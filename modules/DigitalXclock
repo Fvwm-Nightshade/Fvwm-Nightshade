@@ -1,0 +1,14 @@
+########################################################################
+#                        Digital xclock
+########################################################################
+#-----------------------------------------------------------------------
+# Starts xclock as a digital clock with date
+# Parameter:"I"=12h, "H"=24h
+#-----------------------------------------------------------------------
+DestroyFunc DigitalXclock
+AddToFunc   DigitalXclock
++ I Test (x xclock) PipeRead `echo Exec exec xclock \
+                              -d -strftime '%a\\ %e\\ %b\\ %$0:%M' \
+                              -geometry x$((($[infostore.fontsize]-2)*2))-$((($[infostore.fontsize]-2)/2))+$((($[infostore.fontsize]-2)/2)) \
+                              -face $[infostore.used_font]:$[infostore.fontsize]:bold \
+                              -fg white -bg rgb:7a/76/64 -padding $(($[infostore.fontsize]/4))`

@@ -1,0 +1,445 @@
+# This script is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+# USA
+
+#-----------------------------------------------------------------------
+# Version 1.0.4, Copyright 2012, Thomas Funk
+#-----------------------------------------------------------------------
+
+
+WindowTitle		{FvwmScript-PersonalMenu}
+WindowSize		560 250
+WindowPosition		0 170
+
+
+# ----- Initialize -----------------------------------------------------
+
+Init
+Begin
+    Set $personal_changed = 0
+    Set $save_chosen = 0
+    Set $close_click = 0
+    
+    # check, whether personal file exist
+    Set $found_file = (GetOutput {if [ -e $FVWM_USERDIR/.personal ]; then echo 1; else echo 0; fi} 1 -1)
+
+    If $found_file == {1} Then
+    Begin
+	# get personal apps
+	Set $cmd1 = {sed -e '/^# personal menu/ d;/^ *$/,$ d' $FVWM_USERDIR/.personal}
+	Set $cmd2 = { |cut -d'"' -f2 |tr '\n' '|' |sed 's/.$//'}
+	Set $cmd3 = { |tr '\n' '|' |sed 's/AddToMenu MenuFvwmPersonal/\+/g;s/.$//'}
+	Set $cmd = $cmd1 $cmd2
+	#Do {echo personal_app_list cmd: }$cmd
+	Set $personal_app_list = (GetOutput $cmd 1 -1)
+	#Do {echo personal_app_list: }$personal_app_list
+	
+	Set $cmd = $cmd1 $cmd3
+	#Do {echo personal_app_list_strs cmd: }$cmd
+	Set $personal_app_list_strs = (GetOutput $cmd 1 -1)
+	#Do {echo personal_app_list_strs: }$personal_app_list_strs
+	If $personal_app_list <> {} Then
+	Begin
+	    ChangeTitle 9 $personal_app_list
+	End
+    End
+    
+    # get menu list
+    Set $cmd = {sed -e 's/^AddToMenu //p' -n $FVWM_USERDIR/.menu |sed -e 's/\"//g' |cut -d' ' -f1 |sort |sed -e 's/FvwmMenu-//g;/^\s*$/d' |tr '\n' ' '}
+    Set $menu_list = (GetOutput $cmd 1 -1)
+    Set $index = 0
+    Set $notdone = 1
+    Set $new_menu = {}
+    While $notdone == 1 Do
+    Begin
+	Set $index = (Add $index 1)
+	Set $cmd = {echo }$menu_list
+	Set $menu_entry = (GetOutput $cmd 1 $index)
+	If $menu_entry <> {} Then
+	Begin
+	    # do only menus in list which have entries
+	    Set $cmd = {sed -e '/AddToMenu/ d;/Popup/ d;1,/}$menu_entry{\"/ d;/^ *$/,$ d' $FVWM_USERDIR/.menu |wc -l}
+	    Set $lines = (GetOutput $cmd 1 -1)
+	    If $lines <> {0} Then
+	    Begin
+		Set $new_menu = $new_menu $menu_entry { }
+	    End
+	End
+	Else
+	Begin
+	    Set $notdone = 0
+	End
+    End
+    # get 1st menu entry
+    Set $cmd = {echo }$new_menu
+    Set $menu_entry = (GetOutput $cmd 1 1)
+    # change '-' to '/', ' ' to '|' and delete last '|'
+    Set $cmd = {echo '}$new_menu{' |sed -e 's/ /|/g;s/-/\//g;s/.$//'}
+    Set $menu_list = (GetOutput $cmd 1 -1)
+    ChangeTitle 1 $menu_list
+    
+    # initialize app list
+    Set $cmd1 = {sed -e '/AddToMenu/ d;/Popup/ d;1,/}$menu_entry{\"/ d;/^ *$/,$ d' $FVWM_USERDIR/.menu}
+    Set $cmd2 = { |cut -d'"' -f2 |tr '\n' '|' |sed 's/.$//'}
+    Set $cmd3 = { |tr '\n' '|' |sed 's/.$//'}
+    Set $cmd = $cmd1 $cmd2
+    #Do {echo menu_app_list cmd: }$cmd
+    Set $menu_app_list = (GetOutput $cmd 1 -1)
+    #Do {echo menu_app_list: }$menu_app_list
+    Set $cmd = $cmd1 $cmd3
+    #Do {echo menu_app_list_strs cmd: }$cmd
+    Set $menu_app_list_strs = (GetOutput $cmd 1 -1)
+    #Do {echo menu_app_list_strs: }$menu_app_list_strs
+    ChangeTitle 3 $menu_app_list
+End
+
+
+# ----- Widgets --------------------------------------------------------
+
+# Popup menu "Menu entries"
+# -------------------------
+Widget 1
+Property
+    Position		10 10
+    Type		PopupMenu
+    Title		{FvwmMenu                                                                                         |||}
+    Font		"xft:Arial:pixelsize=12"
+    Flags 		NoReliefString
+    ForeColor		{black}
+    BackColor		{white}
+    ShadowColor		{DarkGray}
+    HilightColor	{gray}
+Main
+Case message of
+    SingleClic :
+    Begin
+	Set $close_click = 0
+	ChangeFont 10 {xft:Arial:pixelsize=12}
+	ChangeTitle 10 {}
+	Set $index = (GetValue 1)
+	Set $cmd = {exec echo '}$menu_list{' |cut -d'|' -f}$index{ |sed -e 's/\//-/g'}
+	Set $menu_entry = (GetOutput $cmd 1 -1)
+	#Do {echo }$menu_entry
+
+	#Set $menu_chosen = 0
+	Set $cmd1 = {sed -e '1,/}$menu_entry{\"/ d;/AddToMenu/ d;/Popup/ d;/^ *$/,$ d' $FVWM_USERDIR/.menu}
+	Set $cmd2 = { |cut -d'"' -f2 |tr '\n' '|' |sed 's/.$//'}
+	Set $cmd3 = { |tr '\n' '|' |sed 's/.$//'}
+	Set $cmd = $cmd1 $cmd2
+	Set $menu_app_list = (GetOutput $cmd 1 -1)
+	Set $cmd = $cmd1 $cmd3
+	Set $menu_app_list_strs = (GetOutput $cmd 1 -1)
+	#Do {echo menu_app_list: }$menu_app_list
+	#Do {echo menu_app_list_strs: }$menu_app_list_strs
+	ChangeTitle 3 $menu_app_list
+    End
+End
+
+# Label "Menu applications"
+# -------------------------
+Widget	2
+Property
+    Type		ItemDraw
+    Position		10 40
+    Title		{Menu applications}
+    Font		"xft:Arial:pixelsize=12:bold"
+    Flags 		NoReliefString
+End
+
+# List Menu App list
+Widget 3
+Property
+    Size		200 150
+    Position		10 60
+    Type		List
+    Title		{}
+    Font		"xft:Arial:pixelsize=12"
+    Flags 		NoReliefString
+    BackColor		{white}
+    HilightColor	{light gray}
+Main
+Case message of
+    SingleClic :
+    Begin
+	Set $index = (GetValue 3)
+	#Do {echo index: }$index
+	Set $close_click = 0
+	ChangeFont 10 {xft:Arial:pixelsize=12}
+	ChangeTitle 10 {}
+	
+	Set $cmd = {exec echo '}$menu_app_list{' |cut -d'|' -f}$index
+	Set $chosen_menu_app = (GetOutput $cmd 1 -1)
+	#Do {echo chosen_menu_app: }$chosen_menu_app
+	
+	Set $cmd = {exec echo '}$menu_app_list_strs{' |cut -d'|' -f}$index
+	#Do {echo chosen_menu_app_str cmd: }$cmd
+	Set $chosen_menu_app_str = (GetOutput $cmd 1 -1)
+	#Do {echo chosen_menu_app_str: }$chosen_menu_app_str
+    End
+End
+
+# Button "add >"
+# --------------
+Widget 4
+Property
+    Size		80 25
+    Position		240 70
+    Type		PushButton
+    Title		{Add >}
+    Font		"xft:Arial:pixelsize=12"
+    Flags 		NoReliefString
+    ForeColor		{black}
+    BackColor		{white}
+    ShadowColor		{DarkGray}
+Main
+    Case message of
+    SingleClic :
+    Begin
+	Set $close_click = 0
+	ChangeFont 10 {xft:Arial:pixelsize=12}
+	ChangeTitle 10 {}
+	If $personal_app_list == {} Then
+	Begin
+	    Set $personal_app_list = $chosen_menu_app
+	    Set $personal_app_list_strs = $chosen_menu_app_str
+	End
+	Else
+	Begin
+	    Set $personal_app_list = $personal_app_list {|} $chosen_menu_app
+	    Set $personal_app_list_strs = $personal_app_list_strs{|}$chosen_menu_app_str
+	End
+	#Do {echo add personal_app_list: }$personal_app_list
+	#Do {echo add personal_app_list_strs: }$personal_app_list_strs
+	ChangeTitle 9 $personal_app_list
+	Set $personal_changed = 1
+
+	Set $msg = {Added '}$chosen_menu_app{' to menu}
+	ChangeTitle 10 $msg
+	ChangeTitle 8 {Personal applications*}
+    End
+End
+
+# Button "< Remove"
+# -----------------
+Widget 5
+Property
+    Size		80 25
+    Position		240 100
+    Type		PushButton
+    Title		{< Remove}
+    Font		"xft:Arial:pixelsize=12"
+    Flags 		NoReliefString
+    ForeColor		{black}
+    BackColor		{white}
+    ShadowColor		{DarkGray}
+Main
+    Case message of
+    SingleClic :
+    Begin
+	Set $close_click = 0
+	ChangeFont 10 {xft:Arial:pixelsize=12}
+	ChangeTitle 10 {}
+	Set $cmd = {exec echo '}$chosen_personal_app_str{' |sed -e 's/\+/\[\\+\]/g;s/\"/\\\"/g;s/\//\\\//g'}
+	Set $chosen_personal_app_str = (GetOutput $cmd 1 -1)
+	If $index == {1} Then
+	Begin
+	    #Do {echo personal_app_list: }$personal_app_list
+	    Set $cmd = {exec echo '}$personal_app_list{' |grep -c "|"}
+	    #Do {echo app_count cmd: }$cmd
+	    Set $app_count = (GetOutput $cmd 1 -1)
+	    #Do {echo app_count: }$app_count
+	    If $app_count == {0} Then
+	    Begin
+		#Do {echo bla}
+		Set $personal_app_list = {}
+		Set $personal_app_list_strs = {}
+	    End
+	    Else
+	    Begin
+		#Do {echo blub}
+		Set $cmd = {exec echo '}$chosen_personal_app{' |sed -e 's/\+/\[\\+\]/g;s/\"/\\\"/g;s/\//\\\//g'}
+		Set $chosen_personal_app = (GetOutput $cmd 1 -1)
+		Set $cmd = {exec echo '}$personal_app_list{' | sed -e 's/}$chosen_personal_app{|//'}
+		Set $personal_app_list = (GetOutput $cmd 1 -1)
+		Set $cmd = {exec echo '}$personal_app_list_strs{' | sed -e 's/}$chosen_personal_app_str{|//'}
+		#Do {echo remove cmd: }$cmd
+		Set $personal_app_list_strs = (GetOutput $cmd 1 -1)
+		#Do {echo personal_app_list_strs after remove: }$personal_app_list_strs
+	    End
+	End
+	Else
+	Begin
+	    #Do {echo blubber}
+	    Set $cmd = {exec echo '}$chosen_personal_app{' |sed -e 's/\+/\[\\+\]/g;s/\"/\\\"/g;s/\//\\\//g'}
+	    Set $chosen_personal_app = (GetOutput $cmd 1 -1)
+	    Set $cmd = {exec echo '}$personal_app_list{' | sed -e 's/|}$chosen_personal_app{//'}
+	    #Do {echo remove cmd: }$cmd
+	    Set $personal_app_list = (GetOutput $cmd 1 -1)
+	    #Do {echo personal_app_list after remove: }$personal_app_list
+	    
+	    #Do {echo changed chosen_personal_app_str: }$chosen_personal_app_str
+	    Set $cmd = {exec echo '}$personal_app_list_strs{' | sed -e "s/|}$chosen_personal_app_str{//"}
+	    #Do {echo remove personal_app_list_strs cmd: }$cmd
+	    Set $personal_app_list_strs = (GetOutput $cmd 1 -1)
+	    #Do {echo personal_app_list_strs after remove: }$personal_app_list_strs
+	End
+	#Do {echo remove personal_app_list: }$personal_app_list
+	#Do {echo remove personal_app_list_strs: }$personal_app_list_strs
+
+	ChangeTitle 9 $personal_app_list
+	Set $personal_changed = 1
+
+	Set $msg = {Removed '}$chosen_personal_app{' from menu}
+	ChangeTitle 10 $msg
+	ChangeTitle 8 {Personal applications*}
+    End
+End
+
+# Button "Save"
+# -------------
+Widget 6
+Property
+    Size		80 25
+    Position		240 140
+    Type		PushButton
+    Title		{Save}
+    Font		"xft:Arial:pixelsize=12"
+    Flags 		NoReliefString
+    ForeColor		{black}
+    BackColor		{white}
+    ShadowColor		{DarkGray}
+Main
+    Case message of
+    SingleClic :
+    Begin
+	Set $close_click = 0
+	ChangeFont 10 {xft:Arial:pixelsize=12}
+	ChangeTitle 10 {}
+	Set $cmd = {exec echo '}$personal_app_list_strs{' |sed -e 's/\+/AddToMenu MenuFvwmPersonal/g;s/\"/\\\"/g;s/\//\\\//g;s/|/\\n/g'}
+	#Do {echo save_str cmd: }$cmd
+	Set $save_str = (GetOutput $cmd 1 -1)
+	#Do {echo save_str: }$save_str
+
+	If $found_file == {1} Then
+	Begin
+	    # delete all app entries
+	    Do {exec sed -i '/AddToMenu/d' $FVWM_USERDIR/.personal}
+	End
+	Else
+	Begin
+	    #Create file
+	    Do {exec echo "# personal menu" > $FVWM_USERDIR/.personal}
+	End
+
+	# add new app list
+	Set $cmd = {sed -i '/# personal menu/ a\}$save_str{' $FVWM_USERDIR/.personal}
+	Do {exec sleep 1}
+	#Do {echo save cmd: }$cmd
+	Do {exec }$cmd
+	Set $personal_changed = 0
+
+	ChangeTitle 10 {Personal menu saved}
+	ChangeTitle 8 {Personal applications}
+    End
+End
+
+# Button "Cancel"
+# ---------------
+Widget 7
+Property
+    Size		80 25
+    Position		240 170
+    Type		PushButton
+    Title		{Cancel/Quit}
+    Font		"xft:Arial:pixelsize=12"
+    Flags 		NoReliefString
+    ForeColor		{black}
+    BackColor		{white}
+    ShadowColor		{DarkGray}
+Main
+    Case message of
+    SingleClic :
+    Begin
+	If $personal_changed == {1} Then
+	Begin
+	    If $close_click == {0} Then
+	    Begin
+		ChangeFont 10 {xft:Arial:pixelsize=12:bold}
+		ChangeTitle 10 {!!! Changed menu not saved !!! Next click will quit.}
+		Set $close_click = 1
+	    End
+	    Else
+	    Begin
+		Quit
+	    End
+	End
+	Else
+	Begin
+	    Quit
+	End
+    End
+End
+
+# Label "Personal applications"
+# -----------------------------
+Widget	8
+Property
+    Type		ItemDraw
+    Position		350 40
+    Title		{Personal applications }
+    Font		"xft:Arial:pixelsize=12:bold"
+    Flags 		NoReliefString
+End
+
+# List Personal App list
+Widget 9
+Property
+    Size		200 150
+    Position		350 60
+    Type		List
+    Title		{}
+    Font		"xft:Arial:pixelsize=12"
+    Flags 		NoReliefString
+    BackColor		{white}
+    HilightColor	{light gray}
+Main
+Case message of
+    SingleClic :
+    Begin
+	ChangeFont 10 {xft:Arial:pixelsize=12}
+	ChangeTitle 10 {}
+	Set $index = (GetValue 9)
+	#Do {echo index: }$index
+	
+	Set $cmd = {exec echo '}$personal_app_list{' |cut -d'|' -f}$index
+	Set $chosen_personal_app = (GetOutput $cmd 1 -1)
+	#Do {echo chosen_personal_app: }$chosen_personal_app
+
+	Set $cmd = {exec echo '}$personal_app_list_strs{' |cut -d'|' -f}$index
+	Set $chosen_personal_app_str = (GetOutput $cmd 1 -1)
+	#Do {echo chosen_personal_app_str: }$chosen_personal_app_str
+    End
+End
+
+# Label "Statusbar"
+# -----------------
+Widget	10
+Property
+    Type		ItemDraw
+    Position		10 220
+    Size 		550 20
+    Title		{}
+    Font		"xft:Arial:pixelsize=12"
+    Flags 		NoReliefString
+End

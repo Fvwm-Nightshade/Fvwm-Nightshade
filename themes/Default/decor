@@ -1,0 +1,199 @@
+Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",15*$[infostore.ratio]'`"
+#=======================================================================
+# General
+#=======================================================================
+# HandleWidth takes a numeric argument which is the width of the border
+Style * HandleWidth 3
+Style *	Colorset 1
+
+Style * HilightColorset 2
+Style * BorderColorset 3
+Style * HilightBorderColorset 4
+
+Style *	Button 1, Button 2, Button 4, Button 6
+Style * IconTitleColorset 10
+Style * HilightIconTitleColorset 11
+# IconTitleRelief defines the thickness of the 3D relief drawn around the icon title
+Style * IconTitleRelief 1
+
+
+#=======================================================================
+# Titlebar
+#=======================================================================
+TitleStyle AllActive	Colorset 2 -- Flat
+TitleStyle AllInactive 	Colorset 3 -- Flat
+#TitleStyle LeftJustified Height 18
+TitleStyle  LeftJustified Height $[infostore.titlebar_height]
+
+#=======================================================================
+# Border
+#=======================================================================
+BorderStyle -- HiddenHandles NoInset
+
+#=======================================================================
+# Buttons
+#=======================================================================
+ButtonStyle all	-- UseTitleStyle
+
+# +----------------------------------------------------------+
+# | X  X  X                                          X  X  X |
+# +----------------------------------------------------------+
+# | 1  3  5                                          6  4  2 |
+# |                                                          |
+#                                                                  
+#
+# Vectors are basically just a set of co-ordinates, each button is a grid
+# of 100x100 points (or you can use pixels..it's up to you), following
+# each vector you must specify a line type:
+#
+#   @0 Shadow (sh)
+#   @1 Hilight (hi)
+#   @2 Background (bg)
+#   @3 Foreground (fg)
+#   @4 Invisible (just move the pointer, dont draw anything)
+#
+
+AddButtonStyle 1 Vector 4 50x65@0 35x35@0 65x35@0 50x65@1
+AddButtonStyle 2 Vector 17 20x20@0 30x20@0 50x40@0 70x20@0 80x20@0 80x30@1 60x50@1 80x70@0 80x80@1 70x80@1 50x60@1 30x80@1 20x80@1 20x70@1 40x50@0 20x30@1 20x20@0
+AddButtonStyle 4 Vector 13 60x20@1 60x40@1 80x40@0 80x60@1 60x60@1 60x80@1 40x80@1 40x60@0 20x60@1 20x40@0 40x40@0 40x20@0 60x20@0
+AddButtonStyle 6 Vector 5 25x40@0 25x60@0 75x60@1 75x40@1 25x40@0
+
+ButtonStyle All ActiveUp (-- flat) Inactive (-- flat)
+
+#=======================================================================
+# Menus
+#=======================================================================
+# The MenuStyle command allows almost full control over menu look and feel.
+# We use the preconfigured 'Fvwm' default. This resets most other options
+# and must be set first. We also define a menu called winops for the windows
+# operations menus and very long one. The menus which use this style are 
+# (and must) be defined in the end of the menus.
+
+#***********************************************************************
+# Root menu
+#***********************************************************************
+MenuStyle * fvwm
+MenuStyle * BorderWidth 1, HilightBack, ActiveFore
+MenuStyle * font "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+MenuStyle * MenuColorset 5, ActiveColorset 6
+MenuStyle * Hilight3DThickness 0, TrianglesSolid, Animation
+MenuStyle * PopupDelay 300, PopdownImmediately, PopupOffset 0 100
+MenuStyle * ItemFormat "%s%|%5.i%5.5l%5.5r%.5>%|"
+MenuStyle * VerticalItemSpacing 2 3, VerticalTitleSpacing 1 2
+
+#***********************************************************************
+# WinOps menu
+#***********************************************************************
+CopyMenuStyle * winops
+
+MenuStyle winops TitleWarpOff
+MenuStyle winops VerticalItemSpacing 1 2, VerticalTitleSpacing 1 2
+
+
+#=======================================================================
+# Mouse bindings
+#=======================================================================
+# Handle some Mouse bindings now...
+# Recall that mouse formats look like this:
+#
+# +------------+
+# | ||  ||  || |
+# |	       |
+# +------------+
+#   1   2   3
+
+#-----------------------------------------------------------------------
+# Contexts:                                  Desktop
+#     R = Root Window                 rrrrrrrrrrrrrrrrrrrrrr
+#     W = Application Window          rIrrrrFSSSSSSSSSFrrrrr
+#     F = Frame Corners               rrrrrrS13TTTT642Srrrrr
+#     S = Frame Sides                 rIrrrrSwwwwwwwwwSrrrrr
+#     T = Title Bar                   rrrrrrSwwwwwwwwwSrrrrr
+#     I = Icon                        rIrrrrFSSSSSSSSSFrrrrr
+#                                     rrrrrrrrrrrrrrrrrrrrrr
+# Numbers are buttons: 1 3 5 7 9   0 8 6 4 2
+#
+# Modifiers: (A)ny, (C)ontrol, (S)hift, (M)eta, (N)othing
+#-----------------------------------------------------------------------
+# Buttons:
+# +----------------------------------------------------------+
+# | X  X  X  X  X                              X  X  X  X  X |
+# +----------------------------------------------------------+
+# | 1  3  5  7  9                              0  8  6  4  2 |
+# |                                                          |
+#
+
+#***********************************************************************
+# Pointer in Window Buttons
+#***********************************************************************
+#     Button	Context	Modifi 	Function
+
+# Left button (1)
+# Button 1 shows MenuWindowOpsTrimmed menu <- click
+Mouse 1 	1      	A	Menu MenuWindowOpsTrimmed
+# Button 2 shows Move to page menu <- click
+Mouse 2       	1      	A     	Menu MenuWindowMoveTo
+# Button 3 shows WindowOps group menu <- click
+Mouse 3       	1 	A	Menu MenuWindowGroupOps
+
+# Close button (2)
+# Every button close window <- click
+Mouse 0 	2	A	FuncDeleteOrDestroy
+
+# Maximize button (4)
+# Button 1 maximize window <- click
+Mouse 1		4	A	FuncMaximize
+# Button 2 maximize window vertically <- click
+Mouse 2		4	A	FuncMaximizeVertically
+# Button 3 maximize window horizontally <- click
+Mouse 3		4	A	FuncMaximizeHorizontally
+
+# Minimize button (6)
+# Button 1 iconify window <- click
+Mouse 1		6	A	FuncIconify
+# Button 2 iconify group of same window resources <- click ???
+Mouse 2		6	A	FuncIconifySameResource on
+# Button 3 iconify group of same window resources <- click ???
+Mouse 3		6	A	FuncIconifySameResource toggle
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT to Window Button Pointer
+#-----------------------------------------------------------------------
+#     Button	Context Modifi 	Function
+Mouse 0		1	SCM	FuncShowMessage  "Left Button Bindings" \
+"Mouse 1:  WindowOps menu" \
+"Mouse 2:  Move to page menu" \
+"Mouse 3:  WindowGroupOps menu"
+                                                      
+Mouse 0		2	SCM	FuncShowMessage  "Close Button Bindings" \
+"Mouse 1:  Delete on click" \
+"          Destroy on double click"
+                                                      
+Mouse 0		4	SCM	FuncShowMessage  "Maximize Button Bindings" \
+"Mouse 1:  Maximize fully on click" \
+"          Maximize menu on double click" \
+"Mouse 2:  Maximize vertically" \
+"Mouse 3:  Maximize horizontally"
+                                                      
+Mouse 0		6	SCM	FuncShowMessage  "Minimize Button Bindings" \
+"Mouse 1:  Iconify" \
+"Mouse 2:  Iconify on resource group" \
+"Mouse 3:  Iconify toggle resource group"
+
+
+DestroyFunc FuncRemoveAllButtonBindings
+AddToFunc   FuncRemoveAllButtonBindings
++ I Mouse 1 	1      	A	-
++ I Mouse 2    	1      	A     	-
++ I Mouse 3    	1 	A	-
++ I Mouse 0 	2	A	-
++ I Mouse 1	4	A	-
++ I Mouse 2	4	A	-
++ I Mouse 3	4	A	-
++ I Mouse 1	6	A	-
++ I Mouse 2	6	A	-
++ I Mouse 3	6	A	-
++ I Mouse 0	3	SCM	-
++ I Mouse 0	2	SCM	-
++ I Mouse 0	4	SCM	-
++ I Mouse 0	6	SCM	-

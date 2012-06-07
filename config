@@ -1,0 +1,2232 @@
+########################################################################
+#             _____________________________                        
+#            / ___________________________/ 
+#           / /_   ___      ______ ___
+#          / __/| / / | /| / / __ `__ \   ___
+#         / / | |/ /| |/ |/ / / / / / /  /__/
+#        /_/  |___/ |__/|__/_/ /_/ /_/ 
+#
+#       _   ___        __    __       __              __    
+#      / | / (_)____ _/ /_  / /______/ /_  ____ _____/ /___ 
+#     /  |/ / // __ `/ __ \/ __/ ___/ __ \/ __ `/ __  // _ \
+#    / /|  / // /_/ / / / / /_(__  ) / / / /_/ / /_/ //  __/
+#   /_/ |_/_/ \__, /_/ /_/\__/____/_/ /_/\__,_/\__,_/ \___/ 
+#            /____/                                         
+#
+#
+# Fvwm Nightshade Configuration V 0.4
+# Copyright (C) 2012
+#
+# Authors:
+#   Thomas Funk <t.funk@web.de>
+#
+# Thanks to (in no specific order):
+#   Thomas Adam, Tavis Ormandy, Aelsi, Scientific, unambiguous, Kermit
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or 
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but 
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software Foundation
+# Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+########################################################################
+#
+# Overview:
+#
+# 1.  GLOBAL SETTINGS
+#     1.1 Paths
+#     1.2 Variables
+#         1.2.1 Fvwm specific
+#         1.2.2 Default environment settings
+#         1.2.3 Default applications
+#     1.3 Miscellaneous
+# 2.  GLOBAL LOOK
+#     2.1 Cursors
+#     2.2 Fonts
+#     2.3 Colorsets
+#         2.3.1 Default Colorset
+#         2.3.2 Window Decorations
+#         2.3.3 Menu Colorsets
+#         2.3.4 Module Colorsets
+#         2.3.5 Window List Module Colorsets
+#         2.3.6 Other Module Colorsets
+#         2.3.7 External Colorsets
+#         2.3.8 Application Colorsets
+#     2.4 Windows Decorations
+#         2.4.1 General
+#         2.4.2 Titlebar
+#         2.4.3 Border
+#         2.4.4 Buttons
+#         2.4.5 Icons
+#     2.5 Menus
+#         2.5.1 Root menu
+#         2.5.2 WinOps menu
+# 3.  GLOBAL FEEL
+#     3.1 General
+#     3.2 Windows
+#     3.3 Applications
+# 4.  BINDINGS
+#     4.1 Mouse
+#       4.1.1. Pointer in Root or anywhere
+#       4.1.2. Pointer in Window Buttons
+#       4.1.3. Pointer in Window Decorations
+#       4.1.4. Pointer in Icons
+#       4.1.5. Pointer in Window (and in Icon for consistency)
+#     4.2 Keyboard
+#       4.2.1 ALT + Key
+#       4.2.2 ALT-SHIFT + Key
+#       4.2.3 ALT-CTRL-SHIFT
+#       4.2.4 CTRL + Key
+#       4.2.5 CTRL-ALT + Key
+#       4.2.6 SHIFT-CTRL + Key
+#     4.3 Strokes
+# 5.  MODULES
+#     5.1 FvwmAnimate
+#     5.2 FvwmBacker
+#     5.3 FvwmBanner
+#     5.4 FvwmEvent
+#	  5.4.1 Common FvwmEvents
+#	  5.4.2 Sound FvwmEvents
+#     5.5 FvwmForm
+#         5.5.1 RunCommand
+#     5.6 FvwmIdent
+#     5.7 FvwmIconMan
+#         5.7.1 Global FvwmIconMan ("Taskbar")
+#     5.8 FvwmPager
+#     5.9 FvwmProxy
+# 6.  FUNCTIONS
+#     6.1 Startup
+#         6.1.1 Init
+#         6.1.2 Start
+#         6.1.3 Session
+#     6.2 General
+#     6.3 Window/Icon
+#     6.4 Menus
+# 7.  MENUS
+#     7.1 Root menu
+#     7.2 Help menu
+#     7.3 Modules menu
+#     7.4 Configuration menu
+#     7.5 Fvwm Quit menu
+#     7.6 Window Ops menus
+#
+########################################################################
+
+
+########################################################################
+#                 1. G L O B A L  S E T T I N G S 
+########################################################################
+
+#=======================================================================
+# 1.1 Paths, Variables (SetEnv, InfoStore)
+#=======================================================================
+# Not normally needed; use configure to set defaults at compile time.
+# These paths are colon-separated lists, just like regular unix PATH
+
+#-----------------------------------------------------------------------
+# ModulePath is builtin, you may add some directories here
+#
+# IMPORTANT: if you decide to set a ModulePath, please note that modules
+# are normally installed into a version-dependent directory.  Be sure to
+# update this file after installing a new version.
+#-----------------------------------------------------------------------
+#ModulePath $[FVWM_USERDIR]/mymodules:+
+
+#-----------------------------------------------------------------------
+# Fvwm-Nightshade modules path
+#-----------------------------------------------------------------------
+SetEnv NS_MODULEDIR $[FVWM_USERDIR]/modules
+
+#-----------------------------------------------------------------------
+# The default ImagePath for icons is: 
+# /usr/include/X11/bitmap:/usr/include/X11/pixmaps
+#
+# If the fvwm_icons are not installed in one of these directories or if
+# you want to add a personal image put them here
+#-----------------------------------------------------------------------
+ImagePath /usr/share/icons:/usr/share/icons/wm-icons:+
+ImagePath +:/usr/share/pixmaps:/usr/share/pixmaps/fvwm
+
+#-----------------------------------------------------------------------
+# The actual theme. Will be changed dynamically via FuncChangeDecor
+#-----------------------------------------------------------------------
+InfoStoreAdd used_theme Ambience
+
+#-----------------------------------------------------------------------
+# Each Nightshade theme is located in $[FVWM_USERDIR]/themes
+# Here the path to the actual theme will set
+# Will be set every time FuncChangeDecor is called
+#-----------------------------------------------------------------------
+SetEnv NS_THEMEDIR $[FVWM_USERDIR]/themes/$[infostore.used_theme]
+
+#-----------------------------------------------------------------------
+# wallpaper path. Should be changed to the right directory
+#-----------------------------------------------------------------------
+InfoStoreAdd wallpaper_dir $[FVWM_USERDIR]/wallpapers
+
+#-----------------------------------------------------------------------
+# actual wallpaper
+#-----------------------------------------------------------------------
+InfoStoreAdd fvwm_wallpaper $[FVWM_USERDIR]/.wallpaper
+
+
+#***********************************************************************
+# 1.2.2 Environment settings
+#***********************************************************************
+#-----------------------------------------------------------------------
+# default used font
+#-----------------------------------------------------------------------
+InfoStoreAdd used_font "Arial"
+
+#-----------------------------------------------------------------------
+# default font size
+#-----------------------------------------------------------------------
+InfoStoreAdd fontsize 12
+
+#-----------------------------------------------------------------------
+# Adjust ratio to calculate resolution dependant things
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd ratio `perl -e 'printf \"%.1f\",log($[vp.width]*$[vp.height])/log(10)-log(1024*768)/log(10)+1'`"
+
+#-----------------------------------------------------------------------
+# actual pager height. Needed for the "top bar" modules
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd fvwm_pager_height $(($[vp.height]/25))'
+
+
+#***********************************************************************
+# 1.2.3 Default applications
+#***********************************************************************
+#-----------------------------------------------------------------------
+# terminal
+#-----------------------------------------------------------------------
+InfoStoreAdd default_terminal konsole
+
+#-----------------------------------------------------------------------
+# browser
+#-----------------------------------------------------------------------
+InfoStoreAdd default_browser firefox
+
+
+#***********************************************************************
+# 1.2.3 Others
+#***********************************************************************
+#-----------------------------------------------------------------------
+# used for 'Switching focus between windows. (ALT-Tab)' functionality
+#-----------------------------------------------------------------------
+InfoStoreAdd direction Next
+
+#-----------------------------------------------------------------------
+# save status of menu creation
+# 0 = initial state, read .menu
+# 1 = creation in progres
+# 2 = .menu red, no creation running
+#-----------------------------------------------------------------------
+SetEnv inProgress 0
+
+
+#=======================================================================
+# 1.3 Miscellaneous
+#=======================================================================
+# This commands controls several workarounds for bugs in third party
+# programs
+
+#-----------------------------------------------------------------------
+# Disables ConfigureNotify events that are usually sent to an application
+# while it is moved. If some windows flicker annoyingly while being moved,
+# this option may help
+#-----------------------------------------------------------------------
+BugOpts FlickeringMoveWorkaround True
+
+#-----------------------------------------------------------------------
+# Enabling this option might help for Qt applications using DragnDrop.
+# Surpresses the forwarding of unknown ClientEvent messages to windows
+# -- usually this is harmless, but Qt has problems handling unrecognised
+# ClientEvent messages.
+#-----------------------------------------------------------------------
+BugOpts QtDragnDropWorkaround True
+
+
+########################################################################
+#                  2. G L O B A L  L O O K 
+########################################################################
+# Cursors, default fonts, Windows Decoration and Menu Styles
+########################################################################
+
+#=======================================================================
+# 2.1 Cursors
+#=======================================================================
+CursorStyle ROOT		left_ptr		black	white
+CursorStyle TITLE		top_left_arrow		black	white
+CursorStyle DEFAULT		top_left_arrow		black	white
+CursorStyle SYS			hand2			black	white
+CursorStyle MENU		top_left_arrow		black	white
+CursorStyle POSITION		top_left_corner		black	white
+CursorStyle MOVE		fleur			black	white
+CursorStyle RESIZE		sizing			black	white
+CursorStyle WAIT		watch			black	white
+CursorStyle SELECT		crosshair		black	white
+CursorStyle DESTROY		pirate			black	white
+CursorStyle TOP			top_side		black	white
+CursorStyle RIGHT		right_side		black	white
+CursorStyle BOTTOM		bottom_side		black	white
+CursorStyle LEFT		left_side		black	white
+CursorStyle TOP_LEFT		top_left_corner		black	white
+CursorStyle TOP_RIGHT		top_right_corner	black	white
+CursorStyle BOTTOM_LEFT		bottom_left_corner	black	white
+CursorStyle BOTTOM_RIGHT	bottom_right_corner	black	white
+CursorStyle TOP_EDGE		top_side		black	white
+CursorStyle RIGHT_EDGE		right_side		black	white
+CursorStyle BOTTOM_EDGE		bottom_side		black	white
+CursorStyle LEFT_EDGE		left_side		black	white
+CursorStyle STROKE		plus			black	white
+
+
+#=======================================================================
+# 2.2 Fonts
+#=======================================================================
+
+# For window titles, another for icons, and another for the menus
+Style * Font "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+
+Style * IconFont "xft:monospace:pixelsize=$[infostore.fontsize]:Medium"
+
+# Default font if all else fails
+DefaultFont -*-fixed-medium-r-*-*-$[infostore.fontsize]-*-*-*-*-*-*-*
+
+
+#=======================================================================
+# 2.3 Colorsets (based on Fvwm-Themes)
+#=======================================================================
+# You will find all colorsets in the theme specific file:
+#-----------------------------------------------------------------------
+Read $[NS_THEMEDIR]/colorsets
+#FuncLoadNewColorset
+
+#=======================================================================
+# 2.4 Window Decorations
+#=======================================================================
+
+#***********************************************************************
+# 2.4.1 General
+#***********************************************************************
+Style Fvwm* Colorset 0
+
+#***********************************************************************
+# 2.4.5 Icons
+#***********************************************************************
+# If a window has no icon associated, then the below will use.
+# Remark: UseStyle is deprecated and will be removed in the future.
+#         There are plans to replace it with a more flexible solution
+#         in fvwm-3.0.
+Style Untitled    UseStyle *, EWMHMiniIconOverride, Icon unknown1.xpm, MiniIcon mini.x.xpm
+Style NoClass     UseStyle Untitled
+Style NoResource  UseStyle Untitled
+Style X*          UseStyle Untitled
+Style error       UseStyle *, EWMHMiniIconOverride, Icon bomb.xpm, MiniIcon mini.bomb.xpm
+Style FvwmIdent   UseStyle *, EWMHMiniIconOverride, Icon question.xpm, MiniIcon mini.question.xpm
+
+
+#***********************************************************************
+# 2.4.6 Applications
+#***********************************************************************
+# If any application needs a specific style put it here
+# xclock
+Style XClock  !Title, Sticky, WindowListSkip, StaysOnBottom, HandleWidth 2
+
+# stalonetray
+Style stalonetray !Title, Sticky, WindowListSkip, StaysOnBottom, HandleWidth 2
+
+
+#=======================================================================
+# 2.5 Theme related decorations
+#=======================================================================
+# In the decor file there a all decoration stuff needed for the specific
+# theme like
+# window bar: buttons, titlebar, ...
+# Menus: for the Root and WinOps menu style
+# mouse bindings for the buttons
+#-----------------------------------------------------------------------
+Read $[NS_THEMEDIR]/decor
+#FuncLoadNewDecor
+
+########################################################################
+#                     3. G L O B A L  F E E L 
+########################################################################
+
+#=======================================================================
+# 3.1 General
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# 2.1  Xinerama support
+#-----------------------------------------------------------------------
+Xinerama on
+
+#-----------------------------------------------------------------------
+# Resize and move feedback windows in the center of the screen
+#-----------------------------------------------------------------------
+Emulate mwm
+
+#-----------------------------------------------------------------------
+# Set the desk top size in units of physical screen size
+#
+#   +-----+-----+-----+-----+
+#   |     |     |     |     |
+#   +-----+-----+-----+-----+
+#
+#-----------------------------------------------------------------------
+DeskTopSize 4x1
+
+#-----------------------------------------------------------------------
+# How hard it should be to change the desktop viewport by moving the
+# mouse over the edge of the screen
+#-----------------------------------------------------------------------
+EdgeResistance 350
+
+#-----------------------------------------------------------------------
+# Scrolling complete page when hiting the edge of a page
+# EdgeScroll 0 0 disables scrolling
+#-----------------------------------------------------------------------
+EdgeScroll 100 100
+
+#-----------------------------------------------------------------------
+# In order to enable page scrolling via the mouse, four windows called
+# the "pan frames" are placed at the very edge of the screen. 1 gives
+# the smallest pan frames, which seem to work best except on some servers.
+#-----------------------------------------------------------------------
+EdgeThickness 1
+
+#-----------------------------------------------------------------------
+# Define bands at the edge of the screen. It is used to compute the
+# Working Area: EwmhBaseStruts left right top bottom 
+#-----------------------------------------------------------------------
+PipeRead 'echo EwmhBaseStruts 0 0 $(($[infostore.fvwm_pager_height]+3)) 0'
+
+#-----------------------------------------------------------------------
+# IconBox defines the area where FVWM will place any windows that are
+# in the iconic state: 
+#  IconBox left top right bottom
+#
+# IconGrid ist the distance between each icon. Default grid is 3x3 pixels:
+#  IconGrid x y
+#
+# IconFill defines the direction icons will place. Default is from left
+# to right. To fill an icon box in columns instead of rows, specify the
+# vertical direction (top or bottom) first.
+#-----------------------------------------------------------------------
+Style * IconBox 20 80 -100 -20, \
+        IconGrid 40 40, \
+        IconFill top left, \
+        StaysOnBottom
+
+#-----------------------------------------------------------------------
+# makes fvwm attempt to recognize and respect the mwm prohibited
+# operations hints that applications occasionally use
+#-----------------------------------------------------------------------
+Style * MWMFunctions
+
+#-----------------------------------------------------------------------
+# makes fvwm attempt to recognize and respect the mwm decoration hints
+# that applications occasionally use
+#-----------------------------------------------------------------------
+Style * MWMDecor
+
+#-----------------------------------------------------------------------
+# makes fvwm shade out operations that mwm would prohibit, but it lets
+# you perform the operation anyway
+#-----------------------------------------------------------------------
+Style * HintOverride
+
+#-----------------------------------------------------------------------
+# makes fvwm attempt to recognize and respect the olwm and olvwm hints
+# that many older XView and OLIT applications use
+#-----------------------------------------------------------------------
+Style * OLDecor
+
+#-----------------------------------------------------------------------
+# This command controls the cursor during the execution of certain commands
+#-----------------------------------------------------------------------
+BusyCursor * True
+
+#-----------------------------------------------------------------------
+# Specifies the maximum delay in milliseconds between a button press and
+# a button release for the Function command to consider the action a
+# mouse click. Default is 150 ms
+#-----------------------------------------------------------------------
+ClickTime 300
+
+#-----------------------------------------------------------------------
+# Use EWMH hints and respect EWMH hints which change the window layer.
+#-----------------------------------------------------------------------
+Style * EWMHUseStackingOrderHints
+
+
+#=======================================================================
+# 3.2 Windows
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Never hide the position or size of a window that is usually shown when
+# it is moved or resized
+#-----------------------------------------------------------------------
+HideGeometryWindow Never
+
+#-----------------------------------------------------------------------
+# SnapAttraction lets nearby windows snap together, or snap to edges so
+# that they are easier to align on your desktop, The default is off.
+#-----------------------------------------------------------------------
+Style * SnapAttraction 3 All
+
+#-----------------------------------------------------------------------
+# shows the content of a window while moving
+#-----------------------------------------------------------------------
+OpaqueMoveSize 100
+
+#-----------------------------------------------------------------------
+# shows the content of a window while resizing
+#-----------------------------------------------------------------------
+Style * ResizeOpaque
+
+#-----------------------------------------------------------------------
+# The WindowShadeSteps option selects the number of steps for animation
+# when shading a window with WindowShade.
+#-----------------------------------------------------------------------
+#Style * WindowShadeSteps 20
+
+#-----------------------------------------------------------------------
+# The focus policy. Once you are used to clicking *inside* windows to
+# raise them you will not want to lose this feature.
+#-----------------------------------------------------------------------
+Style * ClickToFocus
+Style * MouseFocusClickRaises
+
+#-----------------------------------------------------------------------
+# TileCascadePlacement automatically places new windows in a smart
+# location - a location in which they do not overlap any other windows
+# on the screen.
+#-----------------------------------------------------------------------
+Style * TileCascadePlacement
+
+#-----------------------------------------------------------------------
+# !UsePPosition instructs fvwm to ignore the PPosition field in window
+# geometry hints. Emacs annoyingly sets PPosition to (0,0)!
+#-----------------------------------------------------------------------
+Style * !UsePPosition
+
+#Style * !FPGrabFocus
+
+#-----------------------------------------------------------------------
+# transient windows
+#-----------------------------------------------------------------------
+# You can do a lot of things with transient windows. However, you may
+# want to set transient style by application (in styles).
+Style * DecorateTransient
+
+#-----------------------------------------------------------------------
+# In *general* it is not a good idea to be able to lower transient window
+# under its main window, but why not...
+#-----------------------------------------------------------------------
+#Style * DontRaiseTransient
+
+
+########################################################################
+#                       4. B I N D I N G S 
+########################################################################
+
+#=======================================================================
+# 4.1 Mouse
+#=======================================================================
+# Handle some Mouse bindings now...
+# Recall that mouse formats look like this:
+#
+# +------------+
+# | ||  ||  || |
+# |	       |
+# +------------+
+#   1   2   3
+
+#-----------------------------------------------------------------------
+# Contexts:                                  Desktop
+#     R = Root Window                 rrrrrrrrrrrrrrrrrrrrrr
+#     W = Application Window          rIrrrrFSSSSSSSSSFrrrrr
+#     F = Frame Corners               rrrrrrS13TTTT642Srrrrr
+#     S = Frame Sides                 rIrrrrSwwwwwwwwwSrrrrr
+#     T = Title Bar                   rrrrrrSwwwwwwwwwSrrrrr
+#     I = Icon                        rIrrrrFSSSSSSSSSFrrrrr
+#                                     rrrrrrrrrrrrrrrrrrrrrr
+# Numbers are buttons: 1 3 5 7 9   0 8 6 4 2
+#
+# Modifiers: (A)ny, (C)ontrol, (S)hift, (M)eta, (N)othing
+#-----------------------------------------------------------------------
+# Buttons:
+# +----------------------------------------------------------+
+# | X  X  X  X  X                              X  X  X  X  X |
+# +----------------------------------------------------------+
+# | 1  3  5  7  9                              0  8  6  4  2 |
+# |                                                          |
+#
+
+#***********************************************************************
+# 4.1.1. Pointer in Root or anywhere
+#***********************************************************************
+#     Button	Context Modifi 	Function
+Mouse 1		R	A       Menu MenuRoot
+Mouse 2       	R       A	WindowList
+#Mouse 3       	RFT     A	Menu MenuWindowOpsFull
+Mouse 3       	RFT     A	Menu MenuDesktopOps
+
+# Roll mouse wheel anywhere with SHIFT-ALT + cursor left/right for goto page
+Mouse 4       	A       SC      FuncGotoPage +1p +0p
+Mouse 5       	A       SC      FuncGotoPage -1p +0p
+
+# Roll mouse wheel anywhere with SHIFT-CTRL + cursor left/right for goto page
+# with active window
+Mouse 4       	A       SM      FuncMoveWindowToPage +1p +0p
+Mouse 5       	A       SM      FuncMoveWindowToPage -1p +0p
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT in Root
+#-----------------------------------------------------------------------
+#     Button	Context Modifi 	Function
+Mouse 0		W       SCM     FuncShowMessage  "Mouse Bindings for Root area" \
+"Mouse 1:   Root menu" \
+"Mouse 2:   Window list" \
+"Mouse 3:   Desktop Oops menu" \
+"Mouse 4/5: Switch to page left/right with" \
+"           SHIFT-ALT + rolling wheel up/down anywhere" \
+"           Switch with window to page left/right with" \
+"           SHIFT-CTRL + rolling wheel up/down anywhere" \
+
+#***********************************************************************
+# 4.1.3. Pointer in Window Decorations
+#***********************************************************************
+#     Button	Context Modifi 	Function
+
+# Button 1 in the titlebar, with any modifiers, gives
+# move <- drag, resize <- click or maximize <- double click
+Mouse 1		T	A	FuncMoveOrRaiseOrMaximize
+# Button 1 in the corners or sides, with any modifiers, gives
+# resize <- drag, raise <- click or maximize <- double click
+Mouse 1		SF	A	FuncResizeOrRaiseOrMaximize
+# Button 2 in the titlebar, corners or sides, with any modifiers, gives
+# move <- drag, raise/lower <- click
+Mouse 2		TSF	A	FuncMoveOrRaiseLower
+# Button 2 in the window, with ALT key, gives
+# move <- drag, raise/lower <- click
+Mouse 2		W	M	FuncMoveOrRaiseLower
+# Button 3 in the titlebar, corners or sides, with any modifiers, gives
+# WindowOps2 menu <- click, with ALT key WindowOps menu <- click
+Mouse 3		TSF	A	Menu MenuWindowOpsTrimmed
+Mouse 3		TSF	M	Menu MenuWindowOpsFull
+
+# Roll mouse wheel on Titlebars to shade/unshade
+Mouse 4		T	A	FuncWheelToggleShade True
+Mouse 5		T       A       FuncWheelToggleShade False
+
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT to Pointer in Window Decorations
+#-----------------------------------------------------------------------
+#     Button	Context Modifi 	Function
+Mouse 0		T	SCM     FuncShowMessage  "Mouse Bindings for Titlebar" \
+"Mouse 1:   Drag moves window" \
+"           Maximize on double click" \
+"Mouse 2:   Drag moves window" \
+"           Raise or lower with click" \
+"Mouse 3:   WindowOpsTrimmed menu with click" \
+"           WindowOpsFull menu with ALT + click" \
+"Mouse 4/5: Shade/unshade window" \
+"           with rolling wheel up/down"
+
+Mouse 0		SF	SCM	FuncShowMessage  "Mouse Bindings for Corners and Sides" \
+"Mouse 1:   Drag resize window" \
+"           Maximize on double click" \
+"Mouse 2:   Drag moves window" \
+"           Raise or lower with click" \
+"Mouse 3:   WindowOpsTrimmed menu with click" \
+"           WindowOpsFull menu with ALT + click"
+
+Mouse 0		W	SCM	FuncShowMessage  "Mouse Bindings for Window area" \
+"Mouse 1:   Root menu with ALT + click" \
+"Mouse 2:   Drag + ALT moves window" \
+"           Raise or lower with ALT + click" \
+"Mouse 4/5: Switch to page left/right with" \
+"           SHIFT-CTRL + rolling wheel up/down anywhere" \
+"           Switch with window to page left/right with" \
+"           SHIFT-ALT + rolling wheel up/down anywhere" \
+
+
+#***********************************************************************
+# 4.1.4. Pointer in Icons
+#***********************************************************************
+#     Button	Context Modifi 	Function
+
+# Button 1 in icon, with any modifiers, gives
+# move <- drag, deiconify <- double click
+Mouse 1		I	A	FuncMoveOrIconify
+# Button 2 in icon, with any modifiers, gives
+# deiconify <- click
+Mouse 2		I	A	FuncIconify
+# Button 2 in icon, with CTRL key, gives
+# deiconify all icons from the same resource group <- click
+Mouse 2		I	C	FuncIconifySameResource toggle
+# Button 3 in icon, with any modifiers, gives
+# WindowOps2 menu <- click
+Mouse 3		I	A	Menu MenuWindowOpsTrimmed
+# Button 3 in icon, with CTRL key, gives
+# WindowGroupOps menu
+Mouse 3		I	C	Menu MenuWindowGroupOps
+
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT to Pointer in Icons
+#-----------------------------------------------------------------------
+#     Button	Context Modifi 	Function
+Mouse 0		I       SCM     FuncShowMessage  "Mouse Bindings for Icons" \
+"Mouse 1:   Drag moves icon" \
+"           Deiconify with double click" \
+"           Root menu with ALT + click" \
+"Mouse 2:   Deiconify icon with click" \
+"           All of same resource group with CTRL + click" \
+"Mouse 3:   WindowOpsTrimmed menu with click" \
+"           WindowGroupOps menu with CTRL + click"
+
+#***********************************************************************
+# 4.1.5. Pointer in Window (and in Icon for consistency)
+#***********************************************************************
+#     Button	Context Modifi 	Function
+Mouse 1		WI	M	Menu MenuRoot
+
+
+#***********************************************************************
+# 4.1 Theme related mouse bindings (window buttons)
+#***********************************************************************
+# Look in $[NS_THEMEDIR]/decor
+
+
+#=======================================================================
+# 4.2 Keyboard
+#=======================================================================
+# same as with mouse:
+#   Keyname 	Context Modifi 	Function
+# Keyname is a standard X11 key name as defined in /usr/include/X11/keysymdef.h,
+# (without the XK_ prefix), or the keysym database /usr/X11R6/lib/X11/XKeysymDB
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT H to show the global key bindings help window
+#-----------------------------------------------------------------------
+key H		A       SCM     FuncShowMessage  "Help Keys with CTRL-ALT" \
+"A: List ALT bindings" \
+"C: List CTRL bindings" \
+"P: List Page bindings"
+
+#***********************************************************************
+# 4.2.1 ALT + Key
+#***********************************************************************
+#   Keyname 	Context Modifi 	Function
+# Switching focus between windows. (ALT-Tab)
+Key Tab		A	M	SwitchWindow
+# Print screenshot of whole desktop (page)
+Key Print	A       M       FuncDesktopCreateScreenshot
+
+#***********************************************************************
+# 4.2.2 ALT-SHIFT + Key
+#***********************************************************************
+#   Keyname 	Context Modifi 	Function
+# keyboard accelerators
+# SHIFT is needed to let apps (xwe, dosemu, kcalc) to handle ALT-FN keys
+# open root menu
+Key F1		A	SM	Menu MenuRoot
+# launch "run application" dialog box
+Key F2		A	SM	Module FvwmForm FvwmForm-RunCommand
+# open window list
+Key F3		A	SM	WindowList
+# close active window
+Key F4		A	SM	Pick Close
+# 
+#Key F5		A	SM	  
+# cycle between windows belonging to the current application
+Key F6		A	SM	Next (CurrentPage, $[w.resource]) FuncSelectWindow
+# move the active window
+Key F7		A	SM	Pick Move
+# resize the active window
+Key F8		A	SM	Pick Resize
+# minimize the active window
+Key F9		A	SM	Pick Iconify
+# maximize/restore the active window
+Key F10		A	SM	Pick Maximize
+# maximize active window to fullscreen and back
+Key F11		A	SM	Pick FuncMaximizeFullScreen
+# identify active window
+Key F12		A	SM	Pick Module FvwmIdent
+
+# press SHIFT-ALT arrow anywhere, move active
+# window to next/previous page
+Key Left	A	SM	FuncMoveWindowToPage -1p +0p
+Key Right	A	SM	FuncMoveWindowToPage +1p +0p
+#Key Up		A	SM	Nop
+#Key Down	A	SM	Nop
+
+#Key Tab	A	SM	WindowList Root c c OnlyListSkip, NoDeskSort, SelectOnRelease
+#Key Tab	A	C	Prev (CurrentPage) FuncSelectWindow
+#Key Tab	A	M	Next (CurrentPage) FuncSelectWindow
+#Key Prior	A	M	Prev FuncSelectWindow
+#Key Next	A	M	Next FuncSelectWindow
+#Key F11	A	SC	Pick FuncMaximizeFullScreen
+
+#***********************************************************************
+# 4.2.3 ALT-CTRL-SHIFT
+#***********************************************************************
+#   Keyname	Context Modifi 	Function
+# press ALT-CTRL-SHIFT arrow anywhere, and scroll by 10% of a page OK
+Key Left	A	SCM	Scroll -10  +0
+Key Right	A	SCM	Scroll +10  +0
+#Key Up		A	SCM	Scroll  +0 -10
+#Key Down	A	SCM	Scroll  +0 +10
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT A to show all ALT related key bindings
+#-----------------------------------------------------------------------
+key A		A	SCM	FuncShowMessage  "ALT Key Bindings" \
+"SHIFT-ALT:" \
+"F1: Open root menu          F7:  Move window" \
+"F2: Launch 'run' dialog box F8:  Resize window" \
+"F3: Show window list        F9:  Minimize window" \
+"F4: Close active window     F10: Maximize/restore window" \
+"F5: Not used                F11: Fullscreen/restore window" \
+"F6: Cycle between same      F12: Identify window" \
+"    resource windows" \
+"----------" \
+"ALT:" \
+"Tab:   Cycle between windows" \
+"Print: Screenshot of the desktop"
+
+
+#***********************************************************************
+# 4.2.4 CTRL + Key
+#***********************************************************************
+#   Keyname 	Context Modifi 	Function
+
+#***********************************************************************
+# 4.2.5 CTRL-ALT + Key
+#***********************************************************************
+#   Keyname Context Modifi 	Function
+# press ALT-CTRL arrow anywhere, and move the pointer by 1% of a page
+Key Left	A	CM	CursorMove -1 +0
+Key Right	A	CM	CursorMove +1 +0
+Key Up		A	CM	CursorMove +0 -1
+Key Down	A	CM	CursorMove +0 +1
+
+#***********************************************************************
+# 4.2.6 SHIFT-CTRL + Key
+#***********************************************************************
+#   Keyname	Context Modifi 	Function
+# Go to page n
+Key 1		A	SC	FuncGotoPage 0 0
+Key 2		A	SC	FuncGotoPage 1 0
+Key 3		A	SC	FuncGotoPage 2 0
+Key 4		A	SC	FuncGotoPage 3 0
+
+# press SHIFT-CTRL arrow anywhere, and scroll by one page
+Key Left	A	SC	FuncGotoPage -1p +0p
+Key Right	A	SC	FuncGotoPage +1p +0p
+#Key Up		A	SC	FuncGotoPage +0p -1p
+#Key Down	A	SC	FuncGotoPage +0p +1p
+
+# open full windows oops menu
+Key F1		A	SC	Menu MenuWindowOpsFull
+# launch FvwmConsole
+Key F2		A	SC	FuncFvwmConsole
+
+# hide/unhide all windows
+Key D		A	SC	All (CurrentPage, AcceptsFocus) Iconify
+# lock Screen
+Key L		A	SC	Exec exec xscreensaver-command -lock
+# launch Terminal
+Key T		A	SC	Exec exec $[infostore.default_terminal]
+# Print screenshot for active window
+Key Print	A	SC	FuncWindowCreateScreenshot
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT C to show all CTRL related key bindings
+#-----------------------------------------------------------------------
+key C		A	SCM	FuncShowMessage  "CTRL Key Bindings" \
+"SHIFT-CTRL:" \
+"F1: Open full Oops menu     F2: Launch FvwmConsole" \
+"---" \
+"D:  Hide/unhide all windows T:  Launch Terminal" \
+"L:  Lock Screen" \
+"---" \
+"1-4: Go to page" \
+"---" \
+"Print: Screenshot of the window"
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT P to show all page related key bindings
+#-----------------------------------------------------------------------
+key P		A	SCM	FuncShowMessage  "Page Key Bindings" \
+"SHIFT-CTRL:" \
+"Cursor right/left: Switch to page right/left" \
+"----------" \
+"SHIFT-ALT:" \
+"Cursor right/left: Switch active window to page right/left" \
+"----------" \
+"ALT-CTRL:" \
+"Cursor right/left/up/down: Move mouse pointer by 1% of a page" \
+"----------" \
+"SHIFT-ALT-CTRL:" \
+"Cursor right/left: Scroll right/left by 10% of a page"
+
+
+#=======================================================================
+# 4.3 Strokes
+#=======================================================================
+# You need fvwm compiled with stroke support and libstroke installed
+# See the Stroke and StrokeFunc entries in the fvwm man page
+# We use mostly simple stroke motion. For complex stroke motions we need
+# to consider many sloppy stroke motions for each action.
+
+#STROKE 2
+#Mouse	3	R	N	StrokeFunc FeedBack DrawMotion
+#Mouse	3 	W 	M 	StrokeFunc FeedBack DrawMotion
+
+#STROKE 2 We need to redefine the default bindings
+#Stroke	0	0 	RN 	WindowList mouse -1p -1p
+#Stroke	0	0	WM	WindowList mouse -1p -1p
+
+#PREF 11
+#STROKE 2 A | from the top to the bottom
+#Stroke	N852	0	RN	Exec exec xterm
+#Stroke	N852	0	WM       Exec exec xterm
+
+#STROKE 2 A | from the bottom to the top
+#Stroke	N258	0	RN	Exec exec emacs
+#Stroke	N258	0	WM	Exec exec emacs
+
+#STROKE 2 A / from the bottom to the top
+#Stroke	N159	0	RN	Exec exec xfm
+#Stroke	N159	0	WM	Exec exec xfm
+
+#STROKE 2 A C from the top
+#Stroke	N9874123 0	RN	Exec exec xcalc
+#Stroke	N9874123 0	WM	Exec exec xcalc
+
+#STROKE 11 A N (from the bottom)
+#Stroke	7415963	 0	RN	Exec exec mozilla
+#Stroke	74148963 0	RN	Exec exec mozilla
+#Stroke	74158963 0	RN	Exec exec mozilla
+#Stroke	7418963	 0	RN	Exec exec mozilla
+#Stroke	415963	 0	RN	Exec exec mozilla
+#
+#Stroke	7415963	 0	WM	Exec exec mozilla
+#Stroke	74148963 0	WM	Exec exec mozilla
+#Stroke	74158963 0	WM	Exec exec mozilla
+#Stroke	7418963	 0	WM	Exec exec mozilla
+#Stroke	415963	 0	WM	Exec exec mozilla
+
+#STROKE 4 A clockwise box from the top left
+#Stroke	N78963214  0	RN	FvwmForm FvwmForm-QuitVerify
+#Stroke	N789632147 0	RN	FvwmForm FvwmForm-QuitVerify
+#Stroke	N78963214  0	WM	FvwmForm FvwmForm-QuitVerify
+#Stroke	N789632147 0	WM	FvwmForm FvwmForm-QuitVerify
+
+
+
+########################################################################
+#                         5. M O D U L E S 
+########################################################################
+# Definitions used by Fvwm modules.
+# (Alphabetic order is used, but the Form are at the end)
+
+#=======================================================================
+# 5.1 FvwmAnimate
+#=======================================================================
+DestroyModuleConfig FvwmAnimate: *
+
+*FvwmAnimate: Color #6e6e6e
+*FvwmAnimate: Effect twist
+*FvwmAnimate: Delay 3
+*FvwmAnimate: Iterations 50
+*FvwmAnimate: Width 5
+
+#=======================================================================
+# 5.2 FvwmBacker
+#=======================================================================
+*FvwmBacker: Command(Desk 0, Page * *) Colorset 24
+
+#=======================================================================
+# 5.3 FvwmBanner
+#=======================================================================
+Style FvwmBanner !Title, Sticky, StaysOnTop, WindowListSkip, CirculateSkip
+
+*FvwmBanner: NoDecor
+Test (I $[FVWM_USERDIR]/Nightshade_logo_compl.png) *FvwmBanner: Pixmap $[FVWM_USERDIR]/Nightshade_logo_compl.png
+*FvwmBanner: Timeout 3
+
+#=======================================================================
+# 5.4 FvwmEvent
+#=======================================================================
+
+#***********************************************************************
+# 5.4.1 Common FvwmEvents
+#***********************************************************************
+DestroyModuleConfig FvwmEventCommon: *
+
+*FvwmEventCommon: StartDelay 3
+*FvwmEventCommon: Delay 1
+
+*FvwmEventCommon: enter_window      FE-EnterWindow
+
+#***********************************************************************
+# 5.4.1 Sound FvwmEvents
+#***********************************************************************
+DestroyModuleConfig FvwmEventSound: *
+
+# replace rplay by a sound player that can play .au sound file
+#*FvwmEvent: Cmd "Exec exec rplay "
+
+*FvwmEventSound: StartDelay 3
+*FvwmEventSound: Delay 1
+
+#*FvwmEventSound: startup          "/usr/share/sounds/gong.au"
+#*FvwmEventSound: add_window       "/usr/share/sounds/wipe.au"
+#*FvwmEventSound: destroy_window   "/usr/share/sounds/pook.au"
+#*FvwmEventSound: iconify          "/usr/share/sounds/clong.au"
+#*FvwmEventSound: deiconify        "/usr/share/sounds/clong.au"
+#*FvwmEventSound: windowshade      "/usr/share/sounds/slide.au"
+#*FvwmEventSound: dewindowshade    "/usr/share/sounds/slide.au"
+#*FvwmEventSound: new_page         "/usr/share/sounds/slide.au"
+
+
+#=======================================================================
+# 5.5 FvwmForm
+#=======================================================================
+
+#***********************************************************************
+# 5.5.1 RunCommand Window
+#***********************************************************************
+DestroyModuleConfig  FvwmForm-RunCommand: *
+*FvwmForm-RunCommand: WarpPointer
+*FvwmForm-RunCommand: Title         "$[gt.Run Command]"
+*FvwmForm-RunCommand: Line          center
+*FvwmForm-RunCommand: Text          "$[gt.Run Command]"
+*FvwmForm-RunCommand: Line          left
+*FvwmForm-RunCommand: Text          "$[gt.Command:]"
+*FvwmForm-RunCommand: Input         Command 30 ""
+*FvwmForm-RunCommand: Line          center
+*FvwmForm-RunCommand: Selection     cmd multiple
+*FvwmForm-RunCommand: Choice        TERM    TERM     off      "$[gt.Run in Terminal]"
+*FvwmForm-RunCommand: Line          expand
+*FvwmForm-RunCommand: Button        quit "$[gt.Execute]"
+*FvwmForm-RunCommand: Command       $(TERM?exec xterm -hold -T "$(Command)" -n "$(Command)" -e $(Command))
+*FvwmForm-RunCommand: Command       exec $(Command)
+*FvwmForm-RunCommand: Button        quit "$[gt.Cancel]"
+*FvwmForm-RunCommand: Command       Nop
+
+
+#=======================================================================
+# 5.6 FvwmIdent
+#=======================================================================
+#  A xwininfo replacement
+DestroyModuleConfig FvwmIdent: *
+*FvwmIdent: Colorset  21
+*FvwmIdent: Font      "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+
+
+
+########################################################################
+#                         6. F U N C T I O N S 
+########################################################################
+# "I" stands for Immediate
+# "M" stands for Motion
+# "C" stands for Click
+# "H" stands for Hold
+# "D" stands for Double Click
+
+#=======================================================================
+# 6.1 Startup
+#=======================================================================
+# The StartFunction is used at start and restart with or without a Session
+# Manager.
+
+#***********************************************************************
+# 6.1.1 Init
+#***********************************************************************
+# The InitFunction is used at fvwm start. Used only once
+AddToFunc InitFunction
+# Load the X Setup Scripts setting if we use it
+#+ I Exec [ -f $HOME/.xinitrc-fvwm ] && sh $HOME/.xinitrc-fvwm
+#+ I Exec exec xsetroot -solid \#7F4B7F
+
+#***********************************************************************
+# 6.1.2 Start
+#***********************************************************************
+#DestroyFunc StartFunction
+AddToFunc StartFunction
+# check for apps needed for full config functionality
++ I Test (Init) FuncAppCheck
+# show splash sceen
++ I Test (Init) Module FvwmBanner
+# set the root background image with Esetroot or if no image found start
+# default Fvwm background
++ I Test (I $[infostore.fvwm_wallpaper]) Exec exec Esetroot -scale $[infostore.fvwm_wallpaper]
++ I TestRC (!Match) Module FvwmBacker
+# activate automatical raise of windows
++ I Module FvwmAuto 300
+# activate animation module used with iconiy for example
++ I Module FvwmAnimate
+# activate module for event actions
++ I Module FvwmEvent FvwmEventCommon
+# activate module for sound event actions
+#+ I Module FvwmEvent FvwmEventSound
+# start systemtray
++ I Test (Init) Test (f $[NS_MODULEDIR]/SysTray) Read $[NS_MODULEDIR]/SysTray
++ I TestRc (Match) FuncStartSysTray
+# start systray applets
++ I Test (Init) FuncStartSystrayApplets
+# start xscreensaver daemon for locking
++ I Test (x xscreensaver-command) Test (Init) Exec xscreensaver -no-splash
+# start window list module
++ I Test (f $[NS_MODULEDIR]/GlobalIconMan) Read $[NS_MODULEDIR]/GlobalIconMan
++ I TestRc (Match) Module FvwmIconMan FvwmGlobalIconMan
+# start a Pager
++ I Test (f $[NS_MODULEDIR]/Pager) Read $[NS_MODULEDIR]/Pager
++ I TestRc (Match) Module FvwmPager
+# starts a time and date module - Parameter:"I"=12h, "H"=24h
++ I Test (Init) Read $[NS_MODULEDIR]/DigitalXclock
++ I TestRc (Match) DigitalXclock H
+# create an Applications menu if no exist
++ I Test (!f $[FVWM_USERDIR]/.menu) PipeRead '$[FVWM_USERDIR]/fvwm-xdg-menu.py -w -f -s 16 -m FvwmMenu > $[FVWM_USERDIR]/.menu 2> $[FVWM_USERDIR]/log.txt &'
++ I TestRc (!Match) PipeRead 'echo Read .menu; echo SetEnv inProgress 2'
+# start programs found in .autostart
++ I Test (Init) FuncAutoStartPrograms
+
+#***********************************************************************
+# 6.1.3 Session
+#***********************************************************************
+# When used with a session manager fvwm uses SessionInitFunction and
+# SessionRestartFunction in the place of  InitFunction and RestartFunction
+AddToFunc SessionInitFunction
+# Do not Load the X Setup Scripts setting, some Session Managers have its own
+# method (e.g., GNOME)
+#+ I Exec [ -f $HOME/.xinitrc-fvwm ] && sh $HOME/.xinitrc-fvwm
+
+AddToFunc SessionRestartFunction
+
+
+#=======================================================================
+# 6.2 General
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Extending Fvwm functionality
+#-----------------------------------------------------------------------
+DestroyFunc FuncFvwmStopModule
+AddToFunc   FuncFvwmStopModule
++ I KillModule $0
+
+DestroyFunc FuncFvwmStopModuleByAlias
+AddToFunc   FuncFvwmStopModuleByAlias
++ I KillModule $0 $1
+
+DestroyFunc FuncFvwmRestartModule
+AddToFunc   FuncFvwmRestartModule
++ I FuncFvwmStopModule $0
++ I Module $0
+
+DestroyFunc FuncFvwmRestartModuleByAlias
+AddToFunc   FuncFvwmRestartModuleByAlias
++ I FuncFvwmStopModuleByAlias $0 $1
++ I Module $0 $1 $2
+
+DestroyFunc FuncFvwmResetColorset
+AddToFunc   FuncFvwmResetColorset
++ I CleanupColorsets
+
+DestroyFunc FuncRemoveAllButtons
+AddToFunc   FuncRemoveAllButtons
++ I Style * !Button 1, !Button 3, !Button 5, !Button 7, !Button 9
++ I Style * !Button 2, !Button 4, !Button 6, !Button 8, !Button 0
++ I FuncRemoveAllButtonBindings
++ I ButtonStyle Reset
++ I TitleStyle Height 5
+
+DestroyFunc FuncChangeDecor
+AddToFunc FuncChangeDecor
++ I PipeRead 'echo InfoStoreAdd used_theme $0'
++ I SetEnv NS_THEMEDIR $[FVWM_USERDIR]/themes/$[infostore.used_theme]
++ I FuncRemoveAllButtons
++ I Read $[NS_THEMEDIR]/colorsets
++ I Read $[NS_THEMEDIR]/decor
++ I PipeRead 'sed -i --follow-symlinks "s/^InfoStoreAdd used_theme.*/InfoStoreAdd used_theme $0/" $FVWM_USERDIR/config' 
+
+#-----------------------------------------------------------------------
+# Prints a message in .xsession-errors
+#-----------------------------------------------------------------------
+DestroyFunc FuncPrintDbgMsg
+AddToFunc   FuncPrintDbgMsg
++ I PipeRead `echo "[fvwm]$0: $1" >> ${HOME}/.xsession-errors`
+
+#-----------------------------------------------------------------------
+# Check which appliction are installed to get full functionality
+# print a message in .xsession-errors if check for app failed
+#-----------------------------------------------------------------------
+DestroyFunc FuncAppCheck
+AddToFunc   FuncAppCheck
+# xterm
++ I Test (!x xterm) FuncPrintDbgMsg "[AppCheck]" "xterm (view, edit) not installed"
+# xclock
++ I Test (!x xclock) FuncPrintDbgMsg "[AppCheck]" "xclock (date & time) not installed"
+# default terminal
++ I Test (!x $[infostore.default_terminal]) FuncPrintDbgMsg "[AppCheck]" "default terminal $[infostore.default_terminal] not installed"
+# default browser
++ I Test (!x $[infostore.default_browser]) FuncPrintDbgMsg "[AppCheck]" "default browser $[infostore.default_browser] not installed"
+# xscreensaver
++ I Test (!x xscreensaver-command) FuncPrintDbgMsg "[AppCheck]" "xscreensaver (lock) not installed"
+# Esetroot in package eterm
++ I Test (!x Esetroot) FuncPrintDbgMsg "[AppCheck]" "eterm (esetroot for background) not installed"
+# import in package imagemagick
++ I Test (!x import) FuncPrintDbgMsg "[AppCheck]" "imagemagick (import for screenshot, thumbs) not installed"
+# stalonetray
++ I Test (!x stalonetray) FuncPrintDbgMsg "[AppCheck]" "stalonetray (systray) not installed"
+# systray app volumeicon
++ I Test (!x volumeicon) FuncPrintDbgMsg "[AppCheck]" "volumeicon (systray volume control) not installed"
+# systray app fdpowermon
++ I Test (!x fdpowermon) FuncPrintDbgMsg "[AppCheck]" "fdpowermon (systray pm control) not installed"
+# systray app nm-applet
++ I Test (!x nm-applet) FuncPrintDbgMsg "[AppCheck]" "nm-applet (systray network control) not installed"
+# systray app bluetooth-applet
++ I Test (!x bluetooth-applet) FuncPrintDbgMsg "[AppCheck]" "bluetooth-applet (systray bluetooth-applet) not installed"
+# Suspend, hibernate pm-is-supported
++ I Test (!x pm-is-supported) FuncPrintDbgMsg "[RequiredAppCheck]" "pm-utils (suspend, hibernate) not installed"
+
+#-----------------------------------------------------------------------
+# Starts a system tray "module"
+#-----------------------------------------------------------------------
+DestroyFunc FuncStartSysTray
+AddToFunc   FuncStartSysTray
++ I Test (x stalonetray) PipeRead `echo Exec exec stalonetray \
+                                  -d all \
+                                  -geometry 1x1+$(($[vp.width]/4*3))+1 \
+                                  --grow-gravity SE \
+                                  --kludges fix_window_pos,force_icons_size,use_icons_hints \
+                                  --background="#7a7664"`
++ I TestRc (Match) Wait stalonetray
+
+#-----------------------------------------------------------------------
+# Starts system tray applets like network, sound, etc
+#-----------------------------------------------------------------------
+DestroyFunc FuncStartSystrayApplets
+AddToFunc   FuncStartSystrayApplets
++ I PipeRead 'echo SetEnv systray_started `ps -e |grep -c stalonetray`'
++ I Test (EnvMatch systray_started 0 ) break
+# volume
++ I Test (x volumeicon) exec exec volumeicon
+# battery
++ I Test (x fdpowermon) exec exec fdpowermon
+# network
++ I Test (x nm-applet) exec exec nm-applet
+# bluetooth
++ I Test (x bluetooth-applet) exec exec bluetooth-applet
+
+#-----------------------------------------------------------------------
+# Starts programs while startup
+#-----------------------------------------------------------------------
+DestroyFunc FuncAutoStartPrograms
+AddToFunc FuncAutoStartPrograms
++ I Exec exec start-programs.sh
+
+#-----------------------------------------------------------------------
+# Starts a FvwmConsole
+#-----------------------------------------------------------------------
+DestroyFunc FuncFvwmConsole
+AddToFunc   FuncFvwmConsole
++ I Module FvwmConsole -fg $[fg.cs22] -bg $[bg.cs22] $*
+
+#-----------------------------------------------------------------------
+# Starts a xterm to run something in it
+#-----------------------------------------------------------------------
+DestroyFunc FuncRunInXterm
+AddToFunc   FuncRunInXterm
++ I exec xterm $3 -fg black -bg snow2 -g 80x40 -fn 7x14 -fb 7x14bold \
+                +sb -ut -T "$0" -n "$0" -e $1
+
+#-----------------------------------------------------------------------
+# starts a xterm to view a file
+#-----------------------------------------------------------------------
+DestroyFunc FuncViewFile
+AddToFunc   FuncViewFile
++ I Exec exec xterm -fg $[fg.cs33] -bg $[bg.cs33] -g 80x24 -fn 7x14 -fb 7x14bold \
+                    -n "File Viewer - $0" -T "File Viewer - $0" -e less -e "$0"
+
+#-----------------------------------------------------------------------
+# Edit a file
+#-----------------------------------------------------------------------
+DestroyFunc FuncFvwmEditFile
+AddToFunc   FuncFvwmEditFile
++ I Test (EnvIsSet EDITOR) FuncRunInXterm 'Edit File - $0' '$ENV[EDITOR] "$0"'
++ I TestRc (!Match) FuncRunInXterm 'Edit File - $0' 'vi "$0"'
+
+#-----------------------------------------------------------------------
+# starts a xterm to tail some a log or so
+#-----------------------------------------------------------------------
+DestroyFunc FuncViewFileTail
+AddToFunc   FuncViewFileTail
++ I Exec exec xterm -fg $[fg.cs33] -bg $[bg.cs33] -g 80x40 -fn 7x14 -fb 7x14bold \
+                    -n "Tail File - $0" -T "Tail File - $0" -e less +F -f "$1"
+
+#-----------------------------------------------------------------------
+# Creates a screenshot from the actual window
+#-----------------------------------------------------------------------
+DestroyFunc FuncWindowCreateScreenshot
+AddToFunc   FuncWindowCreateScreenshot
++ I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%k%M%S`.$[w.id].png"'
++ I Test (x import) ThisWindow (!Shaded, !Iconic, Iconifiable) \
+                  Exec import -frame -window $[w.id] $[infostore.picpath]
++ I TestRc (Match)  FuncShowMessage "$[gt.Screenshot Info for window] $[w.id]" \
+                                    "Screenshot created: $[infostore.picpath]"
++ I TestRc (!Match) FuncShowMessage "$[gt.Screenshot Info for window] $[w.id]" \
+                                    "ImageMagick isn't installed. No screenshot created."
++ I InfoStoreRemove picpath
+
+#-----------------------------------------------------------------------
+# Creates a screenshot from the desktop
+#-----------------------------------------------------------------------
+DestroyFunc FuncDesktopCreateScreenshot
+AddToFunc   FuncDesktopCreateScreenshot
++ I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%k%M%S`.png"'
++ I Test (x import) Exec import -window root $[picpath]
++ I TestRc (Match)  FuncShowMessage "$[gt.Screenshot Info for the desktop]" \
+                                    "Screenshot created: $[infostore.picpath]"
++ I TestRc (!Match) FuncShowMessage "$[gt.Screenshot Info for the desktop]" \
+                                    "ImageMagick isn't installed. No screenshot created."
++ I InfoStoreRemove picpath
+
+
+#-----------------------------------------------------------------------
+# Shows a FvwmForm Infobox with one or multiple message line(s)
+# realized with shell commands over PipeRead
+#-----------------------------------------------------------------------
+# Example:
+# FuncShowMessage "<title>" "<message_1>" ... "<message_n>"
+DestroyFunc FuncShowMessage
+AddToFunc   FuncShowMessage
++ I PipeRead `echo 'DestroyModuleConfig  FvwmForm-Messages: *' > ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo '*FvwmForm-Messages: Font 8x13' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo '*FvwmForm-Messages: WarpPointer' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo "*FvwmForm-Messages: Title   \\"$0\\"" >> ${FVWM_USERDIR}/FvwmForm-Messages `
++ I PipeRead `start=0; for i in $*; do \
+              if [ "$start" -gt "0" ]; then \
+                echo '*FvwmForm-Messages: Line    left' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+                echo "*FvwmForm-Messages: Text  \\"$i\\"" >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              fi; \
+              start=$(($start+1)); \
+              done `
++ I PipeRead `echo '*FvwmForm-Messages: Line   center' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo '*FvwmForm-Messages: Button  quit \" Ok \"' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo '*FvwmForm-Messages: Command !(rm -f ${FVWM_USERDIR}/FvwmForm-Messages)' >> ${FVWM_USERDIR}/FvwmForm-Messages `
++ I Schedule 100 Module FvwmForm FvwmForm-Messages
+
+
+#-----------------------------------------------------------------------
+# Shows a FvwmForm Infobox with all actual available colorset parameters
+# realized with perl over FvwmPerl
+#-----------------------------------------------------------------------
+DestroyFunc FuncFvwmShowColorsets
+AddToFunc   FuncFvwmShowColorsets
++ I PipeRead `echo 'DestroyModuleConfig  FvwmForm-ShowColorsets: *' > ${FVWM_USERDIR}/FvwmForm-ShowColorsets`
++ I FvwmPerl -e 'open(MSG ,">>$[FVWM_USERDIR]/FvwmForm-ShowColorsets") || die "Error $!"; \
+                print MSG "*FvwmForm-ShowColorsets: Font 8x13\\n"; \
+                print MSG "*FvwmForm-ShowColorsets: WarpPointer\\n"; \
+                print MSG "*FvwmForm-ShowColorsets: Title   \\"Colorset Information\\"\\n"; \
+                my @Colorsets = split("\\n", $module->track("Colorsets")->dump); \
+                foreach my $CSstring (@Colorsets) { \
+                    print MSG "*FvwmForm-ShowColorsets: Line    left\\n"; \
+                    print MSG "*FvwmForm-ShowColorsets: Text  \\"$CSstring\\"\\n"; \
+                } \
+                print MSG "*FvwmForm-ShowColorsets: Line   center\\n"; \
+                print MSG "*FvwmForm-ShowColorsets: Button  quit \\" Ok \\"\\n"; \
+                print MSG "*FvwmForm-ShowColorsets: Command !(rm -f \\$\\{FVWM_USERDIR\\}\\/FvwmForm-ShowColorsets)\\n"; \
+                close MSG; \
+                cmd("Schedule 100 Module FvwmForm FvwmForm-ShowColorsets");'
+
+
+#-----------------------------------------------------------------------
+# Open an URL in a browser
+#-----------------------------------------------------------------------
+DestroyFunc FuncOpenURL
+AddToFunc   FuncOpenURL
++ I Test (x $[infostore.default_browser]) Exec $[infostore.default_browser] '$0'
++ I TestRc (!Match) Test (x firefox) Exec firefox '$0'
++ I TestRc (!Match) Test (x chromium) Exec chromium '$0'
++ I TestRc (!Match) Test (x seamonkey) Exec seamonkey '$0'
++ I TestRc (!Match) Test (x iceweasel) Exec iceweasel '$0'
++ I TestRc (!Match) Test (x iceape) Exec iceape '$0'
++ I TestRc (!Match) Test (x netscape) Exec netscape -remote 'openURL($0, new-window)' 2>/dev/null || netscape '$0'
++ I TestRc (!Match) Test (x galeon) Exec galeon '$0'
++ I TestRc (!Match) Test (x konqueror) Exec konqueror '$0'
++ I TestRc (!Match) Test (x opera) Exec opera '$0'
++ I TestRc (!Match) FuncRunInXterm 'Open URL - $0' 'links "$0"'
+
+#-----------------------------------------------------------------------
+# Switching focus between windows. (ALT-Tab) from the Fvwm Wiki
+#-----------------------------------------------------------------------
+DestroyFunc SwitchWindow
+AddToFunc SwitchWindow
++ I $[infostore.direction] (CurrentPage, !Iconic, !Sticky) FuncSelectWindow
++ I Deschedule 134000
++ I PipeRead `[ "$[infostore.DIR]" == "Prev" ] && \
+              echo 'InfoStoreAdd new_direction Next' || \
+              echo 'InfoStoreAdd new_direction Prev'`
++ I Schedule 700 134000 InfoStoreAdd direction $[infostore.new_direction]
+
+#-----------------------------------------------------------------------
+# Wallpaper Browser from Taviso.
+#-----------------------------------------------------------------------
+DestroyFunc WallpaperBrowser
+AddToFunc WallpaperBrowser
++ I PipeRead 'test ! -d "$0" && mkdir "$0"; \
+    test ! -d "$0/.thumbs" && mkdir "$0/.thumbs"; \
+    for i in "$0/"*; do \
+        test -f "$0/.thumbs/${i##*/}" -a "${i}" -ot "$0/.thumbs/${i##*/}" || { \
+                convert -quality 0 -sample 42 "${i}" "png:$0/.thumbs/${i##*/}" 2>/dev/null \
+                    || continue; \
+            }; \
+    done; \
+    fvwm-menu-directory --icon-title menu/folder-open.xpm --icon-file __PIXMAP__ --links \
+    --icon-dir menu/folder.xpm \
+    --dir "$0" --command-file="FuncNewWallpaper \\"%f\\"" \
+    --exec-t="^xv -wait 2 *" --func-name WallpaperBrowser | sed \
+    "s#__PIXMAP__\\(.*\\)\\\"\\(.*/\\)\\(.*\\)\\\"#\\2.thumbs/\\3\\1\\2\\3#g"'
+
+#-----------------------------------------------------------------------
+# switch background from FvwmBacker to chosen wallpaper picture
+#-----------------------------------------------------------------------
+DestroyFunc FuncNewWallpaper
+AddToFunc FuncNewWallpaper
++ I PipeRead 'ln -sf $* $[FVWM_USERDIR]/.wallpaper'
++ I Exec exec Esetroot -scale $[infostore.fvwm_wallpaper]
++ I KillModule FvwmBacker
+
+#-----------------------------------------------------------------------
+# delete wallpaper link and activate FvwmBacker
+#-----------------------------------------------------------------------
+DestroyFunc FuncDelWallpaperlink
+AddToFunc   FuncDelWallpaperlink
++ I PipeRead 'rm -f $[infostore.fvwm_wallpaper]'
++ I Module FvwmBacker
+
+#-----------------------------------------------------------------------
+# Get Fvwm version (full)
+#-----------------------------------------------------------------------
+DestroyFunc FuncGetFvwmVersion
+AddToFunc   FuncGetFvwmVersion
++ I PipeRead 'fvwm -version > $[FVWM_USERDIR]/.version'
++ I PipeRead `sed -e 's/^\\\(.*\\\)$/"\\\1\\\"/' -i $[FVWM_USERDIR]/.version`
++ I PipeRead 'echo InfoStoreAdd version_str1 `head -n 1 $[FVWM_USERDIR]/.version`'
++ I PipeRead 'echo InfoStoreAdd version_str2 `grep with $[FVWM_USERDIR]/.version`'
++ I FuncShowMessage "Fvwm version Info" "$[infostore.version_str1]" "$[infostore.version_str2]"
++ I Schedule 100 PipeRead 'rm -f $[FVWM_USERDIR]/.version'
++ I InfoStoreRemove version_str1
++ I InfoStoreRemove version_str2
+
+
+#-----------------------------------------------------------------------
+# Suspend the machine
+#-----------------------------------------------------------------------
+DestroyFunc FuncSuspend
+AddToFunc   FuncSuspend
++ I PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
+              /org/freedesktop/Hal/devices/computer \
+              org.freedesktop.Hal.Device.SystemPowerManagement.Suspend \
+              int32:0'
+
+#-----------------------------------------------------------------------
+# Set the default terminal
+#-----------------------------------------------------------------------
+DestroyFunc FuncHibernate
+AddToFunc   FuncHibernate
++ I PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
+              /org/freedesktop/Hal/devices/computer \
+              org.freedesktop.Hal.Device.SystemPowerManagement.Hibernate'
+
+
+#-----------------------------------------------------------------------
+# Create the applications menu
+#-----------------------------------------------------------------------
+DestroyFunc FuncCreateFvwmMenu
+AddToFunc FuncCreateFvwmMenu
++ I PipeRead '$[FVWM_USERDIR]/fvwm-xdg-menu.py -w -f -s 16 -m FvwmMenu > $[FVWM_USERDIR]/.menu 2> /dev/null ;  echo SetEnv inProgress 0'
+
+#=======================================================================
+# 6.3 Window/Icon
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# This one moves and then raises the window if you drag the mouse,
+# only raises the window if you click, or maximize if you double click
+#-----------------------------------------------------------------------
+DestroyFunc FuncMoveOrRaiseOrMaximize
+AddToFunc   FuncMoveOrRaiseOrMaximize
++ H Move
++ M Move
++ C Raise
++ D Maximize
+
+#-----------------------------------------------------------------------
+# This one resizes and then raises the window if you drag the mouse, only
+# raises the window if you click,  or maximize if you double click
+#-----------------------------------------------------------------------
+DestroyFunc FuncResizeOrRaiseOrMaximize
+AddToFunc   FuncResizeOrRaiseOrMaximize
++ H Resize $0
++ M Resize $0
++ C Raise
++ D Maximize
+
+#-----------------------------------------------------------------------
+# This one moves the window if you drag the mouse and RaiseLower if you click
+#-----------------------------------------------------------------------
+DestroyFunc FuncMoveOrRaiseLower
+AddToFunc   FuncMoveOrRaiseLower
++ H Move
++ M Move
++ C RaiseLower
+
+#-----------------------------------------------------------------------
+# This moves the icon if you drag the mouse and deiconify it if you double click
+#-----------------------------------------------------------------------
+DestroyFunc FuncMoveOrIconify
+AddToFunc   FuncMoveOrIconify
++ M Move
++ D Iconify
+
+#-----------------------------------------------------------------------
+# This function maximize a window to fullscreen - no title, no buttons, no border 
+#-----------------------------------------------------------------------
+DestroyFunc FuncMaximizeFullScreen
+AddToFunc   FuncMaximizeFullScreen
++ I ThisWindow (Maximized) WindowStyle Title, Borders
++ I TestRc (!Match) WindowStyle !Title, !Borders
++ I TestRc (!Match) Raise
++ I TestRc (!Match) UpdateStyles
++ I Maximize ewmhiwa
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncSelectWindow
+AddToFunc   FuncSelectWindow
++ I Iconify off
++ I Focus
++ I Raise
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncRestore
+AddToFunc   FuncRestore
++ I ThisWindow (!Iconic !Shaded Maximized) Maximize    false
++ I ThisWindow (!Iconic  Shaded          ) WindowShade false
++ I ThisWindow ( Iconic                  ) Iconify     false
+
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncDeleteOrDestroy
+AddToFunc   FuncDeleteOrDestroy
++ H Nop
++ M Nop
++ C Delete
++ D Destroy
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncMaximize
+AddToFunc   FuncMaximize
++ M Nop
++ H Nop
++ C Maximize
++ D Menu MenuWindowMaximize
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncMaximizeVertically
+AddToFunc   FuncMaximizeVertically
++ H Maximize 0 100
++ M Maximize 0 100
++ C Maximize 0 100
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncMaximizeHorizontally
+AddToFunc   FuncMaximizeHorizontally
++ H Maximize 100 0
++ M Maximize 100 0
++ C Maximize 100 0
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncSimpleMaximize
+AddToFunc   FuncSimpleMaximize
++ I Maximize $0
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncSimpleMaximizeVertically
+AddToFunc   FuncSimpleMaximizeVertically
++ I Maximize $0 0 100
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncSimpleMaximizeHorizontally
+AddToFunc   FuncSimpleMaximizeHorizontally
++ I Maximize $0 100 0
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncSimpleMaximizePartially
+AddToFunc   FuncSimpleMaximizePartially
++ I Maximize $0 0 95
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+DestroyFunc FuncIconifySameResource
+AddToFunc   FuncIconifySameResource
++ I All ($[w.resource]) Iconify $0
+
+#-----------------------------------------------------------------------
+# Iconify a window
+#-----------------------------------------------------------------------
+DestroyFunc FuncIconify
+AddToFunc   FuncIconify
++ C Iconify
+
+#-----------------------------------------------------------------------
+# Shade or unshade the window when the Mouse wheel is rolled up or
+# down on the Titlebar. Rolling the Wheel up calls the Function with
+# argument `True` and rolling it down uses `False`, so rolling the wheel
+# down when the window isnt shaded has no effect, which I like :)
+#-----------------------------------------------------------------------
+DestroyFunc FuncWheelToggleShade
+AddToFunc FuncWheelToggleShade
++ D WindowShade $0
+
+#-----------------------------------------------------------------------
+# Move active window to next/previous page
+#-----------------------------------------------------------------------
+DestroyFunc FuncMoveWindowToPage
+AddToFunc FuncMoveWindowToPage
++ I MoveToPage $0 $1
++ I GotoPage $0 $1
+
+#-----------------------------------------------------------------------
+# GotoPage and set focus to window which is in the foreground
+#-----------------------------------------------------------------------
+DestroyFunc FuncGotoPage
+AddToFunc FuncGotoPage
++ I GotoPage $0 $1
++ I Next (CurrentPage, !Iconic, !Sticky, !Shaded, !Focused, !Overlapped) FuncSelectWindow
+
+#-----------------------------------------------------------------------
+# Move window to top layer and next time back to default
+#-----------------------------------------------------------------------
+DestroyFunc FuncStaysOnTopAndBack
+AddToFunc FuncStaysOnTopAndBack
++ I ThisWindow (Layer 2) Pick (CirculateHit) Layer 0 6
++ I TestRc (!Match) Pick (CirculateHit) Layer default
++ I Raise
+
+
+#=======================================================================
+# 6.4 Menus
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Creates a dynamic menu for all available Fvwm manpages
+#-----------------------------------------------------------------------
+DestroyFunc FuncFvwmManpageMenu
+AddToFunc FuncFvwmManpageMenu
++ I PipeRead 'fvwm-menu-directory \
+              --dir "/usr/share/man/man1" \
+              --title "Man Pages" --exec-file "^xterm -fg $[fg.cs33] -bg $[bg.cs33] -g 80x40 -n Fvwm-Help -T Fvwm-Help -e man" |\
+              grep "^Destroy\\|^AddTo\\|^+ Dynamic\\|^+ Missing\\|^+ \\"[Ff]vwm*"|sed -e "s#\\.1\\.gz##g" \
+              -e "s#/usr/share/man/man1/##g" -e "s#\\"##3" -e "s#\\"##3" '
+
+#-----------------------------------------------------------------------
+# Moves all windows to another page
+#-----------------------------------------------------------------------
+DestroyMenu  MenuWindowGroupQuickMove
+AddToMenu    MenuWindowGroupQuickMove
++ "&Right	Page%menu/window-move.xpm%" Pick All ($[w.resource]) MoveToPage +1p +0p
++ "&Left	Page%menu/window-move.xpm%" Pick All ($[w.resource]) MoveToPage -1p +0p
+#+ "D&own	Page%menu/window-move.xpm%" Pick All ($[w.resource]) MoveToPage +0p +1p
+#+ "&Up  	Page%menu/window-move.xpm%" Pick All ($[w.resource]) MoveToPage +0p -1p
+
+#-----------------------------------------------------------------------
+# Move a window to another page
+#-----------------------------------------------------------------------
+DestroyMenu  MenuWindowMoveTo
+AddToMenu    MenuWindowMoveTo "Move to ..." Title
++ "&Right	Page%menu/window-move.xpm%"	AnimatedMove w+100 w
++ "&Left	Page%menu/window-move.xpm%"	AnimatedMove w-100 w
+#+ "&Down	Page%menu/window-move.xpm%"	AnimatedMove w w+100
+#+ "&Up  	Page%menu/window-move.xpm%"	AnimatedMove w w-100
+
+
+########################################################################
+#                            7. M E N U S
+########################################################################
+
+#=======================================================================
+# 7.1 Root menu
+#=======================================================================
+# Dynamic menu realized with DynamicPopupAction
+AddToMenu MenuRoot DynamicPopupAction FuncMenuRoot
+
+DestroyFunc FuncMenuRoot
+AddToFunc FuncMenuRoot
++ I DestroyMenu MenuRoot
++ I AddToMenu MenuRoot DynamicPopupAction FuncMenuRoot
++ I AddToMenu MenuRoot "$[gt.Root Menu]" Title
++ I AddToMenu MenuRoot "$[gt.&Personal Applications]%menu/home.xpm%"		Popup MenuFvwmPersonal
++ I PipeRead 'if [ `ps -ef |grep -c fvwm-xdg-menu.py` -gt 3 ]; then \
+                echo SetEnv inProgress 1; \
+              else \
+		if [ $inProgress -ne 2 ]; then \
+		    echo Read $[FVWM_USERDIR]/.menu; \
+		    echo SetEnv inProgress 2; \
+		fi; \
+              fi'
++ I Test (EnvMatch inProgress 1) \
+    AddToMenu MenuRoot "$[gt.Menu creation in progress ...]%menu/restart.xpm%" Nop
++ I TestRc (!Match) Test (f  $[FVWM_USERDIR]/.menu) \
+    AddToMenu MenuRoot "$[gt.&Applications]%menu/terminal.xpm%"            	Popup FvwmMenu
++ I TestRC (!Match) \
+    AddToMenu MenuRoot "$[gt.&Generate Applications Menu]%menu/terminal.xpm%"	FuncCreateFvwmMenu
++ I TestRC (Match) Test (!EnvMatch inProgress 1) \
+    AddToMenu MenuRoot "$[gt.&Update Applications Menu]%menu/terminal.xpm%"	FuncCreateFvwmMenu
++ I AddToMenu MenuRoot "" Nop
++ I AddToMenu MenuRoot "$[gt.&Configuration]%menu/configuration.xpm%"		Popup MenuConfiguration
++ I AddToMenu MenuRoot "$[gt.&Help]%menu/help.xpm%"				Popup MenuHelp
++ I AddToMenu MenuRoot "" Nop
++ I AddToMenu MenuRoot "$[gt.FVWM &Modules]%menu/modules.xpm%"			Popup MenuFvwmModules
++ I AddToMenu MenuRoot "$[gt.&Window Operations]%menu/window.xpm%"		Popup MenuWindowOpsFull
++ I AddToMenu MenuRoot "" Nop
++ I PipeRead 'if [ `pidof xscreensaver` ]; then \
+                echo SetEnv isRunning 1; \
+              else \
+                echo SetEnv isRunning 0; \
+              fi'
++ I Test (EnvMatch isRunning 1) \
+    AddToMenu MenuRoot "$[gt.&Lock screen]%menu/lock.xpm%"			Exec exec xscreensaver-command -lock
++ I TestRc (!Match) \
+    AddToMenu MenuRoot "$[gt.Lock screen]	Shift-Ctrl+L%menu/lock.xpm%"	FuncShowMessage \
+                                                                                "Lock screen Info" \
+                                                                                "'xscreensaver' not running or not installed."
++ I AddToMenu MenuRoot "$[gt.&Run Command]	Shift-Alt-F2%menu/system.xpm%"	module FvwmForm FvwmForm-RunCommand
++ I AddToMenu MenuRoot "$[gt.&Terminal]	Shift-Ctrl-T%menu/terminal.xpm%"	exec exec $[infostore.default_terminal]
++ I AddToMenu MenuRoot "$[gt.&Quit FVWM]%menu/quit.xpm%"			Popup MenuFvwmQuit
+
+
+#-----------------------------------------------------------------------
+# Dynamic personal applications sub menu for favorite apps
+# realized with DynamicPopupAction
+#-----------------------------------------------------------------------
+AddToMenu MenuFvwmPersonal DynamicPopupAction FuncMenuFvwmPersonal
+
+DestroyFunc FuncMenuFvwmPersonal
+AddToFunc FuncMenuFvwmPersonal
++ I DestroyMenu MenuFvwmPersonal
++ I AddToMenu MenuFvwmPersonal DynamicPopupAction FuncMenuFvwmPersonal
++ I AddToMenu MenuFvwmPersonal "$[gt.&Personal Applications]" Title
++ I AddToMenu MenuFvwmPersonal "$[gt.Configure Personal Applications]%menu/configuration.xpm%"	FvwmScript FvwmScript-PersonalMenu
++ I Test (f  $[FVWM_USERDIR]/.personal) PipeRead `sed -e '/^# personal menu/ d;/^ *$/,$ d' $[FVWM_USERDIR]/.personal`
+
+#=======================================================================
+# 7.2 Help
+#=======================================================================
+DestroyMenu MenuHelp
+AddToMenu   MenuHelp
++ "$[gt.&Help]" Title
++ "%menu/information.xpm%$[gt.Show FVWM Version]"               FuncShowMessage "Fvwm Version Info" "$[version.line]"
+#+ "%menu/information.xpm%$[gt.Show FVWM Version]"               FuncGetFvwmVersion
+# Dynamic Fvwm Manpages realized with MissingSubmenuFunction
++ MissingSubmenuFunction FuncFvwmManpageMenu
++ "%menu/help.xpm%$[gt.FVWM Man Pages]"                         Popup "/usr/share/man/man1"
++ "%menu/www.xpm%$[gt.FVWM Web Pages]"                          Popup MenuFvwmWebPages
++ "" Nop
+Test (x xman)+ "%menu/help.xpm%$[gt.X Man Pages]"               Exec exec xman
+Test (x gnome-help)+ "%menu/help.xpm%$[gt.GNOME Help]"          Exec exec gnome-help
+Test (x gnome-help-browser)+ "%menu/help.xpm%$[gt.GNOME Help]"  Exec exec gnome-help-browser
+Test (x kdehelp)+ "%menu/help.xpm%$[gt.KDE Help]"               Exec exec kdehelp
+Test (x khelpcenter)+ "%menu/help.xpm%$[gt.KDE Help]"           Exec exec khelpcenter
+
+
+#-----------------------------------------------------------------------
+# Help submenu Fvwm web pages
+#-----------------------------------------------------------------------
+DestroyMenu MenuFvwmWebPages
+AddToMenu   MenuFvwmWebPages
++ "$[gt.FVWM Web Pages]" Title
++ "%menu/information.xpm%$[gt.Home Page]"         FuncOpenURL http://www.fvwm.org/
++ "%menu/information.xpm%$[gt.FAQ]"               FuncOpenURL http://www.fvwm.org/generated/FAQ.html
++ "%menu/information.xpm%$[gt.Documentation]"     FuncOpenURL http://fvwm.org/doc/unstable/index.html
++ "" Nop
++ "%menu/information.xpm%$[gt.Wiki]"              FuncOpenURL http://fvwmwiki.xteddy.org/
++ "%menu/information.xpm%$[gt.Forum]"             FuncOpenURL http://www.fvwmforums.org/
++ "" Nop
++ "%menu/information.xpm%$[gt.In the beginning was ...]" FuncOpenURL http://edulinux.homeunix.org/fvwm/user_enumerate.html
++ "%menu/information.xpm%$[gt.Beginners Guide]"   FuncOpenURL http://zensites.net/fvwm/guide/
++ "%menu/information.xpm%$[gt.FAQ inofficial]"    FuncOpenURL http://edulinux.homeunix.org/fvwm/fvwmchanfaq.html
++ "%menu/information.xpm%$[gt.Fvwm and Session Management]"    FuncOpenURL http://linuxgazette.net/100/adam.html
+
+
+#=======================================================================
+# 7.3 Modules
+#=======================================================================
+DestroyMenu MenuFvwmModules
+AddToMenu   MenuFvwmModules
++ "$[gt.FVWM Modules]" Title
++ "$[gt.Start Regular Modules]%menu/modules.xpm%"       Popup MenuStartRegularModules
++ "$[gt.Stop Regular Modules]%menu/quit.xpm%"           Popup MenuStopRegularModules
+
+#-----------------------------------------------------------------------
+# Modules sub menu for starting regular Fvwm modules
+#-----------------------------------------------------------------------
+DestroyMenu MenuStartRegularModules
+AddToMenu   MenuStartRegularModules
++ "$[gt.Regular Modules]" Title
++ "$[gt.&Animation]%menu/window-iconify.xpm%"           FuncRestartModule FvwmAnimate
++ "$[gt.Backe&r]%menu/display.xpm%"                     FuncRestartModule FvwmBacker
++ "$[gt.Ba&nner]%menu/display.xpm%"                     Module FvwmBanner
++ "$[gt.Co&mmandS]%menu/terminal-special.xpm%"          FuncRestartModule FvwmCommandS
++ "$[gt.&Console]%menu/terminal-special.xpm%"           FuncFvwmConsole
++ "$[gt.&GtkDebug]%menu/development.xpm%"               Module FvwmGtkDebug
++ "$[gt.&Debug Console]%menu/development.xpm%"          Module FvwmDebug --xconsole
++ "$[gt.&Identify]%menu/window-identify.xpm%"           Module FvwmIdent
++ "$[gt.&ScrollBar (1/2 app)]%menu/window-resize.xpm%"  Module FvwmScroll 2 2
++ "%menu/window-resize.xpm%$[gt.&ScrollBar (75%% scr)]" Module FvwmScroll 75p 75p
++ "$[gt.Auto Raise (1/2 sec)]%menu/window-raise.xpm%" 	FuncRestartModule 'FvwmAuto 500 "Silent Raise" Nop'
++ "$[gt.Auto Raise (2 sec)]%menu/window-raise.xpm%"   	FuncRestartModule 'FvwmAuto 2000 "Silent Raise" Nop'
++ "" Nop
++ "$[gt.&Forms]%menu/utility.xpm%"                      Popup  MenuFvwmForms
+
+#-----------------------------------------------------------------------
+# Modules sub menu for stoping regular Fvwm modules
+#-----------------------------------------------------------------------
+DestroyMenu MenuStopRegularModules
+AddToMenu   MenuStopRegularModules
++ "$[gt.Regular Modules]" Title
++ "$[gt.Stop &Animation]%menu/quit.xpm%"          KillModule FvwmAnimate
++ "$[gt.Stop Backe&r]%menu/quit.xpm%"             KillModule FvwmBacker
++ "$[gt.Stop Co&mmandS]%menu/quit.xpm%"           KillModule FvwmCommandS
++ "$[gt.Stop &Console]%menu/quit.xpm%"            KillModule FvwmConsole
++ "$[gt.Stop &GtkDebug]%menu/quit.xpm%"           KillModule FvwmGtkDebug
++ "$[gt.Stop &Identify]%menu/quit.xpm%"           KillModule FvwmIdent
++ "$[gt.Stop &ScrollBar]%menu/quit.xpm%"          KillModule FvwmScroll
++ "$[gt.Stop Auto Rais&e]%menu/quit.xpm%"         KillModule FvwmAuto
++ "$[gt.Stop All Events]%menu/quit.xpm%"          KillModule FvwmEvent
++ "$[gt.Stop All &Buttons]%menu/quit.xpm%"        KillModule FvwmButtons
++ "$[gt.Stop All &Forms]%menu/quit.xpm%"          KillModule FvwmForm
+
+#-----------------------------------------------------------------------
+# Modules sub menu for Fvwm Form modules
+#-----------------------------------------------------------------------
+DestroyMenu MenuFvwmForms
+AddToMenu   MenuFvwmForms
++ "$[gt.FvwmForm Tools]" Title
++ "$[gt.&Capture]%menu/display.xpm%"              Module FvwmForm FvwmForm-Capture
++ "$[gt.&Rlogin]%menu/terminal-remote.xpm%"       Module FvwmForm FvwmForm-Rlogin
++ "$[gt.&Talk]%menu/terminal-special.xpm%"        Module FvwmForm FvwmForm-Talk
++ "$[gt.&QuitVerify]%menu/quit.xpm%"              Module FvwmForm FvwmForm-QuitVerify
+
+
+#=======================================================================
+# 7.4 Configuration Menu
+#=======================================================================
+#-----------------------------------------------------------------------
+# Dynamic Configuration menu for Fvwm configuration
+# realized with DynamicPopupAction
+#-----------------------------------------------------------------------
+AddToMenu MenuConfiguration DynamicPopupAction FuncMenuConfiguration
+
+DestroyFunc FuncMenuConfiguration
+AddToFunc FuncMenuConfiguration
++ I DestroyMenu MenuConfiguration
++ I AddToMenu MenuConfiguration DynamicPopupAction FuncMenuConfiguration
++ I AddToMenu MenuConfiguration "$[gt.&Configuration]" Title
++ I AddToMenu MenuConfiguration "$[gt.&Animation Control]%menu/window-iconify.xpm%"     Popup MenuFvwmAnimate
++ I Test (x convert) PipeRead `echo SetEnv appmatch 1`
++ I TestRc (!Match) PipeRead `echo SetEnv appmatch 0`
++ I Test (x Esetroot) PipeRead `echo SetEnv appmatch $(($appmatch+1))`
++ I Test (EnvMatch appmatch 2) \
+    AddToMenu MenuConfiguration "$[gt.&Background]%menu/image-viewer.xpm%"    Popup MenuWallpaperConfiguration
++ I TestRc (!Match) \
+    AddToMenu MenuConfiguration "$[gt.&Background]%menu/image-viewer.xpm%"     FuncShowMessage \
+                                                                                            "Wallpaper browser Info" \
+                                                                                            "Install ImageMagick AND eterm for full functionality."
++ I AddToMenu MenuConfiguration "$[gt.&Keyboard]%menu/keyboard.xpm%"     		Popup MenuKeyboard
++ I AddToMenu MenuConfiguration "$[gt.&Mouse]%menu/mouse.xpm%"     		Popup MenuMouse
++ I Test (x xscreensaver-command) \
+    AddToMenu MenuConfiguration "$[gt.Sc&reen Saver]%menu/display.xpm%"      Popup MenuXScreenSaver
++ I TestRc (!Match) \
+    AddToMenu MenuConfiguration "$[gt.Sc&reen Saver]%menu/display.xpm%"      FuncShowMessage \
+                                                                                "Screensaver Info" \
+                                                                                "Install xscreensaver for full functionality"                            
++ I AddToMenu MenuConfiguration "$[gt.&Decoration]%menu/themes.xpm%"     	    Popup MenuDecoration
++ I AddToMenu MenuConfiguration "$[gt.Fvwm Form &Defaults]%menu/configuration.xpm%"  Module FvwmForm FvwmForm-Form
++ I AddToMenu MenuConfiguration "$[gt.&System Bell]%menu/sound.xpm%"                FvwmScript FvwmScript-BellSetup
++ I AddToMenu MenuConfiguration "$[gt.&Screen]%menu/display.xpm%"            FvwmScript FvwmScript-ScreenSetup
++ I AddToMenu MenuConfiguration "" Nop
++ I AddToMenu MenuConfiguration "$[gt.&Show Colorsets]%menu/colors.xpm%"                   FuncFvwmShowColorsets
++ I AddToMenu MenuConfiguration "$[gt.&Tail .xsession-errors]%menu/information.xpm%" FuncViewFileTail ".xsession-errors" $[HOME]/.xsession-errors
+
+
+
+#-----------------------------------------------------------------------
+# Dynamic Configuration sub menu for keyboard configuration
+# realized with DynamicPopupAction
+#-----------------------------------------------------------------------
+AddToMenu MenuKeyboard DynamicPopupAction FuncMenuKeyboard
+
+DestroyFunc FuncMenuKeyboard
+AddToFunc FuncMenuKeyboard
++ I DestroyMenu MenuKeyboard
++ I AddToMenu MenuKeyboard DynamicPopupAction FuncMenuKeyboard
++ I AddToMenu MenuKeyboard "$[gt.&Keyboard]" Title
++ I AddToMenu MenuKeyboard "$[gt.&Settings]%menu/keyboard.xpm%"         FvwmScript FvwmScript-KeyboardSetup
++ I Test (x gxneur) \
+    AddToMenu MenuKeyboard "$[gt.&Layout]%menu/keyboard.xpm%"      Exec exec gxneur
++ I TestRc (!Match) Test (x xneur) \
+    AddToMenu MenuKeyboard "$[gt.&Layout]%menu/keyboard.xpm%"      Exec exec xneur
++ I TestRc (!Match) \
+    AddToMenu MenuKeyboard "$[gt.&Layout]%menu/keyboard.xpm%"      FuncShowMessage \
+                                                                                "Keyboard Layout Info" \
+                                                                                "Install xneur/gxneur for full functionality"                            
+
+#-----------------------------------------------------------------------
+# Sub menu for Mouse settings
+#-----------------------------------------------------------------------
+DestroyMenu MenuMouse
+AddToMenu   MenuMouse
++ "$[gt.&Mouse]" Title
++ "$[gt.&Settings]%menu/mouse.xpm%"               FvwmScript FvwmScript-PointerSetup
++ "$[gt.Root &Cursor]%menu/item.xpm%"          Module FvwmForm FvwmForm-RootCursor
+
+#-----------------------------------------------------------------------
+# Dynamic Configuration sub menu for window decoration
+# realized with DynamicPopupAction
+#-----------------------------------------------------------------------
+AddToMenu MenuDecoration DynamicPopupAction FuncMenuDecoration
+
+DestroyFunc FuncMenuDecoration
+AddToFunc FuncMenuDecoration
++ I DestroyMenu MenuDecoration
++ I AddToMenu MenuDecoration DynamicPopupAction FuncMenuDecoration
++ I AddToMenu MenuDecoration "$[gt.&Decoration]" Title
++ I AddToMenu MenuDecoration "$[gt.Fvwm &Decor]%menu/windows.xpm%"     	    Popup FvwmDecorMenu
++ I AddToMenu MenuDecoration "$[gt.&Qt Decor]%menu/kde.xpm%"     	    Popup MenuQtDecor
++ I Test (x lxappearance) \
+    AddToMenu MenuDecoration "$[gt.&Gtk+ Decor]%menu/gnome.xpm%"      Exec exec lxappearance
++ I TestRc (!Match) \
+    AddToMenu MenuDecoration "$[gt.&Gtk+ Decor]%menu/gnome.xpm%"      FuncShowMessage \
+                                                                                "Gtk+ Decor Info" \
+                                                                                "Install LxApearance for Gtk+ apps"                            
+#-----------------------------------------------------------------------
+# Dynamic Configuration sub menu for Qt styled windows
+# realized with DynamicPopupAction
+#-----------------------------------------------------------------------
+AddToMenu MenuQtDecor DynamicPopupAction FuncMenuQtDecor
+
+DestroyFunc FuncMenuQtDecor
+AddToFunc FuncMenuQtDecor
++ I DestroyMenu MenuQtDecor
++ I AddToMenu MenuQtDecor DynamicPopupAction FuncMenuQtDecor
++ I AddToMenu MenuQtDecor "$[gt.&Qt Decor]" Title
++ I Test (x qtconfig-qt3) \
+    AddToMenu MenuQtDecor "$[gt.&Qt-3 Decor]%menu/kde.xpm%"      Exec exec qtconfig-qt3
++ I TestRc (!Match) \
+    AddToMenu MenuQtDecor "$[gt.&Qt-3 Decor]%menu/kde.xpm%"      FuncShowMessage \
+                                                                                "Qt3 Decor Info" \
+                                                                                "Install qtconfig-qt3 for Qt3 apps"                            
++ I Test (x qtconfig-qt4) \
+    AddToMenu MenuQtDecor "$[gt.&Qt-4 Decor]%menu/kde.xpm%"      Exec exec qtconfig-qt4
++ I TestRc (!Match) \
+    AddToMenu MenuQtDecor "$[gt.&Qt-4 Decor]%menu/kde.xpm%"      FuncShowMessage \
+                                                                                "Qt4 Decor Info" \
+                                                                                "Install qtconfig-qt4 for Qt4 apps"                            
+
+#-----------------------------------------------------------------------
+# Dynamic decor sub menu with names of each decor folder
+# with DynamicPopupAction and recreation
+#-----------------------------------------------------------------------
+DestroyMenu FvwmDecorMenu
+AddToMenu FvwmDecorMenu
++ "$[gt.Decors]" Title
++ DynamicPopupAction Function FuncFvwmDecorMenu
+
+DestroyFunc FuncFvwmDecorMenu
+AddToFunc FuncFvwmDecorMenu
++ I DestroyMenu recreate FvwmDecorMenu
++ I AddToMenu FvwmDecorMenu "$[gt.Decors]" Title
++ I PipeRead 'for i in `ls -Fh $FVWM_USERDIR/themes/ | grep /$ | sed s#/##g`; \
+  do echo AddToMenu FvwmDecorMenu "${i}%menu/amusement.xpm%" FuncChangeDecor $i; done'
+
+#-----------------------------------------------------------------------
+# Dynamic Configuration sub menu for setting a background with
+# a picture or FvwmBaker (default background) 
+# realized with MissingSubmenuFunction (for the pictures)
+#-----------------------------------------------------------------------
+AddToMenu MenuWallpaperConfiguration DynamicPopupAction FuncMenuWallpaperConfiguration
+
+DestroyFunc FuncMenuWallpaperConfiguration
+AddToFunc FuncMenuWallpaperConfiguration
++ I DestroyMenu MenuWallpaperConfiguration
++ I AddToMenu MenuWallpaperConfiguration "$[gt.&Background Configuration]" Title
++ I AddToMenu MenuWallpaperConfiguration DynamicPopupAction FuncMenuWallpaperConfiguration
++ I Test (I $[infostore.fvwm_wallpaper]) \
+    AddToMenu MenuWallpaperConfiguration "$[gt.Set &Default background]%menu/choice-no.xpm%"      FuncDelWallpaperlink
++ I AddToMenu MenuWallpaperConfiguration MissingSubmenuFunction WallpaperBrowser
++ I AddToMenu MenuWallpaperConfiguration "$[gt.Set &Wallpaper background]%menu/image-viewer.xpm%"    Popup $[infostore.wallpaper_dir]
+
+#-----------------------------------------------------------------------
+# Screensaver sub menu for X configuration
+#-----------------------------------------------------------------------
+DestroyMenu MenuXScreenSaver
+AddToMenu   MenuXScreenSaver "$[gt.Screen Saver]" Title
++ "$[gt.XscreenSaver &Settings]%menu/display.xpm%"  Exec xscreensaver-command -exit; exec xscreensaver; exec xscreensaver-command -demo
++ "$[gt.&XscreenSaver (Re)start]%menu/display.xpm%" Exec xscreensaver-command -exit; exec xscreensaver -no-splash
++ "$[gt.XscreenSaver &Stop]%menu/choice-no.xpm%"    Exec exec xscreensaver-command -exit
++ "$[gt.XscreenSaver &Lock]%menu/lock.xpm%"         Exec exec q -lock
++ "$[gt.XscreenSaver &Activate]%menu/display.xpm%"  Exec exec xscreensaver-command -activate
+
+
+#=======================================================================
+# 7.5 Fvwm Quit menu
+#=======================================================================
+AddToMenu MenuFvwmQuit DynamicPopupAction FuncMenuFvwmQuit
+
+DestroyFunc FuncMenuFvwmQuit
+AddToFunc   FuncMenuFvwmQuit
++ I DestroyMenu MenuFvwmQuit
++ I AddToMenu MenuFvwmQuit DynamicPopupAction FuncMenuFvwmQuit
++ I AddToMenu MenuFvwmQuit "$[gt.Really Quit FVWM]?" Title
++ I AddToMenu MenuFvwmQuit "$[gt.&Restart]%menu/restart.xpm%"             Restart
++ I AddToMenu MenuFvwmQuit "" Nop
++ I AddToMenu MenuFvwmQuit "$[gt.Re&fresh Screen]%menu/refresh.xpm%"      Refresh
++ I AddToMenu MenuFvwmQuit "$[gt.Re&capture Screen]%menu/refresh.xpm%"    Recapture
++ I AddToMenu MenuFvwmQuit "" Nop
++ I Test (x pm-is-supported) \
+    AddToMenu MenuFvwmQuit "$[gt.&Suspend System]%menu/system.xpm%"       FuncSuspend
++ I TestRc (!Match) \
+    AddToMenu MenuFvwmQuit "$[gt.&Suspend System]%menu/system.xpm%"       FuncShowMessage \
+                                                                                "Suspend Info" \
+                                                                                "Install pm-utils for full functionality"                                                                                
++ I Test (x pm-is-supported) \
+    AddToMenu MenuFvwmQuit "$[gt.&Hibernate System]%menu/system.xpm%"     FuncHibernate
++ I TestRc (!Match) \
+    AddToMenu MenuFvwmQuit "$[gt.&Hibernate System]%menu/system.xpm%"     FuncShowMessage \
+                                                                                "Suspend Info" \
+                                                                                "Install pm-utils for full functionality"                                                                                
++ I AddToMenu MenuFvwmQuit "" Nop
++ I AddToMenu MenuFvwmQuit "$[gt.&Yes, Really Quit]%menu/choice-yes.xpm%" Quit
++ I AddToMenu MenuFvwmQuit "$[gt.&No, Don't Quit]%menu/choice-no.xpm%"    Nop
+
+#=======================================================================
+# 7.6 Window Ops menus
+#=======================================================================
+# This defines all window operations
+DestroyMenu MenuWindowOpsFull
+AddToMenu   MenuWindowOpsFull
++ "$[gt.Window Operations]" Title
++ "$[gt.&Move]	Shift-Alt-F7%menu/window-move.xpm%"                 Move
++ "$[gt.&Resize]	Shift-Alt+F8%menu/window-resize.xpm%"             Resize
++ "$[gt.(De)&Iconify]	Shift-Alt+F9%menu/window-iconify.xpm%"        Iconify
++ "$[gt.(Un)Ma&ximize]	Shift-Alt+F10%menu/window-maximize.xpm%"    Maximize
++ "$[gt.(Un)&Shade]%menu/window-shade.xpm%"             WindowShade
++ "$[gt.(Un)S&tick]%menu/window-stick.xpm%"             Stick "toggle"
++ "$[gt.R&aise]%menu/window-raise.xpm%"                 Raise
++ "$[gt.&Lower]%menu/window-lower.xpm%"                 Lower
++ "" Nop
++ "$[gt.&Delete]%menu/window-delete.xpm%"               Delete
++ "$[gt.&Close]	Shift-Alt+F4%menu/window-close.xpm%"    Close
++ "$[gt.&Destroy]%menu/window-destroy.xpm%"             Destroy
++ "" Nop
++ "$[gt.Move to &Page]%menu/window-move.xpm%"           Popup MenuWindowMoveTo
++ "$[gt.&Group Operations]%menu/windows.xpm%"           Popup MenuWindowGroupOps
++ "$[gt.&Window Style]%menu/window.xpm%"                Popup MenuWindowStyle
++ "$[gt.&Maximize Window]%menu/window-maximize.xpm%"    Popup MenuWindowMaximize
++ "$[gt.&Refresh Window]%menu/refresh.xpm%"             Popup MenuWindowRefresh
++ "$[gt.R&earrange All]%menu/refresh.xpm%"              Popup MenuRearrangeWindows
++ "$[gt.Window &Utility]%menu/utility.xpm%"             Popup MenuWindowUtility
++ "" Nop
++ "$[gt.&Identify]	Shift-Alt+F12%menu/window-identify.xpm%"	Module FvwmIdent
++ "$[gt.Sw&itch to...(WinList)]	Shift-Alt+F3%menu/windows.xpm%"       	WindowList
+
+#-----------------------------------------------------------------------
+# A trimmed down version of MenuWindowOps, good for binding to decorations
+#-----------------------------------------------------------------------
+AddToMenu MenuWindowOpsTrimmed DynamicPopupAction FuncMenuWindowOpsTrimmed
+
+DestroyFunc FuncMenuWindowOpsTrimmed
+AddToFunc   FuncMenuWindowOpsTrimmed
++ I DestroyMenu MenuWindowOpsTrimmed
++ I AddToMenu MenuWindowOpsTrimmed DynamicPopupAction FuncMenuWindowOpsTrimmed
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.Re&store]	Shift-Alt+F10%menu/window.xpm%"         FuncRestore
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Move]	Shift-Alt+F7%menu/window-move.xpm%"         	Move
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Resize]	Shift-Alt+F8%menu/window-resize.xpm%"   Resize
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Iconify]	%menu/window-iconify.xpm%"    Iconify
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.Ma&ximize]	Shift-Alt+F10%menu/window-maximize.xpm%" Maximize
++ I ThisWindow (Layer 2) \
+    AddToMenu MenuWindowOpsTrimmed "$[gt.Stays On &Top]%menu/window-raise.xpm%"             FuncStaysOnTopAndBack
++ I TestRc (!Match) \
+    AddToMenu MenuWindowOpsTrimmed "$[gt.Stays &Back]%menu/window-lower.xpm%"               FuncStaysOnTopAndBack
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.(Un)&Stick]%menu/window-stick.xpm%"                Stick "toggle"
++ I AddToMenu MenuWindowOpsTrimmed "" Nop
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Close]	Shift-Alt+F4%menu/window-close.xpm%"      Close
++ I AddToMenu MenuWindowOpsTrimmed "" Nop
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Identify]	Shift-Alt+F12%menu/window-identify.xpm%"  Module FvwmIdent
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.Mor&e...]	%menu/window.xpm%"            	Menu MenuWindowOpsFull This 0 0
+
+#-----------------------------------------------------------------------
+# Resource window group operations for the root menu and buttons
+#-----------------------------------------------------------------------
+DestroyMenu  MenuWindowGroupOps
+AddToMenu    MenuWindowGroupOps
++ "$[gt.&Resource Group Ops]" Title
++ "&$[gt.Iconify]%menu/window-iconify.xpm%"             Pick All ($[w.resource]) Iconify on
++ "$[gt.De&Iconify]%menu/window-iconify.xpm%"           Pick All ($[w.resource]) Iconify off
++ "$[gt.&Shade]%menu/window-shade.xpm%"                 Pick All ($[w.resource]) WindowShade on
++ "$[gt.Un&Shade]%menu/window-shade.xpm%"               Pick All ($[w.resource]) WindowShade off
++ "$[gt.R&aise]%menu/window-raise.xpm%"                 Pick All ($[w.resource]) Raise
++ "$[gt.Lo&wer]%menu/window-lower.xpm%"                 Pick All ($[w.resource]) Lower
++ "" Nop
++ "$[gt.&Delete]%menu/window-delete.xpm%"               Pick All ($[w.resource]) Delete
++ "$[gt.&Close]%menu/window-close.xpm%"                 Pick All ($[w.resource]) Close
++ "$[gt.&Destroy]%menu/window-destroy.xpm%"             Pick All ($[w.resource]) Destroy
++ "" Nop
++ "$[gt.&Quick Move To ...]%menu/window-move.xpm%"      Popup MenuWindowGroupQuickMove
+
+#-----------------------------------------------------------------------
+# Windows Ops sub menu for window styling
+#-----------------------------------------------------------------------
+DestroyMenu MenuWindowStyle
+AddToMenu   MenuWindowStyle
++ "$[gt.Window Style]" Title
++ "%menu/window.xpm%TitleAt&Top"             WindowStyle TitleAtTop
++ "%menu/window.xpm%TitleAt&Bottom"          WindowStyle TitleAtBottom
++ "%menu/window.xpm%&Title"                  WindowStyle Title
++ "%menu/window.xpm%&NoTitle"                WindowStyle !Title
++ "" Nop
++ "%menu/window.xpm%&FvwmBorder"             WindowStyle FvwmBorder
++ "%menu/window.xpm%&MWMBorder"              WindowStyle MWMBorder
++ "%menu/window.xpm%&DepressableBorder"      WindowStyle DepressableBorder
++ "%menu/window.xpm%&FirmBorder"             WindowStyle FirmBorder
++ "%menu/window.xpm%&Handles"                WindowStyle Handles
++ "%menu/window.xpm%N&oHandles"              WindowStyle !Handles
++ "%menu/window.xpm%&BorderWidth 0"          WindowStyle BorderWidth 0
++ "%menu/window.xpm%BorderWidth &5"          WindowStyle BorderWidth 5
++ "%menu/window.xpm%Handle&Width 0"          WindowStyle HandleWidth 0
++ "%menu/window.xpm%HandleWidth &7"          WindowStyle HandleWidth 7
++ "" Nop
++ "%menu/window-resize.xpm%Re&sizeOpaque"    WindowStyle ResizeOpaque
++ "%menu/window-resize.xpm%Resize&Outline"   WindowStyle ResizeOutline
++ "%menu/mouse.xpm%S&loppyFocus"             WindowStyle SloppyFocus
++ "%menu/mouse.xpm%&ClickToFocus"            WindowStyle ClickToFocus
++ "%menu/mouse.xpm%M&ouseFocus"              WindowStyle MouseFocus
++ "%menu/mouse.xpm%N&everFocus"              WindowStyle NeverFocus
+
+#-----------------------------------------------------------------------
+# Windows Ops sub menu for maximize windows
+#-----------------------------------------------------------------------
+DestroyMenu MenuWindowMaximize
+AddToMenu   MenuWindowMaximize
++ "$[gt.Maximize Window]" Title
++ "%menu/window-maximize.xpm%$[gt.&Maximize Fully]"    Maximize On 100 100
++ "%menu/window-maximize.xpm%$[gt.&Unmaximize]"      Maximize Off
++ "" Nop
++ "%menu/window-maximize.xpm%$[gt.Maximize &Partially]"        Pick FuncSimpleMaximizePartially On
++ "%menu/window-maximize.xpm%$[gt.Maximize &Vertically]"       Pick FuncSimpleMaximizeVertically On
++ "%menu/window-maximize.xpm%$[gt.Maximize &Horizontally]"     Pick FuncSimpleMaximizeHorizontally On
++ "" Nop
+# these bound functions do not seem to work well if used consequentially
++ "%menu/window-maximize.xpm%$[gt.Maximize &Grow]"             Maximize On grow grow
++ "%menu/window-maximize.xpm%$[gt.Maximize Grow V&ert.]"       Maximize On    0 grow
++ "%menu/window-maximize.xpm%$[gt.Maximize Grow H&oriz.]"      Maximize On grow    0
++ "" Nop
++ "%menu/window-maximize.xpm""%$[gt.Maximize &Full Screen]	Shift-Alt+F11" Pick FuncMaximizeFullScreen
++ "%menu/window-maximize.xpm%$[gt.&Unmaximize Full Screen]	Shift-Alt+F11" Pick FuncMaximizeFullScreen
+
+#-----------------------------------------------------------------------
+# Windows Ops sub menu for window refreshing
+#-----------------------------------------------------------------------
+DestroyMenu MenuWindowRefresh
+AddToMenu   MenuWindowRefresh
++ "$[gt.Refresh Window]" Title
++ "%menu/refresh.xpm%$[gt.Re&fresh Window]"        RefreshWindow
++ "%menu/refresh.xpm%$[gt.Re&capture Window]"      RecaptureWindow
++ "%menu/refresh.xpm%$[gt.&Place Again]"           PlaceAgain anim
++ "" Nop
++ "%menu/window.xpm%$[gt.&Restore]"                FuncRestore
+
+#-----------------------------------------------------------------------
+# Windows Ops sub menu for window rearranging
+#-----------------------------------------------------------------------
+DestroyMenu MenuRearrangeWindows
+AddToMenu   MenuRearrangeWindows
++ "$[gt.Rearrange Windows]" Title
++ "%menu/refresh.xpm%$[gt.&Cascade]"              FvwmRearrange -cascade -m 3 3 -incx 2
++ "%menu/refresh.xpm%$[gt.&Place Again]"          All (CurrentPage !Sticky) PlaceAgain anim
++ "" NopFvwmAnimate
++ "%menu/refresh.xpm%$[gt.Tile &horizontally]"    FvwmRearrange -tile -h -m 2 2 98 98
++ "%menu/refresh.xpm%$[gt.Tile &vertically]"      FvwmRearrange -tile    -m 2 2 98 98
++ "" Nop
++ "%menu/refresh.xpm%$[gt.&Arrange Icons]"        All (CurrentDesk Iconic) RecaptureWindow
+
+#-----------------------------------------------------------------------
+# Windows Ops sub menu for window utilities like screenshot, layer, etc
+#-----------------------------------------------------------------------
+DestroyMenu MenuWindowUtility
+AddToMenu   MenuWindowUtility
++ "$[gt.Window Utility]" Title
++ "%menu/window.xpm%$[gt.Create &Screenshot]	Shift-Ctrl+Print"	Pick (CirculateHit) FuncWindowCreateScreenshot
++ "%menu/display.xpm%$[gt.&Desktop Screenshot]	Alt+Print"           	Pick (CirculateHit) FuncDesktopCreateScreenshot
++ "" Nop
++ "%menu/window-raise.xpm%$[gt.Stays On &Top]"			Pick (CirculateHit) Layer 0 6
++ "%menu/window-raise.xpm%$[gt.Layer &+1]"                 	Pick (CirculateHit) Layer +1
++ "%menu/window.xpm%$[gt.Stays &Put]"                      	Pick (CirculateHit) Layer 0 4
++ "%menu/window-lower.xpm%$[gt.Layer &-1]"                 	Pick (CirculateHit) Layer -1
++ "%menu/window-lower.xpm%$[gt.Stays On &Bottom]"          	Pick (CirculateHit) Layer 0 2
++ "" Nop
++ "%menu/window-resize.xpm%$[gt.Scroll&Bar (1/2 app)]"    	Pick Module FvwmScroll 2 2
++ "%menu/window-resize.xpm%$[gt.ScrollBar (&75%% scr)]"   	Pick Module FvwmScroll 75p 75p
+
+#-----------------------------------------------------------------------
+# Desktop Ops menus
+#-----------------------------------------------------------------------
+AddToMenu MenuDesktopOps DynamicPopupAction FuncMenuDesktopOps
+
+DestroyFunc FuncMenuDesktopOps
+AddToFunc FuncMenuDesktopOps
++ I DestroyMenu MenuDesktopOps
++ I AddToMenu MenuDesktopOps DynamicPopupAction FuncMenuDesktopOps
++ I AddToMenu MenuDesktopOps "$[gt.&Desktopmenu]" Title
++ I Test (x convert) PipeRead `echo SetEnv appmatch 1`
++ I TestRc (!Match) PipeRead `echo SetEnv appmatch 0`
++ I Test (x Esetroot) PipeRead `echo SetEnv appmatch $(($appmatch+1))`
++ I Test (EnvMatch appmatch 2) \
+    AddToMenu MenuDesktopOps "$[gt.Configure &Background]%menu/image-viewer.xpm%"    Popup MenuWallpaperConfiguration
++ I TestRc (!Match) \
+    AddToMenu MenuDesktopOps "$[gt.Configure Background]%menu/image-viewer.xpm%"     FuncShowMessage \
+                                                                                            "Wallpaper browser Info" \
+                                                                                            "Install ImageMagick AND eterm for full functionality."
++ I AddToMenu MenuDesktopOps "Help%menu/help.xpm%"	 				    Popup MenuHelp
++ I AddToMenu MenuDesktopOps "" Nop
++ I AddToMenu MenuDesktopOps "$[gt.Window Operations]"     				    Popup MenuWindowOpsFull

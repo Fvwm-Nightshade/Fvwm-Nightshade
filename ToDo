@@ -1,0 +1,25 @@
+TODO:
+-----
+
+Themes:
+    - rework of some colorsets
+    - create theme templates
+    - new themes
+
+Config tools:
+    - implement Session manager lxsession and lxsession-edit
+    - create a GUI for the core componnents like pager dimension, bindings,
+      focus, etc
+
+Artwork:
+    - create wallpapers and other stuff for Nightshade identity
+    
+General:
+    - adapt FvwmScript-PersonalMenu to work with fvwm-xdg-menu.py menu entries
+      or create a new GUI tool based on Gtk+-perl
+    - create a Msg box for Fvwm Nightshade like in Fvwm Crystal
+    - create comment headers for files
+    - cleanup code
+
+modules:
+    - create a flexible solution for "modules" like pagers, scripts, etc
