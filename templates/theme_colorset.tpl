@@ -1,13 +1,13 @@
 ########################################################################
-# File:		colorsets
-# Version:	0.1.0
+# File:		<name>
+# Version:	<major>.<minor>.<fix>
 #
-# Description:	colorsets of Ambience theme
+# Description:	<short but meaningful>
 #
 #
-# Author:	Thomas Funk <t.funk@web.de>
-# Created:	06/08/2012
-# Changed:	
+# Author:	<name> <email-address>	
+# Created:	<MM/DD/YYYY>
+# Changed:	<MM/DD/YYYY>
 ########################################################################
 # REMARKS:
 #
@@ -27,6 +27,9 @@
 
 #-----------------------------------------------------------------------
 # for feedback windows (like geometry window and NoteMessage) and Fvwm*
+#
+# Example:
+# Colorset 0 fg black, bg white
 #-----------------------------------------------------------------------
 Colorset 0 fg black, bg white
 
@@ -46,8 +49,12 @@ Colorset 0 fg black, bg white
 # sh = inactive shade color for vector buttons
 # optional:
 # IconAlpha = inactive transparent mini icon in titlebar in %
+#
+# Examples:
+# Colorset 1 fg #606060, bg #606060, sh #98a5b5
+# Colorset 1 fg grey, IconAlpha 60
 #-----------------------------------------------------------------------
-Colorset 1 fg grey, IconAlpha 60
+
 
 #-----------------------------------------------------------------------
 # window title, active
@@ -59,8 +66,13 @@ Colorset 1 fg grey, IconAlpha 60
 # sh = active shade color for vector buttons
 # optional:
 # fgAlpha = merge titlebar text and background in %
+#
+# Examples:
+# Colorset 2  VGradient 255 2 #829aba 40 #657d9d 60 #314969, bg white, fg white, fgAlpha 85, sh #606060, NoShape
+# Colorset 2  VGradient 255 2 #65645e 60 #4c4b46 40 #403f3a, fg white, NoShape
+# Colorset 2  bg #e0dedc, fg black, Plain
 #-----------------------------------------------------------------------
-Colorset 2  VGradient 255 2 #65645e 60 #4c4b46 40 #403f3a, fg white, NoShape
+
 
 #-----------------------------------------------------------------------
 # window borders, inactive
@@ -70,8 +82,12 @@ Colorset 2  VGradient 255 2 #65645e 60 #4c4b46 40 #403f3a, fg white, NoShape
 #      inactive windows titlebar    _
 # hi = inactive border shade color |
 # sh = inactive border shade color _|
+#
+# Examples:
+# Colorset 3 VGradient 255 2 #98a5b5 40 #7c8999 60 #687585, bg #687585, hi #657d9d, NoShape
+# Colorset 3  bg #e0dedc, hi grey80, Plain
 #-----------------------------------------------------------------------
-Colorset 3  VGradient 255 2 #7c7b78 40 #62625e 60 #3e3d38, bg #7c7b78, hi #7c7b78, NoShape
+
 
 #-----------------------------------------------------------------------
 # window borders, active
@@ -79,8 +95,12 @@ Colorset 3  VGradient 255 2 #7c7b78 40 #62625e 60 #3e3d38, bg #7c7b78, hi #7c7b7
 # bg = border color               _
 # hi = active border shade color |
 # sh = active border shade color _|
+# Colorset 4 bg #829aba, hi #657d9d, sh #657d9d, Plain
+#
+# Example:
+# Colorset 4 bg #829aba, hi #657d9d, sh #657d9d, Plain
 #-----------------------------------------------------------------------
-Colorset 4 bg black, hi #4c4b46, sh #4c4b46, Plain
+
 
 
 ########################################################################
@@ -94,21 +114,30 @@ Colorset 4 bg black, hi #4c4b46, sh #4c4b46, Plain
 # fg = title font color
 # bg =
 # hi = inactive arrow color und menu border
+#
+# Example:
+# Colorset 5 VGradient 255 2 #9c9885 60 #e5e4e0 40 white, fg black, bg #424241, hi #424241, NoShape
 #-----------------------------------------------------------------------
-Colorset 5 fg white, bg #65645e, hi #4c4b46, Plain
+
 
 #-----------------------------------------------------------------------
 # active/hilighted menu item
 # fg = title font color in the higlighted area
 # bg = highlight bar color
 # hi = arrow color if higlighted
+#
+# Example:
+# Colorset 6 fg white, bg #687585, hi orange, Plain
 #-----------------------------------------------------------------------
-Colorset 6 fg white, bg #f37b4c, hi white, Plain
+
 
 #-----------------------------------------------------------------------
 # greyed menu item if needed
+#
+# Example:
+# Colorset 7 fg grey45, bg grey45, Plain
 #-----------------------------------------------------------------------
-Colorset 7 fg white, hi #4c4b46, bg #65645e, Plain
+
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.
@@ -125,8 +154,11 @@ Colorset 7 fg white, hi #4c4b46, bg #65645e, Plain
 # ?Gradient = inactive background
 # fg = inactive font color or border color
 # bg = background of inactive pages
+#
+# Example:
+# Colorset 10 VGradient 255 2 #e5e4e0 30 #9c9885 70 #312b1d, fg grey, bg #312b1d, NoShape
 #-----------------------------------------------------------------------
-Colorset 10 VGradient 255 2 #86857f 40 #7c7b78 60 #51504d, fg grey, bg #e5e4e0, NoShape
+
 
 #-----------------------------------------------------------------------
 # default for active modules
@@ -137,8 +169,11 @@ Colorset 10 VGradient 255 2 #86857f 40 #7c7b78 60 #51504d, fg grey, bg #e5e4e0, 
 # fg = active font color color 
 # bg = active border color (mouse) _| _
 #      active border color           |
+#
+# Example:
+# Colorset 11 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0,fg white, bg black, NoShape
 #-----------------------------------------------------------------------
-Colorset 11 VGradient 255 2 #51504d 70 #7c7b78 30 #86857f, fg white, bg black, NoShape
+
 
 #-----------------------------------------------------------------------
 # special or funny: a gradient or a pixmap
@@ -149,8 +184,11 @@ Colorset 11 VGradient 255 2 #51504d 70 #7c7b78 30 #86857f, fg white, bg black, N
 # optional:                   _
 # hi = inactive border shade |
 # sh = inactive border shade _|
+#
+# Example:
+# Colorset 12 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0, fg LightSteelBlue2, NoShape
 #-----------------------------------------------------------------------
-Colorset 12 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0, fg #312b1d, NoShape
+
 
 #-----------------------------------------------------------------------
 # swallowed window: the hilight and shadow colors should be defined
@@ -158,8 +196,11 @@ Colorset 12 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0, fg #312b1d, NoShape
 #
 # fg = font color
 # bg = background color
+#
+# Example:
+# Colorset 13 fg black, bg rgb:70/8C/8C, hi black, sh gray40, Plain
 #-----------------------------------------------------------------------
-Colorset 13 fg white, bg #51504d, hi black, sh gray40, Plain
+
 
 #-----------------------------------------------------------------------
 # default #2
@@ -168,8 +209,11 @@ Colorset 13 fg white, bg #51504d, hi black, sh gray40, Plain
 #
 # fg = border color
 # bg = background
+#
+# Example:
+# Colorset 14 fg black, bg grey50, Plain
 #-----------------------------------------------------------------------
-Colorset 14 fg black, bg grey60, Plain
+
 
 #-----------------------------------------------------------------------
 # default hilight #2
@@ -178,16 +222,22 @@ Colorset 14 fg black, bg grey60, Plain
 #
 # fg = border color
 # bg = background
+#
+# Example:
+# Colorset 15 fg black, bg snow2, Plain
 #-----------------------------------------------------------------------
-Colorset 15 fg black, bg grey80, Plain
+
 
 #-----------------------------------------------------------------------
 # tips/balloons (TaskBar and FvwmPager)
 #
 # fg = tip font color
 # bg = tip background
+#
+# Example:
+# Colorset 16 fg black, bg snow2, Plain
 #-----------------------------------------------------------------------
-Colorset 16 fg black, bg #fd9b72, Plain
+
 
 
 ########################################################################
@@ -196,21 +246,33 @@ Colorset 16 fg black, bg #fd9b72, Plain
 
 #-----------------------------------------------------------------------
 # standard item
+#
+# Example:
+# Colorset 17 fg black, bg rgb:80/A0/A0, Plain
 #-----------------------------------------------------------------------
 # Actually not used
 
 #-----------------------------------------------------------------------
 # active item
+#
+# Example:
+# Colorset 18 fg black, bg rgb:A0/C8/C8, Plain
 #-----------------------------------------------------------------------
 # Actually not used
 
 #-----------------------------------------------------------------------
 # iconified item
+#
+# Example:
+# Colorset 19 fg white, bg rgb:60/78/78, Plain
 #-----------------------------------------------------------------------
 # Actually not used
 
 #-----------------------------------------------------------------------
 # pointed item
+#
+# Example:
+# Colorset 20 fg black, bg rgb:88/AA/AA, Plain
 #-----------------------------------------------------------------------
 # Actually not used
 
@@ -221,23 +283,34 @@ Colorset 16 fg black, bg #fd9b72, Plain
 
 #-----------------------------------------------------------------------
 # FvwmIdent
+#
+# Example:
+# Colorset 21 fg black, bg snow2, Plain
 #-----------------------------------------------------------------------
-Colorset 21 bg white, fg white, sh black, fgsh #d66132, RootTransparent buffer, Tint #d66132 70
+
 
 #-----------------------------------------------------------------------
 # FvwmConsole
+#
+# Example:
+# Colorset 22 fg white, bg rgb:00/30/60, Plain
 #-----------------------------------------------------------------------
-Colorset 22 fg white, bg #003060, Plain
+
 
 #-----------------------------------------------------------------------
 # transparent
+#
+# Example:
+# Colorset 23 fg $[fg.cs10], bg $[bg.cs10], Transparent
 #-----------------------------------------------------------------------
-#Colorset 23 fg $[fg.cs10], bg $[bg.cs10], Transparent
+
 
 #-----------------------------------------------------------------------
 # FvwmBacker
+#
+# Example:
+# Colorset 24 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0, NoShape
 #-----------------------------------------------------------------------
-Colorset 24 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0, NoShape
 
 
 ########################################################################
@@ -260,38 +333,59 @@ Colorset 24 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0, NoShape
 
 #-----------------------------------------------------------------------
 # regular terminal (xterm, rxvt, Eterm)
+#
+# Example:
+# Colorset 30 fg white, bg rgb:00/00/50, Plain
 #-----------------------------------------------------------------------
-Colorset 30 fg white, bg #000050, Plain
+
 
 #-----------------------------------------------------------------------
 # admin terminal (su xterm)
+#
+# Example:
+# Colorset 31 fg white, bg rgb:00/50/50, Plain
 #-----------------------------------------------------------------------
-Colorset 31 fg white, bg #000050, Plain
+
 
 #-----------------------------------------------------------------------
 # remote terminal (ssh, telnet)
+#
+# Example:
+# Colorset 32 fg white, bg rgb:50/00/00, Plain
 #-----------------------------------------------------------------------
-Colorset 32 fg white, bg #500000, Plain
+
 
 #-----------------------------------------------------------------------
 # viewer terminal (man, less, tail -f)
+#
+# Example:
+# Colorset 33 fg white, bg SeaGreen4, Plain
 #-----------------------------------------------------------------------
-Colorset 33 fg white, bg SeaGreen4, Plain
+
 
 #-----------------------------------------------------------------------
 # application run in the terminal, text editor using ft-xrdb
+#
+# Example:
+# Colorset 34 fg black, bg snow2, Plain
 #-----------------------------------------------------------------------
-Colorset 34 fg black, bg snow2, Plain
+
 
 #-----------------------------------------------------------------------
 # dialog main background (FvwmScript, FvwmForm, xmessage, ft-xrdb)
+#
+# Example:
+# Colorset 35 fg black, bg rgb:80/A0/80, Plain
 #-----------------------------------------------------------------------
-Colorset 35 fg black, bg #80A080, Plain
+
 
 #-----------------------------------------------------------------------
 # dialog text area (FvwmScript, FvwmForm, xmessage, ft-xrdb)
+#
+# Example:
+# Colorset 36 fg black, bg rgb:A0/C8/A0, Plain
 #-----------------------------------------------------------------------
-Colorset 36 fg black, bg #A0C8A0, Plain
+
 
 #-----------------------------------------------------------------------
 # Colorsets 37 to 39 are reserved for the future use.
