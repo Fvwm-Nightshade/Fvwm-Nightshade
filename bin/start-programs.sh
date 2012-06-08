@@ -1,8 +1,15 @@
-# shell script for starting apps automatically which will be found in 
-# .autostart
-# Copyright (C) 2007 Thomas Funk <t.funk@web.de>
-# Version: 2.0
-##########################################################################
+########################################################################
+# File:		start-programs.sh
+# Version:	2.0.0
+# Licence: 	GPL 2
+#
+# Description:	shell script for starting apps automatically which will 
+#		be found in $FVWM_USERDIR/.autostart
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+# Created:	2007
+# Changed:	06/08/2012
+########################################################################
 
 # !/bin/bash
 
