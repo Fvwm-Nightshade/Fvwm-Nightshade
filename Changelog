@@ -1,5 +1,10 @@
 History:
 
+06/05/2012 V 0.4.2
+- update overview and some comments in config
+- add a header in all files (version, description, cdate, ...)
+- replace wrong fvwm-xdg-menu.py to correct one
+
 06/05/2012 V 0.4.1
 - create colorset template
 - clean up all colorsets files
