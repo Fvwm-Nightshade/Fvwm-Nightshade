@@ -11,4 +11,4 @@ AddToFunc   DigitalXclock
                               -d -strftime '%a\\ %e\\ %b\\ %$0:%M' \
                               -geometry x$((($[infostore.fontsize]-2)*2))-$((($[infostore.fontsize]-2)/2))+$((($[infostore.fontsize]-2)/2)) \
                               -face $[infostore.used_font]:$[infostore.fontsize]:bold \
-                              -fg white -bg rgb:7a/76/64 -padding $(($[infostore.fontsize]/4))`
+                              -fg $$[fg.cs13] -bg $$[bg.cs13] -padding $(($[infostore.fontsize]/4))`

@@ -9,6 +9,6 @@ AddToFunc   FuncStartSysTray
                                   -geometry 1x1+$(($[vp.width]/4*3))+1 \
                                   --grow-gravity SE \
                                   --kludges fix_window_pos,force_icons_size,use_icons_hints \
-                                  --background="#7a7664"`
+                                  --background=$$[bg.cs13]`
 + I TestRc (Match) Wait stalonetray
 

@@ -3,7 +3,9 @@ History:
 06/05/2012 V 0.4.1
 - create colorset template
 - clean up all colorsets files
-
+- change background colors in DigitalXclock and systray to the theme
+  related color background
+  
 06/05/2012 V 0.4
 - new decors: Ambience (Ubuntu), Air (Kde Oxygen-air)
 - add decor switching without restart via menu
