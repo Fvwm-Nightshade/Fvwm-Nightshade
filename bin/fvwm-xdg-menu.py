@@ -1,6 +1,8 @@
+#!/usr/bin/python
+
 #-----------------------------------------------------------------------
 # File:		fvwm-xdg-menu.py
-# Version:	1.99
+# Version:	1.99.1
 # Licence: 	GPL 2
 #
 # Description:	creates a Fvwm menu with xdg entries
@@ -9,8 +11,6 @@
 # Created:	12/03/2005
 # Changed:	05/22/2012 by Thomas Funk <t.funk@web.de>
 #-----------------------------------------------------------------------
-
-#!/usr/bin/python
 
 # This script searches for the newest menu file conforming to the 
 # XDG Desktop Menu Specification, and outputs the FVWM equivalent 
@@ -161,7 +161,7 @@ def parsemenu(menu, name=""):
 
 # ----- Main ----------------------------------------------------------------
 # $XDG_CONFIG_DIRS/menus/${XDG_MENU_PREFIX}applications.menu
-# get the wantedor newest used menu
+# get the wanted or the applications.menu. If not exist the newest
 pattern = ''
 
 if not options.menu_prefix == '':
@@ -171,21 +171,39 @@ if not options.menu_prefix == '':
         xdg_menu_prefix = options.menu_prefix
 
 if pattern == '':
-    pattern = '*' + options.menu_prefix + 'applications.menu'
-    
-newest_mtime = 0
-newest_xdg_file = ''
+    pattern = options.menu_prefix + 'applications.menu'
 
+
+# check first if file exist
+xdg_file = ''
+stop = False
 for dir in xdg_config_dirs:
-    dir = dir + '/menus'
-    dir_list = os.listdir(dir)
-    for filename in fnmatch.filter(dir_list, pattern):
-        temp_mtime = os.path.getmtime(os.path.join(dir, filename))
-        if temp_mtime > newest_mtime:
-            newest_mtime = temp_mtime
-            newest_xdg_file = os.path.join(dir, filename)
+    if os.path.exists(dir):
+        dir = dir + '/menus'
+        dir_list = os.listdir(dir)
+        for filename in fnmatch.filter(dir_list, pattern):
+            xdg_file = os.path.join(dir, filename)
+            stop = True
+        if stop == True:
+            break
+
+# if no file found take the newes
+if xdg_file == '':
+    pattern = '*' + pattern
+    
+    newest_mtime = 0
+
+    for dir in xdg_config_dirs:
+        if os.path.exists(dir):
+            dir = dir + '/menus'
+            dir_list = os.listdir(dir)
+            for filename in fnmatch.filter(dir_list, pattern):
+                temp_mtime = os.path.getmtime(os.path.join(dir, filename))
+                if temp_mtime > newest_mtime:
+                    newest_mtime = temp_mtime
+                    xdg_file = os.path.join(dir, filename)
         
-parsemenu(xdg.Menu.parse(newest_xdg_file), options.top)
+parsemenu(xdg.Menu.parse(xdg_file), options.top)
 
 """
 for arg in args:
