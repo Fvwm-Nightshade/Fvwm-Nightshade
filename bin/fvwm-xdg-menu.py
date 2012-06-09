@@ -1,4 +1,4 @@
-########################################################################
+#-----------------------------------------------------------------------
 # File:		fvwm-xdg-menu.py
 # Version:	1.99
 # Licence: 	GPL 2
@@ -8,7 +8,8 @@
 # Author:	Piotr Zielinski (http://www.cl.cam.ac.uk/~pz215/)	
 # Created:	12/03/2005
 # Changed:	05/22/2012 by Thomas Funk <t.funk@web.de>
-########################################################################
+#-----------------------------------------------------------------------
+
 #!/usr/bin/python
 
 # This script searches for the newest menu file conforming to the 
