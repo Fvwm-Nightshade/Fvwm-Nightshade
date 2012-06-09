@@ -25,3 +25,8 @@ General:
 
 modules:
     - create a flexible solution for "modules" like pagers, scripts, etc
+
+Appearance:
+    - implementing xcompmgr
+    - ring menu from NickFortune -> sk him for sourcecode
+    - other design for default desktop (Fvwmbuttons with clock and stalonetray)
