@@ -2,7 +2,7 @@
 
 #-----------------------------------------------------------------------
 # File:		fvwm-xdg-menu.py
-# Version:	1.99.1
+# Version:	1.99.2
 # Licence: 	GPL 2
 #
 # Description:	creates a Fvwm menu with xdg entries
@@ -144,20 +144,20 @@ def parsemenu(menu, name=""):
         printtext('AddToMenu "%s"' % name)
     
     for entry in menu.getEntries():
-	if isinstance(entry, xdg.Menu.Menu):
-	    printmenu(entry.getName(), entry.getIcon(),
-		      'Popup "%s"' % entry.getPath())
-	elif isinstance(entry, xdg.Menu.MenuEntry):
-	    desktop = DesktopEntry(entry.DesktopEntry.getFileName())
-	    printmenu(desktop.getName(), desktop.getIcon(),
-		      options.exec_command + " " + desktop.getExec())
-	else:
-	    printtext('# not supported: ' + str(entry))
+    	if isinstance(entry, xdg.Menu.Menu):
+    	    printmenu(entry.getName(), entry.getIcon(),
+    		      'Popup "%s"' % entry.getPath())
+    	elif isinstance(entry, xdg.Menu.MenuEntry):
+    	    desktop = DesktopEntry(entry.DesktopEntry.getFileName())
+    	    printmenu(desktop.getName(), desktop.getIcon(),
+    		      options.exec_command + " " + desktop.getExec())
+    	else:
+    	    printtext('# not supported: ' + str(entry))
 
     print
     for entry in menu.getEntries():
-	if isinstance(entry, xdg.Menu.Menu):
-	    parsemenu(entry)
+    	if isinstance(entry, xdg.Menu.Menu):
+    	    parsemenu(entry)
 
 # ----- Main ----------------------------------------------------------------
 # $XDG_CONFIG_DIRS/menus/${XDG_MENU_PREFIX}applications.menu
@@ -204,9 +204,3 @@ if xdg_file == '':
                     xdg_file = os.path.join(dir, filename)
         
 parsemenu(xdg.Menu.parse(xdg_file), options.top)
-
-"""
-for arg in args:
-    print '# %s' % arg
-    parsemenu(xdg.Menu.parse(arg), options.top)
-"""        

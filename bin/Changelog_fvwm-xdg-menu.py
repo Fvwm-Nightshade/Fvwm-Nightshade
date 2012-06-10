@@ -1,5 +1,8 @@
 History:
 
+06/10/2012 V 1.99.2
+- fix indention bug
+
 06/10/2012 V 1.99.1
 - fix bug that not applications.menu will searched for and then the newest
 
