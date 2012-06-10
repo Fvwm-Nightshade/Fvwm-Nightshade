@@ -1,6 +1,11 @@
 History:
+06/10/2012 V 0.4.3
+- add About box
+- add !Title style for FvwmForm-RunCommand, FvwmForm-About, FvwmForm-Messages
+- fix bugs in fvwm-xdg-menu.py
+- fix bugs creating .menu 
 
-06/05/2012 V 0.4.2
+06/10/2012 V 0.4.2
 - update overview and some comments in config
 - add a header in all files (version, description, cdate, ...)
 - replace wrong fvwm-xdg-menu.py to correct one

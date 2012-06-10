@@ -14,11 +14,13 @@
 #            /____/                                         
 #
 #
-# Fvwm Nightshade Configuration V 0.4.2
+# Fvwm Nightshade Configuration
+InfoStoreAdd ns_version 0.4.3
 # Copyright (C) 2012
 #
 # Authors:
 #   Thomas Funk <t.funk@web.de>
+#   Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Thanks to (in no specific order):
 #   Thomas Adam, Tavis Ormandy, Aelsi, Scientific, unambiguous, Kermit
@@ -202,6 +204,7 @@ InfoStoreAdd default_browser firefox
 #***********************************************************************
 # 1.2.3 Others
 #***********************************************************************
+
 #-----------------------------------------------------------------------
 # used for 'Switching focus between windows. (ALT-Tab)' functionality
 #-----------------------------------------------------------------------
@@ -1000,8 +1003,10 @@ DestroyModuleConfig FvwmEventSound: *
 #***********************************************************************
 # 5.5.1 RunCommand Window
 #***********************************************************************
+Style FvwmForm-RunCommand !Title
 DestroyModuleConfig  FvwmForm-RunCommand: *
 *FvwmForm-RunCommand: WarpPointer
+*FvwmForm-RunCommand: Font 8x13
 *FvwmForm-RunCommand: Title         "$[gt.Run Command]"
 *FvwmForm-RunCommand: Line          center
 *FvwmForm-RunCommand: Text          "$[gt.Run Command]"
@@ -1017,6 +1022,90 @@ DestroyModuleConfig  FvwmForm-RunCommand: *
 *FvwmForm-RunCommand: Command       exec $(Command)
 *FvwmForm-RunCommand: Button        quit "$[gt.Cancel]"
 *FvwmForm-RunCommand: Command       Nop
+
+#***********************************************************************
+# 5.5.2 About box
+#***********************************************************************
+Style FvwmForm-About !Title
+DestroyModuleConfig FvwmForm-About: *
+*FvwmForm-About: WarpPointer
+*FvwmForm-About: Title "$[gt.About]"
+*FvwmForm-About: Font 10x20
+*FvwmForm-About: Line center
+*FvwmForm-About: Text "FVWM-Nightshade"
+*FvwmForm-About: Font 8x13bold
+*FvwmForm-About: Line center
+*FvwmForm-About: Text "$[gt.Version]: $[infostore.ns_version]"
+*FvwmForm-About: Line center
+*FvwmForm-About: Line center
+*FvwmForm-About: Line center
+*FvwmForm-About: Text "$[gt.Authors]:"
+*FvwmForm-About: Font 8x13
+*FvwmForm-About: Line center
+*FvwmForm-About: Text "Thomas Funk <t.funk@web.de>"
+*FvwmForm-About: Line center
+*FvwmForm-About: Text "Bernhard Popp <kermit.popp@googlemail.com>"
+*FvwmForm-About: Line center
+*FvwmForm-About: Line center
+*FvwmForm-About: Line center
+*FvwmForm-About: Button quit " $[gt.Close] " ^[
+*FvwmForm-About: Command Nop
+*FvwmForm-About: Line center
+
+#***********************************************************************
+# 5.5.2 Message box
+#***********************************************************************
+Style FvwmForm-Messages !Title
+#-----------------------------------------------------------------------
+# Shows a FvwmForm Infobox with one or multiple message line(s)
+# realized with shell commands over PipeRead
+#-----------------------------------------------------------------------
+# Example:
+# FuncShowMessage "<title>" "<message_1>" ... "<message_n>"
+DestroyFunc FuncShowMessage
+AddToFunc   FuncShowMessage
++ I PipeRead `echo 'DestroyModuleConfig  FvwmForm-Messages: *' > ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo '*FvwmForm-Messages: Font 8x13' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo '*FvwmForm-Messages: WarpPointer' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo "*FvwmForm-Messages: Title   \\"$0\\"" >> ${FVWM_USERDIR}/FvwmForm-Messages `
++ I PipeRead `start=0; for i in $*; do \
+              if [ "$start" -gt "0" ]; then \
+                echo '*FvwmForm-Messages: Line    left' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+                echo "*FvwmForm-Messages: Text  \\"$i\\"" >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              fi; \
+              start=$(($start+1)); \
+              done `
++ I PipeRead `echo '*FvwmForm-Messages: Line   center' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo '*FvwmForm-Messages: Button  quit \" Ok \"' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo '*FvwmForm-Messages: Command !(rm -f ${FVWM_USERDIR}/FvwmForm-Messages)' >> ${FVWM_USERDIR}/FvwmForm-Messages `
++ I Schedule 100 Module FvwmForm FvwmForm-Messages
+
+
+#***********************************************************************
+# 5.5.2 About box
+#***********************************************************************
+#-----------------------------------------------------------------------
+# Shows a FvwmForm Infobox with all actual available colorset parameters
+# realized with perl over FvwmPerl
+#-----------------------------------------------------------------------
+DestroyFunc FuncFvwmShowColorsets
+AddToFunc   FuncFvwmShowColorsets
++ I PipeRead `echo 'DestroyModuleConfig  FvwmForm-ShowColorsets: *' > ${FVWM_USERDIR}/FvwmForm-ShowColorsets`
++ I FvwmPerl -e 'open(MSG ,">>$[FVWM_USERDIR]/FvwmForm-ShowColorsets") || die "Error $!"; \
+                print MSG "*FvwmForm-ShowColorsets: Font 8x13\\n"; \
+                print MSG "*FvwmForm-ShowColorsets: WarpPointer\\n"; \
+                print MSG "*FvwmForm-ShowColorsets: Title   \\"Colorset Information\\"\\n"; \
+                my @Colorsets = split("\\n", $module->track("Colorsets")->dump); \
+                foreach my $CSstring (@Colorsets) { \
+                    print MSG "*FvwmForm-ShowColorsets: Line    left\\n"; \
+                    print MSG "*FvwmForm-ShowColorsets: Text  \\"$CSstring\\"\\n"; \
+                } \
+                print MSG "*FvwmForm-ShowColorsets: Line   center\\n"; \
+                print MSG "*FvwmForm-ShowColorsets: Button  quit \\" Ok \\"\\n"; \
+                print MSG "*FvwmForm-ShowColorsets: Command !(rm -f \\$\\{FVWM_USERDIR\\}\\/FvwmForm-ShowColorsets)\\n"; \
+                close MSG; \
+                cmd("Schedule 100 Module FvwmForm FvwmForm-ShowColorsets");'
+
 
 
 #=======================================================================
@@ -1087,10 +1176,10 @@ AddToFunc StartFunction
 + I Test (Init) Read $[NS_MODULEDIR]/DigitalXclock
 + I TestRc (Match) DigitalXclock H
 # create an Applications menu if no exist
-+ I Test (!f $[FVWM_USERDIR]/.menu) PipeRead '$[FVWM_USERDIR]/fvwm-xdg-menu.py -w -f -s 16 -m FvwmMenu > $[FVWM_USERDIR]/.menu 2> $[FVWM_USERDIR]/log.txt &'
++ I Test (!f $[FVWM_USERDIR]/.menu) PipeRead '$FVWM_USERDIR/fvwm-xdg-menu.py -w -f -s 16 -m FvwmMenu > $FVWM_USERDIR/.menu 2> $FVWM_USERDIR/log.txt &'
 + I TestRc (!Match) PipeRead 'echo Read .menu; echo SetEnv inProgress 2'
 # start programs found in .autostart
-+ I Test (Init) FuncAutoStartPrograms
+#+ I Test (Init) FuncAutoStartPrograms
 
 #***********************************************************************
 # 6.1.2 Session
@@ -1311,55 +1400,6 @@ AddToFunc   FuncDesktopCreateScreenshot
                                     "ImageMagick isn't installed. No screenshot created."
 + I InfoStoreRemove picpath
 
-
-#-----------------------------------------------------------------------
-# Shows a FvwmForm Infobox with one or multiple message line(s)
-# realized with shell commands over PipeRead
-#-----------------------------------------------------------------------
-# Example:
-# FuncShowMessage "<title>" "<message_1>" ... "<message_n>"
-DestroyFunc FuncShowMessage
-AddToFunc   FuncShowMessage
-+ I PipeRead `echo 'DestroyModuleConfig  FvwmForm-Messages: *' > ${FVWM_USERDIR}/FvwmForm-Messages; \
-              echo '*FvwmForm-Messages: Font 8x13' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
-              echo '*FvwmForm-Messages: WarpPointer' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
-              echo "*FvwmForm-Messages: Title   \\"$0\\"" >> ${FVWM_USERDIR}/FvwmForm-Messages `
-+ I PipeRead `start=0; for i in $*; do \
-              if [ "$start" -gt "0" ]; then \
-                echo '*FvwmForm-Messages: Line    left' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
-                echo "*FvwmForm-Messages: Text  \\"$i\\"" >> ${FVWM_USERDIR}/FvwmForm-Messages; \
-              fi; \
-              start=$(($start+1)); \
-              done `
-+ I PipeRead `echo '*FvwmForm-Messages: Line   center' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
-              echo '*FvwmForm-Messages: Button  quit \" Ok \"' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
-              echo '*FvwmForm-Messages: Command !(rm -f ${FVWM_USERDIR}/FvwmForm-Messages)' >> ${FVWM_USERDIR}/FvwmForm-Messages `
-+ I Schedule 100 Module FvwmForm FvwmForm-Messages
-
-
-#-----------------------------------------------------------------------
-# Shows a FvwmForm Infobox with all actual available colorset parameters
-# realized with perl over FvwmPerl
-#-----------------------------------------------------------------------
-DestroyFunc FuncFvwmShowColorsets
-AddToFunc   FuncFvwmShowColorsets
-+ I PipeRead `echo 'DestroyModuleConfig  FvwmForm-ShowColorsets: *' > ${FVWM_USERDIR}/FvwmForm-ShowColorsets`
-+ I FvwmPerl -e 'open(MSG ,">>$[FVWM_USERDIR]/FvwmForm-ShowColorsets") || die "Error $!"; \
-                print MSG "*FvwmForm-ShowColorsets: Font 8x13\\n"; \
-                print MSG "*FvwmForm-ShowColorsets: WarpPointer\\n"; \
-                print MSG "*FvwmForm-ShowColorsets: Title   \\"Colorset Information\\"\\n"; \
-                my @Colorsets = split("\\n", $module->track("Colorsets")->dump); \
-                foreach my $CSstring (@Colorsets) { \
-                    print MSG "*FvwmForm-ShowColorsets: Line    left\\n"; \
-                    print MSG "*FvwmForm-ShowColorsets: Text  \\"$CSstring\\"\\n"; \
-                } \
-                print MSG "*FvwmForm-ShowColorsets: Line   center\\n"; \
-                print MSG "*FvwmForm-ShowColorsets: Button  quit \\" Ok \\"\\n"; \
-                print MSG "*FvwmForm-ShowColorsets: Command !(rm -f \\$\\{FVWM_USERDIR\\}\\/FvwmForm-ShowColorsets)\\n"; \
-                close MSG; \
-                cmd("Schedule 100 Module FvwmForm FvwmForm-ShowColorsets");'
-
-
 #-----------------------------------------------------------------------
 # Open an URL in a browser
 #-----------------------------------------------------------------------
@@ -1465,7 +1505,7 @@ AddToFunc   FuncHibernate
 #-----------------------------------------------------------------------
 DestroyFunc FuncCreateFvwmMenu
 AddToFunc FuncCreateFvwmMenu
-+ I PipeRead '$[FVWM_USERDIR]/fvwm-xdg-menu.py -w -f -s 16 -m FvwmMenu > $[FVWM_USERDIR]/.menu 2> /dev/null ;  echo SetEnv inProgress 0'
++ I PipeRead '$FVWM_USERDIR/fvwm-xdg-menu.py -w -f -s 16 -m FvwmMenu > $FVWM_USERDIR/.menu 2> /dev/null ;  echo SetEnv inProgress 0'
 
 
 #=======================================================================
@@ -1760,6 +1800,7 @@ AddToFunc FuncMenuFvwmPersonal
 DestroyMenu MenuHelp
 AddToMenu   MenuHelp
 + "$[gt.&Help]" Title
++ "%menu/information.xpm%$[gt.About Nightshade]"                Module FvwmForm FvwmForm-About
 + "%menu/information.xpm%$[gt.Show FVWM Version]"               FuncShowMessage "Fvwm Version Info" "$[version.line]"
 #+ "%menu/information.xpm%$[gt.Show FVWM Version]"               FuncGetFvwmVersion
 # Dynamic Fvwm Manpages realized with MissingSubmenuFunction
