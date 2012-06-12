@@ -1,0 +1,6 @@
+History:
+
+06/12/2012 V 0.1.0
+- initial installer:
+    - copy Fvwm-Nightshade to the correct place
+    - check which apps needed for full functionality are installed

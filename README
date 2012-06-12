@@ -1,8 +1,27 @@
-Welcome to Fvwm Nightshade! This project is a desktop environment based
-on Fvwm. It contains many features of a modern but lightweight desktop.
+               _____________________________                        
+              / ___________________________/ 
+             / /_   ___      ______ ___
+            / __/| / / | /| / / __ `__ \   ___
+           / / | |/ /| |/ |/ / / / / / /  /__/
+          /_/  |___/ |__/|__/_/ /_/ /_/ 
+  
+         _   ___        __    __       __              __    
+        / | / (_)____ _/ /_  / /______/ /_  ____ _____/ /___ 
+       /  |/ / // __ `/ __ \/ __/ ___/ __ \/ __ `/ __  // _ \
+      / /|  / // /_/ / / / / /_(__  ) / / / /_/ / /_/ //  __/
+     /_/ |_/_/ \__, /_/ /_/\__/____/_/ /_/\__,_/\__,_/ \___/ 
+               /____/                                         
+ 
+
+Welcome to Fvwm Nightshade! This project aims to be a lightweight but
+feature rich and good looking configuration of Fvwm. It contains many 
+useful things to make work and life easier with a flavour of a modern 
+desktop. But it can be configure by your own. It is good documented and
+shows you what is possible with this powerful window manager.
+
 
 Featurelist of Fvwm Nightshade:
------------------------------------
+===============================
 - 4 virtual desktop pages (at the moment)
 - Taskbar to show running apps per page
 - Systray (if stalonetray is installed)
@@ -32,17 +51,20 @@ Featurelist of Fvwm Nightshade:
 - Print messages for needed apps for full config functionality in 
   .xsessions-error
 
+
 Requirements:
--------------
-mandatory:	Fvwm >= 2.6.4
-recommended: 	xterm, stalonetray, xscreensaver, eterm, imagemagick, 
-useful:		LxApearance, qtconfig, xneurs, ...
-nice to have:	Volume Icon, fdpowermon, gnomes network manager,
-		bluetooth-applet, pm-utils
+=============
+Required:	Fvwm >= 2.6.3, xdg-python, xterm, xclock, xscreensaver,
+		eterm, imagemagick, stalonetray
+
+Recommended: 	gnomes network manager, Volume Icon
+
+Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
+		qtconfig-qt3, qtconfig-qt4, xneurs
   
 
-Default started systray apps, if stalonetray is installed:
-----------------------------------------------------------
+These systray apps started automatically, if stalonetray is installed:
+----------------------------------------------------------------------
 - Volume Icon: lightweight volume control 
   (http://softwarebakery.com/maato/volumeicon.html)
 - fdpowermon: simple battery power monitor 
@@ -55,7 +77,7 @@ Btw. it doesn't matter if they not installed. Will skip then ;-)
 
 
 Keybindings:
-------------
+============
 
 Alt+Tab                           Switching focus between windows
 Alt+Print                         Screenshot of the whole desktop (page)
@@ -105,7 +127,8 @@ Ctrl-Alt+cursor down              Move mouse pointer down by 1% of a page
 
 
 Mouse bindings:
----------------
+===============
+
 Mouse:
   +------------+
   | ||  ||  || |
@@ -147,8 +170,8 @@ Mouse on windows decoration:
 Titlebar, corners and sides:
 Button 1:   Drag moves window, maximize on double click
 Button 2:   Drag moves window, raise or lower with click
-Button 3:   WindowOpsTrimmed menu with click, MenuWindowOpsFull menu with 
-            ALT + click
+Button 3:   WindowOpsTrimmed menu with click, MenuWindowOpsFull menu 
+	    with ALT + click
 Button 4/5: Rolling wheel on titlebar up/down shades/unshades
 
 Mouse on window area:
@@ -160,8 +183,8 @@ Mouse on Icons (iconified):
 ---------------------------
 Button 1:   Drag moves icon, deiconify with double click, root menu with 
             ALT + click
-Button 2:   Deiconify icon with click, all of the same resource group with 
-            CTRL + click
+Button 2:   Deiconify icon with click, all of the same resource group 
+	    with CTRL + click
 Button 3:   WindowOpsTrimmed menu with click
 	    WindowGroupOps menu with CTRL + click
 
@@ -173,7 +196,27 @@ Button 3:   WindowOpsFull menu
 
 Anywhere:
 ---------
-Button 4/5: Switch to page left/right with ALT + rolling wheel up/down anywhere
-Button 4/5: Switch with active window to page left/right with CTRL + rolling 
-            wheel up/down anywhere
+Button 4/5: Switch to page left/right with ALT + rolling wheel up/down 
+	    anywhere
+Button 4/5: Switch with active window to page left/right with CTRL + 
+	    rolling wheel up/down anywhere
 
+Installation
+============
+Use the install.sh found in the root path of the Fvwm-Nightshade package
+
+
+Bugs and Feature requests
+=========================
+Fvwm-Nightshade is young project. Bugs are possible. We try to avoid 
+them but nobody is perfect ... So, if you find one or have ideas, submit
+them under https://github.com/ThomasFunk/Fvwm-Nightshade/issues
+
+
+Enjoy our work and hopefully you love Fvwm-Nightshade as we do ;-)
+
+
+Team
+====
+Thomas Funk <t.funk@web.de>
+Bernhard Popp <kermit.popp@googlemail.com>

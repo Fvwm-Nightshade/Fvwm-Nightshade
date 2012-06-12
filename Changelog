@@ -1,9 +1,12 @@
 History:
-06/10/2012 V 0.4.3
+06/12/2012 V 0.4.3
 - add About box
 - add !Title style for FvwmForm-RunCommand, FvwmForm-About, FvwmForm-Messages
 - fix bugs in fvwm-xdg-menu.py
 - fix bugs creating .menu 
+- fix paths of FvwmScript-PersonalMenu to find it in the module dir
+- add an installer script
+- add new default wallpaper (5:4 & 16:9) to artwork
 
 06/10/2012 V 0.4.2
 - update overview and some comments in config

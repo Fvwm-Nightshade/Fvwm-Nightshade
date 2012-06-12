@@ -143,7 +143,7 @@ ImagePath +:/usr/share/pixmaps:/usr/share/pixmaps/fvwm
 #-----------------------------------------------------------------------
 # The actual theme. Will be changed dynamically via FuncChangeDecor
 #-----------------------------------------------------------------------
-InfoStoreAdd used_theme Ambience
+InfoStoreAdd used_theme Default
 
 #-----------------------------------------------------------------------
 # Each Nightshade theme is located in $[FVWM_USERDIR]/themes
@@ -958,7 +958,7 @@ DestroyModuleConfig FvwmAnimate: *
 Style FvwmBanner !Title, Sticky, StaysOnTop, WindowListSkip, CirculateSkip
 
 *FvwmBanner: NoDecor
-Test (I $[FVWM_USERDIR]/Nightshade_logo_compl.png) *FvwmBanner: Pixmap $[FVWM_USERDIR]/Nightshade_logo_compl.png
+Test (I $[FVWM_USERDIR]/artwork/splash_Nightshade.png) *FvwmBanner: Pixmap $[FVWM_USERDIR]/artwork/splash_Nightshade.png
 *FvwmBanner: Timeout 3
 
 #=======================================================================
@@ -1176,7 +1176,7 @@ AddToFunc StartFunction
 + I Test (Init) Read $[NS_MODULEDIR]/DigitalXclock
 + I TestRc (Match) DigitalXclock H
 # create an Applications menu if no exist
-+ I Test (!f $[FVWM_USERDIR]/.menu) PipeRead '$FVWM_USERDIR/fvwm-xdg-menu.py -w -f -s 16 -m FvwmMenu > $FVWM_USERDIR/.menu 2> $FVWM_USERDIR/log.txt &'
++ I Test (!f $[FVWM_USERDIR]/.menu) PipeRead 'fvwm-xdg-menu.py -w -f -s 16 -m FvwmMenu > $FVWM_USERDIR/.menu 2> /dev/null &'
 + I TestRc (!Match) PipeRead 'echo Read .menu; echo SetEnv inProgress 2'
 # start programs found in .autostart
 #+ I Test (Init) FuncAutoStartPrograms
@@ -1505,7 +1505,7 @@ AddToFunc   FuncHibernate
 #-----------------------------------------------------------------------
 DestroyFunc FuncCreateFvwmMenu
 AddToFunc FuncCreateFvwmMenu
-+ I PipeRead '$FVWM_USERDIR/fvwm-xdg-menu.py -w -f -s 16 -m FvwmMenu > $FVWM_USERDIR/.menu 2> /dev/null ;  echo SetEnv inProgress 0'
++ I PipeRead 'fvwm-xdg-menu.py -w -f -s 16 -m FvwmMenu > $FVWM_USERDIR/.menu 2> /dev/null ;  echo SetEnv inProgress 0'
 
 
 #=======================================================================
@@ -1791,7 +1791,7 @@ AddToFunc FuncMenuFvwmPersonal
 + I DestroyMenu MenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal DynamicPopupAction FuncMenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal "$[gt.&Personal Applications]" Title
-+ I AddToMenu MenuFvwmPersonal "$[gt.Configure Personal Applications]%menu/configuration.xpm%"	FvwmScript FvwmScript-PersonalMenu
++ I AddToMenu MenuFvwmPersonal "$[gt.Configure Personal Applications]%menu/configuration.xpm%"	FvwmScript $[NS_MODULEDIR]/FvwmScript-PersonalMenu
 + I Test (f  $[FVWM_USERDIR]/.personal) PipeRead `sed -e '/^# personal menu/ d;/^ *$/,$ d' $[FVWM_USERDIR]/.personal`
 
 #=======================================================================

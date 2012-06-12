@@ -1,0 +1,20 @@
+History:
+
+2012/05/14 V 1.0.4
+- Fix bug that app list command string is empty at start
+
+2012/05/14 V 1.0.3
+- Fix bug again that app list is empty at start
+
+2012/05/14 V 1.0.2
+- Fix bug that Popup menus listed in the app list
+- Fix bug that empty menus listed in the menu list
+- Fix bug that menus which has the same name get wrong app entries
+- Fix bug that app list is empty at start
+
+2012/05/02 V 1.0.1
+- Fix bug when name with '/' will removed
+
+2012/04/29 V 1.0
+- FvwmScript to create personal menus. It reads the $FVWM_USERDIR/.menu 
+  created by fvwm-menu-desktop and saves the favorites in $FVWM_USERDIR/.personal
