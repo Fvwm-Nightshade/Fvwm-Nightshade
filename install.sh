@@ -147,33 +147,32 @@ echo ""
 #=======================================================================
 # Installing Nightshade
 #=======================================================================
-testdir=/home/tf/sourcen/git/temp
 
 echo "FIRST step: installing Fvwm-Nightshade"
 echo "--------------------------------------"
 sleep 1
 
 # rename .fvwm if exist
-if [ -d ${testdir}/.fvwm ]
+if [ -d ${HOME}/.fvwm ]
 then
-    echo -n "rename ${testdir}/.fvwm/ ... "
-    mv ${testdir}/.fvwm ${testdir}/fvwm_orig_`date +%Y%m%d%H%M`
+    echo -n "rename ${HOME}/.fvwm/ ... "
+    mv ${HOME}/.fvwm ${HOME}/fvwm_orig_`date +%Y%m%d%H%M`
     sleep $timer
     echo -e "done."
 fi
 
 # create new fvwm home
 echo -n "create new fvwm home ... "
-mkdir ${testdir}/.fvwm
+mkdir ${HOME}/.fvwm
 sleep $timer
 echo -e "done."
 
 # copy all to the right place
-echo -n "copy Nightshade files to ${testdir}/.fvwm/ ... "
-cp -r * ${testdir}/.fvwm/
+echo -n "copy Nightshade files to ${HOME}/.fvwm/ ... "
+cp -r * ${HOME}/.fvwm/
 
 # delete all Changelog files and install.sh
-cd ${testdir}/.fvwm/
+cd ${HOME}/.fvwm/
 for file in `find . -name Changelog_*`
 do
     rm $file
@@ -183,8 +182,8 @@ rm ToDo
 cd - > /dev/null
 
 # create wallpaper dir and move wallpapers
-mkdir ${testdir}/.fvwm/wallpapers
-mv ${testdir}/.fvwm/artwork/wp_* ${testdir}/.fvwm/wallpapers/
+mkdir ${HOME}/.fvwm/wallpapers
+mv ${HOME}/.fvwm/artwork/wp_* ${HOME}/.fvwm/wallpapers/
 
 sleep $timer
 echo -e "done.\n"
