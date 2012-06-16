@@ -55,7 +55,7 @@ Featurelist of Fvwm Nightshade:
 Requirements:
 =============
 Required:	Fvwm >= 2.6.3, xdg-python, xterm, xclock, xscreensaver,
-		eterm, imagemagick, stalonetray
+		eterm, imagemagick, stalonetray, python-xdg, wm-icons
 
 Recommended: 	gnomes network manager, Volume Icon
 
