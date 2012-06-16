@@ -2,14 +2,14 @@
 
 #-----------------------------------------------------------------------
 # File:		fvwm-xdg-menu.py
-# Version:	1.99.2
+# Version:	1.99.4
 # Licence: 	GPL 2
 #
 # Description:	creates a Fvwm menu with xdg entries
 #
 # Author:	Piotr Zielinski (http://www.cl.cam.ac.uk/~pz215/)	
 # Created:	12/03/2005
-# Changed:	05/22/2012 by Thomas Funk <t.funk@web.de>
+# Changed:	06/16/2012 by Thomas Funk <t.funk@web.de>
 #-----------------------------------------------------------------------
 
 # This script searches for the newest menu file conforming to the 
@@ -40,6 +40,7 @@ import os.path
 import os
 from xdg.DesktopEntry import *
 import fnmatch
+import re
 
 usage = """
 
@@ -134,6 +135,7 @@ def printmenu(name, icon, command):
     printtext('+ "%s%%%s%%" %s' % (name, iconfile, command))
 
 def parsemenu(menu, name=""):
+    m = re.compile('%[A-Z]?', re.I)
     if not name:
       name = menu.getPath()
 
@@ -149,8 +151,10 @@ def parsemenu(menu, name=""):
     		      'Popup "%s"' % entry.getPath())
     	elif isinstance(entry, xdg.Menu.MenuEntry):
     	    desktop = DesktopEntry(entry.DesktopEntry.getFileName())
+            # eliminate '%U' etc behind execute string
+            execProgram = m.sub('', desktop.getExec())
     	    printmenu(desktop.getName(), desktop.getIcon(),
-    		      options.exec_command + " " + desktop.getExec())
+    		      options.exec_command + " " + execProgram)
     	else:
     	    printtext('# not supported: ' + str(entry))
 
@@ -160,47 +164,48 @@ def parsemenu(menu, name=""):
     	    parsemenu(entry)
 
 # ----- Main ----------------------------------------------------------------
-# $XDG_CONFIG_DIRS/menus/${XDG_MENU_PREFIX}applications.menu
-# get the wanted or the applications.menu. If not exist the newest
-pattern = ''
+if __name__ == '__main__':
+    # $XDG_CONFIG_DIRS/menus/${XDG_MENU_PREFIX}applications.menu
+    # get the wanted or the applications.menu. If not exist the newest
+    pattern = ''
 
-if not options.menu_prefix == '':
-    if options.menu_prefix == 'debian-':
-        pattern = 'debian-menu.menu'
-    else:
-        xdg_menu_prefix = options.menu_prefix
+    if not options.menu_prefix == '':
+	if options.menu_prefix == 'debian-':
+	    pattern = 'debian-menu.menu'
+	else:
+	    xdg_menu_prefix = options.menu_prefix
 
-if pattern == '':
-    pattern = options.menu_prefix + 'applications.menu'
+    if pattern == '':
+	pattern = options.menu_prefix + 'applications.menu'
 
 
-# check first if file exist
-xdg_file = ''
-stop = False
-for dir in xdg_config_dirs:
-    if os.path.exists(dir):
-        dir = dir + '/menus'
-        dir_list = os.listdir(dir)
-        for filename in fnmatch.filter(dir_list, pattern):
-            xdg_file = os.path.join(dir, filename)
-            stop = True
-        if stop == True:
-            break
-
-# if no file found take the newes
-if xdg_file == '':
-    pattern = '*' + pattern
-    
-    newest_mtime = 0
-
+    # check first if file exist
+    xdg_file = ''
+    stop = False
     for dir in xdg_config_dirs:
-        if os.path.exists(dir):
-            dir = dir + '/menus'
-            dir_list = os.listdir(dir)
-            for filename in fnmatch.filter(dir_list, pattern):
-                temp_mtime = os.path.getmtime(os.path.join(dir, filename))
-                if temp_mtime > newest_mtime:
-                    newest_mtime = temp_mtime
-                    xdg_file = os.path.join(dir, filename)
-        
-parsemenu(xdg.Menu.parse(xdg_file), options.top)
+	dir = dir + '/menus'
+	if os.path.exists(dir):
+	    dir_list = os.listdir(dir)
+	    for filename in fnmatch.filter(dir_list, pattern):
+		xdg_file = os.path.join(dir, filename)
+		stop = True
+	    if stop == True:
+		break
+
+    # if no file found take the newes
+    if xdg_file == '':
+	pattern = '*' + pattern
+	
+	newest_mtime = 0
+
+	for dir in xdg_config_dirs:
+	    dir = dir + '/menus'
+	    if os.path.exists(dir):
+		dir_list = os.listdir(dir)
+		for filename in fnmatch.filter(dir_list, pattern):
+		    temp_mtime = os.path.getmtime(os.path.join(dir, filename))
+		    if temp_mtime > newest_mtime:
+			newest_mtime = temp_mtime
+			xdg_file = os.path.join(dir, filename)
+	    
+    parsemenu(xdg.Menu.parse(xdg_file), options.top)
