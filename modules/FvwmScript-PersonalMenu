@@ -1,10 +1,15 @@
 ########################################################################
 # File:		FvwmScript-PersonalMenu
-# Version:	1.0.4
+# Version:	2.0.0
 # Licence: 	GPL 2
 #
 # Description:	creates and edit a personal menu file
 #		$FVWM_USERDIR/.personal
+#
+# Parameters:	--old-structure
+#		activate parsing of menu structure of old perl version
+#		of fvwm-menu-desktop. Else structure of new python version
+#		will be used.
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	04/29/2012
@@ -12,7 +17,7 @@
 ########################################################################
 
 #-----------------------------------------------------------------------
-# Version 1.0.4, Copyright 2012, Thomas Funk
+# Version 2.0.0, Copyright 2012, Thomas Funk
 #-----------------------------------------------------------------------
 
 
@@ -25,6 +30,17 @@ WindowPosition		0 170
 
 Init
 Begin
+    Set $old_structure = 0
+    # Arguments
+    Set $i = 1
+    Set $arg = (GetScriptArgument $i)
+    While $arg <> {} Do
+    Begin
+	Set $j = (Add $i 1)
+	If $arg == {--old-structure} Then
+	    Set $menu_structure = 1
+    End
+
     Set $personal_changed = 0
     Set $save_chosen = 0
     Set $close_click = 0
@@ -36,8 +52,16 @@ Begin
     Begin
 	# get personal apps
 	Set $cmd1 = {sed -e '/^# personal menu/ d;/^ *$/,$ d' $FVWM_USERDIR/.personal}
-	Set $cmd2 = { |cut -d'"' -f2 |tr '\n' '|' |sed 's/.$//'}
-	Set $cmd3 = { |tr '\n' '|' |sed 's/AddToMenu MenuFvwmPersonal/\+/g;s/.$//'}
+	If $old_structure == 0 Then
+	Begin
+	    Set $cmd2 = { |cut -d'"' -f2 |cut -d'%' -f1 |tr '\n' '|' |sed 's/.$//'}
+	    Set $cmd3 = { |tr '\n' '|' |sed 's/AddToMenu MenuFvwmPersonal/\+/g;s/.$//'}
+	End
+	Else
+	Begin
+	    Set $cmd2 = { |cut -d'"' -f2 |tr '\n' '|' |sed 's/.$//'}
+	    Set $cmd3 = { |tr '\n' '|' |sed 's/AddToMenu MenuFvwmPersonal/\+/g;s/.$//'}
+	End
 	Set $cmd = $cmd1 $cmd2
 	#Do {echo personal_app_list cmd: }$cmd
 	Set $personal_app_list = (GetOutput $cmd 1 -1)
@@ -54,7 +78,14 @@ Begin
     End
     
     # get menu list
-    Set $cmd = {sed -e 's/^AddToMenu //p' -n $FVWM_USERDIR/.menu |sed -e 's/\"//g' |cut -d' ' -f1 |sort |sed -e 's/FvwmMenu-//g;/^\s*$/d' |tr '\n' ' '}
+    If $old_structure == 0 Then
+    Begin
+	Set $cmd = {sed -e 's/^AddToMenu //p' -n $FVWM_USERDIR/.menu |sed -e 's/\"//g' |cut -d' ' -f1 |sort |sed -e 's/\//\\\\\//g;/^\s*$/d' |tr '\n' ' '}
+    End
+    Else
+    Begin
+	Set $cmd = {sed -e 's/^AddToMenu //p' -n $FVWM_USERDIR/.menu |sed -e 's/\"//g' |cut -d' ' -f1 |sort |sed -e 's/FvwmMenu-//g;/^\s*$/d' |tr '\n' ' '}
+    End
     Set $menu_list = (GetOutput $cmd 1 -1)
     Set $index = 0
     Set $notdone = 1
@@ -64,6 +95,7 @@ Begin
 	Set $index = (Add $index 1)
 	Set $cmd = {echo }$menu_list
 	Set $menu_entry = (GetOutput $cmd 1 $index)
+	#Do {echo menu_entry: }$menu_entry
 	If $menu_entry <> {} Then
 	Begin
 	    # do only menus in list which have entries
@@ -79,17 +111,33 @@ Begin
 	    Set $notdone = 0
 	End
     End
+    #Do {echo new_menu: }$new_menu
     # get 1st menu entry
     Set $cmd = {echo }$new_menu
     Set $menu_entry = (GetOutput $cmd 1 1)
-    # change '-' to '/', ' ' to '|' and delete last '|'
-    Set $cmd = {echo '}$new_menu{' |sed -e 's/ /|/g;s/-/\//g;s/.$//'}
+    If $old_structure == 0 Then
+    Begin
+	# change '\\\\/' to '\/', ' ' to '|' and delete last '|'
+	Set $cmd = {echo '}$new_menu{' |sed -e 's/ /|/g;s/\\\//\//g;s/.$//'}
+    End
+    Else
+    Begin
+	# change '-' to '/', ' ' to '|' and delete last '|'
+	Set $cmd = {echo '}$new_menu{' |sed -e 's/ /|/g;s/-/\//g;s/.$//'}
+    End
     Set $menu_list = (GetOutput $cmd 1 -1)
     ChangeTitle 1 $menu_list
     
     # initialize app list
     Set $cmd1 = {sed -e '/AddToMenu/ d;/Popup/ d;1,/}$menu_entry{\"/ d;/^ *$/,$ d' $FVWM_USERDIR/.menu}
-    Set $cmd2 = { |cut -d'"' -f2 |tr '\n' '|' |sed 's/.$//'}
+    If $old_structure == 0 Then
+    Begin
+	Set $cmd2 = { |cut -d'"' -f2 |cut -d'%' -f1 |tr '\n' '|' |sed 's/.$//'}
+    End
+    Else
+    Begin
+	Set $cmd2 = { |cut -d'"' -f2 |tr '\n' '|' |sed 's/.$//'}
+    End
     Set $cmd3 = { |tr '\n' '|' |sed 's/.$//'}
     Set $cmd = $cmd1 $cmd2
     #Do {echo menu_app_list cmd: }$cmd
@@ -126,20 +174,29 @@ Case message of
 	ChangeFont 10 {xft:Arial:pixelsize=12}
 	ChangeTitle 10 {}
 	Set $index = (GetValue 1)
-	Set $cmd = {exec echo '}$menu_list{' |cut -d'|' -f}$index{ |sed -e 's/\//-/g'}
-	Set $menu_entry = (GetOutput $cmd 1 -1)
-	#Do {echo }$menu_entry
+	If $old_structure == 0 Then
+	Begin
+	    Set $cmd = {exec echo '}$menu_list{' |cut -d'|' -f}$index{ |sed -e 's/\//\\\//g'}
+	    Set $menu_entry = (GetOutput $cmd 1 -1)
+	    Set $cmd1 = {sed -e '1,/^DestroyMenu \"}$menu_entry{\"/ d;/AddToMenu/ d;/Popup/ d;/^ *$/,$ d' $FVWM_USERDIR/.menu}
+	    Set $cmd2 = { |cut -d'"' -f2 |cut -d'%' -f1 |tr '\n' '|' |sed 's/.$//'}
+	End
+	Else
+	Begin
+	    Set $cmd = {exec echo '}$menu_list{' |cut -d'|' -f}$index{ |sed -e 's/\//-/g'}
+	    Set $menu_entry = (GetOutput $cmd 1 -1)
+	    Set $cmd1 = {sed -e '1,/}$menu_entry{\"/ d;/AddToMenu/ d;/Popup/ d;/^ *$/,$ d' $FVWM_USERDIR/.menu}
+	    Set $cmd2 = { |cut -d'"' -f2 |tr '\n' '|' |sed 's/.$//'}
+	End
 
 	#Set $menu_chosen = 0
-	Set $cmd1 = {sed -e '1,/}$menu_entry{\"/ d;/AddToMenu/ d;/Popup/ d;/^ *$/,$ d' $FVWM_USERDIR/.menu}
-	Set $cmd2 = { |cut -d'"' -f2 |tr '\n' '|' |sed 's/.$//'}
 	Set $cmd3 = { |tr '\n' '|' |sed 's/.$//'}
 	Set $cmd = $cmd1 $cmd2
 	Set $menu_app_list = (GetOutput $cmd 1 -1)
 	Set $cmd = $cmd1 $cmd3
 	Set $menu_app_list_strs = (GetOutput $cmd 1 -1)
-	#Do {echo menu_app_list: }$menu_app_list
-	#Do {echo menu_app_list_strs: }$menu_app_list_strs
+	Do {echo menu_app_list: }$menu_app_list
+	Do {echo menu_app_list_strs: }$menu_app_list_strs
 	ChangeTitle 3 $menu_app_list
     End
 End
@@ -325,9 +382,9 @@ Main
 	ChangeFont 10 {xft:Arial:pixelsize=12}
 	ChangeTitle 10 {}
 	Set $cmd = {exec echo '}$personal_app_list_strs{' |sed -e 's/\+/AddToMenu MenuFvwmPersonal/g;s/\"/\\\"/g;s/\//\\\//g;s/|/\\n/g'}
-	#Do {echo save_str cmd: }$cmd
+	Do {echo save_str cmd: }$cmd
 	Set $save_str = (GetOutput $cmd 1 -1)
-	#Do {echo save_str: }$save_str
+	Do {echo save_str: }$save_str
 
 	If $found_file == {1} Then
 	Begin

@@ -28,8 +28,7 @@ Featurelist of Fvwm Nightshade:
 - date and time (if xclock is installed)
 - Lock desk & screensaver (if xscreensaver is installed)
 - Application menu via a modified version of fvwm-xdg-menu.py
-- Personal menu via FvwmScript-PersonalMenu (in progress to work with
-  fvwm-xdg-menu.py menu entries)
+- Personal menu via FvwmScript-PersonalMenu
 - Background configurable with thumb browser (if imagemagick and eterm 
   is installed)
 - Animation control of window moves
@@ -54,8 +53,8 @@ Featurelist of Fvwm Nightshade:
 
 Requirements:
 =============
-Required:	Fvwm >= 2.6.3, xdg-python, xterm, xclock, xscreensaver,
-		eterm, imagemagick, stalonetray, python-xdg, wm-icons
+Required:	Fvwm >= 2.6.3, python-xdg, xterm, xclock, xscreensaver,
+		eterm, imagemagick, stalonetray, wm-icons
 
 Recommended: 	gnomes network manager, Volume Icon
 
