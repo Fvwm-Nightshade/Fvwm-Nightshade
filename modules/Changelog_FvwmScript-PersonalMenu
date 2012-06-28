@@ -1,6 +1,10 @@
 History:
 
-2012/05/14 V 2.0.0
+2012/06/29 V 2.0.0
+- fix problem with Do command (max string lenght is 998) while saving
+  entries into .personal file
+
+2012/06/27 V 2.0.0
 - add support for python scripts fvwm-xdg-menu.py and new fvwm-menu-desktop
   With --old-structure it can be used with old perl vesion of fvwm-menu-desktop
   also.
