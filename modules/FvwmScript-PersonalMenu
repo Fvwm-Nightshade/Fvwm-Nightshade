@@ -1,6 +1,6 @@
 ########################################################################
 # File:		FvwmScript-PersonalMenu
-# Version:	2.0.1
+# Version:	2.1.0
 # Licence: 	GPL 2
 #
 # Description:	creates and edit a personal menu file
@@ -13,16 +13,16 @@
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	04/29/2012
-# Changed:	06/29/2012
+# Changed:	07/26/2012
 ########################################################################
 
 #-----------------------------------------------------------------------
-# Version 2.0.0, Copyright 2012, Thomas Funk
+# Version 2.1.0, Copyright 2012, Thomas Funk
 #-----------------------------------------------------------------------
 
 
-WindowTitle		{FvwmScript-PersonalMenu}
-WindowSize		560 250
+WindowTitle		{FvwmScript-PersonalMenu V 2.1.0}
+WindowSize		560 350
 WindowPosition		0 170
 
 
@@ -143,19 +143,30 @@ End
 
 # ----- Widgets --------------------------------------------------------
 
-# Popup menu "Menu entries"
-# -------------------------
+
+# Label "Menu folders"
+# --------------------
+Widget	11
+Property
+    Type		ItemDraw
+    Position		10 10
+    Title		{Menu Folders}
+    Font		"xft:Arial:pixelsize=12:bold"
+    Flags 		NoReliefString
+End
+
+# List Menu folder list
+# ---------------------
 Widget 1
 Property
-    Position		10 10
-    Type		PopupMenu
-    Title		{FvwmMenu                                                                                         |||}
+    Size		540 100
+    Position		10 30
+    Type		List
+    Title		{}
     Font		"xft:Arial:pixelsize=12"
     Flags 		NoReliefString
-    ForeColor		{black}
     BackColor		{white}
-    ShadowColor		{DarkGray}
-    HilightColor	{gray}
+    HilightColor	{light gray}
 Main
 Case message of
     SingleClic :
@@ -189,22 +200,23 @@ Case message of
     End
 End
 
-# Label "Menu applications"
-# -------------------------
+# Label "Menu Entries"
+# --------------------
 Widget	2
 Property
     Type		ItemDraw
-    Position		10 40
-    Title		{Menu applications}
+    Position		10 140
+    Title		{Menu Entries}
     Font		"xft:Arial:pixelsize=12:bold"
     Flags 		NoReliefString
 End
 
 # List Menu App list
+# ------------------
 Widget 3
 Property
     Size		200 150
-    Position		10 60
+    Position		10 160
     Type		List
     Title		{}
     Font		"xft:Arial:pixelsize=12"
@@ -233,7 +245,7 @@ End
 Widget 4
 Property
     Size		80 25
-    Position		240 70
+    Position		240 170
     Type		PushButton
     Title		{Add >}
     Font		"xft:Arial:pixelsize=12"
@@ -263,7 +275,7 @@ Main
 
 	Set $msg = {Added '}$chosen_menu_app{' to menu}
 	ChangeTitle 10 $msg
-	ChangeTitle 8 {Personal applications*}
+	ChangeTitle 8 {Personal Entries*}
     End
 End
 
@@ -272,7 +284,7 @@ End
 Widget 5
 Property
     Size		80 25
-    Position		240 100
+    Position		240 200
     Type		PushButton
     Title		{< Remove}
     Font		"xft:Arial:pixelsize=12"
@@ -333,7 +345,7 @@ End
 Widget 6
 Property
     Size		80 25
-    Position		240 140
+    Position		240 240
     Type		PushButton
     Title		{Save}
     Font		"xft:Arial:pixelsize=12"
@@ -389,7 +401,7 @@ Main
 	Set $personal_changed = 0
 
 	ChangeTitle 10 {Personal menu saved}
-	ChangeTitle 8 {Personal applications}
+	ChangeTitle 8 {Personal Entries}
     End
 End
 
@@ -398,7 +410,7 @@ End
 Widget 7
 Property
     Size		80 25
-    Position		240 170
+    Position		240 270
     Type		PushButton
     Title		{Cancel/Quit}
     Font		"xft:Arial:pixelsize=12"
@@ -430,13 +442,13 @@ Main
     End
 End
 
-# Label "Personal applications"
-# -----------------------------
+# Label "Personal Entries"
+# ------------------------
 Widget	8
 Property
     Type		ItemDraw
-    Position		350 40
-    Title		{Personal applications }
+    Position		350 140
+    Title		{Personal Entries }
     Font		"xft:Arial:pixelsize=12:bold"
     Flags 		NoReliefString
 End
@@ -445,7 +457,8 @@ End
 Widget 9
 Property
     Size		200 150
-    Position		350 60
+    #Position		350 60
+    Position		350 160
     Type		List
     Title		{}
     Font		"xft:Arial:pixelsize=12"
@@ -473,7 +486,7 @@ End
 Widget	10
 Property
     Type		ItemDraw
-    Position		10 220
+    Position		10 320
     Size 		550 20
     Title		{}
     Font		"xft:Arial:pixelsize=12"
