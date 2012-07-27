@@ -1,4 +1,17 @@
 History:
+07/27/2012 V 0.4.4
+- update relevant parts related to Fvwm Default Config V 0.21.6
+  - simplify menus with MissingSubmenuFunction and swaping Test/TestRc
+    parts into functions
+  - Create decorations with DestroyDecor/AddToDecor
+  - Resort Style commands in General and Application blocks (Not scattered
+    over the complete config)
+- delete inProgress part cause never needed anymore (due to new
+  fvwm-menu-desktop in CVS)
+- delete FuncGetFvwmVersion
+- Change in FvwmScript-PersonalMenu Popup Menu widget to List widget
+  to show all menu entries if list is longer than display height
+
 06/12/2012 V 0.4.3
 - add About box
 - add !Title style for FvwmForm-RunCommand, FvwmForm-About, FvwmForm-Messages

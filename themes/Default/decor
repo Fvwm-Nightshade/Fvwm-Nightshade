@@ -1,13 +1,13 @@
 ########################################################################
 # File:		decor
-# Version:	0.1.0
+# Version:	0.1.1
 # Licence: 	GPL 2
 #
 # Description:	decor parts (titlebar, buttons, menus) of Air theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	06/08/2012
-# Changed:	
+# Changed:	07/27/2012
 ########################################################################
 
 Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",15*$[infostore.ratio]'`"
@@ -28,24 +28,24 @@ Style * HilightIconTitleColorset 11
 # IconTitleRelief defines the thickness of the 3D relief drawn around the icon title
 Style * IconTitleRelief 1
 
-
+DestroyDecor Default
+AddToDecor Default
 #=======================================================================
 # Titlebar
 #=======================================================================
-TitleStyle AllActive	Colorset 2 -- Flat
-TitleStyle AllInactive 	Colorset 3 -- Flat
-#TitleStyle LeftJustified Height 18
-TitleStyle  LeftJustified Height $[infostore.titlebar_height]
++ TitleStyle AllActive		Colorset 2 -- Flat
++ TitleStyle AllInactive 	Colorset 3 -- Flat
+#+ TitleStyle LeftJustified Height 18
++ TitleStyle  LeftJustified Height $[infostore.titlebar_height]
 
 #=======================================================================
 # Border
 #=======================================================================
-BorderStyle -- HiddenHandles NoInset
++ BorderStyle -- HiddenHandles NoInset
 
 #=======================================================================
 # Buttons
 #=======================================================================
-ButtonStyle all	-- UseTitleStyle
 
 # +----------------------------------------------------------+
 # | X  X  X                                          X  X  X |
@@ -65,12 +65,17 @@ ButtonStyle all	-- UseTitleStyle
 #   @4 Invisible (just move the pointer, dont draw anything)
 #
 
-AddButtonStyle 1 Vector 4 50x65@0 35x35@0 65x35@0 50x65@1
-AddButtonStyle 2 Vector 17 20x20@0 30x20@0 50x40@0 70x20@0 80x20@0 80x30@1 60x50@1 80x70@0 80x80@1 70x80@1 50x60@1 30x80@1 20x80@1 20x70@1 40x50@0 20x30@1 20x20@0
-AddButtonStyle 4 Vector 13 60x20@1 60x40@1 80x40@0 80x60@1 60x60@1 60x80@1 40x80@1 40x60@0 20x60@1 20x40@0 40x40@0 40x20@0 60x20@0
-AddButtonStyle 6 Vector 5 25x40@0 25x60@0 75x60@1 75x40@1 25x40@0
++ ButtonStyle 1 Vector 4 50x65@0 35x35@0 65x35@0 50x65@1
++ ButtonStyle 2 Vector 17 20x20@0 30x20@0 50x40@0 70x20@0 80x20@0 80x30@1 60x50@1 80x70@0 80x80@1 70x80@1 50x60@1 30x80@1 20x80@1 20x70@1 40x50@0 20x30@1 20x20@0
++ ButtonStyle 4 Vector 13 60x20@1 60x40@1 80x40@0 80x60@1 60x60@1 60x80@1 40x80@1 40x60@0 20x60@1 20x40@0 40x40@0 40x20@0 60x20@0
++ ButtonStyle 6 Vector 5 25x40@0 25x60@0 75x60@1 75x40@1 25x40@0
 
-ButtonStyle All ActiveUp (-- flat) Inactive (-- flat)
++ ButtonStyle All -- UseTitleStyle
++ ButtonStyle All ActiveUp (-- flat) Inactive (-- flat)
+#+ ButtonStyle 1 - Clear MWMDecorMenu
+#+ ButtonStyle 2 - Clear
+#+ ButtonStyle 4 - Clear MWMDecorMax
+#+ ButtonStyle 6 - Clear MWMDecorMin
 
 #=======================================================================
 # Menus

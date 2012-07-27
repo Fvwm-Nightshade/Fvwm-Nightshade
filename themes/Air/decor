@@ -1,13 +1,13 @@
 ########################################################################
 # File:		decor
-# Version:	0.1.0
+# Version:	0.1.1
 # Licence: 	GPL 2
 #
 # Description:	decor parts (titlebar, buttons, menus) of Air theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	06/08/2012
-# Changed:	
+# Changed:	07/27/2012
 ########################################################################
 Piperead "echo InfoStoreAdd button_width `perl -e 'printf \"%.0f\",16*$[infostore.ratio]'`"
 Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",18*$[infostore.ratio]'`"
@@ -28,23 +28,24 @@ Style *	Button 1, Button 2, Button 3, Button 4, Button 6
 Style * IconTitleColorset 10
 Style * HilightIconTitleColorset 11
 
+DestroyDecor Default
+AddToDecor Default
 #***********************************************************************
 # Titlebar
 #***********************************************************************
-TitleStyle AllActive	Colorset 2 -- Flat
-TitleStyle AllInactive 	Colorset 3 -- Flat
-TitleStyle  LeftJustified Height $[infostore.titlebar_height] -- flat
-#TitleStyle  LeftJustified Height 22 -- flat
++ TitleStyle AllActive		Colorset 2 -- Flat
++ TitleStyle AllInactive 	Colorset 3 -- Flat
++ TitleStyle  LeftJustified Height $[infostore.titlebar_height] -- flat
+#+ TitleStyle  LeftJustified Height 22 -- flat
 
 #***********************************************************************
 # Border
 #***********************************************************************
-BorderStyle	Simple -- HiddenHandles NoInset
++ BorderStyle	Simple -- HiddenHandles NoInset
 
 #***********************************************************************
 # Buttons
 #***********************************************************************
-ButtonStyle	All Active (-- flat) Inactive (-- flat)
 
 # +----------------------------------------------------------+
 # | X  X  X                                          X  X  X |
@@ -54,34 +55,36 @@ ButtonStyle	All Active (-- flat) Inactive (-- flat)
 #                                                                  
 #
 
-AddButtonStyle 1 Active		Colorset 2
-AddButtonStyle 1 Inactive	Colorset 3
-AddButtonStyle 1 MiniIcon
++ ButtonStyle 1 Active		Colorset 2
++ ButtonStyle 1 Inactive	Colorset 3
++ ButtonStyle 1 MiniIcon
 
-AddButtonStyle 2 Active		Colorset 2
-AddButtonStyle 2 ActiveUp	Pixmap $[NS_THEMEDIR]/images/close.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-AddButtonStyle 2 ActiveDown	Pixmap $[NS_THEMEDIR]/images/close_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-AddButtonStyle 2 Inactive	Colorset 3
-AddButtonStyle 2 InactiveUp	Pixmap $[NS_THEMEDIR]/images/close_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 Active		Colorset 2
++ ButtonStyle 2 ActiveUp	Pixmap $[NS_THEMEDIR]/images/close.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 ActiveDown	Pixmap $[NS_THEMEDIR]/images/close_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 Inactive	Colorset 3
++ ButtonStyle 2 InactiveUp	Pixmap $[NS_THEMEDIR]/images/close_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 
-AddButtonStyle 3 Active		Colorset 2
-AddButtonStyle 3 ActiveUp	Pixmap $[NS_THEMEDIR]/images/desk.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-AddButtonStyle 3 ActiveDown	Pixmap $[NS_THEMEDIR]/images/desk_down_1.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-AddButtonStyle 3 Inactive	Colorset 3
-AddButtonStyle 3 InactiveUp	Pixmap $[NS_THEMEDIR]/images/desk_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 3 Active		Colorset 2
++ ButtonStyle 3 ActiveUp	Pixmap $[NS_THEMEDIR]/images/desk.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 3 ActiveDown	Pixmap $[NS_THEMEDIR]/images/desk_down_1.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 3 Inactive	Colorset 3
++ ButtonStyle 3 InactiveUp	Pixmap $[NS_THEMEDIR]/images/desk_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 
-AddButtonStyle 4 Active		Colorset 2
-AddButtonStyle 4 ActiveUp	Pixmap $[NS_THEMEDIR]/images/maximize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-AddButtonStyle 4 ActiveDown	Pixmap $[NS_THEMEDIR]/images/maximize_down_1.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-AddButtonStyle 4 Inactive	Colorset 3
-AddButtonStyle 4 InactiveUp	Pixmap $[NS_THEMEDIR]/images/maximize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 4 Active		Colorset 2
++ ButtonStyle 4 ActiveUp	Pixmap $[NS_THEMEDIR]/images/maximize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 4 ActiveDown	Pixmap $[NS_THEMEDIR]/images/maximize_down_1.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 4 Inactive	Colorset 3
++ ButtonStyle 4 InactiveUp	Pixmap $[NS_THEMEDIR]/images/maximize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 
-AddButtonStyle 6 Active		Colorset 2
-AddButtonStyle 6 ActiveUp	Pixmap $[NS_THEMEDIR]/images/minimize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-AddButtonStyle 6 ActiveDown	Pixmap $[NS_THEMEDIR]/images/minimize_down_1.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-AddButtonStyle 6 Inactive	Colorset 3
-AddButtonStyle 6 InactiveUp	Pixmap $[NS_THEMEDIR]/images/minimize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 6 Active		Colorset 2
++ ButtonStyle 6 ActiveUp	Pixmap $[NS_THEMEDIR]/images/minimize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 6 ActiveDown	Pixmap $[NS_THEMEDIR]/images/minimize_down_1.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 6 Inactive	Colorset 3
++ ButtonStyle 6 InactiveUp	Pixmap $[NS_THEMEDIR]/images/minimize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 
++ ButtonStyle All -- UseTitleStyle
++ ButtonStyle All Active (-- flat) Inactive (-- flat)
 
 #=======================================================================
 # Menus
