@@ -1,4 +1,12 @@
 History:
+07/31/2012 V 0.4.5
+- update relevant parts related to Fvwm Default Config V 0.21.7
+  - add some comments and delete unused lines
+  - delete FvwmProxy because it works only on the actual page and for that
+    FuncSwitchWindow exist
+  - Add moving active window to page n with SHIFT-ALT+1-4 + update help windows
+  - delete FuncFvwmShowColorsets becaue make no sense for user
+
 07/27/2012 V 0.4.4
 - update relevant parts related to Fvwm Default Config V 0.21.6
   - simplify menus with MissingSubmenuFunction and swaping Test/TestRc

@@ -27,7 +27,6 @@ Featurelist of Fvwm Nightshade:
 - Systray (if stalonetray is installed)
 - date and time (if xclock is installed)
 - Lock desk & screensaver (if xscreensaver is installed)
-- Application menu via a modified version of fvwm-xdg-menu.py
 - Personal menu via FvwmScript-PersonalMenu
 - Background configurable with thumb browser (if imagemagick and eterm 
   is installed)
@@ -53,7 +52,7 @@ Featurelist of Fvwm Nightshade:
 
 Requirements:
 =============
-Required:	Fvwm >= 2.6.3, python-xdg, xterm, xclock, xscreensaver,
+Required:	Fvwm >= 2.6.6, python-xdg, xterm, xclock, xscreensaver,
 		eterm, imagemagick, stalonetray, wm-icons
 
 Recommended: 	gnomes network manager, Volume Icon
@@ -108,11 +107,21 @@ Shift-Ctrl+Print                  Screenshot of the active window
 -> Help message with Shift-Alt-Ctrl + C
 
 
-Shift-Ctrl+cursor right           Switch to page right
-Shift-Ctrl+cursor left            Switch to page left
+Shift-Alt+1			  Switch to page 1 with active window
+Shift-Alt+2			  Switch to page 2 with active window
+Shift-Alt+3			  Switch to page 3 with active window
+Shift-Alt+4			  Switch to page 4 with active window
 
 Shift-Alt+Cursor right            Switch to page right with active window
 Shift-Alt+Cursor left             Switch to page left with active window
+
+Shift-Ctrl+1			  Switch to page 1
+Shift-Ctrl+2			  Switch to page 2
+Shift-Ctrl+3			  Switch to page 3
+Shift-Ctrl+4			  Switch to page 4
+
+Shift-Ctrl+cursor right           Switch to page right
+Shift-Ctrl+cursor left            Switch to page left
 
 Shift-Alt-Ctrl+cursor right       Scroll right by 10% of a page
 Shift-Alt-Ctrl+cursor left        Scroll left by 10% of a page
@@ -191,14 +200,14 @@ Mouse on Root area:
 -------------------
 Button 1:   Root menu
 Button 2:   Window list
-Button 3:   WindowOpsFull menu
+Button 3:   Desktop menu
 
 Anywhere:
 ---------
-Button 4/5: Switch to page left/right with ALT + rolling wheel up/down 
-	    anywhere
-Button 4/5: Switch with active window to page left/right with CTRL + 
-	    rolling wheel up/down anywhere
+Button 4/5: Switch to page left/right with SHIFT-ALT + rolling wheel 
+            up/down anywhere
+Button 4/5: Switch with active window to page left/right with SHIFT-CTRL
+            + rolling wheel up/down anywhere
 
 Installation
 ============
