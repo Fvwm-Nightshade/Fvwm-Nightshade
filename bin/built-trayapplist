@@ -1,0 +1,46 @@
+#-----------------------------------------------------------------------
+# File:		built-trayapplist.sh
+# Version:	1.0.0
+# Licence: 	GPL 2
+#
+# Description:	shell script to generate a list of actual available
+#		applets in systray (stalonetray)
+#
+# Parameters:	built-trayapplist.sh <stalonetray_logfile> <applist_file>
+#
+# Remarks:	stalonetray must started with --log-level info and
+#		output redirected with 2>stalonetray_logfile
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+# Created:	08/13/2012
+# Changed:	
+#-----------------------------------------------------------------------
+
+#!/bin/bash
+
+infile=$1
+outfile=$2
+
+# first delete outfile
+if [ -f $outfile ]
+then
+    rm -f $outfile
+fi
+
+# get windows ids of last available applets
+windows_ids=`sed -n '/tray status/h;/tray status/!H;$!b;x;p' $infile |sed -n '/tray status/,/-----------------------------------/p' | grep wid |cut -d" " -f3`
+
+for id in $windows_ids
+do
+    #echo id: $id
+    # get PID of the applet
+    PID=`xprop -id $id _NET_WM_PID |cut -d" " -f3`
+    #echo PID: $PID
+    # get command string
+    cmd=`ps -p $PID -o cmd=`
+    #echo cmd: $cmd
+    # put cmd in outfile
+    echo $cmd >> $outfile
+done
+
+exit 0

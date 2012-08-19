@@ -1,0 +1,112 @@
+#-----------------------------------------------------------------------
+# File:		FvwmForm-BaseSetup
+# Version:	1.1.0
+# Licence: 	GPL 2
+#
+# Description:	Script to configure default settings
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+# Created:	08/01/2012
+# Changed:	08/12/2012
+#-----------------------------------------------------------------------
+
+DestroyModuleConfig  FvwmForm-BaseSetup: *
+*FvwmForm-BaseSetup: WarpPointer
+# Layout
+*FvwmForm-BaseSetup: Line       center
+*FvwmForm-BaseSetup: Text       "Fvwm-Nightshade Base Setup"
+*FvwmForm-BaseSetup: Line       center
+*FvwmForm-BaseSetup: Text	" "
+*FvwmForm-BaseSetup: Line       left
+*FvwmForm-BaseSetup: Text       "Use this setup to configure default settings."
+*FvwmForm-BaseSetup: Line       left
+*FvwmForm-BaseSetup: Text	" "
+*FvwmForm-BaseSetup: Line
+
+*FvwmForm-BaseSetup: Line	center
+*FvwmForm-BaseSetup: Text	"---------- Decoration (Windows, Menus) ----------"
+*FvwmForm-BaseSetup: Line
+
+*FvwmForm-BaseSetup: Line	left
+*FvwmForm-BaseSetup: Text 	"Used Theme:    "
+*FvwmForm-BaseSetup: Input 	Theme 15 "Ambience"
+*FvwmForm-BaseSetup: Text 	" (Others: Default, Air)"
+*FvwmForm-BaseSetup: Line
+
+*FvwmForm-BaseSetup: Line	left
+*FvwmForm-BaseSetup: Text 	"Used Font:     "
+*FvwmForm-BaseSetup: Input 	Font 15 "Arial"
+*FvwmForm-BaseSetup: Text 	" (E.g. Sans, Helvetia, Verdana)"
+*FvwmForm-BaseSetup: Line
+
+*FvwmForm-BaseSetup: Line	left
+*FvwmForm-BaseSetup: Text 	"Used Font size:"
+*FvwmForm-BaseSetup: Input 	Fontsize 3 "12"
+*FvwmForm-BaseSetup: Text 	"              (E.g. 10, 11, 13)"
+*FvwmForm-BaseSetup: Line
+
+*FvwmForm-BaseSetup: Line       left
+*FvwmForm-BaseSetup: Text	" "
+*FvwmForm-BaseSetup: Line	center
+*FvwmForm-BaseSetup: Text	"------- Panels (Iconman, Pager, Systray) -------"
+*FvwmForm-BaseSetup: Line
+
+*FvwmForm-BaseSetup: Line	left
+*FvwmForm-BaseSetup: Text 	"Used Layout:   "
+*FvwmForm-BaseSetup: Selection	SelItype single
+*FvwmForm-BaseSetup: Choice	LayoutH	LayoutH	on  "Horizontal (Panels on top/bottom)"
+*FvwmForm-BaseSetup: Line	left
+*FvwmForm-BaseSetup: Text 	"               "
+*FvwmForm-BaseSetup: Choice	LayoutV	LayoutV	off "Vertical (Panels on right/left side)"
+*FvwmForm-BaseSetup: Line
+
+*FvwmForm-BaseSetup: Line       left
+*FvwmForm-BaseSetup: Text	" "
+*FvwmForm-BaseSetup: Line	center
+*FvwmForm-BaseSetup: Text	"----------------- Applications -----------------"
+*FvwmForm-BaseSetup: Line
+
+*FvwmForm-BaseSetup: Line	left
+*FvwmForm-BaseSetup: Text 	"Used Terminal: "
+*FvwmForm-BaseSetup: Input 	Terminal 15 "xterm"
+*FvwmForm-BaseSetup: Text 	" (E.g. konsole, aterm, rxvt)"
+*FvwmForm-BaseSetup: Line
+
+*FvwmForm-BaseSetup: Line	left
+*FvwmForm-BaseSetup: Text 	"Used Browser:  "
+*FvwmForm-BaseSetup: Input 	Browser 15 "firefox"
+*FvwmForm-BaseSetup: Text 	" (E.g. chromium, seamonkey)"
+
+*FvwmForm-BaseSetup: Line       left
+*FvwmForm-BaseSetup: Text	" "
+*FvwmForm-BaseSetup: Line       expand
+*FvwmForm-BaseSetup: Button     quit    "Apply & Save"
+*FvwmForm-BaseSetup: Command   	$(Theme? FuncWriteInfoStoreToFileAndSet used_theme $(Theme) $[FVWM_USERDIR]/.settings)
+*FvwmForm-BaseSetup: Command   	$(LayoutH? FuncWriteInfoStoreToFileAndSet used_layout Horizontal $[FVWM_USERDIR]/.settings)
+*FvwmForm-BaseSetup: Command   	$(LayoutH?!rm -f $[FVWM_USERDIR]/.layout; ln -s $[FVWM_USERDIR]/layouts/Horizontal $[FVWM_USERDIR]/.layout)
+*FvwmForm-BaseSetup: Command   	$(LayoutV? FuncWriteInfoStoreToFileAndSet used_layout Vertical $[FVWM_USERDIR]/.settings)
+*FvwmForm-BaseSetup: Command   	$(LayoutV?!rm -f $[FVWM_USERDIR]/.layout; ln -s $[FVWM_USERDIR]/layouts/Vertical $[FVWM_USERDIR]/.layout)
+*FvwmForm-BaseSetup: Command   	$(Font? FuncWriteInfoStoreToFileAndSet used_font $(Font) $[FVWM_USERDIR]/.settings)
+*FvwmForm-BaseSetup: Command   	$(Fontsize? FuncWriteInfoStoreToFileAndSet fontsize $(Fontsize) $[FVWM_USERDIR]/.settings)
+*FvwmForm-BaseSetup: Command   	$(Terminal? FuncWriteInfoStoreToFileAndSet default_terminal $(Terminal) $[FVWM_USERDIR]/.settings)
+*FvwmForm-BaseSetup: Command   	$(Browser? FuncWriteInfoStoreToFileAndSet default_browser $(Browser) $[FVWM_USERDIR]/.settings)
+*FvwmForm-BaseSetup: Command   	Restart
+
+# Before saving the data, remove any previously saved data:
+*FvwmForm-BaseSetup: Command DestroyModuleConfig SavedBaseSetup: *
+*FvwmForm-BaseSetup: Command !(                                      /bin/echo \
+  "# This file last created by FvwmForm-BaseSetup on: `/bin/date`."; /bin/echo \
+  '*SavedBaseSetup: Theme 	$(Theme) '		; /bin/echo \
+  '*SavedBaseSetup: LayoutH	$(LayoutH?on) '		; /bin/echo \
+  '*SavedBaseSetup: LayoutV  	$(LayoutV?on) '		; /bin/echo \
+  '*SavedBaseSetup: Font  	$(Font) '		; /bin/echo \
+  '*SavedBaseSetup: Fontsize   	$(Fontsize) '		; /bin/echo \
+  '*SavedBaseSetup: Terminal    $(Terminal) '		; /bin/echo \
+  '*SavedBaseSetup: Browser     $(Browser) '		; /bin/echo \
+) > ${FVWM_USERDIR}/.FvwmForm-BaseSetup
+
+*FvwmForm-BaseSetup: Button       restart "Reset"
+*FvwmForm-BaseSetup: Button       quit    "Cancel"
+*FvwmForm-BaseSetup: Command      Nop
+# Tell FvwmForm to read vars from the .FvwmForm-BaseSetup file:
+*FvwmForm-BaseSetup: UseData .FvwmForm-BaseSetup *SavedBaseSetup

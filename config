@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.4.5
+InfoStoreAdd ns_version 0.5
 # Copyright (C) 2012
 #
 # Authors:
@@ -146,6 +146,12 @@ InfoStoreAdd ns_version 0.4.5
 # 1.1 Paths, Variables (SetEnv, InfoStore)
 #=======================================================================
 
+#-----------------------------------------------------------------------
+# Set shell for Exec command
+#-----------------------------------------------------------------------
+ExecUseShell /bin/bash
+
+
 #***********************************************************************
 # 1.2.1 Paths and directories
 #***********************************************************************
@@ -174,23 +180,6 @@ ImagePath /usr/share/icons:/usr/share/icons/wm-icons:+
 ImagePath +:/usr/share/pixmaps:/usr/share/pixmaps/fvwm
 
 #-----------------------------------------------------------------------
-# The actual theme. Will be changed dynamically via FuncChangeDecor
-#-----------------------------------------------------------------------
-InfoStoreAdd used_theme Ambience
-
-#-----------------------------------------------------------------------
-# Each Nightshade theme is located in $[FVWM_USERDIR]/themes
-# Here the path to the actual theme will set
-# Will be set every time FuncChangeDecor is called
-#-----------------------------------------------------------------------
-SetEnv NS_THEMEDIR $[FVWM_USERDIR]/themes/$[infostore.used_theme]
-
-#-----------------------------------------------------------------------
-# wallpaper path. Should be changed to the right directory
-#-----------------------------------------------------------------------
-InfoStoreAdd wallpaper_dir $[FVWM_USERDIR]/wallpapers
-
-#-----------------------------------------------------------------------
 # actual wallpaper
 #-----------------------------------------------------------------------
 InfoStoreAdd fvwm_wallpaper $[FVWM_USERDIR]/.wallpaper
@@ -199,44 +188,18 @@ InfoStoreAdd fvwm_wallpaper $[FVWM_USERDIR]/.wallpaper
 #***********************************************************************
 # 1.2.2 Environment settings
 #***********************************************************************
-#-----------------------------------------------------------------------
-# default used font
-#-----------------------------------------------------------------------
-InfoStoreAdd used_font "Arial"
+# These settings are rolled out to $[FVWM_USERDIR]/.settings
+# They can configured with the FvwmForm-BaseSetup
+Read $[FVWM_USERDIR]/.settings
 
-#-----------------------------------------------------------------------
-# default font size
-#-----------------------------------------------------------------------
-InfoStoreAdd fontsize 12
+#***********************************************************************
+# 1.2.3 Others
+#***********************************************************************
 
 #-----------------------------------------------------------------------
 # Adjust ratio to calculate resolution dependant things
 #-----------------------------------------------------------------------
 PipeRead "echo InfoStoreAdd ratio `perl -e 'printf \"%.1f\",log($[vp.width]*$[vp.height])/log(10)-log(1024*768)/log(10)+1'`"
-
-#-----------------------------------------------------------------------
-# actual pager height. Needed for the "top bar" modules
-#-----------------------------------------------------------------------
-PipeRead 'echo InfoStoreAdd fvwm_pager_height $(($[vp.height]/25))'
-
-
-#***********************************************************************
-# 1.2.3 Default applications
-#***********************************************************************
-#-----------------------------------------------------------------------
-# terminal
-#-----------------------------------------------------------------------
-InfoStoreAdd default_terminal konsole
-
-#-----------------------------------------------------------------------
-# browser
-#-----------------------------------------------------------------------
-InfoStoreAdd default_browser firefox
-
-
-#***********************************************************************
-# 1.2.3 Others
-#***********************************************************************
 
 #-----------------------------------------------------------------------
 # used for 'Switching focus between windows. (ALT-Tab)' functionality
@@ -323,8 +286,6 @@ Read $[NS_THEMEDIR]/colorsets
 # 2.4 Window Decorations
 #=======================================================================
 
-
-
 #=======================================================================
 # 2.5 Theme related decorations
 #=======================================================================
@@ -356,16 +317,6 @@ Xinerama on
 Emulate mwm
 
 #-----------------------------------------------------------------------
-# Set the desk top size in units of physical screen size
-#
-#   +-----+-----+-----+-----+
-#   |     |     |     |     |
-#   +-----+-----+-----+-----+
-#
-#-----------------------------------------------------------------------
-DeskTopSize 4x1
-
-#-----------------------------------------------------------------------
 # How hard it should be to change the desktop viewport by moving the
 # mouse over the edge of the screen
 #-----------------------------------------------------------------------
@@ -383,12 +334,6 @@ EdgeScroll 100 100
 # the smallest pan frames, which seem to work best except on some servers.
 #-----------------------------------------------------------------------
 EdgeThickness 1
-
-#-----------------------------------------------------------------------
-# Define bands at the edge of the screen. It is used to compute the
-# Working Area: EwmhBaseStruts left right top bottom 
-#-----------------------------------------------------------------------
-PipeRead 'echo EwmhBaseStruts 0 0 $(($[infostore.fvwm_pager_height]+3)) 0'
 
 #-----------------------------------------------------------------------
 # IconBox defines the area where FVWM will place any windows that are
@@ -844,7 +789,7 @@ Key Tab		A	M	FuncSwitchWindow
 #-----------------------------------------------------------------------
 # Print screenshot of whole desktop (page)
 #-----------------------------------------------------------------------
-Key Print	A       M       FuncDesktopCreateScreenshot
+Key Print	A       M       FuncDesktopCreateScreenshot 5
 
 
 #***********************************************************************
@@ -1319,24 +1264,20 @@ AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # activate module for sound event actions
 #+ I Module FvwmEvent FvwmEventSound
-# start systemtray
-+ I Test (Init) Test (f $[NS_MODULEDIR]/SysTray) Read $[NS_MODULEDIR]/SysTray
-+ I TestRc (Match) FuncStartSysTray
-#-----------------------------------------------------------------------
-# start systray applets
-+ I Test (Init) FuncStartSystrayApplets
 #-----------------------------------------------------------------------
 # start xscreensaver daemon for locking
 + I Test (x xscreensaver-command) Test (Init) Exec xscreensaver -no-splash
-# start window list module
-+ I Test (f $[NS_MODULEDIR]/GlobalIconMan) Read $[NS_MODULEDIR]/GlobalIconMan
-+ I TestRc (Match) Module FvwmIconMan FvwmGlobalIconMan
-# start a Pager
-+ I Test (f $[NS_MODULEDIR]/Pager) Read $[NS_MODULEDIR]/Pager
-+ I TestRc (Match) Module FvwmPager
-# starts a time and date module - Parameter:"I"=12h, "H"=24h
-+ I Test (Init) Read $[NS_MODULEDIR]/DigitalXclock
-+ I TestRc (Match) DigitalXclock H
+#-----------------------------------------------------------------------
+# start FvwmForm-BaseSetup if not configured
++ I Test (!f $[FVWM_USERDIR]/.FvwmForm-BaseSetup) FvwmForm FvwmForm-BaseSetup
+
+#-----------------------------------------------------------------------
+# Set layout
+#-----------------------------------------------------------------------
++ I Test (-f $[FVWM_USERDIR]/.layout) Read $[FVWM_USERDIR]/.layout
+
+AddToFunc StartFunction
+#-----------------------------------------------------------------------
 # start programs found in .autostart
 + I Test (Init) FuncAutoStartPrograms
 
@@ -1403,15 +1344,23 @@ AddToFunc FuncChangeDecor
 + I FuncRemoveAllButtons
 + I Read $[NS_THEMEDIR]/colorsets
 + I Read $[NS_THEMEDIR]/decor
-#+ I PipeRead 'sed -i --follow-symlinks "s/^InfoStoreAdd used_theme.*/InfoStoreAdd used_theme $0/" $FVWM_USERDIR/config' 
-+ I PipeRead 'sed -i --follow-symlinks "s/^InfoStoreAdd used_theme.*/InfoStoreAdd used_theme $0/" $FVWM_USERDIR/.customize' 
++ I FuncWriteInfoStoreToFileAndSet used_theme $0 $[FVWM_USERDIR]/.settings
++ I ReloadLayoutParts $[infostore.used_layout]
+#+ I ReloadLayoutParts
 
 
-DestroyFunc FuncWriteToCustomize
-AddToFunc   FuncWriteToCustomize
-+ I Test (!f $FVWM_USERDIR/.customize) PipeRead 'touch $FVWM_USERDIR/.customize'
-+ I PipeRead `case $0 in \
-		UsedTheme) sed -i --follow-symlinks "s/^InfoStoreAdd used_theme.*/InfoStoreAdd used_theme $1/" $FVWM_USERDIR/.customize;;
+#-----------------------------------------------------------------------
+# Update/Create an InfoStore variable in a file
+# FuncWriteInfoStoreToFile <var_name> <var_value> <file>
+#-----------------------------------------------------------------------
+DestroyFunc FuncWriteInfoStoreToFileAndSet
+AddToFunc   FuncWriteInfoStoreToFileAndSet
++ I PipeRead 'if [ `grep -c $0 $2` -gt 0 ] ; then \
+		sed -i --follow-symlinks "s/^InfoStoreAdd $0.*/InfoStoreAdd $0 $1/" $2; \
+	      else \
+		sed -i --follow-symlinks "$ a\InfoStoreAdd $0 $1" $2; \
+	      fi;'
++ I InfoStoreAdd $0 $1
 
 #-----------------------------------------------------------------------
 # Prints a message in .xsession-errors
@@ -1427,44 +1376,44 @@ AddToFunc   FuncPrintDbgMsg
 DestroyFunc FuncAppCheck
 AddToFunc   FuncAppCheck
 # xterm
-+ I Test (!x xterm) FuncPrintDbgMsg "[AppCheck]" "xterm (view, edit) not installed"
++ I Test (!x xterm) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "xterm (view, edit) not installed"
 # xclock
-+ I Test (!x xclock) FuncPrintDbgMsg "[AppCheck]" "xclock (date & time) not installed"
++ I Test (!x conky) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "conky (clock, cpu) not installed"
 # default terminal
-+ I Test (!x $[infostore.default_terminal]) FuncPrintDbgMsg "[AppCheck]" "default terminal $[infostore.default_terminal] not installed"
++ I Test (!x $[infostore.default_terminal]) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "default terminal $[infostore.default_terminal] not installed"
 # default browser
-+ I Test (!x $[infostore.default_browser]) FuncPrintDbgMsg "[AppCheck]" "default browser $[infostore.default_browser] not installed"
++ I Test (!x $[infostore.default_browser]) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "default browser $[infostore.default_browser] not installed"
 # xscreensaver
-+ I Test (!x xscreensaver-command) FuncPrintDbgMsg "[AppCheck]" "xscreensaver (lock) not installed"
++ I Test (!x xscreensaver-command) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "xscreensaver (lock) not installed"
 # Esetroot in package eterm
-+ I Test (!x Esetroot) FuncPrintDbgMsg "[AppCheck]" "eterm (esetroot for background) not installed"
++ I Test (!x Esetroot) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "eterm (esetroot for background) not installed"
 # import in package imagemagick
-+ I Test (!x import) FuncPrintDbgMsg "[AppCheck]" "imagemagick (import for screenshot, thumbs) not installed"
++ I Test (!x import) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "imagemagick (import for screenshot, thumbs) not installed"
 # stalonetray
-+ I Test (!x stalonetray) FuncPrintDbgMsg "[AppCheck]" "stalonetray (systray) not installed"
++ I Test (!x stalonetray) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "stalonetray (systray) not installed"
 # systray app volumeicon
-+ I Test (!x volumeicon) FuncPrintDbgMsg "[AppCheck]" "volumeicon (systray volume control) not installed"
++ I Test (!x volumeicon) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "volumeicon (systray volume control) not installed"
 # systray app fdpowermon
-+ I Test (!x fdpowermon) FuncPrintDbgMsg "[AppCheck]" "fdpowermon (systray pm control) not installed"
++ I Test (!x fdpowermon) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "fdpowermon (systray pm control) not installed"
 # systray app nm-applet
-+ I Test (!x nm-applet) FuncPrintDbgMsg "[AppCheck]" "nm-applet (systray network control) not installed"
++ I Test (!x nm-applet) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "nm-applet (systray network control) not installed"
 # systray app bluetooth-applet
-+ I Test (!x bluetooth-applet) FuncPrintDbgMsg "[AppCheck]" "bluetooth-applet (systray bluetooth-applet) not installed"
++ I Test (!x bluetooth-applet) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "bluetooth-applet (systray bluetooth-applet) not installed"
 # Suspend, hibernate pm-is-supported
-+ I Test (!x pm-is-supported) FuncPrintDbgMsg "[RequiredAppCheck]" "pm-utils (suspend, hibernate) not installed"
++ I Test (!x pm-is-supported) FuncPrintDbgMsg "[Fvwm-Nightshade][AppCheck]" "pm-utils (suspend, hibernate) not installed"
 
 #-----------------------------------------------------------------------
 # Starts a system tray "module"
 #-----------------------------------------------------------------------
-DestroyFunc FuncStartSysTray
-AddToFunc   FuncStartSysTray
-+ I Test (x stalonetray) PipeRead `echo Exec exec stalonetray \
-                                  -d all \
-                                  -geometry 1x1+$(($[vp.width]/4*3))+1 \
-                                  --grow-gravity SE \
-                                  --kludges fix_window_pos,force_icons_size,use_icons_hints \
-                                  --background="#7a7664"`
-+ I TestRc (Match) Wait stalonetray
+#DestroyFunc FuncStartSysTray
+#AddToFunc   FuncStartSysTray
+#+ I Test (x stalonetray) PipeRead `echo Exec exec stalonetray \
+#                                  -d all \
+#                                  -geometry 1x1+$(($[vp.width]/4*3))+1 \
+#                                  --grow-gravity SE \
+#                                  --kludges fix_window_pos,force_icons_size,use_icons_hints \
+#                                  --background="#7a7664"`
+#+ I TestRc (Match) Wait stalonetray
 
 #-----------------------------------------------------------------------
 # Starts system tray applets like network, sound, etc
@@ -1487,7 +1436,8 @@ AddToFunc   FuncStartSystrayApplets
 #-----------------------------------------------------------------------
 DestroyFunc FuncAutoStartPrograms
 AddToFunc FuncAutoStartPrograms
-+ I Exec exec start-programs.sh
++ I Test (-f $[FVWM_USERDIR]/.autostart) \
+    Exec exec $[FVWM_USERDIR]/bin/start-programs Autostart $[FVWM_USERDIR]/.autostart
 
 #-----------------------------------------------------------------------
 # Starts a FvwmConsole
@@ -1548,7 +1498,8 @@ AddToFunc   FuncWindowCreateScreenshot
 DestroyFunc FuncDesktopCreateScreenshot
 AddToFunc   FuncDesktopCreateScreenshot
 + I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%k%M%S`.png"'
-+ I Test (x import) PipeRead 'import -window root $[picpath]'
+#+ I Test (x import) PipeRead 'import -window root $[picpath]'
++ I Test (x import) PipeRead 'sleep $0; import -window root -quality 100 -silent $[infostore.picpath]'
 + I TestRc (Match)  FuncShowMessage "$[gt.Screenshot Info for the desktop]" \
                                     "Screenshot created: $[infostore.picpath]"
 + I TestRc (!Match) FuncShowMessage "$[gt.Screenshot Info for the desktop]" \
@@ -2119,11 +2070,13 @@ AddToMenu   MenuConfiguration
 + "$[gt.Sc&reen Saver]%menu/display.xpm%"      			Popup MenuXScreenSaver
 + "$[gt.&Decoration]%menu/themes.xpm%"     	    		Popup MenuDecoration
 + "$[gt.Fvwm Form &Defaults]%menu/configuration.xpm%"  		Module FvwmForm FvwmForm-Form
++ "$[gt.Fvwm-&Nightshade Setup]%$[FVWM_USERDIR]/artwork/nightshade_16x16.png%"  FvwmForm FvwmForm-BaseSetup
 + "$[gt.&System Bell]%menu/sound.xpm%"                		FvwmScript FvwmScript-BellSetup
 + "$[gt.&Screen]%menu/display.xpm%"            			FvwmScript FvwmScript-ScreenSetup
 + "" Nop
 + "$[gt.&Show Colorsets]%menu/colors.xpm%"                   	FuncFvwmShowColorsets
 + "$[gt.&Tail .xsession-errors]%menu/information.xpm%" 		FuncViewFileTail ".xsession-errors" $[HOME]/.xsession-errors
+
 
 #-----------------------------------------------------------------------
 # Sub menu for keyboard configuration
@@ -2383,7 +2336,7 @@ DestroyMenu MenuWindowUtility
 AddToMenu   MenuWindowUtility
 + "$[gt.Window Utility]" Title
 + "%menu/window.xpm%$[gt.Create &Screenshot]	Shift-Ctrl+Print"	Pick (CirculateHit) FuncWindowCreateScreenshot
-+ "%menu/display.xpm%$[gt.&Desktop Screenshot]	Alt+Print"           	Pick (CirculateHit) FuncDesktopCreateScreenshot
++ "%menu/display.xpm%$[gt.&Desktop Screenshot]	Alt+Print"           	FuncDesktopCreateScreenshot 5
 + "" Nop
 + "%menu/window-raise.xpm%$[gt.Stays On &Top]"			Pick (CirculateHit) Layer 0 6
 + "%menu/window-raise.xpm%$[gt.Layer &+1]"                 	Pick (CirculateHit) Layer +1
@@ -2405,3 +2358,4 @@ AddToMenu   MenuDesktopOps
 + "Help%menu/help.xpm%"	 				    	Popup MenuHelp
 + "" Nop
 + "$[gt.Window Operations]"     				Popup MenuWindowOpsFull
+

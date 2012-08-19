@@ -159,7 +159,8 @@ Colorset 12 VGradient 255 2 #6794a7 70 #7398aa 30 #90b0bd, fg grey95, NoShape
 # fg = font color
 # bg = background color
 #-----------------------------------------------------------------------
-Colorset 13 fg black, bg #7398aa, hi black, sh gray40, Plain
+#Colorset 13 fg black, bg #7398aa, hi black, sh gray40, Plain
+Colorset 13 VGradient 255 2 #b3d2de 50 #a1c5d3 50 #75aec3, fg black, bg #75aec3, NoShape
 
 #-----------------------------------------------------------------------
 # default #2

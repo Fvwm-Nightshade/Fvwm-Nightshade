@@ -1,0 +1,132 @@
+#-----------------------------------------------------------------------
+# File:		Vertical
+# Version:	1.0.0
+# Licence: 	GPL 2
+#
+# Description:	Layout of object positions on desktop
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+# Created:	08/16/2012
+# Changed:	<MM/DD/YYYY>
+#-----------------------------------------------------------------------
+# Top right
+#
+# +--------+
+# |        | Panel
+# +--------+
+# +--------+
+# |        | Pager
+# +--------+
+# +--------+
+# |        | IconManager
+# +--------+
+#
+#-----------------------------------------------------------------------
+
+########################################################################
+#                        Positioning
+########################################################################
+
+
+#=======================================================================
+# FvwmButtons Panel
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Panel width
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd panel_width `perl -e 'printf \"%.0f\",$[vp.width]/(8*$[infostore.ratio])'`"
+
+#-----------------------------------------------------------------------
+# Panel height
+#-----------------------------------------------------------------------
+InfoStoreAdd panel_rows 20
+PipeRead "echo InfoStoreAdd row_height `perl -e 'printf \"%.0f\",$[vp.height]/(83*$[infostore.ratio])'`"
+PipeRead 'echo InfoStoreAdd panel_height $(($[infostore.row_height]*$[infostore.panel_rows]))'
+
+#-----------------------------------------------------------------------
+# Panel geometry
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd panel_geometry $[infostore.panel_width]x$[infostore.panel_height]-0+0'
+
+
+#=======================================================================
+# Pager
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Set the desk top size in units of physical screen size
+#
+#   +-----+-----+
+#   |     |     |
+#   +-----+-----+
+#   |     |     |
+#   +-----+-----+
+#-----------------------------------------------------------------------
+DeskTopSize 2x2
+
+#-----------------------------------------------------------------------
+# actual pager height
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd pager_height `perl -e 'printf \"%.0f\",$[vp.height]/(10*$[infostore.ratio])'`"
+
+
+#-----------------------------------------------------------------------
+# FvwmPager geometry
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd pager_geometry $[infostore.panel_width]x$[infostore.pager_height]-0+$(($[infostore.panel_height]+4))'
+
+
+#=======================================================================
+# Icon Manager (WinList per Page)
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# GlobalIconMan Button Geometry
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd iconman_button_geometry $[infostore.panel_width]x0'
+
+#-----------------------------------------------------------------------
+# GlobalIconMan Manager Geometry
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd iconman_manager_geometry 1x0-0+$(($[infostore.panel_height]+$[infostore.pager_height]+8))'
+
+
+#=======================================================================
+# Others
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Define bands at the edge of the screen. It is used to compute the
+# Working Area: EwmhBaseStruts left right top bottom 
+#-----------------------------------------------------------------------
+PipeRead 'echo EwmhBaseStruts 0 $(($[infostore.panel_width])) 0 0'
+
+
+
+AddToFunc StartFunction
+# start window list module
++ I Test (f $[NS_MODULEDIR]/GlobalIconMan) Read $[NS_MODULEDIR]/GlobalIconMan
++ I TestRc (Match) Module FvwmIconMan FvwmGlobalIconMan
+#-----------------------------------------------------------------------
+# start a Pager
++ I Test (f $[NS_MODULEDIR]/Pager) Read $[NS_MODULEDIR]/Pager
++ I TestRc (Match) Module FvwmPager
+#-----------------------------------------------------------------------
+# start horizontal panel
++ I Test Test (f $[NS_MODULEDIR]/VerticalPanel) Read $[NS_MODULEDIR]/VerticalPanel
++ I TestRc (Match) Module FvwmButtons VerticalPanel
+#-----------------------------------------------------------------------
+# start systray applets
+#+ I Wait stalonetray
+#+ I TestRc (Match) FuncStartSystrayApplets
+#-----------------------------------------------------------------------
+
+
+DestroyFunc ReloadLayoutParts
+AddToFunc   ReloadLayoutParts
++ I PipeRead '$FVWM_USERDIR/bin/built-trayapplist $FVWM_USERDIR/.test.log $FVWM_USERDIR/.trayapplist'
++ I Read $[NS_MODULEDIR]/HorizontalPanel
++ I FuncRestartModuleByAlias FvwmButtons VerticalPanel
++ I Wait stalonetray
++ I Exec exec $[FVWM_USERDIR]/bin/start-programs reload_applets $[FVWM_USERDIR]/.trayapplist

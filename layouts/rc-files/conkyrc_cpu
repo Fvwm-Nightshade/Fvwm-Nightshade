@@ -1,0 +1,67 @@
+# Update interval in seconds
+update_interval 1
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop (required in nautilus)
+background no
+own_window yes
+own_window_class conky_cpu
+own_window_transparent yes
+own_window_argb_value 255
+own_window_type normal
+#own_window_hints undecorated,skip_taskbar,skip_pager
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+#minimum_size 1 1
+
+# Draw shades?
+draw_shades no
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around graph
+draw_graph_borders  no
+
+# Stippled borders?
+stippled_borders 0
+
+# border margins
+border_inner_margin 0
+border_outer_margin 0
+
+# border width
+border_width 0
+
+# Default colors and also border colors
+default_color B1B1B1 #default text color
+default_shade_color black
+#default_outline_color white
+#own_window_colour black
+
+# Text alignment
+alignment top_left
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+#gap_x 10
+#gap_y 1
+
+# Subtract file system buffers from used memory?
+no_buffers no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+TEXT
+# empty, cause set via commandline

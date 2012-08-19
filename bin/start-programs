@@ -1,0 +1,44 @@
+#-----------------------------------------------------------------------
+# File:		start-programs.sh
+# Version:	3.0.0
+# Licence: 	GPL 2
+#
+# Description:	shell script to execute command strings which will be 
+#		found in <infile>
+#
+# Parameters:	start-programs <type> <infile>
+#
+# Remarks:	<type> is a name printed in [] in ~/.xsessions-errors
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+# Created:	08/13/2012
+# Changed:	
+#-----------------------------------------------------------------------
+
+#!/bin/bash
+
+type=$1
+infile=$2
+
+# check whether infile exist
+if [ -f $infile ]
+then
+    # read startup file
+    commands="$(cat $infile)"
+    while IFS= read -r
+    do
+	echo $REPLY
+	# check if prog already running
+	prog_started=`ps -ef|grep -c "$REPLY" |grep -v grep`
+	if [ $prog_started -gt 1 ]
+	then
+	    echo [Fvwm-Nightshade][$type]: \'$REPLY\' is already running. Skipping. >> ~/.xsession-errors
+	else
+	    echo [Fvwm-Nightshade][$type]: \'$REPLY\' not running. Will be started now. >> ~/.xsession-errors
+	    $REPLY &
+	    sleep 1
+	fi
+    done <<< "$commands"
+    unset IFS
+fi
+exit 0
