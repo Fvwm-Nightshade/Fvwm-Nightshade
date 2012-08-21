@@ -6,6 +6,7 @@ History:
   - bin/fvwm-nightshade: startup script
   - templates/fvwm-nightshade.desktop: login script
   - doc/License: GPL2
+- add lost About box
 
 07/31/2012 V 0.5
 - roll out some infostore variables to .settings so that an update of the
