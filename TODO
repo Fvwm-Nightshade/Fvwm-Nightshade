@@ -1,32 +1,65 @@
 TODO:
 -----
 
-Themes:
-    - done: rework of some colorsets
-    - done: create theme templates
-    - new themes
+Layouts:
+- Gnome 2
+  - Panel above and below
+- Windows 7
+  - Panel above or below
+    -> transparent and will hide: http://www.youtube.com/watch?v=2hVwVqEXtCw
+	
+Design:
+- 1 vector design (idea always available ^^)
+- other new designs
+- Nightshade icon set (svg & png)
+- Splash screen(s)
+  -> without a background (png)
+  -> with a background but animated (gif)
 
-Config tools:
-    - implement Session manager lxsession and lxsession-edit
-    - create a GUI for the core componnents like pager dimension, bindings,
-      focus, etc
+Features:
+- Session Management
+  -> See Fvwm-Crystal
+  -> use LxSession?
+- Composite Manager for real transparency
+  - Cairo -> http://www.youtube.com/watch?v=YBbeFCYdHno
+  - xcompmgr
+- localisation (de -> po files) for manpages, menus, help windows
+- own config folder: ~/.fvwm-nightshade
+- icons on desktop with idesk (tools: http://icecc.sourceforge.net/idesktools.html)
+- own config tool for the most important options (gtk2, perl or python)
+- applets -> minimoids (http://box-look.org/content/show.php?content=137027)
+  -> must be rewritten to fit into FNS (svgs or use default icons, more configurable, ...)
 
-Artwork:
-    - create wallpapers and other stuff for Nightshade identity
-    
-General:
-    - adapt FvwmScript-PersonalMenu to work with fvwm-xdg-menu.py menu entries
-      or create a new GUI tool based on Gtk+-perl
-    - create a Msg box for Fvwm Nightshade like in Fvwm Crystal
-    - done: create comment headers for files
-    - cleanup code
-    - done: create a header with name, version, license, description, etc
-    - done: add header to all files
+Documentation:
+- F1 help (asciidoc for html & manpage)
+- Wiki on Github (also asciidoc) with helps, screenshots, etc
+- NEWS, INSTALL, ...
 
-modules:
-    - create a flexible solution for "modules" like pagers, scripts, etc
+Package Management:
+- deb
+  -> http://www.debian.org/doc/manuals/maint-guide/index.de.html
+  -> http://www.debian.org/doc/manuals/debian-faq/ch-pkg_basics.de.html
+- rpm
+  -> http://www.linux-community.de/Internal/Artikel/Print-Artikel/LinuxUser/2006/07/RPM-Pakete-selbst-erstellen
+- Makefile for make-install/uninstall (tar.gz file for no package installation)
+- Suse build service for Repo
+  -> http://de.opensuse.org/openSUSE:Build_Service_Anleitung
 
-Appearance:
-    - implementing xcompmgr
-    - ring menu from NickFortune -> sk him for sourcecode
-    - other design for default desktop (Fvwmbuttons with clock and stalonetray)
+Others:
+- Done: fvwm-nightshade.desktop file for login managers
+
+Requirements:
+- fvwm >= 2.6.6 (cvs)
+- stalonetray >= 0.8
+- conky
+- wm-icons
+- xterm
+- xscreensaver
+- eterm (Esetroot for background)
+- imagemagick (convert for fvwm-menu-desktop, screenshots, ...)
+- network manager (nm-applet for systray)
+- python-xdg (for fvwm-menu-desktop)
+- Volume Icon
+- LxApearance
+- qtconfig (3/4)
+- fdpowermon
