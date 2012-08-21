@@ -1,0 +1,29 @@
+#-----------------------------------------------------------------------
+# File:		fvwm-nightshade
+# Version:	1.0.0
+# Licence: 	GPL 2
+#
+# Description:	startup script for Fvwm-Nightshade based on FVWM-Crystal's
+#               startup script.
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+# Created:	08/21/2012
+# Changed:	
+#-----------------------------------------------------------------------
+#!/bin/sh
+
+configfile="$HOME/fvwm-nightshade/config"
+
+if [ -f "$HOME/.fvwm-nightshade/config" ]
+then
+	configfile=$HOME/.fvwm-nightshade/config;
+	break;
+elif [ -f "`dirname ${0}`/../share/fvwm-nightshade/fvwm/config" ]
+then
+	configfile="`dirname ${0}`/../share/fvwm-nightshade/fvwm/config";
+	break;
+fi
+
+exec fvwm -f $configfile $@
+
+

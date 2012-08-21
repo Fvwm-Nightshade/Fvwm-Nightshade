@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5
+InfoStoreAdd ns_version 0.5.1
 # Copyright (C) 2012
 #
 # Authors:
@@ -1274,7 +1274,7 @@ AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # Set layout
 #-----------------------------------------------------------------------
-+ I Test (-f $[FVWM_USERDIR]/.layout) Read $[FVWM_USERDIR]/.layout
++ I Read $[FVWM_USERDIR]/.layout
 
 AddToFunc StartFunction
 #-----------------------------------------------------------------------
@@ -1956,6 +1956,7 @@ AddToMenu   MenuHelp
 + "%menu/www.xpm%$[gt.FVWM Web Pages]"			Popup MenuFvwmWebPages
 + "%menu/help.xpm%$[gt.Other Helps]"			Popup MenuHelpOthers
 + "%menu/information.xpm%$[gt.Show FVWM Version]"	FuncShowMessage "Fvwm Version Info" "$[version.line]"
++ "%$[FVWM_USERDIR]/artwork/nightshade_16x16.png%$[gt.About Nightshade]"        Module FvwmForm FvwmForm-About
 
 #-----------------------------------------------------------------------
 # Dynamic other help application sub menu for miscellaneous help tools

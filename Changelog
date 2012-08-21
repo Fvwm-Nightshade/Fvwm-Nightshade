@@ -1,4 +1,12 @@
 History:
+08/21/2012 V 0.5.1
+- add
+  - COPYING: GPL2
+  - AUTHORS: List of Authors and contributors
+  - bin/fvwm-nightshade: startup script
+  - templates/fvwm-nightshade.desktop: login script
+  - doc/License: GPL2
+
 07/31/2012 V 0.5
 - roll out some infostore variables to .settings so that an update of the
   config won't destroy user settings
