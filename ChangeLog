@@ -1,4 +1,9 @@
 History:
+08/21/2012 V 0.5.2
+- change structure from user to system configuration:
+  - main part is now located in $prefix/share/fvwm-nightshade
+  - user part is now located in ~/.fvwm-nightshade
+
 08/21/2012 V 0.5.1
 - add
   - COPYING: GPL2
@@ -15,7 +20,6 @@ History:
 - replace xclock with conky (because of transparent background)
 - fix bug that FuncDesktopCreateScreenshot creates now the whole desktop
   not only the active window
-
 
 07/31/2012 V 0.4.5
 - update relevant parts related to Fvwm Default Config V 0.21.7

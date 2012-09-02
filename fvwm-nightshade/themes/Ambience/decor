@@ -1,17 +1,16 @@
 ########################################################################
 # File:		decor
-# Version:	0.1.1
+# Version:	0.1.2
 # Licence: 	GPL 2
 #
-# Description:	decor parts (titlebar, buttons, menus) of Air theme
+# Description:	decor parts (titlebar, buttons, menus) of Ambience theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	06/08/2012
-# Changed:	07/27/2012
+# Changed:	09/01/2012
 ########################################################################
-Piperead "echo InfoStoreAdd button_width `perl -e 'printf \"%.0f\",16*$[infostore.ratio]'`"
-Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",18*$[infostore.ratio]'`"
-#InfoStoreAdd button_width 18
+
+Piperead "echo InfoStoreAdd button_width `perl -e 'printf \"%.0f\",20*$[infostore.ratio]'`"
 
 #***********************************************************************
 # General
@@ -24,9 +23,10 @@ Style * HilightColorset 2
 Style * BorderColorset 3
 Style * HilightBorderColorset 4
 
-Style *	Button 1, Button 2, Button 3, Button 4, Button 6
+Style *	Button 1, Button 2, Button 4, Button 6
 Style * IconTitleColorset 10
 Style * HilightIconTitleColorset 11
+
 
 DestroyDecor Default
 AddToDecor Default
@@ -35,8 +35,7 @@ AddToDecor Default
 #***********************************************************************
 + TitleStyle AllActive		Colorset 2 -- Flat
 + TitleStyle AllInactive 	Colorset 3 -- Flat
-+ TitleStyle  LeftJustified Height $[infostore.titlebar_height] -- flat
-#+ TitleStyle  LeftJustified Height 22 -- flat
++ TitleStyle  LeftJustified Height $[infostore.button_width] -- flat
 
 #***********************************************************************
 # Border
@@ -60,31 +59,25 @@ AddToDecor Default
 + ButtonStyle 1 MiniIcon
 
 + ButtonStyle 2 Active		Colorset 2
-+ ButtonStyle 2 ActiveUp	Pixmap $[NS_THEMEDIR]/images/close.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 2 ActiveDown	Pixmap $[NS_THEMEDIR]/images/close_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 ActiveUp	Pixmap $[FNS_THEMEDIR]/images/close.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 ActiveDown	Pixmap $[FNS_THEMEDIR]/images/close_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 + ButtonStyle 2 Inactive	Colorset 3
-+ ButtonStyle 2 InactiveUp	Pixmap $[NS_THEMEDIR]/images/close_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-
-+ ButtonStyle 3 Active		Colorset 2
-+ ButtonStyle 3 ActiveUp	Pixmap $[NS_THEMEDIR]/images/desk.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 3 ActiveDown	Pixmap $[NS_THEMEDIR]/images/desk_down_1.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 3 Inactive	Colorset 3
-+ ButtonStyle 3 InactiveUp	Pixmap $[NS_THEMEDIR]/images/desk_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 InactiveUp	Pixmap $[FNS_THEMEDIR]/images/close_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 
 + ButtonStyle 4 Active		Colorset 2
-+ ButtonStyle 4 ActiveUp	Pixmap $[NS_THEMEDIR]/images/maximize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 4 ActiveDown	Pixmap $[NS_THEMEDIR]/images/maximize_down_1.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 4 ActiveUp	Pixmap $[FNS_THEMEDIR]/images/maximize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 4 ActiveDown	Pixmap $[FNS_THEMEDIR]/images/maximize_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 + ButtonStyle 4 Inactive	Colorset 3
-+ ButtonStyle 4 InactiveUp	Pixmap $[NS_THEMEDIR]/images/maximize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 4 InactiveUp	Pixmap $[FNS_THEMEDIR]/images/maximize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 
 + ButtonStyle 6 Active		Colorset 2
-+ ButtonStyle 6 ActiveUp	Pixmap $[NS_THEMEDIR]/images/minimize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 6 ActiveDown	Pixmap $[NS_THEMEDIR]/images/minimize_down_1.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 6 ActiveUp	Pixmap $[FNS_THEMEDIR]/images/minimize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 6 ActiveDown	Pixmap $[FNS_THEMEDIR]/images/minimize_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 + ButtonStyle 6 Inactive	Colorset 3
-+ ButtonStyle 6 InactiveUp	Pixmap $[NS_THEMEDIR]/images/minimize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 6 InactiveUp	Pixmap $[FNS_THEMEDIR]/images/minimize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 
 + ButtonStyle All -- UseTitleStyle
-+ ButtonStyle All Active (-- flat) Inactive (-- flat)
++ ButtonStyle All ActiveUp (-- flat) Inactive (-- flat)
 
 #=======================================================================
 # Menus
@@ -156,11 +149,11 @@ MenuStyle winops VerticalItemSpacing 1 2, VerticalTitleSpacing 1 2
 
 # Left button (1)
 # Button 1 shows MenuWindowOpsTrimmed menu <- click
-Mouse 1 	3      	A	Menu MenuWindowOpsTrimmed
+Mouse 1 	1      	A	Menu MenuWindowOpsTrimmed
 # Button 2 shows Move to page menu <- click
-Mouse 2       	3      	A     	Menu MenuWindowMoveTo
+Mouse 2       	1      	A     	Menu MenuWindowMoveTo
 # Button 3 shows WindowOps group menu <- click
-Mouse 3       	3 	A	Menu MenuWindowGroupOps
+Mouse 3       	1 	A	Menu MenuWindowGroupOps
 
 # Close button (2)
 # Every button close window <- click
@@ -186,7 +179,7 @@ Mouse 3		6	A	FuncIconifySameResource toggle
 # Help info with SHIFT-CTRL-ALT to Window Button Pointer
 #-----------------------------------------------------------------------
 #     Button	Context Modifi 	Function
-Mouse 0		3	SCM	FuncShowMessage  "Left Button Bindings" \
+Mouse 0		1	SCM	FuncShowMessage  "Left Button Bindings" \
 "Mouse 1:  WindowOps menu" \
 "Mouse 2:  Move to page menu" \
 "Mouse 3:  WindowGroupOps menu"
@@ -209,9 +202,9 @@ Mouse 0		6	SCM	FuncShowMessage  "Minimize Button Bindings" \
 
 DestroyFunc FuncRemoveAllButtonBindings
 AddToFunc   FuncRemoveAllButtonBindings
-+ I Mouse 1 	3      	A	-
-+ I Mouse 2    	3      	A     	-
-+ I Mouse 3    	3 	A	-
++ I Mouse 1 	1      	A	-
++ I Mouse 2    	1      	A     	-
++ I Mouse 3    	1 	A	-
 + I Mouse 0 	2	A	-
 + I Mouse 1	4	A	-
 + I Mouse 2	4	A	-

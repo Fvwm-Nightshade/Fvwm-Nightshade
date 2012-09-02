@@ -1,18 +1,18 @@
 #-----------------------------------------------------------------------
-# File:		start-programs.sh
-# Version:	3.0.0
+# File:		fns-start-programs
+# Version:	3.0.1
 # Licence: 	GPL 2
 #
 # Description:	shell script to execute command strings which will be 
 #		found in <infile>
 #
-# Parameters:	start-programs <type> <infile>
+# Parameters:	fns-start-programs <type> <infile>
 #
 # Remarks:	<type> is a name printed in [] in ~/.xsessions-errors
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/13/2012
-# Changed:	
+# Changed:	08/23/2012
 #-----------------------------------------------------------------------
 
 #!/bin/bash

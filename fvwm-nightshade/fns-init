@@ -1,0 +1,48 @@
+#-----------------------------------------------------------------------
+# Prints a message in .xsession-errors
+#-----------------------------------------------------------------------
+DestroyFunc FuncPrintDbgMsg
+AddToFunc   FuncPrintDbgMsg
++ I PipeRead `echo "[Fvwm-Nightshade][$0]: $1" >> ${HOME}/.xsession-errors`
+
+#-----------------------------------------------------------------------
+# This function looks for specified file in the user's directory (~/.fvwm-nightshade/),
+# then system directory (/usr/[local]/share/fvwm-nightshade) and loads 
+# the first one it finds. 
+#-----------------------------------------------------------------------
+DestroyFunc Load
+AddToFunc Load
++ I FuncPrintDbgMsg 'LoadFunction' $0
++ I Test (f $[FVWM_USERDIR]/$0) FuncPrintDbgMsg 'LoadFunction' '$0 found in userdir'
++ I Test (f $[FVWM_USERDIR]/$0) Read $[FVWM_USERDIR]/$0
++ I TestRc (Match) Break
++ I Test (f $[FNS_SYSTEMDIR]/$0) FuncPrintDbgMsg 'LoadFunction' '$0 found in systemdir' 
++ I Test (f $[FNS_SYSTEMDIR]/$0) Read $[FNS_SYSTEMDIR]/$0
++ I TestRc (Match) Break
++ I Test (f $0) FuncPrintDbgMsg 'LoadFunction' '$0 found'
++ I Test (f $0) Read $0
++ I TestRc (!Match) FuncPrintDbgMsg 'LoadFunction' '$0 not found'
+
+#-----------------------------------------------------------------------
+# This function set FNS_THEMEDIR. First it looks in the user's directory (~/.fvwm-nightshade/),
+# then system directory (/usr/[local]/share/fvwm-nightshade) if the used theme is there
+#-----------------------------------------------------------------------
+DestroyFunc FuncSetThemeDir
+AddToFunc FuncSetThemeDir
++ I Test (f $[FVWM_USERDIR]/themes/$0) SetEnv FNS_THEMEDIR $[FVWM_USERDIR]/themes/$0
++ I TestRc (!Match) Test (f $[FNS_SYSTEMDIR]/themes/$0) SetEnv FNS_THEMEDIR $[FNS_SYSTEMDIR]/themes/$0
+
+#-----------------------------------------------------------------------
+# This function replaces the Restart function of Fvwm to ensure that
+# while restarting the Fvwm-Nightshade init script will launched also
+#-----------------------------------------------------------------------
+DestroyFunc FuncRestart
+AddToFunc FuncRestart
++ I Restart fvwm -f $[FNS_INITFILE]
+
+#-----------------------------------------------------------------------
+# Load main config
+#-----------------------------------------------------------------------
+Load config
+
+

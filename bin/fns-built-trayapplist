@@ -1,19 +1,19 @@
 #-----------------------------------------------------------------------
-# File:		built-trayapplist.sh
-# Version:	1.0.0
+# File:		fns-built-trayapplist.sh
+# Version:	1.0.1
 # Licence: 	GPL 2
 #
 # Description:	shell script to generate a list of actual available
 #		applets in systray (stalonetray)
 #
-# Parameters:	built-trayapplist.sh <stalonetray_logfile> <applist_file>
+# Parameters:	fns-built-trayapplist.sh <stalonetray_logfile> <applist_file>
 #
 # Remarks:	stalonetray must started with --log-level info and
 #		output redirected with 2>stalonetray_logfile
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/13/2012
-# Changed:	
+# Changed:	08/23/2012
 #-----------------------------------------------------------------------
 
 #!/bin/bash

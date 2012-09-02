@@ -13,12 +13,12 @@ InfoStoreAdd used_theme Ambience
 # Here the path to the actual theme will be set
 # Be changed dynamically via FuncChangeDecor
 #-----------------------------------------------------------------------
-SetEnv NS_THEMEDIR $[FVWM_USERDIR]/themes/$[infostore.used_theme]
+#SetEnv FNS_THEMEDIR themes/$[infostore.used_theme]
 
 #-----------------------------------------------------------------------
 # wallpaper directory path.
 #-----------------------------------------------------------------------
-InfoStoreAdd wallpaper_dir $[FVWM_USERDIR]/wallpapers
+InfoStoreAdd wallpaper_dir $[FNS_SYSTEMDIR]/wallpapers
 
 #-----------------------------------------------------------------------
 # default used font for all Fvwm parts

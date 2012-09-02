@@ -1,6 +1,7 @@
+#!/bin/sh
 #-----------------------------------------------------------------------
 # File:		fvwm-nightshade
-# Version:	1.0.0
+# Version:	1.0.1
 # Licence: 	GPL 2
 #
 # Description:	startup script for Fvwm-Nightshade based on FVWM-Crystal's
@@ -8,22 +9,20 @@
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/21/2012
-# Changed:	
+# Changed:	09/01/2012
 #-----------------------------------------------------------------------
-#!/bin/sh
 
-configfile="$HOME/fvwm-nightshade/config"
+initfile=`dirname ${0}`/../share/fvwm-nightshade/fns-init
 
-if [ -f "$HOME/.fvwm-nightshade/config" ]
+export FVWM_USERDIR=$HOME/.fvwm-nightshade
+export FNS_SYSTEMDIR=`dirname ${0}`/../share/fvwm-nightshade
+export FNS_INITFILE=$initfile
+
+if [ ! -d "$HOME/.fvwm-nightshade" ]
 then
-	configfile=$HOME/.fvwm-nightshade/config;
-	break;
-elif [ -f "`dirname ${0}`/../share/fvwm-nightshade/fvwm/config" ]
-then
-	configfile="`dirname ${0}`/../share/fvwm-nightshade/fvwm/config";
-	break;
+	mkdir $HOME/.fvwm-nightshade
 fi
 
-exec fvwm -f $configfile $@
+exec fvwm -f $initfile $@
 
 

@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		Vertical
-# Version:	1.0.0
+# Version:	1.0.1
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/16/2012
-# Changed:	<MM/DD/YYYY>
+# Changed:	08/23/2012
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -106,16 +106,18 @@ PipeRead 'echo EwmhBaseStruts 0 $(($[infostore.panel_width])) 0 0'
 
 AddToFunc StartFunction
 # start window list module
-+ I Test (f $[NS_MODULEDIR]/GlobalIconMan) Read $[NS_MODULEDIR]/GlobalIconMan
++ I Test (f $[FVWM_USERDIR]/modules/GlobalIconMan) Read $[FVWM_USERDIR]/modules/GlobalIconMan
++ I TestRc (!Match) Test (f $[FNS_SYSTEMDIR]/modules/GlobalIconMan) Read $[FNS_SYSTEMDIR]/modules/GlobalIconMan
 + I TestRc (Match) Module FvwmIconMan FvwmGlobalIconMan
 #-----------------------------------------------------------------------
 # start a Pager
-+ I Test (f $[NS_MODULEDIR]/Pager) Read $[NS_MODULEDIR]/Pager
-+ I TestRc (Match) Module FvwmPager
+#+ I Test (f $[NS_MODULEDIR]/Pager) Read $[NS_MODULEDIR]/Pager
+#+ I Test (f $[NS_MODULEDIR]/Pager) Read $[NS_MODULEDIR]/Pager
+#+ I TestRc (Match) Module FvwmPager
 #-----------------------------------------------------------------------
 # start horizontal panel
-+ I Test Test (f $[NS_MODULEDIR]/VerticalPanel) Read $[NS_MODULEDIR]/VerticalPanel
-+ I TestRc (Match) Module FvwmButtons VerticalPanel
+#+ I Test Test (f $[NS_MODULEDIR]/VerticalPanel) Read $[NS_MODULEDIR]/VerticalPanel
+#+ I TestRc (Match) Module FvwmButtons VerticalPanel
 #-----------------------------------------------------------------------
 # start systray applets
 #+ I Wait stalonetray
@@ -125,8 +127,8 @@ AddToFunc StartFunction
 
 DestroyFunc ReloadLayoutParts
 AddToFunc   ReloadLayoutParts
-+ I PipeRead '$FVWM_USERDIR/bin/built-trayapplist $FVWM_USERDIR/.test.log $FVWM_USERDIR/.trayapplist'
++ I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.test.log $FVWM_USERDIR/.trayapplist'
 + I Read $[NS_MODULEDIR]/HorizontalPanel
 + I FuncRestartModuleByAlias FvwmButtons VerticalPanel
 + I Wait stalonetray
-+ I Exec exec $[FVWM_USERDIR]/bin/start-programs reload_applets $[FVWM_USERDIR]/.trayapplist
++ I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist
