@@ -1,0 +1,50 @@
+Unfortunatelly no Makefile is available to install Fvwm-Nightshade easily.
+Also only the login via login manager is supported because .xinitrc not finished.
+
+so, if you're willing to test Fvwm-Nightshade follow the steps below:
+
+1. Get latest Fvwm from CVS:
+    - Open http://www.fvwm.org/documentation/dev_cvs.php
+    - Do the Initial Setup
+    - Checking Out Source Code:
+       cvs -d :pserver:anonymous@cvs.fvwm.org:/home/cvs/fvwm co -r branch-2_6 fvwm
+    - Building the Tree:
+       utils/configure_dev.sh
+2. Install all needed dev libs:
+     deb:
+       - mostly the libs in braces in the "no" lines at the end of the
+	 configure call
+       - also package libXt-dev if X11/Intrinsic.h not found while make
+     rpm:
+       - for full list see http://www.fvwm.org/documentation/dev_creating_rpms.php
+3. Compile Fvwm:
+     deb:
+       - make deb-inplace
+     rpm:
+       unfortunatelly the rpm way doesn't work at the moment. The following fix this
+       problem:
+       - rename bin/fvwm-menu-desktop-config.fpl into bin/fvwm-menu-desktop-config.fpl.in
+       - added in configure.ac after line 1766:
+	 bin/fvwm-menu-desktop-config.fpl
+       - do make rpm-dist
+4. Install Fvwm
+5. Install all required packages for Fvwm-Nightshade:
+    python-xdg, xterm, conky, xscreensaver, eterm, imagemagick, stalonetray, wm-icons
+6. Install Fvwm-Nighshade:
+    - download it from https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tree/develop
+    - unpack it and enter expanded folder
+    - change to root
+	cp bin/* /usr/local/bin/
+	cp system/fvwm-nightshade.desktop /usr/share/xsessions/
+	cp -r fvwm-nightshade/* /usr/local/share/
+	cp fvwm-nightshade/.settings /usr/local/share/fvwm-nightshade/
+	mkdir /usr/local/share/doc
+	mkdir /usr/local/share/doc/fvwm-nightshade
+	cp doc/* /usr/local/share/doc/fvwm-nightshade/
+	cp AUTHORS ChangeLog COPYING README /usr/local/share/doc/fvwm-nightshade/
+	cp fvwm/* /usr/share/fvwm/ (or where you've installed Fvwm)
+7. login into Fvwm-Nightshade, change the base settings and enjoy.
+
+If you have problems or suggestions send an email to fvwmnightshade@gmail.com
+
+Your Fvwm-nightshade team

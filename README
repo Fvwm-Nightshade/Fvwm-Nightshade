@@ -22,20 +22,46 @@ shows you what is possible with this powerful window manager.
 
 Featurelist of Fvwm Nightshade:
 ===============================
+- Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
 - Taskbar to show running apps per page
-- Systray (if stalonetray is installed)
-- date and time (if xclock is installed)
-- Lock desk & screensaver (if xscreensaver is installed)
+- Two layouts: horizontal and vertical (notfinished) with
+  - horizontal:
+			   Top
+    +--------+		+--------+		+--------+
+    |        |          |        |              |        |
+    +--------+		+--------+		+--------+
+    IconManager		   Pager		   Panel
+  
+  - vertical:
+    Top right
+    +--------+
+    |        | Panel
+    +--------+
+    +--------+
+    |        | Pager
+    +--------+
+    +--------+
+    |        | IconManager
+    +--------+
+  
+    Panel in both with:
+    - Menu
+    - Systray (stalonetray)
+    - cpu graph (conky)
+    - date and time (conky)
+
+
+- Lock desk & screensaver (xscreensaver)
 - Personal menu via FvwmScript-PersonalMenu
-- Background configurable with thumb browser (if imagemagick and eterm 
-  is installed)
+- Background configurable with thumb browser (imagemagick and eterm)
 - Animation control of window moves
 - Simple "Run" command with FvwmForm
 - Some themes/decors (Default, Ambience and Air). Can be changed on the
   fly without restart
+- Own themes and layouts can be created with templates (at the moment
+  only theme emplates available)
 - Autostart possibility (starting apps while startup)
-- Session management (in preperation)
 - A useful set of GUI tools to configure the global system (Gtk+, Qt, 
   mouse, keyboard, etc)
 - Help messages for mouse bindings in titlebar, window, corners, sides 
@@ -52,13 +78,14 @@ Featurelist of Fvwm Nightshade:
 
 Requirements:
 =============
-Required:	Fvwm >= 2.6.6, python-xdg, xterm, xclock, xscreensaver,
-		eterm, imagemagick, stalonetray, wm-icons
+Required:	Fvwm >= 2.6.6 (compiled with all features), python-xdg, 
+		xterm, conky, xscreensaver, eterm, imagemagick, 
+		stalonetray, wm-icons
 
 Recommended: 	gnomes network manager, Volume Icon
 
 Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-		qtconfig-qt3, qtconfig-qt4, xneurs
+		qtconfig for qt3, qtconfig for qt4, xneurs
   
 
 These systray apps started automatically, if stalonetray is installed:
@@ -211,17 +238,18 @@ Button 4/5: Switch with active window to page left/right with SHIFT-CTRL
 
 Installation
 ============
-Use the install.sh found in the root path of the Fvwm-Nightshade package
+Makefile for installation is in progress. For Install Fvwm-Nightshade by
+hand read the INSTALL file.
 
 
 Bugs and Feature requests
 =========================
 Fvwm-Nightshade is young project. Bugs are possible. We try to avoid 
 them but nobody is perfect ... So, if you find one or have ideas, submit
-them under https://github.com/ThomasFunk/Fvwm-Nightshade/issues
+them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues
 
 
-Enjoy our work and hopefully you love Fvwm-Nightshade as we do ;-)
+Enjoy our work and hopefully you love Fvwm-Nightshade as we do :-)
 
 
 Team
