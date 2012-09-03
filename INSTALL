@@ -36,12 +36,11 @@ so, if you're willing to test Fvwm-Nightshade follow the steps below:
     - change to root
 	cp bin/* /usr/local/bin/
 	cp system/fvwm-nightshade.desktop /usr/share/xsessions/
-	cp -r fvwm-nightshade/* /usr/local/share/
-	cp fvwm-nightshade/.settings /usr/local/share/fvwm-nightshade/
+	cp -r fvwm-nightshade /usr/local/share/
 	mkdir /usr/local/share/doc
 	mkdir /usr/local/share/doc/fvwm-nightshade
 	cp doc/* /usr/local/share/doc/fvwm-nightshade/
-	cp AUTHORS ChangeLog COPYING README /usr/local/share/doc/fvwm-nightshade/
+	cp AUTHORS ChangeLog COPYING README INSTALL /usr/local/share/doc/fvwm-nightshade/
 	cp fvwm/* /usr/share/fvwm/ (or where you've installed Fvwm)
 7. login into Fvwm-Nightshade, change the base settings and enjoy.
 
