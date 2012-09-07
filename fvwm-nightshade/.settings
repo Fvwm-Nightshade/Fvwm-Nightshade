@@ -1,3 +1,15 @@
+#-----------------------------------------------------------------------
+# File:		.settings
+# Version:	1.0.2
+# Licence: 	GPL 2
+#
+# Description:	base settings for Fvwm-Nighshade
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+# Created:	08/11/2012
+# Changed:	09/05/2012
+#-----------------------------------------------------------------------
+
 #***********************************************************************
 # Environment settings
 #***********************************************************************
@@ -18,7 +30,12 @@ InfoStoreAdd used_theme Ambience
 #-----------------------------------------------------------------------
 # wallpaper directory path.
 #-----------------------------------------------------------------------
-InfoStoreAdd wallpaper_dir $[FNS_SYSTEMDIR]/wallpapers
+InfoStoreAdd wallpaper_dir $[FNS_SYSTEMDIR]/artwork/wallpapers
+
+#-----------------------------------------------------------------------
+# Banner image for FvwmBanner
+#-----------------------------------------------------------------------
+InfoStoreAdd used_banner $[FNS_SYSTEMDIR]/artwork/splashs/splash_fns_small.png
 
 #-----------------------------------------------------------------------
 # default used font for all Fvwm parts

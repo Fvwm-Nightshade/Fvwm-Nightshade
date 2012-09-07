@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		fns-start-programs
-# Version:	3.0.1
+# Version:	3.0.2
 # Licence: 	GPL 2
 #
 # Description:	shell script to execute command strings which will be 
@@ -8,11 +8,11 @@
 #
 # Parameters:	fns-start-programs <type> <infile>
 #
-# Remarks:	<type> is a name printed in [] in ~/.xsessions-errors
+# Remarks:	<type> is a name printed in [] to stderr
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/13/2012
-# Changed:	08/23/2012
+# Changed:	09/04/2012
 #-----------------------------------------------------------------------
 
 #!/bin/bash
@@ -32,13 +32,16 @@ then
 	prog_started=`ps -ef|grep -c "$REPLY" |grep -v grep`
 	if [ $prog_started -gt 1 ]
 	then
-	    echo [Fvwm-Nightshade][$type]: \'$REPLY\' is already running. Skipping. >> ~/.xsession-errors
-	else
-	    echo [Fvwm-Nightshade][$type]: \'$REPLY\' not running. Will be started now. >> ~/.xsession-errors
-	    $REPLY &
-	    sleep 1
-	fi
+            echo [Fvwm-Nightshade][$type]: \'$REPLY\' is already running. Skipping. 2>&1
+        else
+            echo [Fvwm-Nightshade][$type]: \'$REPLY\' not running. Will be started now. 2>&1
+            $REPLY &
+            sleep 1
+        fi
     done <<< "$commands"
     unset IFS
+else
+    echo [Fvwm-Nightshade][$type]: No $infile found 2>&1
+    exit 1
 fi
 exit 0

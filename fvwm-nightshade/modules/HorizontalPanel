@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		HorizontalPanel
-# Version:	1.0.1
+# Version:	1.0.2
 # Licence: 	GPL 2
 #
 # Description:	FvwmButtons panel for horizontal layout. Position on the
@@ -13,7 +13,7 @@
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/11/2012
-# Changed:	<MM/DD/YYYY>
+# Changed:	09/05/2012
 #-----------------------------------------------------------------------
 
 Style HorizontalPanel !Title, Sticky, WindowListSkip, StaysOnBottom, HandleWidth 2
@@ -73,8 +73,8 @@ DestroyModuleConfig HorizontalPanel: *
 # menu button
 #-----------------------------------------------------------------------
 *HorizontalPanel: (2x1, Colorset 10, ActionOnPress, \
-		    Icon	$[FVWM_USERDIR]/artwork/Nightshade_icon_24x24.png, \
-		    ActiveIcon	$[FVWM_USERDIR]/artwork/Nightshade_icon_24x24.png, \
+		    Icon	icon_fns_24x24.png, \
+		    ActiveIcon	icon_fns_24x24.png, \
 		    Action(Mouse 1) `Menu MenuRoot`)
 
 #-----------------------------------------------------------------------
@@ -84,7 +84,7 @@ DestroyModuleConfig HorizontalPanel: *
 		    `Exec exec stalonetray --geometry 1x1 --max-geometry 7x1 \
 		    --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
 		    --grow-gravity E --icon-gravity W --kludges force_icons_size -i 24 \
-		    --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.test.log`)
+		    --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
 
 #-----------------------------------------------------------------------
 # Cpuview

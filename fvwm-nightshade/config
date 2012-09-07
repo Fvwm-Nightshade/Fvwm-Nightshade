@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.2
+InfoStoreAdd ns_version 0.5.3
 # Copyright (C) 2012
 #
 # Authors:
@@ -178,6 +178,7 @@ ExecUseShell /bin/bash
 #-----------------------------------------------------------------------
 ImagePath /usr/share/icons:/usr/share/icons/wm-icons:+
 ImagePath +:/usr/share/pixmaps:/usr/share/pixmaps/fvwm
+ImagePath +:$[FNS_SYSTEMDIR]/artwork/icons:
 
 #-----------------------------------------------------------------------
 # actual wallpaper
@@ -433,6 +434,14 @@ Style * ResizeOpaque
 #-----------------------------------------------------------------------
 Style * ClickToFocus
 Style * MouseFocusClickRaises
+
+#-----------------------------------------------------------------------
+# You can use the IgnoreModifiers command to turn individual modifiers 
+# off for bindings. Now CapsLock, NumLock and ScrollLock are removed from
+# the keyboard map.
+# For more infos please read http://fvwm.org/documentation/faq/#5.5
+#-----------------------------------------------------------------------
+IgnoreModifiers L25
 
 #-----------------------------------------------------------------------
 # TileCascadePlacement automatically places new windows in a smart
@@ -1091,14 +1100,15 @@ DestroyModuleConfig FvwmAnimate: *
 #=======================================================================
 # 7.2 FvwmBacker
 #=======================================================================
+DestroyModuleConfig FvwmBacker: *
 *FvwmBacker: Command(Desk 0, Page * *) Colorset 24
 
 #=======================================================================
 # 7.3 FvwmBanner
 #=======================================================================
+DestroyModuleConfig FvwmBanner: *
 *FvwmBanner: NoDecor
-Test (I $[FVWM_USERDIR]/artwork/splash_Nightshade.png) *FvwmBanner: Pixmap $[FVWM_USERDIR]/artwork/splash_Nightshade.png
-TestRc (!Match) Test (I $[FNS_SYSTEMDIR]/artwork/splash_Nightshade.png) *FvwmBanner: Pixmap $[FNS_SYSTEMDIR]/artwork/splash_Nightshade.png
+*FvwmBanner: Pixmap $[infostore.used_banner]
 *FvwmBanner: Timeout 3
 
 #=======================================================================
@@ -1288,7 +1298,7 @@ FuncPrintDbgMsg load-config $[FVWM_USERDIR]/.layout
 AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # start programs found in .autostart
-+ I Test (Init) FuncAutoStartPrograms
++ I FuncAutoStartPrograms
 
 
 #=======================================================================
@@ -1491,7 +1501,7 @@ AddToFunc   FuncViewFileTail
 #-----------------------------------------------------------------------
 DestroyFunc FuncWindowCreateScreenshot
 AddToFunc   FuncWindowCreateScreenshot
-+ I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%k%M%S`.$[w.id].png"'
++ I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%H%M%S`.$[w.id].png"'
 + I Test (x import) ThisWindow (!Shaded, !Iconic, Iconifiable) \
                   PipeRead 'import -frame -window $[w.id] $[infostore.picpath]'
 + I TestRc (Match)  FuncShowMessage "$[gt.Screenshot Info for window] $[w.id]" \
@@ -1505,7 +1515,7 @@ AddToFunc   FuncWindowCreateScreenshot
 #-----------------------------------------------------------------------
 DestroyFunc FuncDesktopCreateScreenshot
 AddToFunc   FuncDesktopCreateScreenshot
-+ I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%k%M%S`.png"'
++ I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%H%M%S`.png"'
 #+ I Test (x import) PipeRead 'import -window root $[picpath]'
 + I Test (x import) PipeRead 'sleep $0; import -window root -quality 100 -silent $[infostore.picpath]'
 + I TestRc (Match)  FuncShowMessage "$[gt.Screenshot Info for the desktop]" \
@@ -1551,8 +1561,8 @@ AddToFunc   WallpaperBrowser
 + I PipeRead 'test ! -d "${FVWM_USERDIR}/wallpapers" && mkdir "${FVWM_USERDIR}/wallpapers"; \
     test ! -d "${FVWM_USERDIR}/wallpapers/.thumbs" && mkdir "${FVWM_USERDIR}/wallpapers/.thumbs"; \
     for i in "$0/"*; do \
-        test -f "$0/.thumbs/${i##*/}" -a "${i}" -ot "$0/.thumbs/${i##*/}" || { \
-                convert -quality 0 -sample 42 "${i}" "png:$0/.thumbs/${i##*/}" 2>/dev/null \
+        test -f "${FVWM_USERDIR}/wallpapers/.thumbs/${i##*/}" -a "${i}" -ot "${FVWM_USERDIR}/wallpapers/.thumbs/${i##*/}" || { \
+                convert -quality 0 -sample 42 "${i}" "png:${FVWM_USERDIR}/wallpapers/.thumbs/${i##*/}" 2>/dev/null \
                     || continue; \
             }; \
     done; \
@@ -1560,7 +1570,7 @@ AddToFunc   WallpaperBrowser
     --icon-dir menu/folder.xpm \
     --dir "$0" --command-file="FuncNewWallpaper \\"%f\\"" \
     --exec-t="^xv -wait 2 *" --func-name WallpaperBrowser | sed \
-    "s#__PIXMAP__\\(.*\\)\\\"\\(.*/\\)\\(.*\\)\\\"#\\2.thumbs/\\3\\1\\2\\3#g"'
+    "s#__PIXMAP__\\(.*\\)\\\"\\(.*/\\)\\(.*\\)\\\"#\\$[FVWM_USERDIR]/wallpapers/.thumbs/\\3\\1\\2\\3#g"'
 
 #-----------------------------------------------------------------------
 # switch background from FvwmBacker to chosen wallpaper picture
@@ -1964,7 +1974,7 @@ AddToMenu   MenuHelp
 + "%menu/www.xpm%$[gt.FVWM Web Pages]"			Popup MenuFvwmWebPages
 + "%menu/help.xpm%$[gt.Other Helps]"			Popup MenuHelpOthers
 + "%menu/information.xpm%$[gt.Show FVWM Version]"	FuncShowMessage "Fvwm Version Info" "$[version.line]"
-+ "%$[FVWM_USERDIR]/artwork/nightshade_16x16.png%$[gt.About Nightshade]"        Module FvwmForm FvwmForm-About
++ "%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%$[gt.About Nightshade]"        Module FvwmForm FvwmForm-About
 
 #-----------------------------------------------------------------------
 # Dynamic other help application sub menu for miscellaneous help tools
@@ -2079,7 +2089,7 @@ AddToMenu   MenuConfiguration
 + "$[gt.Sc&reen Saver]%menu/display.xpm%"      			Popup MenuXScreenSaver
 + "$[gt.&Decoration]%menu/themes.xpm%"     	    		Popup MenuDecoration
 + "$[gt.Fvwm Form &Defaults]%menu/configuration.xpm%"  		Module FvwmForm FvwmForm-Form
-+ "$[gt.Fvwm-&Nightshade Setup]%$[FVWM_USERDIR]/artwork/nightshade_16x16.png%"  FvwmForm FvwmForm-FNS-BaseSetup
++ "$[gt.Fvwm-&Nightshade Setup]%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%"  FvwmForm FvwmForm-FNS-BaseSetup
 + "$[gt.&System Bell]%menu/sound.xpm%"                		FvwmScript FvwmScript-BellSetup
 + "$[gt.&Screen]%menu/display.xpm%"            			FvwmScript FvwmScript-ScreenSetup
 + "" Nop

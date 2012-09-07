@@ -1,4 +1,16 @@
 #-----------------------------------------------------------------------
+# File:		fns-init
+# Version:	1.0.1
+# Licence: 	GPL 2
+#
+# Description:	start file of Fvwm-Nightshade
+#
+# Author:	Thomas Funk <t.funk@web.de>
+# Created:	09/07/2012
+# Changed:	<MM/DD/YYYY>
+#-----------------------------------------------------------------------
+
+#-----------------------------------------------------------------------
 # Prints a message in .xsession-errors
 #-----------------------------------------------------------------------
 DestroyFunc FuncPrintDbgMsg
@@ -15,12 +27,15 @@ AddToFunc Load
 + I FuncPrintDbgMsg 'LoadFunction' $0
 + I Test (f $[FVWM_USERDIR]/$0) FuncPrintDbgMsg 'LoadFunction' '$0 found in userdir'
 + I Test (f $[FVWM_USERDIR]/$0) Read $[FVWM_USERDIR]/$0
++ I KeepRc FuncPrintDbgMsg 'LoadFunction' 'read finished'
 + I TestRc (Match) Break
-+ I Test (f $[FNS_SYSTEMDIR]/$0) FuncPrintDbgMsg 'LoadFunction' '$0 found in systemdir' 
++ I Test (f $[FNS_SYSTEMDIR]/$0) FuncPrintDbgMsg 'LoadFunction' '$0 found in systemdir'
 + I Test (f $[FNS_SYSTEMDIR]/$0) Read $[FNS_SYSTEMDIR]/$0
++ I KeepRc FuncPrintDbgMsg 'LoadFunction' 'read finished'
 + I TestRc (Match) Break
 + I Test (f $0) FuncPrintDbgMsg 'LoadFunction' '$0 found'
 + I Test (f $0) Read $0
++ I KeepRc FuncPrintDbgMsg 'LoadFunction' 'read finished'
 + I TestRc (!Match) FuncPrintDbgMsg 'LoadFunction' '$0 not found'
 
 #-----------------------------------------------------------------------

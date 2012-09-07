@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		Horizontal
-# Version:	1.0.1
+# Version:	1.0.2
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/16/2012
-# Changed:	08/23/2012
+# Changed:	09/07/2012
 #-----------------------------------------------------------------------
 #			   Top
 #
@@ -95,35 +95,36 @@ PipeRead 'echo EwmhBaseStruts 0 0 $(($[infostore.pager_height]+3)) 0'
 
 
 #=======================================================================
+# Load layout elements
+#=======================================================================
+Load modules/GlobalIconMan
+Load modules/Pager
+Load modules/HorizontalPanel
+
+
+#=======================================================================
 # Functions
 #=======================================================================
 
 AddToFunc StartFunction
 # start window list module
-+ I Test (f $[FVWM_USERDIR]/modules/GlobalIconMan) Read $[FVWM_USERDIR]/modules/GlobalIconMan
-+ I TestRc (!Match) Test (f $[FNS_SYSTEMDIR]/modules/GlobalIconMan) Read $[FNS_SYSTEMDIR]/modules/GlobalIconMan
-+ I TestRc (Match) Module FvwmIconMan FvwmGlobalIconMan
++ I Module FvwmIconMan FvwmGlobalIconMan
 #-----------------------------------------------------------------------
 # start a Pager
-+ I Test (f $[FVWM_USERDIR]/modules/Pager) Read $[FVWM_USERDIR]/modules/Pager
-+ I TestRc (!Match) Test (f $[FNS_SYSTEMDIR]/modules/Pager) Read $[FNS_SYSTEMDIR]/modules/Pager
-+ I TestRc (Match) Module FvwmPager
++ I Module FvwmPager
 #-----------------------------------------------------------------------
 # start horizontal panel
-+ I Test (f $[FVWM_USERDIR]/modules/HorizontalPanel) Read $[FVWM_USERDIR]/modules/HorizontalPanel
-+ I TestRc (!Match) Test (f $[FNS_SYSTEMDIR]/modules/HorizontalPanel) Read $[FNS_SYSTEMDIR]/modules/HorizontalPanel
-+ I TestRc (Match) Module FvwmButtons HorizontalPanel
++ I Module FvwmButtons HorizontalPanel
 #-----------------------------------------------------------------------
 # start systray applets
 + I Wait stalonetray
-+ I TestRc (Match) FuncStartSystrayApplets
++ I FuncStartSystrayApplets
 
 
 DestroyFunc ReloadLayoutParts
 AddToFunc   ReloadLayoutParts
-+ I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.test.log $FVWM_USERDIR/.trayapplist'
-+ I Test (f $[FVWM_USERDIR]/modules/Pager) Read $[FVWM_USERDIR]/modules/Pager
-+ I TestRc (!Match) Test (f $[FNS_SYSTEMDIR]/modules/Pager) Read $[FNS_SYSTEMDIR]/modules/Pager
-+ I TestRc (Match) FuncRestartModuleByAlias FvwmButtons HorizontalPanel
++ I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.systray.log $FVWM_USERDIR/.trayapplist'
++ I Load modules/Pager
++ I FuncRestartModuleByAlias FvwmButtons HorizontalPanel
 + I Wait stalonetray
 + I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist

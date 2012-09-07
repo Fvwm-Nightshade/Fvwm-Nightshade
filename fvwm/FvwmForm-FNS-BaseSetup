@@ -1,26 +1,42 @@
 #-----------------------------------------------------------------------
 # File:		FvwmForm-FNS-BaseSetup
-# Version:	1.1.1
+# Version:	1.1.2
 # Licence: 	GPL 2
 #
 # Description:	Script to configure default settings of Fvwm-Nightshade
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/01/2012
-# Changed:	08/12/2012
+# Changed:	09/06/2012
 #-----------------------------------------------------------------------
 
 DestroyModuleConfig  FvwmForm-FNS-BaseSetup: *
 *FvwmForm-FNS-BaseSetup: WarpPointer
 # Layout
-*FvwmForm-FNS-BaseSetup: Line       center
-*FvwmForm-FNS-BaseSetup: Text       "Fvwm-Nightshade Base Setup"
-*FvwmForm-FNS-BaseSetup: Line       center
+*FvwmForm-FNS-BaseSetup: Line	center
+*FvwmForm-FNS-BaseSetup: Text   "Fvwm-Nightshade Base Setup"
+*FvwmForm-FNS-BaseSetup: Line   left
 *FvwmForm-FNS-BaseSetup: Text	" "
-*FvwmForm-FNS-BaseSetup: Line       left
-*FvwmForm-FNS-BaseSetup: Text       "Use this setup to configure default settings."
-*FvwmForm-FNS-BaseSetup: Line       left
+*FvwmForm-FNS-BaseSetup: Line   center
+*FvwmForm-FNS-BaseSetup: Text   "Use this setup to configure default settings."
+*FvwmForm-FNS-BaseSetup: Line   left
 *FvwmForm-FNS-BaseSetup: Text	" "
+*FvwmForm-FNS-BaseSetup: Line
+
+*FvwmForm-FNS-BaseSetup: Line	center
+*FvwmForm-FNS-BaseSetup: Text	"------ Environment (Splash, Wallpaper Dir) ------"
+*FvwmForm-FNS-BaseSetup: Line
+
+*FvwmForm-FNS-BaseSetup: Line	left
+*FvwmForm-FNS-BaseSetup: Text 	"Used Splash: "
+*FvwmForm-FNS-BaseSetup: Line   center
+*FvwmForm-FNS-BaseSetup: Input 	Splash 60 "$FNS_SYSTEMDIR/artwork/splashs/splash_fns_small.png"
+*FvwmForm-FNS-BaseSetup: Line
+
+*FvwmForm-FNS-BaseSetup: Line	left
+*FvwmForm-FNS-BaseSetup: Text 	"Used Wallpaper Directory: "
+*FvwmForm-FNS-BaseSetup: Line   center
+*FvwmForm-FNS-BaseSetup: Input 	WpDir 60 "$FNS_SYSTEMDIR/artwork/wallpapers"
 *FvwmForm-FNS-BaseSetup: Line
 
 *FvwmForm-FNS-BaseSetup: Line	center
@@ -83,6 +99,8 @@ DestroyModuleConfig  FvwmForm-FNS-BaseSetup: *
 *FvwmForm-FNS-BaseSetup: Button     quit    "Apply & Save"
 *FvwmForm-FNS-BaseSetup: Command   	!if [ ! -f ${FVWM_USERDIR}/.settings ]; then cp ${FNS_SYSTEMDIR}/.settings ${FVWM_USERDIR}/.settings; fi 
 *FvwmForm-FNS-BaseSetup: Command   	$(Theme? FuncWriteInfoStoreToFileAndSet used_theme $(Theme) $[FVWM_USERDIR]/.settings)
+*FvwmForm-FNS-BaseSetup: Command   	$(Splash? FuncWriteInfoStoreToFileAndSet used_banner $(Splash) $[FVWM_USERDIR]/.settings)
+*FvwmForm-FNS-BaseSetup: Command   	$(WpDir? FuncWriteInfoStoreToFileAndSet wallpaper_dir $(WpDir) $[FVWM_USERDIR]/.settings)
 *FvwmForm-FNS-BaseSetup: Command   	$(LayoutH? FuncWriteInfoStoreToFileAndSet used_layout Horizontal $[FVWM_USERDIR]/.settings)
 *FvwmForm-FNS-BaseSetup: Command   	$(LayoutH?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Horizontal ${FVWM_USERDIR}/.layout)
 *FvwmForm-FNS-BaseSetup: Command   	$(LayoutV? FuncWriteInfoStoreToFileAndSet used_layout Vertical $[FVWM_USERDIR]/.settings)
@@ -97,6 +115,8 @@ DestroyModuleConfig  FvwmForm-FNS-BaseSetup: *
 *FvwmForm-FNS-BaseSetup: Command DestroyModuleConfig SavedBaseSetup: *
 *FvwmForm-FNS-BaseSetup: Command !(                                      /bin/echo \
   "# This file last created by FvwmForm-FNS-BaseSetup on: `/bin/date`."; /bin/echo \
+  '*SavedBaseSetup: Splash 	$(Splash) '		; /bin/echo \
+  '*SavedBaseSetup: WpDir 	$(WpDir) '		; /bin/echo \
   '*SavedBaseSetup: Theme 	$(Theme) '		; /bin/echo \
   '*SavedBaseSetup: LayoutH	$(LayoutH?on) '		; /bin/echo \
   '*SavedBaseSetup: LayoutV  	$(LayoutV?on) '		; /bin/echo \

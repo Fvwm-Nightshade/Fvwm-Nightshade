@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		Vertical
-# Version:	1.0.1
+# Version:	1.0.2
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/16/2012
-# Changed:	08/23/2012
+# Changed:	09/07/2012
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -103,32 +103,37 @@ PipeRead 'echo InfoStoreAdd iconman_manager_geometry 1x0-0+$(($[infostore.panel_
 PipeRead 'echo EwmhBaseStruts 0 $(($[infostore.panel_width])) 0 0'
 
 
+#=======================================================================
+# Load layout elements
+#=======================================================================
+Load modules/GlobalIconMan
+Load modules/Pager
+Load modules/HorizontalPanel
+
+#=======================================================================
+# Functions
+#=======================================================================
 
 AddToFunc StartFunction
 # start window list module
-+ I Test (f $[FVWM_USERDIR]/modules/GlobalIconMan) Read $[FVWM_USERDIR]/modules/GlobalIconMan
-+ I TestRc (!Match) Test (f $[FNS_SYSTEMDIR]/modules/GlobalIconMan) Read $[FNS_SYSTEMDIR]/modules/GlobalIconMan
-+ I TestRc (Match) Module FvwmIconMan FvwmGlobalIconMan
++ I Module FvwmIconMan FvwmGlobalIconMan
 #-----------------------------------------------------------------------
 # start a Pager
-#+ I Test (f $[NS_MODULEDIR]/Pager) Read $[NS_MODULEDIR]/Pager
-#+ I Test (f $[NS_MODULEDIR]/Pager) Read $[NS_MODULEDIR]/Pager
-#+ I TestRc (Match) Module FvwmPager
+#+ I Module FvwmPager
 #-----------------------------------------------------------------------
 # start horizontal panel
-#+ I Test Test (f $[NS_MODULEDIR]/VerticalPanel) Read $[NS_MODULEDIR]/VerticalPanel
-#+ I TestRc (Match) Module FvwmButtons VerticalPanel
+#+ I Module FvwmButtons VerticalPanel
 #-----------------------------------------------------------------------
 # start systray applets
 #+ I Wait stalonetray
-#+ I TestRc (Match) FuncStartSystrayApplets
+#+ I FuncStartSystrayApplets
 #-----------------------------------------------------------------------
 
 
 DestroyFunc ReloadLayoutParts
 AddToFunc   ReloadLayoutParts
-+ I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.test.log $FVWM_USERDIR/.trayapplist'
-+ I Read $[NS_MODULEDIR]/HorizontalPanel
++ I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.systray.log $FVWM_USERDIR/.trayapplist'
++ I Load modules/HorizontalPanel
 + I FuncRestartModuleByAlias FvwmButtons VerticalPanel
 + I Wait stalonetray
 + I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist
