@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		FvwmForm-FNS-BaseSetup
-# Version:	1.1.2
+# Version:	1.1.3
 # Licence: 	GPL 2
 #
 # Description:	Script to configure default settings of Fvwm-Nightshade
@@ -11,14 +11,11 @@
 #-----------------------------------------------------------------------
 
 DestroyModuleConfig  FvwmForm-FNS-BaseSetup: *
+*FvwmForm-FNS-BaseSetup: Title  "Fvwm-Nightshade -- Base Setup"
 *FvwmForm-FNS-BaseSetup: WarpPointer
 # Layout
-*FvwmForm-FNS-BaseSetup: Line	center
-*FvwmForm-FNS-BaseSetup: Text   "Fvwm-Nightshade Base Setup"
-*FvwmForm-FNS-BaseSetup: Line   left
-*FvwmForm-FNS-BaseSetup: Text	" "
 *FvwmForm-FNS-BaseSetup: Line   center
-*FvwmForm-FNS-BaseSetup: Text   "Use this setup to configure default settings."
+*FvwmForm-FNS-BaseSetup: Text   "Use this setup to configure default settings of Fvwm-Nightshade"
 *FvwmForm-FNS-BaseSetup: Line   left
 *FvwmForm-FNS-BaseSetup: Text	" "
 *FvwmForm-FNS-BaseSetup: Line
