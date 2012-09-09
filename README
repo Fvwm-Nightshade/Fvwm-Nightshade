@@ -60,7 +60,7 @@ Featurelist of Fvwm Nightshade:
 - Some themes/decors (Default, Ambience and Air). Can be changed on the
   fly without restart
 - Own themes and layouts can be created with templates (at the moment
-  only theme emplates available)
+  only theme templates available)
 - Autostart possibility (starting apps while startup)
 - A useful set of GUI tools to configure the global system (Gtk+, Qt, 
   mouse, keyboard, etc)
@@ -238,8 +238,7 @@ Button 4/5: Switch with active window to page left/right with SHIFT-CTRL
 
 Installation
 ============
-Makefile for installation is in progress. For Install Fvwm-Nightshade by
-hand read the INSTALL file.
+For installation description see the INSTALL file.
 
 
 Bugs and Feature requests
