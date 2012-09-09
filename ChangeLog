@@ -1,6 +1,6 @@
 History:
 
-09/07/2012 V 0.5.3
+09/09/2012 V 0.5.3
 - change names of wallpapers with 5x4 to 4x3
 - add error message to fns-start-programs if no infile found
 - accelerate reading of .menu if available
@@ -13,6 +13,7 @@ History:
 - change WallpaperBrowser function that thumbs will saved in 
   $[FVWM_USERDIR]/wallpapers/.thumbs
 - add IgnoreModifiers L25 for problems with ClickToFocus
+- update Makefile
 
 08/21/2012 V 0.5.2
 - change structure from user to system configuration:
