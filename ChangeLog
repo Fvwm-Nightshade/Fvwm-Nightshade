@@ -1,5 +1,10 @@
 History:
 
+09/10/2012 V 0.5.4
+- add governor-tool FvwmScript-CPU-Performance
+- add icon for governor-tool artwork/icons/GovernorLogo.png
+- add menu entry in config file
+
 09/09/2012 V 0.5.3
 - change names of wallpapers with 5x4 to 4x3
 - add error message to fns-start-programs if no infile found
