@@ -2092,6 +2092,7 @@ AddToMenu   MenuConfiguration
 + "$[gt.Fvwm-&Nightshade Setup]%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%"  FvwmForm FvwmForm-FNS-BaseSetup
 + "$[gt.&System Bell]%menu/sound.xpm%"                		FvwmScript FvwmScript-BellSetup
 + "$[gt.&Screen]%menu/display.xpm%"            			FvwmScript FvwmScript-ScreenSetup
++ "$[gt.&CPU Performance]%menu/display.xpm%"            			FvwmScript FvwmScript-CPU-Performance
 + "" Nop
 + "$[gt.&Show Colorsets]%menu/colors.xpm%"                   	FuncFvwmShowColorsets
 + "$[gt.&Tail .xsession-errors]%menu/information.xpm%" 		FuncViewFileTail ".xsession-errors" $[HOME]/.xsession-errors
