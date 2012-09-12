@@ -80,7 +80,7 @@ Requirements:
 =============
 Required:	Fvwm >= 2.6.6 (compiled with all features), python-xdg, 
 		xterm, conky, xscreensaver, eterm, imagemagick, 
-		stalonetray, wm-icons
+		stalonetray, wm-icons, cpufreq.
 
 Recommended: 	gnomes network manager, Volume Icon
 
