@@ -83,6 +83,8 @@ Installation
 
 1. download package from https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tree/develop
 2. unpack it and switch into the expanded directory
+   Remark: don't use file-roller because the tool cannot handle unix rights in zip files
+           Use unzip instead.
 3. Fvwm-Nightshade will be installed to /usr/local by default. So root
    permissions are required. Run
   
@@ -92,12 +94,6 @@ Installation
    change the prefix:
 
 		    make prefix=<other_dir> install
-
-   If Fvwm is installed in another directory then /usr/share/fvwm you have
-   to told make where because there are some scripts which have to be installed
-   into Fvwm. 
-   
-		make fvwm_path=<path_to_fvwm> install
 
 
 Now Fvwm-Nightshade is installed and you can login, change the base settings and enjoy.
@@ -110,10 +106,9 @@ To remove Fvwm-Nightshade completely run as root
 
 			    make uninstall
 
-Also, if Fvwm is installed in another directory then /usr/share/fvwm you have
-to told make where Fvwm is located
+If you have installed Fvwm-Nightshade to another directory you have to change the prefix:
 
-		make fvwm_path=<path_to_fvwm> uninstall
+		    make prefix=<other_dir> install
 
 
 Tips
