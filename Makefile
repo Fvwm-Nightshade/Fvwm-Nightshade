@@ -31,7 +31,6 @@ fns_executables = $(shell ls -1 bin)
 fns_manpages 	= $(shell ls -1 man)
 fns_fvwmscripts = $(shell ls -1 fvwm)
 
-fvwm_path	?= /usr/share/fvwm
 
 all:
 	@echo "There is nothing to compile."
@@ -76,15 +75,6 @@ install:
 	install -m 644 AUTHORS ChangeLog COPYING README INSTALL $(pkgdocdir)
 	cp -r templates $(pkgdocdir)
 
-	echo "-> install fvwm scripts"
-	if test -d "$(fvwm_path)"; then \
-	  install -m 644 fvwm/*  $(fvwm_path); \
-	else \
-	  echo "Fvwm isn't installed in $(fvwm_path)"; \
-	  echo "Please set fvwm_path=<path_to_fvwm> and rerun make install."; \
-	  exit 2; \
-	fi
-
 	echo "-> install manpages"
 	#install -d -m 644 man/* $(man1dir)
 
@@ -106,22 +96,12 @@ uninstall:
 	echo "-> uninstall documentation"
 	-rm -r $(pkgdocdir)
 
-	echo "-> uninstall fvwm scripts"
-	if test -d "$(fvwm_path)"; then \
-	  for file in $(fns_fvwmscripts) ; do \
-	    rm -f $(fvwm_path)/$$file; \
-	  done; \
-	else \
-	  echo "Fvwm isn't installed in $(fvwm_path)"; \
-	  echo "Please set fvwm_path=<path_to_fvwm> and rerun make uninstall."; \
-	  exit 2; \
-	fi
-	
 	echo "-> uninstall manpages"
 	#for file in $(fns_manpages) ; do \
 	#  -rm $(man1dir)/$$file; done
 
-	echo "Fvwm-Nightshade is now completely removed."
+	echo "Fvwm-Nightshade is now removed. Only ~/.fvwm-nightshade exists."
+	echo "If you don't need it anymore remove it by hand."
 	
 .PHONY: FORCE dist distcheck install uninstall
 .SILENT: install uninstall
