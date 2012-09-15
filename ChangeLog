@@ -7,6 +7,8 @@ History:
   fvwm-nightshade/scripts folder
 - delete in Makefile the part where scripts copied/deleted to/from
   fvwm's systemdir
+- INSTALL updated
+- TODO updated
 
 09/09/2012 V 0.5.3
 - change names of wallpapers with 5x4 to 4x3

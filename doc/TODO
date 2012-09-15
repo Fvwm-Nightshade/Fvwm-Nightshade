@@ -2,6 +2,7 @@ TODO:
 -----
 
 Layouts:
+- Vertical Panel
 - Gnome 2
   - Panel above and below
 - Windows 7
@@ -12,8 +13,9 @@ Design:
 - 1 vector design (idea always available ^^)
 - other new designs
 - Nightshade icon set (svg & png)
+  Done: pngs
 - Splash screen(s)
-  -> without a background (png)
+  Done: -> without a background (png)
   -> with a background but animated (gif)
 
 Features:
@@ -24,7 +26,7 @@ Features:
   - Cairo -> http://www.youtube.com/watch?v=YBbeFCYdHno
   - xcompmgr
 - localisation (de -> po files) for manpages, menus, help windows
-- own config folder: ~/.fvwm-nightshade
+- Done: own config folder: ~/.fvwm-nightshade
 - icons on desktop with idesk (tools: http://icecc.sourceforge.net/idesktools.html)
 - own config tool for the most important options (gtk2, perl or python)
 - applets -> minimoids (http://box-look.org/content/show.php?content=137027)
@@ -34,6 +36,7 @@ Documentation:
 - F1 help (asciidoc for html & manpage)
 - Wiki on Github (also asciidoc) with helps, screenshots, etc
 - NEWS, INSTALL, ...
+  Done: INSTALL
 
 Package Management:
 - deb
@@ -41,7 +44,7 @@ Package Management:
   -> http://www.debian.org/doc/manuals/debian-faq/ch-pkg_basics.de.html
 - rpm
   -> http://www.linux-community.de/Internal/Artikel/Print-Artikel/LinuxUser/2006/07/RPM-Pakete-selbst-erstellen
-- Makefile for make-install/uninstall (tar.gz file for no package installation)
+- Done: Makefile for make-install/uninstall (tar.gz file for no package installation)
 - Suse build service for Repo
   -> http://de.opensuse.org/openSUSE:Build_Service_Anleitung
 
