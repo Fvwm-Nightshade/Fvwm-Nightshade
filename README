@@ -25,16 +25,17 @@ Featurelist of Fvwm Nightshade:
 - Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
 - Taskbar to show running apps per page
-- Two layouts: horizontal and vertical (notfinished) with
-  - horizontal:
+- Two layouts: horizontal and vertical (not finished yet)
+
+  - horizontal (top):
 			   Top
     +--------+		+--------+		+--------+
     |        |          |        |              |        |
     +--------+		+--------+		+--------+
     IconManager		   Pager		   Panel
   
-  - vertical:
-    Top right
+  - vertical (top right):
+    
     +--------+
     |        | Panel
     +--------+
@@ -98,7 +99,7 @@ These systray apps started automatically, if stalonetray is installed:
 - bluetooth-applet: gnomes bluetooth applet 
   (http://library.gnome.org/users/gnome-bluetooth/stable/gnome-bluetooth-applet.html.en)
 
-Btw. it doesn't matter if they not installed. Will skip then ;-)
+It doesn't matter if they not installed. Will be skipped then ;-)
 
 
 Keybindings:
@@ -231,9 +232,9 @@ Button 3:   Desktop menu
 
 Anywhere:
 ---------
-Button 4/5: Switch to page left/right with SHIFT-ALT + rolling wheel 
+Button 4/5: Switch to page left/right with SHIFT-CTRL + rolling wheel 
             up/down anywhere
-Button 4/5: Switch with active window to page left/right with SHIFT-CTRL
+Button 4/5: Switch with active window to page left/right with SHIFT-ALT
             + rolling wheel up/down anywhere
 
 Installation
@@ -243,7 +244,7 @@ For installation description see the INSTALL file.
 
 Bugs and Feature requests
 =========================
-Fvwm-Nightshade is young project. Bugs are possible. We try to avoid 
+Fvwm-Nightshade is a young project. Bugs are possible. We try to avoid 
 them but nobody is perfect ... So, if you find one or have ideas, submit
 them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues
 
