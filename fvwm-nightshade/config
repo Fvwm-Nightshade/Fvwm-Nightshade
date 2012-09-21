@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.3
+InfoStoreAdd ns_version 0.5.4
 # Copyright (C) 2012
 #
 # Authors:
@@ -119,7 +119,8 @@ InfoStoreAdd ns_version 0.5.3
 #	 7.5.2 Message box
 #	 7.5.2 Show Colorset
 #    7.6 FvwmIdent
-#    7.7 Others
+#    7.7 FvwmScript
+#    7.8 Others
 # 8. FUNCTIONS
 #    8.1 Startup
 #        8.1.1 Start
@@ -178,7 +179,8 @@ ExecUseShell /bin/bash
 #-----------------------------------------------------------------------
 ImagePath /usr/share/icons:/usr/share/icons/wm-icons:+
 ImagePath +:/usr/share/pixmaps:/usr/share/pixmaps/fvwm
-ImagePath +:$[FNS_SYSTEMDIR]/artwork/icons:
+ImagePath +:$[FNS_SYSTEMDIR]/artwork/icons
+ImagePath +:$[FVWM_USERDIR]/artwork/icons
 
 #-----------------------------------------------------------------------
 # actual wallpaper
@@ -1226,7 +1228,7 @@ AddToFunc   FuncShowMessage
 
 
 #=======================================================================
-# 7.6 FvwmIdent
+# 7.7 FvwmIdent
 #=======================================================================
 #  A xwininfo replacement
 DestroyModuleConfig FvwmIdent: *
@@ -1235,7 +1237,15 @@ DestroyModuleConfig FvwmIdent: *
 
 
 #=======================================================================
-# 7.7 Others
+# 7.7 FvwmScript
+#=======================================================================
+# Add the third path to search for FvwmScript scripts
+DestroyModuleConfig FvwmScript: *
+*FvwmScript: Path $[FNS_SYSTEMDIR]/scripts
+
+
+#=======================================================================
+# 7.8 Others
 #=======================================================================
 # Other modules will be located in NS_MODULEDIR: $[FVWM_USERDIR]/modules
 
@@ -1304,6 +1314,15 @@ AddToFunc StartFunction
 #=======================================================================
 # 8.2 General
 #=======================================================================
+
+#-----------------------------------------------------------------------
+# Change the original behaviour of UrgencyFunc. Now, if a window is 
+# closed, the focus won't switch to the next window in the windowlist
+#-----------------------------------------------------------------------
+DestroyFunc UrgencyFunc
+AddToFunc UrgencyFunc
++ I Iconify off
++ I Raise
 
 #-----------------------------------------------------------------------
 # Stop Fvwm modules

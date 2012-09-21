@@ -1,9 +1,22 @@
 History:
 
+<<<<<<< HEAD
 09/10/2012 V 0.5.4
 - add governor-tool FvwmScript-CPU-Performance
 - add icon for governor-tool artwork/icons/GovernorLogo.png
 - add menu entry in config file
+=======
+09/15/2012 v 0.5.4
+- add UrgencyFunc with other behaviour to config
+- add the third searchpath for FvwmScript to config
+- move scripts copied to Fvwm's systemdir from fvwm folder to
+  fvwm-nightshade/scripts folder
+- delete in Makefile the part where scripts copied/deleted to/from
+  fvwm's systemdir
+- INSTALL updated
+- TODO updated
+- README updated
+>>>>>>> upstream/develop
 
 09/09/2012 V 0.5.3
 - change names of wallpapers with 5x4 to 4x3
