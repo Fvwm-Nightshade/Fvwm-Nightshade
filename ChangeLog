@@ -1,11 +1,25 @@
 History:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 09/10/2012 V 0.5.4
 - add governor-tool FvwmScript-CPU-Performance
 - add icon for governor-tool artwork/icons/GovernorLogo.png
 - add menu entry in config file
 =======
+=======
+09/22/2012 V 0.5.5
+- add thumbnailing as a replacement for iconify/deiconify
+- change Makefile back to install scripts into $[PREFIX]/share/fvwm
+  because FvwmForm files only called from within $[PREFIX]/share/fvwm
+  or $[FVWM_USERDIR]
+- move fvwm-nightshade/scripts to fvwm/
+- change third searchpath for FvwmScript in config from $FNS_SYSTEMDIR 
+  to $FVWM_USERDIR for user owned FvwmScripts
+- README updated with new entries for mailing list
+
+
+>>>>>>> upstream/develop
 09/15/2012 v 0.5.4
 - add UrgencyFunc with other behaviour to config
 - add the third searchpath for FvwmScript to config
