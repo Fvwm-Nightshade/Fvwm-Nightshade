@@ -5,13 +5,13 @@ Requirements
 ============
 
 Required:	Fvwm >= 2.6.6 (compiled with all features), python-xdg, 
-		xterm, conky, xscreensaver, eterm, imagemagick, 
-		stalonetray, wm-icons
+			xterm, conky, xscreensaver, eterm, imagemagick, xwd,
+			stalonetray, wm-icons
 
-Recommended: 	gnomes network manager, Volume Icon
+Recommended: gnomes network manager, Volume Icon
 
 Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-		qtconfig for qt3, qtconfig for qt4, xneurs
+			qtconfig for qt3, qtconfig for qt4, xneurs
 
 
 
@@ -95,6 +95,12 @@ Installation
 
 		    make prefix=<other_dir> install
 
+   If Fvwm is installed in another directory then /usr/share/fvwm you have
+   to told make where because there are some scripts which have to be installed
+   into Fvwm. 
+   
+		make fvwm_path=<path_to_fvwm> install
+
 
 Now Fvwm-Nightshade is installed and you can login, change the base settings and enjoy.
 
@@ -102,13 +108,18 @@ Now Fvwm-Nightshade is installed and you can login, change the base settings and
 
 Deinstallation
 ==============
-To remove Fvwm-Nightshade completely run as root
+To remove Fvwm-Nightshade expect ~/.fvwm-nightshade run as root
 
 			    make uninstall
 
 If you have installed Fvwm-Nightshade to another directory you have to change the prefix:
 
 		    make prefix=<other_dir> install
+
+Also, if Fvwm is installed in another directory then /usr/share/fvwm you have
+to told make where Fvwm is located
+
+		make fvwm_path=<path_to_fvwm> uninstall
 
 
 Tips

@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.4
+InfoStoreAdd ns_version 0.5.5
 # Copyright (C) 2012
 #
 # Authors:
@@ -359,7 +359,7 @@ EdgeThickness 1
 #-----------------------------------------------------------------------
 Style * IconBox 20 80 -100 -20, \
         IconGrid 40 40, \
-        IconFill top left, \
+        IconFill left bottom, \
         StaysOnBottom
 
 #-----------------------------------------------------------------------
@@ -473,6 +473,10 @@ Style * DecorateTransient
 #-----------------------------------------------------------------------
 #Style * DontRaiseTransient
 
+#-----------------------------------------------------------------------
+# Remove the relief around an iconified apps
+#-----------------------------------------------------------------------
+Style * IconBackgroundRelief 0
 
 ########################################################################
 #                4. A P P L I C A T I O N S  L O O K
@@ -1122,6 +1126,7 @@ DestroyModuleConfig FvwmBanner: *
 #***********************************************************************
 DestroyModuleConfig FvwmEventCommon: *
 *FvwmEventCommon: enter_window      FE-EnterWindow
+*FvwmEventCommon: deiconify 		DeThumbnail
 
 #***********************************************************************
 # 7.4.1 Sound FvwmEvents
@@ -1241,7 +1246,7 @@ DestroyModuleConfig FvwmIdent: *
 #=======================================================================
 # Add the third path to search for FvwmScript scripts
 DestroyModuleConfig FvwmScript: *
-*FvwmScript: Path $[FNS_SYSTEMDIR]/scripts
+*FvwmScript: Path $[FVWM_USERDIR]/scripts
 
 
 #=======================================================================
@@ -1610,6 +1615,39 @@ AddToFunc   FuncDelWallpaperlink
 
 
 #-----------------------------------------------------------------------
+# replacement for iconify. Creates a small thumb with little app icon
+# on the upper right and the name of the app at the bottom
+#-----------------------------------------------------------------------
+DestroyFunc Thumbnail
+AddToFunc Thumbnail
++ I Raise
++ I ThisWindow (!Iconic) PipeRead "echo SetEnv app_name `xprop -id $[w.id] WM_CLASS |cut -d',' -f2 |cut -d'\"' -f2`"
++ I PipeRead "echo SetEnv Icon-$[w.id] `grep -i -m1 \"$[app_name]\" ${FVWM_USERDIR}/.menu |cut -d'%' -f2`"
++ I PipeRead 'test ! -d "${FVWM_USERDIR}/temp" && mkdir "${FVWM_USERDIR}/temp"'
++ I ThisWindow (!Shaded, Iconifiable, !Iconic) PipeRead \
+    "xwd -silent -id $[w.id] | convert -scale 128x72! -frame 1x1 \
+    -mattecolor black -quality 0 xwd:- png:$[FVWM_USERDIR]/temp/icon.tmp.$[w.id].png \
+    && echo WindowStyle IconOverride, Icon $[FVWM_USERDIR]/temp/icon.tmp.$[w.id].png \
+    || echo Nop"
++ I TestRc (Match) Test (f $[Icon-$[w.id]], f $[FVWM_USERDIR]/temp/icon.tmp.$[w.id].png) PipeRead \
+    "convert $[FVWM_USERDIR]/temp/icon.tmp.$[w.id].png \\\( $[Icon-$[w.id]] -scale 24x24 \\\) \
+    -gravity northeast -geometry +10+10 -compose multiply -composite \
+    -fill white -undercolor '#00000080' -gravity south -annotate +0+5 \" $[app_name] \" \
+    $[FVWM_USERDIR]/temp/icon.tmp.$[w.id].png; echo Nop"
++ I Iconify
+
+#-----------------------------------------------------------------------
+# replacement for deiconify.
+#-----------------------------------------------------------------------
+DestroyFunc DeThumbnail
+AddToFunc DeThumbnail
++ I Test (i $[Icon-$[w.id]]) WindowStyle Icon $[Icon-$[w.id]]
++ I TestRc (NoMatch) WindowStyle NoIconOverride, Icon
++ I Exec rm -f $[FVWM_USERDIR]/temp/icon.tmp.$[w.id].png
++ I All (Iconic, CurrentPage) PlaceAgain icon
++ I UnsetEnv Icon-$[w.id]
+
+#-----------------------------------------------------------------------
 # Suspend the machine
 #-----------------------------------------------------------------------
 DestroyFunc FuncSuspend
@@ -1786,17 +1824,20 @@ AddToFunc   FuncSimpleMaximizePartially
 + I Maximize $0 0 95
 
 #-----------------------------------------------------------------------
+# Iconify/deiconify all apps with the same resource
 #-----------------------------------------------------------------------
 DestroyFunc FuncIconifySameResource
 AddToFunc   FuncIconifySameResource
-+ I All ($[w.resource]) Iconify $0
+#+ I All ($[w.resource]) Iconify $0
++ I All ($[w.resource]) Thumbnail
 
 #-----------------------------------------------------------------------
 # Iconify a window
 #-----------------------------------------------------------------------
 DestroyFunc FuncIconify
 AddToFunc   FuncIconify
-+ C Iconify
+#+ C Iconify
++ C Thumbnail
 
 #-----------------------------------------------------------------------
 # Shade or unshade the window when the Mouse wheel is rolled up or
