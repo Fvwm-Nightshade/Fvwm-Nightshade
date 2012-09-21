@@ -1,13 +1,11 @@
 History:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-09/10/2012 V 0.5.4
+09/22/2012 V 0.5.6
 - add governor-tool FvwmScript-CPU-Performance
 - add icon for governor-tool artwork/icons/GovernorLogo.png
 - add menu entry in config file
-=======
-=======
+- update README for new added Governor-tool
+
 09/22/2012 V 0.5.5
 - add thumbnailing as a replacement for iconify/deiconify
 - change Makefile back to install scripts into $[PREFIX]/share/fvwm
@@ -18,8 +16,6 @@ History:
   to $FVWM_USERDIR for user owned FvwmScripts
 - README updated with new entries for mailing list
 
-
->>>>>>> upstream/develop
 09/15/2012 v 0.5.4
 - add UrgencyFunc with other behaviour to config
 - add the third searchpath for FvwmScript to config
@@ -30,7 +26,6 @@ History:
 - INSTALL updated
 - TODO updated
 - README updated
->>>>>>> upstream/develop
 
 09/09/2012 V 0.5.3
 - change names of wallpapers with 5x4 to 4x3
