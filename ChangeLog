@@ -1,5 +1,9 @@
 History:
 
+09/23/2012 V 0.5.7
+- add bin/fns-find-icon and change Thumbnail/DeThumbnail functions
+  to create thumbs with better and correct mini icons
+
 09/22/2012 V 0.5.6
 - add governor-tool FvwmScript-CPU-Performance
 - add icon for governor-tool artwork/icons/GovernorLogo.png

@@ -1,0 +1,139 @@
+#!/usr/bin/python
+#-----------------------------------------------------------------------
+# File:        fns-find-icon
+# Version:     1.0.0
+# Licence:     GPL 2
+#
+# Description: find the needed iconpath for thumbnail function
+# Parameters:  -n name of the application
+#              -i window id of the application
+#              -p more search path(s). Seperated with ':'
+#              -s source icon size. Default is 48
+#
+# Author:      Thomas Funk <t.funk@web.de>
+# Created:     09/22/2012
+# Changed:
+#-----------------------------------------------------------------------
+
+import os, sys, string, time
+import commands
+import fnmatch
+import argparse
+
+def search_file(filename, search_path, pathsep=os.pathsep):
+    """ Given a search path, find file with requested name """
+    for path in string.split(search_path, pathsep):
+        if os.path.exists(path):
+            file_list = os.listdir(path)
+            #pattern = filename+'.*'
+            pattern = '*'+filename+'*'
+            filenames = fnmatch.filter(file_list, pattern)
+            if len(filenames) == 0:
+                continue
+            else:
+                return os.path.join(path, filenames[0])
+    return ''
+
+def get_default_theme ():
+    desktop_config = os.path.join(os.environ['FVWM_USERDIR'], '.FvwmForm-Desktop-Config')
+    out = commands.getoutput("awk '$2 ~ \"Theme\" { print $3 }' "+desktop_config)
+    if out == '':
+        return 'gnome'
+    else:
+        return out
+
+def get_menu_icon_path(app_name):
+    menu_path = os.path.join(os.environ['FVWM_USERDIR'], '.menu')
+    icon_path = commands.getoutput("grep -m1 "+app_name+" "+menu_path+" |cut -d'%' -f2")
+    return icon_path
+    
+def get_dektop_icon_path(app_name):
+    search_paths = '/usr/share/applications' + os.pathsep \
+                    + os.path.join(os.environ['HOME'], '.local/share/applications')
+    desktop_file_path = search_file(app_name, search_paths)
+    
+    if desktop_file_path:
+        icon_path = commands.getoutput("grep '[Ii]con' "+desktop_file_path)
+        icon_path = icon_path.replace(' ', '').split('=')[1]
+        return icon_path
+    else:
+        return ''
+
+def check_convert(iconpath, iconsize):
+    if os.path.splitext(iconpath)[1] == '.svg':
+        basename = os.path.basename(iconpath)
+        new_iconpath = os.path.join(os.environ['FVWM_USERDIR']+'/temp', basename.replace('.svg', '.png'))
+        os.system('convert '+iconpath+' -resize '+iconsize+' '+new_iconpath)
+        return new_iconpath
+    else:
+        return iconpath
+    
+    
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='get the iconpath of an application')
+    parser.add_argument('-n', action="store", dest="name", help='name of the application')
+    parser.add_argument('-i', action="store", dest="w_id", help='window id of the application')
+    parser.add_argument('-p', action="store", dest="extend_path", help='more search path(s). Seperated with \':\'')
+    parser.add_argument('-s', action="store", dest="icon_size", help='source icon size. Default is 48', default='48')
+
+    args = parser.parse_args()
+    
+    app_name = args.name
+    window_id = args.w_id
+    extend_path = args.extend_path
+    icon_size = args.icon_size
+    
+    if app_name and window_id:
+        print "Use either '-n' or '-i'. Exiting."
+        sys.exit(1)
+    
+    ts = time.time()
+
+    # get the used theme in fvwm-menu-desktop-config
+    theme = get_default_theme()
+    
+    i_size = icon_size+'x'+icon_size
+    search_path = '/usr/share/icons/'+theme+'/'+i_size+'/apps' + os.pathsep \
+                + '/usr/share/icons/'+theme+'/apps/'+i_size + os.pathsep \
+                + '/usr/share/icons/'+theme+'/apps/'+icon_size + os.pathsep \
+                + '/usr/share/icons/hicolor/'+i_size+'/apps' + os.pathsep \
+                + '/usr/share/pixmaps'
+    
+    # extend search path if given
+    if extend_path:
+        search_path = search_path + os.pathsep + extend_path
+    
+    # make app name lower if given
+    if app_name:
+        app_name = app_name.lower()
+    
+    # get app name if window id is given
+    if window_id:
+        app_name = commands.getoutput("xprop -id "+window_id+" WM_CLASS |cut -d',' -f2 |cut -d'\"' -f2")
+        app_name = app_name.lower()
+        # reduce it for better finding
+        app_name = app_name.split('-')[0]
+        app_name = app_name.split('.')[0]
+    
+
+    # first find app's desktop file and get the icon path
+    icon_path = get_dektop_icon_path(app_name)
+    if os.path.isabs(icon_path):
+        # if icon is a svg, convert it
+        icon_path = check_convert(icon_path, i_size)
+        print icon_path
+    else:
+        # check, if icon path is found in the search paths
+        icon_path = search_file(icon_path, search_path)
+        if os.path.isabs(icon_path):
+            print icon_path
+        else:
+            # get icon path from .menu
+            icon_path = get_menu_icon_path(app_name)
+            print icon_path
+
+    #print "duration: " + str(time.time()-ts)
+    sys.exit()
+
+
+

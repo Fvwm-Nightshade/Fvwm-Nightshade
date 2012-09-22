@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.6
+InfoStoreAdd ns_version 0.5.7
 # Copyright (C) 2012
 #
 # Authors:
@@ -1622,10 +1622,10 @@ DestroyFunc Thumbnail
 AddToFunc Thumbnail
 + I Raise
 + I ThisWindow (!Iconic) PipeRead "echo SetEnv app_name `xprop -id $[w.id] WM_CLASS |cut -d',' -f2 |cut -d'\"' -f2`"
-+ I PipeRead "echo SetEnv Icon-$[w.id] `grep -i -m1 \"$[app_name]\" ${FVWM_USERDIR}/.menu |cut -d'%' -f2`"
++ I PipeRead "echo SetEnv Icon-$[w.id] `fns-find-icon -i $[w.id]`"
 + I PipeRead 'test ! -d "${FVWM_USERDIR}/temp" && mkdir "${FVWM_USERDIR}/temp"'
 + I ThisWindow (!Shaded, Iconifiable, !Iconic) PipeRead \
-    "xwd -silent -id $[w.id] | convert -scale 128x72! -frame 1x1 \
+    "sleep 0.001; xwd -silent -id $[w.id] | convert -scale 128x72! -frame 1x1 \
     -mattecolor black -quality 0 xwd:- png:$[FVWM_USERDIR]/temp/icon.tmp.$[w.id].png \
     && echo WindowStyle IconOverride, Icon $[FVWM_USERDIR]/temp/icon.tmp.$[w.id].png \
     || echo Nop"
@@ -1645,7 +1645,9 @@ AddToFunc DeThumbnail
 + I TestRc (NoMatch) WindowStyle NoIconOverride, Icon
 + I Exec rm -f $[FVWM_USERDIR]/temp/icon.tmp.$[w.id].png
 + I All (Iconic, CurrentPage) PlaceAgain icon
++ I PipeRead 'if [ -O $[Icon-$[w.id]] ]; then rm -f $[Icon-$[w.id]];fi'
 + I UnsetEnv Icon-$[w.id]
++ I UnsetEnv app_name
 
 #-----------------------------------------------------------------------
 # Suspend the machine

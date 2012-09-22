@@ -76,13 +76,15 @@ Featurelist of Fvwm Nightshade:
 - Print messages for needed apps for full config functionality in 
   .xsessions-error
 - Governor-tool FvwmScript-CPU-Performance to handle cpufreq
+- Create thumbs with mini icon and name for iconified applications 
+  instead of their icon
 
 
 Requirements:
 =============
 Required:	Fvwm >= 2.6.6 (compiled with all features), python-xdg, 
-		xterm, conky, xscreensaver, eterm, imagemagick, 
-		stalonetray, wm-icons, cpufreq.
+		xterm, conky, xscreensaver, eterm, imagemagick, librsvg2-bin
+		stalonetray, wm-icons, cpufreq
 
 Recommended: 	gnomes network manager, Volume Icon
 
