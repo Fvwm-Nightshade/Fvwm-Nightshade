@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		Vertical
-# Version:	1.0.2
+# Version:	1.0.3
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/16/2012
-# Changed:	09/07/2012
+# Changed:	09/23/2012
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -102,6 +102,23 @@ PipeRead 'echo InfoStoreAdd iconman_manager_geometry 1x0-0+$(($[infostore.panel_
 #-----------------------------------------------------------------------
 PipeRead 'echo EwmhBaseStruts 0 $(($[infostore.panel_width])) 0 0'
 
+#-----------------------------------------------------------------------
+# IconBox defines the area where FVWM will place any windows that are
+# in the iconic state: 
+#  IconBox left top right bottom
+#
+# IconGrid ist the distance between each icon. Default grid is 3x3 pixels:
+#  IconGrid x y
+#
+# IconFill defines the direction icons will place. Default is from left
+# to right. To fill an icon box in columns instead of rows, specify the
+# vertical direction (top or bottom) first.
+#-----------------------------------------------------------------------
+Style * IconBox 20 80 -100 -20, \
+        IconGrid 40 40, \
+        IconFill left bottom, \
+        StaysOnBottom
+
 
 #=======================================================================
 # Load layout elements
@@ -133,7 +150,7 @@ AddToFunc StartFunction
 DestroyFunc ReloadLayoutParts
 AddToFunc   ReloadLayoutParts
 + I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.systray.log $FVWM_USERDIR/.trayapplist'
-+ I Load modules/HorizontalPanel
++ I Load modules/VerticalPanel
 + I FuncRestartModuleByAlias FvwmButtons VerticalPanel
 + I Wait stalonetray
 + I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist

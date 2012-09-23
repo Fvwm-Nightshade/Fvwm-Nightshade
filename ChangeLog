@@ -1,5 +1,16 @@
 History:
 
+09/23/2012 V 0.5.8
+- add Debug mode:
+	- FNS_DEBUG env variable in bin/fvwm-nightshade. 1=debug; 0=default
+	- add FuncPrintMsg in fvwm-nightshade/fns-init, change FuncPrintDbgMsg,
+	  Load. Also change in config file FuncPrintDbgMsg to FuncPrintMsg
+- fix bug in modules/HorizontalPanel - load wrong module
+- fix bug in Load function - break needs level to stop breaking after 
+  1 level and not all ...
+- move IconBox into layouts because it belongs to them
+- cleanup config
+
 09/23/2012 V 0.5.7
 - add bin/fns-find-icon and change Thumbnail/DeThumbnail functions
   to create thumbs with better and correct mini icons

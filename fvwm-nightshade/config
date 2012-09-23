@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.7
+InfoStoreAdd ns_version 0.5.8
 # Copyright (C) 2012
 #
 # Authors:
@@ -166,11 +166,6 @@ ExecUseShell /bin/bash
 #ModulePath $[FVWM_USERDIR]/mymodules:+
 
 #-----------------------------------------------------------------------
-# Fvwm-Nightshade modules path
-#-----------------------------------------------------------------------
-#SetEnv NS_MODULEDIR $[FVWM_USERDIR]/modules
-
-#-----------------------------------------------------------------------
 # The default ImagePath for icons is: 
 # /usr/include/X11/bitmap:/usr/include/X11/pixmaps
 #
@@ -193,8 +188,6 @@ InfoStoreAdd fvwm_wallpaper $[FVWM_USERDIR]/.wallpaper
 #***********************************************************************
 # These settings are rolled out to $[FVWM_USERDIR]/.settings
 # They can configured with the FvwmForm-FNS-BaseSetup
-#Read $[FVWM_USERDIR]/.settings
-FuncPrintDbgMsg load-config .settings
 Load .settings
 FuncSetThemeDir $[infostore.used_theme]
 
@@ -285,8 +278,6 @@ Style * IconFont "xft:monospace:pixelsize=$[infostore.fontsize]:Medium"
 #=======================================================================
 # You will find all colorsets in the theme specific file:
 #-----------------------------------------------------------------------
-#Read $[FNS_THEMEDIR]/colorsets
-FuncPrintDbgMsg load-config $[FNS_THEMEDIR]/colorsets
 Load $[FNS_THEMEDIR]/colorsets
 
 
@@ -303,8 +294,6 @@ Load $[FNS_THEMEDIR]/colorsets
 # Menus: for the Root and WinOps menu style
 # mouse bindings for the buttons
 #-----------------------------------------------------------------------
-#Read $[FNS_THEMEDIR]/decor
-FuncPrintDbgMsg load-config $[FNS_THEMEDIR]/decor
 Load $[FNS_THEMEDIR]/decor
 
 
@@ -344,23 +333,6 @@ EdgeScroll 100 100
 # the smallest pan frames, which seem to work best except on some servers.
 #-----------------------------------------------------------------------
 EdgeThickness 1
-
-#-----------------------------------------------------------------------
-# IconBox defines the area where FVWM will place any windows that are
-# in the iconic state: 
-#  IconBox left top right bottom
-#
-# IconGrid ist the distance between each icon. Default grid is 3x3 pixels:
-#  IconGrid x y
-#
-# IconFill defines the direction icons will place. Default is from left
-# to right. To fill an icon box in columns instead of rows, specify the
-# vertical direction (top or bottom) first.
-#-----------------------------------------------------------------------
-Style * IconBox 20 80 -100 -20, \
-        IconGrid 40 40, \
-        IconFill left bottom, \
-        StaysOnBottom
 
 #-----------------------------------------------------------------------
 # makes fvwm attempt to recognize and respect the mwm decoration hints
@@ -1252,7 +1224,7 @@ DestroyModuleConfig FvwmScript: *
 #=======================================================================
 # 7.8 Others
 #=======================================================================
-# Other modules will be located in NS_MODULEDIR: $[FVWM_USERDIR]/modules
+# Other modules will be located in the modules dir
 
 
 ########################################################################
@@ -1307,7 +1279,6 @@ AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # Set layout
 #-----------------------------------------------------------------------
-FuncPrintDbgMsg load-config $[FVWM_USERDIR]/.layout
 + I Read $[FVWM_USERDIR]/.layout
 
 AddToFunc StartFunction
@@ -1385,8 +1356,8 @@ AddToFunc FuncChangeDecor
 + I PipeRead 'echo InfoStoreAdd used_theme $0'
 + I FuncSetThemeDir $[infostore.used_theme]
 + I FuncRemoveAllButtons
-+ I Read $[FNS_THEMEDIR]/colorsets
-+ I Read $[FNS_THEMEDIR]/decor
++ I Load $[FNS_THEMEDIR]/colorsets
++ I Load $[FNS_THEMEDIR]/decor
 + I FuncWriteInfoStoreToFileAndSet used_theme $0 $[FVWM_USERDIR]/.settings
 + I ReloadLayoutParts $[infostore.used_layout]
 
@@ -1405,57 +1376,39 @@ AddToFunc   FuncWriteInfoStoreToFileAndSet
 + I InfoStoreAdd $0 $1
 
 #-----------------------------------------------------------------------
-# Prints a message in .xsession-errors
-#-----------------------------------------------------------------------
-#DestroyFunc FuncPrintDbgMsg
-#AddToFunc   FuncPrintDbgMsg
-#+ I PipeRead `echo "[Fvwm-Nightshade]$0: $1" >> ${HOME}/.xsession-errors`
-
-#-----------------------------------------------------------------------
 # Check which appliction are installed to get full functionality
 # print a message in .xsession-errors if check for app failed
 #-----------------------------------------------------------------------
 DestroyFunc FuncAppCheck
 AddToFunc   FuncAppCheck
 # xterm
-+ I Test (!x xterm) FuncPrintDbgMsg "AppCheck" "xterm (view, edit) not installed"
++ I Test (!x xterm) FuncPrintMsg "AppCheck" "xterm (view, edit) not installed"
 # xclock
-+ I Test (!x conky) FuncPrintDbgMsg "AppCheck" "conky (clock, cpu) not installed"
++ I Test (!x conky) FuncPrintMsg "AppCheck" "conky (clock, cpu) not installed"
 # default terminal
-+ I Test (!x $[infostore.default_terminal]) FuncPrintDbgMsg "AppCheck" "default terminal $[infostore.default_terminal] not installed"
++ I Test (!x $[infostore.default_terminal]) FuncPrintMsg "AppCheck" "default terminal $[infostore.default_terminal] not installed"
 # default browser
-+ I Test (!x $[infostore.default_browser]) FuncPrintDbgMsg "AppCheck" "default browser $[infostore.default_browser] not installed"
++ I Test (!x $[infostore.default_browser]) FuncPrintMsg "AppCheck" "default browser $[infostore.default_browser] not installed"
 # xscreensaver
-+ I Test (!x xscreensaver-command) FuncPrintDbgMsg "AppCheck" "xscreensaver (lock) not installed"
++ I Test (!x xscreensaver-command) FuncPrintMsg "AppCheck" "xscreensaver (lock) not installed"
 # Esetroot in package eterm
-+ I Test (!x Esetroot) FuncPrintDbgMsg "AppCheck" "eterm (esetroot for background) not installed"
++ I Test (!x Esetroot) FuncPrintMsg "AppCheck" "eterm (esetroot for background) not installed"
 # import in package imagemagick
-+ I Test (!x import) FuncPrintDbgMsg "AppCheck" "imagemagick (import for screenshot, thumbs) not installed"
++ I Test (!x import) FuncPrintMsg "AppCheck" "imagemagick (import for screenshot, thumbs) not installed"
+# xwd
++ I Test (!x xwd) FuncPrintMsg "AppCheck" "xwd (for thumbnailing) not installed"
 # stalonetray
-+ I Test (!x stalonetray) FuncPrintDbgMsg "AppCheck" "stalonetray (systray) not installed"
++ I Test (!x stalonetray) FuncPrintMsg "AppCheck" "stalonetray (systray) not installed"
 # systray app volumeicon
-+ I Test (!x volumeicon) FuncPrintDbgMsg "AppCheck" "volumeicon (systray volume control) not installed"
++ I Test (!x volumeicon) FuncPrintMsg "AppCheck" "volumeicon (systray volume control) not installed"
 # systray app fdpowermon
-+ I Test (!x fdpowermon) FuncPrintDbgMsg "AppCheck" "fdpowermon (systray pm control) not installed"
++ I Test (!x fdpowermon) FuncPrintMsg "AppCheck" "fdpowermon (systray pm control) not installed"
 # systray app nm-applet
-+ I Test (!x nm-applet) FuncPrintDbgMsg "AppCheck" "nm-applet (systray network control) not installed"
++ I Test (!x nm-applet) FuncPrintMsg "AppCheck" "nm-applet (systray network control) not installed"
 # systray app bluetooth-applet
-+ I Test (!x bluetooth-applet) FuncPrintDbgMsg "AppCheck" "bluetooth-applet (systray bluetooth-applet) not installed"
++ I Test (!x bluetooth-applet) FuncPrintMsg "AppCheck" "bluetooth-applet (systray bluetooth-applet) not installed"
 # Suspend, hibernate pm-is-supported
-+ I Test (!x pm-is-supported) FuncPrintDbgMsg "AppCheck" "pm-utils (suspend, hibernate) not installed"
-
-#-----------------------------------------------------------------------
-# Starts a system tray "module"
-#-----------------------------------------------------------------------
-#DestroyFunc FuncStartSysTray
-#AddToFunc   FuncStartSysTray
-#+ I Test (x stalonetray) PipeRead `echo Exec exec stalonetray \
-#                                  -d all \
-#                                  -geometry 1x1+$(($[vp.width]/4*3))+1 \
-#                                  --grow-gravity SE \
-#                                  --kludges fix_window_pos,force_icons_size,use_icons_hints \
-#                                  --background="#7a7664"`
-#+ I TestRc (Match) Wait stalonetray
++ I Test (!x pm-is-supported) FuncPrintMsg "AppCheck" "pm-utils (suspend, hibernate) not installed"
 
 #-----------------------------------------------------------------------
 # Starts system tray applets like network, sound, etc
