@@ -1,5 +1,11 @@
 History:
 
+09/28/2012 V 0.5.9
+- fix bug in FuncWriteInfoStoreToFileAndSet that paths won't saved
+- Add new theme 'Tribal'
+- fix problem, that with FuncDesktopCreateScreenshot no screenshot with
+  open menu can made
+
 09/23/2012 V 0.5.8
 - add Debug mode:
 	- FNS_DEBUG env variable in bin/fvwm-nightshade. 1=debug; 0=default

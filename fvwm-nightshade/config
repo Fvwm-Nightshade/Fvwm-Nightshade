@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.8
+InfoStoreAdd ns_version 0.5.9
 # Copyright (C) 2012
 #
 # Authors:
@@ -1369,10 +1369,10 @@ AddToFunc FuncChangeDecor
 DestroyFunc FuncWriteInfoStoreToFileAndSet
 AddToFunc   FuncWriteInfoStoreToFileAndSet
 + I PipeRead 'if [ `grep -c $0 $2` -gt 0 ] ; then \
-		sed -i --follow-symlinks "s/^InfoStoreAdd $0.*/InfoStoreAdd $0 $1/" $2; \
-	      else \
-		sed -i --follow-symlinks "$ a\InfoStoreAdd $0 $1" $2; \
-	      fi;'
+				sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 $1#" $2; \
+			else \
+				sed -i --follow-symlinks "$ a\InfoStoreAdd $0 $1" $2; \
+			fi;'
 + I InfoStoreAdd $0 $1
 
 #-----------------------------------------------------------------------
@@ -1492,14 +1492,17 @@ AddToFunc   FuncWindowCreateScreenshot
 #-----------------------------------------------------------------------
 DestroyFunc FuncDesktopCreateScreenshot
 AddToFunc   FuncDesktopCreateScreenshot
++ I Test (!x import) FuncShowMessage "$[gt.Desktop Screenshot Info]" \
+                                     "ImageMagick isn't installed. No screenshot created."
+
++ I TestRc (Match) Break 1
 + I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%H%M%S`.png"'
-#+ I Test (x import) PipeRead 'import -window root $[picpath]'
-+ I Test (x import) PipeRead 'sleep $0; import -window root -quality 100 -silent $[infostore.picpath]'
-+ I TestRc (Match)  FuncShowMessage "$[gt.Screenshot Info for the desktop]" \
-                                    "Screenshot created: $[infostore.picpath]"
-+ I TestRc (!Match) FuncShowMessage "$[gt.Screenshot Info for the desktop]" \
-                                    "ImageMagick isn't installed. No screenshot created."
++ I Exec sleep $0; import -window root -quality 100 -silent $[infostore.picpath]
++ I PipeRead 'echo InfoStoreAdd pause `expr $0 \\* 1000`'
++ I Schedule $[infostore.pause] FuncShowMessage "$[gt.Screenshot Info for the desktop]" \
+												"Screenshot created: $[infostore.picpath]"
 + I InfoStoreRemove picpath
++ I InfoStoreRemove pause
 
 #-----------------------------------------------------------------------
 # Open an URL in a browser
