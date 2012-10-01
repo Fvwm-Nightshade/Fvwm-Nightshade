@@ -1,18 +1,18 @@
 #-----------------------------------------------------------------------
 # File:		Horizontal
-# Version:	1.0.3
+# Version:	1.0.4
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/16/2012
-# Changed:	09/23/2012
+# Changed:	10/01/2012
 #-----------------------------------------------------------------------
 #			   Top
 #
 # +--------+		+--------+		+--------+
-# |        |            |        |              |        |
+# |        |        |        |      |        |
 # +--------+		+--------+		+--------+
 # IconManager		   Pager		   Panel
 #
@@ -113,7 +113,7 @@ Style * IconBox 20 80 -100 -20, \
 #=======================================================================
 # Load layout elements
 #=======================================================================
-Load modules/GlobalIconMan
+Load modules/GlobalIconMan_ShowHide
 Load modules/Pager
 Load modules/HorizontalPanel
 
@@ -123,8 +123,11 @@ Load modules/HorizontalPanel
 #=======================================================================
 
 AddToFunc StartFunction
+# start event handler for GlobalIconMan_ShowHide
++ I Module FvwmEvent FvwmEventShowHide
+#-----------------------------------------------------------------------
 # start window list module
-+ I Module FvwmIconMan FvwmGlobalIconMan
++ I Module FvwmIconMan GlobalIconManShowHide
 #-----------------------------------------------------------------------
 # start a Pager
 + I Module FvwmPager
@@ -139,6 +142,7 @@ AddToFunc StartFunction
 
 DestroyFunc ReloadLayoutParts
 AddToFunc   ReloadLayoutParts
++ I FuncPrintDbgMsg ReloadLayoutParts
 + I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.systray.log $FVWM_USERDIR/.trayapplist'
 + I Load modules/HorizontalPanel
 + I FuncRestartModuleByAlias FvwmButtons HorizontalPanel

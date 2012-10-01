@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.9
+InfoStoreAdd ns_version 0.5.11
 # Copyright (C) 2012
 #
 # Authors:
@@ -1097,7 +1097,6 @@ DestroyModuleConfig FvwmBanner: *
 # 7.4.1 Common FvwmEvents
 #***********************************************************************
 DestroyModuleConfig FvwmEventCommon: *
-*FvwmEventCommon: enter_window      FE-EnterWindow
 *FvwmEventCommon: deiconify 		DeThumbnail
 
 #***********************************************************************

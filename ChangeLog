@@ -1,5 +1,14 @@
 History:
 
+10/01/2012 V 0.5.11
+- add new GlobalIconMan (GlobalIconman_ShowHide) which moves down if 
+  mouse hover over it and roll back if it leaves.
+- move enter_window event into the IconMan configs
+- adjust the old GlobalIconMan and rename it to GlobalIconman_TopBottom
+
+09/29/2012 V 0.5.10
+- change some colors in the Tribal theme
+
 09/28/2012 V 0.5.9
 - fix bug in FuncWriteInfoStoreToFileAndSet that paths won't saved
 - Add new theme 'Tribal'

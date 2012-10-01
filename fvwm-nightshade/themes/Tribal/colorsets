@@ -1,6 +1,6 @@
 ########################################################################
 # File:		colorsets
-# Version:	0.1.0
+# Version:	0.1.1
 # Licence: 	GPL 2
 #
 # Description:	colorsets of Tribal theme
@@ -47,7 +47,7 @@ Colorset 0 fg black, bg white
 # optional:
 # IconAlpha = inactive transparent mini icon in titlebar in %
 #-----------------------------------------------------------------------
-Colorset 1 fg gray75, IconAlpha 60
+Colorset 1 fg gray60, IconAlpha 60
 
 #-----------------------------------------------------------------------
 # window title, active
@@ -60,7 +60,7 @@ Colorset 1 fg gray75, IconAlpha 60
 # optional:
 # fgAlpha = merge titlebar text and background in %
 #-----------------------------------------------------------------------
-Colorset 2  DGradient 255 3 #001400 30 #006c00 30 #44a200 40 #abfd5a, fg white, NoShape
+Colorset 2  DGradient 255 3 #001400 30 #006c00 30 #44a200 40 #abfd5a, fg #f4ffb5, NoShape
 
 #-----------------------------------------------------------------------
 # window borders, inactive
@@ -126,7 +126,7 @@ Colorset 7 fg white, hi #4c4b46, bg #65645e, Plain
 # fg = inactive font color or border color
 # bg = background of inactive pages
 #-----------------------------------------------------------------------
-Colorset 10 VGradient 255 2 #86857f 40 #7c7b78 60 #51504d, fg grey, bg #e5e4e0, NoShape
+Colorset 10 VGradient 255 2 #86857f 40 #7c7b78 60 #51504d, fg grey70, bg #e5e4e0, NoShape
 
 #-----------------------------------------------------------------------
 # default for active modules
@@ -159,7 +159,7 @@ Colorset 12 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0, fg #312b1d, NoShape
 # fg = font color
 # bg = background color
 #-----------------------------------------------------------------------
-Colorset 13 VGradient 255 2 #86857f 50 #7c7b78 50 #51504d, fg white, bg #e5e4e0, NoShape
+Colorset 13 VGradient 255 2 #86857f 50 #7c7b78 50 #51504d, fg #e1ff84, bg #e5e4e0, NoShape
 
 #-----------------------------------------------------------------------
 # default #2
