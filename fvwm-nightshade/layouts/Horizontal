@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		Horizontal
-# Version:	1.0.4
+# Version:	1.0.5
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/16/2012
-# Changed:	10/01/2012
+# Changed:	10/02/2012
 #-----------------------------------------------------------------------
 #			   Top
 #
@@ -64,12 +64,13 @@ PipeRead 'echo InfoStoreAdd iconman_button_width $(($[vp.width]/4))'
 #-----------------------------------------------------------------------
 # GlobalIconMan geometry
 #-----------------------------------------------------------------------
-PipeRead 'echo InfoStoreAdd iconman_button_geometry $[infostore.iconman_button_width]x0'
+InfoStoreAdd iconman_button_geometry $[infostore.iconman_button_width]x0
 
 #-----------------------------------------------------------------------
 # GlobalIconMan Manager Geometry
 #-----------------------------------------------------------------------
-PipeRead 'echo InfoStoreAdd iconman_manager_geometry 1x0+0+0'
+PipeRead "echo InfoStoreAdd yStartIman `perl -e 'printf \"%.0f\",$[vp.height]-(3/2*$[infostore.fontsize]*$[infostore.ratio])'`"
+InfoStoreAdd iconman_manager_geometry 1x0+0-$[infostore.yStartIman]
 
 
 #=======================================================================

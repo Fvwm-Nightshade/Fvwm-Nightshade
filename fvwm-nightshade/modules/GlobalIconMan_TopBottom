@@ -1,19 +1,19 @@
 ########################################################################
 # File:		GlobalIconMan
-# Version:	0.1.1
+# Version:	0.1.2
 # Licence: 	GPL 2
 #
 # Description:	shows a windows list of all windows in the actual page
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	06/08/2012
-# Changed:	10/01/2012
+# Changed:	10/02/2012
 ########################################################################
 
 #***********************************************************************
 # Global FvwmIconMan ("Taskbar")
 #***********************************************************************
-Style GlobalIconManShowHide Title, TitleAtRight, !Button 1, !Button 2, !Button 4, !Button 6
+Style GlobalIconManShowHide TitleAtRight, !Button 1, !Button 2, !Button 4, !Button 6
 Style GlobalIconManShowHide NeverFocus, WindowListSkip, StaysOnBottom, HandleWidth 1, !State 1
 
 DestroyModuleConfig FvwmGlobalIconMan: *
@@ -59,15 +59,15 @@ DestroyModuleConfig FvwmGlobalIconMan: *
 # Event Handler
 #-----------------------------------------------------------------------
 DestroyModuleConfig FvwmEventTopBottom: *
-*FvwmEventTopBottom: enter_window	FE-EnterWindow
+*FvwmEventTopBottom: enter_window	FETB-EnterWindow
 
 
 #-----------------------------------------------------------------------
 # Functions for moving global iconman from bottom to top layer and 
 # after loosing focus back to bottom layer
 #-----------------------------------------------------------------------
-DestroyFunc FE-EnterWindow
-AddToFunc FE-EnterWindow
+DestroyFunc FETB-EnterWindow
+AddToFunc FETB-EnterWindow
 + I PointerWindow (FvwmGlobalIconMan, !root)
 + I TestRc (!Match) KeepRc All (FvwmGlobalIconMan, State 1) FuncWindowToBottom
 + I ThisWindow (!FvwmGlobalIconMan) All (FvwmGlobalIconMan, State 1) FuncWindowToBottom

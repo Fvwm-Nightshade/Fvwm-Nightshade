@@ -1,6 +1,6 @@
 ########################################################################
 # File:		GlobalIconMan_ShowHide
-# Version:	0.1.0
+# Version:	0.1.1
 # Licence: 	GPL 2
 #
 # Description:	shows a windows list of all windows in the actual page
@@ -9,7 +9,7 @@
 # Author:	Bernhard Popp <kermit.popp@googlemail.com>
 #			Thomas Funk <t.funk@web.de>	
 #
-# Created:	10/01/2012
+# Created:	10/02/2012
 # Changed:	
 ########################################################################
 
@@ -18,7 +18,7 @@ InfoStoreAdd y_move 0
 #***********************************************************************
 # Global FvwmIconMan ("Taskbar")
 #***********************************************************************
-Style GlobalIconManShowHide Title, TitleAtRight, !Button 1, !Button 2, !Button 4, !Button 6
+Style GlobalIconManShowHide TitleAtRight, !Button 1, !Button 2, !Button 4, !Button 6
 Style GlobalIconManShowHide NeverFocus, WindowListSkip, StaysOnTop, HandleWidth 1, !State 1
 
 DestroyModuleConfig GlobalIconManShowHide: *
@@ -64,21 +64,21 @@ DestroyModuleConfig GlobalIconManShowHide: *
 # Event Handler
 #-----------------------------------------------------------------------
 DestroyModuleConfig FvwmEventShowHide: *
-*FvwmEventShowHide: enter_window	FE-EnterWindow
-*FvwmEventShowHide: leave_window	FE-LeaveWindow
+*FvwmEventShowHide: enter_window	FESH-EnterWindow
+*FvwmEventShowHide: leave_window	FESH-LeaveWindow
 *FvwmEventShowHide: new_page		FuncResetPos
 
 
 #-----------------------------------------------------------------------
 # Functions for moving global iconman down and after loosing focus back
 #-----------------------------------------------------------------------
-DestroyFunc FE-EnterWindow
-AddToFunc 	FE-EnterWindow
+DestroyFunc FESH-EnterWindow
+AddToFunc 	FESH-EnterWindow
 + I PointerWindow (GlobalIconManShowHide, !State 1) FuncShowWindow
 
 
-DestroyFunc FE-LeaveWindow
-AddToFunc 	FE-LeaveWindow
+DestroyFunc FESH-LeaveWindow
+AddToFunc 	FESH-LeaveWindow
 + I Prev (GlobalIconManShowHide, State 1) FuncHideWindow
 
 
