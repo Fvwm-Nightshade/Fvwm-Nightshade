@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.11
+InfoStoreAdd ns_version 0.5.12
 # Copyright (C) 2012
 #
 # Authors:
@@ -1140,7 +1140,7 @@ DestroyModuleConfig  FvwmForm-RunCommand: *
 *FvwmForm-RunCommand: Selection     cmd multiple
 *FvwmForm-RunCommand: Choice        TERM    TERM     off      "$[gt.Run in Terminal]"
 *FvwmForm-RunCommand: Line          expand
-*FvwmForm-RunCommand: Button        quit "$[gt.Execute]"
+*FvwmForm-RunCommand: Button        quit "$[gt.Execute]" ^M
 *FvwmForm-RunCommand: Command       $(TERM?exec xterm -hold -T "$(Command)" -n "$(Command)" -e $(Command))
 *FvwmForm-RunCommand: Command       exec $(Command)
 *FvwmForm-RunCommand: Button        quit "$[gt.Cancel]"
@@ -1170,7 +1170,7 @@ DestroyModuleConfig FvwmForm-About: *
 *FvwmForm-About: Line center
 *FvwmForm-About: Line center
 *FvwmForm-About: Line center
-*FvwmForm-About: Button quit " $[gt.Close] " ^[
+*FvwmForm-About: Button quit " $[gt.Close] " ^M
 *FvwmForm-About: Command Nop
 *FvwmForm-About: Line center
 
@@ -1197,7 +1197,7 @@ AddToFunc   FuncShowMessage
               start=$(($start+1)); \
               done `
 + I PipeRead `echo '*FvwmForm-Messages: Line   center' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
-              echo '*FvwmForm-Messages: Button  quit \" Ok \"' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo '*FvwmForm-Messages: Button  quit \" Ok \" ^M' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
               echo '*FvwmForm-Messages: Command !(rm -f ${FVWM_USERDIR}/FvwmForm-Messages)' >> ${FVWM_USERDIR}/FvwmForm-Messages `
 + I Schedule 100 Module FvwmForm FvwmForm-Messages
 

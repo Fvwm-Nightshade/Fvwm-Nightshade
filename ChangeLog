@@ -1,5 +1,17 @@
 History:
 
+10/02/2012 V 0.5.12
+- fix positioning problem with GlobalIconman_ShowHide
+- change FE-* functions in GlobalIconman_ShowHide and GlobalIconman_TopBottom
+  because in both they had the same names and so it was not possible to
+  use them togehter
+- add in all FvwmForms the <enter> key
+- change default theme from Ambience to Tribal in FvwmForm-FNS-BaseSetup
+- change default wallpaper_dir from $FNS_SYSTEMDIR/artwork/wallpapers to
+  $FVWM_USERDIR/wallpapers. Also remove configure possibility in FvwmForm-FNS-BaseSetup
+  but create $FVWM_USERDIR/wallpapers and linked in all wallpapers in 
+  $FNS_SYSTEMDIR/artwork/wallpapers
+
 10/01/2012 V 0.5.11
 - add new GlobalIconMan (GlobalIconman_ShowHide) which moves down if 
   mouse hover over it and roll back if it leaves.

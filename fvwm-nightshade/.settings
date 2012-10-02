@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		.settings
-# Version:	1.0.2
+# Version:	1.0.3
 # Licence: 	GPL 2
 #
 # Description:	base settings for Fvwm-Nighshade
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/11/2012
-# Changed:	09/05/2012
+# Changed:	10/02/2012
 #-----------------------------------------------------------------------
 
 #***********************************************************************
@@ -18,19 +18,12 @@
 #-----------------------------------------------------------------------
 # The actual theme. Be changed dynamically via FuncChangeDecor
 #-----------------------------------------------------------------------
-InfoStoreAdd used_theme Ambience
-
-#-----------------------------------------------------------------------
-# Each Nightshade theme is located in $[FVWM_USERDIR]/themes
-# Here the path to the actual theme will be set
-# Be changed dynamically via FuncChangeDecor
-#-----------------------------------------------------------------------
-#SetEnv FNS_THEMEDIR themes/$[infostore.used_theme]
+InfoStoreAdd used_theme Tribal
 
 #-----------------------------------------------------------------------
 # wallpaper directory path.
 #-----------------------------------------------------------------------
-InfoStoreAdd wallpaper_dir $[FNS_SYSTEMDIR]/artwork/wallpapers
+InfoStoreAdd wallpaper_dir $[FVWM_USERDIR]/wallpapers
 
 #-----------------------------------------------------------------------
 # Banner image for FvwmBanner
@@ -60,7 +53,7 @@ InfoStoreAdd used_layout Horizontal
 #-----------------------------------------------------------------------
 # terminal
 #-----------------------------------------------------------------------
-InfoStoreAdd default_terminal konsole
+InfoStoreAdd default_terminal xterm
 
 #-----------------------------------------------------------------------
 # browser
