@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		Horizontal
-# Version:	1.0.5
+# Version:	1.0.6
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/16/2012
-# Changed:	10/02/2012
+# Changed:	10/03/2012
 #-----------------------------------------------------------------------
 #			   Top
 #
@@ -53,34 +53,67 @@ PipeRead 'echo InfoStoreAdd pager_geometry $[infostore.pager_width]x$[infostore.
 
 
 #=======================================================================
+# FvwmButtons Panel
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Panel width
+#-----------------------------------------------------------------------
+# the width composed of:
+#		+---+-----------------------+-------+-------+
+#		|   |                       |       |       |
+#		+---+-----------------------+-------+-------+
+#		menu stalonetray             cpumon  clock
+#
+# column_size should be 15 pixel long:
+# menu: 1 icon with 24 pixel -> 2x15 = 30 pixel
+# stalonetray: 6 icon with 24 pixel -> 12x15 = 180 pixel
+# cpumon: 5x15 pixel = 75 pixel
+# clock: 5x15 pixel = 75 pixel
+# total: 360 pixel
+
+# first the count of icons visible in stalonetray must set related to the
+# screen resolution
+PipeRead 	'if [ "$[vp.width]" -gt "1600" ]; then \
+				echo InfoStoreAdd tray_icons 7; \
+			elif [ "$[vp.width]" -gt "1400" ]; then \
+				echo InfoStoreAdd tray_icons 6; \
+			elif [ "$[vp.width]" -gt "1200" ]; then \
+				echo InfoStoreAdd tray_icons 5; \
+			else \
+				echo InfoStoreAdd tray_icons 4; \
+			fi'
+
+# needed tray columns
+PipeRead 'echo InfoStoreAdd tray_columns $(($[infostore.tray_icons]*2))'
+
+# needed columns
+PipeRead 'echo InfoStoreAdd columns $(($[infostore.tray_columns]+11))'
+
+# panel width
+PipeRead 'echo InfoStoreAdd panel_width $(($[infostore.columns]*15))'
+
+
+#-----------------------------------------------------------------------
+# Panel geometry
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd panel_geometry $[infostore.panel_width]x$[infostore.pager_height]-0+0''
+
+
+#=======================================================================
 # Icon Manager (WinList per Page)
 #=======================================================================
 
 #-----------------------------------------------------------------------
-# actual GlobalIconMan width
-#-----------------------------------------------------------------------
-PipeRead 'echo InfoStoreAdd iconman_button_width $(($[vp.width]/4))'
-
-#-----------------------------------------------------------------------
 # GlobalIconMan geometry
 #-----------------------------------------------------------------------
-InfoStoreAdd iconman_button_geometry $[infostore.iconman_button_width]x0
+InfoStoreAdd iconman_button_geometry $[infostore.panel_width]x0
 
 #-----------------------------------------------------------------------
 # GlobalIconMan Manager Geometry
 #-----------------------------------------------------------------------
 PipeRead "echo InfoStoreAdd yStartIman `perl -e 'printf \"%.0f\",$[vp.height]-(3/2*$[infostore.fontsize]*$[infostore.ratio])'`"
 InfoStoreAdd iconman_manager_geometry 1x0+0-$[infostore.yStartIman]
-
-
-#=======================================================================
-# FvwmButtons Panel
-#=======================================================================
-
-#-----------------------------------------------------------------------
-# Panel geometry
-#-----------------------------------------------------------------------
-PipeRead 'echo InfoStoreAdd panel_geometry $[infostore.iconman_button_width]x$[infostore.pager_height]-0+0''
 
 
 #=======================================================================
@@ -146,6 +179,7 @@ AddToFunc   ReloadLayoutParts
 + I FuncPrintDbgMsg ReloadLayoutParts
 + I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.systray.log $FVWM_USERDIR/.trayapplist'
 + I Load modules/HorizontalPanel
++ I Load modules/GlobalIconMan_ShowHide
 + I FuncRestartModuleByAlias FvwmButtons HorizontalPanel
 + I Wait stalonetray
 + I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist

@@ -1,5 +1,8 @@
 History:
 
+10/03/2012 V 0.5.13
+- change horizontal panel creation to fit different screen resolutions
+
 10/02/2012 V 0.5.12
 - fix positioning problem with GlobalIconman_ShowHide
 - change FE-* functions in GlobalIconman_ShowHide and GlobalIconman_TopBottom
