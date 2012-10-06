@@ -143,19 +143,25 @@ Shift-Alt+2			  Switch to page 2 with active window
 Shift-Alt+3			  Switch to page 3 with active window
 Shift-Alt+4			  Switch to page 4 with active window
 
-Shift-Alt+Cursor right            Switch to page right with active window
-Shift-Alt+Cursor left             Switch to page left with active window
+Shift-Alt+Cursor right			Switch to page right with active window
+Shift-Alt+Cursor left			Switch to page left with active window
+Shift-Alt+Cursor up				Switch to page up with active window
+Shift-Alt+Cursor down			Switch to page down with active window
 
 Shift-Ctrl+1			  Switch to page 1
 Shift-Ctrl+2			  Switch to page 2
 Shift-Ctrl+3			  Switch to page 3
 Shift-Ctrl+4			  Switch to page 4
 
-Shift-Ctrl+cursor right           Switch to page right
-Shift-Ctrl+cursor left            Switch to page left
+Shift-Ctrl+cursor right			Switch to page right
+Shift-Ctrl+cursor left			Switch to page left
+Shift-Ctrl+cursor up			Switch to page up
+Shift-Ctrl+cursor down			Switch to page down
 
-Shift-Alt-Ctrl+cursor right       Scroll right by 10% of a page
-Shift-Alt-Ctrl+cursor left        Scroll left by 10% of a page
+Shift-Alt-Ctrl+cursor right		Scroll right by 10% of a page
+Shift-Alt-Ctrl+cursor left		Scroll left by 10% of a page
+Shift-Alt-Ctrl+cursor up		Scroll up by 10% of a page
+Shift-Alt-Ctrl+cursor down		Scroll down by 10% of a page
 
 Ctrl-Alt+cursor right             Move mouse pointer right by 1% of a page
 Ctrl-Alt+cursor left              Move mouse pointer left by 1% of a page
@@ -254,8 +260,9 @@ them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues
 
 Mailinglist
 ===========
-There exists a mailing list under
-https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade
+There exist two mailing lists under
+common: 	https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade
+developing:	https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers
 
 To post to this group, you have to do the following:
 
@@ -272,6 +279,8 @@ To post to this group, you have to do the following:
 
 To unsubscribe from this group, send email to 
 fvwmnightshade+unsubscribe@googlegroups.com
+or
+fvwmnightshade-workers+unsubscribe@googlegroups.com
 
 
 Enjoy our work and hopefully you love Fvwm-Nightshade as we do :-)
