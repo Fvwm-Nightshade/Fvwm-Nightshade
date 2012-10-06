@@ -184,7 +184,7 @@ DestroyFunc ReloadLayoutParts
 AddToFunc   ReloadLayoutParts
 + I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.systray.log $FVWM_USERDIR/.trayapplist'
 + I Load modules/VerticalPanel
-+ I Load modules/GlobalIconMan_TopBottom
++ I Load modules/GlobalIconMan_ShowHide
 + I FuncRestartModuleByAlias FvwmButtons VerticalPanel
 + I Wait stalonetray
 + I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist
