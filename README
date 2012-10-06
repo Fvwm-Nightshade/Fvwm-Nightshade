@@ -25,7 +25,7 @@ Featurelist of Fvwm Nightshade:
 - Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
 - Taskbar to show running apps per page
-- Two layouts: horizontal and vertical (not finished yet)
+- Two layouts: horizontal and vertical
 
   - horizontal (top):
 			   Top

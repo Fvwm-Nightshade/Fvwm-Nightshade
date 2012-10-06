@@ -1,5 +1,11 @@
 History:
 
+10/06/2012 V 0.5.14
+- add functional vertical layout
+- adapt horizontal layout to fit the changes in the vertical layout
+- move some key bindings related to FvwmPager and menus into the
+  layout files
+
 10/03/2012 V 0.5.13
 - change horizontal panel creation to fit different screen resolutions
 

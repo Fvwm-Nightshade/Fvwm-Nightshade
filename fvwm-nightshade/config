@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.13
+InfoStoreAdd ns_version 0.5.14
 # Copyright (C) 2012
 #
 # Authors:
@@ -845,18 +845,12 @@ Key F12		A	SM	Pick Module FvwmIdent
 # press SHIFT-ALT arrow anywhere, move active
 # window to next/previous page
 #-----------------------------------------------------------------------
-Key Left	A	SM	FuncMoveWindowToPage -1p +0p
-Key Right	A	SM	FuncMoveWindowToPage +1p +0p
-#Key Up		A	SM	Nop
-#Key Down	A	SM	Nop
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
 
 #-----------------------------------------------------------------------
 # key 1-4 move current window to page n
 #-----------------------------------------------------------------------
-Key 1		A	SM	Current FuncMoveWindowToPage 0 0
-Key 2		A	SM	Current FuncMoveWindowToPage 1 0
-Key 3		A	SM	Current FuncMoveWindowToPage 2 0
-Key 4		A	SM	Current FuncMoveWindowToPage 3 0
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
 
 
 #***********************************************************************
@@ -868,8 +862,8 @@ Key 4		A	SM	Current FuncMoveWindowToPage 3 0
 #-----------------------------------------------------------------------
 Key Left	A	SCM	Scroll -10  +0
 Key Right	A	SCM	Scroll +10  +0
-#Key Up		A	SCM	Scroll  +0 -10
-#Key Down	A	SCM	Scroll  +0 +10
+Key Up		A	SCM	Scroll  +0 -10
+Key Down	A	SCM	Scroll  +0 +10
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT A to show all ALT related key bindings
@@ -921,18 +915,12 @@ Key Down	A	CM	CursorMove +0 +1
 #-----------------------------------------------------------------------
 # Go to page n
 #-----------------------------------------------------------------------
-Key 1		A	SC	FuncGotoPage 0 0
-Key 2		A	SC	FuncGotoPage 1 0
-Key 3		A	SC	FuncGotoPage 2 0
-Key 4		A	SC	FuncGotoPage 3 0
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
 
 #-----------------------------------------------------------------------
 # press SHIFT-CTRL arrow anywhere, and scroll by one page
 #-----------------------------------------------------------------------
-Key Left	A	SC	FuncGotoPage -1p +0p
-Key Right	A	SC	FuncGotoPage +1p +0p
-#Key Up		A	SC	FuncGotoPage +0p -1p
-#Key Down	A	SC	FuncGotoPage +0p +1p
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
 
 #-----------------------------------------------------------------------
 # open full windows oops menu
@@ -975,17 +963,7 @@ key C		A	SCM	FuncShowMessage  "CTRL Key Bindings" \
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT P to show all page related key bindings
 #-----------------------------------------------------------------------
-key P		A	SCM	FuncShowMessage  "Page Key Bindings" \
-"SHIFT-CTRL:" \
-"Cursor right/left: Switch to page right/left" \
-"1-4: Switch to page n" \
-"SHIFT-ALT:" \
-"Cursor right/left: Switch active window to page right/left" \
-"1-4: Switch active window to page n" \
-"ALT-CTRL:" \
-"Cursor right/left/up/down: Move mouse pointer by 1% of a page" \
-"SHIFT-ALT-CTRL:" \
-"Cursor right/left: Scroll right/left by 10% of a page"
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
 
 
 #=======================================================================
@@ -1834,33 +1812,12 @@ AddToFunc FuncStaysOnTopAndBack
 #-----------------------------------------------------------------------
 # Moves all windows of the same resource to another page
 #-----------------------------------------------------------------------
-DestroyMenu  MenuWindowGroupQuickMove
-AddToMenu    MenuWindowGroupQuickMove
-+ "&Right	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +1p +0p
-+ "&Left	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage -1p +0p
-#+ "D&own	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +0p +1p
-#+ "&Up  	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +0p -1p
-+ "" 						Nop
-+ "Page	1%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
-+ "Page	2%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
-+ "Page	3%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 2 0
-+ "Page	4%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 3 0
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
 
 #-----------------------------------------------------------------------
 # Move a window to left/right/1-4 page
 #-----------------------------------------------------------------------
-DestroyMenu  MenuWindowMoveTo
-AddToMenu    MenuWindowMoveTo
-+ "Move to ..." Title
-+ "$[gt.&Right	Page]%menu/window-move.xpm%"	AnimatedMove w+100 w
-+ "&Left	Page%menu/window-move.xpm%"	AnimatedMove w-100 w
-#+ "&Down	Page%menu/window-move.xpm%"	AnimatedMove w w+100
-#+ "&Up  	Page%menu/window-move.xpm%"	AnimatedMove w w-100
-+ "" 						Nop
-+ "Page	1%menu/window-move.xpm%"		FuncMoveWindowToPage 0 0
-+ "Page	2%menu/window-move.xpm%"		FuncMoveWindowToPage 1 0
-+ "Page	3%menu/window-move.xpm%"		FuncMoveWindowToPage 2 0
-+ "Page	4%menu/window-move.xpm%"		FuncMoveWindowToPage 3 0
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
 
 
 #=======================================================================

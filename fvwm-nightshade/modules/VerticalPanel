@@ -1,27 +1,29 @@
 #-----------------------------------------------------------------------
 # File:		VerticalPanel
-# Version:	1.0.1
+# Version:	1.0.2
 # Licence: 	GPL 2
 #
 # Description:	FvwmButtons panel for vertical layout. Position on the
 #		upper right side
 #
 #		+-----------+
-#		|           | clock 25 -> 5
+#		|           | clock
 #		+-----------+
-#		|           | CPUmon 30 -> 6
+#		|           | CPUmon
 #		+-----------+
-#		|           | stalonetray 25 -> 10
+#		|           | stalonetray
 #		|           |
 #		+-----------+
-#		|           | Menü button 25 -> 5
+#		|           | Menü button
 #		+-----------+
-#		|           | Winlist button (entsteht in der Mitte) 25 -> 5
+#		|           | Winlist button
 #		+-----------+
 #
-# Author:	Thomas Funk <t.funk@web.de>	
+# Author:	Thomas Funk <t.funk@web.de>
+#			Bernhard Popp <kermit.popp@googlemail.com>
+#
 # Created:	08/15/2012
-# Changed:	09/05/2012
+# Changed:	09/06/2012
 #-----------------------------------------------------------------------
 
 Style VerticalPanel !Title, Sticky, WindowListSkip, StaysOnBottom, HandleWidth 2
@@ -30,28 +32,25 @@ Style VerticalPanel !Title, Sticky, WindowListSkip, StaysOnBottom, HandleWidth 2
 #-----------------------------------------------------------------------
 # General
 #-----------------------------------------------------------------------
-#InfoStoreAdd panel_rows 63
-#PipeRead 'echo InfoStoreAdd row_height $(($[infostore.pager_height]/4))'
-#PipeRead 'echo InfoStoreAdd panel_height $(($[infostore.row_height]*$[infostore.panel_rows]))'
-
-InfoStoreAdd panel_columns 6
-#InfoStoreAdd vp_width_divider 10
-# column_size should be 15 pixel long -> vp.width:vp_width_divider:columns=15
-# the +1 is to ensure that all applets fit into each button
 PipeRead "echo InfoStoreAdd column_size `perl -e 'printf \"%.0f\",$[infostore.panel_width]/($[infostore.panel_columns]+1)'`"
 
 #-----------------------------------------------------------------------
-# For cpu applet
+# For systray
 #-----------------------------------------------------------------------
-PipeRead 'echo InfostoreAdd graph_width $(($[infostore.column_size]*6))'
-PipeRead "echo InfoStoreAdd graph_voffset `perl -e 'printf \"%.0f\",4*$[infostore.ratio]'`"
-PipeRead "echo InfoStoreAdd percentage_voffset `perl -e 'printf \"%.0f\",$[infostore.pager_height]'`"
+PipeRead 'echo InfostoreAdd tray_max_x $(($[infostore.tray_icons]+1))'
 
 #-----------------------------------------------------------------------
 # For clock applet
 #-----------------------------------------------------------------------
-#PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",$[infostore.row_height]/2*$[infostore.ratio]'`"
-PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",$[infostore.row_height]/2'`"
+PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",$[infostore.row_height]/2*$[infostore.ratio]'`"
+
+#-----------------------------------------------------------------------
+# For cpu applet
+#-----------------------------------------------------------------------
+InfostoreAdd graph_width $[infostore.panel_width]
+PipeRead 'echo InfostoreAdd graph_height $(($[infostore.row_height]*3))'
+PipeRead "echo InfoStoreAdd graph_voffset `perl -e 'printf \"%.0f\",2*$[infostore.ratio]'`"
+PipeRead "echo InfoStoreAdd percentage_voffset `perl -e 'printf \"%.0f\",3*$[infostore.row_height]*$[infostore.ratio]'`"
 
 
 #=======================================================================
@@ -62,7 +61,6 @@ PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",$[infostore.r
 # General
 #***********************************************************************
 DestroyModuleConfig VerticalPanel: *
-#PipeRead 'echo *VerticalPanel: Geometry $(($[vp.width]/$[infostore.vp_width_divider]))x$[infostore.panel_height]-0+0'
 *VerticalPanel: Geometry		$[infostore.panel_geometry]
 *VerticalPanel: Colorset		13
 *VerticalPanel: ActiveColorset		13
@@ -78,32 +76,31 @@ DestroyModuleConfig VerticalPanel: *
 #***********************************************************************
 
 # clock
-*VerticalPanel: (6x4, Colorset 13, Swallow (UseOld,Close,Kill) "conky_clock" \
+*VerticalPanel: ($[infostore.panel_columns]x4, Colorset 13, Swallow (UseOld,Close,Kill) "conky_clock" \
 		`Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.fontsize]}${voffset $[infostore.time_voffset]}$alignc${time %a %e %b %H:%M}' \
-		-c $[FVWM_USERDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
+		-c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
 		Action (mouse 0) Nop)
 
 # cpu
-*VerticalPanel: (6x4, Colorset 13, Swallow (UseOld,Close,Kill) "conky_cpu" \
-		`Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.fvwm_pager_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
-		-c $[FVWM_USERDIR]/layouts/rc-files/conkyrc_cpu -p 1`)
+*VerticalPanel: ($[infostore.panel_columns]x4, Colorset 13, Swallow (UseOld,Close,Kill) "conky_cpu" \
+		`Exec exec conky -t '${color $[fg.cs13]}${voffset $[infostore.graph_voffset]}${cpugraph $[infostore.graph_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
+		-c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 1`)
 
 # systray
-*VerticalPanel: (6x4, Right, Colorset 13)
-#*VerticalPanel: (6x4, Right, Colorset 13, Swallow (UseOld, Close, Kill) "stalonetray" \
-#		    `Exec exec stalonetray --geometry 1x1 --max-geometry 5x1 \
-#		    --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
-#		    --grow-gravity W --icon-gravity W --kludges force_icons_size -i 24 \
-#		    --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
+*VerticalPanel: ($[infostore.panel_columns]x4, Right, Colorset 13, Swallow (UseOld, Close, Kill) "stalonetray" \
+		    `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_icons]x1 \
+		    --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
+		    --grow-gravity E --icon-gravity E --kludges force_icons_size -i 24 \
+		    --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
 
 # menu button
-*VerticalPanel: (6x4, Colorset 13, Left, Padding 5 0, Title (Side) "Root Menu", ActionOnPress, \
+*VerticalPanel: ($[infostore.panel_columns]x4, Colorset 13, Left, Padding 5 0, Title (Side) "Root Menu", ActionOnPress, \
 		Icon icon_fns_24x24.png, \
 		ActiveIcon icon_fns_24x24.png, \
 		Action(Mouse 1) `Menu MenuRoot`)
 
 # winlist button
-*VerticalPanel: (6x4, Colorset 13, Left, Padding 5 0, Title (Side) "Window List", ActionOnPress, \
+*VerticalPanel: ($[infostore.panel_columns]x4, Colorset 13, Left, Padding 5 0, Title (Side) "Window List", ActionOnPress, \
 		Icon menu/windows.xpm, \
 		ActiveIcon menu/windows.xpm, \
 		Action(Mouse 1) `WindowList`)
