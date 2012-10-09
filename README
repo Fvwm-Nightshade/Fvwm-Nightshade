@@ -25,7 +25,7 @@ Featurelist of Fvwm Nightshade:
 - Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
 - Taskbar to show running apps per page
-- Two layouts: horizontal and vertical
+- Three different layouts: horizontal, vertical and G2like
 
   - horizontal (top):
 			   Top
@@ -46,12 +46,26 @@ Featurelist of Fvwm Nightshade:
     |        | IconManager
     +--------+
   
-    Panel in both with:
+    Panel content in both with:
     - Menu
     - Systray (stalonetray)
     - cpu graph (conky)
     - date and time (conky)
 
+  - G2like (top & bottom)
+	Topbar
+	+---+---+---------------------------------+----------+---------+---+
+	|   |   |                                 |          |         |   |
+	+---+---+---------------------------------+----------+---------+---+
+	Menu Personal                              Systray    Date    Logout
+	   
+
+	Bottombar
+	+---+----------------------------------------------+---------------+
+	|   |                                              |               |
+	+---+----------------------------------------------+---------------+
+	Desktop                                             Pager
+		 IconManager
 
 - Lock desk & screensaver (xscreensaver)
 - Personal menu via FvwmScript-PersonalMenu

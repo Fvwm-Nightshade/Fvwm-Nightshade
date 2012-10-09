@@ -1,0 +1,139 @@
+#-----------------------------------------------------------------------
+# File:		G2likeBottomBar
+# Version:	1.0.0
+# Licence: 	GPL 2
+#
+# Description:	Gnome like bottom bar with All iconify/deiconify button,
+#				windows list and pager with 4 virtual pages
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+# Created:	10/09/2012
+# Changed:	<MM/DD/YYYY>
+#-----------------------------------------------------------------------
+
+# Bottombar
+# +---+----------------------------------------------+-------------+-+
+# |   |                                              |             | |
+# +---+----------------------------------------------+-------------+-+
+# Desktop                                             Pager        End
+#      IconMan
+
+# Desktop:	2
+# End:		1
+# ------------
+#           3
+
+
+Style G2likeBottomBar !Title, Sticky, NeverFocus, WindowListSkip, StaysOnBottom, HandleWidth 2
+
+
+#=======================================================================
+# FvwmButtons G2likeBottomBar
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# find desktop icon
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk`"
+
+
+#=======================================================================
+# Pager
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Set the desk top size in units of physical screen size
+#
+#   +-----+-----+-----+-----+
+#   |     |     |     |     |
+#   +-----+-----+-----+-----+
+#
+#-----------------------------------------------------------------------
+DeskTopSize 4x1
+
+#-----------------------------------------------------------------------
+# FvwmPager height
+#-----------------------------------------------------------------------
+InfoStoreAdd pager_height $[infostore.bar_height]
+
+#-----------------------------------------------------------------------
+# FvwmPager width
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd pager_width `perl -e 'printf \"%.0f\",$[vp.width]/(5*$[infostore.ratio])'`"
+
+#-----------------------------------------------------------------------
+# FvwmPager columns
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd pager_columns `perl -e 'printf \"%.0f\",$[infostore.pager_width]/$[infostore.column_size]'`"
+
+#-----------------------------------------------------------------------
+# FvwmPager geometry
+#-----------------------------------------------------------------------
+InfoStoreAdd pager_geometry $[infostore.pager_width]x$[infostore.pager_height]-0-0'
+
+
+#=======================================================================
+# GlobalIconMan BottomBar
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# GlobalIconMan columns
+#-----------------------------------------------------------------------
+PipeRead 'echo InfostoreAdd iconman_columns $(($[infostore.columns]-$[infostore.pager_columns]-3))'
+
+#-----------------------------------------------------------------------
+# GlobalIconMan manager geometry
+#-----------------------------------------------------------------------
+InfoStoreAdd iconman_manager_geometry 8x1+0+0
+
+#-----------------------------------------------------------------------
+# GlobalIconMan geometry
+#-----------------------------------------------------------------------
+InfoStoreAdd iconman_button_geometry 175x$[infostore.bar_height]
+
+#-----------------------------------------------------------------------
+# GlobalIconMan Manager Tips
+#-----------------------------------------------------------------------
+InfoStoreAdd tips_iman always
+
+
+#=======================================================================
+# Bar
+#=======================================================================
+
+#***********************************************************************
+# General
+#***********************************************************************
+DestroyModuleConfig G2likeBottomBar: *
+*G2likeBottomBar: Geometry			$[infostore.bottombar_geometry]
+*G2likeBottomBar: Colorset			10
+*G2likeBottomBar: ActiveColorset	10
+*G2likeBottomBar: PressColorset	10
+
+*G2likeBottomBar: Rows				1
+*G2likeBottomBar: Columns			$[infostore.columns]
+*G2likeBottomBar: Frame			0
+
+#***********************************************************************
+# Buttons
+#***********************************************************************
+
+#-----------------------------------------------------------------------
+# menu button
+#-----------------------------------------------------------------------
+*G2likeBottomBar: (2x1, Colorset 10, Left, ActionOnPress, \
+		    Icon	$[infostore.desktop_icon], \
+		    ActiveIcon	$[infostore.desktop_icon], \
+		    Action(Mouse 1) Function ShowDesktop)
+
+
+#-----------------------------------------------------------------------
+# GlobalIconMan
+#-----------------------------------------------------------------------
+*G2likeBottomBar: ($[infostore.iconman_columns]x1, Colorset 10, Swallow "GlobalIconManBar")
+
+#-----------------------------------------------------------------------
+# FvwmPager
+#-----------------------------------------------------------------------
+*G2likeBottomBar: ($[infostore.pager_columns]x1, Colorset 10, Frame 1, Swallow "FvwmPager")
+

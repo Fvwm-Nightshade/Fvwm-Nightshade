@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		FvwmForm-FNS-BaseSetup
-# Version:	1.1.4
+# Version:	1.2.0
 # Licence: 	GPL 2
 #
 # Description:	Script to configure default settings of Fvwm-Nightshade
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/01/2012
-# Changed:	10/02/2012
+# Changed:	10/09/2012
 #-----------------------------------------------------------------------
 
 DestroyModuleConfig  FvwmForm-FNS-BaseSetup: *
@@ -61,10 +61,13 @@ DestroyModuleConfig  FvwmForm-FNS-BaseSetup: *
 *FvwmForm-FNS-BaseSetup: Line	left
 *FvwmForm-FNS-BaseSetup: Text 	"Used Layout:   "
 *FvwmForm-FNS-BaseSetup: Selection	SelItype single
-*FvwmForm-FNS-BaseSetup: Choice	LayoutH	LayoutH	on  "Horizontal (Panels on top/bottom)"
+*FvwmForm-FNS-BaseSetup: Choice	LayoutH	LayoutH	on  "Horizontal (Panels on top)"
 *FvwmForm-FNS-BaseSetup: Line	left
 *FvwmForm-FNS-BaseSetup: Text 	"               "
-*FvwmForm-FNS-BaseSetup: Choice	LayoutV	LayoutV	off "Vertical (Panels on right/left side)"
+*FvwmForm-FNS-BaseSetup: Choice	LayoutV	LayoutV	off "Vertical (Panels on right side)"
+*FvwmForm-FNS-BaseSetup: Line	left
+*FvwmForm-FNS-BaseSetup: Text 	"               "
+*FvwmForm-FNS-BaseSetup: Choice	LayoutG2 LayoutG2 off "G2like (Panels on top and bottom)"
 *FvwmForm-FNS-BaseSetup: Line
 
 *FvwmForm-FNS-BaseSetup: Line       left
@@ -97,10 +100,13 @@ DestroyModuleConfig  FvwmForm-FNS-BaseSetup: *
 									fi 
 *FvwmForm-FNS-BaseSetup: Command   	$(Theme? FuncWriteInfoStoreToFileAndSet used_theme $(Theme) $[FVWM_USERDIR]/.settings)
 *FvwmForm-FNS-BaseSetup: Command   	$(Splash? FuncWriteInfoStoreToFileAndSet used_banner $(Splash) $[FVWM_USERDIR]/.settings)
+*FvwmForm-FNS-BaseSetup: Command   	$(WpDir? FuncWriteInfoStoreToFileAndSet wallpaper_dir '$(WpDir)' $[FVWM_USERDIR]/.settings)
 *FvwmForm-FNS-BaseSetup: Command   	$(LayoutH? FuncWriteInfoStoreToFileAndSet used_layout Horizontal $[FVWM_USERDIR]/.settings)
 *FvwmForm-FNS-BaseSetup: Command   	$(LayoutH?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Horizontal ${FVWM_USERDIR}/.layout)
 *FvwmForm-FNS-BaseSetup: Command   	$(LayoutV? FuncWriteInfoStoreToFileAndSet used_layout Vertical $[FVWM_USERDIR]/.settings)
 *FvwmForm-FNS-BaseSetup: Command   	$(LayoutV?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Vertical ${FVWM_USERDIR}/.layout)
+*FvwmForm-FNS-BaseSetup: Command   	$(LayoutG2? FuncWriteInfoStoreToFileAndSet used_layout G2like $[FVWM_USERDIR]/.settings)
+*FvwmForm-FNS-BaseSetup: Command   	$(LayoutG2?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/G2like ${FVWM_USERDIR}/.layout)
 *FvwmForm-FNS-BaseSetup: Command   	$(Font? FuncWriteInfoStoreToFileAndSet used_font $(Font) $[FVWM_USERDIR]/.settings)
 *FvwmForm-FNS-BaseSetup: Command   	$(Fontsize? FuncWriteInfoStoreToFileAndSet fontsize $(Fontsize) $[FVWM_USERDIR]/.settings)
 *FvwmForm-FNS-BaseSetup: Command   	$(Terminal? FuncWriteInfoStoreToFileAndSet default_terminal $(Terminal) $[FVWM_USERDIR]/.settings)
@@ -115,11 +121,15 @@ DestroyModuleConfig  FvwmForm-FNS-BaseSetup: *
   '*SavedBaseSetup: Theme 	$(Theme) '		; /bin/echo \
   '*SavedBaseSetup: LayoutH	$(LayoutH?on) '		; /bin/echo \
   '*SavedBaseSetup: LayoutV  	$(LayoutV?on) '		; /bin/echo \
+  '*SavedBaseSetup: LayoutG2  	$(LayoutG2?on) '	; \
+) > ${FVWM_USERDIR}/.FvwmForm-FNS-BaseSetup
+
+*FvwmForm-FNS-BaseSetup: Command !(                                      /bin/echo \
   '*SavedBaseSetup: Font  	$(Font) '		; /bin/echo \
   '*SavedBaseSetup: Fontsize   	$(Fontsize) '		; /bin/echo \
   '*SavedBaseSetup: Terminal    $(Terminal) '		; /bin/echo \
   '*SavedBaseSetup: Browser     $(Browser) '		; /bin/echo \
-) > ${FVWM_USERDIR}/.FvwmForm-FNS-BaseSetup
+) >> ${FVWM_USERDIR}/.FvwmForm-FNS-BaseSetup
 
 *FvwmForm-FNS-BaseSetup: Button       restart "Reset"
 *FvwmForm-FNS-BaseSetup: Button       quit    "Cancel"
