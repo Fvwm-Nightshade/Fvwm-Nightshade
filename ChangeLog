@@ -8,6 +8,8 @@ History:
   - set in both bars the Styles !Iconifiable, !Maximizable, FixedSize, FixedPosition
   - change the button icon for personal because 'stock_bookmark' is not
     available in some icon themes
+  - change used colorset in both bars. Now the font color is always the same
+  - add ActiveColorset to some buttons in both bars
 
 10/09/2012 V 0.5.15
 - add new layout 'G2like' - it looks like Gnome 2 with a top and bottom bar

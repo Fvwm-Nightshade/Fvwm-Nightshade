@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeBottomBar
-# Version:	1.0.1
+# Version:	1.0.2
 # Licence: 	GPL 2
 #
 # Description:	Gnome like bottom bar with All iconify/deiconify button,
@@ -107,9 +107,9 @@ InfoStoreAdd tips_iman always
 #***********************************************************************
 DestroyModuleConfig G2likeBottomBar: *
 *G2likeBottomBar: Geometry			$[infostore.bottombar_geometry]
-*G2likeBottomBar: Colorset			10
-*G2likeBottomBar: ActiveColorset	10
-*G2likeBottomBar: PressColorset	10
+*G2likeBottomBar: Colorset			13
+*G2likeBottomBar: ActiveColorset	13
+*G2likeBottomBar: PressColorset	13
 
 *G2likeBottomBar: Rows				1
 *G2likeBottomBar: Columns			$[infostore.columns]
@@ -122,7 +122,8 @@ DestroyModuleConfig G2likeBottomBar: *
 #-----------------------------------------------------------------------
 # menu button
 #-----------------------------------------------------------------------
-*G2likeBottomBar: (2x1, Colorset 10, Left, ActionOnPress, \
+*G2likeBottomBar: (2x1, Colorset 13, ActiveColorset 11, \
+			Left, ActionOnPress, \
 		    Icon	$[infostore.desktop_icon], \
 		    ActiveIcon	$[infostore.desktop_icon], \
 		    Action(Mouse 1) Function ShowDesktop)

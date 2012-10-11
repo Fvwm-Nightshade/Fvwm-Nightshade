@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeTopBar
-# Version:	1.0.1
+# Version:	1.0.2
 # Licence: 	GPL 2
 #
 # Description:	Gnome like top bar with root menu, personal menu, systray,
@@ -107,9 +107,9 @@ PipeRead "echo InfoStoreAdd logout_icon `fns-find-icon -n 'system-log-out' -s 24
 #***********************************************************************
 DestroyModuleConfig G2likeTopBar: *
 *G2likeTopBar: Geometry			$[infostore.topbar_geometry]
-*G2likeTopBar: Colorset			10
-*G2likeTopBar: ActiveColorset	10
-*G2likeTopBar: PressColorset	10
+*G2likeTopBar: Colorset			13
+*G2likeTopBar: ActiveColorset	13
+*G2likeTopBar: PressColorset	13
 
 *G2likeTopBar: Rows				1
 *G2likeTopBar: Columns			$[infostore.columns]
@@ -122,7 +122,8 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 # menu button
 #-----------------------------------------------------------------------
-*G2likeTopBar: (5x1, Colorset 10, Left, Padding 5 0, Title (Side) "Menu", ActionOnPress, \
+*G2likeTopBar: (5x1, Colorset 13, ActiveColorset 11, \
+			Left, Padding 5 0, Title (Side) "Menu", ActionOnPress, \
 		    Icon	icon_fns_24x24.png, \
 		    ActiveIcon	icon_fns_24x24.png, \
 		    Action(Mouse 1) `Menu MenuRoot`)
@@ -130,7 +131,8 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 # personal menu button
 #-----------------------------------------------------------------------
-*G2likeTopBar: (6x1, Colorset 10, Left, Padding 5 0, Title (Side) "Personal", ActionOnPress, \
+*G2likeTopBar: (6x1, Colorset 13, ActiveColorset 11, \
+			Left, Padding 5 0, Title (Side) "Personal", ActionOnPress, \
 		    Icon	$[infostore.personal_icon], \
 		    ActiveIcon	$[infostore.personal_icon], \
 		    Action(Mouse 1) `Menu MenuFvwmPersonal`)
@@ -138,12 +140,12 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 # empty field
 #-----------------------------------------------------------------------
-*G2likeTopBar: ($[infostore.empty_field_columns]x1, Colorset 10)
+*G2likeTopBar: ($[infostore.empty_field_columns]x1, Colorset 13)
 
 #-----------------------------------------------------------------------
 # Systray
 #-----------------------------------------------------------------------
-*G2likeTopBar: ($[infostore.tray_columns]x1, Right, Colorset 10, \
+*G2likeTopBar: ($[infostore.tray_columns]x1, Right, Colorset 13, \
 			Swallow (UseOld, Close, Kill, Respawn) "stalonetray" \
 		    `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_max_x]x1 \
 		    --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
@@ -153,14 +155,14 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 # Cpuview
 #-----------------------------------------------------------------------
-*G2likeTopBar: (5x1, Colorset 10, Swallow (UseOld, Close, Kill, Respawn) "conky_cpu" \
+*G2likeTopBar: (5x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_cpu" \
 		    `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.pager_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
 		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 1`)
 
 #-----------------------------------------------------------------------
 # Clock
 #-----------------------------------------------------------------------
-*G2likeTopBar: (5x1, Colorset 10, Swallow (UseOld, Close, Kill, Respawn) "conky_clock" \
+*G2likeTopBar: (5x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_clock" \
 		    `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.fontsize]}${voffset 0}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
 		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
 		    Action (mouse 0) Nop)
@@ -168,7 +170,7 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 # logout button
 #-----------------------------------------------------------------------
-*G2likeTopBar: (2x1, Colorset 10, ActionOnPress, \
+*G2likeTopBar: (2x1, Colorset 13, ActiveColorset 11, ActionOnPress, \
 		    Icon	$[infostore.logout_icon], \
 		    ActiveIcon	$[infostore.logout_icon], \
 		    Action(Mouse 1) `Menu MenuFvwmQuit`)
