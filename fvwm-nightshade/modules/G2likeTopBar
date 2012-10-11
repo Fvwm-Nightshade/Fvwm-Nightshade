@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeTopBar
-# Version:	1.0.0
+# Version:	1.0.1
 # Licence: 	GPL 2
 #
 # Description:	Gnome like top bar with root menu, personal menu, systray,
@@ -8,7 +8,7 @@
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	10/09/2012
-# Changed:	<MM/DD/YYYY>
+# Changed:	10/11/2012
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -29,8 +29,8 @@
 #			23
 
 
-Style G2likeTopBar !Title, Sticky, NeverFocus, WindowListSkip, StaysOnBottom, HandleWidth 2
-
+Style G2likeTopBar !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
+Style G2likeTopBar StaysOnBottom, !Iconifiable, !Maximizable, FixedSize, FixedPosition
 
 #=======================================================================
 # Calculations
@@ -90,7 +90,7 @@ PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",3*$[infostore
 #-----------------------------------------------------------------------
 # Find Personal icon
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd personal_icon `fns-find-icon -n 'stock_bookmark' -s 24 -c 'actions' --notdesk`"
+PipeRead "echo InfoStoreAdd personal_icon `fns-find-icon -n 'exec' -s 24 -c 'mimetypes' --notdesk`"
 
 #-----------------------------------------------------------------------
 # find logout icon

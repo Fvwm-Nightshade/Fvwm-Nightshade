@@ -1,8 +1,21 @@
 History:
 
+10/11/2012 V 0.5.16
+- fix bug in bin/fns-find-icon that the wrong icon was found
+- change some parts in G2like layout:
+  - change top and bottom in EwmhBaseStruts that maximized windows won't
+    overlap bars
+  - set in both bars the Styles !Iconifiable, !Maximizable, FixedSize, FixedPosition
+  - change the button icon for personal because 'stock_bookmark' is not
+    available in some icon themes
+
 10/09/2012 V 0.5.15
 - add new layout 'G2like' - it looks like Gnome 2 with a top and bottom bar
 - add G2like to FvwmForm-FNS-BaseSetup
+- add two new options to bin/fns-find-icon:
+  -c category. Default is apps
+  --notdesk Don't search in desktop files. Default is false
+  Now it's possible to search for icons also
 
 10/06/2012 V 0.5.14
 - add functional vertical layout

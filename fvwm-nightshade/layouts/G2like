@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		G2like
-# Version:	1.0.0
+# Version:	1.0.1
 # Licence: 	GPL 2
 #
 # Description:	Gnome like layout with a top and bottom bar
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	10/09/2012
-# Changed:	<MM/DD/YYYY>
+# Changed:	10/11/2012
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -77,7 +77,7 @@ InfoStoreAdd bottombar_geometry $[vp.width]x$[infostore.bar_height]+0-0
 # Define bands at the edge of the screen. It is used to compute the
 # Working Area: EwmhBaseStruts left right top bottom 
 #-----------------------------------------------------------------------
-PipeRead 'echo EwmhBaseStruts 0 0 $[infostore.bar_height] $[infostore.bar_height]'
+PipeRead 'echo EwmhBaseStruts 0 0 $(($[infostore.bar_height]+4)) $(($[infostore.bar_height]+4))'
 
 #-----------------------------------------------------------------------
 # IconBox defines the area where FVWM will place any windows that are

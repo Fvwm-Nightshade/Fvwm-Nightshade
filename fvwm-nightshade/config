@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.15
+InfoStoreAdd ns_version 0.5.16
 # Copyright (C) 2012
 #
 # Authors:
@@ -1254,9 +1254,9 @@ AddToFunc StartFunction
 + I Test (!f $[FVWM_USERDIR]/.FvwmForm-FNS-BaseSetup) FvwmForm FvwmForm-FNS-BaseSetup
 
 #-----------------------------------------------------------------------
-# Set layout
+# load layout
 #-----------------------------------------------------------------------
-+ I Read $[FVWM_USERDIR]/.layout
++ I Load $[FVWM_USERDIR]/.layout
 
 AddToFunc StartFunction
 #-----------------------------------------------------------------------

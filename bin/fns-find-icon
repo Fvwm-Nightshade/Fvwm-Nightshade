@@ -1,10 +1,10 @@
 #!/usr/bin/python
 #-----------------------------------------------------------------------
 # File:        fns-find-icon
-# Version:     1.1.0
+# Version:     1.1.1
 # Licence:     GPL 2
 #
-# Description: find the needed iconpath for thumbnail function
+# Description: get the iconpath of an application or icon
 # Parameters:  -n name of the application/icon
 #              -i window id of the application
 #              -p more search path(s). Seperated with ':'
@@ -14,7 +14,7 @@
 #
 # Author:      Thomas Funk <t.funk@web.de>
 # Created:     09/22/2012
-# Changed:	   10/09/2012
+# Changed:	   10/11/2012
 #-----------------------------------------------------------------------
 
 import os, sys, string, time
@@ -22,13 +22,15 @@ import commands
 import fnmatch
 import argparse
 
-def search_file(filename, search_path, pathsep=os.pathsep):
+def search_file(filename, search_path, nodesktop=False, pathsep=os.pathsep):
     """ Given a search path, find file with requested name """
     for path in string.split(search_path, pathsep):
         if os.path.exists(path):
             file_list = os.listdir(path)
-            #pattern = filename+'.*'
-            pattern = '*'+filename+'*'
+            if nodesktop:
+				pattern = filename+'.*'
+            else:
+				pattern = '*'+filename+'*'
             filenames = fnmatch.filter(file_list, pattern)
             if len(filenames) == 0:
                 continue
@@ -37,8 +39,10 @@ def search_file(filename, search_path, pathsep=os.pathsep):
     return ''
 
 def get_default_theme ():
+    out = ''
     desktop_config = os.path.join(os.environ['FVWM_USERDIR'], '.FvwmForm-Desktop-Config')
-    out = commands.getoutput("awk '$2 ~ \"Theme\" { print $3 }' "+desktop_config)
+    if os.path.isfile(desktop_config):
+		out = commands.getoutput("awk '$2 ~ \"Theme\" { print $3 }' "+desktop_config)
     if out == '':
         return 'gnome'
     else:
@@ -72,7 +76,7 @@ def check_convert(iconpath, iconsize):
     
     
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='get the iconpath of an application')
+    parser = argparse.ArgumentParser(description='get the iconpath of an application or icon')
     parser.add_argument('-n', action="store", dest="name", help='name of the application')
     parser.add_argument('-i', action="store", dest="w_id", help='window id of the application')
     parser.add_argument('-p', action="store", dest="extend_path", help='more search path(s). Seperated with \':\'')
@@ -90,7 +94,7 @@ if __name__ == '__main__':
     not_desktop_file = args.not_desktop_file
     
     if app_name and window_id:
-        print "Use either '-n' or '-i'. Exiting."
+        sys.stderr.write("Use either '-n' or '-i'. Exiting.\n")
         sys.exit(1)
     
     ts = time.time()
@@ -124,24 +128,29 @@ if __name__ == '__main__':
 
     if not_desktop_file:
 		# search only for icons
-		icon_path = search_file(app_name, search_path)
+		icon_path = search_file(app_name, search_path, not_desktop_file)
     else:
 		# first find app's desktop file and get the icon path
 		icon_path = get_dektop_icon_path(app_name)
+
     if os.path.isabs(icon_path):
         # if icon is a svg, convert it
         icon_path = check_convert(icon_path, i_size)
         print icon_path
     else:
-        # check, if icon path is found in the search paths
-        icon_path = search_file(icon_path, search_path)
-        if os.path.isabs(icon_path):
-            print icon_path
+        if not not_desktop_file:
+			# check, if icon path is found in the search paths
+			icon_path = search_file(icon_path, search_path)
+			if not os.path.isabs(icon_path):
+				# get icon path from .menu
+				icon_path = get_menu_icon_path(app_name)
+				if icon_path == '':
+					sys.stderr.write("No icon found for app named '"+app_name+"' with size "+i_size+" in category '"+category+"'\n")
         else:
-            # get icon path from .menu
-            icon_path = get_menu_icon_path(app_name)
-            print icon_path
+			icon_path = ''
+			sys.stderr.write("No icon found named '"+app_name+"' with size "+i_size+" in category '"+category+"'\n")
 
+    print icon_path
     #print "duration: " + str(time.time()-ts)
     sys.exit()
 
