@@ -1,13 +1,15 @@
 #-----------------------------------------------------------------------
 # File:		G2like
-# Version:	1.0.1
+# Version:	1.0.2
 # Licence: 	GPL 2
 #
 # Description:	Gnome like layout with a top and bottom bar
 #
 # Author:	Thomas Funk <t.funk@web.de>	
+#			Bernhard Popp <kermit.popp@googlemail.com>
+#
 # Created:	10/09/2012
-# Changed:	10/11/2012
+# Changed:	10/14/2012
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -46,7 +48,7 @@ PipeRead "echo InfoStoreAdd columns `perl -e 'printf \"%.0f\",$[vp.width]/$[info
 #-----------------------------------------------------------------------
 # Bar height
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd bar_height `perl -e 'printf \"%.0f\",$[vp.height]/(23*$[infostore.ratio])'`"
+PipeRead "echo InfoStoreAdd bar_height `perl -e 'printf \"%.0f\",($[infostore.fontsize]*2)+(6*$[infostore.hratio])'`"
 
 #-----------------------------------------------------------------------
 # Bar geometry
@@ -57,11 +59,6 @@ InfoStoreAdd topbar_geometry $[vp.width]x$[infostore.bar_height]-0+0
 #=======================================================================
 # FvwmButtons G2likeBottomBar
 #=======================================================================
-
-#-----------------------------------------------------------------------
-# Bar height
-#-----------------------------------------------------------------------
-#PipeRead "echo InfoStoreAdd bar_height `perl -e 'printf \"%.0f\",$[vp.height]/(23*$[infostore.ratio])'`"
 
 #-----------------------------------------------------------------------
 # Bar geometry
@@ -213,8 +210,6 @@ DestroyMenu  MenuWindowGroupQuickMove
 AddToMenu    MenuWindowGroupQuickMove
 + "&Right	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +1p +0p
 + "&Left	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage -1p +0p
-#+ "D&own	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +0p +1p
-#+ "&Up  	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +0p -1p
 + "" 						Nop
 + "Page	1%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
 + "Page	2%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
@@ -229,8 +224,6 @@ AddToMenu    MenuWindowMoveTo
 + "Move to ..." Title
 + "$[gt.&Right	Page]%menu/window-move.xpm%"	AnimatedMove w+100 w
 + "&Left	Page%menu/window-move.xpm%"	AnimatedMove w-100 w
-#+ "&Down	Page%menu/window-move.xpm%"	AnimatedMove w w+100
-#+ "&Up  	Page%menu/window-move.xpm%"	AnimatedMove w w-100
 + "" 						Nop
 + "Page	1%menu/window-move.xpm%"		FuncMoveWindowToPage 0 0
 + "Page	2%menu/window-move.xpm%"		FuncMoveWindowToPage 1 0
