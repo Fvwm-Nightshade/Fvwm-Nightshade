@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		Horizontal
-# Version:	1.0.6
+# Version:	1.0.7
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/16/2012
-# Changed:	10/03/2012
+# Changed:	10/12/2012
 #-----------------------------------------------------------------------
 #			   Top
 #
@@ -39,12 +39,12 @@ DeskTopSize 4x1
 #-----------------------------------------------------------------------
 # actual pager height. Needed for the "top bar" modules also
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd pager_height `perl -e 'printf \"%.0f\",$[vp.height]/(21*$[infostore.ratio])'`"
+PipeRead "echo InfoStoreAdd pager_height $((($[infostore.fontsize]*3)+4))"
 
 #-----------------------------------------------------------------------
 # actual pager width
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd pager_width `perl -e 'printf \"%.0f\",$[vp.width]/(4*$[infostore.ratio])'`"
+PipeRead "echo InfoStoreAdd pager_width `perl -e 'printf \"%.0f\",((($[vp.width]/($[vp.height]/($[infostore.fontsize]*3)))*4)+10)'`"
 
 #-----------------------------------------------------------------------
 # FvwmPager geometry
@@ -112,11 +112,9 @@ InfoStoreAdd iconman_button_geometry $[infostore.panel_width]x0
 #-----------------------------------------------------------------------
 # GlobalIconMan Manager Geometry
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd yStartIman `perl -e 'printf \"%.0f\",$[vp.height]-(3/2*$[infostore.fontsize]*$[infostore.ratio])'`"
+PipeRead "echo InfoStoreAdd yStartIman `perl -e 'printf \"%.0f\",$[vp.height]-($[infostore.fontsize]+9)'`"
 InfoStoreAdd xStartIman 0
 InfoStoreAdd iconman_manager_geometry 1x0+$[infostore.xStartIman]-$[infostore.yStartIman]
-
-#InfoStoreAdd iconman_manager_geometry 1x0+0-$[infostore.yStartIman]
 
 #-----------------------------------------------------------------------
 # GlobalIconMan Manager Titlebar position
@@ -261,8 +259,6 @@ DestroyMenu  MenuWindowGroupQuickMove
 AddToMenu    MenuWindowGroupQuickMove
 + "&Right	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +1p +0p
 + "&Left	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage -1p +0p
-#+ "D&own	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +0p +1p
-#+ "&Up  	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +0p -1p
 + "" 						Nop
 + "Page	1%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
 + "Page	2%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
@@ -277,8 +273,6 @@ AddToMenu    MenuWindowMoveTo
 + "Move to ..." Title
 + "$[gt.&Right	Page]%menu/window-move.xpm%"	AnimatedMove w+100 w
 + "&Left	Page%menu/window-move.xpm%"	AnimatedMove w-100 w
-#+ "&Down	Page%menu/window-move.xpm%"	AnimatedMove w w+100
-#+ "&Up  	Page%menu/window-move.xpm%"	AnimatedMove w w-100
 + "" 						Nop
 + "Page	1%menu/window-move.xpm%"		FuncMoveWindowToPage 0 0
 + "Page	2%menu/window-move.xpm%"		FuncMoveWindowToPage 1 0
