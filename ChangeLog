@@ -3,6 +3,7 @@ History:
 10/14/2012 V 0.5.18
 - adapt G2like layout and its components to new ratios
 - remove DigitalXclock and Systray module from fvwm-nightshade/modules
+- change in G2likeTopBar the Personal icon from 'exec' to 'bookmark-new'
 
 
 10/12/2012 V 0.5.17
