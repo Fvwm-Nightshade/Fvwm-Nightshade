@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeTopBar
-# Version:	1.0.3
+# Version:	1.0.4
 # Licence: 	GPL 2
 #
 # Description:	Gnome like top bar with root menu, personal menu, systray,
@@ -95,7 +95,7 @@ PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",($[infostore.
 #-----------------------------------------------------------------------
 # Find Personal icon
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd personal_icon `fns-find-icon -n 'exec' -s 24 -c 'mimetypes' --notdesk`"
+PipeRead "echo InfoStoreAdd personal_icon `fns-find-icon -n 'bookmark-new' -s 24 -c 'actions' --notdesk`"
 
 #-----------------------------------------------------------------------
 # find logout icon
