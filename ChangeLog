@@ -1,5 +1,11 @@
 History:
 
+10/11/2012 V 0.5.17
+- replace ratio with hratio and wratio because of scaling problems in
+  pager, layouts, panels and titlebars
+- adapt horizontal layout and its components to new ratios
+- adapt decors to new ratios
+
 10/11/2012 V 0.5.16
 - fix bug in bin/fns-find-icon that the wrong icon was found
 - change some parts in G2like layout:
