@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.16
+InfoStoreAdd ns_version 0.5.17
 # Copyright (C) 2012
 #
 # Authors:
@@ -199,6 +199,8 @@ FuncSetThemeDir $[infostore.used_theme]
 # Adjust ratio to calculate resolution dependant things
 #-----------------------------------------------------------------------
 PipeRead "echo InfoStoreAdd ratio `perl -e 'printf \"%.1f\",log($[vp.width]*$[vp.height])/log(10)-log(1024*768)/log(10)+1'`"
+PipeRead "echo InfoStoreAdd hratio `perl -e 'printf \"%.1f\",($[vp.height]/1024)*(4/3)'`"
+PipeRead "echo InfoStoreAdd wratio `perl -e 'printf \"%.1f\",$[infostore.hratio]*(($[vp.width]/$[vp.height])/(4/3))'`"
 
 #-----------------------------------------------------------------------
 # used for 'Switching focus between windows. (ALT-Tab)' functionality
