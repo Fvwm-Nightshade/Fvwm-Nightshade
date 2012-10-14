@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.17
+InfoStoreAdd ns_version 0.5.18
 # Copyright (C) 2012
 #
 # Authors:
@@ -473,16 +473,10 @@ Style * IconBackgroundRelief 0
 Style Fvwm* Colorset 0
 
 #-----------------------------------------------------------------------
-# xclock
-#-----------------------------------------------------------------------
-Style XClock  !Title
-Style XClock  HandleWidth 2
-
-#-----------------------------------------------------------------------
 # stalonetray
 #-----------------------------------------------------------------------
-Style stalonetray !Title
-Style stalonetray HandleWidth 2
+#Style stalonetray !Title
+#Style stalonetray HandleWidth 2
 
 #-----------------------------------------------------------------------
 # FvwmBanner
@@ -543,16 +537,9 @@ Style FvwmIdent   EWMHMiniIconOverride, Icon question.xpm, MiniIcon mini.questio
 # Stalonetray
 #-----------------------------------------------------------------------
 Style stalonetray EWMHUseStackingOrderHints
-Style stalonetray Sticky
+#Style stalonetray Sticky
 Style stalonetray WindowListSkip
-Style stalonetray StaysOnBottom
-
-#-----------------------------------------------------------------------
-# xclock
-#-----------------------------------------------------------------------
-Style XClock Sticky
-Style XClock WindowListSkip
-Style XClock StaysOnBottom
+#Style stalonetray StaysOnBottom
 
 #-----------------------------------------------------------------------
 # FvwmBanner
@@ -1362,7 +1349,7 @@ DestroyFunc FuncAppCheck
 AddToFunc   FuncAppCheck
 # xterm
 + I Test (!x xterm) FuncPrintMsg "AppCheck" "xterm (view, edit) not installed"
-# xclock
+# clock, cpu
 + I Test (!x conky) FuncPrintMsg "AppCheck" "conky (clock, cpu) not installed"
 # default terminal
 + I Test (!x $[infostore.default_terminal]) FuncPrintMsg "AppCheck" "default terminal $[infostore.default_terminal] not installed"

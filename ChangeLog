@@ -1,6 +1,11 @@
 History:
 
-10/11/2012 V 0.5.17
+10/14/2012 V 0.5.18
+- adapt G2like layout and its components to new ratios
+- remove DigitalXclock and Systray module from fvwm-nightshade/modules
+
+
+10/12/2012 V 0.5.17
 - replace ratio with hratio and wratio because of scaling problems in
   pager, layouts, panels and titlebars
 - adapt horizontal layout and its components to new ratios
