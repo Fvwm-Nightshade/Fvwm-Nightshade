@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeBottomBar
-# Version:	1.0.3
+# Version:	1.0.4
 # Licence: 	GPL 2
 #
 # Description:	Gnome like bottom bar with All iconify/deiconify button,
@@ -10,7 +10,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	10/09/2012
-# Changed:	10/14/2012
+# Changed:	10/15/2012
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -62,7 +62,7 @@ InfoStoreAdd pager_height $[infostore.bar_height]
 #-----------------------------------------------------------------------
 # FvwmPager width
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd pager_width `perl -e 'printf \"%.0f\",5+($[vp.width]/($[vp.width]/$[infostore.bar_height]))*5'`"
+PipeRead "echo InfoStoreAdd pager_width `perl -e 'printf \"%.0f\",5+(($[vp.width]/($[vp.height]/$[infostore.bar_height]))*4)'`"
 
 #-----------------------------------------------------------------------
 # FvwmPager columns
