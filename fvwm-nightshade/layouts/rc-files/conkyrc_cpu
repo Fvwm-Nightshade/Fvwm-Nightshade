@@ -1,3 +1,21 @@
+#-----------------------------------------------------------------------
+# File:		conkyrc_cpu
+# Version:	1.0.1
+# Licence: 	GPL 2
+#
+# Description:	conky config for cpu applet
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+#
+# Created:	08/11/2012
+# Changed:	10/19/2012
+#-----------------------------------------------------------------------
+
+# Use Xft?
+use_xft yes
+xftalpha 1
+text_buffer_size 2048
+
 # Update interval in seconds
 update_interval 1
 

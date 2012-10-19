@@ -1,3 +1,16 @@
+#-----------------------------------------------------------------------
+# File:		conkyrc_clock
+# Version:	1.0.0
+# Licence: 	GPL 2
+#
+# Description:	conky config for clock/date applet
+#
+# Author:	Thomas Funk <t.funk@web.de>
+#	
+# Created:	08/11/2012
+# Changed:	<MM/DD/YYYY>
+#-----------------------------------------------------------------------
+
 # Use Xft?
 use_xft yes
 xftalpha 1
