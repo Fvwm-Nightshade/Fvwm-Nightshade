@@ -1,5 +1,15 @@
 History:
 
+10/19/2012 V 0.5.20
+- fix bug in fvwm/FvwmForm-FNS-BaseSetup that an error occur in while writing
+  WpDir to ~/.settings
+- fix bug that conky cpu applet won't display the percentage in the right font
+- add comment header in conkyrc files
+- change default font from Arial to Sans
+- use in HorizontalPanel same calculations for clock/date applet than in G2likeTopBar
+  because of sizing problems with resolution <= 1024x768
+
+
 10/16/2012 V 0.5.19
 - fix bugs and display problems in Horizontal and G2like layout
 - fix display problems in decors
