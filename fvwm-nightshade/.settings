@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		.settings
-# Version:	1.0.3
+# Version:	1.0.4
 # Licence: 	GPL 2
 #
 # Description:	base settings for Fvwm-Nighshade
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/11/2012
-# Changed:	10/02/2012
+# Changed:	10/19/2012
 #-----------------------------------------------------------------------
 
 #***********************************************************************
@@ -33,7 +33,7 @@ InfoStoreAdd used_banner $[FNS_SYSTEMDIR]/artwork/splashs/splash_fns_small.png
 #-----------------------------------------------------------------------
 # default used font for all Fvwm parts
 #-----------------------------------------------------------------------
-InfoStoreAdd used_font Arial
+InfoStoreAdd used_font Sans
 
 #-----------------------------------------------------------------------
 # default font size
