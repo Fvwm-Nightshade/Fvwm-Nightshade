@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      1.0.2
+# Version:      1.0.3
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      09/22/2012
+# Changed:      10/22/2012
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -86,7 +86,7 @@ install:
 	fi
 
 	echo "-> install manpages"
-	#install -d -m 644 man/* $(man1dir)
+	install -d -m 644 man/* $(man1dir)
 
 	echo "Fvwm-Nightshade is installed. Thanks."
 	
@@ -118,8 +118,8 @@ uninstall:
 	fi
 	
 	echo "-> uninstall manpages"
-	#for file in $(fns_manpages) ; do \
-	#  -rm $(man1dir)/$$file; done
+	for file in $(fns_manpages) ; do \
+	  -rm $(man1dir)/$$file; done
 
 	echo "Fvwm-Nightshade is now removed. Only ~/.fvwm-nightshade exists."
 	echo "If you don't need it anymore remove it by hand."
