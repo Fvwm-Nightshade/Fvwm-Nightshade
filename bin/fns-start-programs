@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		fns-start-programs
-# Version:	3.0.2
+# Version:	3.0.3
 # Licence: 	GPL 2
 #
 # Description:	shell script to execute command strings which will be 
@@ -12,10 +12,44 @@
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/13/2012
-# Changed:	09/04/2012
+# Changed:	10/22/2012
 #-----------------------------------------------------------------------
 
 #!/bin/bash
+
+version=3.0.3
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+then
+	echo "------------------------------------------------------------------------"
+	echo "Usage: `basename $0` <type> <infile>"
+	echo "       <type>          name printed in [] to stderr"
+	echo "       <infile>        execute command(s) found in infile"
+	echo "       -h|--help       short help"
+	echo "       -v|--version    version"
+	echo
+	echo "Example:"
+	echo "`basename $0` autostart $FVWM_USERDIR/.autostart"
+	echo
+	echo "Output in stderr:"
+	echo "[Fvwm-Nightshade][autostart]: 'bla' not running. Starting now."
+	echo "------------------------------------------------------------------------"
+	exit 0
+elif [ "$1" = "-v" ] || [ "$1" = "--version" ]
+then
+	echo `basename $0` V $version
+	exit 0
+fi
+
+if [ $# -lt 2 ]
+then
+	echo Not enough parameter! Exiting.
+	exit 1
+elif  [ $# -gt 2 ]
+then
+	echo Too much parameter! Exiting.
+	exit 1
+fi
 
 type=$1
 infile=$2
@@ -34,14 +68,14 @@ then
 	then
             echo [Fvwm-Nightshade][$type]: \'$REPLY\' is already running. Skipping. 2>&1
         else
-            echo [Fvwm-Nightshade][$type]: \'$REPLY\' not running. Will be started now. 2>&1
+            echo [Fvwm-Nightshade][$type]: \'$REPLY\' not running. Starting now. 2>&1
             $REPLY &
             sleep 1
         fi
     done <<< "$commands"
     unset IFS
 else
-    echo [Fvwm-Nightshade][$type]: No $infile found 2>&1
+    echo [Fvwm-Nightshade][$type]: No file \'$infile\' found 2>&1
     exit 1
 fi
 exit 0
