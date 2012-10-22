@@ -1,5 +1,18 @@
 History:
 
+10/23/2012 V 0.5.21
+- add '--version' to bin/fns-find-icon
+- activate in Makefile install/uninstall manpages
+- add man/ and doc/html
+- add man/fns-find-icon.1.gz and doc/html/fns-find-icon.html
+- add asciidoc/ for manpage source files + create.sh to built man and html
+- add usage to bin/fns-start-programs and fns-built-trayapplist
+- add man/fns-start-programs.1.gz, doc/html/fns-start-programs.html and 
+  asciidoc/fns-start-programs.txt
+- add man/fns-built-trayapplist.1.gz, doc/html/fns-built-trayapplist.html and 
+  asciidoc/fns-built-trayapplist.txt
+
+
 10/19/2012 V 0.5.20
 - fix bug in fvwm/FvwmForm-FNS-BaseSetup that an error occur in while writing
   WpDir to ~/.settings
