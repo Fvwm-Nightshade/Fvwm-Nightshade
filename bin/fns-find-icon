@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-----------------------------------------------------------------------
 # File:        fns-find-icon
-# Version:     1.1.1
+# Version:     1.1.2
 # Licence:     GPL 2
 #
 # Description: get the iconpath of an application or icon
@@ -11,10 +11,11 @@
 #              -s source icon size. Default is 48
 #			   -c category. Default is apps
 #			   --notdesk Don't search in desktop files. Default is false
+#			   --version Prints version
 #
 # Author:      Thomas Funk <t.funk@web.de>
 # Created:     09/22/2012
-# Changed:	   10/11/2012
+# Changed:	   10/22/2012
 #-----------------------------------------------------------------------
 
 import os, sys, string, time
@@ -77,6 +78,7 @@ def check_convert(iconpath, iconsize):
     
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='get the iconpath of an application or icon')
+    parser.add_argument('--version', action='version', version='%(prog)s V 1.1.2')
     parser.add_argument('-n', action="store", dest="name", help='name of the application')
     parser.add_argument('-i', action="store", dest="w_id", help='window id of the application')
     parser.add_argument('-p', action="store", dest="extend_path", help='more search path(s). Seperated with \':\'')
