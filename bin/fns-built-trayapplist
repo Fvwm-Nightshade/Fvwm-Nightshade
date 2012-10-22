@@ -1,22 +1,53 @@
 #-----------------------------------------------------------------------
-# File:		fns-built-trayapplist.sh
-# Version:	1.0.1
+# File:		fns-built-trayapplist
+# Version:	1.0.2
 # Licence: 	GPL 2
 #
 # Description:	shell script to generate a list of actual available
 #		applets in systray (stalonetray)
 #
-# Parameters:	fns-built-trayapplist.sh <stalonetray_logfile> <applist_file>
+# Parameters:	fns-built-trayapplist <stalonetray_logfile> <applist_file>
 #
 # Remarks:	stalonetray must started with --log-level info and
 #		output redirected with 2>stalonetray_logfile
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/13/2012
-# Changed:	08/23/2012
+# Changed:	10/23/2012
 #-----------------------------------------------------------------------
 
 #!/bin/bash
+
+version=1.0.2
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+then
+	echo "------------------------------------------------------------------------"
+	echo "Usage: `basename $0` <logfile> <appfile>"
+	echo "       <logfile>       path to stalonetray logfile"
+	echo "       <appfile>       path to app list file"
+	echo "       -h|--help       short help"
+	echo "       -v|--version    version"
+	echo
+	echo "Example:"
+	echo "`basename $0` ~/systray.log $FVWM_USERDIR/.applist"
+	echo "------------------------------------------------------------------------"
+	exit 0
+elif [ "$1" = "-v" ] || [ "$1" = "--version" ]
+then
+	echo `basename $0` V $version
+	exit 0
+fi
+
+if [ $# -lt 2 ]
+then
+	echo Not enough parameter! Exiting.
+	exit 1
+elif  [ $# -gt 2 ]
+then
+	echo Too much parameter! Exiting.
+	exit 1
+fi
 
 infile=$1
 outfile=$2
