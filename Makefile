@@ -17,10 +17,10 @@ tarname 	= $(package)
 distdir 	= ../$(tarname)-$(version)
 
 prefix 		?= /usr/local
-exec_prefix 	= $(prefix)
+exec_prefix = $(prefix)
 bindir 		= $(exec_prefix)/bin
-datadir 	=  $(prefix)/share
-mandir 		= $(prefix)/man
+datadir 	= $(prefix)/share
+mandir 		= $(datadir)/man
 man1dir 	= $(mandir)/man1
 docdir 		= $(datadir)/doc
 
@@ -86,6 +86,7 @@ install:
 	fi
 
 	echo "-> install manpages"
+	install -d $(man1dir)
 	install -m 644 man/* $(man1dir)
 
 	echo "Fvwm-Nightshade is installed. Thanks."
@@ -119,7 +120,8 @@ uninstall:
 	
 	echo "-> uninstall manpages"
 	for file in $(fns_manpages) ; do \
-	  rm -f $(man1dir)/$$file; done
+	  rm -f $(man1dir)/$$file; \
+	done
 
 	echo "Fvwm-Nightshade is now removed. Only ~/.fvwm-nightshade exists."
 	echo "If you don't need it anymore remove it by hand."
