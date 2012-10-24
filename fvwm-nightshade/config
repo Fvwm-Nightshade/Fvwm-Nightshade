@@ -1145,25 +1145,27 @@ AddToFunc FuncChangeDecor
 #-----------------------------------------------------------------------
 DestroyFunc FuncWriteInfoStoreToFileAndSet
 AddToFunc   FuncWriteInfoStoreToFileAndSet
-+ I PipeRead 'if [ `grep -c $0 $2` -gt 0 ] ; then \
-				sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$1\\"#" $2; \
++ I PipeRead 'new=`echo "$1" | sed "s/[ \t]*$//"`; \
+			if [ `grep -c $0 $2` -gt 0 ] ; then \
+				sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$new\\"#" $2; \
 			else \
-				sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$1\\"" $2; \
-			fi;'
-+ I InfoStoreAdd $0 "$1"
+				sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$new\\"" $2; \
+			fi; \
+			echo InfoStoreAdd $0 "$new"'
 
 #-----------------------------------------------------------------------
 # Update/Create an SetEnv variable in a file
 # FuncWriteSetEnvToFile <var_name> <var_value> <file>
 #-----------------------------------------------------------------------
-DestroyFunc FuncWriteSetEnvToFileAndSet
-AddToFunc   FuncWriteSetEnvToFileAndSet
-+ I PipeRead 'if [ `grep -c "$0" $2` -gt 0 ] ; then \
-				sed -i --follow-symlinks "s#^SetEnv $0.*#SetEnv $0 \\"$1\\"#" $2; \
+DestroyFunc FuncWriteSetEnvToFile
+AddToFunc   FuncWriteSetEnvToFile
++ I PipeRead 'new=`echo "$1" | sed "s/[ \t]*$//"`; \
+			if [ `grep -c $0 $2` -gt 0 ] ; then \
+				sed -i --follow-symlinks "s#^SetEnv $0.*#SetEnv $0 \\"$new\\"#" $2; \
 			else \
-				sed -i --follow-symlinks "$ a\SetEnv $0 \\"$1\\"" $2; \
-			fi;'
-+ I SetEnv $0 "$1"
+				sed -i --follow-symlinks "$ a\SetEnv $0 \\"$new\\"" $2; \
+			fi; \
+			echo InfoStoreAdd $0 "$new"'
 
 #-----------------------------------------------------------------------
 # Check which appliction are installed to get full functionality
