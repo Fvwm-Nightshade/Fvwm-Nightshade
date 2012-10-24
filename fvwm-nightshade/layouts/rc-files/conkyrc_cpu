@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		conkyrc_cpu
-# Version:	1.0.1
+# Version:	1.0.2
 # Licence: 	GPL 2
 #
 # Description:	conky config for cpu applet
@@ -8,13 +8,13 @@
 # Author:	Thomas Funk <t.funk@web.de>	
 #
 # Created:	08/11/2012
-# Changed:	10/19/2012
+# Changed:	10/24/2012
 #-----------------------------------------------------------------------
 
 # Use Xft?
 use_xft yes
-xftalpha 1
-text_buffer_size 2048
+#xftalpha 1
+#text_buffer_size 2048
 
 # Update interval in seconds
 update_interval 1
@@ -33,7 +33,7 @@ own_window_type normal
 #own_window_hints undecorated,skip_taskbar,skip_pager
 
 # Use double buffering (reduces flicker, may not work for everyone)
-double_buffer yes
+#double_buffer yes
 
 # Minimum size of text area
 #minimum_size 1 1

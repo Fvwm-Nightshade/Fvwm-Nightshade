@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		conkyrc_clock
-# Version:	1.0.0
+# Version:	1.0.1
 # Licence: 	GPL 2
 #
 # Description:	conky config for clock/date applet
@@ -13,8 +13,8 @@
 
 # Use Xft?
 use_xft yes
-xftalpha 1
-text_buffer_size 2048
+#xftalpha 1
+#text_buffer_size 2048
 
 # Update interval in seconds
 update_interval 1
@@ -33,7 +33,7 @@ own_window_type normal
 own_window_hints undecorated,skip_taskbar,skip_pager
 
 # Use double buffering (reduces flicker, may not work for everyone)
-double_buffer yes
+#double_buffer yes
 
 # Minimum size of text area
 #minimum_size 10 10
