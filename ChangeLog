@@ -1,12 +1,24 @@
 History:
 
+10/24/2012 V 0.5.22
+- add possibility to de-/activate splash in FvwmForm-FNS-BaseSetup
+- fix bug that wallpaper links will set only at initial use of FvwmForm-FNS-BaseSetup
+- remove possibility in FvwmForm-FNS-BaseSetup to change wallpaper directory
+- fix bug in FuncWriteInfoStoreToFileAndSet that strings like "xterm -fn 10x20"
+  will write completly
+- add new function FuncWriteSetEnvToFileAndSet to config to write SetEnv 
+  vars to files
+- move InfoStore wallpaper_dir from .settings back into config
+- rollout key bindings into .bindings for later changing by user
+
+
 10/23/2012 V 0.5.21
 - add '--version' to bin/fns-find-icon
 - activate in Makefile install/uninstall manpages
 - add man/ and doc/html
 - add man/fns-find-icon.1.gz and doc/html/fns-find-icon.html
 - add asciidoc/ for manpage source files + create.sh to built man and html
-- add usage to bin/fns-start-programs and fns-built-trayapplist
+- add usage to bin/fns-start-programs and bin/fns-built-trayapplist
 - add man/fns-start-programs.1.gz, doc/html/fns-start-programs.html and 
   asciidoc/fns-start-programs.txt
 - add man/fns-built-trayapplist.1.gz, doc/html/fns-built-trayapplist.html and 
