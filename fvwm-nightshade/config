@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.22
+InfoStoreAdd ns_version 0.5.23
 # Copyright (C) 2012
 #
 # Authors:
@@ -1157,8 +1157,8 @@ AddToFunc   FuncWriteInfoStoreToFileAndSet
 # Update/Create an SetEnv variable in a file
 # FuncWriteSetEnvToFile <var_name> <var_value> <file>
 #-----------------------------------------------------------------------
-DestroyFunc FuncWriteSetEnvToFile
-AddToFunc   FuncWriteSetEnvToFile
+DestroyFunc FuncWriteSetEnvToFileAndSet
+AddToFunc   FuncWriteSetEnvToFileAndSet
 + I PipeRead 'new=`echo "$1" | sed "s/[ \t]*$//"`; \
 			if [ `grep -c $0 $2` -gt 0 ] ; then \
 				sed -i --follow-symlinks "s#^SetEnv $0.*#SetEnv $0 \\"$new\\"#" $2; \
