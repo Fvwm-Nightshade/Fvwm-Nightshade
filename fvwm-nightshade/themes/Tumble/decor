@@ -1,15 +1,15 @@
 ########################################################################
 # File:		decor
-# Version:	0.1.3
+# Version:	0.1.4
 # Licence: 	GPL 2
 #
-# Description:	decor parts (titlebar, buttons, menus) of Air theme
+# Description:	decor parts (titlebar, buttons, menus) of Tumble theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
-#			Bernhard Popp <kermit.popp@googlemail.com>
+#		Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	06/08/2012
-# Changed:	10/14/2012
+# Changed:	10/25/2012
 ########################################################################
 
 Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",1.5*$[infostore.fontsize]'`"

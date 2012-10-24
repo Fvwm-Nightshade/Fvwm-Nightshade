@@ -10,7 +10,7 @@
        /  |/ / // __ `/ __ \/ __/ ___/ __ \/ __ `/ __  // _ \
       / /|  / // /_/ / / / / /_(__  ) / / / /_/ / /_/ //  __/
      /_/ |_/_/ \__, /_/ /_/\__/____/_/ /_/\__,_/\__,_/ \___/ 
-               /____/                                         
+              /____/                                         
  
 
 Welcome to Fvwm Nightshade! This project aims to be a lightweight but
@@ -72,7 +72,7 @@ Featurelist of Fvwm Nightshade:
 - Background configurable with thumb browser (imagemagick and eterm)
 - Animation control of window moves
 - Simple "Run" command with FvwmForm
-- Some themes/decors (Default, Ambience, Tribal and Air). Can be changed
+- Some themes/decors (Tumble, Ambience, Tribal and Air). Can be changed
   on the fly without restart
 - Own themes and layouts can be created with templates (at the moment
   only theme templates available)

@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		FvwmForm-FNS-BaseSetup
-# Version:	1.2.2
+# Version:	1.2.3
 # Licence: 	GPL 2
 #
 # Description:	Script to configure default settings of Fvwm-Nightshade
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/01/2012
-# Changed:	10/24/2012
+# Changed:	10/25/2012
 #-----------------------------------------------------------------------
 
 DestroyModuleConfig  FvwmForm-FNS-BaseSetup: *
@@ -43,7 +43,7 @@ DestroyModuleConfig  FvwmForm-FNS-BaseSetup: *
 *FvwmForm-FNS-BaseSetup: Line	left
 *FvwmForm-FNS-BaseSetup: Text 	"Used Theme:    "
 *FvwmForm-FNS-BaseSetup: Input 	Theme 15 "Tribal"
-*FvwmForm-FNS-BaseSetup: Text 	" (Others: Default, Air, Ambience)"
+*FvwmForm-FNS-BaseSetup: Text 	" (Others: Tumble, Air, Ambience)"
 *FvwmForm-FNS-BaseSetup: Line
 
 *FvwmForm-FNS-BaseSetup: Line	left
