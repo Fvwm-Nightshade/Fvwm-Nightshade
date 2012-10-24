@@ -192,7 +192,7 @@ InfoStoreAdd fvwm_wallpaper $[FVWM_USERDIR]/.wallpaper
 # 1.2.2 Environment settings
 #***********************************************************************
 # These settings are rolled out to $[FVWM_USERDIR]/.settings
-# They can configured with the FvwmForm-FNS-BaseSetup
+# They can configured with the FNS-BaseSetup
 Load .settings
 FuncSetThemeDir $[infostore.used_theme]
 
@@ -1050,8 +1050,8 @@ AddToFunc StartFunction
 # start xscreensaver daemon for locking
 + I Test (x xscreensaver-command) Test (Init) Exec xscreensaver -no-splash
 #-----------------------------------------------------------------------
-# start FvwmForm-FNS-BaseSetup if not configured
-+ I Test (!f $[FVWM_USERDIR]/.FvwmForm-FNS-BaseSetup) FvwmForm FvwmForm-FNS-BaseSetup
+# start FNS-BaseSetup if not configured
++ I Test (!f $[FVWM_USERDIR]/.FNS-BaseSetup) FvwmForm FNS-BaseSetup
 
 #-----------------------------------------------------------------------
 # load layout
@@ -1878,7 +1878,7 @@ AddToMenu   MenuConfiguration
 + "$[gt.Sc&reen Saver]%menu/display.xpm%"      			Popup MenuXScreenSaver
 + "$[gt.&Decoration]%menu/themes.xpm%"     	    		Popup MenuDecoration
 + "$[gt.Fvwm Form &Defaults]%menu/configuration.xpm%"  		Module FvwmForm FvwmForm-Form
-+ "$[gt.Fvwm-&Nightshade Setup]%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%"  FvwmForm FvwmForm-FNS-BaseSetup
++ "$[gt.Fvwm-&Nightshade Setup]%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%"  FvwmForm FNS-BaseSetup
 + "$[gt.&System Bell]%menu/sound.xpm%"                		FvwmScript FvwmScript-BellSetup
 + "$[gt.&Screen]%menu/display.xpm%"            			FvwmScript FvwmScript-ScreenSetup
 + "$[gt.&CPU Performance]%menu/monitoring.xpm%"            			FvwmScript FvwmScript-CPU-Performance
