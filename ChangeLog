@@ -10,6 +10,9 @@ History:
   vars to files
 - move InfoStore wallpaper_dir from .settings back into config
 - rollout key bindings into .bindings for later changing by user
+- fix bugs in Makefile that error messages occur while un-/installing manpages:
+  - wrong mandir
+  - wrong rm syntax
 
 
 10/23/2012 V 0.5.21
