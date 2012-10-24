@@ -1,5 +1,11 @@
 History:
 
+10/25/2012 V 0.5.23
+- change name of "Default" theme to "Tumble"
+- commented out some useless options in conky rc files
+- change name of FvwmForm-FNS-BaseSetup to FNS-BaseSetup
+- INSTALL and AUTHORS updated
+
 10/24/2012 V 0.5.22
 - add possibility to de-/activate splash in FvwmForm-FNS-BaseSetup
 - fix bug that wallpaper links will set only at initial use of FvwmForm-FNS-BaseSetup
@@ -14,7 +20,6 @@ History:
   - wrong mandir
   - wrong rm syntax
 
-
 10/23/2012 V 0.5.21
 - add '--version' to bin/fns-find-icon
 - activate in Makefile install/uninstall manpages
@@ -27,7 +32,6 @@ History:
 - add man/fns-built-trayapplist.1.gz, doc/html/fns-built-trayapplist.html and 
   asciidoc/fns-built-trayapplist.txt
 
-
 10/19/2012 V 0.5.20
 - fix bug in fvwm/FvwmForm-FNS-BaseSetup that an error occur in while writing
   WpDir to ~/.settings
@@ -36,7 +40,6 @@ History:
 - change default font from Arial to Sans
 - use in HorizontalPanel same calculations for clock/date applet than in G2likeTopBar
   because of sizing problems with resolution <= 1024x768
-
 
 10/16/2012 V 0.5.19
 - fix bugs and display problems in Horizontal and G2like layout
