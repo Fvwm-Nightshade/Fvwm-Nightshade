@@ -143,7 +143,7 @@ DestroyModuleConfig  FNS-BaseSetup: *
 ) >> ${FVWM_USERDIR}/.FNS-BaseSetup
 
 *FNS-BaseSetup: Button       continue "Help"
-*FNS-BaseSetup: Command      Exec exec xterm -g 100x50 -n "Help FNS-BaseSetup" -T "Help FNS-BaseSetup" -e "man FNS-BaseSetup\" &
+*FNS-BaseSetup: Command      Exec exec xterm -g 100x50 -n "Help FNS-BaseSetup" -T "Help FNS-BaseSetup" -e "man FNS-BaseSetup" &
 *FNS-BaseSetup: Button       restart "Reset"
 *FNS-BaseSetup: Button       quit    "Cancel"
 *FNS-BaseSetup: Command      Nop
