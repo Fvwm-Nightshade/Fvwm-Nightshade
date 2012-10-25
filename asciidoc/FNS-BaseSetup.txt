@@ -1,0 +1,109 @@
+FNS-BaseSetup(1)
+================
+:doctype: manpage
+
+
+NAME
+----
+
+FNS-BaseSetup - FvwmForm script to configure base settings of Fvwm-Nightshade
+
+
+SYNOPSIS
+--------
+
+FvwmForm FNS-BaseSetup
+
+
+DESCRIPTION
+-----------
+*FNS-BaseSetup* is used to configure the base settings of Fvwm-Nightshade 
+while first startup or if you want to change core parts like font, layout or the
+default terminal, etc.
+
+
+OPTIONS
+-------
+*Used Splash*::
++
+Fvwm-Nightshade supports startup images (png, xpm or gif) called "splashs"  
+shown with FvwmBanner. Here you can enter the path to the image displayed 
+after login.
+
+*Show on start*::
++
+Activate or deactivate FvwmBanner to show the splash image stated under *Used Splash*
+
+*Used Theme*::
++
+In this field you can enter which theme/decor shall be used for windows, panels, pager 
+or other Fvwm modules.
++
+Possible Themes are:
++
+Tribal::::
++
+Default theme of Fvwm-Nightshade held in green/black tones with yellow font collors and 
+tribal signs as buttons.
+
+Tumble::::
++
+Simple vector theme with -, +, v and x as buttons. Blue/gray color gradients for title bar 
+and Fvwm modules.
+
+Ambience::::
++
+Dark Ubuntu 10.04 theme with black gradients for title bar and orange for highlighting.
+
+Air::::
++
+Kde 4 Oxygen theme held in grey and blue tones.
+
+*Used Font*::
++
+Enter an installed Xft font into the field. This font is for menus, modules and other 
+Fvwm components.
+
+*Used Fontsize*::
++
+Defines the used font size of the Fvwm components.
+
+*Used Layout*::
+Fvwm-Nightshade has 3 different layouts how components like pager, icon manager, panels 
+are positioned:
++
+Horizontal::::
++
+The default layout. All components are seperated and arranged at the top of the screen.
+
+Vertical::::
++
+The components are arranged on the top right side.
+
+G2like::::
++
+This layout is based on the Gnome 2 layout - a top panel with menu, favorites, systray, 
+cpu bar and clock/date. A bottom panel with a minimize all button, the task bar and a pager.
+
+*Used Terminal*::
++
+here you can define your favorite terminal.
+
+[NOTE]
+===============================
+Parameters are possible:
+------
+xterm -fn 10x20
+------
+===============================
+
+*Used Browser*::
++
+This field is for your favorite browser.
+
+AUTHOR
+------
+(C) 2012 Thomas Funk <t.funk@web.de>
+
+
+

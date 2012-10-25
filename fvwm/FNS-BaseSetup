@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		FNS-BaseSetup
-# Version:	1.2.3
+# Version:	1.2.4
 # Licence: 	GPL 2
 #
 # Description:	Script to configure base settings of Fvwm-Nightshade
@@ -142,6 +142,8 @@ DestroyModuleConfig  FNS-BaseSetup: *
   '*SavedBaseSetup: Browser     $(Browser) '		; /bin/echo \
 ) >> ${FVWM_USERDIR}/.FNS-BaseSetup
 
+*FNS-BaseSetup: Button       continue "Help"
+*FNS-BaseSetup: Command      Exec exec xterm -g 100x50 -n "Help FNS-BaseSetup" -T "Help FNS-BaseSetup" -e "man FNS-BaseSetup\" &
 *FNS-BaseSetup: Button       restart "Reset"
 *FNS-BaseSetup: Button       quit    "Cancel"
 *FNS-BaseSetup: Command      Nop

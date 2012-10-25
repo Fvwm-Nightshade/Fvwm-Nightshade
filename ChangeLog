@@ -5,6 +5,8 @@ History:
 - commented out some useless options in conky rc files
 - change name of FvwmForm-FNS-BaseSetup to FNS-BaseSetup
 - INSTALL and AUTHORS updated
+- add source, manpage and html page for FNS-BaseSetup
+- add Help button in FNS-BaseSetup
 
 10/24/2012 V 0.5.22
 - add possibility to de-/activate splash in FvwmForm-FNS-BaseSetup
