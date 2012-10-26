@@ -1,5 +1,9 @@
 History:
 
+10/26/2012 V 0.5.24
+- change in HorizontalPanel the calculation of percentage_voffset and 
+  date_voffset for better fiting in smaller resolutions
+
 10/25/2012 V 0.5.23
 - change name of "Default" theme to "Tumble"
 - commented out some useless options in conky rc files
