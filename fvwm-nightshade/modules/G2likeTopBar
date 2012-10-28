@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeTopBar
-# Version:	1.0.5
+# Version:	1.0.6
 # Licence: 	GPL 2
 #
 # Description:	Gnome like top bar with root menu, personal menu, systray,
@@ -10,7 +10,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	10/09/2012
-# Changed:	10/15/2012
+# Changed:	10/28/2012
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -162,7 +162,7 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 *G2likeTopBar: (5x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_cpu" \
 		    `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
-		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 1`)
+		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`)
 
 #-----------------------------------------------------------------------
 # Clock

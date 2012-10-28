@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		HorizontalPanel
-# Version:	1.0.7
+# Version:	1.0.8
 # Licence: 	GPL 2
 #
 # Description:	FvwmButtons panel for horizontal layout. Position on the
@@ -15,10 +15,11 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	08/11/2012
-# Changed:	10/26/2012
+# Changed:	10/28/2012
 #-----------------------------------------------------------------------
 
-Style HorizontalPanel !Title, Sticky, WindowListSkip, StaysOnBottom, HandleWidth 2
+Style HorizontalPanel !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
+Style HorizontalPanel StaysOnBottom, !Iconifiable, !Maximizable, FixedSize, FixedPosition
 
 
 #=======================================================================
@@ -51,17 +52,6 @@ PipeRead "echo InfoStoreAdd time_hsize `perl -e 'printf \"%.0f\",$[infostore.fon
 PipeRead "echo InfoStoreAdd date_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio])'`"
 PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",($[infostore.hratio]*3)'`"
 
-#PipeRead "echo InfoStoreAdd time_hsize `perl -e 'printf \"%.0f\",($[infostore.fontsize]/2)'`"
-#PipeRead "echo InfoStoreAdd time_fsize `perl -e 'printf \"%.0f\",($[infostore.fontsize]-$[infostore.hratio])'`"
-#PipeRead "if [ $[vp.height] -eq 768 ]; then \
-#			echo InfoStoreAdd time_fsize 18; \
-#		  else \
-#			echo InfoStoreAdd time_fsize `perl -e 'printf \"%.0f\",($[infostore.fontsize]-$[infostore.hratio])'`; \
-#		  fi"
-
-#PipeRead "echo InfoStoreAdd date_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]-($[infostore.hratio]*2)'`"
-#PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",4*$[infostore.hratio]'`"
-
 
 #=======================================================================
 # Panel
@@ -71,14 +61,14 @@ PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",($[infostore.
 # General
 #***********************************************************************
 DestroyModuleConfig HorizontalPanel: *
-*HorizontalPanel: Geometry		$[infostore.panel_geometry]
-*HorizontalPanel: Colorset		10
-*HorizontalPanel: ActiveColorset	10
-*HorizontalPanel: PressColorset		10
+*HorizontalPanel: Geometry			$[infostore.panel_geometry]
+*HorizontalPanel: Colorset			13
+*HorizontalPanel: ActiveColorset	13
+*HorizontalPanel: PressColorset		13
 
-*HorizontalPanel: Rows			1
-*HorizontalPanel: Columns		$[infostore.columns]
-*HorizontalPanel: Frame			0
+*HorizontalPanel: Rows				1
+*HorizontalPanel: Columns			$[infostore.columns]
+*HorizontalPanel: Frame				0
 
 #***********************************************************************
 # Buttons
@@ -114,5 +104,5 @@ DestroyModuleConfig HorizontalPanel: *
 #-----------------------------------------------------------------------
 *HorizontalPanel: ($[infostore.time_hsize]x1, Colorset 10, Swallow (UseOld, Close, Kill, Respawn) "conky_clock" \
 		    `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset -$[infostore.hratio]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
-		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 2`, \
+		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
 		    Action (mouse 0) Nop)

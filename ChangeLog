@@ -1,5 +1,18 @@
 History:
 
+10/28/2012 V 0.5.25
+- adapt styles of Pager and HorizontalPanel to G2likeTopBar
+- add new theme 'CrystalBalls'
+- addapt all other themes if some colorset option is missing anywhere
+- change FvwmBacker colorset in Air, Ambience an Tribal so that each theme
+  has its own default background
+- change in GlobalIconMan_Bar the Format string from "%c" to "%c: %t"
+- change in G2likeTopBar and HorizontalPanel the start of cpu graph from 
+  1 sec to 2 sec
+- adapt Vertical layout and VerticalPanel to new ratios
+
+
+
 10/26/2012 V 0.5.24
 - change in HorizontalPanel the calculation of percentage_voffset and 
   date_voffset for better fiting in smaller resolutions
