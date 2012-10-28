@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		Vertical
-# Version:	1.0.3
+# Version:	1.0.4
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/16/2012
-# Changed:	09/23/2012
+# Changed:	10/28/2012
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -33,34 +33,19 @@
 #=======================================================================
 
 #-----------------------------------------------------------------------
-# Panel width
-#-----------------------------------------------------------------------
-# the width composed of the count of systray icons
-
-# create the count of icons visible in stalonetray must set related to the
-# screen resolution
-PipeRead 	'if [ "$[vp.width]" -gt "1600" ]; then \
-				echo InfoStoreAdd tray_icons 6; \
-			elif [ "$[vp.width]" -gt "1400" ]; then \
-				echo InfoStoreAdd tray_icons 5; \
-			elif [ "$[vp.width]" -gt "1200" ]; then \
-				echo InfoStoreAdd tray_icons 4; \
-			else \
-				echo InfoStoreAdd tray_icons 3; \
-			fi'
-
-# needed columns
-PipeRead 'echo InfoStoreAdd panel_columns $(($[infostore.tray_icons]*2))'
-
-# panel width
-PipeRead "echo InfoStoreAdd panel_width `perl -e 'printf \"%.0f\",$[infostore.panel_columns]*12*$[infostore.ratio]'`"
-
-#-----------------------------------------------------------------------
 # Panel height
 #-----------------------------------------------------------------------
-InfoStoreAdd panel_rows 20
-PipeRead "echo InfoStoreAdd row_height `perl -e 'printf \"%.0f\",$[vp.height]/(83*$[infostore.ratio])'`"
-PipeRead 'echo InfoStoreAdd panel_height $(($[infostore.row_height]*$[infostore.panel_rows]))'
+PipeRead "echo InfoStoreAdd row_height $((($[infostore.fontsize]*2)+6))"
+PipeRead "echo InfoStoreAdd panel_height $(($[infostore.row_height]*5))"
+
+#-----------------------------------------------------------------------
+# Panel width
+#-----------------------------------------------------------------------
+
+PipeRead "echo InfoStoreAdd panel_width `perl -e 'printf \"%.0f\",(($[infostore.row_height]*3)*($[vp.width]/$[vp.height]))+1'`"
+
+# the count of systray icons is calculated by the panel width/icon size - 1 icon
+PipeRead "echo InfoStoreAdd tray_icons `perl -e 'printf \"%.0f\",($[infostore.panel_width]/24)-1'`"
 
 #-----------------------------------------------------------------------
 # Panel geometry
@@ -86,7 +71,7 @@ DeskTopSize 2x2
 #-----------------------------------------------------------------------
 # actual pager height
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd pager_height `perl -e 'printf \"%.0f\",$[vp.height]/(10*$[infostore.ratio])'`"
+PipeRead 'echo InfoStoreAdd pager_height $((($[infostore.row_height]*3)+1))'
 
 
 #-----------------------------------------------------------------------
@@ -102,13 +87,13 @@ PipeRead 'echo InfoStoreAdd pager_geometry $[infostore.panel_width]x$[infostore.
 #-----------------------------------------------------------------------
 # GlobalIconMan Button Geometry
 #-----------------------------------------------------------------------
-PipeRead 'echo InfoStoreAdd iconman_button_geometry $(($[infostore.panel_width]-$[infostore.titlebar_height]+1))x0'
+PipeRead 'echo InfoStoreAdd iconman_button_geometry $(($[infostore.panel_width]-$[infostore.titlebar_height]+2))x0'
 
 #-----------------------------------------------------------------------
 # GlobalIconMan Manager Geometry
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd yStartIman `perl -e 'printf \"%.0f\",$[vp.height]-($[infostore.panel_height]+$[infostore.pager_height])-(1.9*$[infostore.fontsize]*$[infostore.ratio])'`"
-PipeRead "echo InfoStoreAdd xStartIman `perl -e 'printf \"%.0f\",$[vp.width]-$[infostore.panel_width]-3'`"
+PipeRead "echo InfoStoreAdd yStartIman `perl -e 'printf \"%.0f\",(($[vp.height]-($[infostore.panel_height]+$[infostore.pager_height])-($[infostore.fontsize]+15)))'`"
+PipeRead "echo InfoStoreAdd xStartIman `perl -e 'printf \"%.0f\",$[vp.width]-$[infostore.panel_width]-4'`"
 InfoStoreAdd iconman_manager_geometry 1x0+$[infostore.xStartIman]-$[infostore.yStartIman]
 
 #-----------------------------------------------------------------------
