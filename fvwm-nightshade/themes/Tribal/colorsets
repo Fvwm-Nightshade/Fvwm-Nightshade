@@ -1,13 +1,13 @@
 ########################################################################
 # File:		colorsets
-# Version:	0.1.1
+# Version:	0.1.2
 # Licence: 	GPL 2
 #
 # Description:	colorsets of Tribal theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	09/27/2012
-# Changed:	
+# Changed:	10/28/2012
 ########################################################################
 # REMARKS:
 #
@@ -71,7 +71,7 @@ Colorset 2  DGradient 255 3 #001400 30 #006c00 30 #44a200 40 #abfd5a, fg #f4ffb5
 # hi = inactive border shade color |
 # sh = inactive border shade color _|
 #-----------------------------------------------------------------------
-Colorset 3  BGradient 255 3 #001400 35 #006c00 35 #44a200 30 #abfd5a, bg #001400, NoShape
+Colorset 3  BGradient 255 3 #001400 35 #006c00 35 #44a200 30 #abfd5a, bg #001400, hi #7c7b78, sh #3e3d38, NoShape
 
 #-----------------------------------------------------------------------
 # window borders, active

@@ -1,13 +1,13 @@
 ########################################################################
 # File:		colorsets
-# Version:	0.1.0
+# Version:	0.1.1
 # Licence: 	GPL 2
 #
 # Description:	colorsets of Air theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	06/08/2012
-# Changed:	
+# Changed:	10/28/2012
 ########################################################################
 # REMARKS:
 #
@@ -71,7 +71,7 @@ Colorset 2  fg black, bg #e0dedc, Plain
 # hi = inactive border shade color |
 # sh = inactive border shade color _|
 #-----------------------------------------------------------------------
-Colorset 3  bg #e0dedc, hi grey80, Plain
+Colorset 3  bg #e0dedc, hi grey80, sh #bebdbb, Plain
 
 #-----------------------------------------------------------------------
 # window borders, active
@@ -238,7 +238,7 @@ Colorset 22 fg white, bg #003060, Plain
 #-----------------------------------------------------------------------
 # FvwmBacker
 #-----------------------------------------------------------------------
-Colorset 24 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0, NoShape
+Colorset 24 BGradient 255 2 #6aa7b7 50 #07668c 50 #034467, NoShape
 
 
 ########################################################################
