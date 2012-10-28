@@ -1,0 +1,224 @@
+########################################################################
+# File:		decor
+# Version:	1.0.0
+# Licence: 	GPL 2
+#
+# Description:	decor parts (titlebar, buttons, menus) of CrystalBall theme
+#
+# Author:	Thomas Funk <t.funk@web.de>
+#			Bernhard Popp <kermit.popp@googlemail.com>
+#
+# Created:	10/28/2012
+# Changed:	
+########################################################################
+Piperead "echo InfoStoreAdd button_width `perl -e 'printf \"%.0f\",1.6*$[infostore.fontsize]'`"
+Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",1.8*$[infostore.fontsize]'`"
+
+#***********************************************************************
+# General
+#***********************************************************************
+# HandleWidth takes a numeric argument which is the width of the border
+Style * Borderwidth 2, HandleWidth 2
+Style *	Colorset 1
+
+Style * HilightColorset 2
+Style * BorderColorset 3
+Style * HilightBorderColorset 4
+
+Style *	Button 1, Button 2, Button 3, Button 5
+Style * IconTitleColorset 10
+Style * HilightIconTitleColorset 11
+
+DestroyDecor Default
+AddToDecor Default
+#***********************************************************************
+# Titlebar
+#***********************************************************************
++ TitleStyle AllActive		Colorset 2 -- Flat
++ TitleStyle AllInactive 	Colorset 3 -- Flat
++ TitleStyle  Centered Height $[infostore.titlebar_height] -- flat
+
+#***********************************************************************
+# Border
+#***********************************************************************
++ BorderStyle	Simple -- HiddenHandles NoInset
+
+#***********************************************************************
+# Buttons
+#***********************************************************************
+
+# +----------------------------------------------------------+
+# | X  X  X                                          X  X  X |
+# +----------------------------------------------------------+
+# | 1  3  5                                          6  4  2 |
+# |                                                          |
+#                                                                  
+#
+
+
++ ButtonStyle 1 Active		Colorset 2
++ ButtonStyle 1 ActiveUp	Pixmap $[FNS_THEMEDIR]/images/close.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 1 ActiveDown	Pixmap $[FNS_THEMEDIR]/images/close_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 1 Inactive	Colorset 3
++ ButtonStyle 1 InactiveUp	Pixmap $[FNS_THEMEDIR]/images/close_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
+
++ ButtonStyle 3 Active		Colorset 2
++ ButtonStyle 3 ActiveUp	Pixmap $[FNS_THEMEDIR]/images/minimize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 3 ActiveDown	Pixmap $[FNS_THEMEDIR]/images/minimize_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 3 Inactive	Colorset 3
++ ButtonStyle 3 InactiveUp	Pixmap $[FNS_THEMEDIR]/images/minimize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
+
++ ButtonStyle 5 Active		Colorset 2
++ ButtonStyle 5 ActiveUp	Pixmap $[FNS_THEMEDIR]/images/maximize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 5 ActiveDown	Pixmap $[FNS_THEMEDIR]/images/maximize_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 5 Inactive	Colorset 3
++ ButtonStyle 5 InactiveUp	Pixmap $[FNS_THEMEDIR]/images/maximize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
+
++ ButtonStyle 2 Active		Colorset 2
++ ButtonStyle 2 ActiveUp	Pixmap $[FNS_THEMEDIR]/images/menu.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 ActiveDown	Pixmap $[FNS_THEMEDIR]/images/menu_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 Inactive	Colorset 3
++ ButtonStyle 2 InactiveUp	Pixmap $[FNS_THEMEDIR]/images/menu_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
+
++ ButtonStyle All -- UseTitleStyle
++ ButtonStyle All Active (-- flat) Inactive (-- flat)
+
+
+#=======================================================================
+# Menus
+#=======================================================================
+# The MenuStyle command allows almost full control over menu look and feel.
+# We use the preconfigured 'Fvwm' default. This resets most other options
+# and must be set first. We also define a menu called winops for the windows
+# operations menus and very long one. The menus which use this style are 
+# (and must) be defined in the end of the menus.
+
+#***********************************************************************
+# Root menu
+#***********************************************************************
+MenuStyle * fvwm
+MenuStyle * BorderWidth 1, HilightBack, ActiveFore
+MenuStyle * font "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+MenuStyle * MenuColorset 5, ActiveColorset 6
+MenuStyle * Hilight3DThickness 0, TrianglesSolid, Animation
+MenuStyle * PopupDelay 300, PopdownImmediately, PopupOffset 0 100
+MenuStyle * ItemFormat "%s%|%5.i%5.5l%5.5r%.5>%|"
+MenuStyle * VerticalItemSpacing 2 3, VerticalTitleSpacing 1 2
+
+#***********************************************************************
+# WinOps menu
+#***********************************************************************
+CopyMenuStyle * winops
+
+MenuStyle winops TitleWarpOff
+MenuStyle winops VerticalItemSpacing 1 2, VerticalTitleSpacing 1 2
+
+
+#=======================================================================
+# Mouse bindings
+#=======================================================================
+# Handle some Mouse bindings now...
+# Recall that mouse formats look like this:
+#
+# +------------+
+# | ||  ||  || |
+# |	       |
+# +------------+
+#   1   2   3
+
+#-----------------------------------------------------------------------
+# Contexts:                                  Desktop
+#     R = Root Window                 rrrrrrrrrrrrrrrrrrrrrr
+#     W = Application Window          rIrrrrFSSSSSSSSSFrrrrr
+#     F = Frame Corners               rrrrrrS13TTTT642Srrrrr
+#     S = Frame Sides                 rIrrrrSwwwwwwwwwSrrrrr
+#     T = Title Bar                   rrrrrrSwwwwwwwwwSrrrrr
+#     I = Icon                        rIrrrrFSSSSSSSSSFrrrrr
+#                                     rrrrrrrrrrrrrrrrrrrrrr
+# Numbers are buttons: 1 3 5 7 9   0 8 6 4 2
+#
+# Modifiers: (A)ny, (C)ontrol, (S)hift, (M)eta, (N)othing
+#-----------------------------------------------------------------------
+# Buttons:
+# +----------------------------------------------------------+
+# | X  X  X  X  X                              X  X  X  X  X |
+# +----------------------------------------------------------+
+# | 1  3  5  7  9                              0  8  6  4  2 |
+# |                                                          |
+#
+
+#***********************************************************************
+# Pointer in Window Buttons
+#***********************************************************************
+#     Button	Context	Modifi 	Function
+
+# Right button (2)
+# Button 1 shows MenuWindowOpsTrimmed menu <- click
+Mouse 1 	2      	A	Menu MenuWindowOpsTrimmed
+# Button 2 shows Move to page menu <- click
+Mouse 2       	2      	A     	Menu MenuWindowMoveTo
+# Button 3 shows WindowOps group menu <- click
+Mouse 3       	2 	A	Menu MenuWindowGroupOps
+
+# Close button (1)
+# Every button close window <- click
+Mouse 0 	1	A	FuncDeleteOrDestroy
+
+# Maximize button (5)
+# Button 1 maximize window <- click
+Mouse 1		5	A	FuncMaximize
+# Button 2 maximize window vertically <- click
+Mouse 2		5	A	FuncMaximizeVertically
+# Button 3 maximize window horizontally <- click
+Mouse 3		5	A	FuncMaximizeHorizontally
+
+# Minimize button (3)
+# Button 1 iconify window <- click
+Mouse 1		3	A	FuncIconify
+# Button 2 iconify group of same window resources <- click ???
+Mouse 2		3	A	FuncIconifySameResource on
+# Button 3 iconify group of same window resources <- click ???
+Mouse 3		3	A	FuncIconifySameResource toggle
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT to Window Button Pointer
+#-----------------------------------------------------------------------
+#     Button	Context Modifi 	Function
+Mouse 0		1	SCM	FuncShowMessage  "Left Button Bindings" \
+"Mouse 1:  WindowOps menu" \
+"Mouse 2:  Move to page menu" \
+"Mouse 3:  WindowGroupOps menu"
+                                                      
+Mouse 0		1	SCM	FuncShowMessage  "Close Button Bindings" \
+"Mouse 1:  Delete on click" \
+"          Destroy on double click"
+                                                      
+Mouse 0		5	SCM	FuncShowMessage  "Maximize Button Bindings" \
+"Mouse 1:  Maximize fully on click" \
+"          Maximize menu on double click" \
+"Mouse 2:  Maximize vertically" \
+"Mouse 3:  Maximize horizontally"
+                                                      
+Mouse 0		3	SCM	FuncShowMessage  "Minimize Button Bindings" \
+"Mouse 1:  Iconify" \
+"Mouse 2:  Iconify on resource group" \
+"Mouse 3:  Iconify toggle resource group"
+
+
+DestroyFunc FuncRemoveAllButtonBindings
+AddToFunc   FuncRemoveAllButtonBindings
+#     Button	Context Modifi 	Function
++ I Mouse 1 	2      	A		-
++ I Mouse 2    	2      	A     	-
++ I Mouse 3    	2 		A		-
++ I Mouse 0 	1		A		-
++ I Mouse 1		5		A		-
++ I Mouse 2		5		A		-
++ I Mouse 3		5		A		-
++ I Mouse 1		3		A		-
++ I Mouse 2		3		A		-
++ I Mouse 3		3		A		-
++ I Mouse 0		3		SCM		-
++ I Mouse 0		1		SCM		-
++ I Mouse 0		5		SCM		-
++ I Mouse 0		3		SCM		-
