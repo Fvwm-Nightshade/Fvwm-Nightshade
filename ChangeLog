@@ -1,5 +1,11 @@
 History:
 
+10/28/2012 V 0.5.26
+- rename Tumble theme in Clean
+- remove "Show Colorsets" entry from Configuration menu
+- reactivate double_buffer in conky rc files because of flickering
+- some clean ups in config
+
 10/28/2012 V 0.5.25
 - adapt styles of Pager and HorizontalPanel to G2likeTopBar
 - add new theme 'CrystalBalls'
