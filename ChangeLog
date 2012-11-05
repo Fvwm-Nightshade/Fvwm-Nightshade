@@ -1,6 +1,8 @@
 History:
 
-10/28/2012 V 0.5.26
+11/05/2012 V 0.5.27
+- add new wallpapers for CrystalBalls
+
 - rename Tumble theme in Clean
 - remove "Show Colorsets" entry from Configuration menu
 - reactivate double_buffer in conky rc files because of flickering
@@ -16,8 +18,6 @@ History:
 - change in G2likeTopBar and HorizontalPanel the start of cpu graph from 
   1 sec to 2 sec
 - adapt Vertical layout and VerticalPanel to new ratios
-
-
 
 10/26/2012 V 0.5.24
 - change in HorizontalPanel the calculation of percentage_voffset and 
