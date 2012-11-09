@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		Horizontal
-# Version:	1.0.8
+# Version:	1.0.9
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
@@ -9,7 +9,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	08/16/2012
-# Changed:	10/16/2012
+# Changed:	11/09/2012
 #-----------------------------------------------------------------------
 #			   Top
 #
@@ -176,7 +176,7 @@ AddToFunc StartFunction
 # start window list module
 + I Module FvwmIconMan GlobalIconManShowHide
 #-----------------------------------------------------------------------
-# start a Pager
+# start Pager
 + I Module FvwmPager
 #-----------------------------------------------------------------------
 # start horizontal panel
@@ -208,30 +208,30 @@ AddToFunc   ReloadLayoutParts
 # press SHIFT-ALT arrow anywhere, move active
 # window to next/previous page
 #-----------------------------------------------------------------------
-Key Left	A	SM	FuncMoveWindowToPage -1p +0p
-Key Right	A	SM	FuncMoveWindowToPage +1p +0p
+Key Left	A		SM		FuncMoveWindowToPage -1p +0p
+Key Right	A		SM		FuncMoveWindowToPage +1p +0p
 
 #-----------------------------------------------------------------------
 # key 1-4 move current window to page n
 #-----------------------------------------------------------------------
-Key 1		A	SM	Current FuncMoveWindowToPage 0 0
-Key 2		A	SM	Current FuncMoveWindowToPage 1 0
-Key 3		A	SM	Current FuncMoveWindowToPage 2 0
-Key 4		A	SM	Current FuncMoveWindowToPage 3 0
+Key 1		A		SM		Current FuncMoveWindowToPage 0 0
+Key 2		A		SM		Current FuncMoveWindowToPage 1 0
+Key 3		A		SM		Current FuncMoveWindowToPage 2 0
+Key 4		A		SM		Current FuncMoveWindowToPage 3 0
 
 #-----------------------------------------------------------------------
 # Go to page n with SHIFT-CTRL + number
 #-----------------------------------------------------------------------
-Key 1		A	SC	FuncGotoPage 0 0
-Key 2		A	SC	FuncGotoPage 1 0
-Key 3		A	SC	FuncGotoPage 2 0
-Key 4		A	SC	FuncGotoPage 3 0
+Key 1		A		SC		FuncGotoPage 0 0
+Key 2		A		SC		FuncGotoPage 1 0
+Key 3		A		SC		FuncGotoPage 2 0
+Key 4		A		SC		FuncGotoPage 3 0
 
 #-----------------------------------------------------------------------
 # press SHIFT-CTRL arrow anywhere, and scroll by one page
 #-----------------------------------------------------------------------
-Key Left	A	SC	FuncGotoPage -1p +0p
-Key Right	A	SC	FuncGotoPage +1p +0p
+Key Left	A		SC		FuncGotoPage -1p +0p
+Key Right	A		SC		FuncGotoPage +1p +0p
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT P to show all page related key bindings
@@ -261,11 +261,11 @@ DestroyMenu  MenuWindowGroupQuickMove
 AddToMenu    MenuWindowGroupQuickMove
 + "&Right	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +1p +0p
 + "&Left	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage -1p +0p
-+ "" 						Nop
-+ "Page	1%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
-+ "Page	2%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
-+ "Page	3%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 2 0
-+ "Page	4%menu/window-move.xpm%"		Pick All ($[w.resource]) FuncMoveWindowToPage 3 0
++ ""										Nop
++ "Page	1%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
++ "Page	2%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
++ "Page	3%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 2 0
++ "Page	4%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 3 0
 
 #-----------------------------------------------------------------------
 # Move a window to left/right/1-4 page
@@ -274,12 +274,12 @@ DestroyMenu  MenuWindowMoveTo
 AddToMenu    MenuWindowMoveTo
 + "Move to ..." Title
 + "$[gt.&Right	Page]%menu/window-move.xpm%"	AnimatedMove w+100 w
-+ "&Left	Page%menu/window-move.xpm%"	AnimatedMove w-100 w
-+ "" 						Nop
-+ "Page	1%menu/window-move.xpm%"		FuncMoveWindowToPage 0 0
-+ "Page	2%menu/window-move.xpm%"		FuncMoveWindowToPage 1 0
-+ "Page	3%menu/window-move.xpm%"		FuncMoveWindowToPage 2 0
-+ "Page	4%menu/window-move.xpm%"		FuncMoveWindowToPage 3 0
++ "&Left	Page%menu/window-move.xpm%"			AnimatedMove w-100 w
++ ""											Nop
++ "Page	1%menu/window-move.xpm%"				FuncMoveWindowToPage 0 0
++ "Page	2%menu/window-move.xpm%"				FuncMoveWindowToPage 1 0
++ "Page	3%menu/window-move.xpm%"				FuncMoveWindowToPage 2 0
++ "Page	4%menu/window-move.xpm%"				FuncMoveWindowToPage 3 0
 
 
 

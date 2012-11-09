@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.27
+InfoStoreAdd ns_version 0.5.28
 # Copyright (C) 2012
 #
 # Authors:
@@ -244,30 +244,30 @@ BugOpts FlickeringMoveWorkaround True
 #=======================================================================
 # 2.1 Cursors
 #=======================================================================
-CursorStyle ROOT		left_ptr		black	white
-CursorStyle TITLE		top_left_arrow		black	white
-CursorStyle DEFAULT		top_left_arrow		black	white
-CursorStyle SYS			hand2			black	white
-CursorStyle MENU		top_left_arrow		black	white
+CursorStyle ROOT			left_ptr			black	white
+CursorStyle TITLE			top_left_arrow		black	white
+CursorStyle DEFAULT			top_left_arrow		black	white
+CursorStyle SYS				hand2				black	white
+CursorStyle MENU			top_left_arrow		black	white
 CursorStyle POSITION		top_left_corner		black	white
-CursorStyle MOVE		fleur			black	white
-CursorStyle RESIZE		sizing			black	white
-CursorStyle WAIT		watch			black	white
-CursorStyle SELECT		crosshair		black	white
-CursorStyle DESTROY		pirate			black	white
-CursorStyle TOP			top_side		black	white
-CursorStyle RIGHT		right_side		black	white
-CursorStyle BOTTOM		bottom_side		black	white
-CursorStyle LEFT		left_side		black	white
+CursorStyle MOVE			fleur				black	white
+CursorStyle RESIZE			sizing				black	white
+CursorStyle WAIT			watch				black	white
+CursorStyle SELECT			crosshair			black	white
+CursorStyle DESTROY			pirate				black	white
+CursorStyle TOP				top_side			black	white
+CursorStyle RIGHT			right_side			black	white
+CursorStyle BOTTOM			bottom_side			black	white
+CursorStyle LEFT			left_side			black	white
 CursorStyle TOP_LEFT		top_left_corner		black	white
 CursorStyle TOP_RIGHT		top_right_corner	black	white
 CursorStyle BOTTOM_LEFT		bottom_left_corner	black	white
 CursorStyle BOTTOM_RIGHT	bottom_right_corner	black	white
-CursorStyle TOP_EDGE		top_side		black	white
-CursorStyle RIGHT_EDGE		right_side		black	white
-CursorStyle BOTTOM_EDGE		bottom_side		black	white
-CursorStyle LEFT_EDGE		left_side		black	white
-CursorStyle STROKE		plus			black	white
+CursorStyle TOP_EDGE		top_side			black	white
+CursorStyle RIGHT_EDGE		right_side			black	white
+CursorStyle BOTTOM_EDGE		bottom_side			black	white
+CursorStyle LEFT_EDGE		left_side			black	white
+CursorStyle STROKE			plus				black	white
 
 
 #=======================================================================
@@ -596,10 +596,9 @@ Style FvwmBanner CirculateSkip
 # 6.1.1. Pointer in Root or anywhere
 #***********************************************************************
 #     Button	Context Modifi 	Function
-Mouse 1		R	A       Menu MenuRoot
-Mouse 2       	R       A	WindowList
-#Mouse 3       	RFT     A	Menu MenuWindowOpsFull
-Mouse 3       	RFT     A	Menu MenuDesktopOps
+Mouse 1			R		A       Menu MenuRoot
+Mouse 2       	R       A		WindowList
+Mouse 3       	RFT     A		Menu MenuDesktopOps
 
 #-----------------------------------------------------------------------
 # Roll mouse wheel anywhere with SHIFT-ALT + cursor left/right for goto page
@@ -618,7 +617,7 @@ Mouse 5       	A       SM      Current FuncMoveWindowToPage -1p +0p
 # Help info with SHIFT-CTRL-ALT in Root
 #-----------------------------------------------------------------------
 #     Button	Context Modifi 	Function
-Mouse 0		R       SCM     FuncShowMessage  "Mouse Bindings for Root area" \
+Mouse 0			R       SCM		FuncShowMessage  "Mouse Bindings for Root area" \
 "Mouse 1:   Root menu" \
 "Mouse 2:   Window list" \
 "Mouse 3:   Desktop Oops menu" \
@@ -644,40 +643,40 @@ Mouse 0		R       SCM     FuncShowMessage  "Mouse Bindings for Root area" \
 # Button 1 in the titlebar, with any modifiers, gives
 # move <- drag, resize <- click or maximize <- double click
 #-----------------------------------------------------------------------
-Mouse 1		T	A	FuncMoveOrRaiseOrMaximize
+Mouse 1			T		A		FuncMoveOrRaiseOrMaximize
 #-----------------------------------------------------------------------
 # Button 1 in the corners or sides, with any modifiers, gives
 # resize <- drag, raise <- click or maximize <- double click
 #-----------------------------------------------------------------------
-Mouse 1		SF	A	FuncResizeOrRaiseOrMaximize
+Mouse 1			SF		A		FuncResizeOrRaiseOrMaximize
 #-----------------------------------------------------------------------
 # Button 2 in the titlebar, corners or sides, with any modifiers, gives
 # move <- drag, raise/lower <- click
 #-----------------------------------------------------------------------
-Mouse 2		TSF	A	FuncMoveOrRaiseLower
+Mouse 2			TSF		A		FuncMoveOrRaiseLower
 #-----------------------------------------------------------------------
 # Button 2 in the window, with ALT key, gives
 # move <- drag, raise/lower <- click
 #-----------------------------------------------------------------------
-Mouse 2		W	M	FuncMoveOrRaiseLower
+Mouse 2			W		M		FuncMoveOrRaiseLower
 #-----------------------------------------------------------------------
 # Button 3 in the titlebar, corners or sides, with any modifiers, gives
 # WindowOps2 menu <- click, with ALT key WindowOps menu <- click
 #-----------------------------------------------------------------------
-Mouse 3		TSF	A	Menu MenuWindowOpsTrimmed
-Mouse 3		TSF	M	Menu MenuWindowOpsFull
+Mouse 3			TSF		A		Menu MenuWindowOpsTrimmed
+Mouse 3			TSF		M		Menu MenuWindowOpsFull
 #-----------------------------------------------------------------------
 # Roll mouse wheel on Titlebars to shade/unshade
 #-----------------------------------------------------------------------
-Mouse 4		T	A	FuncWheelToggleShade True
-Mouse 5		T       A       FuncWheelToggleShade False
+Mouse 4			T		A		FuncWheelToggleShade True
+Mouse 5			T       A       FuncWheelToggleShade False
 
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT to Pointer in Window Decorations
 #-----------------------------------------------------------------------
 #     Button	Context Modifi 	Function
-Mouse 0		T	SCM     FuncShowMessage  "Mouse Bindings for Titlebar" \
+Mouse 0			T		SCM     FuncShowMessage  "Mouse Bindings for Titlebar" \
 "Mouse 1:   Drag moves window" \
 "           Maximize on double click" \
 "Mouse 2:   Drag moves window" \
@@ -687,7 +686,7 @@ Mouse 0		T	SCM     FuncShowMessage  "Mouse Bindings for Titlebar" \
 "Mouse 4/5: Shade/unshade window" \
 "           with rolling wheel up/down"
 
-Mouse 0		SF	SCM	FuncShowMessage  "Mouse Bindings for Corners and Sides" \
+Mouse 0		SF			SCM		FuncShowMessage  "Mouse Bindings for Corners and Sides" \
 "Mouse 1:   Drag resize window" \
 "           Maximize on double click" \
 "Mouse 2:   Drag moves window" \
@@ -695,7 +694,7 @@ Mouse 0		SF	SCM	FuncShowMessage  "Mouse Bindings for Corners and Sides" \
 "Mouse 3:   WindowOpsTrimmed menu with click" \
 "           WindowOpsFull menu with ALT + click"
 
-Mouse 0		W	SCM	FuncShowMessage  "Mouse Bindings for Window area" \
+Mouse 0		W			SCM		FuncShowMessage  "Mouse Bindings for Window area" \
 "Mouse 1:   Root menu with ALT + click" \
 "Mouse 2:   Drag + ALT moves window" \
 "           Raise or lower with ALT + click" \
@@ -714,34 +713,34 @@ Mouse 0		W	SCM	FuncShowMessage  "Mouse Bindings for Window area" \
 # Button 1 in icon, with any modifiers, gives
 # move <- drag, deiconify <- double click
 #-----------------------------------------------------------------------
-Mouse 1		I	A	FuncMoveOrIconify
+Mouse 1			I		A		FuncMoveOrIconify
 #-----------------------------------------------------------------------
 # Button 2 in icon, with any modifiers, gives
 # deiconify <- click
 #-----------------------------------------------------------------------
-Mouse 2		I	A	FuncIconify
+Mouse 2			I		A		FuncIconify
 #-----------------------------------------------------------------------
 # Button 2 in icon, with CTRL key, gives
 # deiconify all icons from the same resource group <- click
 #-----------------------------------------------------------------------
-Mouse 2		I	C	FuncIconifySameResource toggle
+Mouse 2			I		C		FuncIconifySameResource toggle
 #-----------------------------------------------------------------------
 # Button 3 in icon, with any modifiers, gives
 # WindowOps2 menu <- click
 #-----------------------------------------------------------------------
-Mouse 3		I	A	Menu MenuWindowOpsTrimmed
+Mouse 3			I		A		Menu MenuWindowOpsTrimmed
 #-----------------------------------------------------------------------
 # Button 3 in icon, with CTRL key, gives
 # WindowGroupOps menu
 #-----------------------------------------------------------------------
-Mouse 3		I	C	Menu MenuWindowGroupOps
+Mouse 3			I		C		Menu MenuWindowGroupOps
 
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT to Pointer in Icons
 #-----------------------------------------------------------------------
 #     Button	Context Modifi 	Function
-Mouse 0		I       SCM     FuncShowMessage  "Mouse Bindings for Icons" \
+Mouse 0			I       SCM     FuncShowMessage  "Mouse Bindings for Icons" \
 "Mouse 1:   Drag moves icon" \
 "           Deiconify with double click" \
 "           Root menu with ALT + click" \
@@ -755,7 +754,7 @@ Mouse 0		I       SCM     FuncShowMessage  "Mouse Bindings for Icons" \
 # 6.1.5. Pointer in Window (and in Icon for consistency)
 #***********************************************************************
 #     Button	Context Modifi 	Function
-Mouse 1		WI	M	Menu MenuRoot
+Mouse 1			WI		M		Menu MenuRoot
 
 
 #=======================================================================
@@ -875,7 +874,7 @@ DestroyModuleConfig FvwmBanner: *
 # 7.4.1 Common FvwmEvents
 #***********************************************************************
 DestroyModuleConfig FvwmEventCommon: *
-*FvwmEventCommon: deiconify 		DeThumbnail
+*FvwmEventCommon: deiconify	DeThumbnail
 
 #***********************************************************************
 # 7.4.1 Sound FvwmEvents
@@ -929,28 +928,28 @@ DestroyModuleConfig  FvwmForm-RunCommand: *
 #***********************************************************************
 DestroyModuleConfig FvwmForm-About: *
 *FvwmForm-About: WarpPointer
-*FvwmForm-About: Title "$[gt.About]"
-*FvwmForm-About: Font 10x20
-*FvwmForm-About: Line center
-*FvwmForm-About: Text "FVWM-Nightshade"
-*FvwmForm-About: Font 8x13bold
-*FvwmForm-About: Line center
-*FvwmForm-About: Text "$[gt.Version]: $[infostore.ns_version]"
-*FvwmForm-About: Line center
-*FvwmForm-About: Line center
-*FvwmForm-About: Line center
-*FvwmForm-About: Text "$[gt.Authors]:"
-*FvwmForm-About: Font 8x13
-*FvwmForm-About: Line center
-*FvwmForm-About: Text "Thomas Funk <t.funk@web.de>"
-*FvwmForm-About: Line center
-*FvwmForm-About: Text "Bernhard Popp <kermit.popp@googlemail.com>"
-*FvwmForm-About: Line center
-*FvwmForm-About: Line center
-*FvwmForm-About: Line center
+*FvwmForm-About: Title	"$[gt.About]"
+*FvwmForm-About: Font	10x20
+*FvwmForm-About: Line	center
+*FvwmForm-About: Text	"FVWM-Nightshade"
+*FvwmForm-About: Font	8x13bold
+*FvwmForm-About: Line	center
+*FvwmForm-About: Text	"$[gt.Version]: $[infostore.ns_version]"
+*FvwmForm-About: Line	center
+*FvwmForm-About: Line	center
+*FvwmForm-About: Line	center
+*FvwmForm-About: Text	"$[gt.Authors]:"
+*FvwmForm-About: Font	8x13
+*FvwmForm-About: Line	center
+*FvwmForm-About: Text	"Thomas Funk <t.funk@web.de>"
+*FvwmForm-About: Line	center
+*FvwmForm-About: Text	"Bernhard Popp <kermit.popp@googlemail.com>"
+*FvwmForm-About: Line	center
+*FvwmForm-About: Line	center
+*FvwmForm-About: Line	center
 *FvwmForm-About: Button quit " $[gt.Close] " ^M
 *FvwmForm-About: Command Nop
-*FvwmForm-About: Line center
+*FvwmForm-About: Line	center
 
 #***********************************************************************
 # 7.5.2 Message box
@@ -1073,7 +1072,7 @@ AddToFunc StartFunction
 # closed, the focus won't switch to the next window in the windowlist
 #-----------------------------------------------------------------------
 DestroyFunc UrgencyFunc
-AddToFunc UrgencyFunc
+AddToFunc   UrgencyFunc
 + I Iconify off
 + I Raise
 
@@ -1129,7 +1128,7 @@ AddToFunc   FuncRemoveAllButtons
 # Change a decor on the fly
 #-----------------------------------------------------------------------
 DestroyFunc FuncChangeDecor
-AddToFunc FuncChangeDecor
+AddToFunc   FuncChangeDecor
 + I PipeRead 'echo InfoStoreAdd used_theme $0'
 + I FuncSetThemeDir $[infostore.used_theme]
 + I FuncRemoveAllButtons
@@ -1222,7 +1221,7 @@ AddToFunc   FuncStartSystrayApplets
 # Starts programs while startup
 #-----------------------------------------------------------------------
 DestroyFunc FuncAutoStartPrograms
-AddToFunc FuncAutoStartPrograms
+AddToFunc   FuncAutoStartPrograms
 + I Test (f $[FVWM_USERDIR]/.autostart) \
     Exec exec fns-start-programs Autostart $[FVWM_USERDIR]/.autostart
 
@@ -1367,7 +1366,7 @@ AddToFunc   FuncDelWallpaperlink
 # on the upper right and the name of the app at the bottom
 #-----------------------------------------------------------------------
 DestroyFunc Thumbnail
-AddToFunc Thumbnail
+AddToFunc   Thumbnail
 + I Raise
 + I ThisWindow (!Iconic) PipeRead "echo SetEnv app_name `xprop -id $[w.id] WM_CLASS |cut -d',' -f2 |cut -d'\"' -f2`"
 + I PipeRead "echo SetEnv Icon-$[w.id] `fns-find-icon -i $[w.id]`"
@@ -1388,7 +1387,7 @@ AddToFunc Thumbnail
 # replacement for deiconify.
 #-----------------------------------------------------------------------
 DestroyFunc DeThumbnail
-AddToFunc DeThumbnail
+AddToFunc   DeThumbnail
 + I Test (i $[Icon-$[w.id]]) WindowStyle Icon $[Icon-$[w.id]]
 + I TestRc (NoMatch) WindowStyle NoIconOverride, Icon
 + I Exec rm -f $[FVWM_USERDIR]/temp/icon.tmp.$[w.id].png
@@ -1596,14 +1595,14 @@ AddToFunc   FuncIconify
 # down when the window isnt shaded has no effect, which I like :)
 #-----------------------------------------------------------------------
 DestroyFunc FuncWheelToggleShade
-AddToFunc FuncWheelToggleShade
+AddToFunc   FuncWheelToggleShade
 + D WindowShade $0
 
 #-----------------------------------------------------------------------
 # Move active window to next/previous page
 #-----------------------------------------------------------------------
 DestroyFunc FuncMoveWindowToPage
-AddToFunc FuncMoveWindowToPage
+AddToFunc   FuncMoveWindowToPage
 + I MoveToPage $0 $1
 + I GotoPage $0 $1
 
@@ -1611,7 +1610,7 @@ AddToFunc FuncMoveWindowToPage
 # GotoPage and set focus to window which is in the foreground
 #-----------------------------------------------------------------------
 DestroyFunc FuncGotoPage
-AddToFunc FuncGotoPage
+AddToFunc   FuncGotoPage
 + I GotoPage $0 $1
 + I Next (CurrentPage, !Iconic, !Sticky, !Shaded, !Focused, !Overlapped) FuncSelectWindow
 
@@ -1619,7 +1618,7 @@ AddToFunc FuncGotoPage
 # Move window to top layer and next time back to default
 #-----------------------------------------------------------------------
 DestroyFunc FuncStaysOnTopAndBack
-AddToFunc FuncStaysOnTopAndBack
+AddToFunc   FuncStaysOnTopAndBack
 + I ThisWindow (Layer 2) Pick (CirculateHit) Layer 0 6
 + I TestRc (!Match) Pick (CirculateHit) Layer default
 + I Raise
@@ -1643,7 +1642,7 @@ AddToFunc FuncStaysOnTopAndBack
 # Show a Wallpaper configuration menu
 #-----------------------------------------------------------------------
 DestroyFunc FuncMenuWallpaperConfiguration
-AddToFunc FuncMenuWallpaperConfiguration
+AddToFunc   FuncMenuWallpaperConfiguration
 + I Test (x convert) PipeRead `echo SetEnv appmatch 1`
 + I TestRc (!Match) PipeRead `echo SetEnv appmatch 0`
 + I Test (x Esetroot) PipeRead 'echo SetEnv appmatch `expr $appmatch + 1`'
@@ -1654,7 +1653,7 @@ AddToFunc FuncMenuWallpaperConfiguration
 # Creates a dynamic menu for all available Fvwm manpages
 #-----------------------------------------------------------------------
 DestroyFunc FuncFvwmManpageMenu
-AddToFunc FuncFvwmManpageMenu
+AddToFunc   FuncFvwmManpageMenu
 + I PipeRead 'fvwm-menu-directory \
               --dir "/usr/share/man/man1" \
               --title "Man Pages" --exec-file "^xterm -fg $[fg.cs33] -bg $[bg.cs33] -g 80x40 -n Fvwm-Help -T Fvwm-Help -e man" |\
@@ -1665,7 +1664,7 @@ AddToFunc FuncFvwmManpageMenu
 # Start the correct keyboard layouter app
 #-----------------------------------------------------------------------
 DestroyFunc FuncKbdLayouter
-AddToFunc FuncKbdLayouter
+AddToFunc   FuncKbdLayouter
 + I Test (x gxneur) Exec exec gxneur
 + I TestRc (!Match) Test (x xneur) Exec exec xneur
 + I TestRc (!Match) FuncShowMessage "Keyboard Layout Info" "Install xneur/gxneur for full functionality"
@@ -1674,7 +1673,7 @@ AddToFunc FuncKbdLayouter
 # Start Gtk config tool if available
 #-----------------------------------------------------------------------
 DestroyFunc FuncLxappearance
-AddToFunc FuncLxappearance
+AddToFunc   FuncLxappearance
 + I Test (x lxappearance) Exec exec lxappearance
 + I TestRc (!Match) FuncShowMessage "Gtk+ Decor Info" "Install LxApearance for Gtk+ apps"
 
@@ -1682,12 +1681,12 @@ AddToFunc FuncLxappearance
 # Start Qt3/4 config tool if available
 #-----------------------------------------------------------------------
 DestroyFunc FuncQt3Decor
-AddToFunc FuncQt3Decor
+AddToFunc   FuncQt3Decor
 + I Test (x qtconfig-qt3) Exec exec qtconfig-qt3
 + I TestRc (!Match) FuncShowMessage "Qt3 Decor Info" "Install qtconfig-qt3 for Qt3 apps"
 
 DestroyFunc FuncQt4Decor
-AddToFunc FuncQt4Decor
+AddToFunc   FuncQt4Decor
 + I Test (x qtconfig-qt4) Exec exec qtconfig-qt4
 + I TestRc (!Match) FuncShowMessage "Qt4 Decor Info" "Install qtconfig-qt4 for Qt4 apps"
 
@@ -1890,7 +1889,7 @@ AddToMenu   MenuConfiguration
 # Sub menu for keyboard configuration
 #-----------------------------------------------------------------------
 DestroyMenu MenuKeyboard
-AddToMenu MenuKeyboard
+AddToMenu   MenuKeyboard
 + "$[gt.&Keyboard]" Title
 + "$[gt.&Settings]%menu/keyboard.xpm%"		FvwmScript FvwmScript-KeyboardSetup
 + "$[gt.&Layout]%menu/keyboard.xpm%"      	FuncKbdLayouter
@@ -1928,12 +1927,12 @@ AddToMenu   MenuQtDecor
 # with DynamicPopupAction and recreation
 #-----------------------------------------------------------------------
 DestroyMenu FvwmDecorMenu
-AddToMenu FvwmDecorMenu
+AddToMenu   FvwmDecorMenu
 + "$[gt.Decors]" Title
 + DynamicPopupAction Function FuncFvwmDecorMenu
 
 DestroyFunc FuncFvwmDecorMenu
-AddToFunc FuncFvwmDecorMenu
+AddToFunc   FuncFvwmDecorMenu
 + I DestroyMenu recreate FvwmDecorMenu
 + I AddToMenu FvwmDecorMenu "$[gt.Decors]" Title
 + I PipeRead 'for i in `ls -Fh $FNS_SYSTEMDIR/themes/ | grep /$ | sed s#/##g`; \
@@ -1975,7 +1974,7 @@ AddToMenu   MenuXScreenSaver
 # 9.5 Fvwm Quit menu
 #=======================================================================
 DestroyMenu MenuFvwmQuit
-AddToMenu MenuFvwmQuit "$[gt.Really Quit FVWM]?" 	Title
+AddToMenu   MenuFvwmQuit "$[gt.Really Quit FVWM]?" 	Title
 #+ "$[gt.&Restart]%menu/restart.xpm%"             	Restart
 + "$[gt.&Restart]%menu/restart.xpm%"             	FuncRestart
 + "" 						 						Nop

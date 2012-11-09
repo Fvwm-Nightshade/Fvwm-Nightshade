@@ -1,14 +1,14 @@
-########################################################################
+#-----------------------------------------------------------------------
 # File:		Pager
-# Version:	1.0.2
+# Version:	1.0.3
 # Licence: 	GPL 2
 #
 # Description:	shows a Fvwm-Pager
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	06/08/2012
-# Changed:	10/28/2012
-########################################################################
+# Changed:	11/09/2012
+#-----------------------------------------------------------------------
 
 Style FvwmPager !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
 Style FvwmPager StaysOnBottom, !Iconifiable, !Maximizable, FixedSize, FixedPosition

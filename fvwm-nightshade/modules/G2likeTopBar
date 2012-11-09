@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeTopBar
-# Version:	1.0.6
+# Version:	1.0.7
 # Licence: 	GPL 2
 #
 # Description:	Gnome like top bar with root menu, personal menu, systray,
@@ -10,7 +10,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	10/09/2012
-# Changed:	10/28/2012
+# Changed:	11/09/2012
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -61,6 +61,7 @@ PipeRead 'echo InfoStoreAdd tray_columns $(($[infostore.tray_icons]*2))'
 PipeRead "echo InfoStoreAdd empty_field_columns `perl -e 'printf \"%.0f\",$[infostore.columns]-$[infostore.tray_columns]-23'`"
 
 PipeRead 'echo InfostoreAdd tray_max_x $(($[infostore.tray_icons]+1))'
+
 
 #=======================================================================
 # FvwmButtons TopBarG2
@@ -179,33 +180,4 @@ DestroyModuleConfig G2likeTopBar: *
 		    Icon	$[infostore.logout_icon], \
 		    ActiveIcon	$[infostore.logout_icon], \
 		    Action(Mouse 1) `Menu MenuFvwmQuit`)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,14 +1,14 @@
-########################################################################
+#-----------------------------------------------------------------------
 # File:		colorsets
-# Version:	0.1.1
+# Version:	0.1.2
 # Licence: 	GPL 2
 #
 # Description:	colorsets of Air theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	06/08/2012
-# Changed:	10/28/2012
-########################################################################
+# Changed:	11/09/2012
+#-----------------------------------------------------------------------
 # REMARKS:
 #
 # Hints: 'NoShape' removes the shape mask from the colorset.
@@ -159,7 +159,6 @@ Colorset 12 VGradient 255 2 #6794a7 70 #7398aa 30 #90b0bd, fg grey95, NoShape
 # fg = font color
 # bg = background color
 #-----------------------------------------------------------------------
-#Colorset 13 fg black, bg #7398aa, hi black, sh gray40, Plain
 Colorset 13 VGradient 255 2 #b3d2de 50 #a1c5d3 50 #75aec3, fg black, bg #75aec3, NoShape
 
 #-----------------------------------------------------------------------
