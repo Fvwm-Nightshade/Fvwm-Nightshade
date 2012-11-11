@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		FNS-BaseSetup
-# Version:	1.2.4
+# Version:	1.2.5
 # Licence: 	GPL 2
 #
 # Description:	Script to configure base settings of Fvwm-Nightshade
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/01/2012
-# Changed:	10/25/2012
+# Changed:	11/11/2012
 #-----------------------------------------------------------------------
 
 DestroyModuleConfig  FNS-BaseSetup: *
@@ -43,7 +43,7 @@ DestroyModuleConfig  FNS-BaseSetup: *
 *FNS-BaseSetup: Line	left
 *FNS-BaseSetup: Text 	"Used Theme:    "
 *FNS-BaseSetup: Input 	Theme 15 "Tribal"
-*FNS-BaseSetup: Text 	" (Others: Tumble, Air, Ambience)"
+*FNS-BaseSetup: Text 	" (Others: Clean, Air, Ambience, CrystalBalls)"
 *FNS-BaseSetup: Line
 
 *FNS-BaseSetup: Line	left

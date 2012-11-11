@@ -1,5 +1,10 @@
 History:
 
+11/11/2012 V 0.5.29
+- restructure Configuration menu
+- add Fvwm-Nightshade help menu
+- update FNS-BaseSetup and its' help pages
+
 11/09/2012 V 0.5.28
 - cleanup files
 

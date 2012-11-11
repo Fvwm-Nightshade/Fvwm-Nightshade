@@ -46,7 +46,7 @@ Tribal::::
 Default theme of Fvwm-Nightshade held in green/black tones with yellow font collors and 
 tribal signs as buttons.
 
-Tumble::::
+Clean::::
 +
 Simple vector theme with -, +, v and x as buttons. Blue/gray color gradients for title bar 
 and Fvwm modules.
@@ -58,6 +58,10 @@ Dark Ubuntu 10.04 theme with black gradients for title bar and orange for highli
 Air::::
 +
 Kde 4 Oxygen theme held in grey and blue tones.
+
+CrystalBalls::::
++
+Milky Mac OSX theme with white, grey and blue tones.
 
 *Used Font*::
 +

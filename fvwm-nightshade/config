@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.28
+InfoStoreAdd ns_version 0.5.29
 # Copyright (C) 2012
 #
 # Authors:
@@ -1713,13 +1713,13 @@ AddToFunc   FuncMenuRoot
 + I AddToMenu MenuRoot "$[gt.&Configuration]%menu/configuration.xpm%"		Popup MenuConfiguration
 + I AddToMenu MenuRoot "$[gt.&Help]%menu/help.xpm%"							Popup MenuHelp
 + I AddToMenu MenuRoot ""													Nop
-+ I AddToMenu MenuRoot "$[gt.FVWM &Modules]%menu/modules.xpm%"				Popup MenuFvwmModules
++ I AddToMenu MenuRoot "$[gt.Fvwm &Modules]%menu/modules.xpm%"				Popup MenuFvwmModules
 + I AddToMenu MenuRoot "$[gt.&Window Operations]%menu/window.xpm%"			Popup MenuWindowOpsFull
 + I AddToMenu MenuRoot ""													Nop
 + I AddToMenu MenuRoot "$[gt.Lock screen]	Shift-Ctrl+L%menu/lock.xpm%"	FuncLockScreen
 + I AddToMenu MenuRoot "$[gt.&Run Command]	Shift-Alt-F2%menu/system.xpm%"	module FvwmForm FvwmForm-RunCommand
 + I AddToMenu MenuRoot "$[gt.&Terminal]	Shift-Ctrl-T%menu/terminal.xpm%"	exec exec $[infostore.default_terminal]
-+ I AddToMenu MenuRoot "$[gt.&Quit FVWM]%menu/quit.xpm%"					Popup MenuFvwmQuit
++ I AddToMenu MenuRoot "$[gt.&Quit Fvwm-Nightshade]%menu/quit.xpm%"			Popup MenuFvwmQuit
 
 
 #-----------------------------------------------------------------------
@@ -1758,11 +1758,12 @@ AddToMenu   MenuHelp
 + "$[gt.&Help]" Title
 # Dynamic Fvwm Manpages realized with MissingSubmenuFunction
 + MissingSubmenuFunction FuncFvwmManpageMenu
-+ "%menu/help.xpm%$[gt.FVWM Man Pages]"				Popup "/usr/share/man/man1"
-+ "%menu/www.xpm%$[gt.FVWM Web Pages]"				Popup MenuFvwmWebPages
++ "%menu/help.xpm%$[gt.Fvwm Man Pages]"				Popup "/usr/share/man/man1"
++ "%menu/www.xpm%$[gt.Fvwm Web Pages]"				Popup MenuFvwmWebPages
++ "%menu/www.xpm%$[gt.Fvwm-Nightshade Web Pages]"	Popup FNSWebPagesMenu
 + "%menu/help.xpm%$[gt.Other Helps]"				Popup MenuHelpOthers
-+ "%menu/information.xpm%$[gt.Show FVWM Version]"	FuncShowMessage "Fvwm Version Info" "$[version.line]"
-+ "%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%$[gt.About Nightshade]"	Module FvwmForm FvwmForm-About
++ "%mini.f1.xpm%$[gt.Show Fvwm Version]"			FuncShowMessage "Fvwm Version Info" "$[version.line]"
++ "%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%$[gt.About Fvwm-Nightshade]"	Module FvwmForm FvwmForm-About
 
 #-----------------------------------------------------------------------
 # Dynamic other help application sub menu for miscellaneous help tools
@@ -1787,7 +1788,7 @@ AddToFunc   FuncMenuHelpOthers
 #-----------------------------------------------------------------------
 DestroyMenu MenuFvwmWebPages
 AddToMenu   MenuFvwmWebPages
-+ "$[gt.FVWM Web Pages]" Title
++ "$[gt.Fvwm Web Pages]" Title
 + "%menu/information.xpm%$[gt.Home Page]"					FuncOpenURL http://www.fvwm.org/
 + "%menu/information.xpm%$[gt.FAQ]"							FuncOpenURL http://www.fvwm.org/generated/FAQ.html
 + "%menu/information.xpm%$[gt.Documentation]"				FuncOpenURL http://fvwm.org/doc/unstable/index.html
@@ -1802,12 +1803,30 @@ AddToMenu   MenuFvwmWebPages
 + "%menu/information.xpm%$[gt.Session Management]"			FuncOpenURL http://linuxgazette.net/100/adam.html
 
 
+#-----------------------------------------------------------------------
+# Dynamic Fvwm-Nightshade help sub menu with names of each found html 
+# page with DynamicPopupAction and recreation
+#-----------------------------------------------------------------------
+DestroyMenu FNSWebPagesMenu
+AddToMenu   FNSWebPagesMenu
++ "$[gt.FNS Web Pages]" Title
++ DynamicPopupAction Function FuncFNSWebPagesMenu
+
+DestroyFunc FuncFNSWebPagesMenu
+AddToFunc   FuncFNSWebPagesMenu
++ I DestroyMenu recreate FNSWebPagesMenu
++ I AddToMenu FNSWebPagesMenu "$[gt.FNS Web Pages]" Title
++ I PipeRead 'for i in `ls -1 $FNS_SYSTEMDIR/../doc/fvwm-nightshade/html/*.html | sed "s#.*/##"`; \
+  do echo AddToMenu FNSWebPagesMenu "${i}%menu/information.xpm%" FuncOpenURL file://$[FNS_SYSTEMDIR]/../doc/fvwm-nightshade/html/$i; done'
++ I AddToMenu FNSWebPagesMenu "%menu/information.xpm%$[gt.Fvwm-Nightshade Wiki]" FuncOpenURL https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/wiki
+
+
 #=======================================================================
 # 9.3 Modules
 #=======================================================================
 DestroyMenu MenuFvwmModules
 AddToMenu   MenuFvwmModules
-+ "$[gt.FVWM Modules]" Title
++ "$[gt.Fvwm Modules]" Title
 + "$[gt.Start Regular Modules]%menu/modules.xpm%"       Popup MenuStartRegularModules
 + "$[gt.Stop Regular Modules]%menu/quit.xpm%"           Popup MenuStopRegularModules
 
@@ -1868,21 +1887,46 @@ AddToMenu   MenuFvwmForms
 DestroyMenu MenuConfiguration
 AddToMenu   MenuConfiguration
 + "$[gt.&Configuration]" Title
++ "$[gt.&Fvwm]%mini.f1.xpm%"								Popup MenuFvwmConfiguration
++ "$[gt.Fvwm-&Nightshade]%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%"  Popup MenuFNSConfiguration
++ "$[gt.&System]%menu/system.xpm%"							Popup MenuSystemConfiguration
++ ""														Nop
++ "$[gt.&Tail .xsession-errors]%menu/information.xpm%" 		FuncViewFileTail ".xsession-errors" $[HOME]/.xsession-errors
+
+
+#-----------------------------------------------------------------------
+# Sub menu for Fvwm configuration
+#-----------------------------------------------------------------------
+DestroyMenu MenuFvwmConfiguration
+AddToMenu   MenuFvwmConfiguration
++ "$[gt.&Fvwm]" Title
 + "$[gt.&Animation Control]%menu/window-iconify.xpm%"		Popup MenuFvwmAnimate
++ "$[gt.Fvwm Form &Defaults]%menu/configuration.xpm%"  		Module FvwmForm FvwmForm-Form
+
+
+#-----------------------------------------------------------------------
+# Sub menu for Fvwm-Nightshade configuration
+#-----------------------------------------------------------------------
+DestroyMenu MenuFNSConfiguration
+AddToMenu   MenuFNSConfiguration
++ "$[gt.&Fvwm-Nightshade]" Title
 + MissingSubmenuFunction FuncMenuWallpaperConfiguration
 + "$[gt.Configure &Background]%menu/image-viewer.xpm%"    	Popup MenuWallpaperConfiguration
++ "$[gt.&Decoration]%menu/themes.xpm%"						Popup MenuDecoration
++ "$[gt.Fvwm-&Nightshade Setup]%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%"  FvwmForm FNS-BaseSetup
+
+
+#-----------------------------------------------------------------------
+# Sub menu for system configuration
+#-----------------------------------------------------------------------
+DestroyMenu MenuSystemConfiguration
+AddToMenu   MenuSystemConfiguration
++ "$[gt.&System]" Title
 + "$[gt.&Keyboard]%menu/keyboard.xpm%"						Popup MenuKeyboard
 + "$[gt.&Mouse]%menu/mouse.xpm%"							Popup MenuMouse
 + MissingSubmenuFunction FuncMenuXScreenSaver
 + "$[gt.Sc&reen Saver]%menu/display.xpm%"					Popup MenuXScreenSaver
-+ "$[gt.&Decoration]%menu/themes.xpm%"						Popup MenuDecoration
-+ "$[gt.Fvwm Form &Defaults]%menu/configuration.xpm%"  		Module FvwmForm FvwmForm-Form
-+ "$[gt.Fvwm-&Nightshade Setup]%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%"  FvwmForm FNS-BaseSetup
-+ "$[gt.&System Bell]%menu/sound.xpm%"                		FvwmScript FvwmScript-BellSetup
-+ "$[gt.&Screen]%menu/display.xpm%"							FvwmScript FvwmScript-ScreenSetup
 + "$[gt.&CPU Performance]%menu/monitoring.xpm%"				FvwmScript FvwmScript-CPU-Performance
-+ ""														Nop
-+ "$[gt.&Tail .xsession-errors]%menu/information.xpm%" 		FuncViewFileTail ".xsession-errors" $[HOME]/.xsession-errors
 
 
 #-----------------------------------------------------------------------
@@ -1909,7 +1953,7 @@ AddToMenu   MenuMouse
 DestroyMenu MenuDecoration
 AddToMenu   MenuDecoration
 + "$[gt.&Decoration]" Title
-+ "$[gt.Fvwm &Decor]%menu/windows.xpm%"		Popup FvwmDecorMenu
++ "$[gt.&Decors]%menu/windows.xpm%"			Popup FvwmDecorMenu
 + "$[gt.&Qt Decor]%menu/kde.xpm%"			Popup MenuQtDecor
 + "$[gt.&Gtk+ Decor]%menu/gnome.xpm%"		FuncLxappearance
 
@@ -1974,8 +2018,8 @@ AddToMenu   MenuXScreenSaver
 # 9.5 Fvwm Quit menu
 #=======================================================================
 DestroyMenu MenuFvwmQuit
-AddToMenu   MenuFvwmQuit "$[gt.Really Quit FVWM]?" 	Title
-#+ "$[gt.&Restart]%menu/restart.xpm%"             	Restart
+AddToMenu   MenuFvwmQuit 
++ "$[gt.Really Quit]?" 	Title
 + "$[gt.&Restart]%menu/restart.xpm%"             	FuncRestart
 + "" 						 						Nop
 + "$[gt.Re&fresh Screen]%menu/refresh.xpm%"      	Refresh
@@ -2101,14 +2145,14 @@ AddToMenu   MenuWindowMaximize
 + "%menu/window-maximize.xpm%$[gt.&Maximize Fully]"				Maximize On 100 100
 + "%menu/window-maximize.xpm%$[gt.&Unmaximize]"					Maximize Off
 + "" Nop
-+ "%menu/window-maximize.xpm%$[gt.Maximize &Partially]"        Pick FuncSimpleMaximizePartially On
-+ "%menu/window-maximize.xpm%$[gt.Maximize &Vertically]"       Pick FuncSimpleMaximizeVertically On
-+ "%menu/window-maximize.xpm%$[gt.Maximize &Horizontally]"     Pick FuncSimpleMaximizeHorizontally On
++ "%menu/window-maximize.xpm%$[gt.Maximize &Partially]"			Pick FuncSimpleMaximizePartially On
++ "%menu/window-maximize.xpm%$[gt.Maximize &Vertically]"		Pick FuncSimpleMaximizeVertically On
++ "%menu/window-maximize.xpm%$[gt.Maximize &Horizontally]"		Pick FuncSimpleMaximizeHorizontally On
 + "" Nop
 # these bound functions do not seem to work well if used consequentially
-+ "%menu/window-maximize.xpm%$[gt.Maximize &Grow]"             Maximize On grow grow
-+ "%menu/window-maximize.xpm%$[gt.Maximize Grow V&ert.]"       Maximize On    0 grow
-+ "%menu/window-maximize.xpm%$[gt.Maximize Grow H&oriz.]"      Maximize On grow    0
++ "%menu/window-maximize.xpm%$[gt.Maximize &Grow]"				Maximize On grow grow
++ "%menu/window-maximize.xpm%$[gt.Maximize Grow V&ert.]"		Maximize On    0 grow
++ "%menu/window-maximize.xpm%$[gt.Maximize Grow H&oriz.]"		Maximize On grow    0
 + "" Nop
 + "%menu/window-maximize.xpm""%$[gt.Maximize &Full Screen]	Shift-Alt+F11" Pick FuncMaximizeFullScreen
 + "%menu/window-maximize.xpm%$[gt.&Unmaximize Full Screen]	Shift-Alt+F11" Pick FuncMaximizeFullScreen
