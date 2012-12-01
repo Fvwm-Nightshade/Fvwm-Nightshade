@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      1.0.4
+# Version:      1.0.5
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      10/24/2012
+# Changed:      12/01/2012
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -63,7 +63,7 @@ install:
 	install -m 755 bin/* $(bindir)
 	
 	echo "-> install login file"
-	install -d $(datadir)/xsessions
+	install -d /usr/share/xsessions
 	install -m 644 system/fvwm-nightshade.desktop /usr/share/xsessions/
 	
 	echo "-> install fvwm-nightshade system files"

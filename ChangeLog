@@ -1,5 +1,9 @@
 History:
 
+12/01/2012 V 0.5.30
+- fix bug in makefile that /usr/share/xsessions and not /usr/local/share/xsessions 
+  will be created.
+  
 11/11/2012 V 0.5.29
 - restructure Configuration menu
 - add Fvwm-Nightshade help menu
