@@ -1,5 +1,10 @@
 History:
 
+12/26/2012 V 0.5.31
+- zip manpages to best -> debian guidance
+- add deb, rpm and Arch build support
+- update INSTALL and README
+
 12/01/2012 V 0.5.30
 - fix bug in makefile that /usr/share/xsessions and not /usr/local/share/xsessions 
   will be created.
