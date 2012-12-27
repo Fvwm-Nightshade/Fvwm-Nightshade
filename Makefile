@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      1.0.5
+# Version:      1.0.6
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,18 +8,22 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      12/01/2012
+# Changed:      12/27/2012
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
 version 	= $(shell grep ns_version fvwm-nightshade/config |sed q |cut -d' ' -f3)
 tarname 	= $(package)
 distdir 	= ../$(tarname)-$(version)
+pkgdir		= ../$(package)
 
+DESTDIR		?=
+deb: DESTDIR = $(pkgdir)
 prefix 		?= /usr/local
-exec_prefix = $(prefix)
-bindir 		= $(exec_prefix)/bin
-datadir 	= $(prefix)/share
+deb: prefix = /usr
+pkgprefix	= $(DESTDIR)$(prefix)
+bindir 		= $(pkgprefix)/bin
+datadir 	= $(pkgprefix)/share
 mandir 		= $(datadir)/man
 man1dir 	= $(mandir)/man1
 docdir 		= $(datadir)/doc
@@ -31,7 +35,7 @@ fns_executables = $(shell ls -1 bin)
 fns_manpages 	= $(shell ls -1 man)
 fns_fvwmscripts = $(shell ls -1 fvwm)
 
-fvwm_path	?= /usr/share/fvwm
+fvwm_path	?= $(DESTDIR)/usr/share/fvwm
 
 all:
 	@echo "There is nothing to compile."
@@ -57,14 +61,14 @@ distcheck: $(distdir).tar.gz
 	@echo "*** Package $(distdir).tar.gz ready for distribution."
 
 install: 
-	echo "Installing fvwm-nightshade $(version) to $(prefix)"
+	echo "Installing fvwm-nightshade $(version) to $(pkgprefix)"
 	echo "-> install all executables"
 	install -d $(bindir)
 	install -m 755 bin/* $(bindir)
 	
 	echo "-> install login file"
-	install -d /usr/share/xsessions
-	install -m 644 system/fvwm-nightshade.desktop /usr/share/xsessions/
+	install -d $(DESTDIR)/usr/share/xsessions
+	install -m 644 system/fvwm-nightshade.desktop $(DESTDIR)/usr/share/xsessions/
 	
 	echo "-> install fvwm-nightshade system files"
 	install -d $(datadir)
@@ -77,19 +81,26 @@ install:
 	cp -r templates $(pkgdocdir)
 
 	echo "-> install fvwm scripts"
-	if test -d "$(fvwm_path)"; then \
-	  install -m 644 fvwm/*  $(fvwm_path); \
+	if test -z "$(DESTDIR)"; then \
+	  if test -d "$(fvwm_path)"; then \
+	    install -m 644 fvwm/*  $(fvwm_path); \
+	  else \
+	    echo "Fvwm isn't installed in $(fvwm_path)"; \
+	    echo "Please set fvwm_path=<path_to_fvwm> and rerun make install."; \
+	    exit 2; \
+	  fi \
 	else \
-	  echo "Fvwm isn't installed in $(fvwm_path)"; \
-	  echo "Please set fvwm_path=<path_to_fvwm> and rerun make install."; \
-	  exit 2; \
+	  install -d $(fvwm_path); \
+	  install -m 644 fvwm/*  $(fvwm_path); \
 	fi
 
 	echo "-> install manpages"
 	install -d $(man1dir)
 	install -m 644 man/* $(man1dir)
 
-	echo "Fvwm-Nightshade is installed. Thanks."
+	if test -z "$(DESTDIR)"; then \
+	  echo "Fvwm-Nightshade is installed. Thanks."; \
+	fi
 	
 uninstall:
 	echo "uninstall previous version of Fvwm-Nightshade"
@@ -125,7 +136,48 @@ uninstall:
 
 	echo "Fvwm-Nightshade is now removed. Only ~/.fvwm-nightshade exists."
 	echo "If you don't need it anymore remove it by hand."
+
+build-deb: 
+	echo "Build debian package"
+	rm -rf $(pkgdir)
+	mkdir -p $(pkgdir)
+	mkdir -p $(pkgdir)/DEBIAN
+	cp debian/control $(pkgdir)/DEBIAN
+	mkdir -p $(pkgdocdir)
+	cp debian/copyright $(pkgdocdir)
 	
-.PHONY: FORCE dist distcheck install uninstall
-.SILENT: install uninstall
+
+deb: build-deb install
+	rm $(pkgdocdir)/INSTALL
+	sed -i "s/Version:/Version: $(version)/" $(pkgdir)/DEBIAN/control
+	sed -i "s/Installed-Size:/Installed-Size: `du -s fvwm-nightshade |cut -f1`/" $(pkgdir)/DEBIAN/control
+	dpkg -b $(pkgdir) ../$(package)_$(version)_all.deb
+	rm -rf $(pkgdir)
+	echo "Done."
+
+prepare-rpm:
+	sed -i "s/Version:.*/Version:\t$(version)/" rpm/fvwm-nightshade.spec
+
+rpm: prepare-rpm dist
+	echo "Build rpm package"
+	rpmbuild -bb rpm/fvwm-nightshade.spec --clean
+
+prepare-arch: dist
+	echo "Build Arch package"
+	rm -rf $(pkgdir)
+	mkdir -p $(pkgdir)/src/$(tarname)-$(version)
+	cp -rf * $(pkgdir)/src/$(tarname)-$(version)/
+	cp arch/PKGBUILD_FNS $(pkgdir)/PKGBUILD
+	sed -i "s/pkgver=.*/pkgver=$(version)/" $(pkgdir)/PKGBUILD
+	sed -i "s#source=.*#source=\"$(distdir).tar.gz\"#" $(pkgdir)/PKGBUILD
+	sed -i "s#^  cd \"\$$srcdir/.*#  cd \"\$$srcdir/$(package)-$(version)\"#" $(pkgdir)/PKGBUILD
+
+arch: prepare-arch
+	cd $(pkgdir)
+	makepkg -g >> PKGBUILD
+	makepkg
+	
+	
+.PHONY: FORCE dist distcheck install uninstall deb arch
+.SILENT: install uninstall build-deb deb rpm prepare-rpm arch prepare-arch
 	
