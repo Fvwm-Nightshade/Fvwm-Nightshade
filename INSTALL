@@ -141,7 +141,16 @@ Installation of Fvwm-Nightshade
 			# pacman -U fvwm-nightshade-<version>-any.pkg.tar.xz
 		
 
-Now Fvwm-Nightshade is installed and you can login, change the base settings and enjoy.
+Now Fvwm-Nightshade is installed. 
+
+If you haven't a graphical login manager copy system/.xinitrc into your home directory 
+	$ cp system/.xinitrc ~/
+and start the xserver with
+	$ startx
+change the base settings and enjoy.
+
+If you have a graphical login manager there's now a new entry "Fvwm-Nightshade" in your sessions dialog.
+Login, change the base settings and enjoy.
 
 
 

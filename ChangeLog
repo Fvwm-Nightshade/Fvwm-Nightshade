@@ -4,6 +4,7 @@ History:
 - fix Makefile bug in rpm building with missing sources
 - fix Makefile bugs in arch building with package creation
 - update INSTALL
+- update system/.xinitrc
 
 12/26/2012 V 0.5.31
 - zip manpages to best -> debian guidance
