@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      1.0.6
+# Version:      1.0.7
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      12/27/2012
+# Changed:      12/30/2012
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -16,11 +16,15 @@ version 	= $(shell grep ns_version fvwm-nightshade/config |sed q |cut -d' ' -f3)
 tarname 	= $(package)
 distdir 	= ../$(tarname)-$(version)
 pkgdir		= ../$(package)
+arch: pkgdir = /tmp/$(package)
+rpm: srcdir = $(shell rpmbuild --showrc |grep " _topdir" |cut -f2)/SOURCES
 
 DESTDIR		?=
 deb: DESTDIR = $(pkgdir)
+
 prefix 		?= /usr/local
 deb: prefix = /usr
+
 pkgprefix	= $(DESTDIR)$(prefix)
 bindir 		= $(pkgprefix)/bin
 datadir 	= $(pkgprefix)/share
@@ -157,27 +161,30 @@ deb: build-deb install
 
 prepare-rpm:
 	sed -i "s/Version:.*/Version:\t$(version)/" rpm/fvwm-nightshade.spec
+	cp $(distdir).tar.gz $(srcdir)
 
-rpm: prepare-rpm dist
+rpm: dist prepare-rpm
 	echo "Build rpm package"
 	rpmbuild -bb rpm/fvwm-nightshade.spec --clean
 
 prepare-arch: dist
 	echo "Build Arch package"
 	rm -rf $(pkgdir)
-	mkdir -p $(pkgdir)/src/$(tarname)-$(version)
-	cp -rf * $(pkgdir)/src/$(tarname)-$(version)/
+	mkdir -p $(pkgdir)
 	cp arch/PKGBUILD_FNS $(pkgdir)/PKGBUILD
+	mv $(distdir).tar.gz $(pkgdir)/
 	sed -i "s/pkgver=.*/pkgver=$(version)/" $(pkgdir)/PKGBUILD
-	sed -i "s#source=.*#source=\"$(distdir).tar.gz\"#" $(pkgdir)/PKGBUILD
+	sed -i "s#source=.*#source=\"$(package)-$(version).tar.gz\"#" $(pkgdir)/PKGBUILD
 	sed -i "s#^  cd \"\$$srcdir/.*#  cd \"\$$srcdir/$(package)-$(version)\"#" $(pkgdir)/PKGBUILD
 
 arch: prepare-arch
-	cd $(pkgdir)
-	makepkg -g >> PKGBUILD
-	makepkg
+	makepkg --config arch/makepkg.conf -p $(pkgdir)/PKGBUILD -g >> $(pkgdir)/PKGBUILD
+	makepkg --config arch/makepkg.conf -p $(pkgdir)/PKGBUILD
+	rm -f *.xz
+	mv $(pkgdir)/*.xz ../
+	rm -rf $(pkgdir)
 	
 	
-.PHONY: FORCE dist distcheck install uninstall deb arch
-.SILENT: install uninstall build-deb deb rpm prepare-rpm arch prepare-arch
+.PHONY: dist distcheck install uninstall deb rpm arch
+.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch
 	
