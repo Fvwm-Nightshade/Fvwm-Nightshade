@@ -121,7 +121,7 @@ Installation of Fvwm-Nightshade
 	- deb:
 		Run
 			# make deb
-		A Debian package is created in the directory above. Install it with a two liner:
+		A Debian package is created in the directory above. Install it with the two liner:
 			# dpkg -i fvwm-nightshade-<version>.deb
 			# apt-get -f install
 	- rpm:
@@ -137,8 +137,8 @@ Installation of Fvwm-Nightshade
 	- Arch:
 		Type in the terminal
 			# make arch
-		The package is created in the directory 'arch' above. Run as root
-			# pacman -U fvwm-nightshade-version.pkg.tar.xz
+		The package is created in the directory above. Run as root
+			# pacman -U fvwm-nightshade-<version>-any.pkg.tar.xz
 		
 
 Now Fvwm-Nightshade is installed and you can login, change the base settings and enjoy.
