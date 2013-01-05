@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.32
+InfoStoreAdd ns_version 0.5.33
 # Copyright (C) 2012
 #
 # Authors:
@@ -1139,6 +1139,16 @@ AddToFunc   FuncChangeDecor
 
 
 #-----------------------------------------------------------------------
+# Change a Layout on the fly
+#-----------------------------------------------------------------------
+DestroyFunc FuncChangeLayout
+AddToFunc   FuncChangeLayout
++ I PipeRead "rm -f ${FVWM_USERDIR}/.layout; \
+			  ln -s $0/layouts/$1 ${FVWM_USERDIR}/.layout"
++ I FuncRestart
+
+
+#-----------------------------------------------------------------------
 # Update/Create an InfoStore variable in a file
 # FuncWriteInfoStoreToFile <var_name> <var_value> <file>
 #-----------------------------------------------------------------------
@@ -1954,6 +1964,7 @@ DestroyMenu MenuDecoration
 AddToMenu   MenuDecoration
 + "$[gt.&Decoration]" Title
 + "$[gt.&Decors]%menu/windows.xpm%"			Popup FvwmDecorMenu
++ "$[gt.&Layouts]%menu/utility.xpm%"		Popup FvwmLayoutMenu
 + "$[gt.&Qt Decor]%menu/kde.xpm%"			Popup MenuQtDecor
 + "$[gt.&Gtk+ Decor]%menu/gnome.xpm%"		FuncLxappearance
 
@@ -1983,6 +1994,24 @@ AddToFunc   FuncFvwmDecorMenu
   do echo AddToMenu FvwmDecorMenu "${i}%menu/amusement.xpm%" FuncChangeDecor $i; done'
 + I PipeRead 'for i in `ls -Fh $FVWM_USERDIR/themes/ | grep /$ | sed s#/##g`; \
   do echo AddToMenu FvwmDecorMenu "${i}%menu/amusement.xpm%" FuncChangeDecor $i; done'
+
+#-----------------------------------------------------------------------
+# Dynamic layout sub menu with names of each layout file
+# with DynamicPopupAction and recreation
+#-----------------------------------------------------------------------
+DestroyMenu FvwmLayoutMenu
+AddToMenu   FvwmLayoutMenu
++ "$[gt.Layouts]" Title
++ DynamicPopupAction Function FuncFvwmLayoutMenu
+
+DestroyFunc FuncFvwmLayoutMenu
+AddToFunc   FuncFvwmLayoutMenu
++ I DestroyMenu recreate FvwmLayoutMenu
++ I AddToMenu FvwmLayoutMenu "$[gt.Layouts]" Title
++ I PipeRead 'for i in `ls -Fh $FNS_SYSTEMDIR/layouts/ | grep -v /$`; \
+  do echo AddToMenu FvwmLayoutMenu "${i}%menu/item.xpm%" FuncChangeLayout $[FNS_SYSTEMDIR] $i; done'
++ I PipeRead 'for i in `ls -Fh $FVWM_USERDIR/layouts/ | grep -v /$`; \
+  do echo AddToMenu FvwmLayoutMenu "${i}%menu/item.xpm%" FuncChangeDecor $[FVWM_USERDIR] $i; done'
 
 #-----------------------------------------------------------------------
 # Dynamic Configuration sub menu for setting a background with
