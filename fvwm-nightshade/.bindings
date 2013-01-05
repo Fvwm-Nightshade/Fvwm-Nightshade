@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		.bindings
-# Version:	1.0.1
+# Version:	1.1.0
 # Licence: 	GPL 2
 #
 # Description:	keyboard bindings
@@ -8,7 +8,7 @@
 # Author:	Thomas Funk <t.funk@web.de>	
 #
 # Created:	10/24/2012
-# Changed:	11/09/2012
+# Changed:	01/01/2013
 #-----------------------------------------------------------------------
 #
 # Overview:
@@ -20,7 +20,8 @@
 #     6.2.4 CTRL + Key
 #     6.2.5 CTRL-ALT + Key
 #     6.2.6 SHIFT-CTRL + Key
-#	  6.2.7 User specific bindings
+#	  6.2.7 Other keys
+#	  6.2.8 User specific bindings
 
 
 #=======================================================================
@@ -40,33 +41,27 @@
 #-----------------------------------------------------------------------
 Key Tab		A		M		FuncSwitchWindow
 #-----------------------------------------------------------------------
-# Print screenshot of whole desktop (page)
+# Print screenshot for active window
 #-----------------------------------------------------------------------
-Key Print	A       M       FuncDesktopCreateScreenshot 5
+Key Print	A		M		FuncWindowCreateScreenshot
 
 
-#***********************************************************************
-# 6.2.2 ALT-SHIFT + Key
-#***********************************************************************
-#   Keyname Context Modifi 	Function
-# keyboard accelerators
-# SHIFT is needed to let apps (xwe, dosemu, kcalc) to handle ALT-FN keys
 #-----------------------------------------------------------------------
 # F1 open root menu
 #-----------------------------------------------------------------------
-Key F1		A		SM		Menu MenuRoot
+Key F1		A		M		Menu MenuRoot
 #-----------------------------------------------------------------------
 # F2 launch "run application" dialog box
 #-----------------------------------------------------------------------
-Key F2		A		SM		Module FvwmForm FvwmForm-RunCommand
+Key F2		A		M		Module FvwmForm FvwmForm-RunCommand
 #-----------------------------------------------------------------------
 # F3 open window list
 #-----------------------------------------------------------------------
-Key F3		A		SM		WindowList
+Key F3		A		M		WindowList
 #-----------------------------------------------------------------------
 # F4 close active window
 #-----------------------------------------------------------------------
-Key F4		A		SM		Pick Close
+Key F4		A		M		Pick Close
 #-----------------------------------------------------------------------
 # 
 #-----------------------------------------------------------------------
@@ -74,31 +69,42 @@ Key F4		A		SM		Pick Close
 #-----------------------------------------------------------------------
 # F6 cycle between windows belonging to the current application
 #-----------------------------------------------------------------------
-Key F6		A		SM		Next (CurrentPage, $[w.resource]) FuncSelectWindow
+Key F6		A		M		Next (CurrentPage, $[w.resource]) FuncSelectWindow
 #-----------------------------------------------------------------------
 # F7 move the active window
 #-----------------------------------------------------------------------
-Key F7		A		SM		Pick Move
+Key F7		A		M		Pick Move
 #-----------------------------------------------------------------------
 # F8 resize the active window
 #-----------------------------------------------------------------------
-Key F8		A		SM		Pick Resize
+Key F8		A		M		Pick Resize
 #-----------------------------------------------------------------------
 # F9 minimize the active window
 #-----------------------------------------------------------------------
-Key F9		A		SM		Pick FuncIconify
+Key F9		A		M		Pick FuncIconify
 #-----------------------------------------------------------------------
 # F10 maximize/restore the active window
 #-----------------------------------------------------------------------
-Key F10		A		SM		Pick Maximize
+Key F10		A		M		Pick Maximize
 #-----------------------------------------------------------------------
 # F11 maximize active window to fullscreen and back
 #-----------------------------------------------------------------------
-Key F11		A		SM		Pick FuncMaximizeFullScreen
+Key F11		A		M		Pick FuncMaximizeFullScreen
 #-----------------------------------------------------------------------
 # F12 identify active window
 #-----------------------------------------------------------------------
-Key F12		A		SM		Pick Module FvwmIdent
+Key F12		A		M		Pick Module FvwmIdent
+
+#-----------------------------------------------------------------------
+# Print screenshot of whole desktop (page)
+#-----------------------------------------------------------------------
+Key Print	A       N       FuncDesktopCreateScreenshot 5
+
+
+#***********************************************************************
+# 6.2.2 ALT-SHIFT + Key
+#***********************************************************************
+#   Keyname Context Modifi 	Function
 
 #-----------------------------------------------------------------------
 # press SHIFT-ALT arrow anywhere, move active
@@ -128,7 +134,7 @@ Key Down	A		SCM		Scroll  +0 +10
 # Help info with SHIFT-CTRL-ALT A to show all ALT related key bindings
 #-----------------------------------------------------------------------
 key A		A	SCM	FuncShowMessage  "ALT Key Bindings" \
-"SHIFT-ALT:" \
+"ALT:" \
 "F1: Open root menu          F7:  Move window" \
 "F2: Launch 'run' dialog box F8:  Resize window" \
 "F3: Show window list        F9:  Minimize window" \
@@ -136,10 +142,12 @@ key A		A	SCM	FuncShowMessage  "ALT Key Bindings" \
 "F5: Not used                F11: Fullscreen/restore window" \
 "F6: Cycle between same      F12: Identify window" \
 "    resource windows" \
-"----------" \
-"ALT:" \
+"---" \
 "Tab:   Cycle between windows" \
-"Print: Screenshot of the desktop"
+"Print: Screenshot of the active window" \
+"---" \
+"None:" \
+"Print: Screenshot of current page"
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT H to show the global key bindings help window
@@ -159,6 +167,20 @@ key H		A       SCM     FuncShowMessage  "Help Keys with CTRL-ALT" \
 # 6.2.5 CTRL-ALT + Key
 #***********************************************************************
 #   Keyname Context Modifi 	Function
+
+#-----------------------------------------------------------------------
+# hide/unhide all windows
+#-----------------------------------------------------------------------
+Key D		A		CM		All (CurrentPage, AcceptsFocus) FuncIconify
+#-----------------------------------------------------------------------
+# lock Screen
+#-----------------------------------------------------------------------
+Key L		A		CM		Exec exec xscreensaver-command -lock
+#-----------------------------------------------------------------------
+# launch Terminal
+#-----------------------------------------------------------------------
+Key T		A		CM		Exec exec $[infostore.default_terminal]
+
 #-----------------------------------------------------------------------
 # press ALT-CTRL arrow anywhere, and move the pointer by 1% of a page
 #-----------------------------------------------------------------------
@@ -190,22 +212,6 @@ Key F1		A		SC		Menu MenuWindowOpsFull
 #-----------------------------------------------------------------------
 Key F2		A		SC		FuncFvwmConsole
 
-#-----------------------------------------------------------------------
-# hide/unhide all windows
-#-----------------------------------------------------------------------
-Key D		A		SC		All (CurrentPage, AcceptsFocus) Iconify
-#-----------------------------------------------------------------------
-# lock Screen
-#-----------------------------------------------------------------------
-Key L		A		SC		Exec exec xscreensaver-command -lock
-#-----------------------------------------------------------------------
-# launch Terminal
-#-----------------------------------------------------------------------
-Key T		A		SC		Exec exec $[infostore.default_terminal]
-#-----------------------------------------------------------------------
-# Print screenshot for active window
-#-----------------------------------------------------------------------
-Key Print	A		SC		FuncWindowCreateScreenshot
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT C to show all CTRL related key bindings
@@ -214,10 +220,9 @@ key C		A	SCM	FuncShowMessage  "CTRL Key Bindings" \
 "SHIFT-CTRL:" \
 "F1: Open full Oops menu     F2: Launch FvwmConsole" \
 "---" \
+"CTRL-ALT:" \
 "D:  Hide/unhide all windows T:  Launch Terminal" \
-"L:  Lock Screen" \
-"---" \
-"Print: Screenshot of the window"
+"L:  Lock Screen"
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT P to show all page related key bindings
@@ -226,6 +231,17 @@ key C		A	SCM	FuncShowMessage  "CTRL Key Bindings" \
 
 
 #=======================================================================
-# 6.2.7 User specific bindings
+# 6.2.7 Other bindings
+#=======================================================================
+#   Keyname	Context Modifi 	Function
+#-----------------------------------------------------------------------
+# Press left Windows key anywhere to open Root menu
+#-----------------------------------------------------------------------
+Key Super_L			A	N	Menu MenuRoot
+
+
+
+#=======================================================================
+# 6.2.8 User specific bindings
 #=======================================================================
 # enter here your own bindings
