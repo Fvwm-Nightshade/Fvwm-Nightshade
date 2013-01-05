@@ -1,5 +1,11 @@
 History:
 
+05/01/2013 V 0.5.33
+- change bindings in fvwm-nightshade/.bindings to more general ajar to other
+  DEs/WMs
+- add layouts to configuration menu
+
+
 12/26/2012 V 0.5.32
 - fix Makefile bug in rpm building with missing sources
 - fix Makefile bugs in arch building with package creation
