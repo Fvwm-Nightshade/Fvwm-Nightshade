@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.33
+InfoStoreAdd ns_version 0.5.34
 # Copyright (C) 2012
 #
 # Authors:
@@ -1130,6 +1130,7 @@ AddToFunc   FuncRemoveAllButtons
 DestroyFunc FuncChangeDecor
 AddToFunc   FuncChangeDecor
 + I PipeRead 'echo InfoStoreAdd used_theme $0'
++ I FuncUpdateBaseSetupFile Theme $0
 + I FuncSetThemeDir $[infostore.used_theme]
 + I FuncRemoveAllButtons
 + I Load $[FNS_THEMEDIR]/colorsets
@@ -1145,6 +1146,8 @@ DestroyFunc FuncChangeLayout
 AddToFunc   FuncChangeLayout
 + I PipeRead "rm -f ${FVWM_USERDIR}/.layout; \
 			  ln -s $0/layouts/$1 ${FVWM_USERDIR}/.layout"
++ I FuncWriteInfoStoreToFileAndSet used_layout $1 $[FVWM_USERDIR]/.settings
++ I FuncUpdateBaseSetupFile Layout $1
 + I FuncRestart
 
 
@@ -1175,6 +1178,23 @@ AddToFunc   FuncWriteSetEnvToFileAndSet
 				sed -i --follow-symlinks "$ a\SetEnv $0 \\"$new\\"" $2; \
 			fi; \
 			echo InfoStoreAdd $0 "$new"'
+
+#-----------------------------------------------------------------------
+# Update layout and theme settings in base setup file .FNS-BaseSetup
+# FuncUpdateBaseSetupFile <Layout/Theme> <layout/theme name>
+#-----------------------------------------------------------------------
+DestroyFunc FuncUpdateBaseSetupFile
+AddToFunc   FuncUpdateBaseSetupFile
++ I PipeRead 'if [ "$0" = "Layout" ]; then \
+				case $1 in \
+					Horizontal|Vertical|G2like) \
+						sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-BaseSetup_test; \
+						sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-BaseSetup_test;; \
+				esac; \
+			  else \
+				sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-BaseSetup_test; \
+			  fi'
+			  
 
 #-----------------------------------------------------------------------
 # Check which appliction are installed to get full functionality
