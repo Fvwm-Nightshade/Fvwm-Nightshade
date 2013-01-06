@@ -1188,11 +1188,11 @@ AddToFunc   FuncUpdateBaseSetupFile
 + I PipeRead 'if [ "$0" = "Layout" ]; then \
 				case $1 in \
 					Horizontal|Vertical|G2like) \
-						sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-BaseSetup_test; \
-						sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-BaseSetup_test;; \
+						sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-BaseSetup; \
+						sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-BaseSetup;; \
 				esac; \
 			  else \
-				sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-BaseSetup_test; \
+				sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-BaseSetup; \
 			  fi'
 			  
 
