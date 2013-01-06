@@ -1,11 +1,11 @@
 History:
 
-05/01/2013 V 0.5.33
+01/07/2013 V 0.5.34
 - fix bug in FuncChangeLayout that .settings won't updated
 - change layout names in FNS-BaseSetup to handle easier updating of .FNS-BaseSetup
 - add FuncUpdateBaseSetupFile to update theme and layout if changed
 
-05/01/2013 V 0.5.33
+01/05/2013 V 0.5.33
 - change bindings in fvwm-nightshade/.bindings to more general ajar to other
   DEs/WMs
 - add layouts to configuration menu
