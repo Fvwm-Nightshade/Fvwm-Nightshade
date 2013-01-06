@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		FNS-BaseSetup
-# Version:	1.2.5
+# Version:	1.2.6
 # Licence: 	GPL 2
 #
 # Description:	Script to configure base settings of Fvwm-Nightshade
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/01/2012
-# Changed:	11/11/2012
+# Changed:	01/06/2013
 #-----------------------------------------------------------------------
 
 DestroyModuleConfig  FNS-BaseSetup: *
@@ -67,13 +67,13 @@ DestroyModuleConfig  FNS-BaseSetup: *
 *FNS-BaseSetup: Line	left
 *FNS-BaseSetup: Text 	"Used Layout:   "
 *FNS-BaseSetup: Selection	SelItype single
-*FNS-BaseSetup: Choice	LayoutH	LayoutH	on  "Horizontal (Panels on top)"
+*FNS-BaseSetup: Choice	LayoutHorizontal	LayoutHorizontal	on  "Horizontal (Panels on top)"
 *FNS-BaseSetup: Line	left
 *FNS-BaseSetup: Text 	"               "
-*FNS-BaseSetup: Choice	LayoutV	LayoutV	off "Vertical (Panels on right side)"
+*FNS-BaseSetup: Choice	LayoutVertical	LayoutVertical	off "Vertical (Panels on right side)"
 *FNS-BaseSetup: Line	left
 *FNS-BaseSetup: Text 	"               "
-*FNS-BaseSetup: Choice	LayoutG2 LayoutG2 off "G2like (Panels on top and bottom)"
+*FNS-BaseSetup: Choice	LayoutG2like LayoutG2like off "G2like (Panels on top and bottom)"
 *FNS-BaseSetup: Line
 
 *FNS-BaseSetup: Line       left
@@ -110,12 +110,12 @@ DestroyModuleConfig  FNS-BaseSetup: *
 *FNS-BaseSetup: Command   	$(Splash? FuncWriteInfoStoreToFileAndSet used_banner $(Splash) $[FVWM_USERDIR]/.settings)
 *FNS-BaseSetup: Command   	$(SplashOn? FuncWriteSetEnvToFileAndSet SplashOn "1" $[FVWM_USERDIR]/.settings)
 *FNS-BaseSetup: Command   	$(SplashOff? FuncWriteSetEnvToFileAndSet SplashOn "0" $[FVWM_USERDIR]/.settings)
-*FNS-BaseSetup: Command   	$(LayoutH? FuncWriteInfoStoreToFileAndSet used_layout Horizontal $[FVWM_USERDIR]/.settings)
-*FNS-BaseSetup: Command   	$(LayoutH?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Horizontal ${FVWM_USERDIR}/.layout)
-*FNS-BaseSetup: Command   	$(LayoutV? FuncWriteInfoStoreToFileAndSet used_layout Vertical $[FVWM_USERDIR]/.settings)
-*FNS-BaseSetup: Command   	$(LayoutV?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Vertical ${FVWM_USERDIR}/.layout)
-*FNS-BaseSetup: Command   	$(LayoutG2? FuncWriteInfoStoreToFileAndSet used_layout G2like $[FVWM_USERDIR]/.settings)
-*FNS-BaseSetup: Command   	$(LayoutG2?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/G2like ${FVWM_USERDIR}/.layout)
+*FNS-BaseSetup: Command   	$(LayoutHorizontal? FuncWriteInfoStoreToFileAndSet used_layout Horizontal $[FVWM_USERDIR]/.settings)
+*FNS-BaseSetup: Command   	$(LayoutHorizontal?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Horizontal ${FVWM_USERDIR}/.layout)
+*FNS-BaseSetup: Command   	$(LayoutVertical? FuncWriteInfoStoreToFileAndSet used_layout Vertical $[FVWM_USERDIR]/.settings)
+*FNS-BaseSetup: Command   	$(LayoutVertical?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Vertical ${FVWM_USERDIR}/.layout)
+*FNS-BaseSetup: Command   	$(LayoutG2like? FuncWriteInfoStoreToFileAndSet used_layout G2like $[FVWM_USERDIR]/.settings)
+*FNS-BaseSetup: Command   	$(LayoutG2like?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/G2like ${FVWM_USERDIR}/.layout)
 *FNS-BaseSetup: Command   	$(Font? FuncWriteInfoStoreToFileAndSet used_font $(Font) $[FVWM_USERDIR]/.settings)
 *FNS-BaseSetup: Command   	$(Fontsize? FuncWriteInfoStoreToFileAndSet fontsize $(Fontsize) $[FVWM_USERDIR]/.settings)
 *FNS-BaseSetup: Command   	$(Terminal? FuncWriteInfoStoreToFileAndSet default_terminal "$(Terminal)" $[FVWM_USERDIR]/.settings)
@@ -130,9 +130,9 @@ DestroyModuleConfig  FNS-BaseSetup: *
   '*SavedBaseSetup: SplashOn 	$(SplashOn?on) '		; /bin/echo \
   '*SavedBaseSetup: SplashOff 	$(SplashOff?on) '		; /bin/echo \
   '*SavedBaseSetup: Theme 	$(Theme) '		; /bin/echo \
-  '*SavedBaseSetup: LayoutH	$(LayoutH?on) '		; /bin/echo \
-  '*SavedBaseSetup: LayoutV  	$(LayoutV?on) '		; /bin/echo \
-  '*SavedBaseSetup: LayoutG2  	$(LayoutG2?on) '	; \
+  '*SavedBaseSetup: LayoutHorizontal	$(LayoutHorizontal?on) '		; /bin/echo \
+  '*SavedBaseSetup: LayoutVertical  	$(LayoutVertical?on) '		; /bin/echo \
+  '*SavedBaseSetup: LayoutG2like  	$(LayoutG2like?on) '	; \
 ) > ${FVWM_USERDIR}/.FNS-BaseSetup
 
 *FNS-BaseSetup: Command !(                                      /bin/echo \
