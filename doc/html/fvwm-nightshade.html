@@ -1,0 +1,2075 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.6" />
+<title>fvwm-nightshade(1)</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+tt {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+.monospaced {
+  font-family: monospace;
+  font-size: inherit;
+  color: navy;
+}
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="manpage">
+<div id="header">
+<h1>
+fvwm-nightshade(1) Manual Page
+</h1>
+<h2>NAME</h2>
+<div class="sectionbody">
+<p>fvwm-nightshade -
+   a feature rich configuration for F? Virtual Window Manager (FVWM) for X11.
+</p>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_synopsis">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>None</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>Fvwm-Nightshade</strong> aims to be a lightweight but feature rich and good looking
+configuration of Fvwm. It contains many useful things to make work and
+life easier with a flavour of a modern desktop. In this document you find
+how <strong>Fvwm-Nightshade</strong> is constructed, how to handle it, its’ bindings and
+how you can customize it (e.g. new themes or layouts).</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage">USAGE</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_first_start">First Start</h3>
+<div class="paragraph"><p><strong>Fvwm-Nightshade</strong> checks while your first login if <tt>~/.fvwm-nightshade</tt> exist.
+If not a setup dialog appears where you can change things like used theme
+and font, which layout, default terminal and browser you want.</p></div>
+<div class="paragraph"><p>After clicking "Apply &amp; Save" your settings will be activated and
+<strong>Fvwm-Nightshade</strong> is ready to use. If you want to change the settings
+again you can do that over the menu point</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>Configuration -&gt; Fvwm-Nightshade -&gt; Fvwm-Nightshade-Setup</tt></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_desktop_organisation">Desktop Organisation</h3>
+<div class="paragraph"><p>Three different desktop layouts available:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Horizontal (default)
+</p>
+</li>
+<li>
+<p>
+Vertical
+</p>
+</li>
+<li>
+<p>
+G2like (Gnome 2 based)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>You can change it via Fvwm-Nightshade-Setup or over the menu</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>Configuration -&gt; Fvwm-Nightshade -&gt; Decorations -&gt; Layouts</tt></pre>
+</div></div>
+<div class="paragraph"><p>Below each layout is described in detail.</p></div>
+<div class="sect3">
+<h4 id="_horizontal_layout">Horizontal Layout</h4>
+<div class="paragraph"><p>The <strong>Horizontal Layout</strong> has 3 elements at  the top of the screen. It consists
+from left to right.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<em>The "Global Iconman" Taskbar</em>
+</dt>
+<dd>
+<div class="paragraph"><p>It is a vertical growing winlist holding each window on the current page
+as a horizontal bar labeled with the name and the title of each window.
+It moves down if the mouse hovers over the right vertical bar labeled with
+"Global Iconman". If the mouse hovers over one of the horizontal bars the
+window related to this bar gets the focus.</p></div>
+<div class="paragraph"><p>There are some mouse bindings available:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+double clicking or scroll down on a bar iconify the window
+</p>
+</li>
+<li>
+<p>
+double clicking or scroll up on a bar deiconify the window
+</p>
+</li>
+<li>
+<p>
+right clicking  on a bar opens a windows operation menu
+</p>
+</li>
+</ul></div>
+</dd>
+<dt class="hdlist1">
+<em>The Pager</em>
+</dt>
+<dd>
+<div class="paragraph"><p>It is a miniature illustration of the 4 virtual desktop pages (4x1) with
+mini windows. By clicking on each of the 4 segments you can change the page.
+Also you can move each window from one page to another with holding down
+the middle mouse button. If you hover over a mini window it shows the name
+and the title of it.</p></div>
+<div class="paragraph"><p>There are also some key combinations available:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>Shift-Ctrl</em> and <em>Arrow</em> key right/left switch to the next/previous page.
+</p>
+</li>
+<li>
+<p>
+<em>Shift-Ctrl</em> and <em>number</em> 1-4 switch to page 1-4.
+</p>
+</li>
+<li>
+<p>
+<em>Shift-Alt</em> and <em>Arrow</em> key right/left moves the active window to the next/previous page.
+</p>
+</li>
+<li>
+<p>
+<em>Shift-Alt</em> and <em>number</em> 1-4 moves the active window to page 1-4.
+</p>
+</li>
+</ul></div>
+</dd>
+<dt class="hdlist1">
+<em>The Panel</em>
+</dt>
+<dd>
+<div class="paragraph"><p>It contains from left to right:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The root menu. It opens by left clicking the <strong>Fvwm-Nightshade</strong> icon.
+</p>
+</li>
+<li>
+<p>
+The systemtray with application applets. The amount of visible applets
+depends on the screen width. If more applets in the systray than representable
+a bar on the left and right side appears while hovering over the left or
+right end of the tray. With scrolling the mouse wheel you can move throug
+the applets.
+</p>
+</li>
+<li>
+<p>
+A cpu graph with percentage.
+</p>
+</li>
+<li>
+<p>
+A Clock and date applet.
+</p>
+</li>
+</ul></div>
+</dd>
+</dl></div>
+<div class="paragraph"><p>The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So it
+will maximum growing underneath the horizontal elements. You can use <em>Alt-F11</em>
+to grow the window to the whole screen.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_vertical_layout">Vertical Layout</h4>
+<div class="paragraph"><p>The <strong>Vertical Layout</strong> has 3 elements on the right side of the screen. It
+consists from above to below:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<em>The Panel</em>
+</dt>
+<dd>
+<div class="paragraph"><p>It contains from above to below:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+A Clock and date applet.
+</p>
+</li>
+<li>
+<p>
+A cpu graph with percentage.
+</p>
+</li>
+<li>
+<p>
+The systemtray with application applets. The amount of visible applets
+depends on the screen width. If more applets in the systray than representable
+a bar on the left and right side appears while hovering over the left or
+right end of the tray. With scrolling the mouse wheel you can move throug
+the applets.
+</p>
+</li>
+<li>
+<p>
+The root menu. It opens by left clicking the <strong>Fvwm-Nightshade</strong> icon.
+</p>
+</li>
+<li>
+<p>
+The winlist. It opens a window with all windows by left clicking on the
+winlist icon.
+</p>
+</li>
+</ul></div>
+</dd>
+<dt class="hdlist1">
+<em>The Pager</em>
+</dt>
+<dd>
+<div class="paragraph"><p>It is a miniature illustration of the 4 virtual desktop pages (2x2) with
+mini windows. By clicking on each of the 4 segments you can change the page.
+Also you can move each window from one page to another with holding down
+the middle mouse button. If you hover over a mini window it shows the name
+and the title of it.</p></div>
+<div class="paragraph"><p>There are also some key combinations available:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>Shift-Ctrl</em> and <em>Arrow</em> key right/left/up/down switch to the next/previous/upper/down page.
+</p>
+</li>
+<li>
+<p>
+<em>Shift-Ctrl</em> and <em>number</em> 1-4 switch to page 1-4.
+</p>
+</li>
+<li>
+<p>
+<em>Shift-Alt</em> and <em>Arrow</em> key right/left/up/down moves the active window to
+the next/previous/upper/down page.
+</p>
+</li>
+<li>
+<p>
+<em>Shift-Alt</em> and <em>number</em> 1-4 moves the active window to page 1-4.
+</p>
+</li>
+</ul></div>
+</dd>
+<dt class="hdlist1">
+<em>The "Global Iconman" Taskbar</em>
+</dt>
+<dd>
+<div class="paragraph"><p>It is a vertical growing winlist holding each window on the current page
+as a horizontal bar labeled with the name and the title of each window.
+It moves down if the mouse hovers over the left vertical bar labeled with
+"Global Iconman". If the mouse hovers over one of the horizontal bars the
+window related to this bar gets the focus.</p></div>
+<div class="paragraph"><p>There are some mouse bindings available:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+double clicking or scroll down on a bar iconify the window.
+</p>
+</li>
+<li>
+<p>
+double clicking or scroll up on a bar deiconify the window.
+</p>
+</li>
+<li>
+<p>
+right clicking  on a bar opens a windows operation menu.
+</p>
+</li>
+</ul></div>
+</dd>
+</dl></div>
+<div class="paragraph"><p>The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So
+it will maximum growing left to the vertical elements. You can use <em>Alt-F11</em>
+to grow the window to the whole screen.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_g2like_layout">G2like Layout</h4>
+<div class="paragraph"><p>The <strong>G2like</strong> layout is based on the Gnome 2 layout. It consist two panels - one
+on the top and one on the bottom of the screen.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<em>The Top Panel</em>
+</dt>
+<dd>
+<div class="paragraph"><p>This panel contains from left to right:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The root menu. It opens by left clicking the <strong>Fvwm-Nightshade</strong> icon.
+</p>
+</li>
+<li>
+<p>
+The personal/favorite menu. It opens by left clicking the bookmark icon.
+</p>
+</li>
+<li>
+<p>
+The systemtray with application applets. The amount of visible applets
+depends on the screen width. If more applets in the systray than representable
+a bar on the left and right side appears while hovering over the left or
+right end of the tray. With scrolling the mouse wheel you can move through
+the applets.
+</p>
+</li>
+<li>
+<p>
+A cpu graph with percentage.
+</p>
+</li>
+<li>
+<p>
+A Clock and date applet.
+</p>
+</li>
+<li>
+<p>
+The Exit menu. It opens by left clicking the exit icon.
+</p>
+</li>
+</ul></div>
+</dd>
+<dt class="hdlist1">
+<em>The Bottom Panel</em>
+</dt>
+<dd>
+<div class="paragraph"><p>This panel contains from left to right:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The "Show desktop" button. It iconify/deiconify all windows on the current page.
+</p>
+</li>
+<li>
+<p>
+The "Global Iconman" Taskbar. It is a winlist holding each window on the
+current page as a horizontal bar labeled with the name and the title of
+each window. If the mouse hovers over one of the horizontal bars the window
+related to this bar gets the focus.
+</p>
+<div class="paragraph"><p>There are some mouse bindings available:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+double clicking or scroll down on a bar iconify the window.
+</p>
+</li>
+<li>
+<p>
+double clicking or scroll up on a bar deiconify the window.
+</p>
+</li>
+<li>
+<p>
+right clicking  on a bar opens a windows operation menu.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+The Pager. It is a miniature illustration of the 4 virtual desktop pages
+(4x1) with mini windows. By clicking on each of the 4 segments you can
+change the page. Also you can move each window from one page to another
+with holding down the middle mouse button. If you hover over a mini window
+it shows the name and the title of it.
+</p>
+<div class="paragraph"><p>There are also some key combinations available, too:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>Shift-Ctrl</em> and <em>Arrow</em> key right/left switch to the next/previous page.
+</p>
+</li>
+<li>
+<p>
+<em>Shift-Ctrl</em> and <em>number</em> 1-4 switch to page 1-4.
+</p>
+</li>
+<li>
+<p>
+<em>Shift-Alt</em> and <em>Arrow</em> key right/left moves the active window to the next/previous page.
+</p>
+</li>
+<li>
+<p>
+<em>Shift-Alt</em> and <em>number</em> 1-4 moves the active window to page 1-4.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</dd>
+</dl></div>
+<div class="paragraph"><p>The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So
+it will maximum growing inbetween the two panels. You can use <em>Alt-F11</em> to
+grow the window to the whole screen.</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_root_menu">Root Menu</h3>
+<div class="paragraph"><p>The Root menu is the main menu of <strong>Fvwm-Nightshade</strong>. You can call it in
+different areas with mouse or key combinations:
+* In the root area with left click or with <em>Alt+F1</em> or with the left <em>Window</em> key.
+* In each window area or in an iconified windows with <em>Alt+left click</em>.</p></div>
+<div class="sect3">
+<h4 id="_personal_applications">Personal Applications</h4>
+<div class="paragraph"><p>The Personal Applications menu is for your favorite applications. As you
+open it the first entry is a FvwmScript tool to choose applications from
+the application menus found on the system.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Add an application
+</dt>
+<dd>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+In the "Menu Folder" list choose a menu.
+</p>
+</li>
+<li>
+<p>
+In the "Menu Entries" list choose an application.
+</p>
+</li>
+<li>
+<p>
+Click on the "Add" button and the app appears in the "Personal Entries" list.
+</p>
+</li>
+<li>
+<p>
+To finish your selection click on the "Save" button.
+</p>
+</li>
+</ol></div>
+</dd>
+<dt class="hdlist1">
+Remove an application
+</dt>
+<dd>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Choose an app to remove in the "Personal Entries" list.
+</p>
+</li>
+<li>
+<p>
+Click on the "Remove" button - the selected app disappears from the list.
+</p>
+</li>
+<li>
+<p>
+To finish your remove action click on the "Save" button.
+</p>
+</li>
+</ol></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect3">
+<h4 id="_xdg_application_menus">XDG Application Menus</h4>
+<div class="paragraph"><p>Below of the Personal Applications menu all XDG related application menus
+found on the system are listed. No, not all. Only the important ones. You
+can configure the choice with "Regenerate (XDG) Menu".</p></div>
+</div>
+<div class="sect3">
+<h4 id="_regenerate_xdg_menu">Regenerate (XDG) Menu</h4>
+<div class="paragraph"><p>The "Regenerate (XDG) Menu" point is to reconfigure or refresh the XDG
+application menus after software installation.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">If you want icons infront of the app names you should change the
+default entry of "Converted Icon directory" from <tt>~/.fvwm/icons</tt> to
+<tt>~/.fvwm-nightshade/icons</tt> because then the converted icons won&#8217;t stored
+in *Fvwm-Nightshade*s user home.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>How to use it see the fvwm-menu-desktop manpage or clicking on the "Help"
+button.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_configuration">Configuration</h4>
+<div class="paragraph"><p>In this menu you find parts to configure the look and feel of <strong>Fvwm-Nightshade</strong>.
+But also some tools for Gtk and Qt applications.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Fvwm
+</dt>
+<dd>
+<div class="paragraph"><p>Here you can configure the animation how windows iconify/deiconify and how
+FvwmForm windows appear (font, color, background).</p></div>
+</dd>
+<dt class="hdlist1">
+Fvwm-Nightshade
+</dt>
+<dd>
+<div class="paragraph"><p>Here you can configure the background, which theme you want, the look of
+your Gtk and Qt applications and the base settings of <strong>Fvwm-Nightshade</strong>.</p></div>
+</dd>
+<dt class="hdlist1">
+System
+</dt>
+<dd>
+<div class="paragraph"><p>Here you can configure the keyboard, mouse, xscreensaver and, if you have
+a multi cpu system your CPU settings.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect3">
+<h4 id="_help">Help</h4>
+<div class="paragraph"><p>In this menu you’ll find many helps for Fvwm (websites, manpages), <strong>Fvwm-Nightshade</strong>
+and other programs like manpage viewers, online helps, etc.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_fvwm_modules">Fvwm modules</h4>
+<div class="paragraph"><p>In this menu you can start and stop Fvwm modules on the fly.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_window_operations">Window Operations</h4>
+<div class="paragraph"><p><strong>Fvwm-Nightshade</strong> have different "WinOops" menus. You can call them on different
+places but here you find all of them ^^.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_lock_screen">Lock Screen</h4>
+<div class="paragraph"><p>If you have configured xscreensaver you can activate the lock screen by
+clicking this menu point. Or with the keyboard shortcut <em>Alt+Ctrl+L</em>.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_run_command">Run Command</h4>
+<div class="paragraph"><p>If you want to run a program you can open a mini window by clicking to
+enter your command. Or with <em>Alt+F2</em>.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_terminal">Terminal</h4>
+<div class="paragraph"><p>This menu point opens your favorite terminal set with <strong>Fvwm-Nightshades</strong>
+base setup.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_quit">Quit</h4>
+<div class="paragraph"><p>This menu gives you the possibility to restart, refresh, quit, suspend or
+hibernate <strong>Fvwm-Nightshade</strong>.</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bindings">Bindings</h3>
+<div class="paragraph"><p><strong>Fvwm-Nightshade</strong> has some bindings for mouse and keyboard combinations.
+There are some for general and for theme related purpose.</p></div>
+<div class="paragraph"><p>Below they are all listed.</p></div>
+<div class="sect3">
+<h4 id="_mouse">Mouse</h4>
+<div class="paragraph"><p>Mouse bindings are assigned to areas:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Root Area
+</dt>
+<dd>
+<div class="paragraph"><p>Button 1:   Root menu.</p></div>
+<div class="paragraph"><p>Button 2:   Window list.</p></div>
+<div class="paragraph"><p>Button 3:   Desktop menu.</p></div>
+</dd>
+<dt class="hdlist1">
+Windows Area
+</dt>
+<dd>
+<div class="paragraph"><p>Button 1:   Root menu with ALT + click.</p></div>
+<div class="paragraph"><p>Button 2:   Drag + ALT moves window, raise or lower with ALT + click.</p></div>
+</dd>
+<dt class="hdlist1">
+Windows Decoration Area
+</dt>
+<dd>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Titlebar, corners and sides
+</dt>
+<dd>
+<div class="paragraph"><p>Button 1:   Drag moves window, maximize on double click.</p></div>
+<div class="paragraph"><p>Button 2:   Drag moves window, raise or lower with click.</p></div>
+<div class="paragraph"><p>Button 3:   WindowOpsTrimmed menu with click, MenuWindowOpsFull menu with ALT + click.</p></div>
+<div class="paragraph"><p>Button 4/5: Rolling wheel on titlebar up/down shades/unshades.</p></div>
+</dd>
+<dt class="hdlist1">
+Left Button
+</dt>
+<dd>
+<div class="paragraph"><p>Button 1: shows WindowOpsTrimmed menu.</p></div>
+<div class="paragraph"><p>Button 2: shows Move to page menu.</p></div>
+<div class="paragraph"><p>Button 3: shows WindowOps group menu.</p></div>
+</dd>
+<dt class="hdlist1">
+Close Button
+</dt>
+<dd>
+<div class="paragraph"><p>Every button closes the window.</p></div>
+</dd>
+<dt class="hdlist1">
+Maximize Button
+</dt>
+<dd>
+<div class="paragraph"><p>Button 1: maximize window.</p></div>
+<div class="paragraph"><p>Button 2: maximize window vertically.</p></div>
+<div class="paragraph"><p>Button 3: maximize window horizontally.</p></div>
+</dd>
+<dt class="hdlist1">
+Minimize Button
+</dt>
+<dd>
+<div class="paragraph"><p>Button 1: iconify window.</p></div>
+<div class="paragraph"><p>Button 2: iconify group of same window resources.</p></div>
+<div class="paragraph"><p>Button 3: iconify/deiconify group of same window resources.</p></div>
+</dd>
+</dl></div>
+</dd>
+<dt class="hdlist1">
+Anywhere
+</dt>
+<dd>
+<div class="paragraph"><p>Button 4/5: Switch to page left/right with Shift-Ctrl + rolling wheel up/down anywhere.</p></div>
+<div class="paragraph"><p>Button 4/5: Switch with active window to page left/right with Shift-Alt + rolling wheel up/down anywhere.</p></div>
+</dd>
+<dt class="hdlist1">
+Help
+</dt>
+<dd>
+<div class="paragraph"><p>With Shift-Ctrl-Alt + Click you get a help of each mouse binding. For example
+you hold Shift-Ctrl-Alt + click on the minimize button and get a messagebox
+with all minimize bindings.</p></div>
+</dd>
+</dl></div>
+<div class="paragraph"><p>If you want to change them you have to edit the bindings in your favorite
+theme. Create a "themes" folder in the &lt;user&gt; directory and copy the complete
+theme directory into it. You can rename the theme folder or leave it as is.
+Then open the "decor" file and edit the mouse bindings. After loading your
+customized theme by clicking its name in</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>Configuration -&gt; Fvwm-Nightshade -&gt; Decoration -&gt; Decors</tt></pre>
+</div></div>
+<div class="paragraph"><p>you have it ^^</p></div>
+</div>
+<div class="sect3">
+<h4 id="_keys">Keys</h4>
+<div class="paragraph"><p>Key bindings are also assigned to different parts:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Window related
+</dt>
+<dd>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="10%" />
+<col width="90%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F4</p></td>
+<td align="left" valign="top"><p class="table">Close active window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F6</p></td>
+<td align="left" valign="top"><p class="table">Cycle between same resource windows.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F7</p></td>
+<td align="left" valign="top"><p class="table">Move active window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F8</p></td>
+<td align="left" valign="top"><p class="table">Resize active window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F9</p></td>
+<td align="left" valign="top"><p class="table">Minimize active window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F10</p></td>
+<td align="left" valign="top"><p class="table">Maximize/restore active window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F11</p></td>
+<td align="left" valign="top"><p class="table">Maximize active window to fullscreen and back.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F12</p></td>
+<td align="left" valign="top"><p class="table">Identify active window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table"></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + Tab</p></td>
+<td align="left" valign="top"><p class="table">Switching focus to next window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt-Ctrl + D</p></td>
+<td align="left" valign="top"><p class="table">Hide/unhide all windows.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">
+Page related
+</dt>
+<dd>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="75%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Ctrl + 1-4</p></td>
+<td align="left" valign="top"><p class="table">Switch to page 1-4.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Ctrl + cursor right/left</p></td>
+<td align="left" valign="top"><p class="table">Switch to page right/left.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Ctrl + cursor up/down</p></td>
+<td align="left" valign="top"><p class="table">Switch to page up/down (only used in Vertical Layout).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table"></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Alt-Ctrl + cursor right/left</p></td>
+<td align="left" valign="top"><p class="table">Scroll right/left by 10% of a page.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Alt-Ctrl + cursor up/down</p></td>
+<td align="left" valign="top"><p class="table">Scroll up/down by 10% of a page.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table"></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Ctrl-Alt + cursor right/left</p></td>
+<td align="left" valign="top"><p class="table">Move mouse pointer right/left by 1% of a page.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Ctrl-Alt + cursor up/down</p></td>
+<td align="left" valign="top"><p class="table">Move mouse pointer up/down by 1% of a page.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table"></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Alt + 1-4</p></td>
+<td align="left" valign="top"><p class="table">Switch to page 1-4 with active window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table"></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Alt + Cursor right/left</p></td>
+<td align="left" valign="top"><p class="table">Switch to page right/left with active window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Alt + Cursor up/down</p></td>
+<td align="left" valign="top"><p class="table">Switch to page up/down with active window (only used in Vertical Layout).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">
+General
+</dt>
+<dd>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="15%" />
+<col width="85%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Print</p></td>
+<td align="left" valign="top"><p class="table">Screenshot of the whole desktop (page).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + Print</p></td>
+<td align="left" valign="top"><p class="table">Screenshot of the active window.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt-Ctrl + L</p></td>
+<td align="left" valign="top"><p class="table">Lock Screen.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt-Ctrl + T</p></td>
+<td align="left" valign="top"><p class="table">Launch Terminal.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table"></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Windows</p></td>
+<td align="left" valign="top"><p class="table">Open root menu.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F1</p></td>
+<td align="left" valign="top"><p class="table">Open root menu.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F2</p></td>
+<td align="left" valign="top"><p class="table">Launch <em>run</em> dialog box.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Alt + F3</p></td>
+<td align="left" valign="top"><p class="table">Show window list.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"></p></td>
+<td align="left" valign="top"><p class="table"></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Ctrl + F1</p></td>
+<td align="left" valign="top"><p class="table">Open full windows oops menu.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Ctrl + F2</p></td>
+<td align="left" valign="top"><p class="table">Launch FvwmConsole.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">
+Help
+</dt>
+<dd>
+<div class="paragraph"><p>With Shift-Ctrl-Alt + a special key you get a message box with the related
+key bindings (the same as with mouse bindings)</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="15%" />
+<col width="85%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Ctrl-Alt + A</p></td>
+<td align="left" valign="top"><p class="table">Help message for all Alt bindings.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Ctrl-Alt + C</p></td>
+<td align="left" valign="top"><p class="table">Help message for all Ctrl bindings.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Ctrl-Alt + P</p></td>
+<td align="left" valign="top"><p class="table">Help message for all Page bindings.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">Shift-Ctrl-Alt + H</p></td>
+<td align="left" valign="top"><p class="table">Help message for summary.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl></div>
+<div class="paragraph"><p>To change the key bindings to your own needs copy <tt>&lt;system&gt;/share/fvwm-nightshade/.bindings</tt>
+in the &lt;user&gt; directory and edit it. After a restart of <strong>Fvwm-Nightshade</strong>
+the new key bindings are available.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration_2">CONFIGURATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>In the following chapters we describe where you find what, how and which
+files are loaded, how you can debug problems and how you can customize
+<strong>Fvwm-Nightshade</strong>.</p></div>
+<div class="sect2">
+<h3 id="_structure_of_fvwm_nightshade">Structure of Fvwm-Nightshade</h3>
+<div class="paragraph"><p><strong>Fvwm-Nightshade</strong> is splitted in a system and an user part.</p></div>
+<div class="paragraph"><p>The system part is located in <tt>/usr/local</tt> (default) or <tt>/usr</tt> (distribution
+related). In the followed named as &lt;system&gt;.</p></div>
+<div class="paragraph"><p>The user part is located in <tt>~/.fvwm-nightshade</tt>. Followed named as &lt;user&gt;.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_location_of_files_and_their_function">Location of Files and their Function</h3>
+<div class="paragraph"><p><strong>&lt;system&gt;/bin</strong> &#8594; Executables.</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">fvwm-nightshade</p></td>
+<td align="left" valign="top"><p class="table">start script.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">fns-built-trayapplist</p></td>
+<td align="left" valign="top"><p class="table">python script for stalonetray to build applet list. Used for restoring applets after restart stalonetray.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">fns-find-icon</p></td>
+<td align="left" valign="top"><p class="table">python script to find the correct icon for iconified apps or for icons used in layouts.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">fns-start-programs</p></td>
+<td align="left" valign="top"><p class="table">shell script to start apps from a file list. Used for autostart and starting applets for stalonetray.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>-</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/</strong> &#8594; System home of <strong>Fvwm-Nightshade</strong>.</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="10%" />
+<col width="90%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">config</p></td>
+<td align="left" valign="top"><p class="table">system wide configuration file.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">fns-init</p></td>
+<td align="left" valign="top"><p class="table">initial config with the base functions.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.settings</p></td>
+<td align="left" valign="top"><p class="table">template of the base settings. Will be copied into &lt;user&gt; dir.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.bindings</p></td>
+<td align="left" valign="top"><p class="table">system wide key bindings.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>-</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/artwork/</strong> &#8594; <strong>Fvwm-Nightshade</strong> icons, splash and wallpapers.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/layouts/</strong> &#8594; System layout files and conky rc-files.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/modules/</strong> &#8594; Pager, pannels and Iconman modules.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/themes/</strong> &#8594; Theme files and icons.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/doc/fvwm-nightshade/</strong> &#8594; Html pages, templates, readmes.</p></div>
+<div class="paragraph"><p>-</p></div>
+<div class="paragraph"><p><strong>/usr/share/fvwm/</strong> &#8594; Scripts which must resides in Fvwm&#8217;s directory</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">FNS-BaseSetup</p></td>
+<td align="left" valign="top"><p class="table">Fvwm-Nightshade base setup (FvwmForm script).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FvwmScript-CPU-Performance</p></td>
+<td align="left" valign="top"><p class="table">cpufreq settings tool (FvwmForm script).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FvwmScript-PersonalMenu</p></td>
+<td align="left" valign="top"><p class="table">Personal menu creator (FvwmScript script).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>-</p></div>
+<div class="paragraph"><p><strong>/usr/share/xsessions/</strong> &#8594; Login manager directory</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">fvwm-nightshade.desktop</p></td>
+<td align="left" valign="top"><p class="table">login script.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>-</p></div>
+<div class="paragraph"><p><strong>~/.fvwm-nightshade</strong> &#8594; the user home directory (&lt;user&gt;)</p></div>
+</div>
+<div class="sect2">
+<h3 id="_call_sequence_while_startup">Call Sequence while Startup</h3>
+<div class="paragraph"><p>The first file which is called while startup is <tt>&lt;system&gt;/bin/fvwm-nightshade</tt>.
+It initialize some environment variables, creates <tt>~/.fvwm-nightshade</tt> if not
+available and starts Fvwm. But not with the <tt>&lt;user&gt;/config</tt> or <tt>&lt;system&gt;/config</tt>.</p></div>
+<div class="paragraph"><p>First Fvwm starts with a pre config - <tt>&lt;system&gt;/share/fvwm-nightshade/fns-init</tt>.
+It contains some important functions which allows <strong>Fvwm-Nightshade</strong> to handle
+another directory than <tt>~/.fvwm</tt>.</p></div>
+<div class="paragraph"><p>The script calls then the main config via the "Load" function. This function
+looks first in the &lt;user&gt; dir and then in the &lt;system&gt; dir. It makes it
+possible to load parts created by the user or the default ones. With that
+function the user can copy the config or bindings in the &lt;user&gt; dir, alter
+it and restart <strong>Fvwm-Nightshade</strong> without changing anything in the process.</p></div>
+<div class="paragraph"><p>This works with themes and layouts, too. If you create under <tt>~/.fvwm-nightshade</tt>
+the directory structures of themes/layouts as in the <tt>&lt;system&gt;/share/fvwm-nightshade</tt>
+you can build themes or layouts by your own (see THEME and LAYOUT CREATION below).</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_environment_specifications">ENVIRONMENT SPECIFICATIONS</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_global_variables">Global Variables</h3>
+<div class="paragraph"><p>There are some <strong>Fvwm-Nightshade</strong> specific variables. Valid in the shell and
+Fvwm namespace:</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">FVWM_USERDIR</p></td>
+<td align="left" valign="top"><p class="table">It holds the user directory ~/.fvwm-nightshade.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FNS_SYSTEMDIR</p></td>
+<td align="left" valign="top"><p class="table">It contains the system path to the shared files of Fvwm-Nightshade - /usr/local/share/fvwm-nightshade or /usr/share/fvwm-nightshade.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FNS_INITFILE</p></td>
+<td align="left" valign="top"><p class="table">It holds the path to the pre config fns-init.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FNS_DEBUG</p></td>
+<td align="left" valign="top"><p class="table">If you want to raise the message output of Fvwm-Nightshade into ~/.xsessions-error set it to 1. Default is 0.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fvwm_related_variables">Fvwm related Variables</h3>
+<div class="paragraph"><p>There are also some variables in the <strong>Fvwm-Nightshade</strong> namespace defined in
+the system config and .settings file.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+config
+</dt>
+<dd>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.wallpaper_dir]</p></td>
+<td align="left" valign="top"><p class="table">The wallpaper directory located in $[FVWM_USERDIR]/wallpapers.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.fvwm_wallpaper]</p></td>
+<td align="left" valign="top"><p class="table">The current wallpaper located in $[FVWM_USERDIR]/.wallpaper.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.ratio]</p></td>
+<td align="left" valign="top"><p class="table">The screen ratio used for layout, panel, pager calculations.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.hratio]</p></td>
+<td align="left" valign="top"><p class="table">The height ratio used for layout, panel, pager calculations.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.wratio]</p></td>
+<td align="left" valign="top"><p class="table">The width ratio used for layout, panel, pager calculations.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+<dt class="hdlist1">
+settings
+</dt>
+<dd>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.used_theme]</p></td>
+<td align="left" valign="top"><p class="table">The actual theme. Changed dynamically via FuncChangeDecor.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.used_banner]</p></td>
+<td align="left" valign="top"><p class="table">Banner image for FvwmBanner.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.used_font]</p></td>
+<td align="left" valign="top"><p class="table">Default used font for all Fvwm parts.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.fontsize]</p></td>
+<td align="left" valign="top"><p class="table">Default font size for all Fvwm parts.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.used_layout]</p></td>
+<td align="left" valign="top"><p class="table">The actual layout.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.default_terminal]</p></td>
+<td align="left" valign="top"><p class="table">The default used terminal program.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.default_browser]</p></td>
+<td align="left" valign="top"><p class="table">The default used browser.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[SplashOn]</p></td>
+<td align="left" valign="top"><p class="table">Run Banner at startup.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</dd>
+</dl></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_debuging">DEBUGING</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If you want to debug something there are some functions available you can
+use to get output in <tt>~/.xsessions-error</tt>:</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="30%" />
+<col width="70%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">FuncPrintDbgMsg &lt;string or value&gt;</p></td>
+<td align="left" valign="top"><p class="table">This prints debug message but only if you have set FNS_DEBUG to 1 in &lt;system&gt;/share/fvwm-nightshade/fns-init.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FuncPrintMsg &lt;name&gt; &lt;string or value&gt;</p></td>
+<td align="left" valign="top"><p class="table">This function prints normal messages. Yo can use it for normal messages.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_theme_creation">THEME CREATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>A theme consists of the following parts either in <tt>&lt;system&gt;/share/fvwm-nightshade/themes/&lt;name&gt;/</tt>
+or <tt>&lt;user&gt;/themes/&lt;name&gt;/</tt>:</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="10%" />
+<col width="90%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">colorsets</p></td>
+<td align="left" valign="top"><p class="table">Colorsets of decorations, menus, modules etc.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">decor</p></td>
+<td align="left" valign="top"><p class="table">Styles of titlebar, buttons, menus and theme related mouse bindings.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">images</p></td>
+<td align="left" valign="top"><p class="table">optional folder for button images (SVG).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>If you want to build a new theme create in <tt>&lt;user&gt;/themes/</tt> a theme directory
+with it’s name and copy the colorset template from <tt>&lt;system&gt;/share/docs/fvwm-nightshade/templates</tt>
+into the directory.</p></div>
+<div class="paragraph"><p>Two different decors exist - vector based (Clean theme) and image based (Air, Ambiance,
+CrystalBalls and Tribal). Copy one of these decor files into your theme directory.</p></div>
+<div class="paragraph"><p>If you want to build an image related theme create also an "images" folder for
+the button images.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">All image related themes are SVG themes! You can use bitmaps, but than you
+have problems with the button scaling! Also bear in mind If you want to
+send us an image related theme only SVG themes will be accepted.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Now you can adapt the files for your needs. The theme appears automatically
+in the menu</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>Configuration -&gt; Fvwm-Nightshade -&gt; Decoration -&gt; Decors</tt></pre>
+</div></div>
+<div class="paragraph"><p>and can be tested by clicking on the name easily.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_layout_creation">LAYOUT CREATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Layouts are a summary of different parts of modules like FvwmPager, FvwmButtons
+or FvwmIconMan and applets from e.g. conky.</p></div>
+<div class="paragraph"><p>The main part is the layout file where the positions, calculations, key
+bindings and module loadings are done. This can be very tricky and the
+only thing we can say is - look into the Horizontal, Vertical or G2like
+layout to get an overview</p></div>
+<div class="paragraph"><p>Generally the structure is as follow:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+You have to thought about the positioning of your elements and their
+dependencies to each other.
+</p>
+</li>
+<li>
+<p>
+You must define your working area (maximized window) and the Iconbox
+for your iconified windows.
+</p>
+</li>
+<li>
+<p>
+Now the "Load" part follows to initialize your modules with the calculated
+positioning values.
+</p>
+</li>
+<li>
+<p>
+The next step is to include your modules in the Start Function that your
+theme will be loaded correctly after a restart.
+</p>
+</li>
+<li>
+<p>
+In the ReloadLayoutParts function you define all your layout needed to
+function properly after calling it from the configuration menu.
+</p>
+</li>
+<li>
+<p>
+Next you have to define your key bindings if any. Mostly needed for the
+pager module or if you have other special things implemented.
+</p>
+</li>
+<li>
+<p>
+Then the menus following. Also needed mostly for the pager.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>You can test it easily by clicking your layout name under</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>Configuration -&gt; Fvwm-Nightshade -&gt; Decoration -&gt; Layouts</tt></pre>
+</div></div>
+<div class="paragraph"><p>if it found under <tt>&lt;user&gt;/layouts/</tt>. It appears automatically.</p></div>
+<div class="paragraph"><p>That’s it. Not much but hopefully enough for playing ;).</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors">AUTHORS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>&#169; 2013 by the Fvwm-Nightshade team &lt;<a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a>&gt;.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_copyright">COPYRIGHT</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>Fvwm-Nightshade</strong> and all the scripts and other files coming with
+the distribution are subject to the GNU General Public License (GPL).
+Please refer to the COPYING file that came with <strong>Fvwm-Nightshade</strong> for details.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bugs">BUGS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Bug reports can be sent to the fvwmnightshade-workers mailing list at
+<a href="https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers">https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers</a>
+or submit them under <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues">https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues</a>.</p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-01-08 23:45:21 CET
+</div>
+</div>
+</body>
+</html>
