@@ -1,15 +1,15 @@
 ########################################################################
 # File:		decor
-# Version:	0.1.4
+# Version:	0.1.5
 # Licence: 	GPL 2
 #
-# Description:	decor parts (titlebar, buttons, menus) of Tumble theme
+# Description:	decor parts (titlebar, buttons, menus) of Clean theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
-#		Bernhard Popp <kermit.popp@googlemail.com>
+#			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	06/08/2012
-# Changed:	10/25/2012
+# Changed:	01/03/2013
 ########################################################################
 
 Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",1.5*$[infostore.fontsize]'`"
@@ -73,10 +73,6 @@ AddToDecor Default
 
 + ButtonStyle All -- UseTitleStyle
 + ButtonStyle All ActiveUp (-- flat) Inactive (-- flat)
-#+ ButtonStyle 1 - Clear MWMDecorMenu
-#+ ButtonStyle 2 - Clear
-#+ ButtonStyle 4 - Clear MWMDecorMax
-#+ ButtonStyle 6 - Clear MWMDecorMin
 
 #=======================================================================
 # Menus
@@ -144,56 +140,56 @@ MenuStyle winops VerticalItemSpacing 1 2, VerticalTitleSpacing 1 2
 #***********************************************************************
 # Pointer in Window Buttons
 #***********************************************************************
-#     Button	Context	Modifi 	Function
+# Button	Context	Modifi 	Function
 
 # Left button (1)
 # Button 1 shows MenuWindowOpsTrimmed menu <- click
-Mouse 1 	1      	A	Menu MenuWindowOpsTrimmed
+Mouse 1 	1      	A		Menu MenuWindowOpsTrimmed
 # Button 2 shows Move to page menu <- click
-Mouse 2       	1      	A     	Menu MenuWindowMoveTo
+Mouse 2     1      	A     	Menu MenuWindowMoveTo
 # Button 3 shows WindowOps group menu <- click
-Mouse 3       	1 	A	Menu MenuWindowGroupOps
+Mouse 3     1 		A		Menu MenuWindowGroupOps
 
 # Close button (2)
 # Every button close window <- click
-Mouse 0 	2	A	FuncDeleteOrDestroy
+Mouse 0 	2		A		FuncDeleteOrDestroy
 
 # Maximize button (4)
 # Button 1 maximize window <- click
-Mouse 1		4	A	FuncMaximize
+Mouse 1		4		A		FuncMaximize
 # Button 2 maximize window vertically <- click
-Mouse 2		4	A	FuncMaximizeVertically
+Mouse 2		4		A		FuncMaximizeVertically
 # Button 3 maximize window horizontally <- click
-Mouse 3		4	A	FuncMaximizeHorizontally
+Mouse 3		4		A		FuncMaximizeHorizontally
 
 # Minimize button (6)
 # Button 1 iconify window <- click
-Mouse 1		6	A	FuncIconify
-# Button 2 iconify group of same window resources <- click ???
-Mouse 2		6	A	FuncIconifySameResource on
-# Button 3 iconify group of same window resources <- click ???
-Mouse 3		6	A	FuncIconifySameResource toggle
+Mouse 1		6		A		FuncIconify
+# Button 2 iconify group of same window resources <- click
+Mouse 2		6		A		FuncIconifySameResource on
+# Button 3 iconify group of same window resources <- click
+Mouse 3		6		A		FuncIconifySameResource toggle
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT to Window Button Pointer
 #-----------------------------------------------------------------------
-#     Button	Context Modifi 	Function
-Mouse 0		1	SCM	FuncShowMessage  "Left Button Bindings" \
+# Button	Context Modifi 	Function
+Mouse 0		1		SCM		FuncShowMessage  "Left Button Bindings" \
 "Mouse 1:  WindowOps menu" \
 "Mouse 2:  Move to page menu" \
 "Mouse 3:  WindowGroupOps menu"
                                                       
-Mouse 0		2	SCM	FuncShowMessage  "Close Button Bindings" \
+Mouse 0		2		SCM		FuncShowMessage  "Close Button Bindings" \
 "Mouse 1:  Delete on click" \
 "          Destroy on double click"
                                                       
-Mouse 0		4	SCM	FuncShowMessage  "Maximize Button Bindings" \
+Mouse 0		4		SCM		FuncShowMessage  "Maximize Button Bindings" \
 "Mouse 1:  Maximize fully on click" \
 "          Maximize menu on double click" \
 "Mouse 2:  Maximize vertically" \
 "Mouse 3:  Maximize horizontally"
                                                       
-Mouse 0		6	SCM	FuncShowMessage  "Minimize Button Bindings" \
+Mouse 0		6		SCM		FuncShowMessage  "Minimize Button Bindings" \
 "Mouse 1:  Iconify" \
 "Mouse 2:  Iconify on resource group" \
 "Mouse 3:  Iconify toggle resource group"
@@ -201,17 +197,18 @@ Mouse 0		6	SCM	FuncShowMessage  "Minimize Button Bindings" \
 
 DestroyFunc FuncRemoveAllButtonBindings
 AddToFunc   FuncRemoveAllButtonBindings
-+ I Mouse 1 	1      	A	-
+#   Button		Context Modifi 	Function
++ I Mouse 1 	1      	A		-
 + I Mouse 2    	1      	A     	-
-+ I Mouse 3    	1 	A	-
-+ I Mouse 0 	2	A	-
-+ I Mouse 1	4	A	-
-+ I Mouse 2	4	A	-
-+ I Mouse 3	4	A	-
-+ I Mouse 1	6	A	-
-+ I Mouse 2	6	A	-
-+ I Mouse 3	6	A	-
-+ I Mouse 0	3	SCM	-
-+ I Mouse 0	2	SCM	-
-+ I Mouse 0	4	SCM	-
-+ I Mouse 0	6	SCM	-
++ I Mouse 3    	1 		A		-
++ I Mouse 0 	2		A		-
++ I Mouse 1		4		A		-
++ I Mouse 2		4		A		-
++ I Mouse 3		4		A		-
++ I Mouse 1		6		A		-
++ I Mouse 2		6		A		-
++ I Mouse 3		6		A		-
++ I Mouse 0		3		SCM		-
++ I Mouse 0		2		SCM		-
++ I Mouse 0		4		SCM		-
++ I Mouse 0		6		SCM		-

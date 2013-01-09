@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeTopBar
-# Version:	1.0.7
+# Version:	1.0.8
 # Licence: 	GPL 2
 #
 # Description:	Gnome like top bar with root menu, personal menu, systray,
@@ -10,7 +10,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	10/09/2012
-# Changed:	11/09/2012
+# Changed:	01/09/2013
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -19,16 +19,6 @@
 # +---+---+--------+-----------------------------------+---------+---+
 # Menu     (Apps)                     Systray  cpu      Date    Logout
 #    Personal
-#
-# fixed columns
-# Menu:		 5
-# Personal:	 6
-# Apps (not at the moment)
-# cpu:		 5
-# Date:		 5
-# Logout:	 2
-# -------------
-#			23
 
 
 Style G2likeTopBar !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2

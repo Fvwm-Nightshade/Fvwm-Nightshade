@@ -144,7 +144,7 @@ Installation of Fvwm-Nightshade
 Now Fvwm-Nightshade is installed. 
 
 If you haven't a graphical login manager copy system/.xinitrc into your home directory 
-	$ cp system/.xinitrc ~/
+	$ cp <system>/share/doc/fvwm-nightshade/xinitrc-example ~/.xinitrc
 and start the xserver with
 	$ startx
 change the base settings and enjoy.

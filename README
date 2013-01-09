@@ -13,14 +13,14 @@
               /____/                                         
  
 
-Welcome to Fvwm Nightshade! This project aims to be a lightweight but
+Welcome to Fvwm-Nightshade! This project aims to be a lightweight but
 feature rich and good looking configuration of Fvwm. It contains many 
 useful things to make work and life easier with a flavour of a modern 
 desktop. But it can be configure by your own. It is good documented and
 shows you what is possible with this powerful window manager.
 
 
-Featurelist of Fvwm Nightshade:
+Featurelist of Fvwm-Nightshade:
 ===============================
 - Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
@@ -81,8 +81,7 @@ Featurelist of Fvwm Nightshade:
   mouse, keyboard, etc)
 - Help messages for mouse bindings in titlebar, window, corners, sides 
   and icon with Shift-Alt-Ctrl + click
-- Help messages for key bindings with Shift-Alt-Ctrl + key (see on 
-  "Keybindings")
+- Help messages for key bindings with Shift-Alt-Ctrl + key
   - A global one with Shift-Alt-Ctrl + H
 - Dynamic menus
 - Switching focus between windows with Alt-Tab
@@ -149,5 +148,7 @@ Enjoy our work and hopefully you love Fvwm-Nightshade as we do :-)
 
 Team
 ====
-Thomas Funk <t.funk@web.de>
-Bernhard Popp <kermit.popp@googlemail.com>
+Thomas Funk
+Bernhard Popp
+
+Email: <fvwmnightshade@gmail.com>

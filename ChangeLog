@@ -1,5 +1,11 @@
 History:
 
+01/09/2013 V 0.5.36
+- add documentation about autostart to fvwm-nightshade manpage
+- move system/.xinitrc to doc/xinitrc-example
+- update some docs (TODO, README, INSTALL)
+- fix some typos in other files
+
 01/08/2013 V 0.5.35
 - add source, manpage and html page for fvwm-nightshade
 
