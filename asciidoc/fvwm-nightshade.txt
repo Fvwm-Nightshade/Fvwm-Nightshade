@@ -534,8 +534,8 @@ Location of Files and their Function
 */usr/share/fvwm/* -> Scripts which must resides in Fvwm's directory
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|FNS-BaseSetup            |Fvwm-Nightshade base setup (FvwmForm script).
-|FvwmScript-CPU-Performance    |cpufreq settings tool (FvwmForm script).
+|FNS-BaseSetup            		|Fvwm-Nightshade base setup (FvwmForm script).
+|FvwmScript-CPU-Performance    	|cpufreq settings tool (FvwmForm script).
 |FvwmScript-PersonalMenu        |Personal menu creator (FvwmScript script).
 |====
 
@@ -549,7 +549,30 @@ Location of Files and their Function
 
 -
 
-*~/.fvwm-nightshade* -> the user home directory (<user>)
+*~/.fvwm-nightshade/* -> the user home directory (<user>)
+[cols="20%,80%",frame="none",grid="none"]
+|====
+|.autostart			|optional file with application commands.
+|.FNS-BaseSetup		|config file of FNS-BaseSetup.
+|.FvwmForm-Desktop-Config	|config file of Regenerate XDG Menus.
+|.layout			|link to current layout file.
+|.menu				|Fvwm menu file.
+|.personal			|Menu file of your personal apps.
+|.settings        	|settings like layout, theme, font, splash, etc.
+|.systray.log		|stalonetray log file.
+|.trayapplist		|internal list of current systray apps.
+|.wallpaper			|link to current wallpaper
+|====
+
+-
+
+*<user>/wallpapers/* -> default wallpaper directory.
+
+*<user>/icons/* -> Menu icon directory created by Regenerate XDG Menus.
+
+*<user>/layouts/* -> Optional user layout directory.
+
+*<user>/themes/* -> Optional user themes directory.
 
 
 Call Sequence while Startup
@@ -571,6 +594,23 @@ it and restart *Fvwm-Nightshade* without changing anything in the process.
 This works with themes and layouts, too. If you create under +~/.fvwm-nightshade+ 
 the directory structures of themes/layouts as in the +<system>/share/fvwm-nightshade+ 
 you can build themes or layouts by your own (see THEME and LAYOUT CREATION below).
+
+Autostart of Applications
+~~~~~~~~~~~~~~~~~~~~~~~~~
+*Fvwm-Nightshade* has the possibility to start applications while startup 
+like email daemons or systemtools (e.g. gkrellm). Therefore a file ".autostart" 
+must created in the <user> directory and filled with application commands per 
+line e.g.
+----
+sleep 2; gkrellm
+----
+
+Another possibility is to use the function "FuncStartSystrayApplets" in the 
+config file but then you have to copy the system config into the <user> directory
+and add your app like
+-----
++ I Test (x nm-applet) exec exec nm-applet
+-----
 
 
 ENVIRONMENT SPECIFICATIONS

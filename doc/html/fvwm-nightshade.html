@@ -1751,7 +1751,63 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>~/.fvwm-nightshade</strong> &#8594; the user home directory (&lt;user&gt;)</p></div>
+<div class="paragraph"><p><strong>~/.fvwm-nightshade/</strong> &#8594; the user home directory (&lt;user&gt;)</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">.autostart</p></td>
+<td align="left" valign="top"><p class="table">optional file with application commands.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.FNS-BaseSetup</p></td>
+<td align="left" valign="top"><p class="table">config file of FNS-BaseSetup.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.FvwmForm-Desktop-Config</p></td>
+<td align="left" valign="top"><p class="table">config file of Regenerate XDG Menus.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.layout</p></td>
+<td align="left" valign="top"><p class="table">link to current layout file.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.menu</p></td>
+<td align="left" valign="top"><p class="table">Fvwm menu file.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.personal</p></td>
+<td align="left" valign="top"><p class="table">Menu file of your personal apps.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.settings</p></td>
+<td align="left" valign="top"><p class="table">settings like layout, theme, font, splash, etc.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.systray.log</p></td>
+<td align="left" valign="top"><p class="table">stalonetray log file.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.trayapplist</p></td>
+<td align="left" valign="top"><p class="table">internal list of current systray apps.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">.wallpaper</p></td>
+<td align="left" valign="top"><p class="table">link to current wallpaper</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>-</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/wallpapers/</strong> &#8594; default wallpaper directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/icons/</strong> &#8594; Menu icon directory created by Regenerate XDG Menus.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/layouts/</strong> &#8594; Optional user layout directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/themes/</strong> &#8594; Optional user themes directory.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_call_sequence_while_startup">Call Sequence while Startup</h3>
@@ -1769,6 +1825,24 @@ it and restart <strong>Fvwm-Nightshade</strong> without changing anything in the
 <div class="paragraph"><p>This works with themes and layouts, too. If you create under <tt>~/.fvwm-nightshade</tt>
 the directory structures of themes/layouts as in the <tt>&lt;system&gt;/share/fvwm-nightshade</tt>
 you can build themes or layouts by your own (see THEME and LAYOUT CREATION below).</p></div>
+</div>
+<div class="sect2">
+<h3 id="_autostart_of_applications">Autostart of Applications</h3>
+<div class="paragraph"><p><strong>Fvwm-Nightshade</strong> has the possibility to start applications while startup
+like email daemons or systemtools (e.g. gkrellm). Therefore a file ".autostart"
+must created in the &lt;user&gt; directory and filled with application commands per
+line e.g.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>sleep 2; gkrellm</tt></pre>
+</div></div>
+<div class="paragraph"><p>Another possibility is to use the function "FuncStartSystrayApplets" in the
+config file but then you have to copy the system config into the &lt;user&gt; directory
+and add your app like</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>+ I Test (x nm-applet) exec exec nm-applet</tt></pre>
+</div></div>
 </div>
 </div>
 </div>
@@ -2068,7 +2142,7 @@ or submit them under <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-01-08 23:45:21 CET
+Last updated 2013-01-09 19:12:37 CET
 </div>
 </div>
 </body>
