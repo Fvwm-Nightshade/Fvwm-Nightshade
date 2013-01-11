@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Fvwm-Nightshade by Fvwm-Nightshade</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Fvwm-Nightshade</h1>
+        <h2>Desktop environment based on Fvwm</h2>
+        <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <pre><code>           _____________________________                        
+          / ___________________________/ 
+         / /_   ___      ______ ___
+        / __/| / / | /| / / __ `__ \   ___
+       / / | |/ /| |/ |/ / / / / / /  /__/
+      /_/  |___/ |__/|__/_/ /_/ /_/ 
+
+     _   ___        __    __       __              __    
+    / | / (_)____ _/ /_  / /______/ /_  ____ _____/ /___ 
+   /  |/ / // __ `/ __ \/ __/ ___/ __ \/ __ `/ __  // _ \
+  / /|  / // /_/ / / / / /_(__  ) / / / /_/ / /_/ //  __/
+ /_/ |_/_/ \__, /_/ /_/\__/____/_/ /_/\__,_/\__,_/ \___/ 
+          /____/                                         
+</code></pre>
+
+<p>Welcome to Fvwm-Nightshade! This project aims to be a lightweight but
+feature rich and good looking configuration of Fvwm. It contains many 
+useful things to make work and life easier with a flavour of a modern 
+desktop. But it can be configure by your own. It is good documented and
+shows you what is possible with this powerful window manager.</p>
+
+<h1>Featurelist of Fvwm-Nightshade:</h1>
+
+<ul>
+<li>Config tool for base settings (Font, layouts, etc)</li>
+<li>4 virtual desktop pages (at the moment)</li>
+<li>Taskbar to show running apps per page</li>
+<li>
+<p>Three different layouts: horizontal, vertical and G2like</p>
+
+<ul>
+<li>horizontal (top):
+       Top
++--------+      +--------+      +--------+
+|        |          |        |              |        |
++--------+      +--------+      +--------+
+IconManager        Pager           Panel</li>
+<li>vertical (top right):</li>
+</ul>
+<p>+--------+
+|        | Panel
++--------+
++--------+
+|        | Pager
++--------+
++--------+
+|        | IconManager
++--------+</p>
+
+<p>Panel content in both with:</p>
+
+<ul>
+<li>Menu</li>
+<li>Systray (stalonetray)</li>
+<li>cpu graph (conky)</li>
+<li>date and time (conky)</li>
+<li>G2like (top &amp; bottom)
+Topbar
++---+---+---------------------------------+----------+---------+---+
+|   |   |                                 |          |         |   |
++---+---+---------------------------------+----------+---------+---+
+Menu Personal                              Systray    Date    Logout</li>
+</ul>
+<p>Bottombar
++---+----------------------------------------------+---------------+
+|   |                                              |               |
++---+----------------------------------------------+---------------+
+Desktop                                             Pager
+     IconManager</p>
+</li>
+<li><p>Lock desk &amp; screensaver (xscreensaver)</p></li>
+<li><p>Personal menu via FvwmScript-PersonalMenu</p></li>
+<li><p>Background configurable with thumb browser (imagemagick and eterm)</p></li>
+<li><p>Animation control of window moves</p></li>
+<li><p>Simple "Run" command with FvwmForm</p></li>
+<li><p>Some themes/decors (Clean, Ambience, Tribal, CrystalBall and Air). 
+Can be changed on the fly without restart</p></li>
+<li><p>Own themes and layouts can be created with templates (at the moment
+only theme templates available)</p></li>
+<li><p>Autostart possibility (starting apps while startup)</p></li>
+<li><p>A useful set of GUI tools to configure the global system (Gtk+, Qt, 
+mouse, keyboard, etc)</p></li>
+<li><p>Help messages for mouse bindings in titlebar, window, corners, sides 
+and icon with Shift-Alt-Ctrl + click</p></li>
+<li>
+<p>Help messages for key bindings with Shift-Alt-Ctrl + key</p>
+
+<ul>
+<li>A global one with Shift-Alt-Ctrl + H</li>
+</ul>
+</li>
+<li><p>Dynamic menus</p></li>
+<li><p>Switching focus between windows with Alt-Tab</p></li>
+<li><p>Splash screen</p></li>
+<li><p>Print messages for needed apps for full config functionality in 
+.xsessions-error</p></li>
+<li><p>Governor-tool FvwmScript-CPU-Performance to handle cpufreq</p></li>
+<li><p>Create thumbs with mini icon and name for iconified applications 
+instead of their icon</p></li>
+<li><p>Build support for deb, rpm and Arch packages</p></li>
+</ul><h1>Requirements:</h1>
+
+<p>Required:   Fvwm &gt;= 2.6.6 (compiled with all features), python-2, python-xdg, 
+        xterm, conky, xscreensaver, eterm, imagemagick, librsvg2-bin, xwd
+        stalonetray, wm-icons, cpufrequtils</p>
+
+<p>Recommended:    gnomes network manager, Volume Icon</p>
+
+<p>Useful:     fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
+        qtconfig for qt3, qtconfig for qt4, xneurs</p>
+
+<h1>Installation</h1>
+
+<p>For installation description see the INSTALL file.</p>
+
+<h1>Bugs and Feature requests</h1>
+
+<p>Fvwm-Nightshade is a young project. Bugs are possible. We try to avoid 
+them but nobody is perfect ... So, if you find one or have ideas, submit
+them under <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues">https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues</a></p>
+
+<h1>Mailinglist</h1>
+
+<p>There exist two mailing lists under
+common:     <a href="https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade">https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade</a>
+developing: <a href="https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers">https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers</a></p>
+
+<p>To post to this group, you have to do the following:</p>
+
+<ol>
+<li>Register your email at google by clicking on the "Sign in" button 
+(upper right side).</li>
+<li>After successful email verification login to your new account.</li>
+<li>Go to 
+<a href="https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade">https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade</a> 
+and click on button "Apply to join group".</li>
+<li>Fill out the join form and click on "Apply to this group" button.</li>
+<li>After your request is approved you get an email from us.</li>
+<li>Now you can send email to <a href="mailto:fvwmnightshade@googlegroups.com">fvwmnightshade@googlegroups.com</a> to post to 
+the mailing list.</li>
+</ol><p>To unsubscribe from this group, send email to 
+<a href="mailto:fvwmnightshade+unsubscribe@googlegroups.com">fvwmnightshade+unsubscribe@googlegroups.com</a>
+or
+<a href="mailto:fvwmnightshade-workers+unsubscribe@googlegroups.com">fvwmnightshade-workers+unsubscribe@googlegroups.com</a></p>
+
+<p>Enjoy our work and hopefully you love Fvwm-Nightshade as we do :-)</p>
+
+<h1>Team</h1>
+
+<p>Thomas Funk
+Bernhard Popp</p>
+
+<p>Email: <a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade"></a> is maintained by <a href="https://github.com/Fvwm-Nightshade">Fvwm-Nightshade</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
