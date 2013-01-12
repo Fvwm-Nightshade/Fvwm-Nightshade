@@ -5,13 +5,13 @@ Requirements
 ============
 
 Required:	Fvwm >= 2.6.6 (compiled with all features), python-xdg, 
-			xterm, conky, xscreensaver, eterm, imagemagick, xwd,
-			stalonetray, wm-icons
+		xterm, conky, xscreensaver, eterm, imagemagick, xwd,
+		stalonetray, wm-icons
 
 Recommended: gnomes network manager, Volume Icon
 
 Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-			qtconfig for qt3, qtconfig for qt4, xneurs
+		qtconfig for qt3, qtconfig for qt4, xneurs
 
 
 
@@ -53,7 +53,7 @@ Fvwm
 	
 3. Building the Tree:
 	- execute in the terminal
-       $ utils/configure_dev.sh
+       	   $ utils/configure_dev.sh
        
        Hint:
        You can ignore "With GNOME libs support in FvwmGtk? no: Can't find working gnome-config" 
@@ -63,13 +63,13 @@ Fvwm
 4. Compile Fvwm:
 	deb:
     - run 
-		$ ./configure --prefix=/usr
+	   $ ./configure --prefix=/usr
 	- after that
-		$ make deb-inplace
+	   $ make deb-inplace
 		
     rpm:
     - run
-		$ make rpm-dist
+	$ make rpm-dist
 	
 	Arch:
 	- build the package:
@@ -106,7 +106,7 @@ Installation of Fvwm-Nightshade
 		Fvwm-Nightshade will be installed to /usr/local by default. So root
 		permissions are required. Run
   
-			# make install
+		    # make install
 
 		If you want to install Fvwm-Nightshade to another directory you can 
 		change the prefix:
@@ -117,7 +117,7 @@ Installation of Fvwm-Nightshade
 		to told make where because there are some scripts which have to be installed
 		into Fvwm. 
    
-			# make fvwm_path=<path_to_fvwm> install
+	  	    # make fvwm_path=<path_to_fvwm> install
 	- deb:
 		Run
 			# make deb
@@ -159,16 +159,16 @@ Deinstallation
 - General
 	To remove Fvwm-Nightshade expect ~/.fvwm-nightshade run as root
 
-			# make uninstall
+		# make uninstall
 
 	If you have installed Fvwm-Nightshade to another directory you have to change the prefix:
 
-			# make prefix=<other_dir> install
+		# make prefix=<other_dir> install
 
 	Also, if Fvwm is installed in another directory then /usr/share/fvwm you have
 	to told make where Fvwm is located
 
-			# make fvwm_path=<path_to_fvwm> uninstall
+		# make fvwm_path=<path_to_fvwm> uninstall
 			
 - For all others use the package management system.
 

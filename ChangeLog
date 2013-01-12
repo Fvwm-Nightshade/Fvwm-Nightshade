@@ -6,6 +6,7 @@ History:
 - fix bug in FuncFvwmLayoutMenu that layouts in userdir will load correctly
 - change in debian/control cpufreq to cpufrequtils
 - update fvwm-nightshade manpage, html and source
+- fix some formating typos in INSTALL
 
 01/09/2013 V 0.5.36
 - add documentation about autostart to fvwm-nightshade manpage
