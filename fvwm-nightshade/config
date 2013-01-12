@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.36
+InfoStoreAdd ns_version 0.5.37
 # Copyright (C) 2012
 #
 # Authors:
@@ -2031,7 +2031,7 @@ AddToFunc   FuncFvwmLayoutMenu
 + I PipeRead 'for i in `ls -Fh $FNS_SYSTEMDIR/layouts/ | grep -v /$`; \
   do echo AddToMenu FvwmLayoutMenu "${i}%menu/item.xpm%" FuncChangeLayout $[FNS_SYSTEMDIR] $i; done'
 + I PipeRead 'for i in `ls -Fh $FVWM_USERDIR/layouts/ | grep -v /$`; \
-  do echo AddToMenu FvwmLayoutMenu "${i}%menu/item.xpm%" FuncChangeDecor $[FVWM_USERDIR] $i; done'
+  do echo AddToMenu FvwmLayoutMenu "${i}%menu/item.xpm%" FuncChangeLayout $[FVWM_USERDIR] $i; done'
 
 #-----------------------------------------------------------------------
 # Dynamic Configuration sub menu for setting a background with
