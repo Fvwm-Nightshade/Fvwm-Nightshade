@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		fns-init
-# Version:	1.0.2
+# Version:	1.0.3
 # Licence: 	GPL 2
 #
 # Description:	start file of Fvwm-Nightshade
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	09/07/2012
-# Changed:	09/23/2012
+# Changed:	01/12/2012
 #-----------------------------------------------------------------------
 
 #-----------------------------------------------------------------------
@@ -31,19 +31,19 @@ AddToFunc   FuncPrintMsg
 #-----------------------------------------------------------------------
 DestroyFunc Load
 AddToFunc Load
-+ I Test (f $[FVWM_USERDIR]/$0) FuncPrintDbgMsg "Load: $0 found in userdir"
++ I Test (f $[FVWM_USERDIR]/$0) FuncPrintMsg "Load" "$0 found in userdir"
 + I TestRc (Match) Read $[FVWM_USERDIR]/$0
-+ I TestRc (Match) FuncPrintDbgMsg "Load: read of $0 in userdir finished"
++ I TestRc (Match) FuncPrintMsg "Load" "read of $0 in userdir finished"
 + I TestRc (Match) Break 1
-+ I Test (f $[FNS_SYSTEMDIR]/$0) FuncPrintDbgMsg "Load: $0 found in systemdir"
++ I Test (f $[FNS_SYSTEMDIR]/$0) FuncPrintMsg "Load" "$0 found in systemdir"
 + I TestRc (Match) Read $[FNS_SYSTEMDIR]/$0
-+ I TestRc (Match) FuncPrintDbgMsg "Load: read of $0 in systemdir finished"
++ I TestRc (Match) FuncPrintMsg "Load" "read of $0 in systemdir finished"
 + I TestRc (Match) Break 1
-+ I Test (f $0) FuncPrintDbgMsg "Load: $0 found"
++ I Test (f $0) FuncPrintMsg "Load" "$0 found"
 + I TestRc (Match) Read $0
-+ I TestRc (Match) FuncPrintDbgMsg "Load: read of $0 finished"
++ I TestRc (Match) FuncPrintMsg "Load" "read of $0 finished"
 + I TestRc (Match) Break 1
-+ I TestRc (!Match) FuncPrintDbgMsg "Load: $0 not found"
++ I TestRc (!Match) FuncPrintMsg "Load" "$0 not found"
 
 #-----------------------------------------------------------------------
 # This function set FNS_THEMEDIR. First it looks in the user's directory (~/.fvwm-nightshade/),
