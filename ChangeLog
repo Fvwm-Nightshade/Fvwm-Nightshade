@@ -1,5 +1,11 @@
 History:
 
+01/12/2013 V 0.5.37
+- change in Load function FuncPrintDbgMsg to FuncPrintMsg to fix bug with 
+  FNS_DEBUG=0
+- fix bug in FuncFvwmLayoutMenu that layouts in userdir will load correctly
+- change in debian/control cpufreq to cpufrequtils
+
 01/09/2013 V 0.5.36
 - add documentation about autostart to fvwm-nightshade manpage
 - move system/.xinitrc to doc/xinitrc-example
