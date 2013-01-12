@@ -219,6 +219,7 @@ Root Menu
 ~~~~~~~~~
 The Root menu is the main menu of *Fvwm-Nightshade*. You can call it in 
 different areas with mouse or key combinations:
+
 * In the root area with left click or with _Alt+F1_ or with the left _Window_ key.
 * In each window area or in an iconified windows with _Alt+left click_.
 
@@ -255,7 +256,7 @@ application menus after software installation.
 NOTE: If you want icons infront of the app names you should change the 
 default entry of "Converted Icon directory" from +\~/.fvwm/icons+ to 
 +~/.fvwm-nightshade/icons+ because then the converted icons won't stored 
-in *Fvwm-Nightshade*s user home.
+in Fvwm-Nightshade's user home.
 
 How to use it see the fvwm-menu-desktop manpage or clicking on the "Help" 
 button.
@@ -395,7 +396,7 @@ with all minimize bindings.
 
 If you want to change them you have to edit the bindings in your favorite 
 theme. Create a "themes" folder in the <user> directory and copy the complete 
-theme directory into it. You can rename the theme folder or leave it as is. 
+theme directory into it. Rename the theme folder. 
 Then open the "decor" file and edit the mouse bindings. After loading your 
 customized theme by clicking its name in
 ------
