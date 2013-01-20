@@ -1,5 +1,10 @@
 History:
 
+01/20/2013 V 0.5.38
+- add new theme FlatTab
+- fix colorset bugs in HorizontalPanel and G2likebottomBar
+- update of README and AUTHORS
+
 01/12/2013 V 0.5.37
 - change in Load function FuncPrintDbgMsg to FuncPrintMsg to fix bug with 
   FNS_DEBUG=0

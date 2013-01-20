@@ -5,6 +5,7 @@ Thomas Funk <t.funk@web.de>
 - ideas
 - scripts
 - functionality
+- themes
 
 Bernhard Popp 
 - Fvwm-Nightshade Logo
@@ -21,6 +22,7 @@ Contributors (in no specific order):
 - Scientific
 - unambiguous (manpage browser)
 - Maciej Delmanowski (idea for startup script, Load function and About box)
+- xeNULL (idea of FlatTab theme)
 
 If anybody find code which is from her/him please contact one of the 
 authors of Fvwm-Nightshade that we can add her/him to the list :-)
