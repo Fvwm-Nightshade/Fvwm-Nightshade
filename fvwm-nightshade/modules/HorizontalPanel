@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		HorizontalPanel
-# Version:	1.0.8
+# Version:	1.0.9
 # Licence: 	GPL 2
 #
 # Description:	FvwmButtons panel for horizontal layout. Position on the
@@ -15,7 +15,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	08/11/2012
-# Changed:	10/28/2012
+# Changed:	01/20/2013
 #-----------------------------------------------------------------------
 
 Style HorizontalPanel !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
@@ -77,7 +77,7 @@ DestroyModuleConfig HorizontalPanel: *
 #-----------------------------------------------------------------------
 # menu button
 #-----------------------------------------------------------------------
-*HorizontalPanel: (2x1, Colorset 10, ActionOnPress, \
+*HorizontalPanel: (2x1, Colorset 13, ActionOnPress, \
 		    Icon	icon_fns_24x24.png, \
 		    ActiveIcon	icon_fns_24x24.png, \
 		    Action(Mouse 1) `Menu MenuRoot`)
@@ -85,7 +85,7 @@ DestroyModuleConfig HorizontalPanel: *
 #-----------------------------------------------------------------------
 # Systray
 #-----------------------------------------------------------------------
-*HorizontalPanel: ($[infostore.tray_columns]x1, Right, Colorset 10, \
+*HorizontalPanel: ($[infostore.tray_columns]x1, Right, Colorset 13, \
 			Swallow (UseOld, Close, Kill, Respawn) "stalonetray" \
 		    `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_max_x]x1 \
 		    --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
@@ -95,14 +95,14 @@ DestroyModuleConfig HorizontalPanel: *
 #-----------------------------------------------------------------------
 # Cpuview
 #-----------------------------------------------------------------------
-*HorizontalPanel: (5x1, Colorset 10, Swallow (UseOld, Close, Kill, Respawn) "conky_cpu" \
+*HorizontalPanel: (5x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_cpu" \
 		    `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.pager_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
 		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`)
 
 #-----------------------------------------------------------------------
 # Clock
 #-----------------------------------------------------------------------
-*HorizontalPanel: ($[infostore.time_hsize]x1, Colorset 10, Swallow (UseOld, Close, Kill, Respawn) "conky_clock" \
+*HorizontalPanel: ($[infostore.time_hsize]x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_clock" \
 		    `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset -$[infostore.hratio]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
 		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
 		    Action (mouse 0) Nop)
