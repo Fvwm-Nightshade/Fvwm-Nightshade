@@ -6,8 +6,8 @@ History:
 - fix typos in fvwm-nightshade manpage
 
 01/20/2013 V 0.5.38
-- add new theme FlatTab
-- fix colorset bugs in HorizontalPanel and G2likebottomBar
+- add new theme FlatTab inspired by xeNULL
+- fix colorset bugs in HorizontalPanel and G2likeBottomBar
 - update of README and AUTHORS
 
 01/12/2013 V 0.5.37
