@@ -1,5 +1,10 @@
 History:
 
+01/24/2013 V 0.5.39
+- Fix old keybindings in menus
+- remove old comments in config
+- fix typos in fvwm-nightshade manpage
+
 01/20/2013 V 0.5.38
 - add new theme FlatTab
 - fix colorset bugs in HorizontalPanel and G2likebottomBar
