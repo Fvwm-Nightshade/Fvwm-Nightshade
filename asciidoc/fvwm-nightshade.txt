@@ -626,7 +626,7 @@ Fvwm namespace:
 |FVWM_USERDIR    	|It holds the user directory ~/.fvwm-nightshade.
 |FNS_SYSTEMDIR    	|It contains the system path to the shared files of Fvwm-Nightshade - /usr/local/share/fvwm-nightshade or /usr/share/fvwm-nightshade.
 |FNS_INITFILE       |It holds the path to the pre config fns-init.
-|FNS_DEBUG        	|If you want to raise the message output of Fvwm-Nightshade into ~/.xsessions-error set it to 1. Default is 0.
+|FNS_DEBUG        	|If you want to raise the message output of Fvwm-Nightshade into ~/.xsession-errors set it to 1. Default is 0.
 |====
 
 Fvwm related Variables
@@ -663,7 +663,7 @@ settings::
 DEBUGING
 --------
 If you want to debug something there are some functions available you can 
-use to get output in +~/.xsessions-error+:
+use to get output in +~/.xsession-errors+:
 
 [cols="30%,70%",frame="none",grid="none"]
 |====
