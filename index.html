@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <script type="text/javascript" src="javascripts/main.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Fvwm-Nightshade by Fvwm-Nightshade</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <img src="images/html_header.png" width="520" height="160" style="margin: 0 100px" alt="Fvwm-Nightshade" />
+        <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade" class="button"><small>View project on</small>GitHub</a>
+        <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/wiki" class="wiki"><small>View wiki on</small>GitHub</a>
+       <h2 style="margin: 0 130px">Desktop environment based on Fvwm</h2>
+      </div>
+    </header>
+
+<div id="div1" class="divOverlay" >
+<div class=></div>
+<img src="images/horizontal.png" style="margin-left: -50%; margin-top: -50%" /><br />
+<input type="button"  style="margin-left: -18px" value="close" onclick="return HideOverlay('div1')" onmouseup="overlay('')" /> 
+<input type="button"  value="next" onclick="return ShowOverlay('div2')" onmouseup="return HideOverlay('div1')" /> 
+</div>
+<div id="div2" class="divOverlay" >
+<img src="images/vertical.png" style="margin-left: -50%; margin-top: -50%" /><br />
+<input type="button"  style="margin-left: -90px" value="preview" onclick="return ShowOverlay('div1')" onmouseup="return HideOverlay('div2')" /> 
+<input type="button"  value="close" onclick="return HideOverlay('div2')" onmouseup="overlay('')" /> 
+<input type="button"  value="next" onclick="return ShowOverlay('div3')" onmouseup="return HideOverlay('div2')" /> 
+</div>
+<div id="div3" class="divOverlay" >
+<img src="images/g2like.png" style="margin-left: -50%; margin-top: -50%" /><br />
+<input type="button"  style="margin-left: -90px" value="preview" onclick="return ShowOverlay('div2')" onmouseup="return HideOverlay('div3')" /> 
+<input type="button"  value="close" onclick="return HideOverlay('div3')" onmouseup="overlay('')" /> 
+</div>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          
+			<p>Welcome to Fvwm-Nightshade! This project aims to be a lightweight but
+			feature rich and good looking configuration of Fvwm. It contains many 
+			useful things to make work and life easier with a flavour of a modern 
+			desktop. But it can be configure by your own. It is good documented and
+			shows you what is possible with this powerful window manager.</p>
+			
+			<h1>Featurelist of Fvwm-Nightshade:</h1>
+			<ul>
+				<li>Config tool for base settings (Font, layouts, etc)</li>
+				<li>4 virtual desktop pages (at the moment)</li>
+				<li>Taskbar to show running apps per page</li>
+				<li>Three different layouts: horizontal, vertical and G2like</li>
+				
+				<ul style="margin-left: 15px;">
+					<li style="text-decoration: underline">horizontal (top):<br />
+					  <img src="images/horizontal.png" width="480" height="25" alt="horizontal-layout" onclick="overlay('display')" onmouseup="return ShowOverlay('div1')" /></li>
+					<li style="text-decoration: underline">vertical (top right):<br />
+					  <img src="images/vertical.png" width="102" height="148" alt="Vertical-layout" onclick="overlay('display')" onmouseup="return ShowOverlay('div2')" />
+					</li>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Panel content in both with:
+					<ol style="margin-left: 35px;">
+					<li>Menu</li>
+					<li>Systray (stalonetray)</li>
+					<li>cpu graph (conky)</li>
+					<li>date and time (conky)</li>
+					</ol>
+				</ul>
+
+				<ul style="margin-left: 15px;">
+					<li>G2like (top &amp; bottom)<br />
+					Topbar<br />
+					  <img src="images/g2like.png" width="479" height="53" alt="G2like-layout" onclick="overlay('display')" onmouseup="return ShowOverlay('div3')" /><br />
+					Bottombar
+				</ul>
+				
+				<li>Lock desk &amp; screensaver (xscreensaver)</li>
+				<li>Personal menu via FvwmScript-PersonalMenu></li>
+				<li>Background configurable with thumb browser (imagemagick and eterm)</li>
+				<li>Animation control of window moves</li>
+				<li>Simple "Run" command with FvwmForm</li>
+				<li>Some themes/decors (Clean, Ambience, Tribal, CrystalBall and Air).<br /> 
+				&nbsp;&nbsp;&nbsp;Can be changed on the fly without restart</li>
+				<li>Own themes and layouts can be created with templates<br />
+				&nbsp;&nbsp;&nbsp;(at the moment only theme templates available)</li>
+				<li>Autostart possibility (starting apps while startup)</li>
+				<li>A useful set of GUI tools to configure the global system<br />
+				&nbsp;&nbsp;&nbsp;(Gtk+, Qt, mouse, keyboard, etc)</li>
+				<li>Help messages for mouse bindings in titlebar, window, corners, sides 
+				and icon with<br />
+				&nbsp;&nbsp;&nbsp;Shift-Alt-Ctrl + click</li>
+				<li>Help messages for key bindings with Shift-Alt-Ctrl + key</li>
+				<li>A global one with Shift-Alt-Ctrl + H</li>	
+				<li>Dynamic menus</li>
+				<li>Switching focus between windows with Alt-Tab</li>
+				<li>Splash screen</li>
+				<li>Print messages for needed apps for full config functionality in 
+				.xsessions-error</li>
+				<li>Governor-tool FvwmScript-CPU-Performance to handle cpufreq</li>
+				<li>Create thumbs with mini icon and name for iconified applications 
+				instead of their icon</li>
+				<li>Build support for deb, rpm and Arch packages</li>
+			</ul>
+			
+			<h1>Requirements:</h1>
+				<p><b style="text-decoration: underline"> Required:</b>   Fvwm &gt;= 2.6.6 (compiled with all features), python-2, python-xdg, 
+				        xterm, conky, xscreensaver, eterm, imagemagick, librsvg2-bin, xwd
+				        stalonetray, wm-icons, cpufrequtils</p>
+				
+				<p><b style="text-decoration: underline">Recommended:</b>    gnomes network manager, Volume Icon</p>
+				
+				<p><b style="text-decoration: underline">Useful:</b>     fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
+				        qtconfig for qt3, qtconfig for qt4, xneurs</p>
+			
+			<h1>Installation</h1>
+				<p>For installation description see the INSTALL file.</p>
+			
+			<h1>Bugs and Feature requests</h1>
+				<p>Fvwm-Nightshade is a young project. Bugs are possible. We try to avoid 
+				them but nobody is perfect ... So, if you find one or have ideas, submit
+				them under:<br /> <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues">
+				https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues</a></p>
+			
+			<h1>Mailinglist</h1>
+				<p>There exist two mailing lists under:<br />
+				common:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade">
+				https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade</a><br />
+				developing:&nbsp;<a href="https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers">
+				https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers</a></p>
+				<p>To post to this group, you have to do the following:</p>
+			
+			<ol>
+				<li>Register your email at google by clicking on the "Sign in" button 
+				(upper right side).</li>
+				<li>After successful email verification login to your new account.</li>
+				<li>Go to <a href="https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade">
+				https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade</a><br /> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and click on button "Apply to join group".</li>
+				<li>Fill out the join form and click on "Apply to this group" button.</li>
+				<li>After your request is approved you get an email from us.</li>
+				<li>Now you can send email to <a href="mailto:fvwmnightshade@googlegroups.com">fvwmnightshade@googlegroups.com</a> to post to 
+				the mailing list.</li>
+			</ol>
+			<p>To unsubscribe from this group, send email to 
+			<a href="mailto:fvwmnightshade+unsubscribe@googlegroups.com">fvwmnightshade+unsubscribe@googlegroups.com</a>
+			or <a href="mailto:fvwmnightshade-workers+unsubscribe@googlegroups.com">fvwmnightshade-workers+unsubscribe@googlegroups.com</a></p>
+			
+			<p>Enjoy our work and hopefully you love Fvwm-Nightshade as we do :-)</p>
+			
+			
+			<h1>Team</h1>
+				<p>Thomas Funk<br />
+				Bernhard Popp</p>
+				
+				<p>Email: <a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/zipball/master" class="button">
+            <small>Download master as</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tarball/develop" class="button">
+            <small>Download master as</small>
+            .tar.gz file
+          </a>
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/zipball/develop" class="button">
+            <small>Download devop as</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tarball/develop" class="button">
+            <small>Download develop as</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade"></a> This project is maintained by <a href="https://github.com/Fvwm-Nightshade">Fvwm-Nightshade</a>.</p>
+
+          <p>This page using a modification of the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
