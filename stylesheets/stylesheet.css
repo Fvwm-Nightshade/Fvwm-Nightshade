@@ -64,13 +64,8 @@ a:hover {
 }
 
 header {
-<<<<<<< HEAD
   padding-top: 10px;
   padding-bottom: 10px;
-=======
-  padding-top: 40px;
-  padding-bottom: 40px;
->>>>>>> 145f2ff7ba6173d9b3cb64e5a92a61b91490dbd4
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
   background: #2e7bcf url(../images/header-bg.jpg) 0 0 repeat-x;
   border-bottom: solid 1px #275da1;
@@ -126,11 +121,7 @@ aside#sidebar {
 
 aside#sidebar p.repo-owner,
 aside#sidebar p.repo-owner a {
-<<<<<<< HEAD
   font-weight: normal;
-=======
-  font-weight: bold;
->>>>>>> 145f2ff7ba6173d9b3cb64e5a92a61b91490dbd4
 }
 
 #downloads {
@@ -147,7 +138,6 @@ a.button {
   padding-top: 22px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
 }
-<<<<<<< HEAD
 a.wiki {
   width: 134px;
   height: 58px;
@@ -165,16 +155,10 @@ a.button small {
 a.wiki small {
   display: block;
   font-size: 12px;
-=======
-a.button small {
-  display: block;
-  font-size: 11px;
->>>>>>> 145f2ff7ba6173d9b3cb64e5a92a61b91490dbd4
 }
 header a.button {
   position: absolute;
   right: 0;
-<<<<<<< HEAD
   top: 10px;
   background: transparent url(../images/github-button.png) 0 0 no-repeat;
 }
@@ -184,12 +168,6 @@ header a.wiki {
   top: 100px;
   background: transparent url(../images/wiki-button.png) 0 0 no-repeat;
 }aside a.button {
-=======
-  top: 0;
-  background: transparent url(../images/github-button.png) 0 0 no-repeat;
-}
-aside a.button {
->>>>>>> 145f2ff7ba6173d9b3cb64e5a92a61b91490dbd4
   width: 138px;
   padding-left: 64px;
   display: block;
@@ -262,7 +240,6 @@ form {
   
 }
 
-<<<<<<< HEAD
 #overlay {
   position: fixed;
   z-index:199;
@@ -287,8 +264,6 @@ form {
 	visibility: hidden;
 	z-index: 500;
 }
-=======
->>>>>>> 145f2ff7ba6173d9b3cb64e5a92a61b91490dbd4
 
 /* GENERAL ELEMENT TYPE STYLES */
 
@@ -301,11 +276,7 @@ form {
 
 #main-content h1:before {
   content: "/";
-<<<<<<< HEAD
   color: #265a94;
-=======
-  color: #9ddcff;
->>>>>>> 145f2ff7ba6173d9b3cb64e5a92a61b91490dbd4
   padding-right: 0.3em;
   margin-left: -0.9em;
 }
