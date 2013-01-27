@@ -1,10 +1,10 @@
 ########################################################################
 # File:		FvwmScript-CPU-Performance
-# Version:	0.1.0
+# Version:	0.1.1
 # Licence: 	GPL 2
 #
 # Description:	stets the govenor and the frequencies of each single cpu
-#								used in the system.
+#				used in the system.
 #
 # Parameters:	
 #		
@@ -12,8 +12,8 @@
 #		
 #
 # Author:		Bernhard Popp <kermit.popp@googlemail.com>	
-# Created:	09/08/2012
-# Changed:	
+# Created:		09/08/2012
+# Changed:		09/21/2012
 ########################################################################
 
 #-----------------------------------------------------------------------
@@ -31,11 +31,18 @@ WindowPosition	0 100
 Init
 # get amount of CPUs
 Begin
-	Set $cpu_Vendor = (StrCopy (GetOutput {LANG=en_US.UTF-8 cat /proc/cpuinfo} 2 -1) 13 50)
-	Set $cpu_Model = (StrCopy (GetOutput {LANG=en_US.UTF-8 cat /proc/cpuinfo} 5 -1) 14 50)
-	Set $cpu_count = (StrCopy (GetOutput {LANG=en_US.UTF-8 cat /proc/cpuinfo} 12 -1) 13 13)
-	Set $cpu_cache = (StrCopy (GetOutput {LANG=en_US.UTF-8 cat /proc/cpuinfo} 8 -1) 13 21)
-	Set $cpu_bogo = (StrCopy (GetOutput {LANG=en_US.UTF-8 cat /proc/cpuinfo} 20 -1) 12 21)
+	Set $cmd1 = {LANG=en_US.UTF-8 cat /proc/cpuinfo | grep -m1 '}
+	Set $cmd2 = {'| cut -d":" -f2 | sed -e 's/ //g'}
+	Set $cmd = $cmd1{vendor_id}$cmd2
+	Set $cpu_Vendor = (GetOutput $cmd 1 -1)
+	Set $cmd = $cmd1{model name}$cmd2
+	Set $cpu_Model = (GetOutput $cmd 1 -1)
+	Set $cmd = $cmd1{cpu cores}$cmd2
+	Set $cpu_count = (GetOutput $cmd 1 -1)
+	Set $cmd = $cmd1{cache size}$cmd2
+	Set $cpu_cache = (GetOutput $cmd 1 -1)
+	Set $cmd = $cmd1{bogomips}$cmd2
+	Set $cpu_bogo = (GetOutput $cmd 1 -1)
 
 	ChangeTitle 111 $cpu_Vendor
 	ChangeTitle 112 $cpu_Model
@@ -268,7 +275,7 @@ Widget	301
 Property
 	Type		ItemDraw
 	Position	10 130
-	Title		{goernor}
+	Title		{governor}
 	Font		"xft:Arial:pixelsize=12:bold"
 	Flags 		NoReliefString Left
 End
