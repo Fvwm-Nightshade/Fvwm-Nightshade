@@ -259,7 +259,7 @@ form {
 
 .divOverlay {
 	left: 50%;
-	bottom: 25%;
+	bottom: 50%;
 	position: fixed;
 	visibility: hidden;
 	z-index: 500;

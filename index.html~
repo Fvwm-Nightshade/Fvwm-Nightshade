@@ -64,7 +64,7 @@
 <input type="button"  style="cursor:pointer" value="next" onclick="return ShowOverlay('div7')" onmouseup="return HideOverlay('div6')" /> 
 </div>
 <div id="div7" class="divOverlay" >
-<img src="images/governor.png" style="margin-left: -50%; margin-top: -50%" /><br />
+<img src="images/governor.png" style="margin-left: -50%; margin-top: 50%" /><br />
 <input type="button"  style="margin-left: -90px; cursor:pointer" value="preview" onclick="return ShowOverlay('div6')" onmouseup="return HideOverlay('div7')" /> 
 <input type="button"  style="cursor:pointer" value="close" onclick="return HideOverlay('div7')" onmouseup="overlay('')" /> 
 <input type="button"  style="cursor:pointer" value="next" onclick="return ShowOverlay('div8')" onmouseup="return HideOverlay('div7')" /> 
