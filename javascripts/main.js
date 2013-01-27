@@ -1,4 +1,5 @@
 console.log('This would be the main JS file.');
+<<<<<<< HEAD
 
 function ShowOverlay(divID) {
 var divObject = document.getElementById(divID);
@@ -23,3 +24,5 @@ function overlay(mode) {
          getElementById("overlay"));
    }
 }
+=======
+>>>>>>> 145f2ff7ba6173d9b3cb64e5a92a61b91490dbd4
