@@ -1,5 +1,8 @@
 History:
 
+01/25/2013 V 0.5.40
+- change colours of Ambience default background
+
 01/24/2013 V 0.5.39
 - Fix old keybindings in menus
 - remove old comments in config
