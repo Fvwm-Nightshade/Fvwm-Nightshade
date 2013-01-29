@@ -469,14 +469,14 @@ footer a:hover {
   }
   header a.button {
     background-image: none;
-    width: 45;
+    width: 200px;
     height: auto;
     display: inline-block;
     margin-top: 5px;
     padding: 5px 5px;
     position: absolute;
     left: 0;
-    top: 180px;
+    top: 190px;
     text-align: center;
     font-size: 13px;
     line-height: 1;
@@ -488,14 +488,14 @@ footer a:hover {
   }
   header a.wiki {
     background-image: none;
-    width: 45;
+    width: 200px;
     height: auto;
     display: inline-block;
     margin-top: 5px;
     padding: 5px 5px;
     position: absolute;
     right: 0;
-    top: 180px;
+    top: 190px;
     text-align: center;
     font-size: 13px;
     line-height: 1;
