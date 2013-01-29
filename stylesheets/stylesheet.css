@@ -471,9 +471,6 @@ footer a:hover {
     background-image: none;
     width: auto;
     height: auto;
-    display: inline-block;
-    margin-top: 5px;
-    padding: 5px 5px;
     position: absolute;
     right: 5;
     top: 165;
@@ -490,9 +487,6 @@ footer a:hover {
     background-image: none;
     width: auto;
     height: auto;
-    display: inline-block;
-    margin-top: 5px;
-    padding: 5px 5px;
     position: absolute;
     left: 5;
     top: 165;
