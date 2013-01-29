@@ -469,7 +469,7 @@ footer a:hover {
   }
   header a.button {
     background-image: none;
-    width: 200px;
+    width: 100px;
     height: auto;
     display: inline-block;
     margin-top: 5px;
@@ -488,7 +488,7 @@ footer a:hover {
   }
   header a.wiki {
     background-image: none;
-    width: 200px;
+    width: 100px;
     height: auto;
     display: inline-block;
     margin-top: 5px;
