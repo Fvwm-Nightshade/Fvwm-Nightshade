@@ -484,7 +484,28 @@ footer a:hover {
     -webkit-border-radius: 5px;                     
     border-radius: 5px;    
   }
+  header a.wiki {
+    background-image: none;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    margin-top: 15px;
+    padding: 5px 10px;
+    position: relative;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1;
+    background-color: #9ddcff;
+    color: #2879d0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;                     
+    border-radius: 5px;    
+  }
   header a.button small {
+    font-size: 13px;
+    display: inline;
+  }
+  header a.wiki small {
     font-size: 13px;
     display: inline;
   }
