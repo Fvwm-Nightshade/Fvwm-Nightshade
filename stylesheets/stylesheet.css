@@ -474,7 +474,9 @@ footer a:hover {
     display: inline-block;
     margin-top: 5px;
     padding: 5px 5px;
-    position: relative;
+    position: absolute;
+    right: 5;
+    top: 165;
     text-align: center;
     font-size: 13px;
     line-height: 1;
@@ -491,7 +493,9 @@ footer a:hover {
     display: inline-block;
     margin-top: 5px;
     padding: 5px 5px;
-    position: relative;
+    position: absolute;
+    left: 5;
+    top: 165;
     text-align: center;
     font-size: 13px;
     line-height: 1;
