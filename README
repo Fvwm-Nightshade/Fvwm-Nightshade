@@ -12,7 +12,9 @@
      /_/ |_/_/ \__, /_/ /_/\__/____/_/ /_/\__,_/\__,_/ \___/ 
               /____/                                         
  
+        http://fvwm-nightshade.github.com/fvwm-nightshade
 
+        
 Welcome to Fvwm-Nightshade! This project aims to be a lightweight but
 feature rich and good looking configuration of Fvwm. It contains many 
 useful things to make work and life easier with a flavour of a modern 
@@ -20,8 +22,8 @@ desktop. But it can be configure by your own. It is good documented and
 shows you what is possible with this powerful window manager.
 
 
-Featurelist of Fvwm-Nightshade:
-===============================
+Featurelist of Fvwm-Nightshade 0.6:
+===================================
 - Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
 - Taskbar to show running apps per page
@@ -30,7 +32,7 @@ Featurelist of Fvwm-Nightshade:
   - horizontal (top):
 			   Top
     +--------+		+--------+		+--------+
-    |        |          |        |              |        |
+    |        |      |        |      |        |
     +--------+		+--------+		+--------+
     IconManager		   Pager		   Panel
   
@@ -97,10 +99,10 @@ Featurelist of Fvwm-Nightshade:
 Requirements:
 =============
 Required:	Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
-		xterm, conky, xscreensaver, eterm, imagemagick, librsvg2-bin, xwd
-		stalonetray, wm-icons, cpufrequtils
+		xterm, conky, xscreensaver, eterm, imagemagick, librsvg2, xwd
+		stalonetray, cpufrequtils, gksu
 
-Recommended: 	gnomes network manager, Volume Icon
+Recommended: 	gnomes network manager, Volume Icon, wm-icons
 
 Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
 		qtconfig for qt3, qtconfig for qt4, xneurs
