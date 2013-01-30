@@ -167,7 +167,8 @@ header a.wiki {
   right: 0;
   top: 100px;
   background: transparent url(../images/wiki-button.png) 0 0 no-repeat;
-}aside a.button {
+}
+aside a.button {
   width: 138px;
   padding-left: 64px;
   display: block;
@@ -525,8 +526,26 @@ footer a:hover {
     padding: 20px 0;
     min-height: 0;
   }
+    aside a.button small {
+    font-size: 13px;
+    display: inline;
+  }
   aside#sidebar a.button {
-    display: none;
+    background-image: none;
+    width: 300px;
+    height: auto;
+    display: inline-block;
+    margin-top: 15px;
+    padding: 5px 10px;
+    position: relative;;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1;
+    background-color: #9ddcff;
+    color: #2879d0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;                     
+    border-radius: 5px;    
   }
   #main-content h1:before,
   #main-content h2:before,
