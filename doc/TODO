@@ -1,0 +1,34 @@
+TODO (for next version):
+------------------------
+
+Layouts:
+- Vertical Panel left
+- Windows 7
+  - Panel above or below
+    -> transparent and will hide: http://www.youtube.com/watch?v=2hVwVqEXtCw
+- PEM layout with wbar
+
+Design:
+- 1 vector design (idea always available ^^)
+- other new designs
+- Splash screens
+
+Features:
+- Session Management
+  -> See Fvwm-Crystal
+  -> use LxSession?
+- Composite Manager for real transparency
+  - Cairo -> http://www.youtube.com/watch?v=YBbeFCYdHno
+  - xcompmgr
+- localisation (de -> po files) for manpages, menus, help windows
+- icons on desktop with idesk (tools: http://icecc.sourceforge.net/idesktools.html)
+- own config tool for the most important options (gtk2, perl or python)
+- applets -> minimoids (http://box-look.org/content/show.php?content=137027)
+  -> must be rewritten to fit into FNS (svgs or use default icons, more configurable, ...)
+- dynamic Fvwm-Buttons panel
+- Xinerama support (more than one physical screen)
+- smart maximize module
+
+Documentation:
+- F1 help (asciidoc for html & manpage)
+

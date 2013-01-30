@@ -1,0 +1,33 @@
+#-----------------------------------------------------------------------
+# File:		Pager
+# Version:	1.0.3
+# Licence: 	GPL 2
+#
+# Description:	shows a Fvwm-Pager
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+# Created:	06/08/2012
+# Changed:	11/09/2012
+#-----------------------------------------------------------------------
+
+Style FvwmPager !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
+Style FvwmPager StaysOnBottom, !Iconifiable, !Maximizable, FixedSize, FixedPosition
+
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Geometry			$[infostore.pager_geometry]
+*FvwmPager: Colorset            *  10
+*FvwmPager: HilightColorset     *  11
+*FvwmPager: BalloonColorset     *  16
+*FvwmPager: WindowColorsets     14 15
+*FvwmPager: Balloons            All
+*FvwmPager: SmallFont           none
+*FvwmPager: Font                none
+*FvwmPager: BalloonFont         "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+*FvwmPager: BallonYOffset       +2
+*FvwmPager: WindowBorderWidth   1
+*FvwmPager: WindowLabelFormat   ""
+*FvwmPager: MiniIcons
+*FvwmPager: UseSkipList
+*FvwmPager: Rows                1
+*FvwmPager: SolidSeparators
+

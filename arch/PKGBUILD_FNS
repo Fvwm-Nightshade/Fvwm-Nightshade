@@ -1,0 +1,20 @@
+# Pkgbuild script for Fvwm-Nightshade
+
+# Maintainer: Bernhard Popp <fvwmnightshade@gmail.com>
+
+pkgname=Fvwm-Nightshade
+pkgver=
+pkgrel=1
+pkgdesc="A lightweight but feature rich and good looking configuration of Fvwm."
+arch=('any')
+url="https://github.com/Fvwm-Nightshade"
+license=('GPL')
+depends=('fvwm-cvs>=2.6.6' 'pyxdg' 'conky' 'xscreensaver' 'eterm' 'imagemagick' 'librsvg' 'stalonetray' 'cpufreqd' 'xorg-xwd' 'gksu')
+optdepends=('pcmanfm: lightwight filemanger' 'volumeicon: volumecontrol in systray' 'network-manager-applet: network controlling tool for systray')
+provides=('Fvwm-Nightshade')
+source=
+
+package() {
+  cd "$srcdir/"
+  make DESTDIR=$pkgdir prefix=/usr install
+}

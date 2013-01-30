@@ -10,221 +10,147 @@
        /  |/ / // __ `/ __ \/ __/ ___/ __ \/ __ `/ __  // _ \
       / /|  / // /_/ / / / / /_(__  ) / / / /_/ / /_/ //  __/
      /_/ |_/_/ \__, /_/ /_/\__/____/_/ /_/\__,_/\__,_/ \___/ 
-               /____/                                         
+              /____/                                         
  
+        http://fvwm-nightshade.github.com/fvwm-nightshade
 
-Welcome to Fvwm Nightshade! This project aims to be a lightweight but
+        
+Welcome to Fvwm-Nightshade! This project aims to be a lightweight but
 feature rich and good looking configuration of Fvwm. It contains many 
 useful things to make work and life easier with a flavour of a modern 
 desktop. But it can be configure by your own. It is good documented and
 shows you what is possible with this powerful window manager.
 
 
-Featurelist of Fvwm Nightshade:
-===============================
+Featurelist of Fvwm-Nightshade 0.6:
+===================================
+- Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
 - Taskbar to show running apps per page
-- Systray (if stalonetray is installed)
-- date and time (if xclock is installed)
-- Lock desk & screensaver (if xscreensaver is installed)
+- Three different layouts: horizontal, vertical and G2like
+
+  - horizontal (top):
+			   Top
+    +--------+		+--------+		+--------+
+    |        |      |        |      |        |
+    +--------+		+--------+		+--------+
+    IconManager		   Pager		   Panel
+  
+  - vertical (top right):
+    
+    +--------+
+    |        | Panel
+    +--------+
+    +--------+
+    |        | Pager
+    +--------+
+    +--------+
+    |        | IconManager
+    +--------+
+  
+    Panel content in both with:
+    - Menu
+    - Systray (stalonetray)
+    - cpu graph (conky)
+    - date and time (conky)
+
+  - G2like (top & bottom)
+	Topbar
+	+---+---+---------------------------------+----------+---------+---+
+	|   |   |                                 |          |         |   |
+	+---+---+---------------------------------+----------+---------+---+
+	Menu Personal                              Systray    Date    Logout
+	   
+
+	Bottombar
+	+---+----------------------------------------------+---------------+
+	|   |                                              |               |
+	+---+----------------------------------------------+---------------+
+	Desktop                                             Pager
+		 IconManager
+
+- Lock desk & screensaver (xscreensaver)
 - Personal menu via FvwmScript-PersonalMenu
-- Background configurable with thumb browser (if imagemagick and eterm 
-  is installed)
+- Background configurable with thumb browser (imagemagick and eterm)
 - Animation control of window moves
 - Simple "Run" command with FvwmForm
-- Some themes/decors (Default, Ambience and Air). Can be changed on the
-  fly without restart
+- Some themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab and Air). 
+  Can be changed on the fly without restart
+- Own themes and layouts can be created with templates (at the moment
+  only theme templates available)
 - Autostart possibility (starting apps while startup)
-- Session management (in preperation)
 - A useful set of GUI tools to configure the global system (Gtk+, Qt, 
   mouse, keyboard, etc)
 - Help messages for mouse bindings in titlebar, window, corners, sides 
   and icon with Shift-Alt-Ctrl + click
-- Help messages for key bindings with Shift-Alt-Ctrl + key (see on 
-  "Keybindings")
+- Help messages for key bindings with Shift-Alt-Ctrl + key
   - A global one with Shift-Alt-Ctrl + H
 - Dynamic menus
 - Switching focus between windows with Alt-Tab
 - Splash screen
 - Print messages for needed apps for full config functionality in 
   .xsessions-error
+- Governor-tool FvwmScript-CPU-Performance to handle cpufreq
+- Create thumbs with mini icon and name for iconified applications 
+  instead of their icon
+- Build support for deb, rpm and Arch packages
 
 
 Requirements:
 =============
-Required:	Fvwm >= 2.6.6, python-xdg, xterm, xclock, xscreensaver,
-		eterm, imagemagick, stalonetray, wm-icons
+Required:	Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
+		xterm, conky, xscreensaver, eterm, imagemagick, librsvg2, xwd
+		stalonetray, cpufrequtils, gksu
 
-Recommended: 	gnomes network manager, Volume Icon
+Recommended: 	gnomes network manager, Volume Icon, wm-icons
 
 Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-		qtconfig-qt3, qtconfig-qt4, xneurs
+		qtconfig for qt3, qtconfig for qt4, xneurs
   
-
-These systray apps started automatically, if stalonetray is installed:
-----------------------------------------------------------------------
-- Volume Icon: lightweight volume control 
-  (http://softwarebakery.com/maato/volumeicon.html)
-- fdpowermon: simple battery power monitor 
-  (http://packages-holter.debian.org/de/wheezy/fdpowermon)
-- nm-applet: gnomes network manager (http://projects.gnome.org/NetworkManager/)
-- bluetooth-applet: gnomes bluetooth applet 
-  (http://library.gnome.org/users/gnome-bluetooth/stable/gnome-bluetooth-applet.html.en)
-
-Btw. it doesn't matter if they not installed. Will skip then ;-)
-
-
-Keybindings:
-============
-
-Alt+Tab                           Switching focus between windows
-Alt+Print                         Screenshot of the whole desktop (page)
-
-Shift-Alt+F1                      Open root menu
-Shift-Alt+F2                      Launch 'run' dialog box
-Shift-Alt+F3                      Show window list
-Shift-Alt+F4                      Close active window
-Shift-Alt+F5                      Not used
-Shift-Alt+F6                      Cycle between same resource windows
-Shift-Alt+F7                      Move active window
-Shift-Alt+F8                      Resize active window
-Shift-Alt+F9                      Minimize active window
-Shift-Alt+F10                     Maximize/restore active window
-Shift-Alt+F11                     Maximize active window to fullscreen and back
-Shift-Alt+F12                     Identify active window
-
--> Help message with Shift-Alt-Ctrl + A
-
-
-Shift-Ctrl+F1                     Open full windows oops menu
-Shift-Ctrl+F2                     Launch FvwmConsole
-
-Shift-Ctrl+D                      Hide/unhide all windows
-Shift-Ctrl+L                      Lock Screen
-Shift-Ctrl+T                      Launch Terminal
-Shift-Ctrl+Print                  Screenshot of the active window
-
--> Help message with Shift-Alt-Ctrl + C
-
-
-Shift-Alt+1			  Switch to page 1 with active window
-Shift-Alt+2			  Switch to page 2 with active window
-Shift-Alt+3			  Switch to page 3 with active window
-Shift-Alt+4			  Switch to page 4 with active window
-
-Shift-Alt+Cursor right            Switch to page right with active window
-Shift-Alt+Cursor left             Switch to page left with active window
-
-Shift-Ctrl+1			  Switch to page 1
-Shift-Ctrl+2			  Switch to page 2
-Shift-Ctrl+3			  Switch to page 3
-Shift-Ctrl+4			  Switch to page 4
-
-Shift-Ctrl+cursor right           Switch to page right
-Shift-Ctrl+cursor left            Switch to page left
-
-Shift-Alt-Ctrl+cursor right       Scroll right by 10% of a page
-Shift-Alt-Ctrl+cursor left        Scroll left by 10% of a page
-
-Ctrl-Alt+cursor right             Move mouse pointer right by 1% of a page
-Ctrl-Alt+cursor left              Move mouse pointer left by 1% of a page
-Ctrl-Alt+cursor up                Move mouse pointer up by 1% of a page
-Ctrl-Alt+cursor down              Move mouse pointer down by 1% of a page
-
--> Help message with Shift-Alt-Ctrl + P
-
-
-Mouse bindings:
-===============
-
-Mouse:
-  +------------+
-  | ||  ||  || |
-  |	       |
-  +------------+
-    1   2   3
-
-Window:
-  +----------------------------------------------------------+
-  | V                                                -  +  X |
-  +----------------------------------------------------------+
-  |                                                          |
-
-
-Left (V):
----------
-Button 1: shows MenuWindowOpsTrimmed menu
-Button 2: shows Move to page menu
-Button 3: shows WindowOps group menu
-
-Close (X):
-----------
-Every button close window
-
-Maximize (+):
--------------
-Button 1: maximize window
-Button 2: maximize window vertically
-Button 3: maximize window horizontally
-
-Minimize (-):
--------------
-Button 1: iconify window
-Button 2: iconify group of same window resources
-Button 3: iconify/deiconify group of same window resources
-
-Mouse on windows decoration:
-----------------------------
-Titlebar, corners and sides:
-Button 1:   Drag moves window, maximize on double click
-Button 2:   Drag moves window, raise or lower with click
-Button 3:   WindowOpsTrimmed menu with click, MenuWindowOpsFull menu 
-	    with ALT + click
-Button 4/5: Rolling wheel on titlebar up/down shades/unshades
-
-Mouse on window area:
----------------------
-Button 1:   Root menu with ALT + click
-Button 2:   Drag + ALT moves window, raise or lower with ALT + click
-
-Mouse on Icons (iconified):
----------------------------
-Button 1:   Drag moves icon, deiconify with double click, root menu with 
-            ALT + click
-Button 2:   Deiconify icon with click, all of the same resource group 
-	    with CTRL + click
-Button 3:   WindowOpsTrimmed menu with click
-	    WindowGroupOps menu with CTRL + click
-
-Mouse on Root area:
--------------------
-Button 1:   Root menu
-Button 2:   Window list
-Button 3:   Desktop menu
-
-Anywhere:
----------
-Button 4/5: Switch to page left/right with SHIFT-ALT + rolling wheel 
-            up/down anywhere
-Button 4/5: Switch with active window to page left/right with SHIFT-CTRL
-            + rolling wheel up/down anywhere
 
 Installation
 ============
-Use the install.sh found in the root path of the Fvwm-Nightshade package
+For installation description see the INSTALL file.
 
 
 Bugs and Feature requests
 =========================
-Fvwm-Nightshade is young project. Bugs are possible. We try to avoid 
+Fvwm-Nightshade is a young project. Bugs are possible. We try to avoid 
 them but nobody is perfect ... So, if you find one or have ideas, submit
-them under https://github.com/ThomasFunk/Fvwm-Nightshade/issues
+them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues
 
 
-Enjoy our work and hopefully you love Fvwm-Nightshade as we do ;-)
+Mailinglist
+===========
+There exist two mailing lists under
+common: 	https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade
+developing:	https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers
+
+To post to this group, you have to do the following:
+
+1. Register your email at google by clicking on the "Sign in" button 
+   (upper right side).
+2. After successful email verification login to your new account.
+3. Go to 
+   https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade 
+   and click on button "Apply to join group".
+4. Fill out the join form and click on "Apply to this group" button.
+5. After your request is approved you get an email from us.
+6. Now you can send email to fvwmnightshade@googlegroups.com to post to 
+   the mailing list.
+
+To unsubscribe from this group, send email to 
+fvwmnightshade+unsubscribe@googlegroups.com
+or
+fvwmnightshade-workers+unsubscribe@googlegroups.com
+
+
+Enjoy our work and hopefully you love Fvwm-Nightshade as we do :-)
 
 
 Team
 ====
-Thomas Funk <t.funk@web.de>
-Bernhard Popp <kermit.popp@googlemail.com>
+Thomas Funk
+Bernhard Popp
+
+Email: <fvwmnightshade@gmail.com>

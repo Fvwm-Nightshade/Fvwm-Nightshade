@@ -1,0 +1,276 @@
+#-----------------------------------------------------------------------
+# File:		Vertical
+# Version:	1.0.5
+# Licence: 	GPL 2
+#
+# Description:	Layout of object positions on desktop
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+#			Bernhard Popp <kermit.popp@googlemail.com>
+#
+# Created:	08/16/2012
+# Changed:	11/09/2012
+#-----------------------------------------------------------------------
+# Top right
+#
+# +--------+
+# |        | Panel
+# +--------+
+# +--------+
+# |        | Pager
+# +--------+
+# +--------+
+# |        | IconManager
+# +--------+
+#
+#-----------------------------------------------------------------------
+
+########################################################################
+#                        Positioning
+########################################################################
+
+
+#=======================================================================
+# FvwmButtons Panel
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Panel height
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd row_height $((($[infostore.fontsize]*2)+6))"
+PipeRead "echo InfoStoreAdd panel_height $(($[infostore.row_height]*5))"
+
+#-----------------------------------------------------------------------
+# Panel width
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd panel_width `perl -e 'printf \"%.0f\",(($[infostore.row_height]*3)*($[vp.width]/$[vp.height]))+1'`"
+
+# the count of systray icons is calculated by the panel width/icon size - 1 icon
+PipeRead "echo InfoStoreAdd tray_icons `perl -e 'printf \"%.0f\",($[infostore.panel_width]/24)-1'`"
+
+#-----------------------------------------------------------------------
+# Panel geometry
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd panel_geometry $[infostore.panel_width]x$[infostore.panel_height]-0+0'
+
+
+#=======================================================================
+# Pager
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Set the desk top size in units of physical screen size
+#
+#   +-----+-----+
+#   |     |     |
+#   +-----+-----+
+#   |     |     |
+#   +-----+-----+
+#-----------------------------------------------------------------------
+DeskTopSize 2x2
+
+#-----------------------------------------------------------------------
+# actual pager height
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd pager_height $((($[infostore.row_height]*3)+1))'
+
+
+#-----------------------------------------------------------------------
+# FvwmPager geometry
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd pager_geometry $[infostore.panel_width]x$[infostore.pager_height]-0+$(($[infostore.panel_height]+4))'
+
+
+#=======================================================================
+# Icon Manager (WinList per Page)
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# GlobalIconMan Button Geometry
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd iconman_button_geometry $(($[infostore.panel_width]-$[infostore.titlebar_height]+2))x0'
+
+#-----------------------------------------------------------------------
+# GlobalIconMan Manager Geometry
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd yStartIman `perl -e 'printf \"%.0f\",(($[vp.height]-($[infostore.panel_height]+$[infostore.pager_height])-($[infostore.fontsize]+15)))'`"
+PipeRead "echo InfoStoreAdd xStartIman `perl -e 'printf \"%.0f\",$[vp.width]-$[infostore.panel_width]-4'`"
+InfoStoreAdd iconman_manager_geometry 1x0+$[infostore.xStartIman]-$[infostore.yStartIman]
+
+#-----------------------------------------------------------------------
+# GlobalIconMan Manager Titlebar position
+#-----------------------------------------------------------------------
+Style GlobalIconManShowHide TitleAtLeft
+
+#-----------------------------------------------------------------------
+# GlobalIconMan Manager Tips
+#-----------------------------------------------------------------------
+InfoStoreAdd tips_iman always
+
+
+#=======================================================================
+# Others
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Define bands at the edge of the screen. It is used to compute the
+# Working Area: EwmhBaseStruts left right top bottom 
+#-----------------------------------------------------------------------
+PipeRead 'echo EwmhBaseStruts 0 $(($[infostore.panel_width]+4)) 0 0'
+
+#-----------------------------------------------------------------------
+# IconBox defines the area where FVWM will place any windows that are
+# in the iconic state: 
+#  IconBox left top right bottom
+#
+# IconGrid ist the distance between each icon. Default grid is 3x3 pixels:
+#  IconGrid x y
+#
+# IconFill defines the direction icons will place. Default is from left
+# to right. To fill an icon box in columns instead of rows, specify the
+# vertical direction (top or bottom) first.
+#-----------------------------------------------------------------------
+Style * IconBox 20 80 -$[infostore.panel_width] -20, \
+        IconGrid 40 40, \
+        IconFill left bottom, \
+        StaysOnBottom
+
+
+#=======================================================================
+# Load layout elements
+#=======================================================================
+Load modules/GlobalIconMan_ShowHide
+Load modules/Pager
+Load modules/VerticalPanel
+
+#=======================================================================
+# Functions
+#=======================================================================
+
+AddToFunc StartFunction
+# start event handler for GlobalIconMan_ShowHide
++ I Module FvwmEvent FvwmEventShowHide
+#-----------------------------------------------------------------------
+# start window list module
++ I Module FvwmIconMan GlobalIconManShowHide
+#-----------------------------------------------------------------------
+# start Pager
++ I Module FvwmPager
+#-----------------------------------------------------------------------
+# start horizontal panel
++ I Module FvwmButtons VerticalPanel
+#-----------------------------------------------------------------------
+# start systray applets
++ I Wait stalonetray
++ I FuncStartSystrayApplets
+#-----------------------------------------------------------------------
+
+
+DestroyFunc ReloadLayoutParts
+AddToFunc   ReloadLayoutParts
++ I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.systray.log $FVWM_USERDIR/.trayapplist'
++ I Load modules/VerticalPanel
++ I Load modules/GlobalIconMan_ShowHide
++ I FuncRestartModuleByAlias FvwmButtons VerticalPanel
++ I Wait stalonetray
++ I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist
+
+
+#=======================================================================
+# Bindings
+#=======================================================================
+
+#   Keyname	Context Modifi 	Function
+
+#-----------------------------------------------------------------------
+# press SHIFT-ALT arrow anywhere, move active
+# window to next/previous page
+#-----------------------------------------------------------------------
+Key Left	A		SM		FuncMoveWindowToPage -1p +0p
+Key Right	A		SM		FuncMoveWindowToPage +1p +0p
+Key Up		A		SM		FuncMoveWindowToPage +0p -1p
+Key Down	A		SM		FuncMoveWindowToPage +0p +1p
+
+#-----------------------------------------------------------------------
+# key 1-4 move current window to page n
+#-----------------------------------------------------------------------
+Key 1		A		SM		Current FuncMoveWindowToPage 0 0
+Key 2		A		SM		Current FuncMoveWindowToPage 1 0
+Key 3		A		SM		Current FuncMoveWindowToPage 0 1
+Key 4		A		SM		Current FuncMoveWindowToPage 1 1
+
+#-----------------------------------------------------------------------
+# Go to page n with SHIFT-CTRL + number
+#-----------------------------------------------------------------------
+Key 1		A		SC		FuncGotoPage 0 0
+Key 2		A		SC		FuncGotoPage 1 0
+Key 3		A		SC		FuncGotoPage 0 1
+Key 4		A		SC		FuncGotoPage 1 1
+
+#-----------------------------------------------------------------------
+# press SHIFT-CTRL arrow anywhere, and scroll by one page
+#-----------------------------------------------------------------------
+Key Left	A		SC		FuncGotoPage -1p +0p
+Key Right	A		SC		FuncGotoPage +1p +0p
+Key Up		A		SC		FuncGotoPage +0p -1p
+Key Down	A		SC		FuncGotoPage +0p +1p
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT P to show all page related key bindings
+#-----------------------------------------------------------------------
+key P		A	SCM	FuncShowMessage  "Page Key Bindings" \
+"SHIFT-CTRL:" \
+"Cursor right/left: Switch to page right/left" \
+"Cursor up/down: Switch to page up/down" \
+"1-4: Switch to page n" \
+"SHIFT-ALT:" \
+"Cursor right/left: Switch active window to page right/left" \
+"Cursor up/down: Switch active window to page up/down" \
+"1-4: Switch active window to page n" \
+"ALT-CTRL:" \
+"Cursor right/left/up/down: Move mouse pointer by 1% of a page" \
+"SHIFT-ALT-CTRL:" \
+"Cursor right/left/up/down: Scroll right/left by 10% of a page"
+
+
+
+#=======================================================================
+# Menus
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Moves all windows of the same resource to another page
+#-----------------------------------------------------------------------
+DestroyMenu  MenuWindowGroupQuickMove
+AddToMenu    MenuWindowGroupQuickMove
++ "&Right	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +1p +0p
++ "&Left	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage -1p +0p
+#+ "D&own	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +0p +1p
+#+ "&Up  	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +0p -1p
++ ""										Nop
++ "Page	1%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
++ "Page	2%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
++ "Page	3%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 2 0
++ "Page	4%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 3 0
+
+#-----------------------------------------------------------------------
+# Move a window to left/right/1-4 page
+#-----------------------------------------------------------------------
+DestroyMenu  MenuWindowMoveTo
+AddToMenu    MenuWindowMoveTo
++ "Move to ..." Title
++ "$[gt.&Right	Page]%menu/window-move.xpm%"	AnimatedMove w+100 w
++ "&Left	Page%menu/window-move.xpm%"			AnimatedMove w-100 w
+#+ "&Down	Page%menu/window-move.xpm%"			AnimatedMove w w+100
+#+ "&Up  	Page%menu/window-move.xpm%"			AnimatedMove w w-100
++ ""											Nop
++ "Page	1%menu/window-move.xpm%"				FuncMoveWindowToPage 0 0
++ "Page	2%menu/window-move.xpm%"				FuncMoveWindowToPage 1 0
++ "Page	3%menu/window-move.xpm%"				FuncMoveWindowToPage 2 0
++ "Page	4%menu/window-move.xpm%"				FuncMoveWindowToPage 3 0
+
+
+
+
+
+

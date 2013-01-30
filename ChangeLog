@@ -1,0 +1,354 @@
+History:
+
+01/30/2013 V 0.6
+Prepare for release:
+- add NEWS
+- add NEWS to Makefile
+- update README, config
+
+01/25/2013 V 0.5.40
+- change colours of Ambience default background
+- change forgotten parts in FvwmScript-CPU-Performance
+
+01/24/2013 V 0.5.39
+- Fix old keybindings in menus
+- remove old comments in config
+- fix typos in fvwm-nightshade manpage
+
+01/20/2013 V 0.5.38
+- add new theme FlatTab inspired by xeNULL
+- fix colorset bugs in HorizontalPanel and G2likeBottomBar
+- update of README and AUTHORS
+
+01/12/2013 V 0.5.37
+- change in Load function FuncPrintDbgMsg to FuncPrintMsg to fix bug with 
+  FNS_DEBUG=0
+- fix bug in FuncFvwmLayoutMenu that layouts in userdir will load correctly
+- change in debian/control cpufreq to cpufrequtils
+- update fvwm-nightshade manpage, html and source
+- fix some formating typos in INSTALL
+
+01/09/2013 V 0.5.36
+- add documentation about autostart to fvwm-nightshade manpage
+- move system/.xinitrc to doc/xinitrc-example
+- update some docs (TODO, README, INSTALL)
+- fix some typos in other files
+
+01/08/2013 V 0.5.35
+- add source, manpage and html page for fvwm-nightshade
+
+01/07/2013 V 0.5.34
+- fix bug in FuncChangeLayout that .settings won't updated
+- change layout names in FNS-BaseSetup to handle easier updating of .FNS-BaseSetup
+- add FuncUpdateBaseSetupFile to update theme and layout if changed
+- delete bindings from README
+
+01/05/2013 V 0.5.33
+- change bindings in fvwm-nightshade/.bindings to more general ajar to other
+  DEs/WMs
+- add layouts to configuration menu
+
+12/26/2012 V 0.5.32
+- fix Makefile bug in rpm building with missing sources
+- fix Makefile bugs in arch building with package creation
+- update INSTALL
+- update system/.xinitrc
+
+12/26/2012 V 0.5.31
+- zip manpages to best -> debian guidance
+- add deb, rpm and Arch build support
+- update INSTALL and README
+
+12/01/2012 V 0.5.30
+- fix bug in makefile that /usr/share/xsessions and not /usr/local/share/xsessions 
+  will be created.
+  
+11/11/2012 V 0.5.29
+- restructure Configuration menu
+- add Fvwm-Nightshade help menu
+- update FNS-BaseSetup and its' help pages
+
+11/09/2012 V 0.5.28
+- cleanup files
+
+11/05/2012 V 0.5.27
+- add new wallpapers for CrystalBalls
+
+- rename Tumble theme in Clean
+- remove "Show Colorsets" entry from Configuration menu
+- reactivate double_buffer in conky rc files because of flickering
+- some clean ups in config
+
+10/28/2012 V 0.5.25
+- adapt styles of Pager and HorizontalPanel to G2likeTopBar
+- add new theme 'CrystalBalls'
+- addapt all other themes if some colorset option is missing anywhere
+- change FvwmBacker colorset in Air, Ambience an Tribal so that each theme
+  has its own default background
+- change in GlobalIconMan_Bar the Format string from "%c" to "%c: %t"
+- change in G2likeTopBar and HorizontalPanel the start of cpu graph from 
+  1 sec to 2 sec
+- adapt Vertical layout and VerticalPanel to new ratios
+
+10/26/2012 V 0.5.24
+- change in HorizontalPanel the calculation of percentage_voffset and 
+  date_voffset for better fiting in smaller resolutions
+
+10/25/2012 V 0.5.23
+- change name of "Default" theme to "Tumble"
+- commented out some useless options in conky rc files
+- change name of FvwmForm-FNS-BaseSetup to FNS-BaseSetup
+- INSTALL and AUTHORS updated
+- add source, manpage and html page for FNS-BaseSetup
+- add Help button in FNS-BaseSetup
+
+10/24/2012 V 0.5.22
+- add possibility to de-/activate splash in FvwmForm-FNS-BaseSetup
+- fix bug that wallpaper links will set only at initial use of FvwmForm-FNS-BaseSetup
+- remove possibility in FvwmForm-FNS-BaseSetup to change wallpaper directory
+- fix bug in FuncWriteInfoStoreToFileAndSet that strings like "xterm -fn 10x20"
+  will write completly
+- add new function FuncWriteSetEnvToFileAndSet to config to write SetEnv 
+  vars to files
+- move InfoStore wallpaper_dir from .settings back into config
+- rollout key bindings into .bindings for later changing by user
+- fix bugs in Makefile that error messages occur while un-/installing manpages:
+  - wrong mandir
+  - wrong rm syntax
+
+10/23/2012 V 0.5.21
+- add '--version' to bin/fns-find-icon
+- activate in Makefile install/uninstall manpages
+- add man/ and doc/html
+- add man/fns-find-icon.1.gz and doc/html/fns-find-icon.html
+- add asciidoc/ for manpage source files + create.sh to built man and html
+- add usage to bin/fns-start-programs and bin/fns-built-trayapplist
+- add man/fns-start-programs.1.gz, doc/html/fns-start-programs.html and 
+  asciidoc/fns-start-programs.txt
+- add man/fns-built-trayapplist.1.gz, doc/html/fns-built-trayapplist.html and 
+  asciidoc/fns-built-trayapplist.txt
+
+10/19/2012 V 0.5.20
+- fix bug in fvwm/FvwmForm-FNS-BaseSetup that an error occur in while writing
+  WpDir to ~/.settings
+- fix bug that conky cpu applet won't display the percentage in the right font
+- add comment header in conkyrc files
+- change default font from Arial to Sans
+- use in HorizontalPanel same calculations for clock/date applet than in G2likeTopBar
+  because of sizing problems with resolution <= 1024x768
+
+10/16/2012 V 0.5.19
+- fix bugs and display problems in Horizontal and G2like layout
+- fix display problems in decors
+
+10/14/2012 V 0.5.18
+- adapt G2like layout and its components to new ratios
+- remove DigitalXclock and Systray module from fvwm-nightshade/modules
+- change in G2likeTopBar the Personal icon from 'exec' to 'bookmark-new'
+
+10/12/2012 V 0.5.17
+- replace ratio with hratio and wratio because of scaling problems in
+  pager, layouts, panels and titlebars
+- adapt horizontal layout and its components to new ratios
+- adapt decors to new ratios
+
+10/11/2012 V 0.5.16
+- fix bug in bin/fns-find-icon that the wrong icon was found
+- change some parts in G2like layout:
+  - change top and bottom in EwmhBaseStruts that maximized windows won't
+    overlap bars
+  - set in both bars the Styles !Iconifiable, !Maximizable, FixedSize, FixedPosition
+  - change the button icon for personal because 'stock_bookmark' is not
+    available in some icon themes
+  - change used colorset in both bars. Now the font color is always the same
+  - add ActiveColorset to some buttons in both bars
+
+10/09/2012 V 0.5.15
+- add new layout 'G2like' - it looks like Gnome 2 with a top and bottom bar
+- add G2like to FvwmForm-FNS-BaseSetup
+- add two new options to bin/fns-find-icon:
+  -c category. Default is apps
+  --notdesk Don't search in desktop files. Default is false
+  Now it's possible to search for icons also
+
+10/06/2012 V 0.5.14
+- add functional vertical layout
+- adapt horizontal layout to fit the changes in the vertical layout
+- move some key bindings related to FvwmPager and menus into the
+  layout files
+
+10/03/2012 V 0.5.13
+- change horizontal panel creation to fit different screen resolutions
+
+10/02/2012 V 0.5.12
+- fix positioning problem with GlobalIconman_ShowHide
+- change FE-* functions in GlobalIconman_ShowHide and GlobalIconman_TopBottom
+  because in both they had the same names and so it was not possible to
+  use them togehter
+- add in all FvwmForms the <enter> key
+- change default theme from Ambience to Tribal in FvwmForm-FNS-BaseSetup
+- change default wallpaper_dir from $FNS_SYSTEMDIR/artwork/wallpapers to
+  $FVWM_USERDIR/wallpapers. Also remove configure possibility in FvwmForm-FNS-BaseSetup
+  but create $FVWM_USERDIR/wallpapers and linked in all wallpapers in 
+  $FNS_SYSTEMDIR/artwork/wallpapers
+
+10/01/2012 V 0.5.11
+- add new GlobalIconMan (GlobalIconman_ShowHide) which moves down if 
+  mouse hover over it and roll back if it leaves.
+- move enter_window event into the IconMan configs
+- adjust the old GlobalIconMan and rename it to GlobalIconman_TopBottom
+
+09/29/2012 V 0.5.10
+- change some colors in the Tribal theme
+
+09/28/2012 V 0.5.9
+- fix bug in FuncWriteInfoStoreToFileAndSet that paths won't saved
+- Add new theme 'Tribal'
+- fix problem, that with FuncDesktopCreateScreenshot no screenshot with
+  open menu can made
+
+09/23/2012 V 0.5.8
+- add Debug mode:
+	- FNS_DEBUG env variable in bin/fvwm-nightshade. 1=debug; 0=default
+	- add FuncPrintMsg in fvwm-nightshade/fns-init, change FuncPrintDbgMsg,
+	  Load. Also change in config file FuncPrintDbgMsg to FuncPrintMsg
+- fix bug in modules/HorizontalPanel - load wrong module
+- fix bug in Load function - break needs level to stop breaking after 
+  1 level and not all ...
+- move IconBox into layouts because it belongs to them
+- cleanup config
+
+09/23/2012 V 0.5.7
+- add bin/fns-find-icon and change Thumbnail/DeThumbnail functions
+  to create thumbs with better and correct mini icons
+
+09/22/2012 V 0.5.6
+- add governor-tool FvwmScript-CPU-Performance
+- add icon for governor-tool artwork/icons/GovernorLogo.png
+- add menu entry in config file
+- update README for new added Governor-tool
+
+09/22/2012 V 0.5.5
+- add thumbnailing as a replacement for iconify/deiconify
+- change Makefile back to install scripts into $[PREFIX]/share/fvwm
+  because FvwmForm files only called from within $[PREFIX]/share/fvwm
+  or $[FVWM_USERDIR]
+- move fvwm-nightshade/scripts to fvwm/
+- change third searchpath for FvwmScript in config from $FNS_SYSTEMDIR 
+  to $FVWM_USERDIR for user owned FvwmScripts
+- README updated with new entries for mailing list
+
+09/15/2012 v 0.5.4
+- add UrgencyFunc with other behaviour to config
+- add the third searchpath for FvwmScript to config
+- move scripts copied to Fvwm's systemdir from fvwm folder to
+  fvwm-nightshade/scripts folder
+- delete in Makefile the part where scripts copied/deleted to/from
+  fvwm's systemdir
+- INSTALL updated
+- TODO updated
+- README updated
+
+09/09/2012 V 0.5.3
+- change names of wallpapers with 5x4 to 4x3
+- add error message to fns-start-programs if no infile found
+- accelerate reading of .menu if available
+- add 2 new splash screens and new icons
+- change icon name in config, HorizontalPanel and VerticalPanel
+- change stalonetray log file name from test.log to systray.log
+- add used_banner and wallpaper_dir to .settings for FvwmForm-FNS-BaseSettings
+- fix bug in name creation of screenshot functions
+- add headers to some files
+- change WallpaperBrowser function that thumbs will saved in 
+  $[FVWM_USERDIR]/wallpapers/.thumbs
+- add IgnoreModifiers L25 for problems with ClickToFocus
+- update Makefile
+- update INSTALL and README
+
+08/21/2012 V 0.5.2
+- change structure from user to system configuration:
+  - main part is now located in $prefix/share/fvwm-nightshade
+  - user part is now located in ~/.fvwm-nightshade
+
+08/21/2012 V 0.5.1
+- add
+  - COPYING: GPL2
+  - AUTHORS: List of Authors and contributors
+  - bin/fvwm-nightshade: startup script
+  - templates/fvwm-nightshade.desktop: login script
+  - doc/License: GPL2
+- add lost About box
+
+07/31/2012 V 0.5
+- roll out some infostore variables to .settings so that an update of the
+  config won't destroy user settings
+- create two desktop layouts: Horizontal and Vertical
+- replace xclock with conky (because of transparent background)
+- fix bug that FuncDesktopCreateScreenshot creates now the whole desktop
+  not only the active window
+
+07/31/2012 V 0.4.5
+- update relevant parts related to Fvwm Default Config V 0.21.7
+  - add some comments and delete unused lines
+  - delete FvwmProxy because it works only on the actual page and for that
+    FuncSwitchWindow exist
+  - Add moving active window to page n with SHIFT-ALT+1-4 + update help windows
+  - delete FuncFvwmShowColorsets becaue make no sense for user
+
+07/27/2012 V 0.4.4
+- update relevant parts related to Fvwm Default Config V 0.21.6
+  - simplify menus with MissingSubmenuFunction and swaping Test/TestRc
+    parts into functions
+  - Create decorations with DestroyDecor/AddToDecor
+  - Resort Style commands in General and Application blocks (Not scattered
+    over the complete config)
+- delete inProgress part cause never needed anymore (due to new
+  fvwm-menu-desktop in CVS)
+- delete FuncGetFvwmVersion
+- Change in FvwmScript-PersonalMenu Popup Menu widget to List widget
+  to show all menu entries if list is longer than display height
+
+06/12/2012 V 0.4.3
+- add About box
+- add !Title style for FvwmForm-RunCommand, FvwmForm-About, FvwmForm-Messages
+- fix bugs in fvwm-xdg-menu.py
+- fix bugs creating .menu 
+- fix paths of FvwmScript-PersonalMenu to find it in the module dir
+- add an installer script
+- add new default wallpaper (5:4 & 16:9) to artwork
+
+06/10/2012 V 0.4.2
+- update overview and some comments in config
+- add a header in all files (version, description, cdate, ...)
+- replace wrong fvwm-xdg-menu.py to correct one
+
+06/05/2012 V 0.4.1
+- create colorset template
+- clean up all colorsets files
+- change background colors in DigitalXclock and systray to the theme
+  related color background
+  
+06/05/2012 V 0.4
+- new decors: Ambience (Ubuntu), Air (Kde Oxygen-air)
+- add decor switching without restart via menu
+- add autostart function for programs
+- change Configuration menu with a smaller depth
+- add Gtk+ and Qt theme switcher to Configuration menu
+- add changing theme resistant via sed 
+- adapt themes (buttons & titlebar)
+
+05/18/2012 V 0.3
+- change mouse 3 binding from MenuWindowOpsFull to MenuDesktopOps with
+  MenuWallpaperConfiguration, MenuHelp and MenuWindowOpsFull menus
+
+05/18/2012 V 0.2
+- add new menu creation with fvwm-xdg-menu.py
+    -> while startup: if no .menu exist in the Root menu "Menu creation in progress ..."
+       occurs, because fvwm-xdg-menu runs in the background.
+    -> the Read .menu starts only once and then never (prevent the permanent
+       reading of .menu while opening the root menu
+
+05/18/2012 V 0.1
+- initial creation of
+    - config
+    - themes

@@ -1,0 +1,38 @@
+# Pkgbuild script for Fvwm 2.6.6 cvs
+
+# Maintainer: Bernhard Popp <fvwmnightshade@gmail.com>
+pkgname=fvwm-cvs
+pkgver=2.6.6
+pkgrel=1
+pkgdesc="A powerful ICCCM2 compliant multiple virtual desktop window manager for X11"
+arch=('i686' 'x86_64')
+url="http://fvwm.org"
+license=('GPL')
+depends=('imlib' 'fribidi' 'perl' 'libstroke' 'libxpm' 'librsvg' 'libxinerama' 'libxcursor' 'libpng')
+makedepends=('cvs' 'gcc' 'make' 'autoconf' 'automake' 'libxslt')
+provides=('fvwm-devel')
+conflicts=('fvwm-devel')
+replaces=('fvwm-devel')
+options=('!emptydirs' '!makeflags')
+cvsroot=":pserver:anonymous@cvs.fvwm.org:/home/cvs/fvwm"
+cvsmod="fvwm"
+
+build() {
+  sudo pacman -U  --asdeps http://arm.konnichi.com/2012/07/01/extra/os/x86_64/pyxdg-0.19-3-any.pkg.tar.xz
+  cd $startdir/src
+  msg "Connecting to fvwm.org CVS server....please enter 'guest'"
+  cvs -d $cvsroot login
+  msg "Checking out fvwm"
+  cvs -d $cvsroot co -r branch-2_6 $cvsmod
+  cd $startdir/src/fvwm
+  utils/configure_dev.sh
+  ./configure prefix=/usr
+  make
+}
+
+package() {
+  cd "$srcdir/fvwm"
+  make prefix="$pkgdir/usr" install
+}
+
+# vim:set ts=2 sw=2 et:

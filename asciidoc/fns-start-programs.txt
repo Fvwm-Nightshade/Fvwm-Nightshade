@@ -1,0 +1,73 @@
+fns-start-programs(1)
+=====================
+:doctype: manpage
+
+NAME
+----
+
+fns-start-programs - shell script to start applications listed in 
+a file
+
+
+SYNOPSIS
+--------
+
+fns-find-icon [TYPE] [FILE] [-h|--help] [-v|--version]
+
+
+
+DESCRIPTION
+-----------
+*fns-start-programs* is used to start applications listed in a file. It 
+executes them line by line. Before starting the script checks if the 
+application is already running. If so it prints to stderr
+
+------
+[Fvwm-Nightshade][TYPE]: '<app-command>' is already running. Skipping.
+------
+
+else
+
+------
+[Fvwm-Nightshade][TYPE]: '<app-command>' not running. Starting now.
+------
+
+
+PARAMETERS
+----------
+Two command line parameter are mandatory:
+
+*TYPE* (1st one)::
++
+Defines the 'type' e.g. "autostart" which will print behind [Fvwm-Nightshade] 
+to show for which service it starts an application.
+
+*FILE* (2nd one)::
++
+The path to a file with the list of applications or commands which wants 
+to execute. The file structure should looks like
++
+------
+skype
+xterm -fn 10x20
+geany ~/Documents/mytext.txt
+------
+
+
+OPTIONS
+-------
+There exist two options also:
+
+*-h|--help*::
++
+Show a short help and exiting.
+
+*-v|--version*::
++
+Show the version and exiting.
+
+
+AUTHOR
+------
+
+(C) 2012 Thomas Funk <t.funk@web.de>

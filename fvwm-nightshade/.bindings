@@ -1,0 +1,247 @@
+#-----------------------------------------------------------------------
+# File:		.bindings
+# Version:	1.1.0
+# Licence: 	GPL 2
+#
+# Description:	keyboard bindings
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+#
+# Created:	10/24/2012
+# Changed:	01/01/2013
+#-----------------------------------------------------------------------
+#
+# Overview:
+#
+# 6.2 Keyboard
+#     6.2.1 ALT + Key
+#     6.2.2 ALT-SHIFT + Key
+#     6.2.3 ALT-CTRL-SHIFT
+#     6.2.4 CTRL + Key
+#     6.2.5 CTRL-ALT + Key
+#     6.2.6 SHIFT-CTRL + Key
+#	  6.2.7 Other keys
+#	  6.2.8 User specific bindings
+
+
+#=======================================================================
+# 6.2 Keyboard
+#=======================================================================
+# same as with mouse:
+#   Keyname 	Context Modifi 	Function
+# Keyname is a standard X11 key name as defined in /usr/include/X11/keysymdef.h,
+# (without the XK_ prefix), or the keysym database /usr/X11R6/lib/X11/XKeysymDB
+
+#***********************************************************************
+# 6.2.1 ALT + Key
+#***********************************************************************
+#   Keyname Context Modifi 	Function
+#-----------------------------------------------------------------------
+# Switching focus between windows. (ALT-Tab)
+#-----------------------------------------------------------------------
+Key Tab		A		M		FuncSwitchWindow
+#-----------------------------------------------------------------------
+# Print screenshot for active window
+#-----------------------------------------------------------------------
+Key Print	A		M		FuncWindowCreateScreenshot
+
+
+#-----------------------------------------------------------------------
+# F1 open root menu
+#-----------------------------------------------------------------------
+Key F1		A		M		Menu MenuRoot
+#-----------------------------------------------------------------------
+# F2 launch "run application" dialog box
+#-----------------------------------------------------------------------
+Key F2		A		M		Module FvwmForm FvwmForm-RunCommand
+#-----------------------------------------------------------------------
+# F3 open window list
+#-----------------------------------------------------------------------
+Key F3		A		M		WindowList
+#-----------------------------------------------------------------------
+# F4 close active window
+#-----------------------------------------------------------------------
+Key F4		A		M		Pick Close
+#-----------------------------------------------------------------------
+# 
+#-----------------------------------------------------------------------
+#Key F5		A		SM	  
+#-----------------------------------------------------------------------
+# F6 cycle between windows belonging to the current application
+#-----------------------------------------------------------------------
+Key F6		A		M		Next (CurrentPage, $[w.resource]) FuncSelectWindow
+#-----------------------------------------------------------------------
+# F7 move the active window
+#-----------------------------------------------------------------------
+Key F7		A		M		Pick Move
+#-----------------------------------------------------------------------
+# F8 resize the active window
+#-----------------------------------------------------------------------
+Key F8		A		M		Pick Resize
+#-----------------------------------------------------------------------
+# F9 minimize the active window
+#-----------------------------------------------------------------------
+Key F9		A		M		Pick FuncIconify
+#-----------------------------------------------------------------------
+# F10 maximize/restore the active window
+#-----------------------------------------------------------------------
+Key F10		A		M		Pick Maximize
+#-----------------------------------------------------------------------
+# F11 maximize active window to fullscreen and back
+#-----------------------------------------------------------------------
+Key F11		A		M		Pick FuncMaximizeFullScreen
+#-----------------------------------------------------------------------
+# F12 identify active window
+#-----------------------------------------------------------------------
+Key F12		A		M		Pick Module FvwmIdent
+
+#-----------------------------------------------------------------------
+# Print screenshot of whole desktop (page)
+#-----------------------------------------------------------------------
+Key Print	A       N       FuncDesktopCreateScreenshot 5
+
+
+#***********************************************************************
+# 6.2.2 ALT-SHIFT + Key
+#***********************************************************************
+#   Keyname Context Modifi 	Function
+
+#-----------------------------------------------------------------------
+# press SHIFT-ALT arrow anywhere, move active
+# window to next/previous page
+#-----------------------------------------------------------------------
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
+
+#-----------------------------------------------------------------------
+# key 1-4 move current window to page n
+#-----------------------------------------------------------------------
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
+
+
+#***********************************************************************
+# 6.2.3 ALT-CTRL-SHIFT
+#***********************************************************************
+#   Keyname	Context Modifi 	Function
+#-----------------------------------------------------------------------
+# press ALT-CTRL-SHIFT arrow anywhere, and scroll by 10% of a page OK
+#-----------------------------------------------------------------------
+Key Left	A		SCM		Scroll -10  +0
+Key Right	A		SCM		Scroll +10  +0
+Key Up		A		SCM		Scroll  +0 -10
+Key Down	A		SCM		Scroll  +0 +10
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT A to show all ALT related key bindings
+#-----------------------------------------------------------------------
+key A		A	SCM	FuncShowMessage  "ALT Key Bindings" \
+"ALT:" \
+"F1: Open root menu          F7:  Move window" \
+"F2: Launch 'run' dialog box F8:  Resize window" \
+"F3: Show window list        F9:  Minimize window" \
+"F4: Close active window     F10: Maximize/restore window" \
+"F5: Not used                F11: Fullscreen/restore window" \
+"F6: Cycle between same      F12: Identify window" \
+"    resource windows" \
+"---" \
+"Tab:   Cycle between windows" \
+"Print: Screenshot of the active window" \
+"---" \
+"None:" \
+"Print: Screenshot of current page"
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT H to show the global key bindings help window
+#-----------------------------------------------------------------------
+key H		A       SCM     FuncShowMessage  "Help Keys with CTRL-ALT" \
+"A: List ALT bindings" \
+"C: List CTRL bindings" \
+"P: List Page bindings"
+
+
+#***********************************************************************
+# 6.2.4 CTRL + Key
+#***********************************************************************
+#   Keyname Context Modifi 	Function
+
+#***********************************************************************
+# 6.2.5 CTRL-ALT + Key
+#***********************************************************************
+#   Keyname Context Modifi 	Function
+
+#-----------------------------------------------------------------------
+# hide/unhide all windows
+#-----------------------------------------------------------------------
+Key D		A		CM		All (CurrentPage, AcceptsFocus) FuncIconify
+#-----------------------------------------------------------------------
+# lock Screen
+#-----------------------------------------------------------------------
+Key L		A		CM		Exec exec xscreensaver-command -lock
+#-----------------------------------------------------------------------
+# launch Terminal
+#-----------------------------------------------------------------------
+Key T		A		CM		Exec exec $[infostore.default_terminal]
+
+#-----------------------------------------------------------------------
+# press ALT-CTRL arrow anywhere, and move the pointer by 1% of a page
+#-----------------------------------------------------------------------
+Key Left	A		CM		CursorMove -1 +0
+Key Right	A		CM		CursorMove +1 +0
+Key Up		A		CM		CursorMove +0 -1
+Key Down	A		CM		CursorMove +0 +1
+
+#***********************************************************************
+# 6.2.6 SHIFT-CTRL + Key
+#***********************************************************************
+#   Keyname	Context Modifi 	Function
+#-----------------------------------------------------------------------
+# Go to page n
+#-----------------------------------------------------------------------
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
+
+#-----------------------------------------------------------------------
+# press SHIFT-CTRL arrow anywhere, and scroll by one page
+#-----------------------------------------------------------------------
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
+
+#-----------------------------------------------------------------------
+# open full windows oops menu
+#-----------------------------------------------------------------------
+Key F1		A		SC		Menu MenuWindowOpsFull
+#-----------------------------------------------------------------------
+# launch FvwmConsole
+#-----------------------------------------------------------------------
+Key F2		A		SC		FuncFvwmConsole
+
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT C to show all CTRL related key bindings
+#-----------------------------------------------------------------------
+key C		A	SCM	FuncShowMessage  "CTRL Key Bindings" \
+"SHIFT-CTRL:" \
+"F1: Open full Oops menu     F2: Launch FvwmConsole" \
+"---" \
+"CTRL-ALT:" \
+"D:  Hide/unhide all windows T:  Launch Terminal" \
+"L:  Lock Screen"
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT P to show all page related key bindings
+#-----------------------------------------------------------------------
+# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
+
+
+#=======================================================================
+# 6.2.7 Other bindings
+#=======================================================================
+#   Keyname	Context Modifi 	Function
+#-----------------------------------------------------------------------
+# Press left Windows key anywhere to open Root menu
+#-----------------------------------------------------------------------
+Key Super_L			A	N	Menu MenuRoot
+
+
+
+#=======================================================================
+# 6.2.8 User specific bindings
+#=======================================================================
+# enter here your own bindings

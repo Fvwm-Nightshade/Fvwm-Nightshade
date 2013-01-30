@@ -1,0 +1,70 @@
+#-----------------------------------------------------------------------
+# File:		fns-init
+# Version:	1.0.3
+# Licence: 	GPL 2
+#
+# Description:	start file of Fvwm-Nightshade
+#
+# Author:	Thomas Funk <t.funk@web.de>
+# Created:	09/07/2012
+# Changed:	01/12/2012
+#-----------------------------------------------------------------------
+
+#-----------------------------------------------------------------------
+# Prints a debug message in .xsession-errors
+#-----------------------------------------------------------------------
+DestroyFunc FuncPrintDbgMsg
+AddToFunc   FuncPrintDbgMsg
++ I Test (EnvMatch FNS_DEBUG 1) PipeRead `echo "[Fvwm-Nightshade][Dbg]: $0" >> ${HOME}/.xsession-errors`
+
+#-----------------------------------------------------------------------
+# Prints a message in .xsession-errors
+#-----------------------------------------------------------------------
+DestroyFunc FuncPrintMsg
+AddToFunc   FuncPrintMsg
++ I PipeRead `echo "[Fvwm-Nightshade][$0]: $1" >> ${HOME}/.xsession-errors`
+
+#-----------------------------------------------------------------------
+# This function looks for specified file in the user's directory (~/.fvwm-nightshade/),
+# then system directory (/usr/[local]/share/fvwm-nightshade) and loads 
+# the first one it finds. 
+#-----------------------------------------------------------------------
+DestroyFunc Load
+AddToFunc Load
++ I Test (f $[FVWM_USERDIR]/$0) FuncPrintMsg "Load" "$0 found in userdir"
++ I TestRc (Match) Read $[FVWM_USERDIR]/$0
++ I TestRc (Match) FuncPrintMsg "Load" "read of $0 in userdir finished"
++ I TestRc (Match) Break 1
++ I Test (f $[FNS_SYSTEMDIR]/$0) FuncPrintMsg "Load" "$0 found in systemdir"
++ I TestRc (Match) Read $[FNS_SYSTEMDIR]/$0
++ I TestRc (Match) FuncPrintMsg "Load" "read of $0 in systemdir finished"
++ I TestRc (Match) Break 1
++ I Test (f $0) FuncPrintMsg "Load" "$0 found"
++ I TestRc (Match) Read $0
++ I TestRc (Match) FuncPrintMsg "Load" "read of $0 finished"
++ I TestRc (Match) Break 1
++ I TestRc (!Match) FuncPrintMsg "Load" "$0 not found"
+
+#-----------------------------------------------------------------------
+# This function set FNS_THEMEDIR. First it looks in the user's directory (~/.fvwm-nightshade/),
+# then system directory (/usr/[local]/share/fvwm-nightshade) if the used theme is there
+#-----------------------------------------------------------------------
+DestroyFunc FuncSetThemeDir
+AddToFunc FuncSetThemeDir
++ I Test (f $[FVWM_USERDIR]/themes/$0) SetEnv FNS_THEMEDIR $[FVWM_USERDIR]/themes/$0
++ I TestRc (!Match) Test (f $[FNS_SYSTEMDIR]/themes/$0) SetEnv FNS_THEMEDIR $[FNS_SYSTEMDIR]/themes/$0
+
+#-----------------------------------------------------------------------
+# This function replaces the Restart function of Fvwm to ensure that
+# while restarting the Fvwm-Nightshade init script will launched also
+#-----------------------------------------------------------------------
+DestroyFunc FuncRestart
+AddToFunc FuncRestart
++ I Restart fvwm -f $[FNS_INITFILE]
+
+#-----------------------------------------------------------------------
+# Load main config
+#-----------------------------------------------------------------------
+Load config
+
+

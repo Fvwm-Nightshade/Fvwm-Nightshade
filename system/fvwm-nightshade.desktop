@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Fvwm-Nightshade
+Comment=This session logs you into Fvwm-Nightshade
+Exec=fvwm-nightshade
+Icon=
+Type=Application
