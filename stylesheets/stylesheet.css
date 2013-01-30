@@ -526,11 +526,11 @@ footer a:hover {
     padding: 20px 0;
     min-height: 0;
   }
-    aside a.button small {
+   aside a.button small {
     font-size: 13px;
     display: inline;
   }
-  aside#sidebar a.button {
+  aside a.button {
     background-image: none;
     width: 300px;
     height: auto;
