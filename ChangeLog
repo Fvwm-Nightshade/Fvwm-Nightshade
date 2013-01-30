@@ -1,5 +1,11 @@
 History:
 
+01/30/2013 V 0.6
+Prepare for release:
+- add NEWS
+- add NEWS to Makefile
+- update README, config
+
 01/25/2013 V 0.5.40
 - change colours of Ambience default background
 - change forgotten parts in FvwmScript-CPU-Performance

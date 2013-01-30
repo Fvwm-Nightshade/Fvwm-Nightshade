@@ -1,0 +1,42 @@
+Fvwm-Nightshade Release Notes
+=============================
+
+------------------------------------------------------------------------
+
+Version 0.6 (30th January 2013)
+
+This is the first official release of Fvwm-Nightshade.
+
+Features:
+---------
+- Config tool for base settings (Font, layouts, etc)
+- 4 virtual desktop pages
+- Taskbar to show running apps per page
+- Three different layouts: Horizontal, Vertical and G2like
+- Lock desk & screensaver (xscreensaver)
+- Personal menu via FvwmScript-PersonalMenu
+- Background configurable with thumb browser (imagemagick and eterm)
+- Animation control of window moves
+- Simple "Run" command with FvwmForm
+- 6 themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab and Air). 
+  Can be changed on the fly without restart
+- Own themes and layouts can be created with templates (at the moment
+  only theme templates available)
+- Autostart possibility (starting apps while startup)
+- A useful set of GUI tools to configure the global system (Gtk+, Qt, 
+  mouse, keyboard, etc)
+- Help messages for mouse bindings in titlebar, window, corners, sides 
+  and icon with Shift-Alt-Ctrl + click
+- Help messages for key bindings with Shift-Alt-Ctrl + key
+  - A global one with Shift-Alt-Ctrl + H
+- Dynamic menus
+- Switching focus between windows with Alt-Tab
+- Splash screen
+- Print messages for needed apps for full config functionality in 
+  .xsessions-error
+- Governor-tool FvwmScript-CPU-Performance to handle cpufreq
+- Create thumbs with mini icon and name for iconified applications 
+  instead of their icon
+- Build support for deb, rpm and Arch packages
+
+------------------------------------------------------------------------

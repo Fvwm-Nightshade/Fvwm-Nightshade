@@ -15,8 +15,8 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.5.40
-# Copyright (C) 2012
+InfoStoreAdd ns_version 0.6
+# Copyright (C) 2013
 #
 # Authors:
 #   Thomas Funk <t.funk@web.de>
