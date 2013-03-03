@@ -1158,7 +1158,7 @@ AddToFunc   FuncChangeLayout
 #-----------------------------------------------------------------------
 DestroyFunc FuncWriteInfoStoreToFileAndSet
 AddToFunc   FuncWriteInfoStoreToFileAndSet
-+ I PipeRead 'new=`echo "$1" | sed "s/[ \t]*$//"`; \
++ I PipeRead 'new=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
 			if [ `grep -c $0 $2` -gt 0 ] ; then \
 				sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$new\\"#" $2; \
 			else \
@@ -1172,7 +1172,7 @@ AddToFunc   FuncWriteInfoStoreToFileAndSet
 #-----------------------------------------------------------------------
 DestroyFunc FuncWriteSetEnvToFileAndSet
 AddToFunc   FuncWriteSetEnvToFileAndSet
-+ I PipeRead 'new=`echo "$1" | sed "s/[ \t]*$//"`; \
++ I PipeRead 'new=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
 			if [ `grep -c $0 $2` -gt 0 ] ; then \
 				sed -i --follow-symlinks "s#^SetEnv $0.*#SetEnv $0 \\"$new\\"#" $2; \
 			else \
