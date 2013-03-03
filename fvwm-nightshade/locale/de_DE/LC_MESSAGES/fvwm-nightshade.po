@@ -1,0 +1,652 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: fvwm-nightshade\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Thomas Funk <t.funk@web.de>\n"
+"Language-Team: German <t.funk@web.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+
+#-----------------------------------------------------------------------
+# MenuRoot
+#-----------------------------------------------------------------------
+msgid "Root Menu"
+msgstr "Hauptmenü"
+
+msgid "&Personal Applications"
+msgstr "&Persönliche Programme"
+
+msgid "&Configuration"
+msgstr "&Konfiguration"
+
+msgid "&Help"
+msgstr "&Hilfe"
+
+msgid "Fvwm &Modules"
+msgstr "Fvwm &Module"
+
+msgid "&Window Operations"
+msgstr "&Fenster Operationen"
+
+msgid "Lock Screen"
+msgstr "Bildschirm sperren"
+
+msgid "&Run Command"
+msgstr "&Befehl ausführen"
+
+msgid "&Terminal"
+msgstr "&Terminal"
+
+msgid "&Quit Fvwm-Nightshade"
+msgstr "Fvwm-Nightshade &verlassen"
+
+#-----------------------------------------------------------------------
+# MenuFvwmPersonal
+#-----------------------------------------------------------------------
+msgid "Personal Applications"
+msgstr "Persönliche Programme"
+
+msgid "&Configure Personal Applications"
+msgstr "Persönliche Programme konfigurieren"
+
+#-----------------------------------------------------------------------
+# MenuHelp
+#-----------------------------------------------------------------------
+msgid "Help"
+msgstr "Hilfe"
+
+msgid "Fvwm &Man Pages"
+msgstr "Fvwm &Manpageseiten"
+
+msgid "Fvwm &Web Pages"
+msgstr "Fvwm &Webseiten"
+
+msgid "Fvwm-&Nightshade Web Pages"
+msgstr "Fvwm-&Nightshade Webseiten"
+
+msgid "&Other Helps"
+msgstr "&Andere Hilfen"
+
+msgid "&Show Fvwm Version"
+msgstr "&Zeige Fvwm Version"
+
+msgid "&About Fvwm-Nightshade"
+msgstr "&Über Fvwm-Nightshade"
+
+#-----------------------------------------------------------------------
+# MenuHelpOthers
+#-----------------------------------------------------------------------
+msgid "Others"
+msgstr "Andere Hilfen"
+
+msgid "&X Man Pages"
+msgstr "&X Manpageseiten"
+
+msgid "&GNOME Help"
+msgstr "&GNOME Hilfe"
+
+msgid "&KDE Help"
+msgstr "&KDE Hilfe"
+
+#-----------------------------------------------------------------------
+# MenuFvwmWebPages
+#-----------------------------------------------------------------------
+msgid "Fvwm Web Pages"
+msgstr "Fvwm Webseiten"
+
+msgid "Home Page"
+msgstr "Homepage"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Documentation"
+msgstr "Dokumentation"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "In the beginning was ..."
+msgstr "Am Anfang war ..."
+
+msgid "Beginners Guide"
+msgstr "Anfänger Handbuch"
+
+msgid "FAQ inofficial"
+msgstr "Inoffizielle FAQ"
+
+msgid "How Styles are Applied"
+msgstr "Wie Styles angewendet werden"
+
+msgid "Session Management"
+msgstr "Sitzungsverwaltung"
+
+#-----------------------------------------------------------------------
+# FNSWebPagesMenu
+#-----------------------------------------------------------------------
+msgid "FNS Web Pages"
+msgstr "FNS Webseiten"
+
+msgid "Fvwm-Nightshade Wiki"
+msgstr "Fvwm-Nightshade Wiki"
+
+#-----------------------------------------------------------------------
+# MenuFvwmModules
+#-----------------------------------------------------------------------
+msgid "Fvwm Modules"
+msgstr "Fvwm Module"
+
+#-----------------------------------------------------------------------
+# MenuStartRegularModules
+#-----------------------------------------------------------------------
+msgid "Start Regular Modules"
+msgstr "Reguläre Module starten"
+
+msgid "&Animation"
+msgstr "&Animationen"
+
+msgid "&Debug Console"
+msgstr "&Debug-Konsole"
+
+msgid "&Identify"
+msgstr "&Identifizieren"
+
+msgid "&ScrollBar (1/2 app)"
+msgstr "&Bildlaufleiste (1/2 app)"
+
+msgid "&ScrollBar (75%% scr)"
+msgstr "&Bildlaufleiste (75%% scr)"
+
+msgid "Auto Raise (1/2 sec)"
+msgstr "Autom. anheben (1/2 sec)"
+
+msgid "Auto Raise (2 sec)"
+msgstr "Autom. anheben (2 sec)"
+
+#-----------------------------------------------------------------------
+# MenuStopRegularModules
+#-----------------------------------------------------------------------
+msgid "Stop Regular Modules"
+msgstr "Reguläre Module stoppen"
+
+#-----------------------------------------------------------------------
+# MenuFvwmForms
+#-----------------------------------------------------------------------
+msgid "FvwmForm Tools"
+msgstr "FvwmForm Programme"
+
+msgid "&Capture"
+msgstr "&Capture"
+
+msgid "&Rlogin"
+msgstr "&Rlogin"
+
+msgid "&Talk"
+msgstr "&Talk"
+
+msgid "&QuitVerify"
+msgstr "&QuitVerify"
+
+#-----------------------------------------------------------------------
+# MenuConfiguration
+#-----------------------------------------------------------------------
+msgid "Configuration"
+msgstr "Konfiguration"
+
+msgid "&System"
+msgstr "&System"
+
+msgid "&Tail .xsession-errors"
+msgstr "&Tail .xsession-errors"
+
+#-----------------------------------------------------------------------
+# MenuFvwmConfiguration
+#-----------------------------------------------------------------------
+msgid "&Animation Control"
+msgstr "&Animations-Kontrolle"
+
+msgid "Fvwm Form &Defaults"
+msgstr "Fvwm Form &Grundeinstellungen"
+
+#-----------------------------------------------------------------------
+# MenuFNSConfiguration
+#-----------------------------------------------------------------------
+msgid "Configure &Background"
+msgstr "Hintergrund konfigurieren"
+
+msgid "&Decoration"
+msgstr "&Dekoration"
+
+msgid "Fvwm-&Nightshade Setup"
+msgstr "Fvwm-&Nightshade Einstellungen"
+
+#-----------------------------------------------------------------------
+# MenuSystemConfiguration
+#-----------------------------------------------------------------------
+msgid "&Keyboard"
+msgstr "&Tastatur"
+
+msgid "&Mouse"
+msgstr "&Maus"
+
+msgid "Sc&reen Saver"
+msgstr "&Bildschirmschoner"
+
+msgid "&CPU Performance"
+msgstr "&CPU Leistungseinstellungen"
+
+#-----------------------------------------------------------------------
+# MenuKeyboard
+#-----------------------------------------------------------------------
+msgid "Keyboard"
+msgstr "Tastatur"
+
+msgid "&Settings"
+msgstr "&Einstellungen"
+
+msgid "&Layout"
+msgstr "&Layout"
+
+#-----------------------------------------------------------------------
+# MenuMouse
+#-----------------------------------------------------------------------
+msgid "Mouse"
+msgstr "Maus"
+
+msgid "Root &Cursor"
+msgstr "Root &Cursor"
+
+#-----------------------------------------------------------------------
+# MenuDecoration
+#-----------------------------------------------------------------------
+msgid "Decoration"
+msgstr "Dekoration"
+
+msgid "&Decors"
+msgstr "&Dekor"
+
+msgid "&Layouts"
+msgstr "&Layouts"
+
+msgid "&Qt Decor"
+msgstr "&Qt Dekor"
+
+msgid "&Gtk+ Decor"
+msgstr "&Gtk+ Dekor"
+
+#-----------------------------------------------------------------------
+# MenuQtDecor
+#-----------------------------------------------------------------------
+msgid "Qt Decor"
+msgstr "Qt Dekor"
+
+msgid "&Qt-3 Decor"
+msgstr "&Qt-3 Dekor"
+
+msgid "&Qt-4 Decor"
+msgstr "&Qt-4 Dekor"
+
+#-----------------------------------------------------------------------
+# FvwmDecorMenu
+#-----------------------------------------------------------------------
+msgid "Decors"
+msgstr "Dekore"
+
+#-----------------------------------------------------------------------
+# FvwmLayoutMenu
+#-----------------------------------------------------------------------
+msgid "Layouts"
+msgstr "Layouts"
+
+#-----------------------------------------------------------------------
+# MenuWallpaperConfiguration
+#-----------------------------------------------------------------------
+msgid "Background Configuration"
+msgstr "Hintergrundkonfiguration"
+
+msgid "Set &Default background"
+msgstr "&Standard Hntergrund setzen"
+
+msgid "Set &Wallpaper background"
+msgstr "&Hintergrundbild setzen"
+
+#-----------------------------------------------------------------------
+# MenuXScreenSaver
+#-----------------------------------------------------------------------
+msgid "Screen Saver"
+msgstr "Bildschirmschoner"
+
+msgid "XscreenSaver &Settings"
+msgstr "XscreenSaver &Einstellungen"
+
+msgid "&XscreenSaver (Re)start"
+msgstr "&XscreenSaver (Re)start"
+
+msgid "XscreenSaver &Stop"
+msgstr "XscreenSaver &Stop"
+
+msgid "XscreenSaver &Lock"
+msgstr "XscreenSaver &sperren"
+
+msgid "XscreenSaver &Activate"
+msgstr "XscreenSaver &aktivieren"
+
+#-----------------------------------------------------------------------
+# MenuFvwmQuit
+#-----------------------------------------------------------------------
+msgid "Really Quit"
+msgstr "Wirklich verlassen"
+
+msgid "&Restart"
+msgstr "&Restart"
+
+msgid "Re&fresh Screen"
+msgstr "Bildschirm re&freshen"
+
+msgid "Re&capture Screen"
+msgstr ""
+
+msgid "&Suspend System"
+msgstr ""
+
+msgid "&Hibernate System"
+msgstr ""
+
+msgid "&Yes, Really Quit"
+msgstr "&Ja, wirklich verlassen"
+
+msgid "&No, Don't Quit"
+msgstr "&Nein, nicht verlassen"
+
+#-----------------------------------------------------------------------
+# MenuWindowOpsFull
+#-----------------------------------------------------------------------
+msgid "Window Operations"
+msgstr "Fenster Operationen"
+
+msgid "&Move"
+msgstr ""
+
+msgid "&Resize"
+msgstr ""
+
+msgid "(De)&Iconify"
+msgstr ""
+
+msgid "(Un)Ma&ximize"
+msgstr ""
+
+msgid "(Un)&Shade"
+msgstr ""
+
+msgid "(Un)S&tick"
+msgstr ""
+
+msgid "R&aise"
+msgstr ""
+
+msgid "&Lower"
+msgstr ""
+
+msgid "&Delete"
+msgstr ""
+
+msgid "&Close"
+msgstr ""
+
+msgid "&Destroy"
+msgstr ""
+
+msgid "Move to &Page"
+msgstr ""
+
+msgid "&Group Operations"
+msgstr ""
+
+msgid "&Window Style"
+msgstr ""
+
+msgid "&Maximize Window"
+msgstr ""
+
+msgid "&Refresh Window"
+msgstr ""
+
+msgid "R&earrange All"
+msgstr ""
+
+msgid "Window &Utility"
+msgstr ""
+
+msgid "Sw&itch to...(WinList)"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowOpsTrimmed
+#-----------------------------------------------------------------------
+msgid "Re&store"
+msgstr ""
+
+msgid "&Iconify"
+msgstr ""
+
+msgid "Ma&ximize"
+msgstr ""
+
+msgid "Stays On &Top"
+msgstr ""
+
+msgid "Stays &Back"
+msgstr ""
+
+msgid "(Un)&Stick"
+msgstr ""
+
+msgid "Mor&e..."
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupOps
+#-----------------------------------------------------------------------
+msgid "Resource Group Ops"
+msgstr ""
+
+msgid "Iconify"
+msgstr ""
+
+msgid "De&Iconify"
+msgstr ""
+
+msgid "&Shade"
+msgstr ""
+
+msgid "Un&Shade"
+msgstr ""
+
+msgid "Lo&wer"
+msgstr ""
+
+msgid "&Quick Move To ..."
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupOps
+#-----------------------------------------------------------------------
+msgid "Window Style"
+msgstr ""
+
+msgid "TitleAt&Top"
+msgstr ""
+
+msgid "TitleAt&Bottom"
+msgstr ""
+
+msgid "&Title"
+msgstr ""
+
+msgid "NoTitle"
+msgstr ""
+
+msgid "&FvwmBorder"
+msgstr ""
+
+msgid "&MWMBorder"
+msgstr ""
+
+msgid "&DepressableBorder"
+msgstr ""
+
+msgid "&FirmBorder"
+msgstr ""
+
+msgid "&Handles"
+msgstr ""
+
+msgid "N&oHandles"
+msgstr ""
+
+msgid "BorderWidth &0"
+msgstr ""
+
+msgid "BorderWidth &5"
+msgstr ""
+
+msgid "HandleWidth &0"
+msgstr ""
+
+msgid "HandleWidth &7"
+msgstr ""
+
+msgid "Re&sizeOpaque"
+msgstr ""
+
+msgid "Resize&Outline"
+msgstr ""
+
+msgid "S&loppyFocus"
+msgstr ""
+
+msgid "&ClickToFocus"
+msgstr ""
+
+msgid "M&ouseFocus"
+msgstr ""
+
+msgid "N&everFocus"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowMaximize
+#-----------------------------------------------------------------------
+msgid "Maximize Window"
+msgstr ""
+
+msgid "&Maximize Fully"
+msgstr ""
+
+msgid "&Unmaximize"
+msgstr ""
+
+msgid "Maximize &Partially"
+msgstr ""
+
+msgid "Maximize &Vertically"
+msgstr ""
+
+msgid "Maximize &Horizontally"
+msgstr ""
+
+msgid "Maximize &Grow"
+msgstr ""
+
+msgid "Maximize Grow V&ert."
+msgstr ""
+
+msgid "Maximize Grow H&oriz."
+msgstr ""
+
+msgid "Maximize &Full Screen"
+msgstr ""
+
+msgid "&Unmaximize Full Screen"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowRefresh
+#-----------------------------------------------------------------------
+msgid "Refresh Window"
+msgstr ""
+
+msgid "Re&fresh Window"
+msgstr ""
+
+msgid "Re&capture Window"
+msgstr ""
+
+msgid "&Place Again"
+msgstr ""
+
+msgid "&Restore"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuRearrangeWindows
+#-----------------------------------------------------------------------
+msgid "Rearrange Windows"
+msgstr ""
+
+msgid "&Cascade"
+msgstr ""
+
+msgid "Tile &horizontally"
+msgstr ""
+
+msgid "Tile &vertically"
+msgstr ""
+
+msgid "&Arrange Icons"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowUtility
+#-----------------------------------------------------------------------
+msgid "Window Utility"
+msgstr ""
+
+msgid "Create &Screenshot"
+msgstr ""
+
+msgid "&Desktop Screenshot"
+msgstr ""
+
+msgid "Layer &+1"
+msgstr ""
+
+msgid "Stays &Put"
+msgstr ""
+
+msgid "Layer &-1"
+msgstr ""
+
+msgid "Stays On &Bottom"
+msgstr ""
+
+msgid "Scroll&Bar (1/2 app)"
+msgstr ""
+
+msgid "ScrollBar (&75%% scr)"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuDesktopOps
+#-----------------------------------------------------------------------
+msgid "Desktopmenu"
+msgstr ""
+

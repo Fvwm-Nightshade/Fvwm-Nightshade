@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7
+InfoStoreAdd ns_version 0.7.1
 # Copyright (C) 2013
 #
 # Authors:
@@ -164,6 +164,13 @@ ExecUseShell /bin/bash
 # update this file after installing a new version.
 #-----------------------------------------------------------------------
 #ModulePath $[FVWM_USERDIR]/mymodules:+
+
+#-----------------------------------------------------------------------
+# LocalePath specifies a colon separated list of "locale path" in which
+# to search for string translations. A locale path is constituted by a
+# directory path and a text domain separated by a semicolon (';').
+#-----------------------------------------------------------------------
+LocalePath $[FVWM_USERDIR]/locale;fvwm-nightshade:$[FNS_SYSTEMDIR]/locale;fvwm-nightshade:+
 
 #-----------------------------------------------------------------------
 # The default ImagePath for icons is: 
@@ -1741,9 +1748,9 @@ AddToFunc   FuncMenuRoot
 + I AddToMenu MenuRoot "$[gt.Fvwm &Modules]%menu/modules.xpm%"				Popup MenuFvwmModules
 + I AddToMenu MenuRoot "$[gt.&Window Operations]%menu/window.xpm%"			Popup MenuWindowOpsFull
 + I AddToMenu MenuRoot ""													Nop
-+ I AddToMenu MenuRoot "$[gt.Lock screen]	Alt-Ctrl+L%menu/lock.xpm%"	FuncLockScreen
-+ I AddToMenu MenuRoot "$[gt.&Run Command]	Alt-F2%menu/system.xpm%"	module FvwmForm FvwmForm-RunCommand
-+ I AddToMenu MenuRoot "$[gt.&Terminal]	Alt-Ctrl-T%menu/terminal.xpm%"	exec exec $[infostore.default_terminal]
++ I AddToMenu MenuRoot "$[gt.Lock Screen]	Alt-Ctrl+L%menu/lock.xpm%"		FuncLockScreen
++ I AddToMenu MenuRoot "$[gt.&Run Command]	Alt-F2%menu/system.xpm%"		Module FvwmForm FvwmForm-RunCommand
++ I AddToMenu MenuRoot "$[gt.&Terminal]	Alt-Ctrl-T%menu/terminal.xpm%"		exec exec $[infostore.default_terminal]
 + I AddToMenu MenuRoot "$[gt.&Quit Fvwm-Nightshade]%menu/quit.xpm%"			Popup MenuFvwmQuit
 
 
@@ -1770,8 +1777,8 @@ DestroyFunc FuncMenuFvwmPersonal
 AddToFunc   FuncMenuFvwmPersonal
 + I DestroyMenu MenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal DynamicPopupAction FuncMenuFvwmPersonal
-+ I AddToMenu MenuFvwmPersonal "$[gt.&Personal Applications]" Title
-+ I AddToMenu MenuFvwmPersonal "$[gt.Configure Personal Applications]%menu/configuration.xpm%"	FvwmScript FvwmScript-PersonalMenu
++ I AddToMenu MenuFvwmPersonal "$[gt.Personal Applications]" Title
++ I AddToMenu MenuFvwmPersonal "$[gt.&Configure Personal Applications]%menu/configuration.xpm%"	FvwmScript FvwmScript-PersonalMenu
 + I Test (f  $[FVWM_USERDIR]/.personal) PipeRead `sed -e '/^# personal menu/ d;/^ *$/,$ d' $[FVWM_USERDIR]/.personal`
 
 
@@ -1780,15 +1787,15 @@ AddToFunc   FuncMenuFvwmPersonal
 #=======================================================================
 DestroyMenu MenuHelp
 AddToMenu   MenuHelp
-+ "$[gt.&Help]" Title
++ "$[gt.Help]" Title
 # Dynamic Fvwm Manpages realized with MissingSubmenuFunction
 + MissingSubmenuFunction FuncFvwmManpageMenu
-+ "%menu/help.xpm%$[gt.Fvwm Man Pages]"				Popup "/usr/share/man/man1"
-+ "%menu/www.xpm%$[gt.Fvwm Web Pages]"				Popup MenuFvwmWebPages
-+ "%menu/www.xpm%$[gt.Fvwm-Nightshade Web Pages]"	Popup FNSWebPagesMenu
-+ "%menu/help.xpm%$[gt.Other Helps]"				Popup MenuHelpOthers
-+ "%mini.f1.xpm%$[gt.Show Fvwm Version]"			FuncShowMessage "Fvwm Version Info" "$[version.line]"
-+ "%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%$[gt.About Fvwm-Nightshade]"	Module FvwmForm FvwmForm-About
++ "%menu/help.xpm%$[gt.Fvwm &Man Pages]"			Popup "/usr/share/man/man1"
++ "%menu/www.xpm%$[gt.Fvwm &Web Pages]"				Popup MenuFvwmWebPages
++ "%menu/www.xpm%$[gt.Fvwm-&Nightshade Web Pages]"	Popup FNSWebPagesMenu
++ "%menu/help.xpm%$[gt.&Other Helps]"				Popup MenuHelpOthers
++ "%mini.f1.xpm%$[gt.&Show Fvwm Version]"			FuncShowMessage "Fvwm Version Info" "$[version.line]"
++ "%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%$[gt.&About Fvwm-Nightshade]"	Module FvwmForm FvwmForm-About
 
 #-----------------------------------------------------------------------
 # Dynamic other help application sub menu for miscellaneous help tools
@@ -1800,12 +1807,12 @@ DestroyFunc FuncMenuHelpOthers
 AddToFunc   FuncMenuHelpOthers
 + I DestroyMenu  MenuHelpOthers
 + I AddToMenu MenuHelpOthers DynamicPopupAction FuncMenuHelpOthers
-+ I AddToMenu MenuHelpOthers "$[gt.&Others]" Title
-+ I Test (x xman) AddToMenu MenuHelpOthers "%menu/help.xpm%$[gt.X Man Pages]"               Exec exec xman
-+ I Test (x gnome-help) AddToMenu MenuHelpOthers "%menu/help.xpm%$[gt.GNOME Help]"          Exec exec gnome-help
-+ I Test (x gnome-help-browser) AddToMenu MenuHelpOthers "%menu/help.xpm%$[gt.GNOME Help]"  Exec exec gnome-help-browser
-+ I Test (x kdehelp) AddToMenu MenuHelpOthers "%menu/help.xpm%$[gt.KDE Help]"               Exec exec kdehelp
-+ I Test (x khelpcenter) AddToMenu MenuHelpOthers "%menu/help.xpm%$[gt.KDE Help]"           Exec exec khelpcenter
++ I AddToMenu MenuHelpOthers "$[gt.Others]" Title
++ I Test (x xman) AddToMenu MenuHelpOthers "%menu/help.xpm%$[gt.&X Man Pages]"               Exec exec xman
++ I Test (x gnome-help) AddToMenu MenuHelpOthers "%menu/help.xpm%$[gt.&GNOME Help]"          Exec exec gnome-help
++ I Test (x gnome-help-browser) AddToMenu MenuHelpOthers "%menu/help.xpm%$[gt.&GNOME Help]"  Exec exec gnome-help-browser
++ I Test (x kdehelp) AddToMenu MenuHelpOthers "%menu/help.xpm%$[gt.&KDE Help]"               Exec exec kdehelp
++ I Test (x khelpcenter) AddToMenu MenuHelpOthers "%menu/help.xpm%$[gt.&KDE Help]"           Exec exec khelpcenter
 
 
 #-----------------------------------------------------------------------
@@ -1860,7 +1867,7 @@ AddToMenu   MenuFvwmModules
 #-----------------------------------------------------------------------
 DestroyMenu MenuStartRegularModules
 AddToMenu   MenuStartRegularModules
-+ "$[gt.Regular Modules]" Title
++ "$[gt.Start Regular Modules]" Title
 + "$[gt.&Animation]%menu/window-iconify.xpm%"           FuncRestartModule FvwmAnimate
 + "$[gt.Backe&r]%menu/display.xpm%"                     FuncRestartModule FvwmBacker
 + "$[gt.Ba&nner]%menu/display.xpm%"                     Module FvwmBanner
@@ -1869,10 +1876,10 @@ AddToMenu   MenuStartRegularModules
 + "$[gt.&GtkDebug]%menu/development.xpm%"               Module FvwmGtkDebug
 + "$[gt.&Debug Console]%menu/development.xpm%"          Module FvwmDebug --xconsole
 + "$[gt.&Identify]%menu/window-identify.xpm%"           Module FvwmIdent
-+ "$[gt.&ScrollBar (1/2 app)]%menu/window-resize.xpm%"  Module FvwmScroll 2 2
-+ "$[gt.&ScrollBar (75%% scr)]%menu/window-resize.xpm%" Module FvwmScroll 75p 75p
-+ "$[gt.Auto Raise (1/2 sec)]%menu/window-raise.xpm%" 	FuncRestartModule 'FvwmAuto 500 "Silent Raise" Nop'
-+ "$[gt.Auto Raise (2 sec)]%menu/window-raise.xpm%"   	FuncRestartModule 'FvwmAuto 2000 "Silent Raise" Nop'
++ "$[gt.ScrollBar (1/2 a&pp)]%menu/window-resize.xpm%"  Module FvwmScroll 2 2
++ "$[gt.ScrollBar (75%% &scr)]%menu/window-resize.xpm%" Module FvwmScroll 75p 75p
++ "$[gt.Auto Raise (&1/2 sec)]%menu/window-raise.xpm%" 	FuncRestartModule 'FvwmAuto 500 "Silent Raise" Nop'
++ "$[gt.Auto Raise (&2 sec)]%menu/window-raise.xpm%"   	FuncRestartModule 'FvwmAuto 2000 "Silent Raise" Nop'
 + ""													Nop
 + "$[gt.&Forms]%menu/utility.xpm%"                      Popup  MenuFvwmForms
 
@@ -1881,18 +1888,18 @@ AddToMenu   MenuStartRegularModules
 #-----------------------------------------------------------------------
 DestroyMenu MenuStopRegularModules
 AddToMenu   MenuStopRegularModules
-+ "$[gt.Regular Modules]" Title
-+ "$[gt.Stop &Animation]%menu/quit.xpm%"          KillModule FvwmAnimate
-+ "$[gt.Stop Backe&r]%menu/quit.xpm%"             KillModule FvwmBacker
-+ "$[gt.Stop Co&mmandS]%menu/quit.xpm%"           KillModule FvwmCommandS
-+ "$[gt.Stop &Console]%menu/quit.xpm%"            KillModule FvwmConsole
-+ "$[gt.Stop &GtkDebug]%menu/quit.xpm%"           KillModule FvwmGtkDebug
-+ "$[gt.Stop &Identify]%menu/quit.xpm%"           KillModule FvwmIdent
-+ "$[gt.Stop &ScrollBar]%menu/quit.xpm%"          KillModule FvwmScroll
-+ "$[gt.Stop Auto Rais&e]%menu/quit.xpm%"         KillModule FvwmAuto
-+ "$[gt.Stop All Events]%menu/quit.xpm%"          KillModule FvwmEvent
-+ "$[gt.Stop All &Buttons]%menu/quit.xpm%"        KillModule FvwmButtons
-+ "$[gt.Stop All &Forms]%menu/quit.xpm%"          KillModule FvwmForm
++ "$[gt.Stop Regular Modules]" Title
++ "$[gt.&Animation]%menu/quit.xpm%"          KillModule FvwmAnimate
++ "$[gt.Backe&r]%menu/quit.xpm%"             KillModule FvwmBacker
++ "$[gt.Co&mmandS]%menu/quit.xpm%"           KillModule FvwmCommandS
++ "$[gt.&Console]%menu/quit.xpm%"            KillModule FvwmConsole
++ "$[gt.&GtkDebug]%menu/quit.xpm%"           KillModule FvwmGtkDebug
++ "$[gt.&Identify]%menu/quit.xpm%"           KillModule FvwmIdent
++ "$[gt.&ScrollBar]%menu/quit.xpm%"          KillModule FvwmScroll
++ "$[gt.Auto Rais&e]%menu/quit.xpm%"         KillModule FvwmAuto
++ "$[gt.All Events]%menu/quit.xpm%"          KillModule FvwmEvent
++ "$[gt.All &Buttons]%menu/quit.xpm%"        KillModule FvwmButtons
++ "$[gt.All &Forms]%menu/quit.xpm%"          KillModule FvwmForm
 
 #-----------------------------------------------------------------------
 # Modules sub menu for Fvwm Form modules
@@ -1911,7 +1918,7 @@ AddToMenu   MenuFvwmForms
 #=======================================================================
 DestroyMenu MenuConfiguration
 AddToMenu   MenuConfiguration
-+ "$[gt.&Configuration]" Title
++ "$[gt.Configuration]" Title
 + "$[gt.&Fvwm]%mini.f1.xpm%"								Popup MenuFvwmConfiguration
 + "$[gt.Fvwm-&Nightshade]%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%"  Popup MenuFNSConfiguration
 + "$[gt.&System]%menu/system.xpm%"							Popup MenuSystemConfiguration
@@ -1924,7 +1931,7 @@ AddToMenu   MenuConfiguration
 #-----------------------------------------------------------------------
 DestroyMenu MenuFvwmConfiguration
 AddToMenu   MenuFvwmConfiguration
-+ "$[gt.&Fvwm]" Title
++ "$[gt.Fvwm]" Title
 + "$[gt.&Animation Control]%menu/window-iconify.xpm%"		Popup MenuFvwmAnimate
 + "$[gt.Fvwm Form &Defaults]%menu/configuration.xpm%"  		Module FvwmForm FvwmForm-Form
 
@@ -1934,7 +1941,7 @@ AddToMenu   MenuFvwmConfiguration
 #-----------------------------------------------------------------------
 DestroyMenu MenuFNSConfiguration
 AddToMenu   MenuFNSConfiguration
-+ "$[gt.&Fvwm-Nightshade]" Title
++ "$[gt.Fvwm-Nightshade]" Title
 + MissingSubmenuFunction FuncMenuWallpaperConfiguration
 + "$[gt.Configure &Background]%menu/image-viewer.xpm%"    	Popup MenuWallpaperConfiguration
 + "$[gt.&Decoration]%menu/themes.xpm%"						Popup MenuDecoration
@@ -1946,7 +1953,7 @@ AddToMenu   MenuFNSConfiguration
 #-----------------------------------------------------------------------
 DestroyMenu MenuSystemConfiguration
 AddToMenu   MenuSystemConfiguration
-+ "$[gt.&System]" Title
++ "$[gt.System]" Title
 + "$[gt.&Keyboard]%menu/keyboard.xpm%"						Popup MenuKeyboard
 + "$[gt.&Mouse]%menu/mouse.xpm%"							Popup MenuMouse
 + MissingSubmenuFunction FuncMenuXScreenSaver
@@ -1959,7 +1966,7 @@ AddToMenu   MenuSystemConfiguration
 #-----------------------------------------------------------------------
 DestroyMenu MenuKeyboard
 AddToMenu   MenuKeyboard
-+ "$[gt.&Keyboard]" Title
++ "$[gt.Keyboard]" Title
 + "$[gt.&Settings]%menu/keyboard.xpm%"		FvwmScript FvwmScript-KeyboardSetup
 + "$[gt.&Layout]%menu/keyboard.xpm%"      	FuncKbdLayouter
 
@@ -1968,7 +1975,7 @@ AddToMenu   MenuKeyboard
 #-----------------------------------------------------------------------
 DestroyMenu MenuMouse
 AddToMenu   MenuMouse
-+ "$[gt.&Mouse]" Title
++ "$[gt.Mouse]" Title
 + "$[gt.&Settings]%menu/mouse.xpm%"			FvwmScript FvwmScript-PointerSetup
 + "$[gt.Root &Cursor]%menu/item.xpm%"		Module FvwmForm FvwmForm-RootCursor
 
@@ -1977,7 +1984,7 @@ AddToMenu   MenuMouse
 #-----------------------------------------------------------------------
 DestroyMenu MenuDecoration
 AddToMenu   MenuDecoration
-+ "$[gt.&Decoration]" Title
++ "$[gt.Decoration]" Title
 + "$[gt.&Decors]%menu/windows.xpm%"			Popup FvwmDecorMenu
 + "$[gt.&Layouts]%menu/utility.xpm%"		Popup FvwmLayoutMenu
 + "$[gt.&Qt Decor]%menu/kde.xpm%"			Popup MenuQtDecor
@@ -1988,9 +1995,9 @@ AddToMenu   MenuDecoration
 #-----------------------------------------------------------------------
 DestroyMenu MenuQtDecor
 AddToMenu   MenuQtDecor
-+ "$[gt.&Qt Decor]" Title
-+ "$[gt.&Qt-3 Decor]%menu/kde.xpm%"      	FuncQt3Decor
-+ "$[gt.&Qt-4 Decor]%menu/kde.xpm%"      	FuncQt4Decor
++ "$[gt.Qt Decor]" Title
++ "$[gt.Qt-&3 Decor]%menu/kde.xpm%"      	FuncQt3Decor
++ "$[gt.Qt-&4 Decor]%menu/kde.xpm%"      	FuncQt4Decor
 
 #-----------------------------------------------------------------------
 # Dynamic decor sub menu with names of each decor folder
@@ -2038,7 +2045,7 @@ AddToMenu MenuWallpaperConfiguration DynamicPopupAction FuncMenuWallpaperConfigu
 DestroyFunc FuncMenuWallpaperConfiguration
 AddToFunc   FuncMenuWallpaperConfiguration
 + I DestroyMenu MenuWallpaperConfiguration
-+ I AddToMenu MenuWallpaperConfiguration "$[gt.&Background Configuration]" Title
++ I AddToMenu MenuWallpaperConfiguration "$[gt.Background Configuration]" Title
 + I AddToMenu MenuWallpaperConfiguration DynamicPopupAction FuncMenuWallpaperConfiguration
 + I Test (I $[infostore.fvwm_wallpaper]) \
     AddToMenu MenuWallpaperConfiguration "$[gt.Set &Default background]%menu/choice-no.xpm%"      FuncDelWallpaperlink
@@ -2064,10 +2071,9 @@ AddToMenu   MenuXScreenSaver
 DestroyMenu MenuFvwmQuit
 AddToMenu   MenuFvwmQuit 
 + "$[gt.Really Quit]?" 	Title
-+ "$[gt.&Restart]%menu/restart.xpm%"             	FuncRestart
++ "$[gt.&Restart Fvwm]%menu/restart.xpm%"           FuncRestart
 + "" 						 						Nop
 + "$[gt.Re&fresh Screen]%menu/refresh.xpm%"      	Refresh
-+ "$[gt.Re&capture Screen]%menu/refresh.xpm%"    	Recapture
 + "" 						 						Nop
 + "$[gt.&Suspend System]%menu/system.xpm%"       	FuncSuspend
 + "$[gt.&Hibernate System]%menu/system.xpm%"     	FuncHibernate
@@ -2137,7 +2143,7 @@ AddToFunc   FuncMenuWindowOpsTrimmed
 #-----------------------------------------------------------------------
 DestroyMenu  MenuWindowGroupOps
 AddToMenu    MenuWindowGroupOps
-+ "$[gt.&Resource Group Ops]" Title
++ "$[gt.Resource Group Ops]" Title
 + "&$[gt.Iconify]%menu/window-iconify.xpm%"             Pick All ($[w.resource]) Iconify on
 + "$[gt.De&Iconify]%menu/window-iconify.xpm%"           Pick All ($[w.resource]) Iconify off
 + "$[gt.&Shade]%menu/window-shade.xpm%"                 Pick All ($[w.resource]) WindowShade on
@@ -2157,28 +2163,28 @@ AddToMenu    MenuWindowGroupOps
 DestroyMenu MenuWindowStyle
 AddToMenu   MenuWindowStyle
 + "$[gt.Window Style]" Title
-+ "%menu/window.xpm%TitleAt&Top"             WindowStyle TitleAtTop
-+ "%menu/window.xpm%TitleAt&Bottom"          WindowStyle TitleAtBottom
-+ "%menu/window.xpm%&Title"                  WindowStyle Title
-+ "%menu/window.xpm%&NoTitle"                WindowStyle !Title
++ "%menu/window.xpm%$[gt.TitleAtT&op]"             WindowStyle TitleAtTop
++ "%menu/window.xpm%$[gt.TitleAt&Bottom]"          WindowStyle TitleAtBottom
++ "%menu/window.xpm%$[gt.&Title]"                  WindowStyle Title
++ "%menu/window.xpm%&$[gt.&NoTitle]"                WindowStyle !Title
 + "" Nop
-+ "%menu/window.xpm%&FvwmBorder"             WindowStyle FvwmBorder
-+ "%menu/window.xpm%&MWMBorder"              WindowStyle MWMBorder
-+ "%menu/window.xpm%&DepressableBorder"      WindowStyle DepressableBorder
-+ "%menu/window.xpm%&FirmBorder"             WindowStyle FirmBorder
-+ "%menu/window.xpm%&Handles"                WindowStyle Handles
-+ "%menu/window.xpm%N&oHandles"              WindowStyle !Handles
-+ "%menu/window.xpm%&BorderWidth 0"          WindowStyle BorderWidth 0
-+ "%menu/window.xpm%BorderWidth &5"          WindowStyle BorderWidth 5
-+ "%menu/window.xpm%Handle&Width 0"          WindowStyle HandleWidth 0
-+ "%menu/window.xpm%HandleWidth &7"          WindowStyle HandleWidth 7
++ "%menu/window.xpm%$[gt.&FvwmBorder]"             WindowStyle FvwmBorder
++ "%menu/window.xpm%$[gt.&MWMBorder]"              WindowStyle MWMBorder
++ "%menu/window.xpm%$[gt.&DepressableBorder]"      WindowStyle DepressableBorder
++ "%menu/window.xpm%$[gt.F&irmBorder]"             WindowStyle FirmBorder
++ "%menu/window.xpm%$[gt.&Handles]"                WindowStyle Handles
++ "%menu/window.xpm%$[gt.NoH&andles]"              WindowStyle !Handles
++ "%menu/window.xpm%$[gt.BorderWidth &0]"          WindowStyle BorderWidth 0
++ "%menu/window.xpm%$[gt.BorderWidth &5]"          WindowStyle BorderWidth 5
++ "%menu/window.xpm%$[gt.Handle&Width 0]"          WindowStyle HandleWidth 0
++ "%menu/window.xpm%$[gt.HandleWidth &7]"          WindowStyle HandleWidth 7
 + "" Nop
-+ "%menu/window-resize.xpm%Re&sizeOpaque"    WindowStyle ResizeOpaque
-+ "%menu/window-resize.xpm%Resize&Outline"   WindowStyle ResizeOutline
-+ "%menu/mouse.xpm%S&loppyFocus"             WindowStyle SloppyFocus
-+ "%menu/mouse.xpm%&ClickToFocus"            WindowStyle ClickToFocus
-+ "%menu/mouse.xpm%M&ouseFocus"              WindowStyle MouseFocus
-+ "%menu/mouse.xpm%N&everFocus"              WindowStyle NeverFocus
++ "%menu/window-resize.xpm%$[gt.Re&sizeOpaque]"    WindowStyle ResizeOpaque
++ "%menu/window-resize.xpm%$[gt.Resi&zeOutline]"   WindowStyle ResizeOutline
++ "%menu/mouse.xpm%$[gt.S&loppyFocus]"             WindowStyle SloppyFocus
++ "%menu/mouse.xpm%$[gt.&ClickToFocus]"            WindowStyle ClickToFocus
++ "%menu/mouse.xpm%$[gt.Mo&useFocus]"              WindowStyle MouseFocus
++ "%menu/mouse.xpm%$[gt.N&everFocus]"              WindowStyle NeverFocus
 
 #-----------------------------------------------------------------------
 # Windows Ops sub menu for maximize windows
@@ -2242,15 +2248,15 @@ AddToMenu   MenuWindowUtility
 + "%menu/window-lower.xpm%$[gt.Layer &-1]"						Pick (CirculateHit) Layer -1
 + "%menu/window-lower.xpm%$[gt.Stays On &Bottom]"				Pick (CirculateHit) Layer 0 2
 + ""															Nop
-+ "%menu/window-resize.xpm%$[gt.Scroll&Bar (1/2 app)]"			Pick Module FvwmScroll 2 2
-+ "%menu/window-resize.xpm%$[gt.ScrollBar (&75%% scr)]"			Pick Module FvwmScroll 75p 75p
++ "%menu/window-resize.xpm%$[gt.ScrollBar (1/2 &app)]"			Pick Module FvwmScroll 2 2
++ "%menu/window-resize.xpm%$[gt.ScrollBar (75%% &scr)]"			Pick Module FvwmScroll 75p 75p
 
 #-----------------------------------------------------------------------
 # Desktop Ops menus
 #-----------------------------------------------------------------------
 DestroyMenu MenuDesktopOps
 AddToMenu   MenuDesktopOps
-+ "$[gt.&Desktopmenu]" Title
++ "$[gt.Desktopmenu]" Title
 + MissingSubmenuFunction FuncMenuWallpaperConfiguration
 + "$[gt.Configure &Background]%menu/image-viewer.xpm%"    	Popup MenuWallpaperConfiguration
 + "Help%menu/help.xpm%"										Popup MenuHelp

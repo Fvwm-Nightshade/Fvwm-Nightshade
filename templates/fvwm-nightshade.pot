@@ -1,0 +1,840 @@
+# LANGUAGE translation for Fvwm-Nightshade
+# Copyright (C) 2013 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: fvwm-nightshade\n"
+"POT-Creation-Date: 2013-02-06 23:06+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# MENUS
+########################################################################
+#-----------------------------------------------------------------------
+# MenuRoot
+#-----------------------------------------------------------------------
+msgid "Root Menu"
+msgstr ""
+
+msgid "&Personal Applications"
+msgstr ""
+
+msgid "&Configuration"
+msgstr ""
+
+msgid "&Help"
+msgstr ""
+
+msgid "Fvwm &Modules"
+msgstr ""
+
+msgid "&Window Operations"
+msgstr ""
+
+msgid "Lock Screen"
+msgstr ""
+
+msgid "&Run Command"
+msgstr ""
+
+msgid "&Terminal"
+msgstr ""
+
+msgid "&Quit Fvwm-Nightshade"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuFvwmPersonal
+#-----------------------------------------------------------------------
+msgid "Personal Applications"
+msgstr ""
+
+msgid "&Configure Personal Applications"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuHelp
+#-----------------------------------------------------------------------
+msgid "Help"
+msgstr ""
+
+msgid "Fvwm &Man Pages"
+msgstr ""
+
+msgid "Fvwm &Web Pages"
+msgstr ""
+
+msgid "Fvwm-&Nightshade Web Pages"
+msgstr ""
+
+msgid "&Other Helps"
+msgstr ""
+
+msgid "&Show Fvwm Version"
+msgstr ""
+
+msgid "&About Fvwm-Nightshade"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuHelpOthers
+#-----------------------------------------------------------------------
+msgid "Others"
+msgstr ""
+
+msgid "&X Man Pages"
+msgstr ""
+
+msgid "&GNOME Help"
+msgstr ""
+
+msgid "&KDE Help"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuFvwmWebPages
+#-----------------------------------------------------------------------
+msgid "Fvwm Web Pages"
+msgstr ""
+
+msgid "Home Page"
+msgstr ""
+
+msgid "FAQ"
+msgstr ""
+
+msgid "Documentation"
+msgstr ""
+
+msgid "Wiki"
+msgstr ""
+
+msgid "Forum"
+msgstr ""
+
+msgid "In the beginning was ..."
+msgstr ""
+
+msgid "Beginners Guide"
+msgstr ""
+
+msgid "FAQ inofficial"
+msgstr ""
+
+msgid "How Styles are Applied"
+msgstr ""
+
+msgid "Session Management"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# FNSWebPagesMenu
+#-----------------------------------------------------------------------
+msgid "FNS Web Pages"
+msgstr ""
+
+msgid "Fvwm-Nightshade Wiki"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuFvwmModules
+#-----------------------------------------------------------------------
+msgid "Fvwm Modules"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuStartRegularModules
+#-----------------------------------------------------------------------
+msgid "Start Regular Modules"
+msgstr ""
+
+msgid "&Animation"
+msgstr ""
+
+msgid "&Debug Console"
+msgstr ""
+
+msgid "&Identify"
+msgstr ""
+
+msgid "ScrollBar (1/2 &app)"
+msgstr ""
+
+msgid "ScrollBar (75%% &scr)"
+msgstr ""
+
+msgid "Auto Raise (&1/2 sec)"
+msgstr ""
+
+msgid "Auto Raise (&2 sec)"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuStopRegularModules
+#-----------------------------------------------------------------------
+msgid "Stop Regular Modules"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuFvwmForms
+#-----------------------------------------------------------------------
+msgid "FvwmForm Tools"
+msgstr ""
+
+msgid "&Capture"
+msgstr ""
+
+msgid "&Rlogin"
+msgstr ""
+
+msgid "&Talk"
+msgstr ""
+
+msgid "&QuitVerify"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuConfiguration
+#-----------------------------------------------------------------------
+msgid "Configuration"
+msgstr ""
+
+msgid "&System"
+msgstr ""
+
+msgid "&Tail .xsession-errors"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuFvwmConfiguration
+#-----------------------------------------------------------------------
+msgid "&Animation Control"
+msgstr ""
+
+msgid "Fvwm Form &Defaults"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuFNSConfiguration
+#-----------------------------------------------------------------------
+msgid "Configure &Background"
+msgstr ""
+
+msgid "&Decoration"
+msgstr ""
+
+msgid "Fvwm-&Nightshade Setup"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuSystemConfiguration
+#-----------------------------------------------------------------------
+msgid "&Keyboard"
+msgstr ""
+
+msgid "&Mouse"
+msgstr ""
+
+msgid "Sc&reen Saver"
+msgstr ""
+
+msgid "&CPU Performance"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuKeyboard
+#-----------------------------------------------------------------------
+msgid "Keyboard"
+msgstr ""
+
+msgid "&Settings"
+msgstr ""
+
+msgid "&Layout"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuMouse
+#-----------------------------------------------------------------------
+msgid "Mouse"
+msgstr ""
+
+msgid "Root &Cursor"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuDecoration
+#-----------------------------------------------------------------------
+msgid "Decoration"
+msgstr ""
+
+msgid "&Decors"
+msgstr ""
+
+msgid "&Layouts"
+msgstr ""
+
+msgid "&Qt Decor"
+msgstr ""
+
+msgid "&Gtk+ Decor"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuQtDecor
+#-----------------------------------------------------------------------
+msgid "Qt Decor"
+msgstr ""
+
+msgid "Qt-&3 Decor"
+msgstr ""
+
+msgid "Qt-&4 Decor"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# FvwmDecorMenu
+#-----------------------------------------------------------------------
+msgid "Decors"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# FvwmLayoutMenu
+#-----------------------------------------------------------------------
+msgid "Layouts"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWallpaperConfiguration
+#-----------------------------------------------------------------------
+msgid "Background Configuration"
+msgstr ""
+
+msgid "Set &Default background"
+msgstr ""
+
+msgid "Set &Wallpaper background"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuXScreenSaver
+#-----------------------------------------------------------------------
+msgid "Screen Saver"
+msgstr ""
+
+msgid "XscreenSaver &Settings"
+msgstr ""
+
+msgid "&XscreenSaver (Re)start"
+msgstr ""
+
+msgid "XscreenSaver &Stop"
+msgstr ""
+
+msgid "XscreenSaver &Lock"
+msgstr ""
+
+msgid "XscreenSaver &Activate"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuFvwmQuit
+#-----------------------------------------------------------------------
+msgid "Really Quit"
+msgstr ""
+
+msgid "&Restart Fvwm"
+msgstr ""
+
+msgid "Re&fresh Screen"
+msgstr ""
+
+msgid "&Suspend System"
+msgstr ""
+
+msgid "&Hibernate System"
+msgstr ""
+
+msgid "&Yes, Really Quit"
+msgstr ""
+
+msgid "&No, Don't Quit"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowOpsFull
+#-----------------------------------------------------------------------
+msgid "Window Operations"
+msgstr ""
+
+msgid "&Move"
+msgstr ""
+
+msgid "&Resize"
+msgstr ""
+
+msgid "(De)&Iconify"
+msgstr ""
+
+msgid "(Un)Ma&ximize"
+msgstr ""
+
+msgid "(Un)&Shade"
+msgstr ""
+
+msgid "(Un)S&tick"
+msgstr ""
+
+msgid "R&aise"
+msgstr ""
+
+msgid "&Lower"
+msgstr ""
+
+msgid "&Delete"
+msgstr ""
+
+msgid "&Close"
+msgstr ""
+
+msgid "&Destroy"
+msgstr ""
+
+msgid "Move to &Page"
+msgstr ""
+
+msgid "&Group Operations"
+msgstr ""
+
+msgid "&Window Style"
+msgstr ""
+
+msgid "&Maximize Window"
+msgstr ""
+
+msgid "&Refresh Window"
+msgstr ""
+
+msgid "R&earrange All"
+msgstr ""
+
+msgid "Window &Utility"
+msgstr ""
+
+msgid "Sw&itch to...(WinList)"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowOpsTrimmed
+#-----------------------------------------------------------------------
+msgid "Re&store"
+msgstr ""
+
+msgid "&Iconify"
+msgstr ""
+
+msgid "Ma&ximize"
+msgstr ""
+
+msgid "Stays On &Top"
+msgstr ""
+
+msgid "Stays &Back"
+msgstr ""
+
+msgid "(Un)&Stick"
+msgstr ""
+
+msgid "Mor&e..."
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupOps
+#-----------------------------------------------------------------------
+msgid "Resource Group Ops"
+msgstr ""
+
+msgid "Iconify"
+msgstr ""
+
+msgid "De&Iconify"
+msgstr ""
+
+msgid "&Shade"
+msgstr ""
+
+msgid "Un&Shade"
+msgstr ""
+
+msgid "Lo&wer"
+msgstr ""
+
+msgid "&Quick Move To ..."
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupOps
+#-----------------------------------------------------------------------
+msgid "Window Style"
+msgstr ""
+
+msgid "TitleAtT&op"
+msgstr ""
+
+msgid "TitleAt&Bottom"
+msgstr ""
+
+msgid "&Title"
+msgstr ""
+
+msgid "&NoTitle"
+msgstr ""
+
+msgid "&FvwmBorder"
+msgstr ""
+
+msgid "&MWMBorder"
+msgstr ""
+
+msgid "&DepressableBorder"
+msgstr ""
+
+msgid "F&irmBorder"
+msgstr ""
+
+msgid "&Handles"
+msgstr ""
+
+msgid "NoH&andles"
+msgstr ""
+
+msgid "BorderWidth &0"
+msgstr ""
+
+msgid "BorderWidth &5"
+msgstr ""
+
+msgid "Handle&Width 0"
+msgstr ""
+
+msgid "HandleWidth &7"
+msgstr ""
+
+msgid "Re&sizeOpaque"
+msgstr ""
+
+msgid "Resi&zeOutline"
+msgstr ""
+
+msgid "S&loppyFocus"
+msgstr ""
+
+msgid "&ClickToFocus"
+msgstr ""
+
+msgid "Mo&useFocus"
+msgstr ""
+
+msgid "N&everFocus"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowMaximize
+#-----------------------------------------------------------------------
+msgid "Maximize Window"
+msgstr ""
+
+msgid "&Maximize Fully"
+msgstr ""
+
+msgid "&Unmaximize"
+msgstr ""
+
+msgid "Maximize &Partially"
+msgstr ""
+
+msgid "Maximize &Vertically"
+msgstr ""
+
+msgid "Maximize &Horizontally"
+msgstr ""
+
+msgid "Maximize &Grow"
+msgstr ""
+
+msgid "Maximize Grow V&ert."
+msgstr ""
+
+msgid "Maximize Grow H&oriz."
+msgstr ""
+
+msgid "Maximize &Full Screen"
+msgstr ""
+
+msgid "&Unmaximize Full Screen"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowRefresh
+#-----------------------------------------------------------------------
+msgid "Refresh Window"
+msgstr ""
+
+msgid "Re&fresh Window"
+msgstr ""
+
+msgid "Re&capture Window"
+msgstr ""
+
+msgid "&Place Again"
+msgstr ""
+
+msgid "&Restore"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuRearrangeWindows
+#-----------------------------------------------------------------------
+msgid "Rearrange Windows"
+msgstr ""
+
+msgid "&Cascade"
+msgstr ""
+
+msgid "Tile &horizontally"
+msgstr ""
+
+msgid "Tile &vertically"
+msgstr ""
+
+msgid "&Arrange Icons"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowUtility
+#-----------------------------------------------------------------------
+msgid "Window Utility"
+msgstr ""
+
+msgid "Create &Screenshot"
+msgstr ""
+
+msgid "&Desktop Screenshot"
+msgstr ""
+
+msgid "Layer &+1"
+msgstr ""
+
+msgid "Stays &Put"
+msgstr ""
+
+msgid "Layer &-1"
+msgstr ""
+
+msgid "Stays On &Bottom"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuDesktopOps
+#-----------------------------------------------------------------------
+msgid "Desktopmenu"
+msgstr ""
+
+########################################################################
+# FvwmForm
+########################################################################
+#-----------------------------------------------------------------------
+# FNS-BaseSetup
+#-----------------------------------------------------------------------
+msgid "Fvwm-Nightshade -- Base Setup"
+msgstr ""
+
+msgid "Use this setup to configure base settings of Fvwm-Nightshade"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "----------------- Environment ------------------"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "Used Splash: "
+msgstr ""
+
+# msgstr same length as msgid
+msgid "Show on start: "
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "---------- Decoration (Windows, Menus) ----------"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "Used Theme:    "
+msgstr ""
+
+# msgstr same length as msgid
+msgid " (Others: Clean, Air, Ambience, CrystalBalls)"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "Used Font:     "
+msgstr ""
+
+# msgstr same length as msgid
+msgid " (E.g. Arial, Helvetia, Verdana)"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "Used Font size:"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "              (E.g. 10, 11, 13)"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "------- Panels (Iconman, Pager, Systray) -------"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "Used Layout:   "
+msgstr ""
+
+msgid "Horizontal (Panels on top)"
+msgstr ""
+
+msgid "Vertical (Panels on right side)"
+msgstr ""
+
+msgid "G2like (Panels on top and bottom)"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "----------------- Applications -----------------"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "Used Terminal: "
+msgstr ""
+
+# msgstr same length as msgid
+msgid " (E.g. konsole, aterm, rxvt)"
+msgstr ""
+
+# msgstr same length as msgid
+msgid "Used Browser:  "
+msgstr ""
+
+# msgstr same length as msgid
+msgid " (E.g. chromium, seamonkey)"
+msgstr ""
+
+msgid "Apply & Save"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+########################################################################
+# FvwmScript
+########################################################################
+#-----------------------------------------------------------------------
+# FvwmScript-PersonalMenu
+#-----------------------------------------------------------------------
+msgid "Menu Folders"
+msgstr ""
+
+msgid "Menu Entries"
+msgstr ""
+
+msgid "Add >"
+msgstr ""
+
+msgid "< Remove"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Cancel/Quit"
+msgstr ""
+
+msgid "!!! Changed menu not saved !!! Next click will quit."
+msgstr ""
+
+msgid "Personal Entries "
+msgstr ""
+
+msgid "Personal Entries"
+msgstr ""
+
+msgid "Personal applications*"
+msgstr ""
+
+msgid "Personal menu saved"
+msgstr ""
+
+msgid "Added '"
+msgstr ""
+
+msgid "' to menu"
+msgstr ""
+
+msgid "Removed '"
+msgstr ""
+
+msgid "' from menu"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# FvwmScript-PersonalMenu
+#-----------------------------------------------------------------------
+msgid "Vendor"
+msgstr "Hersteller"
+
+msgid "CPU Count"
+msgstr "CPU Anzahl"
+
+msgid "At the moment the governor 'userspace' is not supported, so you cannot use it!"
+msgstr "Zur Zeit wird der Governor 'userspace' nicht unterstützt und kann nicht benutzt werden!"
+
+msgid "But you get the same result with 'powersave' and one of the frequencies in 'Min Frequency',"
+msgstr "Aber Sie erhalten das gleiche Ergebnis mit 'powersave' und einer der Frequenzen in 'Min Frequenz',"
+
+msgid "or 'performance' in combination with 'Max Frequency'."
+msgstr "oder 'performance' in Kombination mit 'Max Frequency'."
+
+msgid "Min Frequency"
+msgstr "Min Frequenz"
+
+msgid "Max Frequency"
+msgstr "Max Frequenz"
+
+msgid "not installed"
+msgstr "Nicht installiert"
+
+msgid " updated and cpufreq set."
+msgstr " upgedated und cpufreq gesetzt."
+
+msgid "New file "
+msgstr "Neue Datei "
+
+msgid " written and cpufreq set."
+msgstr " geschrieben und cpufreq gesetzt."
