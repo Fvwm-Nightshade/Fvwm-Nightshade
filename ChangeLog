@@ -1,11 +1,13 @@
 History:
 
 03/02/2013 V 0.6.1
+- create initial locale template fvwm-nightshade.pot
 - add localization support in:
-  - Rootmenu
+  - config (LocalePath and $[gt.xxxxx] in menus/functions)
   - FNS-BaseSetup
   - FvwmScript-PersonalMenu
   - FvwmScript-CPU-Performance
+- add german translation po file
 
 01/30/2013 V 0.6
 Prepare for release:
