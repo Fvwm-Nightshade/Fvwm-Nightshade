@@ -1,6 +1,11 @@
 History:
 
-03/02/2013 V 0.6.1
+03/04/2013 
+- fix bug in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
+  that theme/layout names ended with 't' doesn't show correctly in menu and
+  can't use though
+
+03/02/2013
 - create initial locale template fvwm-nightshade.pot
 - add localization support in:
   - config (LocalePath and $[gt.xxxxx] in menus/functions)
@@ -8,6 +13,8 @@ History:
   - FvwmScript-PersonalMenu
   - FvwmScript-CPU-Performance
 - add german translation po file
+- fix bug in FvwmScript-CPU-Performance with an absolut path for
+  .governor file
 
 01/30/2013 V 0.6
 Prepare for release:
