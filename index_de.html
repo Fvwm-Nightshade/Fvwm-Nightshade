@@ -15,19 +15,7 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
     <link rel="shortcut icon" href="images/favicon.ico" type="image/png">
     <script type="text/javascript" src="javascripts/main.js"></script>
-	<script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-38985450-1']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>
+    <script type="text/javascript" src="javascripts/ga.js"></script>
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -40,8 +28,8 @@
     <header>
       <div class="inner">
         <img src="images/html_header.png" width="520" height="160" style="margin: 0 100px" alt="Fvwm-Nightshade" /><br />
-        <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade" class="button"><small>Zeige Projekt auf</small>GitHub</a>
-        <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/wiki" class="wiki"><small>Zeige Wiki auf</small>GitHub</a>
+        <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade" onClick="trackOutboundLink(this, 'Outbound Links', 'github.com/Fvwm-Nightshade'); return false;" class="button"><small>Zeige Projekt auf</small>GitHub</a>
+        <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/wiki" onClick="trackOutboundLink(this, 'Outbound Links', 'github.com/Fvwm-Nightshade/wiki'); return false;" class="wiki"><small>Zeige Wiki auf</small>GitHub</a>
        <h2 style="margin: 0 120px">Desktopumgebung basierend auf Fvwm</h2>
       </div>
     </header>
@@ -238,19 +226,19 @@
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/zipball/master" class="button">
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/zipball/master" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip Release'); return false;" class="button">
             <small>Download Release 0.6</small>
             .zip file
           </a>
-          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tarball/master" class="button">
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tarball/master" onClick="trackOutboundLink(this, 'Outbound Links', 'Download tar.gz Release'); return false;" class="button">
             <small>Download Release 0.6</small>
             .tar.gz file
           </a>
-          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/zipball/develop" class="button">
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/zipball/develop" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip develop'); return false;" class="button">
             <small>Download Develop als</small>
             .zip file
           </a>
-          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tarball/develop" class="button">
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tarball/develop" onClick="trackOutboundLink(this, 'Outbound Links', 'Download tar.gz develop'); return false;" class="button">
             <small>Download Develop als</small>
             .tar.gz file
           </a>
