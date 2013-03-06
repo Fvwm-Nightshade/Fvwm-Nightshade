@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      1.0.8
+# Version:      1.0.9
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      01/30/2013
+# Changed:      03/06/2013
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -31,6 +31,7 @@ datadir 	= $(pkgprefix)/share
 mandir 		= $(datadir)/man
 man1dir 	= $(mandir)/man1
 docdir 		= $(datadir)/doc
+localedir	= $(datadir)/locale
 
 pkgdatadir 	= $(datadir)/$(package)
 pkgdocdir 	= $(docdir)/$(package)
@@ -38,6 +39,7 @@ pkgdocdir 	= $(docdir)/$(package)
 fns_executables = $(shell ls -1 bin)
 fns_manpages 	= $(shell ls -1 man)
 fns_fvwmscripts = $(shell ls -1 fvwm)
+fns_mofiles 	= $(shell ls -1 po |grep ".mo")
 
 fvwm_path	?= $(DESTDIR)/usr/share/fvwm
 
@@ -101,6 +103,15 @@ install:
 	echo "-> install manpages"
 	install -d $(man1dir)
 	install -m 644 man/* $(man1dir)
+	
+	echo "-> install localization files"
+	for file in $(fns_mofiles); do \
+	  basename=$${file%%.*}; \
+	  extensions=$${file#*.}; \
+	  lang=$${extensions%%.*}; \
+	  install -d $(localedir)/$$lang/LC_MESSAGES; \
+	  install -m 644 po/$$file $(localedir)/$$lang/LC_MESSAGES/$$basename.mo; \
+	done
 
 	if test -z "$(DESTDIR)"; then \
 	  echo "Fvwm-Nightshade is installed. Thanks."; \
@@ -136,6 +147,14 @@ uninstall:
 	echo "-> uninstall manpages"
 	for file in $(fns_manpages) ; do \
 	  rm -f $(man1dir)/$$file; \
+	done
+
+	echo "-> uninstall localization files"
+	for file in $(fns_mofiles); do \
+	  basename=$${file%%.*}; \
+	  extensions=$${file#*.}; \
+	  lang=$${extensions%%.*}; \
+	  rm -f $(localedir)/$$lang/LC_MESSAGES/$$basename.mo; \
 	done
 
 	echo "Fvwm-Nightshade is now removed. Only ~/.fvwm-nightshade exists."
