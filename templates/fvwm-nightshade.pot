@@ -807,34 +807,37 @@ msgstr ""
 # FvwmScript-PersonalMenu
 #-----------------------------------------------------------------------
 msgid "Vendor"
-msgstr "Hersteller"
+msgstr ""
 
 msgid "CPU Count"
-msgstr "CPU Anzahl"
+msgstr ""
 
 msgid "At the moment the governor 'userspace' is not supported, so you cannot use it!"
-msgstr "Zur Zeit wird der Governor 'userspace' nicht unterstützt und kann nicht benutzt werden!"
+msgstr ""
 
-msgid "But you get the same result with 'powersave' and one of the frequencies in 'Min Frequency',"
-msgstr "Aber Sie erhalten das gleiche Ergebnis mit 'powersave' und einer der Frequenzen in 'Min Frequenz',"
+msgid "But you get the same result with governor 'powersave' and one of the frequencies"
+msgstr ""
 
-msgid "or 'performance' in combination with 'Max Frequency'."
-msgstr "oder 'performance' in Kombination mit 'Max Frequency'."
+msgid "in 'Min Frequency', or governor 'performance' in combination with 'Max Frequency'."
+msgstr ""
 
 msgid "Min Frequency"
-msgstr "Min Frequenz"
+msgstr ""
 
 msgid "Max Frequency"
-msgstr "Max Frequenz"
+msgstr ""
 
 msgid "not installed"
-msgstr "Nicht installiert"
+msgstr ""
+
+msgid "Set"
+msgstr ""
 
 msgid " updated and cpufreq set."
-msgstr " upgedated und cpufreq gesetzt."
+msgstr ""
 
 msgid "New file "
-msgstr "Neue Datei "
+msgstr ""
 
 msgid " written and cpufreq set."
-msgstr " geschrieben und cpufreq gesetzt."
+msgstr ""

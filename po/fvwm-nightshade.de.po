@@ -1,24 +1,31 @@
+# German translation for Fvwm-Nightshade
+# Copyright (C) 2013 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Thomas Funk <t.funk@web.de>, 2013.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: fvwm-nightshade\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
+"POT-Creation-Date: 2013-02-06 23:06+0200\n"
+"PO-Revision-Date: 2013-02-08 00:29+0100\n"
 "Last-Translator: Thomas Funk <t.funk@web.de>\n"
-"Language-Team: German <t.funk@web.de>\n"
+"Language-Team: German\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
 
+########################################################################
+# MENUS
+########################################################################
 #-----------------------------------------------------------------------
 # MenuRoot
 #-----------------------------------------------------------------------
 msgid "Root Menu"
-msgstr "Hauptmen�"
+msgstr "Hauptmenü"
 
 msgid "&Personal Applications"
-msgstr "&Pers�nliche Programme"
+msgstr "&Persönliche Programme"
 
 msgid "&Configuration"
 msgstr "&Konfiguration"
@@ -36,7 +43,7 @@ msgid "Lock Screen"
 msgstr "Bildschirm sperren"
 
 msgid "&Run Command"
-msgstr "&Befehl ausf�hren"
+msgstr "&Befehl ausführen"
 
 msgid "&Terminal"
 msgstr "&Terminal"
@@ -48,10 +55,10 @@ msgstr "Fvwm-Nightshade &verlassen"
 # MenuFvwmPersonal
 #-----------------------------------------------------------------------
 msgid "Personal Applications"
-msgstr "Pers�nliche Programme"
+msgstr "Persönliche Programme"
 
 msgid "&Configure Personal Applications"
-msgstr "Pers�nliche Programme konfigurieren"
+msgstr "Persönliche Programme konfigurieren"
 
 #-----------------------------------------------------------------------
 # MenuHelp
@@ -75,7 +82,7 @@ msgid "&Show Fvwm Version"
 msgstr "&Zeige Fvwm Version"
 
 msgid "&About Fvwm-Nightshade"
-msgstr "&�ber Fvwm-Nightshade"
+msgstr "&Ueber Fvwm-Nightshade"
 
 #-----------------------------------------------------------------------
 # MenuHelpOthers
@@ -117,7 +124,7 @@ msgid "In the beginning was ..."
 msgstr "Am Anfang war ..."
 
 msgid "Beginners Guide"
-msgstr "Anf�nger Handbuch"
+msgstr "Anfänger Handbuch"
 
 msgid "FAQ inofficial"
 msgstr "Inoffizielle FAQ"
@@ -147,7 +154,7 @@ msgstr "Fvwm Module"
 # MenuStartRegularModules
 #-----------------------------------------------------------------------
 msgid "Start Regular Modules"
-msgstr "Regul�re Module starten"
+msgstr "Reguläre Module starten"
 
 msgid "&Animation"
 msgstr "&Animationen"
@@ -158,23 +165,23 @@ msgstr "&Debug-Konsole"
 msgid "&Identify"
 msgstr "&Identifizieren"
 
-msgid "&ScrollBar (1/2 app)"
-msgstr "&Bildlaufleiste (1/2 app)"
+msgid "ScrollBar (1/2 &app)"
+msgstr "Bildlaufleiste (1/2 &app)"
 
-msgid "&ScrollBar (75%% scr)"
-msgstr "&Bildlaufleiste (75%% scr)"
+msgid "ScrollBar (75%% &scr)"
+msgstr "Bildlaufleiste (75%% &scr)"
 
-msgid "Auto Raise (1/2 sec)"
-msgstr "Autom. anheben (1/2 sec)"
+msgid "Auto Raise (&1/2 sec)"
+msgstr "Autom. anheben (&1/2 sec)"
 
-msgid "Auto Raise (2 sec)"
-msgstr "Autom. anheben (2 sec)"
+msgid "Auto Raise (&2 sec)"
+msgstr "Autom. anheben (&2 sec)"
 
 #-----------------------------------------------------------------------
 # MenuStopRegularModules
 #-----------------------------------------------------------------------
 msgid "Stop Regular Modules"
-msgstr "Regul�re Module stoppen"
+msgstr "Reguläre Module stoppen"
 
 #-----------------------------------------------------------------------
 # MenuFvwmForms
@@ -219,7 +226,7 @@ msgstr "Fvwm Form &Grundeinstellungen"
 # MenuFNSConfiguration
 #-----------------------------------------------------------------------
 msgid "Configure &Background"
-msgstr "Hintergrund konfigurieren"
+msgstr "&Hintergrund setzen"
 
 msgid "&Decoration"
 msgstr "&Dekoration"
@@ -287,11 +294,11 @@ msgstr "&Gtk+ Dekor"
 msgid "Qt Decor"
 msgstr "Qt Dekor"
 
-msgid "&Qt-3 Decor"
-msgstr "&Qt-3 Dekor"
+msgid "Qt-&3 Decor"
+msgstr "Qt-&3 Dekor"
 
-msgid "&Qt-4 Decor"
-msgstr "&Qt-4 Dekor"
+msgid "Qt-&4 Decor"
+msgstr "Qt-&4 Dekor"
 
 #-----------------------------------------------------------------------
 # FvwmDecorMenu
@@ -315,7 +322,7 @@ msgid "Set &Default background"
 msgstr "&Standard Hntergrund setzen"
 
 msgid "Set &Wallpaper background"
-msgstr "&Hintergrundbild setzen"
+msgstr "Hintergrund&bild setzen"
 
 #-----------------------------------------------------------------------
 # MenuXScreenSaver
@@ -333,7 +340,7 @@ msgid "XscreenSaver &Stop"
 msgstr "XscreenSaver &Stop"
 
 msgid "XscreenSaver &Lock"
-msgstr "XscreenSaver &sperren"
+msgstr "XscreenSaver s&perren"
 
 msgid "XscreenSaver &Activate"
 msgstr "XscreenSaver &aktivieren"
@@ -344,20 +351,17 @@ msgstr "XscreenSaver &aktivieren"
 msgid "Really Quit"
 msgstr "Wirklich verlassen"
 
-msgid "&Restart"
-msgstr "&Restart"
+msgid "&Restart Fvwm"
+msgstr "&Fvwm neu starten"
 
 msgid "Re&fresh Screen"
-msgstr "Bildschirm re&freshen"
-
-msgid "Re&capture Screen"
-msgstr ""
+msgstr "Bildschirm &auffrischen"
 
 msgid "&Suspend System"
-msgstr ""
+msgstr "&Bereitschaft"
 
 msgid "&Hibernate System"
-msgstr ""
+msgstr "&Ruhezustand"
 
 msgid "&Yes, Really Quit"
 msgstr "&Ja, wirklich verlassen"
@@ -372,281 +376,469 @@ msgid "Window Operations"
 msgstr "Fenster Operationen"
 
 msgid "&Move"
-msgstr ""
+msgstr "&Verschieben"
 
 msgid "&Resize"
-msgstr ""
+msgstr "&Größe ändern"
 
 msgid "(De)&Iconify"
-msgstr ""
+msgstr "(Ent-)M&inimieren"
 
 msgid "(Un)Ma&ximize"
-msgstr ""
+msgstr "(Ent-)Ma&ximieren"
 
 msgid "(Un)&Shade"
-msgstr ""
+msgstr "Ver&bergen/Hervorholen"
 
 msgid "(Un)S&tick"
-msgstr ""
+msgstr "(Ent-)&Pinnen"
 
 msgid "R&aise"
-msgstr ""
+msgstr "in &Anheben"
 
 msgid "&Lower"
-msgstr ""
+msgstr "in Ab&senken"
 
 msgid "&Delete"
-msgstr ""
+msgstr "&Entfernen"
 
 msgid "&Close"
-msgstr ""
+msgstr "S&chließen"
 
 msgid "&Destroy"
-msgstr ""
+msgstr "&Zerstören"
 
 msgid "Move to &Page"
-msgstr ""
+msgstr "Ve&rschieben auf Seite"
 
 msgid "&Group Operations"
-msgstr ""
+msgstr "Gruppen &Operationen"
 
 msgid "&Window Style"
-msgstr ""
+msgstr "&Fenster Style"
 
 msgid "&Maximize Window"
-msgstr ""
+msgstr "Fenster &maximieren"
 
 msgid "&Refresh Window"
-msgstr ""
+msgstr "Fens&ter auffrischen"
 
 msgid "R&earrange All"
-msgstr ""
+msgstr "A&lles neu anordnen"
 
 msgid "Window &Utility"
-msgstr ""
+msgstr "Fensterwerkze&uge"
 
 msgid "Sw&itch to...(WinList)"
-msgstr ""
+msgstr "&Wechseln zu ...(WinList)"
 
 #-----------------------------------------------------------------------
 # MenuWindowOpsTrimmed
 #-----------------------------------------------------------------------
 msgid "Re&store"
-msgstr ""
+msgstr "&Erneuern"
 
 msgid "&Iconify"
-msgstr ""
+msgstr "M&inimieren"
 
 msgid "Ma&ximize"
-msgstr ""
+msgstr "Ma&ximieren"
 
 msgid "Stays On &Top"
-msgstr ""
+msgstr "Im &Vordergrund bleiben"
 
 msgid "Stays &Back"
-msgstr ""
+msgstr "In Grunde&bene zurück"
 
 msgid "(Un)&Stick"
-msgstr ""
+msgstr "(Ent-)&Pinnen"
 
 msgid "Mor&e..."
-msgstr ""
+msgstr "M&ehr..."
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupOps
 #-----------------------------------------------------------------------
 msgid "Resource Group Ops"
-msgstr ""
+msgstr "Resourcegruppen Ops"
 
 msgid "Iconify"
-msgstr ""
+msgstr "Minimieren"
 
 msgid "De&Iconify"
-msgstr ""
+msgstr "&Wiederherstellen"
 
 msgid "&Shade"
-msgstr ""
+msgstr "&Verbergen"
 
 msgid "Un&Shade"
-msgstr ""
+msgstr "&Hervorholen"
 
 msgid "Lo&wer"
-msgstr ""
+msgstr "Ab&senken"
 
 msgid "&Quick Move To ..."
-msgstr ""
+msgstr "Schnelles &verschieben zu ..."
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupOps
 #-----------------------------------------------------------------------
 msgid "Window Style"
-msgstr ""
+msgstr "Fenster Style"
 
-msgid "TitleAt&Top"
-msgstr ""
+msgid "TitleAtT&op"
+msgstr "Titelleiste &oben"
 
 msgid "TitleAt&Bottom"
-msgstr ""
+msgstr "Titelleiste &unten"
 
 msgid "&Title"
-msgstr ""
+msgstr "&Titelleiste"
 
-msgid "NoTitle"
-msgstr ""
+msgid "&NoTitle"
+msgstr "&Keine Titelleiste"
 
 msgid "&FvwmBorder"
-msgstr ""
+msgstr "&Fvwm-Rand"
 
 msgid "&MWMBorder"
-msgstr ""
+msgstr "&MWM-Rand"
 
 msgid "&DepressableBorder"
-msgstr ""
+msgstr "&Versenkter Rand"
 
-msgid "&FirmBorder"
-msgstr ""
+msgid "F&irmBorder"
+msgstr "Standardrand &wiederherstellen"
 
 msgid "&Handles"
-msgstr ""
+msgstr "&Randumrandung"
 
-msgid "N&oHandles"
-msgstr ""
+msgid "NoH&andles"
+msgstr "Kei&ne Randumrandung"
 
 msgid "BorderWidth &0"
-msgstr ""
+msgstr "Randbreite &0"
 
 msgid "BorderWidth &5"
-msgstr ""
+msgstr "Randbreite &5"
 
-msgid "HandleWidth &0"
-msgstr ""
+msgid "Handle&Width 0"
+msgstr "Ran&dumrandungsbreite &0"
 
 msgid "HandleWidth &7"
-msgstr ""
+msgstr "Randumrandungsbreite &7"
 
 msgid "Re&sizeOpaque"
-msgstr ""
+msgstr "&Grösse ändern mit Inhalt"
 
-msgid "Resize&Outline"
-msgstr ""
+msgid "Resi&zeOutline"
+msgstr "Grö&sse ändern ohne Inhalt"
 
 msgid "S&loppyFocus"
-msgstr ""
+msgstr "S&loppyFocus"
 
 msgid "&ClickToFocus"
-msgstr ""
+msgstr "Fokus per Kli&ck"
 
-msgid "M&ouseFocus"
-msgstr ""
+msgid "Mo&useFocus"
+msgstr "Fokus unter M&aus"
 
 msgid "N&everFocus"
-msgstr ""
+msgstr "K&einen Fokus"
 
 #-----------------------------------------------------------------------
 # MenuWindowMaximize
 #-----------------------------------------------------------------------
 msgid "Maximize Window"
-msgstr ""
+msgstr "Fenster maximieren"
 
 msgid "&Maximize Fully"
-msgstr ""
+msgstr "Voll &maximieren"
 
 msgid "&Unmaximize"
-msgstr ""
+msgstr "A&uf Fenstergröße zurück"
 
 msgid "Maximize &Partially"
-msgstr ""
+msgstr "&Teilweise maximieren"
 
 msgid "Maximize &Vertically"
-msgstr ""
+msgstr "&Vertikal maximieren"
 
 msgid "Maximize &Horizontally"
-msgstr ""
+msgstr "&Horizontal maximieren"
 
 msgid "Maximize &Grow"
-msgstr ""
+msgstr "Auf &freie Fläche maximieren"
 
 msgid "Maximize Grow V&ert."
-msgstr ""
+msgstr "Auf &vert. freie Fläche maximieren"
 
 msgid "Maximize Grow H&oriz."
-msgstr ""
+msgstr "Auf horiz. freie Fläche maximieren"
 
 msgid "Maximize &Full Screen"
-msgstr ""
+msgstr "Auf Voll&bildschirm maximieren"
 
 msgid "&Unmaximize Full Screen"
-msgstr ""
+msgstr "Auf Normalbildschirm z&urück"
 
 #-----------------------------------------------------------------------
 # MenuWindowRefresh
 #-----------------------------------------------------------------------
 msgid "Refresh Window"
-msgstr ""
+msgstr "Fenster auffrischen"
 
 msgid "Re&fresh Window"
-msgstr ""
+msgstr "Fenster au&ffrischen"
 
 msgid "Re&capture Window"
-msgstr ""
+msgstr "Fenster au&ffrischen"
 
 msgid "&Place Again"
-msgstr ""
+msgstr "Fenster neu &plazieren"
 
 msgid "&Restore"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #-----------------------------------------------------------------------
 # MenuRearrangeWindows
 #-----------------------------------------------------------------------
 msgid "Rearrange Windows"
-msgstr ""
+msgstr "Fenster anordnen"
 
 msgid "&Cascade"
-msgstr ""
+msgstr "&Kaskadieren"
 
 msgid "Tile &horizontally"
-msgstr ""
+msgstr "Horizontal teilen"
 
 msgid "Tile &vertically"
-msgstr ""
+msgstr "Vertikal teilen"
 
 msgid "&Arrange Icons"
-msgstr ""
+msgstr "&Minimierte Fenster ordnen"
 
 #-----------------------------------------------------------------------
 # MenuWindowUtility
 #-----------------------------------------------------------------------
 msgid "Window Utility"
-msgstr ""
+msgstr "Fenster-Werkzeuge"
 
 msgid "Create &Screenshot"
-msgstr ""
+msgstr "Bildschirmfoto von Fenster"
 
 msgid "&Desktop Screenshot"
-msgstr ""
+msgstr "Bildschirmfoto von Desktop"
 
 msgid "Layer &+1"
-msgstr ""
+msgstr "Ebene &+1"
 
 msgid "Stays &Put"
-msgstr ""
+msgstr "Auf Standardebene (4)"
 
 msgid "Layer &-1"
-msgstr ""
+msgstr "Ebene &-1"
 
 msgid "Stays On &Bottom"
-msgstr ""
-
-msgid "Scroll&Bar (1/2 app)"
-msgstr ""
-
-msgid "ScrollBar (&75%% scr)"
-msgstr ""
+msgstr "In &Hintergrund"
 
 #-----------------------------------------------------------------------
 # MenuDesktopOps
 #-----------------------------------------------------------------------
 msgid "Desktopmenu"
-msgstr ""
+msgstr "Desktopmenü"
+
+########################################################################
+# FvwmForm
+########################################################################
+#-----------------------------------------------------------------------
+# FNS-BaseSetup
+#-----------------------------------------------------------------------
+msgid "Fvwm-Nightshade -- Base Setup"
+msgstr "Fvwm-Nightshade Basiseinstellungen"
+
+msgid "Use this setup to configure base settings of Fvwm-Nightshade"
+msgstr "Benutze dieses Setup um die Basiseinstellungen zu setzen"
+
+# msgstr same length as msgid
+msgid "----------------- Environment ------------------"
+msgstr "------------------- Umgebung -------------------"
+
+# msgstr same length as msgid
+msgid "Used Splash: "
+msgstr "Verw. Splash: "
+
+# msgstr same length as msgid
+msgid "Show on start: "
+msgstr "Bei Start an:   "
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nein"
+
+# msgstr same length as msgid
+msgid "---------- Decoration (Windows, Menus) ----------"
+msgstr "---------- Dekoration (Fenster, Menüs) ----------"
+
+# msgstr same length as msgid
+msgid "Used Theme:    "
+msgstr "Verw. Thema:    "
+
+# msgstr same length as msgid
+msgid " (Others: Clean, Air, Ambience, CrystalBalls)"
+msgstr " (Andere: Clean, Air, Ambience, CrystalBalls)"
+
+# msgstr same length as msgid
+msgid "Used Font:     "
+msgstr "Verw. Font:     "
+
+# msgstr same length as msgid
+msgid " (E.g. Arial, Helvetia, Verdana)"
+msgstr " (z.B. Arial, Helvetia, Verdana)"
+
+# msgstr same length as msgid
+msgid "Used Font size:"
+msgstr "Verw. Fontgröße:"
+
+# msgstr same length as msgid
+msgid "              (E.g. 10, 11, 13)"
+msgstr "              (z.B. 10, 11, 13)"
+
+# msgstr same length as msgid
+msgid "------- Panels (Iconman, Pager, Systray) -------"
+msgstr "------- Panels (Iconman, Pager, Systray) -------"
+
+# msgstr same length as msgid
+msgid "Used Layout:   "
+msgstr "Verw. Layout:  "
+
+msgid "Horizontal (Panels on top)"
+msgstr "Horizontal (Panels oben)"
+
+msgid "Vertical (Panels on right side)"
+msgstr "Vertical (Panels auf rechter Seite)"
+
+msgid "G2like (Panels on top and bottom)"
+msgstr "G2like (Panels oben und unten)"
+
+# msgstr same length as msgid
+msgid "----------------- Applications -----------------"
+msgstr "------------------ Programme -------------------"
+
+# msgstr same length as msgid
+msgid "Used Terminal: "
+msgstr "Verw. Terminal: "
+
+# msgstr same length as msgid
+msgid " (E.g. konsole, aterm, rxvt)"
+msgstr " (z.B. konsole, aterm, rxvt)"
+
+# msgstr same length as msgid
+msgid "Used Browser:  "
+msgstr "Verw. Browser:  "
+
+# msgstr same length as msgid
+msgid " (E.g. chromium, seamonkey)"
+msgstr " (z.B. chromium, seamonkey)"
+
+msgid "Apply & Save"
+msgstr "Anwenden & Speichern"
+
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+########################################################################
+# FvwmScript
+########################################################################
+#-----------------------------------------------------------------------
+# FvwmScript-PersonalMenu
+#-----------------------------------------------------------------------
+msgid "Menu Folders"
+msgstr "Menüordner"
+
+msgid "Menu Entries"
+msgstr "Menüeinträge"
+
+msgid "Add >"
+msgstr "Hinzufügen >"
+
+msgid "< Remove"
+msgstr "< Entfernen"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Cancel/Quit"
+msgstr "Beenden"
+
+msgid "!!! Changed menu not saved !!! Next click will quit."
+msgstr "!!! Geändertes Menü nicht gespeichert !!! Nächster Klick beendet."
+
+msgid "Personal Entries "
+msgstr "Persönliche Einträge "
+
+msgid "Personal Entries"
+msgstr "Persönliche Einträge"
+
+msgid "Personal applications*"
+msgstr "Persönliche Programme*"
+
+msgid "Personal menu saved"
+msgstr "Persönliches Menü gespeichert"
+
+msgid "Added '"
+msgstr "Füge '"
+
+msgid "' to menu"
+msgstr "' zu Menü hinzu"
+
+msgid "Removed '"
+msgstr "Entferne '"
+
+msgid "' from menu"
+msgstr "' von Menü"
+
+#-----------------------------------------------------------------------
+# FvwmScript-PersonalMenu
+#-----------------------------------------------------------------------
+msgid "Vendor:"
+msgstr "Hersteller:"
+
+msgid "CPU Count:"
+msgstr "CPU Anzahl:"
+
+msgid "At the moment the governor 'userspace' is not supported, so you cannot use it!"
+msgstr "Zur Zeit wird der Governor 'userspace' nicht unterstützt und kann nicht benutzt werden!"
+
+msgid "But you get the same result with governor 'powersave' and one of the frequencies"
+msgstr "Aber Sie erhalten das gleiche Ergebnis mit dem Governor 'powersave' und einer der Frequenzen"
+
+msgid "in 'Min Frequency', or governor 'performance' in combination with 'Max Frequency'."
+msgstr "in 'Min Frequenz', oder dem Governor 'performance' in Kombination mit 'Max Frequenz'."
+
+msgid "Min Frequency"
+msgstr "Min Frequenz"
+
+msgid "Max Frequency"
+msgstr "Max Frequenz"
+
+msgid "not installed"
+msgstr "Nicht installiert"
+
+msgid "Set"
+msgstr "Setzen"
+
+msgid " updated and cpufreq set."
+msgstr " upgedated und cpufreq gesetzt."
+
+msgid "New file "
+msgstr "Neue Datei "
+
+msgid " written and cpufreq set."
+msgstr " geschrieben und cpufreq gesetzt."
 

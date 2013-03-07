@@ -1,5 +1,16 @@
 History:
 
+03/08/2013 
+- change LocalePath that locales (fvwm-nightshade.mo) will be found in
+  /install_prefix/share/locale or $FVWM_USERDIR/locale. Changes made in
+  - config
+  - FvwmScript-PersonalMenu
+  - FvwmScript-CPU-Performance
+
+03/06/2013 
+- add locale install/uninstall support in Makefile
+- change locale directory structure
+
 03/04/2013 
 - fix bug in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
   that theme/layout names ended with 't' doesn't show correctly in menu and
