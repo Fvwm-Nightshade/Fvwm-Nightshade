@@ -1,6 +1,6 @@
 ########################################################################
 # File:		FvwmScript-CPU-Performance
-# Version:	0.2.0
+# Version:	0.2.1
 # Licence: 	GPL 2
 #
 # Description:	stets the govenor and the frequencies of each single cpu
@@ -15,15 +15,15 @@
 #				Thomas Funk <t.funk@web.de>
 #	
 # Created:		09/08/2012
-# Changed:		03/03/2013
+# Changed:		03/08/2013
 ########################################################################
 
 #-----------------------------------------------------------------------
-# Version 0.2.0, Copyright 2013, Bernhard Popp
+# Version 0.2.1, Copyright 2013, Bernhard Popp
 #-----------------------------------------------------------------------
 
-UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
-WindowLocaleTitle	{FvwmScript-CPU-Performance V 0.2.0}
+UseGettext			{;fvwm-nightshade:$FVWM_USERDIR/locale;fvwm-nightshade:+}
+WindowLocaleTitle	{FvwmScript-CPU-Performance V 0.2.1}
 WindowSize			650 500
 WindowPosition		0 100
 #Colorset 10
@@ -322,7 +322,7 @@ Property
 	Type			ItemDraw
 	Position		10 380
     Size			630 15
-	LocaleTitle		{But you get the same result with 'powersave' and one of the frequencies in 'Min Frequency',}
+	LocaleTitle		{But you get the same result with governor 'powersave' and one of the frequencies}
 	ForeColor  		{darkred}
 	Flags 			NoReliefString Left
 End
@@ -333,7 +333,7 @@ Property
 	Type			ItemDraw
 	Position		10 400
     Size			630 15
-	LocaleTitle		{or 'performance' in combination with 'Max Frequency'.}
+	LocaleTitle		{in 'Min Frequency', or governor 'performance' in combination with 'Max Frequency'.}
 	ForeColor  		{darkred}
 	Flags 			NoReliefString Left
 End

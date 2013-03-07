@@ -170,7 +170,7 @@ ExecUseShell /bin/bash
 # to search for string translations. A locale path is constituted by a
 # directory path and a text domain separated by a semicolon (';').
 #-----------------------------------------------------------------------
-LocalePath $[FVWM_USERDIR]/locale;fvwm-nightshade:$[FNS_SYSTEMDIR]/locale;fvwm-nightshade:+
+LocalePath ;fvwm-nightshade:$[FVWM_USERDIR]/locale;fvwm-nightshade:+
 
 #-----------------------------------------------------------------------
 # The default ImagePath for icons is: 
