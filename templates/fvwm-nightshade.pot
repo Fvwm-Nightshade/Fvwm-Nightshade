@@ -21,9 +21,6 @@ msgstr ""
 #-----------------------------------------------------------------------
 # MenuRoot
 #-----------------------------------------------------------------------
-msgid "Root Menu"
-msgstr ""
-
 msgid "&Personal Applications"
 msgstr ""
 
@@ -142,12 +139,6 @@ msgid "FNS Web Pages"
 msgstr ""
 
 msgid "Fvwm-Nightshade Wiki"
-msgstr ""
-
-#-----------------------------------------------------------------------
-# MenuFvwmModules
-#-----------------------------------------------------------------------
-msgid "Fvwm Modules"
 msgstr ""
 
 #-----------------------------------------------------------------------
@@ -375,12 +366,6 @@ msgstr ""
 msgid "Window Operations"
 msgstr ""
 
-msgid "&Move"
-msgstr ""
-
-msgid "&Resize"
-msgstr ""
-
 msgid "(De)&Iconify"
 msgstr ""
 
@@ -397,12 +382,6 @@ msgid "R&aise"
 msgstr ""
 
 msgid "&Lower"
-msgstr ""
-
-msgid "&Delete"
-msgstr ""
-
-msgid "&Close"
 msgstr ""
 
 msgid "&Destroy"
@@ -773,7 +752,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-msgid "Cancel/Quit"
+msgid "Quit"
 msgstr ""
 
 msgid "!!! Changed menu not saved !!! Next click will quit."

@@ -2108,7 +2108,7 @@ AddToMenu   MenuWindowOpsFull
 + "$[gt.&Maximize Window]%menu/window-maximize.xpm%"				Popup MenuWindowMaximize
 + "$[gt.&Refresh Window]%menu/refresh.xpm%"							Popup MenuWindowRefresh
 + "$[gt.R&earrange All]%menu/refresh.xpm%"							Popup MenuRearrangeWindows
-+ "$[gt.Window &Utility]%menu/utility.xpm%"							Popup MenuWindowUtility
++ "$[gt.Window &Utilities]%menu/utility.xpm%"						Popup MenuWindowUtility
 + ""																Nop
 + "$[gt.&Identify]	Alt+F12%menu/window-identify.xpm%"				Module FvwmIdent
 + "$[gt.Sw&itch to...(WinList)]	Alt+F3%menu/windows.xpm%"			WindowList
@@ -2238,7 +2238,7 @@ AddToMenu   MenuRearrangeWindows
 #-----------------------------------------------------------------------
 DestroyMenu MenuWindowUtility
 AddToMenu   MenuWindowUtility
-+ "$[gt.Window Utility]" Title
++ "$[gt.Window Utilities]" Title
 + "%menu/window.xpm%$[gt.Create &Screenshot]	Print"			Pick (CirculateHit) FuncWindowCreateScreenshot
 + "%menu/display.xpm%$[gt.&Desktop Screenshot]	Alt+Print"		FuncDesktopCreateScreenshot 5
 + ""															Nop

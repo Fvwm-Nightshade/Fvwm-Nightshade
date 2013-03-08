@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-02-06 23:06+0200\n"
-"PO-Revision-Date: 2013-02-08 00:29+0100\n"
+"PO-Revision-Date: 2013-03-08 12:28+0100\n"
 "Last-Translator: Thomas Funk <t.funk@web.de>\n"
 "Language-Team: German\n"
 "Language: \n"
@@ -21,9 +21,6 @@ msgstr ""
 #-----------------------------------------------------------------------
 # MenuRoot
 #-----------------------------------------------------------------------
-msgid "Root Menu"
-msgstr "Hauptmenü"
-
 msgid "&Personal Applications"
 msgstr "&Persönliche Programme"
 
@@ -143,12 +140,6 @@ msgstr "FNS Webseiten"
 
 msgid "Fvwm-Nightshade Wiki"
 msgstr "Fvwm-Nightshade Wiki"
-
-#-----------------------------------------------------------------------
-# MenuFvwmModules
-#-----------------------------------------------------------------------
-msgid "Fvwm Modules"
-msgstr "Fvwm Module"
 
 #-----------------------------------------------------------------------
 # MenuStartRegularModules
@@ -375,12 +366,6 @@ msgstr "&Nein, nicht verlassen"
 msgid "Window Operations"
 msgstr "Fenster Operationen"
 
-msgid "&Move"
-msgstr "&Verschieben"
-
-msgid "&Resize"
-msgstr "&Größe ändern"
-
 msgid "(De)&Iconify"
 msgstr "(Ent-)M&inimieren"
 
@@ -394,16 +379,10 @@ msgid "(Un)S&tick"
 msgstr "(Ent-)&Pinnen"
 
 msgid "R&aise"
-msgstr "in &Anheben"
+msgstr "&Anheben"
 
 msgid "&Lower"
-msgstr "in Ab&senken"
-
-msgid "&Delete"
-msgstr "&Entfernen"
-
-msgid "&Close"
-msgstr "S&chließen"
+msgstr "Ab&senken"
 
 msgid "&Destroy"
 msgstr "&Zerstören"
@@ -426,7 +405,7 @@ msgstr "Fens&ter auffrischen"
 msgid "R&earrange All"
 msgstr "A&lles neu anordnen"
 
-msgid "Window &Utility"
+msgid "Window &Utilities"
 msgstr "Fensterwerkze&uge"
 
 msgid "Sw&itch to...(WinList)"
@@ -621,7 +600,7 @@ msgstr "&Minimierte Fenster ordnen"
 #-----------------------------------------------------------------------
 # MenuWindowUtility
 #-----------------------------------------------------------------------
-msgid "Window Utility"
+msgid "Window Utilities"
 msgstr "Fenster-Werkzeuge"
 
 msgid "Create &Screenshot"
@@ -773,7 +752,7 @@ msgstr "< Entfernen"
 msgid "Save"
 msgstr "Speichern"
 
-msgid "Cancel/Quit"
+msgid "Quit"
 msgstr "Beenden"
 
 msgid "!!! Changed menu not saved !!! Next click will quit."

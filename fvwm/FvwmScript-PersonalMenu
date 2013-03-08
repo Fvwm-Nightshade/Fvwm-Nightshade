@@ -428,7 +428,7 @@ Property
     Size			80 25
     Position		240 270
     Type			PushButton
-    LocaleTitle		{Cancel/Quit}
+    LocaleTitle		{Quit}
     Font			"xft:Arial:pixelsize=12"
     Flags 			NoReliefString
     ForeColor		{black}
