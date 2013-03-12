@@ -627,6 +627,42 @@ msgstr ""
 msgid "Desktopmenu"
 msgstr ""
 
+#-----------------------------------------------------------------------
+# MenuWindowGroupQuickMove
+#-----------------------------------------------------------------------
+# layout Horizontal, Vertical & G2like
+msgid "&Right	Page"
+msgstr ""
+
+msgid "&Left	Page"
+msgstr ""
+
+msgid "Page	1"
+msgstr ""
+
+msgid "Page	2"
+msgstr ""
+
+msgid "Page	3"
+msgstr ""
+
+msgid "Page	4"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupQuickMove
+#-----------------------------------------------------------------------
+# layout Horizontal, Vertical & G2like
+msgid "Move to ..."
+msgstr ""
+
+# layout Vertical
+msgid "D&own	Page"
+msgstr ""
+
+msgid "&Up  	Page"
+msgstr ""
+
 ########################################################################
 # FvwmForm
 ########################################################################
@@ -729,6 +765,375 @@ msgid "Reset"
 msgstr ""
 
 msgid "Cancel"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# FvwmForm-RunCommand
+#-----------------------------------------------------------------------
+msgid "Run Command"
+msgstr ""
+
+msgid "Command:"
+msgstr ""
+
+msgid "Run in Terminal"
+msgstr ""
+
+msgid "Execute"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# FvwmForm-About
+#-----------------------------------------------------------------------
+msgid "About"
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "Authors"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+#-----------------------------------------------------------------------
+# FvwmForm-Messages
+#-----------------------------------------------------------------------
+# FuncShowMessage "Fvwm Version Info"
+msgid "Fvwm Version Info"
+msgstr ""
+
+msgid " Ok "
+msgstr ""
+
+# config - Help info with SHIFT-CTRL-ALT in Root
+msgid "Mouse Bindings for Root area"
+msgstr ""
+
+msgid "Mouse 1:   Root menu"
+msgstr ""
+
+msgid "Mouse 2:   Window list"
+msgstr ""
+
+msgid "Mouse 3:   Desktop Oops menu"
+msgstr ""
+
+msgid "Mouse 4/5: Switch to page left/right with"
+msgstr ""
+
+msgid "           SHIFT-ALT + rolling wheel up/down anywhere"
+msgstr ""
+
+msgid "           Switch with window to page left/right with"
+msgstr ""
+
+msgid "           SHIFT-CTRL + rolling wheel up/down anywhere"
+msgstr ""
+
+# config - Help info with SHIFT-CTRL-ALT to Pointer in Window Decorations
+msgid "Mouse Bindings for Titlebar"
+msgstr ""
+
+msgid "Mouse 1:   Drag moves window"
+msgstr ""
+
+msgid "           Maximize on double click"
+msgstr ""
+
+msgid "Mouse 2:   Drag moves window"
+msgstr ""
+
+msgid "           Raise or lower with click"
+msgstr ""
+
+msgid "Mouse 3:   WindowOpsTrimmed menu with click"
+msgstr ""
+
+msgid "           WindowOpsFull menu with ALT + click"
+msgstr ""
+
+msgid "Mouse 4/5: Shade/unshade window"
+msgstr ""
+
+msgid "           with rolling wheel up/down"
+msgstr ""
+
+msgid "Mouse Bindings for Corners and Sides"
+msgstr ""
+
+msgid "Mouse 1:   Drag resize window"
+msgstr ""
+
+msgid "Mouse Bindings for Window area"
+msgstr ""
+
+msgid "Mouse 1:   Root menu with ALT + click"
+msgstr ""
+
+msgid "Mouse 2:   Drag + ALT moves window"
+msgstr ""
+
+msgid "           Raise or lower with ALT + click"
+msgstr ""
+
+# config - Help info with SHIFT-CTRL-ALT to Pointer in Icons
+msgid "Mouse Bindings for Icons"
+msgstr ""
+
+msgid "Mouse 1:   Drag moves icon"
+msgstr ""
+
+msgid "           Deiconify with double click"
+msgstr ""
+
+msgid "           Root menu with ALT + click"
+msgstr ""
+
+msgid "Mouse 2:   Deiconify icon with click"
+msgstr ""
+
+msgid "           All of same resource group with CTRL + click"
+msgstr ""
+
+msgid "           WindowGroupOps menu with CTRL + click"
+msgstr ""
+
+# config - FuncWindowCreateScreenshot
+msgid "Screenshot Info for window"
+msgstr ""
+
+msgid "Screenshot created:"
+msgstr ""
+
+msgid "ImageMagick isn't installed. No screenshot created."
+msgstr ""
+
+# config - FuncDesktopCreateScreenshot
+msgid "Desktop Screenshot Info"
+msgstr ""
+
+# config - FuncSuspend
+msgid "Suspend Info"
+msgstr ""
+
+msgid "Install pm-utils for full functionality"
+msgstr ""
+
+# config - FuncHibernate
+msgid "Hibernate Info"
+msgstr ""
+
+# config - FuncLockScreen
+msgid "Lock screen Info"
+msgstr ""
+
+msgid "'xscreensaver' not running or not installed."
+msgstr ""
+
+# config - FuncMenuXScreenSaver
+msgid "Screensaver Info"
+msgstr ""
+
+msgid "Install xscreensaver for full functionality"
+msgstr ""
+
+# config - FuncMenuWallpaperConfiguration
+msgid "Wallpaper browser Info"
+msgstr ""
+
+msgid "Install ImageMagick AND eterm for full functionality."
+msgstr ""
+
+# config - FuncKbdLayouter
+msgid "Keyboard Layout Info"
+msgstr ""
+
+msgid "Install xneur/gxneur for full functionality"
+msgstr ""
+
+# config - FuncLxappearance
+msgid "Gtk+ Decor Info"
+msgstr ""
+
+msgid "Install LxApearance for Gtk+ apps"
+msgstr ""
+
+# config - FuncQt3Decor
+msgid "Qt3 Decor Info"
+msgstr ""
+
+msgid "Install qtconfig-qt3 for Qt3 apps"
+msgstr ""
+
+# config - FuncQt4Decor
+msgid "Qt4 Decor Info"
+msgstr ""
+
+msgid "Install qtconfig-qt4 for Qt4 apps"
+msgstr ""
+
+# Help info with SHIFT-CTRL-ALT P to show all page related key bindings
+# layout Horizontal & G2like
+msgid "Page Key Bindings"
+msgstr ""
+
+msgid "SHIFT-CTRL:"
+msgstr ""
+
+msgid "Cursor right/left: Switch to page right/left"
+msgstr ""
+
+msgid "1-4: Switch to page n"
+msgstr ""
+
+msgid "SHIFT-ALT:"
+msgstr ""
+
+msgid "Cursor right/left: Switch active window to page right/left"
+msgstr ""
+
+msgid "1-4: Switch active window to page n"
+msgstr ""
+
+msgid "ALT-CTRL:"
+msgstr ""
+
+msgid "Cursor right/left/up/down: Move mouse pointer by 1% of a page"
+msgstr ""
+
+msgid "SHIFT-ALT-CTRL:"
+msgstr ""
+
+msgid "Cursor right/left/up/down: Scroll right/left by 10% of a page"
+msgstr ""
+
+# layout Vertical
+msgid "Cursor up/down: Switch to page up/down"
+msgstr ""
+
+msgid "Cursor up/down: Switch active window to page up/down"
+msgstr ""
+
+# .bindings
+# Help info with SHIFT-CTRL-ALT A to show all ALT related key bindings
+msgid "ALT Key Bindings"
+msgstr ""
+
+msgid "ALT:"
+msgstr ""
+
+msgid "F1: Open root menu          F7:  Move window"
+msgstr ""
+
+msgid "F2: Launch 'run' dialog box F8:  Resize window"
+msgstr ""
+
+msgid "F3: Show window list        F9:  Minimize window"
+msgstr ""
+
+msgid "F4: Close active window     F10: Maximize/restore window"
+msgstr ""
+
+msgid "F5: Not used                F11: Fullscreen/restore window"
+msgstr ""
+
+msgid "F6: Cycle between same      F12: Identify window"
+msgstr ""
+
+msgid "    resource windows"
+msgstr ""
+
+msgid "Tab:   Cycle between windows"
+msgstr ""
+
+msgid "Print: Screenshot of the active window"
+msgstr ""
+
+msgid "None:"
+msgstr ""
+
+msgid "Print: Screenshot of current page"
+msgstr ""
+
+# Help info with SHIFT-CTRL-ALT H to show the global key bindings help window
+msgid "Help Keys with CTRL-ALT"
+msgstr ""
+
+msgid "A: List ALT bindings"
+msgstr ""
+
+msgid "C: List CTRL bindings"
+msgstr ""
+
+msgid "P: List Page bindings"
+msgstr ""
+
+# Help info with SHIFT-CTRL-ALT C to show all CTRL related key bindings
+msgid "CTRL Key Bindings"
+msgstr ""
+
+msgid "F1: Open full Oops menu     F2: Launch FvwmConsole"
+msgstr ""
+
+msgid "CTRL-ALT:"
+msgstr ""
+
+msgid "D:  Hide/unhide all windows T:  Launch Terminal"
+msgstr ""
+
+msgid "L:  Lock Screen"
+msgstr ""
+
+# decor theme file
+# Help info with SHIFT-CTRL-ALT to Window Button Pointer
+msgid "Left Button Bindings"
+msgstr ""
+
+msgid "Mouse 1:  WindowOps menu"
+msgstr ""
+
+msgid "Mouse 2:  Move to page menu"
+msgstr ""
+
+msgid "Mouse 3:  WindowGroupOps menu"
+msgstr ""
+
+msgid "Close Button Bindings"
+msgstr ""
+
+msgid "Mouse 1:  Delete on click"
+msgstr ""
+
+msgid "          Destroy on double click"
+msgstr ""
+
+msgid "Maximize Button Bindings"
+msgstr ""
+
+msgid "Mouse 1:  Maximize fully on click"
+msgstr ""
+
+msgid "          Maximize menu on double click"
+msgstr ""
+
+msgid "Mouse 2:  Maximize vertically"
+msgstr ""
+
+msgid "Mouse 3:  Maximize horizontally"
+msgstr ""
+
+msgid "Minimize Button Bindings"
+msgstr ""
+
+msgid "Mouse 1:  Iconify"
+msgstr ""
+
+msgid "Mouse 2:  Iconify on resource group"
+msgstr ""
+
+msgid "Mouse 3:  Iconify toggle resource group"
 msgstr ""
 
 ########################################################################

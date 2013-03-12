@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-02-06 23:06+0200\n"
-"PO-Revision-Date: 2013-03-08 12:28+0100\n"
+"PO-Revision-Date: 2013-03-11 00:21+0100\n"
 "Last-Translator: Thomas Funk <t.funk@web.de>\n"
 "Language-Team: German\n"
 "Language: \n"
@@ -627,6 +627,42 @@ msgstr "In &Hintergrund"
 msgid "Desktopmenu"
 msgstr "Desktopmenü"
 
+#-----------------------------------------------------------------------
+# MenuWindowGroupQuickMove
+#-----------------------------------------------------------------------
+# layout Horizontal, Vertical & G2like
+msgid "&Right	Page"
+msgstr "&Rechte	Seite"
+
+msgid "&Left	Page"
+msgstr "&Linke	Seite"
+
+msgid "Page	1"
+msgstr "Seite	1"
+
+msgid "Page	2"
+msgstr "Seite	2"
+
+msgid "Page	3"
+msgstr "Seite	3"
+
+msgid "Page	4"
+msgstr "Seite	4"
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupQuickMove
+#-----------------------------------------------------------------------
+# layout Horizontal, Vertical & G2like
+msgid "Move to ..."
+msgstr "Verschieben nach ..."
+
+# layout Vertical
+msgid "D&own	Page"
+msgstr "&Untere	Seite"
+
+msgid "&Up  	Page"
+msgstr "&Obere	Seite"
+
 ########################################################################
 # FvwmForm
 ########################################################################
@@ -730,6 +766,375 @@ msgstr "Zurücksetzen"
 
 msgid "Cancel"
 msgstr "Abbrechen"
+
+#-----------------------------------------------------------------------
+# FvwmForm-RunCommand
+#-----------------------------------------------------------------------
+msgid "Run Command"
+msgstr "Befehl ausführen"
+
+msgid "Command:"
+msgstr "Befehl:"
+
+msgid "Run in Terminal"
+msgstr "In Terminal ausführen"
+
+msgid "Execute"
+msgstr "Ausführen"
+
+#-----------------------------------------------------------------------
+# FvwmForm-About
+#-----------------------------------------------------------------------
+msgid "About"
+msgstr "Über"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Authors"
+msgstr "Autoren"
+
+msgid "Close"
+msgstr "Schließen"
+
+#-----------------------------------------------------------------------
+# FvwmForm-Messages
+#-----------------------------------------------------------------------
+# FuncShowMessage "Fvwm Version Info"
+msgid " Ok "
+msgstr " Ok "
+
+msgid "Fvwm Version Info"
+msgstr "Fvwm Versions Info"
+
+# Help info with SHIFT-CTRL-ALT in Root
+msgid "Mouse Bindings for Root area"
+msgstr "Maus Bindings für Root Bereich"
+
+msgid "Mouse 1:   Root menu"
+msgstr "Maus 1:    Root Menü"
+
+msgid "Mouse 2:   Window list"
+msgstr "Maus 2:    Window Liste"
+
+msgid "Mouse 3:   Desktop Oops menu"
+msgstr "Maus 3:    Desktop Oops Menü"
+
+msgid "Mouse 4/5: Switch to page left/right with"
+msgstr "Maus 4/5:  Wechseln zur linken/rechten Seite mit"
+
+msgid "           SHIFT-ALT + rolling wheel up/down anywhere"
+msgstr "           SHIFT-ALT + Scrollrad rauf/runter"
+
+msgid "           Switch with window to page left/right with"
+msgstr "           Mit Fenster zur linken/rechten Seite wechseln mit"
+
+msgid "           SHIFT-CTRL + rolling wheel up/down anywhere"
+msgstr "           SHIFT-STRG + Scrollrad rauf/runter"
+
+# config - Help info with SHIFT-CTRL-ALT to Pointer in Window Decorations
+msgid "Mouse Bindings for Titlebar"
+msgstr "Maus Bindings für Titelleiste"
+
+msgid "Mouse 1:   Drag moves window"
+msgstr "Maus 1:    Ziehen bewegt Fenster"
+
+msgid "           Maximize on double click"
+msgstr "           Maximieren bei Doppelklick"
+
+msgid "Mouse 2:   Drag moves window"
+msgstr "Maus 2:    Ziehen bewegt Fenster"
+
+msgid "           Raise or lower with click"
+msgstr "           Anheben oder absenken mit Klick"
+
+msgid "Mouse 3:   WindowOpsTrimmed menu with click"
+msgstr "Maus 3:    WindowOpsTrimmed-Menü mit Klick"
+
+msgid "           WindowOpsFull menu with ALT + click"
+msgstr "           WindowOpsFull-Menü mit ALT + Klick"
+
+msgid "Mouse 4/5: Shade/unshade window"
+msgstr "Maus 4/5:  Fenster ein/ausrollen"
+
+msgid "           with rolling wheel up/down"
+msgstr "           mit Mausrad vor/zurück"
+
+msgid "Mouse Bindings for Corners and Sides"
+msgstr "Maus Bindings für Ecken und Seiten"
+
+msgid "Mouse 1:   Drag resize window"
+msgstr "Maus 1.    Ziehen passt Fenstergröße an"
+
+msgid "Mouse Bindings for Window area"
+msgstr "Maus Bindings für Fensterbereich"
+
+msgid "Mouse 1:   Root menu with ALT + click"
+msgstr "Maus 1:    Rootmenü mit ALT + Klick"
+
+msgid "Mouse 2:   Drag + ALT moves window"
+msgstr "Maus 2:    Ziehen + ALT bewegt Fenster"
+
+msgid "           Raise or lower with ALT + click"
+msgstr "           Anheben oder absenken mit ALT + Klick"
+
+# config - Help info with SHIFT-CTRL-ALT to Pointer in Icons
+msgid "Mouse Bindings for Icons"
+msgstr "Maus Bindings für Icons"
+
+msgid "Mouse 1:   Drag moves icon"
+msgstr "Maus 1:    Ziehen bewegt Icons"
+
+msgid "           Deiconify with double click"
+msgstr "           Zurück in Fensterform mit Doppelklick"
+
+msgid "           Root menu with ALT + click"
+msgstr "           Rootmenü mit ALT + Klick"
+
+msgid "Mouse 2:   Deiconify icon with click"
+msgstr "Maus 2:    Zurück in Fensterform mit Klick"
+
+msgid "           All of same resource group with CTRL + click"
+msgstr "            Alle der gleichen Fenstergruppe mit STRG + Klick"
+
+msgid "           WindowGroupOps menu with CTRL + click"
+msgstr "           WindowGroupOps-Menü mit STRG + Klick"
+
+# config - FuncWindowCreateScreenshot
+msgid "Screenshot Info for window"
+msgstr "Bildschirmfoto des aktiven Fensters"
+
+msgid "Screenshot created:"
+msgstr "Bildschirmfoto erstellt:"
+
+msgid "ImageMagick isn't installed. No screenshot created."
+msgstr "ImageMagick ist nicht installiert. Kein Bildschirmfoto erstellt."
+
+# config - FuncDesktopCreateScreenshot
+msgid "Desktop Screenshot Info"
+msgstr "Bildschirmfoto des Desktops"
+
+# config - FuncSuspend
+msgid "Suspend Info"
+msgstr "Bereitschaftsmodus Info"
+
+msgid "Install pm-utils for full functionality"
+msgstr "Installiere pm-utils für volle Funktionalität"
+
+# config - FuncHibernate
+msgid "Hibernate Info"
+msgstr "Ruhezustandsmodus Info"
+
+# config - FuncLockScreen
+msgid "Lock screen Info"
+msgstr "Sperrschirm Info"
+
+msgid "'xscreensaver' not running or not installed."
+msgstr "'xscreensaver' läuft nicht oder ist nicht installiert."
+
+# config - FuncMenuXScreenSaver
+msgid "Screensaver Info"
+msgstr "Bildschirmschoner Info"
+
+msgid "Install xscreensaver for full functionality"
+msgstr "Installiere xscreensaver für volle Funktionalität"
+
+# config - FuncMenuWallpaperConfiguration
+msgid "Wallpaper browser Info"
+msgstr "Wallpaper-Browser Info"
+
+msgid "Install ImageMagick AND eterm for full functionality."
+msgstr "Installiere ImageMagick UND eterm für volle Funktionalität"
+
+# config - FuncKbdLayouter
+msgid "Keyboard Layout Info"
+msgstr "Tastatur-Layout Info"
+
+msgid "Install xneur/gxneur for full functionality"
+msgstr "Installiere xneur/gxneur für volle Funktionalität"
+
+# config - FuncLxappearance
+msgid "Gtk+ Decor Info"
+msgstr "Gtk+ Dekor Info"
+
+msgid "Install LxApearance for Gtk+ apps"
+msgstr "Installiere LxApearance für Gtk+ Applikationen"
+
+# config - FuncQt3Decor
+msgid "Qt3 Decor Info"
+msgstr "Qt3 Dekor Info"
+
+msgid "Install qtconfig-qt3 for Qt3 apps"
+msgstr "Installiere qtconfig-qt3 für Qt3 Applikationen"
+
+# config - FuncQt4Decor
+msgid "Qt4 Decor Info"
+msgstr "Qt4 Dekor Info"
+
+msgid "Install qtconfig-qt4 for Qt4 apps"
+msgstr "Installiere qtconfig-qt4 für Qt4 Applikationen"
+
+# Help info with SHIFT-CTRL-ALT P to show all page related key bindings
+# layout Horizontal & G2like
+msgid "Page Key Bindings"
+msgstr "Seiten-Tastatur Bindings"
+
+msgid "SHIFT-CTRL:"
+msgstr "SHIFT-STRG:"
+
+msgid "Cursor right/left: Switch to page right/left"
+msgstr "Cursor rechts/links: Wechsle zur rechten/linken Seite"
+
+msgid "1-4: Switch to page n"
+msgstr "1-4: Wechsle zu Seite n"
+
+msgid "SHIFT-ALT:"
+msgstr "SHIFT-ALT:"
+
+msgid "Cursor right/left: Switch active window to page right/left"
+msgstr "Cursor rechts/links: Wechsle mit aktivem Fenster zur rechten/linken Seite"
+
+msgid "1-4: Switch active window to page n"
+msgstr "1-4: Wechsle mit aktivem Fenster zu Seite n"
+
+msgid "ALT-CTRL:"
+msgstr "ALT-STRG:"
+
+msgid "Cursor right/left/up/down: Move mouse pointer by 1% of a page"
+msgstr "Cursor rechts/links/rauf/runter: Bewege Mauszeiger 1% weiter auf der Seite"
+
+msgid "SHIFT-ALT-CTRL:"
+msgstr "SHIFT-ALT-STRG:"
+
+msgid "Cursor right/left/up/down: Scroll right/left by 10% of a page"
+msgstr "Cursor rechts/links/rauf/runter: Bewege die Seite 10% nach rechts/links"
+
+# layout Vertical
+msgid "Cursor up/down: Switch to page up/down"
+msgstr "Cursor rauf/runter: Wechsle zur oberen/unteren Seite"
+
+msgid "Cursor up/down: Switch active window to page up/down"
+msgstr "Cursor rauf/runter: Wechsle mit aktivem Fenster zur oberen/unteren Seite"
+
+# .bindings
+# Help info with SHIFT-CTRL-ALT A to show all ALT related key bindings
+msgid "ALT Key Bindings"
+msgstr "ALT Tastatur Bindings"
+
+msgid "ALT:"
+msgstr "ALT:"
+
+msgid "F1: Open root menu          F7:  Move window"
+msgstr "F1: Rootmenü öffnen           F7: Fenster bewegen"
+
+msgid "F2: Launch 'run' dialog box F8:  Resize window"
+msgstr "F2: 'Befehl ausführen' Dialog F8: Fenstergröße ändern"
+
+msgid "F3: Show window list        F9:  Minimize window"
+msgstr "F3: Zeige Fensterliste        F9: Fenster minimieren"
+
+msgid "F4: Close active window     F10: Maximize/restore window"
+msgstr "F4 Schließe aktives Fenster   F10: Fenster maximieren/wiederherstellen"
+
+msgid "F5: Not used                F11: Fullscreen/restore window"
+msgstr "F5: Nicht verwendet           F11: Fenster Vollbild/wiederherstellen"
+
+msgid "F6: Cycle between same      F12: Identify window"
+msgstr "F6: Innerhalb von Gruppen-    F12: Fenster identifizieren"
+
+msgid "    resource windows"
+msgstr "    fenstern wechseln"
+
+msgid "Tab:   Cycle between windows"
+msgstr "Tab:   Zwischen Fenstern wechseln"
+
+msgid "Print: Screenshot of the active window"
+msgstr "Druck: Bildschirmfote des aktiven Fensters"
+
+msgid "None:"
+msgstr "Nichts:"
+
+msgid "Print: Screenshot of current page"
+msgstr "Druck: Bildschirmfote der aktuellen Seite"
+
+# Help info with SHIFT-CTRL-ALT H to show the global key bindings help window
+msgid "Help Keys with CTRL-ALT"
+msgstr "Hilfetasten mit STRG-ALT"
+
+msgid "A: List ALT bindings"
+msgstr "A: ALT-Bindings auflisten"
+
+msgid "C: List CTRL bindings"
+msgstr "C: STRG-Bindings auflisten"
+
+msgid "P: List Page bindings"
+msgstr "P: Seiten-Bindings auflisten"
+
+# Help info with SHIFT-CTRL-ALT C to show all CTRL related key bindings
+msgid "CTRL Key Bindings"
+msgstr "STRG-Tasten-Bindings"
+
+msgid "F1: Open full Oops menu     F2: Launch FvwmConsole"
+msgstr "F1: Voll-Oops-Menü öffnen   F2: FvwmConsole starten"
+
+msgid "CTRL-ALT:"
+msgstr "STRG-ALT:"
+
+msgid "D:  Hide/unhide all windows T:  Launch Terminal"
+msgstr "D: Alle Fenster minimieren/zeigen  T: Terminal starten"
+
+msgid "L:  Lock Screen"
+msgstr "L: Bildschirm sperren"
+
+# decor theme file
+# Help info with SHIFT-CTRL-ALT to Window Button Pointer
+msgid "Left Button Bindings"
+msgstr "Bindings für linken Fenster-Button"
+
+msgid "Mouse 1:  WindowOps menu"
+msgstr "Maus 1:   WindowOps-Menü"
+
+msgid "Mouse 2:  Move to page menu"
+msgstr "Maus 2:   Bewege zu Seitenmenü"
+
+msgid "Mouse 3:  WindowGroupOps menu"
+msgstr "Maus 3:   WindowGroupOps-Menü"
+
+msgid "Close Button Bindings"
+msgstr "Bindings für Schließen Fenster-Button"
+
+msgid "Mouse 1:  Delete on click"
+msgstr "Maus 1:   Schließen mit Klick"
+
+msgid "          Destroy on double click"
+msgstr "          Zerstören mit Doppelklick"
+
+msgid "Maximize Button Bindings"
+msgstr "Bindings für Maximieren Fenster-Button"
+
+msgid "Mouse 1:  Maximize fully on click"
+msgstr "Maus 1:   Voll maximieren mit Klick"
+
+msgid "          Maximize menu on double click"
+msgstr "          Maximierenmenü mit Doppelklick"
+
+msgid "Mouse 2:  Maximize vertically"
+msgstr "Maus 2:   Vertikal maximieren"
+
+msgid "Mouse 3:  Maximize horizontally"
+msgstr "Maus 3:   Horizontal maximieren"
+
+msgid "Minimize Button Bindings"
+msgstr "Bindings für Minimieren Fenster-Button"
+
+msgid "Mouse 1:  Iconify"
+msgstr "Maus 1:   Zu Icon minimieren"
+
+msgid "Mouse 2:  Iconify on resource group"
+msgstr "Maus 2:   Fenstergruppe zu Icons minimieren"
+
+msgid "Mouse 3:  Iconify toggle resource group"
+msgstr "Maus 3:   Fenstergruppe zu minimieren/wiederherstellen"
 
 ########################################################################
 # FvwmScript
