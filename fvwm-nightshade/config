@@ -966,16 +966,17 @@ AddToFunc   FuncShowMessage
 + I PipeRead `echo 'DestroyModuleConfig  FvwmForm-Messages: *' > ${FVWM_USERDIR}/FvwmForm-Messages; \
               echo '*FvwmForm-Messages: Font 8x13' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
               echo '*FvwmForm-Messages: WarpPointer' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
-              echo "*FvwmForm-Messages: Title   \\"$0\\"" >> ${FVWM_USERDIR}/FvwmForm-Messages `
+              echo "*FvwmForm-Messages: Title   \\"\\$\[gt.$0\]\\"" >> ${FVWM_USERDIR}/FvwmForm-Messages `
 + I PipeRead `start=0; for i in $*; do \
               if [ "$start" -gt "0" ]; then \
                 echo '*FvwmForm-Messages: Line    left' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
-                echo "*FvwmForm-Messages: Text  \\"$i\\"" >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+                msg=$i; \
+                echo "*FvwmForm-Messages: Text  \\"\\$\[gt.$msg\]\\"" >> ${FVWM_USERDIR}/FvwmForm-Messages; \
               fi; \
               start=$(($start+1)); \
               done `
 + I PipeRead `echo '*FvwmForm-Messages: Line   center' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
-              echo '*FvwmForm-Messages: Button  quit \" Ok \" ^M' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
+              echo '*FvwmForm-Messages: Button  quit \"\$\[gt. Ok \]\" ^M' >> ${FVWM_USERDIR}/FvwmForm-Messages; \
               echo '*FvwmForm-Messages: Command !(rm -f ${FVWM_USERDIR}/FvwmForm-Messages)' >> ${FVWM_USERDIR}/FvwmForm-Messages `
 + I Schedule 100 Module FvwmForm FvwmForm-Messages
 
@@ -1304,9 +1305,9 @@ AddToFunc   FuncWindowCreateScreenshot
 + I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%H%M%S`.$[w.id].png"'
 + I Test (x import) ThisWindow (!Shaded, !Iconic, Iconifiable) \
                   PipeRead 'import -frame -window $[w.id] $[infostore.picpath]'
-+ I TestRc (Match)  FuncShowMessage "$[gt.Screenshot Info for window] $[w.id]" \
-                                    "Screenshot created: $[infostore.picpath]"
-+ I TestRc (!Match) FuncShowMessage "$[gt.Screenshot Info for window] $[w.id]" \
++ I TestRc (Match)  FuncShowMessage "\$\[gt.Screenshot Info for window\] $[w.id]" \
+                                    "\$\[gt.Screenshot created:\] $[infostore.picpath]"
++ I TestRc (!Match) FuncShowMessage "\$\[gt.Screenshot Info for window\]" \
                                     "ImageMagick isn't installed. No screenshot created."
 + I InfoStoreRemove picpath
 
@@ -1315,15 +1316,15 @@ AddToFunc   FuncWindowCreateScreenshot
 #-----------------------------------------------------------------------
 DestroyFunc FuncDesktopCreateScreenshot
 AddToFunc   FuncDesktopCreateScreenshot
-+ I Test (!x import) FuncShowMessage "$[gt.Desktop Screenshot Info]" \
++ I Test (!x import) FuncShowMessage "Desktop Screenshot Info" \
                                      "ImageMagick isn't installed. No screenshot created."
 
 + I TestRc (Match) Break 1
 + I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%H%M%S`.png"'
 + I Exec sleep $0; import -window root -quality 100 -silent $[infostore.picpath]
 + I PipeRead 'echo InfoStoreAdd pause `expr $0 \\* 1000`'
-+ I Schedule $[infostore.pause] FuncShowMessage "$[gt.Screenshot Info for the desktop]" \
-												"Screenshot created: $[infostore.picpath]"
++ I Schedule $[infostore.pause] FuncShowMessage "Desktop Screenshot Info" \
+												"\$\[gt.Screenshot created:\] $[infostore.picpath]"
 + I InfoStoreRemove picpath
 + I InfoStoreRemove pause
 
