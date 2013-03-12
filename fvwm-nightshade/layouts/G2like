@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2like
-# Version:	1.0.3
+# Version:	1.0.4
 # Licence: 	GPL 2
 #
 # Description:	Gnome like layout with a top and bottom bar
@@ -9,7 +9,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	10/09/2012
-# Changed:	11/09/2012
+# Changed:	03/10/2013
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -208,13 +208,13 @@ key P		A	SCM	FuncShowMessage  "Page Key Bindings" \
 #-----------------------------------------------------------------------
 DestroyMenu  MenuWindowGroupQuickMove
 AddToMenu    MenuWindowGroupQuickMove
-+ "&Right	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage +1p +0p
-+ "&Left	Page%menu/window-move.xpm%" 	Pick All ($[w.resource]) MoveToPage -1p +0p
-+ ""										Nop
-+ "Page	1%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
-+ "Page	2%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
-+ "Page	3%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 2 0
-+ "Page	4%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 3 0
++ "$[gt.&Right	Page]%menu/window-move.xpm%" 		Pick All ($[w.resource]) MoveToPage +1p +0p
++ "$[gt.&Left	Page]%menu/window-move.xpm%" 		Pick All ($[w.resource]) MoveToPage -1p +0p
++ ""												Nop
++ "$[gt.Page	&1]%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
++ "$[gt.Page	&2]%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
++ "$[gt.Page	&3]%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 2 0
++ "$[gt.Page	&4]%menu/window-move.xpm%"			Pick All ($[w.resource]) FuncMoveWindowToPage 3 0
 
 #-----------------------------------------------------------------------
 # Move a window to left/right/1-4 page
@@ -222,10 +222,10 @@ AddToMenu    MenuWindowGroupQuickMove
 DestroyMenu  MenuWindowMoveTo
 AddToMenu    MenuWindowMoveTo
 + "Move to ..." Title
-+ "$[gt.&Right	Page]%menu/window-move.xpm%"	AnimatedMove w+100 w
-+ "&Left	Page%menu/window-move.xpm%"			AnimatedMove w-100 w
-+ ""											Nop
-+ "Page	1%menu/window-move.xpm%"				FuncMoveWindowToPage 0 0
-+ "Page	2%menu/window-move.xpm%"				FuncMoveWindowToPage 1 0
-+ "Page	3%menu/window-move.xpm%"				FuncMoveWindowToPage 2 0
-+ "Page	4%menu/window-move.xpm%"				FuncMoveWindowToPage 3 0
++ "$[gt.&Right	Page]%menu/window-move.xpm%"			AnimatedMove w+100 w
++ "$[gt.&Left	Page%menu/window-move.xpm%"				AnimatedMove w-100 w
++ ""													Nop
++ "$[gt.Page	&1]%menu/window-move.xpm%"				FuncMoveWindowToPage 0 0
++ "$[gt.Page	&2]%menu/window-move.xpm%"				FuncMoveWindowToPage 1 0
++ "$[gt.Page	&3]%menu/window-move.xpm%"				FuncMoveWindowToPage 2 0
++ "$[gt.Page	&4]%menu/window-move.xpm%"				FuncMoveWindowToPage 3 0
