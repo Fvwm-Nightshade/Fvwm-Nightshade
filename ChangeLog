@@ -1,5 +1,14 @@
 History:
 
+03/12/2013 
+- change in config:
+  - FuncShowMessage that it can work with $[gt.<message>] correctly
+  - FuncWindowCreateScreenshot and FuncWindowCreateScreenshot that
+    messages are translated correctly
+- add hotkeys in all layouts in MenuWindowGroupQuickMove and MenuWindowMoveTo
+- update fvwm-nightshade.pot
+- update german po and mo files
+
 03/08/2013 
 - change LocalePath that locales (fvwm-nightshade.mo) will be found in
   /install_prefix/share/locale or $FVWM_USERDIR/locale. Changes made in
