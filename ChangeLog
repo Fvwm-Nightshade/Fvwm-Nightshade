@@ -1,5 +1,9 @@
 History:
 
+03/14/2013 
+- add documentation for localization feature to fvwm-nightshade manpage, 
+  html and asciidoc
+
 03/12/2013 
 - change in config:
   - FuncShowMessage that it can work with $[gt.<message>] correctly
