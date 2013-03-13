@@ -1818,6 +1818,7 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p><strong>&lt;user&gt;/icons/</strong> &#8594; Menu icon directory created by Regenerate XDG Menus.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/layouts/</strong> &#8594; Optional user layout directory.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/themes/</strong> &#8594; Optional user themes directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/locales/</strong> &#8594; Optional user language directory.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_call_sequence_while_startup">Call Sequence while Startup</h3>
@@ -2127,6 +2128,118 @@ Then the menus following. Also needed mostly for the pager.
 </div>
 </div>
 <div class="sect1">
+<h2 id="_language_creation">LANGUAGE CREATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>Fvwm-Nightshade</strong> supports a couple of languages - at the moment german,
+russian, spanish, italian and french. If you want to create your own
+translation you can use the "fvwm-nightshade.pot" template located in <tt>&lt;system&gt;/templates</tt>.</p></div>
+<div class="paragraph"><p>We support <strong>two</strong> locations where your translation can copy to:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+The system wide in <tt>/usr/share/locale/</tt> or <tt>/usr/local/share/locale/</tt>
+</p>
+</li>
+<li>
+<p>
+The user wide in <tt>~/fvwm-nightshade/locale/</tt>
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>The following Howto uses the user wide one.</p></div>
+<div class="sect2">
+<h3 id="_steps_for_your_own_translation">Steps for your own translation</h3>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Create the directory with its' sub directories:
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>~/.fvwm-nightshade/locale/&lt;your_lang&gt;/LC_MESSAGES</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+Copy fvwm-nightshade.pot to this directory:
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$&gt; cp &lt;system&gt;/templates/fvwm-nightshade.pot ~/.fvwm-nightshade/locale/&lt;your_lang&gt;/LC_MESSAGES/fvwm-nightshade.po</tt></pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">You can look to <tt>/usr/share/locale</tt> which token is normally used for your language.</td>
+</tr></table>
+</div>
+</li>
+<li>
+<p>
+Open it with your favorite editor, fill out the header and translate
+the messages into your language.
+</p>
+</li>
+<li>
+<p>
+Create the machine readable code with <em>msgfmt</em>
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>$&gt; msgfmt fvwm-nightshade.po -o fvwm-nightshade.mo</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+Restart <strong>Fvwm-Nightshade</strong>.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Now all menus, messages and tools should be shown in your language.</p></div>
+<div class="paragraph"><p><strong>Remark:</strong></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Some messages have a fixed size and spaces at the beginning or the end.
+They should used in the translation just as well! For example:
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><tt>msgid "              (E.g. 10, 11, 13)"
+msgstr "              (z.B. 10, 11, 13)"</tt></pre>
+</div></div>
+</li>
+<li>
+<p>
+Menu entries have <strong>&amp;</strong> for hotkeys. So you should set them that no double
+underlines exist.
+</p>
+</li>
+<li>
+<p>
+Every time you change something in the <strong>po</strong> file a restart of <strong>Fvwm-Nightshade</strong>
+is necessary if it is related to menu entries. All others like in <strong>FvwmScripts</strong>
+or <strong>FvwmForms</strong> are shown after restart of the application.
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Tip</div>
+</td>
+<td class="content">You can use <strong>poedit</strong> or <strong>KBabel</strong> instead of an editor for translation. It&#8217;s
+a matter of choice ;-) &#8230;</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>If you need more information about the used translation process see
+<a href="http://www.gnu.org/software/gettext/manual/gettext.html">http://www.gnu.org/software/gettext/manual/gettext.html</a></p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_authors">AUTHORS</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>&#169; 2013 by the Fvwm-Nightshade team &lt;<a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a>&gt;.</p></div>
@@ -2152,7 +2265,7 @@ or submit them under <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-01-24 20:01:13 CET
+Last updated 2013-03-14 00:28:04 CET
 </div>
 </div>
 </body>

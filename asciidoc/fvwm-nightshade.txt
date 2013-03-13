@@ -575,6 +575,7 @@ Location of Files and their Function
 
 *<user>/themes/* -> Optional user themes directory.
 
+*<user>/locales/* -> Optional user language directory.
 
 Call Sequence while Startup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -739,6 +740,68 @@ Configuration -> Fvwm-Nightshade -> Decoration -> Layouts
 if it found under +<user>/layouts/+. It appears automatically.
 
 That’s it. Not much but hopefully enough for playing ;).
+
+LANGUAGE CREATION
+-----------------
+*Fvwm-Nightshade* supports a couple of languages - at the moment german, 
+russian, spanish, italian and french. If you want to create your own 
+translation you can use the "fvwm-nightshade.pot" template located in +<system>/templates+.
+
+We support *two* locations where your translation can copy to:
+
+. The system wide in +/usr/share/locale/+ or +/usr/local/share/locale/+
+. The user wide in +~/fvwm-nightshade/locale/+
+
+The following Howto uses the user wide one.
+
+Steps for your own translation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+. Create the directory with its' sub directories:
++
+----
+~/.fvwm-nightshade/locale/<your_lang>/LC_MESSAGES
+----
+. Copy fvwm-nightshade.pot to this directory:
++
+----
+$> cp <system>/templates/fvwm-nightshade.pot ~/.fvwm-nightshade/locale/<your_lang>/LC_MESSAGES/fvwm-nightshade.po
+----
++
+TIP: You can look to +/usr/share/locale+ which token is normally used for your language.
+
+. Open it with your favorite editor, fill out the header and translate 
+the messages into your language. 
+
+. Create the machine readable code with _msgfmt_
++
+----
+$> msgfmt fvwm-nightshade.po -o fvwm-nightshade.mo
+----
+
+. Restart *Fvwm-Nightshade*.
+
+Now all menus, messages and tools should be shown in your language.
+
+*Remark:*
+
+* Some messages have a fixed size and spaces at the beginning or the end. 
+They should used in the translation just as well! For example:
++
+----
+msgid "              (E.g. 10, 11, 13)"
+msgstr "              (z.B. 10, 11, 13)"
+----
+* Menu entries have *&* for hotkeys. So you should set them that no double 
+underlines exist.
+* Every time you change something in the *po* file a restart of *Fvwm-Nightshade* 
+is necessary if it is related to menu entries. All others like in *FvwmScripts* 
+or *FvwmForms* are shown after restart of the application.
+
+TIP: You can use *poedit* or *KBabel* instead of an editor for translation. It's 
+a matter of choice ;-) ...
+
+If you need more information about the used translation process see 
+http://www.gnu.org/software/gettext/manual/gettext.html
 
 
 AUTHORS
