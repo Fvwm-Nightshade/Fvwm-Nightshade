@@ -1,6 +1,21 @@
 Fvwm-Nightshade Release Notes
 =============================
 
+Version 0.6.x ( 2013)
+
+Changes:
+--------
+- Add localization support for the following languages:
+  - German
+  - Russian
+  - French
+  - Spanish
+  - Italian
+- Bugfix for FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
+  that theme/layout names ended with 't' doesn't show correctly in menu and
+  can't use though.
+- Bugfix for FvwmScript-CPU-Performance with an absolut path for .governor file.
+
 ------------------------------------------------------------------------
 
 Version 0.6 (30th January 2013)
