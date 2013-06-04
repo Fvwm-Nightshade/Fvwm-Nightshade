@@ -96,7 +96,7 @@ Featurelist of Fvwm-Nightshade 0.6.x:
 - Create thumbs with mini icon and name for iconified applications 
   instead of their icon
 - Build support for deb, rpm and Arch packages
-- Localization support for German, Russian, French, Spanish and Italian
+- Localization support for German, French and Spanish
 
 
 Requirements:
