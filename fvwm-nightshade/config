@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.1
+InfoStoreAdd ns_version 0.7.2
 # Copyright (C) 2013
 #
 # Authors:
@@ -213,11 +213,6 @@ FuncSetThemeDir $[infostore.used_theme]
 PipeRead "echo InfoStoreAdd ratio `perl -e 'printf \"%.1f\",log($[vp.width]*$[vp.height])/log(10)-log(1024*768)/log(10)+1'`"
 PipeRead "echo InfoStoreAdd hratio `perl -e 'printf \"%.1f\",($[vp.height]/1024)*(4/3)'`"
 PipeRead "echo InfoStoreAdd wratio `perl -e 'printf \"%.1f\",$[infostore.hratio]*(($[vp.width]/$[vp.height])/(4/3))'`"
-
-#-----------------------------------------------------------------------
-# used for 'Switching focus between windows. (ALT-Tab)' functionality
-#-----------------------------------------------------------------------
-InfoStoreAdd direction Next
 
 
 #=======================================================================
@@ -1345,17 +1340,20 @@ AddToFunc   FuncOpenURL
 + I TestRc (!Match) Test (x opera) Exec opera '$0'
 + I TestRc (!Match) FuncRunInXterm 'Open URL - $0' 'links "$0"'
 
+
 #-----------------------------------------------------------------------
-# Switching focus between windows. (ALT-Tab) from the Fvwm Wiki
+# Switching focus between windows with ALT-Tab and SHIFT-ALT-Tab
+# from the Russian Fvwm Wiki (http://www.linux.org.ru/wiki/en/FVWM)
 #-----------------------------------------------------------------------
-DestroyFunc FuncSwitchWindow
-AddToFunc   FuncSwitchWindow
-+ I $[infostore.direction] (CurrentPage, !Iconic, !Sticky) FuncSelectWindow
-+ I Deschedule 134000
-+ I PipeRead `[ "$[infostore.DIR]" == "Prev" ] && \
-              echo 'InfoStoreAdd new_direction Next' || \
-              echo 'InfoStoreAdd new_direction Prev'`
-+ I Schedule 700 134000 InfoStoreAdd direction $[infostore.new_direction]
+DestroyFunc FuncFvwmNextWindow
+AddToFunc FuncFvwmNextWindow
++ I Next (CurrentPage, !Iconic, AcceptsFocus) FlipFocus NoWarp
++ I Current Raise
+
+DestroyFunc FuncFvwmPrevWindow
+AddToFunc FuncFvwmPrevWindow
++ I Prev (CurrentPage, !Iconic, AcceptsFocus) Focus NoWarp
++ I Current Raise
 
 #-----------------------------------------------------------------------
 # Wallpaper Browser by Taviso.

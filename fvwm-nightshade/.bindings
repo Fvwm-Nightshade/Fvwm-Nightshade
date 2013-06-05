@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		.bindings
-# Version:	1.1.0
+# Version:	1.1.1
 # Licence: 	GPL 2
 #
 # Description:	keyboard bindings
@@ -8,7 +8,7 @@
 # Author:	Thomas Funk <t.funk@web.de>	
 #
 # Created:	10/24/2012
-# Changed:	01/01/2013
+# Changed:	06/05/2013
 #-----------------------------------------------------------------------
 #
 # Overview:
@@ -39,7 +39,7 @@
 #-----------------------------------------------------------------------
 # Switching focus between windows. (ALT-Tab)
 #-----------------------------------------------------------------------
-Key Tab		A		M		FuncSwitchWindow
+Key Tab		A		M		FuncFvwmNextWindow
 #-----------------------------------------------------------------------
 # Print screenshot for active window
 #-----------------------------------------------------------------------
@@ -105,6 +105,11 @@ Key Print	A       N       FuncDesktopCreateScreenshot 5
 # 6.2.2 ALT-SHIFT + Key
 #***********************************************************************
 #   Keyname Context Modifi 	Function
+
+#-----------------------------------------------------------------------
+# Switching focus between windows backwards. (ALT-SHIFT + Tab)
+#-----------------------------------------------------------------------
+Key Tab		A		SM		FuncFvwmPrevWindow
 
 #-----------------------------------------------------------------------
 # press SHIFT-ALT arrow anywhere, move active
