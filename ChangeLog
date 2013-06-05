@@ -3,11 +3,12 @@ History:
 - fix bug #24 - FvwmScript-PersonalMenu replaces underlines in icon paths 
   with spaces
 - fix bug #25 - FvwmScript-PersonalMenu show bad message in statusbar
-- remove Alt-Tab from Fvwm-Wiki and replace it with the forward/backward 
-  functions found on the Russian Fvwm wiki (http://www.linux.org.ru/wiki/en/FVWM)
-  -> issue #21 - TAB cycling
-- documentation updated (asciidoc, man, html) for issue #21
-- translation updated (pot, de, fr, sp) for issue #21
+- for issue #21 - TAB cycling
+  - remove Alt-Tab from Fvwm-Wiki and replace it with the forward/backward 
+    functions found on the Russian Fvwm wiki (http://www.linux.org.ru/wiki/en/FVWM)
+  - documentation updated (asciidoc, man, html)
+  - translation updated (pot, de, fr, sp)
+  - update README
 
 06/04/2013
 - add spanish and french translation

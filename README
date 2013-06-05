@@ -88,7 +88,7 @@ Featurelist of Fvwm-Nightshade 0.6.x:
 - Help messages for key bindings with Shift-Alt-Ctrl + key
   - A global one with Shift-Alt-Ctrl + H
 - Dynamic menus
-- Switching focus between windows with Alt-Tab
+- Switching focus between windows with Alt-Tab / Shift-Alt-Tab
 - Splash screen
 - Print messages for needed apps for full config functionality in 
   .xsessions-error
