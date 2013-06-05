@@ -422,6 +422,7 @@ Window related::
 |Alt + F12	|Identify active window.
 |	|
 |Alt + Tab	|Switching focus to next window.
+|Alt-Shift + Tab|Switching focus to previous window.
 |Alt-Ctrl + D|Hide/unhide all windows.
 |====
 
