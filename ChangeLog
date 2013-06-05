@@ -1,4 +1,8 @@
 History:
+06/05/2013
+- fix bug #24 - FvwmScript-PersonalMenu replaces underlines in icon paths with spaces
+- fix bug #25 - FvwmScript-PersonalMenu show bad message in statusbar
+
 06/04/2013
 - add spanish and french translation
 - update AUTHORS, README and NEWS
