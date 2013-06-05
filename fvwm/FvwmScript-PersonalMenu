@@ -1,6 +1,6 @@
 ########################################################################
 # File:		FvwmScript-PersonalMenu
-# Version:	2.2.1
+# Version:	2.2.2
 # Licence: 	GPL 2
 #
 # Description:	creates and edit a personal menu file
@@ -13,15 +13,15 @@
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	04/29/2012
-# Changed:	03/08/2013
+# Changed:	06/05/2013
 ########################################################################
 
 #-----------------------------------------------------------------------
-# Version 2.2.1, Copyright 2013, Thomas Funk
+# Version 2.2.2, Copyright 2013, Thomas Funk
 #-----------------------------------------------------------------------
 
 UseGettext			{;fvwm-nightshade:$FVWM_USERDIR/locale;fvwm-nightshade:+}
-WindowLocaleTitle	{FvwmScript-PersonalMenu V 2.1.1}
+WindowLocaleTitle	{FvwmScript-PersonalMenu V 2.2.2}
 WindowSize			560 350
 WindowPosition		0 170
 
@@ -287,7 +287,7 @@ Case message of
 
 		Set $str_t1 = (Gettext {Added '}) 
 		Set $str_t2 = (Gettext {' to menu}) 
-		Set $msg = $str_t1$chosen_menu_app$str_t2
+		Set $msg = $str_t1 $chosen_menu_app $str_t2
 		ChangeLocaleTitle 10 $msg
 		ChangeLocaleTitle 8 {Personal Entries*}
     End
@@ -350,7 +350,7 @@ Case message of
 
 		Set $str_t1 = (Gettext {Removed '}) 
 		Set $str_t2 = (Gettext {' from menu}) 
-		Set $msg = $str_t1$chosen_personal_app$str_t2
+		Set $msg = $str_t1 $chosen_personal_app $str_t2
 		ChangeLocaleTitle 10 $msg
 		ChangeLocaleTitle 8 {Personal applications*}
     End
@@ -390,7 +390,7 @@ Case message of
 
 		# put all line per line into .personal because Do command has
 		# limitation of 998 chars
-		Set $cmd = {exec echo '}$personal_app_list_strs{' |sed -e 's/\+/\\+/g;s/\"/\\\"/g;s/\//\\\//g;s/ /_/g;s/|/ /g' }
+		Set $cmd = {exec echo '}$personal_app_list_strs{' |sed -e 's/\+/\\+/g;s/\"/\\\"/g;s/\//\\\//g;s/_/§/g;s/ /_/g;s/|/ /g' }
 		Set $temp_strs = (GetOutput $cmd 1 -1)
 		Set $index = 0
 		Set $notdone = 1
@@ -402,7 +402,7 @@ Case message of
 			Set $temp_entry = (GetOutput $cmd 1 $index)
 			If $temp_entry <> {} Then
 			Begin
-				Set $cmd = {exec echo '}$temp_entry{' |sed -e 's/ /\\n/g;s/_/ /g;s/\+/AddToMenu MenuFvwmPersonal/g;s/\"/\\\"/g;s/\//\\\//g'}
+				Set $cmd = {exec echo '}$temp_entry{' |sed -e 's/ /\\n/g;s/_/ /g;s/§/_/g;s/\+/AddToMenu MenuFvwmPersonal/g;s/\"/\\\"/g;s/\//\\\//g'}
 				Set $save_str = (GetOutput $cmd 1 -1)
 				# add new app list
 				Set $cmd = {sed -i '/}$last{/ a\}$save_str{' $FVWM_USERDIR/.personal}
