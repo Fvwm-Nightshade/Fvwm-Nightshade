@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
-"POT-Creation-Date: 2013-02-06 23:06+0200\n"
+"POT-Creation-Date: 2013-06-05 23:00++0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1045,7 +1045,10 @@ msgstr ""
 msgid "    resource windows"
 msgstr ""
 
-msgid "Tab:   Cycle between windows"
+msgid "Tab:   Switching focus to next window"
+msgstr ""
+
+msgid "Tab:   Switching focus to previous window"
 msgstr ""
 
 msgid "Print: Screenshot of the active window"
