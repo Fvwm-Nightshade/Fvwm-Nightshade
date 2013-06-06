@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-----------------------------------------------------------------------
 # File:        fns-find-icon
-# Version:     1.1.2
+# Version:     1.3.0
 # Licence:     GPL 2
 #
 # Description: get the iconpath of an application or icon
@@ -9,17 +9,18 @@
 #              -i window id of the application
 #              -p more search path(s). Seperated with ':'
 #              -s source icon size. Default is 48
-#			   -c category. Default is apps
-#			   --notdesk Don't search in desktop files. Default is false
-#			   --version Prints version
+#              -c category. Default is apps
+#              -t theme. Other used theme. Default is None
+#              --notdesk Don't search in desktop files. Default is false
+#              --version Prints version
 #
 # Author:      Thomas Funk <t.funk@web.de>
 # Created:     09/22/2012
-# Changed:	   10/22/2012
+# Changed:     06/06/2013
 #-----------------------------------------------------------------------
 
 import os, sys, string, time
-import commands
+import subprocess
 import fnmatch
 import argparse
 
@@ -43,7 +44,8 @@ def get_default_theme ():
     out = ''
     desktop_config = os.path.join(os.environ['FVWM_USERDIR'], '.FvwmForm-Desktop-Config')
     if os.path.isfile(desktop_config):
-		out = commands.getoutput("awk '$2 ~ \"Theme\" { print $3 }' "+desktop_config)
+        cmd = "awk '$2 ~ \"Theme\" { print $3 }' "+desktop_config
+        out = subprocess.check_output([cmd], shell=True).replace('\n', '')
     if out == '':
         return 'gnome'
     else:
@@ -51,7 +53,8 @@ def get_default_theme ():
 
 def get_menu_icon_path(app_name):
     menu_path = os.path.join(os.environ['FVWM_USERDIR'], '.menu')
-    icon_path = commands.getoutput("grep -m1 "+app_name+" "+menu_path+" |cut -d'%' -f2")
+    cmd = "grep -m1 "+app_name+" "+menu_path+" |cut -d'%' -f2"
+    icon_path = subprocess.check_output([cmd], shell=True).replace('\n', '')
     return icon_path
     
 def get_dektop_icon_path(app_name):
@@ -60,7 +63,8 @@ def get_dektop_icon_path(app_name):
     desktop_file_path = search_file(app_name, search_paths)
     
     if desktop_file_path:
-        icon_path = commands.getoutput("grep '[Ii]con' "+desktop_file_path)
+        cmd = "grep '[Ii]con' "+desktop_file_path
+        icon_path = subprocess.check_output([cmd], shell=True).replace('\n', '')
         icon_path = icon_path.replace(' ', '').split('=')[1]
         return icon_path
     else:
@@ -84,6 +88,7 @@ if __name__ == '__main__':
     parser.add_argument('-p', action="store", dest="extend_path", help='more search path(s). Seperated with \':\'')
     parser.add_argument('-s', action="store", dest="icon_size", help='source icon size. Default is 48', default='48')
     parser.add_argument('-c', action="store", dest="category", help='category. Default is apps', default='apps')
+    parser.add_argument('-t', action="store", dest="theme", help='other theme. Default is None', default=None)
     parser.add_argument('--notdesk', action="store_true", dest="not_desktop_file", help='Don\'t search in desktop files. Default is false', default=False)
 
     args = parser.parse_args()
@@ -93,6 +98,7 @@ if __name__ == '__main__':
     extend_path = args.extend_path
     icon_size = args.icon_size
     category = args.category
+    other_theme = args.theme
     not_desktop_file = args.not_desktop_file
     
     if app_name and window_id:
@@ -101,8 +107,11 @@ if __name__ == '__main__':
     
     ts = time.time()
 
-    # get the used theme in fvwm-menu-desktop-config
-    theme = get_default_theme()
+    if not other_theme == None:
+        theme = other_theme
+    else:
+        # get the used theme in fvwm-menu-desktop-config
+        theme = get_default_theme()
     
     i_size = icon_size+'x'+icon_size
     search_path = '/usr/share/icons/'+theme+'/'+i_size+'/'+category + os.pathsep \
@@ -121,7 +130,8 @@ if __name__ == '__main__':
     
     # get app name if window id is given
     if window_id:
-        app_name = commands.getoutput("xprop -id "+window_id+" WM_CLASS |cut -d',' -f2 |cut -d'\"' -f2")
+        cmd = "xprop -id "+window_id+" WM_CLASS |cut -d',' -f2 |cut -d'\"' -f2"
+        app_name = subprocess.check_output([cmd], shell=True).replace('\n', '')
         app_name = app_name.lower()
         # reduce it for better finding
         app_name = app_name.split('-')[0]
