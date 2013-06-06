@@ -1,4 +1,9 @@
 History:
+06/06/2013
+- adapt fns-find-icon to Python 3 (issue #20). Also add new option -t Theme to use
+  another theme than the default one.
+- update documentation
+
 06/05/2013
 - fix bug #24 - FvwmScript-PersonalMenu replaces underlines in icon paths 
   with spaces
