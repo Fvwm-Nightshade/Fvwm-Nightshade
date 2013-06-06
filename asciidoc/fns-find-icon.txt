@@ -107,6 +107,11 @@ The 'ICON_SIZE' defines the the icon size to search for. Default is '48'.
 The 'CATEGORY' defines the category in the theme to search for an icon. 
 Default is 'apps'.
 
+*-t* 'THEME'::
++
+The 'THEME' defines the theme to search for an icon. 
+Default is the theme used in fvwm-menu-desktop-config.
+
 *--notdesk*::
 +
 To search for a specific icon not for an icon from a .desktop file use 
@@ -123,6 +128,6 @@ Shows short help and exit.
 AUTHOR
 ------
 
-(C) 2012 Thomas Funk <t.funk@web.de>
+(C) 2013 Thomas Funk <t.funk@web.de>
 
 
