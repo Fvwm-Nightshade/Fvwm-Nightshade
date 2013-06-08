@@ -812,7 +812,7 @@ msgid "Mouse Bindings for Root area"
 msgstr "Souris figer pour root domaine"
 
 msgid "Mouse 1:   Root menu"
-msgstr "Mouse 1:  Root menu"
+msgstr "Mouse 1:   Root menu"
 
 msgid "Mouse 2:   Window list"
 msgstr "Mouse 2:   Window list"

@@ -812,59 +812,59 @@ msgid "Mouse Bindings for Root area"
 msgstr "Vincular Ratón para area Root"
 
 msgid "Mouse 1:   Root menu"
-msgstr "Ratón 1: Menú Raíz"
+msgstr "Ratón 1:   Menú Raíz"
 
 msgid "Mouse 2:   Window list"
-msgstr "Ratón 2: Lista de Ventanas"
+msgstr "Ratón 2:   Lista de Ventanas"
 
 msgid "Mouse 3:   Desktop Oops menu"
-msgstr "Ratón 3: Menú Oops de Escritorio"
+msgstr "Ratón 3:   Menú Oops de Escritorio"
 
 msgid "Mouse 4/5: Switch to page left/right with"
 msgstr "Ratón 4/5: Cambiar a página izquierda/derecha con"
 
 msgid "           SHIFT-ALT + rolling wheel up/down anywhere"
-msgstr "          SHIFT-ALT + rueda arriba/abajo"
+msgstr "           SHIFT-ALT + rueda arriba/abajo"
 
 msgid "           Switch with window to page left/right with"
-msgstr "          Mandar ventana a página izquierda/derecha with"
+msgstr "           Mandar ventana a página izquierda/derecha with"
 
 msgid "           SHIFT-CTRL + rolling wheel up/down anywhere"
-msgstr "          SHIFT-CTRL + ruleta arriba/abajo"
+msgstr "           SHIFT-CTRL + ruleta arriba/abajo"
 
 # config - Help info with SHIFT-CTRL-ALT to Pointer in Window Decorations
 msgid "Mouse Bindings for Titlebar"
 msgstr "Atajos de Ratón para Barra de Título"
 
 msgid "Mouse 1:   Drag moves window"
-msgstr "Ratón 1: Arrastrar para mover la ventana"
+msgstr "Ratón 1:   Arrastrar para mover la ventana"
 
 msgid "           Maximize on double click"
-msgstr "          Maximizar con doble click"
+msgstr "           Maximizar con doble click"
 
 msgid "Mouse 2:   Drag moves window"
-msgstr "Ratón 2: Arrastrar para mover la ventana"
+msgstr "Ratón 2:   Arrastrar para mover la ventana"
 
 msgid "           Raise or lower with click"
-msgstr "          Elevar o bajar con Click"
+msgstr "           Elevar o bajar con Click"
 
 msgid "Mouse 3:   WindowOpsTrimmed menu with click"
-msgstr "Ratón 3: Menú resumido de Ops de Ventana con click"
+msgstr "Ratón 3:   Menú resumido de Ops de Ventana con click"
 
 msgid "           WindowOpsFull menu with ALT + click"
-msgstr "          Menú Completo de Ops de Ventana con ALT + click"
+msgstr "           Menú Completo de Ops de Ventana con ALT + click"
 
 msgid "Mouse 4/5: Shade/unshade window"
 msgstr "Ratón 4/5: Enrrollar/Desenrrollar ventana"
 
 msgid "           with rolling wheel up/down"
-msgstr "          con rueda arriba/abajo"
+msgstr "           con rueda arriba/abajo"
 
 msgid "Mouse Bindings for Corners and Sides"
 msgstr "Atajos de Ratón para Esquinas y Lados"
 
 msgid "Mouse 1:   Drag resize window"
-msgstr "Ratón 1:  Arrastrar para cambiar el tamaño de Ventana"
+msgstr "Ratón 1:   Arrastrar para cambiar el tamaño de Ventana"
 
 msgid "Mouse Bindings for Window area"
 msgstr "Atajos de Ratón para area de Ventana"
@@ -873,32 +873,32 @@ msgid "Mouse 1:   Root menu with ALT + click"
 msgstr "Ratón 1:   Menú Raíz con ALT + click"
 
 msgid "Mouse 2:   Drag + ALT moves window"
-msgstr "Ratón 2:  Arrastrar + ALT mover ventana"
+msgstr "Ratón 2:   Arrastrar + ALT mover ventana"
 
 msgid "           Raise or lower with ALT + click"
-msgstr "          Elevar o bajar con ALT + click"
+msgstr "           Elevar o bajar con ALT + click"
 
 # config - Help info with SHIFT-CTRL-ALT to Pointer in Icons
 msgid "Mouse Bindings for Icons"
 msgstr "Atajos de Ratón para Iconos"
 
 msgid "Mouse 1:   Drag moves icon"
-msgstr "Ratón 1: Arrastrar para mover Icono"
+msgstr "Ratón 1:   Arrastrar para mover Icono"
 
 msgid "           Deiconify with double click"
-msgstr "          Deiconificar con doble click"
+msgstr "           Deiconificar con doble click"
 
 msgid "           Root menu with ALT + click"
-msgstr "          Menú Raíz con ALT + click"
+msgstr "           Menú Raíz con ALT + click"
 
 msgid "Mouse 2:   Deiconify icon with click"
-msgstr "Ratón 2: Deiconificar icono con click"
+msgstr "Ratón 2:   Deiconificar icono con click"
 
 msgid "           All of same resource group with CTRL + click"
-msgstr "          Todos los del mismo grupo de recursos con CTRL + click"
+msgstr "           Todos los del mismo grupo de recursos con CTRL + click"
 
 msgid "           WindowGroupOps menu with CTRL + click"
-msgstr "          Menú de Ops Grupos de Ventana con CTRL + click"
+msgstr "           Menú de Ops Grupos de Ventana con CTRL + click"
 
 # config - FuncWindowCreateScreenshot
 msgid "Screenshot Info for window"
@@ -1025,31 +1025,31 @@ msgid "ALT:"
 msgstr "ALT:"
 
 msgid "F1: Open root menu          F7:  Move window"
-msgstr "F1: Abrir Menú Raíz          F7:  Mover ventana"
+msgstr "F1: Abrir Menú Raíz            F7:  Mover ventana"
 
 msgid "F2: Launch 'run' dialog box F8:  Resize window"
-msgstr "F2: Ejecutar 'run' diálogo F8: Cambiar tamaño de ventana"
+msgstr "F2: Ejecutar 'run' diálogo     F8: Cambiar tamaño de ventana"
 
 msgid "F3: Show window list        F9:  Minimize window"
-msgstr "F3: Mostrar lista de ventanas F9: Minimizar Ventana"
+msgstr "F3: Mostrar lista de ventanas  F9: Minimizar Ventana"
 
 msgid "F4: Close active window     F10: Maximize/restore window"
-msgstr "F4: Cerrar ventana activa F10: Maximizar/restaurar ventana"
+msgstr "F4: Cerrar ventana activa      F10: Maximizar/restaurar ventana"
 
 msgid "F5: Not used                F11: Fullscreen/restore window"
-msgstr "F5: No Usada			   F11: Pantalla Completa/Restaurar ventana"
+msgstr "F5: No Usada			       F11: Pantalla Completa/Restaurar ventana"
 
 msgid "F6: Cycle between same      F12: Identify window"
 msgstr "F6: Alternar entre ventanas    F12: Identificar ventana"
 
 msgid "    resource windows"
-msgstr "   con similares recursos"
+msgstr "    con similares recursos"
 
 msgid "Tab:   Switching focus to next window"
-msgstr "Tab:  Cambiar foco a la siguiente ventana"
+msgstr "Tab:      Cambiar foco a la siguiente ventana"
 
 msgid "Tab:   Switching focus to previous window"
-msgstr "Tab:  Cambio de foco a la ventana anterior"
+msgstr "Tab:      Cambio de foco a la ventana anterior"
 
 msgid "Print: Screenshot of the active window"
 msgstr "Imprimir: Captura de ventana activa"
@@ -1084,10 +1084,10 @@ msgid "CTRL-ALT:"
 msgstr "CTRL-ALT"
 
 msgid "D:  Hide/unhide all windows T:  Launch Terminal"
-msgstr "D: Ocultar/mostrar todas las ventanas T: Ejecutar Terminal"
+msgstr "D:  Ocultar/mostrar todas las ventanas T: Ejecutar Terminal"
 
 msgid "L:  Lock Screen"
-msgstr "L: Bloquear Pantalla"
+msgstr "L:  Bloquear Pantalla"
 
 # decor theme file
 # Help info with SHIFT-CTRL-ALT to Window Button Pointer
@@ -1095,49 +1095,49 @@ msgid "Left Button Bindings"
 msgstr "Atajos con Botón Izquierdo"
 
 msgid "Mouse 1:  WindowOps menu"
-msgstr "Ratón 1: Menú de Ops de ventana"
+msgstr "Ratón 1:  Menú de Ops de ventana"
 
 msgid "Mouse 2:  Move to page menu"
-msgstr "Ratón 2: Menú Mover-a-Página"
+msgstr "Ratón 2:  Menú Mover-a-Página"
 
 msgid "Mouse 3:  WindowGroupOps menu"
-msgstr "Ratón 3: Menú Ops de grupo de ventanas"
+msgstr "Ratón 3:  Menú Ops de grupo de ventanas"
 
 msgid "Close Button Bindings"
 msgstr "Atajos del Botón Cerrar"
 
 msgid "Mouse 1:  Delete on click"
-msgstr "Ratón 1: Eliminar con click"
+msgstr "Ratón 1:  Eliminar con click"
 
 msgid "          Destroy on double click"
-msgstr "         Destruir con doble click"
+msgstr "          Destruir con doble click"
 
 msgid "Maximize Button Bindings"
 msgstr "Atajos del Botón Maximizar"
 
 msgid "Mouse 1:  Maximize fully on click"
-msgstr "Ratón 1: Maximizar completamente con click"
+msgstr "Ratón 1:  Maximizar completamente con click"
 
 msgid "          Maximize menu on double click"
-msgstr "         Menú Maximizar con doble click"
+msgstr "          Menú Maximizar con doble click"
 
 msgid "Mouse 2:  Maximize vertically"
-msgstr "Ratón 2: Maximizar verticalmente"
+msgstr "Ratón 2:  Maximizar verticalmente"
 
 msgid "Mouse 3:  Maximize horizontally"
-msgstr "Ratón 3: Maximizar horizontalmente"
+msgstr "Ratón 3:  Maximizar horizontalmente"
 
 msgid "Minimize Button Bindings"
 msgstr "Atajos del Botón Minimizar"
 
 msgid "Mouse 1:  Iconify"
-msgstr "Ratón 1: Iconificar"
+msgstr "Ratón 1:  Iconificar"
 
 msgid "Mouse 2:  Iconify on resource group"
-msgstr "Ratón 2: Iconificar el grupo de recursos"
+msgstr "Ratón 2:  Iconificar el grupo de recursos"
 
 msgid "Mouse 3:  Iconify toggle resource group"
-msgstr "Ratón 3: (Des)Iconificar grupo de recursos"
+msgstr "Ratón 3:  (Des)Iconificar grupo de recursos"
 
 ########################################################################
 # FvwmScript
