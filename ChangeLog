@@ -1,4 +1,76 @@
 History:
+06/08/2013 V 0.6.5
+- fix bug in debian/control that version of installed Fvwm isn't checked
+  correctly and FNS would be installed whether a smaller version than Fvwm
+  2.6.6 is installed
+- fix bug in fns-find-icon that in some cases no printout occurs
+- fix text formating in french and spanish translation (message boxes)
+- Prepare for release 0.6.5:
+  - update README, NEWS, AUTHORS
+
+06/06/2013
+- prepare fns-find-icon for Python 3 (issue #20). Also add new option -t Theme to use
+  another theme than the default one.
+- update documentation
+
+06/05/2013
+- fix bug #24 - FvwmScript-PersonalMenu replaces underlines in icon paths 
+  with spaces
+- fix bug #25 - FvwmScript-PersonalMenu show bad message in statusbar
+- for issue #21 - TAB cycling
+  - remove Alt-Tab from Fvwm-Wiki and replace it with the forward/backward 
+    functions found on the Russian Fvwm wiki (http://www.linux.org.ru/wiki/en/FVWM)
+  - documentation updated (asciidoc, man, html)
+  - translation updated (pot, de, fr, sp)
+  - update README
+
+06/04/2013
+- add spanish and french translation
+- update AUTHORS, README and NEWS
+
+03/14/2013 
+- update NEWS and README
+
+03/14/2013 
+- add documentation for localization feature to fvwm-nightshade manpage, 
+  html and asciidoc
+
+03/12/2013 
+- change in config:
+  - FuncShowMessage that it can work with $[gt.<message>] correctly
+  - FuncWindowCreateScreenshot and FuncWindowCreateScreenshot that
+    messages are translated correctly
+- add hotkeys in all layouts in MenuWindowGroupQuickMove and MenuWindowMoveTo
+- update fvwm-nightshade.pot
+- update german po and mo files
+
+03/08/2013 
+- change LocalePath that locales (fvwm-nightshade.mo) will be found in
+  /install_prefix/share/locale or $FVWM_USERDIR/locale. Changes made in
+  - config
+  - FvwmScript-PersonalMenu
+  - FvwmScript-CPU-Performance
+- delete redundant entries from pot/po files
+
+03/06/2013 
+- add locale install/uninstall support in Makefile
+- change locale directory structure
+
+03/04/2013 
+- fix bug in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
+  that theme/layout names ended with 't' doesn't show correctly in menu and
+  can't use though
+
+03/02/2013
+- create initial locale template fvwm-nightshade.pot
+- add localization support in:
+  - config (LocalePath and $[gt.xxxxx] in menus/functions)
+  - FNS-BaseSetup
+  - FvwmScript-PersonalMenu
+  - FvwmScript-CPU-Performance
+- add german translation po file
+- fix bug in FvwmScript-CPU-Performance with an absolut path for
+  .governor file
 
 01/30/2013 V 0.6
 Prepare for release:
