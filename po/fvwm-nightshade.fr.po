@@ -1,0 +1,1230 @@
+# French translation for Fvwm-Nightshade
+# Copyright (C) 2013 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Maxime Lordier <maxime.lordier@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: fvwm-nightshade\n"
+"POT-Creation-Date: 2013-06-05 23:00++0200\n"
+"PO-Revision-Date: 2013-06-05 23:08+0100\n"
+"Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
+"Language-Team: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# MENUS
+########################################################################
+#-----------------------------------------------------------------------
+# MenuRoot
+#-----------------------------------------------------------------------
+msgid "&Personal Applications"
+msgstr "Application &personnelle"
+
+msgid "&Configuration"
+msgstr "&Configuration"
+
+msgid "&Help"
+msgstr "&Aide"
+
+msgid "Fvwm &Modules"
+msgstr "Fvwm &Modules"
+
+msgid "&Window Operations"
+msgstr "&Fenetre Operation "
+
+msgid "Lock Screen"
+msgstr "Écran verrouillé"
+
+msgid "&Run Command"
+msgstr "&Exécutez commande"
+
+msgid "&Terminal"
+msgstr "&Terminal"
+
+msgid "&Quit Fvwm-Nightshade"
+msgstr "&Quitter Fvwm-Nightshade"
+
+#-----------------------------------------------------------------------
+# MenuFvwmPersonal
+#-----------------------------------------------------------------------
+msgid "Personal Applications"
+msgstr "Programme personnelles"
+
+msgid "&Configure Personal Applications"
+msgstr "&Configuration du programme personnel"
+
+#-----------------------------------------------------------------------
+# MenuHelp
+#-----------------------------------------------------------------------
+msgid "Help"
+msgstr "Aide"
+
+msgid "Fvwm &Man Pages"
+msgstr "Fvwm &page principale"
+
+msgid "Fvwm &Web Pages"
+msgstr "Fvwm page &internet"
+
+msgid "Fvwm-&Nightshade Web Pages"
+msgstr "Fvwm-&Nightshade page internet"
+
+msgid "&Other Helps"
+msgstr "&Autres Aides"
+
+msgid "&Show Fvwm Version"
+msgstr "&Montrer Fvwm Version"
+
+msgid "&About Fvwm-Nightshade"
+msgstr "&À propos Fvwm-Nightshade"
+
+#-----------------------------------------------------------------------
+# MenuHelpOthers
+#-----------------------------------------------------------------------
+msgid "Others"
+msgstr "Autres"
+
+msgid "&X Man Pages"
+msgstr "&X page principale"
+
+msgid "&GNOME Help"
+msgstr "&GNOME Aide"
+
+msgid "&KDE Help"
+msgstr "&KDE Aide"
+
+#-----------------------------------------------------------------------
+# MenuFvwmWebPages
+#-----------------------------------------------------------------------
+msgid "Fvwm Web Pages"
+msgstr "Fvwm page internet"
+
+msgid "Home Page"
+msgstr "Page de démarrage"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "Wiki"
+msgstr "Wiki"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "In the beginning was ..."
+msgstr "Au début c'était..."
+
+msgid "Beginners Guide"
+msgstr "Guide du débutant"
+
+msgid "FAQ inofficial"
+msgstr "FAQ inofficiel"
+
+msgid "How Styles are Applied"
+msgstr "Comment sont appliqués les styles"
+
+msgid "Session Management"
+msgstr "Session Management"
+
+#-----------------------------------------------------------------------
+# FNSWebPagesMenu
+#-----------------------------------------------------------------------
+msgid "FNS Web Pages"
+msgstr "FNS page internet"
+
+msgid "Fvwm-Nightshade Wiki"
+msgstr "Fvwm-Nightshade Wiki"
+
+#-----------------------------------------------------------------------
+# MenuStartRegularModules
+#-----------------------------------------------------------------------
+msgid "Start Regular Modules"
+msgstr "Démarrarer le module régulier"
+
+msgid "&Animation"
+msgstr "&Animation"
+
+msgid "&Debug Console"
+msgstr "Console de &debug"
+
+msgid "&Identify"
+msgstr "&Identification"
+
+msgid "ScrollBar (1/2 &app)"
+msgstr "Barre de défilement (1/2 &app)"
+
+msgid "ScrollBar (75%% &scr)"
+msgstr "Barre de défilement (75%% &scr)"
+
+msgid "Auto Raise (&1/2 sec)"
+msgstr "Agrandissement automatique (&1/2 sec)"
+
+msgid "Auto Raise (&2 sec)"
+msgstr "Agrandissement automatique (&2 sec)"
+
+#-----------------------------------------------------------------------
+# MenuStopRegularModules
+#-----------------------------------------------------------------------
+msgid "Stop Regular Modules"
+msgstr "Arrêt du module régulier"
+
+#-----------------------------------------------------------------------
+# MenuFvwmForms
+#-----------------------------------------------------------------------
+msgid "FvwmForm Tools"
+msgstr "FvwmForm Outils"
+
+msgid "&Capture"
+msgstr "&Capture"
+
+msgid "&Rlogin"
+msgstr "&Rlogin"
+
+msgid "&Talk"
+msgstr "&Talk"
+
+msgid "&QuitVerify"
+msgstr "&QuitVerify"
+
+#-----------------------------------------------------------------------
+# MenuConfiguration
+#-----------------------------------------------------------------------
+msgid "Configuration"
+msgstr "Configuration"
+
+msgid "&System"
+msgstr "&System"
+
+msgid "&Tail .xsession-errors"
+msgstr "&Tail .xsession-errors"
+
+#-----------------------------------------------------------------------
+# MenuFvwmConfiguration
+#-----------------------------------------------------------------------
+msgid "&Animation Control"
+msgstr "Contrôle des &animations"
+
+msgid "Fvwm Form &Defaults"
+msgstr "Fvwm Form par &défault"
+
+#-----------------------------------------------------------------------
+# MenuFNSConfiguration
+#-----------------------------------------------------------------------
+msgid "Configure &Background"
+msgstr "Configuration &arriére plan"
+
+msgid "&Decoration"
+msgstr "&Decoration"
+
+msgid "Fvwm-&Nightshade Setup"
+msgstr "Fvwm-&Nightshade Setup"
+
+#-----------------------------------------------------------------------
+# MenuSystemConfiguration
+#-----------------------------------------------------------------------
+msgid "&Keyboard"
+msgstr "&Clavier"
+
+msgid "&Mouse"
+msgstr "&Souris"
+
+msgid "Sc&reen Saver"
+msgstr "&Ecran de sauvegarde"
+
+msgid "&CPU Performance"
+msgstr "&Performance du CPU"
+
+#-----------------------------------------------------------------------
+# MenuKeyboard
+#-----------------------------------------------------------------------
+msgid "Keyboard"
+msgstr "Clavier"
+
+msgid "&Settings"
+msgstr "&Réglages"
+
+msgid "&Layout"
+msgstr "&Mise en page"
+
+#-----------------------------------------------------------------------
+# MenuMouse
+#-----------------------------------------------------------------------
+msgid "Mouse"
+msgstr "Souris"
+
+msgid "Root &Cursor"
+msgstr "Root &Curseur"
+
+#-----------------------------------------------------------------------
+# MenuDecoration
+#-----------------------------------------------------------------------
+msgid "Decoration"
+msgstr "Decoration"
+
+msgid "&Decors"
+msgstr "&Decors"
+
+msgid "&Layouts"
+msgstr "&Mise en page"
+
+msgid "&Qt Decor"
+msgstr "&Qt Decor"
+
+msgid "&Gtk+ Decor"
+msgstr "&Gtk+ Decor"
+
+#-----------------------------------------------------------------------
+# MenuQtDecor
+#-----------------------------------------------------------------------
+msgid "Qt Decor"
+msgstr "Qt Decor"
+
+msgid "Qt-&3 Decor"
+msgstr "Qt-&3 Decor"
+
+msgid "Qt-&4 Decor"
+msgstr "Qt-&4 Decor"
+
+#-----------------------------------------------------------------------
+# FvwmDecorMenu
+#-----------------------------------------------------------------------
+msgid "Decors"
+msgstr "Decors"
+
+#-----------------------------------------------------------------------
+# FvwmLayoutMenu
+#-----------------------------------------------------------------------
+msgid "Layouts"
+msgstr "Mise en page"
+
+#-----------------------------------------------------------------------
+# MenuWallpaperConfiguration
+#-----------------------------------------------------------------------
+msgid "Background Configuration"
+msgstr "Configuration arriére plan"
+
+msgid "Set &Default background"
+msgstr "Appliquer par &defaut en arriére plan"
+
+msgid "Set &Wallpaper background"
+msgstr "&Appliquer papier pain en arriére plan"
+
+#-----------------------------------------------------------------------
+# MenuXScreenSaver
+#-----------------------------------------------------------------------
+msgid "Screen Saver"
+msgstr "Ecran de sauvegarde"
+
+msgid "XscreenSaver &Settings"
+msgstr "&Réglages de XscreenSaver "
+
+msgid "&XscreenSaver (Re)start"
+msgstr "(Re)Démarrarge de &XscreenSaver "
+
+msgid "XscreenSaver &Stop"
+msgstr "&Arrêt de XscreenSaver "
+
+msgid "XscreenSaver &Lock"
+msgstr "&Verrouiller de XscreenSaver "
+
+msgid "XscreenSaver &Activate"
+msgstr "&Activation de XscreenSaver "
+
+#-----------------------------------------------------------------------
+# MenuFvwmQuit
+#-----------------------------------------------------------------------
+msgid "Really Quit"
+msgstr "Quitter vraiment"
+
+msgid "&Restart Fvwm"
+msgstr "&Redémarrer Fvm"
+
+msgid "Re&fresh Screen"
+msgstr "Ra&fraîchir l'ecran"
+
+msgid "&Suspend System"
+msgstr "&Suspendre le systéme"
+
+msgid "&Hibernate System"
+msgstr "Systéme &hiberner"
+
+msgid "&Yes, Really Quit"
+msgstr "&Oui, quitter vraiment"
+
+msgid "&No, Don't Quit"
+msgstr "&Non, ne pas quitter"
+
+#-----------------------------------------------------------------------
+# MenuWindowOpsFull
+#-----------------------------------------------------------------------
+msgid "Window Operations"
+msgstr "Fenêtre Opération"
+
+msgid "(De)&Iconify"
+msgstr "(De)M&ininmiser"
+
+msgid "(Un)Ma&ximize"
+msgstr "(Dé)Ma&ximiser"
+
+msgid "(Un)&Shade"
+msgstr "(Dé)&Masquer"
+
+msgid "(Un)S&tick"
+msgstr "&Coller"
+
+msgid "R&aise"
+msgstr "&Augmenter"
+
+msgid "&Lower"
+msgstr "&Diminuer"
+
+msgid "&Destroy"
+msgstr "D&étruire"
+
+msgid "Move to &Page"
+msgstr "Déplacer vers la &page"
+
+msgid "&Group Operations"
+msgstr "Opération &grouper"
+
+msgid "&Window Style"
+msgstr "&Fenêtre de styles"
+
+msgid "&Maximize Window"
+msgstr "Fenêtre m&aximiser"
+
+msgid "&Refresh Window"
+msgstr "Fenêtre &rafraîchi"
+
+msgid "R&earrange All"
+msgstr "R&éorganiser tout"
+
+msgid "Window &Utility"
+msgstr "Fenêtre &utilitaires"
+
+msgid "Sw&itch to...(WinList)"
+msgstr "Changer pour...(&WinList)"
+
+#-----------------------------------------------------------------------
+# MenuWindowOpsTrimmed
+#-----------------------------------------------------------------------
+msgid "Re&store"
+msgstr "Re&staurer"
+
+msgid "&Iconify"
+msgstr "M&inimiser"
+
+msgid "Ma&ximize"
+msgstr "Ma&ximiser"
+
+msgid "Stays On &Top"
+msgstr "Rester sur le &premier plan"
+
+msgid "Stays &Back"
+msgstr "Rester sur l'&arriére plan"
+
+msgid "(Un)&Stick"
+msgstr "&Coller"
+
+msgid "Mor&e..."
+msgstr "Plu&e"
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupOps
+#-----------------------------------------------------------------------
+msgid "Resource Group Ops"
+msgstr "Groupe de Resource Ops"
+
+msgid "Iconify"
+msgstr "Minimiser"
+
+msgid "De&Iconify"
+msgstr "Dém&inimiser"
+
+msgid "&Shade"
+msgstr "&Cacher"
+
+msgid "Un&Shade"
+msgstr "Dé&cacher"
+
+msgid "Lo&wer"
+msgstr "Dimin&uer"
+
+msgid "&Quick Move To ..."
+msgstr "&Déplacer rapidement vers..."
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupOps
+#-----------------------------------------------------------------------
+msgid "Window Style"
+msgstr "Fenêtre styles"
+
+msgid "TitleAtT&op"
+msgstr "Titre en &haut"
+
+msgid "TitleAt&Bottom"
+msgstr "Titre en &bas"
+
+msgid "&Title"
+msgstr "&Titre"
+
+msgid "&NoTitle"
+msgstr "&Pas de titre"
+
+msgid "&FvwmBorder"
+msgstr "Bord &Fvwm "
+
+msgid "&MWMBorder"
+msgstr "Bord &MWM "
+
+msgid "&DepressableBorder"
+msgstr "Bord &enfoncé"
+
+msgid "F&irmBorder"
+msgstr "F&irmBorder"
+
+msgid "&Handles"
+msgstr "B&ordure"
+
+msgid "NoH&andles"
+msgstr "Bord de &la bordure"
+
+msgid "BorderWidth &0"
+msgstr "Largeur de bordure &0"
+
+msgid "BorderWidth &5"
+msgstr "Largeur de bordure &5"
+
+msgid "Handle&Width 0"
+msgstr "Lar&gueur de bordure 0"
+
+msgid "HandleWidth &7"
+msgstr "Largueur de bordure &7"
+
+msgid "Re&sizeOpaque"
+msgstr "Re&dimensionner avec contenu"
+
+msgid "Resi&zeOutline"
+msgstr "Redimensionner sans co&ntenu"
+
+msgid "S&loppyFocus"
+msgstr "SloppyFoc&us"
+
+msgid "&ClickToFocus"
+msgstr "Focus par &click "
+
+msgid "Mo&useFocus"
+msgstr "Mou&seFocus"
+
+msgid "N&everFocus"
+msgstr "P&as de focus"
+
+#-----------------------------------------------------------------------
+# MenuWindowMaximize
+#-----------------------------------------------------------------------
+msgid "Maximize Window"
+msgstr "Fenêtre maximiser"
+
+msgid "&Maximize Fully"
+msgstr "&Maximize Fully"
+
+msgid "&Unmaximize"
+msgstr "&Démaximiser"
+
+msgid "Maximize &Partially"
+msgstr "Maximiser &partiellement"
+
+msgid "Maximize &Vertically"
+msgstr "Maximiser &verticallement"
+
+msgid "Maximize &Horizontally"
+msgstr "Maximiser &horizontallement"
+
+msgid "Maximize &Grow"
+msgstr "Maximize &Grow"
+
+msgid "Maximize Grow V&ert."
+msgstr "Maximize Grow V&ert."
+
+msgid "Maximize Grow H&oriz."
+msgstr "Maximize Grow H&oriz."
+
+msgid "Maximize &Full Screen"
+msgstr "P&lein écran"
+
+msgid "&Unmaximize Full Screen"
+msgstr "&Retour écran normal"
+
+#-----------------------------------------------------------------------
+# MenuWindowRefresh
+#-----------------------------------------------------------------------
+msgid "Refresh Window"
+msgstr "Fenêtre rafraîchie"
+
+msgid "Re&fresh Window"
+msgstr "&Fenêtre rafraîchie"
+
+msgid "Re&capture Window"
+msgstr "Fenêtre &rafraîchie"
+
+msgid "&Place Again"
+msgstr "Re&positionner"
+
+msgid "&Restore"
+msgstr "R&estaurer"
+
+#-----------------------------------------------------------------------
+# MenuRearrangeWindows
+#-----------------------------------------------------------------------
+msgid "Rearrange Windows"
+msgstr "fenetre rearranger"
+
+msgid "&Cascade"
+msgstr "&Cascader"
+
+msgid "Tile &horizontally"
+msgstr "Titre &horizontalle"
+
+msgid "Tile &vertically"
+msgstr "Titre &verticale"
+
+msgid "&Arrange Icons"
+msgstr "&Iconiser"
+
+#-----------------------------------------------------------------------
+# MenuWindowUtility
+#-----------------------------------------------------------------------
+msgid "Window Utility"
+msgstr "Fenêtre utilitaires"
+
+msgid "Create &Screenshot"
+msgstr "&Créer imprime écran"
+
+msgid "&Desktop Screenshot"
+msgstr "&Imprime écran du bureau"
+
+msgid "Layer &+1"
+msgstr "Couche &+1"
+
+msgid "Stays &Put"
+msgstr "Stays &Put"
+
+msgid "Layer &-1"
+msgstr "Couche &-1"
+
+msgid "Stays On &Bottom"
+msgstr "Rester sur &l'arrière plan"
+
+#-----------------------------------------------------------------------
+# MenuDesktopOps
+#-----------------------------------------------------------------------
+msgid "Desktopmenu"
+msgstr "Menu de bureau"
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupQuickMove
+#-----------------------------------------------------------------------
+# layout Horizontal, Vertical & G2like
+msgid "&Right	Page"
+msgstr "&Droite  page"
+
+msgid "&Left	Page"
+msgstr "&Gauche Page"
+
+msgid "Page	1"
+msgstr "Page	1"
+
+msgid "Page	2"
+msgstr "Page	2"
+
+msgid "Page	3"
+msgstr "Page	3"
+
+msgid "Page	4"
+msgstr "Page	4"
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupQuickMove
+#-----------------------------------------------------------------------
+# layout Horizontal, Vertical & G2like
+msgid "Move to ..."
+msgstr "Déplacer vers ..."
+
+# layout Vertical
+msgid "D&own	Page"
+msgstr "Page	&inférieure"
+
+msgid "&Up  	Page"
+msgstr "Page	&supérieur"
+
+########################################################################
+# FvwmForm
+########################################################################
+#-----------------------------------------------------------------------
+# FNS-BaseSetup
+#-----------------------------------------------------------------------
+msgid "Fvwm-Nightshade -- Base Setup"
+msgstr "Fvwm-Nightshade -- installation de base"
+
+msgid "Use this setup to configure base settings of Fvwm-Nightshade"
+msgstr "Utilisez l'installation pour configurer les réglages de base de Fvwm-Nightshade "
+
+# msgstr same length as msgid
+msgid "----------------- Environment ------------------"
+msgstr "---------------- Environnement -----------------"
+
+# msgstr same length as msgid
+msgid  "Used Splash: "
+msgstr "Splash util: "
+
+# msgstr same length as msgid
+msgid  "Show on start: "
+msgstr "Au démarrage : "
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "No"
+msgstr "Non"
+
+# msgstr same length as msgid
+msgid "---------- Decoration (Windows, Menus) ----------"
+msgstr "---------- Decoration (Fenêtre, Menus) ----------"
+
+# msgstr same length as msgid
+msgid  "Used Theme:    "
+msgstr "Thème utilisé: "
+
+# msgstr same length as msgid
+msgid  " (Others: Clean, Air, Ambience, CrystalBalls)"
+msgstr " (Autres: Clean, Air, Ambience, CrystalBalls)"
+
+# msgstr same length as msgid
+msgid  "Used Font:     "
+msgstr "Police utilisé:"
+
+# msgstr same length as msgid
+msgid  " (E.g. Arial, Helvetia, Verdana)"
+msgstr " (E.g. Arial, Helvetia, Verdana)"
+
+# msgstr same length as msgid
+msgid  "Used Font size:"
+msgstr "Taille utilisé:"
+
+# msgstr same length as msgid
+msgid "              (E.g. 10, 11, 13)"
+msgstr "              (E.g. 10, 11, 13)"
+
+# msgstr same length as msgid
+msgid "------- Panels (Iconman, Pager, Systray) -------"
+msgstr "------- Panels (Iconman, Pager, Systray) -------"
+
+# msgstr same length as msgid
+msgid "Used Layout:   "
+msgstr "Mise en page:  "
+
+msgid "Horizontal (Panels on top)"
+msgstr "Horizontale (Panels en haut)"
+
+msgid "Vertical (Panels on right side)"
+msgstr "Vertical (Panels sur le côté droit)"
+
+msgid "G2like (Panels on top and bottom)"
+msgstr "G2like (Panels en haut et en bas)"
+
+# msgstr same length as msgid
+msgid "----------------- Applications -----------------"
+msgstr "----------------- Applications -----------------"
+
+# msgstr same length as msgid
+msgid "Used Terminal: "
+msgstr "Terminal:      "
+
+# msgstr same length as msgid
+msgid " (E.g. konsole, aterm, rxvt)"
+msgstr " (E.g. konsole, aterm, rxvt)"
+
+# msgstr same length as msgid
+msgid "Used Browser:  "
+msgstr "Navigateur:    "
+
+# msgstr same length as msgid
+msgid " (E.g. chromium, seamonkey)"
+msgstr " (E.g. chromium, seamonkey)"
+
+msgid "Apply & Save"
+msgstr "Appliquer"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+#-----------------------------------------------------------------------
+# FvwmForm-RunCommand
+#-----------------------------------------------------------------------
+msgid "Run Command"
+msgstr "Exécutez commande"
+
+msgid "Command:"
+msgstr "Commande:"
+
+msgid "Run in Terminal"
+msgstr "Lancer avec terminal"
+
+msgid "Execute"
+msgstr "Exécuter"
+
+#-----------------------------------------------------------------------
+# FvwmForm-About
+#-----------------------------------------------------------------------
+msgid "About"
+msgstr "À propos"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Authors"
+msgstr "Auteurs"
+
+msgid "Close"
+msgstr "Fermer"
+
+#-----------------------------------------------------------------------
+# FvwmForm-Messages
+#-----------------------------------------------------------------------
+# FuncShowMessage "Fvwm Version Info"
+msgid "Fvwm Version Info"
+msgstr "Fvwm Version Info"
+
+msgid " Ok "
+msgstr " Ok "
+
+# config - Help info with SHIFT-CTRL-ALT in Root
+msgid "Mouse Bindings for Root area"
+msgstr "Souris figer pour root domaine"
+
+msgid "Mouse 1:   Root menu"
+msgstr "Mouse 1:   Root menu"
+
+msgid "Mouse 2:   Window list"
+msgstr "Mouse 2:   Window list"
+
+msgid "Mouse 3:   Desktop Oops menu"
+msgstr "Mouse 3:   Desktop Oops menu"
+
+msgid "Mouse 4/5: Switch to page left/right with"
+msgstr "Mouse 4/5: changer pour la page gauche/droite avec"
+
+msgid "           SHIFT-ALT + rolling wheel up/down anywhere"
+msgstr "           SHIFT-ALT + rolling wheel up/down anywhere"
+
+msgid "           Switch with window to page left/right with"
+msgstr "           Changer pour la fenêtre gauche/droite avec"
+
+msgid "           SHIFT-CTRL + rolling wheel up/down anywhere"
+msgstr "           SHIFT-CTRL + rolling wheel up/down anywhere"
+
+# config - Help info with SHIFT-CTRL-ALT to Pointer in Window Decorations
+msgid "Mouse Bindings for Titlebar"
+msgstr "Souris figer pour la barre de titre"
+
+msgid "Mouse 1:   Drag moves window"
+msgstr "Mouse 1:   Drag moves window"
+
+msgid "           Maximize on double click"
+msgstr "           Agrandir avec un double clic"
+
+msgid "Mouse 2:   Drag moves window"
+msgstr "Mouse 2:   Drag moves window"
+
+msgid "           Raise or lower with click"
+msgstr "           Augmenter ou diminuer avec un clic"
+
+msgid "Mouse 3:   WindowOpsTrimmed menu with click"
+msgstr "Mouse 3:   WindowOpsTrimmed menu avec clic"
+
+msgid "           WindowOpsFull menu with ALT + click"
+msgstr "           WindowOpsFull menu avec ALT + click"
+
+msgid "Mouse 4/5: Shade/unshade window"
+msgstr "Mouse 4/5: Shade/unshade window"
+
+msgid "           with rolling wheel up/down"
+msgstr "           monter/descendre avec la roulette"
+
+msgid "Mouse Bindings for Corners and Sides"
+msgstr "Souris figer pour les coin et les côtés"
+
+msgid "Mouse 1:   Drag resize window"
+msgstr "Mouse 1:   Redimensionner la fenêtre par glissement"
+
+msgid "Mouse Bindings for Window area"
+msgstr "Souris figer pour la zone de la fenêtre"
+
+msgid "Mouse 1:   Root menu with ALT + click"
+msgstr "Mouse 1:   Menu root avec ALT + clic"
+
+msgid "Mouse 2:   Drag + ALT moves window"
+msgstr "Mouse 2:   Glisser + ALT déplacer fenêtre"
+
+msgid "           Raise or lower with ALT + click"
+msgstr "           Augmenter ou diminuer with ALT + click"
+
+# config - Help info with SHIFT-CTRL-ALT to Pointer in Icons
+msgid "Mouse Bindings for Icons"
+msgstr "Souris enfoncé pour les icônes"
+
+msgid "Mouse 1:   Drag moves icon"
+msgstr "Mouse 1:   Le glissement déplace l'icônes"
+
+msgid "           Deiconify with double click"
+msgstr "           Retour à l'ancienne version avec un double clic"
+
+msgid "           Root menu with ALT + click"
+msgstr "           Menu root avec ALT + click"
+
+msgid "Mouse 2:   Deiconify icon with click"
+msgstr "Mouse 2:   Deiconify icon avec clic"
+
+msgid "           All of same resource group with CTRL + click"
+msgstr "           Groupement des mêmes resources avec CTRL + clic"
+
+msgid "           WindowGroupOps menu with CTRL + click"
+msgstr "           WindowGroupOps menu avec CTRL + clic"
+
+# config - FuncWindowCreateScreenshot
+msgid "Screenshot Info for window"
+msgstr "Imprime écran d'information pour la fenêtre"
+
+msgid "Screenshot created:"
+msgstr "Imprime écran créé:"
+
+msgid "ImageMagick isn't installed. No screenshot created."
+msgstr "ImageMagick n'est pas installé. Aucun imprime écran crée"
+
+# config - FuncDesktopCreateScreenshot
+msgid "Desktop Screenshot Info"
+msgstr "Desktop Screenshot Info"
+
+# config - FuncSuspend
+msgid "Suspend Info"
+msgstr "Info suspendu"
+
+msgid "Install pm-utils for full functionality"
+msgstr "Installer pm-utils pour avoir l'ensemble des fonctionnalités"
+
+# config - FuncHibernate
+msgid "Hibernate Info"
+msgstr "Info hiberné"
+
+# config - FuncLockScreen
+msgid "Lock screen Info"
+msgstr " Info écran verrouillé"
+
+msgid "'xscreensaver' not running or not installed."
+msgstr "'xscreensaver' pas en fonctionnement ou pas installé"
+
+# config - FuncMenuXScreenSaver
+msgid "Screensaver Info"
+msgstr "Info écran de sauvegarde"
+
+msgid "Install xscreensaver for full functionality"
+msgstr "Installer pm-utils pour avoir l'ensemble des fonctionnalités"
+
+# config - FuncMenuWallpaperConfiguration
+msgid "Wallpaper browser Info"
+msgstr "Navigateur papier paint info"
+
+msgid "Install ImageMagick AND eterm for full functionality."
+msgstr "Installer ImageMagick et eterm pour avoir l'ensemble des fonctionnalités"
+
+# config - FuncKbdLayouter
+msgid "Keyboard Layout Info"
+msgstr "Info disposition clavier"
+
+msgid "Install xneur/gxneur for full functionality"
+msgstr "Installer xneur/gxneur pour avoir l'ensemble des fonctionnalités"
+
+# config - FuncLxappearance
+msgid "Gtk+ Decor Info"
+msgstr "Gtk+ Decor Info"
+
+msgid "Install LxApearance for Gtk+ apps"
+msgstr "Installer LxApearance pour l'application Gtk+"
+
+# config - FuncQt3Decor
+msgid "Qt3 Decor Info"
+msgstr "Qt3 Decor Info"
+
+msgid "Install qtconfig-qt3 for Qt3 apps"
+msgstr "Installer qtconfig-qt3 pour l'application Qt3"
+
+# config - FuncQt4Decor
+msgid "Qt4 Decor Info"
+msgstr "Qt4 Decor Info"
+
+msgid "Install qtconfig-qt4 for Qt4 apps"
+msgstr "Installer qtconfig-qt4 pour Qt4 application"
+
+# Help info with SHIFT-CTRL-ALT P to show all page related key bindings
+# layout Horizontal & G2like
+msgid "Page Key Bindings"
+msgstr "Touche Page enfoncé"
+
+msgid "SHIFT-CTRL:"
+msgstr "SHIFT-CTRL:"
+
+msgid "Cursor right/left: Switch to page right/left"
+msgstr "Curseur droite/gauche: changer de page droite/gauche"
+
+msgid "1-4: Switch to page n"
+msgstr "1-4: change pour la page n"
+
+msgid "SHIFT-ALT:"
+msgstr "SHIFT-ALT:"
+
+msgid "Cursor right/left: Switch active window to page right/left"
+msgstr "Curseur droite/gauche: changer la fenêtre active pour la page droite/gauche"
+
+msgid "1-4: Switch active window to page n"
+msgstr "Change la fenêtre active pour la page n"
+
+msgid "ALT-CTRL:"
+msgstr "ALT-CTRL:"
+
+msgid "Cursor right/left/up/down: Move mouse pointer by 1% of a page"
+msgstr "Curseur droite/gauche/haut/bas: déplace le pointeur de la souris de 1% de la page"
+
+msgid "SHIFT-ALT-CTRL:"
+msgstr "SHIFT-ALT-CTRL:"
+
+msgid "Cursor right/left/up/down: Scroll right/left by 10% of a page"
+msgstr "Curseur droite/gauche/haut/bas: défile de 10% de la page"
+
+# layout Vertical
+msgid "Cursor up/down: Switch to page up/down"
+msgstr "Curseur haut/bas change la page de haut/bas"
+
+msgid "Cursor up/down: Switch active window to page up/down"
+msgstr "Curseur haut/bas change la fenêtre active de haut/bas"
+
+# .bindings
+# Help info with SHIFT-CTRL-ALT A to show all ALT related key bindings
+msgid "ALT Key Bindings"
+msgstr "Touche ALT enfoncé"
+
+msgid "ALT:"
+msgstr "ALT:"
+
+msgid "F1: Open root menu          F7:  Move window"
+msgstr "F1: Ouvrir menu root               F7:  Déplace la fenêtre"
+
+msgid "F2: Launch 'run' dialog box F8:  Resize window"
+msgstr "F2: Boite de dialogue 'commande'   F8:  Redimensionne la fenêtre"
+
+msgid "F3: Show window list        F9:  Minimize window"
+msgstr "F3:Affiche la liste de la fenêtre  F9:  Minimise la fenêtre"
+
+msgid "F4: Close active window     F10: Maximize/restore window"
+msgstr "F4: Ferme la fenêtre active        F10: Maximise/restaure la fenêtre"
+
+msgid "F5: Not used                F11: Fullscreen/restore window"
+msgstr "F5: Pas utilisé                    F11: Plein écran/restaure la fenêtre"
+
+msgid "F6: Cycle between same      F12: Identify window"
+msgstr "F6: Cycle between same             F12: Identifier la fenêtre"
+
+msgid "    resource windows"
+msgstr "    resource windows"
+
+msgid "Tab:   Switching focus to next window"
+msgstr "Tab:      Mise en focus à la fenêtre suivante"
+
+msgid "Tab:   Switching focus to previous window"
+msgstr "Tab:      Mise en focus à la fenêtre précédente"
+
+msgid "Print: Screenshot of the active window"
+msgstr "Affiche:  Imprime écran de la fenêtre active"
+
+msgid "None:"
+msgstr "Rien:"
+
+msgid "Print: Screenshot of current page"
+msgstr "Affiche:  Imprime écran de la page actuelle"
+
+# Help info with SHIFT-CTRL-ALT H to show the global key bindings help window
+msgid "Help Keys with CTRL-ALT"
+msgstr "Touche Aide avec CTRL-ALT"
+
+msgid "A: List ALT bindings"
+msgstr "A: List ALT enfoncé"
+
+msgid "C: List CTRL bindings"
+msgstr "C: List CTRL enfoncé"
+
+msgid "P: List Page bindings"
+msgstr "P: List Page enfoncé"
+
+# Help info with SHIFT-CTRL-ALT C to show all CTRL related key bindings
+msgid "CTRL Key Bindings"
+msgstr "Touche CTRL enfoncé"
+
+msgid "F1: Open full Oops menu     F2: Launch FvwmConsole"
+msgstr "F1: Menu full Oops ouvert               F2: Laucer FvwmConsole"
+
+msgid "CTRL-ALT:"
+msgstr "CTRL-ALT:"
+
+msgid "D:  Hide/unhide all windows T:  Launch Terminal"
+msgstr "D:  Cacher/Décacher toutes les fenêtres T:  Lancer le Terminal"
+
+msgid "L:  Lock Screen"
+msgstr "L:  écran verrouillé"
+
+# decor theme file
+# Help info with SHIFT-CTRL-ALT to Window Button Pointer
+msgid "Left Button Bindings"
+msgstr "Bouton gauche enfoncé"
+
+msgid "Mouse 1:  WindowOps menu"
+msgstr "Mouse 1:  WindowOps menu"
+
+msgid "Mouse 2:  Move to page menu"
+msgstr "Mouse 2:  Déplacer vers la page menu"
+
+msgid "Mouse 3:  WindowGroupOps menu"
+msgstr "Mouse 3:  WindowGroupOps menu"
+
+msgid "Close Button Bindings"
+msgstr "Bouton fermeture enfoncé"
+
+msgid "Mouse 1:  Delete on click"
+msgstr "Mouse 1:  Effacer au click"
+
+msgid "          Destroy on double click"
+msgstr "		  Détruire avec le double clic"
+
+msgid "Maximize Button Bindings"
+msgstr "Button maximiser enfoncé"
+
+msgid "Mouse 1:  Maximize fully on click"
+msgstr "Mouse 1:  Maximize fully on click"
+
+msgid "          Maximize menu on double click"
+msgstr "		  Menu maximiser avec le double clic"
+
+msgid "Mouse 2:  Maximize vertically"
+msgstr "Mouse 2:  Maximiser verticallement"
+
+msgid "Mouse 3:  Maximize horizontally"
+msgstr "Mouse 3:  Maximiser horizontallement"
+
+msgid "Minimize Button Bindings"
+msgstr "Bouton minimiser enfoncé"
+
+msgid "Mouse 1:  Iconify"
+msgstr "Mouse 1:  Iconify"
+
+msgid "Mouse 2:  Iconify on resource group"
+msgstr "Mouse 2:  Iconify on resource group"
+
+msgid "Mouse 3:  Iconify toggle resource group"
+msgstr "Mouse 3:  Iconify toggle resource group"
+
+########################################################################
+# FvwmScript
+########################################################################
+#-----------------------------------------------------------------------
+# FvwmScript-PersonalMenu
+#-----------------------------------------------------------------------
+msgid "Menu Folders"
+msgstr "Menu dossiers"
+
+msgid "Menu Entries"
+msgstr "menu entrée"
+
+msgid "Add >"
+msgstr "Ajouter >"
+
+msgid "< Remove"
+msgstr "< Enlever"
+
+msgid "Save"
+msgstr "Sauvegarder"
+
+msgid "Quit"
+msgstr "Quitter"
+
+msgid "!!! Changed menu not saved !!! Next click will quit."
+msgstr "!!! Le menu a changé sans être sauvegarder!!! Prochain clic quittera le menu."
+
+msgid "Personal Entries "
+msgstr "Entrées personnelle"
+
+msgid "Personal Entries"
+msgstr "Entrées personnelle "
+
+msgid "Personal applications*"
+msgstr "Application personnelle*"
+
+msgid "Personal menu saved"
+msgstr "Menu personnel sauvegardé"
+
+msgid "Added '"
+msgstr "Ajouté '"
+
+msgid "' to menu"
+msgstr "' au menu"
+
+msgid "Removed '"
+msgstr "Enlevé  '"
+
+msgid "' from menu"
+msgstr "' du menu"
+
+#-----------------------------------------------------------------------
+# FvwmScript-PersonalMenu
+#-----------------------------------------------------------------------
+msgid "Vendor"
+msgstr "Vendeur"
+
+msgid "CPU Count"
+msgstr "Compteur CPU"
+
+msgid "At the moment the governor 'userspace' is not supported, so you cannot use it!"
+msgstr "Pour l'instant le gouvernement 'userspace'n'est pas supporté, donc vous ne pouvez pas l'utiliser "
+
+msgid "But you get the same result with governor 'powersave' and one of the frequencies"
+msgstr "mais vous obtenez le même résultat avec le gouvernement 'powersave' et un autres de cette fréquence"
+
+msgid "in 'Min Frequency', or governor 'performance' in combination with 'Max Frequency'."
+msgstr "dans 'fréquence min' , ou gouvernement 'perfermonce'  en combinant avec 'fréquence max'."
+
+msgid "Min Frequency"
+msgstr "Fréquence min"
+
+msgid "Max Frequency"
+msgstr "Fréquence max"
+
+msgid "not installed"
+msgstr "pas installé"
+
+msgid "Set"
+msgstr "Set"
+
+msgid " updated and cpufreq set."
+msgstr " mis à jour et cpufreq set."
+
+msgid "New file "
+msgstr "Nouveau fichier "
+
+msgid " written and cpufreq set."
+msgstr " écrit et pufreq set."

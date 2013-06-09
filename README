@@ -22,8 +22,8 @@ desktop. But it can be configure by your own. It is good documented and
 shows you what is possible with this powerful window manager.
 
 
-Featurelist of Fvwm-Nightshade 0.6:
-===================================
+Featurelist of Fvwm-Nightshade 0.6.5:
+=====================================
 - Own user configuration directory ~/.fvwm-nightshade (can be used parallel to existing Fvwm configuration)
 - Own entry "Fvwm-Nightshade" in graphical login managers
 - Config tool for base settings (Font, layouts, etc)
@@ -88,7 +88,8 @@ Featurelist of Fvwm-Nightshade 0.6:
 - Help messages for key bindings with Shift-Alt-Ctrl + key
   - A global one with Shift-Alt-Ctrl + H
 - Dynamic menus
-- Switching focus between windows with Alt-Tab
+- Switching focus between windows with Alt-Tab (forward) / Shift-Alt-Tab
+  (backward)
 - Splash screen
 - Print messages for needed apps for full config functionality in 
   .xsessions-error
@@ -96,6 +97,7 @@ Featurelist of Fvwm-Nightshade 0.6:
 - Create thumbs with mini icon and name for iconified applications 
   instead of their icon
 - Build support for deb, rpm and Arch packages
+- Localization support for German, French and Spanish
 
 
 Requirements:

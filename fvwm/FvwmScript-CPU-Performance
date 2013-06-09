@@ -1,6 +1,6 @@
 ########################################################################
 # File:		FvwmScript-CPU-Performance
-# Version:	0.1.1
+# Version:	0.2.1
 # Licence: 	GPL 2
 #
 # Description:	stets the govenor and the frequencies of each single cpu
@@ -11,26 +11,61 @@
 #		
 #		
 #
-# Author:		Bernhard Popp <kermit.popp@googlemail.com>	
+# Author:		Bernhard Popp <kermit.popp@googlemail.com>
+#				Thomas Funk <t.funk@web.de>
+#	
 # Created:		09/08/2012
-# Changed:		09/21/2012
+# Changed:		03/08/2013
 ########################################################################
 
 #-----------------------------------------------------------------------
-# Version 0.1.0, Copyright 2012, Bernhard Popp
+# Version 0.2.1, Copyright 2013, Bernhard Popp
 #-----------------------------------------------------------------------
 
-WindowTitle		{Fvwm-Nightshade -- CPU Perfomance Manager}
-WindowSize		650 500
-WindowPosition	0 100
-
+UseGettext			{;fvwm-nightshade:$FVWM_USERDIR/locale;fvwm-nightshade:+}
+WindowLocaleTitle	{FvwmScript-CPU-Performance V 0.2.1}
+WindowSize			650 500
+WindowPosition		0 100
+#Colorset 10
 
 # ----- Initialize -----------------------------------------------------
 
 
 Init
-# get amount of CPUs
 Begin
+	Set $homeDir = (GetOutput {echo $FVWM_USERDIR} 1 -1)
+	
+    #set Widget fonts
+    Set $Fonttype = (GetOutput {echo $[infostore.used_font]} 1 -1)
+	Set $normalFont = {xft:}$Fonttype{:size=9}
+	Set $boldFont = {xft:}$Fonttype{:size=8:bold}
+
+	For $Widget=111 To 115 Do
+		ChangeFont $Widget $normalFont
+	For $Widget=211 To 218 Do
+		ChangeFont $Widget $normalFont
+	For $Widget=221 To 228 Do
+		ChangeFont $Widget $normalFont
+	For $Widget=231 To 238 Do
+		ChangeFont $Widget $normalFont
+	For $Widget=991 To 993 Do
+		ChangeFont $Widget $normalFont
+
+	For $Widget=100 To 105 Do
+		ChangeFont $Widget $boldFont
+	For $Widget=116 To 118 Do
+		ChangeFont $Widget $boldFont
+	For $Widget=301 To 306 Do
+		ChangeFont $Widget $boldFont
+	For $Widget=201 To 208 Do
+		ChangeFont $Widget $boldFont
+	
+	# set statusbar
+	Set $status = {}
+	Set $gov_updated = 0
+	Set $timeElapsed = 0
+
+	# get amount of CPUs
 	Set $cmd1 = {LANG=en_US.UTF-8 cat /proc/cpuinfo | grep -m1 '}
 	Set $cmd2 = {'| cut -d":" -f2 | sed -e 's/ //g'}
 	Set $cmd = $cmd1{vendor_id}$cmd2
@@ -49,80 +84,104 @@ Begin
 	ChangeTitle 113 $cpu_count
 	ChangeTitle 114 $cpu_cache
 	ChangeTitle 115 $cpu_bogo
+
 	Set $a = 1
-		While $a<(Add $cpu_count 1) Do
-			Begin
-				Set $core_titel = (Add $a 200)
-				Set $core_governor = (Add $a 210)
-				Set $core_min_freq = (Add $a 220)
-				Set $core_max_freq = (Add $a 230)
-				Set $titel = {core }$a
-				
+	While $a<(Add $cpu_count 1) Do
+	Begin
+		Set $core_titel = (Add $a 200)
+		Set $core_governor = (Add $a 210)
+		Set $core_min_freq = (Add $a 220)
+		Set $core_max_freq = (Add $a 230)
+		Set $titel = {Core }$a
+		
 		# ---- show  menus -------------------------------------------------
-				ShowWidget $core_governor
-				ShowWidget $core_min_freq
-				ShowWidget $core_max_freq
+		ShowWidget $core_governor
+		ShowWidget $core_min_freq
+		ShowWidget $core_max_freq
 
 		# ---- collect governor list ---------------------------------------
-				Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_governor}
-				Set $ac_governor = {-g }(GetOutput $cmd 1 1)
-				Set $ac_gov = (GetOutput $cmd 1 1)
-				Set $b = 1
-				Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_available_governors}
-				Set $governor = (GetOutput $cmd 1 $b)
-				Set $governor_option = $governor
-				Set $b = (Add $b 1)
-				While $governor<>{} Do
-					Begin
-						If $ac_gov==$governor Then
-							Begin
-								ChangeValue $core_governor (Add $b -1)
-							End
-						Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_available_governors}
-						Set $governor = (GetOutput $cmd 1 $b)
-						If $governor<>{} Then
-							Set $governor_option = $governor_option{|}$governor
-						Set $b = (Add $b 1)
-					End
-				
-		# ---- collect frequency list for avialable frequencies ------------
-				Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_min_freq}
-				Set $ac_min_frequency = {-d }(Div (GetOutput $cmd 1 1) 1000){MHz}
-				Set $ac_min_freq = (GetOutput $cmd 1 1)
-				Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_max_freq}
-				Set $ac_max_frequency = {-u }(Div (GetOutput $cmd 1 1) 1000){MHz}
-				Set $ac_max_freq = (GetOutput $cmd 1 1)
-				Set $b = 1
-				Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_available_frequencies}
-				Set $av_freq = (GetOutput $cmd 1 $b)
-				Set $av_freq_option = (Div $av_freq 1000){MHz}
-				Set $b = (Add $b 1)
-				While $av_freq<>{} Do
-					Begin
-						If $ac_min_freq==$av_freq Then
-							Begin
-								ChangeValue $core_min_freq (Add $b -1)
-							End
-						If $ac_max_freq==$av_freq Then
-							Begin
-								ChangeValue $core_max_freq (Add $b -1)
-							End
-						Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_available_frequencies}
-						Set $av_freq = (GetOutput $cmd 1 $b)
-						If $av_freq<>{} Then
-							Set $av_freq_option = $av_freq_option{|}(Div $av_freq 1000){MHz}
-						Set $b = (Add $b 1)
-					End
-					
-		# ---- set titles --------------------------------------------------
-				ChangeTitle $core_titel $titel
-				ChangeTitle $core_governor $governor_option
-				ChangeTitle $core_min_freq $av_freq_option
-				ChangeTitle $core_max_freq $av_freq_option
-				Set $a = (Add $a 1)
+		Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_governor}
+		Set $ac_governor = {-g }(GetOutput $cmd 1 1)
+		Set $ac_gov = (GetOutput $cmd 1 1)
+		Set $b = 1
+		Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_available_governors}
+		Set $governor = (GetOutput $cmd 1 $b)
+		Set $governor_option = $governor
+		
+		Set $b = (Add $b 1)
+		While $governor<>{} Do
+		Begin
+			If $ac_gov==$governor Then
+			Begin
+				ChangeValue $core_governor (Add $b -1)
 			End
+
+			Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_available_governors}
+			Set $governor = (GetOutput $cmd 1 $b)
+
+			If $governor<>{} Then
+				Set $governor_option = $governor_option{|}$governor
+
+			Set $b = (Add $b 1)
+		End
+		
+		# ---- collect frequency list for avialable frequencies ------------
+		Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_min_freq}
+		Set $ac_min_frequency = {-d }(Div (GetOutput $cmd 1 1) 1000){MHz}
+		Set $ac_min_freq = (GetOutput $cmd 1 1)
+		Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_max_freq}
+		Set $ac_max_frequency = {-u }(Div (GetOutput $cmd 1 1) 1000){MHz}
+		Set $ac_max_freq = (GetOutput $cmd 1 1)
+		Set $b = 1
+		Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_available_frequencies}
+		Set $av_freq = (GetOutput $cmd 1 $b)
+		Set $av_freq_option = (Div $av_freq 1000){MHz}
+		Set $b = (Add $b 1)
+
+		While $av_freq<>{} Do
+		Begin
+			If $ac_min_freq==$av_freq Then
+			Begin
+				ChangeValue $core_min_freq (Add $b -1)
+			End
+
+			If $ac_max_freq==$av_freq Then
+			Begin
+				ChangeValue $core_max_freq (Add $b -1)
+			End
+
+			Set $cmd = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}(Add $a -1){/cpufreq/scaling_available_frequencies}
+			Set $av_freq = (GetOutput $cmd 1 $b)
+
+			If $av_freq<>{} Then
+				Set $av_freq_option = $av_freq_option{|}(Div $av_freq 1000){MHz}
+
+			Set $b = (Add $b 1)
+		End
+			
+		# ---- set titles --------------------------------------------------
+		ChangeTitle $core_titel $titel
+		ChangeTitle $core_governor $governor_option
+		ChangeTitle $core_min_freq $av_freq_option
+		ChangeTitle $core_max_freq $av_freq_option
+		Set $a = (Add $a 1)
+	End
 End
 
+PeriodicTasks
+Begin
+	Set $timeElapsed = (Add $timeElapsed 1)
+	If (RemainderOfDiv $timeElapsed 5) == 0 Then
+	Begin
+		If $status <> {} Then
+		Begin
+			Set $status = {}
+			Set $timeElapsed = 0
+			Set $gov_updated = 0
+			ChangeTitle 991 $status
+		End
+	End
+End
 
 # show "status icon"
 # ------------------
@@ -130,139 +189,153 @@ Widget	1
 Property
 	Type		ItemDraw
 	Icon		GovernorLogo.png
-	Position		490 10
+	Position	495 5
 End
 
 
 # output "CPU information"
 # ------------------------
+# Text field "CPU Information"
 Widget	100
 Property
-	Type		ItemDraw
+	Type			ItemDraw
 	Position		10 10
-	Title		{CPU Information:}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left
+    Size			120 15
+	Title			{CPU Information}
+	Flags 			NoReliefString Left
 End
 
+# Text field "Vendor"
 Widget	101
 Property
-	Type		ItemDraw
-	Position	10 40
-	Title		{Vendor}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		10 60
+    Size			80 15
+	LocaleTitle		{Vendor:}
+	Flags 			NoReliefString Left
 End
 
+# Text field "Model"
 Widget	102
 Property
-	Type		ItemDraw
-	Position	10 60
-	Title		{Model}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		10 80
+    Size			80 15
+	Title			{Model:}
+	Flags 			NoReliefString Left
 End
 
+# Text field "CPU Count"
 Widget	103
 Property
-	Type		ItemDraw
-	Position	10 80
-	Title		{CPU Count}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		10 40
+    Size			80 15
+	LocaleTitle		{CPU Count:}
+	Flags 			NoReliefString Left
 End
 
+# Text field "L2 Cache (core)"
 Widget	104
 Property
-	Type		ItemDraw
-	Position	320 40
-	Title		{L2 cache( core)}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		290 40
+    Size			110 15
+	Title			{L2 Cache (core):}
+	Flags 			NoReliefString Left
 End
 
+# Text field "Bogomips (core)"
 Widget	105
 Property
-	Type		ItemDraw
-	Position	320 60
-	Title		{Bogomips (core)}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		290 60
+    Size			110 15
+	Title			{Bogomips (core):}
+	Flags 			NoReliefString Left
 End
 
+# Value field for "Vendor"
 Widget	111
 Property
-	Type		ItemDraw
-	Position	80 40
-	Title		{Vendor__________________________}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		100 60
+    Size			180 15
+	Title			{???}
+	Flags 			NoReliefString Left
 End
 
+# Value field for "Model"
 Widget	112
 Property
-	Type		ItemDraw
-	Position	80 60
-	Title		{Model___________________________}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		100 80
+    Size			330 15
+	Title			{???}
+	Flags 			NoReliefString Left
 End
 
+# Value field for "CPU Count"
 Widget	113
 Property
-	Type		ItemDraw
-	Position	80 80
-	Title		{CPU Count_______________________}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		100 40
+    Size			30 15
+	Title			{???}
+	Flags 			NoReliefString Left
 End
 
+# Value field for "L2 Cache (core)"
 Widget	114
 Property
-	Type		ItemDraw
-	Position	420 40
-	Title		{L2 Cach}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		410 40
+    Size			80 15
+	Title			{???}
+	Flags 			NoReliefString Left
 End
 
+# Value field for "Bogomips (core)"
 Widget	115
 Property
-	Type		ItemDraw
-	Position	420 60
-	Title		{bogomips}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		410 60
+    Size			80 15
+	Title			{???}
+	Flags 			NoReliefString Left
 End
 
+# Text field for Warning information line 1
 Widget	116
 Property
-	Type		ItemDraw
-	Position	10 360
-	Title		{At the moment the governor 'userspace' is not supported, so you must not use it!}
-	Font		"xft:Arial:pixelsize=13:bold"
-	ForeColor  {darkred}
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		10 360
+    Size			630 15
+	LocaleTitle		{At the moment the governor 'userspace' is not supported, so you cannot use it!}
+	ForeColor  		{darkred}
+	Flags 			NoReliefString Left
 End
 
+# Text field for Warning information line 2
 Widget	117
 Property
-	Type		ItemDraw
-	Position	10 380
-	Title		{You get the same when setting 'powersave' and 'min frequenc' the speed your cpu should operate,}
-	Font		"xft:Arial:pixelsize=13:bold"
-	ForeColor  {darkred}
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		10 380
+    Size			630 15
+	LocaleTitle		{But you get the same result with governor 'powersave' and one of the frequencies}
+	ForeColor  		{darkred}
+	Flags 			NoReliefString Left
 End
 
+# Text field for Warning information line 3
 Widget	118
 Property
-	Type		ItemDraw
-	Position	10 400
-	Title		{or use 'performance' in combination with 'max frequenc' both will work the same as 'userspace'.}
-	Font		"xft:Arial:pixelsize=13:bold"
-	ForeColor  {darkred}
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		10 400
+    Size			630 15
+	LocaleTitle		{in 'Min Frequency', or governor 'performance' in combination with 'Max Frequency'.}
+	ForeColor  		{darkred}
+	Flags 			NoReliefString Left
 End
 
 
@@ -271,133 +344,147 @@ End
 
 # Labelling
 # ---------
+# Text field "Governor" 1st cores row
 Widget	301
 Property
-	Type		ItemDraw
-	Position	10 130
-	Title		{governor}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		10 130
+    Size			110 15
+	Title			{Governor}
+	Flags 			NoReliefString Left
 End
 
+# Text field "Min Frequency" 1st cores row
 Widget	302
 Property
-	Type		ItemDraw
-	Position	10 160
-	Title		{min frequenc}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		10 160
+    Size			110 15
+	LocaleTitle		{Min Frequency}
+	Flags 			NoReliefString Left
 End
 
+# Text field "Max Frequency" 1st cores row
 Widget	303
-	Property
-	Type		ItemDraw
-	Position	10 190
-	Title		{max frequenc}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left 
+Property
+	Type			ItemDraw
+	Position		10 190
+    Size			110 15
+	LocaleTitle		{Max Frequency}
+	Flags 			NoReliefString Left 
 End
 
+# Text field "Governor" 2nd cores row
 Widget	304
-	Property
-	Type		ItemDraw
-	Position	10 260
-	Title		{governor}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left 
+Property
+	Type			ItemDraw
+	Position		10 260
+    Size			110 15
+	LocaleTitle		{Governor}
+	Flags 			NoReliefString Left 
 End
 
+# Text field "Min Frequency" 2nd cores row
 Widget	305
-	Property
-	Type		ItemDraw
-	Position	10 290
-	Title		{min frequenc}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left 
+Property
+	Type			ItemDraw
+	Position		10 290
+    Size			110 15
+	LocaleTitle		{Min Frequency}
+	Flags 			NoReliefString Left 
 End
 
+# Text field "Max Frequency" 2nd cores row
 Widget	306
-	Property
-	Type		ItemDraw
-	Position	10 320
-	Title		{max frequenc}
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left 
+Property
+	Type			ItemDraw
+	Position		10 320
+    Size			110 15
+	LocaleTitle		{Max Frequency}
+	Flags 			NoReliefString Left 
 End
 
 
-# Titel
-# -----
+# Titles
+# ------
+# Text field 1st core
 Widget	201
 Property
-	Type		ItemDraw
-	Position	130 110
-	Title		{not installed   }
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		130 110
+    Size			100 15
+	LocaleTitle		{not installed}
+	Flags 			NoReliefString Left
 End
 
+# Text field 2nd core
 Widget	202
 Property
-	Type		ItemDraw
-	Position	260 110
-	Title		{not installed   }
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left
+	Type			ItemDraw
+	Position		260 110
+    Size			100 15
+	LocaleTitle		{not installed}
+	Flags 			NoReliefString Left
 End
 
+# Text field 3rd core
 Widget	203
-	Property
-	Type		ItemDraw
-	Position	390 110
-	Title		{not installed   }
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left 
+Property
+	Type			ItemDraw
+	Position		390 110
+    Size			100 15
+	LocaleTitle		{not installed}
+	Flags 			NoReliefString Left 
 End
 
+# Text field 4th core
 Widget	204
-	Property
-	Type		ItemDraw
-	Position	520 110
-	Title		{not installed   }
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left 
+Property
+	Type			ItemDraw
+	Position		520 110
+    Size			100 15
+	LocaleTitle		{not installed}
+	Flags 			NoReliefString Left 
 End
 
+# Text field 5th core
 Widget	205
 	Property
-	Type		ItemDraw
-	Position	130 240
-	Title		{not installed   }
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left 
+	Type			ItemDraw
+	Position		130 240
+    Size			100 15
+	LocaleTitle		{not installed}
+	Flags 			NoReliefString Left 
 End
 
+# Text field 6th core
 Widget	206
-	Property
-	Type		ItemDraw
-	Position	260 240
-	Title		{not installed   }
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left 
+Property
+	Type			ItemDraw
+	Position		260 240
+    Size			100 15
+	LocaleTitle		{not installed}
+	Flags 			NoReliefString Left 
 End
 
+# Text field 7th core
 Widget	207
-	Property
-	Type		ItemDraw
-	Position	390 240
-	Title		{not installed   }
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left 
+Property
+	Type			ItemDraw
+	Position		390 240
+    Size			100 15
+	LocaleTitle		{not installed}
+	Flags 			NoReliefString Left 
 End
 
+# Text field 8th core
 Widget	208
-	Property
-	Type		ItemDraw
-	Position	520 240
-	Title		{not installed   }
-	Font		"xft:Arial:pixelsize=12:bold"
-	Flags 		NoReliefString Left 
+Property
+	Type			ItemDraw
+	Position		520 240
+    Size			100 15
+	LocaleTitle		{not installed}
+	Flags 			NoReliefString Left 
 End
 
 
@@ -405,74 +492,66 @@ End
 # --------
 Widget	211
 Property
-	Type		PopupMenu
-	Position	130 130
-	Title		{not available}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		130 130
+	LocaleTitle		{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	212
 Property
-	Type		PopupMenu
-	Position	260 130
-	Title		{not available}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left 
+	Type			PopupMenu
+	Position		260 130
+	LocaleTitle		{not available}
+	Flags 			NoReliefString Left 
 End
 
 Widget	213
 Property
-	Type		PopupMenu
-	Position	390 130
-	Title		{not available}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		390 130
+	LocaleTitle		{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	214
 Property
-	Type		PopupMenu
-	Position	520 130
-	Title		{not available}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		520 130
+	LocaleTitle		{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	215
 Property
-	Type		PopupMenu
-	Position	130 260
-	Title		{not available}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		130 260
+	LocaleTitle		{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	216
 Property
-	Type		PopupMenu
-	Position	260 260
-	Title		{not available}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		260 260
+	LocaleTitle		{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	217
 Property
-	Type		PopupMenu
-	Position	390 260
-	Title		{not available}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		390 260
+	LocaleTitle		{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	218
 Property
-	Type		PopupMenu
-	Position	520 260
-	Title		{not available}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		520 260
+	LocaleTitle		{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 
@@ -480,74 +559,66 @@ End
 # ------------
 Widget	221
 Property
-	Type		PopupMenu
-	Position	130 160
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		130 160
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	222
 Property
-	Type		PopupMenu
-	Position	260 160
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		260 160
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	223
 Property
-	Type		PopupMenu
-	Position	390 160
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		390 160
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	224
 Property
-	Type		PopupMenu
-	Position	520 160
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		520 160
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	225
 Property
-	Type		PopupMenu
-	Position	130 290
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		130 290
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	226
 Property
-	Type		PopupMenu
-	Position	260 290
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		260 290
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	227
 Property
-	Type		PopupMenu
-	Position	390 290
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		390 290
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	228
 Property
-	Type		PopupMenu
-	Position	520 290
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		520 290
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 
@@ -555,74 +626,66 @@ End
 # ------------
 Widget	231
 Property
-	Type		PopupMenu
-	Position	130 190
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		130 190
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	232
 Property
-	Type		PopupMenu
-	Position	260 190
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		260 190
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	233
 Property
-	Type		PopupMenu
-	Position	390 190
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		390 190
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	234
 Property
-	Type		PopupMenu
-	Position	520 190
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		520 190
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	235
 Property
-	Type		PopupMenu
-	Position	130 320
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		130 320
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	236
 Property
-	Type		PopupMenu
-	Position	260 320
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		260 320
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	237
 Property
-	Type		PopupMenu
-	Position	390 320
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		390 320
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 Widget	238
 Property
-	Type		PopupMenu
-	Position	520 320
-	Title		{conservative}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString Left Hidden
+	Type			PopupMenu
+	Position		520 320
+	Title			{not available}
+	Flags 			NoReliefString Left Hidden
 End
 
 
@@ -632,17 +695,16 @@ End
 # ---------------
 Widget 993
 Property
-	Size		80 25
+	Size			80 25
 	Position		450 460
-	Type		PushButton
-	Title		{Quit}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString
+	Type			PushButton
+	LocaleTitle		{Quit}
+	Flags 			NoReliefString
 	ForeColor		{black}
 	BackColor		{white}
 	ShadowColor		{DarkGray}
 Main
-	Case message of
+Case message of
 	SingleClic :
 	Begin
 		Quit
@@ -654,93 +716,66 @@ End
 # ---------------
 Widget 992
 Property
-	Size		80 25
+	Size			80 25
 	Position		550 460
-	Type		PushButton
-	Title		{Set}
-	Font		"xft:Arial:pixelsize=12"
-	Flags 		NoReliefString
+	Type			PushButton
+	LocaleTitle		{Set}
+	Flags 			NoReliefString
 	ForeColor		{black}
 	BackColor		{white}
 	ShadowColor		{DarkGray}
 Main
-	Case message of
+Case message of
 	SingleClic :
 	Begin
-		Set $found_file = (GetOutput {if [ -e ~/.fvwm-nightshade/.governor ]; then echo 1; else echo 0; fi} 1 -1)
+		Set $gov_path = $homeDir{/.governor}
+		Set $cmd = {if [ -e }$gov_path{ ]; then echo 1; else echo 0; fi}
+		Set $found_file = (GetOutput $cmd 1 -1)
 		If $found_file == {1} Then
-			Begin
-				Do {Exec rm ~/.fvwm-nightshade/.governor}
-				Do {Exec touch ~/.fvwm-nightshade/.governor}
-			End
-			Else
-				Do {Exec touch	~/.fvwm-nightshade/.governor}
-		If $cpu_count>0 Then
-			Begin
-				Set $cmd_governor = {-g }(GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors} 1 (GetValue 211))
-				Set $cmd_min_freq = {-d }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies} 1 (GetValue 221)) 1000){MHz}
-				Set $cmd_max_freq = {-u }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies} 1 (GetValue 231)) 1000){MHz}
-				Set $cmd_cpu1 = {Exec echo "cpufreq-set -c 0 }$cmd_governor{ }$cmd_min_freq{ }$cmd_max_freq{" >> '/home/bernhard/.fvwm-nightshade/.governor'}
-				Do $cmd_cpu1
-			End
-		If $cpu_count>1 Then
-			Begin
-				Set $cmd_governor = {-g }(GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu1/cpufreq/scaling_available_governors} 1 (GetValue 212))
-				Set $cmd_min_freq = {-d }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu1/cpufreq/scaling_available_frequencies} 1 (GetValue 222)) 1000){MHz}
-				Set $cmd_max_freq = {-u }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu1/cpufreq/scaling_available_frequencies} 1 (GetValue 232)) 1000){MHz}
-				Set $cmd_cpu2 = {Exec echo "cpufreq-set -c 1 }$cmd_governor{ }$cmd_min_freq{ }$cmd_max_freq{" >> '/home/bernhard/.fvwm-nightshade/.governor'}
-				Do $cmd_cpu2
-			End
-		If $cpu_count>2 Then
-			Begin
-				Set $cmd_governor = {-g }(GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu2/cpufreq/scaling_available_governors} 1 (GetValue 213))
-				Set $cmd_min_freq = {-d }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu2/cpufreq/scaling_available_frequencies} 1 (GetValue 223)) 1000){MHz}
-				Set $cmd_max_freq = {-u }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu2/cpufreq/scaling_available_frequencies} 1 (GetValue 233)) 1000){MHz}
-				Set $cmd_cpu3 = {Exec echo "cpufreq-set -c 2 }$cmd_governor{ }$cmd_min_freq{ }$cmd_max_freq{" >> '/home/bernhard/.fvwm-nightshade/.governor'}
-				Do $cmd_cpu3
-			End
-		If $cpu_count>3 Then
-			Begin
-				Set $cmd_governor = {-g }(GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu3/cpufreq/scaling_available_governors} 1 (GetValue 214))
-				Set $cmd_min_freq = {-d }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu3/cpufreq/scaling_available_frequencies} 1 (GetValue 224)) 1000){MHz}
-				Set $cmd_max_freq = {-u }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu3/cpufreq/scaling_available_frequencies} 1 (GetValue 234)) 1000){MHz}
-				Set $cmd_cpu4 = {Exec echo "cpufreq-set -c 3 }$cmd_governor{ }$cmd_min_freq{ }$cmd_max_freq{" >> '/home/bernhard/.fvwm-nightshade/.governor'}
-				Do $cmd_cpu4
-			End
-		If $cpu_count>4 Then
-			Begin
-				Set $cmd_governor = {-g }(GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu4/cpufreq/scaling_available_governors} 1 (GetValue 215))
-				Set $cmd_min_freq = {-d }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu4/cpufreq/scaling_available_frequencies} 1 (GetValue 225)) 1000){MHz}
-				Set $cmd_max_freq = {-u }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu4/cpufreq/scaling_available_frequencies} 1 (GetValue 235)) 1000){MHz}
-				Set $cmd_cpu5 = {Exec echo "cpufreq-set -c 4 }$cmd_governor{ }$cmd_min_freq{ }$cmd_max_freq{" >> '/home/bernhard/.fvwm-nightshade/.governor'}
-				Do $cmd_cpu5
-			End
-		If $cpu_count>5 Then
-			Begin
-				Set $cmd_governor = {-g }(GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu5/cpufreq/scaling_available_governors} 1 (GetValue 216))
-				Set $cmd_min_freq = {-d }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu5/cpufreq/scaling_available_frequencies} 1 (GetValue 226)) 1000){MHz}
-				Set $cmd_max_freq = {-u }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu5/cpufreq/scaling_available_frequencies} 1 (GetValue 236)) 1000){MHz}
-				Set $cmd_cpu6 = {Exec echo "cpufreq-set -c 5 }$cmd_governor{ }$cmd_min_freq{ }$cmd_max_freq{" >> '/home/bernhard/.fvwm-nightshade/.governor'}
-				Do $cmd_cpu6
-			End
-		If $cpu_count>6 Then
-			Begin
-				Set $cmd_governor = {-g }(GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu6/cpufreq/scaling_available_governors} 1 (GetValue 217))
-				Set $cmd_min_freq = {-d }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu6/cpufreq/scaling_available_frequencies} 1 (GetValue 227)) 1000){MHz}
-				Set $cmd_max_freq = {-u }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu6/cpufreq/scaling_available_frequencies} 1 (GetValue 237)) 1000){MHz}
-				Set $cmd_cpu7 = {Exec echo "cpufreq-set -c 6 }$cmd_governor{ }$cmd_min_freq{ }$cmd_max_freq{" >> '/home/bernhard/.fvwm-nightshade/.governoor'}
-				Do $cmd_cpu7
-			End
-		If $cpu_count>7 Then
-			Begin
-				Set $cmd_governor = {-g }(GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu7/cpufreq/scaling_available_governors} 1 (GetValue 218))
-				Set $cmd_min_freq = {-d }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu7/cpufreq/scaling_available_frequencies} 1 (GetValue 228)) 1000){MHz}
-				Set $cmd_max_freq = {-u }(Div (GetOutput {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu7/cpufreq/scaling_available_frequencies} 1 (GetValue 238)) 1000){MHz}
-				Set $cmd_cpu8 = {Exec echo "cpufreq-set -c 7 }$cmd_governor{ }$cmd_min_freq{ }$cmd_max_freq{" >> '/home/bernhard/.fvwm-nightshade/.governor'}
-				Do $cmd_cpu8
-			End
-		Do {Exec chmod 4775 	~/.fvwm-nightshade/.governor}
-#		Do {Exec gksu chown root:users 	~/.fvwm-nightshade/.governor}
-		Do {Exec gksu ~/.fvwm-nightshade/.governor}
+		Begin
+			Do {Exec rm -f }$gov_path
+			Do {Exec touch }$gov_path
+			Set $gov_updated = 1
+		End
+		Else
+			Do {Exec touch }$gov_path
+		
+		For $i = 0 To (Add $cpu_count -1) Do
+		Begin
+			Set $gov_widget = (Add 211 $i)
+			Set $min_freq_widget = (Add 221 $i)
+			Set $max_freq_widget = (Add 231 $i)
+			Set $cmd_cat_governor = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}$i{/cpufreq/scaling_available_governors}
+			Set $cmd_cat_min_freq = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}$i{/cpufreq/scaling_available_frequencies}
+			Set $cmd_cat_max_freq = {LANG=en_US.UTF-8 cat /sys/devices/system/cpu/cpu}$i{/cpufreq/scaling_available_frequencies}
+			Set $cmd_governor = {-g }(GetOutput $cmd_cat_governor 1 (GetValue $gov_widget))
+			Set $cmd_min_freq = {-d }(Div (GetOutput $cmd_cat_min_freq 1 (GetValue $min_freq_widget)) 1000){MHz}
+			Set $cmd_max_freq = {-u }(Div (GetOutput $cmd_cat_max_freq 1 (GetValue $max_freq_widget)) 1000){MHz}
+			Set $cmd_cpu = {Exec echo "cpufreq-set -c }$i{ }$cmd_governor{ }$cmd_min_freq{ }$cmd_max_freq{" >> "}$gov_path{"}
+			Do $cmd_cpu
+		End
+		
+
+		Do {Exec chmod 4775 }$gov_path
+#		Do {Exec gksu chown root:users }$gov_path
+		Do {Exec gksu }$gov_path
+		
+		Set $timeElapsed = 0
+		If $gov_updated == 1 Then
+			Set $status = $gov_path{ updated and cpufreq set.}
+		Else
+			Set $status = {New file}$gov_path{ written and cpufreq set.}
+		ChangeTitle 991 $status
 	End
+End
+
+# Label "Statusbar"
+# -----------------
+Widget	991
+Property
+    Type			ItemDraw
+    Position		10 465
+    Size 			430 15
+    Title			{}
+    Flags 			NoReliefString Left
 End
