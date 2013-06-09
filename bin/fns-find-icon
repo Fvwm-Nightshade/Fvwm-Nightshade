@@ -24,6 +24,9 @@ import subprocess
 import fnmatch
 import argparse
 
+def print_(s):
+    sys.stdout.write(str(s))
+    
 def search_file(filename, searchpaths, nodesktop=False, pathsep=os.pathsep):
     """ Given a search path, find file with requested name """
     for path in searchpaths.split(pathsep):
@@ -149,7 +152,7 @@ if __name__ == '__main__':
     if os.path.isabs(icon_path):
         # if icon is a svg, convert it
         icon_path = check_convert(icon_path, i_size)
-        print(icon_path)
+        print_(icon_path)
     else:
         if icon_path == '':
             sys.stderr.write("No icon found named '"+app_name+"' with size "+i_size+" in category '"+category+"'\n")
@@ -164,6 +167,6 @@ if __name__ == '__main__':
                     if icon_path == '':
                         sys.stderr.write("No icon found for app named '"+app_name+"' with size "+i_size+" in category '"+category+"'\n")
                         sys.exit(1)
-        print(icon_path)
+        print_(icon_path)
     #print "duration: " + str(time.time()-ts)
     sys.exit()
