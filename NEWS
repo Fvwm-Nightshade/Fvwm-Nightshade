@@ -1,7 +1,7 @@
 Fvwm-Nightshade Release Notes
 =============================
 
-Version 0.6.x ( 2013)
+Version 0.6.5 (09th June 2013)
 
 Changes:
 --------
@@ -9,10 +9,14 @@ Changes:
   - German
   - French
   - Spanish
+- Add Tab cycling (#21) in both directions with Alt-Tab (forward) and Alt-Shift-Tab (backwards)
+- Prepare Python scripts to work with Python 2 and 3 (#20)
 - Bugfix for FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
   that theme/layout names ended with 't' doesn't show correctly in menu and
   can't use though.
 - Bugfix for FvwmScript-CPU-Performance with an absolut path for .governor file.
+- Bugfix #24 - FvwmScript-PersonalMenu replaces underlines in icon paths with spaces
+- Bugfix #25 - FvwmScript-PersonalMenu show bad message in statusbar
 
 ------------------------------------------------------------------------
 
