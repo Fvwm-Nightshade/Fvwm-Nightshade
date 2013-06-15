@@ -3,7 +3,7 @@
 # Maintainer: Bernhard Popp <fvwmnightshade@gmail.com>
 
 pkgname=Fvwm-Nightshade
-pkgver=0.5.31
+pkgver=0.6.6
 pkgrel=1
 pkgdesc="user fiendly and flexible useability addon for fvwm"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ makedepends=('unzip')
 optdepends=('pcmanfm: lightwight filemanger' 'volumeicon: volumecontrol in systray' 'network-manager-applet: network controlling tool for systray')
 provides=('Fvwm-Nightshade')
 #source="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/develop.zip"
-source="develop.zip"
+source="0.6.6.zip"
 
 package() {
   cd "$srcdir/Fvwm-Nightshade-develop"
