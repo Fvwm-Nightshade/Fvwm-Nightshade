@@ -1,0 +1,17 @@
+*FvwmForm-Desktop-ConfigDefault: IconsOn 	on 
+*FvwmForm-Desktop-ConfigDefault: IconsOff	 
+*FvwmForm-Desktop-ConfigDefault: Size        
+*FvwmForm-Desktop-ConfigDefault: TitlesOn 	on 
+*FvwmForm-Desktop-ConfigDefault: TitlesOff 	 
+*FvwmForm-Desktop-ConfigDefault: InsertOn 	on 
+*FvwmForm-Desktop-ConfigDefault: InsertOff	 
+*FvwmForm-Desktop-ConfigDefault: InMenu   	MenuRoot 
+*FvwmForm-Desktop-ConfigDefault: Theme       
+*FvwmForm-Desktop-ConfigDefault: Title   	 
+*FvwmForm-Desktop-ConfigDefault: Installprefix  
+*FvwmForm-Desktop-ConfigDefault: Desktop	 
+*FvwmForm-Desktop-ConfigDefault: Menutype	 
+*FvwmForm-Desktop-ConfigDefault: Path      	$FVWM_USERDIR/.menu 
+*FvwmForm-Desktop-ConfigDefault: IconDir      	~/.fvwm-nightshade/icons 
+*FvwmForm-Desktop-ConfigDefault: MultiOn 	on 
+*FvwmForm-Desktop-ConfigDefault: MultiOff	 

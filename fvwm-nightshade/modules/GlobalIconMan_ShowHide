@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		GlobalIconMan_ShowHide
-# Version:	0.1.3
+# Version:	0.1.4
 # Licence: 	GPL 2
 #
 # Description:	shows a windows list of all windows in the actual page
@@ -10,7 +10,7 @@
 #			Thomas Funk <t.funk@web.de>	
 #
 # Created:	10/02/2012
-# Changed:	10/12/2012
+# Changed:	06/15/2013
 #-----------------------------------------------------------------------
 
 InfoStoreAdd y_move 0
@@ -20,7 +20,7 @@ InfoStoreAdd y_move 0
 #***********************************************************************
 Style GlobalIconManShowHide !Button 1, !Button 3, !Button 5, !Button 7, !Button 9
 Style GlobalIconManShowHide !Button 2, !Button 4, !Button 6, !Button 8, !Button 0
-Style GlobalIconManShowHide NeverFocus, WindowListSkip, Layer 0, HandleWidth 1, !State 1
+Style GlobalIconManShowHide NeverFocus, !Iconifiable, !Maximizable, WindowListSkip, Layer 0, HandleWidth 1, !State 1
 
 DestroyModuleConfig GlobalIconManShowHide: *
 *GlobalIconManShowHide: 1 IconName					GlobalIconMan
@@ -79,12 +79,12 @@ DestroyModuleConfig FvwmEventShowHide: *
 #-----------------------------------------------------------------------
 DestroyFunc FESH-EnterWindow
 AddToFunc 	FESH-EnterWindow
-+ I PointerWindow (GlobalIconManShowHide, !State 1) FuncShowWindow
++ I PointerWindow (GlobalIconManShowHide, !State 1) Schedule 100 FuncShowWindow
 
 
 DestroyFunc FESH-LeaveWindow
 AddToFunc 	FESH-LeaveWindow
-+ I Prev (GlobalIconManShowHide, State 1) FuncHideWindow
++ I Prev (GlobalIconManShowHide, State 1) Schedule 100 FuncHideWindow
 
 
 DestroyFunc FuncShowWindow
@@ -95,9 +95,9 @@ AddToFunc	FuncShowWindow
 			else \
 				echo InfoStoreAdd y_move 0; \
 			fi'
-+ I	Schedule 200 ThisWindow (GlobalIconManShowHide) AnimatedMove w+0 w+$[infostore.y_move]p
++ I	ThisWindow (GlobalIconManShowHide) AnimatedMove w+0 w+$[infostore.y_move]p
++ I Schedule 70 ThisWindow (GlobalIconManShowHide) Pick (CirculateHit) Layer 0 6
 + I All (GlobalIconManShowHide) State 1 True
-+ I Schedule 200 ThisWindow (GlobalIconManShowHide) Pick (CirculateHit) Layer 0 6
 	
 
 DestroyFunc FuncHideWindow
