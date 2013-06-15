@@ -1,6 +1,15 @@
 Fvwm-Nightshade Release Notes
 =============================
 
+Version 0.6.6 (15th June 2013)
+
+Changes:
+--------
+- Bugfix #26 - Application menu predefines not set to .fvwm-nightshade
+- Bugfix #27 - Global Iconman is flipping sometimes
+
+------------------------------------------------------------------------
+
 Version 0.6.5 (09th June 2013)
 
 Changes:
