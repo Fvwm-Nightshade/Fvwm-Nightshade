@@ -1,4 +1,10 @@
 History:
+06/15/2013 V 0.6.6
+- fix bug #26 - Application menu predefines not set to .fvwm-nightshade:
+  - add a default .FvwmForm-Desktop-Config with needed settings
+  - add copy routine to FNS-BaseSetup
+- fix bug #27 - Global Iconman is flipping sometimes
+
 06/08/2013 V 0.6.5
 - fix bug in debian/control that version of installed Fvwm isn't checked
   correctly and FNS would be installed whether a smaller version than Fvwm
