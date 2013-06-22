@@ -5,13 +5,13 @@ Requirements
 ============
 
 Required:	Fvwm >= 2.6.6 (compiled with all features), python-xdg, 
-		xterm, conky, xscreensaver, eterm, imagemagick, xwd,
-		stalonetray, wm-icons
+			xterm, conky, xscreensaver, eterm, imagemagick, xwd,
+			stalonetray, wm-icons
 
 Recommended: gnomes network manager, Volume Icon
 
 Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-		qtconfig for qt3, qtconfig for qt4, xneurs
+			qtconfig for qt3, qtconfig for qt4, xneurs
 
 
 
@@ -97,7 +97,7 @@ Fvwm
 Installation of Fvwm-Nightshade
 ===============================
 
-1. download package from https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tree/develop
+1. download package from http://fvwm-nightshade.github.io/Fvwm-Nightshade
 2. unpack it and switch into the expanded directory
    Remark: don't use file-roller because the tool cannot handle unix rights in zip files
            Use unzip instead.
@@ -143,7 +143,7 @@ Installation of Fvwm-Nightshade
 
 Now Fvwm-Nightshade is installed. 
 
-If you haven't a graphical login manager copy system/.xinitrc into your home directory 
+If you haven't a graphical login manager copy xinitrc template into your home directory 
 	$ cp <system>/share/doc/fvwm-nightshade/xinitrc-example ~/.xinitrc
 and start the xserver with
 	$ startx
@@ -163,12 +163,20 @@ Deinstallation
 
 	If you have installed Fvwm-Nightshade to another directory you have to change the prefix:
 
-		# make prefix=<other_dir> install
+		# make prefix=<other_dir> uninstall
 
 	Also, if Fvwm is installed in another directory then /usr/share/fvwm you have
 	to told make where Fvwm is located
 
 		# make fvwm_path=<path_to_fvwm> uninstall
+	
+	Since 0.6.7 'make install' creates an install log. For previous versions which haven't this
+	file you must use
+		
+		# make uninstall-alternative
+	
+	It checks the default installation locations and try to uninstall all installed files. Maybe
+	some files won't found. Excuse the inconvenience.
 			
 - For all others use the package management system.
 
