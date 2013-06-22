@@ -1,4 +1,12 @@
 History:
+06/23/2013 V 0.7.0
+- Issue #38 - Enhance uninstall routine
+  - change install/uninstall routines in the Makefile to support the creation
+    of an install list so keep the sources of the installed version never needed.
+  - update INSTALL
+- update config to 0.7.0
+- update README with an attention hint that this is the development version
+
 06/15/2013 V 0.6.6
 - fix bug #26 - Application menu predefines not set to .fvwm-nightshade:
   - add a default .FvwmForm-Desktop-Config with needed settings
