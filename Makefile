@@ -459,7 +459,6 @@ arch: prepare-arch
 	mv $(pkgdir)/*.xz ../
 	rm -rf $(pkgdir)
 	
-	
 .PHONY: dist distcheck install uninstall dry-uninstall uninstall-alternative dry-uninstall-alternative deb rpm arch
 .SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list dry-uninstall uninstall-alternative dry-uninstall-alternative
 	
