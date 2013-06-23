@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.0.0
+# Version:      2.0.1
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      06/23/2013
+# Changed:      06/24/2013
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -126,13 +126,13 @@ build-install-list:
 	for directory in $(fns_docdirs); do \
 		echo $(pkgdocdir)/$$directory >> ./fns-install_$(version).lst; \
 	done
-	echo $(pkgdocdir) >> ./fns-install_$(version).lst
 	
 	echo "-> Template files"
 	for file in $(fns_templates); do \
 		echo $(pkgdocdir)/templates/$$file >> ./fns-install_$(version).lst; \
 	done
 	echo $(pkgdocdir)/templates >> ./fns-install_$(version).lst;
+	echo $(pkgdocdir) >> ./fns-install_$(version).lst
 
 	echo "-> Manpage files"
 	for file in $(fns_manpages); do \
@@ -229,10 +229,10 @@ uninstall:
 				cp $(pkgdocdir)/fns-install_$$inst_fns_version.lst .; \
 				echo "copy $(pkgdocdir)/fns-install_$$inst_fns_version.lst to `pwd`"; \
 				for path in `cat fns-install_$$inst_fns_version.lst` ; do \
-					if test -e $$path; then \
+					if test -f "$$path"; then \
 						rm -f $$path; \
 						echo "remove file: $$path"; \
-					elif test -d $$path; then \
+					elif test -d "$$path"; then \
 						rmdir $$path; \
 						echo "remove directory: $$path"; \
 					else \
@@ -273,9 +273,9 @@ dry-uninstall:
 				echo "Starting with deinstallation ..."; \
 				echo "copy $(pkgdocdir)/fns-install_$$inst_fns_version.lst to `pwd`"; \
 				for path in `cat fns-install_$$inst_fns_version.lst` ; do \
-					if test -e $$path; then \
+					if test -f "$$path"; then \
 						echo "remove file: $$path"; \
-					elif test -d $$path; then \
+					elif test -d "$$path"; then \
 						echo "remove directory: $$path"; \
 					else \
 						echo "not found: $$path"; \
