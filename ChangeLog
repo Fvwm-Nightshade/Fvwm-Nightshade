@@ -1,4 +1,9 @@
 History:
+06/24/2013 V 0.7.1
+- For Issue #38:
+  - fix bug in install rule: wrong test option -e instead of -f
+  - fix bug in build-install-list rule: wrong place of doc dir entry.
+
 06/23/2013 V 0.7.0
 - Issue #38 - Enhance uninstall routine
   - change install/uninstall routines in the Makefile to support the creation
