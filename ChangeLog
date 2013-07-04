@@ -1,4 +1,18 @@
 History:
+
+07/04/2013 V 0.7.2
+- Issue #39 - installing localy needs to update /usr/share/xsessions/
+  - add new options in Makefile:
+    local=yes
+      allow local installation without root permissions.
+    displaymanager=no
+      disable automatic install of fvwm-nightshade.desktop in /usr/share/xsessions
+      if no display-manager is installed.
+  - split target 'install' to fit new possibility into 'install' for generic
+    installation and dist-install for package buildings.
+  - update rpm spec and arch pkgbuild file
+  - update documentation (INSTALL, NEWS, manpage, html)
+  
 06/24/2013 V 0.7.1
 - For Issue #38:
   - fix bug in install rule: wrong test option -e instead of -f

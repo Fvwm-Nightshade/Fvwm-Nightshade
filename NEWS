@@ -5,6 +5,10 @@ Version 0.7.x
 - Fix issue #38 - Enhance uninstall routine
   Makefile supports now the creation of an install list so keep the sources 
   of the installed version never needed.
+- Fix issue #39 - installing localy needs to update /usr/share/xsessions/
+  It is now possible to install Fvwm-Nightshade without the login file
+  fvwm-nightshade.desktop. Also local installation can be done if user
+  hasn't root rights.
 
 ------------------------------------------------------------------------
 
