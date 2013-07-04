@@ -3,7 +3,7 @@
 %define        	__os_install_post %{_dbpath}/brp-compress
 
 Name:		fvwm-nightshade
-Version:	
+Version:	0.7.1
 Release:	1
 Summary:	Fvwm-Nightshade
 
@@ -41,7 +41,7 @@ cp %{SOURCEURL0} %{_topdir}/SOURCES/
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make DESTDIR=$RPM_BUILD_ROOT prefix=/usr install
+make DESTDIR=$RPM_BUILD_ROOT prefix=/usr dist-install
 
 %clean
 rm -rf $RPM_BUILD_ROOT

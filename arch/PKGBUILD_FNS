@@ -16,5 +16,5 @@ source=
 
 package() {
   cd "$srcdir/"
-  make DESTDIR=$pkgdir prefix=/usr install
+  make DESTDIR=$pkgdir prefix=/usr dist-install
 }
