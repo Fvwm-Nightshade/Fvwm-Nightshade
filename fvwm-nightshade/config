@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.2
+InfoStoreAdd ns_version 0.7.3
 # Copyright (C) 2013
 #
 # Authors:
@@ -1026,9 +1026,9 @@ AddToFunc StartFunction
 # show splash sceen
 + I Test (Init) Test (EnvMatch SplashOn 1) Module FvwmBanner
 #-----------------------------------------------------------------------
-# set the root background image with Esetroot or if no image found start
+# set the root background image with feh or if no image found start
 # default Fvwm background
-+ I Test (I $[infostore.fvwm_wallpaper]) Exec exec Esetroot -scale $[infostore.fvwm_wallpaper]
++ I Test (I $[infostore.fvwm_wallpaper]) Exec exec feh --bg-scale $[infostore.fvwm_wallpaper]
 + I TestRC (!Match) Module FvwmBacker
 #-----------------------------------------------------------------------
 # activate automatical raise of windows
@@ -1210,8 +1210,8 @@ AddToFunc   FuncAppCheck
 + I Test (!x $[infostore.default_browser]) FuncPrintMsg "AppCheck" "default browser $[infostore.default_browser] not installed"
 # xscreensaver
 + I Test (!x xscreensaver-command) FuncPrintMsg "AppCheck" "xscreensaver (lock) not installed"
-# Esetroot in package eterm
-+ I Test (!x Esetroot) FuncPrintMsg "AppCheck" "eterm (esetroot for background) not installed"
+# feh
++ I Test (!x feh) FuncPrintMsg "AppCheck" "feh (for background) not installed"
 # import in package imagemagick
 + I Test (!x import) FuncPrintMsg "AppCheck" "imagemagick (import for screenshot, thumbs) not installed"
 # xwd
@@ -1380,7 +1380,7 @@ AddToFunc   WallpaperBrowser
 DestroyFunc FuncNewWallpaper
 AddToFunc   FuncNewWallpaper
 + I PipeRead 'ln -sf $* $[FVWM_USERDIR]/.wallpaper'
-+ I Exec exec Esetroot -scale $[infostore.fvwm_wallpaper]
++ I Exec exec feh --bg-scale $[infostore.fvwm_wallpaper]
 + I KillModule FvwmBacker
 
 #-----------------------------------------------------------------------
@@ -1676,9 +1676,9 @@ DestroyFunc FuncMenuWallpaperConfiguration
 AddToFunc   FuncMenuWallpaperConfiguration
 + I Test (x convert) PipeRead `echo SetEnv appmatch 1`
 + I TestRc (!Match) PipeRead `echo SetEnv appmatch 0`
-+ I Test (x Esetroot) PipeRead 'echo SetEnv appmatch `expr $appmatch + 1`'
++ I Test (x feh) PipeRead 'echo SetEnv appmatch `expr $appmatch + 1`'
 + I Test (EnvMatch appmatch 2) Popup MenuWallpaperConfiguration
-+ I TestRc (!Match) FuncShowMessage "Wallpaper browser Info" "Install ImageMagick AND eterm for full functionality."
++ I TestRc (!Match) FuncShowMessage "Wallpaper browser Info" "Install ImageMagick AND feh for full functionality."
 
 #-----------------------------------------------------------------------
 # Creates a dynamic menu for all available Fvwm manpages

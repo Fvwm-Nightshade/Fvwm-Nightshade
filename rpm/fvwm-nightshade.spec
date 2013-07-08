@@ -3,7 +3,7 @@
 %define        	__os_install_post %{_dbpath}/brp-compress
 
 Name:		fvwm-nightshade
-Version:	0.7.1
+Version:	
 Release:	1
 Summary:	Fvwm-Nightshade
 
@@ -15,12 +15,12 @@ BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 Requires:	fvwm >= 2.6.6
-Requires:	python
+Requires:	python <= 2.7
 Requires:	pyxdg
 Requires:	xterm
 Requires:	conky
 Requires:	xscreensaver
-Requires:	eterm
+Requires:	feh
 Requires:	ImageMagick
 Requires:	librsvg2
 Requires:	stalonetray
