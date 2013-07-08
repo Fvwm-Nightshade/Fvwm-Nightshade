@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.2
+# Version:      2.1.3
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -443,7 +443,7 @@ prepare-arch: dist
 
 arch: prepare-arch
 	makepkg --config arch/makepkg.conf -p $(pkgdir)/PKGBUILD -g >> $(pkgdir)/PKGBUILD
-	makepkg --config arch/makepkg.conf -p $(pkgdir)/PKGBUILD
+	makepkg -s --config arch/makepkg.conf -p $(pkgdir)/PKGBUILD
 	rm -f *.xz
 	mv $(pkgdir)/*.xz ../
 	rm -rf $(pkgdir)

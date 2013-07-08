@@ -81,7 +81,7 @@ Fvwm
 			$ mkdir -p /home/<your_user_name>/packages/fvwm
 			$ cd /home/<your_user_name>/packages/fvwm
 		2. Copy from arch/PKGBUILD_FVWM into the directory rename it to PKGBUILD and run
-			$ makepkg -c
+			$ makepkg -s
 		3. enter password 'guest' for CVS login
 
 4. Install Fvwm
