@@ -4,16 +4,17 @@ Installing Fvwm-Nightshade
 Requirements
 ============
 
-Required:	Fvwm >= 2.6.6 (compiled with all features), python-xdg, 
-			xterm, conky, xscreensaver, eterm, imagemagick, xwd,
-			stalonetray, wm-icons
+Required:		Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
+				xterm, conky, xscreensaver, feh, imagemagick, librsvg2, xwd
+				stalonetray, cpufrequtils*, gksu
 
-Recommended: gnomes network manager, Volume Icon
+Recommended: 	gnomes network manager, Volume Icon, wm-icons
 
-Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-			qtconfig for qt3, qtconfig for qt4, xneurs
+Useful:			fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
+				qtconfig for qt3, qtconfig for qt4, xneurs
 
-
+* unfortunatelly not usable in Arch - changed to cpupower but not supported
+  at the moment -> see issue #40 in the bugtracker.
 
 Preparation
 ===========
@@ -45,11 +46,14 @@ Fvwm
 	    - add in configure.ac after line 1766:
 	      bin/fvwm-menu-desktop-config.fpl
 	
-	deb/Arch:
+	deb:
 	- it's mostly easier to do "3. Building the Tree" before installing packages because the 
 	  absent packages/dev-libs are in braces in the "no" lines at the end of the summary ;)
-	- deb: if X11/Intrinsic.h not found while make you need package libXt-dev, too.
-	- Arch: xsltproc is equivalent to libxslt. librplay not available but normally not needed.
+	- if X11/Intrinsic.h not found while make you need package libXt-dev, too.
+	
+	Arch:
+	- xsltproc is equivalent to libxslt. librplay not available but normally not needed.
+	- next step: 4. Compile Fvwm
 	
 3. Building the Tree:
 	- execute in the terminal
@@ -77,7 +81,7 @@ Fvwm
 			$ mkdir -p /home/<your_user_name>/packages/fvwm
 			$ cd /home/<your_user_name>/packages/fvwm
 		2. Copy from arch/PKGBUILD_FVWM into the directory rename it to PKGBUILD and run
-			$ makepkg
+			$ makepkg -c
 		3. enter password 'guest' for CVS login
 
 4. Install Fvwm
@@ -170,8 +174,8 @@ change the base settings and enjoy.
 If you have a graphical login manager there's now a new entry "Fvwm-Nightshade" in your sessions dialog.
 Login, change the base settings and enjoy.
 
-If you have installed Fvwm-Nightshade locally copy (with root rights) fvwm-nightshade.desktop-example
-from the doc directory to /usr/share/xsessions:
+If you have installed Fvwm-Nightshade locally and want to use a display-manager copy (with root rights) 
+fvwm-nightshade.desktop-example from the doc directory to /usr/share/xsessions:
 	# cp <system>/share/doc/fvwm-nightshade/fvwm-nightshade.desktop-example /usr/share/xsessions/fvwm-nightshade.desktop
 
 
@@ -227,7 +231,15 @@ To install a downloaded package use yum (as root) to solve package dependencies 
 
 	# yum --nogpgcheck localinstall <path_to_rpm_package>
 
-Some package search sites:
+Arch:
+https://www.archlinux.org/packages/
+https://www.archlinux.org/packages/
+
+To install a downloaded package use pacman (as root) to solve package dependencies with
+
+	# pacman -U <path_to_arch_package>
+
+Some other package search sites:
 http://pkgs.org
 http://rpm.pbone.net/
 http://www.rpmseek.com/index.html

@@ -109,14 +109,17 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 Requirements:
 =============
 Required:	Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
-		xterm, conky, xscreensaver, eterm, imagemagick, librsvg2, xwd
-		stalonetray, cpufrequtils, gksu
+		xterm, conky, xscreensaver, feh, imagemagick, librsvg2, xwd
+		stalonetray, cpufrequtils*, gksu
 
 Recommended: 	gnomes network manager, Volume Icon, wm-icons
 
 Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
 			qtconfig for qt3, qtconfig for qt4, xneurs
   
+* unfortunatelly not usable in Arch - changed to cpupower but not supported
+  at the moment -> see issue #40 in the bugtracker.
+
 
 Installation
 ============
