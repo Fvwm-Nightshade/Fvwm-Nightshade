@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
-"POT-Creation-Date: 2013-06-05 23:00++0200\n"
-"PO-Revision-Date: 2013-06-05 23:08+0100\n"
+"POT-Creation-Date: 2013-07-07 18:40+0200\n"
+"PO-Revision-Date: 2013-07-07 18:40+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -943,8 +943,8 @@ msgstr "Installer pm-utils pour avoir l'ensemble des fonctionnalités"
 msgid "Wallpaper browser Info"
 msgstr "Navigateur papier paint info"
 
-msgid "Install ImageMagick AND eterm for full functionality."
-msgstr "Installer ImageMagick et eterm pour avoir l'ensemble des fonctionnalités"
+msgid "Install ImageMagick AND feh for full functionality."
+msgstr "Installer ImageMagick et feh pour avoir l'ensemble des fonctionnalités"
 
 # config - FuncKbdLayouter
 msgid "Keyboard Layout Info"
