@@ -1,4 +1,15 @@
 History:
+08/07/2013 V 0.7.3
+- exchange Esetroot with feh because of the poor availability in different
+  distribution repositories.
+- update translation files (pot & po)
+- update rpm/deb/arch control files
+- update documentation (INSTALL, README, News)
+- cpufrequtils temporarily removed from PKGBUILD - FvwmScript-CPU-Performance
+  not working at the moment in Arch installation. See issue #40
+- add python2-xdg to Fvwm PKGBUILD script. Also remove old py-xdg 0.19.3 from
+  build function
+- add -s to arch target to perform installation of dependencies after build
 
 07/04/2013 V 0.7.2
 - Issue #39 - installing localy needs to update /usr/share/xsessions/
