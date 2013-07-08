@@ -1,6 +1,16 @@
-# Pkgbuild script for Fvwm 2.6.6 cvs
+#-----------------------------------------------------------------------
+# File:		PKGBUILD_FVWM
+# Version:	1.1.0
+# Licence: 	GPL 2
+#
+# Description:	Pkgbuild script for Fvwm 2.6.6 cvs
+#
+# Author:	Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>	
+#
+# Created:	???
+# Changed:	07/07/2013
+#-----------------------------------------------------------------------
 
-# Maintainer: Bernhard Popp <fvwmnightshade@gmail.com>
 pkgname=fvwm-cvs
 pkgver=2.6.6
 pkgrel=1
@@ -8,7 +18,7 @@ pkgdesc="A powerful ICCCM2 compliant multiple virtual desktop window manager for
 arch=('i686' 'x86_64')
 url="http://fvwm.org"
 license=('GPL')
-depends=('imlib' 'fribidi' 'perl' 'libstroke' 'libxpm' 'librsvg' 'libxinerama' 'libxcursor' 'libpng')
+depends=('imlib' 'fribidi' 'perl' 'libstroke' 'libxpm' 'librsvg' 'libxinerama' 'libxcursor' 'libpng' 'python2-xdg')
 makedepends=('cvs' 'gcc' 'make' 'autoconf' 'automake' 'libxslt')
 provides=('fvwm-devel')
 conflicts=('fvwm-devel')
@@ -18,7 +28,6 @@ cvsroot=":pserver:anonymous@cvs.fvwm.org:/home/cvs/fvwm"
 cvsmod="fvwm"
 
 build() {
-  sudo pacman -U  --asdeps http://arm.konnichi.com/2012/07/01/extra/os/x86_64/pyxdg-0.19-3-any.pkg.tar.xz
   cd $startdir/src
   msg "Connecting to fvwm.org CVS server....please enter 'guest'"
   cvs -d $cvsroot login
