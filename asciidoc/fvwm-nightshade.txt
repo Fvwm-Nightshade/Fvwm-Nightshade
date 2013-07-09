@@ -533,7 +533,9 @@ Location of Files and their Function
 
 - 
 
-*/usr/share/fvwm/* -> Scripts which must resides in Fvwm's directory
+*/usr/share/fvwm/* -> Scripts which must resides in Fvwm's directory or
+in the <user> directories - FvwmScripts in the scripts/ sub directory, all 
+others in the <user> root.
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |FNS-BaseSetup            		|Fvwm-Nightshade base setup (FvwmForm script).
@@ -543,7 +545,7 @@ Location of Files and their Function
 
 -
 
-*/usr/share/xsessions/* -> Login manager directory
+*/usr/share/xsessions/* -> Login manager directory if a display-manager is available.
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |fvwm-nightshade.desktop        |login script.
@@ -569,6 +571,8 @@ Location of Files and their Function
 -
 
 *<user>/wallpapers/* -> default wallpaper directory.
+
+*<user>/scripts/* -> Optional user FvwmScripts directory.
 
 *<user>/icons/* -> Menu icon directory created by Regenerate XDG Menus.
 

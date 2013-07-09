@@ -1,6 +1,15 @@
-# Pkgbuild script for Fvwm-Nightshade
-
-# Maintainer: Bernhard Popp <fvwmnightshade@gmail.com>
+#-----------------------------------------------------------------------
+# File:		PKGBUILD_FNS
+# Version:	1.1.1
+# Licence: 	GPL 2
+#
+# Description:	Pkgbuild script for Fvwm-Nightshade
+#
+# Author:	Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>	
+#
+# Created:	???
+# Changed:	07/07/2013
+#-----------------------------------------------------------------------
 
 pkgname=Fvwm-Nightshade
 pkgver=
@@ -9,12 +18,12 @@ pkgdesc="A lightweight but feature rich and good looking configuration of Fvwm."
 arch=('any')
 url="https://github.com/Fvwm-Nightshade"
 license=('GPL')
-depends=('fvwm-cvs>=2.6.6' 'pyxdg' 'conky' 'xscreensaver' 'eterm' 'imagemagick' 'librsvg' 'stalonetray' 'cpufreqd' 'xorg-xwd' 'gksu')
-optdepends=('pcmanfm: lightwight filemanger' 'volumeicon: volumecontrol in systray' 'network-manager-applet: network controlling tool for systray')
+depends=('fvwm-cvs>=2.6.6' 'pyxdg' 'conky' 'xscreensaver' 'feh' 'imagemagick' 'librsvg' 'stalonetray' 'xorg-xwd' 'gksu')
+optdepends=('pcmanfm: lightweight filemanager' 'volumeicon: volumecontrol in systray' 'network-manager-applet: network controlling tool for systray')
 provides=('Fvwm-Nightshade')
 source=
 
 package() {
   cd "$srcdir/"
-  make DESTDIR=$pkgdir prefix=/usr install
+  make DESTDIR=$pkgdir prefix=/usr dist-install
 }

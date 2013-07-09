@@ -21,10 +21,16 @@ useful things to make work and life easier with a flavour of a modern
 desktop. But it can be configure by your own. It is good documented and
 shows you what is possible with this powerful window manager.
 
+***********************************************************************
+************* ATTENTION: THIS IS THE DEVELOPMENT VERSION! *************
+*************         SOMETIMES IT DOESN'T WORK!          *************
+*************     SO INSTALL/USE IT ON YOUR OWN RISK!     *************
+***********************************************************************
 
-Featurelist of Fvwm-Nightshade 0.6.6:
+Featurelist of Fvwm-Nightshade 0.7.x:
 =====================================
-- Own user configuration directory ~/.fvwm-nightshade (can be used parallel to existing Fvwm configuration)
+- Own user configuration directory ~/.fvwm-nightshade (can be used 
+  parallel to existing Fvwm configuration)
 - Own entry "Fvwm-Nightshade" in graphical login managers
 - Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
@@ -103,14 +109,17 @@ Featurelist of Fvwm-Nightshade 0.6.6:
 Requirements:
 =============
 Required:	Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
-		xterm, conky, xscreensaver, eterm, imagemagick, librsvg2, xwd
-		stalonetray, cpufrequtils, gksu
+		xterm, conky, xscreensaver, feh, imagemagick, librsvg2, xwd
+		stalonetray, cpufrequtils*, gksu
 
 Recommended: 	gnomes network manager, Volume Icon, wm-icons
 
 Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-		qtconfig for qt3, qtconfig for qt4, xneurs
+			qtconfig for qt3, qtconfig for qt4, xneurs
   
+* unfortunatelly not usable in Arch - changed to cpupower but not supported
+  at the moment -> see issue #40 in the bugtracker.
+
 
 Installation
 ============

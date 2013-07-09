@@ -15,12 +15,12 @@ BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 Requires:	fvwm >= 2.6.6
-Requires:	python
+Requires:	python <= 2.7
 Requires:	pyxdg
 Requires:	xterm
 Requires:	conky
 Requires:	xscreensaver
-Requires:	eterm
+Requires:	feh
 Requires:	ImageMagick
 Requires:	librsvg2
 Requires:	stalonetray
@@ -41,7 +41,7 @@ cp %{SOURCEURL0} %{_topdir}/SOURCES/
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make DESTDIR=$RPM_BUILD_ROOT prefix=/usr install
+make DESTDIR=$RPM_BUILD_ROOT prefix=/usr dist-install
 
 %clean
 rm -rf $RPM_BUILD_ROOT

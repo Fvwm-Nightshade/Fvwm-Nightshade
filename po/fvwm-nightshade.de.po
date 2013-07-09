@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: fvwm-nightshade\n"
-"POT-Creation-Date: 2013-06-05 23:00+0200\n"
-"PO-Revision-Date: 2013-06-05 23:01+0100\n"
+"POT-Creation-Date: 2013-07-07 18:40+0200\n"
+"PO-Revision-Date: 2013-07-07 18:40+0200\n"
 "Last-Translator: Thomas Funk <t.funk@web.de>\n"
 "Language-Team: German\n"
 "Language: \n"
@@ -943,8 +943,8 @@ msgstr "Installiere xscreensaver für volle Funktionalität"
 msgid "Wallpaper browser Info"
 msgstr "Wallpaper-Browser Info"
 
-msgid "Install ImageMagick AND eterm for full functionality."
-msgstr "Installiere ImageMagick UND eterm für volle Funktionalität"
+msgid "Install ImageMagick AND feh for full functionality."
+msgstr "Installiere ImageMagick UND feh für volle Funktionalität"
 
 # config - FuncKbdLayouter
 msgid "Keyboard Layout Info"
