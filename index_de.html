@@ -100,8 +100,20 @@
 			<a href="images/Screen_BP_01.png" target="_blank"><img src="images/s_Screen_BP_01.png" height="128" align="middle" alt="Vertical with CrystalBalls theme"></a>
 			<a href="images/Screen_G2like_TF_Clean.png" target="_blank"><img src="images/s_Screen_G2like_TF_Clean.png" height="128" align="middle" alt="G2like with Clean theme"></a>
 			<h1>Neuigkeiten:</h1>
-			<p>Wir haben das Bugfix Release 0.6.6 mit 2 netten Verbesserungen veröffentlicht. Die Applikations Menü-Einträge werden jetzt vorgesetzt, da es recht schwierig war, die Richtigen zu finden, damit die Menüs im Root Menü auftauchen.
-			Ebenfalls wurde das nervige flippen des Global Iconman behoben.</p>
+			<ul>Neues Bugfix- und Erweiterungs-Release 0.6.7 ist draussen!
+				<li>Erweiterte Deinstallationsroutine für die generische Installation - eine Installationsliste wird nun erstellt,
+					so dass nicht mehr die Sourcen der installierten Version aufgehoben werden müssen.</li>
+				<li>Es ist jetzt auch möglich Fvwm-Nightshade lokal zu installieren, wenn der User keine Rootrechte hat. Gut zum antesten. ^^</li>
+				<li>Auch kann die Installation ohne die Logindatei, wenn kein Displaymanger installiert ist, gemacht werden.</li>
+				<li>Wir haben Esetroot gegen feh getauscht, da die Verfügbarkeit des Etermpakets in vielen Distributions-
+				    Repositorien sehr schlecht geworden ist.</li>
+				<li>Ein Wehrmutstropfen für Archuser existiert leider:
+				    <ul>
+						FvwmScript-CPU-Performance funktioniert gerade nicht, weil cpufrequtils gegen cpupower ausgetauscht wurde
+						und wir das erst noch implementieren müssen. Sorry.
+					</ul>
+				</li>
+			</ul>
 			<h1>Features von Fvwm-Nightshade:</h1>
 			<ul>
 				<li>Eigenes User-Konfigurationsverzeichnis ~/.fvwm-nightshade. Somit parallel verwendbar zu einer existierenden Fvwm-Konfiguration</li>
@@ -166,7 +178,7 @@
 				<li>Hilfemitteilungen für die Tastatureingaben mit Shift-Alt-Ctrl + Taste</li>
 				<li>Eine allgemeine Hilfemitteilung erreichn Sie über Shift-Alt-Ctrl + H</li>	
 				<li>Dynamische Menüs</li>
-				<li><span style="font-weight:bold"><font color="red">*Neu*</font></span> Wechseln des Eingabefokus zwischen den Fenstern mit Alt-Tab (vorwärts) / Shift-Alt-Tab (rückwärts)</li>
+				<li>Wechseln des Eingabefokus zwischen den Fenstern mit Alt-Tab (vorwärts) / Shift-Alt-Tab (rückwärts)</li>
 				<li>Begrüßungsbildschirm</li>
 				<li>Nachrichtenausgabe für benötigte Anwendungen, für Konfigurationszwecke, in 
 				  .xsession-errors</li>
@@ -175,12 +187,13 @@
 				<li>Anzeige von Miniaturansichten minimierter Anwendungen und deren Name, anstelle einfacher Symbole<br />
 			     &nbsp;&nbsp;&nbsp;<img src="images/thumbs.png" width="250" alt="thumbs" style="cursor:pointer" onclick="overlay('display')" onmouseup="return ShowOverlay('div8')" /><br /></li>
 				<li>Build support für deb, rpm and Arch Pakete</li>
-				<li><span style="font-weight:bold"><font color="red">*Neu*</font></span> Lokalisierng für Deutsch, Französisch und Spanisch</li>
+				<li><span style="font-weight:bold"><font color="red">*Neu*</font></span> Support für lokale Installation ohne Rootrechte</li>
+				<li>Lokalisierng für Deutsch, Französisch und Spanisch</li>
 			</ul>
 			
 			<h1>Voraussetzungen:</h1>
 				<p><b style="text-decoration: underline"> Benötigt:</b>   Fvwm &gt;= 2.6.6 (mit allen Funktionen kompiliert), python-2, python-xdg, 
-				        xterm, conky, xscreensaver, eterm, imagemagick, librsvg2-bin, xwd, 
+				        xterm, conky, xscreensaver, feh, imagemagick, librsvg2-bin, xwd, 
 				        stalonetray, wm-icons, cpufrequtils</p>
 				
 				<p><b style="text-decoration: underline">Empfohlen:</b>    gnomes network manager, Volume Icon</p>
@@ -230,12 +243,12 @@
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.6.zip" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip Release'); return false;" class="button">
-            <small>Download Release 0.6</small>
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.7.zip" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip Release'); return false;" class="button">
+            <small>Download Release 0.6.7</small>
             .zip file
           </a>
-          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.6.tar.gz" onClick="trackOutboundLink(this, 'Outbound Links', 'Download tar.gz Release'); return false;" class="button">
-            <small>Download Release 0.6</small>
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.7.tar.gz" onClick="trackOutboundLink(this, 'Outbound Links', 'Download tar.gz Release'); return false;" class="button">
+            <small>Download Release 0.6.7</small>
             .tar.gz file
           </a>
           <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/zipball/master" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip develop'); return false;" class="button">
