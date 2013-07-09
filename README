@@ -21,13 +21,8 @@ useful things to make work and life easier with a flavour of a modern
 desktop. But it can be configure by your own. It is good documented and
 shows you what is possible with this powerful window manager.
 
-***********************************************************************
-************* ATTENTION: THIS IS THE DEVELOPMENT VERSION! *************
-*************         SOMETIMES IT DOESN'T WORK!          *************
-*************     SO INSTALL/USE IT ON YOUR OWN RISK!     *************
-***********************************************************************
 
-Featurelist of Fvwm-Nightshade 0.7.x:
+Featurelist of Fvwm-Nightshade 0.7.3:
 =====================================
 - Own user configuration directory ~/.fvwm-nightshade (can be used 
   parallel to existing Fvwm configuration)
@@ -102,7 +97,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Governor-tool FvwmScript-CPU-Performance to handle cpufreq
 - Create thumbs with mini icon and name for iconified applications 
   instead of their icon
-- Build support for deb, rpm and Arch packages
+- Build support for deb, rpm and Arch packages and local installation
 - Localization support for German, French and Spanish
 
 
