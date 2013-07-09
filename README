@@ -22,7 +22,7 @@ desktop. But it can be configure by your own. It is good documented and
 shows you what is possible with this powerful window manager.
 
 
-Featurelist of Fvwm-Nightshade 0.7.3:
+Featurelist of Fvwm-Nightshade 0.6.7:
 =====================================
 - Own user configuration directory ~/.fvwm-nightshade (can be used 
   parallel to existing Fvwm configuration)

@@ -1,5 +1,6 @@
 History:
-08/07/2013 V 0.7.3
+
+09/07/2013 V 0.6.7
 - exchange Esetroot with feh because of the poor availability in different
   distribution repositories.
 - update translation files (pot & po)
@@ -10,8 +11,6 @@ History:
 - add python2-xdg to Fvwm PKGBUILD script. Also remove old py-xdg 0.19.3 from
   build function
 - add -s to arch target to perform installation of dependencies after build
-
-07/04/2013 V 0.7.2
 - Issue #39 - installing localy needs to update /usr/share/xsessions/
   - add new options in Makefile:
     local=yes
@@ -23,19 +22,10 @@ History:
     installation and dist-install for package buildings.
   - update rpm spec and arch pkgbuild file
   - update documentation (INSTALL, NEWS, manpage, html)
-  
-06/24/2013 V 0.7.1
-- For Issue #38:
-  - fix bug in install rule: wrong test option -e instead of -f
-  - fix bug in build-install-list rule: wrong place of doc dir entry.
-
-06/23/2013 V 0.7.0
 - Issue #38 - Enhance uninstall routine
   - change install/uninstall routines in the Makefile to support the creation
     of an install list so keep the sources of the installed version never needed.
   - update INSTALL
-- update config to 0.7.0
-- update README with an attention hint that this is the development version
 
 06/15/2013 V 0.6.6
 - fix bug #26 - Application menu predefines not set to .fvwm-nightshade:
