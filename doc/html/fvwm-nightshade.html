@@ -1725,7 +1725,9 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/themes/</strong> &#8594; Theme files and icons.</p></div>
 <div class="paragraph"><p><strong>&lt;system&gt;/share/doc/fvwm-nightshade/</strong> &#8594; Html pages, templates, readmes.</p></div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>/usr/share/fvwm/</strong> &#8594; Scripts which must resides in Fvwm&#8217;s directory</p></div>
+<div class="paragraph"><p><strong>/usr/share/fvwm/</strong> &#8594; Scripts which must resides in Fvwm&#8217;s directory or
+in the &lt;user&gt; directories - FvwmScripts in the scripts/ sub directory, all
+others in the &lt;user&gt; root.</p></div>
 <div class="tableblock">
 <table rules="none"
 width="100%"
@@ -1750,7 +1752,7 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>/usr/share/xsessions/</strong> &#8594; Login manager directory</p></div>
+<div class="paragraph"><p><strong>/usr/share/xsessions/</strong> &#8594; Login manager directory if a display-manager is available.</p></div>
 <div class="tableblock">
 <table rules="none"
 width="100%"
@@ -1821,6 +1823,7 @@ cellspacing="0" cellpadding="4">
 </div>
 <div class="paragraph"><p>-</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/wallpapers/</strong> &#8594; default wallpaper directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/scripts/</strong> &#8594; Optional user FvwmScripts directory.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/icons/</strong> &#8594; Menu icon directory created by Regenerate XDG Menus.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/layouts/</strong> &#8594; Optional user layout directory.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/themes/</strong> &#8594; Optional user themes directory.</p></div>
@@ -2271,7 +2274,7 @@ or submit them under <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-06-05 22:50:12 CEST
+Last updated 2013-07-04 20:46:49 CEST
 </div>
 </div>
 </body>

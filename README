@@ -22,9 +22,10 @@ desktop. But it can be configure by your own. It is good documented and
 shows you what is possible with this powerful window manager.
 
 
-Featurelist of Fvwm-Nightshade 0.6.6:
+Featurelist of Fvwm-Nightshade 0.7.3:
 =====================================
-- Own user configuration directory ~/.fvwm-nightshade (can be used parallel to existing Fvwm configuration)
+- Own user configuration directory ~/.fvwm-nightshade (can be used 
+  parallel to existing Fvwm configuration)
 - Own entry "Fvwm-Nightshade" in graphical login managers
 - Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
@@ -96,21 +97,24 @@ Featurelist of Fvwm-Nightshade 0.6.6:
 - Governor-tool FvwmScript-CPU-Performance to handle cpufreq
 - Create thumbs with mini icon and name for iconified applications 
   instead of their icon
-- Build support for deb, rpm and Arch packages
+- Build support for deb, rpm and Arch packages and local installation
 - Localization support for German, French and Spanish
 
 
 Requirements:
 =============
 Required:	Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
-		xterm, conky, xscreensaver, eterm, imagemagick, librsvg2, xwd
-		stalonetray, cpufrequtils, gksu
+		xterm, conky, xscreensaver, feh, imagemagick, librsvg2, xwd
+		stalonetray, cpufrequtils*, gksu
 
 Recommended: 	gnomes network manager, Volume Icon, wm-icons
 
 Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-		qtconfig for qt3, qtconfig for qt4, xneurs
+			qtconfig for qt3, qtconfig for qt4, xneurs
   
+* unfortunatelly not usable in Arch - changed to cpupower but not supported
+  at the moment -> see issue #40 in the bugtracker.
+
 
 Installation
 ============

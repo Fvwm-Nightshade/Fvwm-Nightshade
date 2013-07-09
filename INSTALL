@@ -4,16 +4,17 @@ Installing Fvwm-Nightshade
 Requirements
 ============
 
-Required:	Fvwm >= 2.6.6 (compiled with all features), python-xdg, 
-		xterm, conky, xscreensaver, eterm, imagemagick, xwd,
-		stalonetray, wm-icons
+Required:		Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
+				xterm, conky, xscreensaver, feh, imagemagick, librsvg2, xwd
+				stalonetray, cpufrequtils*, gksu
 
-Recommended: gnomes network manager, Volume Icon
+Recommended: 	gnomes network manager, Volume Icon, wm-icons
 
-Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-		qtconfig for qt3, qtconfig for qt4, xneurs
+Useful:			fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
+				qtconfig for qt3, qtconfig for qt4, xneurs
 
-
+* unfortunatelly not usable in Arch - changed to cpupower but not supported
+  at the moment -> see issue #40 in the bugtracker.
 
 Preparation
 ===========
@@ -45,11 +46,14 @@ Fvwm
 	    - add in configure.ac after line 1766:
 	      bin/fvwm-menu-desktop-config.fpl
 	
-	deb/Arch:
+	deb:
 	- it's mostly easier to do "3. Building the Tree" before installing packages because the 
 	  absent packages/dev-libs are in braces in the "no" lines at the end of the summary ;)
-	- deb: if X11/Intrinsic.h not found while make you need package libXt-dev, too.
-	- Arch: xsltproc is equivalent to libxslt. librplay not available but normally not needed.
+	- if X11/Intrinsic.h not found while make you need package libXt-dev, too.
+	
+	Arch:
+	- xsltproc is equivalent to libxslt. librplay not available but normally not needed.
+	- next step: 4. Compile Fvwm
 	
 3. Building the Tree:
 	- execute in the terminal
@@ -77,7 +81,7 @@ Fvwm
 			$ mkdir -p /home/<your_user_name>/packages/fvwm
 			$ cd /home/<your_user_name>/packages/fvwm
 		2. Copy from arch/PKGBUILD_FVWM into the directory rename it to PKGBUILD and run
-			$ makepkg
+			$ makepkg -s
 		3. enter password 'guest' for CVS login
 
 4. Install Fvwm
@@ -97,7 +101,7 @@ Fvwm
 Installation of Fvwm-Nightshade
 ===============================
 
-1. download package from https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tree/develop
+1. download package from http://fvwm-nightshade.github.io/Fvwm-Nightshade
 2. unpack it and switch into the expanded directory
    Remark: don't use file-roller because the tool cannot handle unix rights in zip files
            Use unzip instead.
@@ -112,12 +116,28 @@ Installation of Fvwm-Nightshade
 		change the prefix:
 
 		    # make prefix=<other_dir> install
+		
+		If you haven't installed a display-manager like GDM you can add the option
+		displaymanager=no to the make call:
+
+		    # make install displaymanager=no
 
 		If Fvwm is installed in another directory then /usr/share/fvwm you have
 		to told make where because there are some scripts which have to be installed
 		into Fvwm. 
    
 	  	    # make fvwm_path=<path_to_fvwm> install
+	  	
+	  	If you haven't root rights you can install Fvwm-Nightshade locally. All you
+	  	need is a directory e.g. ~/.local with write permissions. Also an entry in 
+	  	your PATH variable in your .bashrc, .bash_profile or .profile like
+	  	
+	  	    PATH=$PATH:$HOME/.local/bin
+	  	
+	  	Now you can install Fvwm-Nightshade with the following make call:
+
+		    $ make prefix=~/.local install local=yes
+	  	
 	- deb:
 		Run
 			# make deb
@@ -143,7 +163,9 @@ Installation of Fvwm-Nightshade
 
 Now Fvwm-Nightshade is installed. 
 
-If you haven't a graphical login manager copy system/.xinitrc into your home directory 
+Don't forget to install the required packages from the beginning of this document.
+
+If you haven't a graphical login manager copy xinitrc template into your home directory 
 	$ cp <system>/share/doc/fvwm-nightshade/xinitrc-example ~/.xinitrc
 and start the xserver with
 	$ startx
@@ -152,6 +174,9 @@ change the base settings and enjoy.
 If you have a graphical login manager there's now a new entry "Fvwm-Nightshade" in your sessions dialog.
 Login, change the base settings and enjoy.
 
+If you have installed Fvwm-Nightshade locally and want to use a display-manager copy (with root rights) 
+fvwm-nightshade.desktop-example from the doc directory to /usr/share/xsessions:
+	# cp <system>/share/doc/fvwm-nightshade/fvwm-nightshade.desktop-example /usr/share/xsessions/fvwm-nightshade.desktop
 
 
 Deinstallation
@@ -163,12 +188,22 @@ Deinstallation
 
 	If you have installed Fvwm-Nightshade to another directory you have to change the prefix:
 
-		# make prefix=<other_dir> install
+		# make prefix=<other_dir> uninstall
 
+	That applies for local installation without root rights, too.
+	
 	Also, if Fvwm is installed in another directory then /usr/share/fvwm you have
 	to told make where Fvwm is located
 
 		# make fvwm_path=<path_to_fvwm> uninstall
+	
+	Since 0.6.7 'make install' creates an install log. For previous versions which haven't this
+	file you must use
+		
+		# make uninstall-alternative
+	
+	It checks the default installation locations and try to uninstall all installed files. Maybe
+	some files won't found. Excuse the inconvenience.
 			
 - For all others use the package management system.
 
@@ -196,7 +231,15 @@ To install a downloaded package use yum (as root) to solve package dependencies 
 
 	# yum --nogpgcheck localinstall <path_to_rpm_package>
 
-Some package search sites:
+Arch:
+https://www.archlinux.org/packages/
+https://www.archlinux.org/packages/
+
+To install a downloaded package use pacman (as root) to solve package dependencies with
+
+	# pacman -U <path_to_arch_package>
+
+Some other package search sites:
 http://pkgs.org
 http://rpm.pbone.net/
 http://www.rpmseek.com/index.html

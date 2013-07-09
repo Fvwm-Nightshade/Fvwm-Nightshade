@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
-"POT-Creation-Date: 2013-06-05 23:00++0200\n"
+"POT-Creation-Date: 2013-07-07 18:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -943,7 +943,7 @@ msgstr ""
 msgid "Wallpaper browser Info"
 msgstr ""
 
-msgid "Install ImageMagick AND eterm for full functionality."
+msgid "Install ImageMagick AND feh for full functionality."
 msgstr ""
 
 # config - FuncKbdLayouter
