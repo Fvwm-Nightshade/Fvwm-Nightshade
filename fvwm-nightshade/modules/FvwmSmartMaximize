@@ -1,20 +1,20 @@
 #!/usr/bin/perl
-#-----------------------------------------------------------------------
+################################################################################
 # File:        FvwmSmartMaximize
-# Version:    1.1.1
+# Version:     1.1.2
 # Licence:     GPL 2
 #
-# Description:    Module to move and resize a current window to the largest 
-#                free area of desktop/page.
-#                 implement as described in:
-#                 http://www.mail-archive.com/fvwm@lists.math.uh.edu/msg16809.html
+# Description: Module to move and resize a current window to the largest
+#              free area of desktop/page.
+#              implement as described in:
+#              http://www.mail-archive.com/fvwm@lists.math.uh.edu/msg16809.html
 #
-# Author:        Andreas Hoenen <andreas@hoenen-terstappen.de>
-# Adapted by:    Thomas Funk <t.funk@web.de>
+# Author:      Andreas Hoenen <andreas@hoenen-terstappen.de>
+# Adapted by:  Thomas Funk <t.funk@web.de>
 #
-# Created:    06/29/2013
-# Changed:    07/18/2013
-#-----------------------------------------------------------------------
+# Created:     2013-06-29
+# Changed:     2013-07-18
+################################################################################
 
 use warnings;
 use strict;
@@ -23,9 +23,8 @@ use List::Util qw(min);
 
 use lib `fvwm-perllib dir`;
 use FVWM::Module;
-#use Data::Dumper qw(Dumper);
 
-my $module = new FVWM::Module(Name => "FvwmSmartMaximize", Mask => M_STRING);
+my $module = new FVWM::Module(Name => 'FvwmSmartMaximize', Mask => M_STRING);
 my $pageTrackerWL = $module->track('WindowList');
 my $vp_width = $pageTrackerWL->pageInfo->{vp_width};
 my $vp_height = $pageTrackerWL->pageInfo->{vp_height};
@@ -38,7 +37,7 @@ $module->event_loop;
 sub smartMaximize
 {
     my ($module, $event) = @_;
-    my $action = $event->{arg_values}[-1];
+    my $action = $event->_text;
 
     # the window to be maximized
     my $own = $pageTrackerWL->data(${$event->args}{win_id});
@@ -46,19 +45,7 @@ sub smartMaximize
     # the size of a desktop/page (90%) <- if EwmhBaseStruts has reduced
     # the real desktop/page area
     my $deskArea = $vp_width * $vp_height * 0.9;
-    
-    # we want the window to actually grow
-    my $minArea =
-        $own->{width} * $own->{height} + min($own->{width}, $own->{height});
-    
-    # reduce minArea to 1/8 to smart maximize maximized windows, too.
-    my $reduced = 0;
-    if ($minArea >= $deskArea)
-    {
-        $minArea = int($minArea/8);
-        $reduced = 1;
-    }
-    
+
     # Find all free rectangles in the current page where the window could be
     # displayed. This works as follows:
     # The list of display rectangles starts with one preliminary display
@@ -82,18 +69,14 @@ sub smartMaximize
     # apply all windows to the display rectangle list
     foreach my $other ($pageTrackerWL->windows)
     {
-        # If 90% of the current page is filled from a window this one will be
-        # ignored if "IgnoreMaxWindows" is set.
-        my $otherArea = 0;
-        if ($action eq "IgnoreMaxWindows")
-        {
-            $otherArea = $other->{width} * $other->{height};
-        }
         unless ($other->{win_id} == $own->{win_id}
                 or $other->{desk} != $own->{desk}
-                or $otherArea >= $deskArea)
+                # If 90% of the current page is filled from a window, this one
+                # will be ignored if "IgnoreMaxWindows" is set.
+                or ($action eq 'IgnoreMaxWindows'
+                    and $other->{width} * $other->{height} >= $deskArea))
         {
-            @rectangles = &applyWindow($other, $minArea, @rectangles);
+            @rectangles = &applyWindow($other, @rectangles);
         }
     }
 
@@ -125,34 +108,26 @@ sub smartMaximize
     if ($dest)
     {
         # move the window to the display rectangle and let it fill
+        my $width = $dest->{x_max} - $dest->{x_min};
+        my $height = $dest->{y_max} - $dest->{y_min};
         my $x = $dest->{x_min} - $own->{page_nx} * $vp_width;
         my $y = $dest->{y_min} - $own->{page_ny} * $vp_height;
-        my $newWidth = $vp_width - $x;
-        my $newHeight = $vp_height - $y;
-        if ($reduced)
+        $module->send("WindowId $own->{win_id} ResizeMove ${width}p ${height}p"
+                      . " ${x}p ${y}p Warp");
+
+        # Some windows don't grow by pixels, but by lines and columns.
+        # If the window has grown too large this way, shrink it again.
+        $pageTrackerWL->restart();
+        my $resized = $pageTrackerWL->data(${$event->args}{win_id});
+        my $deltaX = ($resized->{width} > $width)
+            ? 'w-' . ($resized->{width} - $width) . 'p' : 'keep';
+        my $deltaY = ($resized->{height} > $height)
+            ? 'w-' . ($resized->{height} - $height) . 'p' : 'keep';
+        if ($deltaX ne 'keep' or $deltaY ne 'keep')
         {
-            # reduce a maximized window to 25% of its real size
-            $newWidth = int($own->{width} * 0.25);
-            $newHeight = int($own->{height} * 0.25);
-            $module->send("WindowId $own->{win_id} Maximize False");
+            $module->send("WindowId $own->{win_id} Resize $deltaX $deltaY");
         }
-        else
-        {
-            # This is to eliminate flipping to other pages if Window 
-            # overlap to the other page
-            if ($own->{width} < $newWidth)
-            {
-                $newWidth = $own->{width};
-            }
-            if ($own->{height} < $newHeight)
-            {
-                $newHeight = $own->{height};
-            }
-        }
-        #$module->send("WindowId $own->{win_id} Maximize screen c False");
-        $module->send("WindowId $own->{win_id} ResizeMove ${newWidth}p ${newHeight}p ${x}p ${y}p Warp");
-        $module->send("WindowId $own->{win_id} Maximize screen c grow grow");
-        # if window is maximized and should grow on the right side mouse cursor could flip to other page.
+        # ensure that mouse cursor stays on window
         $module->send("WindowId $own->{win_id} WarpToWindow 50 10");
     }
 }
@@ -161,7 +136,7 @@ sub smartMaximize
 # This may change the rectangle list.
 sub applyWindow
 {
-    my ($other, $minArea, @oldRectangles, $reduce) = @_;
+    my ($other, @oldRectangles) = @_;
 
     my $splitter =
     {x_min => $other->{page_nx} * $vp_width + $other->{x},
@@ -179,38 +154,34 @@ sub applyWindow
             if ($rect->{x_min} < $splitter->{x_min})
             {
                 # new rectangle left of splitter window
-                my $r = &createRectangle($rect->{x_min},
-                                         $splitter->{x_min} - 1,
-                                         $rect->{y_min},
-                                         $rect->{y_max});
-                push @newRectangles, $r if $r->{area} >= $minArea;
+                push @newRectangles, &createRectangle($rect->{x_min},
+                                                      $splitter->{x_min} - 1,
+                                                      $rect->{y_min},
+                                                      $rect->{y_max});
             }
             if ($rect->{x_max} > $splitter->{x_max})
             {
                 # new rectangle right of splitter window
-                my $r = &createRectangle($splitter->{x_max} + 1,
-                                         $rect->{x_max},
-                                         $rect->{y_min},
-                                         $rect->{y_max});
-                push @newRectangles, $r if $r->{area} >= $minArea;
+                push @newRectangles, &createRectangle($splitter->{x_max} + 1,
+                                                      $rect->{x_max},
+                                                      $rect->{y_min},
+                                                      $rect->{y_max});
             }
             if ($rect->{y_min} < $splitter->{y_min})
             {
                 # new rectangle above splitter window
-                my $r = &createRectangle($rect->{x_min},
-                                         $rect->{x_max},
-                                         $rect->{y_min},
-                                         $splitter->{y_min} - 1);
-                push @newRectangles, $r if $r->{area} >= $minArea;
+                push @newRectangles, &createRectangle($rect->{x_min},
+                                                      $rect->{x_max},
+                                                      $rect->{y_min},
+                                                      $splitter->{y_min} - 1);
             }
             if ($rect->{y_max} > $splitter->{y_max})
             {
                 # new rectangle below splitter window
-                my $r = &createRectangle($rect->{x_min},
-                                         $rect->{x_max},
-                                         $splitter->{y_max} + 1,
-                                         $rect->{y_max});
-                push @newRectangles, $r if $r->{area} >= $minArea;
+                push @newRectangles, &createRectangle($rect->{x_min},
+                                                      $rect->{x_max},
+                                                      $splitter->{y_max} + 1,
+                                                      $rect->{y_max});
             }
         }
         else
@@ -275,4 +246,3 @@ Andreas Hoenen <andreas@hoenen-terstappen.de> and Thomas Funk <t.funk@web.de>.
 For more information, see L<fvwm>, L<FVWM::Module>.
 
 =cut
-
