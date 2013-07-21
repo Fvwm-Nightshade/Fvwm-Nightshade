@@ -1,8 +1,20 @@
 #!/usr/bin/perl
-# Time-stamp: "2013-06-29 11:13:03 ah"
-
-# implement "smart maximize" as described in:
-# http://www.mail-archive.com/fvwm@lists.math.uh.edu/msg16809.html
+#-----------------------------------------------------------------------
+# File:		FvwmSmartMaximize
+# Version:	1.1.0
+# Licence: 	GPL 2
+#
+# Description:	Module to move and resize a current window to the largest 
+#				free area of desktop/page.
+# 				implement as described in:
+# 				http://www.mail-archive.com/fvwm@lists.math.uh.edu/msg16809.html
+#
+# Author:		Andreas Hoenen <andreas@hoenen-terstappen.de>
+# Adapted by:	Thomas Funk <t.funk@web.de>
+#
+# Created:	06/29/2013
+# Changed:	07/17/2013
+#-----------------------------------------------------------------------
 
 use warnings;
 use strict;
@@ -11,8 +23,9 @@ use List::Util qw(min);
 
 use lib `fvwm-perllib dir`;
 use FVWM::Module;
+#use Data::Dumper qw(Dumper);
 
-my $module = new FVWM::Module(Mask => M_STRING);
+my $module = new FVWM::Module(Name => "FvwmSmartMaximize", Mask => M_STRING);
 my $pageTrackerWL = $module->track('WindowList');
 my $vp_width = $pageTrackerWL->pageInfo->{vp_width};
 my $vp_height = $pageTrackerWL->pageInfo->{vp_height};
@@ -25,14 +38,27 @@ $module->event_loop;
 sub smartMaximize
 {
     my ($module, $event) = @_;
+	my $action = $event->{arg_values}[-1];
 
     # the window to be maximized
     my $own = $pageTrackerWL->data(${$event->args}{win_id});
 
+	# the size of a desktop/page (90%) <- if EwmhBaseStruts has reduced
+	# the real desktop/page area
+	my $deskArea = $vp_width * $vp_height * 0.9;
+	
     # we want the window to actually grow
     my $minArea =
         $own->{width} * $own->{height} + min($own->{width}, $own->{height});
-
+	
+	# reduce minArea to 1/8 to smart maximize maximized windows, too.
+	my $reduced = 0;
+	if ($minArea >= $deskArea)
+	{
+		$minArea = int($minArea/8);
+		$reduced = 1;
+	}
+	
     # Find all free rectangles in the current page where the window could be
     # displayed. This works as follows:
     # The list of display rectangles starts with one preliminary display
@@ -56,8 +82,16 @@ sub smartMaximize
     # apply all windows to the display rectangle list
     foreach my $other ($pageTrackerWL->windows)
     {
+		# If 90% of the current page is filled from a window this one will be
+		# ignored if "IgnoreMaxWindows" is set.
+		my $otherArea = 0;
+		if ($action eq "IgnoreMaxWindows")
+		{
+			$otherArea = $other->{width} * $other->{height};
+		}
         unless ($other->{win_id} == $own->{win_id}
-                or $other->{desk} != $own->{desk})
+                or $other->{desk} != $own->{desk}
+                or $otherArea >= $deskArea)
         {
             @rectangles = &applyWindow($other, $minArea, @rectangles);
         }
@@ -90,11 +124,34 @@ sub smartMaximize
 
     if ($dest)
     {
-        # move the window to the display rectangle and let it fill it
+        # move the window to the display rectangle and let it fill
         my $x = $dest->{x_min} - $own->{page_nx} * $vp_width;
         my $y = $dest->{y_min} - $own->{page_ny} * $vp_height;
-        $module->send("WindowId $own->{win_id} Move ${x}p ${y}p Warp");
-        $module->send("WindowId $own->{win_id} Maximize grow grow");
+        my $newWidth = $vp_width - $x;
+        my $newHeight = $vp_height - $y;
+        if ($reduced)
+        {
+			# reduce a maximized window to 25% of its real size
+			$newWidth = int($own->{width} * 0.25);
+			$newHeight = int($own->{height} * 0.25);
+		}
+		else
+		{
+			# This is to eliminate flipping to other pages if Window 
+			# overlap to the other page
+			if ($own->{width} < $newWidth)
+			{
+				$newWidth = $own->{width};
+			}
+			if ($own->{height} < $newHeight)
+			{
+				$newHeight = $own->{height};
+			}
+		}
+		$module->send("WindowId $own->{win_id} ResizeMove ${newWidth}p ${newHeight}p ${x}p ${y}p Warp");
+        $module->send("WindowId $own->{win_id} Maximize screen c grow grow");
+        # if window is maximized and should grow on the right side mouse cursor could flip to other page.
+        $module->send("WindowId $own->{win_id} WarpToWindow 50 10");
     }
 }
 
@@ -102,7 +159,7 @@ sub smartMaximize
 # This may change the rectangle list.
 sub applyWindow
 {
-    my ($other, $minArea, @oldRectangles) = @_;
+    my ($other, $minArea, @oldRectangles, $reduce) = @_;
 
     my $splitter =
     {x_min => $other->{page_nx} * $vp_width + $other->{x},
@@ -185,3 +242,35 @@ sub doRectanglesOverlap
                 or $r1->{y_max} < $r2->{y_min}
                 or $r1->{y_min} > $r2->{y_max});
 }
+
+__END__
+
+=head1 NAME
+
+FvwmSmartMaximize - The smart maximize module
+
+=head1 SYNOPSIS
+
+Module FvwmSmartMaximize [All|IgnoreMaxWindows]
+
+FvwmSmartMaximize can only be invoked by fvwm. Command line invocation of the FvwmSmartMaximize module will not work.
+
+=head1 DESCRIPTION
+
+This module moves and resizes a current window to the largest free area of desktop/page
+If no place found nothing happens.
+
+=head1 INVOCATION
+
+To be written
+
+=head1 AUTHORS
+
+Andreas Hoenen <andreas@hoenen-terstappen.de> and Thomas Funk <t.funk@web.de>.
+
+=head1 SEE ALSO
+
+For more information, see L<fvwm>, L<FVWM::Module>.
+
+=cut
+
