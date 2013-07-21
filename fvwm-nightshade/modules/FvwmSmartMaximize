@@ -1,19 +1,19 @@
 #!/usr/bin/perl
 #-----------------------------------------------------------------------
-# File:		FvwmSmartMaximize
-# Version:	1.1.0
-# Licence: 	GPL 2
+# File:        FvwmSmartMaximize
+# Version:    1.1.1
+# Licence:     GPL 2
 #
-# Description:	Module to move and resize a current window to the largest 
-#				free area of desktop/page.
-# 				implement as described in:
-# 				http://www.mail-archive.com/fvwm@lists.math.uh.edu/msg16809.html
+# Description:    Module to move and resize a current window to the largest 
+#                free area of desktop/page.
+#                 implement as described in:
+#                 http://www.mail-archive.com/fvwm@lists.math.uh.edu/msg16809.html
 #
-# Author:		Andreas Hoenen <andreas@hoenen-terstappen.de>
-# Adapted by:	Thomas Funk <t.funk@web.de>
+# Author:        Andreas Hoenen <andreas@hoenen-terstappen.de>
+# Adapted by:    Thomas Funk <t.funk@web.de>
 #
-# Created:	06/29/2013
-# Changed:	07/17/2013
+# Created:    06/29/2013
+# Changed:    07/18/2013
 #-----------------------------------------------------------------------
 
 use warnings;
@@ -38,27 +38,27 @@ $module->event_loop;
 sub smartMaximize
 {
     my ($module, $event) = @_;
-	my $action = $event->{arg_values}[-1];
+    my $action = $event->{arg_values}[-1];
 
     # the window to be maximized
     my $own = $pageTrackerWL->data(${$event->args}{win_id});
 
-	# the size of a desktop/page (90%) <- if EwmhBaseStruts has reduced
-	# the real desktop/page area
-	my $deskArea = $vp_width * $vp_height * 0.9;
-	
+    # the size of a desktop/page (90%) <- if EwmhBaseStruts has reduced
+    # the real desktop/page area
+    my $deskArea = $vp_width * $vp_height * 0.9;
+    
     # we want the window to actually grow
     my $minArea =
         $own->{width} * $own->{height} + min($own->{width}, $own->{height});
-	
-	# reduce minArea to 1/8 to smart maximize maximized windows, too.
-	my $reduced = 0;
-	if ($minArea >= $deskArea)
-	{
-		$minArea = int($minArea/8);
-		$reduced = 1;
-	}
-	
+    
+    # reduce minArea to 1/8 to smart maximize maximized windows, too.
+    my $reduced = 0;
+    if ($minArea >= $deskArea)
+    {
+        $minArea = int($minArea/8);
+        $reduced = 1;
+    }
+    
     # Find all free rectangles in the current page where the window could be
     # displayed. This works as follows:
     # The list of display rectangles starts with one preliminary display
@@ -82,13 +82,13 @@ sub smartMaximize
     # apply all windows to the display rectangle list
     foreach my $other ($pageTrackerWL->windows)
     {
-		# If 90% of the current page is filled from a window this one will be
-		# ignored if "IgnoreMaxWindows" is set.
-		my $otherArea = 0;
-		if ($action eq "IgnoreMaxWindows")
-		{
-			$otherArea = $other->{width} * $other->{height};
-		}
+        # If 90% of the current page is filled from a window this one will be
+        # ignored if "IgnoreMaxWindows" is set.
+        my $otherArea = 0;
+        if ($action eq "IgnoreMaxWindows")
+        {
+            $otherArea = $other->{width} * $other->{height};
+        }
         unless ($other->{win_id} == $own->{win_id}
                 or $other->{desk} != $own->{desk}
                 or $otherArea >= $deskArea)
@@ -131,24 +131,26 @@ sub smartMaximize
         my $newHeight = $vp_height - $y;
         if ($reduced)
         {
-			# reduce a maximized window to 25% of its real size
-			$newWidth = int($own->{width} * 0.25);
-			$newHeight = int($own->{height} * 0.25);
-		}
-		else
-		{
-			# This is to eliminate flipping to other pages if Window 
-			# overlap to the other page
-			if ($own->{width} < $newWidth)
-			{
-				$newWidth = $own->{width};
-			}
-			if ($own->{height} < $newHeight)
-			{
-				$newHeight = $own->{height};
-			}
-		}
-		$module->send("WindowId $own->{win_id} ResizeMove ${newWidth}p ${newHeight}p ${x}p ${y}p Warp");
+            # reduce a maximized window to 25% of its real size
+            $newWidth = int($own->{width} * 0.25);
+            $newHeight = int($own->{height} * 0.25);
+            $module->send("WindowId $own->{win_id} Maximize False");
+        }
+        else
+        {
+            # This is to eliminate flipping to other pages if Window 
+            # overlap to the other page
+            if ($own->{width} < $newWidth)
+            {
+                $newWidth = $own->{width};
+            }
+            if ($own->{height} < $newHeight)
+            {
+                $newHeight = $own->{height};
+            }
+        }
+        #$module->send("WindowId $own->{win_id} Maximize screen c False");
+        $module->send("WindowId $own->{win_id} ResizeMove ${newWidth}p ${newHeight}p ${x}p ${y}p Warp");
         $module->send("WindowId $own->{win_id} Maximize screen c grow grow");
         # if window is maximized and should grow on the right side mouse cursor could flip to other page.
         $module->send("WindowId $own->{win_id} WarpToWindow 50 10");
