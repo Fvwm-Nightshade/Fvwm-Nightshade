@@ -1,0 +1,282 @@
+#!/usr/bin/perl
+################################################################################
+# File:        FvwmSmartMaximize
+# Version:     1.1.3
+# Licence:     GPL 2
+#
+# Description: Module to move and resize a current window to the largest
+#              free area of desktop/page.
+#              implement as described in:
+#              http://www.mail-archive.com/fvwm@lists.math.uh.edu/msg16809.html
+#
+# Author:      Andreas Hoenen <andreas@hoenen-terstappen.de>
+# Adapted by:  Thomas Funk <t.funk@web.de>
+#
+# Created:     2013-06-29
+# Changed:     2013-07-21
+################################################################################
+
+use warnings;
+use strict;
+
+use lib `fvwm-perllib dir`;
+use FVWM::Module;
+
+use constant LEFT   => 0;
+use constant RIGHT  => 1;
+use constant TOP    => 2;
+use constant BOTTOM => 3;
+
+my $module = new FVWM::Module(Name => 'FvwmSmartMaximize', Mask => M_STRING);
+
+# Evaluate optional EwmhBaseStruts arguments.
+# Missing (or broken) values are assumed to be 0.
+my @emwhBaseStruts = @ARGV;
+foreach my $idx (LEFT .. BOTTOM)
+{
+    if (defined $emwhBaseStruts[$idx])
+    {
+        unless ($emwhBaseStruts[$idx] =~ m/^\d+$/)
+        {
+            &logWarning("not a non negative integer: $emwhBaseStruts[$idx]");
+            &logWarning('usage: Module FvwmSmartMaximize',
+                        '[EwmhBaseStruts arguments]');
+            $emwhBaseStruts[$idx] = 0;
+        }
+    }
+    else
+    {
+        $emwhBaseStruts[$idx] = 0;
+    }
+}
+
+my $pageTrackerWL = $module->track('WindowList');
+my $vp_width = $pageTrackerWL->pageInfo->{vp_width};
+my $vp_height = $pageTrackerWL->pageInfo->{vp_height};
+
+$module->add_handler(M_STRING, \&smartMaximize);
+$module->event_loop;
+
+# main function smartMaximize gets called when issuing one of those FVWM
+# commands:
+# SendToModule smart_maximize.pl All
+# SendToModule smart_maximize.pl IgnoreMaxWindows
+sub smartMaximize
+{
+    my ($module, $event) = @_;
+    my $action = $event->_text;
+
+    # the window to be maximized
+    my $own = $pageTrackerWL->data(${$event->args}{win_id});
+
+    # the size of a desktop/page (90%) <- if EwmhBaseStruts has reduced
+    # the real desktop/page area
+    my $deskArea = $vp_width * $vp_height * 0.9;
+
+    # Find all free rectangles in the current page where the window could be
+    # displayed. This works as follows:
+    # The list of display rectangles starts with one preliminary display
+    # rectangle: the whole page minus EwmhBaseStruts.
+    # Then one after another all windows are applied to the list of the
+    # preliminary display rectangles.
+    # If a window overlaps with a rectangle, it splits the rectangle into at
+    # most four smaller rectangles: the one above the window, the one below it,
+    # the one left of it, the one right of it.
+    # After all windows have been applied to the rectangle list, the display
+    # rectangles are not preliminary any longer, as they won't be split into
+    # smaller rectangles any longer.
+    # The biggest display rectangle will be used as the new window location.
+    my @rectangles = (&createRectangle($own->{page_nx} * $vp_width
+                                       + $emwhBaseStruts[LEFT],
+                                       ($own->{page_nx} + 1) * $vp_width
+                                       - $emwhBaseStruts[LEFT]
+                                       - $emwhBaseStruts[RIGHT],
+                                       $own->{page_ny} * $vp_height
+                                       + $emwhBaseStruts[TOP],
+                                       ($own->{page_ny} + 1) * $vp_height
+                                       - $emwhBaseStruts[TOP]
+                                       - $emwhBaseStruts[BOTTOM]));
+
+    # apply all windows to the display rectangle list
+    foreach my $other ($pageTrackerWL->windows)
+    {
+        unless ($other->{win_id} == $own->{win_id}
+                or $other->{desk} != $own->{desk}
+                # If 90% of the current page is filled from a window, this one
+                # will be ignored if "IgnoreMaxWindows" is set.
+                or ($action eq 'IgnoreMaxWindows'
+                    and $other->{width} * $other->{height} >= $deskArea))
+        {
+            @rectangles = &applyWindow($other, @rectangles);
+        }
+    }
+
+    # take the rectangle with the largest area as destination
+    my $dest;
+    foreach my $rect (@rectangles)
+    {
+        if ($dest)
+        {
+            # first level criterion: bigger
+            if ($rect->{area} > $dest->{area}
+                # second level criterion: just as big, but more left
+                or ($rect->{area} == $dest->{area}
+                    and ($rect->{x_min} < $dest->{x_min}
+                         # third level criterion:
+                         # just as big, just as left, but more up
+                         or ($rect->{x_min} == $dest->{x_min}
+                             and $rect->{y_min} < $dest->{y_min}))))
+            {
+                $dest = $rect;
+            }
+        }
+        else
+        {
+            $dest = $rect;
+        }
+    }
+
+    if ($dest)
+    {
+        # move the window to the display rectangle and let it fill
+        my $width = &roundDown($dest->{x_max} - $dest->{x_min},
+                               $own->{resize_width_inc});
+        my $height = &roundDown($dest->{y_max} - $dest->{y_min},
+                                $own->{resize_height_inc});
+        my $x = $dest->{x_min} - $own->{page_nx} * $vp_width;
+        my $y = $dest->{y_min} - $own->{page_ny} * $vp_height;
+        $module->send("WindowId $own->{win_id} ResizeMoveMaximize"
+                      # resize arguments
+                      . " Frame ${width}p ${height}p"
+                      # move arguments
+                      . " ${x}p ${y}p ewmhiwa"
+                      . " Warp");
+    }
+}
+
+# Apply a window to the current display rectangle list.
+# This may change the rectangle list.
+sub applyWindow
+{
+    my ($other, @oldRectangles) = @_;
+
+    my $splitter =
+    {x_min => $other->{page_nx} * $vp_width + $other->{x},
+     x_max => $other->{page_nx} * $vp_width + $other->{x} + $other->{width},
+     y_min => $other->{page_ny} * $vp_height + $other->{y},
+     y_max => $other->{page_ny} * $vp_height + $other->{y} + $other->{height}};
+    my @newRectangles;
+
+    # apply the window to all display rectangles
+    foreach my $rect (@oldRectangles)
+    {
+        if (&doRectanglesOverlap($rect, $splitter))
+        {
+            # the window splits the rectangle into 0-4 new, smaller rectangles
+            if ($rect->{x_min} < $splitter->{x_min})
+            {
+                # new rectangle left of splitter window
+                push @newRectangles, &createRectangle($rect->{x_min},
+                                                      $splitter->{x_min} - 1,
+                                                      $rect->{y_min},
+                                                      $rect->{y_max});
+            }
+            if ($rect->{x_max} > $splitter->{x_max})
+            {
+                # new rectangle right of splitter window
+                push @newRectangles, &createRectangle($splitter->{x_max} + 1,
+                                                      $rect->{x_max},
+                                                      $rect->{y_min},
+                                                      $rect->{y_max});
+            }
+            if ($rect->{y_min} < $splitter->{y_min})
+            {
+                # new rectangle above splitter window
+                push @newRectangles, &createRectangle($rect->{x_min},
+                                                      $rect->{x_max},
+                                                      $rect->{y_min},
+                                                      $splitter->{y_min} - 1);
+            }
+            if ($rect->{y_max} > $splitter->{y_max})
+            {
+                # new rectangle below splitter window
+                push @newRectangles, &createRectangle($rect->{x_min},
+                                                      $rect->{x_max},
+                                                      $splitter->{y_max} + 1,
+                                                      $rect->{y_max});
+            }
+        }
+        else
+        {
+            # As window and display rectangle do not overlap,
+            # the display rectangle is not affected by the window.
+            push @newRectangles, $rect;
+        }
+    }
+
+    return @newRectangles;
+}
+
+sub createRectangle
+{
+    my ($x_min, $x_max, $y_min, $y_max) = @_;
+
+    return {x_min => $x_min,
+            x_max => $x_max,
+            y_min => $y_min,
+            y_max => $y_max,
+            area  => ($x_max - $x_min) * ($y_max - $y_min)};
+}
+
+sub doRectanglesOverlap
+{
+    my ($r1, $r2) = @_;
+
+    return not ($r1->{x_max} < $r2->{x_min}
+                or $r1->{x_min} > $r2->{x_max}
+                or $r1->{y_max} < $r2->{y_min}
+                or $r1->{y_min} > $r2->{y_max});
+}
+
+sub logWarning
+{
+    warn "[FvwmSmartMaximize]: WARNING: @_\n";
+}
+
+sub roundDown
+{
+    my ($size, $step) = @_;
+
+    return int($size / $step) * $step;
+}
+
+__END__
+
+=head1 NAME
+
+FvwmSmartMaximize - The smart maximize module
+
+=head1 SYNOPSIS
+
+Module FvwmSmartMaximize [All|IgnoreMaxWindows]
+
+FvwmSmartMaximize can only be invoked by fvwm. Command line invocation of the FvwmSmartMaximize module will not work.
+
+=head1 DESCRIPTION
+
+This module moves and resizes a current window to the largest free area of desktop/page
+If no place found nothing happens.
+
+=head1 INVOCATION
+
+To be written
+
+=head1 AUTHORS
+
+Andreas Hoenen <andreas@hoenen-terstappen.de> and Thomas Funk <t.funk@web.de>.
+
+=head1 SEE ALSO
+
+For more information, see L<fvwm>, L<FVWM::Module>.
+
+=cut
