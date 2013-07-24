@@ -1,4 +1,7 @@
 History:
+24/07/2013
+- new module FvwmSmartMaximize
+
 08/07/2013 V 0.7.3
 - exchange Esetroot with feh because of the poor availability in different
   distribution repositories.
