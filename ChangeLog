@@ -1,8 +1,19 @@
 History:
-24/07/2013
+
+07/31/2013
+- Fixes in FvwmSmartMaximize:
+  - get EwmhBaseStruts via xprop to eliminate command line arguments
+  - add additional option 'screen' to handle multi display support
+  - fix bug in creating preliminary display rectangle
+  - remove function roundDown because never needed
+  - finish pod documentation
+  - add manpage created from pod to man/
+- add Modulpath to config
+
+07/24/2013
 - new module FvwmSmartMaximize
 
-08/07/2013 V 0.7.3
+07/08/2013 V 0.7.3
 - exchange Esetroot with feh because of the poor availability in different
   distribution repositories.
 - update translation files (pot & po)
