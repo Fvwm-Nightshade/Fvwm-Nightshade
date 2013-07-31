@@ -163,7 +163,7 @@ ExecUseShell /bin/bash
 # are normally installed into a version-dependent directory.  Be sure to
 # update this file after installing a new version.
 #-----------------------------------------------------------------------
-#ModulePath $[FVWM_USERDIR]/mymodules:+
+ModulePath $[FVWM_USERDIR]/lib:$[FNS_SYSTEMDIR]/lib:+
 
 #-----------------------------------------------------------------------
 # LocalePath specifies a colon separated list of "locale path" in which
