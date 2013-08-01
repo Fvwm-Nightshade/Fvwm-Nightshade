@@ -1,5 +1,5 @@
 FvwmSmartMaximize(1)
-================
+====================
 :doctype: manpage
 
 NAME
@@ -12,7 +12,7 @@ SYNOPSIS
 --------
 
 *FvwmSmartMaximize* can only be invoked by fvwm. Command line invocation 
-of the B<FvwmSmartMaximize> module will not work.
+of the *FvwmSmartMaximize* module will not work.
 
 
 DESCRIPTION
@@ -48,29 +48,29 @@ For multi display screens there's an addition to the main options:
 
 '[screen]'::
 +
-With this addition B<FvwmSmartMaximize> will only use the current screen 
+With this addition *FvwmSmartMaximize* will only use the current screen 
 for placing. Else the complete display is used.
 
 EXAMPLES
 --------
 To use *FvwmSmartMaximize* three parts have to be implemented:
 
-. You can copy B<FvwmSmartMaximize> in the lib directory of Fvwm. To get the path type in a terminal
-
+. You can copy *FvwmSmartMaximize* in the lib directory of Fvwm. To get the path type in a terminal
++
 ----
 $ echo $FVWM_MODULEDIR
 ----
-    
++    
 Or you can implement your own in your .fvwm2rc file with:
-   
++   
 ----
 ModulePath $[FVWM_USERDIR]/lib:+
 ----
-
-Now copy B<FvwmSmartMaximize> into your own module path.
++
+Now copy *FvwmSmartMaximize* into your own module path.
    
 . The module initialization in the StartFunction declaration in your .fvwm2rc file:
-
++
 ----
 DestroyFunc StartFunction
 AddToFunc StartFunction
@@ -78,24 +78,45 @@ AddToFunc StartFunction
 ----
 
 . A menu, mouse button, or keystroke binding:
-
++
 ----
 Mouse 1 4 M SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
 ----
-    
-This binds the call to mouse button 1 (left button) + Alt-Key and to the window button 4. So if you hold Alt and click on the window button 4 B<FvwmSmartMaximize> is smart maximizing the active window to the largest free area on the current screen, ignoring maximized windows.
-   
++    
+This binds the call to mouse button 1 (left button) + Alt-Key and to the window button 4. So if you hold Alt and click on the window button 4 *FvwmSmartMaximize* is smart maximizing the active window to the largest free area on the current screen, ignoring maximized windows.
++   
 ----
 Key Super_L WTSF N SendToModule FvwmSmartMaximize All
 ----
-
++
 This binds the call to the left Windows key and smart maximizing the active window to the largest free area on the whole desktop if no maximized window blocks it.
++
+----
+DestroyMenu MenuWindowMaximize
+AddToMenu   MenuWindowMaximize
++ "Maximize Window" Title
++ "%menu/window-maximize.xpm%Maximize &Smart"	SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
+----
++
+This creates a menu 'Maximize Window' with an entry 'Maximize Smart'.
 
+BUGS
+----
+Bug reports can be sent to <andreas@hoenen-terstappen.de> or the 
+fvwmnightshade-workers mailing list at https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers 
+or submit them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues.
 
+CAVEATS
+-------
+If the width/height of the largest free area is smaller than the smallest 
+possible width/height of a program it is only positioning there without resizing.
 
-AUTHOR
-------
+COPYRIGHTS
+----------
+This program stands under the GPL V2.
 
-(C) 2013 Thomas Funk <t.funk@web.de>
+AUTHORS
+-------
+Andreas Hoenen <andreas@hoenen-terstappen.de> and Thomas Funk <t.funk@web.de>.
 
 
