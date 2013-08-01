@@ -12,7 +12,7 @@ Version 0.7.x
 - exchange Esetroot with feh because of the poor availability in different
   distribution repositories.
 - new feature smart maximize - moves and resizes a current window to the 
-  largest free area of a desktop/page.
+  largest free area of a desktop/page (thanks to Andreas Hoenen ^^)
 
 ------------------------------------------------------------------------
 
