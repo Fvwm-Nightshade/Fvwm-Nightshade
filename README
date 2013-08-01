@@ -104,6 +104,8 @@ Featurelist of Fvwm-Nightshade 0.7.x:
   instead of their icon
 - Build support for deb, rpm and Arch packages
 - Localization support for German, French and Spanish
+- Smart maximize windows - move and resize windows to the largest free 
+  area of a desktop/page
 
 
 Requirements:
