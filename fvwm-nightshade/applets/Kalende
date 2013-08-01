@@ -1,0 +1,1209 @@
+#-----------------------------------------------------------------------
+# File:		Kalende
+# Version:	1.0.0
+# Licence: 	GPL 2
+#
+# Description:	Calender applet based on FvwmScript
+#
+# Parameters: 	-fns
+#					initiate applet that it will be used by Fvwm-Nightshade
+#					with another font, colorset and another icon directory.
+#
+#				-fnt
+#					set another font than the default one.
+#
+#				-cs
+#					set another colorset than the default one.
+#
+#				-hcs
+#					set another highlight colorset
+#
+# Without parameters it starts with default settings from sebaro.
+#
+# Author:		sebaro	
+# Adjusted by:	Thomas Funk <t.funk@web.de>
+#
+# Created:	08/12/2012
+# Changed:	02/11/2013
+#-----------------------------------------------------------------------
+
+UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
+WindowLocaleTitle 	{Kalende}
+#WindowSize 			320 170
+WindowSize 			185 150
+#WindowPosition 187 610
+
+##### Global Styles by sebaro
+Colorset 10
+Font "xft:DejaVu Sans:size=10:bold"
+
+Init
+Begin
+    ##### Global Styles
+    Set $defaultColorset = 10
+    Set $highlightColorset = 10
+    Set $defaultFont = {DejaVu Sans}
+
+    ##### Widgets Styles
+    Set $dayNameBgColor = {#cccccc}
+    Set $dayNrBgColor = {#eeeeee}
+    Set $dayCurrBgColor = {#A4CDF9}
+
+    ##### Settings
+    Set $homeDir = (GetOutput {echo $[infostore.mScripts]} 1 -1) {/Kalende/}
+	Set $setFirstDay = {monday}
+
+	##### Widgets
+	Set $prevIcon = $homeDir {icons/left.png}
+	Set $nextIcon = $homeDir {icons/right.png}
+	Set $quitButton = $homeDir {icons/quit.png}
+
+    ##### Commandline Arguments
+    Set $FnsUseApplet = 0
+    Set $ColorsetChanged = 0
+    Set $FontChanged = 0
+    Set $i = 1
+    Set $arg = (GetScriptArgument $i)
+
+    While $arg <> {} Do
+    Begin
+		Set $j = (Add $i 1)
+		Set $value = (GetScriptArgument $j)
+
+		# Fvwm-Nightshade use widget
+		If $arg == {-fns} Then
+		Begin
+			Set $FnsUseApplet = 1
+			
+			Set $defaultColorset = 25
+#			Set $defaultColorset = 10
+			Set $ColorsetChanged = 1
+			
+			Set $highlightColorset = 26
+#			Set $highlightColorset = 10
+			
+			If $FontChanged == 0 Then
+			Begin
+				Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
+				Set $FontChanged = 1
+			End
+		End
+
+		# other default colorset
+		If $arg == {-cs} Then
+		Begin
+			Set $defaultColorset = $value
+			Set $ColorsetChanged = 1
+		End
+
+		# other highlight colorset
+		If $arg == {-hcs} Then
+			Set $highlightColorset = $value
+
+		# other default font
+		If $arg == {-fnt} Then
+		Begin
+			Set $defaultFont = $value
+			Set $FontChanged = 1
+		End
+
+		If $arg == {-fns} Then
+			Set $i = (Add $i 1)
+		Else
+			Set $i = (Add $i 2)
+			
+		Set $arg = (GetScriptArgument $i)
+    End
+
+    ##### change Global Styles if needed
+    If $ColorsetChanged == 1 Then
+    Begin
+		For $Widget=1 To 54 Do
+		Begin
+			ChangeColorset $Widget $defaultColorset
+		End
+		ChangeColorset 0 $defaultColorset
+	End
+
+    ##### change Widget Styles if needed
+    If $FontChanged == 1 Then
+    Begin
+		Set $newFont = {xft:}$defaultFont{:size=7:bold}
+		For $Widget=1 To 54 Do
+			ChangeFont $Widget $newFont
+	End
+	Set $titleFont = {xft:}$defaultFont{:size=8:bold}
+
+    ##### change Settings if needed
+    If $FnsUseApplet == 1 Then
+    Begin
+		Set $homeDir = (GetOutput {echo $[FVWM_USERDIR]} 1 -1) {/scripts/}
+		Set $prevIcon = {left.png}
+		Set $nextIcon = {right.png}
+		Set $quitButton = {quit.png}
+	End
+	
+	# Debug
+	#Do {echo -----------------------}
+	#Do {echo FnsUseApplet: }$FnsUseApplet
+	#Do {echo ColorsetChanged: }$ColorsetChanged
+	#Do {echo defaultColorset: }$defaultColorset
+	#Do {echo highlightColorset: }$highlightColorset
+	#Do {echo FontChanged: }$FontChanged
+	#Do {echo titleFont: }$titleFont
+	#Do {echo newFont: }$newFont
+	#Do {echo homeDir: }$homeDir
+	#Do {echo prevIcon: }$prevIcon
+	#Do {echo nextIcon: }$nextIcon
+	#Do {echo quitButton: }$quitButton
+	#Do {echo -----------------------}
+
+    ##### change Widgets
+    ChangeIcon 1 $prevIcon
+    ChangeIcon 4 $nextIcon
+    ChangeIcon 54 $quitButton
+
+    ChangeFont 2 $titleFont
+    ChangeFont 3 $titleFont
+    
+    For $daysName = 5 To 11 Do
+		ChangeBackColor $daysName $dayNameBgColor
+    
+    ##### Variables
+    Set $weekFirstDay = $setFirstDay
+    Set $changeCal = {month}
+    ChangeColorset 2 $highlightColorset
+    Set $goAction = {none}
+
+    ##### Calendar
+
+    ## Day, Month & Year
+    Set $currentDay = (GetOutput {date +"%d"} 1 -1)
+    Set $currentMonNo = (GetOutput {date +"%m" | sed -e "s/^0//g"} 1 -1)
+    Set $currentMonTitle = (GetOutput {date +"%B"} 1 -1)
+    Set $currentYear = (GetOutput {date +"%Y"} 1 -1)
+    ChangeTitle 2 $currentMonTitle
+    ChangeTitle 3 $currentYear
+
+    ## First Day Position
+    Set $getWeekLastDay = {cal | head -n 3 | tail -n 1 | sed -e "s/ //g" | grep -o "[0-9]$"}
+    Set $weekLastDay = (GetOutput $getWeekLastDay 1 -1)
+    
+    If $weekFirstDay == {monday} Then
+    Begin
+		If $weekLastDay == 7 Then
+			Set $firstDayPos = 6
+		Else
+			Set $firstDayPos = (Add 6 (Mult $weekLastDay -1))
+    End
+    Else
+		Set $firstDayPos = (Add 7 (Mult $weekLastDay -1))
+
+    ## Last Day
+    Set $lastDay = 28
+    
+    For $i = 29 To 31 Do
+    Begin
+		Set $getLastDay = {cal | tail -n 2 | grep -o } $i
+		
+		If (GetOutput  $getLastDay 1 -1) == $i Then
+			Set $lastDay = $i
+    End
+
+    ## Week Days
+    Set $getDayNames = {cal -j | head -n 2 | tail -n 1}
+    Set $dayNameWidget = 5
+    
+    For $i = 1 To 7 Do
+    Begin
+		If $weekFirstDay == {sunday} Then
+			ChangeTitle $dayNameWidget (GetOutput $getDayNames 1 $i)
+		Else
+		Begin
+			Set $j = (Add $i 1)
+			
+			If $i == 7 Then
+				Set $j = 1
+			
+			ChangeTitle $dayNameWidget (GetOutput $getDayNames 1 $j)
+		End
+		
+		Set $dayNameWidget = (Add $dayNameWidget 1)
+    End
+
+    ## Month Days
+    Set $dayNrWidget = (Add $firstDayPos 11)
+    
+    For $i = 1 To $lastDay Do
+    Begin
+		Set $dayNrWidget = (Add $dayNrWidget 1)
+		
+		If (GetOutput {date +"%d" | sed -e "s/^0//"} 1 -1) == $i Then
+			ChangeBackColor $dayNrWidget $dayCurrBgColor
+		Else
+			ChangeBackColor $dayNrWidget $dayNrBgColor
+		
+		ChangeTitle $dayNrWidget $i
+    End
+
+	##### Curly Brackets
+	Set $leftCB = (GetOutput {printf "\173"} 1 -1)
+	Set $rightCB = (GetOutput {printf "\175"} 1 -1)
+End
+
+PeriodicTasks
+Begin
+    If $doRefresh == {true} Then
+    Begin
+        For $i = 12 To 53 Do
+			HideWidget $i
+
+		## Change Week
+		If $changeWeek == {true} Then
+		Begin
+			If $weekFirstDay == {sunday} Then
+				Set $weekFirstDay = {monday}
+			Else
+				Set $weekFirstDay = {sunday}
+			
+			Do {exec sed -i -e "s/^.*Set \$setFirstDay.*$/  Set \$setFirstDay = } $leftCB $weekFirstDay $rightCB {/" } $homeDir {Kalende}
+			Set $changeWeek = {false}
+		End
+
+		## Change Month
+		If $changeCal == {month} Then
+		Begin
+			If $goAction == {next} Then
+			Begin
+				If $currentMonNo == 12 Then
+				Begin
+					Set $currentMonNo = 0
+					Set $currentYear = (Add $currentYear 1)
+					Set $refreshYear = {true}
+				End
+				
+				Set $currentMonNo = (Add $currentMonNo 1)
+				Set $refreshMonth = {true}
+				Set $goAction = {none}
+			End
+			
+			If $goAction == {previous} Then
+			Begin
+				If $currentMonNo == 1 Then
+				Begin
+					Set $currentMonNo = 13
+					Set $currentYear = (Add $currentYear -1)
+					Set $refreshYear = {true}
+				End
+				
+				Set $currentMonNo = (Add $currentMonNo -1)
+				Set $refreshMonth = {true}
+				Set $goAction = {none}
+			End
+		End
+
+		## Change Year
+		If $changeCal == {year} Then
+		Begin
+			If $goAction == {next} Then
+			Begin
+				Set $currentYear = (Add $currentYear 1)
+				Set $refreshYear = {true}
+				Set $goAction = {none}
+			End
+			
+			If $goAction == {previous} Then
+			Begin
+				Set $currentYear = (Add $currentYear -1)
+				Set $refreshYear = {true}
+				Set $goAction = {none}
+			End
+		End
+
+		##### Refresh Calendar
+
+		## Month
+		If $refreshMonth == {true} Then
+		Begin
+			Set $getMonTitle = {cal } $currentMonNo { } $currentYear { | head -n 1 | sed -e "s/ //g" -e "s/[0-9]//g"}
+			Set $currentMonTitle = (GetOutput $getMonTitle 1 -1)
+			ChangeTitle 2 $currentMonTitle
+			Set $refreshMonth = {false}
+		End
+
+		## Year
+		If $refreshYear == {true} Then
+		Begin
+			ChangeTitle 3 $currentYear
+			Set $refreshYear = {false}
+		End
+
+		## First Day Position
+		Set $getWeekLastDay = {cal } $currentMonNo { } $currentYear { | head -n 3 | tail -n 1 | sed -e "s/ //g" | grep -o "[0-9]$"}
+		Set $weekLastDay = (GetOutput $getWeekLastDay 1 -1)
+		
+		If $weekFirstDay == {monday} Then
+		Begin
+			If $weekLastDay == 7 Then
+				Set $firstDayPos = 6
+			Else
+				Set $firstDayPos = (Add 6 (Mult $weekLastDay -1))
+		End
+		Else
+			Set $firstDayPos = (Add 7 (Mult $weekLastDay -1))
+
+		## Last Day
+		Set $lastDay = 28
+		
+		For $i = 29 To 31 Do
+		Begin
+			Set $getLastDay = {cal } $currentMonNo { } $currentYear { | tail -n 2 | grep -o } $i
+			
+			If (GetOutput  $getLastDay 1 -1) == $i Then
+				Set $lastDay = $i
+		End
+
+		## Week Days
+		Set $dayNameWidget = 5
+		For $i = 1 To 7 Do
+		Begin
+			If $weekFirstDay == {sunday} Then
+				ChangeTitle $dayNameWidget (GetOutput $getDayNames 1 $i)
+			Else
+			Begin
+				Set $j = (Add $i 1)
+				
+				If $i == 7 Then
+					Set $j = 1
+				
+				ChangeTitle $dayNameWidget (GetOutput $getDayNames 1 $j)
+			End
+			
+			Set $dayNameWidget = (Add $dayNameWidget 1)
+		End
+
+		## Month Days
+		Set $currDate = $currentMonNo $currentYear
+		Set $dayNrWidget = (Add $firstDayPos 11)
+		
+		For $i = 1 To $lastDay Do
+		Begin
+			Set $dayNrWidget = (Add $dayNrWidget 1)
+			ShowWidget $dayNrWidget
+			ChangeBackColor $dayNrWidget $dayNrBgColor
+			ChangeTitle $dayNrWidget $i
+			
+			If (GetOutput {date +"%m%Y" | sed -e "s/^0//"} 1 -1) ==  $currDate Then
+			Begin
+				If (GetOutput {date +"%d" | sed -e "s/^0//"} 1 -1) == $i Then
+					ChangeBackColor $dayNrWidget $dayCurrBgColor
+			End
+		End  
+		
+		Set $doRefresh = {false}
+    End
+
+    ##### Update Calendar
+    If (RemainderOfDiv (GetTime) 60) == 0 Then
+    Begin
+		If $currentDay <> (GetOutput {date +"%d"} 1 -1) Then
+		Begin
+			Set $currentDay = (GetOutput {date +"%d"} 1 -1)
+
+			If $currentMonNo <> (GetOutput {date +"%m" | sed -e "s/^0//"} 1 -1) Then
+			Begin
+				Set $currentMonNo = (GetOutput {date +"%m" | sed -e "s/^0//"} 1 -1)
+				Set $refreshMonth = {true}
+			End
+
+			If $currentYear <> (GetOutput {date +"%Y"} 1 -1) Then
+			Begin
+				Set $currentYear = (GetOutput {date +"%Y"} 1 -1)
+				Set $refreshYear = {true}
+			End
+
+			Set $doRefresh = {true}
+		End
+    End
+End
+
+# previous month arrow
+Widget			1
+Property
+    Type		ItemDraw
+#    Icon		left.png
+    Size		22 22
+#    Position	20 10
+    Position	5 5
+    Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+		Set $goAction = {previous}
+		Set $doRefresh = {true}
+    End
+End
+
+# Actual month text
+Widget			2
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=12:bold
+#    Size		140 20
+    Size		70 20
+#    Position	45 10
+    Position	25 5
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+		Set $changeCal = {month}
+		ChangeColorset 2 $highlightColorset
+		ChangeColorset 3 $defaultColorset
+    End
+End
+
+# Actual year text
+Widget			3
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=12:bold
+#    Size		100 20
+    Size		45 20
+#    Position	190 10
+    Position	100 5
+    Flags		NoFocus NoReliefString Left
+Main
+Case message of
+    SingleClic :
+    Begin
+		Set $changeCal = {year}
+		ChangeColorset 3 $highlightColorset
+		ChangeColorset 2 $defaultColorset
+    End
+End
+
+# next month arrow
+Widget			4
+Property
+    Type		ItemDraw
+#    Icon		right.png
+    Size		22 22
+#    Position	275 10
+    Position	145 5
+    Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+		Set $goAction = {next}
+		Set $doRefresh = {true}
+    End
+End
+
+# 1st week day text
+Widget			5
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	20 40
+    Position	5 30
+    Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+		Set $changeWeek = {true}
+		Set $doRefresh = {true}
+    End
+End
+
+# 2nd week day text
+Widget			6
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	60 40
+    Position	30 30
+    Flags		NoFocus NoReliefString
+Main
+Case message of
+End
+
+# 3rd week day text
+Widget			7
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	100 40
+    Position	55 30
+    Flags		NoFocus NoReliefString
+Main
+Case message of
+End
+
+# 4th week day text
+Widget			8
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	140 40
+    Position	80 30
+    Flags		NoFocus NoReliefString
+Main
+    Case message of
+    End
+
+# 5th week day text
+Widget			9
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	180 40
+    Position	105 30
+    Flags		NoFocus NoReliefString
+Main
+Case message of
+End
+
+# 6th week day text
+Widget			10
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	220 40
+    Position	130 30
+    Flags		NoFocus NoReliefString
+Main
+Case message of
+End
+
+# 7th week day text
+Widget			11
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	260 40
+    Position	155 30
+    Flags		NoFocus NoReliefString
+Main
+Case message of
+End
+
+# 1st row, 1st element
+Widget			12
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	20 57
+    Position	5 47
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 1st row, 2nd element
+Widget			13
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	60 57
+    Position	30 47
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 1st row, 3rd element
+Widget			14
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	100 57
+    Position	55 47
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 1st row, 4th element
+Widget			15
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	140 57
+    Position	80 47
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 1st row, 5th element
+Widget			16
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	180 57
+    Position	105 47
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 1st row, 6th element
+Widget			17
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	220 57
+    Position	130 47
+    Flags		NoFocus NoReliefString Right
+Main
+    Case message of
+    End
+
+# 1st row, 7th element
+Widget			18
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	260 57
+    Position	155 47
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 2nd row, 1st element
+Widget			19
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	20 74
+    Position	5 64
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 2nd row, 2nd element
+Widget			20
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	60 74
+    Position	30 64
+    Flags		NoFocus NoReliefString Right
+Main
+  Case message of
+  End
+
+# 2nd row, 3rd element
+Widget			21
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	100 74
+    Position	55 64
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 2nd row, 4th element
+Widget			22
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	140 74
+    Position	80 64
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 2nd row, 5th element
+Widget			23
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	180 74
+    Position	105 64
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 2nd row, 6th element
+Widget			24
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+    Position	130 64
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 2nd row, 7th element
+Widget			25
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+    Position	155 64
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 3rd row, 1st element
+Widget			26
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	20 91
+    Position	5 81
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 3rd row, 2nd element
+Widget			27
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	60 91
+    Position	30 81
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 3rd row, 3rd element
+Widget			28
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	100 91
+    Position	55 81
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 3rd row, 4th element
+Widget			29
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	140 91
+    Position	80 81
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 3rd row, 5th element
+Widget			30
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	180 91
+    Position	105 81
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 3rd row, 6th element
+Widget			31
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	220 91
+    Position	130 81
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 3rd row, 7th element
+Widget			32
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	260 91
+    Position	155 81
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 4th row, 1st element
+Widget			33
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	20 108
+    Position	5 98
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 4th row, 2nd element
+Widget			34
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	60 108
+    Position	30 98
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 4th row, 3rd element
+Widget			35
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	100 108
+    Position	55 98
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 4th row, 4th element
+Widget			36
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	140 108
+    Position	80 98
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 4th row, 5th element
+Widget			37
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	180 108
+    Position	105 98
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 4th row, 6th element
+Widget			38
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	220 108
+    Position	130 98
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 4th row, 7th element
+Widget			39
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	260 108
+    Position	155 98
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 5th row, 1st element
+Widget			40
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	20 125
+    Position	5 115
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 5th row, 2nd element
+Widget			41
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	60 125
+    Position	30 115
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 5th row, 3rd element
+Widget			42
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	100 125
+    Position	55 115
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 5th row, 4th element
+Widget			43
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	140 125
+    Position	80 115
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 5th row, 5th element
+Widget			44
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	180 125
+    Position	105 115
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 5th row, 6th element
+Widget			45
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	220 125
+    Position	130 115
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 5th row, 7th element
+Widget			46
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	260 125
+    Position	155 115
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 6th row, 1st element
+Widget			47
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	20 142
+    Position	5 132
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 6th row, 2nd element
+Widget			48
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	60 142
+    Position	30 132
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 6th row, 3rd element
+Widget			49
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	100 142
+    Position	55 132
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 6th row, 4th element
+Widget			50
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	140 142
+    Position	80 132
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 6th row, 5th element
+Widget			51
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	180 142
+    Position	105 132
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 6th row, 6th element
+Widget			52
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	220 142
+    Position	130 132
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+# 6th row, 7th element
+Widget			53
+Property
+    Type		ItemDraw
+#    Font		xft:DejaVu Sans:size=10:bold
+#    Size		38 15
+    Size		23 15
+#    Position	260 142
+    Position	155 132
+    Flags		NoFocus NoReliefString Right
+Main
+Case message of
+End
+
+Widget			54
+Property
+    Type		ItemDraw
+    Icon		quit.png
+    Size		16 16
+#    Position	303 1
+	Position		168 1
+    Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+		Quit
+    End
+End

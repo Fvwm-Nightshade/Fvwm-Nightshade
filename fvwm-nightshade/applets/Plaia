@@ -1,0 +1,1122 @@
+#-----------------------------------------------------------------------
+# File:		Plaia
+# Version:	1.0.15
+# Licence: 	GPL 2
+#
+# Description:	Music player applet based on FvwmScript
+#
+# Parameters: 	-fns
+#					initiate applet that it will be used by Fvwm-Nightshade
+#					with another font, colorset and another icon directory.
+#
+#				-fnt
+#					set another font than the default one.
+#
+#				-fs
+#					set another fontsize than the deafult one
+#
+#				-cs
+#					set another colorset than the default one.
+#
+#				-wcs
+#					set another warn colorset.
+#
+#				-hcs
+#					set another highlight colorset. If is not set default
+#					colorset is used.
+#
+#				-t
+#					set another theme. Default is gnome.
+#
+# Without parameters it starts with default settings from sebaro.
+#
+# Author:		Thomas Funk <t.funk@web.de>	
+#
+# Created:	03/17/2013
+# Changed:	05/22/2013
+#-----------------------------------------------------------------------
+
+UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
+WindowLocaleTitle 	{Plaia}
+WindowSize 			185 130
+
+##### Global Style for sebaro
+#Colorset 10
+#Font "xft:DejaVu Sans:size=8:bold"
+
+Init
+Begin
+	##### Widgets Style
+	Set $defaultColorset = 10
+	Set $highlightColorset = 10
+	Set $warnColorset = 12
+    Set $defaultFont = {DejaVu Sans}
+    Set $defaultFontsize = 8
+    Set $boldFont = {xft:}$defaultFont{:size=}$defaultFontsize{:bold}
+    Set $infoFontsize = 8
+    Set $infoFont = {xft:}$defaultFont{:size=}$infoFontsize
+    Set $defaultTheme = {gnome}
+    Set $defaultSize = 24
+
+	##### Settings
+    Set $homeDir = (GetOutput {echo $[infostore.mScripts]} 1 -1) {/Plaia/}
+    Set $iconDir = $homeDir{icons/}
+    Set $coverDir = {/dev/shm/}
+
+    ##### Commandline Arguments
+    Set $FnsUseApplet = 0
+    Set $ColorsetChanged = 0
+    Set $FontChanged = 0
+    Set $useThemeIcons = 0
+    Set $ThemeChanged = 0
+    Set $i = 1
+    Set $arg = (GetScriptArgument $i)
+
+    While $arg <> {} Do
+    Begin
+		Set $j = (Add $i 1)
+		Set $value = (GetScriptArgument $j)
+
+		# Fvwm-Nightshade use widget
+		If $arg == {-fns} Then
+		Begin
+			Set $FnsUseApplet = 1
+			Set $useThemeIcons = 1
+			
+			Set $defaultColorset = 25
+#			Set $defaultColorset = 10
+			Set $ColorsetChanged = 1
+			
+			Set $warnColorset = 27
+			Set $highlightColorset = 26
+
+			Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
+			Set $FontChanged = 1
+		End
+
+		# other default colorset
+		If $arg == {-cs} Then
+		Begin
+			Set $defaultColorset = $value
+			Set $ColorsetChanged = 1
+		End
+
+		# other warn colorset
+		If $arg == {-wcs} Then
+			Set $warnColorset = $value
+
+		# other highlight colorset
+		If $arg == {-hcs} Then
+			Set $highlightColorset = $value
+
+		# other default font
+		If $arg == {-fnt} Then
+		Begin
+			Set $defaultFont = $value
+			Set $FontChanged = 1
+		End
+
+		# other default fontsize
+		If $arg == {-fs} Then
+		Begin
+			Set $defaultFontsize = $value
+			If (Add $defaultFontsize -8) <= 0 Then
+				Set $infoFontsize = $defaultFontsize
+			Else
+			Begin
+				If (Add $defaultFontsize -8) >= 2 Then
+					Set $infoFontsize = (Add $defaultFontsize -2)
+				Else
+					Set $infoFontsize = (Add $defaultFontsize -1)
+			End
+			Set $FontChanged = 1
+		End
+
+		# other default theme
+		If $arg == {-t} Then
+		Begin
+			Set $defaultTheme = $value
+			If $defaultTheme == {oxygen} Then
+				Set $defaultSize = 22
+			Set $ThemeChanged = 1
+		End
+
+		If $arg == {-fns} Then
+			Set $i = (Add $i 1)
+		Else
+			Set $i = (Add $i 2)
+			
+		Set $arg = (GetScriptArgument $i)
+    End
+
+    ##### change Global Styles if needed
+    If $ColorsetChanged == 1 Then
+    Begin
+		ChangeColorset 1 $highlightColorset
+		For $Widget=2 To 13 Do
+		Begin
+			ChangeColorset $Widget $defaultColorset
+		End
+		ChangeColorset 0 $defaultColorset
+	End
+
+    ##### change Widget Styles if needed
+    If $FontChanged == 1 Then
+    Begin
+		Set $boldFont = {xft:}$defaultFont{:size=}$defaultFontsize{:bold}
+		Do {echo boldFont: }$boldFont
+		Set $infoFont = {xft:}$defaultFont{:size=}$infoFontsize
+		Do {echo infoFont: }$infoFont
+	End
+	ChangeFont 1 $boldFont
+	For $Widget=2 To 4 Do
+		ChangeFont $Widget $infoFont
+	ChangeFont 7 $boldFont
+	
+    ##### change Settings if needed
+    If $FnsUseApplet == 1 Then
+    Begin
+		Set $homeDir = (GetOutput {echo $FVWM_USERDIR} 1 -1) {/scripts/Plaia/}
+		Set $iconDir = $homeDir{icons/}
+		Set $Cmd = {echo $FVWM_USERDIR/temp/}$BS_CMD
+		Set $coverDir = (GetOutput $Cmd 1 -1)
+		#Do {echo coverDir: }$coverDir
+#		Set $quitButton = {quit.png}
+	End
+
+	If $ThemeChanged == 1 Then
+		Set $useThemeIcons = 1
+	
+	If $useThemeIcons == 1 Then
+	Begin
+		Set $icons = {media-seek-backward media-seek-forward media-skip-backward media-skip-forward media-playback-stop media-playback-start media-playback-pause}
+		For $index = 1 To 7 Do
+		Begin
+			Set $cmd = {echo }$icons
+			Set $icon = (GetOutput $cmd 1 $index)
+			
+			If $ThemeChanged == 1 Then
+				Set $cmd = {fns-find-icon -n }$icon{ -s }$defaultSize{ -c actions -t }$defaultTheme{ --notdesk}
+			Else
+				Set $cmd = {fns-find-icon -n }$icon{ -s }$defaultSize{ -c actions --notdesk}
+			Set $wIcon = (GetOutput $cmd 1 -1)
+			#Do {echo wIcon: }$wIcon
+			If $wIcon == {} Then
+			Begin
+				Set $cmd = {fns-find-icon -n }$icon{ -s }$defaultSize{ -c actions -t gnome --notdesk}
+				Set $wIcon = (GetOutput $cmd 1 -1)
+			End
+
+			If $index == 1 Then
+				Set $seekbackButton = $wIcon
+			If $index == 2 Then
+				Set $seekforwButton = $wIcon
+			If $index == 3 Then
+				Set $backwardButton = $wIcon
+			If $index == 4 Then
+				Set $forwardButton = $wIcon
+			If $index == 5 Then
+				Set $stopButton = $wIcon
+			If $index == 6 Then
+				Set $playButton = $wIcon
+			If $index == 7 Then
+				Set $pauseButton = $wIcon
+		End
+	End
+	Else
+	Begin
+		Set $seekbackButton = $iconDir{media-seek-backward.png}
+		Set $seekforwButton = $iconDir{media-seek-forward.png}
+		Set $backwardButton = $iconDir{media-skip-backward.png}
+		Set $forwardButton = $iconDir{media-skip-forward.png}
+		Set $stopButton = $iconDir{media-playback-stop.png}
+		Set $playButton = $iconDir{media-playback-start.png}
+		Set $pauseButton = $iconDir{media-playback-pause.png}
+	End
+	
+	Set $quitButton = $iconDir{quit.png}
+	Set $stoppedCover = $iconDir{noCover.png}
+	Set $playedCover = $iconDir{playing.png}
+	Set $convertedCover = $homeDir {cover.png}
+	
+	Set $state = {}
+	Set $BS_CMD = {|sed "s/\([()#!|*&'\` ]\)/\\\\\1/g"}
+	Set $Backtic_CMD = {|sed "s/\([\`]\)/\\\\\1/g"}
+	Set $timeElapsed = 0
+	
+	Set $Seconds = 0
+	Set $tenSeconds = 0
+	Set $Minutes = 0
+	Set $tenMinutes = 0
+	Set $Hours = 0
+	
+	Set $checkFile = {false}
+	Set $get_totalTime = {false}
+	Set $get_currentTime = {false}
+	Set $get_fileInfos = {false}
+	Set $checkCover = {false}
+	Set $displayCover = {false}
+	Set $newFile = {}
+	Set $Cmd = {echo $HOME}$BS_CMD
+	Set $lastDir = (GetOutput $Cmd 1 -1) {/}
+	Set $fileInfos = {""}
+	Set $currentTime = 0
+	Set $totalTime = 0
+	Set $str_currentTime = {0:00:00}
+	Set $endChecked = {false}
+	Set $playcount = 1
+	Set $playlistcount = 0
+	Set $mode ={}
+	Set $seekFwClicks = 0
+	Set $seekBwClicks = 0
+	Set $functionsDisabled = {true}
+	Set $songStopped = {false}
+	Set $songEnded = {false}
+	Set $retrieveInfo = {false}
+	Set $get_playlistcount = {false}
+	Set $resetValues = {false}
+	Set $repeat = {false}
+	Set $notFound = 0
+	Set $error = {false}
+
+	
+	Set $currentArtist = {}
+	Set $currentAlbum = {}
+	Set $currentTitle = {}
+	Set $currentCover = $stoppedCover
+	
+	##### change Widgets
+	ChangeTitle 2 $currentArtist
+	ChangeTitle 3 $currentAlbum
+	ChangeTitle 4 $currentTitle
+	ChangeIcon 5 $currentCover
+	ChangeIcon 6 $seekbackButton
+	ChangeTitle 7 $str_currentTime
+	ChangeIcon 8 $seekforwButton
+	ChangeIcon 9 $backwardButton
+	ChangeIcon 10 $playButton
+	ChangeIcon 11 $stopButton
+	ChangeIcon 12 $forwardButton
+	ChangeIcon 13 $quitButton
+
+    ##### key bindings
+	#Key Return A 19 1
+	#Key Escape A 19 2
+    
+    ##### create named pipes and start mplayer
+    Set $pid = (GetPid)
+    Do {echo pid: }$pid
+    Set $FVWM_USERDIR = (GetOutput {echo $FVWM_USERDIR} 1 -1)
+    Set $out = $FVWM_USERDIR{/.tmp-com-out-}$pid
+    Set $inFifo = $FVWM_USERDIR{/.tmp-com-in-}$pid
+
+    # delete pipes if exist
+    Do {Exec rm -f }$out
+    Do {Exec rm -f }$inFifo
+    # create communication files
+    Do {Exec if [ ! -e }$out{ ];then touch }$out{;fi}
+    Do {Exec if [ ! -p }$inFifo{ ];then rm -f }$inFifo{; mkfifo }$inFifo{;fi}
+    # start mplayer
+    Do {Exec TERM=vt100; export TERM;mplayer -idle -slave -input file=}$inFifo{ nodefault-bindings -noconfig all -msglevel all=-1:global=4 2>/dev/null > }$out
+
+End
+
+PeriodicTasks
+Begin
+	If $resetValues == {true} Then
+	Begin
+		Set $Seconds = 0
+		Set $tenSeconds = 0
+		Set $Minutes = 0
+		Set $tenMinutes = 0
+		Set $Hours = 0
+
+		Set $fileInfos = {""}
+		Set $totalTime = 0
+		Set $currentTime = 0
+		Set $seekFwClicks = 0
+		Set $seekBwClicks = 0
+		Set $songEnded = {false}
+
+		Set $get_totalTime = {false}
+		Set $get_currentTime = {false}
+		Set $checkCover = {false}
+		Set $endChecked = {false}
+		Set $notFound = 0
+		Set $resetValues = {false}
+	End
+	
+	If $retrieveInfo == {true} Then
+	Begin
+		ChangeColorset 2 $defaultColorset
+		ChangeColorset 3 $defaultColorset
+		ChangeColorset 4 $defaultColorset
+		ChangeIcon 5 $stoppedCover
+		ChangeTitle 3 {}
+		ChangeTitle 4 {}
+		ChangeLocaleTitle 2 {Fetching song details ...}
+		Set $retrieveInfo = {false}
+	End
+
+	If $get_currentTime == {true} Then
+	Begin
+		Set $Cmd = {echo "get_time_pos" >}$inFifo{; sleep 0.5; tail -n 1 }$out{ |tr -d '\n'}
+		Set $_currentTime = (GetOutput $Cmd 1 -1)
+		Set $_currentTime = (StrCopy $_currentTime 19 30)
+		Set $Cmd = {perl -e 'printf "%.0f",}$_currentTime{'}
+		Set $currentTime = (GetOutput $Cmd 1 -1)
+		#Do {echo currentTime: }$currentTime
+		Set $get_currentTime = {false}
+		If $currentTime < $totalTime Then
+			Set $functionsDisabled = {false}
+	End
+
+	If $get_totalTime == {true} Then
+	Begin
+		Set $Cmd = {echo "get_time_length" >}$inFifo{; sleep 0.5; tail -n 1 }$out{ |tr -d '\n'}
+		Set $totalTime = (GetOutput $Cmd 1 -1)
+		Set $totalTime = (StrCopy $totalTime 12 22)
+		Set $totalTime = (Mult $totalTime 1)
+		#Do {echo totalTime: }$totalTime
+
+		Set $hours = (Div $totalTime 3600)
+		Set $t_Minutes = (Div (Add (Mult $hours -3600) $totalTime) 60)
+		Set $tenMinutes = (Div $t_Minutes 10)
+		Set $Minutes = (Add $t_Minutes (Mult $tenMinutes -10))
+		Set $t_Seconds = (Add $totalTime (Mult (Div $totalTime 60) -60))
+		Set $tenSeconds = (Div $t_Seconds 10)
+		Set $Seconds = (Add $t_Seconds (Mult $tenSeconds -10))
+		Set $_totalTime = $hours{:}$tenMinutes $Minutes{:}$tenSeconds $Seconds
+
+		#Do {echo totalTime string: }$_totalTime
+		Set $get_totalTime = {false}
+		Set $get_currentTime = {true}
+	End
+
+	If $checkFile == {true} Then
+	Begin
+		Set $songStopped = {false}
+		ChangeColorset 2 $defaultColorset
+		ChangeColorset 3 $defaultColorset
+		ChangeColorset 4 $defaultColorset
+		# get current file
+		Set $Cmd = {echo "get_property path" >}$inFifo{; sleep 0.5; tail -n 1 }$out{ |tr -d '\n'}$BS_CMD
+		Set $newFile_BS = (GetOutput $Cmd 1 -1)
+		Set $newFile_BS = (StrCopy $newFile_BS 10 300)
+		Do {echo checkFile newFile: }$newFile_BS
+		Set $temp = (StrCopy $newFile_BS 1 8)
+		Do {echo temp: }$temp
+
+		If (StrCopy $newFile_BS 1 8) <> {POSITION} Then
+		Begin
+			Set $get_totalTime = {true}
+			Do {Exec rm -f }$convertedCover
+			Set $get_fileInfos = {true}
+			Set $checkFile = {false}
+		End
+		Else
+			Set $repeat = {true}
+	End
+
+	If $state == {play} Then
+	Begin
+		Set $currentTime = (Add $currentTime 1)
+		#Do {echo playTime: }$currentTime
+		Set $hours = (Div $currentTime 3600)
+		Set $c_Minutes = (Div (Add (Mult $hours -3600) $currentTime) 60)
+		Set $tenMinutes = (Div $c_Minutes 10)
+		Set $Minutes = (Add $c_Minutes (Mult $tenMinutes -10))
+		Set $c_Seconds = (Add $currentTime (Mult (Div $currentTime 60) -60))
+		Set $tenSeconds = (Div $c_Seconds 10)
+		Set $Seconds = (Add $c_Seconds (Mult $tenSeconds -10))
+		Set $str_currentTime = $hours{:}$tenMinutes $Minutes{:}$tenSeconds $Seconds
+		ChangeTitle 7 $str_currentTime
+
+		If $functionsDisabled == {false} Then
+		Begin
+			If $seekFwClicks <> 0 Then
+			Begin
+				Set $seekTime = (Mult $seekFwClicks 10)
+				#Do {echo Fw seekTime: }$seekTime
+				Set $timestamp = (Add $currentTime $seekTime)
+				#Do {echo timestamp: }$timestamp
+				#Do {echo totalTime: }$totalTime
+				If $timestamp > $totalTime Then
+				Begin
+					Set $seekTime = (Add $totalTime (Mult (Add $currentTime -1) -1))
+					#Do {echo new Fw seekTime: }$seekTime
+					Set $currentTime = $seekTime
+					Set $functionsDisabled = {true}
+					Set $songEnded = {true}
+				End
+				Do {Exec echo "seek }$seekTime{ 0" > }$inFifo
+				Set $get_currentTime = {true}
+				Set $seekFwClicks = 0
+			End
+
+			If $seekBwClicks <> 0 Then
+			Begin
+				Set $seekTime = (Mult $seekBwClicks -10)
+				#Do {echo Bw seekTime: }$seekTime
+				Set $timestamp = (Add $currentTime $seekTime)
+				#Do {echo timestamp: }$timestamp
+				#Do {echo totalTime: }$totalTime
+				If $timestamp < 0 Then
+				Begin
+					Set $seekTime = (Mult (Add $currentTime -1) -1)
+					#Do {echo new Bw seekTime: }$seekTime
+					Set $currentTime = 0
+					Set $functionsDisabled = {true}
+					Set $songEnded = {true}
+				End
+				Do {Exec echo "seek }$seekTime{ 0" > }$inFifo
+				Set $get_currentTime = {true}
+				Set $seekBwClicks = 0
+			End
+		End
+
+
+		If $totalTime <> 0 Then
+		Begin
+			If $endChecked == {false} Then
+			Begin
+				If $currentTime > (Add $totalTime -20) Then
+				Begin
+					#Do {echo endChecked set}
+					#Do {echo currentTime: }$currentTime
+					#Do {echo totalTime: }$totalTime
+					Set $get_currentTime = {true}
+					Set $endChecked = {true}
+				End
+			End
+		End
+
+		# check if song end is reached
+		If $endChecked == {true} Then
+		Begin
+			#Do {echo endChecked reached}
+			#Do {echo currentTime: }$currentTime
+			#Do {echo totalTime: }$totalTime
+			If $currentTime > $totalTime Then
+			Begin
+				Set $songEnded = {true}
+				Set $endChecked = {false}
+			End
+		End
+
+		If $songEnded == {true} Then
+		Begin
+			#Do {echo song ended}
+			If $mode == {file} Then
+				Set $state = {stop}
+			Else
+			Begin
+				If $playcount == $playlistcount Then
+					Set $state = {stop}
+				Else
+				Begin
+					Set $state = {wait}
+					Set $resetValues = {true}
+					Set $retrieveInfo = {true}
+					Set $str_currentTime = {0:00:00}
+					ChangeTitle 7 $str_currentTime
+				End
+			End
+			
+		End
+	End
+
+	If $state == {wait} Then
+	Begin
+		Do {echo timeElapsed: }$timeElapsed
+		If $timeElapsed <> 1 Then
+			Set $timeElapsed = (Add $timeElapsed 1)
+		Else
+		Begin
+			Set $state = {play}
+			Set $timeElapsed = 0
+			Set $checkFile = {true}
+			If $currentTime > (Add $totalTime -1) Then
+			Begin
+				If $repeat == {true} Then
+				Begin
+					Set $playcount = (Add $playcount -1)
+					Set $repeat = {false}
+				End
+				Else
+					Set $playcount = (Add $playcount 1)
+			End
+			Do {echo playcount wait: }$playcount
+		End
+	End
+
+	If $state == {stop} Then
+	Begin
+		If $songStopped == {false} Then
+		Begin
+			Set $get_fileInfos = {false}
+			Set $functionsDisabled = {true}
+			Set $retrieveInfo = {false}
+			Set $resetValues = {true}
+			Set $checkFile = {false}
+			Set $str_currentTime = {0:00:00}
+			Set $repeat = {false}
+
+			If $mode == {playlist} Then
+			Begin
+				Set $playcount = 1
+				Set $fileInfos = {""}
+				Set $newFile = {}
+				Set $newFile_BS = {}
+				If $error == {false} Then
+				Begin
+					Set $currentArtist = {}
+					Set $currentAlbum = {}
+					Set $currentTitle = {}
+					Set $currentCover = $stoppedCover
+					ChangeTitle 2 $currentArtist
+					ChangeTitle 3 $currentAlbum
+					ChangeTitle 4 $currentTitle
+					ChangeIcon 5 $currentCover
+				End
+				Else
+					Set $error = {false}
+			End
+
+			Do {Exec echo "stop" > }$inFifo
+			ChangeTitle 7 $str_currentTime
+			ChangeIcon 10 $playButton
+			Set $songStopped = {true}
+		End
+	End
+
+	If $get_fileInfos == {true} Then
+	Begin
+		#Do {echo playcount get_fileInfos: }$playcount
+		# get file infos
+		Set $Cmd = $homeDir {coverlovin.py -f } $newFile_BS { -i png --info -x }$coverDir{|sed -e 's/" "/%/g;s/ /§/g'}$BS_CMD{|sed -e 's/%/ /g'}
+		Do {echo coverlovin cmd:}$Cmd
+		Set $fileInfos = (GetOutput $Cmd 1 -1)
+		Do {echo fileInfos: }$fileInfos
+		
+		Set $index = 1
+		While $index<5 Do
+		Begin
+			Set $Cmd = {echo }$fileInfos $Backtic_CMD
+			Set $entry = (GetOutput $Cmd 1 $index)
+			Do {echo entry: "}$entry{"}
+			If $entry ==  {Usage:§coverlovin.py§[options]} Then
+			Begin
+				Set $problem = {false}
+				If $newFile_BS == {\(null\)} Then
+				Begin
+					Set $problem = {true}
+				End
+
+				If $newFile_BS == {} Then
+				Begin
+					Set $problem = {true}
+				End
+
+				If $problem == {true} Then
+				Begin
+					Set $currentArtist = {Problem with song}
+					ChangeColorset 2 $warnColorset
+					Set $currentAlbum = {Skipping}
+					ChangeColorset 3 $warnColorset
+					Set $currentTitle = {}
+					Set $currentCover = {---}
+					Set $songEnded = {true}
+					Set $repeat = {false}
+				End
+				Else
+				Begin
+					Set $currentArtist = {---}
+					Set $currentAlbum = {---}
+					Set $currentTitle = {---}
+					Set $currentCover = {---}
+				End
+				Set $index = 4
+			End
+			Else
+			Begin
+				If $index <> 4 Then
+					Set $Cmd = {echo }$entry{|sed -e 's/§/ /g;s/\\//g'}
+				Else
+					Set $Cmd = {echo }$entry{|sed -e 's/§/ /g'}$BS_CMD
+
+				If $index == 1 Then
+					Set $currentArtist = (GetOutput $Cmd 1 -1)
+				If $index == 2 Then
+					Set $currentAlbum = (GetOutput $Cmd 1 -1)
+				If $index == 3 Then
+					Set $currentTitle = (GetOutput $Cmd 1 -1)
+				If $index == 4 Then
+				Begin
+					Set $currentCover = (GetOutput $Cmd 1 -1)
+				End
+			End
+			Set $index = (Add $index 1)
+		End
+		ChangeTitle 2 $currentArtist
+		ChangeTitle 3 $currentAlbum
+		ChangeTitle 4 $currentTitle
+		
+		Do {echo currentCover:}$currentCover
+		If $currentCover <> {---} Then
+			Set $checkCover = {true}
+		Else
+		Begin
+			If $problem == {true} Then
+			Begin
+				ChangeIcon 5 $stoppedCover
+				Set $problem = {false}
+			End
+			Else
+				ChangeIcon 5 $playedCover
+		End
+
+		Set $get_fileInfos = {false}
+	End
+
+	If $checkCover == {true} Then
+	Begin
+		Set $Cmd = {if [ -f }$convertedCover{ ];then echo 1;else echo 0;fi}
+		Set $found = (GetOutput $Cmd 1 -1)
+		If $found == 0 Then
+			Do {Exec convert }$currentCover{ -scale 64 }$convertedCover
+		Else
+		Begin
+			ChangeIcon 5 $convertedCover
+			Set $checkCover = {false}
+		End
+	End
+	
+	If $get_playlistcount == {true} Then
+	Begin
+		Set $Cmd = {[ -f }$playlist{ ] && echo 1 || echo 0}
+		Set $playlist_found = (GetOutput $Cmd 1 -1)
+		Do {echo playlist_found: }$playlist_found
+		If $playlist_found == 1 Then
+		Begin
+			Set $Cmd = {sed -n '$=' }$playlist
+			Set $playlistcount = (GetOutput $Cmd 1 -1)
+			#Do {echo playlistcount in loop: }$playlistcount
+			If $playlistcount <> {} Then
+			Begin
+				Set $playit = {"loadlist }$playlist{"}
+				Set $state = {play}
+				Do {Exec echo }$playit{ > }$inFifo
+				Set $checkFile = {true}
+				Set $notFound = 0
+			End
+			Else
+			Begin
+				ChangeIcon 5 $stoppedCover
+				ChangeTitle 4 {}
+				ChangeLocaleTitle 2 {Playlist is empty!}
+				ChangeColorset 2 $warnColorset
+				ChangeLocaleTitle 3 {Please Check why ...}
+				ChangeColorset 3 $warnColorset
+				Set $state = {stop}
+				Set $error = {true}
+			End
+			Set $get_playlistcount = {false}
+		End
+		Else
+		Begin
+			Do {echo directory_BS: }$directory_BS
+			Do {Exec find }$directory_BS{ -maxdepth 1 -type f -iregex ".*\.\(ape\|flac\|m4a\|mp3\|mpc\|oga\|ogg\|spx\|tta\|wav\|wv\)$" | sort > }$playlist
+			Set $notFound = (Add $notFound 1)
+		End
+		
+		Do {echo notFound: }$notFound
+		If $notFound == 3 Then
+		Begin
+			ChangeIcon 5 $stoppedCover
+			ChangeColorset 2 $warnColorset
+			ChangeLocaleTitle 2 {Can't load/create playlist!}
+			ChangeColorset 3 $warnColorset
+			ChangeLocaleTitle 3 {Error occured. Sorry ...}
+			ChangeColorset 4 $warnColorset
+			ChangeLocaleTitle 4 {Please try again.}
+			Set $state = {stop}
+			Set $error = {true}
+			Set $get_playlistcount = {false}
+		End
+	End
+	
+	# show cover in a seperated window
+	If $displayCover == {true} Then
+	Begin
+		Do {Exec display }$currentCover
+		Set $displayCover = {false}
+	End
+End
+
+# Popup
+Widget		1
+Property
+	Type		ItemDraw
+	LocaleTitle	{Menu}
+	Size		160 16
+	Position	2 1
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+		#Do {Popup MenuPlaiaOps mouse 0p 0p}
+		Do {FuncMenuPlaiaOps }$lastDir
+	End
+	
+	1 :
+	Begin
+		Set $newFile_BS = (LastString)
+		Do {echo newFile_BS: }$newFile_BS
+
+		Set $Cmd = {dirname }$newFile_BS
+		Do {echo lastDir Cmd: }$Cmd
+		Set $lastDir = (GetOutput $Cmd 1 -1)
+
+		If $lastDir <> {/} Then
+			Set $lastDir = $lastDir{/}
+		Do {echo lastDir: }$lastDir
+		
+		If $state == {play} Then
+		Begin
+			Do {Exec echo "stop" > }$inFifo
+			Set $str_currentTime = {0:00:00}
+			ChangeTitle 7 $str_currentTime
+			Set $songStopped = {true}
+			Set $resetValues = {true}
+		End
+		
+		Set $playit = {"loadfile }$newFile_BS{"}
+		Set $mode = {file}
+		Set $functionsDisabled = {true}
+		Set $retrieveInfo = {true}
+		ChangeIcon 10 $pauseButton
+		Do {Exec rm -f }$convertedCover
+		Set $state = {play}
+		Do {Exec echo }$playit{ > }$inFifo
+		Set $checkFile = {true}
+	End
+
+	2 :
+	Begin
+		Set $directory_BS = (LastString)
+		Do {echo directory_BS: }$directory_BS
+		Set $lastDir = (LastString)
+
+		Set $playlist = $FVWM_USERDIR{/.tmpAplaylist}
+		If $state == {play} Then
+		Begin
+			Do {Exec echo "stop" > }$inFifo
+			Set $str_currentTime = {0:00:00}
+			ChangeTitle 7 $str_currentTime
+			Set $songStopped = {true}
+			Set $resetValues = {true}
+		End
+		
+		Do {echo playlist: }$playlist
+		Do {Exec rm -f }$playlist
+		Do {Exec find }$directory_BS{ -maxdepth 1 -type f -iregex ".*\.\(ape\|flac\|m4a\|mp3\|mpc\|oga\|ogg\|spx\|tta\|wav\|wv\)$" | sort > }$playlist
+		Set $get_playlistcount = {true}
+		Set $playcount = 1
+		Set $mode = {playlist}
+		Set $functionsDisabled = {true}
+		Set $retrieveInfo = {true}
+		ChangeIcon 10 $pauseButton
+		Do {Exec rm -f }$convertedCover
+	End
+
+	3 :
+	Begin
+		Set $playlist = (LastString)
+
+		Set $Cmd = {dirname }$playlist
+		Set $lastDir = (GetOutput $Cmd 1 -1)
+
+		If $lastDir <> {/} Then
+			Set $lastDir = $lastDir{/}
+		Do {echo lastDir: }$lastDir
+
+		If $state == {play} Then
+		Begin
+			Do {Exec echo "stop" > }$inFifo
+			Set $str_currentTime = {0:00:00}
+			ChangeTitle 7 $str_currentTime
+			Set $songStopped = {true}
+			Set $resetValues = {true}
+		End
+
+		Do {echo playlist: }$playlist
+		Set $get_playlistcount = {true}
+		Set $playcount = 1
+		Set $mode = {playlist}
+		Set $functionsDisabled = {true}
+		Set $retrieveInfo = {true}
+		ChangeIcon 10 $pauseButton
+		Do {Exec rm -f }$convertedCover
+	End
+End
+
+# Artist
+Widget		2
+Property
+	Type		ItemDraw
+	Size		180 16
+	Position	2 20
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Album
+Widget		3
+Property
+	Type		ItemDraw
+	Size		180 16
+	Position	2 36
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Title
+Widget		4
+Property
+	Type		ItemDraw
+	Size		180 16
+	Position	2 54
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Cover
+Widget		5
+Property
+	Type		ItemDraw
+	Size		64 64
+	Position	119 69
+	Flags		NoFocus
+Main
+Case message of
+	SingleClic :
+	Begin
+		Set $displayCover = {true}
+	End
+End
+
+# seek backward
+Widget		6
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position	4 75
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+		If $functionsDisabled == {false} Then
+			Set $seekBwClicks = (Add $seekBwClicks 1)
+		Else
+		Begin
+			If $seekBwClicks <> 0 Then
+				Set $seekBwClicks = 0
+		End
+	End
+End
+
+# Time
+Widget		7
+Property
+	Type		ItemDraw
+	Size		57 25
+	Position	30 75
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# seek forward
+Widget		8
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position	88 75
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+		If $functionsDisabled == {false} Then
+			Set $seekFwClicks = (Add $seekFwClicks 1)
+		Else
+		Begin
+			If $seekFwClicks <> 0 Then
+				Set $seekFwClicks = 0
+		End
+	End
+End
+
+# Previous song
+Widget		9
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position	4 104
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+		If $mode == {playlist} Then
+		Begin
+			If $playcount > 1 Then
+			Begin
+				Set $functionsDisabled = {true}
+				Do {Exec echo "pt_step -1" > }$inFifo
+				Set $resetValues = {true}
+				Set $retrieveInfo = {true}
+				Set $checkFile = {true}
+				Set $state = {play}
+				Set $playcount = (Add $playcount -1)
+				#Do {echo playcount previous song: }$playcount
+			End
+		End
+	End
+End
+
+# Play/Pause
+Widget		10
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position	32 104
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+		Do {echo state: }$state
+		If $state == {pause} Then
+		Begin
+			Set $state = {play}
+			Do {Exec echo "pause" > }$inFifo
+			ChangeIcon 10 $pauseButton
+		End
+		Else
+		Begin
+			If $state == {play} Then
+			Begin
+				Set $state = {pause}
+				Do {Exec echo "pause" > }$inFifo
+				ChangeIcon 10 $playButton
+			End
+
+			If $state == {stop} Then
+			Begin
+				Set $functionsDisabled = {true}
+				If $mode == {playlist} Then
+				Begin
+					Set $retrieveInfo = {true}
+				End
+				ChangeIcon 10 $pauseButton
+				Do {Exec rm -f }$convertedCover
+				Set $state = {play}
+				Do {Exec echo }$playit{ > }$inFifo
+				Set $checkFile = {true}
+			End
+		End
+	End
+End
+
+# Stop
+Widget		11
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position	60 104
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+		Do {Exec echo "stop" > }$inFifo
+		ChangeIcon 10 $playButton
+		Set $state = {stop}
+	End
+End
+
+# Next song
+Widget		12
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position	88 104
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+		If $mode == {playlist} Then
+		Begin
+			If $playcount < $playlistcount Then
+			Begin
+				If $functionsDisabled == {false} Then
+				Begin
+					Set $functionsDisabled = {true}
+					Do {Exec echo "pt_step 1" > }$inFifo
+					Set $resetValues = {true}
+					Set $retrieveInfo = {true}
+					Set $checkFile = {true}
+					Set $state = {play}
+					Set $playcount = (Add $playcount 1)
+					#Do {echo playcount next song: }$playcount
+				End
+			End
+		End
+	End
+End
+
+# Close
+Widget		13
+Property
+	Type		ItemDraw
+	Size		16 16
+	Position	168 1
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+		Do {Exec echo "quit" > }$inFifo
+		Do {Exec rm -f }$convertedCover
+		Do {Exec rm -f }$FVWM_USERDIR{/.tmpAplaylist}
+		Do {Exec rm -f }$out
+		Do {Exec rm -f }$inFifo
+		Do {Exec killall mplayer 2>/dev/null}
+		Quit
+	End
+End
+
+
+
+
+
