@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.3
+InfoStoreAdd ns_version 0.7.4
 # Copyright (C) 2013
 #
 # Authors:
@@ -1042,6 +1042,9 @@ AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # activate module for sound event actions
 #+ I Module FvwmEvent FvwmEventSound
+#-----------------------------------------------------------------------
+# activate module for smart maximize
++ I Module FvwmSmartMaximize
 #-----------------------------------------------------------------------
 # start xscreensaver daemon for locking
 + I Test (x xscreensaver-command) Test (Init) Exec xscreensaver -no-splash
@@ -2200,6 +2203,7 @@ AddToMenu   MenuWindowMaximize
 + "" Nop
 # these bound functions do not seem to work well if used consequentially
 + "%menu/window-maximize.xpm%$[gt.Maximize &Grow]"						Maximize On grow grow
++ "%menu/window-maximize.xpm%$[gt.Maximize &Smart]"						SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
 + "%menu/window-maximize.xpm%$[gt.Maximize Grow V&ert.]"				Maximize On    0 grow
 + "%menu/window-maximize.xpm%$[gt.Maximize Grow H&oriz.]"				Maximize On grow    0
 + "" Nop
