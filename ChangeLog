@@ -1,5 +1,21 @@
 History:
 
+08/02/2013
+- add FuncFvwmAppletLibCheck in config to check whether softlink 
+  FvwmApplet to FvwmScript exist
+- add AppletIconMan to modules to manage FvwmApplets
+- add some Nanomoids applets in applets/:
+  - Kalende - a Calendar
+  - Meteo - a Weather forecast applet
+  - Plaia - a Musicplayer based on mplayer
+  - Pagina - a Videoplayer based on mplayer
+- add Nanomoids icons in artwork/icons
+- add some tools needed for Nanomoids in fvwm/:
+  - FNS-AppletConfigurator - only a GUI at the moment
+  - FNS-FileBrowser - a file browser based on FvwmScript-FileBrowser
+  - FNS-PlaylistCreator - a simple playlist creator
+- add a modified version of coverlovin in bin/ to handle id3 tags and covers
+
 08/01/2013 V 0.7.4
 - add FvwmSmartMaximize to all themes:
   - move Maximize horizontally from mouse 3 to mouse 2 + Alt
