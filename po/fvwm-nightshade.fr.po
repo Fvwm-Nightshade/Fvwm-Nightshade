@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2013-07-07 18:40+0200\n"
+"PO-Revision-Date: 2013-08-01 13:15+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -532,7 +532,7 @@ msgid "Maximize Window"
 msgstr "Fenêtre maximiser"
 
 msgid "&Maximize Fully"
-msgstr "&Maximize Fully"
+msgstr "&Maximiser pleinement"
 
 msgid "&Unmaximize"
 msgstr "&Démaximiser"
@@ -547,13 +547,16 @@ msgid "Maximize &Horizontally"
 msgstr "Maximiser &horizontallement"
 
 msgid "Maximize &Grow"
-msgstr "Maximize &Grow"
+msgstr "Maximize &croître"
+
+msgid "Maximize &Smart"
+msgstr "Maximiser &intelligent"
 
 msgid "Maximize Grow V&ert."
-msgstr "Maximize Grow V&ert."
+msgstr "Maximiser croître V&ert."
 
 msgid "Maximize Grow H&oriz."
-msgstr "Maximize Grow H&oriz."
+msgstr "Maximiser croître H&oriz."
 
 msgid "Maximize &Full Screen"
 msgstr "P&lein écran"
@@ -1115,17 +1118,20 @@ msgstr "		  Détruire avec le double clic"
 msgid "Maximize Button Bindings"
 msgstr "Button maximiser enfoncé"
 
-msgid "Mouse 1:  Maximize fully on click"
-msgstr "Mouse 1:  Maximize fully on click"
+msgid "Mouse 1:       Maximize fully on click"
+msgstr "Mouse 1:       Maximiser pleinement cliquez sur"
 
-msgid "          Maximize menu on double click"
-msgstr "		  Menu maximiser avec le double clic"
+msgid "               Maximize menu on double click"
+msgstr "		       Menu maximiser avec le double clic"
 
-msgid "Mouse 2:  Maximize vertically"
-msgstr "Mouse 2:  Maximiser verticallement"
+msgid "Mouse 2:       Maximize vertically"
+msgstr "Mouse 2:       Maximiser verticallement"
 
-msgid "Mouse 3:  Maximize horizontally"
-msgstr "Mouse 3:  Maximiser horizontallement"
+msgid "Mouse 2 + Alt: Maximize horizontally"
+msgstr "Mouse 2 + Alt: Maximiser horizontallement"
+
+msgid "Mouse 3:       Maximize smart"
+msgstr "               Maximiser intelligent"
 
 msgid "Minimize Button Bindings"
 msgstr "Bouton minimiser enfoncé"

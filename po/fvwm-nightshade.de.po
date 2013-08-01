@@ -549,6 +549,9 @@ msgstr "&Horizontal maximieren"
 msgid "Maximize &Grow"
 msgstr "Auf &freie Fläche maximieren"
 
+msgid "Maximize &Smart"
+msgstr "Auf &größte freie Fläche maximieren"
+
 msgid "Maximize Grow V&ert."
 msgstr "Auf &vert. freie Fläche maximieren"
 
@@ -1115,17 +1118,20 @@ msgstr "          Zerstören mit Doppelklick"
 msgid "Maximize Button Bindings"
 msgstr "Bindings für Maximieren Fenster-Button"
 
-msgid "Mouse 1:  Maximize fully on click"
-msgstr "Maus 1:   Voll maximieren mit Klick"
+msgid "Mouse 1:       Maximize fully on click"
+msgstr "Maus 1:   	   Voll maximieren mit Klick"
 
-msgid "          Maximize menu on double click"
-msgstr "          Maximierenmenü mit Doppelklick"
+msgid "               Maximize menu on double click"
+msgstr "               Maximierenmenü mit Doppelklick"
 
-msgid "Mouse 2:  Maximize vertically"
-msgstr "Maus 2:   Vertikal maximieren"
+msgid "Mouse 2:       Maximize vertically"
+msgstr "Maus 2:        Vertikal maximieren"
 
-msgid "Mouse 3:  Maximize horizontally"
-msgstr "Maus 3:   Horizontal maximieren"
+msgid "Mouse 2 + Alt: Maximize horizontally"
+msgstr "Maus 2 + Alt:  Horizontal maximieren"
+
+msgid "Mouse 3:       Maximize smart"
+msgstr "Maus 3:        Smart maximieren"
 
 msgid "Minimize Button Bindings"
 msgstr "Bindings für Minimieren Fenster-Button"

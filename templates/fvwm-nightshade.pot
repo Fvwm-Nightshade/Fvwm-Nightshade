@@ -549,6 +549,9 @@ msgstr ""
 msgid "Maximize &Grow"
 msgstr ""
 
+msgid "Maximize &Smart"
+msgstr ""
+
 msgid "Maximize Grow V&ert."
 msgstr ""
 
@@ -1115,16 +1118,19 @@ msgstr ""
 msgid "Maximize Button Bindings"
 msgstr ""
 
-msgid "Mouse 1:  Maximize fully on click"
+msgid "Mouse 1:       Maximize fully on click"
 msgstr ""
 
-msgid "          Maximize menu on double click"
+msgid "               Maximize menu on double click"
 msgstr ""
 
-msgid "Mouse 2:  Maximize vertically"
+msgid "Mouse 2:       Maximize vertically"
 msgstr ""
 
-msgid "Mouse 3:  Maximize horizontally"
+msgid "Mouse 2 + Alt: Maximize horizontally"
+msgstr ""
+
+msgid "Mouse 3:       Maximize smart"
 msgstr ""
 
 msgid "Minimize Button Bindings"
