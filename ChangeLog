@@ -1,5 +1,20 @@
 History:
 
+08/01/2013 V 0.7.4
+- add FvwmSmartMaximize to all themes:
+  - move Maximize horizontally from mouse 3 to mouse 2 + Alt
+  - add Maximize smart to mouse 3
+  - update help
+- add FvwmSmartMaximize to StartFunction and Maximize menu
+- add asciidoc version of FvwmSmartMaximize help
+- exchange pod manpage of FvwmSmartMaximize with asciidoc generated
+- add html page of FvwmSmartMaximize
+- update pod docu in FvwmSmartMaximize
+- add FvwmSmartMaximize in menu MenuWindowMaximize
+- update bindings in fvwm-nightshade help (asciidoc, manpage, html) and add
+  section MODULE CREATION
+- update translation files (pot and pos)
+
 07/31/2013
 - Fixes in FvwmSmartMaximize:
   - get EwmhBaseStruts via xprop to eliminate command line arguments
