@@ -372,7 +372,9 @@ Button 1: maximize window.
 +
 Button 2: maximize window vertically.
 +
-Button 3: maximize window horizontally.
+Button 2 + Alt: maximize window horizontally.
++
+Button 3: maximize window smart.
 +
 Minimize Button:::
 +
@@ -525,6 +527,14 @@ Location of Files and their Function
 
 *<system>/share/fvwm-nightshade/layouts/* -> System layout files and conky rc-files.
 
+*<system>/share/fvwm-nightshade/lib/* -> Fvwm modules written in Perl or C/C++. Directory is in the ModulePath.
+[cols="20%,80%",frame="none",grid="none"]
+|====
+|FvwmSmartMaximize         		|Perl module to maximize windows in the largest area of the desktop/page.
+|====
+
+-
+
 *<system>/share/fvwm-nightshade/modules/* -> Pager, pannels and Iconman modules.
 
 *<system>/share/fvwm-nightshade/themes/* -> Theme files and icons.
@@ -577,6 +587,8 @@ others in the <user> root.
 *<user>/icons/* -> Menu icon directory created by Regenerate XDG Menus.
 
 *<user>/layouts/* -> Optional user layout directory.
+
+*<user>/lib/* -> Optional user module directory. Is in the ModulPath.
 
 *<user>/themes/* -> Optional user themes directory.
 
@@ -808,6 +820,27 @@ a matter of choice ;-) ...
 If you need more information about the used translation process see 
 http://www.gnu.org/software/gettext/manual/gettext.html
 
+MODULE CREATION
+---------------
+If you want to create your own modules based on fvwm-perlib you have three 
+possibilities to put them in:
+
+. Fvwm its own directory, usually /usr/lib/fvwm/<Fvwm-version/
+. Fvwm-Nightshades system directory - <system>/share/fvwm-nightshade/lib/
+. The user directory in <user>/lib/
+
+The easiest way is the user directory. Create the directory ~/.fvwm-nightshade/lib 
+and put your module in it. Now you can start it from within FvwmConsole with
+
+----
+Module <Modulename>
+----
+
+or in the StartFunction with
+
+----
++ I Module <Modulename>
+----
 
 AUTHORS
 -------

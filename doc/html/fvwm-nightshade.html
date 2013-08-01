@@ -1361,7 +1361,8 @@ Maximize Button
 <dd>
 <div class="paragraph"><p>Button 1: maximize window.</p></div>
 <div class="paragraph"><p>Button 2: maximize window vertically.</p></div>
-<div class="paragraph"><p>Button 3: maximize window horizontally.</p></div>
+<div class="paragraph"><p>Button 2 + Alt: maximize window horizontally.</p></div>
+<div class="paragraph"><p>Button 3: maximize window smart.</p></div>
 </dd>
 <dt class="hdlist1">
 Minimize Button
@@ -1721,6 +1722,23 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>-</p></div>
 <div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/artwork/</strong> &#8594; <strong>Fvwm-Nightshade</strong> icons, splash and wallpapers.</p></div>
 <div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/layouts/</strong> &#8594; System layout files and conky rc-files.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/lib/</strong> &#8594; Fvwm modules written in Perl or C/C++. Directory is in the ModulePath.</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">FvwmSmartMaximize</p></td>
+<td align="left" valign="top"><p class="table">Perl module to maximize windows in the largest area of the desktop/page.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>-</p></div>
 <div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/modules/</strong> &#8594; Pager, pannels and Iconman modules.</p></div>
 <div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/themes/</strong> &#8594; Theme files and icons.</p></div>
 <div class="paragraph"><p><strong>&lt;system&gt;/share/doc/fvwm-nightshade/</strong> &#8594; Html pages, templates, readmes.</p></div>
@@ -1826,6 +1844,7 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p><strong>&lt;user&gt;/scripts/</strong> &#8594; Optional user FvwmScripts directory.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/icons/</strong> &#8594; Menu icon directory created by Regenerate XDG Menus.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/layouts/</strong> &#8594; Optional user layout directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/lib/</strong> &#8594; Optional user module directory. Is in the ModulPath.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/themes/</strong> &#8594; Optional user themes directory.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/locales/</strong> &#8594; Optional user language directory.</p></div>
 </div>
@@ -2249,6 +2268,41 @@ a matter of choice ;-) &#8230;</td>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_module_creation">MODULE CREATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If you want to create your own modules based on fvwm-perlib you have three
+possibilities to put them in:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Fvwm its own directory, usually /usr/lib/fvwm/&lt;Fvwm-version/
+</p>
+</li>
+<li>
+<p>
+Fvwm-Nightshades system directory - &lt;system&gt;/share/fvwm-nightshade/lib/
+</p>
+</li>
+<li>
+<p>
+The user directory in &lt;user&gt;/lib/
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>The easiest way is the user directory. Create the directory ~/.fvwm-nightshade/lib
+and put your module in it. Now you can start it from within FvwmConsole with</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>Module &lt;Modulename&gt;</tt></pre>
+</div></div>
+<div class="paragraph"><p>or in the StartFunction with</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>+ I Module &lt;Modulename&gt;</tt></pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_authors">AUTHORS</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>&#169; 2013 by the Fvwm-Nightshade team &lt;<a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a>&gt;.</p></div>
@@ -2274,7 +2328,7 @@ or submit them under <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-07-04 20:46:49 CEST
+Last updated 2013-08-01 12:42:36 CEST
 </div>
 </div>
 </body>
