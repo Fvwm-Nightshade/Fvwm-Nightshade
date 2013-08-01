@@ -1020,6 +1020,9 @@ DestroyModuleConfig FvwmScript: *
 # Manager.
 DestroyFunc StartFunction
 AddToFunc StartFunction
+# check whether softlink FvwmApplet to FvwmScript exist
++ I Test FuncFvwmAppletLibCheck
+#-----------------------------------------------------------------------
 # check for apps needed for full config functionality
 + I Test (Init) FuncAppCheck
 #-----------------------------------------------------------------------
@@ -1105,6 +1108,19 @@ DestroyFunc FuncRestartModuleByAlias
 AddToFunc   FuncRestartModuleByAlias
 + I FuncStopModuleByAlias $0 $1
 + I Module $0 $1 $2
+
+#-----------------------------------------------------------------------
+# Checks whether the softlink of FvwmApplet pointed to right FvwmScript
+# module related to the current running Fvwm version
+#-----------------------------------------------------------------------
+DestroyFunc FuncFvwmAppletLibCheck
+AddToFunc FuncFvwmAppletLibCheck
++ I PipeRead 'test ! -d "${FVWM_USERDIR}/lib" && mkdir "${FVWM_USERDIR}/lib"; \
+			  if [ ! -e "${FVWM_USERDIR}/lib/FvwmApplet" ] || \
+				 [ `readlink -f ${FVWM_USERDIR}/lib/FvwmApplet|xargs dirname` != "$FVWM_MODULEDIR" ]; then \
+					rm -f ${FVWM_USERDIR}/lib/FvwmApplet; \
+					ln -s ${FVWM_MODULEDIR}/FvwmScript ${FVWM_USERDIR}/lib/FvwmApplet; \
+			  fi'
 
 #-----------------------------------------------------------------------
 # Resets a definition of all colorsets
