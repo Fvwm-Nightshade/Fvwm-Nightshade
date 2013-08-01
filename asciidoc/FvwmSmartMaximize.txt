@@ -1,0 +1,101 @@
+FvwmSmartMaximize(1)
+================
+:doctype: manpage
+
+NAME
+----
+
+FvwmSmartMaximize - The smart maximize module
+
+
+SYNOPSIS
+--------
+
+*FvwmSmartMaximize* can only be invoked by fvwm. Command line invocation 
+of the B<FvwmSmartMaximize> module will not work.
+
+
+DESCRIPTION
+-----------
+This module moves and resizes a current window to the largest free area 
+of the desktop/page. If no place found nothing happens.
+
+INVOCATION
+----------
+*FvwmSmartMaximize* can be invoked by inserting the line 'Module FvwmSmartMaximize' 
+in the StartFunction declarations in the .fvwm2rc file. 
+
+To call *FvwmSmartMaximize* it has to be bound to a menu, mouse button, or keystroke.
+
+
+OPTIONS
+-------
+Two main options exist needed for calling *FvwmSmartMaximize* from a menu, 
+mouse button, or keystroke.
+
+*All* '[screen]'::
++
+All windows on the current page are included in the calculation of the 
+largest free area. If maximized windows are available they will block 
+the smart maximization and nothing will happen.
+
+*IgnoreMaxWindows* '[screen]'::
++
+All windows on the current page except maximized windows are included in 
+the calculation of the largest free area. This is the preffered option.
+
+For multi display screens there's an addition to the main options:
+
+'[screen]'::
++
+With this addition B<FvwmSmartMaximize> will only use the current screen 
+for placing. Else the complete display is used.
+
+EXAMPLES
+--------
+To use *FvwmSmartMaximize* three parts have to be implemented:
+
+. You can copy B<FvwmSmartMaximize> in the lib directory of Fvwm. To get the path type in a terminal
+
+----
+$ echo $FVWM_MODULEDIR
+----
+    
+Or you can implement your own in your .fvwm2rc file with:
+   
+----
+ModulePath $[FVWM_USERDIR]/lib:+
+----
+
+Now copy B<FvwmSmartMaximize> into your own module path.
+   
+. The module initialization in the StartFunction declaration in your .fvwm2rc file:
+
+----
+DestroyFunc StartFunction
+AddToFunc StartFunction
++ I Module FvwmSmartMaximize
+----
+
+. A menu, mouse button, or keystroke binding:
+
+----
+Mouse 1 4 M SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
+----
+    
+This binds the call to mouse button 1 (left button) + Alt-Key and to the window button 4. So if you hold Alt and click on the window button 4 B<FvwmSmartMaximize> is smart maximizing the active window to the largest free area on the current screen, ignoring maximized windows.
+   
+----
+Key Super_L WTSF N SendToModule FvwmSmartMaximize All
+----
+
+This binds the call to the left Windows key and smart maximizing the active window to the largest free area on the whole desktop if no maximized window blocks it.
+
+
+
+AUTHOR
+------
+
+(C) 2013 Thomas Funk <t.funk@web.de>
+
+
