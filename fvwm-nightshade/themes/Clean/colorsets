@@ -1,13 +1,13 @@
 ########################################################################
 # File:		colorsets
-# Version:	0.1.1
+# Version:	0.1.2
 # Licence: 	GPL 2
 #
 # Description:	colorsets of Clean theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	06/08/2012
-# Changed:	11/09/2012
+# Changed:	08/02/2013
 ########################################################################
 # REMARKS:
 #
@@ -241,17 +241,40 @@ Colorset 24 VGradient 255 2 #e5e4e0 30 #9c9885 70 #312b1d, NoShape
 
 
 ########################################################################
-# External Colorsets
+# Nanomoids Colorsets
 ########################################################################
 
 #-----------------------------------------------------------------------
-# reserved for modules@: 25
+# Default Colorset
+#-----------------------------------------------------------------------
+#Colorset 10 fg #EEEEEE, bg $[fvwm_bgcolor], hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
+Colorset 25 fg $[infostore.used_appletfontcolor], bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
-# reserved for the future use: 26-28
+# Highlight Colorset or Default Colorset for Icons e.g. in DriveInn to
+# simulate unmounted devices
+#-----------------------------------------------------------------------
+Colorset 26 fg #A4CDF9, bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint], IconAlpha 50
 
 #-----------------------------------------------------------------------
-# temporary colorset: 29, has no static definition, used dynamically
+# Warn Colorset
+#-----------------------------------------------------------------------
+#Colorset 11 fg #E78787, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
+Colorset 27 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#Colorset 12 fg #e78787, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
+Colorset 28 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#Colorset 13 fg #89d5d7, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
+Colorset 29 fg #89D5D7, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#Colorset 30
 
 
 ########################################################################
@@ -261,37 +284,37 @@ Colorset 24 VGradient 255 2 #e5e4e0 30 #9c9885 70 #312b1d, NoShape
 #-----------------------------------------------------------------------
 # regular terminal (xterm, rxvt, Eterm)
 #-----------------------------------------------------------------------
-Colorset 30 fg white, bg #000050, Plain
+Colorset 31 fg white, bg #000050, Plain
 
 #-----------------------------------------------------------------------
 # admin terminal (su xterm)
 #-----------------------------------------------------------------------
-Colorset 31 fg white, bg #000050, Plain
+Colorset 32 fg white, bg #000050, Plain
 
 #-----------------------------------------------------------------------
 # remote terminal (ssh, telnet)
 #-----------------------------------------------------------------------
-Colorset 32 fg white, bg #500000, Plain
+Colorset 33 fg white, bg #500000, Plain
 
 #-----------------------------------------------------------------------
 # viewer terminal (man, less, tail -f)
 #-----------------------------------------------------------------------
-Colorset 33 fg white, bg SeaGreen4, Plain
+Colorset 34 fg white, bg SeaGreen4, Plain
 
 #-----------------------------------------------------------------------
 # application run in the terminal, text editor using ft-xrdb
 #-----------------------------------------------------------------------
-Colorset 34 fg black, bg snow2, Plain
+Colorset 35 fg black, bg snow2, Plain
 
 #-----------------------------------------------------------------------
 # dialog main background (FvwmScript, FvwmForm, xmessage, ft-xrdb)
 #-----------------------------------------------------------------------
-Colorset 35 fg black, bg #80A080, Plain
+Colorset 36 fg black, bg #80A080, Plain
 
 #-----------------------------------------------------------------------
 # dialog text area (FvwmScript, FvwmForm, xmessage, ft-xrdb)
 #-----------------------------------------------------------------------
-Colorset 36 fg black, bg #A0C8A0, Plain
+Colorset 37 fg black, bg #A0C8A0, Plain
 
 #-----------------------------------------------------------------------
-# Colorsets 37 to 39 are reserved for the future use.
+# Colorsets 38 to 40 are reserved for the future use.
