@@ -1027,22 +1027,22 @@ msgstr ""
 msgid "ALT:"
 msgstr ""
 
-msgid "F1: Open root menu          F7:  Move window"
+msgid "F1: Open root menu           F7:  Move window"
 msgstr ""
 
-msgid "F2: Launch 'run' dialog box F8:  Resize window"
+msgid "F2: Launch 'run' dialog box  F8:  Resize window"
 msgstr ""
 
-msgid "F3: Show window list        F9:  Minimize window"
+msgid "F3: Show window list         F9:  Minimize window"
 msgstr ""
 
-msgid "F4: Close active window     F10: Maximize/restore window"
+msgid "F4: Close active window      F10: Maximize/restore window"
 msgstr ""
 
-msgid "F5: Not used                F11: Fullscreen/restore window"
+msgid "F5: Show/hide AppletIconMan  F11: Fullscreen/restore window"
 msgstr ""
 
-msgid "F6: Cycle between same      F12: Identify window"
+msgid "F6: Cycle between same       F12: Identify window"
 msgstr ""
 
 msgid "    resource windows"
