@@ -1,9 +1,21 @@
 History:
 
 08/02/2013
-- add FuncFvwmAppletLibCheck in config to check whether softlink 
-  FvwmApplet to FvwmScript exist
+- Changes in config:
+  - add FuncFvwmAppletLibCheck in config to check whether softlink 
+    FvwmApplet to FvwmScript exist
+  - increase in all functions colorsets greater 30 +1 to get more place
+    in theme colorsets for FvwmApplets
+  - update FuncFvwmNextWindow and FuncFvwmPrevWindow to support AppletIconMan
+  - add general Style for FvwmApplets
+  - add icon style for Kalende, Meteo, Plaia and Pagina
+  - add some Ops menu for FvwmApplets
+  - add update functions for tint and font color
+  - add general binding for Ops menu
+- add key binding to show/hide AppletIconMan in .bindings
+- update translation files for new key binding
 - add AppletIconMan to modules to manage FvwmApplets
+  - add Functions to show/hide AppletIconMan and de-/activate focus on applets
 - add some Nanomoids applets in applets/:
   - Kalende - a Calendar
   - Meteo - a Weather forecast applet
@@ -15,6 +27,7 @@ History:
   - FNS-FileBrowser - a file browser based on FvwmScript-FileBrowser
   - FNS-PlaylistCreator - a simple playlist creator
 - add a modified version of coverlovin in bin/ to handle id3 tags and covers
+- add new colorsets for Nanomoids in themes
 
 08/01/2013 V 0.7.4
 - add FvwmSmartMaximize to all themes:
