@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		AppletIconMan
-# Version:	0.1.0
+# Version:	0.1.1
 # Licence: 	GPL 2
 #
 # Description:	shows a windows list of all applets in the actual page
@@ -9,7 +9,7 @@
 #			Thomas Funk <t.funk@web.de>	
 #
 # Created:	07/20/2013
-# Changed:	07/22/2013
+# Changed:	08/02/2013
 #-----------------------------------------------------------------------
 
 
@@ -63,3 +63,29 @@ DestroyModuleConfig AppletIconMan: *
 
 *AppletIconMan: 1 Action  Key 		Left   N 	gotobutton Next, select
 *AppletIconMan: 1 Action  Key 		Right N 	gotobutton Prev, select
+
+
+#-----------------------------------------------------------------------
+# Functions to show/hide AppletIconMan and de-/activate focus on applets
+#-----------------------------------------------------------------------
+DestroyFunc ShowHideAppletIconMan
+AddToFunc   ShowHideAppletIconMan
++ I None (AppletIconMan, !State 2) Module FvwmIconMan AppletIconMan
++ I TestRc (Match) KeepRc ActivateFocusOnApplets
++ I TestRc (!Match) KeepRc KillModule FvwmIconMan AppletIconMan
++ I TestRc (!Match) DeactivateFocusOnApplets
+
+DestroyFunc ActivateFocusOnApplets
+AddToFunc   ActivateFocusOnApplets
++ I All (FvwmApplet) Layer 0 6
++ I All (FvwmApplet) Style "FvwmApplet" Borderwidth 2
++ I All (AppletIconMan) State 2 True
+
+DestroyFunc DeactivateFocusOnApplets
+AddToFunc   DeactivateFocusOnApplets
++ I All (AppletIconMan) State 2 False
++ I All (FvwmApplet) Style "FvwmApplet" Borderwidth 0
++ I Prev (CurrentPage, !Iconic, AcceptsFocus, !FvwmApplet) Focus NoWarp
++ I All (FvwmApplet) Layer 0 2
+
+
