@@ -98,6 +98,7 @@ InfoStoreAdd ns_version 0.7.4
 #        6.1.3. Pointer in Window Decorations
 #        6.1.4. Pointer in Icons
 #        6.1.5. Pointer in Window (and in Icon for consistency)
+#        6.1.6. Pointer in FvwmApplets
 #    6.2 Keyboard
 #        6.2.1 ALT + Key
 #        6.2.2 ALT-SHIFT + Key
@@ -135,6 +136,7 @@ InfoStoreAdd ns_version 0.7.4
 #    9.4 Configuration menu
 #    9.5 Fvwm Quit menu
 #    9.6 Window Ops menus
+#    9.7 FvwmApplet Ops menus
 #
 ########################################################################
 
@@ -499,6 +501,13 @@ Style FvwmForm-RunCommand !Title
 #-----------------------------------------------------------------------
 Style FvwmForm-About !Title
 
+#-----------------------------------------------------------------------
+# FvwmApplets
+#-----------------------------------------------------------------------
+Style FvwmApplet NoTitle, !Handles, Borderwidth 0
+Style FvwmApplet Sticky, !FixedPosition, FixedSize, !Iconifiable
+Style FvwmApplet StaysOnBottom, WindowListSkip
+
 
 #***********************************************************************
 # 4.1.2 Icons
@@ -511,6 +520,13 @@ Style X*          UseStyle Untitled
 Style error       EWMHMiniIconOverride, Icon bomb.xpm, MiniIcon mini.bomb.xpm
 Style FvwmIdent   EWMHMiniIconOverride, Icon question.xpm, MiniIcon mini.question.xpm
 
+#-----------------------------------------------------------------------
+# FvwmApplets
+#-----------------------------------------------------------------------
+Style Plaia     EWMHMiniIconOverride, Icon Plaia_Applet.png, MiniIcon Plaia_Applet.png
+Style Pagina    EWMHMiniIconOverride, Icon Pagina_Applet.png, MiniIcon Pagina_Applet.png
+Style Meteo     EWMHMiniIconOverride, Icon Meteo_Applet.png, MiniIcon Meteo_Applet.png
+Style Kalende   EWMHMiniIconOverride, Icon Kalende_Applet.png, MiniIcon Kalende_Applet.png
 
 
 ########################################################################
@@ -751,6 +767,12 @@ Mouse 0			I       SCM     FuncShowMessage  "Mouse Bindings for Icons" \
 #***********************************************************************
 #     Button	Context Modifi 	Function
 Mouse 1			WI		M		Menu MenuRoot
+
+#***********************************************************************
+# 6.1.6. Pointer in FvwmApplets
+#***********************************************************************
+#     Button	Context Modifi 	Function
+Mouse 3         W       A       ThisWindow ("FvwmApplet") Popup MenuAppletOps
 
 
 #=======================================================================
@@ -1212,6 +1234,21 @@ AddToFunc   FuncUpdateBaseSetupFile
 				sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-BaseSetup; \
 			  fi'
 			  
+#-----------------------------------------------------------------------
+# Update applet tint value in .settings
+#-----------------------------------------------------------------------
+DestroyFunc UpdateAppletTint
+AddToFunc   UpdateAppletTint
++ I FuncWriteInfoStoreToFileAndSetTest used_applettint $0 $[FVWM_USERDIR]/.settings
++ I Load $[FNS_THEMEDIR]/colorsets
+
+#-----------------------------------------------------------------------
+# Update applet font color in .settings
+#-----------------------------------------------------------------------
+DestroyFunc UpdateAppletFontColor
+AddToFunc   UpdateAppletFontColor
++ I FuncWriteInfoStoreToFileAndSetTest used_appletfontcolor $0 $[FVWM_USERDIR]/.settings
++ I Load $[FNS_THEMEDIR]/colorsets
 
 #-----------------------------------------------------------------------
 # Check which appliction are installed to get full functionality
@@ -1292,7 +1329,7 @@ AddToFunc   FuncRunInXterm
 #-----------------------------------------------------------------------
 DestroyFunc FuncViewFile
 AddToFunc   FuncViewFile
-+ I Exec exec xterm -fg $[fg.cs33] -bg $[bg.cs33] -g 80x24 -fn 7x14 -fb 7x14bold \
++ I Exec exec xterm -fg $[fg.cs34] -bg $[bg.cs34] -g 80x24 -fn 7x14 -fb 7x14bold \
                     -n "File Viewer - $0" -T "File Viewer - $0" -e less -e "$0"
 
 #-----------------------------------------------------------------------
@@ -1366,12 +1403,14 @@ AddToFunc   FuncOpenURL
 #-----------------------------------------------------------------------
 DestroyFunc FuncFvwmNextWindow
 AddToFunc FuncFvwmNextWindow
-+ I Next (CurrentPage, !Iconic, AcceptsFocus) FlipFocus NoWarp
++ I None (AppletIconMan, !State 2) KeepRc Next (CurrentPage, !Iconic, AcceptsFocus, !FvwmApplet) FlipFocus NoWarp
++ I TestRc (!Match) Next (CurrentPage, !Iconic, AcceptsFocus, FvwmApplet) FlipFocus NoWarp
 + I Current Raise
 
 DestroyFunc FuncFvwmPrevWindow
 AddToFunc FuncFvwmPrevWindow
-+ I Prev (CurrentPage, !Iconic, AcceptsFocus) Focus NoWarp
++ I None (AppletIconMan, !State 2) KeepRc Next (CurrentPage, !Iconic, AcceptsFocus, !FvwmApplet) Focus NoWarp
++ I TestRc (!Match) Next (CurrentPage, !Iconic, AcceptsFocus, FvwmApplet) Focus NoWarp
 + I Current Raise
 
 #-----------------------------------------------------------------------
@@ -1706,7 +1745,7 @@ DestroyFunc FuncFvwmManpageMenu
 AddToFunc   FuncFvwmManpageMenu
 + I PipeRead 'fvwm-menu-directory \
               --dir "/usr/share/man/man1" \
-              --title "Man Pages" --exec-file "^xterm -fg $[fg.cs33] -bg $[bg.cs33] -g 80x40 -n Fvwm-Help -T Fvwm-Help -e man" |\
+              --title "Man Pages" --exec-file "^xterm -fg $[fg.cs34] -bg $[bg.cs34] -g 80x40 -n Fvwm-Help -T Fvwm-Help -e man" |\
               grep "^Destroy\\|^AddTo\\|^+ Dynamic\\|^+ Missing\\|^+ \\"[Ff]vwm*"|sed -e "s#\\.1\\.gz##g" \
               -e "s#/usr/share/man/man1/##g" -e "s#\\"##3" -e "s#\\"##3" '
 
@@ -1739,7 +1778,6 @@ DestroyFunc FuncQt4Decor
 AddToFunc   FuncQt4Decor
 + I Test (x qtconfig-qt4) Exec exec qtconfig-qt4
 + I TestRc (!Match) FuncShowMessage "Qt4 Decor Info" "Install qtconfig-qt4 for Qt4 apps"
-
 
 
 ########################################################################
@@ -2281,4 +2319,95 @@ AddToMenu   MenuDesktopOps
 + "Help%menu/help.xpm%"										Popup MenuHelp
 + ""														Nop
 + "$[gt.Window Operations]"									Popup MenuWindowOpsFull
+
+
+#=======================================================================
+# 9.7 FvwmApplet Ops menus
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# General right click Ops menu
+#-----------------------------------------------------------------------
+AddToMenu MenuAppletOps DynamicPopupAction FuncMenuAppletOps
+
+DestroyFunc FuncMenuAppletOps
+AddToFunc   FuncMenuAppletOps
++ I DestroyMenu recreate MenuAppletOps
+#+ I AddToMenu MenuAppletOps DynamicPopupAction FuncMenuAppletOps
++ I AddToMenu MenuAppletOps "$[gt.Appletmenu]"									Title
++ I AddToMenu MenuAppletOps "$[gt.&Move]	Alt+F7%menu/window-move.xpm%"		Move
++ I ThisWindow (Layer 2) \
+    AddToMenu MenuAppletOps "$[gt.Stays On &Top]%menu/window-raise.xpm%"		FuncStaysOnTopAndBack
++ I TestRc (!Match) \
+    AddToMenu MenuAppletOps "$[gt.Stays &Back]%menu/window-lower.xpm%"			FuncStaysOnTopAndBack
++ I AddToMenu MenuAppletOps ""													Nop
++ I AddToMenu MenuAppletOps "$[gt.&Save Position]%menu/disk.xpm%"				SaveAppletPosition
++ I AddToMenu MenuAppletOps "$[gt.&Add to Autostart]%menu/disk.xpm%"			AddAppletToAutostart
++ I AddToMenu MenuAppletOps "$[gt.&Change Tint Style]%menu/image-viewer.xpm%"	Popup MenuTintOps
++ I AddToMenu MenuAppletOps "$[gt.&Change Font Color]%menu/image-viewer.xpm%"	Popup MenuFontColor
++ I AddToMenu MenuAppletOps "$[gt.&Close]	Alt+F4%menu/window-close.xpm%"		Close
++ I AddToMenu MenuAppletOps "$[gt.&Destroy]%menu/window-destroy.xpm%"			Destroy
++ I AddToMenu MenuAppletOps ""													Nop
++ I AddToMenu MenuAppletOps "$[gt.&Identify]	Alt+F12%menu/window-identify.xpm%"  	Module FvwmIdent
+
+#-----------------------------------------------------------------------
+# Sub menu for tint style
+#-----------------------------------------------------------------------
+AddToMenu MenuTintOps DynamicPopupAction FuncMenuTintOps
+
+DestroyFunc FuncMenuTintOps
+AddToFunc   FuncMenuTintOps
++ I DestroyMenu MenuTintOps
+#+ I DestroyMenu recreate MenuTintOps
++ I AddToMenu MenuTintOps DynamicPopupAction FuncMenuTintOps
++ I PipeRead 'for percent in 0 10 20 30 40 50 60 70 80 90 100; do \
+				if [ "$percent" = "$[infostore.used_applettint]" ]; then \
+					echo AddToMenu MenuTintOps \"$percent%%%menu/game.xpm%\" Nop; \
+				else \
+					echo AddToMenu MenuTintOps \"$percent%%%menu/empty.xpm%\" UpdateAppletTint $percent; \
+				fi; \
+			done'
+
+#-----------------------------------------------------------------------
+# Sub menu for Font color in applets
+#-----------------------------------------------------------------------
+AddToMenu MenuFontColor DynamicPopupAction FuncMenuFontColor
+
+DestroyFunc FuncMenuFontColor
+AddToFunc   FuncMenuFontColor
++ I DestroyMenu MenuFontColor
+#+ I DestroyMenu recreate MenuFontColor
++ I AddToMenu MenuFontColor DynamicPopupAction FuncMenuFontColor
++ I PipeRead 'if [ "$[infostore.used_appletfontcolor]" = "black" ]; then \
+				echo AddToMenu MenuFontColor \"$[gt.Black]%menu/game.xpm%\" Nop; \
+			  else \
+				echo AddToMenu MenuFontColor \"$[gt.Black]%menu/empty.xpm%\" UpdateAppletFontColor "black"; \
+			  fi'
++ I PipeRead 'if [ "$[infostore.used_appletfontcolor]" = "white" ]; then \
+				echo AddToMenu MenuFontColor \"$[gt.White]%menu/game.xpm%\" Nop; \
+			  else \
+				echo AddToMenu MenuFontColor \"$[gt.White]%menu/empty.xpm%\" UpdateAppletFontColor "white"; \
+			  fi'
+
+AddToMenu MenuPlaiaOps DynamicPopupAction FuncMenuPlaiaOps
+
+#-----------------------------------------------------------------------
+# Plaia Menu menu
+#-----------------------------------------------------------------------
+DestroyFunc FuncMenuPlaiaOps
+AddToFunc   FuncMenuPlaiaOps
++ I DestroyMenu MenuPlaiaOps
++ I AddToMenu MenuPlaiaOps DynamicPopupAction FuncMenuRoot
++ I AddToMenu MenuPlaiaOps "$[gt.Menu]"	Title
++ I AddToMenu MenuPlaiaOps "$[gt.Open File]%menu/file.xpm%"	FvwmScript FNS-FileBrowser "$0" -b -m "Plaia/Plaia" -w 1 -s 1
++ I AddToMenu MenuPlaiaOps "$[gt.Open Folder]%menu/folder.xpm%"	FvwmScript FNS-FileBrowser "$0" -d -b -m "Plaia/Plaia" -w 1 -s 2
++ I AddToMenu MenuPlaiaOps "$[gt.Load Playlist]%menu/information.xpm%"	FvwmScript FNS-FileBrowser "$0" -b -m "Plaia/Plaia" -w 1 -s 3
++ I AddToMenu MenuPlaiaOps "$[gt.Create Playlist]%menu/editor.xpm%"	FvwmScript FNS-PlaylistCreator
++ I Popup MenuPlaiaOps mouse 0p 0p
+
+
+
+
+
+
 
