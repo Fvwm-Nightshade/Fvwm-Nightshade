@@ -28,6 +28,7 @@ History:
   - FNS-PlaylistCreator - a simple playlist creator
 - add a modified version of coverlovin in bin/ to handle id3 tags and covers
 - add new colorsets for Nanomoids in themes
+- add 2 new infostore variables for FvwmApplets in .settings
 
 08/01/2013 V 0.7.4
 - add FvwmSmartMaximize to all themes:
