@@ -1,5 +1,16 @@
 History:
 
+08/03/2013
+- move all FNS-Applets from fvwm-nightshade/applets to fvwm/
+- rename all FvwmScripts to FNS-Script-<Name>
+- rename all FvwmForms to FNS-Form-<Name>
+- rename all FvwmApplets to FNS-Applet-<Name>
+- update all names in config to the new name nomenclature
+- add Pagina menus to config
+- rename FNS-BaseSetup helps to FNS-Form-BaseSetup helps and update it
+- update fvwm-nightshade help with the new names
+- update fvwm-nightshade help with new infostore variables and the new tools
+
 08/02/2013
 - Changes in config:
   - add FuncFvwmAppletLibCheck in config to check whether softlink 
@@ -21,6 +32,7 @@ History:
   - Meteo - a Weather forecast applet
   - Plaia - a Musicplayer based on mplayer
   - Pagina - a Videoplayer based on mplayer
+  - DriveInn - a storage drives manager
 - add Nanomoids icons in artwork/icons
 - add some tools needed for Nanomoids in fvwm/:
   - FNS-AppletConfigurator - only a GUI at the moment
