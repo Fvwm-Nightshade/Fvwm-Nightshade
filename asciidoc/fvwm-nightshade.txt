@@ -548,8 +548,8 @@ in the <user> directories - FvwmScripts in the scripts/ sub directory, all
 others in the <user> root.
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|FNS-BaseSetup            		|Fvwm-Nightshade base setup (FvwmForm script).
-|FvwmScript-CPU-Performance    	|cpufreq settings tool (FvwmForm script).
+|FNS-Form-BaseSetup            		|Fvwm-Nightshade base setup (FvwmForm script).
+|FNS-Script-CpuPerformance    	|cpufreq settings tool (FvwmForm script).
 |FvwmScript-PersonalMenu        |Personal menu creator (FvwmScript script).
 |====
 
@@ -567,7 +567,7 @@ others in the <user> root.
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |.autostart			|optional file with application commands.
-|.FNS-BaseSetup		|config file of FNS-BaseSetup.
+|.FNS-Form-BaseSetup		|config file of FNS-Form-BaseSetup.
 |.FvwmForm-Desktop-Config	|config file of Regenerate XDG Menus.
 |.layout			|link to current layout file.
 |.menu				|Fvwm menu file.
