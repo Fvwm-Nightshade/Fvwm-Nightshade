@@ -548,9 +548,17 @@ in the <user> directories - FvwmScripts in the scripts/ sub directory, all
 others in the <user> root.
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|FNS-Form-BaseSetup            		|Fvwm-Nightshade base setup (FvwmForm script).
+|FNS-Form-BaseSetup            	|Fvwm-Nightshade base setup (FvwmForm script).
 |FNS-Script-CpuPerformance    	|cpufreq settings tool (FvwmForm script).
-|FvwmScript-PersonalMenu        |Personal menu creator (FvwmScript script).
+|FNS-Script-PersonalMenu        |Personal menu creator (FvwmScript script).
+|FNS-Script-PlaylistCreator     |Tool to create playlists for Pagina and Plaia
+|FNS-Script-FileBrowser         |File browser based on FvwmScript-FileBrowser
+|FNS-Script-AppletConfigurator  |FNS-Applet Configurator
+|FNS-Applet-Plaia               |Music player applet based on mplayer
+|FNS-Applet-Pagina              |Video player applet based on mplayer
+|FNS-Applet-Meteo               |Weather forecast applet
+|FNS-Applet-Kalende             |Calendar applet
+|FNS-Applet-DriveInn            |Storage drives manager applet
 |====
 
 -
@@ -667,14 +675,16 @@ settings::
 +
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|$[infostore.used_theme]        |The actual theme. Changed dynamically via FuncChangeDecor.
-|$[infostore.used_banner]       |Banner image for FvwmBanner.
-|$[infostore.used_font]         |Default used font for all Fvwm parts.
-|$[infostore.fontsize]          |Default font size for all Fvwm parts.
-|$[infostore.used_layout]       |The actual layout.
-|$[infostore.default_terminal]  |The default used terminal program.
-|$[infostore.default_browser]   |The default used browser.
-|$[SplashOn]                	|Run Banner at startup.
+|$[infostore.used_theme]            |The actual theme. Changed dynamically via FuncChangeDecor.
+|$[infostore.used_banner]           |Banner image for FvwmBanner.
+|$[infostore.used_font]             |Default used font for all Fvwm parts.
+|$[infostore.fontsize]              |Default font size for all Fvwm parts.
+|$[infostore.used_layout]           |The actual layout.
+|$[infostore.default_terminal]      |The default used terminal program.
+|$[infostore.default_browser]       |The default used browser.
+|$[infostore.used_applettint]       |Transparency value for FNS-Applets.
+|$[infostore.used_appletfontcolor]  |Font color of FNS-Applets.
+|$[SplashOn]                	    |Run Banner at startup.
 |====
 
 
