@@ -1,6 +1,6 @@
 ########################################################################
-# File:		FvwmScript-PersonalMenu
-# Version:	2.2.2
+# File:		FNS-Script-PersonalMenu
+# Version:	2.2.3
 # Licence: 	GPL 2
 #
 # Description:	creates and edit a personal menu file
@@ -13,15 +13,15 @@
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	04/29/2012
-# Changed:	06/05/2013
+# Changed:	08/02/2013
 ########################################################################
 
 #-----------------------------------------------------------------------
-# Version 2.2.2, Copyright 2013, Thomas Funk
+# Version 2.2.3, Copyright 2013, Thomas Funk
 #-----------------------------------------------------------------------
 
 UseGettext			{;fvwm-nightshade:$FVWM_USERDIR/locale;fvwm-nightshade:+}
-WindowLocaleTitle	{FvwmScript-PersonalMenu V 2.2.2}
+WindowLocaleTitle	{PersonalMenu V 2.2.3}
 WindowSize			560 350
 WindowPosition		0 170
 

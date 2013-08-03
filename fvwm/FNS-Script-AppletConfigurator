@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
-# File:		FNS-AppletConfigurator
-# Version:	0.0.1
+# File:		FNS-Script-AppletConfigurator
+# Version:	0.0.2
 # Licence: 	GPL 2
 #
 # Description:	Applet configurator based on FvwmScript
@@ -12,7 +12,7 @@
 # Author:		Thomas Funk <t.funk@web.de>	
 #
 # Created:	05/28/2013
-# Changed:	
+# Changed:	08/02/2013
 #-----------------------------------------------------------------------
 
 UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}

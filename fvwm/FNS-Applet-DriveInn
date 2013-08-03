@@ -1,0 +1,688 @@
+#-----------------------------------------------------------------------
+# File:		FNS-Applet-DriveInn
+# Version:	1.0.0
+# Licence: 	GPL 2
+#
+# Description:	Storage drives manager applet based on FvwmScript
+#
+# Parameters: 	-fns
+#					initiate applet that it will be used by Fvwm-Nightshade
+#					with another font, colorset and another icon directory.
+#
+#				-fnt
+#					set another font than the default one.
+#
+#				-cs
+#					set another colorset than the default one.
+#
+#				-hcs
+#					set another highlight colorset. If is not set default
+#					colorset is used.
+#
+#				-b
+#					set the used browser application. If is not set default
+#					application is pcmanfm
+#
+# Without parameters it starts with default settings from sebaro.
+#
+# Author:		sebaro	
+# Adjusted by:	Thomas Funk <t.funk@web.de>
+#
+# Created:	08/16/2012
+# Changed:	02/11/2013
+#-----------------------------------------------------------------------
+
+UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
+WindowTitle {DriveInn}
+WindowSize 320 180
+WindowPosition 13 8
+
+##### Global Style by sebaro
+Colorset 10
+Font "xft:DejaVu Sans:size=8:bold"
+
+Init
+Begin
+	Set $defaultColorset = 10
+	Set $highlightColorset = 10
+	Set $warnColorset = 12
+    Set $defaultFont = {DejaVu Sans}
+
+	##### Settings
+	Set $homeDir = (GetOutput {echo $[infostore.mScripts]} 1 -1) {/DriveInn/}
+	Set $browser = {pcmanfm}
+	Set $refresh = {5}
+	Set $exclude = {/,/boot,/usr,/tmp,/var}
+
+    ##### Commandline Arguments
+    Set $FnsUseApplet = 0
+    Set $ColorsetChanged = 0
+    Set $FontChanged = 0
+    Set $useThemeIcons = 0
+    Set $i = 1
+    Set $arg = (GetScriptArgument $i)
+
+    While $arg <> {} Do
+    Begin
+		Set $j = (Add $i 1)
+		Set $value = (GetScriptArgument $j)
+
+		# Fvwm-Nightshade use widget
+		If $arg == {-fns} Then
+		Begin
+			Set $FnsUseApplet = 1
+			
+#			Set $defaultColorset = 25
+			Set $defaultColorset = 10
+			Set $ColorsetChanged = 1
+			
+			Set $highlightColorset = 26
+			
+			If $FontChanged == 0 Then
+			Begin
+				Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
+				Set $FontChanged = 1
+			End
+		End
+
+		# other default colorset
+		If $arg == {-cs} Then
+		Begin
+			Set $defaultColorset = $value
+			Set $ColorsetChanged = 1
+		End
+
+		# other highlight colorset
+		If $arg == {-hcs} Then
+			Set $highlightColorset = $value
+
+		# other default font
+		If $arg == {-fnt} Then
+		Begin
+			Set $defaultFont = $value
+			Set $FontChanged = 1
+		End
+
+		# other browser
+		If $arg == {-b} Then
+			Set $browser = $value
+
+		If $arg == {-fns} Then
+			Set $i = (Add $i 1)
+		Else
+			Set $i = (Add $i 2)
+			
+		Set $arg = (GetScriptArgument $i)
+    End
+
+    ##### change Global Styles if needed
+    If $ColorsetChanged == 1 Then
+    Begin
+		Set $i = 1
+		For $Widget=1 To 13 Do
+		Begin
+			If $FnsUseApplet == 1 Then
+			Begin
+				Set $res = (Div $i $Widget)
+				If $res <> 0 Then
+				Begin
+					If $Widget <> 13 Then
+						ChangeColorset $Widget $highlightColorset
+					Else
+						ChangeColorset $Widget $defaultColorset
+				End
+				Else
+				Begin
+					Set $i = (Add $i 2)
+					ChangeColorset $Widget $defaultColorset
+				End
+			End
+			Else
+				ChangeColorset $Widget $defaultColorset
+		End
+		ChangeColorset 0 $defaultColorset
+	End
+
+    ##### change Widget Styles if needed
+    If $FontChanged == 1 Then
+    Begin
+		#Set $newFont = {xft:}$defaultFont{:size=8}
+		Set $newFont = {xft:}$defaultFont{:size=7:bold}
+		For $Widget=1 To 13 Do
+			ChangeFont $Widget $newFont
+	End
+	Set $nowTempFont = {xft:}$defaultFont{:size=11:bold}
+
+    ##### change Settings if needed
+	Set $noIcon = {}
+	Set $quitButton = $homeDir {icons/quit.png}
+
+    If $FnsUseApplet == 1 Then
+    Begin
+		Set $homeDir = (GetOutput {echo $FVWM_USERDIR} 1 -1) {/scripts/DriveInn/}
+		Set $quitButton = {quit.png}
+	End
+	
+	ChangeIcon 13 $quitButton
+
+	##### Vaiables
+	Set $toMount = {false}
+	Set $toBrowse = {false}
+	Set $toRefresh = {true}
+	Set $clicks = 0
+	Set $timeElapsed = 0
+	Set $whichDrive = 0
+
+	##### Curly Brackets
+	Set $leftCB = (GetOutput {printf "\173"} 1 -1)
+	Set $rightCB = (GetOutput {printf "\175"} 1 -1)
+
+	##### Drive Filter
+	Set $previousDrives = (GetOutput {echo $(udisks --dump | grep "has media" | sed -e "s/\s//g" -e "s/(.*//g" && udisks --dump | grep "is mounted" | sed -e "s/\s//g" -e "s/(.*//g")} 1 -1)
+	Set $driveCounter = {ls /dev/disk/by-path | wc -l}
+	Set $driveFilter = {for d in /dev/disk/by-path/*;do p=$} $leftCB {d#/dev/} $rightCB {;/sbin/udevadm info -q all -n $p | grep "DEVNAME\|DEVTYPE\|ID_TYPE\|ID_BUS" | sed -e "s/.*=//g";done}
+
+	##### Udev Version
+	Set $udevVersion = (GetOutput {/sbin/udevadm --version} 1 -1)
+End
+
+PeriodicTasks
+Begin
+	##### Check for one/double click(s)
+	Set $timeElapsed = (Add $timeElapsed 1)
+	If (RemainderOfDiv $timeElapsed 2) == 0 Then
+	Begin
+		If $clicks == 1 Then
+		Begin
+			#Do {echo one click}
+			Set $toBrowse = {true}
+		End
+		If $clicks == 2 Then
+		Begin
+			#Do {echo two clicks}
+			Set $toMount = {true}
+		End
+		Set $thisDrive = $whichDrive
+		Set $timeElapsed = 0
+		Set $clicks = 0
+		Set $whichDrive = 0
+	End
+
+	##### (Un)Mount Drives
+	If $toMount == {true} Then
+	Begin
+		Set $iconWidget = (Add $thisDrive (Add $thisDrive -1))
+		Set $titleWidget = (Add $thisDrive $thisDrive)
+		Set $drivePath = (GetTitle $titleWidget)
+		Set $notMounted = {echo } $drivePath { | grep -q "^/dev" && echo 1 || echo 0}
+		If (GetOutput $notMounted 1 -1) == 1 Then
+		Begin
+			Set $notMountedCorrect = {grep -q "} $drivePath {" /etc/mtab && echo 1 || echo 0}
+			If (GetOutput $notMountedCorrect 1 -1) <> 1 Then
+			Begin
+				Set $theMounting = {udisks --mount } $drivePath { && echo 1 || echo 0}
+				If (GetOutput $theMounting 1 -1) == 1 Then
+				Begin
+					Set $mSuccess = {true}
+					Set $driveMounted = 1
+					Set $getMountPath = {udisks --show-info } $drivePath { | grep "mount paths" | sed -e "s/\s//g" | cut -d ":" -f 2}
+					Set $putTitle = (GetOutput $getMountPath 1 -1)
+				End
+			End
+			Else
+				Set $toRefresh = {true}
+		End
+		Else
+		Begin
+			Set $mountedCorrect = {grep -q "} $drivePath {" /etc/mtab && echo 1 || echo 0}
+			If (GetOutput $mountedCorrect 1 -1) == 1 Then
+			Begin
+				Set $getDevName = {cat /etc/mtab | grep } $drivePath { | cut -d " " -f 1}
+				Set $drivePath = (GetOutput $getDevName 1 -1)
+				Set $theUnmounting = {udisks --unmount } $drivePath { && echo 1 || echo 0}
+				If (GetOutput $theUnmounting 1 -1) == 1 Then
+				Begin
+					Set $mSuccess = {true}
+					Set $driveMounted = 0
+					Set $putTitle = $drivePath
+				End
+			End
+			Else
+				Set $toRefresh = {true}      
+		End
+		If $mSuccess == {true} Then
+		Begin
+			Set $getDriveInfo = {/sbin/udevadm info -q all -n } $drivePath { | grep "ID_TYPE\|ID_BUS" | sed -e "s/.*=//g"}
+			If $udevVersion == {171} Then
+			Begin
+				Set $driveIDType = (GetOutput $getDriveInfo 1 -1)
+				Set $driveIDBus = (GetOutput $getDriveInfo 2 -1)
+			End
+			Else
+			Begin
+				Set $driveIDType = (GetOutput $getDriveInfo 2 -1)
+				Set $driveIDBus = (GetOutput $getDriveInfo 1 -1)
+			End
+			Set $fnsIcon = {}
+			If $driveIDType == {cd} Then
+			Begin
+				Set $driveIcon = $homeDir {icons/} $driveIDType $driveMounted {.png}
+				Set $fnsIcon = {drive-optical}
+			End
+			Else
+			Begin
+				Set $driveIcon = $homeDir {icons/} $driveIDBus $driveMounted {.png}
+				If $driveIDBus == {mmc} Then
+					Set $fnsIcon = {media-removable}
+				If $driveIDBus == {usb} Then
+					Set $fnsIcon = {media-removable}
+				If $fnsIcon == {} Then
+					Set $fnsIcon = {drive-harddisk}
+			End
+				
+			Set $cmd = {fns-find-icon -n }$fnsIcon{ -s 32 -c devices --notdesk}
+			Set $driveFnsIcon = (GetOutput $cmd 1 -1)
+			If $driveFnsIcon == {} Then
+			Begin
+				Set $cmd = {fns-find-icon -n }$fnsIcon{ -s 32 -t gnome -c devices --notdesk}
+				Set $driveFnsIcon = (GetOutput $cmd 1 -1)
+			End
+			If $FnsUseApplet == 1 Then
+				ChangeIcon $iconWidget $driveFnsIcon
+			Else
+				ChangeIcon $iconWidget $driveIcon
+			If $driveMounted == 1 Then
+			Begin
+				ChangeColorset $iconWidget $defaultColorset
+				ChangeColorset $titleWidget $highlightColorset
+			End
+			Else
+			Begin
+				ChangeColorset $iconWidget $highlightColorset
+				ChangeColorset $titleWidget $defaultColorset
+			End
+			ChangeTitle $titleWidget $putTitle
+			Set $mSuccess = {false}
+		End
+		Set $toMount = {false}
+	End
+
+	##### Browse Drives
+	If $toBrowse == {true} Then
+	Begin
+		Set $titleWidget = (Add $thisDrive $thisDrive)
+		Set $thisTitle = (GetTitle $titleWidget)
+		Set $notMounted = {echo } $thisTitle { | grep -q "^/dev" && echo 1 || echo 0}
+		If (GetOutput $notMounted 1 -1) <> 1 Then
+		Begin
+			Set $mountedCorrect = {grep -q "} $thisTitle {" /etc/mtab && echo 1 || echo 0}
+			If (GetOutput $mountedCorrect 1 -1) == 1 Then
+				Do {exec } $browser { } $thisTitle
+			Else
+				Set $toRefresh = {true}
+		End
+		Else
+		Begin
+			Set $getDriveInfo = {/sbin/udevadm info -q all -n } $thisTitle { | grep "ID_TYPE\|ID_BUS" | sed -e "s/.*=//g"}
+			If $udevVersion == {171} Then
+				Set $driveIDType = (GetOutput $getDriveInfo 1 -1)
+			Else
+				Set $driveIDType = (GetOutput $getDriveInfo 2 -1)
+			If $driveIDType == {cd} Then
+			Begin
+				Set $cmd = {which eject}
+				Set $ejectPath = (GetOutput $cmd 1 -1)
+				If $ejectPath <> {} Then
+					Do {exec }$ejectPath{ }$thisTitle
+			End
+		End
+		Set $toBrowse = {false}
+	End
+
+	##### Get & Show Drives
+	If $toRefresh == {true} Then
+	Begin
+		Do {echo ---- Get & Show Drives ----- }
+		Set $driveID = 1
+		Set $driveIcon = 1
+		Set $driveTitle = 2
+		Set $infoPos = 1
+		Set $driveNum = (GetOutput $driveCounter 1 -1)
+		For $drivePos = 1 To $driveNum Do
+		Begin
+			If $driveID < 7 Then
+			Begin
+				Set $driveDevName = (GetOutput $driveFilter $infoPos -1)
+				Do {echo driveDevName: }$driveDevName
+				Set $driveDevType = (GetOutput $driveFilter (Add $infoPos 1) -1)
+				Do {echo driveDevType: }$driveDevType
+				If $udevVersion == {171} Then
+				Begin
+					Set $driveIDType = (GetOutput $driveFilter (Add $infoPos 2) -1)
+					Set $driveIDBus = (GetOutput $driveFilter (Add $infoPos 3) -1)
+				End
+				Else
+				Begin
+					Set $driveIDType = (GetOutput $driveFilter (Add $infoPos 3) -1)
+					Set $driveIDBus = (GetOutput $driveFilter (Add $infoPos 2) -1)
+				End
+				
+				If $driveDevType <> $driveIDType Then
+				Begin
+					Set $getHasMedia = {udisks --show-info } $driveDevName { | grep "has media" | sed -e "s/\s//g" | cut -d ":" -f 2}
+					Set $hasMedia = (GetOutput $getHasMedia 1 -1)
+					Set $getIsExtSwap = {udisks --show-info } $driveDevName { | grep "type" | sed -e "s/\s//g" | cut -d ":" -f 2 | grep -q "0x05\|0x82" && echo 1 || echo 0}
+					Set $isExtSwap = (GetOutput $getIsExtSwap 1 -1)
+					Set $driveTypeOK = {true}
+					If $hasMedia == 0 Then
+						Set $driveTypeOK = {false}
+					If $isExtSwap == 1 Then
+						Set $driveTypeOK = {false}
+					Do {echo driveTypeOK: }$driveTypeOK
+					If $driveTypeOK == {true} Then
+					Begin
+						Set $getIsMounted = {udisks --show-info } $driveDevName { | grep "is mounted" | sed -e "s/\s//g" | cut -d ":" -f 2}
+						Set $isMounted = (GetOutput $getIsMounted 1 -1)
+						Set $getMountPath = {udisks --show-info } $driveDevName { | grep "mount paths" | sed -e "s/\s//g" | cut -d ":" -f 2}
+						Set $mountPath = (GetOutput $getMountPath 1 -1)
+						If $exclude <> {} Then
+						Begin
+							Set $matchPaths = {echo } $exclude { | sed -e "s/,\s\+/,/g" -e "s/\\/,/^\\/$,/g" -e "s/,/\\\|^/g"}
+							Set $excludePaths = (GetOutput $matchPaths 1 -1)
+							Set $mountPathNo = {echo } $mountPath { | grep -q "} $excludePaths {" && echo 1 || echo 0}
+							Set $excludedPath = (GetOutput $mountPathNo 1 -1)
+						End
+						Else
+							Set $excludedPath = 0
+						If $excludedPath <> 1 Then
+						Begin
+							Set $fnsIcon = {}
+							If $driveIDType == {cd} Then
+							Begin
+								Set $driveIconThis = $homeDir {icons/} $driveIDType $isMounted {.png}
+								Set $fnsIcon = {drive-optical}
+							End
+							Else
+							Begin
+								Set $driveIconThis = $homeDir {icons/} $driveIDBus $isMounted {.png}
+								If $driveIDBus == {mmc} Then
+									Set $fnsIcon = {media-removable}
+								If $driveIDBus == {usb} Then
+									Set $fnsIcon = {media-removable}
+								If $fnsIcon == {} Then
+									Set $fnsIcon = {drive-harddisk}
+							End
+
+							If $isMounted == 1 Then
+							Begin
+								Set $driveTitleThis = $mountPath
+								ChangeColorset $driveTitle $highlightColorset
+								ChangeColorset $driveIcon $defaultColorset
+							End
+							Else
+							Begin
+								Set $driveTitleThis = $driveDevName
+								ChangeColorset $driveTitle $defaultColorset
+								ChangeColorset $driveIcon $highlightColorset
+							End
+							Set $driveTitleNow = (GetTitle $driveTitle)
+							If $driveTitleNow <> $driveTitleThis Then
+							Begin
+								Set $cmd = {fns-find-icon -n }$fnsIcon{ -s 32 -c devices --notdesk}
+								Set $driveFnsIconThis = (GetOutput $cmd 1 -1)
+								If $driveFnsIconThis == {} Then
+								Begin
+									Set $cmd = {fns-find-icon -n }$fnsIcon{ -s 32 -t gnome -c devices --notdesk}
+									Set $driveFnsIconThis = (GetOutput $cmd 1 -1)
+								End
+								If $FnsUseApplet == 1 Then
+									ChangeIcon $driveIcon $driveFnsIconThis
+								Else
+									ChangeIcon $driveIcon $driveIconThis
+								ChangeTitle $driveTitle $driveTitleThis
+							End
+							Set $driveID = (Add $driveID 1)
+							Set $driveIcon = (Add $driveIcon 2)
+							Set $driveTitle = (Add $driveTitle 2)
+						End
+					End
+				End
+			End
+			Set $infoPos = (Add $infoPos 4)
+		End
+
+		### Remove Drives With No Media
+		#Do {echo ---- Remove Drives With No Media ----- }
+		For $driveDrop = $driveID To 6 Do
+		Begin
+			ChangeIcon $driveIcon $noIcon
+			ChangeTitle $driveTitle {}
+			Set $driveID = (Add $driveID 1)
+			Set $driveIcon = (Add $driveIcon 2)
+			Set $driveTitle = (Add $driveTitle 2)
+		End
+		Set $toRefresh = {false}
+	End
+
+	##### Check For New Drives
+	If (RemainderOfDiv (GetTime) $refresh) == 0 Then
+	Begin
+		#Do {echo ---- Check For New Drives ----- }
+		Set $currentDrives = (GetOutput {echo $(udisks --dump | grep "has media" | sed -e "s/\s//g" -e "s/(.*//g" && udisks --dump | grep "is mounted" | sed -e "s/\s//g" -e "s/(.*//g")} 1 -1)
+		If $currentDrives <> $previousDrives Then
+			Set $toRefresh = {true}
+		Set $previousDrives = $currentDrives
+	End
+End
+
+# Mountpoint 1
+Widget		1
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position		28 5
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+		Set $whichDrive = 1
+		Set $clicks = (Add $clicks 1)
+		If $clicks == 1 Then
+			Set $timeElapsed = 0
+	End
+End
+
+Widget		2
+Property
+	Type		ItemDraw
+	Size		100 15
+	Position		10 70
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+#      Set $thisDrive = 1
+#      Set $toBrowse = {true}
+	End
+End
+
+# Mountpoint 2
+Widget		3
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position		128 5
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+		Set $whichDrive = 2
+		Set $clicks = (Add $clicks 1)
+		If $clicks == 1 Then
+			Set $timeElapsed = 0
+	End
+End
+
+Widget		4
+Property
+	Type		ItemDraw
+	Size		100 15
+	Position		110 70
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+#		Set $thisDrive = 2
+#		Set $toBrowse = {true}
+    End
+End
+
+# Mountpoint 3
+Widget		5
+Property
+  Type		ItemDraw
+  Size		24 24
+  Position		228 5
+  Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+		Set $whichDrive = 2
+		Set $clicks = (Add $clicks 1)
+		If $clicks == 1 Then
+			Set $timeElapsed = 0
+	End
+End
+
+Widget		6
+Property
+	Type		ItemDraw
+	Size		100 15
+	Position		210 70
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+#		Set $thisDrive = 3
+#		Set $toBrowse = {true}
+    End
+End
+
+# Mountpoint 4
+Widget		7
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position		28 90
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+		Set $whichDrive = 4
+		Set $clicks = (Add $clicks 1)
+		If $clicks == 1 Then
+			Set $timeElapsed = 0
+    End
+End
+
+Widget		8
+Property
+	Type		ItemDraw
+	Size		100 15
+	Position		10 155
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+#		Set $thisDrive = 4
+#		Set $toBrowse = {true}
+    End
+End
+
+# Mountpoint 5
+Widget		9
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position		128 90
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+		Set $whichDrive = 5
+		Set $clicks = (Add $clicks 1)
+		If $clicks == 1 Then
+			Set $timeElapsed = 0
+    End
+End
+
+Widget		10
+Property
+	Type		ItemDraw
+	Size		100 15
+	Position		110 155
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+#		Set $thisDrive = 5
+#		Set $toBrowse = {true}
+    End
+End
+
+# Mountpoint 6
+Widget		11
+Property
+	Type		ItemDraw
+	Size		24 24
+	Position		228 90
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+		Set $whichDrive = 6
+		Set $clicks = (Add $clicks 1)
+		If $clicks == 1 Then
+			Set $timeElapsed = 0
+    End
+End
+
+Widget		12
+Property
+	Type		ItemDraw
+	Size		100 15
+	Position		210 155
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+#      Set $thisDrive = 6
+#      Set $toBrowse = {true}
+    End
+End
+
+Widget		13
+Property
+	Type		ItemDraw
+	Size		16 16
+	Position		303 1
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+		Quit
+    End
+End

@@ -1,0 +1,154 @@
+#-----------------------------------------------------------------------
+# File:		FNS-Form-BaseSetup
+# Version:	1.2.9
+# Licence: 	GPL 2
+#
+# Description:	Script to configure base settings of Fvwm-Nightshade
+#
+# Author:	Thomas Funk <t.funk@web.de>	
+# Created:	08/01/2012
+# Changed:	08/02/2013
+#-----------------------------------------------------------------------
+
+DestroyModuleConfig  FNS-Form-BaseSetup: *
+*FNS-Form-BaseSetup: Title      "$[gt.Fvwm-Nightshade -- Base Setup]"
+*FNS-Form-BaseSetup: WarpPointer
+# Layout
+*FNS-Form-BaseSetup: Line       center
+*FNS-Form-BaseSetup: Text       "$[gt.Use this setup to configure base settings of Fvwm-Nightshade]"
+*FNS-Form-BaseSetup: Line       left
+*FNS-Form-BaseSetup: Text	    " "
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line	    center
+*FNS-Form-BaseSetup: Text	    "$[gt.----------------- Environment ------------------]"
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line	    left
+*FNS-Form-BaseSetup: Text 	    "$[gt.Used Splash: ]"
+*FNS-Form-BaseSetup: Line       center
+*FNS-Form-BaseSetup: Input 	    Splash 60 "$FNS_SYSTEMDIR/artwork/splashs/splash_fns_small.png"
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line	    left
+*FNS-Form-BaseSetup: Text 	    "$[gt.Show on start: ]"
+*FNS-Form-BaseSetup: Selection	SelItype single
+*FNS-Form-BaseSetup: Choice	    SplashOn	SplashOn	on  "$[gt.Yes]"
+*FNS-Form-BaseSetup: Choice	    SplashOff	SplashOff	off "$[gt.No]"
+
+*FNS-Form-BaseSetup: Line	    center
+*FNS-Form-BaseSetup: Text	    "$[gt.---------- Decoration (Windows, Menus) ----------]"
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line	    left
+*FNS-Form-BaseSetup: Text 	    "$[gt.Used Theme:    ]"
+*FNS-Form-BaseSetup: Input 	    Theme 15 "Tribal"
+*FNS-Form-BaseSetup: Text 	    "$[gt. (Others: Clean, Air, Ambience, CrystalBalls)]"
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line	    left
+*FNS-Form-BaseSetup: Text 	    "$[gt.Used Font:     ]"
+*FNS-Form-BaseSetup: Input 	    Font 15 "Sans"
+*FNS-Form-BaseSetup: Text 	    "$[gt. (E.g. Arial, Helvetia, Verdana)]"
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line	    left
+*FNS-Form-BaseSetup: Text 	    "$[gt.Used Font size:]"
+*FNS-Form-BaseSetup: Input 	    Fontsize 3 "12"
+*FNS-Form-BaseSetup: Text 	    "$[gt.              (E.g. 10, 11, 13)]"
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line       left
+*FNS-Form-BaseSetup: Text	    " "
+*FNS-Form-BaseSetup: Line	    center
+*FNS-Form-BaseSetup: Text	    "$[gt.------- Panels (Iconman, Pager, Systray) -------]"
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line	    left
+*FNS-Form-BaseSetup: Text 	    "$[gt.Used Layout:   ]"
+*FNS-Form-BaseSetup: Selection	SelItype single
+*FNS-Form-BaseSetup: Choice	    LayoutHorizontal	LayoutHorizontal	on  "$[gt.Horizontal (Panels on top)]"
+*FNS-Form-BaseSetup: Line	    left
+*FNS-Form-BaseSetup: Text 	    "               "
+*FNS-Form-BaseSetup: Choice	    LayoutVertical	LayoutVertical	off "$[gt.Vertical (Panels on right side)]"
+*FNS-Form-BaseSetup: Line	    left
+*FNS-Form-BaseSetup: Text 	    "               "
+*FNS-Form-BaseSetup: Choice	    LayoutG2like LayoutG2like off "$[gt.G2like (Panels on top and bottom)]"
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line       left
+*FNS-Form-BaseSetup: Text	    " "
+*FNS-Form-BaseSetup: Line	    center
+*FNS-Form-BaseSetup: Text	    "$[gt.----------------- Applications -----------------]"
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line	    left
+*FNS-Form-BaseSetup: Text 	    "$[gt.Used Terminal: ]"
+*FNS-Form-BaseSetup: Input 	    Terminal 20 "xterm"
+*FNS-Form-BaseSetup: Text 	    "$[gt. (E.g. konsole, aterm, rxvt)]"
+*FNS-Form-BaseSetup: Line
+
+*FNS-Form-BaseSetup: Line	    left
+*FNS-Form-BaseSetup: Text 	    "$[gt.Used Browser:  ]"
+*FNS-Form-BaseSetup: Input 	    Browser 20 "firefox"
+*FNS-Form-BaseSetup: Text 	    "$[gt. (E.g. chromium, seamonkey)]"
+
+*FNS-Form-BaseSetup: Line       left
+*FNS-Form-BaseSetup: Text	    " "
+*FNS-Form-BaseSetup: Line       expand
+*FNS-Form-BaseSetup: Button     quit    "$[gt.Apply & Save]" ^M
+*FNS-Form-BaseSetup: Command   	!if [ ! -f ${FVWM_USERDIR}/.settings ]; then \
+                                    cp ${FNS_SYSTEMDIR}/.settings ${FVWM_USERDIR}/.settings; \
+                                fi 
+*FNS-Form-BaseSetup: Command   	!if [ ! -f ${FVWM_USERDIR}/.FvwmForm-Desktop-Config ]; then \
+                                    cp ${FNS_SYSTEMDIR}/.FvwmForm-Desktop-Config ${FVWM_USERDIR}/.FvwmForm-Desktop-Config; \
+                                fi 
+*FNS-Form-BaseSetup: Command   	!mkdir -p ${FVWM_USERDIR}/wallpapers
+*FNS-Form-BaseSetup: Command   	!for wallpaper in `ls -1 ${FNS_SYSTEMDIR}/artwork/wallpapers`; do \
+                                    if [ ! -L ${FVWM_USERDIR}/wallpapers/${wallpaper} ]; then \
+                                        ln -s ${FNS_SYSTEMDIR}/artwork/wallpapers/${wallpaper} ${FVWM_USERDIR}/wallpapers/${wallpaper}; \
+                                    fi; \
+                                done
+*FNS-Form-BaseSetup: Command   	$(Theme? FuncWriteInfoStoreToFileAndSet used_theme $(Theme) $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	$(Splash? FuncWriteInfoStoreToFileAndSet used_banner $(Splash) $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	$(SplashOn? FuncWriteSetEnvToFileAndSet SplashOn "1" $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	$(SplashOff? FuncWriteSetEnvToFileAndSet SplashOn "0" $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	$(LayoutHorizontal? FuncWriteInfoStoreToFileAndSet used_layout Horizontal $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	$(LayoutHorizontal?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Horizontal ${FVWM_USERDIR}/.layout)
+*FNS-Form-BaseSetup: Command   	$(LayoutVertical? FuncWriteInfoStoreToFileAndSet used_layout Vertical $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	$(LayoutVertical?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Vertical ${FVWM_USERDIR}/.layout)
+*FNS-Form-BaseSetup: Command   	$(LayoutG2like? FuncWriteInfoStoreToFileAndSet used_layout G2like $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	$(LayoutG2like?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/G2like ${FVWM_USERDIR}/.layout)
+*FNS-Form-BaseSetup: Command   	$(Font? FuncWriteInfoStoreToFileAndSet used_font $(Font) $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	$(Fontsize? FuncWriteInfoStoreToFileAndSet fontsize $(Fontsize) $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	$(Terminal? FuncWriteInfoStoreToFileAndSet default_terminal "$(Terminal)" $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	$(Browser? FuncWriteInfoStoreToFileAndSet default_browser "$(Browser)" $[FVWM_USERDIR]/.settings)
+*FNS-Form-BaseSetup: Command   	FuncRestart
+
+# Before saving the data, remove any previously saved data:
+*FNS-Form-BaseSetup: Command DestroyModuleConfig SavedBaseSetup: *
+*FNS-Form-BaseSetup: Command !(                                      /bin/echo \
+  "# This file last created by FNS-Form-BaseSetup on: `/bin/date`."; /bin/echo \
+  '*SavedBaseSetup: Splash 	$(Splash) '		; /bin/echo \
+  '*SavedBaseSetup: SplashOn 	$(SplashOn?on) '		; /bin/echo \
+  '*SavedBaseSetup: SplashOff 	$(SplashOff?on) '		; /bin/echo \
+  '*SavedBaseSetup: Theme 	$(Theme) '		; /bin/echo \
+  '*SavedBaseSetup: LayoutHorizontal	$(LayoutHorizontal?on) '		; /bin/echo \
+  '*SavedBaseSetup: LayoutVertical  	$(LayoutVertical?on) '		; /bin/echo \
+  '*SavedBaseSetup: LayoutG2like  	$(LayoutG2like?on) '	; \
+) > ${FVWM_USERDIR}/.FNS-Form-BaseSetup
+
+*FNS-Form-BaseSetup: Command !(                                      /bin/echo \
+  '*SavedBaseSetup: Font  	$(Font) '		; /bin/echo \
+  '*SavedBaseSetup: Fontsize   	$(Fontsize) '		; /bin/echo \
+  '*SavedBaseSetup: Terminal    $(Terminal) '		; /bin/echo \
+  '*SavedBaseSetup: Browser     $(Browser) '		; /bin/echo \
+) >> ${FVWM_USERDIR}/.FNS-Form-BaseSetup
+
+*FNS-Form-BaseSetup: Button       continue "$[gt.Help]"
+*FNS-Form-BaseSetup: Command      Exec exec xterm -g 100x50 -n "Help FNS-Form-BaseSetup" -T "Help FNS-Form-BaseSetup" -e "man FNS-Form-BaseSetup" &
+*FNS-Form-BaseSetup: Button       restart "$[gt.Reset]"
+*FNS-Form-BaseSetup: Button       quit    "$[gt.Cancel]"
+*FNS-Form-BaseSetup: Command      Nop
+# Tell FvwmForm to read vars from the .FNS-Form-BaseSetup file:
+*FNS-Form-BaseSetup: UseData .FNS-Form-BaseSetup *SavedBaseSetup

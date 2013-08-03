@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
-# File:		FNS-PlaylistCreator
-# Version:	1.0.0
+# File:		FNS-Script-PlaylistCreator
+# Version:	1.0.1
 # Licence: 	GPL 2
 #
 # Description:	Playlist creator script
@@ -10,11 +10,11 @@
 # Author:		Thomas Funk <t.funk@web.de>
 #
 # Created:	05/09/2013
-# Changed:	05/15/2013
+# Changed:	08/02/2013
 #-----------------------------------------------------------------------
 
 UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
-WindowTitle			{Playlist Creator V 1.0.0}
+WindowTitle			{Playlist Creator V 1.0.1}
 WindowSize 425 445		# Taille
 
 Init

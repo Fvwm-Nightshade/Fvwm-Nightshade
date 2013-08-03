@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
-# File:		FNS-FileBrowser
-# Version:	1.1.7
+# File:		FNS-Script-FileBrowser
+# Version:	1.1.8
 # Licence: 	GPL 2
 #
 # Description:	File Browser script based on FvwmScript-FileBrowser
@@ -38,7 +38,7 @@
 # Revised by:	Thomas Funk <t.funk@web.de>
 #
 # Created:	???
-# Changed:	05/16/2013
+# Changed:	08/02/2013
 #-----------------------------------------------------------------------
 
 UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
