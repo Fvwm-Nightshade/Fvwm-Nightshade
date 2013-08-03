@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.3
+# Version:      2.1.4
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      07/04/2013
+# Changed:      08/03/2013
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -83,10 +83,10 @@ build-install-list:
 	if test -z "$(DESTDIR)"; then \
 		if test "$(local)" = "yes"; then \
 			for file in $(fns_fvwmscripts); do \
-				if test "$${file#*FvwmScript}" != "$$file"; then \
-					echo $(fnsuserdir)/scripts/$$file >> ./fns-install_$(version).lst; \
-				else \
+				if test "$${file#*FNS-Form}" != "$$file"; then \
 					echo $(fnsuserdir)/$$file >> ./fns-install_$(version).lst; \
+				else \
+					echo $(fnsuserdir)/scripts/$$file >> ./fns-install_$(version).lst; \
 				fi; \
 			done; \
 		else \
@@ -214,10 +214,10 @@ dist-install:
 		if test "$(local)" = "yes"; then \
 			install -d $(fnsuserdir)/scripts; \
 			for file in $(fns_fvwmscripts); do \
-				if test "$${file#*FvwmScript}" != "$$file"; then \
-					install -m 644 fvwm/$$file $(fnsuserdir)/scripts/; \
-				else \
+				if test "$${file#*FNS-Form}" != "$$file"; then \
 					install -m 644 fvwm/$$file $(fnsuserdir); \
+				else \
+					install -m 644 fvwm/$$file $(fnsuserdir)/scripts/; \
 				fi; \
 			done; \
 		else \
