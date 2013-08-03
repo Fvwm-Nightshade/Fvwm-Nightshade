@@ -201,7 +201,7 @@ InfoStoreAdd fvwm_wallpaper $[FVWM_USERDIR]/.wallpaper
 # 1.2.2 Environment settings
 #***********************************************************************
 # These settings are rolled out to $[FVWM_USERDIR]/.settings
-# They can configured with the FNS-BaseSetup
+# They can configured with the FNS-Form-BaseSetup
 Load .settings
 FuncSetThemeDir $[infostore.used_theme]
 
@@ -1074,8 +1074,8 @@ AddToFunc StartFunction
 # start xscreensaver daemon for locking
 + I Test (x xscreensaver-command) Test (Init) Exec xscreensaver -no-splash
 #-----------------------------------------------------------------------
-# start FNS-BaseSetup if not configured
-+ I Test (!f $[FVWM_USERDIR]/.FNS-BaseSetup) FvwmForm FNS-BaseSetup
+# start FNS-Form-BaseSetup if not configured
++ I Test (!f $[FVWM_USERDIR]/.FNS-Form-BaseSetup) FvwmForm FNS-Form-BaseSetup
 
 #-----------------------------------------------------------------------
 # load layout
@@ -1219,7 +1219,7 @@ AddToFunc   FuncWriteSetEnvToFileAndSet
 
 
 #-----------------------------------------------------------------------
-# Update layout and theme settings in base setup file .FNS-BaseSetup
+# Update layout and theme settings in base setup file .FNS-Form-BaseSetup
 # FuncUpdateBaseSetupFile <Layout/Theme> <layout/theme name>
 #-----------------------------------------------------------------------
 DestroyFunc FuncUpdateBaseSetupFile
@@ -1227,11 +1227,11 @@ AddToFunc   FuncUpdateBaseSetupFile
 + I PipeRead 'if [ "$0" = "Layout" ]; then \
 				case $1 in \
 					Horizontal|Vertical|G2like) \
-						sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-BaseSetup; \
-						sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-BaseSetup;; \
+						sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+						sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup;; \
 				esac; \
 			  else \
-				sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-BaseSetup; \
+				sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
 			  fi'
 			  
 #-----------------------------------------------------------------------
@@ -1834,7 +1834,7 @@ AddToFunc   FuncMenuFvwmPersonal
 + I DestroyMenu MenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal DynamicPopupAction FuncMenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal "$[gt.Personal Applications]" Title
-+ I AddToMenu MenuFvwmPersonal "$[gt.&Configure Personal Applications]%menu/configuration.xpm%"	FvwmScript FvwmScript-PersonalMenu
++ I AddToMenu MenuFvwmPersonal "$[gt.&Configure Personal Applications]%menu/configuration.xpm%"	FvwmScript FNS-Script-PersonalMenu
 + I Test (f  $[FVWM_USERDIR]/.personal) PipeRead `sed -e '/^# personal menu/ d;/^ *$/,$ d' $[FVWM_USERDIR]/.personal`
 
 
@@ -2001,7 +2001,7 @@ AddToMenu   MenuFNSConfiguration
 + MissingSubmenuFunction FuncMenuWallpaperConfiguration
 + "$[gt.Configure &Background]%menu/image-viewer.xpm%"    	Popup MenuWallpaperConfiguration
 + "$[gt.&Decoration]%menu/themes.xpm%"						Popup MenuDecoration
-+ "$[gt.Fvwm-&Nightshade Setup]%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%"  FvwmForm FNS-BaseSetup
++ "$[gt.Fvwm-&Nightshade Setup]%$[FNS_SYSTEMDIR]/artwork/icons/icon_fns_16x16.png%"  FvwmForm FNS-Form-BaseSetup
 
 
 #-----------------------------------------------------------------------
@@ -2014,7 +2014,7 @@ AddToMenu   MenuSystemConfiguration
 + "$[gt.&Mouse]%menu/mouse.xpm%"							Popup MenuMouse
 + MissingSubmenuFunction FuncMenuXScreenSaver
 + "$[gt.Sc&reen Saver]%menu/display.xpm%"					Popup MenuXScreenSaver
-+ "$[gt.&CPU Performance]%menu/monitoring.xpm%"				FvwmScript FvwmScript-CPU-Performance
++ "$[gt.&CPU Performance]%menu/monitoring.xpm%"				FvwmScript FNS-Script-CpuPerformance
 
 
 #-----------------------------------------------------------------------
@@ -2399,12 +2399,61 @@ AddToFunc   FuncMenuPlaiaOps
 + I DestroyMenu MenuPlaiaOps
 + I AddToMenu MenuPlaiaOps DynamicPopupAction FuncMenuRoot
 + I AddToMenu MenuPlaiaOps "$[gt.Menu]"	Title
-+ I AddToMenu MenuPlaiaOps "$[gt.Open File]%menu/file.xpm%"	FvwmScript FNS-FileBrowser "$0" -b -m "Plaia/Plaia" -w 1 -s 1
-+ I AddToMenu MenuPlaiaOps "$[gt.Open Folder]%menu/folder.xpm%"	FvwmScript FNS-FileBrowser "$0" -d -b -m "Plaia/Plaia" -w 1 -s 2
-+ I AddToMenu MenuPlaiaOps "$[gt.Load Playlist]%menu/information.xpm%"	FvwmScript FNS-FileBrowser "$0" -b -m "Plaia/Plaia" -w 1 -s 3
-+ I AddToMenu MenuPlaiaOps "$[gt.Create Playlist]%menu/editor.xpm%"	FvwmScript FNS-PlaylistCreator
++ I AddToMenu MenuPlaiaOps "$[gt.Open File]%menu/file.xpm%"	FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Plaia" -w 1 -s 1
++ I AddToMenu MenuPlaiaOps "$[gt.Open Folder]%menu/folder.xpm%"	FvwmScript FNS-Script-FileBrowser "$0" -d -b -m "FNS-Applet-Plaia" -w 1 -s 2
++ I AddToMenu MenuPlaiaOps "$[gt.Load Playlist]%menu/information.xpm%"	FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Plaia" -w 1 -s 3
++ I AddToMenu MenuPlaiaOps "$[gt.Create Playlist]%menu/editor.xpm%"	FvwmScript FNS-Script-PlaylistCreator
 + I Popup MenuPlaiaOps mouse 0p 0p
 
+#-----------------------------------------------------------------------
+# FNS-Applet-Pagina Menu menu
+#-----------------------------------------------------------------------
+AddToMenu MenuPaginaFile DynamicPopupAction FuncMenuPaginaFile
+
+DestroyFunc FuncMenuPaginaFile
+AddToFunc   FuncMenuPaginaFile
++ I DestroyMenu MenuPaginaFile
++ I AddToMenu MenuPaginaFile DynamicPopupAction FuncMenuRoot
++ I AddToMenu MenuPaginaFile "$[gt.Play]"	Title
++ I AddToMenu MenuPaginaFile "$[gt.Open File]%menu/file.xpm%"	FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Pagina" -w 1 -s 1
++ I AddToMenu MenuPaginaFile "$[gt.Open Folder]%menu/folder.xpm%"	FvwmScript FNS-Script-FileBrowser "$0" -d -b -m "FNS-Applet-Pagina" -w 1 -s 2
++ I AddToMenu MenuPaginaFile "$[gt.Load Playlist]%menu/information.xpm%"	FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Pagina" -w 1 -s 3
++ I AddToMenu MenuPaginaFile "$[gt.Create Playlist]%menu/editor.xpm%"	FvwmScript FNS-Script-PlaylistCreator
++ I Popup MenuPaginaFile mouse 0p 0p
+
+#-----------------------------------------------------------------------
+# Pagina Audio menu
+#-----------------------------------------------------------------------
+DestroyMenu MenuPaginaAudio
+AddToMenu MenuPaginaAudio
++ "$[gt.Audio Channels]"			Title
++ "$[gt.Mono]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 2 1 1
++ "$[gt.Stereo]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 2 1 2
++ "$[gt.Surround]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 2 1 4
++ "$[gt.5.1]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 2 1 6
++ "$[gt.Language]"			Title
++ "$[gt.Lang. 1]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 2 2 0
++ "$[gt.Lang. 2]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 2 2 1
++ "$[gt.Lang. 3]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 2 2 2
++ "$[gt.Lang. 4]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 2 2 3
++ "$[gt.Lang. 5]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 2 2 4
++ "$[gt.Lang. 6]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 2 2 5
+
+#-----------------------------------------------------------------------
+# Pagina Subtitle menu
+#-----------------------------------------------------------------------
+DestroyMenu MenuPaginaSub
+AddToMenu MenuPaginaSub
++ "$[gt.Subtitle]"			Title
++ "$[gt.on]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 3 1 1
++ "$[gt.off]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 3 1 0
++ "$[gt.Language]"			Title
++ "$[gt.Lang. 1]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 3 2 0
++ "$[gt.Lang. 2]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 3 2 1
++ "$[gt.Lang. 3]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 3 2 2
++ "$[gt.Lang. 4]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 3 2 3
++ "$[gt.Lang. 5]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 3 2 4
++ "$[gt.Lang. 6]%menu/multimedia.xpm%"	SendToModule FNS-Applet-Pagina SendString 3 2 5
 
 
 
