@@ -10,6 +10,7 @@ History:
 - rename FNS-BaseSetup helps to FNS-Form-BaseSetup helps and update it
 - update fvwm-nightshade help with the new names
 - update fvwm-nightshade help with new infostore variables and the new tools
+- adapt Makefile to new name convention
 
 08/02/2013
 - Changes in config:
