@@ -11,6 +11,10 @@ History:
 - update fvwm-nightshade help with the new names
 - update fvwm-nightshade help with new infostore variables and the new tools
 - adapt Makefile to new name convention
+- add weather icons for FNS-Applet-Meteo
+- set permissions of FNS-Applet-Meteo to 644
+- add quit icon to artwork/icons
+- rename coverlovin.py to coverlovin
 
 08/02/2013
 - Changes in config:
