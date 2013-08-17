@@ -38,11 +38,11 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Three different layouts: horizontal, vertical and G2like
 
   - horizontal (top):
-			   Top
-    +--------+		+--------+		+--------+
-    |        |      |        |      |        |
-    +--------+		+--------+		+--------+
-    IconManager		   Pager		   Panel
+               Top
+    +--------+        +--------+        +--------+
+    |        |        |        |        |        |
+    +--------+        +--------+        +--------+
+    IconManager           Pager           Panel
   
   - vertical (top right):
     
@@ -63,19 +63,19 @@ Featurelist of Fvwm-Nightshade 0.7.x:
     - date and time (conky)
 
   - G2like (top & bottom)
-	Topbar
-	+---+---+---------------------------------+----------+---------+---+
-	|   |   |                                 |          |         |   |
-	+---+---+---------------------------------+----------+---------+---+
-	Menu Personal                              Systray    Date    Logout
-	   
+    Topbar
+    +---+---+---------------------------------+----------+---------+---+
+    |   |   |                                 |          |         |   |
+    +---+---+---------------------------------+----------+---------+---+
+    Menu Personal                              Systray    Date    Logout
+       
 
-	Bottombar
-	+---+----------------------------------------------+---------------+
-	|   |                                              |               |
-	+---+----------------------------------------------+---------------+
-	Desktop                                             Pager
-		 IconManager
+    Bottombar
+    +---+----------------------------------------------+---------------+
+    |   |                                              |               |
+    +---+----------------------------------------------+---------------+
+    Desktop                                             Pager
+         IconManager
 
 - Lock desk & screensaver (xscreensaver)
 - Personal menu via FvwmScript-PersonalMenu
@@ -110,14 +110,14 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 
 Requirements:
 =============
-Required:	Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
-		xterm, conky, xscreensaver, feh, imagemagick, librsvg2, xwd
-		stalonetray, cpufrequtils*, gksu
+Required:        Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
+                 xterm, conky, xscreensaver, feh, imagemagick, librsvg2, xwd
+                 stalonetray, cpufrequtils*, gksu
 
-Recommended: 	gnomes network manager, Volume Icon, wm-icons
+Recommended:     gnomes network manager, Volume Icon
 
-Useful:		fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-			qtconfig for qt3, qtconfig for qt4, xneurs
+Useful:          fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
+                 qtconfig for qt3, qtconfig for qt4, xneurs
   
 * unfortunatelly not usable in Arch - changed to cpupower but not supported
   at the moment -> see issue #40 in the bugtracker.
@@ -138,8 +138,8 @@ them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues
 Mailinglist
 ===========
 There exist two mailing lists under
-common: 	https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade
-developing:	https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers
+common:     https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade
+developing:    https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers
 
 To post to this group, you have to do the following:
 
