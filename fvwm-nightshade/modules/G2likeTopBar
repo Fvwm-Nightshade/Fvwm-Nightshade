@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeTopBar
-# Version:	1.0.8
+# Version:	1.0.9
 # Licence: 	GPL 2
 #
 # Description:	Gnome like top bar with root menu, personal menu, systray,
@@ -10,7 +10,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	10/09/2012
-# Changed:	01/09/2013
+# Changed:	08/15/2013
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -120,8 +120,8 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 *G2likeTopBar: (5x1, Colorset 13, ActiveColorset 11, \
 			Left, Padding 5 0, Title (Side) "Menu", ActionOnPress, \
-		    Icon	icon_fns_24x24.png, \
-		    ActiveIcon	icon_fns_24x24.png, \
+		    Icon	icon_fns.svg:24x24, \
+		    ActiveIcon	icon_fns.svg:24x24, \
 		    Action(Mouse 1) `Menu MenuRoot`)
 
 #-----------------------------------------------------------------------

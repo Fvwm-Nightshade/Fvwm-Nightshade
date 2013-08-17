@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		HorizontalPanel
-# Version:	1.0.9
+# Version:	1.0.10
 # Licence: 	GPL 2
 #
 # Description:	FvwmButtons panel for horizontal layout. Position on the
@@ -15,7 +15,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	08/11/2012
-# Changed:	01/20/2013
+# Changed:	08/15/2013
 #-----------------------------------------------------------------------
 
 Style HorizontalPanel !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
@@ -78,8 +78,8 @@ DestroyModuleConfig HorizontalPanel: *
 # menu button
 #-----------------------------------------------------------------------
 *HorizontalPanel: (2x1, Colorset 13, ActionOnPress, \
-		    Icon	icon_fns_24x24.png, \
-		    ActiveIcon	icon_fns_24x24.png, \
+		    Icon	icon_fns.svg:24x24, \
+		    ActiveIcon	icon_fns.svg:24x24, \
 		    Action(Mouse 1) `Menu MenuRoot`)
 
 #-----------------------------------------------------------------------

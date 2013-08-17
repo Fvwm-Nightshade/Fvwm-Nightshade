@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		VerticalPanel
-# Version:	1.0.3
+# Version:	1.0.4
 # Licence: 	GPL 2
 #
 # Description:	FvwmButtons panel for vertical layout. Position on the
@@ -23,7 +23,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	08/15/2012
-# Changed:	10/28/2012
+# Changed:	08/15/2013
 #-----------------------------------------------------------------------
 
 Style VerticalPanel !Title, Sticky, WindowListSkip, StaysOnBottom, HandleWidth 2
@@ -96,14 +96,14 @@ DestroyModuleConfig VerticalPanel: *
 
 # menu button
 *VerticalPanel: (1x1, Colorset 13, Left, Padding 5 0, Title (Side) "Root Menu", ActionOnPress, \
-		Icon icon_fns_24x24.png, \
-		ActiveIcon icon_fns_24x24.png, \
+		Icon icon_fns.svg:24x24, \
+		ActiveIcon icon_fns.svg:24x24, \
 		Action(Mouse 1) `Menu MenuRoot`)
 
 # winlist button
 *VerticalPanel: (1x1, Colorset 13, Left, Padding 5 0, Title (Side) "Window List", ActionOnPress, \
-		Icon menu/windows.xpm, \
-		ActiveIcon menu/windows.xpm, \
+		Icon windows.svg:24x24, \
+		ActiveIcon windows.svg:24x24, \
 		Action(Mouse 1) `WindowList`)
 
 
