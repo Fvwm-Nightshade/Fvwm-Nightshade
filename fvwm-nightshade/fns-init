@@ -1,14 +1,32 @@
 #-----------------------------------------------------------------------
 # File:		fns-init
-# Version:	1.0.3
+# Version:	1.0.4
 # Licence: 	GPL 2
 #
 # Description:	start file of Fvwm-Nightshade
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	09/07/2012
-# Changed:	01/12/2012
+# Changed:	08/05/2013
 #-----------------------------------------------------------------------
+
+#-----------------------------------------------------------------------
+# Set Menu icon size dependent of .FvwmForm-Desktop-Config
+#-----------------------------------------------------------------------
+DestroyFunc SetMenuIconSize
+AddToFunc   SetMenuIconSize
++ I PipeRead "if test -f ${FVWM_USERDIR}/.FvwmForm-Desktop-Config; then \
+				Size=`cat ${FVWM_USERDIR}/.FvwmForm-Desktop-Config |grep Size| awk '{ print $$$3 }'`; \
+			  else \
+				Size=`cat ${FNS_SYSTEMDIR}/.FvwmForm-Desktop-Config |grep Size| awk '{ print $$$3 }'`; \
+			  fi; \
+			  if test -z $Size; then \
+				echo InfoStoreAdd MenuIconSize 24x24; \
+			  else \
+				echo InfoStoreAdd MenuIconSize ${Size}x${Size}; \
+			  fi"
+
+SetMenuIconSize
 
 #-----------------------------------------------------------------------
 # Prints a debug message in .xsession-errors
