@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="256"
+   height="256"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="bomb.svg">
+  <title
+     id="title3840">bomb</title>
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective2985" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.390625"
+     inkscape:cx="128"
+     inkscape:cy="128"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1436"
+     inkscape:window-height="839"
+     inkscape:window-x="0"
+     inkscape:window-y="37"
+     inkscape:window-maximized="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>bomb</dc:title>
+        <dc:date>08-05-2011</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Muhammad Haidar</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:language>English</dc:language>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>bomb</rdf:li>
+            <rdf:li>explode</rdf:li>
+            <rdf:li>explosive</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>bomb has been set</dc:description>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-157.14287,-353.50501)">
+    <g
+       style="font-size:22px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       id="flowRoot3001"
+       transform="matrix(0.40308696,0,0,0.40308696,116.93415,335.87378)" />
+    <g
+       style="font-size:56px;font-style:normal;font-weight:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       id="flowRoot3027"
+       transform="matrix(0.40308696,0,0,0.40308696,116.93415,335.87378)" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       d="m 313.87092,514.76004 c 0,36.89112 -29.90615,66.79727 -66.79726,66.79727 -36.89112,0 -66.79727,-29.90615 -66.79727,-66.79727 0,-36.89111 29.90615,-66.79726 66.79727,-66.79726 36.89111,0 66.79726,29.90615 66.79726,66.79726 z"
+       id="path3047"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       d="m 203.43659,483.97816 c -9.2153,16.34473 -14.81778,32.24642 -17.03402,30.99689 -2.21623,-1.24953 0.60738,-18.36276 9.82269,-34.70749 9.2153,-16.34473 23.77573,-25.73155 25.99196,-24.48202 2.21623,1.24953 -9.15815,11.44071 -18.37345,27.78544"
+       id="path3049"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csssc" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       d="m 189.41207,522.07095 c 0,2.58611 -1.18495,4.68256 -2.64667,4.68256 -1.46171,0 -2.64666,-2.09645 -2.64666,-4.68256 0,-2.58611 1.18495,-4.68256 2.64666,-4.68256 1.46172,0 2.64667,2.09645 2.64667,4.68256 z"
+       id="path3053"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       d="m 264.88718,435.25885 11.09335,3.09415 c 3.68743,1.02849 5.82801,4.82506 4.79952,8.51249 l -1.54708,5.54667 c -1.02849,3.68743 -4.82506,5.82801 -8.51248,4.79952 l -11.09335,-3.09414 c -3.68743,-1.0285 -5.82801,-4.82507 -4.79952,-8.51249 l 1.54707,-5.54668 c 1.0285,-3.68742 4.82506,-5.82801 8.51249,-4.79952 z"
+       id="rect3056"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.40308696;stroke-opacity:1"
+       d="m 281.15753,444.00919 c -0.67194,2.28859 -6.16406,2.69131 -12.26699,0.89948 -6.10293,-1.79182 -10.50562,-5.09966 -9.83369,-7.38826 0.67193,-2.2886 6.16405,-2.69131 12.26698,-0.89949 6.10293,1.79183 10.50563,5.09967 9.8337,7.38827 z"
+       id="path3059"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.4291966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 269.6762,458.09423 c 0,0 1.39563,-92.34058 34.89077,-41.26953 33.49511,51.07105 41.86891,1.03174 41.86891,1.03174"
+       id="path3831"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csc" />
+    <path
+       style="fill:#ffc519;fill-opacity:1;stroke:none"
+       d="m 379.3311,458.30568 -23.08668,-15.37635 -5.45202,27.19747 -5.45203,-27.19747 -23.08666,15.37635 15.37634,-23.08667 -27.19745,-5.45202 27.19745,-5.45204 -15.37634,-23.08665 23.08666,15.37633 5.45203,-27.19744 5.45202,27.19744 23.08668,-15.37633 -15.37632,23.08665 27.19743,5.45204 -27.19743,5.45202 z"
+       id="path3833"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
