@@ -3,8 +3,8 @@ Version:
 Architecture: all
 Maintainer: Thomas Funk <t.funk@web.de>
 Installed-Size:
-Depends: fvwm (>> 1:2.6.5)|fvwm (>> 2.6.5), python (<= 2.7), python-xdg, xterm, conky, xscreensaver, feh, imagemagick, librsvg2-bin, stalonetray, cpufrequtils, x11-apps
-Recommends: network-manager-gnome, wm-icons, pcmanfm
+Depends: fvwm (>> 1:2.6.5)|fvwm (>> 2.6.5), python (<< 3), python-xdg, xterm, conky, xscreensaver, feh, imagemagick, librsvg2-bin, stalonetray, cpufrequtils, x11-apps, mplayer, python-mutagen, python-simplejson
+Recommends: network-manager-gnome, pcmanfm
 Suggests: volumeicon, fdpowermon, bluetooth-applet, pm-utils, lxapearance, qt3-qtconfig, qt4.qtconfig
 Section: x11
 Priority: optional

@@ -27,6 +27,9 @@ Requires:	stalonetray
 Requires:	cpufrequtils
 Requires:	xorg-x11-apps
 Requires:	beesu
+Requires:	mplayer
+Requires:	python-mutagen
+Requires:	python-simplejson
 
 %description
 A lightweight but feature rich and good looking configuration of Fvwm.
