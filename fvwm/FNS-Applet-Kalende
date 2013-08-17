@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		Kalende
-# Version:	1.0.0
+# Version:	1.0.1
 # Licence: 	GPL 2
 #
 # Description:	Calender applet based on FvwmScript
@@ -24,7 +24,7 @@
 # Adjusted by:	Thomas Funk <t.funk@web.de>
 #
 # Created:	08/12/2012
-# Changed:	02/11/2013
+# Changed:	08/07/2013
 #-----------------------------------------------------------------------
 
 UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
@@ -137,7 +137,7 @@ Begin
     ##### change Settings if needed
     If $FnsUseApplet == 1 Then
     Begin
-		Set $homeDir = (GetOutput {echo $[FVWM_USERDIR]} 1 -1) {/scripts/}
+#		Set $homeDir = (GetOutput {echo $[FVWM_USERDIR]} 1 -1) {/scripts/}
 		Set $prevIcon = {left.png}
 		Set $nextIcon = {right.png}
 		Set $quitButton = {quit.png}
@@ -266,7 +266,8 @@ Begin
 			Else
 				Set $weekFirstDay = {sunday}
 			
-			Do {exec sed -i -e "s/^.*Set \$setFirstDay.*$/  Set \$setFirstDay = } $leftCB $weekFirstDay $rightCB {/" } $homeDir {Kalende}
+			If $FnsUseApplet == 0 Then
+				Do {exec sed -i -e "s/^.*Set \$setFirstDay.*$/  Set \$setFirstDay = } $leftCB $weekFirstDay $rightCB {/" } $homeDir {Kalende}
 			Set $changeWeek = {false}
 		End
 

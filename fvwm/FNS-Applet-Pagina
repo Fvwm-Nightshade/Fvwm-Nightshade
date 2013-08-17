@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		Pagina
-# Version:	1.0.0
+# Version:	1.0.1
 # Licence: 	GPL 2
 #
 # Description:	Music player applet based on FvwmScript
@@ -30,7 +30,7 @@
 # Author:		Bernhard Popp <kermit.popp@googlemail.com>	
 #
 # Created:	03/17/2013
-# Changed:	04/21/2013
+# Changed:	08/15/2013
 #-----------------------------------------------------------------------
 
 UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
@@ -623,7 +623,7 @@ Main
 Case message of
 	SingleClic :
 	Begin
-		Do {Popup MenuPaginaAudio mouse 0p 0p}
+		Do {FuncMenuPaginaAudio}
 	End
 	
 	1 :
@@ -661,7 +661,7 @@ Main
 Case message of
 	SingleClic :
 	Begin
-		Do {Popup MenuPaginaSub mouse 0p 0p}
+		Do {FuncMenuPaginaSub}
 	End
 
 	1 :

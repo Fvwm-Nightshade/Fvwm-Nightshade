@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		Plaia
-# Version:	1.0.15
+# Version:	1.0.16
 # Licence: 	GPL 2
 #
 # Description:	Music player applet based on FvwmScript
@@ -33,7 +33,7 @@
 # Author:		Thomas Funk <t.funk@web.de>	
 #
 # Created:	03/17/2013
-# Changed:	05/22/2013
+# Changed:	08/06/2013
 #-----------------------------------------------------------------------
 
 UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
@@ -176,12 +176,15 @@ Begin
     ##### change Settings if needed
     If $FnsUseApplet == 1 Then
     Begin
-		Set $homeDir = (GetOutput {echo $FVWM_USERDIR} 1 -1) {/scripts/Plaia/}
-		Set $iconDir = $homeDir{icons/}
+		Do {Exec mkdir -p $FVWM_USERDIR/temp/}
 		Set $Cmd = {echo $FVWM_USERDIR/temp/}$BS_CMD
 		Set $coverDir = (GetOutput $Cmd 1 -1)
 		#Do {echo coverDir: }$coverDir
-#		Set $quitButton = {quit.png}
+		Set $quitButton = {quit.png}
+		Set $stoppedCover = {noCover.png}
+		Set $playedCover = {playing.png}
+		Set $convertedCover = $coverDir{cover.png}
+		Set $coverlovin = coverlovin
 	End
 
 	If $ThemeChanged == 1 Then
@@ -232,12 +235,12 @@ Begin
 		Set $stopButton = $iconDir{media-playback-stop.png}
 		Set $playButton = $iconDir{media-playback-start.png}
 		Set $pauseButton = $iconDir{media-playback-pause.png}
+		Set $quitButton = $iconDir{quit.png}
+		Set $stoppedCover = $iconDir{noCover.png}
+		Set $playedCover = $iconDir{playing.png}
+		Set $convertedCover = $homeDir {cover.png}
+		Set $coverlovin = $homeDir{coverlovin}
 	End
-	
-	Set $quitButton = $iconDir{quit.png}
-	Set $stoppedCover = $iconDir{noCover.png}
-	Set $playedCover = $iconDir{playing.png}
-	Set $convertedCover = $homeDir {cover.png}
 	
 	Set $state = {}
 	Set $BS_CMD = {|sed "s/\([()#!|*&'\` ]\)/\\\\\1/g"}
@@ -594,7 +597,7 @@ Begin
 	Begin
 		#Do {echo playcount get_fileInfos: }$playcount
 		# get file infos
-		Set $Cmd = $homeDir {coverlovin.py -f } $newFile_BS { -i png --info -x }$coverDir{|sed -e 's/" "/%/g;s/ /§/g'}$BS_CMD{|sed -e 's/%/ /g'}
+		Set $Cmd = $coverlovin{ -f } $newFile_BS { -i png --info -x }$coverDir{|sed -e 's/" "/%/g;s/ /§/g'}$BS_CMD{|sed -e 's/%/ /g'}
 		Do {echo coverlovin cmd:}$Cmd
 		Set $fileInfos = (GetOutput $Cmd 1 -1)
 		Do {echo fileInfos: }$fileInfos
