@@ -1,5 +1,27 @@
 History:
 
+08/17/2013
+- add dependencies for coverlovin in control files for arch, deb and rpm
+- remove wm-icons package from recommended dependencies in /debian/control
+- adapt FNS-Applet-Kalende, FNS-Applet-Pagina and FNS-Applet-Plaia to new structure
+- add new vector icons to artworks/icons/scalable to replace wm-icons package
+- remove Tips entries and mouse actions in AppletIconMan because they're not needed
+- change bitmap icons to vector icons in G2likeTopBar, VerticalPanel and HorizontalPanel
+  to change icon size on the fly
+- add SetMenuIconSize function in fns-init to set Menu icon size dependent of .FvwmForm-Desktop-Config
+  on the fly in menus and Windowlist
+- changes in config:
+  - add loading of AppletIconMan in 7. Modules under 7.8.1
+  - change the order in ImagePath that Fvwm search for images in FVWM_USERDIR first
+  - change most of the xpm files to svg
+  - change static menus to dynamic menus and xpm to vector icons to change icon size on the fly
+  - fix variable problem in FuncWriteInfoStoreToFileAndSet
+  - implement SetMenuIconSize in all menus if needed to update icon size variable to enable
+    changing icon size on the fly
+- change static menus to dynamic menus and xpm to vector icons in all layouts to change icon size on the fly
+- remove wm-icons from recommended dependencies in INSTALL and README
+- exchange tabs with spaces in INSTALL and README
+
 08/03/2013
 - move all FNS-Applets from fvwm-nightshade/applets to fvwm/
 - rename all FvwmScripts to FNS-Script-<Name>
