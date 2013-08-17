@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		AppletIconMan
-# Version:	0.1.1
+# Version:	0.1.2
 # Licence: 	GPL 2
 #
 # Description:	shows a windows list of all applets in the actual page
@@ -9,7 +9,7 @@
 #			Thomas Funk <t.funk@web.de>	
 #
 # Created:	07/20/2013
-# Changed:	08/02/2013
+# Changed:	08/15/2013
 #-----------------------------------------------------------------------
 
 
@@ -51,14 +51,8 @@ DestroyModuleConfig AppletIconMan: *
 *AppletIconMan: 1 Format					""
 *AppletIconMan: 1 Font						"xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 	
-*AppletIconMan: 1 Tips						$[infostore.tips_iman]
-*AppletIconMan: 1 TipsColorset				16
-*AppletIconMan: 1 TipsFont					"xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
-
 *AppletIconMan: 1 NoIconAction				"SendToModule FvwmAnimate animate"
 *AppletIconMan: 1 Action  Mouse		1	A	sendcommand "FuncSelectWindow"
-*AppletIconMan: 1 Action  Mouse		2	A	sendcommand "FuncIconify"
-*AppletIconMan: 1 Action  Mouse		3	A	sendcommand "Popup MenuWindowOpsTrimmed Mouse c -102m"
 *AppletIconMan: 1 Action  select			sendcommand "Focus"
 
 *AppletIconMan: 1 Action  Key 		Left   N 	gotobutton Next, select
