@@ -1,7 +1,7 @@
 #!/usr/bin/perl
-#-----------------------------------------------------------------------
+################################################################################
 # File:        FvwmSmartMaximize
-# Version:     1.1.4
+# Version:     1.1.3
 # Licence:     GPL 2
 #
 # Description: Module to move and resize a current window to the largest
@@ -13,20 +13,14 @@
 # Adapted by:  Thomas Funk <t.funk@web.de>
 #
 # Created:     2013-06-29
-# Changed:     2013-07-30
-#-----------------------------------------------------------------------
-# To get a man page:
-# pod2man --center=" " --section=1 --release="1.1.4" FvwmSmartMaximize > FvwmSmartMaximize.1
-# To get a Html page:
-# pod2html --noindex --infile FvwmSmartMaximize --outfile FvwmSmartMaximize.html
-
+# Changed:     2013-07-21
+################################################################################
 
 use warnings;
 use strict;
 
 use lib `fvwm-perllib dir`;
 use FVWM::Module;
-use General::Parse qw(get_tokens);
 
 use constant LEFT   => 0;
 use constant RIGHT  => 1;
@@ -34,43 +28,50 @@ use constant TOP    => 2;
 use constant BOTTOM => 3;
 
 my $module = new FVWM::Module(Name => 'FvwmSmartMaximize', Mask => M_STRING);
+
+# Evaluate optional EwmhBaseStruts arguments.
+# Missing (or broken) values are assumed to be 0.
+my @emwhBaseStruts = @ARGV;
+foreach my $idx (LEFT .. BOTTOM)
+{
+    if (defined $emwhBaseStruts[$idx])
+    {
+        unless ($emwhBaseStruts[$idx] =~ m/^\d+$/)
+        {
+            &logWarning("not a non negative integer: $emwhBaseStruts[$idx]");
+            &logWarning('usage: Module FvwmSmartMaximize',
+                        '[EwmhBaseStruts arguments]');
+            $emwhBaseStruts[$idx] = 0;
+        }
+    }
+    else
+    {
+        $emwhBaseStruts[$idx] = 0;
+    }
+}
+
 my $pageTrackerWL = $module->track('WindowList');
 my $vp_width = $pageTrackerWL->pageInfo->{vp_width};
 my $vp_height = $pageTrackerWL->pageInfo->{vp_height};
-
-# get EwmhBaseStruts values
-# xprop returns the _NET_WORKAREA specified 4 values for each page:
-# xmin, ymin, width, height
-my $out = `xprop -root | grep _NET_WORKAREA |grep 1 |sed "s/[[:blank:]]//g"`;
-chop($out);
-my @workareas = split(',', substr( $out, rindex( $out, '=' ) + 1 ));
-
-# EwmhBaseStruts left right top bottom
-my @emwhBaseStruts = (0,0,0,0);
-$emwhBaseStruts[LEFT] = $workareas[0];
-$emwhBaseStruts[RIGHT] = $vp_width - $workareas[0] - $workareas[2];
-$emwhBaseStruts[TOP] = $workareas[1];
-$emwhBaseStruts[BOTTOM] = $vp_height - $workareas[1] - $workareas[3];
-
-# the real working area size: desktop/page - EwmhBaseStruts
-my $workArea = $workareas[2] * $workareas[3];
 
 $module->add_handler(M_STRING, \&smartMaximize);
 $module->event_loop;
 
 # main function smartMaximize gets called when issuing one of those FVWM
 # commands:
-# SendToModule FvwmSmartMaximize All
-# SendToModule FvwmSmartMaximize IgnoreMaxWindows
+# SendToModule smart_maximize.pl All
+# SendToModule smart_maximize.pl IgnoreMaxWindows
 sub smartMaximize
 {
     my ($module, $event) = @_;
-    my @options = get_tokens($event->_text);
-    my $action = $options[0];
-    my $addition = ($options[1] || '');
+    my $action = $event->_text;
 
     # the window to be maximized
     my $own = $pageTrackerWL->data(${$event->args}{win_id});
+
+    # the size of a desktop/page (90%) <- if EwmhBaseStruts has reduced
+    # the real desktop/page area
+    my $deskArea = $vp_width * $vp_height * 0.9;
 
     # Find all free rectangles in the current page where the window could be
     # displayed. This works as follows:
@@ -85,20 +86,26 @@ sub smartMaximize
     # rectangles are not preliminary any longer, as they won't be split into
     # smaller rectangles any longer.
     # The biggest display rectangle will be used as the new window location.
-    my @rectangles = (&createRectangle($own->{page_nx} * $vp_width + $emwhBaseStruts[LEFT],
-                                        ($own->{page_nx} + 1) * $vp_width - $emwhBaseStruts[RIGHT],
-                                       $own->{page_ny} * $vp_height + $emwhBaseStruts[TOP],
-                                       ($own->{page_ny} + 1) * $vp_height - $emwhBaseStruts[BOTTOM]));
+    my @rectangles = (&createRectangle($own->{page_nx} * $vp_width
+                                       + $emwhBaseStruts[LEFT],
+                                       ($own->{page_nx} + 1) * $vp_width
+                                       - $emwhBaseStruts[LEFT]
+                                       - $emwhBaseStruts[RIGHT],
+                                       $own->{page_ny} * $vp_height
+                                       + $emwhBaseStruts[TOP],
+                                       ($own->{page_ny} + 1) * $vp_height
+                                       - $emwhBaseStruts[TOP]
+                                       - $emwhBaseStruts[BOTTOM]));
 
     # apply all windows to the display rectangle list
     foreach my $other ($pageTrackerWL->windows)
     {
         unless ($other->{win_id} == $own->{win_id}
                 or $other->{desk} != $own->{desk}
-                # If the working area of the current page is filled from a window,
-                # this one will be ignored if "IgnoreMaxWindows" is set.
+                # If 90% of the current page is filled from a window, this one
+                # will be ignored if "IgnoreMaxWindows" is set.
                 or ($action eq 'IgnoreMaxWindows'
-                    and $other->{width} * $other->{height} >= $workArea))
+                    and $other->{width} * $other->{height} >= $deskArea))
         {
             @rectangles = &applyWindow($other, @rectangles);
         }
@@ -132,28 +139,18 @@ sub smartMaximize
     if ($dest)
     {
         # move the window to the display rectangle and let it fill
-        my $width = $dest->{x_max} - $dest->{x_min};
-        my $height = $dest->{y_max} - $dest->{y_min};
+        my $width = &roundDown($dest->{x_max} - $dest->{x_min},
+                               $own->{resize_width_inc});
+        my $height = &roundDown($dest->{y_max} - $dest->{y_min},
+                                $own->{resize_height_inc});
         my $x = $dest->{x_min} - $own->{page_nx} * $vp_width;
         my $y = $dest->{y_min} - $own->{page_ny} * $vp_height;
-        if ($addition eq 'screen')
-        {
-            $module->send("WindowId $own->{win_id} ResizeMoveMaximize"
-                          # resize arguments
-                          . " Frame ${width}p ${height}p"
-                          # move arguments
-                          . " screen c ${x}p ${y}p ewmhiwa"
-                          . " Warp");
-        }
-        else
-        {
-            $module->send("WindowId $own->{win_id} ResizeMoveMaximize"
-                          # resize arguments
-                          . " Frame ${width}p ${height}p"
-                          # move arguments
-                          . " ${x}p ${y}p ewmhiwa"
-                          . " Warp");
-        }
+        $module->send("WindowId $own->{win_id} ResizeMoveMaximize"
+                      # resize arguments
+                      . " Frame ${width}p ${height}p"
+                      # move arguments
+                      . " ${x}p ${y}p ewmhiwa"
+                      . " Warp");
     }
 }
 
@@ -180,14 +177,14 @@ sub applyWindow
             {
                 # new rectangle left of splitter window
                 push @newRectangles, &createRectangle($rect->{x_min},
-                                                      $splitter->{x_min},
+                                                      $splitter->{x_min} - 1,
                                                       $rect->{y_min},
                                                       $rect->{y_max});
             }
             if ($rect->{x_max} > $splitter->{x_max})
             {
                 # new rectangle right of splitter window
-                push @newRectangles, &createRectangle($splitter->{x_max},
+                push @newRectangles, &createRectangle($splitter->{x_max} + 1,
                                                       $rect->{x_max},
                                                       $rect->{y_min},
                                                       $rect->{y_max});
@@ -198,14 +195,14 @@ sub applyWindow
                 push @newRectangles, &createRectangle($rect->{x_min},
                                                       $rect->{x_max},
                                                       $rect->{y_min},
-                                                      $splitter->{y_min});
+                                                      $splitter->{y_min} - 1);
             }
             if ($rect->{y_max} > $splitter->{y_max})
             {
                 # new rectangle below splitter window
                 push @newRectangles, &createRectangle($rect->{x_min},
                                                       $rect->{x_max},
-                                                      $splitter->{y_max},
+                                                      $splitter->{y_max} + 1,
                                                       $rect->{y_max});
             }
         }
@@ -241,9 +238,19 @@ sub doRectanglesOverlap
                 or $r1->{y_min} > $r2->{y_max});
 }
 
-__END__
+sub logWarning
+{
+    warn "[FvwmSmartMaximize]: WARNING: @_\n";
+}
 
-=pod
+sub roundDown
+{
+    my ($size, $step) = @_;
+
+    return int($size / $step) * $step;
+}
+
+__END__
 
 =head1 NAME
 
@@ -251,88 +258,25 @@ FvwmSmartMaximize - The smart maximize module
 
 =head1 SYNOPSIS
 
-B<FvwmSmartMaximize> can only be invoked by fvwm. Command line invocation of the B<FvwmSmartMaximize> module will not work.
+Module FvwmSmartMaximize [All|IgnoreMaxWindows]
+
+FvwmSmartMaximize can only be invoked by fvwm. Command line invocation of the FvwmSmartMaximize module will not work.
 
 =head1 DESCRIPTION
 
-This module moves and resizes a current window to the largest free area of the desktop/page. If no place found nothing happens.
+This module moves and resizes a current window to the largest free area of desktop/page
+If no place found nothing happens.
 
 =head1 INVOCATION
 
-B<FvwmSmartMaximize> can be invoked by inserting the line C<'Module FvwmSmartMaximize'> in the StartFunction declarations in the .fvwm2rc file. 
-
-To call B<FvwmSmartMaximize> it has to be bound to a menu, mouse button, or keystroke.
-
-=head1 OPTIONS
-
-Two main options exist needed for calling B<FvwmSmartMaximize> from a menu, mouse button, or keystroke
-
-=over 4
-
-=item B<All> [I<screen>]
-
-All windows on the current page are included in the calculation of the largest free area. If maximized windows are available they will block the smart maximization and nothing will happen.
-
-=item B<IgnoreMaxWindows> [I<screen>]
-
-All windows on the current page except maximized windows are included in the calculation of the largest free area. This is the preffered option.
-
-=back
-
-For multi display screens there's an addition to the main options:
-
-=over 4
-
-=item I<screen>
-
-With this addition B<FvwmSmartMaximize> will only use the current screen for placing. Else the complete display is used.
-
-=back
-
-=head1 Examples
-
-To use B<FvwmSmartMaximize> three parts have to be implemented:
-
-1. You can copy B<FvwmSmartMaximize> in the lib directory of Fvwm. To get the path type in a terminal
-
-    $ echo $FVWM_MODULEDIR
-    
-Or you can implement your own in your .fvwm2rc file with:
-   
-    ModulePath $[FVWM_USERDIR]/lib:+
-
-Now copy B<FvwmSmartMaximize> into your own module path.
-   
-2. The module initialization in the StartFunction declaration in your .fvwm2rc file:
-
-    DestroyFunc StartFunction
-    AddToFunc StartFunction
-    + I Module FvwmSmartMaximize
-
-3. A menu, mouse button, or keystroke binding:
-
-    Mouse 1 4 M SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
-    
-This binds the call to mouse button 1 (left button) + Alt-Key and to the window button 4. So if you hold Alt and click on the window button 4 B<FvwmSmartMaximize> is smart maximizing the active window to the largest free area on the current screen, ignoring maximized windows.
-   
-    Key Super_L WTSF N SendToModule FvwmSmartMaximize All
-
-This binds the call to the left Windows key and smart maximizing the active window to the largest free area on the whole desktop if no maximized window blocks it.
-
-=head1 BUGS
-
-Bug reports can be sent to <andreas@hoenen-terstappen.de> or the fvwmnightshade-workers mailing list at https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers or submit them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues.
-
-=head1 CAVEATS
-
-If the width/height of the largest free area is smaller than the smallest possible width/height of a program it is only positioning there without resizing.
-
-=head1 COPYRIGHTS
-
-This program stands under the GPL V2 or higher.
+To be written
 
 =head1 AUTHORS
 
 Andreas Hoenen <andreas@hoenen-terstappen.de> and Thomas Funk <t.funk@web.de>.
+
+=head1 SEE ALSO
+
+For more information, see L<fvwm>, L<FVWM::Module>.
 
 =cut
