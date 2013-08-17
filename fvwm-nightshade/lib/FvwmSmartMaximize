@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #-----------------------------------------------------------------------
 # File:        FvwmSmartMaximize
-# Version:     1.1.4
+# Version:     1.1.5
 # Licence:     GPL 2
 #
 # Description: Module to move and resize a current window to the largest
@@ -16,7 +16,7 @@
 # Changed:     2013-07-30
 #-----------------------------------------------------------------------
 # To get a man page:
-# pod2man --center=" " --section=1 --release="1.1.4" FvwmSmartMaximize > FvwmSmartMaximize.1
+# pod2man --center=" " --section=1 --release="1.1.5" FvwmSmartMaximize > FvwmSmartMaximize.1
 # To get a Html page:
 # pod2html --noindex --infile FvwmSmartMaximize --outfile FvwmSmartMaximize.html
 
@@ -38,30 +38,38 @@ my $pageTrackerWL = $module->track('WindowList');
 my $vp_width = $pageTrackerWL->pageInfo->{vp_width};
 my $vp_height = $pageTrackerWL->pageInfo->{vp_height};
 
-# get EwmhBaseStruts values
-# xprop returns the _NET_WORKAREA specified 4 values for each page:
-# xmin, ymin, width, height
-my $out = `xprop -root | grep _NET_WORKAREA |grep 1 |sed "s/[[:blank:]]//g"`;
-chop($out);
-my @workareas = split(',', substr( $out, rindex( $out, '=' ) + 1 ));
+# get EwmhBaseStruts values and the real working area size
 
-# EwmhBaseStruts left right top bottom
-my @emwhBaseStruts = (0,0,0,0);
-$emwhBaseStruts[LEFT] = $workareas[0];
-$emwhBaseStruts[RIGHT] = $vp_width - $workareas[0] - $workareas[2];
-$emwhBaseStruts[TOP] = $workareas[1];
-$emwhBaseStruts[BOTTOM] = $vp_height - $workareas[1] - $workareas[3];
+# EwmhBaseStruts: left right top bottom
+# initialize it with fallback values: no reserved areas
+my @emwhBaseStruts = (0, 0, 0, 0);
 
 # the real working area size: desktop/page - EwmhBaseStruts
-my $workArea = $workareas[2] * $workareas[3];
+# initialize it with fallback value: no reserved areas
+my $workArea = $vp_width * $vp_height;
+
+# xprop returns the _NET_WORKAREA specified 4 values for each page:
+# xmin, ymin, width, height
+my $out = `xprop -root`;
+unless ($?)
+{
+    if ($out =~ m/^_NET_WORKAREA.*=\s*(\d+),\s*(\d+),\s*(\d+),\s*(\d+)/m)
+    {
+        $emwhBaseStruts[LEFT] = $1;
+        $emwhBaseStruts[RIGHT] = $vp_width - $1 - $3;
+        $emwhBaseStruts[TOP] = $2;
+        $emwhBaseStruts[BOTTOM] = $vp_height - $2 - $4;
+        $workArea = $3 * $4;
+    }
+}
 
 $module->add_handler(M_STRING, \&smartMaximize);
 $module->event_loop;
 
 # main function smartMaximize gets called when issuing one of those FVWM
 # commands:
-# SendToModule FvwmSmartMaximize All
-# SendToModule FvwmSmartMaximize IgnoreMaxWindows
+# SendToModule FvwmSmartMaximize All [screen]
+# SendToModule FvwmSmartMaximize IgnoreMaxWindows [screen]
 sub smartMaximize
 {
     my ($module, $event) = @_;

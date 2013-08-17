@@ -1,5 +1,8 @@
 History:
 
+08/12/2013
+- FvwmSmartMaximize: make EwmhBaseStruts determination more perlish
+
 08/01/2013 V 0.7.4
 - add FvwmSmartMaximize to all themes:
   - move Maximize horizontally from mouse 3 to mouse 2 + Alt
