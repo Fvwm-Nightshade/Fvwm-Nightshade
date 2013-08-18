@@ -2,8 +2,27 @@ Fvwm-Nightshade Release Notes
 =============================
 
 Version 0.7.x
+
+Features:
+---------
+- new feature smart maximize - moves and resizes a current window to the 
+  largest free area of a desktop/page (thanks to Andreas Hoenen ^^)
+- right click menu for cpu bar to restart them on error and start other 
+  related scripts/applets.
+- new set of icons for menus and internal apps to exchange wm-icons dependency
+  because this package isn't available in all distributions and of its' 
+  unscalability. Also special thanks to Alessandro Roncone who gives us 
+  the permission to use some of his Awoken icons.
+
+
+------------------------------------------------------------------------
+
+Version 0.6.7 (09th July 2013)
+
+Changes:
+--------
 - Fix issue #38 - Enhance uninstall routine
-  Makefile supports now the creation of an install list so keep the sources 
+  Makefile supports now the creation of an install list so keep the sources
   of the installed version never needed.
 - Fix issue #39 - installing localy needs to update /usr/share/xsessions/
   It is now possible to install Fvwm-Nightshade without the login file
@@ -11,8 +30,8 @@ Version 0.7.x
   hasn't root rights.
 - exchange Esetroot with feh because of the poor availability in different
   distribution repositories.
-- new feature smart maximize - moves and resizes a current window to the 
-  largest free area of a desktop/page (thanks to Andreas Hoenen ^^)
+- Remark for Arch:
+  FvwmScript-CPU-Performance not working at the moment. See issue #40
 
 ------------------------------------------------------------------------
 
