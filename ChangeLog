@@ -1,5 +1,36 @@
 History:
 
+08/18/2013
+- changes in config:
+  - launch new develop versioning: <version_number>-<YYYYMMDD>
+  - exchange tabs with spaces
+  - add to 9.3 -> Modules and Applets menu
+  - add icon styles for FNS-Applets and other FNS scripts
+  - add new menus:
+    - MenuFnsApplets - show all new applets
+    - MenuClockOps - popups when right click on date/time with:
+      - calender
+      - alarm clock
+      - set time and date
+      - restart Conky clock
+    - MenuCpuOps - popups when right click on cpu bar with:
+      - Cpu Performance tool
+      - Cpu applet Nucleu
+      - restart Conky cpu bar
+    - exchange some xpm icons with vector icons in MenuAppletOps
+- add own_window_title to conkyrc_clock and conkyrc_cpu to make it possible to kill them with xkill
+- update FNS-Applet-Kalende:
+  - add new option '-s' to start it as a normal Skript with the same decoration as normal FvwmScripts
+  - move Sebaros settings in a if loop
+  - made changes in Command line argument parsing to can handle more than on option without value
+  - integrate other colors for using applet as a script for better look
+  - fix bug that current day number won't show colorized if month or year changed
+  - remove old useless comment lines
+- add mouse action on conky_cpu and conky_clock button - right click to show menu - in
+  G2likeTopBar, HorizontalPanel and VerticalPanel
+- add some new vector icons to artworks/icons/scalable
+- change some vector icons in artworks/icons/scalable
+
 08/17/2013
 - add dependencies for coverlovin in control files for arch, deb and rpm
 - remove wm-icons package from recommended dependencies in /debian/control

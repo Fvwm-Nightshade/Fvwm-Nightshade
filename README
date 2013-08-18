@@ -22,7 +22,7 @@ desktop. But it can be configure by your own. It is good documented and
 shows you what is possible with this powerful window manager.
 
 ***********************************************************************
-************* ATTENTION: THIS IS THE DEVELOPMENT VERSION! *************
+************* ATTENTION: THIS IS A DEVELOPMENT VERSION!   *************
 *************         SOMETIMES IT DOESN'T WORK!          *************
 *************     SO INSTALL/USE IT ON YOUR OWN RISK!     *************
 ***********************************************************************
@@ -78,7 +78,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
          IconManager
 
 - Lock desk & screensaver (xscreensaver)
-- Personal menu via FvwmScript-PersonalMenu
+- Personal menu via FNS-Script-PersonalMenu
 - Background configurable with thumb browser (imagemagick and eterm)
 - Animation control of window moves
 - Simple "Run" command with FvwmForm
@@ -99,7 +99,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Splash screen
 - Print messages for needed apps for full config functionality in 
   .xsessions-error
-- Governor-tool FvwmScript-CPU-Performance to handle cpufreq
+- Governor-tool FNS-Script-CPU-Performance to handle cpufreq
 - Create thumbs with mini icon and name for iconified applications 
   instead of their icon
 - Build support for deb, rpm and Arch packages
@@ -110,9 +110,9 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 
 Requirements:
 =============
-Required:        Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
-                 xterm, conky, xscreensaver, feh, imagemagick, librsvg2, xwd
-                 stalonetray, cpufrequtils*, gksu
+Required:       Fvwm >= 2.6.6 (compiled with all features), python-2, 
+                python-xdg, xterm, conky, xscreensaver, feh, librsvg2, 
+                xwd, imagemagick, stalonetray, cpufrequtils*, gksu
 
 Recommended:     gnomes network manager, Volume Icon
 
@@ -138,7 +138,7 @@ them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues
 Mailinglist
 ===========
 There exist two mailing lists under
-common:     https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade
+common:        https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade
 developing:    https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers
 
 To post to this group, you have to do the following:
@@ -155,9 +155,9 @@ To post to this group, you have to do the following:
    the mailing list.
 
 To unsubscribe from this group, send email to 
-fvwmnightshade+unsubscribe@googlegroups.com
+<fvwmnightshade+unsubscribe@googlegroups.com>
 or
-fvwmnightshade-workers+unsubscribe@googlegroups.com
+<fvwmnightshade-workers+unsubscribe@googlegroups.com>
 
 
 Enjoy our work and hopefully you love Fvwm-Nightshade as we do :-)
