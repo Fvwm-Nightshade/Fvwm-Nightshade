@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		Kalende
-# Version:	1.0.1
+# Version:	1.1.0
 # Licence: 	GPL 2
 #
 # Description:	Calender applet based on FvwmScript
@@ -18,48 +18,28 @@
 #				-hcs
 #					set another highlight colorset
 #
+#				-s
+#					use applet as standalone script. Only usable with -fns
+#
 # Without parameters it starts with default settings from sebaro.
 #
 # Author:		sebaro	
 # Adjusted by:	Thomas Funk <t.funk@web.de>
 #
 # Created:	08/12/2012
-# Changed:	08/07/2013
+# Changed:	08/18/2013
 #-----------------------------------------------------------------------
 
 UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
-WindowLocaleTitle 	{Kalende}
-#WindowSize 			320 170
+WindowTitle 		{Kalende}
 WindowSize 			185 150
-#WindowPosition 187 610
-
-##### Global Styles by sebaro
-Colorset 10
-Font "xft:DejaVu Sans:size=10:bold"
 
 Init
 Begin
-    ##### Global Styles
-    Set $defaultColorset = 10
-    Set $highlightColorset = 10
-    Set $defaultFont = {DejaVu Sans}
-
-    ##### Widgets Styles
-    Set $dayNameBgColor = {#cccccc}
-    Set $dayNrBgColor = {#eeeeee}
-    Set $dayCurrBgColor = {#A4CDF9}
-
-    ##### Settings
-    Set $homeDir = (GetOutput {echo $[infostore.mScripts]} 1 -1) {/Kalende/}
-	Set $setFirstDay = {monday}
-
-	##### Widgets
-	Set $prevIcon = $homeDir {icons/left.png}
-	Set $nextIcon = $homeDir {icons/right.png}
-	Set $quitButton = $homeDir {icons/quit.png}
-
     ##### Commandline Arguments
     Set $FnsUseApplet = 0
+    Set $UseAppletAsScript = 0
+    Set $FNSUseAppletAsScript = 0
     Set $ColorsetChanged = 0
     Set $FontChanged = 0
     Set $i = 1
@@ -67,26 +47,33 @@ Begin
 
     While $arg <> {} Do
     Begin
+		Set $noValue = {false}
 		Set $j = (Add $i 1)
 		Set $value = (GetScriptArgument $j)
 
 		# Fvwm-Nightshade use widget
 		If $arg == {-fns} Then
 		Begin
+			Set $noValue = {true}
 			Set $FnsUseApplet = 1
 			
 			Set $defaultColorset = 25
-#			Set $defaultColorset = 10
 			Set $ColorsetChanged = 1
 			
 			Set $highlightColorset = 26
-#			Set $highlightColorset = 10
 			
 			If $FontChanged == 0 Then
 			Begin
 				Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
 				Set $FontChanged = 1
 			End
+		End
+
+		# use applet as script
+		If $arg == {-s} Then
+		Begin
+			Set $noValue = {true}
+			Set $UseAppletAsScript = 1
 		End
 
 		# other default colorset
@@ -107,13 +94,58 @@ Begin
 			Set $FontChanged = 1
 		End
 
-		If $arg == {-fns} Then
+		If $noValue == {true} Then
 			Set $i = (Add $i 1)
 		Else
 			Set $i = (Add $i 2)
 			
 		Set $arg = (GetScriptArgument $i)
     End
+
+    ##### change Settings if needed
+    If $UseAppletAsScript == 1 Then
+    Begin
+		If $FnsUseApplet == 1 Then
+			Set $FNSUseAppletAsScript = 1
+	End
+	
+    If $FnsUseApplet == 1 Then
+    Begin
+		Set $prevIcon = {left.svg:24x24}
+		Set $nextIcon = {right.svg:24x24}
+		Set $quitButton = {quit.png}
+		If $FNSUseAppletAsScript == 0 Then
+			ChangeWindowTitle {Applet-Kalende}
+		Else
+			Set $ColorsetChanged = 0
+	End
+	Else
+	Begin
+		If $FNSUseAppletAsScript == 0 Then
+		Begin
+			# settings from Sebaro
+			Set $defaultColorset = 10
+			Set $highlightColorset = 10
+			Set $ColorsetChanged = 1
+			Set $defaultFont = {DejaVu Sans}
+			Set $FontChanged = 1
+
+			Set $homeDir = (GetOutput {echo $[infostore.mScripts]} 1 -1) {/Kalende/}
+
+			Set $prevIcon = $homeDir {icons/left.png}
+			Set $nextIcon = $homeDir {icons/right.png}
+			Set $quitButton = $homeDir {icons/quit.png}
+		End
+	End
+	
+	Set $setFirstDay = {monday}
+
+    ##### Widgets Styles
+    Set $dayNameBgColor = {#cccccc}
+    Set $dayNrBgColor = {#eeeeee}
+    Set $dayCurrBgColor = {#A4CDF9}
+    Set $MonYearDefForeColor = {grey25}
+    Set $MonYearCurrForeColor = {#4c87c9}
 
     ##### change Global Styles if needed
     If $ColorsetChanged == 1 Then
@@ -134,18 +166,11 @@ Begin
 	End
 	Set $titleFont = {xft:}$defaultFont{:size=8:bold}
 
-    ##### change Settings if needed
-    If $FnsUseApplet == 1 Then
-    Begin
-#		Set $homeDir = (GetOutput {echo $[FVWM_USERDIR]} 1 -1) {/scripts/}
-		Set $prevIcon = {left.png}
-		Set $nextIcon = {right.png}
-		Set $quitButton = {quit.png}
-	End
-	
 	# Debug
 	#Do {echo -----------------------}
 	#Do {echo FnsUseApplet: }$FnsUseApplet
+	#Do {echo UseAppletAsScript: }$UseAppletAsScript
+	#Do {echo FNSUseAppletAsScript: }$FNSUseAppletAsScript
 	#Do {echo ColorsetChanged: }$ColorsetChanged
 	#Do {echo defaultColorset: }$defaultColorset
 	#Do {echo highlightColorset: }$highlightColorset
@@ -172,7 +197,13 @@ Begin
     ##### Variables
     Set $weekFirstDay = $setFirstDay
     Set $changeCal = {month}
-    ChangeColorset 2 $highlightColorset
+    If $FNSUseAppletAsScript == 1 Then
+    Begin
+		ChangeForeColor 2 $MonYearCurrForeColor
+		ChangeForeColor 3 $MonYearDefForeColor
+	End
+	Else
+		ChangeColorset 2 $highlightColorset
     Set $goAction = {none}
 
     ##### Calendar
@@ -394,11 +425,8 @@ Begin
 			ChangeBackColor $dayNrWidget $dayNrBgColor
 			ChangeTitle $dayNrWidget $i
 			
-			If (GetOutput {date +"%m%Y" | sed -e "s/^0//"} 1 -1) ==  $currDate Then
-			Begin
-				If (GetOutput {date +"%d" | sed -e "s/^0//"} 1 -1) == $i Then
-					ChangeBackColor $dayNrWidget $dayCurrBgColor
-			End
+			If (GetOutput {date +"%d" | sed -e "s/^0//"} 1 -1) == $i Then
+				ChangeBackColor $dayNrWidget $dayCurrBgColor
 		End  
 		
 		Set $doRefresh = {false}
@@ -432,9 +460,7 @@ End
 Widget			1
 Property
     Type		ItemDraw
-#    Icon		left.png
     Size		22 22
-#    Position	20 10
     Position	5 5
     Flags		NoFocus NoReliefString
 Main
@@ -450,10 +476,7 @@ End
 Widget			2
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=12:bold
-#    Size		140 20
     Size		70 20
-#    Position	45 10
     Position	25 5
     Flags		NoFocus NoReliefString Right
 Main
@@ -461,8 +484,16 @@ Case message of
     SingleClic :
     Begin
 		Set $changeCal = {month}
-		ChangeColorset 2 $highlightColorset
-		ChangeColorset 3 $defaultColorset
+		If $FNSUseAppletAsScript == 0 Then
+		Begin
+			ChangeColorset 2 $highlightColorset
+			ChangeColorset 3 $defaultColorset
+		End
+		Else
+		Begin
+			ChangeForeColor 2 $MonYearCurrForeColor
+			ChangeForeColor 3 $MonYearDefForeColor
+		End
     End
 End
 
@@ -470,10 +501,7 @@ End
 Widget			3
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=12:bold
-#    Size		100 20
     Size		45 20
-#    Position	190 10
     Position	100 5
     Flags		NoFocus NoReliefString Left
 Main
@@ -481,8 +509,16 @@ Case message of
     SingleClic :
     Begin
 		Set $changeCal = {year}
-		ChangeColorset 3 $highlightColorset
-		ChangeColorset 2 $defaultColorset
+		If $FNSUseAppletAsScript == 0 Then
+		Begin
+			ChangeColorset 3 $highlightColorset
+			ChangeColorset 2 $defaultColorset
+		End
+		Else
+		Begin
+			ChangeForeColor 3 $MonYearCurrForeColor
+			ChangeForeColor 2 $MonYearDefForeColor
+		End
     End
 End
 
@@ -490,9 +526,7 @@ End
 Widget			4
 Property
     Type		ItemDraw
-#    Icon		right.png
     Size		22 22
-#    Position	275 10
     Position	145 5
     Flags		NoFocus NoReliefString
 Main
@@ -508,10 +542,7 @@ End
 Widget			5
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	20 40
     Position	5 30
     Flags		NoFocus NoReliefString
 Main
@@ -527,10 +558,7 @@ End
 Widget			6
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	60 40
     Position	30 30
     Flags		NoFocus NoReliefString
 Main
@@ -541,10 +569,7 @@ End
 Widget			7
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	100 40
     Position	55 30
     Flags		NoFocus NoReliefString
 Main
@@ -555,10 +580,7 @@ End
 Widget			8
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	140 40
     Position	80 30
     Flags		NoFocus NoReliefString
 Main
@@ -569,10 +591,7 @@ Main
 Widget			9
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	180 40
     Position	105 30
     Flags		NoFocus NoReliefString
 Main
@@ -583,10 +602,7 @@ End
 Widget			10
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	220 40
     Position	130 30
     Flags		NoFocus NoReliefString
 Main
@@ -597,10 +613,7 @@ End
 Widget			11
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	260 40
     Position	155 30
     Flags		NoFocus NoReliefString
 Main
@@ -611,10 +624,7 @@ End
 Widget			12
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	20 57
     Position	5 47
     Flags		NoFocus NoReliefString Right
 Main
@@ -625,10 +635,7 @@ End
 Widget			13
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	60 57
     Position	30 47
     Flags		NoFocus NoReliefString Right
 Main
@@ -639,10 +646,7 @@ End
 Widget			14
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	100 57
     Position	55 47
     Flags		NoFocus NoReliefString Right
 Main
@@ -653,10 +657,7 @@ End
 Widget			15
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	140 57
     Position	80 47
     Flags		NoFocus NoReliefString Right
 Main
@@ -667,10 +668,7 @@ End
 Widget			16
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	180 57
     Position	105 47
     Flags		NoFocus NoReliefString Right
 Main
@@ -681,10 +679,7 @@ End
 Widget			17
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	220 57
     Position	130 47
     Flags		NoFocus NoReliefString Right
 Main
@@ -695,10 +690,7 @@ Main
 Widget			18
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	260 57
     Position	155 47
     Flags		NoFocus NoReliefString Right
 Main
@@ -709,10 +701,7 @@ End
 Widget			19
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	20 74
     Position	5 64
     Flags		NoFocus NoReliefString Right
 Main
@@ -723,10 +712,7 @@ End
 Widget			20
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	60 74
     Position	30 64
     Flags		NoFocus NoReliefString Right
 Main
@@ -737,10 +723,7 @@ Main
 Widget			21
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	100 74
     Position	55 64
     Flags		NoFocus NoReliefString Right
 Main
@@ -751,10 +734,7 @@ End
 Widget			22
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	140 74
     Position	80 64
     Flags		NoFocus NoReliefString Right
 Main
@@ -765,10 +745,7 @@ End
 Widget			23
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	180 74
     Position	105 64
     Flags		NoFocus NoReliefString Right
 Main
@@ -779,8 +756,6 @@ End
 Widget			24
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
     Position	130 64
     Flags		NoFocus NoReliefString Right
@@ -792,8 +767,6 @@ End
 Widget			25
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
     Position	155 64
     Flags		NoFocus NoReliefString Right
@@ -805,10 +778,7 @@ End
 Widget			26
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	20 91
     Position	5 81
     Flags		NoFocus NoReliefString Right
 Main
@@ -819,10 +789,7 @@ End
 Widget			27
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	60 91
     Position	30 81
     Flags		NoFocus NoReliefString Right
 Main
@@ -833,10 +800,7 @@ End
 Widget			28
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	100 91
     Position	55 81
     Flags		NoFocus NoReliefString Right
 Main
@@ -847,10 +811,7 @@ End
 Widget			29
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	140 91
     Position	80 81
     Flags		NoFocus NoReliefString Right
 Main
@@ -861,10 +822,7 @@ End
 Widget			30
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	180 91
     Position	105 81
     Flags		NoFocus NoReliefString Right
 Main
@@ -875,10 +833,7 @@ End
 Widget			31
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	220 91
     Position	130 81
     Flags		NoFocus NoReliefString Right
 Main
@@ -889,10 +844,7 @@ End
 Widget			32
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	260 91
     Position	155 81
     Flags		NoFocus NoReliefString Right
 Main
@@ -903,10 +855,7 @@ End
 Widget			33
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	20 108
     Position	5 98
     Flags		NoFocus NoReliefString Right
 Main
@@ -917,10 +866,7 @@ End
 Widget			34
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	60 108
     Position	30 98
     Flags		NoFocus NoReliefString Right
 Main
@@ -931,10 +877,7 @@ End
 Widget			35
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	100 108
     Position	55 98
     Flags		NoFocus NoReliefString Right
 Main
@@ -945,10 +888,7 @@ End
 Widget			36
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	140 108
     Position	80 98
     Flags		NoFocus NoReliefString Right
 Main
@@ -959,10 +899,7 @@ End
 Widget			37
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	180 108
     Position	105 98
     Flags		NoFocus NoReliefString Right
 Main
@@ -973,10 +910,7 @@ End
 Widget			38
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	220 108
     Position	130 98
     Flags		NoFocus NoReliefString Right
 Main
@@ -987,10 +921,7 @@ End
 Widget			39
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	260 108
     Position	155 98
     Flags		NoFocus NoReliefString Right
 Main
@@ -1001,10 +932,7 @@ End
 Widget			40
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	20 125
     Position	5 115
     Flags		NoFocus NoReliefString Right
 Main
@@ -1015,10 +943,7 @@ End
 Widget			41
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	60 125
     Position	30 115
     Flags		NoFocus NoReliefString Right
 Main
@@ -1029,10 +954,7 @@ End
 Widget			42
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	100 125
     Position	55 115
     Flags		NoFocus NoReliefString Right
 Main
@@ -1043,10 +965,7 @@ End
 Widget			43
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	140 125
     Position	80 115
     Flags		NoFocus NoReliefString Right
 Main
@@ -1057,10 +976,7 @@ End
 Widget			44
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	180 125
     Position	105 115
     Flags		NoFocus NoReliefString Right
 Main
@@ -1071,10 +987,7 @@ End
 Widget			45
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	220 125
     Position	130 115
     Flags		NoFocus NoReliefString Right
 Main
@@ -1085,10 +998,7 @@ End
 Widget			46
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	260 125
     Position	155 115
     Flags		NoFocus NoReliefString Right
 Main
@@ -1099,10 +1009,7 @@ End
 Widget			47
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	20 142
     Position	5 132
     Flags		NoFocus NoReliefString Right
 Main
@@ -1113,10 +1020,7 @@ End
 Widget			48
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	60 142
     Position	30 132
     Flags		NoFocus NoReliefString Right
 Main
@@ -1127,10 +1031,7 @@ End
 Widget			49
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	100 142
     Position	55 132
     Flags		NoFocus NoReliefString Right
 Main
@@ -1141,10 +1042,7 @@ End
 Widget			50
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	140 142
     Position	80 132
     Flags		NoFocus NoReliefString Right
 Main
@@ -1155,10 +1053,7 @@ End
 Widget			51
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	180 142
     Position	105 132
     Flags		NoFocus NoReliefString Right
 Main
@@ -1169,10 +1064,7 @@ End
 Widget			52
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	220 142
     Position	130 132
     Flags		NoFocus NoReliefString Right
 Main
@@ -1183,10 +1075,7 @@ End
 Widget			53
 Property
     Type		ItemDraw
-#    Font		xft:DejaVu Sans:size=10:bold
-#    Size		38 15
     Size		23 15
-#    Position	260 142
     Position	155 132
     Flags		NoFocus NoReliefString Right
 Main
@@ -1198,7 +1087,6 @@ Property
     Type		ItemDraw
     Icon		quit.png
     Size		16 16
-#    Position	303 1
 	Position		168 1
     Flags		NoFocus NoReliefString
 Main
