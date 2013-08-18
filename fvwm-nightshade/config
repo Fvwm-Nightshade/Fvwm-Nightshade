@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.4
+InfoStoreAdd ns_version 0.7.4-20130818
 # Copyright (C) 2013
 #
 # Authors:
@@ -113,16 +113,16 @@ InfoStoreAdd ns_version 0.7.4
 #    7.3 FvwmBanner
 #    7.4 FvwmEvent
 #        7.4.1 Common FvwmEvents
-#	 7.4.2 Sound FvwmEvents
+#        7.4.2 Sound FvwmEvents
 #    7.5 FvwmForm
 #        7.5.1 RunCommand
-#	 7.5.2 About box
-#	 7.5.2 Message box
-#	 7.5.2 Show Colorset
+#        7.5.2 About box
+#        7.5.2 Message box
+#        7.5.2 Show Colorset
 #    7.6 FvwmIdent
 #    7.7 FvwmScript
 #    7.8 Others
-# 		7.8.1 AppletIconMan
+#        7.8.1 AppletIconMan
 # 8. FUNCTIONS
 #    8.1 Startup
 #        8.1.1 Start
@@ -133,7 +133,7 @@ InfoStoreAdd ns_version 0.7.4
 # 9. MENUS
 #    9.1 Root menu
 #    9.2 Help menu
-#    9.3 Modules menu
+#    9.3 Modules and Applets menus
 #    9.4 Configuration menu
 #    9.5 Fvwm Quit menu
 #    9.6 Window Ops menus
@@ -249,30 +249,30 @@ BugOpts FlickeringMoveWorkaround True
 #=======================================================================
 # 2.1 Cursors
 #=======================================================================
-CursorStyle ROOT			left_ptr			black	white
-CursorStyle TITLE			top_left_arrow		black	white
-CursorStyle DEFAULT			top_left_arrow		black	white
-CursorStyle SYS				hand2				black	white
-CursorStyle MENU			top_left_arrow		black	white
-CursorStyle POSITION		top_left_corner		black	white
-CursorStyle MOVE			fleur				black	white
-CursorStyle RESIZE			sizing				black	white
-CursorStyle WAIT			watch				black	white
-CursorStyle SELECT			crosshair			black	white
-CursorStyle DESTROY			pirate				black	white
-CursorStyle TOP				top_side			black	white
-CursorStyle RIGHT			right_side			black	white
-CursorStyle BOTTOM			bottom_side			black	white
-CursorStyle LEFT			left_side			black	white
-CursorStyle TOP_LEFT		top_left_corner		black	white
-CursorStyle TOP_RIGHT		top_right_corner	black	white
-CursorStyle BOTTOM_LEFT		bottom_left_corner	black	white
-CursorStyle BOTTOM_RIGHT	bottom_right_corner	black	white
-CursorStyle TOP_EDGE		top_side			black	white
-CursorStyle RIGHT_EDGE		right_side			black	white
-CursorStyle BOTTOM_EDGE		bottom_side			black	white
-CursorStyle LEFT_EDGE		left_side			black	white
-CursorStyle STROKE			plus				black	white
+CursorStyle ROOT            left_ptr                black    white
+CursorStyle TITLE           top_left_arrow          black    white
+CursorStyle DEFAULT         top_left_arrow          black    white
+CursorStyle SYS             hand2                   black    white
+CursorStyle MENU            top_left_arrow          black    white
+CursorStyle POSITION        top_left_corner         black    white
+CursorStyle MOVE            fleur                   black    white
+CursorStyle RESIZE          sizing                  black    white
+CursorStyle WAIT            watch                   black    white
+CursorStyle SELECT          crosshair               black    white
+CursorStyle DESTROY         pirate                  black    white
+CursorStyle TOP             top_side                black    white
+CursorStyle RIGHT           right_side              black    white
+CursorStyle BOTTOM          bottom_side             black    white
+CursorStyle LEFT            left_side               black    white
+CursorStyle TOP_LEFT        top_left_corner         black    white
+CursorStyle TOP_RIGHT       top_right_corner        black    white
+CursorStyle BOTTOM_LEFT     bottom_left_corner      black    white
+CursorStyle BOTTOM_RIGHT    bottom_right_corner     black    white
+CursorStyle TOP_EDGE        top_side                black    white
+CursorStyle RIGHT_EDGE      right_side              black    white
+CursorStyle BOTTOM_EDGE     bottom_side             black    white
+CursorStyle LEFT_EDGE       left_side               black    white
+CursorStyle STROKE          plus                    black    white
 
 
 #=======================================================================
@@ -514,26 +514,40 @@ Style FvwmApplet StaysOnBottom, WindowListSkip
 # 4.1.2 Icons
 #***********************************************************************
 # If a window has no icon associated, then the below will use.
-Style Untitled    EWMHMiniIconOverride, Icon question2.svg:48x48, MiniIcon question2.svg:16x16
-Style NoClass     UseStyle Untitled
-Style NoResource  UseStyle Untitled
-Style X*          UseStyle Untitled
-Style error       EWMHMiniIconOverride, Icon bomb.svg:48x48, MiniIcon bomb.svg:16x16
-Style FvwmIdent   EWMHMiniIconOverride, Icon question.svg:48x48, MiniIcon question.svg:16x16
+Style Untitled        EWMHMiniIconOverride, Icon question2.svg:48x48, MiniIcon question2.svg:16x16
+Style NoClass         UseStyle Untitled
+Style NoResource      UseStyle Untitled
+Style X*              EWMHMiniIconOverride, Icon x.svg:48x48, MiniIcon x.svg:16x16
+Style error           EWMHMiniIconOverride, Icon bomb.svg:48x48, MiniIcon bomb.svg:16x16
+Style FvwmIdent       EWMHMiniIconOverride, Icon question.svg:48x48, MiniIcon question.svg:16x16
+Style FvwmConsole     EWMHMiniIconOverride, Icon fvwm_footprint.svg:48x48, MiniIcon fvwm_footprint.svg:16x16
+Style FvwmForm        EWMHMiniIconOverride, Icon fvwm_footprint.svg:48x48, MiniIcon fvwm_footprint.svg:16x16
+Style FvwmScript      EWMHMiniIconOverride, Icon fvwm_footprint.svg:48x48, MiniIcon fvwm_footprint.svg:16x16
 
 #-----------------------------------------------------------------------
 # FNS related icons
 #-----------------------------------------------------------------------
-Style FNS-Script-PersonalMenu		EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
+Style FNS-Form-BaseSetup            EWMHMiniIconOverride, Icon icon_fns.svg:48x48, MiniIcon icon_fns.svg:16x16
+Style FNS-Script-AppletConfigurator EWMHMiniIconOverride, Icon plugin.svg:48x48, MiniIcon plugin.svg:16x16
+Style FNS-Script-PersonalMenu       EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
+Style FNS-Script-FileBrowser        EWMHMiniIconOverride, Icon filemanager.svg:48x48, MiniIcon filemanager.svg:16x16
+Style FNS-Script-PlaylistCreator    EWMHMiniIconOverride, Icon playlist-creator.svg:48x48, MiniIcon playlist-creator.svg:16x16
+Style FNS-Script-CpuPerformance     EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
+Style Chrono                        EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon Chrono.svg:16x16
+Style Kalende                       EWMHMiniIconOverride, Icon Kalende.svg:48x48, MiniIcon Kalende.svg:16x16
 
 
 #-----------------------------------------------------------------------
 # FvwmApplets
 #-----------------------------------------------------------------------
-Style Plaia     EWMHMiniIconOverride, Icon Plaia_Applet.png, MiniIcon Plaia_Applet.png
-Style Pagina    EWMHMiniIconOverride, Icon Pagina_Applet.png, MiniIcon Pagina_Applet.png
-Style Meteo     EWMHMiniIconOverride, Icon Meteo_Applet.png, MiniIcon Meteo_Applet.png
-Style Kalende   EWMHMiniIconOverride, Icon Kalende_Applet.png, MiniIcon Kalende_Applet.png
+Style Applet-Plaia          EWMHMiniIconOverride, Icon Plaia.svg:48x48, MiniIcon Plaia_Applet.png
+Style Applet-Pagina         EWMHMiniIconOverride, Icon Pagina.svg:48x48, MiniIcon Pagina_Applet.png
+Style Applet-Meteo          EWMHMiniIconOverride, Icon Meteo.svg:48x48, MiniIcon Meteo_Applet.png
+Style Applet-DriveInn       EWMHMiniIconOverride, Icon DriveInn.svg:48x48, MiniIcon DriveInn_Applet.png
+Style Applet-Chrono         EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon Chrono_Applet.png
+Style Applet-Empidy         EWMHMiniIconOverride, Icon Empidy.svg:48x48, MiniIcon Empidy_Applet.png
+Style Applet-Timpul         EWMHMiniIconOverride, Icon Timpul.svg:48x48, MiniIcon Timpul_Applet.png
+Style Applet-Kalende        EWMHMiniIconOverride, Icon Kalende.svg:48x48, MiniIcon Kalende_Applet.png
 
 
 ########################################################################
@@ -586,7 +600,7 @@ Style FvwmBanner CirculateSkip
 #
 # +------------+
 # | ||  ||  || |
-# |	       |
+# |            |
 # +------------+
 #   1   2   3
 
@@ -614,29 +628,29 @@ Style FvwmBanner CirculateSkip
 #***********************************************************************
 # 6.1.1. Pointer in Root or anywhere
 #***********************************************************************
-#     Button	Context Modifi 	Function
-Mouse 1			R		A       Menu MenuRoot
-Mouse 2       	R       A		WindowList
-Mouse 3       	RFT     A		Menu MenuDesktopOps
+#     Button    Context Modifi      Function
+Mouse 1         R       A           Menu MenuRoot
+Mouse 2         R       A           WindowList
+Mouse 3         RFT     A           Menu MenuDesktopOps
 
 #-----------------------------------------------------------------------
 # Roll mouse wheel anywhere with SHIFT-ALT + cursor left/right for goto page
 #-----------------------------------------------------------------------
-Mouse 4       	A       SC      FuncGotoPage +1p +0p
-Mouse 5       	A       SC      FuncGotoPage -1p +0p
+Mouse 4         A       SC          FuncGotoPage +1p +0p
+Mouse 5         A       SC          FuncGotoPage -1p +0p
 
 #-----------------------------------------------------------------------
 # Roll mouse wheel anywhere with SHIFT-CTRL + cursor left/right for goto page
 # with active window
 #-----------------------------------------------------------------------
-Mouse 4       	A       SM      Current FuncMoveWindowToPage +1p +0p
-Mouse 5       	A       SM      Current FuncMoveWindowToPage -1p +0p
+Mouse 4         A       SM          Current FuncMoveWindowToPage +1p +0p
+Mouse 5         A       SM          Current FuncMoveWindowToPage -1p +0p
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT in Root
 #-----------------------------------------------------------------------
-#     Button	Context Modifi 	Function
-Mouse 0			R       SCM		FuncShowMessage  "Mouse Bindings for Root area" \
+#     Button    Context Modifi     Function
+Mouse 0         R       SCM        FuncShowMessage  "Mouse Bindings for Root area" \
 "Mouse 1:   Root menu" \
 "Mouse 2:   Window list" \
 "Mouse 3:   Desktop Oops menu" \
@@ -656,46 +670,46 @@ Mouse 0			R       SCM		FuncShowMessage  "Mouse Bindings for Root area" \
 #***********************************************************************
 # 6.1.3. Pointer in Window Decorations
 #***********************************************************************
-#     Button	Context Modifi 	Function
+#     Button    Context Modifi      Function
 
 #-----------------------------------------------------------------------
 # Button 1 in the titlebar, with any modifiers, gives
 # move <- drag, resize <- click or maximize <- double click
 #-----------------------------------------------------------------------
-Mouse 1			T		A		FuncMoveOrRaiseOrMaximize
+Mouse 1         T       A           FuncMoveOrRaiseOrMaximize
 #-----------------------------------------------------------------------
 # Button 1 in the corners or sides, with any modifiers, gives
 # resize <- drag, raise <- click or maximize <- double click
 #-----------------------------------------------------------------------
-Mouse 1			SF		A		FuncResizeOrRaiseOrMaximize
+Mouse 1         SF      A           FuncResizeOrRaiseOrMaximize
 #-----------------------------------------------------------------------
 # Button 2 in the titlebar, corners or sides, with any modifiers, gives
 # move <- drag, raise/lower <- click
 #-----------------------------------------------------------------------
-Mouse 2			TSF		A		FuncMoveOrRaiseLower
+Mouse 2         TSF     A           FuncMoveOrRaiseLower
 #-----------------------------------------------------------------------
 # Button 2 in the window, with ALT key, gives
 # move <- drag, raise/lower <- click
 #-----------------------------------------------------------------------
-Mouse 2			W		M		FuncMoveOrRaiseLower
+Mouse 2         W       M           FuncMoveOrRaiseLower
 #-----------------------------------------------------------------------
 # Button 3 in the titlebar, corners or sides, with any modifiers, gives
 # WindowOps2 menu <- click, with ALT key WindowOps menu <- click
 #-----------------------------------------------------------------------
-Mouse 3			TSF		A		Menu MenuWindowOpsTrimmed
-Mouse 3			TSF		M		Menu MenuWindowOpsFull
+Mouse 3         TSF     A           Menu MenuWindowOpsTrimmed
+Mouse 3         TSF     M           Menu MenuWindowOpsFull
 #-----------------------------------------------------------------------
 # Roll mouse wheel on Titlebars to shade/unshade
 #-----------------------------------------------------------------------
-Mouse 4			T		A		FuncWheelToggleShade True
-Mouse 5			T       A       FuncWheelToggleShade False
+Mouse 4         T       A           FuncWheelToggleShade True
+Mouse 5         T       A           FuncWheelToggleShade False
 
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT to Pointer in Window Decorations
 #-----------------------------------------------------------------------
-#     Button	Context Modifi 	Function
-Mouse 0			T		SCM     FuncShowMessage  "Mouse Bindings for Titlebar" \
+#     Button    Context Modifi      Function
+Mouse 0         T       SCM         FuncShowMessage  "Mouse Bindings for Titlebar" \
 "Mouse 1:   Drag moves window" \
 "           Maximize on double click" \
 "Mouse 2:   Drag moves window" \
@@ -705,7 +719,7 @@ Mouse 0			T		SCM     FuncShowMessage  "Mouse Bindings for Titlebar" \
 "Mouse 4/5: Shade/unshade window" \
 "           with rolling wheel up/down"
 
-Mouse 0		SF			SCM		FuncShowMessage  "Mouse Bindings for Corners and Sides" \
+Mouse 0         SF      SCM         FuncShowMessage  "Mouse Bindings for Corners and Sides" \
 "Mouse 1:   Drag resize window" \
 "           Maximize on double click" \
 "Mouse 2:   Drag moves window" \
@@ -713,7 +727,7 @@ Mouse 0		SF			SCM		FuncShowMessage  "Mouse Bindings for Corners and Sides" \
 "Mouse 3:   WindowOpsTrimmed menu with click" \
 "           WindowOpsFull menu with ALT + click"
 
-Mouse 0		W			SCM		FuncShowMessage  "Mouse Bindings for Window area" \
+Mouse 0         W       SCM         FuncShowMessage  "Mouse Bindings for Window area" \
 "Mouse 1:   Root menu with ALT + click" \
 "Mouse 2:   Drag + ALT moves window" \
 "           Raise or lower with ALT + click" \
@@ -726,40 +740,40 @@ Mouse 0		W			SCM		FuncShowMessage  "Mouse Bindings for Window area" \
 #***********************************************************************
 # 6.1.4. Pointer in Icons
 #***********************************************************************
-#     Button	Context Modifi 	Function
+#     Button    Context Modifi     Function
 
 #-----------------------------------------------------------------------
 # Button 1 in icon, with any modifiers, gives
 # move <- drag, deiconify <- double click
 #-----------------------------------------------------------------------
-Mouse 1			I		A		FuncMoveOrIconify
+Mouse 1         I       A          FuncMoveOrIconify
 #-----------------------------------------------------------------------
 # Button 2 in icon, with any modifiers, gives
 # deiconify <- click
 #-----------------------------------------------------------------------
-Mouse 2			I		A		FuncIconify
+Mouse 2         I       A           FuncIconify
 #-----------------------------------------------------------------------
 # Button 2 in icon, with CTRL key, gives
 # deiconify all icons from the same resource group <- click
 #-----------------------------------------------------------------------
-Mouse 2			I		C		FuncIconifySameResource toggle
+Mouse 2         I       C           FuncIconifySameResource toggle
 #-----------------------------------------------------------------------
 # Button 3 in icon, with any modifiers, gives
 # WindowOps2 menu <- click
 #-----------------------------------------------------------------------
-Mouse 3			I		A		Menu MenuWindowOpsTrimmed
+Mouse 3         I       A           Menu MenuWindowOpsTrimmed
 #-----------------------------------------------------------------------
 # Button 3 in icon, with CTRL key, gives
 # WindowGroupOps menu
 #-----------------------------------------------------------------------
-Mouse 3			I		C		Menu MenuWindowGroupOps
+Mouse 3         I       C           Menu MenuWindowGroupOps
 
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT to Pointer in Icons
 #-----------------------------------------------------------------------
-#     Button	Context Modifi 	Function
-Mouse 0			I       SCM     FuncShowMessage  "Mouse Bindings for Icons" \
+#     Button    Context Modifi      Function
+Mouse 0         I       SCM         FuncShowMessage  "Mouse Bindings for Icons" \
 "Mouse 1:   Drag moves icon" \
 "           Deiconify with double click" \
 "           Root menu with ALT + click" \
@@ -772,14 +786,14 @@ Mouse 0			I       SCM     FuncShowMessage  "Mouse Bindings for Icons" \
 #***********************************************************************
 # 6.1.5. Pointer in Window (and in Icon for consistency)
 #***********************************************************************
-#     Button	Context Modifi 	Function
-Mouse 1			WI		M		Menu MenuRoot
+#     Button    Context Modifi      Function
+Mouse 1         WI      M           Menu MenuRoot
 
 #***********************************************************************
 # 6.1.6. Pointer in FvwmApplets
 #***********************************************************************
-#     Button	Context Modifi 	Function
-Mouse 3         W       A       ThisWindow ("FvwmApplet") Popup MenuAppletOps
+#     Button    Context Modifi      Function
+Mouse 3         W       A           ThisWindow ("FvwmApplet") Popup MenuAppletOps
 
 
 #=======================================================================
@@ -801,62 +815,63 @@ Load .bindings
 #-----------------------------------------------------------------------
 #STROKE 2
 #-----------------------------------------------------------------------
-#Mouse	3	R	N	StrokeFunc FeedBack DrawMotion
-#Mouse	3 	W 	M 	StrokeFunc FeedBack DrawMotion
+#     Button    Context Modifi      Function
+#Mouse    3    R    N    StrokeFunc FeedBack DrawMotion
+#Mouse    3     W     M     StrokeFunc FeedBack DrawMotion
 
 #-----------------------------------------------------------------------
 #STROKE 2 We need to redefine the default bindings
 #-----------------------------------------------------------------------
-#Stroke	0	0 	RN 	WindowList mouse -1p -1p
-#Stroke	0	0	WM	WindowList mouse -1p -1p
+#Stroke    0    0     RN     WindowList mouse -1p -1p
+#Stroke    0    0    WM    WindowList mouse -1p -1p
 
 #-----------------------------------------------------------------------
 #PREF 11
 #STROKE 2 A | from the top to the bottom
 #-----------------------------------------------------------------------
-#Stroke	N852	0	RN	Exec exec xterm
-#Stroke	N852	0	WM       Exec exec xterm
+#Stroke    N852    0    RN    Exec exec xterm
+#Stroke    N852    0    WM       Exec exec xterm
 
 #-----------------------------------------------------------------------
 #STROKE 2 A | from the bottom to the top
 #-----------------------------------------------------------------------
-#Stroke	N258	0	RN	Exec exec emacs
-#Stroke	N258	0	WM	Exec exec emacs
+#Stroke    N258    0    RN    Exec exec emacs
+#Stroke    N258    0    WM    Exec exec emacs
 
 #-----------------------------------------------------------------------
 #STROKE 2 A / from the bottom to the top
 #-----------------------------------------------------------------------
-#Stroke	N159	0	RN	Exec exec xfm
-#Stroke	N159	0	WM	Exec exec xfm
+#Stroke    N159    0    RN    Exec exec xfm
+#Stroke    N159    0    WM    Exec exec xfm
 
 #-----------------------------------------------------------------------
 #STROKE 2 A C from the top
 #-----------------------------------------------------------------------
-#Stroke	N9874123 0	RN	Exec exec xcalc
-#Stroke	N9874123 0	WM	Exec exec xcalc
+#Stroke    N9874123 0    RN    Exec exec xcalc
+#Stroke    N9874123 0    WM    Exec exec xcalc
 
 #-----------------------------------------------------------------------
 #STROKE 11 A N (from the bottom)
 #-----------------------------------------------------------------------
-#Stroke	7415963	 0	RN	Exec exec mozilla
-#Stroke	74148963 0	RN	Exec exec mozilla
-#Stroke	74158963 0	RN	Exec exec mozilla
-#Stroke	7418963	 0	RN	Exec exec mozilla
-#Stroke	415963	 0	RN	Exec exec mozilla
+#Stroke    7415963     0    RN    Exec exec mozilla
+#Stroke    74148963 0    RN    Exec exec mozilla
+#Stroke    74158963 0    RN    Exec exec mozilla
+#Stroke    7418963     0    RN    Exec exec mozilla
+#Stroke    415963     0    RN    Exec exec mozilla
 #
-#Stroke	7415963	 0	WM	Exec exec mozilla
-#Stroke	74148963 0	WM	Exec exec mozilla
-#Stroke	74158963 0	WM	Exec exec mozilla
-#Stroke	7418963	 0	WM	Exec exec mozilla
-#Stroke	415963	 0	WM	Exec exec mozilla
+#Stroke    7415963     0    WM    Exec exec mozilla
+#Stroke    74148963 0    WM    Exec exec mozilla
+#Stroke    74158963 0    WM    Exec exec mozilla
+#Stroke    7418963     0    WM    Exec exec mozilla
+#Stroke    415963     0    WM    Exec exec mozilla
 
 #-----------------------------------------------------------------------
 #STROKE 4 A clockwise box from the top left
 #-----------------------------------------------------------------------
-#Stroke	N78963214  0	RN	FvwmForm FvwmForm-QuitVerify
-#Stroke	N789632147 0	RN	FvwmForm FvwmForm-QuitVerify
-#Stroke	N78963214  0	WM	FvwmForm FvwmForm-QuitVerify
-#Stroke	N789632147 0	WM	FvwmForm FvwmForm-QuitVerify
+#Stroke    N78963214  0    RN    FvwmForm FvwmForm-QuitVerify
+#Stroke    N789632147 0    RN    FvwmForm FvwmForm-QuitVerify
+#Stroke    N78963214  0    WM    FvwmForm FvwmForm-QuitVerify
+#Stroke    N789632147 0    WM    FvwmForm FvwmForm-QuitVerify
 
 
 
@@ -899,7 +914,7 @@ DestroyModuleConfig FvwmBanner: *
 # 7.4.1 Common FvwmEvents
 #***********************************************************************
 DestroyModuleConfig FvwmEventCommon: *
-*FvwmEventCommon: deiconify	DeThumbnail
+*FvwmEventCommon: deiconify    DeThumbnail
 
 #***********************************************************************
 # 7.4.1 Sound FvwmEvents
@@ -953,28 +968,28 @@ DestroyModuleConfig  FvwmForm-RunCommand: *
 #***********************************************************************
 DestroyModuleConfig FvwmForm-About: *
 *FvwmForm-About: WarpPointer
-*FvwmForm-About: Title	"$[gt.About]"
-*FvwmForm-About: Font	10x20
-*FvwmForm-About: Line	center
-*FvwmForm-About: Text	"FVWM-Nightshade"
-*FvwmForm-About: Font	8x13bold
-*FvwmForm-About: Line	center
-*FvwmForm-About: Text	"$[gt.Version]: $[infostore.ns_version]"
-*FvwmForm-About: Line	center
-*FvwmForm-About: Line	center
-*FvwmForm-About: Line	center
-*FvwmForm-About: Text	"$[gt.Authors]:"
-*FvwmForm-About: Font	8x13
-*FvwmForm-About: Line	center
-*FvwmForm-About: Text	"Thomas Funk <t.funk@web.de>"
-*FvwmForm-About: Line	center
-*FvwmForm-About: Text	"Bernhard Popp <kermit.popp@googlemail.com>"
-*FvwmForm-About: Line	center
-*FvwmForm-About: Line	center
-*FvwmForm-About: Line	center
-*FvwmForm-About: Button quit " $[gt.Close] " ^M
-*FvwmForm-About: Command Nop
-*FvwmForm-About: Line	center
+*FvwmForm-About: Title      "$[gt.About]"
+*FvwmForm-About: Font       10x20
+*FvwmForm-About: Line       center
+*FvwmForm-About: Text       "FVWM-Nightshade"
+*FvwmForm-About: Font       8x13bold
+*FvwmForm-About: Line       center
+*FvwmForm-About: Text       "$[gt.Version]: $[infostore.ns_version]"
+*FvwmForm-About: Line       center
+*FvwmForm-About: Line       center
+*FvwmForm-About: Line       center
+*FvwmForm-About: Text       "$[gt.Authors]:"
+*FvwmForm-About: Font       8x13
+*FvwmForm-About: Line       center
+*FvwmForm-About: Text       "Thomas Funk <t.funk@web.de>"
+*FvwmForm-About: Line       center
+*FvwmForm-About: Text       "Bernhard Popp <kermit.popp@googlemail.com>"
+*FvwmForm-About: Line       center
+*FvwmForm-About: Line       center
+*FvwmForm-About: Line       center
+*FvwmForm-About: Button     quit " $[gt.Close] " ^M
+*FvwmForm-About: Command    Nop
+*FvwmForm-About: Line       center
 
 #***********************************************************************
 # 7.5.2 Message box
@@ -1153,11 +1168,11 @@ AddToFunc   FuncRestartModuleByAlias
 DestroyFunc FuncFvwmAppletLibCheck
 AddToFunc FuncFvwmAppletLibCheck
 + I PipeRead 'test ! -d "${FVWM_USERDIR}/lib" && mkdir "${FVWM_USERDIR}/lib"; \
-			  if [ ! -e "${FVWM_USERDIR}/lib/FvwmApplet" ] || \
-				 [ `readlink -f ${FVWM_USERDIR}/lib/FvwmApplet|xargs dirname` != "$FVWM_MODULEDIR" ]; then \
-					rm -f ${FVWM_USERDIR}/lib/FvwmApplet; \
-					ln -s ${FVWM_MODULEDIR}/FvwmScript ${FVWM_USERDIR}/lib/FvwmApplet; \
-			  fi'
+              if [ ! -e "${FVWM_USERDIR}/lib/FvwmApplet" ] || \
+                 [ `readlink -f ${FVWM_USERDIR}/lib/FvwmApplet|xargs dirname` != "$FVWM_MODULEDIR" ]; then \
+                    rm -f ${FVWM_USERDIR}/lib/FvwmApplet; \
+                    ln -s ${FVWM_MODULEDIR}/FvwmScript ${FVWM_USERDIR}/lib/FvwmApplet; \
+              fi'
 
 #-----------------------------------------------------------------------
 # Resets a definition of all colorsets
@@ -1198,7 +1213,7 @@ AddToFunc   FuncChangeDecor
 DestroyFunc FuncChangeLayout
 AddToFunc   FuncChangeLayout
 + I PipeRead "rm -f ${FVWM_USERDIR}/.layout; \
-			  ln -s $0/layouts/$1 ${FVWM_USERDIR}/.layout"
+              ln -s $0/layouts/$1 ${FVWM_USERDIR}/.layout"
 + I FuncWriteInfoStoreToFileAndSet used_layout $1 $[FVWM_USERDIR]/.settings
 + I FuncUpdateBaseSetupFile Layout $1
 + I FuncRestart
@@ -1211,12 +1226,12 @@ AddToFunc   FuncChangeLayout
 DestroyFunc FuncWriteInfoStoreToFileAndSet
 AddToFunc   FuncWriteInfoStoreToFileAndSet
 + I PipeRead 'new=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
-			if [ `grep -c $0 $2` -gt 0 ] ; then \
-				sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$new\\"#" $2; \
-			else \
-				sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$new\\"" $2; \
-			fi; \
-			echo InfoStoreAdd $0 "$new"'
+            if [ `grep -c $0 $2` -gt 0 ] ; then \
+                sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$new\\"#" $2; \
+            else \
+                sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$new\\"" $2; \
+            fi; \
+            echo InfoStoreAdd $0 "$new"'
 
 #-----------------------------------------------------------------------
 # Update/Create an SetEnv variable in a file
@@ -1225,12 +1240,12 @@ AddToFunc   FuncWriteInfoStoreToFileAndSet
 DestroyFunc FuncWriteInfoStoreToFileAndSet
 AddToFunc   FuncWriteInfoStoreToFileAndSet
 + I PipeRead 'Val=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
-			if [ `grep -c $0 $2` -gt 0 ] ; then \
-				sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$Val\\"#" $2; \
-			else \
-				sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$Val\\"" $2; \
-			fi; \
-			echo InfoStoreAdd $0 "$Val"'
+            if [ `grep -c $0 $2` -gt 0 ] ; then \
+                sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$Val\\"#" $2; \
+            else \
+                sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$Val\\"" $2; \
+            fi; \
+            echo InfoStoreAdd $0 "$Val"'
 
 #-----------------------------------------------------------------------
 # Update layout and theme settings in base setup file .FNS-Form-BaseSetup
@@ -1239,15 +1254,15 @@ AddToFunc   FuncWriteInfoStoreToFileAndSet
 DestroyFunc FuncUpdateBaseSetupFile
 AddToFunc   FuncUpdateBaseSetupFile
 + I PipeRead 'if [ "$0" = "Layout" ]; then \
-				case $1 in \
-					Horizontal|Vertical|G2like) \
-						sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-						sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup;; \
-				esac; \
-			  else \
-				sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-			  fi'
-			  
+                case $1 in \
+                    Horizontal|Vertical|G2like) \
+                        sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+                        sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup;; \
+                esac; \
+              else \
+                sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+              fi'
+              
 #-----------------------------------------------------------------------
 # Update applet tint value in .settings
 #-----------------------------------------------------------------------
@@ -1389,7 +1404,7 @@ AddToFunc   FuncDesktopCreateScreenshot
 + I Exec sleep $0; import -window root -quality 100 -silent $[infostore.picpath]
 + I PipeRead 'echo InfoStoreAdd pause `expr $0 \\* 1000`'
 + I Schedule $[infostore.pause] FuncShowMessage "Desktop Screenshot Info" \
-												"\$\[gt.Screenshot created:\] $[infostore.picpath]"
+                                                "\$\[gt.Screenshot created:\] $[infostore.picpath]"
 + I InfoStoreRemove picpath
 + I InfoStoreRemove pause
 
@@ -1505,9 +1520,9 @@ AddToFunc   DeThumbnail
 DestroyFunc FuncSuspend
 AddToFunc   FuncSuspend
 + I Test (x pm-is-supported) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
-					/org/freedesktop/Hal/devices/computer \
-					org.freedesktop.Hal.Device.SystemPowerManagement.Suspend \
-					int32:0'
+                    /org/freedesktop/Hal/devices/computer \
+                    org.freedesktop.Hal.Device.SystemPowerManagement.Suspend \
+                    int32:0'
 + I TestRc (!Match) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"         
 
 #-----------------------------------------------------------------------
@@ -1516,8 +1531,8 @@ AddToFunc   FuncSuspend
 DestroyFunc FuncHibernate
 AddToFunc   FuncHibernate
 + I Test (x pm-is-supported) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
-					/org/freedesktop/Hal/devices/computer \
-					org.freedesktop.Hal.Device.SystemPowerManagement.Hibernate'
+                    /org/freedesktop/Hal/devices/computer \
+                    org.freedesktop.Hal.Device.SystemPowerManagement.Hibernate'
 + I TestRc (!Match) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"          
 
 #-----------------------------------------------------------------------
@@ -1810,19 +1825,20 @@ AddToFunc   FuncMenuRoot
 + I DestroyMenu MenuRoot
 + I AddToMenu MenuRoot DynamicPopupAction FuncMenuRoot
 + I AddToMenu MenuRoot "$[gt.Root Menu]" Title
-+ I AddToMenu MenuRoot "$[gt.&Personal Applications]%home.svg:$[infostore.MenuIconSize]%"		Popup MenuFvwmPersonal
++ I AddToMenu MenuRoot "$[gt.&Personal Applications]%home.svg:$[infostore.MenuIconSize]%"       Popup MenuFvwmPersonal
 + I Popup FvwmMenu
 + I AddToMenu MenuRoot "" Nop
-+ I AddToMenu MenuRoot "$[gt.&Configuration]%system.svg:$[infostore.MenuIconSize]%"				Popup MenuConfiguration
-+ I AddToMenu MenuRoot "$[gt.&Help]%help.svg:$[infostore.MenuIconSize]%"						Popup MenuHelp
++ I AddToMenu MenuRoot "$[gt.&Configuration]%system.svg:$[infostore.MenuIconSize]%"             Popup MenuConfiguration
++ I AddToMenu MenuRoot "$[gt.&Help]%help.svg:$[infostore.MenuIconSize]%"                        Popup MenuHelp
 + I AddToMenu MenuRoot "" Nop
-+ I AddToMenu MenuRoot "$[gt.Fvwm &Modules]%modules.svg:$[infostore.MenuIconSize]%"				Popup MenuFvwmModules
-+ I AddToMenu MenuRoot "$[gt.&Window Operations]%window.svg:$[infostore.MenuIconSize]%"			Popup MenuWindowOpsFull
++ I AddToMenu MenuRoot "$[gt.Fvwm &Modules]%modules.svg:$[infostore.MenuIconSize]%"             Popup MenuFvwmModules
++ I AddToMenu MenuRoot "$[gt.FNS &Applets]%plugin.svg:$[infostore.MenuIconSize]%"               Popup MenuFnsApplets
++ I AddToMenu MenuRoot "$[gt.&Window Operations]%window.svg:$[infostore.MenuIconSize]%"         Popup MenuWindowOpsFull
 + I AddToMenu MenuRoot "" Nop
-+ I AddToMenu MenuRoot "$[gt.Lock Screen]	Alt-Ctrl+L%lock.svg:$[infostore.MenuIconSize]%"		FuncLockScreen
-+ I AddToMenu MenuRoot "$[gt.&Run Command]	Alt-F2%executable.svg:$[infostore.MenuIconSize]%"	Module FvwmForm FvwmForm-RunCommand
-+ I AddToMenu MenuRoot "$[gt.&Terminal]	Alt-Ctrl-T%terminal.svg:$[infostore.MenuIconSize]%"		exec exec $[infostore.default_terminal]
-+ I AddToMenu MenuRoot "$[gt.&Quit Fvwm-Nightshade]%logout.svg:$[infostore.MenuIconSize]%"		Popup MenuFvwmQuit
++ I AddToMenu MenuRoot "$[gt.Lock Screen]	Alt-Ctrl+L%lock.svg:$[infostore.MenuIconSize]%"     FuncLockScreen
++ I AddToMenu MenuRoot "$[gt.&Run Command]	Alt-F2%executable.svg:$[infostore.MenuIconSize]%"   Module FvwmForm FvwmForm-RunCommand
++ I AddToMenu MenuRoot "$[gt.&Terminal]	Alt-Ctrl-T%terminal.svg:$[infostore.MenuIconSize]%"     exec exec $[infostore.default_terminal]
++ I AddToMenu MenuRoot "$[gt.&Quit Fvwm-Nightshade]%logout.svg:$[infostore.MenuIconSize]%"      Popup MenuFvwmQuit
 
 
 #-----------------------------------------------------------------------
@@ -1849,7 +1865,7 @@ AddToFunc   FuncMenuFvwmPersonal
 + I DestroyMenu MenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal DynamicPopupAction FuncMenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal "$[gt.Personal Applications]" Title
-+ I AddToMenu MenuFvwmPersonal "$[gt.&Configure Personal Applications]%PersonalMenuCreator.svg:$[infostore.MenuIconSize]%"	FvwmScript FNS-Script-PersonalMenu
++ I AddToMenu MenuFvwmPersonal "$[gt.&Configure Personal Applications]%PersonalMenuCreator.svg:$[infostore.MenuIconSize]%"    FvwmScript FNS-Script-PersonalMenu
 + I Test (f  $[FVWM_USERDIR]/.personal) PipeRead `sed -e '/^# personal menu/ d;/^ *$/,$ d' $[FVWM_USERDIR]/.personal`
 
 
@@ -1865,12 +1881,12 @@ AddToFunc   FuncMenuHelp
 + I AddToMenu MenuHelp "$[gt.Help]" Title
 # Dynamic Fvwm Manpages realized with MissingSubmenuFunction
 + I AddToMenu MenuHelp MissingSubmenuFunction FuncFvwmManpageMenu
-+ I AddToMenu MenuHelp "$[gt.Fvwm &Man Pages]%help.svg:$[infostore.MenuIconSize]%"				Popup "/usr/share/man/man1"
-+ I AddToMenu MenuHelp "$[gt.Fvwm &Web Pages]%www.svg:$[infostore.MenuIconSize]%"				Popup MenuFvwmWebPages
-+ I AddToMenu MenuHelp "$[gt.Fvwm-&Nightshade Web Pages]%www.svg:$[infostore.MenuIconSize]%"	Popup FNSWebPagesMenu
-+ I AddToMenu MenuHelp "$[gt.&Other Helps]%help.svg:$[infostore.MenuIconSize]%"					Popup MenuHelpOthers
-+ I AddToMenu MenuHelp "$[gt.&Show Fvwm Version]%fvwm_footprint.svg:$[infostore.MenuIconSize]%"	FuncShowMessage "Fvwm Version Info" "$[version.line]"
-+ I AddToMenu MenuHelp "$[gt.&About Fvwm-Nightshade]%icon_fns.svg:$[infostore.MenuIconSize]%"	Module FvwmForm FvwmForm-About
++ I AddToMenu MenuHelp "$[gt.Fvwm &Man Pages]%help.svg:$[infostore.MenuIconSize]%"              Popup "/usr/share/man/man1"
++ I AddToMenu MenuHelp "$[gt.Fvwm &Web Pages]%www.svg:$[infostore.MenuIconSize]%"               Popup MenuFvwmWebPages
++ I AddToMenu MenuHelp "$[gt.Fvwm-&Nightshade Web Pages]%www.svg:$[infostore.MenuIconSize]%"    Popup FNSWebPagesMenu
++ I AddToMenu MenuHelp "$[gt.&Other Helps]%help.svg:$[infostore.MenuIconSize]%"                 Popup MenuHelpOthers
++ I AddToMenu MenuHelp "$[gt.&Show Fvwm Version]%fvwm_footprint.svg:$[infostore.MenuIconSize]%" FuncShowMessage "Fvwm Version Info" "$[version.line]"
++ I AddToMenu MenuHelp "$[gt.&About Fvwm-Nightshade]%icon_fns.svg:$[infostore.MenuIconSize]%"   Module FvwmForm FvwmForm-About
 
 
 #-----------------------------------------------------------------------
@@ -1884,11 +1900,11 @@ AddToFunc   FuncMenuHelpOthers
 + I DestroyMenu  MenuHelpOthers
 + I AddToMenu MenuHelpOthers DynamicPopupAction FuncMenuHelpOthers
 + I AddToMenu MenuHelpOthers "$[gt.Others]" Title
-+ I Test (x xman) AddToMenu MenuHelpOthers "%x.svg:$[infostore.MenuIconSize]%$[gt.&X Man Pages]"					Exec exec xman
-+ I Test (x gnome-help) AddToMenu MenuHelpOthers "%gnome.svg:$[infostore.MenuIconSize]%$[gt.&GNOME Help]"			Exec exec gnome-help
-+ I Test (x gnome-help-browser) AddToMenu MenuHelpOthers "%gnome.svg:$[infostore.MenuIconSize]%$[gt.&GNOME Help]"	Exec exec gnome-help-browser
-+ I Test (x kdehelp) AddToMenu MenuHelpOthers "%kde.svg:$[infostore.MenuIconSize]%$[gt.&KDE Help]"					Exec exec kdehelp
-+ I Test (x khelpcenter) AddToMenu MenuHelpOthers "%kde.svg:$[infostore.MenuIconSize]%$[gt.&KDE Help]"				Exec exec khelpcenter
++ I Test (x xman) AddToMenu MenuHelpOthers "%x.svg:$[infostore.MenuIconSize]%$[gt.&X Man Pages]"                    Exec exec xman
++ I Test (x gnome-help) AddToMenu MenuHelpOthers "%gnome.svg:$[infostore.MenuIconSize]%$[gt.&GNOME Help]"           Exec exec gnome-help
++ I Test (x gnome-help-browser) AddToMenu MenuHelpOthers "%gnome.svg:$[infostore.MenuIconSize]%$[gt.&GNOME Help]"   Exec exec gnome-help-browser
++ I Test (x kdehelp) AddToMenu MenuHelpOthers "%kde.svg:$[infostore.MenuIconSize]%$[gt.&KDE Help]"                  Exec exec kdehelp
++ I Test (x khelpcenter) AddToMenu MenuHelpOthers "%kde.svg:$[infostore.MenuIconSize]%$[gt.&KDE Help]"              Exec exec khelpcenter
 
 
 #-----------------------------------------------------------------------
@@ -1901,18 +1917,18 @@ AddToFunc   FuncMenuFvwmWebPages
 + I DestroyMenu  MenuFvwmWebPages
 + I AddToMenu MenuFvwmWebPages DynamicPopupAction FuncMenuFvwmWebPages
 + I AddToMenu MenuFvwmWebPages "$[gt.Fvwm Web Pages]" Title
-+ I AddToMenu MenuFvwmWebPages "$[gt.Home Page]%webpage.svg:$[infostore.MenuIconSize]%"					FuncOpenURL http://www.fvwm.org/
-+ I AddToMenu MenuFvwmWebPages "$[gt.FAQ]%webpage.svg:$[infostore.MenuIconSize]%"						FuncOpenURL http://www.fvwm.org/generated/FAQ.html
-+ I AddToMenu MenuFvwmWebPages "$[gt.Documentation]%webpage.svg:$[infostore.MenuIconSize]%"				FuncOpenURL http://fvwm.org/doc/unstable/index.html
++ I AddToMenu MenuFvwmWebPages "$[gt.Home Page]%webpage.svg:$[infostore.MenuIconSize]%"                 FuncOpenURL http://www.fvwm.org/
++ I AddToMenu MenuFvwmWebPages "$[gt.FAQ]%webpage.svg:$[infostore.MenuIconSize]%"                       FuncOpenURL http://www.fvwm.org/generated/FAQ.html
++ I AddToMenu MenuFvwmWebPages "$[gt.Documentation]%webpage.svg:$[infostore.MenuIconSize]%"             FuncOpenURL http://fvwm.org/doc/unstable/index.html
 + I AddToMenu MenuFvwmWebPages "" Nop
-+ I AddToMenu MenuFvwmWebPages "$[gt.Wiki]%webpage.svg:$[infostore.MenuIconSize]%"						FuncOpenURL http://fvwmwiki.xteddy.org/
-+ I AddToMenu MenuFvwmWebPages "$[gt.Forum]%webpage.svg:$[infostore.MenuIconSize]%"						FuncOpenURL http://www.fvwmforums.org/
++ I AddToMenu MenuFvwmWebPages "$[gt.Wiki]%webpage.svg:$[infostore.MenuIconSize]%"                      FuncOpenURL http://fvwmwiki.xteddy.org/
++ I AddToMenu MenuFvwmWebPages "$[gt.Forum]%webpage.svg:$[infostore.MenuIconSize]%"                     FuncOpenURL http://www.fvwmforums.org/
 + I AddToMenu MenuFvwmWebPages "" Nop
-+ I AddToMenu MenuFvwmWebPages "$[gt.In the beginning was ...]%webpage.svg:$[infostore.MenuIconSize]%"	FuncOpenURL http://edulinux.homeunix.org/fvwm/user_enumerate.html
-+ I AddToMenu MenuFvwmWebPages "$[gt.Beginners Guide]%webpage.svg:$[infostore.MenuIconSize]%"			FuncOpenURL http://zensites.net/fvwm/guide/
-+ I AddToMenu MenuFvwmWebPages "$[gt.FAQ inofficial]%webpage.svg:$[infostore.MenuIconSize]%"			FuncOpenURL http://edulinux.homeunix.org/fvwm/fvwmchanfaq.html
-+ I AddToMenu MenuFvwmWebPages "$[gt.How Styles are Applied]%webpage.svg:$[infostore.MenuIconSize]%"	FuncOpenURL http://linuxgazette.net/127/adam.html
-+ I AddToMenu MenuFvwmWebPages "$[gt.Session Management]%webpage.svg:$[infostore.MenuIconSize]%"		FuncOpenURL http://linuxgazette.net/100/adam.html
++ I AddToMenu MenuFvwmWebPages "$[gt.In the beginning was ...]%webpage.svg:$[infostore.MenuIconSize]%"  FuncOpenURL http://edulinux.homeunix.org/fvwm/user_enumerate.html
++ I AddToMenu MenuFvwmWebPages "$[gt.Beginners Guide]%webpage.svg:$[infostore.MenuIconSize]%"           FuncOpenURL http://zensites.net/fvwm/guide/
++ I AddToMenu MenuFvwmWebPages "$[gt.FAQ inofficial]%webpage.svg:$[infostore.MenuIconSize]%"            FuncOpenURL http://edulinux.homeunix.org/fvwm/fvwmchanfaq.html
++ I AddToMenu MenuFvwmWebPages "$[gt.How Styles are Applied]%webpage.svg:$[infostore.MenuIconSize]%"    FuncOpenURL http://linuxgazette.net/127/adam.html
++ I AddToMenu MenuFvwmWebPages "$[gt.Session Management]%webpage.svg:$[infostore.MenuIconSize]%"        FuncOpenURL http://linuxgazette.net/100/adam.html
 
 
 #-----------------------------------------------------------------------
@@ -1934,7 +1950,7 @@ AddToFunc   FuncFNSWebPagesMenu
 
 
 #=======================================================================
-# 9.3 Modules
+# 9.3 Modules and Applets
 #=======================================================================
 AddToMenu MenuFvwmModules DynamicPopupAction FuncMenuFvwmModules
 
@@ -1943,8 +1959,8 @@ AddToFunc   FuncMenuFvwmModules
 + I DestroyMenu  MenuFvwmModules
 + I AddToMenu MenuFvwmModules DynamicPopupAction FuncMenuFvwmModules
 + I AddToMenu MenuFvwmModules "$[gt.Fvwm Modules]" Title
-+ I AddToMenu MenuFvwmModules "$[gt.Start Regular Modules]%modules.svg:$[infostore.MenuIconSize]%"       Popup MenuStartRegularModules
-+ I AddToMenu MenuFvwmModules "$[gt.Stop Regular Modules]%stop.svg:$[infostore.MenuIconSize]%"           Popup MenuStopRegularModules
++ I AddToMenu MenuFvwmModules "$[gt.Start Regular Modules]%modules.svg:$[infostore.MenuIconSize]%"      Popup MenuStartRegularModules
++ I AddToMenu MenuFvwmModules "$[gt.Stop Regular Modules]%stop.svg:$[infostore.MenuIconSize]%"          Popup MenuStopRegularModules
 
 #-----------------------------------------------------------------------
 # Modules sub menu for starting regular Fvwm modules
@@ -1956,20 +1972,20 @@ AddToFunc   FuncMenuStartRegularModules
 + I DestroyMenu  MenuStartRegularModules
 + I AddToMenu MenuStartRegularModules DynamicPopupAction FuncMenuStartRegularModules
 + I AddToMenu MenuStartRegularModules "$[gt.Start Regular Modules]" Title
-+ I AddToMenu MenuStartRegularModules "$[gt.&Animation]%window-iconify.svg:$[infostore.MenuIconSize]%"				FuncRestartModule FvwmAnimate
-+ I AddToMenu MenuStartRegularModules "$[gt.Backe&r]%display.svg:$[infostore.MenuIconSize]%"						FuncRestartModule FvwmBacker
-+ I AddToMenu MenuStartRegularModules "$[gt.Ba&nner]%display.svg:$[infostore.MenuIconSize]%"						Module FvwmBanner
-+ I AddToMenu MenuStartRegularModules "$[gt.Co&mmandS]%terminal.svg:$[infostore.MenuIconSize]%"						FuncRestartModule FvwmCommandS
-+ I AddToMenu MenuStartRegularModules "$[gt.&Console]%terminal.svg:$[infostore.MenuIconSize]%"						FuncFvwmConsole
-+ I AddToMenu MenuStartRegularModules "$[gt.&GtkDebug]%bug.svg:$[infostore.MenuIconSize]%"               			Module FvwmGtkDebug
-+ I AddToMenu MenuStartRegularModules "$[gt.&Debug Console]%bug.svg:$[infostore.MenuIconSize]%"          			Module FvwmDebug --xconsole
-+ I AddToMenu MenuStartRegularModules "$[gt.&Identify]%question.svg:$[infostore.MenuIconSize]%"           			Module FvwmIdent
-+ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (1/2 a&pp)]%window-resize.svg:$[infostore.MenuIconSize]%"		Module FvwmScroll 2 2
-+ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (75%% &scr)]%window-resize.svg:$[infostore.MenuIconSize]%" 	Module FvwmScroll 75p 75p
-+ I AddToMenu MenuStartRegularModules "$[gt.Auto Raise (&1/2 sec)]%arrow-up.svg:$[infostore.MenuIconSize]%" 		FuncRestartModule 'FvwmAuto 500 "Silent Raise" Nop'
-+ I AddToMenu MenuStartRegularModules "$[gt.Auto Raise (&2 sec)]%arrow-up.svg:$[infostore.MenuIconSize]%"   		FuncRestartModule 'FvwmAuto 2000 "Silent Raise" Nop'
++ I AddToMenu MenuStartRegularModules "$[gt.&Animation]%window-iconify.svg:$[infostore.MenuIconSize]%"              FuncRestartModule FvwmAnimate
++ I AddToMenu MenuStartRegularModules "$[gt.Backe&r]%display.svg:$[infostore.MenuIconSize]%"                        FuncRestartModule FvwmBacker
++ I AddToMenu MenuStartRegularModules "$[gt.Ba&nner]%display.svg:$[infostore.MenuIconSize]%"                        Module FvwmBanner
++ I AddToMenu MenuStartRegularModules "$[gt.Co&mmandS]%terminal.svg:$[infostore.MenuIconSize]%"                     FuncRestartModule FvwmCommandS
++ I AddToMenu MenuStartRegularModules "$[gt.&Console]%terminal.svg:$[infostore.MenuIconSize]%"                      FuncFvwmConsole
++ I AddToMenu MenuStartRegularModules "$[gt.&GtkDebug]%bug.svg:$[infostore.MenuIconSize]%"                          Module FvwmGtkDebug
++ I AddToMenu MenuStartRegularModules "$[gt.&Debug Console]%bug.svg:$[infostore.MenuIconSize]%"                     Module FvwmDebug --xconsole
++ I AddToMenu MenuStartRegularModules "$[gt.&Identify]%question.svg:$[infostore.MenuIconSize]%"                     Module FvwmIdent
++ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (1/2 a&pp)]%window-resize.svg:$[infostore.MenuIconSize]%"     Module FvwmScroll 2 2
++ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (75%% &scr)]%window-resize.svg:$[infostore.MenuIconSize]%"    Module FvwmScroll 75p 75p
++ I AddToMenu MenuStartRegularModules "$[gt.Auto Raise (&1/2 sec)]%arrow-up.svg:$[infostore.MenuIconSize]%"         FuncRestartModule 'FvwmAuto 500 "Silent Raise" Nop'
++ I AddToMenu MenuStartRegularModules "$[gt.Auto Raise (&2 sec)]%arrow-up.svg:$[infostore.MenuIconSize]%"           FuncRestartModule 'FvwmAuto 2000 "Silent Raise" Nop'
 + I AddToMenu MenuStartRegularModules "" Nop
-+ I AddToMenu MenuStartRegularModules "$[gt.&Forms]%window2.svg:$[infostore.MenuIconSize]%"							Popup  MenuFvwmForms
++ I AddToMenu MenuStartRegularModules "$[gt.&Forms]%window2.svg:$[infostore.MenuIconSize]%"                         Popup  MenuFvwmForms
 
 #-----------------------------------------------------------------------
 # Modules sub menu for stoping regular Fvwm modules
@@ -2003,11 +2019,32 @@ AddToFunc   FuncMenuFvwmForms
 + I DestroyMenu  MenuFvwmForms
 + I AddToMenu MenuFvwmForms DynamicPopupAction FuncMenuFvwmForms
 + I AddToMenu MenuFvwmForms "$[gt.FvwmForm Tools]" Title
-+ I AddToMenu MenuFvwmForms "$[gt.&Capture]%printer.svg:$[infostore.MenuIconSize]%"		Module FvwmForm FvwmForm-Capture
-+ I AddToMenu MenuFvwmForms "$[gt.&Rlogin]%network.svg:$[infostore.MenuIconSize]%"		Module FvwmForm FvwmForm-Rlogin
++ I AddToMenu MenuFvwmForms "$[gt.&Capture]%printer.svg:$[infostore.MenuIconSize]%"     Module FvwmForm FvwmForm-Capture
++ I AddToMenu MenuFvwmForms "$[gt.&Rlogin]%network.svg:$[infostore.MenuIconSize]%"      Module FvwmForm FvwmForm-Rlogin
 + I AddToMenu MenuFvwmForms "$[gt.&Talk]%network.svg:$[infostore.MenuIconSize]%"        Module FvwmForm FvwmForm-Talk
-+ I AddToMenu MenuFvwmForms "$[gt.&QuitVerify]%halt.svg:$[infostore.MenuIconSize]%"		Module FvwmForm FvwmForm-QuitVerify
++ I AddToMenu MenuFvwmForms "$[gt.&QuitVerify]%halt.svg:$[infostore.MenuIconSize]%"     Module FvwmForm FvwmForm-QuitVerify
 
+
+#-----------------------------------------------------------------------
+# FNS Applets menu
+#-----------------------------------------------------------------------
+AddToMenu MenuFnsApplets DynamicPopupAction FuncMenuFnsApplets
+
+DestroyFunc FuncMenuFnsApplets
+AddToFunc   FuncMenuFnsApplets
++ I DestroyMenu  MenuFnsApplets
++ I AddToMenu MenuFnsApplets DynamicPopupAction FuncMenuFnsApplets
++ I AddToMenu MenuFnsApplets "$[gt.FNS Applets]" Title
++ I AddToMenu MenuFnsApplets "$[gt.Chrono (Alarm Clock)]%Chrono.svg:$[infostore.MenuIconSize]%"         FvwmApplet FNS-Applet-Chrono -fns
++ I AddToMenu MenuFnsApplets "$[gt.DriveInn (Drive Manager)]%DriveInn.svg:$[infostore.MenuIconSize]%"   FvwmApplet FNS-Applet-DriveInn -fns
++ I AddToMenu MenuFnsApplets "$[gt.Empidy (MPD Music Player)]%Empidy.svg:$[infostore.MenuIconSize]%"    FvwmApplet FNS-Applet-Empidy -fns
++ I AddToMenu MenuFnsApplets "$[gt.Kalende (Calender)]%Kalende.svg:$[infostore.MenuIconSize]%"          FvwmApplet FNS-Applet-Kalende -fns
++ I AddToMenu MenuFnsApplets "$[gt.Meteo (Weather Forecast)]%Meteo.svg:$[infostore.MenuIconSize]%"      FvwmApplet FNS-Applet-Meteo -fns
++ I AddToMenu MenuFnsApplets "$[gt.Nucleu (CPU State)]%nucleu.svg:$[infostore.MenuIconSize]%"           FvwmApplet FNS-Applet-Nucleu -fns
++ I AddToMenu MenuFnsApplets "$[gt.Pagina (Video Player)]%Pagina.svg:$[infostore.MenuIconSize]%"        FvwmApplet FNS-Applet-Pagina -fns
++ I AddToMenu MenuFnsApplets "$[gt.Plaia (Music Player)]%Plaia.svg:$[infostore.MenuIconSize]%"          FvwmApplet FNS-Applet-Plaia -fns
++ I AddToMenu MenuFnsApplets "$[gt.Timpul (World Clock)]%Timpul.svg:$[infostore.MenuIconSize]%"         FvwmApplet FNS-Applet-Timpul -fns
++ I AddToMenu MenuFnsApplets "$[gt.Yard (Folder and App Access)]%Yard.svg:$[infostore.MenuIconSize]%"   FvwmApplet FNS-Applet-Yard -fns
 
 #=======================================================================
 # 9.4 Configuration Menu
@@ -2019,11 +2056,11 @@ AddToFunc   FuncMenuConfiguration
 + I DestroyMenu  MenuConfiguration
 + I AddToMenu MenuConfiguration DynamicPopupAction FuncMenuConfiguration
 + I AddToMenu MenuConfiguration "$[gt.Configuration]" Title
-+ I AddToMenu MenuConfiguration "$[gt.&Fvwm]%fvwm_footprint.svg:$[infostore.MenuIconSize]%"			Popup MenuFvwmConfiguration
-+ I AddToMenu MenuConfiguration "$[gt.Fvwm-&Nightshade]%icon_fns.svg:$[infostore.MenuIconSize]%"	Popup MenuFNSConfiguration
-+ I AddToMenu MenuConfiguration "$[gt.&System]%system2.svg:$[infostore.MenuIconSize]%"				Popup MenuSystemConfiguration
++ I AddToMenu MenuConfiguration "$[gt.&Fvwm]%fvwm_footprint.svg:$[infostore.MenuIconSize]%"         Popup MenuFvwmConfiguration
++ I AddToMenu MenuConfiguration "$[gt.Fvwm-&Nightshade]%icon_fns.svg:$[infostore.MenuIconSize]%"    Popup MenuFNSConfiguration
++ I AddToMenu MenuConfiguration "$[gt.&System]%system2.svg:$[infostore.MenuIconSize]%"              Popup MenuSystemConfiguration
 + I AddToMenu MenuConfiguration "" Nop
-+ I AddToMenu MenuConfiguration "$[gt.&Tail .xsession-errors]%text.svg:$[infostore.MenuIconSize]%"	FuncViewFileTail ".xsession-errors" $[HOME]/.xsession-errors
++ I AddToMenu MenuConfiguration "$[gt.&Tail .xsession-errors]%text.svg:$[infostore.MenuIconSize]%"  FuncViewFileTail ".xsession-errors" $[HOME]/.xsession-errors
 
 
 #-----------------------------------------------------------------------
@@ -2036,8 +2073,8 @@ AddToFunc   FuncMenuFvwmConfiguration
 + I DestroyMenu  MenuFvwmConfiguration
 + I AddToMenu MenuFvwmConfiguration DynamicPopupAction FuncMenuFvwmConfiguration
 + I AddToMenu MenuFvwmConfiguration "$[gt.Fvwm]" Title
-+ I AddToMenu MenuFvwmConfiguration "$[gt.&Animation Control]%window-iconify.svg:$[infostore.MenuIconSize]%"	Popup MenuFvwmAnimate
-+ I AddToMenu MenuFvwmConfiguration "$[gt.Fvwm Form &Defaults]%fvwm_footprint.svg:$[infostore.MenuIconSize]%"	Module FvwmForm FvwmForm-Form
++ I AddToMenu MenuFvwmConfiguration "$[gt.&Animation Control]%window-iconify.svg:$[infostore.MenuIconSize]%"    Popup MenuFvwmAnimate
++ I AddToMenu MenuFvwmConfiguration "$[gt.Fvwm Form &Defaults]%fvwm_footprint.svg:$[infostore.MenuIconSize]%"   Module FvwmForm FvwmForm-Form
 
 
 #-----------------------------------------------------------------------
@@ -2051,9 +2088,9 @@ AddToFunc   FuncMenuFNSConfiguration
 + I AddToMenu MenuFNSConfiguration DynamicPopupAction FuncMenuFNSConfiguration
 + I AddToMenu MenuFNSConfiguration "$[gt.Fvwm-Nightshade]" Title
 + I AddToMenu MenuFNSConfiguration MissingSubmenuFunction FuncMenuWallpaperConfiguration
-+ I AddToMenu MenuFNSConfiguration "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"	Popup MenuWallpaperConfiguration
-+ I AddToMenu MenuFNSConfiguration "$[gt.&Decoration]%themes.svg:$[infostore.MenuIconSize]%"				Popup MenuDecoration
-+ I AddToMenu MenuFNSConfiguration "$[gt.Fvwm-&Nightshade Setup]%icon_fns.svg:$[infostore.MenuIconSize]%"	FvwmForm FNS-Form-BaseSetup
++ I AddToMenu MenuFNSConfiguration "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"  Popup MenuWallpaperConfiguration
++ I AddToMenu MenuFNSConfiguration "$[gt.&Decoration]%themes.svg:$[infostore.MenuIconSize]%"                Popup MenuDecoration
++ I AddToMenu MenuFNSConfiguration "$[gt.Fvwm-&Nightshade Setup]%icon_fns.svg:$[infostore.MenuIconSize]%"   FvwmForm FNS-Form-BaseSetup
 
 
 #-----------------------------------------------------------------------
@@ -2066,11 +2103,11 @@ AddToFunc   FuncMenuSystemConfiguration
 + I DestroyMenu  MenuSystemConfiguration
 + I AddToMenu MenuSystemConfiguration DynamicPopupAction FuncMenuSystemConfiguration
 + I AddToMenu MenuSystemConfiguration "$[gt.System]" Title
-+ I AddToMenu MenuSystemConfiguration "$[gt.&Keyboard]%keyboard.svg:$[infostore.MenuIconSize]%"			Popup MenuKeyboard
-+ I AddToMenu MenuSystemConfiguration "$[gt.&Mouse]%mouse.svg:$[infostore.MenuIconSize]%"				Popup MenuMouse
++ I AddToMenu MenuSystemConfiguration "$[gt.&Keyboard]%keyboard.svg:$[infostore.MenuIconSize]%"         Popup MenuKeyboard
++ I AddToMenu MenuSystemConfiguration "$[gt.&Mouse]%mouse.svg:$[infostore.MenuIconSize]%"               Popup MenuMouse
 + I AddToMenu MenuSystemConfiguration MissingSubmenuFunction FuncMenuXScreenSaver
-+ I AddToMenu MenuSystemConfiguration "$[gt.Sc&reen Saver]%screensaver.svg:$[infostore.MenuIconSize]%"	Popup MenuXScreenSaver
-+ I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"	FvwmScript FNS-Script-CpuPerformance
++ I AddToMenu MenuSystemConfiguration "$[gt.Sc&reen Saver]%screensaver.svg:$[infostore.MenuIconSize]%"  Popup MenuXScreenSaver
++ I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"    FvwmScript FNS-Script-CpuPerformance
 
 
 #-----------------------------------------------------------------------
@@ -2083,7 +2120,7 @@ AddToFunc   FuncMenuKeyboard
 + I DestroyMenu  MenuKeyboard
 + I AddToMenu MenuKeyboard DynamicPopupAction FuncMenuKeyboard
 + I AddToMenu MenuKeyboard "$[gt.Keyboard]" Title
-+ I AddToMenu MenuKeyboard "$[gt.&Settings]%keyboard.svg:$[infostore.MenuIconSize]%"	FvwmScript FvwmScript-KeyboardSetup
++ I AddToMenu MenuKeyboard "$[gt.&Settings]%keyboard.svg:$[infostore.MenuIconSize]%"    FvwmScript FvwmScript-KeyboardSetup
 + I AddToMenu MenuKeyboard "$[gt.&Layout]%keyboard.svg:$[infostore.MenuIconSize]%"      FuncKbdLayouter
 
 #-----------------------------------------------------------------------
@@ -2096,8 +2133,8 @@ AddToFunc   FuncMenuMouse
 + I DestroyMenu  MenuMouse
 + I AddToMenu MenuMouse DynamicPopupAction FuncMenuMouse
 + I AddToMenu MenuMouse "$[gt.Mouse]" Title
-+ I AddToMenu MenuMouse "$[gt.&Settings]%mouse.svg:$[infostore.MenuIconSize]%"			FvwmScript FvwmScript-PointerSetup
-+ I AddToMenu MenuMouse "$[gt.Root &Cursor]%pointer.svg:$[infostore.MenuIconSize]%"		Module FvwmForm FvwmForm-RootCursor
++ I AddToMenu MenuMouse "$[gt.&Settings]%mouse.svg:$[infostore.MenuIconSize]%"          FvwmScript FvwmScript-PointerSetup
++ I AddToMenu MenuMouse "$[gt.Root &Cursor]%pointer.svg:$[infostore.MenuIconSize]%"     Module FvwmForm FvwmForm-RootCursor
 
 #-----------------------------------------------------------------------
 # Sub menu for window decoration
@@ -2109,10 +2146,10 @@ AddToFunc   FuncMenuDecoration
 + I DestroyMenu  MenuDecoration
 + I AddToMenu MenuDecoration DynamicPopupAction FuncMenuDecoration
 + I AddToMenu MenuDecoration "$[gt.Decoration]" Title
-+ I AddToMenu MenuDecoration "$[gt.&Decors]%windows.svg:$[infostore.MenuIconSize]%"		Popup FvwmDecorMenu
-+ I AddToMenu MenuDecoration "$[gt.&Layouts]%layout.svg:$[infostore.MenuIconSize]%"		Popup FvwmLayoutMenu
-+ I AddToMenu MenuDecoration "$[gt.&Qt Decor]%qt.svg:$[infostore.MenuIconSize]%"		Popup MenuQtDecor
-+ I AddToMenu MenuDecoration "$[gt.&Gtk+ Decor]%gtk.svg:$[infostore.MenuIconSize]%"		FuncLxappearance
++ I AddToMenu MenuDecoration "$[gt.&Decors]%windows.svg:$[infostore.MenuIconSize]%"     Popup FvwmDecorMenu
++ I AddToMenu MenuDecoration "$[gt.&Layouts]%layout.svg:$[infostore.MenuIconSize]%"     Popup FvwmLayoutMenu
++ I AddToMenu MenuDecoration "$[gt.&Qt Decor]%qt.svg:$[infostore.MenuIconSize]%"        Popup MenuQtDecor
++ I AddToMenu MenuDecoration "$[gt.&Gtk+ Decor]%gtk.svg:$[infostore.MenuIconSize]%"     FuncLxappearance
 
 #-----------------------------------------------------------------------
 # Sub menu for Qt styled windows
@@ -2124,8 +2161,8 @@ AddToFunc   FuncMenuQtDecor
 + I DestroyMenu  MenuQtDecor
 + I AddToMenu MenuQtDecor DynamicPopupAction FuncMenuQtDecor
 + I AddToMenu MenuQtDecor "$[gt.Qt Decor]" Title
-+ I AddToMenu MenuQtDecor "$[gt.Qt-&3 Decor]%qt.svg:$[infostore.MenuIconSize]%"      	FuncQt3Decor
-+ I AddToMenu MenuQtDecor "$[gt.Qt-&4 Decor]%qt.svg:$[infostore.MenuIconSize]%"      	FuncQt4Decor
++ I AddToMenu MenuQtDecor "$[gt.Qt-&3 Decor]%qt.svg:$[infostore.MenuIconSize]%"          FuncQt3Decor
++ I AddToMenu MenuQtDecor "$[gt.Qt-&4 Decor]%qt.svg:$[infostore.MenuIconSize]%"          FuncQt4Decor
 
 #-----------------------------------------------------------------------
 # Dynamic decor sub menu with names of each decor folder
@@ -2172,7 +2209,7 @@ AddToFunc   FuncMenuWallpaperConfiguration
 + I AddToMenu MenuWallpaperConfiguration "$[gt.Background Configuration]" Title
 + I AddToMenu MenuWallpaperConfiguration DynamicPopupAction FuncMenuWallpaperConfiguration
 + I Test (I $[infostore.fvwm_wallpaper]) \
-    AddToMenu MenuWallpaperConfiguration "$[gt.Set &Default background]%delete.svg:$[infostore.MenuIconSize]%"      	FuncDelWallpaperlink
+    AddToMenu MenuWallpaperConfiguration "$[gt.Set &Default background]%delete.svg:$[infostore.MenuIconSize]%"          FuncDelWallpaperlink
 + I AddToMenu MenuWallpaperConfiguration MissingSubmenuFunction WallpaperBrowser
 + I AddToMenu MenuWallpaperConfiguration "$[gt.Set &Wallpaper background]%background.svg:$[infostore.MenuIconSize]%"    Popup $[infostore.wallpaper_dir]
 
@@ -2186,11 +2223,11 @@ AddToFunc   FuncMenuXScreenSaver
 + I DestroyMenu MenuXScreenSaver
 + I AddToMenu MenuXScreenSaver DynamicPopupAction FuncMenuXScreenSaver
 + I AddToMenu MenuXScreenSaver "$[gt.Screen Saver]" Title
-+ I AddToMenu MenuXScreenSaver "$[gt.XscreenSaver &Settings]%system2.svg:$[infostore.MenuIconSize]%"	Exec xscreensaver-command -exit; exec xscreensaver; exec xscreensaver-command -demo
-+ I AddToMenu MenuXScreenSaver "$[gt.&XscreenSaver (Re)start]%restart.svg:$[infostore.MenuIconSize]%"	Exec xscreensaver-command -exit; exec xscreensaver -no-splash
-+ I AddToMenu MenuXScreenSaver "$[gt.XscreenSaver &Stop]%stop.svg:$[infostore.MenuIconSize]%"			Exec exec xscreensaver-command -exit
-+ I AddToMenu MenuXScreenSaver "$[gt.XscreenSaver &Lock]%lock.svg:$[infostore.MenuIconSize]%"			Exec exec q -lock
-+ I AddToMenu MenuXScreenSaver "$[gt.XscreenSaver &Activate]%hook.svg:$[infostore.MenuIconSize]%"		Exec exec xscreensaver-command -activate
++ I AddToMenu MenuXScreenSaver "$[gt.XscreenSaver &Settings]%system2.svg:$[infostore.MenuIconSize]%"    Exec xscreensaver-command -exit; exec xscreensaver; exec xscreensaver-command -demo
++ I AddToMenu MenuXScreenSaver "$[gt.&XscreenSaver (Re)start]%restart.svg:$[infostore.MenuIconSize]%"   Exec xscreensaver-command -exit; exec xscreensaver -no-splash
++ I AddToMenu MenuXScreenSaver "$[gt.XscreenSaver &Stop]%stop.svg:$[infostore.MenuIconSize]%"           Exec exec xscreensaver-command -exit
++ I AddToMenu MenuXScreenSaver "$[gt.XscreenSaver &Lock]%lock.svg:$[infostore.MenuIconSize]%"           Exec exec q -lock
++ I AddToMenu MenuXScreenSaver "$[gt.XscreenSaver &Activate]%hook.svg:$[infostore.MenuIconSize]%"       Exec exec xscreensaver-command -activate
 
 
 #=======================================================================
@@ -2203,16 +2240,16 @@ AddToFunc   FuncMenuFvwmQuit
 + I SetMenuIconSize
 + I DestroyMenu MenuFvwmQuit
 + I AddToMenu MenuFvwmQuit DynamicPopupAction FuncMenuFvwmQuit
-+ I AddToMenu MenuFvwmQuit "$[gt.Really Quit]?" 	Title
++ I AddToMenu MenuFvwmQuit "$[gt.Really Quit]?"     Title
 + I AddToMenu MenuFvwmQuit "$[gt.&Restart Fvwm]%restart.svg:$[infostore.MenuIconSize]%"         FuncRestart
 + I AddToMenu MenuFvwmQuit "" Nop
-+ I AddToMenu MenuFvwmQuit "$[gt.Re&fresh Screen]%refresh.svg:$[infostore.MenuIconSize]%"      	Refresh
++ I AddToMenu MenuFvwmQuit "$[gt.Re&fresh Screen]%refresh.svg:$[infostore.MenuIconSize]%"       Refresh
 + I AddToMenu MenuFvwmQuit "" Nop
-+ I AddToMenu MenuFvwmQuit "$[gt.&Suspend System]%suspend.svg:$[infostore.MenuIconSize]%"     	FuncSuspend
-+ I AddToMenu MenuFvwmQuit "$[gt.&Hibernate System]%hibernate.svg:$[infostore.MenuIconSize]%"  	FuncHibernate
++ I AddToMenu MenuFvwmQuit "$[gt.&Suspend System]%suspend.svg:$[infostore.MenuIconSize]%"       FuncSuspend
++ I AddToMenu MenuFvwmQuit "$[gt.&Hibernate System]%hibernate.svg:$[infostore.MenuIconSize]%"   FuncHibernate
 + I AddToMenu MenuFvwmQuit "" Nop
-+ I AddToMenu MenuFvwmQuit "$[gt.&Yes, Really Quit]%hook.svg:$[infostore.MenuIconSize]%" 		Quit
-+ I AddToMenu MenuFvwmQuit "$[gt.&No, Don't Quit]%exit.svg:$[infostore.MenuIconSize]%"			Nop
++ I AddToMenu MenuFvwmQuit "$[gt.&Yes, Really Quit]%hook.svg:$[infostore.MenuIconSize]%"        Quit
++ I AddToMenu MenuFvwmQuit "$[gt.&No, Don't Quit]%exit.svg:$[infostore.MenuIconSize]%"          Nop
 
 
 #=======================================================================
@@ -2227,29 +2264,29 @@ AddToFunc   FuncMenuWindowOpsFull
 + I DestroyMenu MenuWindowOpsFull
 + I AddToMenu MenuWindowOpsFull DynamicPopupAction FuncMenuWindowOpsFull
 + I AddToMenu MenuWindowOpsFull "$[gt.Window Operations]" Title
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Move]	Alt+F7%window-move.svg:$[infostore.MenuIconSize]%"					Move
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Resize]	Alt+F8%window-resize.svg:$[infostore.MenuIconSize]%"				Resize
-+ I AddToMenu MenuWindowOpsFull "$[gt.(De)&Iconify]	Alt+F9%window-iconify.svg:$[infostore.MenuIconSize]%"			FuncIconify
-+ I AddToMenu MenuWindowOpsFull "$[gt.(Un)Ma&ximize]	Alt+F10%window-maximize.svg:$[infostore.MenuIconSize]%"		Maximize
-+ I AddToMenu MenuWindowOpsFull "$[gt.(Un)&Shade]%window-shade.svg:$[infostore.MenuIconSize]%"						WindowShade
-+ I AddToMenu MenuWindowOpsFull "$[gt.(Un)S&tick]%pin.svg:$[infostore.MenuIconSize]%"								Stick "toggle"
-+ I AddToMenu MenuWindowOpsFull "$[gt.R&aise]%arrow-up.svg:$[infostore.MenuIconSize]%"								Raise
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Lower]%arrow-down.svg:$[infostore.MenuIconSize]%"							Lower
++ I AddToMenu MenuWindowOpsFull "$[gt.&Move]	Alt+F7%window-move.svg:$[infostore.MenuIconSize]%"                  Move
++ I AddToMenu MenuWindowOpsFull "$[gt.&Resize]	Alt+F8%window-resize.svg:$[infostore.MenuIconSize]%"                Resize
++ I AddToMenu MenuWindowOpsFull "$[gt.(De)&Iconify]	Alt+F9%window-iconify.svg:$[infostore.MenuIconSize]%"           FuncIconify
++ I AddToMenu MenuWindowOpsFull "$[gt.(Un)Ma&ximize]	Alt+F10%window-maximize.svg:$[infostore.MenuIconSize]%"     Maximize
++ I AddToMenu MenuWindowOpsFull "$[gt.(Un)&Shade]%window-shade.svg:$[infostore.MenuIconSize]%"                      WindowShade
++ I AddToMenu MenuWindowOpsFull "$[gt.(Un)S&tick]%pin.svg:$[infostore.MenuIconSize]%"                               Stick "toggle"
++ I AddToMenu MenuWindowOpsFull "$[gt.R&aise]%arrow-up.svg:$[infostore.MenuIconSize]%"                              Raise
++ I AddToMenu MenuWindowOpsFull "$[gt.&Lower]%arrow-down.svg:$[infostore.MenuIconSize]%"                            Lower
 + I AddToMenu MenuWindowOpsFull "" Nop
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Delete]%bomb.svg:$[infostore.MenuIconSize]%"									Delete
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Close]	Alt+F4%exit.svg:$[infostore.MenuIconSize]%"						Close
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Destroy]%destroy.svg:$[infostore.MenuIconSize]%"								Destroy
++ I AddToMenu MenuWindowOpsFull "$[gt.&Delete]%bomb.svg:$[infostore.MenuIconSize]%"                                 Delete
++ I AddToMenu MenuWindowOpsFull "$[gt.&Close]	Alt+F4%exit.svg:$[infostore.MenuIconSize]%"                         Close
++ I AddToMenu MenuWindowOpsFull "$[gt.&Destroy]%destroy.svg:$[infostore.MenuIconSize]%"                             Destroy
 + I AddToMenu MenuWindowOpsFull "" Nop
-+ I AddToMenu MenuWindowOpsFull "$[gt.Move to &Page]%window-move.svg:$[infostore.MenuIconSize]%"					Popup MenuWindowMoveTo
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Group Operations]%windows.svg:$[infostore.MenuIconSize]%"					Popup MenuWindowGroupOps
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Window Style]%window.svg:$[infostore.MenuIconSize]%"							Popup MenuWindowStyle
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Maximize Window]%window-maximize.svg:$[infostore.MenuIconSize]%"				Popup MenuWindowMaximize
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Refresh Window]%window-refresh.svg:$[infostore.MenuIconSize]%"				Popup MenuWindowRefresh
-+ I AddToMenu MenuWindowOpsFull "$[gt.R&earrange All]%windows-rearrange.svg:$[infostore.MenuIconSize]%"				Popup MenuRearrangeWindows
-+ I AddToMenu MenuWindowOpsFull "$[gt.Window &Utilities]%window-utilities.svg:$[infostore.MenuIconSize]%"			Popup MenuWindowUtility
++ I AddToMenu MenuWindowOpsFull "$[gt.Move to &Page]%window-move.svg:$[infostore.MenuIconSize]%"                    Popup MenuWindowMoveTo
++ I AddToMenu MenuWindowOpsFull "$[gt.&Group Operations]%windows.svg:$[infostore.MenuIconSize]%"                    Popup MenuWindowGroupOps
++ I AddToMenu MenuWindowOpsFull "$[gt.&Window Style]%window.svg:$[infostore.MenuIconSize]%"                         Popup MenuWindowStyle
++ I AddToMenu MenuWindowOpsFull "$[gt.&Maximize Window]%window-maximize.svg:$[infostore.MenuIconSize]%"             Popup MenuWindowMaximize
++ I AddToMenu MenuWindowOpsFull "$[gt.&Refresh Window]%window-refresh.svg:$[infostore.MenuIconSize]%"               Popup MenuWindowRefresh
++ I AddToMenu MenuWindowOpsFull "$[gt.R&earrange All]%windows-rearrange.svg:$[infostore.MenuIconSize]%"             Popup MenuRearrangeWindows
++ I AddToMenu MenuWindowOpsFull "$[gt.Window &Utilities]%window-utilities.svg:$[infostore.MenuIconSize]%"           Popup MenuWindowUtility
 + I AddToMenu MenuWindowOpsFull "" Nop
-+ I AddToMenu MenuWindowOpsFull "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"				Module FvwmIdent
-+ I AddToMenu MenuWindowOpsFull "$[gt.Sw&itch to...(WinList)]	Alt+F3%windows.svg:$[infostore.MenuIconSize]%"		WindowList
++ I AddToMenu MenuWindowOpsFull "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"                Module FvwmIdent
++ I AddToMenu MenuWindowOpsFull "$[gt.Sw&itch to...(WinList)]	Alt+F3%windows.svg:$[infostore.MenuIconSize]%"      WindowList
 
 #-----------------------------------------------------------------------
 # A trimmed down version of MenuWindowOps, good for decoration bindings
@@ -2261,21 +2298,21 @@ AddToFunc   FuncMenuWindowOpsTrimmed
 + I SetMenuIconSize
 + I DestroyMenu MenuWindowOpsTrimmed
 + I AddToMenu MenuWindowOpsTrimmed DynamicPopupAction FuncMenuWindowOpsTrimmed
-+ I AddToMenu MenuWindowOpsTrimmed "$[gt.Re&store]	Alt+F10%window-restore.svg:$[infostore.MenuIconSize]%"         							FuncRestore
-+ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Move]	Alt+F7%window-move.svg:$[infostore.MenuIconSize]%"				Move
-+ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Resize]	Alt+F8%window-resize.svg:$[infostore.MenuIconSize]%"   		Resize
-+ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Iconify]	Alt+F9%window-iconify.svg:$[infostore.MenuIconSize]%"		FuncIconify
-+ I AddToMenu MenuWindowOpsTrimmed "$[gt.Ma&ximize]	Alt+F10%window-maximize.svg:$[infostore.MenuIconSize]%"		Maximize
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.Re&store]	Alt+F10%window-restore.svg:$[infostore.MenuIconSize]%"      FuncRestore
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Move]	Alt+F7%window-move.svg:$[infostore.MenuIconSize]%"              Move
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Resize]	Alt+F8%window-resize.svg:$[infostore.MenuIconSize]%"        Resize
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Iconify]	Alt+F9%window-iconify.svg:$[infostore.MenuIconSize]%"       FuncIconify
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.Ma&ximize]	Alt+F10%window-maximize.svg:$[infostore.MenuIconSize]%"     Maximize
 + I ThisWindow (Layer 2) \
-    AddToMenu MenuWindowOpsTrimmed "$[gt.Stays On &Top]%arrow-up.svg:$[infostore.MenuIconSize]%"             	FuncStaysOnTopAndBack
+    AddToMenu MenuWindowOpsTrimmed "$[gt.Stays On &Top]%arrow-up.svg:$[infostore.MenuIconSize]%"                FuncStaysOnTopAndBack
 + I TestRc (!Match) \
-    AddToMenu MenuWindowOpsTrimmed "$[gt.Stays &Back]%arrow-down.svg:$[infostore.MenuIconSize]%"               FuncStaysOnTopAndBack
-+ I AddToMenu MenuWindowOpsTrimmed "$[gt.(Un)&Stick]%pin.svg:$[infostore.MenuIconSize]%"                		Stick "toggle"
+    AddToMenu MenuWindowOpsTrimmed "$[gt.Stays &Back]%arrow-down.svg:$[infostore.MenuIconSize]%"                FuncStaysOnTopAndBack
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.(Un)&Stick]%pin.svg:$[infostore.MenuIconSize]%"                        Stick "toggle"
 + I AddToMenu MenuWindowOpsTrimmed "" Nop
-+ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Close]	Alt+F4%exit.svg:$[infostore.MenuIconSize]%"				Close
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Close]	Alt+F4%exit.svg:$[infostore.MenuIconSize]%"                 Close
 + I AddToMenu MenuWindowOpsTrimmed "" Nop
-+ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"  			Module FvwmIdent
-+ I AddToMenu MenuWindowOpsTrimmed "$[gt.Mor&e...]	%window.svg:$[infostore.MenuIconSize]%"						Menu MenuWindowOpsFull This 0 0
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"            Module FvwmIdent
++ I AddToMenu MenuWindowOpsTrimmed "$[gt.Mor&e...]	%window.svg:$[infostore.MenuIconSize]%"                     Menu MenuWindowOpsFull This 0 0
 
 #-----------------------------------------------------------------------
 # Resource window group operations for the root menu and buttons
@@ -2288,16 +2325,16 @@ AddToFunc   FuncMenuWindowGroupOps
 + I DestroyMenu MenuWindowGroupOps
 + I AddToMenu MenuWindowGroupOps DynamicPopupAction FuncMenuWindowGroupOps
 + I AddToMenu MenuWindowGroupOps "$[gt.Resource Group Ops]" Title
-+ I AddToMenu MenuWindowGroupOps "$[gt.Iconify]%window-iconify.svg:$[infostore.MenuIconSize]%"			Pick All ($[w.resource]) Iconify on
-+ I AddToMenu MenuWindowGroupOps "$[gt.De&Iconify]%window-iconify.svg:$[infostore.MenuIconSize]%"		Pick All ($[w.resource]) Iconify off
-+ I AddToMenu MenuWindowGroupOps "$[gt.&Shade]%window-shade.svg:$[infostore.MenuIconSize]%"				Pick All ($[w.resource]) WindowShade on
++ I AddToMenu MenuWindowGroupOps "$[gt.Iconify]%window-iconify.svg:$[infostore.MenuIconSize]%"          Pick All ($[w.resource]) Iconify on
++ I AddToMenu MenuWindowGroupOps "$[gt.De&Iconify]%window-iconify.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) Iconify off
++ I AddToMenu MenuWindowGroupOps "$[gt.&Shade]%window-shade.svg:$[infostore.MenuIconSize]%"             Pick All ($[w.resource]) WindowShade on
 + I AddToMenu MenuWindowGroupOps "$[gt.Un&Shade]%window-shade.svg:$[infostore.MenuIconSize]%"           Pick All ($[w.resource]) WindowShade off
 + I AddToMenu MenuWindowGroupOps "$[gt.R&aise]%arrow-up.svg:$[infostore.MenuIconSize]%"                 Pick All ($[w.resource]) Raise
-+ I AddToMenu MenuWindowGroupOps "$[gt.Lo&wer]%arrow-down.svg:$[infostore.MenuIconSize]%"				Pick All ($[w.resource]) Lower
++ I AddToMenu MenuWindowGroupOps "$[gt.Lo&wer]%arrow-down.svg:$[infostore.MenuIconSize]%"               Pick All ($[w.resource]) Lower
 + I AddToMenu MenuWindowGroupOps "" Nop
-+ I AddToMenu MenuWindowGroupOps "$[gt.&Delete]%bomb.svg:$[infostore.MenuIconSize]%"               		Pick All ($[w.resource]) Delete
-+ I AddToMenu MenuWindowGroupOps "$[gt.&Close]%exit.svg:$[infostore.MenuIconSize]%"                 	Pick All ($[w.resource]) Close
-+ I AddToMenu MenuWindowGroupOps "$[gt.&Destroy]%destroy.svg:$[infostore.MenuIconSize]%"             	Pick All ($[w.resource]) Destroy
++ I AddToMenu MenuWindowGroupOps "$[gt.&Delete]%bomb.svg:$[infostore.MenuIconSize]%"                    Pick All ($[w.resource]) Delete
++ I AddToMenu MenuWindowGroupOps "$[gt.&Close]%exit.svg:$[infostore.MenuIconSize]%"                     Pick All ($[w.resource]) Close
++ I AddToMenu MenuWindowGroupOps "$[gt.&Destroy]%destroy.svg:$[infostore.MenuIconSize]%"                Pick All ($[w.resource]) Destroy
 + I AddToMenu MenuWindowGroupOps "" Nop
 + I AddToMenu MenuWindowGroupOps "$[gt.&Quick Move To ...]%window-move.svg:$[infostore.MenuIconSize]%"  Popup MenuWindowGroupQuickMove
 
@@ -2345,21 +2382,21 @@ AddToFunc   FuncMenuWindowMaximize
 + I DestroyMenu MenuWindowMaximize
 + I AddToMenu MenuWindowMaximize DynamicPopupAction FuncMenuWindowMaximize
 + I AddToMenu MenuWindowMaximize "$[gt.Maximize Window]" Title
-+ I AddToMenu MenuWindowMaximize "$[gt.&Maximize Fully]%window-maximize.svg:$[infostore.MenuIconSize]%"						Maximize On 100 100
-+ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize]%window-maximize.svg:$[infostore.MenuIconSize]%"							Maximize Off
++ I AddToMenu MenuWindowMaximize "$[gt.&Maximize Fully]%window-maximize.svg:$[infostore.MenuIconSize]%"                     Maximize On 100 100
++ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize]%window-maximize.svg:$[infostore.MenuIconSize]%"                         Maximize Off
 + I AddToMenu MenuWindowMaximize "" Nop
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Partially]%window-maximize.svg:$[infostore.MenuIconSize]%"					Pick FuncSimpleMaximizePartially On
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Vertically]%window-maximize.svg:$[infostore.MenuIconSize]%"				Pick FuncSimpleMaximizeVertically On
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Horizontally]%window-maximize.svg:$[infostore.MenuIconSize]%"				Pick FuncSimpleMaximizeHorizontally On
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Partially]%window-maximize.svg:$[infostore.MenuIconSize]%"                 Pick FuncSimpleMaximizePartially On
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Vertically]%window-maximize.svg:$[infostore.MenuIconSize]%"                Pick FuncSimpleMaximizeVertically On
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Horizontally]%window-maximize.svg:$[infostore.MenuIconSize]%"              Pick FuncSimpleMaximizeHorizontally On
 + I AddToMenu MenuWindowMaximize "" Nop
 # these bound functions do not seem to work well if used consequentially
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Grow]%window-maximize.svg:$[infostore.MenuIconSize]%"						Maximize On grow grow
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Smart]%window-maximize.svg:$[infostore.MenuIconSize]%"						SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow V&ert.]%window-maximize.svg:$[infostore.MenuIconSize]%"				Maximize On    0 grow
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow H&oriz.]%window-maximize.svg:$[infostore.MenuIconSize]%"				Maximize On grow    0
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Grow]%window-maximize.svg:$[infostore.MenuIconSize]%"                      Maximize On grow grow
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Smart]%window-maximize.svg:$[infostore.MenuIconSize]%"                     SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow V&ert.]%window-maximize.svg:$[infostore.MenuIconSize]%"                Maximize On    0 grow
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow H&oriz.]%window-maximize.svg:$[infostore.MenuIconSize]%"               Maximize On grow    0
 + I AddToMenu MenuWindowMaximize "" Nop
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Full Screen]	Alt+F11%window-maximize.svg:$[infostore.MenuIconSize]%" 	Pick FuncMaximizeFullScreen
-+ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize Full Screen]	Alt+F11%window-maximize.svg:$[infostore.MenuIconSize]%" 	Pick FuncMaximizeFullScreen
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Full Screen]	Alt+F11%window-maximize.svg:$[infostore.MenuIconSize]%"     Pick FuncMaximizeFullScreen
++ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize Full Screen]	Alt+F11%window-maximize.svg:$[infostore.MenuIconSize]%"     Pick FuncMaximizeFullScreen
 
 #-----------------------------------------------------------------------
 # Windows Ops sub menu for window refreshing
@@ -2371,11 +2408,11 @@ AddToFunc   FuncMenuWindowRefresh
 + I DestroyMenu MenuWindowRefresh
 + I AddToMenu MenuWindowRefresh DynamicPopupAction FuncMenuWindowRefresh
 + I AddToMenu MenuWindowRefresh "$[gt.Refresh Window]" Title
-+ I AddToMenu MenuWindowRefresh "$[gt.Re&fresh Window]%window-refresh.svg:$[infostore.MenuIconSize]%"        RefreshWindow
-+ I AddToMenu MenuWindowRefresh "$[gt.Re&capture Window]%window-recapture.svg:$[infostore.MenuIconSize]%"      RecaptureWindow
-+ I AddToMenu MenuWindowRefresh "$[gt.&Place Again]%window-replace.svg:$[infostore.MenuIconSize]%"           PlaceAgain anim
++ I AddToMenu MenuWindowRefresh "$[gt.Re&fresh Window]%window-refresh.svg:$[infostore.MenuIconSize]%"       RefreshWindow
++ I AddToMenu MenuWindowRefresh "$[gt.Re&capture Window]%window-recapture.svg:$[infostore.MenuIconSize]%"   RecaptureWindow
++ I AddToMenu MenuWindowRefresh "$[gt.&Place Again]%window-replace.svg:$[infostore.MenuIconSize]%"          PlaceAgain anim
 + I AddToMenu MenuWindowRefresh "" Nop
-+ I AddToMenu MenuWindowRefresh "$[gt.&Restore]%window-restore.svg:$[infostore.MenuIconSize]%"                FuncRestore
++ I AddToMenu MenuWindowRefresh "$[gt.&Restore]%window-restore.svg:$[infostore.MenuIconSize]%"              FuncRestore
 
 #-----------------------------------------------------------------------
 # Windows Ops sub menu for window rearranging
@@ -2387,13 +2424,13 @@ AddToFunc   FuncMenuRearrangeWindows
 + I DestroyMenu MenuRearrangeWindows
 + I AddToMenu MenuRearrangeWindows DynamicPopupAction FuncMenuRearrangeWindows
 + I AddToMenu MenuRearrangeWindows "$[gt.Rearrange Windows]" Title
-+ I AddToMenu MenuRearrangeWindows "$[gt.&Cascade]%windows-rearrange.svg:$[infostore.MenuIconSize]%"				FvwmRearrange -cascade -m 3 3 -incx 2
-+ I AddToMenu MenuRearrangeWindows "$[gt.&Place Again]%window-replace.svg:$[infostore.MenuIconSize]%"			All (CurrentPage !Sticky) PlaceAgain anim
-+ I AddToMenu MenuRearrangeWindows ""												Nop
-+ I AddToMenu MenuRearrangeWindows "$[gt.Tile &horizontally]%menu/refresh.xpm%"		FvwmRearrange -tile -h -m 2 2 98 98
-+ I AddToMenu MenuRearrangeWindows "$[gt.Tile &vertically]%menu/refresh.xpm%"		FvwmRearrange -tile    -m 2 2 98 98
-+ I AddToMenu MenuRearrangeWindows ""												Nop
-+ I AddToMenu MenuRearrangeWindows "$[gt.&Arrange Icons]%window-icons.svg:$[infostore.MenuIconSize]%"			All (CurrentDesk Iconic) RecaptureWindow
++ I AddToMenu MenuRearrangeWindows "$[gt.&Cascade]%windows-rearrange.svg:$[infostore.MenuIconSize]%"    FvwmRearrange -cascade -m 3 3 -incx 2
++ I AddToMenu MenuRearrangeWindows "$[gt.&Place Again]%window-replace.svg:$[infostore.MenuIconSize]%"   All (CurrentPage !Sticky) PlaceAgain anim
++ I AddToMenu MenuRearrangeWindows "" Nop
++ I AddToMenu MenuRearrangeWindows "$[gt.Tile &horizontally]%menu/refresh.xpm%"                         FvwmRearrange -tile -h -m 2 2 98 98
++ I AddToMenu MenuRearrangeWindows "$[gt.Tile &vertically]%menu/refresh.xpm%"                           FvwmRearrange -tile    -m 2 2 98 98
++ I AddToMenu MenuRearrangeWindows "" Nop
++ I AddToMenu MenuRearrangeWindows "$[gt.&Arrange Icons]%window-icons.svg:$[infostore.MenuIconSize]%"   All (CurrentDesk Iconic) RecaptureWindow
 
 #-----------------------------------------------------------------------
 # Windows Ops sub menu for window utilities like screenshot, layer, etc
@@ -2405,17 +2442,17 @@ AddToFunc   FuncMenuWindowUtility
 + I DestroyMenu MenuWindowUtility
 + I AddToMenu MenuWindowUtility DynamicPopupAction FuncMenuWindowUtility
 + I AddToMenu MenuWindowUtility "$[gt.Window Utilities]" Title
-+ I AddToMenu MenuWindowUtility "$[gt.Create &Screenshot]	Print%window.svg:$[infostore.MenuIconSize]%"			Pick (CirculateHit) FuncWindowCreateScreenshot
-+ I AddToMenu MenuWindowUtility "$[gt.&Desktop Screenshot]	Alt+Print%display.svg:$[infostore.MenuIconSize]%"	FuncDesktopCreateScreenshot 5
-+ I AddToMenu MenuWindowUtility ""															Nop
-+ I AddToMenu MenuWindowUtility "$[gt.Stays On &Top]%layer-top.svg:$[infostore.MenuIconSize]%"				Pick (CirculateHit) Layer 0 6
-+ I AddToMenu MenuWindowUtility "$[gt.Layer &+1]%layer-+1.svg:$[infostore.MenuIconSize]%"					Pick (CirculateHit) Layer +1
-+ I AddToMenu MenuWindowUtility "$[gt.Stays &Put]%layer-put.svg:$[infostore.MenuIconSize]%"							Pick (CirculateHit) Layer 0 4
-+ I AddToMenu MenuWindowUtility "$[gt.Layer &-1]%layer--1.svg:$[infostore.MenuIconSize]%"					Pick (CirculateHit) Layer -1
-+ I AddToMenu MenuWindowUtility "$[gt.Stays On &Bottom]%layer-bottom.svg:$[infostore.MenuIconSize]%"				Pick (CirculateHit) Layer 0 2
-+ I AddToMenu MenuWindowUtility ""															Nop
-+ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (1/2 &app)]%window-resize.svg:$[infostore.MenuIconSize]%"		Pick Module FvwmScroll 2 2
-+ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (75%% &scr)]%window-resize.svg:$[infostore.MenuIconSize]%"		Pick Module FvwmScroll 75p 75p
++ I AddToMenu MenuWindowUtility "$[gt.Create &Screenshot]	Print%window.svg:$[infostore.MenuIconSize]%"        Pick (CirculateHit) FuncWindowCreateScreenshot
++ I AddToMenu MenuWindowUtility "$[gt.&Desktop Screenshot]	Alt+Print%display.svg:$[infostore.MenuIconSize]%"   FuncDesktopCreateScreenshot 5
++ I AddToMenu MenuWindowUtility "" Nop
++ I AddToMenu MenuWindowUtility "$[gt.Stays On &Top]%layer-top.svg:$[infostore.MenuIconSize]%"                  Pick (CirculateHit) Layer 0 6
++ I AddToMenu MenuWindowUtility "$[gt.Layer &+1]%layer-+1.svg:$[infostore.MenuIconSize]%"                       Pick (CirculateHit) Layer +1
++ I AddToMenu MenuWindowUtility "$[gt.Stays &Put]%layer-put.svg:$[infostore.MenuIconSize]%"                     Pick (CirculateHit) Layer 0 4
++ I AddToMenu MenuWindowUtility "$[gt.Layer &-1]%layer--1.svg:$[infostore.MenuIconSize]%"                       Pick (CirculateHit) Layer -1
++ I AddToMenu MenuWindowUtility "$[gt.Stays On &Bottom]%layer-bottom.svg:$[infostore.MenuIconSize]%"            Pick (CirculateHit) Layer 0 2
++ I AddToMenu MenuWindowUtility "" Nop
++ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (1/2 &app)]%window-resize.svg:$[infostore.MenuIconSize]%"       Pick Module FvwmScroll 2 2
++ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (75%% &scr)]%window-resize.svg:$[infostore.MenuIconSize]%"      Pick Module FvwmScroll 75p 75p
 
 #-----------------------------------------------------------------------
 # Desktop Ops menus
@@ -2429,10 +2466,43 @@ AddToFunc   FuncMenuDesktopOps
 + I AddToMenu MenuDesktopOps DynamicPopupAction FuncMenuDesktopOps
 + I AddToMenu MenuDesktopOps "$[gt.Desktopmenu]" Title
 + I AddToMenu MenuDesktopOps MissingSubmenuFunction FuncMenuWallpaperConfiguration
-+ I AddToMenu MenuDesktopOps "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"    	Popup MenuWallpaperConfiguration
-+ I AddToMenu MenuDesktopOps "Help%help.svg:$[infostore.MenuIconSize]%"										Popup MenuHelp
-+ I AddToMenu MenuDesktopOps ""															Nop
-+ I AddToMenu MenuDesktopOps "$[gt.Window Operations]"									Popup MenuWindowOpsFull
++ I AddToMenu MenuDesktopOps "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"    Popup MenuWallpaperConfiguration
++ I AddToMenu MenuDesktopOps "Help%help.svg:$[infostore.MenuIconSize]%"                                 Popup MenuHelp
++ I AddToMenu MenuDesktopOps "" Nop
++ I AddToMenu MenuDesktopOps "$[gt.Window Operations]"                                                  Popup MenuWindowOpsFull
+
+#-----------------------------------------------------------------------
+# Clock Ops menu
+#-----------------------------------------------------------------------
+AddToMenu MenuClockOps DynamicPopupAction FuncMenuClockOps
+
+DestroyFunc FuncMenuClockOps
+AddToFunc   FuncMenuClockOps
++ I SetMenuIconSize
++ I DestroyMenu MenuClockOps
++ I AddToMenu MenuClockOps DynamicPopupAction FuncMenuDesktopOps
++ I AddToMenu MenuClockOps "$[gt.Conky Clock Ops]" Title
++ I AddToMenu MenuClockOps "$[gt.Calender]%Kalende.svg:$[infostore.MenuIconSize]%"              FvwmScript FNS-Applet-Kalende -fns -s
++ I AddToMenu MenuClockOps "$[gt.Alarm]%Chrono.svg:$[infostore.MenuIconSize]%"                  FvwmScript FNS-Applet-Chrono -fns -s
++ I AddToMenu MenuClockOps "" Nop
++ I AddToMenu MenuClockOps "$[gt.Set Date/Time]%system.svg:$[infostore.MenuIconSize]%"          FvwmScript FvwmScript-Date
++ I AddToMenu MenuClockOps "$[gt.Restart Conky Clock]%restart.svg:$[infostore.MenuIconSize]%"   Exec exec xkill -id `xwininfo -name conky_clock|grep "Window id"|cut -d ' ' -f4`
+
+#-----------------------------------------------------------------------
+# CPU Ops menu
+#-----------------------------------------------------------------------
+AddToMenu MenuCpuOps DynamicPopupAction FuncMenuCpuOps
+
+DestroyFunc FuncMenuCpuOps
+AddToFunc   FuncMenuCpuOps
++ I SetMenuIconSize
++ I DestroyMenu MenuCpuOps
++ I AddToMenu MenuCpuOps DynamicPopupAction FuncMenuCpuOps
++ I AddToMenu MenuCpuOps "$[gt.Conky Cpu Ops]" Title
++ I AddToMenu MenuCpuOps "$[gt.CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"      FvwmScript FNS-Script-CpuPerformance
++ I AddToMenu MenuCpuOps "$[gt.Nucleu (CPU State)]%nucleu.svg:$[infostore.MenuIconSize]%"   FvwmScript FNS-Applet-Nucleu -fns -s
++ I AddToMenu MenuCpuOps "" Nop
++ I AddToMenu MenuCpuOps "$[gt.Restart Conky CPU]%restart.svg:$[infostore.MenuIconSize]%"   Exec exec xkill -id `xwininfo -name conky_cpu|grep "Window id"|cut -d ' ' -f4`
 
 
 #=======================================================================
@@ -2448,21 +2518,21 @@ DestroyFunc FuncMenuAppletOps
 AddToFunc   FuncMenuAppletOps
 + I DestroyMenu recreate MenuAppletOps
 #+ I AddToMenu MenuAppletOps DynamicPopupAction FuncMenuAppletOps
-+ I AddToMenu MenuAppletOps "$[gt.Appletmenu]"									Title
-+ I AddToMenu MenuAppletOps "$[gt.&Move]	Alt+F7%window-move.svg:$[infostore.MenuIconSize]%"		Move
++ I AddToMenu MenuAppletOps "$[gt.Appletmenu]" Title
++ I AddToMenu MenuAppletOps "$[gt.&Move]	Alt+F7%window-move.svg:$[infostore.MenuIconSize]%"      Move
 + I ThisWindow (Layer 2) \
-    AddToMenu MenuAppletOps "$[gt.Stays On &Top]%arrow-up.svg:$[infostore.MenuIconSize]%"		FuncStaysOnTopAndBack
+    AddToMenu MenuAppletOps "$[gt.Stays On &Top]%arrow-up.svg:$[infostore.MenuIconSize]%"           FuncStaysOnTopAndBack
 + I TestRc (!Match) \
-    AddToMenu MenuAppletOps "$[gt.Stays &Back]%arrow-down.svg:$[infostore.MenuIconSize]%"			FuncStaysOnTopAndBack
-+ I AddToMenu MenuAppletOps ""													Nop
-+ I AddToMenu MenuAppletOps "$[gt.&Save Position]%menu/disk.xpm%"				SaveAppletPosition
-+ I AddToMenu MenuAppletOps "$[gt.&Add to Autostart]%menu/disk.xpm%"			AddAppletToAutostart
-+ I AddToMenu MenuAppletOps "$[gt.&Change Tint Style]%menu/image-viewer.xpm%"	Popup MenuTintOps
-+ I AddToMenu MenuAppletOps "$[gt.&Change Font Color]%menu/image-viewer.xpm%"	Popup MenuFontColor
-+ I AddToMenu MenuAppletOps "$[gt.&Close]	Alt+F4%exit.svg:$[infostore.MenuIconSize]%"		Close
-+ I AddToMenu MenuAppletOps "$[gt.&Destroy]%window-destroy.svg:$[infostore.MenuIconSize]%"			Destroy
-+ I AddToMenu MenuAppletOps ""													Nop
-+ I AddToMenu MenuAppletOps "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"  	Module FvwmIdent
+    AddToMenu MenuAppletOps "$[gt.Stays &Back]%arrow-down.svg:$[infostore.MenuIconSize]%"           FuncStaysOnTopAndBack
++ I AddToMenu MenuAppletOps "" Nop
++ I AddToMenu MenuAppletOps "$[gt.&Save Position]%save.svg:$[infostore.MenuIconSize]%"              SaveAppletPosition
++ I AddToMenu MenuAppletOps "$[gt.&Add to Autostart]%autorun.svg:$[infostore.MenuIconSize]%"        AddAppletToAutostart
++ I AddToMenu MenuAppletOps "$[gt.&Change Tint Style]%tint.svg:$[infostore.MenuIconSize]%"          Popup MenuTintOps
++ I AddToMenu MenuAppletOps "$[gt.&Change Font Color]%text-color.svg:$[infostore.MenuIconSize]%"    Popup MenuFontColor
++ I AddToMenu MenuAppletOps "$[gt.&Close]	Alt+F4%exit.svg:$[infostore.MenuIconSize]%"             Close
++ I AddToMenu MenuAppletOps "$[gt.&Destroy]%destroy.svg:$[infostore.MenuIconSize]%"                 Destroy
++ I AddToMenu MenuAppletOps "" Nop
++ I AddToMenu MenuAppletOps "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"    Module FvwmIdent
 
 #-----------------------------------------------------------------------
 # Sub menu for tint style
@@ -2475,12 +2545,12 @@ AddToFunc   FuncMenuTintOps
 #+ I DestroyMenu recreate MenuTintOps
 + I AddToMenu MenuTintOps DynamicPopupAction FuncMenuTintOps
 + I PipeRead 'for percent in 0 10 20 30 40 50 60 70 80 90 100; do \
-				if [ "$percent" = "$[infostore.used_applettint]" ]; then \
-					echo AddToMenu MenuTintOps \"$percent%%%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
-				else \
-					echo AddToMenu MenuTintOps \"$percent%%%empty.svg:$[infostore.MenuIconSize]%\" UpdateAppletTint $percent; \
-				fi; \
-			done'
+                if [ "$percent" = "$[infostore.used_applettint]" ]; then \
+                    echo AddToMenu MenuTintOps \"$percent%%%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
+                else \
+                    echo AddToMenu MenuTintOps \"$percent%%%empty.svg:$[infostore.MenuIconSize]%\" UpdateAppletTint $percent; \
+                fi; \
+            done'
 
 #-----------------------------------------------------------------------
 # Sub menu for Font color in applets
@@ -2493,15 +2563,15 @@ AddToFunc   FuncMenuFontColor
 #+ I DestroyMenu recreate MenuFontColor
 + I AddToMenu MenuFontColor DynamicPopupAction FuncMenuFontColor
 + I PipeRead 'if [ "$[infostore.used_appletfontcolor]" = "black" ]; then \
-				echo AddToMenu MenuFontColor \"$[gt.Black]%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
-			  else \
-				echo AddToMenu MenuFontColor \"$[gt.Black]%empty.svg:$[infostore.MenuIconSize]%\" UpdateAppletFontColor "black"; \
-			  fi'
+                echo AddToMenu MenuFontColor \"$[gt.Black]%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
+              else \
+                echo AddToMenu MenuFontColor \"$[gt.Black]%empty.svg:$[infostore.MenuIconSize]%\" UpdateAppletFontColor "black"; \
+              fi'
 + I PipeRead 'if [ "$[infostore.used_appletfontcolor]" = "white" ]; then \
-				echo AddToMenu MenuFontColor \"$[gt.White]%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
-			  else \
-				echo AddToMenu MenuFontColor \"$[gt.White]%empty.svg:$[infostore.MenuIconSize]%\" UpdateAppletFontColor "white"; \
-			  fi'
+                echo AddToMenu MenuFontColor \"$[gt.White]%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
+              else \
+                echo AddToMenu MenuFontColor \"$[gt.White]%empty.svg:$[infostore.MenuIconSize]%\" UpdateAppletFontColor "white"; \
+              fi'
 
 #-----------------------------------------------------------------------
 # Plaia Menu menu
@@ -2509,11 +2579,11 @@ AddToFunc   FuncMenuFontColor
 DestroyFunc FuncMenuPlaiaOps
 AddToFunc   FuncMenuPlaiaOps
 + I DestroyMenu MenuPlaiaOps
-+ I AddToMenu MenuPlaiaOps "$[gt.Menu]"	Title
-+ I AddToMenu MenuPlaiaOps "$[gt.Open File]%file-play.svg:$[infostore.MenuIconSize]%"	FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Plaia" -w 1 -s 1
-+ I AddToMenu MenuPlaiaOps "$[gt.Open Folder]%folder-play.svg:$[infostore.MenuIconSize]%"	FvwmScript FNS-Script-FileBrowser "$0" -d -b -m "FNS-Applet-Plaia" -w 1 -s 2
-+ I AddToMenu MenuPlaiaOps "$[gt.Load Playlist]%playlist.svg:$[infostore.MenuIconSize]%"	FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Plaia" -w 1 -s 3
-+ I AddToMenu MenuPlaiaOps "$[gt.Create Playlist]%playlist-creator.svg:$[infostore.MenuIconSize]%"	FvwmScript FNS-Script-PlaylistCreator
++ I AddToMenu MenuPlaiaOps "$[gt.Menu]" Title
++ I AddToMenu MenuPlaiaOps "$[gt.Open File]%file-play.svg:$[infostore.MenuIconSize]%"               FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Plaia" -w 1 -s 1
++ I AddToMenu MenuPlaiaOps "$[gt.Open Folder]%folder-play.svg:$[infostore.MenuIconSize]%"           FvwmScript FNS-Script-FileBrowser "$0" -d -b -m "FNS-Applet-Plaia" -w 1 -s 2
++ I AddToMenu MenuPlaiaOps "$[gt.Load Playlist]%playlist.svg:$[infostore.MenuIconSize]%"            FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Plaia" -w 1 -s 3
++ I AddToMenu MenuPlaiaOps "$[gt.Create Playlist]%playlist-creator.svg:$[infostore.MenuIconSize]%"  FvwmScript FNS-Script-PlaylistCreator
 + I Popup MenuPlaiaOps mouse 0p 0p
 
 #-----------------------------------------------------------------------
@@ -2522,11 +2592,11 @@ AddToFunc   FuncMenuPlaiaOps
 DestroyFunc FuncMenuPaginaFile
 AddToFunc   FuncMenuPaginaFile
 + I DestroyMenu MenuPaginaFile
-+ I AddToMenu MenuPaginaFile "$[gt.Play]"	Title
-+ I AddToMenu MenuPaginaFile "$[gt.Open File]%file-play.svg:$[infostore.MenuIconSize]%"	FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Pagina" -w 1 -s 1
-+ I AddToMenu MenuPaginaFile "$[gt.Open Folder]%folder-play.svg:$[infostore.MenuIconSize]%"	FvwmScript FNS-Script-FileBrowser "$0" -d -b -m "FNS-Applet-Pagina" -w 1 -s 2
-+ I AddToMenu MenuPaginaFile "$[gt.Load Playlist]%playlist.svg:$[infostore.MenuIconSize]%"	FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Pagina" -w 1 -s 3
-+ I AddToMenu MenuPaginaFile "$[gt.Create Playlist]%playlist-creator.svg:$[infostore.MenuIconSize]%"	FvwmScript FNS-Script-PlaylistCreator
++ I AddToMenu MenuPaginaFile "$[gt.Play]" Title
++ I AddToMenu MenuPaginaFile "$[gt.Open File]%file-play.svg:$[infostore.MenuIconSize]%"                 FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Pagina" -w 1 -s 1
++ I AddToMenu MenuPaginaFile "$[gt.Open Folder]%folder-play.svg:$[infostore.MenuIconSize]%"             FvwmScript FNS-Script-FileBrowser "$0" -d -b -m "FNS-Applet-Pagina" -w 1 -s 2
++ I AddToMenu MenuPaginaFile "$[gt.Load Playlist]%playlist.svg:$[infostore.MenuIconSize]%"              FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Pagina" -w 1 -s 3
++ I AddToMenu MenuPaginaFile "$[gt.Create Playlist]%playlist-creator.svg:$[infostore.MenuIconSize]%"    FvwmScript FNS-Script-PlaylistCreator
 + I Popup MenuPaginaFile mouse 0p 0p
 
 #-----------------------------------------------------------------------
@@ -2536,17 +2606,17 @@ DestroyFunc FuncMenuPaginaAudio
 AddToFunc   FuncMenuPaginaAudio
 + I DestroyMenu MenuPaginaAudio
 + I AddToMenu MenuPaginaAudio "$[gt.Audio Channels]" Title
-+ I AddToMenu MenuPaginaAudio "$[gt.Mono]%mono.svg:$[infostore.MenuIconSize]%"			SendToModule FNS-Applet-Pagina SendString 2 1 1
-+ I AddToMenu MenuPaginaAudio "$[gt.Stereo]%stereo.svg:$[infostore.MenuIconSize]%"		SendToModule FNS-Applet-Pagina SendString 2 1 2
-+ I AddToMenu MenuPaginaAudio "$[gt.Surround]%quadro.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 2 1 4
-+ I AddToMenu MenuPaginaAudio "$[gt.5.1]%51.svg:$[infostore.MenuIconSize]%"				SendToModule FNS-Applet-Pagina SendString 2 1 6
++ I AddToMenu MenuPaginaAudio "$[gt.Mono]%mono.svg:$[infostore.MenuIconSize]%"          SendToModule FNS-Applet-Pagina SendString 2 1 1
++ I AddToMenu MenuPaginaAudio "$[gt.Stereo]%stereo.svg:$[infostore.MenuIconSize]%"      SendToModule FNS-Applet-Pagina SendString 2 1 2
++ I AddToMenu MenuPaginaAudio "$[gt.Surround]%quadro.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 1 4
++ I AddToMenu MenuPaginaAudio "$[gt.5.1]%51.svg:$[infostore.MenuIconSize]%"             SendToModule FNS-Applet-Pagina SendString 2 1 6
 + I AddToMenu MenuPaginaAudio "$[gt.Language]" Title
-+ I AddToMenu MenuPaginaAudio "$[gt.Lang. 1]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 2 2 0
-+ I AddToMenu MenuPaginaAudio "$[gt.Lang. 2]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 2 2 1
-+ I AddToMenu MenuPaginaAudio "$[gt.Lang. 3]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 2 2 2
-+ I AddToMenu MenuPaginaAudio "$[gt.Lang. 4]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 2 2 3
-+ I AddToMenu MenuPaginaAudio "$[gt.Lang. 5]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 2 2 4
-+ I AddToMenu MenuPaginaAudio "$[gt.Lang. 6]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 2 2 5
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 1]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 0
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 2]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 1
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 3]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 2
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 4]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 3
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 5]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 4
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 6]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 5
 + I Popup MenuPaginaAudio mouse 0p 0p
 
 #-----------------------------------------------------------------------
@@ -2556,15 +2626,15 @@ DestroyFunc FuncMenuPaginaSub
 AddToFunc   FuncMenuPaginaSub
 + I DestroyMenu MenuPaginaSub
 + I AddToMenu MenuPaginaSub "$[gt.Subtitle]" Title
-+ I AddToMenu MenuPaginaSub "$[gt.on]%hook.svg:$[infostore.MenuIconSize]%"		SendToModule FNS-Applet-Pagina SendString 3 1 1
-+ I AddToMenu MenuPaginaSub "$[gt.off]%exit.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 3 1 0
++ I AddToMenu MenuPaginaSub "$[gt.on]%hook.svg:$[infostore.MenuIconSize]%"          SendToModule FNS-Applet-Pagina SendString 3 1 1
++ I AddToMenu MenuPaginaSub "$[gt.off]%exit.svg:$[infostore.MenuIconSize]%"         SendToModule FNS-Applet-Pagina SendString 3 1 0
 + I AddToMenu MenuPaginaSub "$[gt.Language]" Title
-+ I AddToMenu MenuPaginaSub "$[gt.Lang. 1]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 3 2 0
-+ I AddToMenu MenuPaginaSub "$[gt.Lang. 2]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 3 2 1
-+ I AddToMenu MenuPaginaSub "$[gt.Lang. 3]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 3 2 2
-+ I AddToMenu MenuPaginaSub "$[gt.Lang. 4]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 3 2 3
-+ I AddToMenu MenuPaginaSub "$[gt.Lang. 5]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 3 2 4
-+ I AddToMenu MenuPaginaSub "$[gt.Lang. 6]%un-flag.svg:$[infostore.MenuIconSize]%"	SendToModule FNS-Applet-Pagina SendString 3 2 5
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 1]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 0
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 2]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 1
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 3]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 2
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 4]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 3
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 5]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 4
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 6]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 5
 + I Popup MenuPaginaSub mouse 0p 0p
 
 
