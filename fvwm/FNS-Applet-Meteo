@@ -1,67 +1,70 @@
 #-----------------------------------------------------------------------
-# File:		Meteo
-# Version:	1.0.0
-# Licence: 	GPL 2
+# File:         Meteo
+# Version:      1.1.0
+# Licence:      GPL 2
 #
-# Description:	Weather forecast applet based on FvwmScript
+# Description:  Weather forecast applet based on FvwmScript
 #
-# Parameters: 	-fns
-#					initiate applet that it will be used by Fvwm-Nightshade
-#					with another font, colorset and another icon directory.
+# Parameters:   -fns
+#                   initiate applet that it will be used by Fvwm-Nightshade
+#                   with another font, colorset and another icon directory.
 #
-#				-fnt
-#					set another font than the default one.
+#               -fnt
+#                   set another font than the default one.
 #
-#				-cs
-#					set another colorset than the default one.
+#               -cs
+#                   set another colorset than the default one.
 #
-#				-wcs
-#					set another warn colorset.
+#               -wcs
+#                   set another warn colorset.
 #
-#				-hcs
-#					set another highlight colorset. If is not set default
-#					colorset is used.
+#               -hcs
+#                   set another highlight colorset. If is not set default
+#                   colorset is used.
+#
+#               -t
+#                   use icons from another icon theme. If no value given it
+#                   uses the icon theme set in .FvwmForm-Desktop-Config
+#
+#               -tsc
+#                   set the scale temperature. Default is 'celsius'. The
+#                   other value is 'fahrenheit'.
+#
+#               -std
+#                   set wind speed between 'metric' and 'english' standard.
+#                   Default is 'metric'.
+#
+#               -ut
+#                   set update time in seconds. Default is 3600.
+#
+#               -key
+#                   set another wonderground key
+#
+#               -city
+#                   set another city
 #
 # Without parameters it starts with default settings from sebaro.
 #
-# Author:		sebaro	
-# Adjusted by:	Thomas Funk <t.funk@web.de>
+# Author:       sebaro    
+# Adjusted by:  Thomas Funk <t.funk@web.de>
 #
-# Created:	09/32/2012
-# Changed:	02/11/2013
+# Created:      09/32/2012
+# Changed:      08/21/2013
 #-----------------------------------------------------------------------
 
-UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
-WindowLocaleTitle 	{Meteo}
-#WindowSize 			320 160
-WindowSize 			185 130
-WindowPosition 954 10
-
-##### Global Style by sebaro
-Colorset 10
-Font "xft:DejaVu Sans:size=8:bold"
+UseGettext      {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
+WindowTitle     {Applet-Meteo}
+WindowSize      185 130
 
 Init
 Begin
-	##### Widgets Style
-	Set $defaultColorset = 10
-	Set $highlightColorset = 10
-	Set $warnColorset = 12
-    Set $defaultFont = {DejaVu Sans}
-	#Set $nowTempFont = {xft:}$defaultFont{:size=14:bold}
-
-	##### Settings
-    Set $homeDir = (GetOutput {echo $[infostore.mScripts]} 1 -1) {/Meteo/}
-	
-	Do {echo homeDir: }$homeDir
-  Set $setMyCity = {Magstd}
-  Set $setTempScale = {celsius}
-  Set $setStandard = {metric}
-	Set $putTmp = {/dev/shm/}
-	Set $updateTime = {3600}
-	Set $setTheme = {oxygen}
-#	Set $setTheme = {}
-	Set $wgKey = {5d5e9bf63cc94d12}
+    ##### weather options
+    Set $setMyCity = {Magstadt}
+    Set $setTempScale = {celsius}
+    Set $setStandard = {metric}
+    Set $wgKey = {5d5e9bf63cc94d12}
+    Set $updateTime = {3600}
+    Set $setTheme = {oxygen}
 
     ##### Commandline Arguments
     Set $FnsUseApplet = 0
@@ -73,871 +76,921 @@ Begin
 
     While $arg <> {} Do
     Begin
-		Set $j = (Add $i 1)
-		Set $value = (GetScriptArgument $j)
+        Set $noValue = {false}
+        Set $j = (Add $i 1)
+        Set $value = (GetScriptArgument $j)
 
-		# Fvwm-Nightshade use widget
-		If $arg == {-fns} Then
-		Begin
-			Set $FnsUseApplet = 1
-			
-			Set $defaultColorset = 25
-#			Set $defaultColorset = 10
-			Set $ColorsetChanged = 1
-			
-			Set $warnColorset = 27
+        # Fvwm-Nightshade use widget
+        If $arg == {-fns} Then
+        Begin
+            Set $noValue = {true}
+            Set $FnsUseApplet = 1
+            
+            Set $defaultColorset = 25
+            Set $ColorsetChanged = 1
+            
+            Set $warnColorset = 27
 
-			Set $highlightColorset = 26
-			
-			If $FontChanged == 0 Then
-			Begin
-				Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
-				Set $FontChanged = 1
-			End
-		End
+            Set $highlightColorset = 26
+            
+            If $FontChanged == 0 Then
+            Begin
+                Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
+                Set $FontChanged = 1
+            End
+        End
 
-		# other default colorset
-		If $arg == {-cs} Then
-		Begin
-			Set $defaultColorset = $value
-			Set $ColorsetChanged = 1
-		End
+        # other default colorset
+        If $arg == {-cs} Then
+        Begin
+            Set $defaultColorset = $value
+            Set $ColorsetChanged = 1
+        End
 
-		# other warn colorset
-		If $arg == {-wcs} Then
-			Set $warnColorset = $value
+        # other warn colorset
+        If $arg == {-wcs} Then
+            Set $warnColorset = $value
 
-		# other highlight colorset
-		If $arg == {-hcs} Then
-			Set $highlightColorset = $value
+        # other highlight colorset
+        If $arg == {-hcs} Then
+            Set $highlightColorset = $value
 
-		# other default font
-		If $arg == {-fnt} Then
-		Begin
-			Set $defaultFont = $value
-			Set $FontChanged = 1
-		End
+        # other default font
+        If $arg == {-fnt} Then
+        Begin
+            Set $defaultFont = $value
+            Set $FontChanged = 1
+        End
 
-		If $arg == {-fns} Then
-			Set $i = (Add $i 1)
-		Else
-			Set $i = (Add $i 2)
-			
-		Set $arg = (GetScriptArgument $i)
+        # use icons from current theme set in .FvwmForm-Desktop-Config
+        If $arg == {-t} Then
+        Begin
+            # current theme set in .FvwmForm-Desktop-Config
+            Set $char = (StrCopy $value 1 1)
+            If $char == {-} Then
+            Begin
+                Set $setTheme = {default}
+                Set $noValue = {true}
+            End
+            If $char == {} Then
+            Begin
+                Set $setTheme = {default}
+                Set $noValue = {true}
+            End
+
+            If $noValue == {false} Then
+            Begin
+                Set $cmd = {ls -1 $FNS_SYSTEMDIR/artwork/icons/weather/ |tr '\n' ' '}
+                Set $wThemes = (GetOutput $cmd 1 -1)
+
+                Set $cmd = {if test -d $FVWM_USERDIR/artwork/icons/weather; then ls -1 $FNS_SYSTEMDIR/artwork/icons/weather/ |tr '\n' ' ';else echo '';fi}
+                Set $uwThemes = (GetOutput $cmd 1 -1)
+                If $uwThemes <> {} Then
+                    Set $wThemes = $wThemes $uwThemes
+
+                Set $cmd = {echo '}$wThemes{'|wc -w}
+                Set $count = (GetOutput $cmd 1 -1)
+                Set $cmd = {echo }$wThemes
+                Set $match = {false}
+                For $index = 1 To $count Do
+                Begin
+                    Set $theme = (GetOutput $cmd 1 $index)
+                    If $theme == $value Then
+                    Begin
+                        Set $setTheme = $theme
+                        Set $match = {true}
+                    End
+                    Else
+                        Set $setTheme = $value
+                End
+                Do {echo setTheme: }$setTheme
+            End
+            If $match <> {true} Then
+                Set $useThemeIcons = 1
+        End
+
+        # other scale temperature
+        If $arg == {-tsc} Then
+            Set $setTempScale = $value
+
+        # other wind speed standard
+        If $arg == {-std} Then
+            Set $setStandard = $value
+
+        # other update time
+        If $arg == {-ut} Then
+            Set $updateTime = $value
+
+        # other wonderground key
+        If $arg == {-key} Then
+            Set $wgKey = $value
+
+        # other city
+        If $arg == {-city} Then
+            Set $setMyCity = $value
+
+        If $noValue == {true} Then
+            Set $i = (Add $i 1)
+        Else
+            Set $i = (Add $i 2)
+            
+        Set $arg = (GetScriptArgument $i)
     End
+
+    ##### change Settings if needed
+    If $FnsUseApplet == 1 Then
+    Begin
+        Set $homeDir = (GetOutput {echo $FVWM_USERDIR} 1 -1)
+        Set $putTmp = $homeDir{/temp/}
+        Do {Exec mkdir -p $FVWM_USERDIR/temp/}
+        Set $themesDir = {weather/}
+        Set $noIcon = {noicon.png}
+        Set $quitButton = {quit.png}
+    End
+    Else
+    Begin
+        ChangeWindowTitle {Meteo}
+        Set $homeDir = (GetOutput {echo $[infostore.mScripts]} 1 -1) {/Meteo/}
+        Set $themesDir = $homeDir {icons/themes/}
+        Set $putTmp = {/dev/shm/}
+        Set $noIcon = $homeDir {icons/themes/noicon.png}
+        Set $quitButton = $homeDir {icons/quit.png}
+        
+        Set $defaultColorset = 10
+        Set $highlightColorset = 10
+        Set $warnColorset = 12
+        
+        Set $defaultFont = {DejaVu Sans}
+    End
+
+
 
     ##### change Global Styles if needed
     If $ColorsetChanged == 1 Then
     Begin
-		For $Widget=1 To 20 Do
-		Begin
-			ChangeColorset $Widget $defaultColorset
-		End
-		ChangeColorset 0 $defaultColorset
-	End
+        For $Widget=1 To 20 Do
+        Begin
+            ChangeColorset $Widget $defaultColorset
+        End
+        ChangeColorset 0 $defaultColorset
+    End
 
     ##### change Widget Styles if needed
     If $FontChanged == 1 Then
     Begin
-		#Set $newFont = {xft:}$defaultFont{:size=8}
-		Set $newFont = {xft:}$defaultFont{:size=7:bold}
-		For $Widget=1 To 20 Do
-			ChangeFont $Widget $newFont
-	End
-	Set $nowTempFont = {xft:}$defaultFont{:size=11:bold}
+        Set $newFont = {xft:}$defaultFont{:size=7:bold}
+        For $Widget=1 To 20 Do
+            ChangeFont $Widget $newFont
+    End
+    Set $nowTempFont = {xft:}$defaultFont{:size=11:bold}
 
     ##### change Settings if needed
-	Set $noIcon = $homeDir {icons/themes/noicon.png}
-	Set $quitButton = $homeDir {icons/quit.png}
 
-	If $setTheme <> {} Then
-		Set $themeDir = $homeDir {icons/themes/} $setTheme {/}
-	Else
-		Set $themeDir = $homeDir {icons/themes/default/}
+    If $setTheme <> {} Then
+        Set $themeDir = $themesDir $setTheme {/}
+    Else
+        Set $useThemeIcons = 1
+    
+    ##### change Widgets
+    ChangeColorset 1 $highlightColorset
+     
+    ChangeFont 3 $nowTempFont
 
-    If $FnsUseApplet == 1 Then
-    Begin
-		Set $homeDir = (GetOutput {echo $FVWM_USERDIR} 1 -1) {/scripts/Meteo/}
-
-		If $setTheme <> {} Then
-			Set $themeDir = $homeDir {icons/themes/} $setTheme {/}
-		Else
-			Set $useThemeIcons = 1
-
-		Set $noIcon = {noicon.png}
-		Set $quitButton = {quit.png}
-	End
-	
-	Do {echo themeDir: }$themeDir
-	Do {echo useThemeIcons: }$useThemeIcons
-	Do {echo homeDir: }$homeDir
-	
-	##### change Widgets
-	ChangeColorset 1 $highlightColorset
-	 
-	ChangeFont 3 $nowTempFont
-
-	ChangeIcon 20 $quitButton
-	For $i = 2 To 20 Do
-		HideWidget $i
+    ChangeIcon 20 $quitButton
+    For $i = 2 To 20 Do
+        HideWidget $i
 
     ##### key bindings
-	Key Return A 19 1
-	Key Escape A 19 2
+    Key Return A 19 1
+    Key Escape A 19 2
     
-	##### Fetch Data
-	Set $fetchConditionsFile = $putTmp {meteo_conditions_fetch_file}
-	Set $fetchForecastFile = $putTmp {meteo_forecast_fetch_file}
-	Set $fetchFileStatus = $putTmp {meteo_fetch_file_status}
-	Do {exec echo "" > "} $fetchFileStatus {"}
-	Set $wgWeather = {http://api.wunderground.com/api/}
+    ##### Fetch Data
+    Set $fetchConditionsFile = $putTmp {meteo_conditions_fetch_file}
+    Set $fetchForecastFile = $putTmp {meteo_forecast_fetch_file}
+    Set $fetchFileStatus = $putTmp {meteo_fetch_file_status}
+    Do {exec echo "" > "} $fetchFileStatus {"}
+    Set $wgWeather = {http://api.wunderground.com/api/}
 
-	##### Temperature Data
-	Set $degree = {°}
-	Set $degreeF = $degree {F}
-	Set $degreeC = $degree {C}
+    ##### Temperature Data
+    Set $degree = {°}
+    Set $degreeF = $degree {F}
+    Set $degreeC = $degree {C}
 
-	##### Variables
-	Set $myCity = $setMyCity
-	Set $tempScale = $setTempScale
-	Set $standard = $setStandard
-	Set $conditionsParser = {sed -e "s/^\s*//g" | grep "<weather>\|<temp_f>\|<temp_c>\|<relative_humidity>\|<wind_dir>\|<wind_mph>\|<wind_kph>\|<icon>" | sed -e "s/.*>\(.*\)<.*/\1/g"}
-	Set $forecastParser = {sed -e "s/^\s*//g" | sed -n '/simpleforecast/,$p' | grep "<weekday_short>\|<fahrenheit>\|<celsius>\|<icon>" | sed -e "s/.*>\(.*\)<.*/\1/g"}
-	Set $doFetch = {true}
+    ##### Variables
+    Set $myCity = $setMyCity
+    Set $tempScale = $setTempScale
+    Set $standard = $setStandard
+    Set $conditionsParser = {sed -e "s/^\s*//g" | grep "<weather>\|<temp_f>\|<temp_c>\|<relative_humidity>\|<wind_dir>\|<wind_mph>\|<wind_kph>\|<icon>" | sed -e "s/.*>\(.*\)<.*/\1/g"}
+    Set $forecastParser = {sed -e "s/^\s*//g" | sed -n '/simpleforecast/,$p' | grep "<weekday_short>\|<fahrenheit>\|<celsius>\|<icon>" | sed -e "s/.*>\(.*\)<.*/\1/g"}
+    Set $doFetch = {true}
 
-	##### Curly Brackets
-	Set $leftCB = (GetOutput {printf "\173"} 1 -1)
-	Set $rightCB = (GetOutput {printf "\175"} 1 -1)
+    ##### Curly Brackets
+    Set $leftCB = (GetOutput {printf "\173"} 1 -1)
+    Set $rightCB = (GetOutput {printf "\175"} 1 -1)
 End
 
 PeriodicTasks
 Begin
-	##### Get Data
-	If $doFetch == {true} Then
-	Begin
-		Set $newTitle = {Fetching weather for } $myCity { ...}
-		ChangeTitle 1 $newTitle
-		Set $conditionsURL = $wgWeather $wgKey {/conditions/q/} $myCity {.xml}
-		Set $forecastURL = $wgWeather $wgKey {/forecast/q/} $myCity {.xml}
-		Do {exec wget "} $conditionsURL {" -O "} $fetchConditionsFile {" && wget "} $forecastURL {" -O "} $fetchForecastFile {" && echo "1" > "} $fetchFileStatus {" || echo "0" > "} $fetchFileStatus {"}
-		Set $fetchReady = {false}
-		Set $doFetch = {false}
-	End
+    ##### Get Data
+    If $doFetch == {true} Then
+    Begin
+        Set $newTitle = {Fetching weather for } $myCity { ...}
+        ChangeTitle 1 $newTitle
+        Set $conditionsURL = $wgWeather $wgKey {/conditions/q/} $myCity {.xml}
+        Set $forecastURL = $wgWeather $wgKey {/forecast/q/} $myCity {.xml}
+        Do {exec wget "} $conditionsURL {" -O "} $fetchConditionsFile {" && wget "} $forecastURL {" -O "} $fetchForecastFile {" && echo "1" > "} $fetchFileStatus {" || echo "0" > "} $fetchFileStatus {"}
+        Set $fetchReady = {false}
+        Set $doFetch = {false}
+    End
 
-	##### Fetching
-	If $fetchReady == {false} Then
-	Begin
-		Set $getFetch = {cat "} $fetchFileStatus {"}
-		If (GetOutput $getFetch 1 -1) == 1 Then
-		Begin
-			Do {exec echo "" > "} $fetchFileStatus {"}
-			Set $queryNotFound = {cat "} $fetchConditionsFile {" | grep "querynotfound"}
-			Set $queryMultiCity = {cat "} $fetchConditionsFile {" | grep "result" | wc -l}
-			If (GetOutput $queryNotFound 1 -1) == {} Then
-			Begin
-				If (GetOutput $queryMultiCity 1 -1) == 0 Then
-				Begin
-					#ChangeColorset 1 $defaultColorset
-					ChangeColorset 1 $highlightColorset
-					Set $fetchReady = {true}
-					Set $doRefresh = {true}
-				End
-				Else
-				Begin
-					For $i = 2 To 20 Do
-						HideWidget $i
-					Set $fetchReady = {true}
-					ChangeColorset 1 $warnColorset
-					Set $newTitle = {Add country/state of } $myCity {!}
-					ChangeTitle 1 $newTitle
-				End
-			End
-			Else
-			Begin
-				For $i = 2 To 20 Do
-					HideWidget $i
-				Set $fetchReady = {true}
-				ChangeColorset 1 $warnColorset
-				Set $newTitle = {Nothing available for } $myCity {!}
-				ChangeTitle 1 $newTitle
-			End
-		End
-		If (GetOutput $getFetch 1 -1) == 0 Then
-		Begin
-			Do {exec echo "" > "} $fetchFileStatus {"}
-			For $i = 2 To 20 Do
-				HideWidget $i
-			Set $fetchReady = {true}
-			ChangeColorset 1 $warnColorset
-			Set $newTitle = {Fetching weather for } $myCity { failed!}
-			ChangeTitle 1 $newTitle
-		End
-	End
+    ##### Fetching
+    If $fetchReady == {false} Then
+    Begin
+        Set $getFetch = {cat "} $fetchFileStatus {"}
+        If (GetOutput $getFetch 1 -1) == 1 Then
+        Begin
+            Do {exec echo "" > "} $fetchFileStatus {"}
+            Set $queryNotFound = {cat "} $fetchConditionsFile {" | grep "querynotfound"}
+            Set $queryMultiCity = {cat "} $fetchConditionsFile {" | grep "result" | wc -l}
+            If (GetOutput $queryNotFound 1 -1) == {} Then
+            Begin
+                If (GetOutput $queryMultiCity 1 -1) == 0 Then
+                Begin
+                    #ChangeColorset 1 $defaultColorset
+                    ChangeColorset 1 $highlightColorset
+                    Set $fetchReady = {true}
+                    Set $doRefresh = {true}
+                End
+                Else
+                Begin
+                    For $i = 2 To 20 Do
+                        HideWidget $i
+                    Set $fetchReady = {true}
+                    ChangeColorset 1 $warnColorset
+                    Set $newTitle = {Add country/state of } $myCity {!}
+                    ChangeTitle 1 $newTitle
+                End
+            End
+            Else
+            Begin
+                For $i = 2 To 20 Do
+                    HideWidget $i
+                Set $fetchReady = {true}
+                ChangeColorset 1 $warnColorset
+                Set $newTitle = {Nothing available for } $myCity {!}
+                ChangeTitle 1 $newTitle
+            End
+        End
+        If (GetOutput $getFetch 1 -1) == 0 Then
+        Begin
+            Do {exec echo "" > "} $fetchFileStatus {"}
+            For $i = 2 To 20 Do
+                HideWidget $i
+            Set $fetchReady = {true}
+            ChangeColorset 1 $warnColorset
+            Set $newTitle = {Fetching weather for } $myCity { failed!}
+            ChangeTitle 1 $newTitle
+        End
+    End
 
-	##### Print Data
-	If $doRefresh == {true} Then
-	Begin
-		## Set City
-		#ChangeColorset 1 $defaultColorset
-		ChangeColorset 1 $highlightColorset
-		Set $newTitle =  $myCity
-		ChangeTitle 1 $newTitle
+    ##### Print Data
+    If $doRefresh == {true} Then
+    Begin
+        ## Set City
+        ChangeColorset 1 $highlightColorset
+        Set $newTitle =  $myCity
+        ChangeTitle 1 $newTitle
 
-		## Conditions Now
-		Set $wConditions = {cat } $fetchConditionsFile { | } $conditionsParser
+        ## Conditions Now
+        Set $wConditions = {cat } $fetchConditionsFile { | } $conditionsParser
 
-		# Icon
-		Set $wIcon = (GetOutput $wConditions 8 -1)
-		If $wIcon <> {} Then
-		Begin
-			If $useThemeIcons == 0 Then
-				Set $wIcon = $themeDir $wIcon {.png}
-			Else
-			Begin
-				Set $cmd = {}
-				Set $icon = {weather-severe-alert}
-				For $index = 1 To 19 Do
-				Begin
-					Set $states = {chanceflurries chancesnow flurries snow partlycloudy mostlysunny partlysunny chancetstorms tstorms clear sunny cloudy mostlycloudy fog hazy chancesleet sleet chancerain rain}
-					Set $cmd = {echo }$states
-					Set $entry = (GetOutput $cmd 1 $index)
-					If $entry == $wIcon Then
-					Begin
-						If $index < 5 Then
-							Set $icon = {weather-snow}
-						Else
-						Begin
-							If $index < 8 Then
-								Set $icon = {weather-few-clouds}
-						End
-						If $index >= 8 Then
-						Begin
-							If $index < 11 Then
-								Set $icon = {weather-storm}
-						End
-						If $index >= 11 Then
-						Begin
-							If $index < 12 Then
-								Set $icon = {weather-clear}
-						End
-						If $index >= 12 Then
-						Begin
-							If $index < 14 Then
-								Set $icon = {weather-overcast}
-						End
-						If $index >= 14 Then
-						Begin
-							If $index < 16 Then
-								Set $icon = {weather-fog}
-						End
-						If $index >= 16 Then
-						Begin
-							If $index < 18 Then
-								Set $icon = {weather-showers-scattered}
-						End
-						If $index >= 18 Then
-							Set $icon = {weather-showers}
-					End
-				End
-				Set $cmd = {fns-find-icon -n }$icon{ -s 24 -c status -t gnome --notdesk}
-				Set $wIcon = (GetOutput $cmd 1 -1)
-			End
-		End
-		Else
-		Begin
-			If $useThemeIcons == 0 Then
-				Set $wIcon = $noIcon
-			Else
-			Begin
-				Set $cmd = {fns-find-icon -n weather-severe-alert -s 24 -c status -t gnome --notdesk}
-				Set $wIcon = (GetOutput $cmd 1 -1)
-			End
-		End
-			
-		ChangeIcon 2 $wIcon
+        # Icon
+        Set $wIcon = (GetOutput $wConditions 8 -1)
+        If $wIcon <> {} Then
+        Begin
+            If $useThemeIcons == 0 Then
+            Begin
+                Set $wIcon = $themeDir $wIcon {.png}
+                Do {echo wIcon: }$wIcon
+            End
+            Else
+            Begin
+                Set $cmd = {}
+                Set $icon = {weather-severe-alert}
+                For $index = 1 To 19 Do
+                Begin
+                    Set $states = {chanceflurries chancesnow flurries snow partlycloudy mostlysunny partlysunny chancetstorms tstorms clear sunny cloudy mostlycloudy fog hazy chancesleet sleet chancerain rain}
+                    Set $cmd = {echo }$states
+                    Set $entry = (GetOutput $cmd 1 $index)
+                    If $entry == $wIcon Then
+                    Begin
+                        If $index < 5 Then
+                            Set $icon = {weather-snow}
+                        Else
+                        Begin
+                            If $index < 8 Then
+                                Set $icon = {weather-few-clouds}
+                        End
+                        If $index >= 8 Then
+                        Begin
+                            If $index < 11 Then
+                                Set $icon = {weather-storm}
+                        End
+                        If $index >= 11 Then
+                        Begin
+                            If $index < 12 Then
+                                Set $icon = {weather-clear}
+                        End
+                        If $index >= 12 Then
+                        Begin
+                            If $index < 14 Then
+                                Set $icon = {weather-overcast}
+                        End
+                        If $index >= 14 Then
+                        Begin
+                            If $index < 16 Then
+                                Set $icon = {weather-fog}
+                        End
+                        If $index >= 16 Then
+                        Begin
+                            If $index < 18 Then
+                                Set $icon = {weather-showers-scattered}
+                        End
+                        If $index >= 18 Then
+                            Set $icon = {weather-showers}
+                    End
+                End
+                If $setTheme == {default} Then
+                    Set $cmd = {fns-find-icon -n }$icon{ -s 24 -c status --notdesk}
+                Else
+                    Set $cmd = {fns-find-icon -n }$icon{ -s 24 -c status -t }$setTheme{ --notdesk}
+                Set $wIcon = (GetOutput $cmd 1 -1)
+            End
+        End
+        Else
+        Begin
+            If $useThemeIcons == 0 Then
+                Set $wIcon = $noIcon
+            Else
+            Begin
+                If $setTheme == {default} Then
+                    Set $cmd = {fns-find-icon -n weather-severe-alert -s 24 -c status --notdesk}
+                Else
+                    Set $cmd = {fns-find-icon -n weather-severe-alert -s 24 -c status -t }$setTheme{ --notdesk}
+                Set $wIcon = (GetOutput $cmd 1 -1)
+            End
+        End
+        ChangeIcon 2 $wIcon
 
-		# Temperature
-		Set $wTempF = (GetOutput $wConditions 2 -1)
-		Set $wTempC = (GetOutput $wConditions 3 -1)
-		If $wTempF <> {} Then
-			Set $wTempF = $wTempF $degreeF
-		Else
-			Set $wTempF = {N/A}
-		If $wTempC <> {} Then
-			Set $wTempC = $wTempC $degreeC
-		Else
-			Set $wTempC = {N/A}
-		If $tempScale == {fahrenheit} Then
-			ChangeTitle 3 $wTempF
-		Else
-			ChangeTitle 3 $wTempC
+        # Temperature
+        Set $wTempF = (GetOutput $wConditions 2 -1)
+        Set $wTempC = (GetOutput $wConditions 3 -1)
+        If $wTempF <> {} Then
+            Set $wTempF = $wTempF $degreeF
+        Else
+            Set $wTempF = {N/A}
+        If $wTempC <> {} Then
+            Set $wTempC = $wTempC $degreeC
+        Else
+            Set $wTempC = {N/A}
+        If $tempScale == {fahrenheit} Then
+            ChangeTitle 3 $wTempF
+        Else
+            ChangeTitle 3 $wTempC
 
-		# Condition
-		Set $wCondition = (GetOutput $wConditions 1 -1)
-		If $wCondition <> {} Then
-			ChangeTitle 4 $wCondition
-		Else
-			ChangeTitle 4 {Condition: N/A}
+        # Condition
+        Set $wCondition = (GetOutput $wConditions 1 -1)
+        If $wCondition <> {} Then
+            ChangeTitle 4 $wCondition
+        Else
+            ChangeTitle 4 {Condition: N/A}
 
-		# Wind
-		Set $wWindDir = (GetOutput $wConditions 5 -1)
-		Set $wWindMPH = (GetOutput $wConditions 6 -1)
-		If $wWindMPH <> {} Then
-			Set $wWindMPH = $wWindMPH { mph}
-		Else
-			Set $wWindMPH = {N/A}
-		Set $wWindKMH = (GetOutput $wConditions 7 -1)
-		If $wWindKMH <> {} Then
-			Set $wWindKMH = $wWindKMH { km/h}
-		Else
-			Set $wWindKMH = {N/A}
-		If $wWindDir <> {} Then
-		Begin
-			If $standard == {metric} Then
-			Begin
-				If $wWindKMH <> {N/A} Then
-					Set $wWind = {Wind from } $wWindDir { at } $wWindKMH
-				Else
-					Set $wWind = {Wind from N/A}
-			End
-			Else
-			Begin
-				If $wWindMPH <> {N/A} Then
-					Set $wWind = {Wind from } $wWindDir { at } $wWindMPH
-				Else
-					Set $wWind = {Wind from N/A}
-			End
-		End
-		Else
-			Set $wWind = {Wind from N/A}
-		ChangeTitle 5 $wWind
+        # Wind
+        Set $wWindDir = (GetOutput $wConditions 5 -1)
+        Set $wWindMPH = (GetOutput $wConditions 6 -1)
+        If $wWindMPH <> {} Then
+            Set $wWindMPH = $wWindMPH { mph}
+        Else
+            Set $wWindMPH = {N/A}
+        Set $wWindKMH = (GetOutput $wConditions 7 -1)
+        If $wWindKMH <> {} Then
+            Set $wWindKMH = $wWindKMH { km/h}
+        Else
+            Set $wWindKMH = {N/A}
+        If $wWindDir <> {} Then
+        Begin
+            If $standard == {metric} Then
+            Begin
+                If $wWindKMH <> {N/A} Then
+                    Set $wWind = {Wind from } $wWindDir { at } $wWindKMH
+                Else
+                    Set $wWind = {Wind from N/A}
+            End
+            Else
+            Begin
+                If $wWindMPH <> {N/A} Then
+                    Set $wWind = {Wind from } $wWindDir { at } $wWindMPH
+                Else
+                    Set $wWind = {Wind from N/A}
+            End
+        End
+        Else
+            Set $wWind = {Wind from N/A}
+        ChangeTitle 5 $wWind
 
-		# Humidity
-		Set $wHumidity = (GetOutput $wConditions 4 -1)
-		If $wHumidity <> {} Then
-			Set $wHumidity = {Humidity: } $wHumidity
-		Else
-			Set $wHumidity = {Humidity: N/A}
-		ChangeTitle 6 $wHumidity
+        # Humidity
+        Set $wHumidity = (GetOutput $wConditions 4 -1)
+        If $wHumidity <> {} Then
+            Set $wHumidity = {Humidity: } $wHumidity
+        Else
+            Set $wHumidity = {Humidity: N/A}
+        ChangeTitle 6 $wHumidity
 
-		## Forecast
-		Set $wForecast = {cat } $fetchForecastFile { | } $forecastParser
-		Set $widgetStep = 3
-		Set $weatherStep = 6
+        ## Forecast
+        Set $wForecast = {cat } $fetchForecastFile { | } $forecastParser
+        Set $widgetStep = 3
+        Set $weatherStep = 6
 
-		# Days
-		Set $weatherDay = 1
-		Set $widgetDay = 7
-		For $d = 1 To 4 Do
-		Begin
-			Set $wDay = (GetOutput $wForecast $weatherDay -1)
-			If $wDay <> {} Then
-				ChangeTitle $widgetDay $wDay
-			Else
-				ChangeTitle $widgetDay {N/A}
-			Set $weatherDay = (Add $weatherDay $weatherStep)
-			Set $widgetDay = (Add $widgetDay $widgetStep)
-		End
+        # Days
+        Set $weatherDay = 1
+        Set $widgetDay = 7
+        For $d = 1 To 4 Do
+        Begin
+            Set $wDay = (GetOutput $wForecast $weatherDay -1)
+            If $wDay <> {} Then
+                ChangeTitle $widgetDay $wDay
+            Else
+                ChangeTitle $widgetDay {N/A}
+            Set $weatherDay = (Add $weatherDay $weatherStep)
+            Set $widgetDay = (Add $widgetDay $widgetStep)
+        End
 
-		# Icons
-		Set $weatherIcon = 6
-		Set $widgetIcon = 8
-		For $d = 1 To 4 Do
-		Begin
-			Set $wIconF = (GetOutput $wForecast $weatherIcon -1)
-			Set $icon = {image-missing}
-			If $wIconF <> {} Then
-			Begin
-				If $useThemeIcons == 0 Then
-				Begin
-					Set $wIconImg = $themeDir $wIconF {.png}
-					ChangeIcon $widgetIcon $wIconImg
-				End
-				Else
-				Begin
-					Set $cmd = {}
-					For $index = 1 To 19 Do
-					Begin
-						Set $states = {chanceflurries chancesnow flurries snow partlycloudy mostlysunny partlysunny chancetstorms tstorms clear sunny cloudy mostlycloudy fog hazy chancesleet sleet chancerain rain}
-						Set $cmd = {echo }$states
-						Set $entry = (GetOutput $cmd 1 $index)
-						If $entry == $wIconF Then
-						Begin
-							If $index < 5 Then
-								Set $icon = {weather-snow}
-							Else
-							Begin
-								If $index < 8 Then
-									Set $icon = {weather-few-clouds}
-							End
-							If $index >= 8 Then
-							Begin
-								If $index < 11 Then
-									Set $icon = {weather-storm}
-							End
-							If $index >= 11 Then
-							Begin
-								If $index < 12 Then
-									Set $icon = {weather-clear}
-							End
-							If $index >= 12 Then
-							Begin
-								If $index < 14 Then
-									Set $icon = {weather-overcast}
-							End
-							If $index >= 14 Then
-							Begin
-								If $index < 16 Then
-									Set $icon = {weather-fog}
-							End
-							If $index >= 16 Then
-							Begin
-								If $index < 18 Then
-									Set $icon = {weather-showers-scattered}
-							End
-							If $index >= 18 Then
-								Set $icon = {weather-showers}
-						End
-					End
-					Set $cmd = {fns-find-icon -n }$icon{ -s 24 -t gnome -c status -t gnome --notdesk}
-					Set $wIconImg = (GetOutput $cmd 1 -1)
-				End
-			End
-			Else
-			Begin
-				If $useThemeIcons == 0 Then
-					Set $wIconImg = $noIcon
-				Else
-				Begin
-					Set $cmd = {fns-find-icon -n weather-severe-alert -s 24 -t gnome -c status -t gnome --notdesk}
-					Set $wIconImg = (GetOutput $cmd 1 -1)
-				End
-			End
-			ChangeIcon $widgetIcon $wIconImg
+        # Icons
+        Set $weatherIcon = 6
+        Set $widgetIcon = 8
+        For $d = 1 To 4 Do
+        Begin
+            Set $wIconF = (GetOutput $wForecast $weatherIcon -1)
+            Set $icon = {image-missing}
+            If $wIconF <> {} Then
+            Begin
+                If $useThemeIcons == 0 Then
+                Begin
+                    Set $wIconImg = $themeDir $wIconF {.png}
+                    ChangeIcon $widgetIcon $wIconImg
+                End
+                Else
+                Begin
+                    Set $cmd = {}
+                    For $index = 1 To 19 Do
+                    Begin
+                        Set $states = {chanceflurries chancesnow flurries snow partlycloudy mostlysunny partlysunny chancetstorms tstorms clear sunny cloudy mostlycloudy fog hazy chancesleet sleet chancerain rain}
+                        Set $cmd = {echo }$states
+                        Set $entry = (GetOutput $cmd 1 $index)
+                        If $entry == $wIconF Then
+                        Begin
+                            If $index < 5 Then
+                                Set $icon = {weather-snow}
+                            Else
+                            Begin
+                                If $index < 8 Then
+                                    Set $icon = {weather-few-clouds}
+                            End
+                            If $index >= 8 Then
+                            Begin
+                                If $index < 11 Then
+                                    Set $icon = {weather-storm}
+                            End
+                            If $index >= 11 Then
+                            Begin
+                                If $index < 12 Then
+                                    Set $icon = {weather-clear}
+                            End
+                            If $index >= 12 Then
+                            Begin
+                                If $index < 14 Then
+                                    Set $icon = {weather-overcast}
+                            End
+                            If $index >= 14 Then
+                            Begin
+                                If $index < 16 Then
+                                    Set $icon = {weather-fog}
+                            End
+                            If $index >= 16 Then
+                            Begin
+                                If $index < 18 Then
+                                    Set $icon = {weather-showers-scattered}
+                            End
+                            If $index >= 18 Then
+                                Set $icon = {weather-showers}
+                        End
+                    End
+                    If $setTheme == {default} Then
+                        Set $cmd = {fns-find-icon -n }$icon{ -s 24 -t gnome -c status --notdesk}
+                    Else
+                        Set $cmd = {fns-find-icon -n }$icon{ -s 24 -t gnome -c status -t }$setTheme{ --notdesk}
+                    Set $wIconImg = (GetOutput $cmd 1 -1)
+                End
+            End
+            Else
+            Begin
+                If $useThemeIcons == 0 Then
+                    Set $wIconImg = $noIcon
+                Else
+                Begin
+                    If $setTheme == {default} Then
+                        Set $cmd = {fns-find-icon -n weather-severe-alert -s 24 -t gnome -c status --notdesk}
+                    Else
+                        Set $cmd = {fns-find-icon -n weather-severe-alert -s 24 -t gnome -c status -t }$setTheme{ --notdesk}
+                    Set $wIconImg = (GetOutput $cmd 1 -1)
+                End
+            End
+            ChangeIcon $widgetIcon $wIconImg
 
-			Set $weatherIcon = (Add $weatherIcon $weatherStep)
-			Set $widgetIcon = (Add $widgetIcon $widgetStep)
-		End
+            Set $weatherIcon = (Add $weatherIcon $weatherStep)
+            Set $widgetIcon = (Add $widgetIcon $widgetStep)
+        End
 
-		# Temperatures
-		Set $weatherFHigh = 2
-		Set $weatherCHigh = 3
-		Set $weatherFLow = 4
-		Set $weatherCLow = 5
-		Set $widgetTemp = 9
-		For $d = 1 To 4 Do
-		Begin
-			Set $wTempFHigh = (GetOutput $wForecast $weatherFHigh -1)
-			If $wTempFHigh <> {} Then
-				Set $wTempFHigh = $wTempFHigh $degree
-			Else
-				Set $wTempFHigh = {N/A}
-			Set $weatherFHigh = (Add $weatherFHigh $weatherStep)
-			Set $wTempFLow = (GetOutput $wForecast $weatherFLow -1)
-			If $wTempFLow <> {} Then
-				Set $wTempFLow = $wTempFLow $degree
-			Else
-				Set $wTempFLow = {N/A}
-			Set $weatherFLow = (Add $weatherFLow $weatherStep)
-			Set $weatherFAll = $wTempFHigh {/} $wTempFLow
-			Set $wTempCHigh = (GetOutput $wForecast $weatherCHigh -1)
-			If $wTempCHigh <> {} Then
-				Set $wTempCHigh = $wTempCHigh $degree
-			Else
-				Set $wTempCHigh = {N/A}
-			Set $weatherCHigh = (Add $weatherCHigh $weatherStep)
-			Set $wTempCLow = (GetOutput $wForecast $weatherCLow -1)
-			If $wTempCLow <> {} Then
-				Set $wTempCLow = $wTempCLow $degree
-			Else
-				Set $wTempCLow = {N/A}
-			Set $weatherCLow = (Add $weatherCLow $weatherStep)
-			Set $weatherCAll = $wTempCHigh {/} $wTempCLow
-			If $tempScale == {fahrenheit} Then
-				ChangeTitle $widgetTemp $weatherFAll
-			Else
-				ChangeTitle $widgetTemp $weatherCAll
-			Set $widgetTemp = (Add $widgetTemp $widgetStep)
-		End
+        # Temperatures
+        Set $weatherFHigh = 2
+        Set $weatherCHigh = 3
+        Set $weatherFLow = 4
+        Set $weatherCLow = 5
+        Set $widgetTemp = 9
+        For $d = 1 To 4 Do
+        Begin
+            Set $wTempFHigh = (GetOutput $wForecast $weatherFHigh -1)
+            If $wTempFHigh <> {} Then
+                Set $wTempFHigh = $wTempFHigh $degree
+            Else
+                Set $wTempFHigh = {N/A}
+            Set $weatherFHigh = (Add $weatherFHigh $weatherStep)
+            Set $wTempFLow = (GetOutput $wForecast $weatherFLow -1)
+            If $wTempFLow <> {} Then
+                Set $wTempFLow = $wTempFLow $degree
+            Else
+                Set $wTempFLow = {N/A}
+            Set $weatherFLow = (Add $weatherFLow $weatherStep)
+            Set $weatherFAll = $wTempFHigh {/} $wTempFLow
+            Set $wTempCHigh = (GetOutput $wForecast $weatherCHigh -1)
+            If $wTempCHigh <> {} Then
+                Set $wTempCHigh = $wTempCHigh $degree
+            Else
+                Set $wTempCHigh = {N/A}
+            Set $weatherCHigh = (Add $weatherCHigh $weatherStep)
+            Set $wTempCLow = (GetOutput $wForecast $weatherCLow -1)
+            If $wTempCLow <> {} Then
+                Set $wTempCLow = $wTempCLow $degree
+            Else
+                Set $wTempCLow = {N/A}
+            Set $weatherCLow = (Add $weatherCLow $weatherStep)
+            Set $weatherCAll = $wTempCHigh {/} $wTempCLow
+            If $tempScale == {fahrenheit} Then
+                ChangeTitle $widgetTemp $weatherFAll
+            Else
+                ChangeTitle $widgetTemp $weatherCAll
+            Set $widgetTemp = (Add $widgetTemp $widgetStep)
+        End
 
-		# Show The Widgets
-		For $i = 2 To 18 Do
-			ShowWidget $i
-		ShowWidget 20
-		
-		Set $doRefresh = {false}
-	End
+        # Show The Widgets
+        For $i = 2 To 18 Do
+            ShowWidget $i
+        ShowWidget 20
+        
+        Set $doRefresh = {false}
+    End
 
-	##### Change City
-	If $changeCity == {true} Then
-	Begin
-		If $cityAction == {new} Then
-		Begin
-			#ChangeColorset 1 $defaultColorset
-			ChangeColorset 1 $highlightColorset
-			Set $newTitle = {Weather for }
-			ChangeTitle 1 $newTitle
-			ShowWidget 19
-			ChangeTitle 19 $myCity
-		End
-		If $cityAction == {apply} Then
-		Begin
-			Set $getNewCity = {echo "} (GetTitle 19) {" | sed -e "s/^[ ]*//" -e "s/[ ]*$//" -e "s/\\\//g"}
-			Set $newCity = (GetOutput $getNewCity 1 -1)
-			If $newCity == {} Then
-				Set $invalidCity = {true}
-			Else
-			Begin
-				Set $findBadChars = {echo "} $newCity {" | grep "[^a-zA-Z ',-]"}
-				Set $findAlphaChars = {echo "} $newCity {" | grep "[a-zA-Z]"}
-				If (GetOutput $findBadChars 1 -1) == {} Then
-				Begin
-					If (GetOutput $findAlphaChars 1 -1) <> {} Then
-						Set $invalidCity = {false}
-					Else
-						Set $invalidCity = {true}
-				End
-				Else
-					Set $invalidCity = {true}
-			End
-			If $invalidCity == {true} Then
-			Begin
-				ChangeColorset 1 $warnColorset
-				Set $newTitle = {Invalid City}
-				ChangeTitle 1 $newTitle
-			End
-			Else
-			Begin
-				Set $myCity = $newCity
-				Do {exec sed -i -e "s/^.*Set \$setMyCity.*$/  Set \$setMyCity = } $leftCB $myCity $rightCB {/" } $homeDir {Meteo}
-				Set $doFetch = {true}
-			End
-			HideWidget 19
-		End
-		If $cityAction == {cancel} Then
-		Begin
-			Set $newTitle = $myCity
-			ChangeTitle 1 $newTitle
-			HideWidget 19
-		End
-		Set $changeCity = {false}
-	End
+    ##### Change City
+    If $changeCity == {true} Then
+    Begin
+        If $cityAction == {new} Then
+        Begin
+            #ChangeColorset 1 $defaultColorset
+            ChangeColorset 1 $highlightColorset
+            Set $newTitle = {Weather for }
+            ChangeTitle 1 $newTitle
+            ShowWidget 19
+            ChangeTitle 19 $myCity
+        End
+        If $cityAction == {apply} Then
+        Begin
+            Set $getNewCity = {echo "} (GetTitle 19) {" | sed -e "s/^[ ]*//" -e "s/[ ]*$//" -e "s/\\\//g"}
+            Set $newCity = (GetOutput $getNewCity 1 -1)
+            If $newCity == {} Then
+                Set $invalidCity = {true}
+            Else
+            Begin
+                Set $findBadChars = {echo "} $newCity {" | grep "[^a-zA-Z ',-]"}
+                Set $findAlphaChars = {echo "} $newCity {" | grep "[a-zA-Z]"}
+                If (GetOutput $findBadChars 1 -1) == {} Then
+                Begin
+                    If (GetOutput $findAlphaChars 1 -1) <> {} Then
+                        Set $invalidCity = {false}
+                    Else
+                        Set $invalidCity = {true}
+                End
+                Else
+                    Set $invalidCity = {true}
+            End
+            If $invalidCity == {true} Then
+            Begin
+                ChangeColorset 1 $warnColorset
+                Set $newTitle = {Invalid City}
+                ChangeTitle 1 $newTitle
+            End
+            Else
+            Begin
+                Set $myCity = $newCity
+                If $FnsUseApplet == 0 Then
+                    Do {exec sed -i -e "s/^.*Set \$setMyCity.*$/  Set \$setMyCity = } $leftCB $myCity $rightCB {/" } $homeDir {Meteo}
+                Set $doFetch = {true}
+            End
+            HideWidget 19
+        End
+        If $cityAction == {cancel} Then
+        Begin
+            Set $newTitle = $myCity
+            ChangeTitle 1 $newTitle
+            HideWidget 19
+        End
+        Set $changeCity = {false}
+    End
 
-	##### Change Temperature Scale
-	If $changeTempScale == {true} Then
-	Begin
-		If $tempScale == {celsius} Then
-			Set $tempScale = {fahrenheit}
-		Else
-			Set $tempScale = {celsius}
-		Do {exec sed -i -e "s/^.*Set \$setTempScale.*$/  Set \$setTempScale = } $leftCB $tempScale $rightCB {/" } $homeDir {Meteo}
-		Set $doRefresh = {true}
-		Set $changeTempScale = {false}
-	End
+    ##### Change Temperature Scale
+    If $changeTempScale == {true} Then
+    Begin
+        If $tempScale == {celsius} Then
+            Set $tempScale = {fahrenheit}
+        Else
+            Set $tempScale = {celsius}
+        If $FnsUseApplet == 0 Then
+            Do {exec sed -i -e "s/^.*Set \$setTempScale.*$/  Set \$setTempScale = } $leftCB $tempScale $rightCB {/" } $homeDir {Meteo}
+        Set $doRefresh = {true}
+        Set $changeTempScale = {false}
+    End
 
-	##### Change Standard
-	If $changeStandard == {true} Then
-	Begin
-		If $standard == {metric} Then
-			Set $standard = {english}
-		Else
-			Set $standard = {metric}
-		Do {exec sed -i -e "s/^.*Set \$setStandard.*$/  Set \$setStandard = } $leftCB $standard $rightCB {/" } $homeDir {Meteo}
-		Set $doRefresh = {true}
-		Set $changeStandard = {false}
-	End
+    ##### Change Standard
+    If $changeStandard == {true} Then
+    Begin
+        If $standard == {metric} Then
+            Set $standard = {english}
+        Else
+            Set $standard = {metric}
+        If $FnsUseApplet == 0 Then
+            Do {exec sed -i -e "s/^.*Set \$setStandard.*$/  Set \$setStandard = } $leftCB $standard $rightCB {/" } $homeDir {Meteo}
+        Set $doRefresh = {true}
+        Set $changeStandard = {false}
+    End
 
-	##### Update Weather
-	If (RemainderOfDiv (GetTime) $updateTime) == 0 Then
-		Set $doFetch = {true}
+    ##### Update Weather
+    If (RemainderOfDiv (GetTime) $updateTime) == 0 Then
+        Set $doFetch = {true}
 End
 
 # Fetching weather text
 # Other message text
 # Weather for $myCity text
-Widget		1
+Widget        1
 Property
-	Type		ItemDraw
-#	Size		250 20
-	Size		170 20
-#	Position		10 5
-	Position		5 1
-	Flags		NoFocus NoReliefString Left
+    Type        ItemDraw
+    Size        170 20
+    Position    5 1
+    Flags        NoFocus NoReliefString Left
 Main
 Case message of
-	SingleClic :
-	Begin
-	  Set $cityAction = {new}
-	  Set $changeCity = {true}
-	End
+    SingleClic :
+    Begin
+      Set $cityAction = {new}
+      Set $changeCity = {true}
+    End
 End
 
 # Main weather icon
-Widget		2
+Widget        2
 Property
-	Type		ItemDraw
-#	Size		40 40
-	Size		24 24
-#	Position		10 30
-	Position		5 25
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        24 24
+    Position    5 25
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # temperature
-Widget		3
+Widget        3
 Property
-	Type		ItemDraw
-#	Size		100 30
-	Size		70 20
-#	Position		55 25
-	Position		35 20
-	Flags		NoFocus NoReliefString Left
+    Type        ItemDraw
+    Size        70 20
+    Position    35 20
+    Flags       NoFocus NoReliefString Left
 Main
 Case message of
-	SingleClic :
-	Begin
-	  Set $changeTempScale = {true}
-	End
+    SingleClic :
+    Begin
+      Set $changeTempScale = {true}
+    End
 End
 
 # weather state text
-Widget		4
+Widget        4
 Property
-	Type		ItemDraw
-#	Size		100 20
-	Size		160 15
-#	Position		55 50
-	Position		5 55
-	Flags		NoFocus NoReliefString Left
+    Type        ItemDraw
+    Size        160 15
+    Position    5 55
+    Flags       NoFocus NoReliefString Left
 Main
 Case message of
 End
 
 # wind text
-Widget		5
+Widget        5
 Property
-	Type		ItemDraw
-#	Size		160 20
-	Size		160 15
-#	Position		160 30
-#	Position		130 30
-	Position		35 40
-	Flags		NoFocus NoReliefString Left
+    Type        ItemDraw
+    Size        160 15
+    Position    35 40
+    Flags       NoFocus NoReliefString Left
 Main
 Case message of
-	SingleClic :
-	Begin
-	  Set $changeStandard = {true}
-	End
+    SingleClic :
+    Begin
+      Set $changeStandard = {true}
+    End
 End
 
 # humidity text
-Widget		6
+Widget        6
 Property
-	Type		ItemDraw
-#	Size		160 20
-	Size		80 15
-#	Position		160 50
-	Position		105 23
-	Flags		NoFocus NoReliefString Left
+    Type        ItemDraw
+    Size        80 15
+    Position    105 23
+    Flags       NoFocus NoReliefString Left
 Main
 Case message of
 End
 
 # 1st day text
-Widget		7
+Widget        7
 Property
-	Type		ItemDraw
-#	Size		40 20
-	Size		24 15
-#	Position		32 75
-	Position		12 75
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        24 15
+    Position    12 75
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 1st day weather icon
-Widget		8
+Widget        8
 Property
-	Type		ItemDraw
-#    Icon		noicon.png
-#	Size		40 40
-	Size		24 24
-#	Position		32 95
-	Position		12 90
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        24 24
+    Position    12 90
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 1st day temperature min/max text
-Widget		9
+Widget        9
 Property
-	Type		ItemDraw
-#	Size		64 20
-	Size		40 15
-	Position		5 110
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        40 15
+    Position    5 110
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 2nd day text
-Widget		10
+Widget        10
 Property
-	Type		ItemDraw
-#	Size		40 20
-	Size		24 15
-#	Position		104 75
-	Position		57 75
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        24 15
+    Position    57 75
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 2nd day weather icon
-Widget		11
+Widget        11
 Property
-	Type		ItemDraw
-#    Icon		noicon.png
-#	Size		40 40
-	Size		24 24
-#	Position		104 95
-	Position		57 90
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        24 24
+    Position    57 90
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 2nd day temperature min/max text
-Widget		12
+Widget        12
 Property
-	Type		ItemDraw
-#	Size		64 20
-	Size		40 15
-#	Position		92 135
-	Position		50 110
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        40 15
+    Position    50 110
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 3rd day text
-Widget		13
+Widget        13
 Property
-	Type		ItemDraw
-#	Size		40 20
-	Size		24 15
-#	Position		176 75
-	Position		102 75
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        24 15
+    Position    102 75
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 3rd day weather icon
-Widget		14
+Widget        14
 Property
-	Type		ItemDraw
-#    Icon		noicon.png
-#	Size		40 40
-	Size		24 24
-#	Position		176 95
-	Position		102 90
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        24 24
+    Position    102 90
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 3rd day temperature min/max text
-Widget		15
+Widget        15
 Property
-	Type		ItemDraw
-#	Size		64 20
-	Size		40 15
-#	Position		164 135
-	Position		95 110
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        40 15
+    Position    95 110
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 4th day text
-Widget		16
+Widget        16
 Property
-	Type		ItemDraw
-#	Size		40 20
-	Size		24 15
-#	Position		248 75
-	Position		147 75
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        24 15
+    Position    147 75
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 4th day weather icon
-Widget		17
+Widget        17
 Property
-	Type		ItemDraw
-#	Size		40 40
-	Size		24 24
-#	Position		248 95
-	Position		147 90
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        24 24
+    Position    147 90
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # 4th day temperature min/max text
-Widget		18
+Widget        18
 Property
-	Type		ItemDraw
-#	Size		64 20
-	Size		40 15
-#	Position		236 135
-	Position		140 110
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        40 15
+    Position    140 110
+    Flags       NoFocus NoReliefString
 Main
 Case message of
 End
 
 # change city
-Widget		19
+Widget        19
 Property
-	Type		TextField
-#	Size		200 20
-	Size		100 20
-#	Position		90 5
-	Position		70 1
-	Flags		NoReliefString Left
+    Type        TextField
+    Size        100 20
+    Position    70 1
+    Flags       NoReliefString Left
 Main
 Case message of
-	1 :
-	Begin
-	  Set $cityAction = {apply}
-	  Set $changeCity = {true}
-	End
-	2 :
-	Begin
-	  Set $cityAction = {cancel}
-	  Set $changeCity = {true}
-	End
+    1 :
+    Begin
+      Set $cityAction = {apply}
+      Set $changeCity = {true}
+    End
+    2 :
+    Begin
+      Set $cityAction = {cancel}
+      Set $changeCity = {true}
+    End
 End
 
-Widget		20
+Widget        20
 Property
-	Type		ItemDraw
-	Size		16 16
-#	Position		303 1
-	Position		168 1
-	Flags		NoFocus NoReliefString
+    Type        ItemDraw
+    Size        16 16
+    Position    168 1
+    Flags       NoFocus NoReliefString
 Main
 Case message of
-	SingleClic :
-	Begin
-	  Quit
-	End
+    SingleClic :
+    Begin
+      Quit
+    End
 End
