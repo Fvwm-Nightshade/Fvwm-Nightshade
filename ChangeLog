@@ -1,5 +1,21 @@
 History:
 
+08/21/2013
+- create new icon directory structure in artworks/icon:
+  16x16/, 24x24/, 64x64/ and 80x64/ for bitmap icons
+- delete fns bitmap icons because they never needed - a svg icon exist
+- resize weather icons faenza and google from 40x40 to 24x24
+- update applet icons in config to new icon directory structure
+- adapt in Meteo, Kalende, Plaia and Pagina:
+  - exchange tabs with spaces
+  - rename all window titles to Applet-<name>
+  - make command line parsing more general
+  - exchange svg icons with bitmaps
+- changes in Meteo:
+  - add a bunch of new options
+  - script can now decide which theme should taken - wonderground or system theme icons
+
+
 08/18/2013
 - changes in config:
   - launch new develop versioning: <version_number>-<YYYYMMDD>

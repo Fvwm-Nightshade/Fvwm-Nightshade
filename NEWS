@@ -9,10 +9,10 @@ Features:
   largest free area of a desktop/page (thanks to Andreas Hoenen ^^)
 - right click menu for cpu bar to restart them on error and start other 
   related scripts/applets.
-- new set of icons for menus and internal apps to exchange wm-icons dependency
+- new set of icons for menus and internal apps to remove wm-icons dependency
   because this package isn't available in all distributions and of its' 
   unscalability. Also special thanks to Alessandro Roncone who gives us 
-  the permission to use some of his Awoken icons.
+  the permission to use his Awoken icons :-).
 
 
 ------------------------------------------------------------------------
