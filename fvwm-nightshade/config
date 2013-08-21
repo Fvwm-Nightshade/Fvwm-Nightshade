@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.4-20130818
+InfoStoreAdd ns_version 0.7.4-20130821
 # Copyright (C) 2013
 #
 # Authors:
@@ -540,14 +540,14 @@ Style Kalende                       EWMHMiniIconOverride, Icon Kalende.svg:48x48
 #-----------------------------------------------------------------------
 # FvwmApplets
 #-----------------------------------------------------------------------
-Style Applet-Plaia          EWMHMiniIconOverride, Icon Plaia.svg:48x48, MiniIcon Plaia_Applet.png
-Style Applet-Pagina         EWMHMiniIconOverride, Icon Pagina.svg:48x48, MiniIcon Pagina_Applet.png
-Style Applet-Meteo          EWMHMiniIconOverride, Icon Meteo.svg:48x48, MiniIcon Meteo_Applet.png
-Style Applet-DriveInn       EWMHMiniIconOverride, Icon DriveInn.svg:48x48, MiniIcon DriveInn_Applet.png
-Style Applet-Chrono         EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon Chrono_Applet.png
-Style Applet-Empidy         EWMHMiniIconOverride, Icon Empidy.svg:48x48, MiniIcon Empidy_Applet.png
-Style Applet-Timpul         EWMHMiniIconOverride, Icon Timpul.svg:48x48, MiniIcon Timpul_Applet.png
-Style Applet-Kalende        EWMHMiniIconOverride, Icon Kalende.svg:48x48, MiniIcon Kalende_Applet.png
+Style Applet-Plaia          EWMHMiniIconOverride, Icon Plaia.svg:48x48, MiniIcon 80x64/Plaia_Applet.png
+Style Applet-Pagina         EWMHMiniIconOverride, Icon Pagina.svg:48x48, MiniIcon 80x64/Pagina_Applet.png
+Style Applet-Meteo          EWMHMiniIconOverride, Icon Meteo.svg:48x48, MiniIcon 80x64/Meteo_Applet.png
+Style Applet-DriveInn       EWMHMiniIconOverride, Icon DriveInn.svg:48x48, MiniIcon 80x64/DriveInn_Applet.png
+Style Applet-Chrono         EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon 80x64/Chrono_Applet.png
+Style Applet-Empidy         EWMHMiniIconOverride, Icon Empidy.svg:48x48, MiniIcon 80x64/Empidy_Applet.png
+Style Applet-Timpul         EWMHMiniIconOverride, Icon Timpul.svg:48x48, MiniIcon 80x64/Timpul_Applet.png
+Style Applet-Kalende        EWMHMiniIconOverride, Icon Kalende.svg:48x48, MiniIcon 80x64/Kalende_Applet.png
 
 
 ########################################################################
@@ -1222,20 +1222,6 @@ AddToFunc   FuncChangeLayout
 #-----------------------------------------------------------------------
 # Update/Create an InfoStore variable in a file
 # FuncWriteInfoStoreToFile <var_name> <var_value> <file>
-#-----------------------------------------------------------------------
-DestroyFunc FuncWriteInfoStoreToFileAndSet
-AddToFunc   FuncWriteInfoStoreToFileAndSet
-+ I PipeRead 'new=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
-            if [ `grep -c $0 $2` -gt 0 ] ; then \
-                sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$new\\"#" $2; \
-            else \
-                sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$new\\"" $2; \
-            fi; \
-            echo InfoStoreAdd $0 "$new"'
-
-#-----------------------------------------------------------------------
-# Update/Create an SetEnv variable in a file
-# FuncWriteSetEnvToFile <var_name> <var_value> <file>
 #-----------------------------------------------------------------------
 DestroyFunc FuncWriteInfoStoreToFileAndSet
 AddToFunc   FuncWriteInfoStoreToFileAndSet
