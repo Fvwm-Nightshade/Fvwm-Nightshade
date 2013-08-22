@@ -1,5 +1,13 @@
 History:
 
+08/22/2013
+- add FNS-Script-Date based on FvwmScript-Date because the original fits
+  not into the FNS GUI design. Also, setting system time/date needs root
+  permission which is not possible with FvwmScript-Date
+- add FNS-Script-Date in some menus
+- add new clock vector icon for FNS-Script-Date
+- exchange tabs with spaces in FNS-Script-FileBrowser and header.tpl
+
 08/21/2013
 - create new icon directory structure in artworks/icon:
   16x16/, 24x24/, 64x64/ and 80x64/ for bitmap icons
