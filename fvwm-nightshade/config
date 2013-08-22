@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.4-20130821
+InfoStoreAdd ns_version 0.7.4-20130822
 # Copyright (C) 2013
 #
 # Authors:
@@ -533,6 +533,7 @@ Style FNS-Script-PersonalMenu       EWMHMiniIconOverride, Icon PersonalMenuCreat
 Style FNS-Script-FileBrowser        EWMHMiniIconOverride, Icon filemanager.svg:48x48, MiniIcon filemanager.svg:16x16
 Style FNS-Script-PlaylistCreator    EWMHMiniIconOverride, Icon playlist-creator.svg:48x48, MiniIcon playlist-creator.svg:16x16
 Style FNS-Script-CpuPerformance     EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
+Style FNS-Script-Date               EWMHMiniIconOverride, Icon clock.svg:48x48, MiniIcon clock.svg:16x16
 Style Chrono                        EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon Chrono.svg:16x16
 Style Kalende                       EWMHMiniIconOverride, Icon Kalende.svg:48x48, MiniIcon Kalende.svg:16x16
 
@@ -2094,6 +2095,7 @@ AddToFunc   FuncMenuSystemConfiguration
 + I AddToMenu MenuSystemConfiguration MissingSubmenuFunction FuncMenuXScreenSaver
 + I AddToMenu MenuSystemConfiguration "$[gt.Sc&reen Saver]%screensaver.svg:$[infostore.MenuIconSize]%"  Popup MenuXScreenSaver
 + I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"    FvwmScript FNS-Script-CpuPerformance
++ I AddToMenu MenuSystemConfiguration "$[gt.Set Date/Time]%clock.svg:$[infostore.MenuIconSize]%"        FvwmScript FNS-Script-Date
 
 
 #-----------------------------------------------------------------------
@@ -2471,7 +2473,7 @@ AddToFunc   FuncMenuClockOps
 + I AddToMenu MenuClockOps "$[gt.Calender]%Kalende.svg:$[infostore.MenuIconSize]%"              FvwmScript FNS-Applet-Kalende -fns -s
 + I AddToMenu MenuClockOps "$[gt.Alarm]%Chrono.svg:$[infostore.MenuIconSize]%"                  FvwmScript FNS-Applet-Chrono -fns -s
 + I AddToMenu MenuClockOps "" Nop
-+ I AddToMenu MenuClockOps "$[gt.Set Date/Time]%system.svg:$[infostore.MenuIconSize]%"          FvwmScript FvwmScript-Date
++ I AddToMenu MenuClockOps "$[gt.Set Date/Time]%system.svg:$[infostore.MenuIconSize]%"          FvwmScript FNS-Script-Date
 + I AddToMenu MenuClockOps "$[gt.Restart Conky Clock]%restart.svg:$[infostore.MenuIconSize]%"   Exec exec xkill -id `xwininfo -name conky_clock|grep "Window id"|cut -d ' ' -f4`
 
 #-----------------------------------------------------------------------
