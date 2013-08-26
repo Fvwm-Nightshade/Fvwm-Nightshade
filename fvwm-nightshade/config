@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.4-20130822
+InfoStoreAdd ns_version 0.7.4-20130826
 # Copyright (C) 2013
 #
 # Authors:
@@ -186,6 +186,15 @@ ImagePath $[FVWM_USERDIR]/artwork/icons:$[FVWM_USERDIR]/artwork/icons/scalable:+
 ImagePath +:$[FNS_SYSTEMDIR]/artwork/icons:$[FNS_SYSTEMDIR]/artwork/icons/scalable
 ImagePath +:/usr/share/icons:/usr/share/icons/wm-icons
 ImagePath +:/usr/share/pixmaps:/usr/share/pixmaps/fvwm
+
+#-----------------------------------------------------------------------
+# FnsSoundPath is a Fvwm-Nightshade builtin, you may add some directories here.
+# You can search for sounds over 'fns-find-file [file name]' which returns
+# the full path of the specified sound file (if available).
+# The predefine sound search paths are:
+# $[FVWM_USERDIR]/artwork/sounds:$[FNS_SYSTEMDIR]/artwork/sounds
+#-----------------------------------------------------------------------
+FnsSoundPath +:/usr/share/sounds
 
 #-----------------------------------------------------------------------
 # wallpaper directory path.
