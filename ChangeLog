@@ -15,6 +15,7 @@ History:
 - add new variable __version__ for version in fns-find-icon
 - adapt variables which use 0/1 to false/true in some FvwmScript scripts
 - fix bug in FNS-Applet-Kalende that in script mode the background is transparent
+- add documentation for fns-find-file (asciidoc, manpage, html)
 
 08/22/2013
 - add FNS-Script-Date based on FvwmScript-Date because the original fits
