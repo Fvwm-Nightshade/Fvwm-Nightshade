@@ -1,5 +1,21 @@
 History:
 
+08/26/2013
+- add new environment variable to fvwm-nightshade to have a search variable
+  for sound paths
+- add new function FnsSoundPath in fns-init to have the same possibility
+  like ModulePath or ImagePath to create search paths for sounds
+- add new python script fns-find-file to search in path variables like
+  $PATH or $FNS_SOUNDPATH for files
+- add FnsSoundPath to config and update version
+- add new applet FNS-Aplet-Chrono (alarm clock)
+- add new 32x32 icons for FNS-Aplet-Chrono in artwork/icons
+- add sounds in artworks for own system sounds
+- exchange tabs with spaces in fns-init and fvwm-nightshade
+- add new variable __version__ for version in fns-find-icon
+- adapt variables which use 0/1 to false/true in some FvwmScript scripts
+- fix bug in FNS-Applet-Kalende that in script mode the background is transparent
+
 08/22/2013
 - add FNS-Script-Date based on FvwmScript-Date because the original fits
   not into the FNS GUI design. Also, setting system time/date needs root
@@ -22,7 +38,6 @@ History:
 - changes in Meteo:
   - add a bunch of new options
   - script can now decide which theme should taken - wonderground or system theme icons
-
 
 08/18/2013
 - changes in config:
