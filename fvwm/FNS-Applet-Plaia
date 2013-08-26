@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Plaia
-# Version:      1.0.16
+# Version:      1.0.17
 # Licence:      GPL 2
 #
 # Description:  Music player applet based on FvwmScript
@@ -33,7 +33,7 @@
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      03/17/2013
-# Changed:      08/19/2013
+# Changed:      08/25/2013
 #-----------------------------------------------------------------------
 
 UseGettext      {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
@@ -59,11 +59,11 @@ Begin
     Set $defaultSize = 24
 
     ##### Commandline Arguments
-    Set $FnsUseApplet = 0
-    Set $ColorsetChanged = 0
-    Set $FontChanged = 0
-    Set $useThemeIcons = 0
-    Set $ThemeChanged = 0
+    Set $FnsUseApplet = {false}
+    Set $ColorsetChanged = {false}
+    Set $FontChanged = {false}
+    Set $useThemeIcons = {false}
+    Set $ThemeChanged = {false}
     Set $i = 1
     Set $arg = (GetScriptArgument $i)
 
@@ -77,23 +77,23 @@ Begin
         If $arg == {-fns} Then
         Begin
             Set $noValue = {false}
-            Set $FnsUseApplet = 1
+            Set $FnsUseApplet = {true}
             
             Set $defaultColorset = 25
-            Set $ColorsetChanged = 1
+            Set $ColorsetChanged = {true}
             
             Set $warnColorset = 27
             Set $highlightColorset = 26
 
             Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
-            Set $FontChanged = 1
+            Set $FontChanged = {true}
         End
 
         # other default colorset
         If $arg == {-cs} Then
         Begin
             Set $defaultColorset = $value
-            Set $ColorsetChanged = 1
+            Set $ColorsetChanged = {true}
         End
 
         # other warn colorset
@@ -108,7 +108,7 @@ Begin
         If $arg == {-fnt} Then
         Begin
             Set $defaultFont = $value
-            Set $FontChanged = 1
+            Set $FontChanged = {true}
         End
 
         # other default fontsize
@@ -124,7 +124,7 @@ Begin
                 Else
                     Set $infoFontsize = (Add $defaultFontsize -1)
             End
-            Set $FontChanged = 1
+            Set $FontChanged = {true}
         End
 
         # other default theme
@@ -133,8 +133,8 @@ Begin
             Set $defaultTheme = $value
             If $defaultTheme == {oxygen} Then
                 Set $defaultSize = 22
-            Set $ThemeChanged = 1
-            Set $useThemeIcons = 1
+            Set $ThemeChanged = {true}
+            Set $useThemeIcons = {true}
         End
 
         If $noValue == {true} Then
@@ -146,7 +146,7 @@ Begin
     End
 
     ##### change Settings if needed
-    If $FnsUseApplet == 1 Then
+    If $FnsUseApplet == {true} Then
     Begin
         Do {Exec mkdir -p $FVWM_USERDIR/temp/}
         Set $Cmd = {echo $FVWM_USERDIR/temp/}$BS_CMD
@@ -170,7 +170,7 @@ Begin
     End
 
     ##### change Global Styles if needed
-    If $ColorsetChanged == 1 Then
+    If $ColorsetChanged == {true} Then
     Begin
         ChangeColorset 1 $highlightColorset
         For $Widget=2 To 13 Do
@@ -181,7 +181,7 @@ Begin
     End
 
     ##### change Widget Styles if needed
-    If $FontChanged == 1 Then
+    If $FontChanged == {true} Then
     Begin
         Set $boldFont = {xft:}$defaultFont{:size=}$defaultFontsize{:bold}
         Do {echo boldFont: }$boldFont
@@ -193,10 +193,10 @@ Begin
         ChangeFont $Widget $infoFont
     ChangeFont 7 $boldFont
     
-    If $ThemeChanged == 1 Then
-        Set $useThemeIcons = 1
+    If $ThemeChanged == {true} Then
+        Set $useThemeIcons = {true}
     
-    If $useThemeIcons == 1 Then
+    If $useThemeIcons == {true} Then
     Begin
         Set $icons = {media-seek-backward media-seek-forward media-skip-backward media-skip-forward media-playback-stop media-playback-start media-playback-pause}
         For $index = 1 To 7 Do
@@ -204,7 +204,7 @@ Begin
             Set $cmd = {echo }$icons
             Set $icon = (GetOutput $cmd 1 $index)
             
-            If $ThemeChanged == 1 Then
+            If $ThemeChanged == {true} Then
                 Set $cmd = {fns-find-icon -n }$icon{ -s }$defaultSize{ -c actions -t }$defaultTheme{ --notdesk}
             Else
                 Set $cmd = {fns-find-icon -n }$icon{ -s }$defaultSize{ -c actions --notdesk}

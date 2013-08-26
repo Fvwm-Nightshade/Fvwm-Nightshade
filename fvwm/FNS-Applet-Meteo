@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Meteo
-# Version:      1.1.0
+# Version:      1.1.1
 # Licence:      GPL 2
 #
 # Description:  Weather forecast applet based on FvwmScript
@@ -49,7 +49,7 @@
 # Adjusted by:  Thomas Funk <t.funk@web.de>
 #
 # Created:      09/32/2012
-# Changed:      08/21/2013
+# Changed:      08/25/2013
 #-----------------------------------------------------------------------
 
 UseGettext      {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
@@ -67,10 +67,10 @@ Begin
     Set $setTheme = {oxygen}
 
     ##### Commandline Arguments
-    Set $FnsUseApplet = 0
-    Set $ColorsetChanged = 0
-    Set $FontChanged = 0
-    Set $useThemeIcons = 0
+    Set $FnsUseApplet = {false}
+    Set $ColorsetChanged = {false}
+    Set $FontChanged = {false}
+    Set $useThemeIcons = {false}
     Set $i = 1
     Set $arg = (GetScriptArgument $i)
 
@@ -84,19 +84,19 @@ Begin
         If $arg == {-fns} Then
         Begin
             Set $noValue = {true}
-            Set $FnsUseApplet = 1
+            Set $FnsUseApplet = {true}
             
             Set $defaultColorset = 25
-            Set $ColorsetChanged = 1
+            Set $ColorsetChanged = {true}
             
             Set $warnColorset = 27
 
             Set $highlightColorset = 26
             
-            If $FontChanged == 0 Then
+            If $FontChanged == {false} Then
             Begin
                 Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
-                Set $FontChanged = 1
+                Set $FontChanged = {true}
             End
         End
 
@@ -104,7 +104,7 @@ Begin
         If $arg == {-cs} Then
         Begin
             Set $defaultColorset = $value
-            Set $ColorsetChanged = 1
+            Set $ColorsetChanged = {true}
         End
 
         # other warn colorset
@@ -119,7 +119,7 @@ Begin
         If $arg == {-fnt} Then
         Begin
             Set $defaultFont = $value
-            Set $FontChanged = 1
+            Set $FontChanged = {true}
         End
 
         # use icons from current theme set in .FvwmForm-Desktop-Config
@@ -166,7 +166,7 @@ Begin
                 Do {echo setTheme: }$setTheme
             End
             If $match <> {true} Then
-                Set $useThemeIcons = 1
+                Set $useThemeIcons = {true}
         End
 
         # other scale temperature
@@ -198,7 +198,7 @@ Begin
     End
 
     ##### change Settings if needed
-    If $FnsUseApplet == 1 Then
+    If $FnsUseApplet == {true} Then
     Begin
         Set $homeDir = (GetOutput {echo $FVWM_USERDIR} 1 -1)
         Set $putTmp = $homeDir{/temp/}
@@ -226,7 +226,7 @@ Begin
 
 
     ##### change Global Styles if needed
-    If $ColorsetChanged == 1 Then
+    If $ColorsetChanged == {true} Then
     Begin
         For $Widget=1 To 20 Do
         Begin
@@ -236,7 +236,7 @@ Begin
     End
 
     ##### change Widget Styles if needed
-    If $FontChanged == 1 Then
+    If $FontChanged == {true} Then
     Begin
         Set $newFont = {xft:}$defaultFont{:size=7:bold}
         For $Widget=1 To 20 Do
@@ -249,7 +249,7 @@ Begin
     If $setTheme <> {} Then
         Set $themeDir = $themesDir $setTheme {/}
     Else
-        Set $useThemeIcons = 1
+        Set $useThemeIcons = {true}
     
     ##### change Widgets
     ChangeColorset 1 $highlightColorset
@@ -368,7 +368,7 @@ Begin
         Set $wIcon = (GetOutput $wConditions 8 -1)
         If $wIcon <> {} Then
         Begin
-            If $useThemeIcons == 0 Then
+            If $useThemeIcons == {false} Then
             Begin
                 Set $wIcon = $themeDir $wIcon {.png}
                 Do {echo wIcon: }$wIcon
@@ -429,7 +429,7 @@ Begin
         End
         Else
         Begin
-            If $useThemeIcons == 0 Then
+            If $useThemeIcons == {false} Then
                 Set $wIcon = $noIcon
             Else
             Begin
@@ -534,7 +534,7 @@ Begin
             Set $icon = {image-missing}
             If $wIconF <> {} Then
             Begin
-                If $useThemeIcons == 0 Then
+                If $useThemeIcons == {false} Then
                 Begin
                     Set $wIconImg = $themeDir $wIconF {.png}
                     ChangeIcon $widgetIcon $wIconImg
@@ -594,7 +594,7 @@ Begin
             End
             Else
             Begin
-                If $useThemeIcons == 0 Then
+                If $useThemeIcons == {false} Then
                     Set $wIconImg = $noIcon
                 Else
                 Begin
@@ -701,7 +701,7 @@ Begin
             Else
             Begin
                 Set $myCity = $newCity
-                If $FnsUseApplet == 0 Then
+                If $FnsUseApplet == {false} Then
                     Do {exec sed -i -e "s/^.*Set \$setMyCity.*$/  Set \$setMyCity = } $leftCB $myCity $rightCB {/" } $homeDir {Meteo}
                 Set $doFetch = {true}
             End
@@ -723,7 +723,7 @@ Begin
             Set $tempScale = {fahrenheit}
         Else
             Set $tempScale = {celsius}
-        If $FnsUseApplet == 0 Then
+        If $FnsUseApplet == {false} Then
             Do {exec sed -i -e "s/^.*Set \$setTempScale.*$/  Set \$setTempScale = } $leftCB $tempScale $rightCB {/" } $homeDir {Meteo}
         Set $doRefresh = {true}
         Set $changeTempScale = {false}
@@ -736,7 +736,7 @@ Begin
             Set $standard = {english}
         Else
             Set $standard = {metric}
-        If $FnsUseApplet == 0 Then
+        If $FnsUseApplet == {false} Then
             Do {exec sed -i -e "s/^.*Set \$setStandard.*$/  Set \$setStandard = } $leftCB $standard $rightCB {/" } $homeDir {Meteo}
         Set $doRefresh = {true}
         Set $changeStandard = {false}

@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Kalende
-# Version:      1.1.1
+# Version:      1.1.2
 # Licence:      GPL 2
 #
 # Description:  Calender applet based on FvwmScript
@@ -27,7 +27,7 @@
 # Adjusted by:  Thomas Funk <t.funk@web.de>
 #
 # Created:      08/12/2012
-# Changed:      08/21/2013
+# Changed:      08/25/2013
 #-----------------------------------------------------------------------
 
 UseGettext      {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
@@ -37,11 +37,11 @@ WindowSize      185 150
 Init
 Begin
     ##### Commandline Arguments
-    Set $FnsUseApplet = 0
-    Set $UseAppletAsScript = 0
-    Set $FNSUseAppletAsScript = 0
-    Set $ColorsetChanged = 0
-    Set $FontChanged = 0
+    Set $FnsUseApplet = {false}
+    Set $UseAppletAsScript = {false}
+    Set $FNSUseAppletAsScript = {false}
+    Set $ColorsetChanged = {false}
+    Set $FontChanged = {false}
     Set $i = 1
     Set $arg = (GetScriptArgument $i)
 
@@ -55,17 +55,17 @@ Begin
         If $arg == {-fns} Then
         Begin
             Set $noValue = {true}
-            Set $FnsUseApplet = 1
+            Set $FnsUseApplet = {true}
             
             Set $defaultColorset = 25
-            Set $ColorsetChanged = 1
+            Set $ColorsetChanged = {true}
             
             Set $highlightColorset = 26
             
-            If $FontChanged == 0 Then
+            If $FontChanged == {false} Then
             Begin
                 Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
-                Set $FontChanged = 1
+                Set $FontChanged = {true}
             End
         End
 
@@ -73,14 +73,14 @@ Begin
         If $arg == {-s} Then
         Begin
             Set $noValue = {true}
-            Set $UseAppletAsScript = 1
+            Set $UseAppletAsScript = {true}
         End
 
         # other default colorset
         If $arg == {-cs} Then
         Begin
             Set $defaultColorset = $value
-            Set $ColorsetChanged = 1
+            Set $ColorsetChanged = {true}
         End
 
         # other highlight colorset
@@ -91,7 +91,7 @@ Begin
         If $arg == {-fnt} Then
         Begin
             Set $defaultFont = $value
-            Set $FontChanged = 1
+            Set $FontChanged = {true}
         End
 
         If $noValue == {true} Then
@@ -103,33 +103,34 @@ Begin
     End
 
     ##### change Settings if needed
-    If $UseAppletAsScript == 1 Then
+    If $UseAppletAsScript == {true} Then
     Begin
-        If $FnsUseApplet == 1 Then
-            Set $FNSUseAppletAsScript = 1
+        If $FnsUseApplet == {true} Then
+            Set $FNSUseAppletAsScript = {true}
     End
     
-    If $FnsUseApplet == 1 Then
+    If $FnsUseApplet == {true} Then
     Begin
         Set $prevIcon = {24x24/left.png}
         Set $nextIcon = {24x24/right.png}
         Set $quitButton = {16x16/quit.png}
-        If $FNSUseAppletAsScript == 1 Then
+        If $FNSUseAppletAsScript == {true} Then
+        Begin
             ChangeWindowTitle {Kalende}
-        Else
-            Set $ColorsetChanged = 0
+            Set $ColorsetChanged = {false}
+        End
     End
     Else
     Begin
-        If $FNSUseAppletAsScript == 0 Then
+        If $FNSUseAppletAsScript == {true} Then
         Begin
             # settings from Sebaro
             ChangeWindowTitle {Kalende}
             Set $defaultColorset = 10
             Set $highlightColorset = 10
-            Set $ColorsetChanged = 1
+            Set $ColorsetChanged = {true}
             Set $defaultFont = {DejaVu Sans}
-            Set $FontChanged = 1
+            Set $FontChanged = {true}
 
             Set $homeDir = (GetOutput {echo $[infostore.mScripts]} 1 -1) {/Kalende/}
 
@@ -149,7 +150,7 @@ Begin
     Set $MonYearCurrForeColor = {#4c87c9}
 
     ##### change Global Styles if needed
-    If $ColorsetChanged == 1 Then
+    If $ColorsetChanged == {true} Then
     Begin
         For $Widget=1 To 54 Do
         Begin
@@ -159,7 +160,7 @@ Begin
     End
 
     ##### change Widget Styles if needed
-    If $FontChanged == 1 Then
+    If $FontChanged == {true} Then
     Begin
         Set $newFont = {xft:}$defaultFont{:size=7:bold}
         For $Widget=1 To 54 Do
@@ -198,7 +199,7 @@ Begin
     ##### Variables
     Set $weekFirstDay = $setFirstDay
     Set $changeCal = {month}
-    If $FNSUseAppletAsScript == 1 Then
+    If $FNSUseAppletAsScript == {true} Then
     Begin
         ChangeForeColor 2 $MonYearCurrForeColor
         ChangeForeColor 3 $MonYearDefForeColor
@@ -485,7 +486,7 @@ Case message of
     SingleClic :
     Begin
         Set $changeCal = {month}
-        If $FNSUseAppletAsScript == 0 Then
+        If $FNSUseAppletAsScript == {false} Then
         Begin
             ChangeColorset 2 $highlightColorset
             ChangeColorset 3 $defaultColorset
@@ -510,7 +511,7 @@ Case message of
     SingleClic :
     Begin
         Set $changeCal = {year}
-        If $FNSUseAppletAsScript == 0 Then
+        If $FNSUseAppletAsScript == {false} Then
         Begin
             ChangeColorset 3 $highlightColorset
             ChangeColorset 2 $defaultColorset

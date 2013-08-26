@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Pagina
-# Version:      1.1.0
+# Version:      1.1.1
 # Licence:      GPL 2
 #
 # Description:  Music player applet based on FvwmScript
@@ -30,7 +30,7 @@
 # Author:       Bernhard Popp <kermit.popp@googlemail.com>    
 #
 # Created:      03/17/2013
-# Changed:      08/21/2013
+# Changed:      08/25/2013
 #-----------------------------------------------------------------------
 
 UseGettext      {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
@@ -49,11 +49,11 @@ Begin
     Set $defaultSize = 24
 
     ##### Commandline Arguments
-    Set $FnsUseApplet = 0
-    Set $ColorsetChanged = 0
-    Set $FontChanged = 0
-    Set $useThemeIcons = 0
-    Set $ThemeChanged = 0
+    Set $FnsUseApplet = {false}
+    Set $ColorsetChanged = {false}
+    Set $FontChanged = {false}
+    Set $useThemeIcons = {false}
+    Set $ThemeChanged = {false}
     Set $i = 1
     Set $arg = (GetScriptArgument $i)
 
@@ -67,22 +67,22 @@ Begin
         If $arg == {-fns} Then
         Begin
             Set $noValue = {false}
-            Set $FnsUseApplet = 1
+            Set $FnsUseApplet = {true}
             
             Set $defaultColorset = 25
-            Set $ColorsetChanged = 1
+            Set $ColorsetChanged = {true}
             
             Set $highlightColorset = 26
             
             Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
-            Set $FontChanged = 1
+            Set $FontChanged = {true}
         End
 
         # other default colorset
         If $arg == {-cs} Then
         Begin
             Set $defaultColorset = $value
-            Set $ColorsetChanged = 1
+            Set $ColorsetChanged = {true}
         End
 
         # other highlight colorset
@@ -93,14 +93,14 @@ Begin
         If $arg == {-fnt} Then
         Begin
             Set $defaultFont = $value
-            Set $FontChanged = 1
+            Set $FontChanged = {true}
         End
 
         # other default fontsize
         If $arg == {-fs} Then
         Begin
             Set $defaultFontsize = $value
-            Set $FontChanged = 1
+            Set $FontChanged = {true}
         End
 
         # other default theme
@@ -109,7 +109,7 @@ Begin
             Set $defaultTheme = $value
             If $defaultTheme == {oxygen} Then
                 Set $defaultSize = 22
-            Set $ThemeChanged = 1
+            Set $ThemeChanged = {true}
         End
 
         If $noValue == {true} Then
@@ -121,7 +121,7 @@ Begin
     End
 
     ##### change Settings if needed
-    If $FnsUseApplet == 1 Then
+    If $FnsUseApplet == {true} Then
     Begin
         Set $iconDir = {24x24/}
         Set $quitButton = {16x16/quit.png}
@@ -134,7 +134,7 @@ Begin
     End
 
     ##### change Global Styles if needed
-    If $ColorsetChanged == 1 Then
+    If $ColorsetChanged == {true} Then
     Begin
         For $Widget=1 To 12 Do
         Begin
@@ -144,17 +144,17 @@ Begin
     End
 
     ##### change Widget Styles if needed
-    If $FontChanged == 1 Then
+    If $FontChanged == {true} Then
     Begin
         Set $newFont = {xft:}$defaultFont{:size=}$defaultFontsize{:bold}
         For $Widget=1 To 5 Do
             ChangeFont $Widget $newFont
     End
 
-    If $ThemeChanged == 1 Then
-        Set $useThemeIcons = 1
+    If $ThemeChanged == {true} Then
+        Set $useThemeIcons = {true}
     
-    If $useThemeIcons == 1 Then
+    If $useThemeIcons == {true} Then
     Begin
         Set $icons = {media-seek-backward media-seek-forward media-skip-backward media-skip-forward media-playback-stop media-playback-start media-playback-pause}
         For $index = 1 To 7 Do
@@ -162,7 +162,7 @@ Begin
             Set $cmd = {echo }$icons
             Set $icon = (GetOutput $cmd 1 $index)
             
-            If $ThemeChanged == 1 Then
+            If $ThemeChanged == {true} Then
                 Set $cmd = {fns-find-icon -n }$icon{ -s }$defaultSize{ -c actions -t }$defaultTheme{ --notdesk}
             Else
                 Set $cmd = {fns-find-icon -n }$icon{ -s }$defaultSize{ -c actions --notdesk}
