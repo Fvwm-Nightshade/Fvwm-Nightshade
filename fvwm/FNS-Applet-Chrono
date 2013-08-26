@@ -1,0 +1,679 @@
+#-----------------------------------------------------------------------
+# File:         FNS-Applet-Chrono
+# Version:      1.0.1
+# Licence:      GPL 2
+#
+# Description:  Alarm clock applet based on FvwmScript
+#
+# Parameters:   -fns
+#                   initiate applet that it will be used by Fvwm-Nightshade
+#                   with another font, colorset and another icon directory.
+#
+#               -fnt
+#                   set another font than the default one.
+#
+#               -cs
+#                   set another colorset than the default one.
+#
+#               -s
+#                   use applet as standalone script. Only usable with -fns
+#
+#               -h
+#                   set hours format. Default is '24'. Other value is '12'
+#
+#               -a
+#                   set alarm time. Alarm time is 24 hours time, e.g. '00:12'
+#
+#               -as
+#                   set alarm state. Default is 'off'. Other value is 'on'
+#
+#               -snd
+#                   set other path of alarm sound.
+#
+# Without parameters it starts with default settings from sebaro.
+#
+# Author:       sebaro    
+# Adjusted by:  Thomas Funk <t.funk@web.de>
+#               Bernhard Popp <kermit.popp@googlemail.com>
+#
+# Created:      08/23/2013
+# Changed:      08/25/2013
+#-----------------------------------------------------------------------
+
+UseGettext      {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
+WindowTitle     {Applet-Chrono}
+WindowSize      185 120
+
+Init
+Begin
+    Set $setHoursFormat = {24}
+    Set $setAlarmState = {off}
+    Set $setAlarmTime = {00:25}
+    Set $setAlarmSound = {alarm.wav}
+
+    ##### Commandline Arguments
+    Set $FnsUseApplet = {false}
+    Set $UseAppletAsScript = {false}
+    Set $FNSUseAppletAsScript = {false}
+    Set $ColorsetChanged = {false}
+    Set $FontChanged = {false}
+    Set $i = 1
+    Set $arg = (GetScriptArgument $i)
+
+    While $arg <> {} Do
+    Begin
+        Set $noValue = {false}
+        Set $j = (Add $i 1)
+        Set $value = (GetScriptArgument $j)
+
+        # Fvwm-Nightshade use widget
+        If $arg == {-fns} Then
+        Begin
+            Set $noValue = {true}
+            Set $FnsUseApplet = {true}
+            
+            Set $defaultColorset = 25
+            Set $ColorsetChanged = {true}
+            
+            If $FontChanged == {false} Then
+            Begin
+                Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
+                Set $FontChanged = {true}
+            End
+        End
+
+        # use applet as script
+        If $arg == {-s} Then
+        Begin
+            Set $noValue = {true}
+            Set $UseAppletAsScript = {true}
+        End
+
+        # other default colorset
+        If $arg == {-cs} Then
+        Begin
+            Set $defaultColorset = $value
+            Set $ColorsetChanged = {true}
+        End
+
+        # other default font
+        If $arg == {-fnt} Then
+        Begin
+            Set $defaultFont = $value
+            Set $FontChanged = {true}
+        End
+
+        # other highlight colorset
+        If $arg == {-hcs} Then
+            Set $highlightColorset = $value
+
+        # other hours format
+        If $arg == {-h} Then
+            Set $setHoursFormat = $value
+
+        # other alarm time
+        If $arg == {-a} Then
+            Set $setAlarmTime = $value
+
+        # other alarm state
+        If $arg == {-as} Then
+            Set $setAlarmState = $value
+
+        # other alarm sound
+        If $arg == {-snd} Then
+            Set $setAlarmSound = $value
+
+        If $noValue == {true} Then
+            Set $i = (Add $i 1)
+        Else
+            Set $i = (Add $i 2)
+            
+        Set $arg = (GetScriptArgument $i)
+    End
+
+    ##### set current hours format
+    Set $currentHour = (GetOutput {date "+%H"} 1 -1)
+    If $currentHour > 12 Then
+        Set $currentHoursFormat = {PM}
+    Else
+        Set $currentHoursFormat = {AM}
+    
+    ##### change Settings if needed
+    If $UseAppletAsScript == {true} Then
+    Begin
+        If $FnsUseApplet == {true} Then
+            Set $FNSUseAppletAsScript = {true}
+    End
+    
+    If $FnsUseApplet == {true} Then
+    Begin
+        Set $clockIcon = {32x32/clock.png}
+        Set $alarmIcon = {32x32/alarm.png}
+        Set $setAlarmIcon = {32x32/set-alarm.png}
+        Set $dateIcon = {32x32/date.png}
+        Set $quitButton = {16x16/quit.png}
+        
+        If $setAlarmSound <> {alarm.wav} Then
+        Begin
+            Set $cmd = {if test -r }$setAlarmSound{; then echo true; else echo false;fi}
+            If (GetOutput $cmd 1 -1) == {true} Then
+                Set $AlarmSound = $setAlarmSound
+            Else
+            Begin
+                Do {echo '}$setAlarmSound{' not found in FNS_SOUNDPATH. Use default sound.}
+                Set $cmd = {fns-find-file alarm.wav}
+                Set $AlarmSound = (GetOutput $cmd 1 -1)
+            End
+        End
+        Else
+        Begin
+            Set $cmd = {fns-find-file alarm.wav}
+            Set $AlarmSound = (GetOutput $cmd 1 -1)
+        End
+        
+        Set $Kalende = {FvwmScript FNS-Applet-Kalende -fns -s}
+        
+        If $FNSUseAppletAsScript == {true} Then
+        Begin
+            ChangeWindowTitle {Chrono}
+            Set $ColorsetChanged = {false}
+        End
+    End
+    Else
+    Begin
+        If $FNSUseAppletAsScript == {false} Then
+        Begin
+            # settings from Sebaro
+            ChangeWindowTitle {Chrono}
+            Set $defaultColorset = 10
+            Set $ColorsetChanged = {true}
+            Set $defaultFont = {DejaVu Sans}
+            Set $FontChanged = {true}
+
+            Set $homeDir = (GetOutput {echo $[infostore.mScripts]} 1 -1) {/Chrono/}
+
+            Set $clockIcon = $homeDir {icons/clock.png}
+            Set $alarmIcon = $homeDir {icons/alarm.png}
+            Set $setAlarmIcon = $homeDir {icons/set-alarm.png}
+            Set $dateIcon = $homeDir {icons/date.png}
+            Set $quitButton = $homeDir {icons/quit.png}
+            Set $AlarmSound = $homeDir {sounds/alarm.wav}
+            
+            Set $Kalende = {FvwmScript Kalende/FNS-Applet-Kalende}
+        End
+    End
+
+    ##### change Global Styles if needed
+    If $ColorsetChanged == {true} Then
+    Begin
+        For $Widget=1 To 9 Do
+        Begin
+            ChangeColorset $Widget $defaultColorset
+        End
+        ChangeColorset 0 $defaultColorset
+    End
+
+    ##### change Widget Styles if needed
+    If $FontChanged == {true} Then
+    Begin
+        Set $hoursFormatFont = {xft:}$defaultFont{:size=11:bold}
+        Set $dayFont = {xft:}$defaultFont{:size=10:bold}
+        Set $dateFont = {xft:}$defaultFont{:size=8:bold}
+        For $Widget=2 To 4 Do
+            ChangeFont $Widget $hoursFormatFont
+        
+        ChangeFont 5 $dayFont
+        ChangeFont 7 $dayFont
+        ChangeFont 8 $dateFont
+    End
+
+    HideWidget 11
+    HideWidget 12
+    
+    ##### Variables
+    Set $hoursFormat = $setHoursFormat
+    Set $alarmState = $setAlarmState
+
+    ##### Widgets
+    If $alarmState == {on} Then
+    Begin
+        Set $currClock = {alarmOn}
+        ChangeIcon 1 $alarmIcon
+    End
+    Else
+    Begin
+        Set $currClock = {alarmOff}
+        ChangeIcon 1 $clockIcon
+    End
+    ChangeIcon 6 $dateIcon
+    ChangeIcon 9 $quitButton
+
+    ##### Alarm
+    Set $getAlarmHour = {exec echo } $setAlarmTime { | cut -d ":" -f 1}
+    Set $alarmHour = (GetOutput $getAlarmHour 1 -1)
+    If $hoursFormat == {12} Then
+    Begin
+        If $alarmHour > 12 Then
+        Begin
+            Set $alarmHoursFormat = {PM}
+            Set $displayedAlarmHour = (Add $alarmHour -12)
+        End
+        Else
+        Begin
+            Set $alarmHoursFormat = {AM}
+            If $alarmHour<10 Then
+            Begin
+                If $alarmHour == {00} Then
+                    Set $displayedAlarmHour = 12
+                Else
+                    Set $displayedAlarmHour = 0 $alarmHour
+            End
+            Else
+                Set $displayedAlarmHour = $alarmHour
+        End
+        ChangeMinValue 11 1
+        ChangeMaxValue 11 12
+    End
+    Else
+    Begin
+        Set $alarmHoursFormat = {}
+        Set $displayedAlarmHour = $alarmHour
+        ChangeMinValue 11 0
+        ChangeMaxValue 11 23
+    End
+    ChangeValue 11 $displayedAlarmHour
+    
+    Set $getAlarmMinutes = {exec echo } $setAlarmTime { | cut -d ":" -f 2}
+    Set $alarmMinutes = (GetOutput $getAlarmMinutes 1 -1)
+    ChangeValue 12 $alarmMinutes
+    Set $alarmTime = $alarmHour {:} $alarmMinutes
+    Set $alarmStarted = {false} 
+
+    ##### Set Time & Date
+    If $hoursFormat == {12} Then
+    Begin
+        ChangeTitle 2 (GetOutput {date "+%I"} 1 -1)
+        ChangeTitle 5 $currentHoursFormat
+    End
+    Else
+    Begin
+        ChangeTitle 2 (GetOutput {date "+%H"} 1 -1)
+        ChangeTitle 5 {}
+    End
+    ChangeTitle 3 {:}
+    ChangeTitle 4 (GetOutput {date "+%M"} 1 -1)
+    ChangeFont 7 $dayFont
+    ChangeTitle 7 (GetOutput {date "+%A"} 1 -1)
+    ChangeFont 8 $dateFont
+    ChangeTitle 8 (GetOutput {date "+%d %B %Y"} 1 -1)
+
+    ##### Curly Brackets
+    Set $leftCB = (GetOutput {printf "\173"} 1 -1)
+    Set $rightCB = (GetOutput {printf "\175"} 1 -1)
+End
+
+PeriodicTasks
+Begin
+    ##### Refresh Hours, Minutes & Date
+    If $currClock <> {alarmSet} Then
+    Begin
+        If (RemainderOfDiv (GetTime) 60) == 0 Then
+        Begin
+            ChangeTitle 4 (GetOutput {date "+%M"} 1 -1)
+            If (GetOutput {date "+%M"} 1 -1) == {00} Then
+                Set $refreshHours = {true}
+            If $hoursFormat == {12} Then
+            Begin
+                If (GetOutput {date "+%I"} 1 -1) <> (GetTitle 2) Then
+                    Set $refreshHours = {true}
+            End
+            Else
+            Begin
+                If (GetOutput {date "+%H"} 1 -1) <> (GetTitle 2) Then
+                    Set $refreshHours = {true}
+            End
+
+            If $refreshHours == {true} Then
+            Begin
+                If $hoursFormat == {12} Then
+                Begin
+                    ChangeTitle 2 (GetOutput {date "+%I"} 1 -1)
+                    Set $currentHour = (GetOutput {date "+%H"} 1 -1)
+                    If $currentHour > 12 Then
+                        Set $currentHoursFormat = {PM}
+                    Else
+                        Set $currentHoursFormat = {AM}
+                    ChangeTitle 5 $currentHoursFormat
+                    If (GetOutput {date "+%I"} 1 -1) == {12} Then
+                    Begin
+                        If $currentHoursFormat == {AM} Then
+                            Set $refreshDate = {true}
+                    End
+                End
+                Else
+                Begin
+                    ChangeTitle 2 (GetOutput {date "+%H"} 1 -1)
+                    ChangeTitle 5 {}
+                    If (GetOutput {date "+%H"} 1 -1) == {00} Then
+                        Set $refreshDate = {true}
+                End
+                Set $refreshHours = {false}
+            End
+            
+            If (GetOutput {date "+%A"} 1 -1) <> (GetTitle 7) Then
+                Set $refreshDate = {true}
+            If $refreshDate == {true} Then
+            Begin
+                ChangeTitle 7 (GetOutput {date "+%A"} 1 -1)
+                ChangeTitle 8 (GetOutput {date "+%d %B %Y"} 1 -1)
+                Set $refreshDate = {false}
+            End
+        End
+    End
+
+    ##### Change Hours
+    If $changeHours == {true} Then
+    Begin
+        If $hoursFormat == {12} Then
+        Begin
+            Set $hoursFormat = {24}
+            Set $displayedAlarmHour = $alarmHour
+            ChangeMinValue 11 0
+            ChangeMaxValue 11 23
+            Set $alarmHoursFormat = {}
+        End
+        Else
+        Begin
+            Set $hoursFormat = {12}
+            ChangeMinValue 11 1
+            ChangeMaxValue 11 12
+            If $alarmHour > 12 Then
+            Begin
+                Set $displayedAlarmHour = (Add $alarmHour -12)
+                Set $alarmHoursFormat = {PM}
+            End
+            Else
+            Begin
+                If $alarmHour == {00} Then
+                    Set $displayedAlarmHour = 12
+                Else
+                    Set $displayedAlarmHour = $alarmHour
+                Set $alarmHoursFormat = {AM}
+            End
+        End
+        ChangeValue 11 $displayedAlarmHour
+        If $displayedAlarmHour<10 Then
+            Set $displayedAlarmHour = 0 $displayedAlarmHour
+        
+        Set $resetMinutes = {false}
+        Set $resetHours = {true}
+        If $FnsUseApplet <> {true} Then
+            Do {exec sed -i -e "s/^.*Set \$setHoursFormat.*$/    Set \$setHoursFormat = } $leftCB $hoursFormat $rightCB {/" } $homeDir {FNS-Applet-Chrono}
+        Set $changeHours = {false}
+    End
+
+    ##### Change Alarm
+    If $changeAlarm == {true} Then
+    Begin
+        If $currClock == {alarmOff} Then
+        Begin
+            ChangeIcon 1 $setAlarmIcon
+            ShowWidget 11
+            ShowWidget 12
+            ChangeTitle 2 $displayedAlarmHour
+            ChangeTitle 4 $alarmMinutes
+            ChangeTitle 5 $alarmHoursFormat
+            Set $currClock = {alarmSet}
+        End
+        Else
+        Begin
+            If $currClock == {alarmSet} Then
+            Begin
+                ChangeIcon 1 $alarmIcon
+                HideWidget 11
+                HideWidget 12
+                Set $currClock = {alarmOn}
+                Set $alarmState = {on}
+                If $hoursFormat == {12} Then
+                Begin
+                    If $alarmHoursFormat == {PM} Then
+                    Begin
+                        Set $alarmHour = (Add $displayedAlarmHour 12)
+                        If $alarmHour == 24 Then
+                            Set $alarmHour = {12}
+                    End
+                    Else
+                    Begin
+                        Set $alarmHour = $displayedAlarmHour
+                        If $alarmHour == 12 Then
+                            Set $alarmHour = {00}
+                    End
+                End
+                Else
+                    Set $alarmHour = $displayedAlarmHour
+                Set $alarmTime = $alarmHour {:} $alarmMinutes
+                #Do {echo alarmTime: }$alarmTime
+                If $FnsUseApplet <> {true} Then
+                    Do {exec sed -i -e "s/^.*Set \$setAlarmState.*$/    Set \$setAlarmState = } $leftCB $alarmState $rightCB {/" -e "s/^.*Set \$setAlarmTime.*$/    Set \$setAlarmTime = } $leftCB $alarmTime $rightCB {/" } $homeDir {FNS-Applet-Chrono}
+                Set $resetMinutes = {true}
+                Set $resetHours = {true}
+            End
+            Else
+            Begin
+                ChangeIcon 1 $clockIcon
+                Set $currClock = {alarmOff}
+                Set $alarmState = {off}
+                If $FnsUseApplet <> {true} Then
+                    Do {exec sed -i -e "s/^.*Set \$setAlarmState.*$/    Set \$setAlarmState = } $leftCB $alarmState $rightCB {/" } $homeDir {FNS-Applet-Chrono}
+            End
+        End
+        Set $changeAlarm = {false}
+    End
+
+    ##### Start Alarm
+    If $alarmState == {on} Then
+    Begin
+        If $alarmTime == (GetOutput {date "+%H:%M" | sed -e "s/ //g"} 1 -1) Then
+        Begin
+            If $alarmStarted == {false} Then
+            Begin
+                Do {exec mplayer nodefault-bindings -noconfig all -msglevel all=-1:global=4 2>/dev/null } $AlarmSound
+                Set $alarmStarted = {true}
+            End
+        End
+        Else
+            Set $alarmStarted = {false}
+    End
+
+    ##### Reset Hours & Minutes
+    If $resetHours == {true} Then
+    Begin
+        If $hoursFormat == {12} Then
+        Begin
+            ChangeTitle 2 (GetOutput {date "+%I"} 1 -1)
+            Set $currentHour = (GetOutput {date "+%H"} 1 -1)
+            If $currentHour > 12 Then
+                Set $currentHoursFormat = {PM}
+            Else
+                Set $currentHoursFormat = {AM}
+            ChangeTitle 5 $currentHoursFormat
+        End
+        Else
+        Begin
+            ChangeTitle 2 (GetOutput {date "+%H"} 1 -1)
+            ChangeTitle 5 {}
+        End
+        If $resetMinutes == {true} Then
+            ChangeTitle 4 (GetOutput {date "+%M"} 1 -1)
+        Set $resetHours = {false}
+    End
+End
+
+# alarm clock icon
+Widget 1
+Property
+    Type        ItemDraw
+    Size        32 32
+    Position    13 16
+    Flags       NoFocus NoReliefString
+Main
+    Case message of
+        SingleClic :
+        Begin
+            Set $changeAlarm = {true}
+        End
+    End
+
+# MiniScroll for hours values
+Widget 11
+Property
+    Type        MiniScroll
+#    Value       15
+#    MinValue    0
+#    MaxValue    23
+    Position    47 15
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $displayedAlarmHour=(GetValue 11)
+        If $displayedAlarmHour<10 Then
+            Set $displayedAlarmHour=0 $displayedAlarmHour
+        ChangeTitle 2 $displayedAlarmHour
+    End
+End
+
+# text hours
+Widget 2
+Property
+    Type        ItemDraw
+    Size        20 20
+    Position    68 22
+    Flags       NoFocus NoReliefString Right
+Main
+    Case message of
+        SingleClic :
+        Begin
+            Set $changeHours = {true}
+        End
+    End
+
+# text colon
+Widget 3
+Property
+    Type        ItemDraw
+    Size        5 20
+    Position    90 22
+    Flags       NoFocus NoReliefString
+Main
+    Case message of
+    End
+
+# text minutes
+Widget 4
+Property
+    Type        ItemDraw
+    Size        20 20
+    Position    97 22
+    Flags       NoFocus NoReliefString Right
+Main
+    Case message of
+        SingleClic :
+        Begin
+        End
+    End
+
+# MiniScroll for minutes values
+Widget 12
+Property
+    Type        MiniScroll
+#    Value       15
+    MinValue    0
+    MaxValue    59
+    Position    119 15
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $alarmMinutes=(GetValue 12)
+        If $alarmMinutes<10 Then
+            Set $alarmMinutes=0 $alarmMinutes
+        ChangeTitle 4 $alarmMinutes
+    End
+End
+
+# hours format
+Widget 5
+Property
+    Type        ItemDraw
+    Size        25 20
+    Position    140 22
+    Flags       NoFocus NoReliefString Left
+Main
+    Case message of
+        SingleClic :
+        Begin
+            If $currClock == {alarmSet} Then
+            Begin
+                If $alarmHoursFormat == {AM} Then
+                    Set $alarmHoursFormat = {PM}
+                Else
+                    Set $alarmHoursFormat = {AM}
+                ChangeTitle 5 $alarmHoursFormat
+            End
+        End
+    End
+
+# calender icon
+Widget        6
+Property
+    Type        ItemDraw
+    Size        32 32
+    Position    13 69
+    Flags       NoFocus NoReliefString Left
+Main
+    Case message of
+        SingleClic :
+        Begin
+            Do $Kalende
+        End
+    End
+
+# text day
+Widget 7
+Property
+    Type        ItemDraw
+    Size        110 20
+    Position    58 64
+    Flags       NoFocus NoReliefString
+Main
+    Case message of
+    End
+
+# text month
+Widget 8
+Property
+    Type        ItemDraw
+    Size        110 20
+    Position    58 86
+    Flags       NoFocus NoReliefString
+Main
+    Case message of
+    End
+
+# quit icon
+Widget 9
+Property
+    Type        ItemDraw
+    Size        16 16
+    Position    168 1
+    Flags       NoFocus NoReliefString
+Main
+    Case message of
+        SingleClic :
+        Begin
+            Quit
+        End
+    End
