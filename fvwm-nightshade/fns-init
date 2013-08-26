@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
-# File:		fns-init
-# Version:	1.0.4
-# Licence: 	GPL 2
+# File:         fns-init
+# Version:      1.0.5
+# Licence:      GPL 2
 #
-# Description:	start file of Fvwm-Nightshade
+# Description:  start file of Fvwm-Nightshade
 #
-# Author:	Thomas Funk <t.funk@web.de>
-# Created:	09/07/2012
-# Changed:	08/05/2013
+# Author:       Thomas Funk <t.funk@web.de>
+# Created:      09/07/2012
+# Changed:      08/26/2013
 #-----------------------------------------------------------------------
 
 #-----------------------------------------------------------------------
@@ -16,15 +16,15 @@
 DestroyFunc SetMenuIconSize
 AddToFunc   SetMenuIconSize
 + I PipeRead "if test -f ${FVWM_USERDIR}/.FvwmForm-Desktop-Config; then \
-				Size=`cat ${FVWM_USERDIR}/.FvwmForm-Desktop-Config |grep Size| awk '{ print $$$3 }'`; \
-			  else \
-				Size=`cat ${FNS_SYSTEMDIR}/.FvwmForm-Desktop-Config |grep Size| awk '{ print $$$3 }'`; \
-			  fi; \
-			  if test -z $Size; then \
-				echo InfoStoreAdd MenuIconSize 24x24; \
-			  else \
-				echo InfoStoreAdd MenuIconSize ${Size}x${Size}; \
-			  fi"
+                Size=`cat ${FVWM_USERDIR}/.FvwmForm-Desktop-Config |grep Size| awk '{ print $$$3 }'`; \
+              else \
+                Size=`cat ${FNS_SYSTEMDIR}/.FvwmForm-Desktop-Config |grep Size| awk '{ print $$$3 }'`; \
+              fi; \
+              if test -z $Size; then \
+                echo InfoStoreAdd MenuIconSize 24x24; \
+              else \
+                echo InfoStoreAdd MenuIconSize ${Size}x${Size}; \
+              fi"
 
 SetMenuIconSize
 
@@ -79,6 +79,23 @@ AddToFunc FuncSetThemeDir
 DestroyFunc FuncRestart
 AddToFunc FuncRestart
 + I Restart fvwm -f $[FNS_INITFILE]
+
+#-----------------------------------------------------------------------
+# This function specifies a colon separated list of directories in which 
+# to search for sounds.
+# Further, a '+' in the path is expanded to the previous value of the path,
+# allowing appending or prepending to the path easily.
+# It will add the new paths to $FNS_SOUNDPATH environment variable
+#-----------------------------------------------------------------------
+DestroyFunc FnsSoundPath
+AddToFunc   FnsSoundPath
++ I SetEnv newPaths $0
++ I PipeRead 'if [ `echo $newPaths |grep -e ^+: |grep -e :+\$` ]; then \
+                echo SetEnv newPaths `echo $newPaths |sed -e "s#:+##"`; \
+              fi'
++ I PipeRead 'echo SetEnv FNS_SOUNDPATH `echo $newPaths |sed -e "s#+#$FNS_SOUNDPATH#"`'
+#+ I PipeRead 'export FNS_SOUNDPATH=`echo $newPaths |sed -e "s#+#$FNS_SOUNDPATH#"`'
++ I UnsetEnv newPaths
 
 #-----------------------------------------------------------------------
 # Load main config
