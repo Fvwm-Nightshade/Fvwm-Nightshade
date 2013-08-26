@@ -13,6 +13,8 @@ Features:
   because this package isn't available in all distributions and of its' 
   unscalability. Also special thanks to Alessandro Roncone who gives us 
   the permission to use his Awoken icons :-).
+- new python script fns-find-file to search for files in path variables 
+  like $PATH or $FNS_SOUNDPATH.
 
 
 ------------------------------------------------------------------------
