@@ -1,5 +1,9 @@
 History:
 
+08/28/2013
+- add new applet FNS-Applet-DriveInn (a storage drives manager)
+- add new vector icons for FNS-Applet-DriveInn to artwork/scalable
+
 08/26/2013
 - add new environment variable to fvwm-nightshade to have a search variable
   for sound paths
