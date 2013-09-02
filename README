@@ -79,7 +79,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 
 - Lock desk & screensaver (xscreensaver)
 - Personal menu via FvwmScript-PersonalMenu
-- Background configurable with thumb browser (imagemagick and eterm)
+- Background configurable with thumb browser (imagemagick and feh)
 - Animation control of window moves
 - Simple "Run" command with FvwmForm
 - Some themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab and Air). 
@@ -106,11 +106,11 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Localization support for German, French and Spanish
 - Smart maximize windows - move and resize windows to the largest free 
   area of a desktop/page
-
+- built support for Xdg menus
 
 Requirements:
 =============
-Required:	Fvwm >= 2.6.6 (compiled with all features), python-2, python-xdg, 
+Required:	Fvwm >= 2.6.5 (compiled with all features), python-2, python-xdg, 
 		xterm, conky, xscreensaver, feh, imagemagick, librsvg2, xwd
 		stalonetray, cpufrequtils*, gksu
 
