@@ -3,7 +3,7 @@ Version:
 Architecture: all
 Maintainer: Thomas Funk <t.funk@web.de>
 Installed-Size:
-Depends: fvwm (>> 1:2.6.5)|fvwm (>> 2.6.5), python (<= 2.7), python-xdg, xterm, conky, xscreensaver, feh, imagemagick, librsvg2-bin, stalonetray, cpufrequtils, x11-apps
+Depends: fvwm (>> 1:2.6.4)|fvwm (>> 2.6.4), python (<< 3), python-xdg, xterm, conky, xscreensaver, feh, imagemagick, librsvg2-bin, stalonetray, cpufrequtils, x11-apps
 Recommends: network-manager-gnome, wm-icons, pcmanfm
 Suggests: volumeicon, fdpowermon, bluetooth-applet, pm-utils, lxapearance, qt3-qtconfig, qt4.qtconfig
 Section: x11
@@ -18,13 +18,10 @@ Description: A lightweight but feature rich and good looking configuration of Fv
  - Three different layouts: horizontal, vertical and G2like
  - Lock desk & screensaver (xscreensaver)
  - Personal menu via FvwmScript-PersonalMenu
- - Background configurable with thumb browser (imagemagick and eterm)
+ - Background configurable with thumb browser (imagemagick and feh)
  - Animation control of window moves
- - Simple "Run" command with FvwmForm
- - Some themes/decors (Clean, Ambience, Tribal, CrystalBall and Air). 
+ - Some themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab and Air). 
    Can be changed on the fly without restart
- - Own themes and layouts can be created with templates (at the moment
-   only theme templates available)
  - Autostart possibility (starting apps while startup)
  - A useful set of GUI tools to configure the global system (Gtk+, Qt, 
    mouse, keyboard, etc)
@@ -34,11 +31,13 @@ Description: A lightweight but feature rich and good looking configuration of Fv
    "Keybindings")
    - A global one with Shift-Alt-Ctrl + H
  - Dynamic menus
- - Switching focus between windows with Alt-Tab
- - Splash screen
- - Print messages for needed apps for full config functionality in 
-   .xsessions-error
+ - Switching focus between windows with Alt-Tab (forward) / Shift-Alt-Tab
+   (backward)
  - Governor-tool FvwmScript-CPU-Performance to handle cpufreq
  - Create thumbs with mini icon and name for iconified applications 
    instead of their icon
+ - Localization support for German, French and Spanish
+ - Smart maximize windows - move and resize windows to the largest free 
+   area of a desktop/page
+ - Support for Xdg menus
 
