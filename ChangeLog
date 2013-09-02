@@ -1,5 +1,28 @@
 History:
 
+09/02/2013
+- changes to use Fvwm-Nightshade with FVWM 2.6.5 instead of 2.6.6 CVS:
+  - add some files from CVS with some name changes to enable the usages
+    of Xdg menus:
+    - fvwm-menu-desktop as fvwm-menu-desktop2
+    - fvwm-menu-desktop-config.fpl as fvwm-menu-desktop2-config.fpl
+    - fvwm-menu-desktop manpage as fvwm-menu-desktop2 manpage
+  - add translation parts for fvwm-menu-desktop and fvwm-menu-desktop-config.fpl
+    from CVS fvwm..de/fr.po to fvwm-nightshade.de/fr.po and built new mo files
+  - add FVWM version check in FuncXdgMenusInRoot to decide which fvwm-menu-desktop
+    have to be used.
+  - update debian/control:
+    - change required FVWM version to >> 2.6.4
+    - change required python version to << 3
+    - remove some uninteresting description lines and add Xdg menu support
+  - update arch/PKGBUILD_FNS and rpm/fvwm-nightshade.spec:
+    - change required FVWM version to >= 2.6.5
+    - change required python version to < 3
+  - update README:
+    - change required FVWM version to >= 2.6.5
+    - add Xdg menu support
+    
+    
 08/12/2013
 - FvwmSmartMaximize: make EwmhBaseStruts determination more perlish
 
