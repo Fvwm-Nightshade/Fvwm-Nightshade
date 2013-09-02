@@ -13,6 +13,8 @@ Version 0.7.x
   distribution repositories.
 - new feature smart maximize - moves and resizes a current window to the 
   largest free area of a desktop/page (thanks to Andreas Hoenen ^^)
+- works now with FVWM 2.6.5 without loosing new Xdg menu support from CVS
+  version
 
 ------------------------------------------------------------------------
 

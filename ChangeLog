@@ -1,6 +1,6 @@
 History:
 
-09/02/2013
+09/03/2013
 - changes to use Fvwm-Nightshade with FVWM 2.6.5 instead of 2.6.6 CVS:
   - add some files from CVS with some name changes to enable the usages
     of Xdg menus:
@@ -21,7 +21,7 @@ History:
   - update README:
     - change required FVWM version to >= 2.6.5
     - add Xdg menu support
-    
+  - update NEWS
     
 08/12/2013
 - FvwmSmartMaximize: make EwmhBaseStruts determination more perlish
