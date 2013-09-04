@@ -5,6 +5,8 @@ History:
   prevent the use of Python 3
 - remove the command 'Separator' in fvwm-menu-desktop2-config.fpl because
   only available in CVS of FVWM
+- change in arch/PKGBUILD_FNS wrong dependency python<3 to python2
+- remove old and useless arch/PKGBUILD_FNS_download
 
 09/03/2013
 - changes to use Fvwm-Nightshade with FVWM 2.6.5 instead of 2.6.6 CVS:
