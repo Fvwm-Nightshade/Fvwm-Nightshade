@@ -6,6 +6,7 @@ History:
 - remove the command 'Separator' in fvwm-menu-desktop2-config.fpl because
   only available in CVS of FVWM
 - change in arch/PKGBUILD_FNS wrong dependency python<3 to python2
+- change in arch/PKGBUILD_FNS wrong dependency pyxdg to python2-xdg
 - remove old and useless arch/PKGBUILD_FNS_download
 
 09/03/2013
