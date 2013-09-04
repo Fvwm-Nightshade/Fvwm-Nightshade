@@ -53,9 +53,8 @@ DestroyModuleConfig  ${modname}: *
 *${modname}: Line		center
 *${modname}: Text	\"\$[gt.Fvwm Menu Desktop Config]\"
 *${modname}: Line
-*${modname}: Separator
 *${modname}: Line		center
-*${modname}: Text		\"\$[gt.Multiple Menu]\"
+*${modname}: Text		\"------------------ \$[gt.Multiple Menu] ------------------\"
 *${modname}: Line 		
 ";
 
@@ -102,9 +101,8 @@ else {
 
 $fvwmform_commands .= "
 *${modname}: Line
-*${modname}: Separator
 *${modname}: Line		center
-*${modname}: Text         \"\$[gt.General Options]\"
+*${modname}: Text         \"------------------ \$[gt.General Options] ------------------\"
 *${modname}: Line
 *${modname}: Line		Left
 *${modname}: Text         \"\$[gt.Use Icons in Menus?       ]\"
@@ -144,9 +142,8 @@ $fvwmform_commands .= "
 *${modname}: Line 	left
 *${modname}: Line
 *${modname}: Line
-*${modname}: Separator
 *${modname}: Line 	center
-*${modname}: Text   \"\$[gt.Single Menu]\"
+*${modname}: Text   \"------------------ \$[gt.Single Menu] ------------------\"
 *${modname}: Line		
 *${modname}: Line	Left
 *${modname}: Text   \"\$[gt.If you want a single menu only deselect all menus above and fill out]\"
@@ -182,9 +179,8 @@ $fvwmform_commands .= "
 *${modname}: Line 	left
 *${modname}: Line
 *${modname}: Line
-*${modname}: Separator
 *${modname}: Line 	center
-*${modname}: Text         \"\$[gt.Actions]\"
+*${modname}: Text         \"------------------ \$[gt.Actions] ------------------\"
 *${modname}: Line 	left
 *${modname}: Line
 *${modname}: Line         center
@@ -192,7 +188,6 @@ $fvwmform_commands .= "
 *${modname}: Choice       MultiOn  MultiOn    on  \"\$[gt.Multiple]\"
 *${modname}: Choice       MultiOff MultiOff   off \"\$[gt.Single]\"
 *${modname}: Line
-*${modname}: Separator
 *${modname}: Line         expand
 *${modname}: Button       continue \"\$[gt.Generate Menu(s)]\" 
 *${modname}: Command      PipeRead 'fvwm-menu-desktop2 \\
