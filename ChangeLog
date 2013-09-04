@@ -8,6 +8,10 @@ History:
 - change in arch/PKGBUILD_FNS wrong dependency python<3 to python2
 - change in arch/PKGBUILD_FNS wrong dependency pyxdg to python2-xdg
 - remove old and useless arch/PKGBUILD_FNS_download
+- add translation parts for fvwm-menu-desktop and fvwm-menu-desktop-config.fpl
+  to /templates/fvwm-nightshade.pot
+- adapt INSTALL to new usage of FVWM 2.6.5 instead of 2.6.6 CVS
+- change copyright in COPYING from 2012 to 2013
 
 09/03/2013
 - changes to use Fvwm-Nightshade with FVWM 2.6.5 instead of 2.6.6 CVS:
