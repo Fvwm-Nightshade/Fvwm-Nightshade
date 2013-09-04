@@ -12,6 +12,7 @@ History:
   to /templates/fvwm-nightshade.pot
 - adapt INSTALL to new usage of FVWM 2.6.5 instead of 2.6.6 CVS
 - change copyright in COPYING from 2012 to 2013
+- update README
 
 09/03/2013
 - changes to use Fvwm-Nightshade with FVWM 2.6.5 instead of 2.6.6 CVS:

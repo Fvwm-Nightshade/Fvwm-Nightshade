@@ -29,6 +29,8 @@ shows you what is possible with this powerful window manager.
 
 Featurelist of Fvwm-Nightshade 0.7.x:
 =====================================
+- Works now with FVWM 2.6.5 but with full support of Xdg menus like in 
+  CVS version
 - Own user configuration directory ~/.fvwm-nightshade (can be used 
   parallel to existing Fvwm configuration)
 - Own entry "Fvwm-Nightshade" in graphical login managers
@@ -40,9 +42,9 @@ Featurelist of Fvwm-Nightshade 0.7.x:
   - horizontal (top):
                Top
     +--------+        +--------+        +--------+
-    |        |      |        |      |        |
+    |        |        |        |        |        |
     +--------+        +--------+        +--------+
-    IconManager           Pager           Panel
+    IconManager       Pager             Panel
   
   - vertical (top right):
     
@@ -67,15 +69,15 @@ Featurelist of Fvwm-Nightshade 0.7.x:
     +---+---+---------------------------------+----------+---------+---+
     |   |   |                                 |          |         |   |
     +---+---+---------------------------------+----------+---------+---+
-    Menu Personal                              Systray    Date    Logout
+    Menu Personal                             Systray    Date     Logout
        
 
     Bottombar
     +---+----------------------------------------------+---------------+
     |   |                                              |               |
     +---+----------------------------------------------+---------------+
-    Desktop                                             Pager
-         IconManager
+    Desktop                                            Pager
+        IconManager
 
 - Lock desk & screensaver (xscreensaver)
 - Personal menu via FvwmScript-PersonalMenu
@@ -84,8 +86,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Simple "Run" command with FvwmForm
 - Some themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab and Air). 
   Can be changed on the fly without restart
-- Own themes and layouts can be created with templates (at the moment
-  only theme templates available)
+- Own themes and layouts can be created with templates
 - Autostart possibility (starting apps while startup)
 - A useful set of GUI tools to configure the global system (Gtk+, Qt, 
   mouse, keyboard, etc)
@@ -106,8 +107,6 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Localization support for German, French and Spanish
 - Smart maximize windows - move and resize windows to the largest free 
   area of a desktop/page
-- Works now with FVWM 2.6.5 but with full support of Xdg menus like in 
-  CVS version
 
 Requirements:
 =============
@@ -120,8 +119,9 @@ Recommended: gnomes network manager, Volume Icon, wm-icons
 Useful:     fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
             qtconfig for qt3, qtconfig for qt4, xneurs
   
-* unfortunatelly not usable in Arch - changed to cpupower but not supported
-  at the moment -> see issue #40 in the bugtracker.
+* unfortunatelly not usable in Arch at the moment. They have changed from
+  cpufrequtils to cpupower but it's not supported at the moment 
+  -> see issue #40 in the bugtracker.
 
 
 Installation
@@ -140,7 +140,7 @@ Mailinglist
 ===========
 There exist two mailing lists under
 common:     https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade
-developing:    https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers
+developing: https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers
 
 To post to this group, you have to do the following:
 
