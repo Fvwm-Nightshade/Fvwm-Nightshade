@@ -1,5 +1,11 @@
 History:
 
+09/04/2013
+- change #!/usr/bin/python to #!/usr/bin/env python2 in python script to
+  prevent the use of Python 3
+- remove the command 'Separator' in fvwm-menu-desktop2-config.fpl because
+  only available in CVS of FVWM
+
 09/03/2013
 - changes to use Fvwm-Nightshade with FVWM 2.6.5 instead of 2.6.6 CVS:
   - add some files from CVS with some name changes to enable the usages
