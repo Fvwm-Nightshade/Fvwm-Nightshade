@@ -1,5 +1,10 @@
 History:
 
+09/05/2013 V 0.7.4
+- merge develop in master
+- update required FVWM to >= 2.6.5 in INSTALL
+- update version to 0.7.4 in NEWS and README
+
 09/05/2013
 - adapt prepare-rpm rule in Makefile to work with FVWM 2.6.5 installed
   by the package manager
@@ -44,7 +49,7 @@ History:
 08/12/2013
 - FvwmSmartMaximize: make EwmhBaseStruts determination more perlish
 
-08/01/2013 V 0.7.4
+08/01/2013
 - add FvwmSmartMaximize to all themes:
   - move Maximize horizontally from mouse 3 to mouse 2 + Alt
   - add Maximize smart to mouse 3
