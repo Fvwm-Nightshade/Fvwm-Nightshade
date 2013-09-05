@@ -4,6 +4,7 @@ History:
 - merge develop in master
 - update required FVWM to >= 2.6.5 in INSTALL
 - update version to 0.7.4 in NEWS and README
+- adapt Requirements in NEWS and README
 
 09/05/2013
 - adapt prepare-rpm rule in Makefile to work with FVWM 2.6.5 installed
