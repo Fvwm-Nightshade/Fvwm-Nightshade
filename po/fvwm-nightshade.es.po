@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2013-07-07 18:40+0200\n"
+"PO-Revision-Date: 2013-08-01 13:08+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
 "MIME-Version: 1.0\n"
@@ -548,6 +548,9 @@ msgstr "Maximizar &Horizontalmente"
 
 msgid "Maximize &Grow"
 msgstr "Maximizar &Crecimiento"
+
+msgid "Maximize &Smart"
+msgstr "Maximizar &Inteligente"
 
 msgid "Maximize Grow V&ert."
 msgstr "Maximizar Crecimiento V&ert."
@@ -1115,17 +1118,20 @@ msgstr "          Destruir con doble click"
 msgid "Maximize Button Bindings"
 msgstr "Atajos del Botón Maximizar"
 
-msgid "Mouse 1:  Maximize fully on click"
-msgstr "Ratón 1:  Maximizar completamente con click"
+msgid "Mouse 1:       Maximize fully on click"
+msgstr "Ratón 1:       Maximizar completamente con click"
 
-msgid "          Maximize menu on double click"
-msgstr "          Menú Maximizar con doble click"
+msgid "               Maximize menu on double click"
+msgstr "               Menú Maximizar con doble click"
 
-msgid "Mouse 2:  Maximize vertically"
-msgstr "Ratón 2:  Maximizar verticalmente"
+msgid "Mouse 2:       Maximize vertically"
+msgstr "Ratón 2:       Maximizar verticalmente"
 
-msgid "Mouse 3:  Maximize horizontally"
-msgstr "Ratón 3:  Maximizar horizontalmente"
+msgid "Mouse 2 + Alt: Maximize horizontally"
+msgstr "Ratón 2 + Alt: Maximizar horizontalmente"
+
+msgid "Mouse 3:       Maximize smart"
+msgstr "Ratón 2:       Maximizar intelligente"
 
 msgid "Minimize Button Bindings"
 msgstr "Atajos del Botón Minimizar"

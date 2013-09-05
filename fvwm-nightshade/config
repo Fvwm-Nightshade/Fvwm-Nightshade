@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.3
+InfoStoreAdd ns_version 0.7.4
 # Copyright (C) 2013
 #
 # Authors:
@@ -163,7 +163,7 @@ ExecUseShell /bin/bash
 # are normally installed into a version-dependent directory.  Be sure to
 # update this file after installing a new version.
 #-----------------------------------------------------------------------
-#ModulePath $[FVWM_USERDIR]/mymodules:+
+ModulePath $[FVWM_USERDIR]/lib:$[FNS_SYSTEMDIR]/lib:+
 
 #-----------------------------------------------------------------------
 # LocalePath specifies a colon separated list of "locale path" in which
@@ -1043,6 +1043,9 @@ AddToFunc StartFunction
 # activate module for sound event actions
 #+ I Module FvwmEvent FvwmEventSound
 #-----------------------------------------------------------------------
+# activate module for smart maximize
++ I Module FvwmSmartMaximize
+#-----------------------------------------------------------------------
 # start xscreensaver daemon for locking
 + I Test (x xscreensaver-command) Test (Init) Exec xscreensaver -no-splash
 #-----------------------------------------------------------------------
@@ -1762,8 +1765,9 @@ AddToMenu FvwmMenu DynamicPopupAction FuncXdgMenusInRoot
 DestroyFunc FuncXdgMenusInRoot
 AddToFunc   FuncXdgMenusInRoot
 + I AddToMenu FvwmMenu DynamicPopupAction FuncXdgMenusInRoot
-+ I Test (f  $[FVWM_USERDIR]/.menu) Read $[FVWM_USERDIR]/.menu
-+ I TestRC (!Match) PipeRead 'fvwm-menu-desktop --insert-in-menu MenuRoot > $[FVWM_USERDIR]/.menu &&  echo "Read $[FVWM_USERDIR]/.menu"'
++ I Test (f $[FVWM_USERDIR]/.menu) Read $[FVWM_USERDIR]/.menu
++ I TestRC (!Match) Test (Version >= 2.6.6) PipeRead 'fvwm-menu-desktop --insert-in-menu MenuRoot > $[FVWM_USERDIR]/.menu &&  echo "Read $[FVWM_USERDIR]/.menu"'
++ I TestRC (!Match) PipeRead 'fvwm-menu-desktop2 --insert-in-menu MenuRoot > $[FVWM_USERDIR]/.menu &&  echo "Read $[FVWM_USERDIR]/.menu"'
 
 
 #-----------------------------------------------------------------------
@@ -2200,6 +2204,7 @@ AddToMenu   MenuWindowMaximize
 + "" Nop
 # these bound functions do not seem to work well if used consequentially
 + "%menu/window-maximize.xpm%$[gt.Maximize &Grow]"						Maximize On grow grow
++ "%menu/window-maximize.xpm%$[gt.Maximize &Smart]"						SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
 + "%menu/window-maximize.xpm%$[gt.Maximize Grow V&ert.]"				Maximize On    0 grow
 + "%menu/window-maximize.xpm%$[gt.Maximize Grow H&oriz.]"				Maximize On grow    0
 + "" Nop

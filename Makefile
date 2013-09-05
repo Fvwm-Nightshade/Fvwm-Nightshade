@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.3
+# Version:      2.1.4
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      07/04/2013
+# Changed:      08/05/2013
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -17,7 +17,6 @@ tarname 	= $(package)
 distdir 	= ../$(tarname)-$(version)
 pkgdir		= ../$(package)
 arch: pkgdir = /tmp/$(package)
-rpm: srcdir = $(shell rpmbuild --showrc |grep " _topdir" |cut -f2)/SOURCES
 
 DESTDIR		?=
 deb: DESTDIR = $(pkgdir)
@@ -424,8 +423,19 @@ deb: build-deb dist-install
 	echo "Done."
 
 prepare-rpm:
-	sed -i "s/Version:.*/Version:\t$(version)/" rpm/fvwm-nightshade.spec
-	cp $(distdir).tar.gz $(srcdir)
+	if test "`rpm -q rpm-build|cut -d '-' -f -2`" != "rpm-build"; then \
+		echo "rpm-build package isn't installed."; \
+		echo "Please install rpm-build and rerun make rpm."; \
+		exit 2; \
+	else \
+		if test ! -f "~/.rpmmacros"; then \
+			echo "%_topdir /home/$(id)/redhat" > ~/.rpmmacros; \
+		fi; \
+		sed -i "s/Version:.*/Version:\t$(version)/" rpm/fvwm-nightshade.spec; \
+		srcdir=`rpmbuild --showrc |grep " _topdir" |cut -f2`/SOURCES; \
+		mkdir -p $$srcdir; \
+		cp $(distdir).tar.gz $$srcdir; \
+	fi;
 
 rpm: dist prepare-rpm
 	echo "Build rpm package"
