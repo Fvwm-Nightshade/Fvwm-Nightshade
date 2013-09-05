@@ -1,5 +1,9 @@
 History:
 
+09/05/2013
+- adapt prepare-rpm rule in Makefile to work with FVWM 2.6.5 installed
+  by the package manager
+
 09/04/2013
 - change #!/usr/bin/python to #!/usr/bin/env python2 in python script to
   prevent the use of Python 3
