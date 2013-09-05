@@ -1,7 +1,7 @@
 Fvwm-Nightshade Release Notes
 =============================
 
-Version 0.7.3
+Version 0.7.4
 - Fix issue #38 - Enhance uninstall routine
   Makefile supports now the creation of an install list so keep the sources 
   of the installed version never needed.
