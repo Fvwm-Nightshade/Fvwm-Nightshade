@@ -1157,13 +1157,14 @@ AddToFunc   FuncChangeLayout
 #-----------------------------------------------------------------------
 DestroyFunc FuncWriteInfoStoreToFileAndSet
 AddToFunc   FuncWriteInfoStoreToFileAndSet
-+ I PipeRead 'new=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
-			if [ `grep -c $0 $2` -gt 0 ] ; then \
-				sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$new\\"#" $2; \
-			else \
-				sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$new\\"" $2; \
-			fi; \
-			echo InfoStoreAdd $0 "$new"'
++ I PipeRead 'Val=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
+            if [ `grep -c $0 $2` -gt 0 ] ; then \
+                sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$Val\\"#" $2; \
+            else \
+                sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$Val\\"" $2; \
+            fi; \
+            echo InfoStoreAdd $0 "$Val"'
+
 
 #-----------------------------------------------------------------------
 # Update/Create an SetEnv variable in a file
@@ -1171,31 +1172,13 @@ AddToFunc   FuncWriteInfoStoreToFileAndSet
 #-----------------------------------------------------------------------
 DestroyFunc FuncWriteSetEnvToFileAndSet
 AddToFunc   FuncWriteSetEnvToFileAndSet
-+ I PipeRead 'new=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
-			if [ `grep -c $0 $2` -gt 0 ] ; then \
-				sed -i --follow-symlinks "s#^SetEnv $0.*#SetEnv $0 \\"$new\\"#" $2; \
-			else \
-				sed -i --follow-symlinks "$ a\SetEnv $0 \\"$new\\"" $2; \
-			fi; \
-			echo InfoStoreAdd $0 "$new"'
-
-
-#-----------------------------------------------------------------------
-# Update layout and theme settings in base setup file .FNS-BaseSetup
-# FuncUpdateBaseSetupFile <Layout/Theme> <layout/theme name>
-#-----------------------------------------------------------------------
-DestroyFunc FuncUpdateBaseSetupFile
-AddToFunc   FuncUpdateBaseSetupFile
-+ I PipeRead 'if [ "$0" = "Layout" ]; then \
-				case $1 in \
-					Horizontal|Vertical|G2like) \
-						sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-BaseSetup; \
-						sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-BaseSetup;; \
-				esac; \
-			  else \
-				sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-BaseSetup; \
-			  fi'
-			  
++ I PipeRead 'Val=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
+            if [ `grep -c $0 $2` -gt 0 ] ; then \
+                sed -i --follow-symlinks "s#^SetEnv $0.*#SetEnv $0 \\"$Val\\"#" $2; \
+            else \
+                sed -i --follow-symlinks "$ a\SetEnv $0 \\"$Val\\"" $2; \
+            fi; \
+            echo InfoStoreAdd $0 "$Val"'
 
 #-----------------------------------------------------------------------
 # Check which appliction are installed to get full functionality

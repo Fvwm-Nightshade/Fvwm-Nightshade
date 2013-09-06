@@ -1,5 +1,9 @@
 History:
 
+09/07/2013
+- add deleted function FuncWriteSetEnvToFileAndSet back into config
+- fix wrong rm commands in uninstall-alternative in Makefile
+
 09/05/2013 V 0.7.4
 - merge develop in master
 - update required FVWM to >= 2.6.5 in INSTALL
