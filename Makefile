@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.4
+# Version:      2.1.5
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      08/05/2013
+# Changed:      09/07/2013
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -369,19 +369,19 @@ uninstall-alternative:
 	if test -f "/usr/share/xsessions/fvwm-nightshade.desktop"; then \
 		echo "-> Uninstall login file"; \
 		echo "remove /usr/share/xsessions/fvwm-nightshade.desktop"; \
-		-rm /usr/share/xsessions/fvwm-nightshade.desktop; \
+		rm -f /usr/share/xsessions/fvwm-nightshade.desktop; \
 	fi
 
 	echo "-> Uninstall system files"
 	if test -d "$(pkgdatadir)"; then \
 		echo "remove $(pkgdatadir) completelly"; \
-		-rm -r $(pkgdatadir); \
+		rm -rf $(pkgdatadir); \
 	fi
 	
 	echo "-> Uninstall documentation"
 	if test -d "$(pkgdocdir)"; then \
 		echo "remove $(pkgdocdir) completelly"; \
-		-rm -r $(pkgdocdir); \
+		rm -rf $(pkgdocdir); \
 	fi
 
 	echo "-> Uninstall manpages"
