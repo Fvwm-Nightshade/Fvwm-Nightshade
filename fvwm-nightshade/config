@@ -1157,20 +1157,6 @@ AddToFunc   FuncChangeLayout
 #-----------------------------------------------------------------------
 DestroyFunc FuncWriteInfoStoreToFileAndSet
 AddToFunc   FuncWriteInfoStoreToFileAndSet
-+ I PipeRead 'new=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
-			if [ `grep -c $0 $2` -gt 0 ] ; then \
-				sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$new\\"#" $2; \
-			else \
-				sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$new\\"" $2; \
-			fi; \
-			echo InfoStoreAdd $0 "$new"'
-
-#-----------------------------------------------------------------------
-# Update/Create an InfoStore variable in a file
-# FuncWriteInfoStoreToFile <var_name> <var_value> <file>
-#-----------------------------------------------------------------------
-DestroyFunc FuncWriteInfoStoreToFileAndSet
-AddToFunc   FuncWriteInfoStoreToFileAndSet
 + I PipeRead 'Val=`echo "$1" | sed "s/[[:blank:]]*$//"`; \
             if [ `grep -c $0 $2` -gt 0 ] ; then \
                 sed -i --follow-symlinks "s#^InfoStoreAdd $0.*#InfoStoreAdd $0 \\"$Val\\"#" $2; \
@@ -1178,6 +1164,7 @@ AddToFunc   FuncWriteInfoStoreToFileAndSet
                 sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$Val\\"" $2; \
             fi; \
             echo InfoStoreAdd $0 "$Val"'
+
 
 #-----------------------------------------------------------------------
 # Update/Create an SetEnv variable in a file
