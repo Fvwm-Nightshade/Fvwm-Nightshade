@@ -98,7 +98,7 @@ Featurelist of Fvwm-Nightshade 0.7.4:
 - Governor-tool FvwmScript-CPU-Performance to handle cpufreq
 - Create thumbs with mini icon and name for iconified applications 
   instead of their icon
-- Build support for deb, rpm and Arch packages and local installation
+- Build support for deb, rpm, Arch, Gentoo and local installation
 - Localization support for German, French and Spanish
 - Smart maximize windows - move and resize windows to the largest free 
   area of a desktop/page

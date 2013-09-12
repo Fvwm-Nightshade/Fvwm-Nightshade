@@ -1,5 +1,19 @@
 History:
 
+09/12/2013
+- add Gentoo installation support (thanks to Sebastian Luncan for the ebuild)
+- add install documentation for Gentoo to INSTALL
+- add gentoo-prepare in Makefile to create an install package and an ebuild
+  with the correct version number
+- update README, AUTHORS and NEWS
+- fix bugs in fvwm-menu-desktop2 if only one xdg menu exists:
+  - no output appears with 'fvwm-menu-desktop --get-menus all|desktop'
+  - no entry "Regenerate XDG menu(s)" appears with 'fvwm-menu-desktop --insert-in-menu MenuRoot'
+    therefore the output in fvwm-menu-desktop-config.fpl is completely crappy.
+  - if an icon not found but the path was given convert
+  - exchanged all Tabs with spaces to prevent indention errors with the Python interpreter.
+- update version in config
+
 09/07/2013
 - add deleted function FuncWriteSetEnvToFileAndSet back into config
 - fix wrong rm commands in uninstall-alternative in Makefile
