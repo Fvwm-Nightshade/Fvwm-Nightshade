@@ -114,7 +114,7 @@ Standard output is a series Fvwm commands."""
         sys.exit(2)
     global verbose, force, size, theme, icon_dir, top, install_prefix, menu_type, menu_list_length 
     global with_titles, menu_entry_count, get_menus, timestamp, set_menus, printmode, insert_in_menu
-    version = "2.2"
+    version = "2.2.1"
     verbose = False
     force = False
     desktop=''
@@ -274,9 +274,9 @@ def getmenulist(desktop, menu_type):
         vprint("\n DE weighting search: DE => [user menus, system menus, overall]")
         weight_dict = {}
         if desktop == '':
-		    # first the desktops, then debian (shouldn't appear in others) then others holding
-		    # all other non DE menus e.g. tools and at the end the nones without prefixes
-		    # If there're other prefixes from other WMs - should be added BEFORE debian
+            # first the desktops, then debian (shouldn't appear in others) then others holding
+            # all other non DE menus e.g. tools and at the end the nones without prefixes
+            # If there're other prefixes from other WMs - should be added BEFORE debian
             DEs = ['gnome', 'kde', 'xfce', 'lxde', 'cinnamon', 'mate', 'debian', 'others', 'none']
         else:
             DEs = [desktop]
@@ -298,9 +298,9 @@ def getmenulist(desktop, menu_type):
                     filled = True
                 for name in menu_names:
                     menus.add(path+'/'+name)
-				# delete each found DE menu from the actual path. So, the menus will be reduced loop by loop.
+                # delete each found DE menu from the actual path. So, the menus will be reduced loop by loop.
                 menudict[path] = menudict[path]-set(menu_names)
-				# count the menus found in the users and systems menu path for later weighting
+                # count the menus found in the users and systems menu path for later weighting
                 if not path == '/etc/xdg/menus':
                     user_menus = len(menu_names)
                 else:
@@ -308,7 +308,7 @@ def getmenulist(desktop, menu_type):
             if filled:
                 desktop_dict[de] = menus
                 filled = False
-			# fill the weight dictionary with the counts
+            # fill the weight dictionary with the counts
             weight_dict[de] = [user_menus, system_menus, user_menus+system_menus]
             vprint(" %s => %s" %(de, weight_dict[de]))
     
@@ -326,18 +326,18 @@ def getmenulist(desktop, menu_type):
                     highest_user = weight_dict[de_highest][0]
                     highest_system = weight_dict[de_highest][1]
                     highest_total = weight_dict[de_highest][2]
-					# first compare the total counts
+                    # first compare the total counts
                     if highest < de_total:
                         higher = True
                     elif highest == de_total:
-						# if the totals equal compare the users
+                        # if the totals equal compare the users
                         if highest_user < de_user:
                             higher = True
                         elif highest_user == de_user:
-							# it the users equal compare the system menus
+                            # it the users equal compare the system menus
                             if highest_system < de_system:
                                 higher = True
-							# if the systems equal the last wins
+                            # if the systems equal the last wins
                             elif highest_system == de_system:
                                 higher = True # fixme, should be biunique. -but how? With atime?
             else:
@@ -352,8 +352,8 @@ def getmenulist(desktop, menu_type):
         if desktop_dict.has_key('none'):
             for menu in desktop_dict['none']:
                 name = menu.replace('.menu', '').split('/')
-		        # the fnmatch.filter will be used to find NO match because then
-		        # the menu is not in the list
+                # the fnmatch.filter will be used to find NO match because then
+                # the menu is not in the list
                 found = fnmatch.filter(desktop_dict[de_highest], '*'+name[-1]+'*')
                 if found == []:
                     desktop_dict[de_highest].add(menu)
@@ -400,8 +400,12 @@ def geticonfile(icon):
     if extension == '.svg':
         iconfile = iconfile.replace('.svg', '.png')
 
-    os.system("if test \\( ! -f '%s' \\) -o \\( '%s' -nt '%s' \\) ; then convert '%s' -resize %i '%s' ; fi"% 
-              (iconfile, iconpath, iconfile, iconpath, size, iconfile))
+    if os.path.exists(iconpath):
+        os.system("if test \\( ! -f '%s' \\) -o \\( '%s' -nt '%s' \\) ; then convert '%s' -resize %i '%s' ; fi"% 
+                  (iconfile, iconpath, iconfile, iconpath, size, iconfile))
+    else:
+        printtext("skip %s" % iconpath)
+        return None
     return iconfile
 
     
@@ -433,6 +437,7 @@ def printmenu(name, icon, command):
 def parsemenus(menulist, desktop):
     global menu_entry_count
     if menu_list_length == 1:
+        new_menulist = menulist
         # user defines only one special menu
         parsemenu(xdg.Menu.parse(menulist[0]), top)
     else:
@@ -475,8 +480,8 @@ def parsemenus(menulist, desktop):
             printtext('+ "" Nop')
             printmenu("$[gt.Regenerate XDG Menu(s)]", "system-software-update", "Module FvwmPerl -l fvwm-menu-desktop2-config.fpl" )
 
-        if not get_menus == '':
-            printtext('%s' % ' '.join(new_menulist))
+    if not get_menus == '':
+        printtext('%s' % ' '.join(new_menulist))
         
     
 def parsemenu(menu, name="", title=""):
@@ -499,31 +504,30 @@ def parsemenu(menu, name="", title=""):
         else:
             printtext('AddToMenu "%s"' % name)
     for entry in menu.getEntries():
-    	if isinstance(entry, xdg.Menu.Menu):
+        if isinstance(entry, xdg.Menu.Menu):
             if printmode:
                 printmenu(entry.getName(), entry.getIcon(), 'Popup "%s"' % entry.getPath())
-    	elif isinstance(entry, xdg.Menu.MenuEntry):
+        elif isinstance(entry, xdg.Menu.MenuEntry):
             if printmode:
                 desktop = DesktopEntry(entry.DesktopEntry.getFileName())
                 # eliminate '%U' etc behind execute string
                 execProgram = m.sub('', desktop.getExec())
                 printmenu(desktop.getName(), desktop.getIcon(), "Exec exec " + " " + execProgram)
             menu_entry_count += 1
-    	else:
+        else:
             if printmode:
                 printtext('# not supported: ' + str(entry))
 
-    # should only appear in a single menu. For more it will insert in parsemenus() when the top menu will built
-    if menu_list_length == 1 and not insert_in_menu and name == top:
-        printtext('+ "" Nop')
-        printmenu("$[gt.Regenerate XDG Menu(s)]", "system-software-update", "Module FvwmPerl -l fvwm-menu-desktop2-config.fpl" )
-        
     if printmode:
+        # should only appear in a single menu. For more it will insert in parsemenus() when the top menu will built
+        if menu_list_length == 1 and name == top:
+            printtext('+ "" Nop')
+            printmenu("$[gt.Regenerate XDG Menu(s)]", "system-software-update", "Module FvwmPerl -l fvwm-menu-desktop2-config.fpl" )
         printtext('')
 
     for entry in menu.getEntries():
-    	if isinstance(entry, xdg.Menu.Menu):
-    	    parsemenu(entry)
+        if isinstance(entry, xdg.Menu.Menu):
+            parsemenu(entry)
 
 usage="""
 A script which parses xdg menu definitions to build
