@@ -13,6 +13,9 @@ History:
   - if an icon not found but the path was given convert
   - exchanged all Tabs with spaces to prevent indention errors with the Python interpreter.
 - update version in config to correct Gentoo requirements: 0.7.4.20131209
+- change #!/usr/bin/env python2 to #!/usr/bin/env python2.7 in python scripts because
+  not on all systems python2 symlink exist.
+- remove python_replicate_script function from ebuild template
 
 09/07/2013
 - add deleted function FuncWriteSetEnvToFileAndSet back into config
