@@ -12,7 +12,7 @@ History:
     therefore the output in fvwm-menu-desktop-config.fpl is completely crappy.
   - if an icon not found but the path was given convert
   - exchanged all Tabs with spaces to prevent indention errors with the Python interpreter.
-- update version in config
+- update version in config to correct Gentoo requirements: 0.7.4.20131209
 
 09/07/2013
 - add deleted function FuncWriteSetEnvToFileAndSet back into config
