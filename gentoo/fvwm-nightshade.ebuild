@@ -45,10 +45,6 @@ src_install() {
 		DESTDIR="${D}" \
 		prefix="/usr" \
 		dist-install
-
-	python_replicate_script \
-		"${D}/usr/bin/fns-find-icon" \
-		"${D}/usr/bin/fvwm-menu-desktop2"
 }
 
 pkg_postinst() {
