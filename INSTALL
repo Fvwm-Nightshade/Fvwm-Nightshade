@@ -58,7 +58,7 @@ Fvwm
     
     2. Building the Tree:
     - execute in the terminal
-              $ utils/configure_dev.sh
+        $ utils/configure_dev.sh
        
        Hint:
        You can ignore "With GNOME libs support in FvwmGtk? no: Can't find working gnome-config" 
@@ -166,15 +166,54 @@ Installation of Fvwm-Nightshade
             # make arch
         The package is created in the directory above. Run as root
             # pacman -U fvwm-nightshade-<version>-any.pkg.tar.xz
+    - Gentoo:
+        An additional overlay repository for custom ebuilds which are not in the official
+        Portage is needed. It will be set over the PORTDIR_OVERLAY variable in 
+        /etc/portage/make.conf. The normal personal per-machine overlay is /usr/local/portage.
+        But another could used also.
         
+        The Fvwm-Nightshade ebuild has to be created from the template in gentoo/.
+        Also the dist package for the installation. This can done with one step.
+        Type in the terminal:
+            $ make prepare-gentoo
+        The make rule creates the dist package ../fvwm-nightshade-<version>.tar.gz and adds 
+        the current version of the downloaded package to the ebuild name and saves it in 
+        the current directory.
+        
+        A sub directory 'fvwm-nightshade' in the category 'x11-themes' have to be created
+        (if you use the overlay /usr/local/portage you need root permissions!):
+            $|# mkdir -p <overlay_directory>/x11-themes/fvwm-nightshade
+        
+        Copy the versioned fvwm-nightshade ebuild into your personal overlay repository:
+            $|# cp fvwm-nightshade-<version>.ebuild <overlay_directory>/x11-themes/fvwm-nightshade/
+        
+        Copy the dist package as root to /usr/portage/disfiles:
+            # cp ../fvwm-nightshade-<version>.tar.gz /usr/portage/disfiles/
+        
+        Create the manifest:
+            $|# ebuild --force <overlay_directory>/x11-themes/fvwm-nightshade/fvwm-nightshade-<version>.ebuild digest
+        
+        Unmask the package with your system architecture -> ~x86 or ~amd64 :
+            # echo x11-themes/fvwm-nightshade ~x86 >> /etc/portage/package.keywords
+        
+        Install Fvwm-Nightshade with
+            # emerge x11-themes/fvwm-nightshade
+        
+        Perhaps you need some additional USEs. Emerge told you which. Echo them into /etc/portage/package.use:
+            # echo "<USEs>" >> /etc/portage/package.use
+        
+        Emerge again.
 
 Fvwm-Nightshade is installed. Congratulation!
 
 If you haven't a graphical login manager copy xinitrc template into your home directory 
     $ cp <system>/share/doc/fvwm-nightshade/xinitrc-example ~/.xinitrc
+or add the following line to your .xinitrc:
+    exec fvwm-nightshade
 and start the xserver with
     $ startx
-change the base settings and enjoy.
+
+Change the base settings and enjoy.
 
 If you have a graphical login manager there's now a new entry "Fvwm-Nightshade" in your sessions dialog.
 Login, change the base settings and enjoy.
