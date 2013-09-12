@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.5
+# Version:      2.1.6
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      09/07/2013
+# Changed:      09/12/2013
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -59,6 +59,7 @@ all:
 dist: $(distdir).tar.gz
 
 $(distdir).tar.gz: FORCE $(distdir)
+	echo "Create dist package ../$(tarname)-$(version)"
 	tar chof - $(distdir) |gzip -9 -c > $(distdir).tar.gz
 	rm -rf $(distdir)
 
@@ -457,7 +458,11 @@ arch: prepare-arch
 	rm -f *.xz
 	mv $(pkgdir)/*.xz ../
 	rm -rf $(pkgdir)
-	
-.PHONY: dist distcheck install uninstall uninstall-alternative deb rpm arch
-.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list uninstall-alternative dist-install
+
+gentoo-prepare: dist
+	echo "Create ebuild with current version in name"
+	cp gentoo/fvwm-nightshade.ebuild fvwm-nightshade-$(version).ebuild
+
+.PHONY: dist distcheck install uninstall uninstall-alternative deb rpm arch gentoo-prepare
+.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list uninstall-alternative dist-install gentoo-prepare
 	
