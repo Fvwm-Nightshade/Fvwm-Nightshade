@@ -1,5 +1,80 @@
 History:
 
+09/13/2013
+- merge develop changes from 08/12/2013 to 09/12/2013 into feature_nanomoids branch
+
+---- develop merge end -------------------------------------------------
+
+09/12/2013
+- add Gentoo installation support (thanks to Sebastian Luncan for the ebuild)
+- add install documentation for Gentoo to INSTALL
+- add gentoo-prepare in Makefile to create an install package and an ebuild
+  with the correct version number
+- update README, AUTHORS and NEWS
+- fix bugs in fvwm-menu-desktop2 if only one xdg menu exists:
+  - no output appears with 'fvwm-menu-desktop --get-menus all|desktop'
+  - no entry "Regenerate XDG menu(s)" appears with 'fvwm-menu-desktop --insert-in-menu MenuRoot'
+    therefore the output in fvwm-menu-desktop-config.fpl is completely crappy.
+  - if an icon not found but the path was given convert
+  - exchanged all Tabs with spaces to prevent indention errors with the Python interpreter.
+- update version in config to correct Gentoo requirements: 0.7.4.20131209
+- change #!/usr/bin/env python2 to #!/usr/bin/env python2.7 in python scripts because
+  not on all systems python2 symlink exist.
+- remove python_replicate_script function from ebuild template
+
+09/07/2013
+- add deleted function FuncWriteSetEnvToFileAndSet back into config
+- fix wrong rm commands in uninstall-alternative in Makefile
+
+09/05/2013 V 0.7.4
+- merge develop in master
+- update required FVWM to >= 2.6.5 in INSTALL
+- update version to 0.7.4 in NEWS and README
+- adapt Requirements in NEWS and README
+
+09/05/2013
+- adapt prepare-rpm rule in Makefile to work with FVWM 2.6.5 installed
+  by the package manager
+
+09/04/2013
+- change #!/usr/bin/python to #!/usr/bin/env python2 in python script to
+  prevent the use of Python 3
+- remove the command 'Separator' in fvwm-menu-desktop2-config.fpl because
+  only available in CVS of FVWM
+- change in arch/PKGBUILD_FNS wrong dependency python<3 to python2
+- change in arch/PKGBUILD_FNS wrong dependency pyxdg to python2-xdg
+- remove old and useless arch/PKGBUILD_FNS_download
+- add translation parts for fvwm-menu-desktop and fvwm-menu-desktop-config.fpl
+  to /templates/fvwm-nightshade.pot
+- adapt INSTALL to new usage of FVWM 2.6.5 instead of 2.6.6 CVS
+- change copyright in COPYING from 2012 to 2013
+- update README
+
+09/03/2013
+- changes to use Fvwm-Nightshade with FVWM 2.6.5 instead of 2.6.6 CVS:
+  - add some files from CVS with some name changes to enable the usages
+    of Xdg menus:
+    - fvwm-menu-desktop as fvwm-menu-desktop2
+    - fvwm-menu-desktop-config.fpl as fvwm-menu-desktop2-config.fpl
+    - fvwm-menu-desktop manpage as fvwm-menu-desktop2 manpage
+  - add translation parts for fvwm-menu-desktop and fvwm-menu-desktop-config.fpl
+    from CVS fvwm..de/fr.po to fvwm-nightshade.de/fr.po and built new mo files
+  - add FVWM version check in FuncXdgMenusInRoot to decide which fvwm-menu-desktop
+    have to be used.
+  - update debian/control:
+    - change required FVWM version to >> 2.6.4
+    - change required python version to << 3
+    - remove some uninteresting description lines and add Xdg menu support
+  - update arch/PKGBUILD_FNS and rpm/fvwm-nightshade.spec:
+    - change required FVWM version to >= 2.6.5
+    - change required python version to < 3
+  - update README:
+    - change required FVWM version to >= 2.6.5
+    - add Xdg menu support
+  - update NEWS
+
+---- develop merge start -----------------------------------------------
+
 08/28/2013
 - add new applet FNS-Applet-DriveInn (a storage drives manager)
 - add new vector icons for FNS-Applet-DriveInn to artwork/scalable
@@ -98,6 +173,13 @@ History:
 - remove wm-icons from recommended dependencies in INSTALL and README
 - exchange tabs with spaces in INSTALL and README
 
+---- develop merge end -------------------------------------------------
+
+08/12/2013
+- FvwmSmartMaximize: make EwmhBaseStruts determination more perlish
+
+---- develop merge start -----------------------------------------------
+
 08/03/2013
 - move all FNS-Applets from fvwm-nightshade/applets to fvwm/
 - rename all FvwmScripts to FNS-Script-<Name>
@@ -145,7 +227,7 @@ History:
 - add new colorsets for Nanomoids in themes
 - add 2 new infostore variables for FvwmApplets in .settings
 
-08/01/2013 V 0.7.4
+08/01/2013
 - add FvwmSmartMaximize to all themes:
   - move Maximize horizontally from mouse 3 to mouse 2 + Alt
   - add Maximize smart to mouse 3
