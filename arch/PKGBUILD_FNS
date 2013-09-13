@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		PKGBUILD_FNS
-# Version:	1.1.1
+# Version:	1.1.4
 # Licence: 	GPL 2
 #
 # Description:	Pkgbuild script for Fvwm-Nightshade
@@ -8,7 +8,7 @@
 # Author:	Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>	
 #
 # Created:	???
-# Changed:	08/17/2013
+# Changed:	09/13/2013
 #-----------------------------------------------------------------------
 
 pkgname=Fvwm-Nightshade
@@ -18,7 +18,7 @@ pkgdesc="A lightweight but feature rich and good looking configuration of Fvwm."
 arch=('any')
 url="https://github.com/Fvwm-Nightshade"
 license=('GPL')
-depends=('fvwm-cvs>=2.6.6' 'pyxdg' 'conky' 'xscreensaver' 'feh' 'imagemagick' 'librsvg' 'stalonetray' 'xorg-xwd' 'gksu' 'mplayer' 'python-mutagen' 'python-simplejson')
+depends=('fvwm>=2.6.5' 'python2' 'python2-xdg' 'conky' 'xscreensaver' 'feh' 'imagemagick' 'librsvg' 'stalonetray' 'xorg-xwd' 'gksu' 'mplayer' 'python-mutagen' 'python-simplejson')
 optdepends=('pcmanfm: lightweight filemanager' 'volumeicon: volumecontrol in systray' 'network-manager-applet: network controlling tool for systray')
 provides=('Fvwm-Nightshade')
 source=

@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.4
+# Version:      2.1.6
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      08/03/2013
+# Changed:      09/12/2013
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -17,7 +17,6 @@ tarname 	= $(package)
 distdir 	= ../$(tarname)-$(version)
 pkgdir		= ../$(package)
 arch: pkgdir = /tmp/$(package)
-rpm: srcdir = $(shell rpmbuild --showrc |grep " _topdir" |cut -f2)/SOURCES
 
 DESTDIR		?=
 deb: DESTDIR = $(pkgdir)
@@ -60,6 +59,7 @@ all:
 dist: $(distdir).tar.gz
 
 $(distdir).tar.gz: FORCE $(distdir)
+	echo "Create dist package ../$(tarname)-$(version)"
 	tar chof - $(distdir) |gzip -9 -c > $(distdir).tar.gz
 	rm -rf $(distdir)
 
@@ -370,19 +370,19 @@ uninstall-alternative:
 	if test -f "/usr/share/xsessions/fvwm-nightshade.desktop"; then \
 		echo "-> Uninstall login file"; \
 		echo "remove /usr/share/xsessions/fvwm-nightshade.desktop"; \
-		-rm /usr/share/xsessions/fvwm-nightshade.desktop; \
+		rm -f /usr/share/xsessions/fvwm-nightshade.desktop; \
 	fi
 
 	echo "-> Uninstall system files"
 	if test -d "$(pkgdatadir)"; then \
 		echo "remove $(pkgdatadir) completelly"; \
-		-rm -r $(pkgdatadir); \
+		rm -rf $(pkgdatadir); \
 	fi
 	
 	echo "-> Uninstall documentation"
 	if test -d "$(pkgdocdir)"; then \
 		echo "remove $(pkgdocdir) completelly"; \
-		-rm -r $(pkgdocdir); \
+		rm -rf $(pkgdocdir); \
 	fi
 
 	echo "-> Uninstall manpages"
@@ -424,8 +424,19 @@ deb: build-deb dist-install
 	echo "Done."
 
 prepare-rpm:
-	sed -i "s/Version:.*/Version:\t$(version)/" rpm/fvwm-nightshade.spec
-	cp $(distdir).tar.gz $(srcdir)
+	if test "`rpm -q rpm-build|cut -d '-' -f -2`" != "rpm-build"; then \
+		echo "rpm-build package isn't installed."; \
+		echo "Please install rpm-build and rerun make rpm."; \
+		exit 2; \
+	else \
+		if test ! -f "~/.rpmmacros"; then \
+			echo "%_topdir /home/$(id)/redhat" > ~/.rpmmacros; \
+		fi; \
+		sed -i "s/Version:.*/Version:\t$(version)/" rpm/fvwm-nightshade.spec; \
+		srcdir=`rpmbuild --showrc |grep " _topdir" |cut -f2`/SOURCES; \
+		mkdir -p $$srcdir; \
+		cp $(distdir).tar.gz $$srcdir; \
+	fi;
 
 rpm: dist prepare-rpm
 	echo "Build rpm package"
@@ -447,7 +458,11 @@ arch: prepare-arch
 	rm -f *.xz
 	mv $(pkgdir)/*.xz ../
 	rm -rf $(pkgdir)
-	
-.PHONY: dist distcheck install uninstall uninstall-alternative deb rpm arch
-.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list uninstall-alternative dist-install
+
+gentoo-prepare: dist
+	echo "Create ebuild with current version in name"
+	cp gentoo/fvwm-nightshade.ebuild fvwm-nightshade-$(version).ebuild
+
+.PHONY: dist distcheck install uninstall uninstall-alternative deb rpm arch gentoo-prepare
+.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list uninstall-alternative dist-install gentoo-prepare
 	

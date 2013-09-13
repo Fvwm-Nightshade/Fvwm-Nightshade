@@ -15,6 +15,9 @@ Features:
   the permission to use his Awoken icons :-).
 - new python script fns-find-file to search for files in path variables 
   like $PATH or $FNS_SOUNDPATH.
+- works now with FVWM 2.6.5 without loosing new Xdg menu support from CVS
+  version
+- support for Gentoo installation (thanks to Sebastian Luncan :-) )
 
 
 ------------------------------------------------------------------------
