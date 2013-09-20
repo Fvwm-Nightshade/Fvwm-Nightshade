@@ -1,5 +1,33 @@
 History:
 
+20/12/2013
+- merge parts from branch feature_nanomoids into develop:
+  - add new variable __version__ for version in fns-find-icon
+  - remove wm-icons package from recommended dependencies in /debian/control
+  - add new vector icons to artworks/icons/scalable to replace wm-icons package
+  - delete fns bitmap icons because they never needed - a svg icon exist
+  - add own_window_title to conkyrc_clock and conkyrc_cpu to make it possible to kill them with xkill
+  - change static menus to dynamic menus and xpm to vector icons in all layouts to change icon size on the fly
+  - change bitmap icons to vector icons in G2likeTopBar, VerticalPanel and HorizontalPanel
+    to change icon size on the fly
+  - add mouse action on conky_cpu and conky_clock button - right click to show menu - in
+    G2likeTopBar, HorizontalPanel and VerticalPanel
+  - changes in config:
+    - change the order in ImagePath that Fvwm search for images in FVWM_USERDIR first
+    - change most of the xpm files to svg
+    - change static menus to dynamic menus and xpm to vector icons to change icon size on the fly
+    - fix variable problem in FuncWriteInfoStoreToFileAndSet
+    - implement SetMenuIconSize in all menus if needed to update icon size variable to enable
+      changing icon size on the fly
+    - exchange tabs with spaces
+    - add deleted FuncUpdateBaseSetupFile to update theme and layout if changed
+    - add FuncMenuClockOps and FuncMenuCpuOps
+  - add SetMenuIconSize function in fns-init to set Menu icon size dependent of .FvwmForm-Desktop-Config
+    on the fly in menus and Windowlist
+  - exchange tabs with spaces in header.tpl
+  - remove wm-icons from recommended dependencies in INSTALL and README
+  - exchange tabs with spaces in INSTALL and README
+
 09/12/2013
 - add Gentoo installation support (thanks to Sebastian Luncan for the ebuild)
 - add install documentation for Gentoo to INSTALL
