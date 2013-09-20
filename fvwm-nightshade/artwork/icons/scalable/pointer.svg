@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:version="0.32"
+   id="svg1408"
+   height="256"
+   width="256"
+   sodipodi:docname="pointer.svg"
+   inkscape:export-filename="/home/egore/source/lincity-ng/data/images/gui/pointer.png"
+   inkscape:export-xdpi="4.0599999"
+   inkscape:export-ydpi="4.0599999"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0">
+  <defs
+     id="defs3">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 354.33072 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="708.66144 : 354.33072 : 1"
+       inkscape:persp3d-origin="354.33072 : 236.22048 : 1"
+       id="perspective18" />
+    <linearGradient
+       id="linearGradient2192"
+       inkscape:collect="always">
+      <stop
+         id="stop2194"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         id="stop2196"
+         offset="1"
+         style="stop-color:#ffffff;stop-opacity:0;" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient2180">
+      <stop
+         id="stop2182"
+         offset="0"
+         style="stop-color:#339eff;stop-opacity:1;" />
+      <stop
+         id="stop2184"
+         offset="1"
+         style="stop-color:#140fb4;stop-opacity:1;" />
+    </linearGradient>
+    <radialGradient
+       gradientUnits="userSpaceOnUse"
+       r="449.05411"
+       fy="73.590805"
+       fx="323.06348"
+       cy="73.590805"
+       cx="323.06348"
+       gradientTransform="matrix(0.19679469,-0.05273098,0.07866538,0.29358321,127.1809,432.19516)"
+       id="radialGradient2188"
+       xlink:href="#linearGradient2180"
+       inkscape:collect="always" />
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="300.52786"
+       x2="252.70598"
+       y1="64.480942"
+       x1="106.03597"
+       gradientTransform="matrix(1.187613,0,0,0.614127,71.85562,54.96817)"
+       id="linearGradient2198"
+       xlink:href="#linearGradient2192"
+       inkscape:collect="always" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:current-layer="layer1"
+     inkscape:document-units="px"
+     inkscape:cy="128"
+     inkscape:cx="201.83007"
+     inkscape:zoom="2.390625"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:window-width="1436"
+     inkscape:window-height="839"
+     inkscape:window-x="0"
+     inkscape:window-y="37"
+     showgrid="false"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata4">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Mouse Pointer created for Lincity-NG</dc:title>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Christoph Brill</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1"
+     transform="translate(-91.068616,-400.17193)">
+    <path
+       sodipodi:nodetypes="cccccccc"
+       id="path2204"
+       d="m 134.67098,451.69383 c 27.59191,44.07562 50.96282,84.6902 71.53032,145.57205 2.94404,-16.66958 5.84169,-35.04873 13.63145,-48.99869 21.30736,23.18213 37.14861,39.79289 52.78689,67.93807 7.97436,-22.99214 14.78763,-36.48912 27.50624,-50.99442 -17.48741,-18.657 -37.27955,-36.69646 -63.65254,-50.10258 9.48666,-14.78731 16.0815,-17.31973 24.6477,-23.25039 -36.23159,-28.17589 -103.00312,-45.87263 -126.45006,-40.16404 z"
+       style="fill:#000000;fill-opacity:0.58554215;fill-rule:evenodd;stroke:none"
+       inkscape:connector-curvature="0" />
+    <path
+       sodipodi:nodetypes="cccccccc"
+       id="path1418"
+       d="m 135.66482,437.90599 c 27.4136,43.79077 50.63349,84.14289 71.06806,144.63126 2.92499,-16.56185 5.80392,-34.82221 13.54334,-48.68203 21.16966,23.03232 36.90852,39.53573 52.44572,67.499 7.92284,-22.84353 14.69209,-36.25328 27.32849,-50.66485 -17.37439,-18.53642 -37.03862,-36.45929 -63.24117,-49.77877 9.42535,-14.69174 15.97757,-17.20779 24.48841,-23.10012 -35.99743,-27.9938 -102.33743,-45.57618 -125.63285,-39.90449 z"
+       style="fill:url(#radialGradient2188);fill-opacity:1;fill-rule:evenodd;stroke:#7387e4;stroke-width:0.99537975;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       sodipodi:nodetypes="cssssss"
+       id="path2190"
+       d="m 121.66962,89.580661 c -12.34053,-4.685618 17.6018,34.452719 36.08264,77.977539 18.48085,43.52481 16.44312,62.00056 26.18484,70.33228 9.19735,7.86617 -12.23421,-90.67601 7.92495,-93.96729 53.80707,-8.78483 250.44307,80.0813 238.88071,70.19244 -8.5592,-7.32038 -80.08485,-46.57785 -149.51168,-73.71661 C 211.80425,113.26025 144.47625,98.240194 121.66962,89.580661 z"
+       style="opacity:0.89841985;fill:url(#linearGradient2198);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
