@@ -103,16 +103,17 @@ Featurelist of Fvwm-Nightshade 0.7.4:
 - Smart maximize windows - move and resize windows to the largest free 
   area of a desktop/page
 
+
 Requirements:
 =============
-Required:   Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
-            xscreensaver, feh, imagemagick, librsvg2, xwd,
-            stalonetray, cpufrequtils*, gksu
+Required:        Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
+                 xscreensaver, feh, imagemagick, librsvg2, xwd,
+                 stalonetray, cpufrequtils*, gksu
 
-Recommended: gnomes network manager, Volume Icon, wm-icons
+Recommended:     gnomes network manager, Volume Icon
 
-Useful:     fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-            qtconfig for qt3, qtconfig for qt4, xneurs
+Useful:          fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
+                 qtconfig for qt3, qtconfig for qt4, xneurs
   
 * unfortunatelly not usable in Arch at the moment. They have changed from
   cpufrequtils to cpupower but it's not supported at the moment 
@@ -134,8 +135,8 @@ them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues
 Mailinglist
 ===========
 There exist two mailing lists under
-common:     https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade
-developing: https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers
+common:        https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade
+developing:    https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers
 
 To post to this group, you have to do the following:
 
@@ -151,9 +152,9 @@ To post to this group, you have to do the following:
    the mailing list.
 
 To unsubscribe from this group, send email to 
-fvwmnightshade+unsubscribe@googlegroups.com
+<fvwmnightshade+unsubscribe@googlegroups.com>
 or
-fvwmnightshade-workers+unsubscribe@googlegroups.com
+<fvwmnightshade-workers+unsubscribe@googlegroups.com>
 
 
 Enjoy our work and hopefully you love Fvwm-Nightshade as we do :-)

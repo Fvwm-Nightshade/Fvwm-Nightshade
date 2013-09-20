@@ -8,7 +8,7 @@ Required:       Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky,
                 xscreensaver, feh, imagemagick, librsvg2, xwd,
                 stalonetray, cpufrequtils*, gksu/beesu
 
-Recommended:    gnomes network manager, Volume Icon, wm-icons
+Recommended:    gnomes network manager, Volume Icon
 
 Useful:         fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
                 qtconfig for qt3, qtconfig for qt4, xneurs
@@ -94,8 +94,8 @@ Fvwm
             - The package is located under /home/[your_user_name]/redhat/RPMS/i386/
             # rpm -ivh /home/<your_user_name>/redhat/RPMS/i386/fvwm-2.6.x-0.<date>.i386.rpm
         deb:
-            - The package is created one level higher than the fvwm/fvwm-snapshot folder
-            # dpkg -i ../<path_to_fvwm/fvwm-snapshot>/fvwm-2.6.x-0.<date>.i386.deb
+            - The package is created one level higher than the fvwm folder
+            # dpkg -i ../<path_to_fvwm>/fvwm-2.6.x-0.<date>.i386.deb
         Arch:
             - The package is created in the previous generated directory. Run
             # pacman -U fvwm-cvs-2.6.6-1-architecture.pkg.tar.xz
@@ -133,15 +133,15 @@ Installation of Fvwm-Nightshade
    
               # make fvwm_path=<path_to_fvwm> install
           
-          If you haven't root rights you can install Fvwm-Nightshade locally. All you
-          need is a directory e.g. ~/.local with write permissions. Also an entry in 
-          your PATH variable in your .bashrc, .bash_profile or .profile like
+        If you haven't root rights you can install Fvwm-Nightshade locally. All you
+        need is a directory e.g. ~/.local with write permissions. Also an entry in 
+        your PATH variable in your .bashrc, .bash_profile or .profile like
           
               PATH=$PATH:$HOME/.local/bin
           
-          Now you can install Fvwm-Nightshade with the following make call:
+        Now you can install Fvwm-Nightshade with the following make call:
 
-            $ make prefix=~/.local install local=yes
+              $ make prefix=~/.local install local=yes
           
         Don't forget to install the required packages from the beginning of this document!
 
