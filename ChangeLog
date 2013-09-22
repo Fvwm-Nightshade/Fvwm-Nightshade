@@ -1,5 +1,14 @@
 History:
 
+20/22/2013
+- Some Bugfixes in fvwm-menu-desktop2:
+  - DecodeEncodeErrors in menu names
+  - no output appears with 'fvwm-menu-desktop2 --get-menus all|desktop'
+  - No entry "Regenerate XDG menu(s)" appears with
+    'fvwm-menu-desktop2 --insert-in-menu MenuRoot'
+  -  exchange all tabs with spaces to prevent indention errors
+- update config version
+
 20/12/2013
 - merge parts from branch feature_nanomoids into develop:
   - add new variable __version__ for version in fns-find-icon
