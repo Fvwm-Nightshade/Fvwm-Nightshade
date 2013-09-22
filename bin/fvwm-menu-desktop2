@@ -2,6 +2,14 @@
  
 # Modification History
 
+# Changed on 15/09/13 by Thomas Funk:
+# Some Bugfixes:
+# - DecodeEncodeErrors in menu names
+# - no output appears with 'fvwm-menu-desktop --get-menus all|desktop'
+# - No entry "Regenerate XDG menu(s)" appears with
+#   'fvwm-menu-desktop --insert-in-menu MenuRoot'
+# -  exchange all tabs with spaces to prevent indention errors
+
 # Changed on 15/06/13 by Thomas Funk:
 # support for python-xdg > 0.19.
 # add gettext localization.
@@ -114,7 +122,7 @@ Standard output is a series Fvwm commands."""
         sys.exit(2)
     global verbose, force, size, theme, icon_dir, top, install_prefix, menu_type, menu_list_length 
     global with_titles, menu_entry_count, get_menus, timestamp, set_menus, printmode, insert_in_menu
-    version = "2.2.1"
+    version = "2.3"
     verbose = False
     force = False
     desktop=''
@@ -372,11 +380,35 @@ def vprint(text):
     if verbose:
         sys.stderr.write(text+"\n")
     
-def printtext(text):
-    print text.encode("utf-8")
+def printtext(text, encodetext=True):
+    if encodetext:
+        print text.encode("utf-8")
+    else:
+        print text
 
+# fix unicode decode problem like
+# UnicodeDecodeError: 'ascii' codec can't decode byte 0xc3 in position xyz: ordinal not in range(128) 
+def decodetext(text):
+    old_stdout = sys.stdout
+    fnull = open(os.devnull, 'w')
+    sys.stdout = fnull
+    try:
+        new_text = text.encode("utf-8")
+        printtext('%s' % text)
+    except UnicodeDecodeError:
+        try:
+            unicode_text = text.decode("iso-8859-15")
+            text = "%s" % unicode_text
+            new_text = text.encode("iso-8859-15")
+            print new_text
+        except:
+            new_text = None
+    fnull.close()
+    sys.stdout = old_stdout
+    return new_text
+    
 def geticonfile(icon):
-    iconpath = xdg.IconTheme.getIconPath(icon, size, theme, ["png", "xpm"])
+    iconpath = xdg.IconTheme.getIconPath(icon, size, theme, ["png", "xpm", "svg"])
 
     if not iconpath == None:
         extension = os.path.splitext(iconpath)[1]
@@ -404,7 +436,7 @@ def geticonfile(icon):
         os.system("if test \\( ! -f '%s' \\) -o \\( '%s' -nt '%s' \\) ; then convert '%s' -resize %i '%s' ; fi"% 
                   (iconfile, iconpath, iconfile, iconpath, size, iconfile))
     else:
-        printtext("skip %s" % iconpath)
+        sys.stderr.write("%s not found! Use default icon.\n" % iconpath)
         return None
     return iconfile
 
@@ -421,18 +453,14 @@ def printmenu(name, icon, command):
         iconfile = geticonfile(icon) or getdefaulticonfile(command) or icon
         if not iconfile == '':
             iconfile = '%'+iconfile+'%'
-    # fix unicode decode problem like
-    # UnicodeDecodeError: 'ascii' codec can't decode byte 0xc3 in position xyz: ordinal not in range(128) 
-    try:
-        printtext('+ "%s%s" %s' % (name, iconfile, command))
-    except UnicodeDecodeError:
-        try:
-            unicode_name = name.decode("iso-8859-15")
-            unicode_command = command.decode("iso-8859-15")
-            text = '+ "%s%s" %s' % (unicode_name, iconfile, unicode_command)
-            print text.encode("iso-8859-15")
-        except:
-            sys.stderr.write("A menu entry cannot decode! Skipping it ...\n")
+    name = decodetext(name)
+    command = decodetext(command)
+    iconfile = decodetext(iconfile)
+    if not (name == None or command == None or iconfile == None):
+        printtext('+ "%s%s" %s' % (name, iconfile, command), False)
+    else:
+        sys.stderr.write("A menu entry cannot decode! Skipping ...\n")
+        printtext('# Decode Error! Menu entry skipped.')
 
 def parsemenus(menulist, desktop):
     global menu_entry_count
@@ -482,8 +510,7 @@ def parsemenus(menulist, desktop):
 
     if not get_menus == '':
         printtext('%s' % ' '.join(new_menulist))
-        
-    
+
 def parsemenu(menu, name="", title=""):
     global menu_entry_count
     m = re.compile('%[A-Z]?', re.I) # Pattern for %A-Z (meant for %U)
@@ -492,17 +519,23 @@ def parsemenu(menu, name="", title=""):
     if not title:
         title = name
     if printmode:
-        if not insert_in_menu or not (insert_in_menu and name == top and menu_list_length == 1):
-            printtext('DestroyMenu "%s"' % name)
-        if with_titles:
-            # for insert-in-menu AddToMenu doesn't have a title for top menu
-            # because this will appear then in the other menu
-            if insert_in_menu and name == top and menu_list_length == 1:
-                printtext('AddToMenu "%s"' % name)
+        name = decodetext(name)
+        title = decodetext(title)
+        if not (name == None or title == None):
+            if not insert_in_menu or not (insert_in_menu and name == top and menu_list_length == 1):
+                printtext('DestroyMenu "%s"' % name, False)
+            if with_titles:
+                # for insert-in-menu AddToMenu doesn't have a title for top menu
+                # because this will appear then in the other menu
+                if insert_in_menu and name == top and menu_list_length == 1:
+                    printtext('AddToMenu "%s"' % name, False)
+                else:
+                    printtext('AddToMenu "%s" "%s" Title' % (name, title), False)
             else:
-                printtext('AddToMenu "%s" "%s" Title' % (name, title))
+                printtext('AddToMenu "%s"' % name, False)
         else:
-            printtext('AddToMenu "%s"' % name)
+            sys.stderr.write("A menu entry cannot decode! Skipping ...\n")
+            printtext('# Decode Error! Menu entry skipped.')
     for entry in menu.getEntries():
         if isinstance(entry, xdg.Menu.Menu):
             if printmode:
