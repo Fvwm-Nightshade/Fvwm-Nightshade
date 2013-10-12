@@ -1,6 +1,15 @@
 History:
+10/12/2013
+- changes in fvwm-menu-desktop2:
+  - add two new options: --app-icon and --dir-icon to handle default icons 
+    for not available app/dir icons
+  - fix bug in convert icon routine that background of svg icons are transparent again
+- update fvwm-menu-desktop2 manpage for the new options --app-icon and --dir-icon
+- rewrite of fvwm-menu-desktop2-config.fpl to add the new options of fvwm-menu-desktop2
+  and help buttons.
+- add 3 new FvwmForms for fvwm-menu-desktop2-config help
 
-20/22/2013
+09/22/2013
 - Some Bugfixes in fvwm-menu-desktop2:
   - DecodeEncodeErrors in menu names
   - no output appears with 'fvwm-menu-desktop2 --get-menus all|desktop'
@@ -9,7 +18,7 @@ History:
   -  exchange all tabs with spaces to prevent indention errors
 - update config version
 
-20/12/2013
+09/12/2013
 - merge parts from branch feature_nanomoids into develop:
   - add new variable __version__ for version in fns-find-icon
   - remove wm-icons package from recommended dependencies in /debian/control
