@@ -1,4 +1,10 @@
 History:
+10/13/2013
+- remove the command 'Separator' in fvwm-menu-desktop2-config.fpl and all help files 
+  because only available in CVS of FVWM
+- fix bug in fvwm-menu-desktop2 that .theme file will be generated if --enable-mini-icons
+  isn't set
+
 10/12/2013
 - changes in fvwm-menu-desktop2:
   - add two new options: --app-icon and --dir-icon to handle default icons 
