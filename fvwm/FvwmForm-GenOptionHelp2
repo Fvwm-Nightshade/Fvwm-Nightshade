@@ -6,7 +6,8 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Line    center
 *FvwmForm-GenOptionHelp2:   Text    "fvwm-menu-desktop2-config - $[gt.General Options] $[gt.Help]"
 *FvwmForm-GenOptionHelp2:   Line 
-*FvwmForm-GenOptionHelp2:   Separator
+*FvwmForm-GenOptionHelp2:   Line    center
+*FvwmForm-GenOptionHelp2:   Text    "----------------------------------------------------------------------------------------"
 *FvwmForm-GenOptionHelp2:   Line    center
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.General Options]"
 *FvwmForm-GenOptionHelp2:   Line    left
@@ -109,7 +110,8 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Line    " "
 *FvwmForm-GenOptionHelp2:   Line    left
-*FvwmForm-GenOptionHelp2:   Separator
+*FvwmForm-GenOptionHelp2:   Line    center
+*FvwmForm-GenOptionHelp2:   Text    "----------------------------------------------------------------------------------------"
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Line    " "
 # Buttons
@@ -118,4 +120,6 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Command Nop
 *FvwmForm-GenOptionHelp2:   Button  continue "fvwm-menu-desktop $[gt.Help]"        
 *FvwmForm-GenOptionHelp2:   Command Exec exec xterm -g 100x50 -n "Help fvwm-menu-desktop" -T "Help fvwm-menu-desktop" -e "man fvwm-menu-desktop"
+*FvwmForm-GenOptionHelp2:   Line    Left
+*FvwmForm-GenOptionHelp2:   Line    " "
 

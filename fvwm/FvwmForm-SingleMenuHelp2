@@ -6,7 +6,8 @@ DestroyModuleConfig  FvwmForm-SingleMenuHelp2: *
 *FvwmForm-SingleMenuHelp2:   Line    center
 *FvwmForm-SingleMenuHelp2:   Text    "fvwm-menu-desktop2-config - $[gt.Single Menu Help]"
 *FvwmForm-SingleMenuHelp2:   Line 
-*FvwmForm-SingleMenuHelp2:   Separator
+*FvwmForm-SingleMenuHelp2:   Line    center
+*FvwmForm-SingleMenuHelp2:   Text    "-----------------------------------------------------------------------------------"
 *FvwmForm-SingleMenuHelp2:   Line    center
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.Single Menu]"
 *FvwmForm-SingleMenuHelp2:   Line    left
@@ -59,7 +60,8 @@ DestroyModuleConfig  FvwmForm-SingleMenuHelp2: *
 *FvwmForm-SingleMenuHelp2:   Line    Left
 *FvwmForm-SingleMenuHelp2:   Line    " "
 *FvwmForm-SingleMenuHelp2:   Line    left
-*FvwmForm-SingleMenuHelp2:   Separator
+*FvwmForm-SingleMenuHelp2:   Line    center
+*FvwmForm-SingleMenuHelp2:   Text    "-----------------------------------------------------------------------------------"
 *FvwmForm-SingleMenuHelp2:   Line    Left
 *FvwmForm-SingleMenuHelp2:   Line    " "
 # Buttons
@@ -68,4 +70,6 @@ DestroyModuleConfig  FvwmForm-SingleMenuHelp2: *
 *FvwmForm-SingleMenuHelp2:   Command Nop
 *FvwmForm-SingleMenuHelp2:   Button  continue "fvwm-menu-desktop $[gt.Help]"        
 *FvwmForm-SingleMenuHelp2:   Command Exec exec xterm -g 100x50 -n "Help fvwm-menu-desktop" -T "Help fvwm-menu-desktop" -e "man fvwm-menu-desktop"
+*FvwmForm-SingleMenuHelp2:   Line    Left
+*FvwmForm-SingleMenuHelp2:   Line    " "
 

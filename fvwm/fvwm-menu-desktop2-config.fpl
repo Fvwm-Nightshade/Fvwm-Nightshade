@@ -54,7 +54,7 @@ DestroyModuleConfig  ${modname}: *
 *${modname}: Text       \"\$[gt.Fvwm Menu Desktop Config]\"
 *${modname}: Line
 *${modname}: Line       center
-*${modname}: Tex        \"----------------------------------------------------------\"
+*${modname}: Text       \"-----------------------------------------------------------------------------------------\"
 *${modname}: Line       center
 *${modname}: Text       \"\$[gt.Multiple Menu]\"
 *${modname}: Button     continue \"\$[gt.Help]\" 
@@ -104,7 +104,7 @@ else {
 
 $fvwmform_commands .= "
 *${modname}: Line       center
-*${modname}: Tex        \"----------------------------------------------------------\"
+*${modname}: Text       \"-----------------------------------------------------------------------------------------\"
 *${modname}: Line       center
 *${modname}: Text       \"\$[gt.Single Menu]\"
 *${modname}: Button     continue \"\$[gt.Help]\" 
@@ -135,7 +135,7 @@ $fvwmform_commands .= "
 *${modname}: Line       left
 *${modname}: Line
 *${modname}: Line       center
-*${modname}: Tex        \"----------------------------------------------------------\"
+*${modname}: Text       \"-----------------------------------------------------------------------------------------\"
 
 *${modname}: Line       center
 *${modname}: Text       \"\$[gt.General Options]\"
@@ -201,7 +201,7 @@ $fvwmform_commands .= "
 *${modname}: Line       left
 *${modname}: Line
 *${modname}: Line       center
-*${modname}: Tex        \"----------------------------------------------------------\"
+*${modname}: Text       \"-----------------------------------------------------------------------------------------\"
 
 *${modname}: Line       left
 *${modname}: Line

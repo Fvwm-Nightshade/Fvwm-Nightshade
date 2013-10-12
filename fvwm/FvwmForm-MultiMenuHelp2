@@ -5,8 +5,9 @@ DestroyModuleConfig  FvwmForm-MultiMenuHelp2: *
 # Layout
 *FvwmForm-MultiMenuHelp2:   Line    center
 *FvwmForm-MultiMenuHelp2:   Text    "fvwm-menu-desktop2-config - $[gt.Multiple Menu Help]"
-*FvwmForm-MultiMenuHelp2:   Line 
-*FvwmForm-MultiMenuHelp2:   Separator
+*FvwmForm-MultiMenuHelp2:   Line    " "
+*FvwmForm-MultiMenuHelp2:   Line    center
+*FvwmForm-MultiMenuHelp2:   Text    "--------------------------------------------------------------------"
 *FvwmForm-MultiMenuHelp2:   Line    center
 *FvwmForm-MultiMenuHelp2:   Text    "$[gt.Multiple Menu]"
 *FvwmForm-MultiMenuHelp2:   Line    left
@@ -63,7 +64,8 @@ DestroyModuleConfig  FvwmForm-MultiMenuHelp2: *
 *FvwmForm-MultiMenuHelp2:   Line    left
 *FvwmForm-MultiMenuHelp2:   Line    " "
 *FvwmForm-MultiMenuHelp2:   Line    left
-*FvwmForm-MultiMenuHelp2:   Separator
+*FvwmForm-MultiMenuHelp2:   Line    center
+*FvwmForm-MultiMenuHelp2:   Text    "--------------------------------------------------------------------"
 *FvwmForm-MultiMenuHelp2:   Line    Left
 *FvwmForm-MultiMenuHelp2:   Line    " "
 # Buttons
@@ -72,4 +74,6 @@ DestroyModuleConfig  FvwmForm-MultiMenuHelp2: *
 *FvwmForm-MultiMenuHelp2:   Command Nop
 *FvwmForm-MultiMenuHelp2:   Button  continue "fvwm-menu-desktop $[gt.Help]"        
 *FvwmForm-MultiMenuHelp2:   Command Exec exec xterm -g 100x50 -n "Help fvwm-menu-desktop" -T "Help fvwm-menu-desktop" -e "man fvwm-menu-desktop"
+*FvwmForm-MultiMenuHelp2:   Line    Left
+*FvwmForm-MultiMenuHelp2:   Line    " "
 
