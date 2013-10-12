@@ -249,8 +249,8 @@ Standard output is a series Fvwm commands."""
         
         parsemenus(menulist, desktop)
 
-    # write current_theme to <icon_dir>/.theme
-    if printmode:
+    # write current_theme to <icon_dir>/.theme if --enable-mini-icons and printmode is set
+    if printmode and force:
         fh = open(os.path.join(os.path.expanduser(icon_dir), ".theme"), "w")
         fh.write(current_theme)
         fh.close()
