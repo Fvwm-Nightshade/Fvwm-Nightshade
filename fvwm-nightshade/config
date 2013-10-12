@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.4.20130922
+InfoStoreAdd ns_version 0.7.4.20131012
 # Copyright (C) 2013
 #
 # Authors:
@@ -2287,20 +2287,19 @@ AddToFunc   FuncMenuWindowMaximize
 + I AddToMenu MenuWindowMaximize DynamicPopupAction FuncMenuWindowMaximize
 + I AddToMenu MenuWindowMaximize "$[gt.Maximize Window]" Title
 + I AddToMenu MenuWindowMaximize "$[gt.&Maximize Fully]%window-maximize.svg:$[infostore.MenuIconSize]%"                     Maximize On 100 100
-+ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize]%window-maximize.svg:$[infostore.MenuIconSize]%"                         Maximize Off
++ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize]%window-unmaximize.svg:$[infostore.MenuIconSize]%"                         Maximize Off
 + I AddToMenu MenuWindowMaximize "" Nop
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Partially]%window-maximize.svg:$[infostore.MenuIconSize]%"                 Pick FuncSimpleMaximizePartially On
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Vertically]%window-maximize.svg:$[infostore.MenuIconSize]%"                Pick FuncSimpleMaximizeVertically On
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Horizontally]%window-maximize.svg:$[infostore.MenuIconSize]%"              Pick FuncSimpleMaximizeHorizontally On
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Vertically]%window-maximize-vertical.svg:$[infostore.MenuIconSize]%"                Pick FuncSimpleMaximizeVertically On
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Horizontally]%window-maximize-horizontal.svg:$[infostore.MenuIconSize]%"              Pick FuncSimpleMaximizeHorizontally On
 + I AddToMenu MenuWindowMaximize "" Nop
 # these bound functions do not seem to work well if used consequentially
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Grow]%window-maximize.svg:$[infostore.MenuIconSize]%"                      Maximize On grow grow
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Smart]%window-maximize.svg:$[infostore.MenuIconSize]%"                     SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow V&ert.]%window-maximize.svg:$[infostore.MenuIconSize]%"                Maximize On    0 grow
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow H&oriz.]%window-maximize.svg:$[infostore.MenuIconSize]%"               Maximize On grow    0
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Grow]%window-smart-maximize.svg:$[infostore.MenuIconSize]%"                      Maximize On grow grow
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Smart]%window-smart-maximize.svg:$[infostore.MenuIconSize]%"                     SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow V&ert.]%window-grow-vertical.svg:$[infostore.MenuIconSize]%"                Maximize On    0 grow
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow H&oriz.]%window-grow-horizontal.svg:$[infostore.MenuIconSize]%"               Maximize On grow    0
 + I AddToMenu MenuWindowMaximize "" Nop
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Full Screen]	Alt+F11%window-maximize.svg:$[infostore.MenuIconSize]%"     Pick FuncMaximizeFullScreen
-+ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize Full Screen]	Alt+F11%window-maximize.svg:$[infostore.MenuIconSize]%"     Pick FuncMaximizeFullScreen
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Full Screen]	Alt+F11%window-maximize-fs.svg:$[infostore.MenuIconSize]%"     Pick FuncMaximizeFullScreen
++ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize Full Screen]	Alt+F11%window-unmaximize-fs.svg:$[infostore.MenuIconSize]%"     Pick FuncMaximizeFullScreen
 
 #-----------------------------------------------------------------------
 # Windows Ops sub menu for window refreshing
@@ -2328,13 +2327,13 @@ AddToFunc   FuncMenuRearrangeWindows
 + I DestroyMenu MenuRearrangeWindows
 + I AddToMenu MenuRearrangeWindows DynamicPopupAction FuncMenuRearrangeWindows
 + I AddToMenu MenuRearrangeWindows "$[gt.Rearrange Windows]" Title
-+ I AddToMenu MenuRearrangeWindows "$[gt.&Cascade]%windows-rearrange.svg:$[infostore.MenuIconSize]%"    FvwmRearrange -cascade -m 3 3 -incx 2
-+ I AddToMenu MenuRearrangeWindows "$[gt.&Place Again]%window-replace.svg:$[infostore.MenuIconSize]%"   All (CurrentPage !Sticky) PlaceAgain anim
++ I AddToMenu MenuRearrangeWindows "$[gt.&Cascade]%windows-rearrange.svg:$[infostore.MenuIconSize]%"					FvwmRearrange -cascade -m 3 3 -incx 2
++ I AddToMenu MenuRearrangeWindows "$[gt.&Place Again]%window-replace.svg:$[infostore.MenuIconSize]%"					All (CurrentPage !Sticky) PlaceAgain anim
 + I AddToMenu MenuRearrangeWindows "" Nop
-+ I AddToMenu MenuRearrangeWindows "$[gt.Tile &horizontally]%menu/refresh.xpm%"                         FvwmRearrange -tile -h -m 2 2 98 98
-+ I AddToMenu MenuRearrangeWindows "$[gt.Tile &vertically]%menu/refresh.xpm%"                           FvwmRearrange -tile    -m 2 2 98 98
++ I AddToMenu MenuRearrangeWindows "$[gt.Tile &horizontally]%windows-tile-horizontal.svg:$[infostore.MenuIconSize]%"    FvwmRearrange -tile -h -m 2 2 98 98
++ I AddToMenu MenuRearrangeWindows "$[gt.Tile &vertically]%windows-tile-vertical.svg:$[infostore.MenuIconSize]%"        FvwmRearrange -tile    -m 2 2 98 98
 + I AddToMenu MenuRearrangeWindows "" Nop
-+ I AddToMenu MenuRearrangeWindows "$[gt.&Arrange Icons]%window-icons.svg:$[infostore.MenuIconSize]%"   All (CurrentDesk Iconic) RecaptureWindow
++ I AddToMenu MenuRearrangeWindows "$[gt.&Arrange Icons]%window-icons.svg:$[infostore.MenuIconSize]%"   				All (CurrentDesk Iconic) RecaptureWindow
 
 #-----------------------------------------------------------------------
 # Windows Ops sub menu for window utilities like screenshot, layer, etc
@@ -2355,8 +2354,8 @@ AddToFunc   FuncMenuWindowUtility
 + I AddToMenu MenuWindowUtility "$[gt.Layer &-1]%layer--1.svg:$[infostore.MenuIconSize]%"                       Pick (CirculateHit) Layer -1
 + I AddToMenu MenuWindowUtility "$[gt.Stays On &Bottom]%layer-bottom.svg:$[infostore.MenuIconSize]%"            Pick (CirculateHit) Layer 0 2
 + I AddToMenu MenuWindowUtility "" Nop
-+ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (1/2 &app)]%window-resize.svg:$[infostore.MenuIconSize]%"       Pick Module FvwmScroll 2 2
-+ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (75%% &scr)]%window-resize.svg:$[infostore.MenuIconSize]%"      Pick Module FvwmScroll 75p 75p
++ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (1/2 &app)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"       Pick Module FvwmScroll 2 2
++ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (75%% &scr)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"      Pick Module FvwmScroll 75p 75p
 
 #-----------------------------------------------------------------------
 # Desktop Ops menus
