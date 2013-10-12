@@ -8,7 +8,12 @@ History:
 - rewrite of fvwm-menu-desktop2-config.fpl to add the new options of fvwm-menu-desktop2
   and help buttons.
 - add 3 new FvwmForms for fvwm-menu-desktop2-config help
-
+- add 11 new vector icons for menu
+- change colors in 3 vector icons for menu
+- changes in config:
+  - remove partitialmaximize in menu
+  - exchange bitmap icon entries with new svg icon entries in menus
+  
 09/22/2013
 - Some Bugfixes in fvwm-menu-desktop2:
   - DecodeEncodeErrors in menu names
