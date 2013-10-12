@@ -2,13 +2,17 @@
  
 # Modification History
 
-# Changed on 15/09/13 by Thomas Funk:
+# Changed on 06/10/13 by Thomas Funk:
 # Some Bugfixes:
 # - DecodeEncodeErrors in menu names
 # - no output appears with 'fvwm-menu-desktop --get-menus all|desktop'
 # - No entry "Regenerate XDG menu(s)" appears with
 #   'fvwm-menu-desktop --insert-in-menu MenuRoot'
 # -  exchange all tabs with spaces to prevent indention errors
+# - add two new options: --app-icon --dir-icon
+#   to handle default icons for not available app/dir icons
+# - fix bug in convert icon routine that background of svg icons are
+#   transparent
 
 # Changed on 15/06/13 by Thomas Funk:
 # support for python-xdg > 0.19.
@@ -114,20 +118,23 @@ Standard output is a series Fvwm commands."""
         opts, args = getopt.getopt(sys.argv[1:], "hs:t:vw",
                                    ["help", "verbose", "enable-mini-icons", "with-titles", "version",
                                     "desktop=", "size=", "theme=", "install-prefix=", "menu-type=",
-                                    "title=", "get-menus=", "set-menus=", "insert-in-menu=", "mini-icon-dir="]+obs_args+equaled_obs_parms)
+                                    "title=", "get-menus=", "set-menus=", "insert-in-menu=", "mini-icon-dir=",
+                                    "app-icon=", "dir-icon="]+obs_args+equaled_obs_parms)
     except getopt.GetoptError, err:
         # print help information and exit:
         print str(err) # will print something like "option -a not recognized"
         print usage
         sys.exit(2)
-    global verbose, force, size, theme, icon_dir, top, install_prefix, menu_type, menu_list_length 
-    global with_titles, menu_entry_count, get_menus, timestamp, set_menus, printmode, insert_in_menu
+    global verbose, force, size, current_theme, icon_dir, top, install_prefix, menu_type, menu_list_length 
+    global with_titles, menu_entry_count, get_menus, timestamp, set_menus, printmode, insert_in_menu, previous_theme
+    global default_app_icon, default_dir_icon
     version = "2.3"
     verbose = False
     force = False
     desktop=''
     size=24
-    theme='gnome'
+    current_theme='gnome'
+    previous_theme='gnome'
     icon_dir="~/.fvwm/icons"
     top='FvwmMenu'
     insert_in_menu = False
@@ -139,6 +146,8 @@ Standard output is a series Fvwm commands."""
     get_menus = ''
     printmode = True
     set_menus = []
+    default_app_icon = "gnome-applications"
+    default_dir_icon = "gnome-fs-directory"
 
     for o, a in opts:
         if o == "-v":
@@ -182,13 +191,17 @@ Standard output is a series Fvwm commands."""
                 a=a + '/'
             install_prefix = a
         elif o in ("--theme") :
-            theme = a
+            current_theme = a
         elif o in ("--menu-type") :
             menu_type = a
         elif o in ("-w","--with-titles") :
             with_titles = True
         elif o in ("--verbose") :
             verbose = True
+        elif o in ("--app-icon") :
+            default_app_icon = a
+        elif o in ("--dir-icon") :
+            default_dir_icon = a
         elif o in (str(dashed_obs_args+dashed_obs_parms)) :
             # Ignore
             sys.stderr.write( "Warning: Arg "+o+" is obsolete and ignored\n" )
@@ -228,8 +241,20 @@ Standard output is a series Fvwm commands."""
         sys.stderr.write(install_prefix+desktop+menu_type+".menu not available on this system. Exiting...\n")
         sys.exit(1)
     else:
+        # set previous_theme if <icon_dir>/.theme exist
+        if os.path.exists(os.path.join(os.path.expanduser(icon_dir), ".theme")):
+            previous_theme = next(open(os.path.join(os.path.expanduser(icon_dir), ".theme"), 'r')).replace('\n', '')
+        vprint(" Previous used theme: %s" %previous_theme)
+        vprint(" Current used theme: %s" %current_theme)
+        
         parsemenus(menulist, desktop)
 
+    # write current_theme to <icon_dir>/.theme
+    if printmode:
+        fh = open(os.path.join(os.path.expanduser(icon_dir), ".theme"), "w")
+        fh.write(current_theme)
+        fh.close()
+              
     vprint("\nProcess took " + str(time.time()-timestamp) + " seconds")
              
 def getmenulist(desktop, menu_type):
@@ -408,7 +433,7 @@ def decodetext(text):
     return new_text
     
 def geticonfile(icon):
-    iconpath = xdg.IconTheme.getIconPath(icon, size, theme, ["png", "xpm", "svg"])
+    iconpath = xdg.IconTheme.getIconPath(icon, None, current_theme, ["png", "xpm", "svg"])
 
     if not iconpath == None:
         extension = os.path.splitext(iconpath)[1]
@@ -429,12 +454,14 @@ def geticonfile(icon):
                             "%ix%i-" % (size, size) + 
                             os.path.basename(iconpath))
 
-    if extension == '.svg':
-        iconfile = iconfile.replace('.svg', '.png')
-
     if os.path.exists(iconpath):
-        os.system("if test \\( ! -f '%s' \\) -o \\( '%s' -nt '%s' \\) ; then convert '%s' -resize %i '%s' ; fi"% 
-                  (iconfile, iconpath, iconfile, iconpath, size, iconfile))
+        if extension == '.svg':
+            iconfile = iconfile.replace('.svg', '.png')
+            os.system("if test \\( \\( ! -f '%s' \\) -o \\( '%s' -nt '%s' \\) \\) -o \\( '%s' != '%s' \\); then convert -background none '%s' -resize %i '%s' ; fi"% 
+                          (iconfile, iconpath, iconfile, current_theme, previous_theme, iconpath, size, iconfile))
+        else:
+            os.system("if test \\( \\( ! -f '%s' \\) -o \\( '%s' -nt '%s' \\) \\) -o \\( '%s' != '%s' \\); then convert '%s' -resize %i '%s' ; fi"% 
+                          (iconfile, iconpath, iconfile, current_theme, previous_theme, iconpath, size, iconfile))
     else:
         sys.stderr.write("%s not found! Use default icon.\n" % iconpath)
         return None
@@ -443,16 +470,18 @@ def geticonfile(icon):
     
 def getdefaulticonfile(command):
     if command.startswith("Popup"):
-        return geticonfile("gnome-fs-directory")
+        return geticonfile(default_dir_icon)
     else:
-        return geticonfile("gnome-applications")    
+        return geticonfile(default_app_icon)    
 
 def printmenu(name, icon, command):
     iconfile = ''
     if force :
         iconfile = geticonfile(icon) or getdefaulticonfile(command) or icon
-        if not iconfile == '':
+        if not (iconfile == '' or iconfile == None):
             iconfile = '%'+iconfile+'%'
+        else:
+            sys.stderr.write("%s icon or default icon not found!\n")
     name = decodetext(name)
     command = decodetext(command)
     iconfile = decodetext(iconfile)
@@ -568,31 +597,35 @@ the corresponding fvwm menus.
 
 Usage: $0 [OPTIONS]
 Options:
-    -h, --help                show this help and exit
-    --version                 show version and exit
+    -h, --help                show this help and exit.
+    --version                 show version and exit.
     --install-prefix DIR      install prefix of the desktop menu files. Per default not set.
-                              For the system wide menus use /etc/xdg/menus/
+                              For system wide menus use /etc/xdg/menus/.
     --desktop NAME            desktop name to build menus for:
                               gnome, kde, xfce, lxde, debian, etc.
     --menu-type NAME          applications, settings, preferences, etc.
     --theme NAME              gnome (default), oxygen, etc. Don't use hicolor. 
                               It's the default fallback theme if no icon will be found.
     -w, --with-titles         generate menus with titles.
-    --enable-mini-icons       enable mini-icons in menu
+    --enable-mini-icons       enable mini-icons in menu.
     -s, --size NUM            set size of mini-icons in menu. Default is 24.
-    --mini-icon-dir           set directory for mini-icons. Default is ~/.fvwm/icons.
+    --mini-icon-dir DIR       set directory for mini-icons. Default is ~/.fvwm/icons.
+    --app-icon NAME           set default application icon if no others found.
+                              Default is 'gnome-applications'.
+    --dir-icon NAME           set default directory icon if no others found.
+                              Default is 'gnome-fs-directory'.
     -t, --title NAME          menu title of the top menu used by Popup command.
-                              Default is FvwmMenu
+                              Default is FvwmMenu.
     --insert-in-menu NAME     generates a menu to place it in the root level of the
-                              menu NAME
+                              menu NAME.
     --get-menus all|desktop   prints a space separated list of full menu paths.
                               'all' is all menus on the system except empty ones.
                               'desktop' is desktop related menus.
                               No menu generation is done.
                               This option is meant for use with the configuration tool.
     --set-menus menu_paths    expects a space separated list of full menu paths to generate
-                              user specified menus
-    -v, --verbose             run and display debug info on STDERR"""
+                              user specified menus.
+    -v, --verbose             run and display debug info on STDERR."""
 
 if __name__ == "__main__":
     main()
