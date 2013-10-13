@@ -4,6 +4,14 @@ History:
   because only available in CVS of FVWM
 - fix bug in fvwm-menu-desktop2 that .theme file will be generated if --enable-mini-icons
   isn't set
+- fix bug in layouts that shortcuts are shown with '&' instead of an underline
+- change command fvwm-menu-desktop to fvwm-menu-desktop2 in fvwm-menu-desktop2-config and
+  its helps
+- add fns-applications.menu to system/
+- add desktop-directories for fns-applications.menu to system/
+- add XDG menu parts to install/uninstal and build-list in Makefile
+- fix translation bug and wrong icon in config
+- update version in config
 
 10/12/2013
 - changes in fvwm-menu-desktop2:
