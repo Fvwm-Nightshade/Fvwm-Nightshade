@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.4.20131012
+InfoStoreAdd ns_version 0.7.4.20131013
 # Copyright (C) 2013
 #
 # Authors:
@@ -1905,8 +1905,8 @@ AddToFunc   FuncMenuStartRegularModules
 + I AddToMenu MenuStartRegularModules "$[gt.&GtkDebug]%bug.svg:$[infostore.MenuIconSize]%"                          Module FvwmGtkDebug
 + I AddToMenu MenuStartRegularModules "$[gt.&Debug Console]%bug.svg:$[infostore.MenuIconSize]%"                     Module FvwmDebug --xconsole
 + I AddToMenu MenuStartRegularModules "$[gt.&Identify]%question.svg:$[infostore.MenuIconSize]%"                     Module FvwmIdent
-+ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (1/2 a&pp)]%window-resize.svg:$[infostore.MenuIconSize]%"     Module FvwmScroll 2 2
-+ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (75%% &scr)]%window-resize.svg:$[infostore.MenuIconSize]%"    Module FvwmScroll 75p 75p
++ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (1/2 &app)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"	Module FvwmScroll 2 2
++ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (75%% &scr)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"	Module FvwmScroll 75p 75p
 + I AddToMenu MenuStartRegularModules "$[gt.Auto Raise (&1/2 sec)]%arrow-up.svg:$[infostore.MenuIconSize]%"         FuncRestartModule 'FvwmAuto 500 "Silent Raise" Nop'
 + I AddToMenu MenuStartRegularModules "$[gt.Auto Raise (&2 sec)]%arrow-up.svg:$[infostore.MenuIconSize]%"           FuncRestartModule 'FvwmAuto 2000 "Silent Raise" Nop'
 + I AddToMenu MenuStartRegularModules "" Nop
