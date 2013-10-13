@@ -118,8 +118,8 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Line    center
 *FvwmForm-GenOptionHelp2:   Button  quit    "$[gt.Close]"         ^M
 *FvwmForm-GenOptionHelp2:   Command Nop
-*FvwmForm-GenOptionHelp2:   Button  continue "fvwm-menu-desktop $[gt.Help]"        
-*FvwmForm-GenOptionHelp2:   Command Exec exec xterm -g 100x50 -n "Help fvwm-menu-desktop" -T "Help fvwm-menu-desktop" -e "man fvwm-menu-desktop"
+*FvwmForm-GenOptionHelp2:   Button  continue "fvwm-menu-desktop2 $[gt.Help]"        
+*FvwmForm-GenOptionHelp2:   Command Exec exec xterm -g 100x50 -n "Help fvwm-menu-desktop2" -T "Help fvwm-menu-desktop2" -e "man fvwm-menu-desktop2"
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Line    " "
 

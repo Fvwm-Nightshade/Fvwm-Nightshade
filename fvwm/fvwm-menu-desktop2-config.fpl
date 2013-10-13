@@ -184,7 +184,7 @@ $fvwmform_commands .= "
 *${modname}: Text       \"\$[gt.Directory Icon:    ]\"
 *${modname}: Input      DirIcon 20 \"gnome-fs-directory\"
 
-*${modname}: Text       \"\"
+*${modname}: Text       \" \"
 *${modname}: Text       \"\$[gt.Application Icon:  ]\"
 *${modname}: Input      AppIcon 20 \"gnome-applications\"
 
@@ -281,7 +281,7 @@ $fvwmform_commands .= ") > \$FVWM_USERDIR/.${modname}
 *${modname}: Button         restart    \"\$[gt.Reset]\"
 *${modname}: Command        Nop
 *${modname}: Button         continue \"\$[gt.Help]\"        
-*${modname}: Command        Exec exec xterm -g 100x50 -n \"Help fvwm-menu-desktop\" -T \"Help fvwm-menu-desktop\" -e \"man fvwm-menu-desktop\" &
+*${modname}: Command        Exec exec xterm -g 100x50 -n \"Help fvwm-menu-desktop2\" -T \"Help fvwm-menu-desktop2\" -e \"man fvwm-menu-desktop2\" &
 *${modname}: Button         quit       \"\$[gt.Quit]\"        
 *${modname}: Command        Nop
 
