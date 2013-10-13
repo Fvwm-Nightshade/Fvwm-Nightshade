@@ -16,6 +16,7 @@ Features:
 - works now with FVWM 2.6.5 without loosing new Xdg menu support from CVS
   version
 - support for Gentoo installation (thanks to Sebastian Luncan :-) )
+- Own XDG applications menu
 
 
 ------------------------------------------------------------------------

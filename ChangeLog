@@ -12,6 +12,7 @@ History:
 - add XDG menu parts to install/uninstal and build-list in Makefile
 - fix translation bug and wrong icon in config
 - update version in config
+- update README and NEWS
 
 10/12/2013
 - changes in fvwm-menu-desktop2:
