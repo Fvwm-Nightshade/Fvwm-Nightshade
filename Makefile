@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.6
+# Version:      2.1.7
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      09/12/2013
+# Changed:      10/13/2013
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -35,7 +35,9 @@ mandir 		= $(datadir)/man
 man1dir 	= $(mandir)/man1
 docdir 		= $(datadir)/doc
 localedir	= $(datadir)/locale
-fnsuserdir	= ~/.$(package)
+xdgdir		= $(datadir)/desktop-directories
+userdir		= ~
+fnsuserdir	= $(userdir)/.$(package)
 
 pkgdatadir 	= $(datadir)/$(package)
 pkgdocdir 	= $(docdir)/$(package)
@@ -49,6 +51,7 @@ fns_docdirs		= $(shell find doc/ -type d|sort -r|cut -d'/' -f 2-)
 fns_files 		= $(shell find $(package) -type f|cut -d'/' -f 2-)
 fns_directories = $(shell find $(package)/ -type d|sort -r|cut -d'/' -f 2-)
 fns_mofiles 	= $(shell ls -1 po |grep ".mo")
+fns_xdgfiles	= $(shell find system/desktop-directories -type f|cut -d'/' -f 3-)
 id				= $(shell id -un)
 
 fvwm_path	?= $(DESTDIR)/usr/share/fvwm
@@ -187,8 +190,6 @@ build-install-list:
 	done
 	echo $(man1dir) >> ./fns-install_$(version).lst
 	echo $(mandir) >> ./fns-install_$(version).lst
-	echo $(datadir) >> ./fns-install_$(version).lst
-	echo $(pkgprefix) >> ./fns-install_$(version).lst
 
 	echo "-> Localization files"
 	for file in $(fns_mofiles); do \
@@ -201,6 +202,21 @@ build-install-list:
 			echo $(localedir)/$$lang/LC_MESSAGES/$$basename.mo >> ./fns-install_$(version).lst; \
 		fi; \
 	done
+
+	echo "-> XDG menu files"
+	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
+		echo $(userdir)/.config/menus/fns-applications.menu >> ./fns-install_$(version).lst; \
+	else \
+		echo /etc/xdg/menus/fns-applications.menu >> ./fns-install_$(version).lst; \
+	fi; \
+	
+	for file in $(fns_xdgfiles); do \
+		echo $(xdgdir)/$$file >> ./fns-install_$(version).lst; \
+	done
+	echo $(xdgdir) >> ./fns-install_$(version).lst
+
+	echo $(datadir) >> ./fns-install_$(version).lst
+	echo $(pkgprefix) >> ./fns-install_$(version).lst
 
 	echo "Done"
 	echo
@@ -292,6 +308,20 @@ dist-install:
 			install -d $(localedir)/$$lang/LC_MESSAGES; \
 			install -m 644 po/$$file $(localedir)/$$lang/LC_MESSAGES/$$basename.mo; \
 		fi; \
+	done
+
+	echo "-> Install XDG menu files"
+	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
+		install -d $(userdir)/.config/menus; \
+		install -m 644 system/fns-applications.menu $(userdir)/.config/menus/; \
+	else \
+		install -d $(DESTDIR)/etc/xdg/menus; \
+		install -m 644 system/fns-applications.menu $(DESTDIR)/etc/xdg/menus/; \
+	fi; \
+	
+	for file in $(fns_xdgfiles); do \
+		install -d $(xdgdir); \
+		install -m 644 system/desktop-directories/$$file $(xdgdir); \
 	done
 	
 	if test -z "$(DESTDIR)"; then \
@@ -403,6 +433,27 @@ uninstall-alternative:
 			rm -f $(localedir)/$$lang/LC_MESSAGES/$$basename.mo; \
 		fi; \
 	done
+
+	echo "-> Uninstall XDG menu files"
+	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
+		if test -f "$(userdir)/.config/menus/fns-applications.menu"; then \
+			echo "remove $(userdir)/.config/menus/fns-applications.menu"; \
+			rm -f $(userdir)/.config/menus/fns-applications.menu; \
+		fi; \
+	else \
+		if test -f "/etc/xdg/menus/fns-applications.menu"; then \
+			echo "remove /etc/xdg/menus/fns-applications.menu"; \
+			rm -f /etc/xdg/menus/fns-applications.menu; \
+		fi; \
+	fi; \
+	
+	for file in $(fns_xdgfiles); do \
+		if test -f "$(xdgdir)/$$file"; then \
+			echo "remove $(xdgdir)/$$file"; \
+			rm -f $(xdgdir)/$$file; \
+		fi; \
+	done
+	rmdir $(xdgdir)
 
 	echo "Fvwm-Nightshade is now removed (hopefully). Only ~/.fvwm-nightshade exists."
 	echo "If you don't need it anymore remove it by hand."
