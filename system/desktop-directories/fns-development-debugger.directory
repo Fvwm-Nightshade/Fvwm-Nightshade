@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Debugger
+Name[ar]=المصحح
+Name[de]=Debugger
+Name[es]=Depurador
+Name[fr]=Débogueur
+Name[ru]=отладчик
+Name[sv]=Debugger
+Name[zh_CN]=调试
+Name[zh_TW]=調試
+Icon=applications-development
+Type=Directory
+
