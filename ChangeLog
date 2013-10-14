@@ -1,4 +1,12 @@
 History:
+10/14/2013
+- add /etc/* to %files in fvwm-nightshade.spec to add fns-applications.menu to rpm
+- add new translation msgids to fvwm-nightshade.pot for fvwm-menu-desktop2-config.fpl 
+  and its help files
+- adapt some changes in fvwm-menu-desktop2-config.fpl help files to reduce translation msgids
+- update german translation
+- update config version
+
 10/13/2013
 - remove the command 'Separator' in fvwm-menu-desktop2-config.fpl and all help files 
   because only available in CVS of FVWM
