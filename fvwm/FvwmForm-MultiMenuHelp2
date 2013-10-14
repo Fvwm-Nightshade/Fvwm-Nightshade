@@ -1,10 +1,11 @@
 # FvwmForm-MultiMenuHelp2 - Help Text for fvwm-menu-desktop2-config Multiple Menu
+# V 1.0.1
 DestroyModuleConfig  FvwmForm-MultiMenuHelp2: *
-*FvwmForm-MultiMenuHelp2:   Title   "fvwm-menu-desktop2-config - $[gt.Multiple Menu Help]"
+*FvwmForm-MultiMenuHelp2:   Title   "fvwm-menu-desktop2-config - $[gt.Multiple Menu] $[gt.Help]"
 *FvwmForm-MultiMenuHelp2:   WarpPointer
 # Layout
 *FvwmForm-MultiMenuHelp2:   Line    center
-*FvwmForm-MultiMenuHelp2:   Text    "fvwm-menu-desktop2-config - $[gt.Multiple Menu Help]"
+*FvwmForm-MultiMenuHelp2:   Text    "fvwm-menu-desktop2-config - $[gt.Multiple Menu] $[gt.Help]"
 *FvwmForm-MultiMenuHelp2:   Line    " "
 *FvwmForm-MultiMenuHelp2:   Line    center
 *FvwmForm-MultiMenuHelp2:   Text    "--------------------------------------------------------------------"

@@ -1,4 +1,5 @@
 # FvwmForm-GenOptionHelp2 - Help Text for fvwm-menu-desktop2-config General Options
+# V 1.0.1
 DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Title   "fvwm-menu-desktop2-config - $[gt.General Options] $[gt.Help]"
 *FvwmForm-GenOptionHelp2:   WarpPointer
@@ -19,7 +20,7 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Line    " "
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Use Icons?         ]"
-*FvwmForm-GenOptionHelp2:   Text    "$[gt.Option enables mini\-icons in the menu(s).]"
+*FvwmForm-GenOptionHelp2:   Text    "$[gt.Option enables mini-icons in the menu(s).]"
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Line    " "
 *FvwmForm-GenOptionHelp2:   Line    Left
@@ -46,7 +47,7 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Sets the used icon theme. Default is 'gnome' but all others found in]"
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Text    "                   "
-*FvwmForm-GenOptionHelp2:   Text    "/usr/share/icons $[gt.can used except the hicolor theme because it's the default]"
+*FvwmForm-GenOptionHelp2:   Text    "$[gt./usr/share/icons can used except the hicolor theme because it's the default]"
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Text    "                   "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.fallback theme if no icon is found. Note that the theme name must be written]"

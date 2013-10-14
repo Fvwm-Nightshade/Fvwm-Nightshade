@@ -1,10 +1,11 @@
 # FvwmForm-SingleMenuHelp2 - Help Text for fvwm-menu-desktop2-config Single Menu
+# V 1.0.1
 DestroyModuleConfig  FvwmForm-SingleMenuHelp2: *
-*FvwmForm-SingleMenuHelp2:   Title   "fvwm-menu-desktop2-config - $[gt.Single Menu Help]"
+*FvwmForm-SingleMenuHelp2:   Title   "fvwm-menu-desktop2-config - $[gt.Single Menu] $[gt.Help]"
 *FvwmForm-SingleMenuHelp2:   WarpPointer
 # Layout
 *FvwmForm-SingleMenuHelp2:   Line    center
-*FvwmForm-SingleMenuHelp2:   Text    "fvwm-menu-desktop2-config - $[gt.Single Menu Help]"
+*FvwmForm-SingleMenuHelp2:   Text    "fvwm-menu-desktop2-config - $[gt.Single Menu] $[gt.Help]"
 *FvwmForm-SingleMenuHelp2:   Line 
 *FvwmForm-SingleMenuHelp2:   Line    center
 *FvwmForm-SingleMenuHelp2:   Text    "-----------------------------------------------------------------------------------"
@@ -19,43 +20,43 @@ DestroyModuleConfig  FvwmForm-SingleMenuHelp2: *
 *FvwmForm-SingleMenuHelp2:   Line    Left
 *FvwmForm-SingleMenuHelp2:   Text    " "
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "$[gt.Menu Top Title:  ]"
+*FvwmForm-SingleMenuHelp2:   Text    "$[gt.Menu Top Title:    ]"
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.Specifies the menu title of the top menu used by Fvwm's Popup command.]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "                 "
+*FvwmForm-SingleMenuHelp2:   Text    "                   "
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.Default is 'FvwmMenu'.]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
 *FvwmForm-SingleMenuHelp2:   Line    " "
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "$[gt.Install-Prefix:  ]"
+*FvwmForm-SingleMenuHelp2:   Text    "$[gt.Install-Prefix:   ]"
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.Overrides the standard locations for XDG menu definitions. The standard]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "                 "
+*FvwmForm-SingleMenuHelp2:   Text    "                  "
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.locations are /etc/xdg/menus and] $HOME/.config/menus $[gt.if available.]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
 *FvwmForm-SingleMenuHelp2:   Line    " "
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "$[gt.Desktop:         ]"
+*FvwmForm-SingleMenuHelp2:   Text    "$[gt.Desktop:           ]"
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.Overrides the name of the main desktop environment installed on the]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "                 "
+*FvwmForm-SingleMenuHelp2:   Text    "                   "
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.system. If a system offers multiple desktop environments $XDG_MENU_PREFIX]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "                 "
+*FvwmForm-SingleMenuHelp2:   Text    "                   "
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.is typically set. It is ignored if this field is used.]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "                 "
+*FvwmForm-SingleMenuHelp2:   Text    "                   "
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.Possible names: gnome, kde, lxde, etc.]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
 *FvwmForm-SingleMenuHelp2:   Line    " "
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "$[gt.Menutype:        ]"
+*FvwmForm-SingleMenuHelp2:   Text    "$[gt.Menutype:         ]"
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.Defines which type of menu should be found. Possible name types could be:]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "                 "
+*FvwmForm-SingleMenuHelp2:   Text    "                  "
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.applications, settings, preferences, etc. Note if the specified menu type]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
-*FvwmForm-SingleMenuHelp2:   Text    "                 "
+*FvwmForm-SingleMenuHelp2:   Text    "                  "
 *FvwmForm-SingleMenuHelp2:   Text    "$[gt.doesn't exist the generated menu is empty!]"
 *FvwmForm-SingleMenuHelp2:   Line    Left
 *FvwmForm-SingleMenuHelp2:   Line    " "
