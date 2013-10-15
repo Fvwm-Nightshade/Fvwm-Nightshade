@@ -640,16 +640,16 @@ msgstr ""
 msgid "&Left	Page"
 msgstr ""
 
-msgid "Page	1"
+msgid "&1.	Page"
 msgstr ""
 
-msgid "Page	2"
+msgid "&2.	Page"
 msgstr ""
 
-msgid "Page	3"
+msgid "&3.	Page"
 msgstr ""
 
-msgid "Page	4"
+msgid "&4.	Page"
 msgstr ""
 
 #-----------------------------------------------------------------------
@@ -1259,11 +1259,11 @@ msgid "Single Menu"
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 114
-msgid "If you want a single menu only deselect all menus above and fill out"
+msgid "If you want a single menu only deselect all menus above and fill out the fields below."
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 116
-msgid "the fields below. But remember, if the menu doesn't exist, nothing happens."
+msgid "But remember, if the menu doesn't exist, nothing happens."
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 120
@@ -1271,7 +1271,7 @@ msgid "Menu Top Title:    "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 124
-msgid "Install-Prefix:   "
+msgid "Install-Prefix:    "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 128
@@ -1279,7 +1279,7 @@ msgid "Desktop:           "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 132
-msgid "Menutype:         "
+msgid "Menutype:          "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 141
@@ -1444,7 +1444,11 @@ msgid "use the 'Single Menu' section."
 msgstr ""
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 28
-msgid "List menus with checkboxes found in"
+msgid "List menus with checkboxes found in /etc/xdg/menus/"
+msgstr ""
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 36
+msgid "List menus with checkboxes found in $HOME/.config/menus/"
 msgstr ""
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 42
@@ -1456,7 +1460,7 @@ msgid "following the XDG menu specification only shown in $HOME/.config/menus/."
 msgstr ""
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 48
-msgid "If no menus appear check why from within a terminal with"
+msgid "If no menus appear check why from within a terminal with 'fvwm-menu-desktop -v'."
 msgstr ""
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 50
