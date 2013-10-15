@@ -1,4 +1,13 @@
 History:
+10/15/2013
+- update pot template for fvwm-menu-desktop2-config.fpl and its help files
+- update german po and mo file:
+  - add translation messages for fvwm-menu-desktop2-config.fpl and its help files
+  - add new translation messages from CPU and Clock Ops menu
+- fix bugs in layouts that some translations doesn't work
+- adapt line formatings in fvwm-menu-desktop2-config.fpl and its help files
+- update config version
+
 10/14/2013
 - add /etc/* to %files in fvwm-nightshade.spec to add fns-applications.menu to rpm
 - add new translation msgids to fvwm-nightshade.pot for fvwm-menu-desktop2-config.fpl 
