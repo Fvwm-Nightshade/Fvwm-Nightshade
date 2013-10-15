@@ -4,6 +4,9 @@ History:
 - update german po and mo file:
   - add translation messages for fvwm-menu-desktop2-config.fpl and its help files
   - add new translation messages from CPU and Clock Ops menu
+- update french po file:
+  - add english translation messages for fvwm-menu-desktop2-config.fpl and its help files
+  - add new translation messages from CPU and Clock Ops menu
 - fix bugs in layouts that some translations doesn't work
 - adapt line formatings in fvwm-menu-desktop2-config.fpl and its help files
 - update config version
