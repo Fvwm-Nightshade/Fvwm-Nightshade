@@ -666,6 +666,24 @@ msgstr "&Untere	Seite"
 msgid "&Up  	Page"
 msgstr "&Obere	Seite"
 
+#-----------------------------------------------------------------------
+# MenuClockOps
+#-----------------------------------------------------------------------
+msgid "Conky Clock Ops"
+msgstr "Conky Uhr Ops"
+
+msgid "Restart Conky Clock"
+msgstr "Neustart Conky Uhr"
+
+#-----------------------------------------------------------------------
+# MenuCpuOps
+#-----------------------------------------------------------------------
+msgid "Conky Cpu Ops"
+msgstr "Conky Cpu Ops"
+
+msgid "Restart Conky CPU"
+msgstr "Neustart Conky CPU"
+
 ########################################################################
 # FvwmForm
 ########################################################################
