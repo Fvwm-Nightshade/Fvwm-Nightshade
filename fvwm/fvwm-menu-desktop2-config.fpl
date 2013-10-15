@@ -4,7 +4,7 @@
 # Dan Espen but inserts the found xdg menus dynamically into the Form
 # before processed.
 # Author: Thomas Funk <t.funk@web.de>
-# Version: 1.4
+# Version: 1.4.1
 
 package MenuConfig;
 use File::Basename;
@@ -121,7 +121,7 @@ $fvwmform_commands .= "
 *${modname}: Input      Title 20 \"\"
 
 *${modname}: Text       \" \"
-*${modname}: Text       \"\$[gt.Install-Prefix:   ]\"
+*${modname}: Text       \"\$[gt.Install-Prefix:    ]\"
 *${modname}: Input      Installprefix 20 \"\"
 
 *${modname}: Line       left
@@ -129,7 +129,7 @@ $fvwmform_commands .= "
 *${modname}: Input      Desktop 20 \"\"
 
 *${modname}: Text       \" \"
-*${modname}: Text       \"\$[gt.Menutype:         ]\"
+*${modname}: Text       \"\$[gt.Menutype:          ]\"
 *${modname}: Input      Menutype 20 \"\"
 
 *${modname}: Line       left

@@ -1,5 +1,5 @@
 # FvwmForm-GenOptionHelp2 - Help Text for fvwm-menu-desktop2-config General Options
-# V 1.0.1
+# V 1.0.2
 DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Title   "fvwm-menu-desktop2-config - $[gt.General Options] $[gt.Help]"
 *FvwmForm-GenOptionHelp2:   WarpPointer
@@ -27,7 +27,7 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Icon size:         ]"
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size is]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.desired enter the wanted size in this field.]"
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Line    " "
@@ -35,10 +35,10 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Icon directory:    ]"
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.If the specified icon isn't that size it is converted if ImageMagick is installed.]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Generated icons are saved in $HOME/.fvwm/icons or the directory specified here.]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Otherwise no icon appears in the menu for that entry.]"
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Line    " "
@@ -46,13 +46,13 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Used Icon theme:   ]"
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Sets the used icon theme. Default is 'gnome' but all others found in]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt./usr/share/icons can used except the hicolor theme because it's the default]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.fallback theme if no icon is found. Note that the theme name must be written]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.exactly as the icon directory e.g.] /usr/share/icons/Mint-X => 'Mint-X'."
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Line    " "
@@ -60,13 +60,13 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Directory Icon:    ]"
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.If 'Use Icons' is enabled and for a directory in a menu no icon is found]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "'gnome-fs-directory' $[gt.as default icon is used. But if the gnome icon theme isn't]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.installed no default icon appears. Another icon can defined here.]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Only the name of an icon is needed not the path!]"
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Line    " "
@@ -74,13 +74,13 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Application Icon:  ]"
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.If 'Use Icons' is enabled and for an application no icon is found]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "'gnome-applications' $[gt.as default icon is used. But if the gnome icon theme isn't]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.installed no default icon appears. Another icon can defined here.]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Only the name of an icon is needed not the path!]"
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Line    " "
@@ -93,10 +93,10 @@ DestroyModuleConfig  FvwmForm-GenOptionHelp2: *
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Insert in menu:    ]"
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.Enter in this field the name of the menu (its top title) where the generated menu(s)]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "$[gt.should insert. For more information see the USAGE section in the man page of]"
 *FvwmForm-GenOptionHelp2:   Line    Left
-*FvwmForm-GenOptionHelp2:   Text    "                   "
+*FvwmForm-GenOptionHelp2:   Text    "                     "
 *FvwmForm-GenOptionHelp2:   Text    "fvwm-menu-desktop."
 *FvwmForm-GenOptionHelp2:   Line    Left
 *FvwmForm-GenOptionHelp2:   Line    " "
