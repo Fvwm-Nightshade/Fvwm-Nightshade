@@ -640,17 +640,17 @@ msgstr "&Rechte	Seite"
 msgid "&Left	Page"
 msgstr "&Linke	Seite"
 
-msgid "Page	1"
-msgstr "Seite	1"
+msgid "&1.	Page"
+msgstr "&1.	Seite"
 
-msgid "Page	2"
-msgstr "Seite	2"
+msgid "&2.	Page"
+msgstr "&2.	Seite"
 
-msgid "Page	3"
-msgstr "Seite	3"
+msgid "&3.	Page"
+msgstr "&3.	Seite"
 
-msgid "Page	4"
-msgstr "Seite	4"
+msgid "&4.	Page"
+msgstr "&4.	Seite"
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
@@ -1259,28 +1259,28 @@ msgid "Single Menu"
 msgstr "Einzelmenü"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 114
-msgid "If you want a single menu only deselect all menus above and fill out"
-msgstr "Für ein Einzelmenü alle nicht benötigten Menüs deselektieren und die"
+msgid "If you want a single menu only deselect all menus above and fill out the fields below."
+msgstr "Für ein Einzelmenü alle nicht benötigten Menüs deselektieren und die Felder unten ausfüllen."
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 116
-msgid "the fields below. But remember, if the menu doesn't exist, nothing happens."
-msgstr "Felder unten ausfüllen. Achtung: wenn ein Menü leer ist, passiert nichts."
+msgid "But remember, if the menu doesn't exist, nothing happens."
+msgstr "Bitte beachten: wenn ein Menü leer ist, passiert nichts."
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 120
 msgid "Menu Top Title:    "
 msgstr "Menü Top Titel:    "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 124
-msgid "Install-Prefix:   "
-msgstr "Install-Prefix:   "
+msgid "Install-Prefix:    "
+msgstr "Install-Prefix:    "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 128
 msgid "Desktop:           "
 msgstr "Desktop:           "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 132
-msgid "Menutype:         "
-msgstr "Menütyp:          "
+msgid "Menutype:          "
+msgstr "Menütyp:           "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 141
 msgid "General Options"
@@ -1374,23 +1374,23 @@ msgstr "XDG Menu neu erstellen"
 #-----------------------------------------------------------------------
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 17
 msgid "In this section you can define a custom-assembled menu 'foo-bar.menu' placed on another"
-msgstr "In dieser Sektion können Sie ein eigenerstelltes Menü 'foo-bar.menu', das an einem anderen"
+msgstr "In dieser Sektion können Sie ein eigenerstelltes Menü 'foo-bar.menu', das an einem anderen Ort"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 19
 msgid "location as defined in the XDG menu definitions."
-msgstr "Ort als in den XDG Menüspezifikationen definiert ist, erstellen"
+msgstr "als in den XDG Menüspezifikationen definiert ist, erstellen."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 24
 msgid "Specifies the menu title of the top menu used by Fvwm's Popup command."
-msgstr "Spezifiziert den Menütitel des Topmenüs, das Fvwm's Popup Kommando verwendet."
+msgstr "Spezifiziert den Menütitel des Topmenüs, das Fvwm's Popup Kommando"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 27
 msgid "Default is 'FvwmMenu'."
-msgstr "Default ist 'FvwmMenu'."
+msgstr "verwendet. Default ist 'FvwmMenu'."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 32
 msgid "Overrides the standard locations for XDG menu definitions. The standard"
-msgstr "Überschreibt die Standartorte für XDG Menüdefinitionen. Die Standardorte"
+msgstr "Überschreibt die Standardorte für die XDG Menüdefinitionen. Die Standardorte"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 35
 msgid "locations are /etc/xdg/menus and"
@@ -1398,35 +1398,35 @@ msgstr "sind /etc/xdg/menus und"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 35
 msgid "if available."
-msgstr "wenn vorhanden."
+msgstr "(wenn vorhanden)."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 40
 msgid "Overrides the name of the main desktop environment installed on the"
-msgstr "Überschreibt den Namen der Haupt-Desktop-Umgebung, das auf dem System installiert ist."
+msgstr "Überschreibt den Namen der Haupt-Desktop-Umgebung, welche auf dem System"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 43
 msgid "system. If a system offers multiple desktop environments $XDG_MENU_PREFIX"
-msgstr "Wenn ein System mehrere Desktop-Umgebungen bereitstellt, ist normalerweise $XDG_MENU_PREFIX"
+msgstr "installiert ist. Wenn ein System mehrere Desktop-Umgebungen bereitstellt, ist"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 46
 msgid "is typically set. It is ignored if this field is used."
-msgstr "gesetzt. Die Variable wird jedoch ignoriert, wenn dieses Feld benutzt wird."
+msgstr "normalerweise $XDG_MENU_PREFIX gesetzt. Die Variable wird jedoch ignoriert,"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 49
 msgid "Possible names: gnome, kde, lxde, etc."
-msgstr "Mögliche Namen: gnome, kde, lxde, etc."
+msgstr "wenn dieses Feld benutzt wird. Mögliche Namen: gnome, kde, lxde, etc."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 54
 msgid "Defines which type of menu should be found. Possible name types could be:"
-msgstr "Definiert welcher menütyp gefunden werden soll. Mögliche Typen könnten sein:"
+msgstr "Definiert welcher Menütyp gefunden werden soll. Mögliche Typen könnten sein:"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 57
 msgid "applications, settings, preferences, etc. Note if the specified menu type"
-msgstr "applications, settings, preferences, etc. Achtung, wenn das hier spezifizierte Menü"
+msgstr "applications, settings, preferences, etc. Achtung, wenn das hier spezifizierte"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 60
 msgid "doesn't exist the generated menu is empty!"
-msgstr "nicht existiert, ist das erstellte Menü leer!"
+msgstr "Menü nicht existiert, ist das erstellte Menü leer!"
 
 #-----------------------------------------------------------------------
 # FvwmForm-MultiMenuHelp which are in the CVS version of FVWM
@@ -1444,8 +1444,12 @@ msgid "use the 'Single Menu' section."
 msgstr "zusammengestelltes Menu erstellen wollen, benutzen Sie die 'Einzelmenü' Sektion."
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 28
-msgid "List menus with checkboxes found in"
-msgstr "Listet Menüs mit Checkboxen, gefunden in"
+msgid "List menus with checkboxes found in /etc/xdg/menus/"
+msgstr "Listet in /etc/xdg/menus/ gefundene Menüs mit Checkboxen auf."
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 36
+msgid "List menus with checkboxes found in $HOME/.config/menus/"
+msgstr "Listet in $HOME/.config/menus/ gefundene Menüs mit Checkboxen auf"
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 42
 msgid "Note that equal menus found under /etc/xdg/menus AND $HOME/.config/menus/"
@@ -1453,11 +1457,11 @@ msgstr "Anmerkung: gleiche Menüs, die in /etc/xdg/menus UND $HOME/.config/menus
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 44
 msgid "following the XDG menu specification only shown in $HOME/.config/menus/."
-msgstr "werden der XDG Menüspezifikation nur unter $HOME/.config/menus/ angezeigt."
+msgstr "werden der XDG Menüspezifikation folgend nur unter $HOME/.config/menus/ angezeigt."
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 48
-msgid "If no menus appear check why from within a terminal with"
-msgstr "Wenn keine Menüs erscheinen, checken Sie von einem Terminal aus warum mit"
+msgid "If no menus appear check why from within a terminal with 'fvwm-menu-desktop -v'."
+msgstr "Wenn keine Menüs erscheinen, von einem Terminal mit 'fvwm-menu-desktop -v' checken warum."
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 50
 msgid "Also it is a good idea to check .xsession-errors in the user home for errors."
@@ -1476,8 +1480,8 @@ msgid "This happens because PipeRead used for menu generation has a command leng
 msgstr "Das passiert, weil PipeRead, das zum generieren des Menüs verwendet wird, eine Limitierung"
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 64
-msgid "limit of 1000 characters. Sorry for that inconvenience."
-msgstr "von 1000 Zeichen für ein Kommando hat. Entschuldigen Sie die Unannehmlichkeit."
+msgid "limit of 1000 characters. Sorry for that inconvinience."
+msgstr "von 1000 Zeichen für ein Kommando hat. Entschuldigung für diese Unannehmlichkeit."
 
 #-----------------------------------------------------------------------
 # FvwmForm-GenOptionHelp which are in the CVS version of FVWM
@@ -1492,35 +1496,35 @@ msgstr "Option aktiviert Mini-Icons in dem/den Menü(s)."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 28
 msgid "If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size is"
-msgstr "Wenn 'Icons verwenden' gesetzt ist, werden per default 24x24 Mini-Icons verwendet. Wenn eine"
+msgstr "Wenn 'Icons verwenden' gesetzt ist, werden per default 24x24 Mini-Icons verwendet."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 31
 msgid "desired enter the wanted size in this field."
-msgstr "Größe verwendet werden soll, in diesem Feld eintragen."
+msgstr "Wenn eine andere Größe verwendet werden soll, in diesem Feld eintragen."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 36
 msgid "If the specified icon isn't that size it is converted if ImageMagick is installed."
-msgstr "Wenn das Icon in der Größe nicht vorhanden ist, wird es konvertiert, wenn ImageMagick"
+msgstr "Wenn das Icon in der Größe nicht vorhanden ist, wird es konvertiert, falls ImageMagick"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 39
 msgid "Generated icons are saved in $HOME/.fvwm/icons or the directory specified here."
-msgstr "installiert ist. Generierte Icons werden unter $HOME/.fvwm/icons oder dem hier angegebenen"
+msgstr "installiert ist. Generierte Icons werden unter $HOME/.fvwm/icons oder dem hier"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 42
 msgid "Otherwise no icon appears in the menu for that entry."
-msgstr "Verzeichnis gespeichert. Sonst taucht kein Icon im Menü für den Eintrag auf."
+msgstr "angegebenen Verzeichnis gespeichert. Sonst taucht kein Icon im Menü für den Eintrag auf."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 47
 msgid "Sets the used icon theme. Default is 'gnome' but all others found in"
-msgstr "Setzt den verwendeten Icontheme. Default ist 'gnome', aber alle anderen die unter"
+msgstr "Setzt den Icontheme. Default ist 'gnome', aber alle die unter /usr/share/icons gefunden"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 50
 msgid "/usr/share/icons can used except the hicolor theme because it's the default"
-msgstr "/usr/share/icons gefunden werden, können verwendet werden. Ausgenommen 'hicolor', weil dieser"
+msgstr "werden, können verwendet werden. Ausgenommen 'hicolor', weil dieser der default"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 53
 msgid "fallback theme if no icon is found. Note that the theme name must be written"
-msgstr "der default Fallback Theme ist, wenn kein Icon gefunden wird. Es ist wichtig, dass der Themename"
+msgstr "Fallback Theme ist, wenn kein Icon gefunden wird. Es ist wichtig, dass der Themename"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 56
 msgid "exactly as the icon directory e.g."
@@ -1528,23 +1532,23 @@ msgstr "exakt gleich wie das Verzeichnis geschrieben wird:"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 61
 msgid "If 'Use Icons' is enabled and for a directory in a menu no icon is found"
-msgstr "Wenn 'Icons verwenden' gesetzt ist, jedoch für ein Verzeichnis kein Icon gefunden wird,"
+msgstr "Wenn 'Icons verwenden' gesetzt ist und für ein Verzeichnis kein Icon gefunden wird, wird"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 64
 msgid "as default icon is used. But if the gnome icon theme isn't"
-msgstr "als Defaulticon verwendet. Aber wenn der Gnome-Icontheme nicht installiert ist,"
+msgstr "als Defaulticon verwendet. Wenn jedoch der Gnome-Icontheme nicht"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 67
 msgid "installed no default icon appears. Another icon can defined here."
-msgstr "taucht kein Icon für den Eintrag auf. Hier kann ein anderes Defaulticon definiert werden."
+msgstr "installiert ist, taucht auch kein Icon für den Eintrag auf. Darum kann hier ein anderes"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 70
 msgid "Only the name of an icon is needed not the path!"
-msgstr "Es muss nur der Name, nicht jedoch der Pfad angegeben werden!"
+msgstr "Defaulticon definiert werden. Es muss nur der Name, nicht der Pfad angegeben werden!"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 75
 msgid "If 'Use Icons' is enabled and for an application no icon is found"
-msgstr "Wenn 'Icons verwenden' gesetzt ist, jedoch für eine Applikation kein Icon gefunden wird,"
+msgstr "Wenn 'Icons verwenden' gesetzt ist, aber für eine Applikation kein Icon gefunden wird, wird"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 89
 msgid "Enable this checkbox to insert generated menu(s) IN a menu."
@@ -1552,11 +1556,11 @@ msgstr "Aktivieren Sie diese Checkbox, um erstellte Menüs IN einem Menü einzub
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 94
 msgid "Enter in this field the name of the menu (its top title) where the generated menu(s)"
-msgstr "In diesem Feld den Namen des Menüs (seinen Toptitel) eintragen, wo die erstelten Menüs"
+msgstr "Hier den Namen des Menüs (seinen Toptitel) eintragen, wo die erstellten Menüs"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 97
 msgid "should insert. For more information see the USAGE section in the man page of"
-msgstr "eingebunden werden sollen. Für mehr Informationen schauen Sie in der USAGE Sektion nach von"
+msgstr "eingebunden werden sollen. Für weitere Informationen siehe die USAGE Sektion von"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 105
 msgid "If this option is set menus are generated with titles. Default is no titles."
@@ -1564,4 +1568,4 @@ msgstr "Wenn diese Option gesetzt ist, werden Menüs mit Titeln erstellt. Defaul
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 110
 msgid "Enter here the FULL path of the menu to store. Default path is $FVWM_USERDIR/.menu."
-msgstr "Tragen Sie hier den VOLLEN Speicherpfad des Fvwm-Menüs ein. Defaultpfad ist $FVWM_USERDIR/.menu."
+msgstr "Hier den VOLLEN Speicherpfad des Fvwm-Menüs eintragen. Default ist $FVWM_USERDIR/.menu."
