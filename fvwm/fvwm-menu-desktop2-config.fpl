@@ -117,19 +117,19 @@ $fvwmform_commands .= "
 
 *${modname}: Line
 *${modname}: Line       left
-*${modname}: Text       \"\$[gt.Menu Top Title:    ]\"
+*${modname}: Text       \"\$[gt.Menu Top Title:     ]\"
 *${modname}: Input      Title 20 \"\"
 
-*${modname}: Text       \" \"
-*${modname}: Text       \"\$[gt.Install-Prefix:    ]\"
+*${modname}: Text       \"\$[gt.  ]\"
+*${modname}: Text       \"\$[gt.Install-Prefix:     ]\"
 *${modname}: Input      Installprefix 20 \"\"
 
 *${modname}: Line       left
-*${modname}: Text       \"\$[gt.Desktop:           ]\"
+*${modname}: Text       \"\$[gt.Desktop:            ]\"
 *${modname}: Input      Desktop 20 \"\"
 
-*${modname}: Text       \" \"
-*${modname}: Text       \"\$[gt.Menutype:          ]\"
+*${modname}: Text       \"\$[gt.  ]\"
+*${modname}: Text       \"\$[gt.Menutype:           ]\"
 *${modname}: Input      Menutype 20 \"\"
 
 *${modname}: Line       left
@@ -143,58 +143,58 @@ $fvwmform_commands .= "
 *${modname}: Command    Module FvwmForm FvwmForm-GenOptionHelp2
 *${modname}: Line
 *${modname}: Line       left
-*${modname}: Text       \"\$[gt.Used Menu Type:    ]\"
+*${modname}: Text       \"\$[gt.Used Menu Type:     ]\"
 
 *${modname}: Selection  SelItype single
-*${modname}: Choice     MultiOn  MultiOn    on  \"\$[gt.Multiple]\"
+*${modname}: Choice     MultiOn  MultiOn    on  \"\$[gt.Multiple ]\"
 *${modname}: Choice     MultiOff MultiOff   off \"\$[gt.Single]\"
 
 *${modname}: Line       Left
-*${modname}: Text       \"\$[gt.Use Icons?         ]\"
+*${modname}: Text       \"\$[gt.Use Icons?          ]\"
 *${modname}: Selection  SelItype single
-*${modname}: Choice     IconsOn  IconsOn    on  \"\$[gt.Yes]     \"
-*${modname}: Choice     IconsOff IconsOff   off \"\$[gt.No]\"
+*${modname}: Choice     IconsOn  IconsOn    on  \"\$[gt.Yes      ]\"
+*${modname}: Choice     IconsOff IconsOff   off \"\$[gt.No   ]\"
 
-*${modname}: Text       \"    \"
-*${modname}: Text       \"\$[gt.Icon size:         ]\"
+*${modname}: Text       \"\$[gt.  ]\"
+*${modname}: Text       \"\$[gt.Icon size:          ]\"
 *${modname}: Input      Size 2 \"\"
 *${modname}: Text       \"\$[gt. (Default is 24)]\"
 
 *${modname}: Line       Left
-*${modname}: Text       \"\$[gt.Use Titles?        ]\"
+*${modname}: Text       \"\$[gt.Use Titles?         ]\"
 *${modname}: Selection  SelItype single
-*${modname}: Choice     TitlesOn  TitlesOn    on  \"\$[gt.Yes]     \"
-*${modname}: Choice     TitlesOff TitlesOff   off \"\$[gt.No]\"
+*${modname}: Choice     TitlesOn  TitlesOn    on  \"\$[gt.Yes      ]\"
+*${modname}: Choice     TitlesOff TitlesOff   off \"\$[gt.No   ]\"
 
-*${modname}: Text       \"    \"
-*${modname}: Text       \"\$[gt.Used Icon theme:   ]\"
+*${modname}: Text       \"\$[gt.  ]\"
+*${modname}: Text       \"\$[gt.Used Icon theme:    ]\"
 *${modname}: Input      Theme 20 \"\"
 
 *${modname}: Line       Left
-*${modname}: Text       \"\$[gt.Menu(s) in a Menu? ]\"
+*${modname}: Text       \"\$[gt.Menu(s) in a Menu?  ]\"
 *${modname}: Selection  SelItype single
-*${modname}: Choice     InsertOn  InsertOn    off \"\$[gt.Yes]     \"
-*${modname}: Choice     InsertOff InsertOff   on  \"\$[gt.No]\"
+*${modname}: Choice     InsertOn  InsertOn    off \"\$[gt.Yes      ]\"
+*${modname}: Choice     InsertOff InsertOff   on  \"\$[gt.No   ]\"
 
-*${modname}: Text       \"    \"
-*${modname}: Text       \"\$[gt.Insert in menu:    ]\"
+*${modname}: Text       \"\$[gt.  ]\"
+*${modname}: Text       \"\$[gt.Insert in menu:     ]\"
 *${modname}: Input      InMenu 20 \"\"
 
 *${modname}: Line       left
-*${modname}: Text       \"\$[gt.Directory Icon:    ]\"
+*${modname}: Text       \"\$[gt.Directory Icon:     ]\"
 *${modname}: Input      DirIcon 20 \"gnome-fs-directory\"
 
-*${modname}: Text       \" \"
-*${modname}: Text       \"\$[gt.Application Icon:  ]\"
+*${modname}: Text       \"\$[gt.  ]\"
+*${modname}: Text       \"\$[gt.Application Icon:   ]\"
 *${modname}: Input      AppIcon 20 \"gnome-applications\"
 
 *${modname}: Line       left
-*${modname}: Text       \"\$[gt.Icon directory:    ]\"
+*${modname}: Text       \"\$[gt.Icon directory:     ]\"
 *${modname}: Input      IconDir 30 \"~/.fvwm/icons\"
 *${modname}: Text       \"\$[gt. (Directory for converted icons)]\"
 
 *${modname}: Line       left
-*${modname}: Text       \"\$[gt.Output path:       ]\"
+*${modname}: Text       \"\$[gt.Output path:        ]\"
 *${modname}: Input      Path 30 \"\$FVWM_USERDIR/.menu\"
 *${modname}: Text       \"\$[gt. (Full path to store output)]\"
 
