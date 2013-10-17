@@ -1285,43 +1285,55 @@ msgid "But remember, if the menu doesn't exist, nothing happens."
 msgstr "Bitte beachten: wenn ein Menü leer ist, passiert nichts."
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 120
-msgid "Menu Top Title:    "
-msgstr "Menü Top Titel:    "
+msgid "Menu Top Title:     "
+msgstr "Menü Top Titel:      "
+
+#. ./bin/fvwm-menu-desktop-config.fpl.in: line 123
+msgid "  "
+msgstr "  "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 124
-msgid "Install-Prefix:    "
-msgstr "Install-Prefix:    "
+msgid "Install-Prefix:     "
+msgstr "Install-Prefix:      "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 128
-msgid "Desktop:           "
-msgstr "Desktop:           "
+msgid "Desktop:            "
+msgstr "Desktop:             "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 132
-msgid "Menutype:          "
-msgstr "Menütyp:           "
+msgid "Menutype:           "
+msgstr "Menütyp:             "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 141
 msgid "General Options"
 msgstr "Generelle Optionen"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 146
-msgid "Used Menu Type:    "
+msgid "Used Menu Type:     "
 msgstr "Verwendeter Menütyp: "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 149
-msgid "Multiple"
-msgstr "Mehrfach"
+msgid "Multiple "
+msgstr "Mehrfach "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 150
 msgid "Single"
 msgstr "Einzel"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 153
-msgid "Use Icons?         "
+msgid "Use Icons?          "
 msgstr "Icons verwenden?     "
 
+#. ./bin/fvwm-menu-desktop-config.fpl.in: line 155
+msgid "Yes      "
+msgstr "Ja       "
+
+#. ./bin/fvwm-menu-desktop-config.fpl.in: line 156
+msgid "No   "
+msgstr "Nein "
+
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 159
-msgid "Icon size:         "
+msgid "Icon size:          "
 msgstr "Icongröße:           "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 161
@@ -1329,31 +1341,31 @@ msgid " (Default is 24)"
 msgstr "(Default ist 24)"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 164
-msgid "Use Titles?        "
+msgid "Use Titles?         "
 msgstr "Titel verwenden?     "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 170
-msgid "Used Icon theme:   "
+msgid "Used Icon theme:    "
 msgstr "Benutzter Icontheme: "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 174
-msgid "Menu(s) in a Menu? "
+msgid "Menu(s) in a Menu?  "
 msgstr "Menü(s) in dem Menü? "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 180
-msgid "Insert in menu:    "
+msgid "Insert in menu:     "
 msgstr "Einfügen in Menü:    "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 184
-msgid "Directory Icon:    "
+msgid "Directory Icon:     "
 msgstr "Verzeichnis-Icon:    "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 188
-msgid "Application Icon:  "
+msgid "Application Icon:   "
 msgstr "Applikations-Icon:   "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 192
-msgid "Icon directory:    "
+msgid "Icon directory:     "
 msgstr "Icon-Verzeichnis:    "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 194
@@ -1361,7 +1373,7 @@ msgid " (Directory for converted icons)"
 msgstr " (für konvertierte Icons)"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 197
-msgid "Output path:       "
+msgid "Output path:        "
 msgstr "Ausgabepfad:         "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 199
@@ -1392,19 +1404,23 @@ msgstr "XDG Menu neu erstellen"
 #-----------------------------------------------------------------------
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 17
 msgid "In this section you can define a custom-assembled menu 'foo-bar.menu' placed on another"
-msgstr "In dieser Sektion können Sie ein eigenerstelltes Menü 'foo-bar.menu', das an einem anderen Ort"
+msgstr "In dieser Sektion können Sie ein eigenerstelltes Menü 'foo-bar.menu', das an einem anderen Ort als in"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 19
 msgid "location as defined in the XDG menu definitions."
-msgstr "als in den XDG Menüspezifikationen definiert ist, erstellen."
+msgstr "den XDG Menüspezifikationen definiert ist, erstellen."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 24
 msgid "Specifies the menu title of the top menu used by Fvwm's Popup command."
-msgstr "Spezifiziert den Menütitel des Topmenüs, das Fvwm's Popup Kommando"
+msgstr "Spezifiziert den Menütitel des Topmenüs, das Fvwm's Popup Kommando verwendet."
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 26
+msgid "                    "
+msgstr "                     "
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 27
 msgid "Default is 'FvwmMenu'."
-msgstr "verwendet. Default ist 'FvwmMenu'."
+msgstr "Default ist 'FvwmMenu'."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 32
 msgid "Overrides the standard locations for XDG menu definitions. The standard"

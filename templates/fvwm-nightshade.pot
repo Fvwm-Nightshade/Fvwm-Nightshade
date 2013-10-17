@@ -1285,19 +1285,23 @@ msgid "But remember, if the menu doesn't exist, nothing happens."
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 120
-msgid "Menu Top Title:    "
+msgid "Menu Top Title:     "
+msgstr ""
+
+#. ./bin/fvwm-menu-desktop-config.fpl.in: line 123
+msgid "  "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 124
-msgid "Install-Prefix:    "
+msgid "Install-Prefix:     "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 128
-msgid "Desktop:           "
+msgid "Desktop:            "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 132
-msgid "Menutype:          "
+msgid "Menutype:           "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 141
@@ -1305,11 +1309,11 @@ msgid "General Options"
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 146
-msgid "Used Menu Type:    "
+msgid "Used Menu Type:     "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 149
-msgid "Multiple"
+msgid "Multiple "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 150
@@ -1317,11 +1321,19 @@ msgid "Single"
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 153
-msgid "Use Icons?         "
+msgid "Use Icons?          "
+msgstr ""
+
+#. ./bin/fvwm-menu-desktop-config.fpl.in: line 155
+msgid "Yes      "
+msgstr ""
+
+#. ./bin/fvwm-menu-desktop-config.fpl.in: line 156
+msgid "No   "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 159
-msgid "Icon size:         "
+msgid "Icon size:          "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 161
@@ -1329,31 +1341,31 @@ msgid " (Default is 24)"
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 164
-msgid "Use Titles?        "
+msgid "Use Titles?         "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 170
-msgid "Used Icon theme:   "
+msgid "Used Icon theme:    "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 174
-msgid "Menu(s) in a Menu? "
+msgid "Menu(s) in a Menu?  "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 180
-msgid "Insert in menu:    "
+msgid "Insert in menu:     "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 184
-msgid "Directory Icon:    "
+msgid "Directory Icon:     "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 188
-msgid "Application Icon:  "
+msgid "Application Icon:   "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 192
-msgid "Icon directory:    "
+msgid "Icon directory:     "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 194
@@ -1361,7 +1373,7 @@ msgid " (Directory for converted icons)"
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 197
-msgid "Output path:       "
+msgid "Output path:        "
 msgstr ""
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 199
@@ -1400,6 +1412,10 @@ msgstr ""
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 24
 msgid "Specifies the menu title of the top menu used by Fvwm's Popup command."
+msgstr ""
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 26
+msgid "                    "
 msgstr ""
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 27
