@@ -1,4 +1,14 @@
 History:
+10/17/2013
+- adapt fvwm-menu-desktop2-config.fpl and its help files to handle different
+  language layouts
+- add empty strings and adapt some text length to fvwm-nightshade.pot for 
+  better layout handling with different languages. Also in the german, 
+  spanish and french po files.
+- add french translations for FvwmForm-GenOptionHelp to po file
+- update german and french mo files
+- update config version
+
 10/15/2013
 - update pot template for fvwm-menu-desktop2-config.fpl and its help files
 - update german po and mo file:
