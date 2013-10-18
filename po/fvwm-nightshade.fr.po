@@ -635,10 +635,10 @@ msgstr "Menu de bureau"
 #-----------------------------------------------------------------------
 # layout Horizontal, Vertical & G2like
 msgid "&Right	Page"
-msgstr "&Droite  page"
+msgstr "&Droite	Page"
 
 msgid "&Left	Page"
-msgstr "&Gauche Page"
+msgstr "&Gauche	Page"
 
 msgid "&1.	Page"
 msgstr "&1.	Page"
@@ -1274,7 +1274,7 @@ msgstr "Pas de menu trouvé ! Depuis un terminal, contrôlez pourquoi avec"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 109
 msgid "Single Menu"
-msgstr "Menu simple"
+msgstr "Menu Simple"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 114
 msgid "If you want a single menu only deselect all menus above and fill out the fields below."
@@ -1402,9 +1402,120 @@ msgstr "Régénérer le menu XDG"
 #-----------------------------------------------------------------------
 # FvwmForm-SingleMenuHelp which are in the CVS version of FVWM
 #-----------------------------------------------------------------------
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 17
+msgid "In this section you can define a custom-assembled menu 'foo-bar.menu' placed on another"
+msgstr "Dans cette section vous pouvez definir un menu 'foo-bar.menu' placé dans un autre"
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 19
+msgid "location as defined in the XDG menu definitions."
+msgstr "emplacement comme defini dans le menu XDG."
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 24
+msgid "Specifies the menu title of the top menu used by Fvwm's Popup command."
+msgstr "Specifiez le titre du menu en haut utilisé par la commande Fvwm's."
+
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 26
 msgid "                    "
 msgstr "                      "
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 27
+msgid "Default is 'FvwmMenu'."
+msgstr "Par défaut est 'FvwmMenu'."
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 32
+msgid "Overrides the standard locations for XDG menu definitions. The standard"
+msgstr "Écrase l'emplacement standard pour la definition du menu XDG. Les emplacements"
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 35
+msgid "locations are /etc/xdg/menus and"
+msgstr "standard sont /etc/xdg/menus et"
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 35
+msgid "if available."
+msgstr "si disponible."
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 40
+msgid "Overrides the name of the main desktop environment installed on the"
+msgstr "Écrase le nom de l'environnement principal qui est installé sur le systeme."
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 43
+msgid "system. If a system offers multiple desktop environments $XDG_MENU_PREFIX"
+msgstr "Si le systeme offre plusieurs environneent de bureau, $XDG_MENU_PREFIX est"
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 46
+msgid "is typically set. It is ignored if this field is used."
+msgstr "normalement appliqué. A variable est ignoré si le champ est utilisé. Noms"
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 49
+msgid "Possible names: gnome, kde, lxde, etc."
+msgstr "possible: gnome, kde, lxde, etc."
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 54
+msgid "Defines which type of menu should be found. Possible name types could be:"
+msgstr "Definisé quel type de menu doit être trouvé. Les nom de types possible peuventz"
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 57
+msgid "applications, settings, preferences, etc. Note if the specified menu type"
+msgstr "être: applications, settings, preferences, etc. Attention: si le type de menu"
+
+#. ./bin/FvwmForm-SingleMenuHelp.in: line 60
+msgid "doesn't exist the generated menu is empty!"
+msgstr "specifié n'existe pas, le menu généré est vide."
+
+#-----------------------------------------------------------------------
+# FvwmForm-MultiMenuHelp which are in the CVS version of FVWM
+#-----------------------------------------------------------------------
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 17
+msgid "In this section all XDG menus found on the system are shown. All selected menus"
+msgstr "In cette section tous les menus XDG trouvé seront affiché sur le systeme. Tous les"
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 19
+msgid "will integrate in one Fvwm menu. If you want to generate a custom-assembled menu"
+msgstr "menu selectionnés seront intégré dans  un menu Fvwm. Si vous voulez generer un menu"
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 21
+msgid "use the 'Single Menu' section."
+msgstr "client, utlisez la section 'Single Menu'."
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 28
+msgid "List menus with checkboxes found in /etc/xdg/menus/"
+msgstr "La liste des menus avec les checkbox se trouve dans /etc/xdg/menus/"
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 36
+msgid "List menus with checkboxes found in $HOME/.config/menus/"
+msgstr "La liste des menus avec les checkbox se trouve dans $HOME/.config/menus/"
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 42
+msgid "Note that equal menus found under /etc/xdg/menus AND $HOME/.config/menus/"
+msgstr "Remarque: identique Menu trouvé sous /etc/xdg/menus et $HOME/.config/menus/, suivant"
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 44
+msgid "following the XDG menu specification only shown in $HOME/.config/menus/."
+msgstr "le menu XDG specifié seulement montré dans $HOME/.config/menus/."
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 48
+msgid "If no menus appear check why from within a terminal with 'fvwm-menu-desktop -v'."
+msgstr "Si aucun menu apparait, vérifiez  pourquoi du terminal avec 'fvwm-menu-desktop -v'."
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 50
+msgid "Also it is a good idea to check .xsession-errors in the user home for errors."
+msgstr "C'est aussi une bonne idée de vérifier dans .xsession-errors pour les erreurs."
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 54
+msgid "One limitation exists:"
+msgstr "Une limite existe:"
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 56
+msgid "If there are too much menus found an error occurs in .xsession-errors:"
+msgstr "Si il y a trop de menus trouvé une message d'erreur apparaît dans .xsession-errors:"
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 62
+msgid "This happens because PipeRead used for menu generation has a command length"
+msgstr "Cela se produit, parce que PipeRead a utilisé pour la generation de menu une commande"
+
+#. ./bin/FvwmForm-MultiMenuHelp.in: line 64
+msgid "limit of 1000 characters. Sorry for that inconvinience."
+msgstr "qui est limité à 1000 caractéres. Pardon pour la gêne occassionné."
 
 #-----------------------------------------------------------------------
 # FvwmForm-GenOptionHelp which are in the CVS version of FVWM
@@ -1419,7 +1530,7 @@ msgstr "Option mini icones activé dans le/les menu(s)."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 28
 msgid "If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size is"
-msgstr "Si 'Icones utlisés' par defaut les mini-icones 24x24 seront utilisés. Si une autre taille"
+msgstr "Si 'Utiliser icônes' par defaut les mini-icones 24x24 seront utilisés. Si une autre taille"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 31
 msgid "desired enter the wanted size in this field."
@@ -1455,7 +1566,7 @@ msgstr "dossier:"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 61
 msgid "If 'Use Icons' is enabled and for a directory in a menu no icon is found"
-msgstr "Si 'icones utilisé' est actif et qu'aucune icone est trouvé dans un dossier, est utilisé"
+msgstr "Si 'Utiliser icônes' est actif et qu'aucune icone est trouvé dans un dossier, est utilisé"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 64
 msgid "as default icon is used. But if the gnome icon theme isn't"
@@ -1471,7 +1582,7 @@ msgstr "est nécessaire pas le chemin d'accés."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 75
 msgid "If 'Use Icons' is enabled and for an application no icon is found"
-msgstr "Si 'icones utilisées' est actif et que pour une application aucune icnone est trouvée,"
+msgstr "Si 'Utiliser icônes' est actif et que pour une application aucune icnone est trouvée,"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 89
 msgid "Enable this checkbox to insert generated menu(s) IN a menu."
@@ -1491,7 +1602,7 @@ msgstr "Si cet option est active les menus sont générés avec le titre. Defaut is
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 110
 msgid "Enter here the FULL path of the menu to store. Default path is $FVWM_USERDIR/.menu."
-msgstr "Entrez ici le chemin complet du menu pour l'enregistrer. Par défaut est $FVWM_USERDIR/.menu."
+msgstr "Entrez ici le chemin complet du menu pour l'enregistrer. Default est $FVWM_USERDIR/.menu."
 
 
 
