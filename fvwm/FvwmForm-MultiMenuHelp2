@@ -1,5 +1,5 @@
 # FvwmForm-MultiMenuHelp2 - Help Text for fvwm-menu-desktop2-config Multiple Menu
-# V 1.0.1
+# V 1.0.2
 DestroyModuleConfig  FvwmForm-MultiMenuHelp2: *
 *FvwmForm-MultiMenuHelp2:   Title   "fvwm-menu-desktop2-config - $[gt.Multiple Menu] $[gt.Help]"
 *FvwmForm-MultiMenuHelp2:   WarpPointer
@@ -45,7 +45,7 @@ DestroyModuleConfig  FvwmForm-MultiMenuHelp2: *
 *FvwmForm-MultiMenuHelp2:   Line    Left
 *FvwmForm-MultiMenuHelp2:   Line    " "
 *FvwmForm-MultiMenuHelp2:   Line    left
-*FvwmForm-MultiMenuHelp2:   Text    "$[gt.If no menus appear check why from within a terminal with] 'fvwm-menu-desktop -v'."
+*FvwmForm-MultiMenuHelp2:   Text    "$[gt.If no menus appear check why from within a terminal with 'fvwm-menu-desktop -v'.]"
 *FvwmForm-MultiMenuHelp2:   Line    left
 *FvwmForm-MultiMenuHelp2:   Text    "$[gt.Also it is a good idea to check .xsession-errors in the user home for errors.]"
 *FvwmForm-MultiMenuHelp2:   Line    left
@@ -54,7 +54,7 @@ DestroyModuleConfig  FvwmForm-MultiMenuHelp2: *
 *FvwmForm-MultiMenuHelp2:   Text    "$[gt.One limitation exists:]"
 *FvwmForm-MultiMenuHelp2:   Line    left
 *FvwmForm-MultiMenuHelp2:   Text    "$[gt.If there are too much menus found an error occurs in .xsession-errors:]"
-*FvwmForm-MultiMenuHelp2:   Line    left
+*FvwmForm-MultiMenuHelp2:   Line    center
 *FvwmForm-MultiMenuHelp2:   Text    "<<ERROR>> Module(0xXXXXXXX) command is too big (1008), limit is 1000"
 *FvwmForm-MultiMenuHelp2:   Line    left
 *FvwmForm-MultiMenuHelp2:   Line    " "
