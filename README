@@ -103,7 +103,9 @@ Featurelist of Fvwm-Nightshade 0.7.4:
 - Smart maximize windows - move and resize windows to the largest free 
   area of a desktop/page
 - New set of icons for menus and internal apps
-- Own XDG applications menu
+- Own XDG applications menu with its' directory files
+- New fvwm-menu-desktop GUI with help windows
+- Restart possibility for Conky clock and CPU applet in panel
 
 
 Requirements:

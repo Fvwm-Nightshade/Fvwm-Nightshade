@@ -16,7 +16,9 @@ Features:
 - works now with FVWM 2.6.5 without loosing new Xdg menu support from CVS
   version
 - support for Gentoo installation (thanks to Sebastian Luncan :-) )
-- Own XDG applications menu
+- own XDG applications menu
+- new fvwm-menu-desktop GUI with help windows
+- restart possibility for Conky clock and CPU applet in panel
 
 
 ------------------------------------------------------------------------
