@@ -1,4 +1,9 @@
 History:
+10/18/2013
+- final update of spanish and french po and mo files
+- fix bug in a line of FvwmForm-GenOptionHelp2 that translation failed
+- update config version, NEWS, AUTHORS and README
+
 10/17/2013
 - adapt fvwm-menu-desktop2-config.fpl and its help files to handle different
   language layouts
