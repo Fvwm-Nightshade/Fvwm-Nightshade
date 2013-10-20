@@ -1,6 +1,6 @@
 <!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
  "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
-<!-- V 1.0.1 -->
+<!-- V 1.0.3 -->
 
 <Menu>
     <Name>Applications</Name>
@@ -91,7 +91,7 @@
 
         <Menu>
             <Name>File tools</Name>
-            <Directory>fns-system-tools-file-tools.directory</Directory>
+            <Directory>fns-accessories-file-tools.directory</Directory>
             <Include>
                 <Category>FileTools</Category>
                 <Category>FileManager</Category>
