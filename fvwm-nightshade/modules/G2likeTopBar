@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeTopBar
-# Version:	1.0.8
+# Version:	1.0.10
 # Licence: 	GPL 2
 #
 # Description:	Gnome like top bar with root menu, personal menu, systray,
@@ -10,7 +10,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	10/09/2012
-# Changed:	01/09/2013
+# Changed:	08/18/2013
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -120,8 +120,8 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 *G2likeTopBar: (5x1, Colorset 13, ActiveColorset 11, \
 			Left, Padding 5 0, Title (Side) "Menu", ActionOnPress, \
-		    Icon	icon_fns_24x24.png, \
-		    ActiveIcon	icon_fns_24x24.png, \
+		    Icon	icon_fns.svg:24x24, \
+		    ActiveIcon	icon_fns.svg:24x24, \
 		    Action(Mouse 1) `Menu MenuRoot`)
 
 #-----------------------------------------------------------------------
@@ -153,7 +153,9 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 *G2likeTopBar: (5x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_cpu" \
 		    `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
-		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`)
+		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`, \
+			Action (mouse 3) `Menu MenuCpuOps`,\
+			Action (mouse 0) Nop)
 
 #-----------------------------------------------------------------------
 # Clock
@@ -161,6 +163,7 @@ DestroyModuleConfig G2likeTopBar: *
 *G2likeTopBar: ($[infostore.time_hsize]x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_clock" \
 		    `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset $[infostore.time_voffset]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
 		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
+		    Action (mouse 3) `Menu MenuClockOps`,\
 		    Action (mouse 0) Nop)
 
 #-----------------------------------------------------------------------

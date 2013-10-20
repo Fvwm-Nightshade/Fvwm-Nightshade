@@ -1,0 +1,1177 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+ "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+<!-- V 1.0.3 -->
+
+<Menu>
+    <Name>Applications</Name>
+    <Directory>fns-applications.directory</Directory>
+
+    <!-- Scan legacy dirs first, as later items take priority -->
+    <LegacyDir>/etc/X11/applnk</LegacyDir>
+    <LegacyDir>/usr/share/gnome/apps</LegacyDir>
+
+    <!-- Read standard .directory and .desktop file locations -->
+    <DefaultAppDirs/>
+    <DefaultDirectoryDirs/>
+    <KDELegacyDirs/>
+
+    <!-- Add stock tarball installs to menus -->
+    <AppDir>/usr/local/share/applications</AppDir>
+
+    <!-- Read in overrides and child menus from applications-merged/ -->
+    <DefaultMergeDirs/>
+
+    <!-- Accessories submenu -->
+    <Menu>
+        <Name>Accessories</Name>
+        <Directory>fns-accessories.directory</Directory>
+        <Include>
+            <And>
+                <Category>Utility</Category>
+                <Not>
+                    <Category>Accessibility</Category>
+                    <Category>Archiving</Category>
+                    <Category>Compression</Category>
+                    <Category>DesktopSettings</Category>
+                    <Category>FileTools</Category>
+                    <Category>FileManager</Category>
+                    <Category>PackageManager</Category>
+                    <Category>System</Category>
+                    <Category>TerminalEmulator</Category>
+                    <Category>TextEditor</Category>
+                    <Category>TextTools</Category>
+                    <Category>Viewer</Category>
+                    <Category>X-SuSE-DesktopUtility</Category>
+                </Not>
+            </And>
+        </Include>
+        <Exclude>
+            <Or>
+                <Filename>exo-file-manager.desktop</Filename>
+                <Filename>exo-terminal-emulator.desktop</Filename>
+            </Or>
+        </Exclude>
+        
+        <Menu>
+            <Name>Universal Access</Name>
+            <Directory>fns-accessories-accessibility.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Accessibility</Category>
+                    <Not><Category>Settings</Category></Not>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Desktop</Name>
+            <Directory>fns-accessories-desktop.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Utility</Category>
+                    <Category>Settings</Category>
+                </And>
+                <And>
+                    <Category>DesktopSettings</Category>
+                    <Not><Category>X-XFCE-HardwareSettings</Category></Not>
+                </And>
+                <Category>X-SuSE-DesktopUtility</Category>
+                <Filename>xfce4-about.desktop</Filename>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Editors</Name>
+            <Directory>fns-accessories-editors.directory</Directory>
+            <Include>
+                <And>
+                    <Category>TextTools</Category>
+                    <Not><Category>Office</Category></Not>
+                </And>
+                <Category>TextEditor</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>File tools</Name>
+            <Directory>fns-accessories-file-tools.directory</Directory>
+            <Include>
+                <Category>FileTools</Category>
+                <Category>FileManager</Category>
+                <Filename>exo-file-manager.desktop</Filename>
+            </Include>
+        </Menu>
+    </Menu> <!-- End Accessories -->
+
+    <!-- Development Tools -->
+    <Menu>
+        <Name>Development</Name>
+        <Directory>fns-development.directory</Directory>
+        <Include>
+            <And>
+                <Category>Development</Category>
+                <Not>
+                    <Category>Building</Category>
+                    <Category>Database</Category>
+                    <Category>Debugger</Category>
+                    <Category>Documentation</Category>
+                    <Category>GUIDesigner</Category>
+                    <Category>IDE</Category>
+                    <Category>Profiling</Category>
+                    <Category>ProjectManagement</Category>
+                    <Category>RevisionControl</Category>
+                    <Category>Translation</Category>
+                    <Category>WebDevelopment</Category>
+                </Not>
+            </And>
+            <And>
+                <Category>Development</Category>
+                <Category>ConsoleOnly</Category>
+            </And>
+            <Filename>emacs.desktop</Filename>
+        </Include>
+
+        <Menu>
+            <Name>Debugger</Name>
+            <Directory>fns-development-debugger.directory</Directory>
+            <Include>
+                <Category>Debugger</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Development Environments</Name>
+            <Directory>fns-development-ide.directory</Directory>
+            <Include>
+                <Category>IDE</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>GUI Designer</Name>
+            <Directory>fns-development-guidesigner.directory</Directory>
+            <Include>
+                <Category>GUIDesigner</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Profiling</Name>
+            <Directory>fns-development-profiling.directory</Directory>
+            <Include>
+                <Category>Profiling</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Revision Control</Name>
+            <Directory>fns-development-revisioncontrol.directory</Directory>
+            <Include>
+                <Category>RevisionControl</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Database</Name>
+            <Directory>fns-development-databases.directory</Directory>
+            <Include>
+                <Category>Database</Category>
+                <And>
+                    <Category>Database</Category>
+                    <Not><Category>Office</Category></Not>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Translation</Name>
+            <Directory>fns-development-translation.directory</Directory>
+            <Include>
+                <Category>Translation</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Web Development</Name>
+            <Directory>fns-development-webdevelopment.directory</Directory>
+            <Include>
+                <Category>WebDevelopment</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Documentation</Name>
+            <Directory>fns-development-documentation.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Development</Category>
+                    <Category>Documentation</Category>
+                </And>
+            </Include>
+        </Menu>
+    </Menu> <!-- End Development Tools -->
+
+
+    <!-- Education -->
+    <Menu>
+        <Name>Education</Name>
+        <Directory>fns-education.directory</Directory>
+        <Include>
+            <And>
+                <Category>Education</Category>
+                <Not>
+                    <Category>Art</Category>
+                    <Category>ArtificialIntelligence</Category>
+                    <Category>Astronomy</Category>
+                    <Category>Biology</Category>
+                    <Category>Chemistry</Category>
+                    <Category>ComputerScience</Category>
+                    <Category>Construction</Category>
+                    <Category>DataVisualization</Category>
+                    <Category>Economy</Category>
+                    <Category>Electricity</Category>
+                    <Category>Geology</Category>
+                    <Category>Geography</Category>
+                    <Category>History</Category>
+                    <Category>Humanities</Category>
+                    <Category>ImageProcessing</Category>
+                    <Category>Languages</Category>
+                    <Category>Literature</Category>
+                    <Category>Math</Category>
+                    <Category>Maps</Category>
+                    <Category>MedicalSoftware</Category>
+                    <Category>Music</Category>
+                    <Category>NumericalAnalysis</Category>
+                    <Category>ParallelComputing</Category>
+                    <Category>Physics</Category>
+                    <Category>Robotics</Category>
+                    <Category>Science</Category>
+                    <Category>Sports</Category>
+                    <Category>Spirituality</Category>
+                </Not>
+            </And>
+        </Include>
+
+        <Menu>
+            <Name>Natural Science</Name>
+            <Directory>fns-science-natural.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Education</Category>
+                    <Or>
+                        <Category>Astronomy</Category>
+                        <Category>Biology</Category>
+                        <Category>Chemistry</Category>
+                        <Category>MedicalSoftware</Category>
+                        <Category>Physics</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Humanities</Name>
+            <Directory>fns-science-humanities.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Education</Category>
+                    <Or>
+                        <Category>Art</Category>
+                        <Category>History</Category>
+                        <Category>Humanities</Category>
+                        <Category>Languages</Category>
+                        <Category>Literature</Category>
+                        <Category>Spirituality</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Computer Science</Name>
+            <Directory>fns-science-computer.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Education</Category>
+                    <Or>
+                        <Category>ArtificialIntelligence</Category>
+                        <Category>ComputerScience</Category>
+                        <Category>DataVisualization</Category>
+                        <Category>ImageProcessing</Category>
+                        <Category>ParallelComputing</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Engineering</Name>
+            <Directory>fns-science-engineering.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Or>
+                        <Category>Construction</Category>
+                        <Category>Electricity</Category>
+                        <Category>Robotics</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Music</Name>
+            <Directory>fns-science-music.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Education</Category>
+                    <Category>Music</Category>
+                    <Not><Category>AudioVideo</Category></Not>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Economy</Name>
+            <Directory>fns-sciences-economy.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Education</Category>
+                    <Category>Economy</Category>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Geo Science</Name>
+            <Directory>fns-science-geo.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Education</Category>
+                    <Or>
+                        <Category>Geography</Category>
+                        <Category>Geology</Category>
+                        <Category>Geoscience</Category>
+                        <Category>Maps</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Mathematics</Name>
+            <Directory>fns-science-mathematics.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Education</Category>
+                    <Or>
+                        <Category>Math</Category>
+                        <Category>NumericalAnalysis</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Sports</Name>
+            <Directory>fns-science-sports.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Education</Category>
+                    <Category>Sports</Category>
+                </And>
+            </Include>
+        </Menu>
+    </Menu> <!-- End Education -->
+
+
+    <!-- Science -->
+    <Menu>
+        <Name>Science</Name>
+        <Directory>fns-science.directory</Directory>
+        <Include>
+            <And>
+                <Category>Science</Category>
+                <Not>
+                    <Category>Art</Category>
+                    <Category>ArtificialIntelligence</Category>
+                    <Category>Astronomy</Category>
+                    <Category>Biology</Category>
+                    <Category>Chemistry</Category>
+                    <Category>ComputerScience</Category>
+                    <Category>Construction</Category>
+                    <Category>DataVisualization</Category>
+                    <Category>Economy</Category>
+                    <Category>Education</Category>
+                    <Category>Electricity</Category>
+                    <Category>Geology</Category>
+                    <Category>Geography</Category>
+                    <Category>History</Category>
+                    <Category>Humanities</Category>
+                    <Category>ImageProcessing</Category>
+                    <Category>Languages</Category>
+                    <Category>Literature</Category>
+                    <Category>Math</Category>
+                    <Category>Maps</Category>
+                    <Category>MedicalSoftware</Category>
+                    <Category>Music</Category>
+                    <Category>NumericalAnalysis</Category>
+                    <Category>ParallelComputing</Category>
+                    <Category>Physics</Category>
+                    <Category>Robotics</Category>
+                    <Category>Sports</Category>
+                    <Category>Spirituality</Category>
+                </Not>
+            </And>
+        </Include>
+
+        <Menu>
+            <Name>Natural Science</Name>
+            <Directory>fns-science-natural.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Or>
+                        <Category>Astronomy</Category>
+                        <Category>Biology</Category>
+                        <Category>Chemistry</Category>
+                        <Category>MedicalSoftware</Category>
+                        <Category>Physics</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Humanities</Name>
+            <Directory>fns-science-humanities.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Or>
+                        <Category>Art</Category>
+                        <Category>History</Category>
+                        <Category>Humanities</Category>
+                        <Category>Languages</Category>
+                        <Category>Literature</Category>
+                        <Category>Spirituality</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Computer Science</Name>
+            <Directory>fns-science-computer.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Or>
+                        <Category>ArtificialIntelligence</Category>
+                        <Category>ComputerScience</Category>
+                        <Category>DataVisualization</Category>
+                        <Category>ImageProcessing</Category>
+                        <Category>ParallelComputing</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Engineering</Name>
+            <Directory>Engineering.directory</Directory>
+            <Directory>suse-science.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Or>
+                        <Category>Construction</Category>
+                        <Category>Electricity</Category>
+                        <Category>Robotics</Category>
+                    </Or>
+                </And>
+                <Category>Electronics</Category>
+                <Category>Engineering</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Economy</Name>
+            <Directory>fns-science-economy.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Category>Economy</Category>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Geo Science</Name>
+            <Directory>fns-science-geo.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Or>
+                        <Category>Geography</Category>
+                        <Category>Geology</Category>
+                        <Category>Geoscience</Category>
+                        <Category>Maps</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Mathematics</Name>
+            <Directory>fns-science-mathematics.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Or>
+                        <Category>Math</Category>
+                        <Category>NumericalAnalysis</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Music</Name>
+            <Directory>fns-science-music.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Category>Music</Category>
+                    <Not><Category>AudioVideo</Category></Not>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Sports</Name>
+            <Directory>fns-science-sports.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Category>Sports</Category>
+                </And>
+            </Include>
+        </Menu>
+    </Menu> <!-- End Science -->
+
+
+    <!-- Games -->
+    <Menu>
+        <Name>Games</Name>
+        <Directory>fns-games.directory</Directory>
+        <Include>
+            <And>
+                <Category>Game</Category>
+                <Not>
+                    <Category>ActionGame</Category>
+                    <Category>AdventureGame</Category>
+                    <Category>ArcadeGame</Category>
+                    <Category>BoardGame</Category>
+                    <Category>BoardGame</Category>
+                    <Category>CardGame</Category>
+                    <Category>Emulator</Category>
+                    <Category>KidsGame</Category>
+                    <Category>LogicGame</Category>
+                    <Category>PlatformGame</Category>
+                    <Category>RolePlaying</Category>
+                    <Category>Shooter</Category>
+                    <Category>Simulation</Category>
+                    <Category>SportsGame</Category>
+                    <Category>StrategyGame</Category>
+                </Not>
+            </And>
+        </Include>
+
+        <Menu>
+            <Name>Action</Name>
+            <Directory>fns-games-action.directory</Directory>
+            <Include>
+                <Category>ActionGame</Category>
+                <Category>Shooter</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Adventure</Name>
+            <Directory>fns-games-adventure.directory</Directory>
+            <Include>
+                <Category>AdventureGame</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Arcade</Name>
+            <Directory>fns-games-arcade.directory</Directory>
+            <Include>
+                <Category>ArcadeGame</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Board</Name>
+            <Directory>fns-games-board.directory</Directory>
+            <Include>
+                <Category>BoardGame</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Cards</Name>
+            <Directory>fns-games-cards.directory</Directory>
+            <Include>
+                <Category>CardGame</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Kids</Name>
+            <Directory>fns-games-kids.directory</Directory>
+            <Include>
+                <Category>KidsGame</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Logic</Name>
+            <Directory>fns-games-logic.directory</Directory>
+            <Include>
+                <Category>LogicGame</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Role playing</Name>
+            <Directory>fns-games-roleplaying.directory</Directory>
+            <Include>
+                <Category>RolePlaying</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Simulation</Name>
+            <Directory>fns-games-simulation.directory</Directory>
+            <Include>
+                <Category>Simulation</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Sports</Name>
+            <Directory>fns-games-sports.directory</Directory>
+            <Include>
+                <Category>SportsGame</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Strategy</Name>
+            <Directory>fns-games-strategy.directory</Directory>
+            <Include>
+                <Category>StrategyGame</Category>
+            </Include>
+        </Menu>
+    </Menu> <!-- End Games -->
+
+    <!-- Graphics -->
+    <Menu>
+        <Name>Graphics</Name>
+        <Directory>fns-graphics.directory</Directory>
+        <Include>
+            <And>
+                <Category>Graphics</Category>
+                <Not>
+                    <Category>2DGraphics</Category>
+                    <Category>3DGraphics</Category>
+                    <Category>OCR</Category>
+                    <Category>Office</Category>
+                    <Category>Photography</Category>
+                    <Category>Publishing</Category>
+                    <Category>RasterGraphics</Category>
+                    <Category>Scanning</Category>
+                    <Category>VectorGraphics</Category>
+                    <Category>Viewer</Category>
+                </Not>
+            </And>
+        </Include>
+
+        <Menu>
+            <Name>2D Graphics</Name>
+            <Directory>fns-graphics-2d.directory</Directory>
+            <Include>
+                <And>
+                    <Or>
+                        <Category>2DGraphics</Category>
+                        <Category>RasterGraphics</Category>
+                        <Category>VectorGraphics</Category>
+                    </Or>
+                    <Not>
+                        <Category>Viewer</Category>
+                        <Category>Office</Category>
+                    </Not>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>3D Graphics</Name>
+            <Directory>fns-graphics-3d.directory</Directory>
+            <Include>
+                <Category>3DGraphics</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Scanning</Name>
+            <Directory>fns-graphics-scanning.directory</Directory>
+            <Include>
+                <Category>Scanning</Category>
+                <Category>OCR</Category>
+            </Include>
+        </Menu>
+
+       <Menu>
+            <Name>Photography</Name>
+            <Directory>fns-graphics-photography.directory</Directory>
+            <Include>
+                <Category>Photography</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Publishing</Name>
+            <Directory>fns-graphics-publishing.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Publishing</Category>
+                    <Category>Graphics</Category>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Image Viewer</Name>
+            <Directory>fns-graphics-viewer.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Viewer</Category>
+                    <Not>
+                        <Category>Office</Category>
+                        <Category>3DGraphics</Category>
+                        <Category>VectorGraphics</Category>
+                        <Category>Photography</Category>
+                    </Not>
+                </And>
+            </Include>
+        </Menu>
+    </Menu> <!-- End Graphics -->
+
+
+    <!-- Internet -->
+    <Menu>
+        <Name>Internet</Name>
+        <Directory>fns-internet.directory</Directory>
+        <Include>
+            <And>
+                <Category>Network</Category>
+                <Not>
+                    <Category>Chat</Category>
+                    <Category>Dialup</Category>
+                    <Category>Email</Category>
+                    <Category>Feed</Category>
+                    <Category>FileTransfer</Category>
+                    <Category>HamRadio</Category>
+                    <Category>InstantMessaging</Category>
+                    <Category>IRCClient</Category>
+                    <Category>Monitor</Category>
+                    <Category>News</Category>
+                    <Category>P2P</Category>
+                    <Category>RemoteAccess</Category>
+                    <Category>Telephony</Category>
+                    <Category>VideoConference</Category>
+                    <Category>WebBrowser</Category>
+                    <Category>WebDevelopment</Category>
+                    <Category>X-SuSE-RSS-News</Category>
+                </Not>
+            </And>
+        </Include>
+        <Exclude>
+            <Or>
+                <Filename>exo-mail-reader.desktop</Filename>
+                <Filename>exo-web-browser.desktop</Filename>
+            </Or>
+        </Exclude>
+
+        <Menu>
+            <Name>WebBrowsing</Name>
+            <Directory>fns-internet-webbrowsing.directory</Directory>
+            <Include>
+                <Category>WebBrowser</Category>
+                <Filename>exo-web-browser.desktop</Filename>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Mail</Name>
+            <Directory>fns-internet-mail.directory</Directory>
+            <Include>
+                <Category>Email</Category>
+                <Filename>exo-mail-reader.desktop</Filename>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Instant messaging</Name>
+            <Directory>fns-internet-instant-messaging.directory</Directory>
+            <Include>
+                <Category>InstantMessaging</Category>
+                <Category>Chat</Category>
+                <Category>IRCClient</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>News</Name>
+            <Directory>fns-internet-news.directory</Directory>
+            <Include>
+                <Or>
+                    <Category>Feed</Category>
+                    <Category>News</Category>
+                    <Category>X-SuSE-RSS-News</Category>
+                </Or>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>File transfer</Name>
+            <Directory>fns-internet-file-transfer.directory</Directory>
+            <Include>
+                <Category>FileTransfer</Category>
+                <Category>P2P</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Communications</Name>
+            <Directory>fns-internet-communications.directory</Directory>
+            <Include>
+                <Category>Telephony</Category>
+                <Category>VideoConference</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Remote access</Name>
+            <Directory>fns-internet-remote-access.directory</Directory>
+            <Include>
+                <Category>RemoteAccess</Category>
+            </Include>
+        </Menu>
+    </Menu>     <!-- End Internet -->
+
+
+    <!-- Multimedia -->
+    <Menu>
+        <Name>Multimedia</Name>
+        <Directory>fns-multimedia.directory</Directory>
+        <Include>
+            <And>
+                <Category>AudioVideo</Category>
+                <Not>
+                    <Category>Application</Category>
+                    <Category>Audio</Category>
+                    <Category>AudioVideoEditing</Category>
+                    <Category>Database</Category>
+                    <Category>DiscBurning</Category>
+                    <Category>Video</Category>
+                    <Category>HamRadio</Category>
+                    <Category>Midi</Category>
+                    <Category>Mixer</Category>
+                    <Category>Music</Category>
+                    <Category>Player</Category>
+                    <Category>Recorder</Category>
+                    <Category>Sequencer</Category>
+                    <Category>Tuner</Category>
+                    <Category>TV</Category>
+                    <Category>Utility</Category>
+                </Not>
+            </And>
+        </Include>
+
+        <Menu>
+            <Name>Sound and Video</Name>
+            <Directory>fns-multimedia-audiovideo.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Recorder</Category>
+                    <Category>AudioVideo</Category>
+                </And>
+                <And>
+                    <Category>Recorder</Category>
+                </And>
+                <Category>AudioVideoEditing</Category>
+                <Category>Tuner</Category>
+                <Category>TV</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Video</Name>
+            <Directory>fns-multimedia-video.directory</Directory>
+            <Include>
+                <And>
+                    <Category>AudioVideo</Category>
+                    <Category>Player</Category>
+                    <Category>Video</Category>
+                </And>
+                <And>
+                    <Category>AudioVideo</Category>
+                    <Category>Video</Category>
+                    <Not>
+                        <Category>Player</Category>
+                    </Not>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Audio</Name>
+            <Directory>fns-multimedia-audio.directory</Directory>
+            <Include>
+                <And>
+                    <Category>AudioVideo</Category>
+                    <Category>Player</Category>
+                    <Not>
+                        <Category>Video</Category>
+                    </Not>
+                </And>
+                <And>
+                    <Category>AudioVideo</Category>
+                    <Category>Application</Category>
+                </And>
+                <And>
+                    <Category>AudioVideo</Category>
+                    <Category>Audio</Category>
+                </And>
+                <Category>HamRadio</Category>
+                <Category>Sequencer</Category>
+                <Category>Midi</Category>
+                <Category>Mixer</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Cd burning</Name>
+            <Directory>fns-multimedia-cd-burning.directory</Directory>
+            <Include>
+                <Category>DiscBurning</Category>
+            </Include>
+        </Menu>
+    </Menu>     <!-- End Multimedia -->
+
+
+    <!-- Office -->
+    <Menu>
+        <Name>Office</Name>
+        <Directory>fns-office.directory</Directory>
+        <Include>
+            <And>
+                <Category>Office</Category>
+                <Not>
+                    <Category>Email</Category>
+                    <Category>PDA</Category>
+                    <Category>ProjectManagement</Category>
+                    <Category>Photography</Category>
+                </Not>
+            </And>
+        </Include>
+    </Menu> <!-- End Office -->
+
+
+    <!-- System Tools-->
+    <Menu>
+        <Name>System Tools</Name>
+        <Directory>fns-system-tools.directory</Directory>
+        <Include>
+            <And>
+                <Category>System</Category>
+                <Not>
+                    <Category>Emulator</Category>
+                    <Category>FileTools</Category>
+                    <Category>FileManager</Category>
+                    <Category>Filesystem</Category>
+                    <Category>Game</Category>
+                    <Category>Monitor</Category>
+                    <Category>PackageManager</Category>
+                    <Category>Security</Category>
+                    <Category>Settings</Category>
+                    <Category>TerminalEmulator</Category>
+                    <Category>X-XFCE-HardwareSettings</Category>
+                    <Category>X-SuSE-YaST-Hardware</Category>
+                    <Category>X-SuSE-YaST-Virtualization</Category>
+                </Not>
+            </And>
+        </Include>
+
+        <Menu>
+            <Name>Archiving</Name>
+            <Directory>fns-system-tools-archiving.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Utility</Category>
+                    <Or>
+                        <Category>Archiving</Category>
+                        <Category>Compression</Category>
+                        <Category>PackageManager</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Documentation</Name>
+            <Directory>fns-system-tools-documentation.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Documentation</Category>
+                    <Not><Category>Development</Category></Not>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Emulators</Name>
+            <Directory>fns-system-tools-emulators.directory</Directory>
+            <Include>
+                <Category>Emulator</Category>
+                <Category>X-SuSE-YaST-Virtualization</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Hardware</Name>
+            <Directory>fns-system-tools-hardware.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Settings</Category>
+                    <Category>HardwareSettings</Category>
+                </And>
+                <And>
+                    <Category>Settings</Category>
+                    <Or>
+                        <Category>X-XFCE-HardwareSettings</Category>
+                        <Category>X-SuSE-YaST-Hardware</Category>
+                    </Or>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Security</Name>
+            <Directory>fns-system-tools-security.directory</Directory>
+            <Include>
+                <Category>Security</Category>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Terminal Applications</Name>
+            <Directory>fns-system-tools-terminal.directory</Directory>
+            <Include>
+                <Category>TerminalEmulator</Category>
+                <Category>Shell</Category>
+                <Filename>exo-terminal-emulator.desktop</Filename>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Monitoring</Name>
+            <Directory>fns-system-tools-monitoring.directory</Directory>
+            <Include>
+                <And>
+                    <Category>System</Category>
+                    <Category>Monitor</Category>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Preferences</Name>
+            <Directory>fns-system-tools-settings.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Settings</Category>
+                    <Not>
+                        <Category>Utility</Category>
+                        <Category>System</Category>
+                        <Category>HardwareSettings</Category>
+                        <Category>X-XFCE-HardwareSettings</Category>
+                        <Category>X-SuSE-YaST-Hardware</Category>
+                    </Not>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
+            <Name>Administration</Name>
+            <Directory>fns-system-tools-settings-system.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Settings</Category>
+                    <Category>System</Category>
+                    <Not>
+                        <Category>HardwareSettings</Category>
+                        <Category>X-XFCE-HardwareSettings</Category>
+                        <Category>X-SuSE-YaST-Hardware</Category>
+                        <Category>X-SuSE-YaST-Virtualization</Category>
+                    </Not>
+                </And>
+                <Category>Filesystem</Category>
+            </Include>
+        </Menu>
+    </Menu>     <!-- End System Tools -->
+
+
+    <!-- Other -->
+    <Menu>
+        <Name>Lost and Found</Name>
+        <Directory>fns-unknown.directory</Directory>
+        <OnlyUnallocated/>
+        <Include>
+            <And>
+                <Not>
+                    <Category>Core</Category>
+                    <Category>Screensaver</Category>
+                </Not>
+            </And>
+        </Include>
+    </Menu> <!-- End Other -->
+
+
+     <Layout>
+         <Merge type="menus" />
+         <Menuname>Other</Menuname>
+         <Merge type="files" />
+     </Layout>
+
+
+    <!-- The Debian menu -->
+    <Menu>
+        <Name>Debian</Name>
+        <MergeFile>debian-menu.menu</MergeFile>
+        <Directory>fns-debian.directory</Directory>
+    </Menu>
+
+
+    <!-- The YaST menu -->
+    <Menu>
+        <Name>YaST2</Name>
+        <MergeFile>yast-settings.menu</MergeFile>
+        <Directory>fns-suse-yast.directory</Directory>
+    </Menu>
+</Menu> <!-- End Applications -->

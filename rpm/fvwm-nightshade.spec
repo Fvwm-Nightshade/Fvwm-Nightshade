@@ -50,6 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/*
 %{_datadir}/*
+/etc/*
 
 %define date%(echo `LC_ALL="C" date +"%a %b %d %Y"`)
 %changelog

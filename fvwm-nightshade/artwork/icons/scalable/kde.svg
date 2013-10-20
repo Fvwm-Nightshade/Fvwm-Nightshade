@@ -1,0 +1,54 @@
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+
+<!-- KDE-LOGO converted by Theseus (www.svg4all.de)-->
+
+<svg width="500" height="500">
+<defs>
+  <radialGradient id="grad1" gradientUnits="userSpaceOnUse" cx="170" cy="160" r="220">
+    <stop stop-color="#fefef2" offset="0" />
+    <stop stop-color="#fefef2" offset="0.1" />
+    <stop stop-color="#fcfccd" offset="0.3" />
+    <stop stop-color="#fcd99a" offset="0.5" />
+    <stop stop-color="#e4b573" offset="0.6" />
+    <stop stop-color="#cb9e60" offset="0.75" />
+    <stop stop-color="#c19553" offset="1" />
+  </radialGradient>
+  <linearGradient id="grad2" gradientUnits="userSpaceOnUse" x1="10" y1="10" x2="300" y2="400">
+    <stop stop-color="#fffff2" offset="0" />
+    <stop stop-color="#fffff2" offset="0.4" />
+    <stop stop-color="#b1b3b2" offset="1" />
+  </linearGradient>
+  <linearGradient id="grad3" gradientUnits="userSpaceOnUse" x1="100" y1="100" x2="300" y2="400">
+    <stop stop-color="#6e6e6e" offset="0" />
+    <stop stop-color="#373731" offset="1" />
+  </linearGradient>
+  <linearGradient id="grad4" gradientUnits="userSpaceOnUse" x1="200" y1="200" x2="250" y2="350">
+    <stop stop-color="#545450" offset="0" />
+    <stop stop-color="#d9dade" offset="1" />
+  </linearGradient>
+  <linearGradient id="grad5" gradientUnits="userSpaceOnUse" x1="100" y1="400" x2="250" y2="350">
+    <stop stop-color="#c5b7aa" offset="0" />
+    <stop stop-color="#fefdf9" offset="1" />
+  </linearGradient>
+  <filter id="shadow" filterUnits="objectBoundingBox" x="-10%" y="-10%" width="120%" height="120%"> 
+    <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="shadow"/>    
+    <feMerge> 
+      <feMergeNode in="shadow"/>
+      <feMergeNode in="shadow"/>
+      <feMergeNode in="shadow"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>     
+  </filter>  
+</defs>
+
+<g id="gear" filter="url(#shadow)" stroke="none">
+  <path fill="url(#grad2)" d="M200 144, l-100 -71, l-35 35, l65 95, l-118 25, l0 50, 120 22, l-72 101, l36 38, l100 -73, l20 125, l52 0, l20 -126, l101 74, l35 -39, l-44 -60, l0 -48, l89 -14, l0 -52, l-100 -17, z"/>
+  <circle fill="url(#grad3)" cx="243" cy="254" r="165"/>
+  <circle fill="url(#grad2)" cx="243" cy="254" r="158"/>
+  <circle fill="url(#grad4)" cx="243" cy="254" r="135"/>
+  <circle fill="url(#grad5)" id="sphere-reflection" cx="247" cy="269" r="120"/>
+  <circle fill="url(#grad1)" id="sphere" cx="243" cy="254" r="123"/>
+</g>
+<path id="k" fill="white" filter="url(#shadow)" d="M197 19, l0 345, l84 -10, l0 -147, l115 160, l83 -26, l-112 -158, l115-145, l-90 -23, l-111 150, l0 -152, z"/>
+
+</svg>

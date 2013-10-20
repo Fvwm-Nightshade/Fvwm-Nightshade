@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.0"
+   width="256"
+   height="256"
+   id="svg2">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient4088">
+      <stop
+         id="stop4090"
+         style="stop-color:#6294ff;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop4092"
+         style="stop-color:#0051ff;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient21776">
+      <stop
+         id="stop21778"
+         style="stop-color:#000000;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop21784"
+         style="stop-color:#373737;stop-opacity:1"
+         offset="0.5" />
+      <stop
+         id="stop21780"
+         style="stop-color:#545454;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient20799">
+      <stop
+         id="stop20801"
+         style="stop-color:#5f5f5f;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop20803"
+         style="stop-color:#a0a0a0;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient19818">
+      <stop
+         id="stop19820"
+         style="stop-color:#b3b3b3;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop19822"
+         style="stop-color:#e0e0e0;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient16886">
+      <stop
+         id="stop16888"
+         style="stop-color:#676767;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop16894"
+         style="stop-color:#616161;stop-opacity:1"
+         offset="0.28460741" />
+      <stop
+         id="stop16896"
+         style="stop-color:#bbbbbb;stop-opacity:1"
+         offset="0.5122323" />
+      <stop
+         id="stop16890"
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient10994">
+      <stop
+         id="stop10996"
+         style="stop-color:#b0b0b0;stop-opacity:0"
+         offset="0" />
+      <stop
+         id="stop11002"
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="0.46590909" />
+      <stop
+         id="stop11004"
+         style="stop-color:#949494;stop-opacity:1"
+         offset="0.93181819" />
+      <stop
+         id="stop10998"
+         style="stop-color:#949494;stop-opacity:0"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient6129">
+      <stop
+         id="stop6131"
+         style="stop-color:#747474;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop6137"
+         style="stop-color:#eaeaea;stop-opacity:1"
+         offset="0.5" />
+      <stop
+         id="stop6139"
+         style="stop-color:#c4c4c4;stop-opacity:1"
+         offset="0.75" />
+      <stop
+         id="stop6133"
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <filter
+       color-interpolation-filters="sRGB"
+       id="filter14934">
+      <feGaussianBlur
+         id="feGaussianBlur14936"
+         stdDeviation="0.70481535" />
+    </filter>
+    <linearGradient
+       x1="58.222721"
+       y1="11.919148"
+       x2="50.957073"
+       y2="111.56588"
+       id="linearGradient3294"
+       xlink:href="#linearGradient21776"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.94932611,0,0,0.94932611,3.7805979,5.8162233)" />
+    <linearGradient
+       x1="57.706955"
+       y1="88.513283"
+       x2="51.685875"
+       y2="63.940647"
+       id="linearGradient3297"
+       xlink:href="#linearGradient20799"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.94932611,0,0,0.94932611,3.7805979,5.8162233)" />
+    <linearGradient
+       x1="13.125309"
+       y1="108.18014"
+       x2="7.2367773"
+       y2="108.4483"
+       id="linearGradient3301"
+       xlink:href="#linearGradient10994"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.94932611,0,0,0.94932611,3.7805979,5.8162233)" />
+    <linearGradient
+       x1="55.532738"
+       y1="92.655975"
+       x2="53.538322"
+       y2="108.63219"
+       id="linearGradient3308"
+       xlink:href="#linearGradient16886"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0074497,0,0,1.0074497,0.11202601,0.36036156)" />
+    <linearGradient
+       x1="99.311035"
+       y1="117.01833"
+       x2="100.79892"
+       y2="122.07417"
+       id="linearGradient3311"
+       xlink:href="#linearGradient10994"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.94932611,0,0,0.94932611,3.7805979,5.8162233)" />
+    <linearGradient
+       x1="64.418236"
+       y1="90.553123"
+       x2="73.781937"
+       y2="129.62103"
+       id="linearGradient3314"
+       xlink:href="#linearGradient6129"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.94932611,0,0,0.94932611,3.7805979,5.8162233)" />
+    <linearGradient
+       x1="107.91725"
+       y1="96.608521"
+       x2="65.772636"
+       y2="16.110321"
+       id="linearGradient3318"
+       xlink:href="#linearGradient19818"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.94932611,0,0,0.94932611,3.7805978,5.8162233)" />
+    <linearGradient
+       x1="76.878227"
+       y1="20.850063"
+       x2="79.653938"
+       y2="66.039955"
+       id="linearGradient4094"
+       xlink:href="#linearGradient4088"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,128)"
+     id="layer1" />
+</svg>

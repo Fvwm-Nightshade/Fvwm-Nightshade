@@ -100,8 +100,11 @@ depends on the screen width. If more applets in the systray than representable
 a bar on the left and right side appears while hovering over the left or 
 right end of the tray. With scrolling the mouse wheel you can move throug 
 the applets.
-* A cpu graph with percentage.
-* A Clock and date applet.
+* A cpu graph with percentage. With right click on the applet area an 
+opertion menu appears with the possibility to restart the applet or open 
+the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+* A Clock and date applet. With right click on the applet area an opertion 
+menu appears with the possibility to restart the applet.
 
 The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So it 
 will maximum growing underneath the horizontal elements. You can use _Alt-F11_ 
@@ -116,8 +119,11 @@ _The Panel_::
 +
 It contains from above to below:
 +
-* A Clock and date applet.
-* A cpu graph with percentage.
+* A Clock and date applet. With right click on the applet area an opertion 
+menu appears with the possibility to restart the applet.
+* A cpu graph with percentage. With right click on the applet area an 
+opertion menu appears with the possibility to restart the applet or open 
+the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
 * The systemtray with application applets. The amount of visible applets 
 depends on the screen width. If more applets in the systray than representable 
 a bar on the left and right side appears while hovering over the left or 
@@ -177,8 +183,11 @@ depends on the screen width. If more applets in the systray than representable
 a bar on the left and right side appears while hovering over the left or 
 right end of the tray. With scrolling the mouse wheel you can move through 
 the applets.
-* A cpu graph with percentage.
-* A Clock and date applet.
+* A cpu graph with percentage. With right click on the applet area an 
+opertion menu appears with the possibility to restart the applet or open 
+the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+* A Clock and date applet. With right click on the applet area an opertion 
+menu appears with the possibility to restart the applet.
 * The Exit menu. It opens by left clicking the exit icon.
 
 _The Bottom Panel_::
@@ -253,18 +262,18 @@ Regenerate (XDG) Menu
 The "Regenerate (XDG) Menu" point is to reconfigure or refresh the XDG 
 application menus after software installation. 
 
-NOTE: If you want icons infront of the app names you should change the 
-default entry of "Converted Icon directory" from +\~/.fvwm/icons+ to 
-+~/.fvwm-nightshade/icons+ because then the converted icons won't stored 
-in Fvwm-Nightshade's user home.
+For information about each possibility click on the "Help" button right 
+hand of the section headline. A help window appears describing each entry 
+shortly. 
 
-How to use it see the fvwm-menu-desktop manpage or clicking on the "Help" 
-button.
+For more information about _fvwm-menu-desktop_ itself click on the "Help" 
+button in the action section left hand of the Quit button or in each help
+section window.
 
 Configuration
 ^^^^^^^^^^^^^
 In this menu you find parts to configure the look and feel of *Fvwm-Nightshade*. 
-But also some tools for Gtk and Qt applications.
+But also some tools for Gtk and Qt applications if they are installed.
 
 Fvwm::
 +
@@ -288,11 +297,12 @@ and other programs like manpage viewers, online helps, etc.
 
 Fvwm modules
 ^^^^^^^^^^^^
-In this menu you can start and stop Fvwm modules on the fly.
+In this menu you can start and stop Fvwm modules on the fly. Also a submenu directory 
+for useful FvwmForms exist.
 
 Window Operations
 ^^^^^^^^^^^^^^^^^
-*Fvwm-Nightshade* have different "WinOops" menus. You can call them on different 
+*Fvwm-Nightshade* have different "WinOps" menus. You can call them on different 
 places but here you find all of them ^^.
 
 Lock Screen
@@ -494,8 +504,9 @@ Structure of Fvwm-Nightshade
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *Fvwm-Nightshade* is splitted in a system and an user part.
 
-The system part is located in +/usr/local+ (default) or +/usr+ (distribution 
-related). In the followed named as <system>.
+The system part is located in +/usr/local+ (default), +/usr+ (distribution 
+related) or if you use the local installation under +<chosen_dir>+. In the 
+followed named as <system>.
 
 The user part is located in +~/.fvwm-nightshade+. Followed named as <user>.
 
@@ -507,6 +518,7 @@ Location of Files and their Function
 |fvwm-nightshade    |start script.
 |fns-built-trayapplist    |python script for stalonetray to build applet list. Used for restoring applets after restart stalonetray.
 |fns-find-icon        |python script to find the correct icon for iconified apps or for icons used in layouts.
+|fvwm-menu-desktop2     |adapted fvwm-menu-desktop from Fvwm's CVS to create Fvwm menu(s).
 |fns-start-programs    |shell script to start apps from a file list. Used for autostart and starting applets for stalonetray.
 |====
 
@@ -543,14 +555,36 @@ Location of Files and their Function
 
 - 
 
-*/usr/share/fvwm/* -> Scripts which must resides in Fvwm's directory or
-in the <user> directories - FvwmScripts in the scripts/ sub directory, all 
-others in the <user> root.
+*/usr/share/fvwm/* -> Scripts which must resides in Fvwm's directory or if 
+local installation is chosen in the <user> directories - FvwmScripts in the 
+scripts/ sub directory, all others in the <user> root.
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |FNS-BaseSetup            		|Fvwm-Nightshade base setup (FvwmForm script).
-|FvwmScript-CPU-Performance    	|cpufreq settings tool (FvwmForm script).
+|FvwmScript-CPU-Performance    	|Cpufreq settings tool (FvwmForm script).
 |FvwmScript-PersonalMenu        |Personal menu creator (FvwmScript script).
+|fvwm-menu-desktop2-config.fpl  |Configuration GUI for fvwm-menu-desktop2.
+|FvwmForm-SingleMenuHelp2       |Help window for single menu section in fvwm-menu-desktop2-config.
+|FvwmForm-MultiMenuHelp2        |Help window for multiple menu section in fvwm-menu-desktop2-config.
+|FvwmForm-GenOptionHelp2        |Help window for general option section in fvwm-menu-desktop2-config.
+|====
+
+-
+
+*/etc/xdg/menus/* -> XDG applications menu directory. If local installation 
+is chosen it is located in ~/.config/menus/.
+[cols="20%,80%",frame="none",grid="none"]
+|====
+|fns-applications.menu          |Fvwm-Nightshade's application menu.
+|====
+
+-
+
+*/usr/share/desktop-directories/* -> Directory for XDG directory files. If local 
+installation is chosen it is located in <chosen_dir>/share/desktop-directories/.
+[cols="20%,80%",frame="none",grid="none"]
+|====
+|fns-<*>.directory              |Some .directory files for fns-applications.menu.
 |====
 
 -
@@ -621,7 +655,7 @@ like email daemons or systemtools (e.g. gkrellm). Therefore a file ".autostart"
 must created in the <user> directory and filled with application commands per 
 line e.g.
 ----
-sleep 2; gkrellm
+thunderbird
 ----
 
 Another possibility is to use the function "FuncStartSystrayApplets" in the 
@@ -645,6 +679,7 @@ Fvwm namespace:
 |FNS_SYSTEMDIR    	|It contains the system path to the shared files of Fvwm-Nightshade - /usr/local/share/fvwm-nightshade or /usr/share/fvwm-nightshade.
 |FNS_INITFILE       |It holds the path to the pre config fns-init.
 |FNS_DEBUG        	|If you want to raise the message output of Fvwm-Nightshade into ~/.xsession-errors set it to 1. Default is 0.
+|$[MenuIconSize]    |It holds the used menu icon size set with fvwm-menu-desktop2-config to adapt menu icons on the fly.
 |====
 
 Fvwm related Variables
