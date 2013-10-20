@@ -1,4 +1,9 @@
 History:
+10/20/2013
+- update fvwm-nightshade help in asciidoc, man page and html
+- add missing categories to fns-applications.menu based on latest XDG menu spec
+- update README and config version
+
 10/18/2013
 - final update of spanish and french po and mo files
 - fix bug in a line of FvwmForm-GenOptionHelp2 that translation failed
