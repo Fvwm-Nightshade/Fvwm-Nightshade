@@ -1,6 +1,219 @@
 History:
 
-09/07/2013 V 0.6.7
+10/20/2013 V 0.6.8
+- update fvwm-nightshade help in asciidoc, man page and html
+- changes to fns-applications.menu:
+  - add missing categories based on latest XDG menu spec
+  - move file-tools from System Tools to Accessories
+  - add category Utility to NOT section of Preferences and add a NOT section
+    with Office to TextTools in Editors to prevent showing office apps there.
+- change fns-system-tools-file-tools.directory to fns-accessories-file-tools.directory
+- change wrong make command 'prepare-gentoo' to 'gentoo-prepare' in Makefile
+- update README and config version
+
+10/18/2013
+- final update of spanish and french po and mo files
+- fix bug in a line of FvwmForm-GenOptionHelp2 that translation failed
+- update config version, NEWS, AUTHORS and README
+
+10/17/2013
+- adapt fvwm-menu-desktop2-config.fpl and its help files to handle different
+  language layouts
+- add empty strings and adapt some text length to fvwm-nightshade.pot for 
+  better layout handling with different languages. Also in the german, 
+  spanish and french po files.
+- add french translations for FvwmForm-GenOptionHelp to po file
+- update german and french mo files
+- update config version
+
+10/15/2013
+- update pot template for fvwm-menu-desktop2-config.fpl and its help files
+- update german po and mo file:
+  - add translation messages for fvwm-menu-desktop2-config.fpl and its help files
+  - add new translation messages from CPU and Clock Ops menu
+- update french po file:
+  - add english translation messages for fvwm-menu-desktop2-config.fpl and its help files
+  - add new translation messages from CPU and Clock Ops menu
+- fix bugs in layouts that some translations doesn't work
+- adapt line formatings in fvwm-menu-desktop2-config.fpl and its help files
+- update config version
+
+10/14/2013
+- add /etc/* to %files in fvwm-nightshade.spec to add fns-applications.menu to rpm
+- add new translation msgids to fvwm-nightshade.pot for fvwm-menu-desktop2-config.fpl 
+  and its help files
+- adapt some changes in fvwm-menu-desktop2-config.fpl help files to reduce translation msgids
+- update german translation
+- update config version
+
+10/13/2013
+- remove the command 'Separator' in fvwm-menu-desktop2-config.fpl and all help files 
+  because only available in CVS of FVWM
+- fix bug in fvwm-menu-desktop2 that .theme file will be generated if --enable-mini-icons
+  isn't set
+- fix bug in layouts that shortcuts are shown with '&' instead of an underline
+- change command fvwm-menu-desktop to fvwm-menu-desktop2 in fvwm-menu-desktop2-config and
+  its helps
+- add fns-applications.menu to system/
+- add desktop-directories for fns-applications.menu to system/
+- add XDG menu parts to install/uninstal and build-list in Makefile
+- fix translation bug and wrong icon in config
+- update version in config
+- update README and NEWS
+
+10/12/2013
+- changes in fvwm-menu-desktop2:
+  - add two new options: --app-icon and --dir-icon to handle default icons 
+    for not available app/dir icons
+  - fix bug in convert icon routine that background of svg icons are transparent again
+- update fvwm-menu-desktop2 manpage for the new options --app-icon and --dir-icon
+- rewrite of fvwm-menu-desktop2-config.fpl to add the new options of fvwm-menu-desktop2
+  and help buttons.
+- add 3 new FvwmForms for fvwm-menu-desktop2-config help
+- add 11 new vector icons for menu
+- change colors in 3 vector icons for menu
+- changes in config:
+  - remove partitialmaximize in menu
+  - exchange bitmap icon entries with new svg icon entries in menus
+  
+09/22/2013
+- Some Bugfixes in fvwm-menu-desktop2:
+  - DecodeEncodeErrors in menu names
+  - no output appears with 'fvwm-menu-desktop2 --get-menus all|desktop'
+  - No entry "Regenerate XDG menu(s)" appears with
+    'fvwm-menu-desktop2 --insert-in-menu MenuRoot'
+  -  exchange all tabs with spaces to prevent indention errors
+- update config version
+
+09/12/2013
+- merge parts from branch feature_nanomoids into develop:
+  - add new variable __version__ for version in fns-find-icon
+  - remove wm-icons package from recommended dependencies in /debian/control
+  - add new vector icons to artworks/icons/scalable to replace wm-icons package
+  - delete fns bitmap icons because they never needed - a svg icon exist
+  - add own_window_title to conkyrc_clock and conkyrc_cpu to make it possible to kill them with xkill
+  - change static menus to dynamic menus and xpm to vector icons in all layouts to change icon size on the fly
+  - change bitmap icons to vector icons in G2likeTopBar, VerticalPanel and HorizontalPanel
+    to change icon size on the fly
+  - add mouse action on conky_cpu and conky_clock button - right click to show menu - in
+    G2likeTopBar, HorizontalPanel and VerticalPanel
+  - changes in config:
+    - change the order in ImagePath that Fvwm search for images in FVWM_USERDIR first
+    - change most of the xpm files to svg
+    - change static menus to dynamic menus and xpm to vector icons to change icon size on the fly
+    - fix variable problem in FuncWriteInfoStoreToFileAndSet
+    - implement SetMenuIconSize in all menus if needed to update icon size variable to enable
+      changing icon size on the fly
+    - exchange tabs with spaces
+    - add deleted FuncUpdateBaseSetupFile to update theme and layout if changed
+    - add FuncMenuClockOps and FuncMenuCpuOps
+  - add SetMenuIconSize function in fns-init to set Menu icon size dependent of .FvwmForm-Desktop-Config
+    on the fly in menus and Windowlist
+  - exchange tabs with spaces in header.tpl
+  - remove wm-icons from recommended dependencies in INSTALL and README
+  - exchange tabs with spaces in INSTALL and README
+
+09/12/2013
+- add Gentoo installation support (thanks to Sebastian Luncan for the ebuild)
+- add install documentation for Gentoo to INSTALL
+- add gentoo-prepare in Makefile to create an install package and an ebuild
+  with the correct version number
+- update README, AUTHORS and NEWS
+- fix bugs in fvwm-menu-desktop2 if only one xdg menu exists:
+  - no output appears with 'fvwm-menu-desktop --get-menus all|desktop'
+  - no entry "Regenerate XDG menu(s)" appears with 'fvwm-menu-desktop --insert-in-menu MenuRoot'
+    therefore the output in fvwm-menu-desktop-config.fpl is completely crappy.
+  - if an icon not found but the path was given convert
+  - exchanged all Tabs with spaces to prevent indention errors with the Python interpreter.
+- update version in config to correct Gentoo requirements: 0.7.4.20131209
+- change #!/usr/bin/env python2 to #!/usr/bin/env python2.7 in python scripts because
+  not on all systems python2 symlink exist.
+- remove python_replicate_script function from ebuild template
+
+09/07/2013
+- add deleted function FuncWriteSetEnvToFileAndSet back into config
+- fix wrong rm commands in uninstall-alternative in Makefile
+
+09/05/2013 V 0.7.4
+- merge develop in master
+- update required FVWM to >= 2.6.5 in INSTALL
+- update version to 0.7.4 in NEWS and README
+- adapt Requirements in NEWS and README
+
+09/05/2013
+- adapt prepare-rpm rule in Makefile to work with FVWM 2.6.5 installed
+  by the package manager
+
+09/04/2013
+- change #!/usr/bin/python to #!/usr/bin/env python2 in python script to
+  prevent the use of Python 3
+- remove the command 'Separator' in fvwm-menu-desktop2-config.fpl because
+  only available in CVS of FVWM
+- change in arch/PKGBUILD_FNS wrong dependency python<3 to python2
+- change in arch/PKGBUILD_FNS wrong dependency pyxdg to python2-xdg
+- remove old and useless arch/PKGBUILD_FNS_download
+- add translation parts for fvwm-menu-desktop and fvwm-menu-desktop-config.fpl
+  to /templates/fvwm-nightshade.pot
+- adapt INSTALL to new usage of FVWM 2.6.5 instead of 2.6.6 CVS
+- change copyright in COPYING from 2012 to 2013
+- update README
+
+09/03/2013
+- changes to use Fvwm-Nightshade with FVWM 2.6.5 instead of 2.6.6 CVS:
+  - add some files from CVS with some name changes to enable the usages
+    of Xdg menus:
+    - fvwm-menu-desktop as fvwm-menu-desktop2
+    - fvwm-menu-desktop-config.fpl as fvwm-menu-desktop2-config.fpl
+    - fvwm-menu-desktop manpage as fvwm-menu-desktop2 manpage
+  - add translation parts for fvwm-menu-desktop and fvwm-menu-desktop-config.fpl
+    from CVS fvwm..de/fr.po to fvwm-nightshade.de/fr.po and built new mo files
+  - add FVWM version check in FuncXdgMenusInRoot to decide which fvwm-menu-desktop
+    have to be used.
+  - update debian/control:
+    - change required FVWM version to >> 2.6.4
+    - change required python version to << 3
+    - remove some uninteresting description lines and add Xdg menu support
+  - update arch/PKGBUILD_FNS and rpm/fvwm-nightshade.spec:
+    - change required FVWM version to >= 2.6.5
+    - change required python version to < 3
+  - update README:
+    - change required FVWM version to >= 2.6.5
+    - add Xdg menu support
+  - update NEWS
+    
+08/12/2013
+- FvwmSmartMaximize: make EwmhBaseStruts determination more perlish
+
+08/01/2013
+- add FvwmSmartMaximize to all themes:
+  - move Maximize horizontally from mouse 3 to mouse 2 + Alt
+  - add Maximize smart to mouse 3
+  - update help
+- add FvwmSmartMaximize to StartFunction and Maximize menu
+- add asciidoc version of FvwmSmartMaximize help
+- exchange pod manpage of FvwmSmartMaximize with asciidoc generated
+- add html page of FvwmSmartMaximize
+- update pod docu in FvwmSmartMaximize
+- add FvwmSmartMaximize in menu MenuWindowMaximize
+- update bindings in fvwm-nightshade help (asciidoc, manpage, html) and add
+  section MODULE CREATION
+- update translation files (pot, po, mo)
+- update AUTHORS, NEWS
+
+07/31/2013
+- Fixes in FvwmSmartMaximize:
+  - get EwmhBaseStruts via xprop to eliminate command line arguments
+  - add additional option 'screen' to handle multi display support
+  - fix bug in creating preliminary display rectangle
+  - remove function roundDown because never needed
+  - finish pod documentation
+  - add manpage created from pod to man/
+- add Modulpath to config
+
+07/24/2013
+- new module FvwmSmartMaximize
+
+07/08/2013 V 0.6.7
 - exchange Esetroot with feh because of the poor availability in different
   distribution repositories.
 - update translation files (pot & po)

@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.3
+# Version:      2.1.7
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      07/04/2013
+# Changed:      10/13/2013
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -17,7 +17,6 @@ tarname 	= $(package)
 distdir 	= ../$(tarname)-$(version)
 pkgdir		= ../$(package)
 arch: pkgdir = /tmp/$(package)
-rpm: srcdir = $(shell rpmbuild --showrc |grep " _topdir" |cut -f2)/SOURCES
 
 DESTDIR		?=
 deb: DESTDIR = $(pkgdir)
@@ -36,7 +35,9 @@ mandir 		= $(datadir)/man
 man1dir 	= $(mandir)/man1
 docdir 		= $(datadir)/doc
 localedir	= $(datadir)/locale
-fnsuserdir	= ~/.$(package)
+xdgdir		= $(datadir)/desktop-directories
+userdir		= ~
+fnsuserdir	= $(userdir)/.$(package)
 
 pkgdatadir 	= $(datadir)/$(package)
 pkgdocdir 	= $(docdir)/$(package)
@@ -50,6 +51,7 @@ fns_docdirs		= $(shell find doc/ -type d|sort -r|cut -d'/' -f 2-)
 fns_files 		= $(shell find $(package) -type f|cut -d'/' -f 2-)
 fns_directories = $(shell find $(package)/ -type d|sort -r|cut -d'/' -f 2-)
 fns_mofiles 	= $(shell ls -1 po |grep ".mo")
+fns_xdgfiles	= $(shell find system/desktop-directories -type f|cut -d'/' -f 3-)
 id				= $(shell id -un)
 
 fvwm_path	?= $(DESTDIR)/usr/share/fvwm
@@ -60,6 +62,7 @@ all:
 dist: $(distdir).tar.gz
 
 $(distdir).tar.gz: FORCE $(distdir)
+	echo "Create dist package ../$(tarname)-$(version)"
 	tar chof - $(distdir) |gzip -9 -c > $(distdir).tar.gz
 	rm -rf $(distdir)
 
@@ -187,8 +190,6 @@ build-install-list:
 	done
 	echo $(man1dir) >> ./fns-install_$(version).lst
 	echo $(mandir) >> ./fns-install_$(version).lst
-	echo $(datadir) >> ./fns-install_$(version).lst
-	echo $(pkgprefix) >> ./fns-install_$(version).lst
 
 	echo "-> Localization files"
 	for file in $(fns_mofiles); do \
@@ -201,6 +202,21 @@ build-install-list:
 			echo $(localedir)/$$lang/LC_MESSAGES/$$basename.mo >> ./fns-install_$(version).lst; \
 		fi; \
 	done
+
+	echo "-> XDG menu files"
+	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
+		echo $(userdir)/.config/menus/fns-applications.menu >> ./fns-install_$(version).lst; \
+	else \
+		echo /etc/xdg/menus/fns-applications.menu >> ./fns-install_$(version).lst; \
+	fi; \
+	
+	for file in $(fns_xdgfiles); do \
+		echo $(xdgdir)/$$file >> ./fns-install_$(version).lst; \
+	done
+	echo $(xdgdir) >> ./fns-install_$(version).lst
+
+	echo $(datadir) >> ./fns-install_$(version).lst
+	echo $(pkgprefix) >> ./fns-install_$(version).lst
 
 	echo "Done"
 	echo
@@ -293,6 +309,20 @@ dist-install:
 			install -m 644 po/$$file $(localedir)/$$lang/LC_MESSAGES/$$basename.mo; \
 		fi; \
 	done
+
+	echo "-> Install XDG menu files"
+	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
+		install -d $(userdir)/.config/menus; \
+		install -m 644 system/fns-applications.menu $(userdir)/.config/menus/; \
+	else \
+		install -d $(DESTDIR)/etc/xdg/menus; \
+		install -m 644 system/fns-applications.menu $(DESTDIR)/etc/xdg/menus/; \
+	fi; \
+	
+	for file in $(fns_xdgfiles); do \
+		install -d $(xdgdir); \
+		install -m 644 system/desktop-directories/$$file $(xdgdir); \
+	done
 	
 	if test -z "$(DESTDIR)"; then \
 		echo "Fvwm-Nightshade $(version) is installed. Enjoy ^^"; \
@@ -370,19 +400,19 @@ uninstall-alternative:
 	if test -f "/usr/share/xsessions/fvwm-nightshade.desktop"; then \
 		echo "-> Uninstall login file"; \
 		echo "remove /usr/share/xsessions/fvwm-nightshade.desktop"; \
-		-rm /usr/share/xsessions/fvwm-nightshade.desktop; \
+		rm -f /usr/share/xsessions/fvwm-nightshade.desktop; \
 	fi
 
 	echo "-> Uninstall system files"
 	if test -d "$(pkgdatadir)"; then \
 		echo "remove $(pkgdatadir) completelly"; \
-		-rm -r $(pkgdatadir); \
+		rm -rf $(pkgdatadir); \
 	fi
 	
 	echo "-> Uninstall documentation"
 	if test -d "$(pkgdocdir)"; then \
 		echo "remove $(pkgdocdir) completelly"; \
-		-rm -r $(pkgdocdir); \
+		rm -rf $(pkgdocdir); \
 	fi
 
 	echo "-> Uninstall manpages"
@@ -404,6 +434,27 @@ uninstall-alternative:
 		fi; \
 	done
 
+	echo "-> Uninstall XDG menu files"
+	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
+		if test -f "$(userdir)/.config/menus/fns-applications.menu"; then \
+			echo "remove $(userdir)/.config/menus/fns-applications.menu"; \
+			rm -f $(userdir)/.config/menus/fns-applications.menu; \
+		fi; \
+	else \
+		if test -f "/etc/xdg/menus/fns-applications.menu"; then \
+			echo "remove /etc/xdg/menus/fns-applications.menu"; \
+			rm -f /etc/xdg/menus/fns-applications.menu; \
+		fi; \
+	fi; \
+	
+	for file in $(fns_xdgfiles); do \
+		if test -f "$(xdgdir)/$$file"; then \
+			echo "remove $(xdgdir)/$$file"; \
+			rm -f $(xdgdir)/$$file; \
+		fi; \
+	done
+	rmdir $(xdgdir)
+
 	echo "Fvwm-Nightshade is now removed (hopefully). Only ~/.fvwm-nightshade exists."
 	echo "If you don't need it anymore remove it by hand."
 
@@ -424,8 +475,19 @@ deb: build-deb dist-install
 	echo "Done."
 
 prepare-rpm:
-	sed -i "s/Version:.*/Version:\t$(version)/" rpm/fvwm-nightshade.spec
-	cp $(distdir).tar.gz $(srcdir)
+	if test "`rpm -q rpm-build|cut -d '-' -f -2`" != "rpm-build"; then \
+		echo "rpm-build package isn't installed."; \
+		echo "Please install rpm-build and rerun make rpm."; \
+		exit 2; \
+	else \
+		if test ! -f "~/.rpmmacros"; then \
+			echo "%_topdir /home/$(id)/redhat" > ~/.rpmmacros; \
+		fi; \
+		sed -i "s/Version:.*/Version:\t$(version)/" rpm/fvwm-nightshade.spec; \
+		srcdir=`rpmbuild --showrc |grep " _topdir" |cut -f2`/SOURCES; \
+		mkdir -p $$srcdir; \
+		cp $(distdir).tar.gz $$srcdir; \
+	fi;
 
 rpm: dist prepare-rpm
 	echo "Build rpm package"
@@ -447,7 +509,11 @@ arch: prepare-arch
 	rm -f *.xz
 	mv $(pkgdir)/*.xz ../
 	rm -rf $(pkgdir)
-	
-.PHONY: dist distcheck install uninstall uninstall-alternative deb rpm arch
-.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list uninstall-alternative dist-install
+
+gentoo-prepare: dist
+	echo "Create ebuild with current version in name"
+	cp gentoo/fvwm-nightshade.ebuild fvwm-nightshade-$(version).ebuild
+
+.PHONY: dist distcheck install uninstall uninstall-alternative deb rpm arch gentoo-prepare
+.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list uninstall-alternative dist-install gentoo-prepare
 	

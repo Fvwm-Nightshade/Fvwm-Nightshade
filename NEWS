@@ -1,9 +1,32 @@
 Fvwm-Nightshade Release Notes
 =============================
 
+Version 0.6.8 (20th October 2013)
+
+Changes:
+--------
+- New feature smart maximize - moves and resizes a current window to the 
+  largest free area of a desktop/page (thanks to Andreas Hoenen ^^)
+- Right click menu for Conky clock and CPU applet in panel to restart 
+  them on error and start other related scripts/applets.
+- New set of icons for menus and internal apps to remove wm-icons dependency
+  because this package isn't available in all distributions and of its' 
+  unscalability. Also special thanks to Alessandro Roncone who gives us 
+  the permission to use his Awoken icons :-).
+- Works now with FVWM 2.6.5 without loosing new Xdg menu support from CVS
+  version
+- Support for Gentoo installation (thanks to Sebastian Luncan :-) )
+- Own XDG applications menu with it's own directory files
+- New fvwm-menu-desktop GUI with help windows
+
+------------------------------------------------------------------------
+
 Version 0.6.7 (09th July 2013)
+
+Changes:
+--------
 - Fix issue #38 - Enhance uninstall routine
-  Makefile supports now the creation of an install list so keep the sources 
+  Makefile supports now the creation of an install list so keep the sources
   of the installed version never needed.
 - Fix issue #39 - installing localy needs to update /usr/share/xsessions/
   It is now possible to install Fvwm-Nightshade without the login file

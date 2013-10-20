@@ -14,8 +14,8 @@ Source0:	%{expand:%%(pwd)}/../%{name}-%{version}.tar.gz
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 
-Requires:	fvwm >= 2.6.6
-Requires:	python <= 2.7
+Requires:	fvwm >= 2.6.5
+Requires:	python < 3
 Requires:	pyxdg
 Requires:	xterm
 Requires:	conky
@@ -50,6 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/*
 %{_datadir}/*
+/etc/*
 
 %define date%(echo `LC_ALL="C" date +"%a %b %d %Y"`)
 %changelog
