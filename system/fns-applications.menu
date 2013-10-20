@@ -84,7 +84,10 @@
             <Name>Editors</Name>
             <Directory>fns-accessories-editors.directory</Directory>
             <Include>
-                <Category>TextTools</Category>
+                <And>
+                    <Category>TextTools</Category>
+                    <Not><Category>Office</Category></Not>
+                </And>
                 <Category>TextEditor</Category>
             </Include>
         </Menu>
@@ -1104,6 +1107,7 @@
                 <And>
                     <Category>Settings</Category>
                     <Not>
+                        <Category>Utility</Category>
                         <Category>System</Category>
                         <Category>HardwareSettings</Category>
                         <Category>X-XFCE-HardwareSettings</Category>
