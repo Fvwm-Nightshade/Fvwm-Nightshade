@@ -1,5 +1,6 @@
 <!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
  "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+<!-- V 1.0.1 -->
 
 <Menu>
     <Name>Applications</Name>
@@ -29,17 +30,16 @@
                 <Category>Utility</Category>
                 <Not>
                     <Category>Accessibility</Category>
-                    <Category>DesktopSettings</Category>
-                    <Category>TextTools</Category>
                     <Category>Archiving</Category>
                     <Category>Compression</Category>
-                    <Category>TextTools</Category>
-                    <Category>TextEditor</Category>
-                    <Category>System</Category>
+                    <Category>DesktopSettings</Category>
                     <Category>FileTools</Category>
                     <Category>FileManager</Category>
                     <Category>PackageManager</Category>
+                    <Category>System</Category>
                     <Category>TerminalEmulator</Category>
+                    <Category>TextEditor</Category>
+                    <Category>TextTools</Category>
                     <Category>Viewer</Category>
                     <Category>X-SuSE-DesktopUtility</Category>
                 </Not>
@@ -88,6 +88,16 @@
                 <Category>TextEditor</Category>
             </Include>
         </Menu>
+
+        <Menu>
+            <Name>File tools</Name>
+            <Directory>fns-system-tools-file-tools.directory</Directory>
+            <Include>
+                <Category>FileTools</Category>
+                <Category>FileManager</Category>
+                <Filename>exo-file-manager.desktop</Filename>
+            </Include>
+        </Menu>
     </Menu> <!-- End Accessories -->
 
     <!-- Development Tools -->
@@ -99,16 +109,21 @@
                 <Category>Development</Category>
                 <Not>
                     <Category>Building</Category>
-                    <Category>Debugger</Category>
-                    <Category>IDE</Category>
-                    <Category>GUIDesigner</Category>
-                    <Category>Profiling</Category>
-                    <Category>RevisionControl</Category>
                     <Category>Database</Category>
-                    <Category>Translation</Category>
+                    <Category>Debugger</Category>
                     <Category>Documentation</Category>
+                    <Category>GUIDesigner</Category>
+                    <Category>IDE</Category>
+                    <Category>Profiling</Category>
+                    <Category>ProjectManagement</Category>
+                    <Category>RevisionControl</Category>
+                    <Category>Translation</Category>
                     <Category>WebDevelopment</Category>
                 </Not>
+            </And>
+            <And>
+                <Category>Development</Category>
+                <Category>ConsoleOnly</Category>
             </And>
             <Filename>emacs.desktop</Filename>
         </Include>
@@ -202,35 +217,34 @@
             <And>
                 <Category>Education</Category>
                 <Not>
-                    <Category>Science</Category>
                     <Category>Art</Category>
-                    <Category>Construction</Category>
-                    <Category>Music</Category>
-                    <Category>Languages</Category>
+                    <Category>ArtificialIntelligence</Category>
+                    <Category>Astronomy</Category>
                     <Category>Biology</Category>
                     <Category>Chemistry</Category>
-                    <Category>Physics</Category>
-                    <Category>Economy</Category>
-                    <Category>Geography</Category>
-                    <Category>Geology</Category>
-                    <Category>History</Category>
-                    <Category>Literature</Category>
-                    <Category>Math</Category>
-                    <Category>Sports</Category>
-                    <Category>Astronomy</Category>
                     <Category>ComputerScience</Category>
-                    <Category>ArtificialIntelligence</Category>
-                    <Category>ParallelComputing</Category>
+                    <Category>Construction</Category>
                     <Category>DataVisualization</Category>
-                    <Category>Robotics</Category>
+                    <Category>Economy</Category>
                     <Category>Electricity</Category>
-                    <Category>Maps</Category>
+                    <Category>Geology</Category>
+                    <Category>Geography</Category>
+                    <Category>History</Category>
                     <Category>Humanities</Category>
                     <Category>ImageProcessing</Category>
-                    <Category>NumericalAnalysis</Category>
+                    <Category>Languages</Category>
+                    <Category>Literature</Category>
+                    <Category>Math</Category>
+                    <Category>Maps</Category>
                     <Category>MedicalSoftware</Category>
-                    <Category>Spirituality</Category>
+                    <Category>Music</Category>
+                    <Category>NumericalAnalysis</Category>
+                    <Category>ParallelComputing</Category>
+                    <Category>Physics</Category>
+                    <Category>Robotics</Category>
+                    <Category>Science</Category>
                     <Category>Sports</Category>
+                    <Category>Spirituality</Category>
                 </Not>
             </And>
         </Include>
@@ -245,8 +259,8 @@
                         <Category>Astronomy</Category>
                         <Category>Biology</Category>
                         <Category>Chemistry</Category>
-                        <Category>Physics</Category>
                         <Category>MedicalSoftware</Category>
+                        <Category>Physics</Category>
                     </Or>
                 </And>
             </Include>
@@ -377,31 +391,33 @@
                 <Category>Science</Category>
                 <Not>
                     <Category>Art</Category>
-                    <Category>Construction</Category>
-                    <Category>Languages</Category>
+                    <Category>ArtificialIntelligence</Category>
                     <Category>Astronomy</Category>
                     <Category>Biology</Category>
                     <Category>Chemistry</Category>
                     <Category>ComputerScience</Category>
-                    <Category>ArtificialIntelligence</Category>
-                    <Category>ParallelComputing</Category>
+                    <Category>Construction</Category>
                     <Category>DataVisualization</Category>
-                    <Category>Robotics</Category>
                     <Category>Economy</Category>
+                    <Category>Education</Category>
                     <Category>Electricity</Category>
-                    <Category>Geography</Category>
                     <Category>Geology</Category>
-                    <Category>Maps</Category>
-                    <Category>Humanities</Category>
+                    <Category>Geography</Category>
                     <Category>History</Category>
-                    <Category>Literature</Category>
+                    <Category>Humanities</Category>
                     <Category>ImageProcessing</Category>
+                    <Category>Languages</Category>
+                    <Category>Literature</Category>
                     <Category>Math</Category>
-                    <Category>NumericalAnalysis</Category>
+                    <Category>Maps</Category>
                     <Category>MedicalSoftware</Category>
+                    <Category>Music</Category>
+                    <Category>NumericalAnalysis</Category>
+                    <Category>ParallelComputing</Category>
                     <Category>Physics</Category>
-                    <Category>Spirituality</Category>
+                    <Category>Robotics</Category>
                     <Category>Sports</Category>
+                    <Category>Spirituality</Category>
                 </Not>
             </And>
         </Include>
@@ -518,6 +534,18 @@
         </Menu>
 
         <Menu>
+            <Name>Music</Name>
+            <Directory>fns-science-music.directory</Directory>
+            <Include>
+                <And>
+                    <Category>Science</Category>
+                    <Category>Music</Category>
+                    <Not><Category>AudioVideo</Category></Not>
+                </And>
+            </Include>
+        </Menu>
+
+        <Menu>
             <Name>Sports</Name>
             <Directory>fns-science-sports.directory</Directory>
             <Include>
@@ -543,10 +571,11 @@
                     <Category>ArcadeGame</Category>
                     <Category>BoardGame</Category>
                     <Category>BoardGame</Category>
-                    <Category>PlatformGame</Category>
                     <Category>CardGame</Category>
+                    <Category>Emulator</Category>
                     <Category>KidsGame</Category>
                     <Category>LogicGame</Category>
+                    <Category>PlatformGame</Category>
                     <Category>RolePlaying</Category>
                     <Category>Shooter</Category>
                     <Category>Simulation</Category>
@@ -655,15 +684,15 @@
                 <Category>Graphics</Category>
                 <Not>
                     <Category>2DGraphics</Category>
-                    <Category>RasterGraphics</Category>
-                    <Category>VectorGraphics</Category>
                     <Category>3DGraphics</Category>
-                    <Category>Scanning</Category>
                     <Category>OCR</Category>
+                    <Category>Office</Category>
                     <Category>Photography</Category>
                     <Category>Publishing</Category>
+                    <Category>RasterGraphics</Category>
+                    <Category>Scanning</Category>
+                    <Category>VectorGraphics</Category>
                     <Category>Viewer</Category>
-                    <Category>Office</Category>
                 </Not>
             </And>
         </Include>
@@ -678,8 +707,10 @@
                         <Category>RasterGraphics</Category>
                         <Category>VectorGraphics</Category>
                     </Or>
-                    <Not><Category>Viewer</Category></Not>
-                    <Not><Category>Office</Category></Not>
+                    <Not>
+                        <Category>Viewer</Category>
+                        <Category>Office</Category>
+                    </Not>
                 </And>
             </Include>
         </Menu>
@@ -746,20 +777,22 @@
             <And>
                 <Category>Network</Category>
                 <Not>
-                    <Category>WebBrowser</Category>
-                    <Category>Email</Category>
-                    <Category>InstantMessaging</Category>
                     <Category>Chat</Category>
-                    <Category>IRCClient</Category>
+                    <Category>Dialup</Category>
+                    <Category>Email</Category>
                     <Category>Feed</Category>
-                    <Category>News</Category>
                     <Category>FileTransfer</Category>
+                    <Category>HamRadio</Category>
+                    <Category>InstantMessaging</Category>
+                    <Category>IRCClient</Category>
+                    <Category>Monitor</Category>
+                    <Category>News</Category>
                     <Category>P2P</Category>
+                    <Category>RemoteAccess</Category>
                     <Category>Telephony</Category>
                     <Category>VideoConference</Category>
-                    <Category>RemoteAccess</Category>
-                    <Category>Dialup</Category>
-                    <Category>HamRadio</Category>
+                    <Category>WebBrowser</Category>
+                    <Category>WebDevelopment</Category>
                     <Category>X-SuSE-RSS-News</Category>
                 </Not>
             </And>
@@ -849,21 +882,20 @@
                 <Not>
                     <Category>Application</Category>
                     <Category>Audio</Category>
+                    <Category>AudioVideoEditing</Category>
+                    <Category>Database</Category>
+                    <Category>DiscBurning</Category>
                     <Category>Video</Category>
+                    <Category>HamRadio</Category>
                     <Category>Midi</Category>
                     <Category>Mixer</Category>
-                    <Category>Tuner</Category>
-                    <Category>TV</Category>
-                    <Category>AudioVideoEditing</Category>
+                    <Category>Music</Category>
                     <Category>Player</Category>
                     <Category>Recorder</Category>
-                    <Category>DiscBurning</Category>
-                    <Category>HamRadio</Category>
-                    <Category>DiscBurning</Category>
-                    <Category>Database</Category>
-                    <Category>Utility</Category>
-                    <Category>Music</Category>
                     <Category>Sequencer</Category>
+                    <Category>Tuner</Category>
+                    <Category>TV</Category>
+                    <Category>Utility</Category>
                 </Not>
             </And>
         </Include>
@@ -947,7 +979,12 @@
         <Include>
             <And>
                 <Category>Office</Category>
-                <Not><Category>Email</Category></Not>
+                <Not>
+                    <Category>Email</Category>
+                    <Category>PDA</Category>
+                    <Category>ProjectManagement</Category>
+                    <Category>Photography</Category>
+                </Not>
             </And>
         </Include>
     </Menu> <!-- End Office -->
@@ -961,16 +998,16 @@
             <And>
                 <Category>System</Category>
                 <Not>
-                    <Category>Settings</Category>
-                    <Category>Game</Category>
+                    <Category>Emulator</Category>
                     <Category>FileTools</Category>
                     <Category>FileManager</Category>
-                    <Category>TerminalEmulator</Category>
                     <Category>Filesystem</Category>
+                    <Category>Game</Category>
                     <Category>Monitor</Category>
                     <Category>PackageManager</Category>
                     <Category>Security</Category>
-                    <Category>Emulator</Category>
+                    <Category>Settings</Category>
+                    <Category>TerminalEmulator</Category>
                     <Category>X-XFCE-HardwareSettings</Category>
                     <Category>X-SuSE-YaST-Hardware</Category>
                     <Category>X-SuSE-YaST-Virtualization</Category>
@@ -1010,16 +1047,6 @@
             <Include>
                 <Category>Emulator</Category>
                 <Category>X-SuSE-YaST-Virtualization</Category>
-            </Include>
-        </Menu>
-
-        <Menu>
-            <Name>File tools</Name>
-            <Directory>fns-system-tools-file-tools.directory</Directory>
-            <Include>
-                <Category>FileTools</Category>
-                <Category>FileManager</Category>
-                <Filename>exo-file-manager.desktop</Filename>
             </Include>
         </Menu>
 
