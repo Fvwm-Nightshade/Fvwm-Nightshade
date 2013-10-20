@@ -1,7 +1,13 @@
 History:
 10/20/2013
 - update fvwm-nightshade help in asciidoc, man page and html
-- add missing categories to fns-applications.menu based on latest XDG menu spec
+- changes to fns-applications.menu:
+  - add missing categories based on latest XDG menu spec
+  - move file-tools from System Tools to Accessories
+  - add category Utility to NOT section of Preferences and add a NOT section
+    with Office to TextTools in Editors to prevent showing office apps there.
+- change fns-system-tools-file-tools.directory to fns-accessories-file-tools.directory
+- change wrong make command 'prepare-gentoo' to 'gentoo-prepare' in Makefile
 - update README and config version
 
 10/18/2013
