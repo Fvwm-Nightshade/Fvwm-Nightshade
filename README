@@ -95,7 +95,7 @@ Featurelist of Fvwm-Nightshade 0.7.4:
 - Splash screen
 - Print messages for needed apps for full config functionality in 
   .xsessions-error
-- Governor-tool FvwmScript-CPU-Performance to handle cpufreq
+- Governor-tool FvwmScript-CPU-Performance to handle cpufreq settings
 - Create thumbs with mini icon and name for iconified applications 
   instead of their icon
 - Build support for deb, rpm, Arch, Gentoo and local installation
@@ -103,7 +103,7 @@ Featurelist of Fvwm-Nightshade 0.7.4:
 - Smart maximize windows - move and resize windows to the largest free 
   area of a desktop/page
 - New set of icons for menus and internal apps
-- Own XDG applications menu with its' directory files
+- Own XDG applications menu with it's own directory files
 - New fvwm-menu-desktop GUI with help windows
 - Restart possibility for Conky clock and CPU applet in panel
 
