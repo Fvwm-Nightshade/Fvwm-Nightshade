@@ -14,6 +14,7 @@ History:
   - add fns-applications.menu to system/
   - change xpm icons to svg icons in menu and update version
   - add XDG menu parts to install/uninstal and build-list in Makefile
+  - fix bug in Makefile that shell errors occur while creating fns-install-list
 
 10/20/2013
 - update fvwm-nightshade help in asciidoc, man page and html
