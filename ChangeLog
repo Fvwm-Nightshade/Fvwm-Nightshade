@@ -1,9 +1,116 @@
 History:
+10/20/2013
+- update fvwm-nightshade help in asciidoc, man page and html
+- changes to fns-applications.menu:
+  - add missing categories based on latest XDG menu spec
+  - move file-tools from System Tools to Accessories
+  - add category Utility to NOT section of Preferences and add a NOT section
+    with Office to TextTools in Editors to prevent showing office apps there.
+- change fns-system-tools-file-tools.directory to fns-accessories-file-tools.directory
+- change wrong make command 'prepare-gentoo' to 'gentoo-prepare' in Makefile
+- update README and config version
 
-09/13/2013
-- merge develop changes from 08/12/2013 to 09/12/2013 into feature_nanomoids branch
+10/18/2013
+- final update of spanish and french po and mo files
+- fix bug in a line of FvwmForm-GenOptionHelp2 that translation failed
+- update config version, NEWS, AUTHORS and README
 
----- develop merge end -------------------------------------------------
+10/17/2013
+- adapt fvwm-menu-desktop2-config.fpl and its help files to handle different
+  language layouts
+- add empty strings and adapt some text length to fvwm-nightshade.pot for 
+  better layout handling with different languages. Also in the german, 
+  spanish and french po files.
+- add french translations for FvwmForm-GenOptionHelp to po file
+- update german and french mo files
+- update config version
+
+10/15/2013
+- update pot template for fvwm-menu-desktop2-config.fpl and its help files
+- update german po and mo file:
+  - add translation messages for fvwm-menu-desktop2-config.fpl and its help files
+  - add new translation messages from CPU and Clock Ops menu
+- update french po file:
+  - add english translation messages for fvwm-menu-desktop2-config.fpl and its help files
+  - add new translation messages from CPU and Clock Ops menu
+- fix bugs in layouts that some translations doesn't work
+- adapt line formatings in fvwm-menu-desktop2-config.fpl and its help files
+- update config version
+
+10/14/2013
+- add /etc/* to %files in fvwm-nightshade.spec to add fns-applications.menu to rpm
+- add new translation msgids to fvwm-nightshade.pot for fvwm-menu-desktop2-config.fpl 
+  and its help files
+- adapt some changes in fvwm-menu-desktop2-config.fpl help files to reduce translation msgids
+- update german translation
+- update config version
+
+10/13/2013
+- remove the command 'Separator' in fvwm-menu-desktop2-config.fpl and all help files 
+  because only available in CVS of FVWM
+- fix bug in fvwm-menu-desktop2 that .theme file will be generated if --enable-mini-icons
+  isn't set
+- fix bug in layouts that shortcuts are shown with '&' instead of an underline
+- change command fvwm-menu-desktop to fvwm-menu-desktop2 in fvwm-menu-desktop2-config and
+  its helps
+- add fns-applications.menu to system/
+- add desktop-directories for fns-applications.menu to system/
+- add XDG menu parts to install/uninstal and build-list in Makefile
+- fix translation bug and wrong icon in config
+- update version in config
+- update README and NEWS
+
+10/12/2013
+- changes in fvwm-menu-desktop2:
+  - add two new options: --app-icon and --dir-icon to handle default icons 
+    for not available app/dir icons
+  - fix bug in convert icon routine that background of svg icons are transparent again
+- update fvwm-menu-desktop2 manpage for the new options --app-icon and --dir-icon
+- rewrite of fvwm-menu-desktop2-config.fpl to add the new options of fvwm-menu-desktop2
+  and help buttons.
+- add 3 new FvwmForms for fvwm-menu-desktop2-config help
+- add 11 new vector icons for menu
+- change colors in 3 vector icons for menu
+- changes in config:
+  - remove partitialmaximize in menu
+  - exchange bitmap icon entries with new svg icon entries in menus
+  
+09/22/2013
+- Some Bugfixes in fvwm-menu-desktop2:
+  - DecodeEncodeErrors in menu names
+  - no output appears with 'fvwm-menu-desktop2 --get-menus all|desktop'
+  - No entry "Regenerate XDG menu(s)" appears with
+    'fvwm-menu-desktop2 --insert-in-menu MenuRoot'
+  -  exchange all tabs with spaces to prevent indention errors
+- update config version
+
+09/12/2013
+- merge parts from branch feature_nanomoids into develop:
+  - add new variable __version__ for version in fns-find-icon
+  - remove wm-icons package from recommended dependencies in /debian/control
+  - add new vector icons to artworks/icons/scalable to replace wm-icons package
+  - delete fns bitmap icons because they never needed - a svg icon exist
+  - add own_window_title to conkyrc_clock and conkyrc_cpu to make it possible to kill them with xkill
+  - change static menus to dynamic menus and xpm to vector icons in all layouts to change icon size on the fly
+  - change bitmap icons to vector icons in G2likeTopBar, VerticalPanel and HorizontalPanel
+    to change icon size on the fly
+  - add mouse action on conky_cpu and conky_clock button - right click to show menu - in
+    G2likeTopBar, HorizontalPanel and VerticalPanel
+  - changes in config:
+    - change the order in ImagePath that Fvwm search for images in FVWM_USERDIR first
+    - change most of the xpm files to svg
+    - change static menus to dynamic menus and xpm to vector icons to change icon size on the fly
+    - fix variable problem in FuncWriteInfoStoreToFileAndSet
+    - implement SetMenuIconSize in all menus if needed to update icon size variable to enable
+      changing icon size on the fly
+    - exchange tabs with spaces
+    - add deleted FuncUpdateBaseSetupFile to update theme and layout if changed
+    - add FuncMenuClockOps and FuncMenuCpuOps
+  - add SetMenuIconSize function in fns-init to set Menu icon size dependent of .FvwmForm-Desktop-Config
+    on the fly in menus and Windowlist
+  - exchange tabs with spaces in header.tpl
+  - remove wm-icons from recommended dependencies in INSTALL and README
+  - exchange tabs with spaces in INSTALL and README
 
 09/12/2013
 - add Gentoo installation support (thanks to Sebastian Luncan for the ebuild)
@@ -72,8 +179,6 @@ History:
     - change required FVWM version to >= 2.6.5
     - add Xdg menu support
   - update NEWS
-
----- develop merge start -----------------------------------------------
 
 08/28/2013
 - add new applet FNS-Applet-DriveInn (a storage drives manager)
@@ -173,12 +278,8 @@ History:
 - remove wm-icons from recommended dependencies in INSTALL and README
 - exchange tabs with spaces in INSTALL and README
 
----- develop merge end -------------------------------------------------
-
 08/12/2013
 - FvwmSmartMaximize: make EwmhBaseStruts determination more perlish
-
----- develop merge start -----------------------------------------------
 
 08/03/2013
 - move all FNS-Applets from fvwm-nightshade/applets to fvwm/

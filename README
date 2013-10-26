@@ -44,7 +44,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
     +--------+        +--------+        +--------+
     |        |        |        |        |        |
     +--------+        +--------+        +--------+
-    IconManager           Pager           Panel
+    IconManager       Pager             Panel
   
   - vertical (top right):
     
@@ -69,15 +69,15 @@ Featurelist of Fvwm-Nightshade 0.7.x:
     +---+---+---------------------------------+----------+---------+---+
     |   |   |                                 |          |         |   |
     +---+---+---------------------------------+----------+---------+---+
-    Menu Personal                              Systray    Date    Logout
+    Menu Personal                             Systray    Date     Logout
        
 
     Bottombar
     +---+----------------------------------------------+---------------+
     |   |                                              |               |
     +---+----------------------------------------------+---------------+
-    Desktop                                             Pager
-         IconManager
+    Desktop                                            Pager
+        IconManager
 
 - Lock desk & screensaver (xscreensaver)
 - Personal menu via FNS-Script-PersonalMenu
@@ -107,6 +107,10 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Localization support for German, French and Spanish
 - Smart maximize windows - move and resize windows to the largest free 
   area of a desktop/page
+- New set of icons for menus and internal apps
+- Own XDG applications menu with it's own directory files
+- New fvwm-menu-desktop GUI with help windows
+- Restart possibility for Conky clock and CPU applet in panel
 
 
 Requirements:

@@ -175,7 +175,7 @@ Installation of Fvwm-Nightshade
         The Fvwm-Nightshade ebuild has to be created from the template in gentoo/.
         Also the dist package for the installation. This can done with one step.
         Type in the terminal:
-            $ make prepare-gentoo
+            $ make gentoo-prepare
         The make rule creates the dist package ../fvwm-nightshade-<version>.tar.gz and adds 
         the current version of the downloaded package to the ebuild name and saves it in 
         the current directory.
@@ -188,7 +188,7 @@ Installation of Fvwm-Nightshade
             $|# cp fvwm-nightshade-<version>.ebuild <overlay_directory>/x11-themes/fvwm-nightshade/
         
         Copy the dist package as root to /usr/portage/disfiles:
-            # cp ../fvwm-nightshade-<version>.tar.gz /usr/portage/disfiles/
+            # cp ../fvwm-nightshade-<version>.tar.gz /usr/portage/distfiles/
         
         Create the manifest:
             $|# ebuild --force <overlay_directory>/x11-themes/fvwm-nightshade/fvwm-nightshade-<version>.ebuild digest
