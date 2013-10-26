@@ -1,4 +1,20 @@
 History:
+10/26/2013
+- merge changes from develop branch:
+  - add /etc/* to %files in fvwm-nightshade.spec to add fns-applications.menu to rpm
+  - fix bug in layouts that shortcuts are shown with '&' instead of an underline
+  - add new vector icons for menu and modify some
+  - change #!/usr/bin/env python2 to #!/usr/bin/env python2.7 in fns-find-icon
+  - final update of fvwm-nightshade.pot, german, spanish and french po and mo files
+  - update fvwm-nightshade help in asciidoc, man page and html
+  - update fvwm-menu-desktop2, fvwm-menu-desktop2-config.fpl to final version
+  - add fvwm-menu-desktop man page
+  - add help forms for new fvwm-menu-desktop2-config.fpl
+  - add desktop-directories for fns-applications.menu to system/
+  - add fns-applications.menu to system/
+  - change xpm icons to svg icons in menu and update version
+  - add XDG menu parts to install/uninstal and build-list in Makefile
+
 10/20/2013
 - update fvwm-nightshade help in asciidoc, man page and html
 - changes to fns-applications.menu:
