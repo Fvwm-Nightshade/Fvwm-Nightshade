@@ -1,0 +1,14 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Image Viewer
+Name[ar]=عارض الصور
+Name[de]=Bildbetrachter
+Name[es]=Visor de imágenes
+Name[fr]=Visionneuse d'image
+Name[ru]=просмотра изображений
+Name[sv]=bildvisningsprogram
+Name[zh_CN]=图像查看器
+Name[zh_TW]=圖像查看器
+Icon=applications-graphics
+Type=Directory
+
