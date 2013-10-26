@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		Vertical
-# Version:	1.0.7
+# Version:	1.0.9
 # Licence: 	GPL 2
 #
 # Description:	Layout of object positions on desktop
@@ -9,7 +9,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	08/16/2012
-# Changed:	08/15/2013
+# Changed:	10/15/2013
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -253,10 +253,10 @@ AddToFunc   FuncMenuWindowGroupQuickMove
 + I AddToMenu MenuWindowGroupQuickMove "$[gt.D&own	Page]%window-move.svg:$[infostore.MenuIconSize]%" 		Pick All ($[w.resource]) MoveToPage +0p +1p
 + I AddToMenu MenuWindowGroupQuickMove "$[gt.&Up  	Page]%window-move.svg:$[infostore.MenuIconSize]%" 		Pick All ($[w.resource]) MoveToPage +0p -1p
 + I AddToMenu MenuWindowGroupQuickMove "" Nop
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.Page	&1]%window-move.svg:$[infostore.MenuIconSize]%"			Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.Page	&2]%window-move.svg:$[infostore.MenuIconSize]%"			Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.Page	&3]%window-move.svg:$[infostore.MenuIconSize]%"			Pick All ($[w.resource]) FuncMoveWindowToPage 2 0
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.Page	&4]%window-move.svg:$[infostore.MenuIconSize]%"			Pick All ($[w.resource]) FuncMoveWindowToPage 3 0
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&1.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&2.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&3.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		Pick All ($[w.resource]) FuncMoveWindowToPage 2 0
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&4.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		Pick All ($[w.resource]) FuncMoveWindowToPage 3 0
 
 #-----------------------------------------------------------------------
 # Move a window to left/right/1-4 page
@@ -268,16 +268,16 @@ AddToFunc   FuncMenuWindowMoveTo
 + I SetMenuIconSize
 + I DestroyMenu MenuWindowMoveTo
 + I AddToMenu MenuWindowMoveTo DynamicPopupAction FuncMenuWindowMoveTo
-+ I AddToMenu MenuWindowMoveTo "Move to ..." Title
++ I AddToMenu MenuWindowMoveTo "$[gt.Move to ...]" Title
 + I AddToMenu MenuWindowMoveTo "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%"		AnimatedMove w+100 w
 + I AddToMenu MenuWindowMoveTo "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%"		AnimatedMove w-100 w
 + I AddToMenu MenuWindowMoveTo "$[gt.D&own	Page]%window-move.svg:$[infostore.MenuIconSize]%"		AnimatedMove w w+100
 + I AddToMenu MenuWindowMoveTo "$[gt.&Up  	Page]%window-move.svg:$[infostore.MenuIconSize]%"		AnimatedMove w w-100
 + I AddToMenu MenuWindowMoveTo "" Nop
-+ I AddToMenu MenuWindowMoveTo "$[gt.Page	&1]%window-move.svg:$[infostore.MenuIconSize]%"			FuncMoveWindowToPage 0 0
-+ I AddToMenu MenuWindowMoveTo "$[gt.Page	&2]%window-move.svg:$[infostore.MenuIconSize]%"			FuncMoveWindowToPage 1 0
-+ I AddToMenu MenuWindowMoveTo "$[gt.Page	&3]%window-move.svg:$[infostore.MenuIconSize]%"			FuncMoveWindowToPage 2 0
-+ I AddToMenu MenuWindowMoveTo "$[gt.Page	&4]%window-move.svg:$[infostore.MenuIconSize]%"			FuncMoveWindowToPage 3 0
++ I AddToMenu MenuWindowMoveTo "$[gt.&1.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		FuncMoveWindowToPage 0 0
++ I AddToMenu MenuWindowMoveTo "$[gt.&2.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		FuncMoveWindowToPage 1 0
++ I AddToMenu MenuWindowMoveTo "$[gt.&3.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		FuncMoveWindowToPage 2 0
++ I AddToMenu MenuWindowMoveTo "$[gt.&4.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		FuncMoveWindowToPage 3 0
 
 
 
