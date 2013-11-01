@@ -3,23 +3,29 @@ Fvwm-Nightshade Release Notes
 
 Version 0.7.x
 
-Features:
----------
-- new feature smart maximize - moves and resizes a current window to the 
+Changes:
+--------
+- New theme 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
+
+------------------------------------------------------------------------
+
+Version 0.6.8 (20th October 2013)
+
+Changes:
+--------
+- New feature smart maximize - moves and resizes a current window to the 
   largest free area of a desktop/page (thanks to Andreas Hoenen ^^)
-- right click menu for cpu bar to restart them on error and start other 
-  related scripts/applets.
-- new set of icons for menus and internal apps to remove wm-icons dependency
+- Right click menu for Conky clock and CPU applet in panel to restart 
+  them on error and start other related scripts/applets.
+- New set of icons for menus and internal apps to remove wm-icons dependency
   because this package isn't available in all distributions and of its' 
   unscalability. Also special thanks to Alessandro Roncone who gives us 
   the permission to use his Awoken icons :-).
-- works now with FVWM 2.6.5 without loosing new Xdg menu support from CVS
+- Works now with FVWM 2.6.5 without loosing new Xdg menu support from CVS
   version
-- support for Gentoo installation (thanks to Sebastian Luncan :-) )
-- own XDG applications menu
-- new fvwm-menu-desktop GUI with help windows
-- restart possibility for Conky clock and CPU applet in panel
-
+- Support for Gentoo installation (thanks to Sebastian Luncan :-) )
+- Own XDG applications menu with it's own directory files
+- New fvwm-menu-desktop GUI with help windows
 
 ------------------------------------------------------------------------
 
