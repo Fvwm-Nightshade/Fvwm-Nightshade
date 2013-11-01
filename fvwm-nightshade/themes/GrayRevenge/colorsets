@@ -1,0 +1,323 @@
+#-----------------------------------------------------------------------
+# File:         colorsets
+# Version:      1.0.2
+# Licence:      GPL 2
+#
+# Description:  colorsets of GreyRevenge theme by alecive
+#               (http://alecive.deviantart.com/art/Gray-Revenge-1-7-194633730)
+#
+# Author:       Thomas Funk <t.funk@web.de>
+#
+# Created:      06/25/2013
+# Changed:      11/01/2013
+#-----------------------------------------------------------------------
+# REMARKS:
+#
+# Hints: 'NoShape' removes the shape mask from the colorset.
+#        'Plain' removes the background pixmap or gradient.
+#        Optional parts are sometimes problematic because while switching
+#        they won't be removed and will be stayed until restart!
+#
+# IMPORTANT: ALL COLORSETS MUST BE SET !!! BECAUSE ALL ARE SET IN THE 
+#            OTHER THEMES. NOT ALL ARE USED. THESE CAN BE TAKEN FOR OTHERS.
+#            IF POSSIBLE ;-)
+
+
+########################################################################
+# Default Colorset
+########################################################################
+
+#-----------------------------------------------------------------------
+# for feedback windows (like geometry window and NoteMessage) and Fvwm*
+#-----------------------------------------------------------------------
+Colorset 0 fg black, bg white
+
+
+########################################################################
+# Window Decorations
+########################################################################
+# The following colors are used in FvwmPager for the window colors
+# and in a title bar of windows (shade/hilight colors, computed from
+# the bg color, but might be specified directly by sh and hi).
+
+#-----------------------------------------------------------------------
+# window title, inactive
+#
+# fg = inactive titlebar font color
+# bg = inactive hilight color for vector buttons
+# sh = inactive shade color for vector buttons
+# optional:
+# IconAlpha = inactive transparent mini icon in titlebar in %
+#-----------------------------------------------------------------------
+Colorset 1 fg #737373, IconAlpha 60
+
+#-----------------------------------------------------------------------
+# window title, active
+#
+# ?Gradient = active windows titlebar
+# fg = active titlebar font color
+# bg = active hilight color for vector buttons
+#      active windows titlebar
+# sh = active shade color for vector buttons
+# optional:
+# fgAlpha = merge titlebar text and background in %
+#-----------------------------------------------------------------------
+Colorset 2  VGradient 255 1 #3C3C3C 100 #3C3C3C, fg white, NoShape
+
+#-----------------------------------------------------------------------
+# window borders and titlebar, inactive
+#
+# ?Gradient = inactive windows titlebar
+# bg = inactive border line color
+#      inactive windows titlebar    _
+# hi = inactive border shade color |
+# sh = inactive border shade color _|
+#-----------------------------------------------------------------------
+Colorset 3  VGradient 255 1 #3C3C3C 100 #3C3C3C, bg #353535, hi #3C3C3C, sh #333333, NoShape
+
+#-----------------------------------------------------------------------
+# window borders, active
+#
+# bg = border color               _
+# hi = active border shade color |
+# sh = active border shade color _|
+#-----------------------------------------------------------------------
+Colorset 4 bg #353535, hi #666666, sh #555555, Plain
+
+
+########################################################################
+# Menu Colorsets
+########################################################################
+
+#-----------------------------------------------------------------------
+# inactive menu
+#
+# ?Gradient = color flow in menu
+# fg = title font color
+# bg =
+# hi = inactive arrow color und menu border
+#-----------------------------------------------------------------------
+Colorset 5 VGradient 255 1 #4C4C4C 100 #3C3C3C, bg #666666, fg white, hi #666666, NoShape
+
+#-----------------------------------------------------------------------
+# active/hilighted menu item
+# fg = title font color in the higlighted area
+# bg = highlight bar color
+# hi = arrow color if higlighted
+#-----------------------------------------------------------------------
+Colorset 6 fg white, bg #466464, hi white, Plain
+
+#-----------------------------------------------------------------------
+# greyed menu item if needed
+#-----------------------------------------------------------------------
+Colorset 7 fg white, hi #a0b2c8, bg #a0b2c8, Plain
+
+#-----------------------------------------------------------------------
+# Colorsets 8 and 9 are reserved for the future use.
+
+
+########################################################################
+# Module Colorsets
+########################################################################
+
+#-----------------------------------------------------------------------
+# default for inactive modules
+# FvwmButtons, FvwmPager, can be also used for FvwmIconMan, FvwmIconBox.
+#
+# ?Gradient = inactive background
+# fg = inactive font color or border color
+# bg = background of inactive pages
+#-----------------------------------------------------------------------
+Colorset 10 CGradient 255 1 #4C4C4C 100 #5c5c5c, bg #666666, fg gray50, hi #666666, NoShape
+
+#-----------------------------------------------------------------------
+# default for active modules
+# For hilighting a part of a button bar (some swallowed apps for example)
+# or anything else.
+#
+# ?Gradient = active background
+# fg = active font color color 
+# bg = active border color (mouse) _| _
+#      active border color           |
+#-----------------------------------------------------------------------
+Colorset 11 CGradient 255 1 #567474 100 #466464, fg white, bg gray15, NoShape
+
+#-----------------------------------------------------------------------
+# special or funny: a gradient or a pixmap
+# May be used in certain FvwmButtons, FvwmIconMan, FvwmIconBox.
+#
+# ?Gradient = inactive background
+# fg = inactive font color
+# optional:                   _
+# hi = inactive border shade |
+# sh = inactive border shade _|
+#-----------------------------------------------------------------------
+Colorset 12 VGradient 255 1 #4C4C4C 100 #5c5c5c, fg gray60, NoShape
+
+#-----------------------------------------------------------------------
+# swallowed window: the hilight and shadow colors should be defined
+# (-hd of xclock and -hl of xload use sh, and -hl of xclock uses hi)
+#
+# fg = font color
+# bg = background color
+#-----------------------------------------------------------------------
+Colorset 13 VGradient 255 1 #4C4C4C 100 #5c5c5c, fg gray85, bg #e5e4e0, NoShape
+
+#-----------------------------------------------------------------------
+# default #2
+# FvwmPager or to get more colors in FvwmButtons, can be set to 10.
+# Pager mini windows inactive
+#
+# fg = border color
+# bg = background
+#-----------------------------------------------------------------------
+Colorset 14 fg grey35, bg gray55, Plain
+
+#-----------------------------------------------------------------------
+# default hilight #2
+# FvwmPager or to get more colors in FvwmButtons, can be set to 11.
+# Pager mini windows active
+#
+# fg = border color
+# bg = background
+#-----------------------------------------------------------------------
+Colorset 15 fg grey85, bg #72a3a7, Plain
+
+#-----------------------------------------------------------------------
+# tips/balloons (TaskBar and FvwmPager)
+#
+# fg = tip font color
+# bg = tip background
+#-----------------------------------------------------------------------
+Colorset 16 fg white, bg #57868a, Plain
+
+
+########################################################################
+# Window List Module Colorsets
+########################################################################
+
+#-----------------------------------------------------------------------
+# standard item
+#-----------------------------------------------------------------------
+# Actually not used
+
+#-----------------------------------------------------------------------
+# active item
+#-----------------------------------------------------------------------
+# Actually not used
+
+#-----------------------------------------------------------------------
+# iconified item
+#-----------------------------------------------------------------------
+# Actually not used
+
+#-----------------------------------------------------------------------
+# pointed item
+#-----------------------------------------------------------------------
+# Actually not used
+
+
+########################################################################
+# Other Module Colorsets
+########################################################################
+
+#-----------------------------------------------------------------------
+# FvwmIdent
+#-----------------------------------------------------------------------
+Colorset 21 bg grey65, fg gray15, sh black, fgsh #777777, RootTransparent buffer, Tint #777777 40
+
+#-----------------------------------------------------------------------
+# FvwmConsole
+#-----------------------------------------------------------------------
+Colorset 22 fg gray15, bg grey75, Plain
+
+#-----------------------------------------------------------------------
+# transparent
+#-----------------------------------------------------------------------
+#Colorset 23 fg $[fg.cs10], bg $[bg.cs10], Transparent
+
+#-----------------------------------------------------------------------
+# FvwmBacker
+#-----------------------------------------------------------------------
+#Colorset 24 BGradient 255 1 #39464c 100 #737c74, NoShape
+Colorset 24 BGradient 255 2 #39464c 60 #737c74 40 #939e94, NoShape
+
+
+########################################################################
+# Nanomoids Colorsets
+########################################################################
+
+#-----------------------------------------------------------------------
+# Default Colorset
+#-----------------------------------------------------------------------
+#Colorset 10 fg #EEEEEE, bg $[fvwm_bgcolor], hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
+Colorset 25 fg $[infostore.used_appletfontcolor], bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+# Highlight Colorset or Default Colorset for Icons e.g. in DriveInn to
+# simulate unmounted devices
+#-----------------------------------------------------------------------
+Colorset 26 fg #A4CDF9, bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint], IconAlpha 50
+
+#-----------------------------------------------------------------------
+# Warn Colorset
+#-----------------------------------------------------------------------
+#Colorset 11 fg #E78787, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
+Colorset 27 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#Colorset 12 fg #e78787, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
+Colorset 28 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#Colorset 13 fg #89d5d7, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
+Colorset 29 fg #89D5D7, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#Colorset 30
+
+
+########################################################################
+# Application Colorsets
+########################################################################
+
+#-----------------------------------------------------------------------
+# regular terminal (xterm, rxvt, Eterm)
+#-----------------------------------------------------------------------
+Colorset 31 fg gray15, bg grey75, Plain
+
+#-----------------------------------------------------------------------
+# admin terminal (su xterm)
+#-----------------------------------------------------------------------
+Colorset 32 fg gray15, bg grey75, Plain
+
+#-----------------------------------------------------------------------
+# remote terminal (ssh, telnet)
+#-----------------------------------------------------------------------
+Colorset 33 fg gray15, bg grey75, Plain
+
+#-----------------------------------------------------------------------
+# viewer terminal (man, less, tail -f)
+#-----------------------------------------------------------------------
+Colorset 34 fg gray15, bg grey75, Plain
+
+#-----------------------------------------------------------------------
+# application run in the terminal, text editor using ft-xrdb
+#-----------------------------------------------------------------------
+Colorset 35 fg gray15, bg grey75, Plain
+
+#-----------------------------------------------------------------------
+# dialog main background (FvwmScript, FvwmForm, xmessage, ft-xrdb)
+#-----------------------------------------------------------------------
+Colorset 36 fg gray15, bg grey75, Plain
+
+#-----------------------------------------------------------------------
+# dialog text area (FvwmScript, FvwmForm, xmessage, ft-xrdb)
+#-----------------------------------------------------------------------
+Colorset 37 fg gray15, bg grey75, Plain
+
+#-----------------------------------------------------------------------
+# Colorsets 38 to 40 are reserved for the future use.
