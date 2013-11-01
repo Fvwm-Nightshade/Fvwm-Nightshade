@@ -1,4 +1,10 @@
 History:
+11/01/2013
+- add new theme 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
+  (http://alecive.deviantart.com/art/Gray-Revenge-1-7-194633730) and update
+  colorsets to handle nanomoids
+- update NEWS and config version
+
 10/26/2013
 - merge changes from develop branch:
   - add /etc/* to %files in fvwm-nightshade.spec to add fns-applications.menu to rpm
