@@ -1,19 +1,19 @@
 #-----------------------------------------------------------------------
 # File:		.settings
-# Version:	1.0.7
+# Version:	1.0.8
 # Licence: 	GPL 2
 #
 # Description:	base settings for Fvwm-Nighshade
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/11/2012
-# Changed:	08/02/2013
+# Changed:	01/09/2014
 #-----------------------------------------------------------------------
 
 #***********************************************************************
 # Environment settings
 #***********************************************************************
-# DO NOT EDIT! WILL BE CHANGED BY FVWMFORM-FNS-BASESETUP!
+# DO NOT EDIT! WILL BE CHANGED BY FNS-Form-BaseSetup!
 
 #-----------------------------------------------------------------------
 # The actual theme. Be changed dynamically via FuncChangeDecor
@@ -23,12 +23,12 @@ InfoStoreAdd used_theme "Tribal"
 #-----------------------------------------------------------------------
 # Banner image for FvwmBanner
 #-----------------------------------------------------------------------
-InfoStoreAdd used_banner "/usr/local/bin/../share/fvwm-nightshade/artwork/splashs/splash_fns_small.png"
+InfoStoreAdd used_banner "/usr/bin/../share/fvwm-nightshade/artwork/splashs/splash_fns_small.png"
 
 #-----------------------------------------------------------------------
 # Run Banner at startup?
 #-----------------------------------------------------------------------
-SetEnv SplashOn "0"
+SetEnv SplashOn "1"
 
 #-----------------------------------------------------------------------
 # default used font for all Fvwm parts
@@ -46,6 +46,11 @@ InfoStoreAdd fontsize "12"
 InfoStoreAdd used_layout "Horizontal"
 
 #-----------------------------------------------------------------------
+# The actual menu tint level
+#-----------------------------------------------------------------------
+InfoStoreAdd used_menutint "70"
+
+#-----------------------------------------------------------------------
 # The actual applet tint level
 #-----------------------------------------------------------------------
 InfoStoreAdd used_applettint "20"
@@ -54,6 +59,26 @@ InfoStoreAdd used_applettint "20"
 # The actual applet font color
 #-----------------------------------------------------------------------
 InfoStoreAdd used_appletfontcolor "white"
+
+#-----------------------------------------------------------------------
+# use composite manager
+#-----------------------------------------------------------------------
+SetEnv use_composite "1"
+
+#-----------------------------------------------------------------------
+# composite manager command
+#-----------------------------------------------------------------------
+InfoStoreAdd comp_command "xcompmgr -c -C -o 0.8 -r 10 -l -5 -t -5 -f -D 5"
+
+#-----------------------------------------------------------------------
+# The actual (inactive) window transparency level (used by transset)
+#-----------------------------------------------------------------------
+InfoStoreAdd used_windowtransparency "80"
+
+#-----------------------------------------------------------------------
+# The actual (active) window opacity level (used by transset)
+#-----------------------------------------------------------------------
+InfoStoreAdd used_windowopacity "100"
 
 
 #***********************************************************************
