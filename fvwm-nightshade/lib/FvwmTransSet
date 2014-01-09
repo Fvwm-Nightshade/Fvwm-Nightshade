@@ -27,7 +27,7 @@ use FVWM::Module;
 use Text::ParseWords;
 use Scalar::Util qw(looks_like_number);
 
-my $debug = 1;
+my $debug = 0;
 
 # defaults
 my %initialConfig = (
