@@ -30,6 +30,7 @@ History:
 - add some additional search sites to INSTALL
 - add zypper install command to INSTALL
 - update NEWS, COPYING, README
+- add documentation for FvwmTransSet
 
 11/01/2013
 - add new theme 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
