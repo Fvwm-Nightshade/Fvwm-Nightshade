@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.6.20140109
+InfoStoreAdd ns_version 0.7.6.20140110
 # Copyright (C) 2014
 #
 # Authors:
@@ -1620,21 +1620,28 @@ AddToFunc   DeThumbnail
 #-----------------------------------------------------------------------
 DestroyFunc FuncSuspend
 AddToFunc   FuncSuspend
-+ I Test (x pm-is-supported) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
-                    /org/freedesktop/Hal/devices/computer \
-                    org.freedesktop.Hal.Device.SystemPowerManagement.Suspend \
-                    int32:0'
-+ I TestRc (!Match) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"         
++ I Test (!x pm-is-supported) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"
++ I TestRc (Match) break
++ I TestRc (!Match) Test (x /usr/sbin/hald) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
+                                                    /org/freedesktop/Hal/devices/computer \
+                                                    org.freedesktop.Hal.Device.SystemPowerManagement.Suspend int32:0 1>&2'
++ I TestRc (!Match) Test (x upower) PipeRead 'dbus-send --print-reply --system --dest=org.freedesktop.UPower \
+                                            /org/freedesktop/UPower org.freedesktop.UPower.Suspend 1>&2'
++ I TestRc (!Match) FuncShowMessage "Suspend Info" "Suspend not possible - hald nor upower found!"
 
 #-----------------------------------------------------------------------
 # Hibernate the machine
 #-----------------------------------------------------------------------
 DestroyFunc FuncHibernate
 AddToFunc   FuncHibernate
-+ I Test (x pm-is-supported) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
-                    /org/freedesktop/Hal/devices/computer \
-                    org.freedesktop.Hal.Device.SystemPowerManagement.Hibernate'
-+ I TestRc (!Match) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"          
++ I Test (!x pm-is-supported) FuncShowMessage "Hibernate Info" "Install pm-utils for full functionality"
++ I TestRc (Match) break
++ I TestRc (!Match) Test (x /usr/sbin/hald) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
+                                                    /org/freedesktop/Hal/devices/computer \
+                                                    org.freedesktop.Hal.Device.SystemPowerManagement.Hibernate 1>&2'
++ I TestRc (!Match) Test (x upower) PipeRead 'dbus-send --print-reply --system --dest=org.freedesktop.UPower \
+                                            /org/freedesktop/UPower org.freedesktop.UPower.Hibernate 1>&2'
++ I TestRc (!Match) FuncShowMessage "Suspend Info" "Hibernate not possible - hald nor upower found!"
 
 #-----------------------------------------------------------------------
 # Activate lockscreen if installed
