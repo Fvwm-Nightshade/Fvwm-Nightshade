@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #-----------------------------------------------------------------------
 # File:         FvwmTransSet
-# Version:      1.0.0
+# Version:      1.0.1
 # Licence:      GPL 2
 #
 # Description:  Module to set true transparency to windows if a composite
@@ -11,7 +11,7 @@
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      2013-11-30
-# Changed:      2014-01-09
+# Changed:      2014-01-10
 #-----------------------------------------------------------------------
 # To get a man page:
 # pod2man --center=" " --section=1 --release="1.0.0" FvwmTransSet > FvwmTransSet.1
@@ -285,6 +285,13 @@ sub getClass {
     return $wmClass[1]
 }
 
+sub getWindowState {
+    my ($win_id) = @_;
+    my $result = `xprop -id $win_id |grep '^_NET_WM_WINDOW_TYPE(ATOM)'|cut -d" " -f3`;
+    $result =~ s/\"|\s//g;
+    return $result;
+}
+
 sub matchExcludes {
     my ($win_id) = @_;
     my $wmClass = getClass($win_id);
@@ -313,7 +320,11 @@ sub transFocus {
         if ($lastWinId != $win_id) {
             # We're leaving
             showDebugMsg("leaving");
-            setWindowTransparent($lastWinId);
+            # Check if the window is not a dialog. If so
+            # we don't set the last window transparent
+            if (getWindowState($win_id) ne '_NET_WM_WINDOW_TYPE_DIALOG') {
+                setWindowTransparent($lastWinId);
+            }
         }
         $lastWinId = $win_id;
     }
