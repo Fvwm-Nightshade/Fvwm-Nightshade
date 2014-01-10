@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      1.0.2
+# Version:      1.0.3
 # Licence:      GPL 2
 #
 # Description:  colorsets of GreyRevenge theme by alecive
@@ -9,7 +9,7 @@
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      06/25/2013
-# Changed:      11/01/2013
+# Changed:      01/09/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -97,7 +97,8 @@ Colorset 4 bg #353535, hi #666666, sh #555555, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Colorset 5 VGradient 255 1 #4C4C4C 100 #3C3C3C, bg #666666, fg white, hi #666666, NoShape
+Test (EnvMatch use_composite 1) Colorset 5 VGradient 255 1 #4C4C4C 100 #3C3C3C, bg #666666, fg white, hi #666666, NoShape, RootTransparent, Tint #3C3C3C $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 5 VGradient 255 1 #4C4C4C 100 #3C3C3C, bg #666666, fg white, hi #666666, NoShape
 
 #-----------------------------------------------------------------------
 # active/hilighted menu item
@@ -105,7 +106,8 @@ Colorset 5 VGradient 255 1 #4C4C4C 100 #3C3C3C, bg #666666, fg white, hi #666666
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Colorset 6 fg white, bg #466464, hi white, Plain
+Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #466464, hi white, Plain, RootTransparent, Tint #466464 $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #466464, hi white, Plain
 
 #-----------------------------------------------------------------------
 # greyed menu item if needed
@@ -250,7 +252,6 @@ Colorset 24 BGradient 255 2 #39464c 60 #737c74 40 #939e94, NoShape
 #-----------------------------------------------------------------------
 # Default Colorset
 #-----------------------------------------------------------------------
-#Colorset 10 fg #EEEEEE, bg $[fvwm_bgcolor], hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 25 fg $[infostore.used_appletfontcolor], bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
@@ -262,17 +263,14 @@ Colorset 26 fg #A4CDF9, bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tin
 #-----------------------------------------------------------------------
 # Warn Colorset
 #-----------------------------------------------------------------------
-#Colorset 11 fg #E78787, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 27 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
-#Colorset 12 fg #e78787, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 28 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
-#Colorset 13 fg #89d5d7, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 29 fg #89D5D7, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------

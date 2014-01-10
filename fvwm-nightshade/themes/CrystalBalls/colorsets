@@ -1,15 +1,15 @@
 #-----------------------------------------------------------------------
-# File:		colorsets
-# Version:	1.0.1
-# Licence: 	GPL 2
+# File:         colorsets
+# Version:      1.0.2
+# Licence:      GPL 2
 #
-# Description:	colorsets of CrystalBall theme
+# Description:  colorsets of CrystalBall theme
 #
-# Author:	Thomas Funk <t.funk@web.de>
-#			Bernhard Popp <kermit.popp@googlemail.com>
+# Author:       Thomas Funk <t.funk@web.de>
+#               Bernhard Popp <kermit.popp@googlemail.com>
 #
-# Created:	10/28/2012
-# Changed:	08/02/2013
+# Created:      10/28/2012
+# Changed:      01/10/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -97,7 +97,8 @@ Colorset 4 hi #f0f0f0, sh #aaaaaa, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Colorset 5 VGradient 255 2 #e0e0e0 5 #f3f3f3 95 #f9f9f9, bg #e8e8e8, fg gray15, hi #666666, NoShape
+Test (EnvMatch use_composite 1) Colorset 5 VGradient 255 2 #e0e0e0 5 #f3f3f3 95 #f9f9f9, bg #e8e8e8, fg gray15, hi #666666, NoShape, RootTransparent, Tint #e0e0e0 $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 5 VGradient 255 2 #e0e0e0 5 #f3f3f3 95 #f9f9f9, bg #e8e8e8, fg gray15, hi #666666, NoShape
 
 #-----------------------------------------------------------------------
 # active/hilighted menu item
@@ -105,7 +106,8 @@ Colorset 5 VGradient 255 2 #e0e0e0 5 #f3f3f3 95 #f9f9f9, bg #e8e8e8, fg gray15, 
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Colorset 6 fg white, bg #3570be, hi #fafafa, Plain
+Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #3570be, hi #fafafa, Plain, RootTransparent, Tint #3570be $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #3570be, hi #fafafa, Plain
 
 #-----------------------------------------------------------------------
 # greyed menu item if needed
@@ -249,7 +251,6 @@ Colorset 24 CGradient 255 1 #5d84bc 100 #2f579c, NoShape
 #-----------------------------------------------------------------------
 # Default Colorset
 #-----------------------------------------------------------------------
-#Colorset 10 fg #EEEEEE, bg $[fvwm_bgcolor], hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 25 fg $[infostore.used_appletfontcolor], bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
@@ -261,17 +262,14 @@ Colorset 26 fg #A4CDF9, bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tin
 #-----------------------------------------------------------------------
 # Warn Colorset
 #-----------------------------------------------------------------------
-#Colorset 11 fg #E78787, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 27 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
-#Colorset 12 fg #e78787, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 28 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
-#Colorset 13 fg #89d5d7, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 29 fg #89D5D7, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------

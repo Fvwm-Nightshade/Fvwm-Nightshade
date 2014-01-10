@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
-# File:		colorsets
-# Version:	0.1.4
-# Licence: 	GPL 2
+# File:         colorsets
+# Version:      0.1.4
+# Licence:      GPL 2
 #
-# Description:	colorsets of Tribal theme
+# Description:  colorsets of Tribal theme
 #
-# Author:	Thomas Funk <t.funk@web.de>
-# Created:	09/27/2012
-# Changed:	08/02/2013
+# Author:       Thomas Funk <t.funk@web.de>
+# Created:      09/27/2012
+# Changed:      01/10/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -95,7 +95,8 @@ Colorset 4 bg #e0dedc, hi #006c00, sh #3a8a00, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Colorset 5 DGradient 255 2 #51504d 60 #7c7b78 40 #86857f, fg white, bg #65645e, hi #4c4b46, NoShape
+Test (EnvMatch use_composite 1) Colorset 5 DGradient 255 2 #51504d 60 #7c7b78 40 #86857f, fg white, bg #65645e, hi #4c4b46, NoShape, RootTransparent, Tint #51504d $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 5 DGradient 255 2 #51504d 60 #7c7b78 40 #86857f, fg white, bg #65645e, hi #4c4b46, NoShape
 
 #-----------------------------------------------------------------------
 # active/hilighted menu item
@@ -103,7 +104,8 @@ Colorset 5 DGradient 255 2 #51504d 60 #7c7b78 40 #86857f, fg white, bg #65645e, 
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Colorset 6 fg white, bg #44a200, hi yellow, Plain
+Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #44a200, hi yellow, Plain, RootTransparent, Tint #44a200 $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #44a200, hi yellow, Plain
 
 #-----------------------------------------------------------------------
 # greyed menu item if needed
@@ -247,7 +249,6 @@ Colorset 24 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0, NoShape
 #-----------------------------------------------------------------------
 # Default Colorset
 #-----------------------------------------------------------------------
-#Colorset 10 fg #EEEEEE, bg $[fvwm_bgcolor], hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 25 fg $[infostore.used_appletfontcolor], bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
@@ -259,17 +260,14 @@ Colorset 26 fg #A4CDF9, bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tin
 #-----------------------------------------------------------------------
 # Warn Colorset
 #-----------------------------------------------------------------------
-#Colorset 11 fg #E78787, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 27 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
-#Colorset 12 fg #e78787, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 28 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
 #-----------------------------------------------------------------------
-#Colorset 13 fg #89d5d7, bg $[fvwm_bgcolor], RootTransparent, Tint $[fvwm_colorstyle] $[fvwm_tintstyle]
 Colorset 29 fg #89D5D7, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
