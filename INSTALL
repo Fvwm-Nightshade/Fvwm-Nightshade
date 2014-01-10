@@ -270,6 +270,7 @@ To install a downloaded package use yast (as root) to solve package dependencies
 
 Fedora:
 https://apps.fedoraproject.org/packages/
+http://koji.fedoraproject.org/koji/search
 
 To install a downloaded package use yum (as root) to solve package dependencies with
 
@@ -277,11 +278,17 @@ To install a downloaded package use yum (as root) to solve package dependencies 
 
 Arch:
 https://www.archlinux.org/packages/
-https://www.archlinux.org/packages/
+https://aur.archlinux.org/
 
 To install a downloaded package use pacman (as root) to solve package dependencies with
 
     # pacman -U <path_to_arch_package>
+
+Gentoo:
+http://en.znurt.org/
+
+Slackware:
+http://slackfind.net/en/
 
 Some other package search sites:
 http://pkgs.org
