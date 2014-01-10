@@ -1,4 +1,36 @@
 History:
+09/01/2013
+- add FNS-Script-CompConfigurator - Composite configurator script for 
+  xcompmgr or compton
+- add new composite icons
+- add new values in .settings: use_composite, comp_command, used_windowtransparency,
+  used_windowopacity
+- add new module FvwmTransSet to set true transparency to windows if a composite
+  manager is running
+- update config:
+  - assign CompConfigurator icon to FNS-Script-CompConfigurator
+  - add configuration for FvwmTransSet
+  - add composite manager and FvwmTransSet to StartFunction
+  - add ExitFunction to stop composite manager and FvwmTransSet if needed
+  - add some needed composite functions: FuncKillCompmgr, FuncStartFvwmTransSet,
+    FuncStopFvwmTransSet, UpdateWindowOpacity, UpdateWindowTransparency,
+    UpdateMenuTint, 
+  - fix bug in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
+    that strings with space get cut
+  - add new sub menu for compositing in Fvwm-Nightshade configuration menu. Also
+    menus for change transparency in the RootMenu, and windows
+  - add in MenuWindowOpsTrimmed the possibility to change window opacity and
+    transparency if composite manager is running. Also in MenuDesktopOps to
+    change the menu transparency
+  - update overview, copyright and version number
+- add to colorsets use_composite tests to set tint or not
+- add a check in FvwmTransSet that dialogs don't change the last window's opacity
+  because it looks confusing if the parent window gets transparent
+- add support for hald AND upower to FuncSuspend/FuncHibernate
+- add some additional search sites to INSTALL
+- add zypper install command to INSTALL
+- update NEWS, COPYING, README
+
 11/01/2013
 - add new theme 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
   (http://alecive.deviantart.com/art/Gray-Revenge-1-7-194633730) and update

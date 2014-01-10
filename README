@@ -111,6 +111,9 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Own XDG applications menu with it's own directory files
 - New fvwm-menu-desktop GUI with help windows
 - Restart possibility for Conky clock and CPU applet in panel
+- Support for shadows and transparency with XcompMgr and Compton
+- Support for hald and upower for Suspend/Hibernate
+
 
 
 Requirements:
@@ -122,7 +125,7 @@ Required:        Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky,
 Recommended:     gnomes network manager, Volume Icon
 
 Useful:          fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-                 qtconfig for qt3, qtconfig for qt4, xneurs
+                 qtconfig3, qtconfig4, xneurs, xcompmgr or compton
   
 * unfortunatelly not usable in Arch at the moment. They have changed from
   cpufrequtils to cpupower but it's not supported at the moment 
