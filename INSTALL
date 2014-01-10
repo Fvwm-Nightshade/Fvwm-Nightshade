@@ -268,6 +268,10 @@ To install a downloaded package use yast (as root) to solve package dependencies
 
     # yast -i <path_to_rpm_package>
 
+or, if you have zypper installed use (as root)
+
+    # zypper install <path_to_rpm_package>
+
 Fedora:
 https://apps.fedoraproject.org/packages/
 http://koji.fedoraproject.org/koji/search
