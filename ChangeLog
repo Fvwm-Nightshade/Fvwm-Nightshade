@@ -1,4 +1,9 @@
 History:
+
+02/25/2014
+- update fvwm-menu-desktop2 to last upstream changes:
+  - Converting of icons always to png
+
 10/20/2013
 - update fvwm-nightshade help in asciidoc, man page and html
 - changes to fns-applications.menu:
