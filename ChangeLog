@@ -1,5 +1,10 @@
 History:
-09/01/2013
+
+02/25/2014
+- update fvwm-menu-desktop2 to last upstream changes:
+  - Converting of icons always to png
+
+01/09/2014
 - add FNS-Script-CompConfigurator - Composite configurator script for 
   xcompmgr or compton
 - add new composite icons
