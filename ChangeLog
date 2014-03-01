@@ -1,5 +1,12 @@
 History:
 
+03/01/2014
+- update FvwmForm-MultiMenuHelp2 to last upstream changes
+  - 2 line fix by Dominique Michel to correspond correctly with fvwm-nightshade.pot
+- update French and Spanish translation to last upstream changes:
+  - Spanish proof read patch by Jesús J. Guerrero Botella
+  - French proof read patches by Dominique Michel
+
 02/25/2014
 - update fvwm-menu-desktop2 to last upstream changes:
   - Converting of icons always to png
