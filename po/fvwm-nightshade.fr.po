@@ -8,11 +8,12 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2013-09-02 17:40+0200\n"
-"Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
+"PO-Revision-Date: 2014-02-27 11:40+0100\n"
+"Last-Translator: Dominique Michel <dominique_libre@users.sourceforge.net>\n"
 "Language-Team: French\n"
+"Language: French\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 ########################################################################
@@ -37,10 +38,10 @@ msgid "&Window Operations"
 msgstr "&Fenetre Operation "
 
 msgid "Lock Screen"
-msgstr "Écran verrouillé"
+msgstr "Ã‰cran verrouillÃ©"
 
 msgid "&Run Command"
-msgstr "&Exécutez commande"
+msgstr "&ExÃ©cutez commande"
 
 msgid "&Terminal"
 msgstr "&Terminal"
@@ -79,7 +80,7 @@ msgid "&Show Fvwm Version"
 msgstr "&Montrer Fvwm Version"
 
 msgid "&About Fvwm-Nightshade"
-msgstr "&À propos Fvwm-Nightshade"
+msgstr "&Ã€ propos Fvwm-Nightshade"
 
 #-----------------------------------------------------------------------
 # MenuHelpOthers
@@ -103,7 +104,7 @@ msgid "Fvwm Web Pages"
 msgstr "Fvwm page internet"
 
 msgid "Home Page"
-msgstr "Page de démarrage"
+msgstr "Page de dÃ©marrage"
 
 msgid "FAQ"
 msgstr "FAQ"
@@ -118,16 +119,16 @@ msgid "Forum"
 msgstr "Forum"
 
 msgid "In the beginning was ..."
-msgstr "Au début c'était..."
+msgstr "Au dÃ©but c'Ã©tait..."
 
 msgid "Beginners Guide"
-msgstr "Guide du débutant"
+msgstr "Guide du dÃ©butant"
 
 msgid "FAQ inofficial"
 msgstr "FAQ inofficiel"
 
 msgid "How Styles are Applied"
-msgstr "Comment sont appliqués les styles"
+msgstr "Comment sont appliquÃ©s les styles"
 
 msgid "Session Management"
 msgstr "Session Management"
@@ -145,7 +146,7 @@ msgstr "Fvwm-Nightshade Wiki"
 # MenuStartRegularModules
 #-----------------------------------------------------------------------
 msgid "Start Regular Modules"
-msgstr "Démarrarer le module régulier"
+msgstr "DÃ©marrarer le module rÃ©gulier"
 
 msgid "&Animation"
 msgstr "&Animation"
@@ -157,10 +158,10 @@ msgid "&Identify"
 msgstr "&Identification"
 
 msgid "ScrollBar (1/2 &app)"
-msgstr "Barre de défilement (1/2 &app)"
+msgstr "Barre de dÃ©filement (1/2 &app)"
 
 msgid "ScrollBar (75%% &scr)"
-msgstr "Barre de défilement (75%% &scr)"
+msgstr "Barre de dÃ©filement (75%% &scr)"
 
 msgid "Auto Raise (&1/2 sec)"
 msgstr "Agrandissement automatique (&1/2 sec)"
@@ -172,7 +173,7 @@ msgstr "Agrandissement automatique (&2 sec)"
 # MenuStopRegularModules
 #-----------------------------------------------------------------------
 msgid "Stop Regular Modules"
-msgstr "Arrêt du module régulier"
+msgstr "ArrÃªt du module rÃ©gulier"
 
 #-----------------------------------------------------------------------
 # MenuFvwmForms
@@ -208,16 +209,16 @@ msgstr "&Tail .xsession-errors"
 # MenuFvwmConfiguration
 #-----------------------------------------------------------------------
 msgid "&Animation Control"
-msgstr "Contrôle des &animations"
+msgstr "ContrÃ´le des &animations"
 
 msgid "Fvwm Form &Defaults"
-msgstr "Fvwm Form par &défault"
+msgstr "Fvwm Form par &dÃ©fault"
 
 #-----------------------------------------------------------------------
 # MenuFNSConfiguration
 #-----------------------------------------------------------------------
 msgid "Configure &Background"
-msgstr "Configuration &arriére plan"
+msgstr "Configuration &arriÃ©re plan"
 
 msgid "&Decoration"
 msgstr "&Decoration"
@@ -247,7 +248,7 @@ msgid "Keyboard"
 msgstr "Clavier"
 
 msgid "&Settings"
-msgstr "&Réglages"
+msgstr "&RÃ©glages"
 
 msgid "&Layout"
 msgstr "&Mise en page"
@@ -307,13 +308,13 @@ msgstr "Mise en page"
 # MenuWallpaperConfiguration
 #-----------------------------------------------------------------------
 msgid "Background Configuration"
-msgstr "Configuration arriére plan"
+msgstr "Configuration arriÃ©re plan"
 
 msgid "Set &Default background"
-msgstr "Appliquer par &defaut en arriére plan"
+msgstr "Appliquer par &defaut en arriÃ©re plan"
 
 msgid "Set &Wallpaper background"
-msgstr "&Appliquer papier pain en arriére plan"
+msgstr "&Appliquer papier pain en arriÃ©re plan"
 
 #-----------------------------------------------------------------------
 # MenuXScreenSaver
@@ -322,13 +323,13 @@ msgid "Screen Saver"
 msgstr "Ecran de sauvegarde"
 
 msgid "XscreenSaver &Settings"
-msgstr "&Réglages de XscreenSaver "
+msgstr "&RÃ©glages de XscreenSaver "
 
 msgid "&XscreenSaver (Re)start"
-msgstr "(Re)Démarrarge de &XscreenSaver "
+msgstr "(Re)DÃ©marrarge de &XscreenSaver "
 
 msgid "XscreenSaver &Stop"
-msgstr "&Arrêt de XscreenSaver "
+msgstr "&ArrÃªt de XscreenSaver "
 
 msgid "XscreenSaver &Lock"
 msgstr "&Verrouiller de XscreenSaver "
@@ -343,16 +344,16 @@ msgid "Really Quit"
 msgstr "Quitter vraiment"
 
 msgid "&Restart Fvwm"
-msgstr "&Redémarrer Fvm"
+msgstr "&RedÃ©marrer Fvm"
 
 msgid "Re&fresh Screen"
-msgstr "Ra&fraîchir l'ecran"
+msgstr "Ra&fraÃ®chir l'ecran"
 
 msgid "&Suspend System"
-msgstr "&Suspendre le systéme"
+msgstr "&Suspendre le systÃ©me"
 
 msgid "&Hibernate System"
-msgstr "Systéme &hiberner"
+msgstr "SystÃ©me &hiberner"
 
 msgid "&Yes, Really Quit"
 msgstr "&Oui, quitter vraiment"
@@ -364,16 +365,16 @@ msgstr "&Non, ne pas quitter"
 # MenuWindowOpsFull
 #-----------------------------------------------------------------------
 msgid "Window Operations"
-msgstr "Fenêtre Opération"
+msgstr "FenÃªtre OpÃ©ration"
 
 msgid "(De)&Iconify"
 msgstr "(De)M&ininmiser"
 
 msgid "(Un)Ma&ximize"
-msgstr "(Dé)Ma&ximiser"
+msgstr "(DÃ©)Ma&ximiser"
 
 msgid "(Un)&Shade"
-msgstr "(Dé)&Masquer"
+msgstr "(DÃ©)&Masquer"
 
 msgid "(Un)S&tick"
 msgstr "&Coller"
@@ -385,28 +386,28 @@ msgid "&Lower"
 msgstr "&Diminuer"
 
 msgid "&Destroy"
-msgstr "D&étruire"
+msgstr "D&Ã©truire"
 
 msgid "Move to &Page"
-msgstr "Déplacer vers la &page"
+msgstr "DÃ©placer vers la &page"
 
 msgid "&Group Operations"
-msgstr "Opération &grouper"
+msgstr "OpÃ©ration &grouper"
 
 msgid "&Window Style"
-msgstr "&Fenêtre de styles"
+msgstr "&FenÃªtre de styles"
 
 msgid "&Maximize Window"
-msgstr "Fenêtre m&aximiser"
+msgstr "FenÃªtre m&aximiser"
 
 msgid "&Refresh Window"
-msgstr "Fenêtre &rafraîchi"
+msgstr "FenÃªtre &rafraÃ®chi"
 
 msgid "R&earrange All"
-msgstr "R&éorganiser tout"
+msgstr "R&Ã©organiser tout"
 
 msgid "Window &Utility"
-msgstr "Fenêtre &utilitaires"
+msgstr "FenÃªtre &utilitaires"
 
 msgid "Sw&itch to...(WinList)"
 msgstr "Changer pour...(&WinList)"
@@ -427,7 +428,7 @@ msgid "Stays On &Top"
 msgstr "Rester sur le &premier plan"
 
 msgid "Stays &Back"
-msgstr "Rester sur l'&arriére plan"
+msgstr "Rester sur l'&arriÃ©re plan"
 
 msgid "(Un)&Stick"
 msgstr "&Coller"
@@ -445,25 +446,25 @@ msgid "Iconify"
 msgstr "Minimiser"
 
 msgid "De&Iconify"
-msgstr "Dém&inimiser"
+msgstr "DÃ©m&inimiser"
 
 msgid "&Shade"
 msgstr "&Cacher"
 
 msgid "Un&Shade"
-msgstr "Dé&cacher"
+msgstr "DÃ©&cacher"
 
 msgid "Lo&wer"
 msgstr "Dimin&uer"
 
 msgid "&Quick Move To ..."
-msgstr "&Déplacer rapidement vers..."
+msgstr "&DÃ©placer rapidement vers..."
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupOps
 #-----------------------------------------------------------------------
 msgid "Window Style"
-msgstr "Fenêtre styles"
+msgstr "FenÃªtre styles"
 
 msgid "TitleAtT&op"
 msgstr "Titre en &haut"
@@ -484,7 +485,7 @@ msgid "&MWMBorder"
 msgstr "Bord &MWM "
 
 msgid "&DepressableBorder"
-msgstr "Bord &enfoncé"
+msgstr "Bord &enfoncÃ©"
 
 msgid "F&irmBorder"
 msgstr "F&irmBorder"
@@ -529,13 +530,13 @@ msgstr "P&as de focus"
 # MenuWindowMaximize
 #-----------------------------------------------------------------------
 msgid "Maximize Window"
-msgstr "Fenêtre maximiser"
+msgstr "FenÃªtre maximiser"
 
 msgid "&Maximize Fully"
 msgstr "&Maximiser pleinement"
 
 msgid "&Unmaximize"
-msgstr "&Démaximiser"
+msgstr "&DÃ©maximiser"
 
 msgid "Maximize &Partially"
 msgstr "Maximiser &partiellement"
@@ -547,34 +548,34 @@ msgid "Maximize &Horizontally"
 msgstr "Maximiser &horizontallement"
 
 msgid "Maximize &Grow"
-msgstr "Maximize &croître"
+msgstr "Maximize &croÃ®tre"
 
 msgid "Maximize &Smart"
 msgstr "Maximiser &intelligent"
 
 msgid "Maximize Grow V&ert."
-msgstr "Maximiser croître V&ert."
+msgstr "Maximiser croÃ®tre V&ert."
 
 msgid "Maximize Grow H&oriz."
-msgstr "Maximiser croître H&oriz."
+msgstr "Maximiser croÃ®tre H&oriz."
 
 msgid "Maximize &Full Screen"
-msgstr "P&lein écran"
+msgstr "P&lein Ã©cran"
 
 msgid "&Unmaximize Full Screen"
-msgstr "&Retour écran normal"
+msgstr "&Retour Ã©cran normal"
 
 #-----------------------------------------------------------------------
 # MenuWindowRefresh
 #-----------------------------------------------------------------------
 msgid "Refresh Window"
-msgstr "Fenêtre rafraîchie"
+msgstr "FenÃªtre rafraÃ®chie"
 
 msgid "Re&fresh Window"
-msgstr "&Fenêtre rafraîchie"
+msgstr "&FenÃªtre rafraÃ®chie"
 
 msgid "Re&capture Window"
-msgstr "Fenêtre &rafraîchie"
+msgstr "FenÃªtre &rafraÃ®chie"
 
 msgid "&Place Again"
 msgstr "Re&positionner"
@@ -604,13 +605,13 @@ msgstr "&Iconiser"
 # MenuWindowUtility
 #-----------------------------------------------------------------------
 msgid "Window Utility"
-msgstr "Fenêtre utilitaires"
+msgstr "FenÃªtre utilitaires"
 
 msgid "Create &Screenshot"
-msgstr "&Créer imprime écran"
+msgstr "&CrÃ©er imprime Ã©cran"
 
 msgid "&Desktop Screenshot"
-msgstr "&Imprime écran du bureau"
+msgstr "&Imprime Ã©cran du bureau"
 
 msgid "Layer &+1"
 msgstr "Couche &+1"
@@ -622,7 +623,7 @@ msgid "Layer &-1"
 msgstr "Couche &-1"
 
 msgid "Stays On &Bottom"
-msgstr "Rester sur &l'arrière plan"
+msgstr "Rester sur &l'arriÃ¨re plan"
 
 #-----------------------------------------------------------------------
 # MenuDesktopOps
@@ -657,14 +658,14 @@ msgstr "&4.	Page"
 #-----------------------------------------------------------------------
 # layout Horizontal, Vertical & G2like
 msgid "Move to ..."
-msgstr "Déplacer vers ..."
+msgstr "DÃ©placer vers ..."
 
 # layout Vertical
 msgid "D&own	Page"
-msgstr "Page	&inférieure"
+msgstr "Page	&infÃ©rieure"
 
 msgid "&Up  	Page"
-msgstr "Page	&supérieur"
+msgstr "Page	&supÃ©rieur"
 
 #-----------------------------------------------------------------------
 # MenuClockOps
@@ -673,7 +674,7 @@ msgid "Conky Clock Ops"
 msgstr "Conky Montre Ops"
 
 msgid "Restart Conky Clock"
-msgstr "Redémarrer Conky Montre"
+msgstr "RedÃ©marrer Conky Montre"
 
 #-----------------------------------------------------------------------
 # MenuCpuOps
@@ -682,7 +683,7 @@ msgid "Conky Cpu Ops"
 msgstr "Conky Cpu Ops"
 
 msgid "Restart Conky CPU"
-msgstr "Redémarrer Conky CPU"
+msgstr "RedÃ©marrer Conky CPU"
 
 ########################################################################
 # FvwmForm
@@ -694,7 +695,7 @@ msgid "Fvwm-Nightshade -- Base Setup"
 msgstr "Fvwm-Nightshade -- installation de base"
 
 msgid "Use this setup to configure base settings of Fvwm-Nightshade"
-msgstr "Utilisez l'installation pour configurer les réglages de base de Fvwm-Nightshade "
+msgstr "Utilisez l'installation pour configurer les rÃ©glages de base de Fvwm-Nightshade "
 
 # msgstr same length as msgid
 msgid "----------------- Environment ------------------"
@@ -706,7 +707,7 @@ msgstr "Splash util: "
 
 # msgstr same length as msgid
 msgid  "Show on start: "
-msgstr "Au démarrage : "
+msgstr "Au dÃ©marrage : "
 
 msgid "Yes"
 msgstr "Oui"
@@ -716,11 +717,11 @@ msgstr "Non"
 
 # msgstr same length as msgid
 msgid "---------- Decoration (Windows, Menus) ----------"
-msgstr "---------- Decoration (Fenêtre, Menus) ----------"
+msgstr "---------- Decoration (FenÃªtre, Menus) ----------"
 
 # msgstr same length as msgid
 msgid  "Used Theme:    "
-msgstr "Thème utilisé: "
+msgstr "ThÃ¨me utilisÃ©: "
 
 # msgstr same length as msgid
 msgid  " (Others: Clean, Air, Ambience, CrystalBalls)"
@@ -728,7 +729,7 @@ msgstr " (Autres: Clean, Air, Ambience, CrystalBalls)"
 
 # msgstr same length as msgid
 msgid  "Used Font:     "
-msgstr "Police utilisé:"
+msgstr "Police utilisÃ©:"
 
 # msgstr same length as msgid
 msgid  " (E.g. Arial, Helvetia, Verdana)"
@@ -736,7 +737,7 @@ msgstr " (E.g. Arial, Helvetia, Verdana)"
 
 # msgstr same length as msgid
 msgid  "Used Font size:"
-msgstr "Taille utilisé:"
+msgstr "Taille utilisÃ©:"
 
 # msgstr same length as msgid
 msgid "              (E.g. 10, 11, 13)"
@@ -754,7 +755,7 @@ msgid "Horizontal (Panels on top)"
 msgstr "Horizontale (Panels en haut)"
 
 msgid "Vertical (Panels on right side)"
-msgstr "Vertical (Panels sur le côté droit)"
+msgstr "Vertical (Panels sur le cÃ´tÃ© droit)"
 
 msgid "G2like (Panels on top and bottom)"
 msgstr "G2like (Panels en haut et en bas)"
@@ -792,7 +793,7 @@ msgstr "Annuler"
 # FvwmForm-RunCommand
 #-----------------------------------------------------------------------
 msgid "Run Command"
-msgstr "Exécutez commande"
+msgstr "ExÃ©cutez commande"
 
 msgid "Command:"
 msgstr "Commande:"
@@ -801,13 +802,13 @@ msgid "Run in Terminal"
 msgstr "Lancer avec terminal"
 
 msgid "Execute"
-msgstr "Exécuter"
+msgstr "ExÃ©cuter"
 
 #-----------------------------------------------------------------------
 # FvwmForm-About
 #-----------------------------------------------------------------------
 msgid "About"
-msgstr "À propos"
+msgstr "Ã€ propos"
 
 msgid "Version"
 msgstr "Version"
@@ -848,7 +849,7 @@ msgid "           SHIFT-ALT + rolling wheel up/down anywhere"
 msgstr "           SHIFT-ALT + rolling wheel up/down anywhere"
 
 msgid "           Switch with window to page left/right with"
-msgstr "           Changer pour la fenêtre gauche/droite avec"
+msgstr "           Changer pour la fenÃªtre gauche/droite avec"
 
 msgid "           SHIFT-CTRL + rolling wheel up/down anywhere"
 msgstr "           SHIFT-CTRL + rolling wheel up/down anywhere"
@@ -882,32 +883,32 @@ msgid "           with rolling wheel up/down"
 msgstr "           monter/descendre avec la roulette"
 
 msgid "Mouse Bindings for Corners and Sides"
-msgstr "Souris figer pour les coin et les côtés"
+msgstr "Souris figer pour les coin et les cÃ´tÃ©s"
 
 msgid "Mouse 1:   Drag resize window"
-msgstr "Mouse 1:   Redimensionner la fenêtre par glissement"
+msgstr "Mouse 1:   Redimensionner la fenÃªtre par glissement"
 
 msgid "Mouse Bindings for Window area"
-msgstr "Souris figer pour la zone de la fenêtre"
+msgstr "Souris figer pour la zone de la fenÃªtre"
 
 msgid "Mouse 1:   Root menu with ALT + click"
 msgstr "Mouse 1:   Menu root avec ALT + clic"
 
 msgid "Mouse 2:   Drag + ALT moves window"
-msgstr "Mouse 2:   Glisser + ALT déplacer fenêtre"
+msgstr "Mouse 2:   Glisser + ALT dÃ©placer fenÃªtre"
 
 msgid "           Raise or lower with ALT + click"
 msgstr "           Augmenter ou diminuer with ALT + click"
 
 # config - Help info with SHIFT-CTRL-ALT to Pointer in Icons
 msgid "Mouse Bindings for Icons"
-msgstr "Souris enfoncé pour les icônes"
+msgstr "Souris enfoncÃ© pour les icÃ´nes"
 
 msgid "Mouse 1:   Drag moves icon"
-msgstr "Mouse 1:   Le glissement déplace l'icônes"
+msgstr "Mouse 1:   Le glissement dÃ©place l'icÃ´nes"
 
 msgid "           Deiconify with double click"
-msgstr "           Retour à l'ancienne version avec un double clic"
+msgstr "           Retour Ã  l'ancienne version avec un double clic"
 
 msgid "           Root menu with ALT + click"
 msgstr "           Menu root avec ALT + click"
@@ -916,20 +917,20 @@ msgid "Mouse 2:   Deiconify icon with click"
 msgstr "Mouse 2:   Deiconify icon avec clic"
 
 msgid "           All of same resource group with CTRL + click"
-msgstr "           Groupement des mêmes resources avec CTRL + clic"
+msgstr "           Groupement des mÃªmes resources avec CTRL + clic"
 
 msgid "           WindowGroupOps menu with CTRL + click"
 msgstr "           WindowGroupOps menu avec CTRL + clic"
 
 # config - FuncWindowCreateScreenshot
 msgid "Screenshot Info for window"
-msgstr "Imprime écran d'information pour la fenêtre"
+msgstr "Imprime Ã©cran d'information pour la fenÃªtre"
 
 msgid "Screenshot created:"
-msgstr "Imprime écran créé:"
+msgstr "Imprime Ã©cran crÃ©Ã©:"
 
 msgid "ImageMagick isn't installed. No screenshot created."
-msgstr "ImageMagick n'est pas installé. Aucun imprime écran crée"
+msgstr "ImageMagick n'est pas installÃ©. Aucun imprime Ã©cran crÃ©e"
 
 # config - FuncDesktopCreateScreenshot
 msgid "Desktop Screenshot Info"
@@ -940,39 +941,39 @@ msgid "Suspend Info"
 msgstr "Info suspendu"
 
 msgid "Install pm-utils for full functionality"
-msgstr "Installer pm-utils pour avoir l'ensemble des fonctionnalités"
+msgstr "Installer pm-utils pour avoir l'ensemble des fonctionnalitÃ©s"
 
 # config - FuncHibernate
 msgid "Hibernate Info"
-msgstr "Info hiberné"
+msgstr "Info hibernÃ©"
 
 # config - FuncLockScreen
 msgid "Lock screen Info"
-msgstr " Info écran verrouillé"
+msgstr " Info Ã©cran verrouillÃ©"
 
 msgid "'xscreensaver' not running or not installed."
-msgstr "'xscreensaver' pas en fonctionnement ou pas installé"
+msgstr "'xscreensaver' pas en fonctionnement ou pas installÃ©"
 
 # config - FuncMenuXScreenSaver
 msgid "Screensaver Info"
-msgstr "Info écran de sauvegarde"
+msgstr "Info Ã©cran de sauvegarde"
 
 msgid "Install xscreensaver for full functionality"
-msgstr "Installer pm-utils pour avoir l'ensemble des fonctionnalités"
+msgstr "Installer pm-utils pour avoir l'ensemble des fonctionnalitÃ©s"
 
 # config - FuncMenuWallpaperConfiguration
 msgid "Wallpaper browser Info"
 msgstr "Navigateur papier paint info"
 
 msgid "Install ImageMagick AND feh for full functionality."
-msgstr "Installer ImageMagick et feh pour avoir l'ensemble des fonctionnalités"
+msgstr "Installer ImageMagick et feh pour avoir l'ensemble des fonctionnalitÃ©s"
 
 # config - FuncKbdLayouter
 msgid "Keyboard Layout Info"
 msgstr "Info disposition clavier"
 
 msgid "Install xneur/gxneur for full functionality"
-msgstr "Installer xneur/gxneur pour avoir l'ensemble des fonctionnalités"
+msgstr "Installer xneur/gxneur pour avoir l'ensemble des fonctionnalitÃ©s"
 
 # config - FuncLxappearance
 msgid "Gtk+ Decor Info"
@@ -998,7 +999,7 @@ msgstr "Installer qtconfig-qt4 pour Qt4 application"
 # Help info with SHIFT-CTRL-ALT P to show all page related key bindings
 # layout Horizontal & G2like
 msgid "Page Key Bindings"
-msgstr "Touche Page enfoncé"
+msgstr "Touche Page enfoncÃ©"
 
 msgid "SHIFT-CTRL:"
 msgstr "SHIFT-CTRL:"
@@ -1013,90 +1014,90 @@ msgid "SHIFT-ALT:"
 msgstr "SHIFT-ALT:"
 
 msgid "Cursor right/left: Switch active window to page right/left"
-msgstr "Curseur droite/gauche: changer la fenêtre active pour la page droite/gauche"
+msgstr "Curseur droite/gauche: changer la fenÃªtre active pour la page droite/gauche"
 
 msgid "1-4: Switch active window to page n"
-msgstr "Change la fenêtre active pour la page n"
+msgstr "Change la fenÃªtre active pour la page n"
 
 msgid "ALT-CTRL:"
 msgstr "ALT-CTRL:"
 
 msgid "Cursor right/left/up/down: Move mouse pointer by 1% of a page"
-msgstr "Curseur droite/gauche/haut/bas: déplace le pointeur de la souris de 1% de la page"
+msgstr "Curseur droite/gauche/haut/bas: dÃ©place le pointeur de la souris de 1% de la page"
 
 msgid "SHIFT-ALT-CTRL:"
 msgstr "SHIFT-ALT-CTRL:"
 
 msgid "Cursor right/left/up/down: Scroll right/left by 10% of a page"
-msgstr "Curseur droite/gauche/haut/bas: défile de 10% de la page"
+msgstr "Curseur droite/gauche/haut/bas: dÃ©file de 10% de la page"
 
 # layout Vertical
 msgid "Cursor up/down: Switch to page up/down"
 msgstr "Curseur haut/bas change la page de haut/bas"
 
 msgid "Cursor up/down: Switch active window to page up/down"
-msgstr "Curseur haut/bas change la fenêtre active de haut/bas"
+msgstr "Curseur haut/bas change la fenÃªtre active de haut/bas"
 
 # .bindings
 # Help info with SHIFT-CTRL-ALT A to show all ALT related key bindings
 msgid "ALT Key Bindings"
-msgstr "Touche ALT enfoncé"
+msgstr "Touche ALT enfoncÃ©"
 
 msgid "ALT:"
 msgstr "ALT:"
 
 msgid "F1: Open root menu          F7:  Move window"
-msgstr "F1: Ouvrir menu root               F7:  Déplace la fenêtre"
+msgstr "F1: Ouvrir menu root               F7:  DÃ©place la fenÃªtre"
 
 msgid "F2: Launch 'run' dialog box F8:  Resize window"
-msgstr "F2: Boite de dialogue 'commande'   F8:  Redimensionne la fenêtre"
+msgstr "F2: Boite de dialogue 'commande'   F8:  Redimensionne la fenÃªtre"
 
 msgid "F3: Show window list        F9:  Minimize window"
-msgstr "F3:Affiche la liste de la fenêtre  F9:  Minimise la fenêtre"
+msgstr "F3:Affiche la liste de la fenÃªtre  F9:  Minimise la fenÃªtre"
 
 msgid "F4: Close active window     F10: Maximize/restore window"
-msgstr "F4: Ferme la fenêtre active        F10: Maximise/restaure la fenêtre"
+msgstr "F4: Ferme la fenÃªtre active        F10: Maximise/restaure la fenÃªtre"
 
 msgid "F5: Not used                F11: Fullscreen/restore window"
-msgstr "F5: Pas utilisé                    F11: Plein écran/restaure la fenêtre"
+msgstr "F5: Pas utilisÃ©                    F11: Plein Ã©cran/restaure la fenÃªtre"
 
 msgid "F6: Cycle between same      F12: Identify window"
-msgstr "F6: Cycle between same             F12: Identifier la fenêtre"
+msgstr "F6: Cycle between same             F12: Identifier la fenÃªtre"
 
 msgid "    resource windows"
 msgstr "    resource windows"
 
 msgid "Tab:   Switching focus to next window"
-msgstr "Tab:      Mise en focus à la fenêtre suivante"
+msgstr "Tab:      Mise en focus Ã  la fenÃªtre suivante"
 
 msgid "Tab:   Switching focus to previous window"
-msgstr "Tab:      Mise en focus à la fenêtre précédente"
+msgstr "Tab:      Mise en focus Ã  la fenÃªtre prÃ©cÃ©dente"
 
 msgid "Print: Screenshot of the active window"
-msgstr "Affiche:  Imprime écran de la fenêtre active"
+msgstr "Affiche:  Imprime Ã©cran de la fenÃªtre active"
 
 msgid "None:"
 msgstr "Rien:"
 
 msgid "Print: Screenshot of current page"
-msgstr "Affiche:  Imprime écran de la page actuelle"
+msgstr "Affiche:  Imprime Ã©cran de la page actuelle"
 
 # Help info with SHIFT-CTRL-ALT H to show the global key bindings help window
 msgid "Help Keys with CTRL-ALT"
 msgstr "Touche Aide avec CTRL-ALT"
 
 msgid "A: List ALT bindings"
-msgstr "A: List ALT enfoncé"
+msgstr "A: List ALT enfoncÃ©"
 
 msgid "C: List CTRL bindings"
-msgstr "C: List CTRL enfoncé"
+msgstr "C: List CTRL enfoncÃ©"
 
 msgid "P: List Page bindings"
-msgstr "P: List Page enfoncé"
+msgstr "P: List Page enfoncÃ©"
 
 # Help info with SHIFT-CTRL-ALT C to show all CTRL related key bindings
 msgid "CTRL Key Bindings"
-msgstr "Touche CTRL enfoncé"
+msgstr "Touche CTRL enfoncÃ©"
 
 msgid "F1: Open full Oops menu     F2: Launch FvwmConsole"
 msgstr "F1: Menu full Oops ouvert               F2: Laucer FvwmConsole"
@@ -1105,36 +1106,36 @@ msgid "CTRL-ALT:"
 msgstr "CTRL-ALT:"
 
 msgid "D:  Hide/unhide all windows T:  Launch Terminal"
-msgstr "D:  Cacher/Décacher toutes les fenêtres T:  Lancer le Terminal"
+msgstr "D:  Cacher/DÃ©cacher toutes les fenÃªtres T:  Lancer le Terminal"
 
 msgid "L:  Lock Screen"
-msgstr "L:  écran verrouillé"
+msgstr "L:  Ã©cran verrouillÃ©"
 
 # decor theme file
 # Help info with SHIFT-CTRL-ALT to Window Button Pointer
 msgid "Left Button Bindings"
-msgstr "Bouton gauche enfoncé"
+msgstr "Bouton gauche enfoncÃ©"
 
 msgid "Mouse 1:  WindowOps menu"
 msgstr "Mouse 1:  WindowOps menu"
 
 msgid "Mouse 2:  Move to page menu"
-msgstr "Mouse 2:  Déplacer vers la page menu"
+msgstr "Mouse 2:  DÃ©placer vers la page menu"
 
 msgid "Mouse 3:  WindowGroupOps menu"
 msgstr "Mouse 3:  WindowGroupOps menu"
 
 msgid "Close Button Bindings"
-msgstr "Bouton fermeture enfoncé"
+msgstr "Bouton fermeture enfoncÃ©"
 
 msgid "Mouse 1:  Delete on click"
 msgstr "Mouse 1:  Effacer au click"
 
 msgid "          Destroy on double click"
-msgstr "		  Détruire avec le double clic"
+msgstr "		  DÃ©truire avec le double clic"
 
 msgid "Maximize Button Bindings"
-msgstr "Button maximiser enfoncé"
+msgstr "Button maximiser enfoncÃ©"
 
 msgid "Mouse 1:       Maximize fully on click"
 msgstr "Mouse 1:       Maximiser pleinement cliquez sur"
@@ -1152,7 +1153,7 @@ msgid "Mouse 3:       Maximize smart"
 msgstr "               Maximiser intelligent"
 
 msgid "Minimize Button Bindings"
-msgstr "Bouton minimiser enfoncé"
+msgstr "Bouton minimiser enfoncÃ©"
 
 msgid "Mouse 1:  Iconify"
 msgstr "Mouse 1:  Iconify"
@@ -1173,7 +1174,7 @@ msgid "Menu Folders"
 msgstr "Menu dossiers"
 
 msgid "Menu Entries"
-msgstr "menu entrée"
+msgstr "menu entrÃ©e"
 
 msgid "Add >"
 msgstr "Ajouter >"
@@ -1188,28 +1189,28 @@ msgid "Quit"
 msgstr "Quitter"
 
 msgid "!!! Changed menu not saved !!! Next click will quit."
-msgstr "!!! Le menu a changé sans être sauvegarder!!! Prochain clic quittera le menu."
+msgstr "!!! Le menu a changÃ© sans Ãªtre sauvegarder!!! Prochain clic quittera le menu."
 
 msgid "Personal Entries "
-msgstr "Entrées personnelle"
+msgstr "EntrÃ©es personnelle"
 
 msgid "Personal Entries"
-msgstr "Entrées personnelle "
+msgstr "EntrÃ©es personnelle "
 
 msgid "Personal applications*"
 msgstr "Application personnelle*"
 
 msgid "Personal menu saved"
-msgstr "Menu personnel sauvegardé"
+msgstr "Menu personnel sauvegardÃ©"
 
 msgid "Added '"
-msgstr "Ajouté '"
+msgstr "AjoutÃ© '"
 
 msgid "' to menu"
 msgstr "' au menu"
 
 msgid "Removed '"
-msgstr "Enlevé  '"
+msgstr "EnlevÃ©  '"
 
 msgid "' from menu"
 msgstr "' du menu"
@@ -1224,34 +1225,34 @@ msgid "CPU Count"
 msgstr "Compteur CPU"
 
 msgid "At the moment the governor 'userspace' is not supported, so you cannot use it!"
-msgstr "Pour l'instant le gouvernement 'userspace'n'est pas supporté, donc vous ne pouvez pas l'utiliser "
+msgstr "Pour l'instant le gouvernement 'userspace'n'est pas supportÃ©, donc vous ne pouvez pas l'utiliser "
 
 msgid "But you get the same result with governor 'powersave' and one of the frequencies"
-msgstr "mais vous obtenez le même résultat avec le gouvernement 'powersave' et un autres de cette fréquence"
+msgstr "mais vous obtenez le mÃªme rÃ©sultat avec le gouvernement 'powersave' et un autres de cette frÃ©quence"
 
 msgid "in 'Min Frequency', or governor 'performance' in combination with 'Max Frequency'."
-msgstr "dans 'fréquence min' , ou gouvernement 'perfermonce'  en combinant avec 'fréquence max'."
+msgstr "dans 'frÃ©quence min' , ou gouvernement 'perfermonce'  en combinant avec 'frÃ©quence max'."
 
 msgid "Min Frequency"
-msgstr "Fréquence min"
+msgstr "FrÃ©quence min"
 
 msgid "Max Frequency"
-msgstr "Fréquence max"
+msgstr "FrÃ©quence max"
 
 msgid "not installed"
-msgstr "pas installé"
+msgstr "pas installÃ©"
 
 msgid "Set"
 msgstr "Set"
 
 msgid " updated and cpufreq set."
-msgstr " mis à jour et cpufreq set."
+msgstr " mis Ã  jour et cpufreq set."
 
 msgid "New file "
 msgstr "Nouveau fichier "
 
 msgid " written and cpufreq set."
-msgstr " écrit et pufreq set."
+msgstr " Ã©crit et pufreq set."
 
 #-----------------------------------------------------------------------
 # fvwm-menu-desktop-config.fpl which are in the CVS version of FVWM
@@ -1270,23 +1271,28 @@ msgstr "Menus dans"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 95
 msgid "No menus found! Check why from within a terminal with"
-msgstr "Pas de menu trouvé ! Depuis un terminal, contrôlez pourquoi avec"
+msgstr "Pas de menu trouvÃ© ! Depuis un terminal, contrÃ´lez pourquoi avec"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 109
 msgid "Single Menu"
-msgstr "Menu Simple"
+msgstr "Menu simple"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 114
-msgid "If you want a single menu only deselect all menus above and fill out the fields below."
-msgstr "Si vous voulez un menu unique, désélectionner tous les menus ci-dessus et remplissez les champs"
+msgid ""
+"If you want a single menu only deselect all menus above and fill out the "
+"fields below."
+msgstr ""
+"Si vous voulez un menu unique, dÃ©sÃ©lectionner tous les menus ci-dessus et "
+"remplissez les champs"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 116
 msgid "But remember, if the menu doesn't exist, nothing happens."
-msgstr "ci-dessous. Mais rappelez-vous, si le menu n'existe pas, rien ne se passe."
+msgstr ""
+"ci-dessous. Mais rappelez-vous, si le menu n'existe pas, rien ne se passe."
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 120
 msgid "Menu Top Title:     "
-msgstr "Menu haut titre:      "
+msgstr "Titre du menu :     "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 123
 msgid "  "
@@ -1294,23 +1300,23 @@ msgstr "  "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 124
 msgid "Install-Prefix:     "
-msgstr "Installer-Préfixe:    "
+msgstr "PrÃ©fixe de menu :   "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 128
 msgid "Desktop:            "
-msgstr "Desktop:              "
+msgstr "Bureau:             "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 132
 msgid "Menutype:           "
-msgstr "Type d'menu:          "
+msgstr "Type de menu:       "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 141
 msgid "General Options"
-msgstr "Options générales"
+msgstr "Options gÃ©nÃ©rales"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 146
 msgid "Used Menu Type:     "
-msgstr "Type de menu utilisé: "
+msgstr "Type de menu utilisÃ©: "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 149
 msgid "Multiple "
@@ -1322,7 +1328,7 @@ msgstr "Simple"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 153
 msgid "Use Icons?          "
-msgstr "Utiliser icônes?      "
+msgstr "Utiliser des icÃ´nes?  "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 155
 msgid "Yes      "
@@ -1334,19 +1340,19 @@ msgstr "Non  "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 159
 msgid "Icon size:          "
-msgstr "Taille d'icône:       "
+msgstr "Taille d'icÃ´ne:       "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 161
 msgid " (Default is 24)"
-msgstr " (Par défaut est 24)"
+msgstr " (Par dÃ©faut, 24)"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 164
 msgid "Use Titles?         "
-msgstr "Utiliser titres?      "
+msgstr "Utiliser des titres?  "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 170
 msgid "Used Icon theme:    "
-msgstr "Thème d'icônes:       "
+msgstr "ThÃ¨me d'icÃ´nes:       "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 174
 msgid "Menu(s) in a Menu?  "
@@ -1354,23 +1360,23 @@ msgstr "Menu(s) dans un menu? "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 180
 msgid "Insert in menu:     "
-msgstr "Insérer dans le menu: "
+msgstr "InsÃ©rer dans le menu: "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 184
 msgid "Directory Icon:     "
-msgstr "Annuaire d'icône:     "
+msgstr "Annuaire d'icÃ´ne:     "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 188
 msgid "Application Icon:   "
-msgstr "Demande d'icône:      "
+msgstr "IcÃ´ne d'applications: "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 192
 msgid "Icon directory:     "
-msgstr "Dossier des icônes:   "
+msgstr "Dossier des icÃ´nes:   "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 194
 msgid " (Directory for converted icons)"
-msgstr " (Répertoire pour les icônes converties)"
+msgstr " (RÃ©pertoire pour les icÃ´nes converties)"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 197
 msgid "Output path:        "
@@ -1378,41 +1384,46 @@ msgstr "Chemin de sortie:     "
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 199
 msgid " (Full path to store output)"
-msgstr " (Chemin complêt du fichier de sortie)"
+msgstr " (Chemin complÃªt du fichier de menu)"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 209
 msgid "Generate Menu(s)"
-msgstr "Sauvez les réglages"
+msgstr "GÃ©nÃ©rez le menu"
 
 #. ./bin/fvwm-menu-desktop-config.fpl.in: line 235
 msgid "Save Settings"
-msgstr "Sauvez les réglages"
+msgstr "Sauvez les rÃ©glages"
 
 #-----------------------------------------------------------------------
 # fvwm-menu-desktop which are in the CVS version of FVWM
 #-----------------------------------------------------------------------
 #. ./bin/fvwm-menu-desktop.in: line 472
 msgid "Regenerate XDG Menu(s)"
-msgstr "Régénérer le(s) menu(s) XDG"
+msgstr "RÃ©gÃ©nÃ©rer le(s) menu(s) XDG"
 
 #. ./bin/fvwm-menu-desktop.in: line 515
 msgid "Regenerate XDG Menu"
-msgstr "Régénérer le menu XDG"
+msgstr "RÃ©gÃ©nÃ©rer le menu XDG"
 
 #-----------------------------------------------------------------------
 # FvwmForm-SingleMenuHelp which are in the CVS version of FVWM
 #-----------------------------------------------------------------------
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 17
-msgid "In this section you can define a custom-assembled menu 'foo-bar.menu' placed on another"
-msgstr "Dans cette section vous pouvez definir un menu 'foo-bar.menu' placé dans un autre"
+msgid ""
+"In this section you can define a custom-assembled menu 'foo-bar.menu' placed "
+"on another"
+msgstr ""
+"Dans cette section vous pouvez customiser un menu 'foo-bar.menu' placÃ© dans "
+"un autre"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 19
 msgid "location as defined in the XDG menu definitions."
-msgstr "emplacement comme defini dans le menu XDG."
+msgstr "emplacement comme defini dans les dÃ©finitions du menu XDG."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 24
 msgid "Specifies the menu title of the top menu used by Fvwm's Popup command."
-msgstr "Specifiez le titre du menu en haut utilisé par la commande Fvwm's."
+msgstr ""
+"  Specifiez le titre du menu principal utilisÃ© par la commande de Fvwm."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 26
 msgid "                    "
@@ -1420,15 +1431,17 @@ msgstr "                      "
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 27
 msgid "Default is 'FvwmMenu'."
-msgstr "Par défaut est 'FvwmMenu'."
+msgstr "La valeur par dÃ©faut est 'FvwmMenu'."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 32
 msgid "Overrides the standard locations for XDG menu definitions. The standard"
-msgstr "Écrase l'emplacement standard pour la definition du menu XDG. Les emplacements"
+msgstr ""
+"  Ã‰crase l'emplacement standard pour la definition du menu XDG. Les "
+"emplacements"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 35
 msgid "locations are /etc/xdg/menus and"
-msgstr "standard sont /etc/xdg/menus et"
+msgstr "standards sont /etc/xdg/menus et"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 35
 msgid "if available."
@@ -1436,173 +1449,253 @@ msgstr "si disponible."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 40
 msgid "Overrides the name of the main desktop environment installed on the"
-msgstr "Écrase le nom de l'environnement principal qui est installé sur le systeme."
+msgstr ""
+"  Ã‰crase le nom de l'environnement principal qui est installÃ© sur le systeme."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 43
-msgid "system. If a system offers multiple desktop environments $XDG_MENU_PREFIX"
-msgstr "Si le systeme offre plusieurs environneent de bureau, $XDG_MENU_PREFIX est"
+msgid ""
+"system. If a system offers multiple desktop environments $XDG_MENU_PREFIX"
+msgstr ""
+"Si le systeme offre plusieurs environneents de bureau, $XDG_MENU_PREFIX est"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 46
 msgid "is typically set. It is ignored if this field is used."
-msgstr "normalement appliqué. A variable est ignoré si le champ est utilisé. Noms"
+msgstr ""
+"normalement appliquÃ©. Elle est ignorÃ©e si le champ est utilisÃ©. Les noms"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 49
 msgid "Possible names: gnome, kde, lxde, etc."
-msgstr "possible: gnome, kde, lxde, etc."
+msgstr "possibles sont: gnome, kde, lxde, etc."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 54
-msgid "Defines which type of menu should be found. Possible name types could be:"
-msgstr "Definisé quel type de menu doit être trouvé. Les nom de types possible peuventz"
+msgid ""
+"Defines which type of menu should be found. Possible name types could be:"
+msgstr ""
+"  DÃ©finit quel type de menu doit Ãªtre trouvÃ©. Les noms des types possibles"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 57
-msgid "applications, settings, preferences, etc. Note if the specified menu type"
-msgstr "être: applications, settings, preferences, etc. Attention: si le type de menu"
+msgid ""
+"applications, settings, preferences, etc. Note if the specified menu type"
+msgstr ""
+"peuvent Ãªtre : applications, settings, preferences, etc. Attention: si le "
+"type"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 60
 msgid "doesn't exist the generated menu is empty!"
-msgstr "specifié n'existe pas, le menu généré est vide."
+msgstr "de menu specifiÃ© n'existe pas, le menu gÃ©nÃ©rÃ© est vide !"
 
 #-----------------------------------------------------------------------
 # FvwmForm-MultiMenuHelp which are in the CVS version of FVWM
 #-----------------------------------------------------------------------
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 17
-msgid "In this section all XDG menus found on the system are shown. All selected menus"
-msgstr "In cette section tous les menus XDG trouvé seront affiché sur le systeme. Tous les"
+msgid ""
+"In this section all XDG menus found on the system are shown. All selected "
+"menus"
+msgstr ""
+"Dans cette section tous les menus XDG trouvÃ©s seront affichÃ©s sur le "
+"systeme. Tous les"
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 19
-msgid "will integrate in one Fvwm menu. If you want to generate a custom-assembled menu"
-msgstr "menu selectionnés seront intégré dans  un menu Fvwm. Si vous voulez generer un menu"
+msgid ""
+"will integrate in one Fvwm menu. If you want to generate a custom-assembled "
+"menu"
+msgstr ""
+"menus selectionnÃ©s seront intÃ©grÃ©s dans  un menu Fvwm. Si vous voulez gÃ©nÃ©rer"
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 21
 msgid "use the 'Single Menu' section."
-msgstr "client, utlisez la section 'Single Menu'."
+msgstr "un menu client, utlisez la section 'Menu simple'."
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 28
 msgid "List menus with checkboxes found in /etc/xdg/menus/"
-msgstr "La liste des menus avec les checkbox se trouve dans /etc/xdg/menus/"
+msgstr ""
+"La liste des menus avec des cases Ã  cocher se trouve dans /etc/xdg/menus/"
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 36
 msgid "List menus with checkboxes found in $HOME/.config/menus/"
-msgstr "La liste des menus avec les checkbox se trouve dans $HOME/.config/menus/"
+msgstr ""
+"La liste des menus avec des cases Ã  cocher se trouve dans $HOME/.config/"
+"menus/"
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 42
-msgid "Note that equal menus found under /etc/xdg/menus AND $HOME/.config/menus/"
-msgstr "Remarque: identique Menu trouvé sous /etc/xdg/menus et $HOME/.config/menus/, suivant"
+msgid ""
+"Note that equal menus found under /etc/xdg/menus AND $HOME/.config/menus/"
+msgstr ""
+"Notez que des menus identiques trouvÃ©s dans /etc/xdg/menus et $HOME/.config/"
+"menus/,"
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 44
-msgid "following the XDG menu specification only shown in $HOME/.config/menus/."
-msgstr "le menu XDG specifié seulement montré dans $HOME/.config/menus/."
+msgid ""
+"following the XDG menu specification only shown in $HOME/.config/menus/."
+msgstr ""
+"suivant la spÃ©cification de menu XDG ne sont montrÃ©s que dans $HOME/.config/"
+"menus/."
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 48
-msgid "If no menus appear check why from within a terminal with 'fvwm-menu-desktop -v'."
-msgstr "Si aucun menu apparait, vérifiez  pourquoi du terminal avec 'fvwm-menu-desktop -v'."
+msgid ""
+"If no menus appear check why from within a terminal with 'fvwm-menu-desktop -"
+"v'."
+msgstr ""
+"Si le menu n'apparaÃ®t pas, vÃ©rifiez  pourquoi dans un terminal avec 'fvwm-"
+"menu-desktop -v'."
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 50
-msgid "Also it is a good idea to check .xsession-errors in the user home for errors."
-msgstr "C'est aussi une bonne idée de vérifier dans .xsession-errors pour les erreurs."
+msgid ""
+"Also it is a good idea to check .xsession-errors in the user home for errors."
+msgstr ""
+"C'est aussi une bonne idÃ©e de chercher les erreurs dans ~/.xsession-errors."
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 54
 msgid "One limitation exists:"
-msgstr "Une limite existe:"
+msgstr "Il existe une limitation :"
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 56
 msgid "If there are too much menus found an error occurs in .xsession-errors:"
-msgstr "Si il y a trop de menus trouvé une message d'erreur apparaît dans .xsession-errors:"
+msgstr ""
+"S'il y a trop de menus trouvÃ©s, un message d'erreur apparaÃ®t dans .xsession-"
+"errors:"
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 62
-msgid "This happens because PipeRead used for menu generation has a command length"
-msgstr "Cela se produit, parce que PipeRead a utilisé pour la generation de menu une commande"
+msgid ""
+"This happens because PipeRead used for menu generation has a command length"
+msgstr ""
+"Cela se produit quand PipeRead a utilisÃ© pour la generation du menu une "
+"commande"
 
 #. ./bin/FvwmForm-MultiMenuHelp.in: line 64
 msgid "limit of 1000 characters. Sorry for that inconvinience."
-msgstr "qui est limité à 1000 caractéres. Pardon pour la gêne occassionné."
+msgstr ""
+"qui dÃ©passe la limite de 1000 caractÃ©res. DÃ©solÃ© pour la gÃªne occassionnÃ©e."
 
 #-----------------------------------------------------------------------
 # FvwmForm-GenOptionHelp which are in the CVS version of FVWM
 #-----------------------------------------------------------------------
 #. ./bin/FvwmForm-GenOptionHelp.in: line 18
 msgid "Set which menu generation will be used."
-msgstr "Appliqué quel menu generation sera utilisé."
+msgstr "Applique quel type de gÃ©nÃ©ration de menu sera utilisÃ©."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 23
 msgid "Option enables mini-icons in the menu(s)."
-msgstr "Option mini icones activé dans le/les menu(s)."
+msgstr "Option pour activer les mini icÃ´nes dans le/les menu(s)."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 28
-msgid "If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size is"
-msgstr "Si 'Utiliser icônes' par defaut les mini-icones 24x24 seront utilisés. Si une autre taille"
+msgid ""
+"If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size "
+"is"
+msgstr ""
+"Si 'Utiliser des icÃ´nes' est choisi, par defaut des mini-icones de 24x24 "
+"seront utilisÃ©s."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 31
 msgid "desired enter the wanted size in this field."
-msgstr "est desirée entrer la taille voulue dans le champ."
+msgstr ""
+"Si une autre taille est desirÃ©e, entrer la taille voulue dans ce champ."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 36
-msgid "If the specified icon isn't that size it is converted if ImageMagick is installed."
-msgstr "Si l'icone specifié n'exsite pas à cette taille, elle peut être convertie si ImageMagick"
+msgid ""
+"If the specified icon isn't that size it is converted if ImageMagick is "
+"installed."
+msgstr ""
+"Si l'icÃ´ne specifiÃ©e n'exsite pas Ã  cette taille, elle peut Ãªtre convertie "
+"si ImageMagick"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 39
-msgid "Generated icons are saved in $HOME/.fvwm/icons or the directory specified here."
-msgstr "est installé. Les icones generées sont sauvegardées sous $HOME/.fvwm/icons ou dans le"
+msgid ""
+"Generated icons are saved in $HOME/.fvwm/icons or the directory specified "
+"here."
+msgstr ""
+"est installÃ©. Les icÃ´nes gÃ©nÃ©rÃ©es sont sauvegardÃ©es sous $HOME/.fvwm/icons "
+"ou dans le"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 42
 msgid "Otherwise no icon appears in the menu for that entry."
-msgstr "dossier spécifié ici. Sinon aucune icone apparait dans le menu pour cette saisi."
+msgstr ""
+"dossier spÃ©cifiÃ© ici. Sinon aucune icÃ´ne apparaÃ®t dans le menu pour cette "
+"entrÃ©e."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 47
 msgid "Sets the used icon theme. Default is 'gnome' but all others found in"
-msgstr "Appliqué le théme de l'icone utilisé. Defaut est 'gnome', mais toute autres trouvé dans"
+msgstr ""
+"Applique le thÃ©me d'icÃ´nes utilisÃ©. Par dÃ©faut  'gnome', mais toute autre "
+"icÃ´ne trouvÃ©e"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 50
-msgid "/usr/share/icons can used except the hicolor theme because it's the default"
-msgstr "in /usr/share/icons peuvent être utilisé sauf le théme hicolor car c'est le théme defaut"
+msgid ""
+"/usr/share/icons can used except the hicolor theme because it's the default"
+msgstr ""
+"dans /usr/share/icons peut Ãªtre utilisÃ©e sauf le thÃ©me hicolor car c'est le "
+"thÃ©me"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 53
-msgid "fallback theme if no icon is found. Note that the theme name must be written"
-msgstr "Fallback, si aucune icone est trouvée. Notez que le théme dit avoir le même nom que le"
+msgid ""
+"fallback theme if no icon is found. Note that the theme name must be written"
+msgstr ""
+"de secour par dÃ©faut, si aucune icÃ´ne n'est trouvÃ©e. Notez que le thÃ©me doit "
+"avoir le"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 56
 msgid "exactly as the icon directory e.g."
-msgstr "dossier:"
+msgstr "mÃªme nom que le dossier des icÃ´nes, par exemple :"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 61
-msgid "If 'Use Icons' is enabled and for a directory in a menu no icon is found"
-msgstr "Si 'Utiliser icônes' est actif et qu'aucune icone est trouvé dans un dossier, est utilisé"
+msgid ""
+"If 'Use Icons' is enabled and for a directory in a menu no icon is found"
+msgstr ""
+"Si 'Utiliser des icÃ´nes' est actif et qu'aucune icÃ´ne n'est trouvÃ©e dans un "
+"dossier,"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 64
 msgid "as default icon is used. But if the gnome icon theme isn't"
-msgstr "par defaut. Mais si le théme icone gnome n'est pas installé, aucune"
+msgstr "est utilisÃ© par defaut. Mais si le thÃ©me d'icÃ´ne de gnome n'est pas"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 67
 msgid "installed no default icon appears. Another icon can defined here."
-msgstr "icone apparaîtera. D'autres icones peuvent être definie ici. Seulement le nom de l'icone"
+msgstr ""
+"installÃ©, aucune icÃ´ne n'apparaÃ®tera. D'autres icÃ´nes peuvent Ãªtre definies "
+"ici."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 70
 msgid "Only the name of an icon is needed not the path!"
-msgstr "est nécessaire pas le chemin d'accés."
+msgstr "Seul le nom d'une icÃ´ne est nÃ©cessaire, pas le chemin d'accÃ©s."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 75
 msgid "If 'Use Icons' is enabled and for an application no icon is found"
-msgstr "Si 'Utiliser icônes' est actif et que pour une application aucune icnone est trouvée,"
+msgstr ""
+"Si 'Utiliser des icÃ´nes' est actif et que pour une application aucune icnone "
+"n'est trouvÃ©e,"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 89
 msgid "Enable this checkbox to insert generated menu(s) IN a menu."
-msgstr "Activez cette checkbox pour insérer le menu généré dans le menu."
+msgstr "Activez cette case Ã  cocher pour insÃ©rer le menu gÃ©nÃ©rÃ© dans un menu."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 94
-msgid "Enter in this field the name of the menu (its top title) where the generated menu(s)"
-msgstr "Entrez dans le chanp le nomn du menu (son titre) où le menu généré devra être inséré."
+msgid ""
+"Enter in this field the name of the menu (its top title) where the generated "
+"menu(s)"
+msgstr ""
+"Entrez dans ce chanp le nom du menu (son titre principal) oÃ¹ le menu gÃ©nÃ©rÃ© "
+"devra Ãªtre"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 97
-msgid "should insert. For more information see the USAGE section in the man page of"
-msgstr "Pour plus d'information regardez la section USAGE dans la page principale de"
+msgid ""
+"should insert. For more information see the USAGE section in the man page of"
+msgstr ""
+"insÃ©rÃ©. Pour plus d'information regardez la section USAGE dans la page man de"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 105
-msgid "If this option is set menus are generated with titles. Default is no titles."
-msgstr "Si cet option est active les menus sont générés avec le titre. Defaut is sans titre."
+msgid ""
+"If this option is set menus are generated with titles. Default is no titles."
+msgstr ""
+"Si cet option est active les menus sont gÃ©nÃ©rÃ©s avec des titres. Par dÃ©faut "
+"sans titre."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 110
-msgid "Enter here the FULL path of the menu to store. Default path is $FVWM_USERDIR/.menu."
-msgstr "Entrez ici le chemin complet du menu pour l'enregistrer. Default est $FVWM_USERDIR/.menu."
+msgid ""
+"Enter here the FULL path of the menu to store. Default path is "
+"$FVWM_USERDIR/.menu."
+msgstr ""
+"Entrez ici le chemin complet du menu pour l'enregistrer. Par default "
+"$FVWM_USERDIR/.menu."
 
 
 
