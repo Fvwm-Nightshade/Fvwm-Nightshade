@@ -1,5 +1,5 @@
 # FvwmForm-MultiMenuHelp2 - Help Text for fvwm-menu-desktop2-config Multiple Menu
-# V 1.0.2
+# V 1.0.3
 DestroyModuleConfig  FvwmForm-MultiMenuHelp2: *
 *FvwmForm-MultiMenuHelp2:   Title   "fvwm-menu-desktop2-config - $[gt.Multiple Menu] $[gt.Help]"
 *FvwmForm-MultiMenuHelp2:   WarpPointer
@@ -33,7 +33,7 @@ DestroyModuleConfig  FvwmForm-MultiMenuHelp2: *
 *FvwmForm-MultiMenuHelp2:   Text    " /home/<user>/.config/menus/"
 *FvwmForm-MultiMenuHelp2:   Line    left
 *FvwmForm-MultiMenuHelp2:   Text    "  =>"
-*FvwmForm-MultiMenuHelp2:   Text    "$[gt.List menus with checkboxes found in] $HOME/.config/menus/ $[gt.if available.]"
+*FvwmForm-MultiMenuHelp2:   Text    "$[gt.List menus with checkboxes found in $HOME/.config/menus/] $[gt.if available.]"
 *FvwmForm-MultiMenuHelp2:   Line    Left
 *FvwmForm-MultiMenuHelp2:   Line    " "
 *FvwmForm-MultiMenuHelp2:   Line    left
