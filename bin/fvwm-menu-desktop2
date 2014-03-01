@@ -11,7 +11,7 @@
 # - no output appears with 'fvwm-menu-desktop --get-menus all|desktop'
 # - No entry "Regenerate XDG menu(s)" appears with
 #   'fvwm-menu-desktop --insert-in-menu MenuRoot'
-# -  exchange all tabs with spaces to prevent indention errors
+# - exchange all tabs with spaces to prevent indention errors
 # - add two new options: --app-icon --dir-icon
 #   to handle default icons for not available app/dir icons
 # - fix bug in convert icon routine that background of svg icons are
@@ -466,7 +466,7 @@ def geticonfile(icon):
             os.system("if test \\( \\( ! -f '%s' \\) -o \\( '%s' -nt '%s' \\) \\) -o \\( '%s' != '%s' \\); then convert '%s' -resize %i '%s' ; fi"% 
                           (iconfile, iconpath, iconfile, current_theme, previous_theme, iconpath, size, iconfile))
     else:
-        sys.stderr.write("%s not found! Use default icon.\n" % iconpath)
+        sys.stderr.write("%s not found! Using default icon.\n" % iconpath)
         return None
     return iconfile
 
