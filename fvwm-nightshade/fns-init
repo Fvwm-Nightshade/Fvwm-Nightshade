@@ -81,6 +81,23 @@ AddToFunc FuncRestart
 + I Restart fvwm -f $[FNS_INITFILE]
 
 #-----------------------------------------------------------------------
+# This function specifies a colon separated list of directories in which 
+# to search for sounds.
+# Further, a '+' in the path is expanded to the previous value of the path,
+# allowing appending or prepending to the path easily.
+# It will add the new paths to $FNS_SOUNDPATH environment variable
+#-----------------------------------------------------------------------
+DestroyFunc FnsSoundPath
+AddToFunc   FnsSoundPath
++ I SetEnv newPaths $0
++ I PipeRead 'if [ `echo $newPaths |grep -e ^+: |grep -e :+\$` ]; then \
+                echo SetEnv newPaths `echo $newPaths |sed -e "s#:+##"`; \
+              fi'
++ I PipeRead 'echo SetEnv FNS_SOUNDPATH `echo $newPaths |sed -e "s#+#$FNS_SOUNDPATH#"`'
+#+ I PipeRead 'export FNS_SOUNDPATH=`echo $newPaths |sed -e "s#+#$FNS_SOUNDPATH#"`'
++ I UnsetEnv newPaths
+
+#-----------------------------------------------------------------------
 # Load main config
 #-----------------------------------------------------------------------
 Load config
