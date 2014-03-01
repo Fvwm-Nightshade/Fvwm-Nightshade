@@ -15,8 +15,8 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.5.20131102
-# Copyright (C) 2013
+InfoStoreAdd ns_version 0.7.5.20140301
+# Copyright (C) 2014
 #
 # Authors:
 #   Thomas Funk <t.funk@web.de>
@@ -184,6 +184,15 @@ ImagePath +:$[FNS_SYSTEMDIR]/artwork/icons:$[FNS_SYSTEMDIR]/artwork/icons/scalab
 ImagePath +:/usr/share/pixmaps:/usr/share/pixmaps/fvwm
 
 #-----------------------------------------------------------------------
+# FnsSoundPath is a Fvwm-Nightshade builtin, you may add some directories here.
+# You can search for sounds over 'fns-find-file [file name]' which returns
+# the full path of the specified sound file (if available).
+# The predefine sound search paths are:
+# $[FVWM_USERDIR]/artwork/sounds:$[FNS_SYSTEMDIR]/artwork/sounds
+#-----------------------------------------------------------------------
+FnsSoundPath +:/usr/share/sounds
+
+#-----------------------------------------------------------------------
 # wallpaper directory path.
 #-----------------------------------------------------------------------
 InfoStoreAdd wallpaper_dir $[FVWM_USERDIR]/wallpapers                
@@ -198,7 +207,7 @@ InfoStoreAdd fvwm_wallpaper $[FVWM_USERDIR]/.wallpaper
 # 1.2.2 Environment settings
 #***********************************************************************
 # These settings are rolled out to $[FVWM_USERDIR]/.settings
-# They can configured with the FNS-BaseSetup
+# They can configured with the FNS-Form-BaseSetup
 Load .settings
 FuncSetThemeDir $[infostore.used_theme]
 
@@ -516,9 +525,9 @@ Style FvwmScript      EWMHMiniIconOverride, Icon fvwm_footprint.svg:48x48, MiniI
 #-----------------------------------------------------------------------
 # FNS related icons
 #-----------------------------------------------------------------------
-Style FNS-BaseSetup                 EWMHMiniIconOverride, Icon icon_fns.svg:48x48, MiniIcon icon_fns.svg:16x16
-Style FvwmScript-PersonalMenu       EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
-Style FvwmScript-Cpu-Performance    EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
+Style FNS-Form-BaseSetup            EWMHMiniIconOverride, Icon icon_fns.svg:48x48, MiniIcon icon_fns.svg:16x16
+Style FNS-Script-PersonalMenu       EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
+Style FNS-Script-CpuPerformance     EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
 
 
 ########################################################################
@@ -882,7 +891,7 @@ DestroyModuleConfig FvwmEventCommon: *
 *FvwmEventCommon: deiconify    DeThumbnail
 
 #***********************************************************************
-# 7.4.1 Sound FvwmEvents
+# 7.4.2 Sound FvwmEvents
 #***********************************************************************
 DestroyModuleConfig FvwmEventSound: *
 
@@ -1058,8 +1067,8 @@ AddToFunc StartFunction
 # start xscreensaver daemon for locking
 + I Test (x xscreensaver-command) Test (Init) Exec xscreensaver -no-splash
 #-----------------------------------------------------------------------
-# start FNS-BaseSetup if not configured
-+ I Test (!f $[FVWM_USERDIR]/.FNS-BaseSetup) FvwmForm FNS-BaseSetup
+# start FNS-Form-BaseSetup if not configured
++ I Test (!f $[FVWM_USERDIR]/.FNS-Form-BaseSetup) FvwmForm FNS-Form-BaseSetup
 
 #-----------------------------------------------------------------------
 # load layout
@@ -1172,6 +1181,7 @@ AddToFunc   FuncWriteInfoStoreToFileAndSet
             else \
                 sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$Val\\"" $2; \
             fi; \
+            Val=`echo "$Val" | sed "s/ /\\\\\\\\\\ /g"`; \
             echo InfoStoreAdd $0 "$Val"'
 
 
@@ -1187,7 +1197,8 @@ AddToFunc   FuncWriteSetEnvToFileAndSet
             else \
                 sed -i --follow-symlinks "$ a\SetEnv $0 \\"$Val\\"" $2; \
             fi; \
-            echo InfoStoreAdd $0 "$Val"'
+			Val=`echo "$Val" | sed "s/ /\\\\\\\\\\ /g"`; \
+            echo SetEnv $0 "$Val"'
 
 #-----------------------------------------------------------------------
 # Update layout and theme settings in base setup file .FNS-Form-BaseSetup
@@ -1285,7 +1296,7 @@ AddToFunc   FuncRunInXterm
 #-----------------------------------------------------------------------
 DestroyFunc FuncViewFile
 AddToFunc   FuncViewFile
-+ I Exec exec xterm -fg $[fg.cs33] -bg $[bg.cs33] -g 80x24 -fn 7x14 -fb 7x14bold \
++ I Exec exec xterm -fg $[fg.cs34] -bg $[bg.cs34] -g 80x24 -fn 7x14 -fb 7x14bold \
                     -n "File Viewer - $0" -T "File Viewer - $0" -e less -e "$0"
 
 #-----------------------------------------------------------------------
@@ -1444,21 +1455,28 @@ AddToFunc   DeThumbnail
 #-----------------------------------------------------------------------
 DestroyFunc FuncSuspend
 AddToFunc   FuncSuspend
-+ I Test (x pm-is-supported) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
-                    /org/freedesktop/Hal/devices/computer \
-                    org.freedesktop.Hal.Device.SystemPowerManagement.Suspend \
-                    int32:0'
-+ I TestRc (!Match) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"         
++ I Test (!x pm-is-supported) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"
++ I TestRc (Match) break
++ I TestRc (!Match) Test (x /usr/sbin/hald) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
+                                                    /org/freedesktop/Hal/devices/computer \
+                                                    org.freedesktop.Hal.Device.SystemPowerManagement.Suspend int32:0 1>&2'
++ I TestRc (!Match) Test (x upower) PipeRead 'dbus-send --print-reply --system --dest=org.freedesktop.UPower \
+                                            /org/freedesktop/UPower org.freedesktop.UPower.Suspend 1>&2'
++ I TestRc (!Match) FuncShowMessage "Suspend Info" "Suspend not possible - hald nor upower found!"
 
 #-----------------------------------------------------------------------
 # Hibernate the machine
 #-----------------------------------------------------------------------
 DestroyFunc FuncHibernate
 AddToFunc   FuncHibernate
-+ I Test (x pm-is-supported) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
-                    /org/freedesktop/Hal/devices/computer \
-                    org.freedesktop.Hal.Device.SystemPowerManagement.Hibernate'
-+ I TestRc (!Match) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"          
++ I Test (!x pm-is-supported) FuncShowMessage "Hibernate Info" "Install pm-utils for full functionality"
++ I TestRc (Match) break
++ I TestRc (!Match) Test (x /usr/sbin/hald) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
+                                                    /org/freedesktop/Hal/devices/computer \
+                                                    org.freedesktop.Hal.Device.SystemPowerManagement.Hibernate 1>&2'
++ I TestRc (!Match) Test (x upower) PipeRead 'dbus-send --print-reply --system --dest=org.freedesktop.UPower \
+                                            /org/freedesktop/UPower org.freedesktop.UPower.Hibernate 1>&2'
++ I TestRc (!Match) FuncShowMessage "Suspend Info" "Hibernate not possible - hald nor upower found!"
 
 #-----------------------------------------------------------------------
 # Activate lockscreen if installed
@@ -1699,7 +1717,7 @@ DestroyFunc FuncFvwmManpageMenu
 AddToFunc   FuncFvwmManpageMenu
 + I PipeRead 'fvwm-menu-directory \
               --dir "/usr/share/man/man1" \
-              --title "Man Pages" --exec-file "^xterm -fg $[fg.cs33] -bg $[bg.cs33] -g 80x40 -n Fvwm-Help -T Fvwm-Help -e man" |\
+              --title "Man Pages" --exec-file "^xterm -fg $[fg.cs34] -bg $[bg.cs34] -g 80x40 -n Fvwm-Help -T Fvwm-Help -e man" |\
               grep "^Destroy\\|^AddTo\\|^+ Dynamic\\|^+ Missing\\|^+ \\"[Ff]vwm*"|sed -e "s#\\.1\\.gz##g" \
               -e "s#/usr/share/man/man1/##g" -e "s#\\"##3" -e "s#\\"##3" '
 
@@ -1790,7 +1808,7 @@ AddToFunc   FuncMenuFvwmPersonal
 + I DestroyMenu MenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal DynamicPopupAction FuncMenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal "$[gt.Personal Applications]" Title
-+ I AddToMenu MenuFvwmPersonal "$[gt.&Configure Personal Applications]%PersonalMenuCreator.svg:$[infostore.MenuIconSize]%"    FvwmScript FvwmScript-PersonalMenu
++ I AddToMenu MenuFvwmPersonal "$[gt.&Configure Personal Applications]%PersonalMenuCreator.svg:$[infostore.MenuIconSize]%"    FvwmScript FNS-Script-PersonalMenu
 + I Test (f  $[FVWM_USERDIR]/.personal) PipeRead `sed -e '/^# personal menu/ d;/^ *$/,$ d' $[FVWM_USERDIR]/.personal`
 
 
@@ -1994,7 +2012,7 @@ AddToFunc   FuncMenuFNSConfiguration
 + I AddToMenu MenuFNSConfiguration MissingSubmenuFunction FuncMenuWallpaperConfiguration
 + I AddToMenu MenuFNSConfiguration "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"  Popup MenuWallpaperConfiguration
 + I AddToMenu MenuFNSConfiguration "$[gt.&Decoration]%themes.svg:$[infostore.MenuIconSize]%"                Popup MenuDecoration
-+ I AddToMenu MenuFNSConfiguration "$[gt.Fvwm-&Nightshade Setup]%icon_fns.svg:$[infostore.MenuIconSize]%"   FvwmForm FNS-Form-BaseSetup
++ I AddToMenu MenuFNSConfiguration "$[gt.FNS Base Setup]%icon_fns.svg:$[infostore.MenuIconSize]%"           FvwmForm FNS-Form-BaseSetup
 
 
 #-----------------------------------------------------------------------
@@ -2011,7 +2029,7 @@ AddToFunc   FuncMenuSystemConfiguration
 + I AddToMenu MenuSystemConfiguration "$[gt.&Mouse]%mouse.svg:$[infostore.MenuIconSize]%"               Popup MenuMouse
 + I AddToMenu MenuSystemConfiguration MissingSubmenuFunction FuncMenuXScreenSaver
 + I AddToMenu MenuSystemConfiguration "$[gt.Sc&reen Saver]%screensaver.svg:$[infostore.MenuIconSize]%"  Popup MenuXScreenSaver
-+ I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"    FvwmScript FvwmScript-CPU-Performance
++ I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"    FvwmScript FNS-Script-CpuPerformance
 
 
 #-----------------------------------------------------------------------
@@ -2398,7 +2416,7 @@ AddToFunc   FuncMenuCpuOps
 + I DestroyMenu MenuCpuOps
 + I AddToMenu MenuCpuOps DynamicPopupAction FuncMenuCpuOps
 + I AddToMenu MenuCpuOps "$[gt.Conky Cpu Ops]" Title
-+ I AddToMenu MenuCpuOps "$[gt.CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"      FvwmScript FvwmScript-CPU-Performance
++ I AddToMenu MenuCpuOps "$[gt.CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"      FvwmScript FNS-Script-CpuPerformance
 + I AddToMenu MenuCpuOps "" Nop
 + I AddToMenu MenuCpuOps "$[gt.Restart Conky CPU]%restart.svg:$[infostore.MenuIconSize]%"   Exec exec xkill -id `xwininfo -name conky_cpu|grep "Window id"|cut -d ' ' -f4`
 
