@@ -1,15 +1,15 @@
 #!/bin/sh
 #-----------------------------------------------------------------------
-# File:		fvwm-nightshade
-# Version:	1.0.3
-# Licence: 	GPL 2
+# File:         fvwm-nightshade
+# Version:      1.0.4
+# Licence:      GPL 2
 #
-# Description:	startup script for Fvwm-Nightshade based on FVWM-Crystal's
+# Description:  startup script for Fvwm-Nightshade based on FVWM-Crystal's
 #               startup script.
 #
-# Author:	Thomas Funk <t.funk@web.de>	
-# Created:	08/21/2012
-# Changed:	01/09/2013
+# Author:       Thomas Funk <t.funk@web.de>    
+# Created:      08/21/2012
+# Changed:      08/26/2013
 #-----------------------------------------------------------------------
 
 initfile=`dirname ${0}`/../share/fvwm-nightshade/fns-init
@@ -17,12 +17,13 @@ initfile=`dirname ${0}`/../share/fvwm-nightshade/fns-init
 export FVWM_USERDIR=$HOME/.fvwm-nightshade
 export FNS_SYSTEMDIR=`dirname ${0}`/../share/fvwm-nightshade
 export FNS_INITFILE=$initfile
+export FNS_SOUNDPATH=$FVWM_USERDIR/artwork/sounds:$FNS_SYSTEMDIR/artwork/sounds
 # set this env variable to 1 for debugging. Default is 0
 export FNS_DEBUG=0
 
 if [ ! -d "$HOME/.fvwm-nightshade" ]
 then
-	mkdir $HOME/.fvwm-nightshade
+    mkdir $HOME/.fvwm-nightshade
 fi
 
 exec fvwm -f $initfile $@
