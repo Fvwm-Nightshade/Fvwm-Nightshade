@@ -11,6 +11,7 @@ msgstr ""
 "PO-Revision-Date: 2013-08-01 13:08+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
+"Language: Spanish\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1444,15 +1445,15 @@ msgstr "Si un sistema ofrece múltiples escritorios, $XDG_MENU_PREFIX es típicame
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 46
 msgid "is typically set. It is ignored if this field is used."
-msgstr "seleccionado. Es ignorado, si el campo es usado. Posibles nombres:"
+msgstr "seleccionado, pero se ignora si este campo es usado."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 49
 msgid "Possible names: gnome, kde, lxde, etc."
-msgstr "gnome, kde, lxde, etc."
+msgstr "Posibles nombres: gnome, kde, lxde, etc."
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 54
 msgid "Defines which type of menu should be found. Possible name types could be:"
-msgstr "Defina qué tipo de menú debe ser encontrado. Posibles tipos pueden ser: applications,"
+msgstr "Define qué tipo de menú debe ser encontrado. Posibles tipos pueden ser: applications,"
 
 #. ./bin/FvwmForm-SingleMenuHelp.in: line 57
 msgid "applications, settings, preferences, etc. Note if the specified menu type"
@@ -1526,15 +1527,15 @@ msgstr "Establecer el menú de generación utilizado."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 23
 msgid "Option enables mini-icons in the menu(s)."
-msgstr "Opción para activar mini-iconos en el menú(s)."
+msgstr "Opción para activar mini-iconos en el(los) menú(s)."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 28
 msgid "If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size is"
-msgstr "Si 'Usar Iconos' está seleccionado, 24x24 Mini-Iconos serán usados por defecto. Si otro"
+msgstr "Si 'Usar Iconos' está seleccionado, iconos de 24x24 serán usados por defecto. Si"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 31
 msgid "desired enter the wanted size in this field."
-msgstr "tamaño es deseado, establecer el tamaño deseado en este campo."
+msgstr "desea otro tamaño, establézcalo en este campo."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 36
 msgid "If the specified icon isn't that size it is converted if ImageMagick is installed."
@@ -1542,7 +1543,7 @@ msgstr "Si el icono especificado no es de ese tamaño, será convertido, si ImageM
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 39
 msgid "Generated icons are saved in $HOME/.fvwm/icons or the directory specified here."
-msgstr "Iconos generados son guardados en $HOME/.fvwm/icons o el directorio especificado aquí."
+msgstr "Los iconos generados se guardan en $HOME/.fvwm/icons o el directorio especificado aquí."
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 42
 msgid "Otherwise no icon appears in the menu for that entry."
@@ -1562,7 +1563,7 @@ msgstr "defecto de reserva si ningún icono es encontrado. Atención al nombre del
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 56
 msgid "exactly as the icon directory e.g."
-msgstr "ser escrito exactamente al directorio del icono:"
+msgstr "ser escrito exactamente como el directorio de los iconos:"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 61
 msgid "If 'Use Icons' is enabled and for a directory in a menu no icon is found"
@@ -1594,7 +1595,7 @@ msgstr "Escriba en el campo de nombre de menú (encima del título) donde los menú
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 97
 msgid "should insert. For more information see the USAGE section in the man page of"
-msgstr "deberían insertarse. Para más información vea la sección de USO en la página de man"
+msgstr "deberían insertarse. Para más información vea la sección de USO en la página man de"
 
 #. ./bin/FvwmForm-GenOptionHelp.in: line 105
 msgid "If this option is set menus are generated with titles. Default is no titles."
