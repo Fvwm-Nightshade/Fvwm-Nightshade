@@ -1,6 +1,6 @@
 ########################################################################
-# File:		FvwmScript-CPU-Performance
-# Version:	0.2.1
+# File:		FNS-Script-CpuPerformance
+# Version:	0.2.2
 # Licence: 	GPL 2
 #
 # Description:	stets the govenor and the frequencies of each single cpu
@@ -15,15 +15,15 @@
 #				Thomas Funk <t.funk@web.de>
 #	
 # Created:		09/08/2012
-# Changed:		03/08/2013
+# Changed:		08/02/2013
 ########################################################################
 
 #-----------------------------------------------------------------------
-# Version 0.2.1, Copyright 2013, Bernhard Popp
+# Version 0.2.2, Copyright 2013, Bernhard Popp
 #-----------------------------------------------------------------------
 
 UseGettext			{;fvwm-nightshade:$FVWM_USERDIR/locale;fvwm-nightshade:+}
-WindowLocaleTitle	{FvwmScript-CPU-Performance V 0.2.1}
+WindowLocaleTitle	{CpuPerformance V 0.2.2}
 WindowSize			650 500
 WindowPosition		0 100
 #Colorset 10
