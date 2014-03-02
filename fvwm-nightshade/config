@@ -120,7 +120,8 @@ InfoStoreAdd ns_version 0.7.5.20140301
 #        7.5.2 Show Colorset
 #    7.6 FvwmIdent
 #    7.7 FvwmScript
-#    7.8 Others
+#	 7.8 FvwmTransSet
+#    7.9 Others
 # 8. FUNCTIONS
 #    8.1 Startup
 #        8.1.1 Start
@@ -528,6 +529,7 @@ Style FvwmScript      EWMHMiniIconOverride, Icon fvwm_footprint.svg:48x48, MiniI
 Style FNS-Form-BaseSetup            EWMHMiniIconOverride, Icon icon_fns.svg:48x48, MiniIcon icon_fns.svg:16x16
 Style FNS-Script-PersonalMenu       EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
 Style FNS-Script-CpuPerformance     EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
+Style FNS-Script-CompConfigurator   EWMHMiniIconOverride, Icon CompConfigurator.svg:48x48, MiniIcon CompConfigurator.svg:16x16
 
 
 ########################################################################
@@ -1013,7 +1015,18 @@ DestroyModuleConfig FvwmScript: *
 
 
 #=======================================================================
-# 7.8 Others
+# 7.8 FvwmTransSet
+#=======================================================================
+# Module to set true transparency to windows if a composite manager is running
+DestroyModuleConfig FvwmTransSet: *
+*FvwmTransSet: Excludes FvwmButtons, FvwmPager, FvwmIconMan, stalonetray, conky_cpu, conky_clock
+*FvwmTransSet: Opacity 1.0
+*FvwmTransSet: Transparency 0.8
+*FvwmTransSet: UsedTransset transset
+
+
+#=======================================================================
+# 7.9 Others
 #=======================================================================
 # Other modules will be located in the modules dir
 
@@ -1069,6 +1082,12 @@ AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # start FNS-Form-BaseSetup if not configured
 + I Test (!f $[FVWM_USERDIR]/.FNS-Form-BaseSetup) FvwmForm FNS-Form-BaseSetup
+#-----------------------------------------------------------------------
+# start composite manager if it is activated
++ I Test (EnvMatch use_composite 1) Exec exec $[infostore.comp_command]
+#-----------------------------------------------------------------------
+# start FvwmTransSet if composite manager is activated
++ I TestRC (Match) FuncStartFvwmTransSet
 
 #-----------------------------------------------------------------------
 # load layout
@@ -1079,6 +1098,19 @@ AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # start programs found in .autostart
 + I FuncAutoStartPrograms
+
+#***********************************************************************
+# 8.1.2 Exit
+#***********************************************************************
+# The ExitFunction, executed when exiting or restarting before actually
+# quitting FVWM.
+DestroyFunc ExitFunction
+AddToFunc   ExitFunction
+# stop FvwmTransSet and save configuration if composite manager is activated
++ I Test (EnvMatch use_composite 1) FuncStopFvwmTransSet
+#-----------------------------------------------------------------------
+# stop composite manager if it is activated
++ I Test (EnvMatch use_composite 1) FuncKillCompmgr
 
 
 #=======================================================================
@@ -1130,6 +1162,35 @@ AddToFunc   FuncRestartModuleByAlias
 DestroyFunc FuncResetColorset
 AddToFunc   FuncResetColorset
 + I CleanupColorsets
+
+#-----------------------------------------------------------------------
+# Kill running composite manager
+#-----------------------------------------------------------------------
+DestroyFunc FuncKillCompmgr
+AddToFunc   FuncKillCompmgr
++ I PipeRead 'if [ ! -z `pidof xcompmgr` ]; then \
+                killall xcompmgr; \
+            else \
+                if [ ! -z `pidof compton` ]; then \
+                    killall compton; \
+                fi; \
+            fi'
+
+#-----------------------------------------------------------------------
+# Start FvwmTransSet and reread colorset
+#-----------------------------------------------------------------------
+DestroyFunc FuncStartFvwmTransSet
+AddToFunc   FuncStartFvwmTransSet
++ I Module FvwmTransSet
++ I Load $[FNS_THEMEDIR]/colorsets
+
+#-----------------------------------------------------------------------
+# Stop FvwmTransSet and save current configuration before stopping
+#-----------------------------------------------------------------------
+DestroyFunc FuncStopFvwmTransSet
+AddToFunc   FuncStopFvwmTransSet
++ I SendToModule FvwmTransSet save
++ I SendToModule FvwmTransSet stop
 
 #-----------------------------------------------------------------------
 # Remove all buttons for a theme and its bindings
@@ -1216,6 +1277,48 @@ AddToFunc   FuncUpdateBaseSetupFile
                 sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
               fi'
               
+
+#-----------------------------------------------------------------------
+# Update window opacity
+#-----------------------------------------------------------------------
+DestroyFunc UpdateWindowOpacity
+AddToFunc   UpdateWindowOpacity
++ I PipeRead "echo SendToModule FvwmTransSet opac `perl -e 'printf \"%.1f\",($0/100)'`"
++ I PipeRead "echo SendToModule FvwmTransSet save"
++ I FuncWriteInfoStoreToFileAndSet used_windowopacity $0 $[FVWM_USERDIR]/.settings
+
+#-----------------------------------------------------------------------
+# Update window transparency
+#-----------------------------------------------------------------------
+DestroyFunc UpdateWindowTransparency
+AddToFunc   UpdateWindowTransparency
++ I PipeRead "echo SendToModule FvwmTransSet trans `perl -e 'printf \"%.1f\",($0/100)'`"
++ I PipeRead "echo SendToModule FvwmTransSet save"
++ I FuncWriteInfoStoreToFileAndSet used_windowtransparency $0 $[FVWM_USERDIR]/.settings
+
+#-----------------------------------------------------------------------
+# Update menu tint value in .settings
+#-----------------------------------------------------------------------
+DestroyFunc UpdateMenuTint
+AddToFunc   UpdateMenuTint
++ I FuncWriteInfoStoreToFileAndSet used_menutint $0 $[FVWM_USERDIR]/.settings
++ I Load $[FNS_THEMEDIR]/colorsets
+
+#-----------------------------------------------------------------------
+# Update applet tint value in .settings
+#-----------------------------------------------------------------------
+DestroyFunc UpdateAppletTint
+AddToFunc   UpdateAppletTint
++ I FuncWriteInfoStoreToFileAndSet used_applettint $0 $[FVWM_USERDIR]/.settings
++ I Load $[FNS_THEMEDIR]/colorsets
+
+#-----------------------------------------------------------------------
+# Update applet font color in .settings
+#-----------------------------------------------------------------------
+DestroyFunc UpdateAppletFontColor
+AddToFunc   UpdateAppletFontColor
++ I FuncWriteInfoStoreToFileAndSet used_appletfontcolor $0 $[FVWM_USERDIR]/.settings
++ I Load $[FNS_THEMEDIR]/colorsets
 
 #-----------------------------------------------------------------------
 # Check which appliction are installed to get full functionality
@@ -2011,6 +2114,7 @@ AddToFunc   FuncMenuFNSConfiguration
 + I AddToMenu MenuFNSConfiguration "$[gt.Fvwm-Nightshade]" Title
 + I AddToMenu MenuFNSConfiguration MissingSubmenuFunction FuncMenuWallpaperConfiguration
 + I AddToMenu MenuFNSConfiguration "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"  Popup MenuWallpaperConfiguration
++ I AddToMenu MenuFNSConfiguration "$[gt.&Compositing]%compositing.svg:$[infostore.MenuIconSize]%"          Popup MenuCompositing
 + I AddToMenu MenuFNSConfiguration "$[gt.&Decoration]%themes.svg:$[infostore.MenuIconSize]%"                Popup MenuDecoration
 + I AddToMenu MenuFNSConfiguration "$[gt.FNS Base Setup]%icon_fns.svg:$[infostore.MenuIconSize]%"           FvwmForm FNS-Form-BaseSetup
 
@@ -2117,6 +2221,26 @@ AddToFunc   FuncFvwmLayoutMenu
   do echo AddToMenu FvwmLayoutMenu "${i}%layout2.svg:$[infostore.MenuIconSize]%" FuncChangeLayout $[FNS_SYSTEMDIR] $i; done'
 + I PipeRead 'for i in `ls -Fh $FVWM_USERDIR/layouts/ | grep -v /$`; \
   do echo AddToMenu FvwmLayoutMenu "${i}%layout2.svg:$[infostore.MenuIconSize]%" FuncChangeLayout $[FVWM_USERDIR] $i; done'
+
+#-----------------------------------------------------------------------
+# Sub menu for Compositing
+#-----------------------------------------------------------------------
+AddToMenu MenuCompositing DynamicPopupAction FuncMenuCompositing
+
+DestroyFunc FuncMenuCompositing
+AddToFunc   FuncMenuCompositing
++ I DestroyMenu  MenuCompositing
++ I AddToMenu MenuCompositing DynamicPopupAction FuncMenuCompositing
++ I AddToMenu MenuCompositing "$[gt.Compositing]" Title
++ I AddToMenu MenuCompositing "$[gt.FNS CompMgr &Configurator]%CompConfigurator.svg:$[infostore.MenuIconSize]%"     FvwmScript FNS-Script-CompConfigurator $[infostore.comp_command]
++ I Test (EnvMatch use_composite 1) \
+    AddToMenu MenuCompositing "$[gt.&Menu Transparency]%tint.svg:$[infostore.MenuIconSize]%"                        Popup MenuTintOps
++ I Test (EnvMatch use_composite 1) \
+    AddToMenu MenuCompositing "$[gt.Active Window &Opacity]%tint.svg:$[infostore.MenuIconSize]%"                    Popup MenuOpacityOps
++ I Test (EnvMatch use_composite 1) \
+    AddToMenu MenuCompositing "$[gt.Inactive Window &Transparency]%tint.svg:$[infostore.MenuIconSize]%"             Popup MenuTransparencyOps
+
+
 
 #-----------------------------------------------------------------------
 # Dynamic Configuration sub menu for setting a background with
@@ -2233,8 +2357,66 @@ AddToFunc   FuncMenuWindowOpsTrimmed
 + I AddToMenu MenuWindowOpsTrimmed "" Nop
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.&Close]	Alt+F4%exit.svg:$[infostore.MenuIconSize]%"                 Close
 + I AddToMenu MenuWindowOpsTrimmed "" Nop
++ I Test (EnvMatch use_composite 1) \
+    AddToMenu MenuWindowOpsTrimmed "$[gt.Active Window &Opacity]%tint.svg:$[infostore.MenuIconSize]%"                  Popup MenuOpacityOps
++ I Test (EnvMatch use_composite 1) \
+    AddToMenu MenuWindowOpsTrimmed "$[gt.Inactive Window &Transparency]%tint.svg:$[infostore.MenuIconSize]%"             Popup MenuTransparencyOps
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"            Module FvwmIdent
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.Mor&e...]	%window.svg:$[infostore.MenuIconSize]%"                     Menu MenuWindowOpsFull This 0 0
+
+#-----------------------------------------------------------------------
+# Sub menu for tint style
+#-----------------------------------------------------------------------
+AddToMenu MenuTintOps DynamicPopupAction FuncMenuTintOps
+
+DestroyFunc FuncMenuTintOps
+AddToFunc   FuncMenuTintOps
++ I DestroyMenu MenuTintOps
+#+ I DestroyMenu recreate MenuTintOps
++ I AddToMenu MenuTintOps DynamicPopupAction FuncMenuTintOps
++ I PipeRead 'for percent in 0 10 20 30 40 50 60 70 80 90 100; do \
+                if [ "$percent" = "$[infostore.used_menutint]" ]; then \
+                    echo AddToMenu MenuTintOps \"$percent%%%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
+                else \
+                    echo AddToMenu MenuTintOps \"$percent%%%empty.svg:$[infostore.MenuIconSize]%\" UpdateMenuTint $percent; \
+                fi; \
+            done'
+
+#-----------------------------------------------------------------------
+# Sub menu for window opacity
+#-----------------------------------------------------------------------
+AddToMenu MenuOpacityOps DynamicPopupAction FuncMenuOpacityOps
+
+DestroyFunc FuncMenuOpacityOps
+AddToFunc   FuncMenuOpacityOps
++ I DestroyMenu MenuOpacityOps
+#+ I DestroyMenu recreate MenuOpacityOps
++ I AddToMenu MenuOpacityOps DynamicPopupAction FuncMenuOpacityOps
++ I PipeRead 'for percent in 0 10 20 30 40 50 60 70 80 90 100; do \
+                if [ "$percent" = "$[infostore.used_windowopacity]" ]; then \
+                    echo AddToMenu MenuOpacityOps \"$percent%%%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
+                else \
+                    echo AddToMenu MenuOpacityOps \"$percent%%%empty.svg:$[infostore.MenuIconSize]%\" UpdateWindowOpacity $percent; \
+                fi; \
+            done'
+
+#-----------------------------------------------------------------------
+# Sub menu for window transparency
+#-----------------------------------------------------------------------
+AddToMenu MenuTransparencyOps DynamicPopupAction FuncMenuTransparencyOps
+
+DestroyFunc FuncMenuTransparencyOps
+AddToFunc   FuncMenuTransparencyOps
++ I DestroyMenu MenuTransparencyOps
+#+ I DestroyMenu recreate MenuTransparencyOps
++ I AddToMenu MenuTransparencyOps DynamicPopupAction FuncMenuTransparencyOps
++ I PipeRead 'for percent in 0 10 20 30 40 50 60 70 80 90 100; do \
+                if [ "$percent" = "$[infostore.used_windowtransparency]" ]; then \
+                    echo AddToMenu MenuTransparencyOps \"$percent%%%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
+                else \
+                    echo AddToMenu MenuTransparencyOps \"$percent%%%empty.svg:$[infostore.MenuIconSize]%\" UpdateWindowTransparency $percent; \
+                fi; \
+            done'
 
 #-----------------------------------------------------------------------
 # Resource window group operations for the root menu and buttons
@@ -2388,9 +2570,11 @@ AddToFunc   FuncMenuDesktopOps
 + I AddToMenu MenuDesktopOps "$[gt.Desktopmenu]" Title
 + I AddToMenu MenuDesktopOps MissingSubmenuFunction FuncMenuWallpaperConfiguration
 + I AddToMenu MenuDesktopOps "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"    Popup MenuWallpaperConfiguration
-+ I AddToMenu MenuDesktopOps "Help%help.svg:$[infostore.MenuIconSize]%"                                 Popup MenuHelp
++ I Test (EnvMatch use_composite 1) \
+    AddToMenu MenuDesktopOps "$[gt.&Menu Transparency]%tint.svg:$[infostore.MenuIconSize]%"             Popup MenuTintOps
++ I AddToMenu MenuDesktopOps "$[gt.Help]%help.svg:$[infostore.MenuIconSize]%"                           Popup MenuHelp
 + I AddToMenu MenuDesktopOps "" Nop
-+ I AddToMenu MenuDesktopOps "$[gt.Window Operations]"                                                  Popup MenuWindowOpsFull
++ I AddToMenu MenuDesktopOps "$[gt.Window Operations]%window.svg:$[infostore.MenuIconSize]%"            Popup MenuWindowOpsFull
 
 #-----------------------------------------------------------------------
 # Clock Ops menu
