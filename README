@@ -21,8 +21,13 @@ useful things to make work and life easier with a flavour of a modern
 desktop. But it can be configure by your own. It is good documented and
 shows you what is possible with this powerful window manager.
 
+***********************************************************************
+************* ATTENTION: THIS IS A DEVELOPMENT VERSION!   *************
+*************         SOMETIMES IT DOESN'T WORK!          *************
+*************     SO INSTALL/USE IT ON YOUR OWN RISK!     *************
+***********************************************************************
 
-Featurelist of Fvwm-Nightshade 0.7.4:
+Featurelist of Fvwm-Nightshade 0.7.x:
 =====================================
 - Works now with FVWM 2.6.5 but with full support of Xdg menus like in 
   CVS version
@@ -75,7 +80,7 @@ Featurelist of Fvwm-Nightshade 0.7.4:
         IconManager
 
 - Lock desk & screensaver (xscreensaver)
-- Personal menu via FvwmScript-PersonalMenu
+- Personal menu via FNS-Script-PersonalMenu
 - Background configurable with thumb browser (imagemagick and feh)
 - Animation control of window moves
 - Simple "Run" command with FvwmForm
@@ -95,7 +100,7 @@ Featurelist of Fvwm-Nightshade 0.7.4:
 - Splash screen
 - Print messages for needed apps for full config functionality in 
   .xsessions-error
-- Governor-tool FvwmScript-CPU-Performance to handle cpufreq settings
+- Governor-tool FNS-Script-CPU-Performance to handle cpufreq
 - Create thumbs with mini icon and name for iconified applications 
   instead of their icon
 - Build support for deb, rpm, Arch, Gentoo and local installation
@@ -106,6 +111,9 @@ Featurelist of Fvwm-Nightshade 0.7.4:
 - Own XDG applications menu with it's own directory files
 - New fvwm-menu-desktop GUI with help windows
 - Restart possibility for Conky clock and CPU applet in panel
+- Support for shadows and transparency with XcompMgr and Compton
+- Support for hald and upower for Suspend/Hibernate
+
 
 
 Requirements:
@@ -117,7 +125,7 @@ Required:        Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky,
 Recommended:     gnomes network manager, Volume Icon
 
 Useful:          fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-                 qtconfig for qt3, qtconfig for qt4, xneurs
+                 qtconfig for qt3, qtconfig for qt4, xneurs, xcompmgr or compton
   
 * unfortunatelly not usable in Arch at the moment. They have changed from
   cpufrequtils to cpupower but it's not supported at the moment 

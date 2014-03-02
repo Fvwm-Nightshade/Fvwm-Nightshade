@@ -6,6 +6,8 @@ Version 0.7.x
 Changes:
 --------
 - New theme 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
+- Support for shadows and transparency with XcompMgr and Compton
+- Support for hald and upower for Suspend/Hibernate
 
 ------------------------------------------------------------------------
 

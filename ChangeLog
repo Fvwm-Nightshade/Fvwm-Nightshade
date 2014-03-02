@@ -11,6 +11,39 @@ History:
 - update fvwm-menu-desktop2 to last upstream changes:
   - Converting of icons always to png
 
+01/09/2014
+- add FNS-Script-CompConfigurator - Composite configurator script for 
+  xcompmgr or compton
+- add new composite icons
+- add new values in .settings: use_composite, comp_command, used_windowtransparency,
+  used_windowopacity
+- add new module FvwmTransSet to set true transparency to windows if a composite
+  manager is running
+- update config:
+  - assign CompConfigurator icon to FNS-Script-CompConfigurator
+  - add configuration for FvwmTransSet
+  - add composite manager and FvwmTransSet to StartFunction
+  - add ExitFunction to stop composite manager and FvwmTransSet if needed
+  - add some needed composite functions: FuncKillCompmgr, FuncStartFvwmTransSet,
+    FuncStopFvwmTransSet, UpdateWindowOpacity, UpdateWindowTransparency,
+    UpdateMenuTint, 
+  - fix bug in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
+    that strings with space get cut
+  - add new sub menu for compositing in Fvwm-Nightshade configuration menu. Also
+    menus for change transparency in the RootMenu, and windows
+  - add in MenuWindowOpsTrimmed the possibility to change window opacity and
+    transparency if composite manager is running. Also in MenuDesktopOps to
+    change the menu transparency
+  - update overview, copyright and version number
+- add to colorsets use_composite tests to set tint or not
+- add a check in FvwmTransSet that dialogs don't change the last window's opacity
+  because it looks confusing if the parent window gets transparent
+- add support for hald AND upower to FuncSuspend/FuncHibernate
+- add some additional search sites to INSTALL
+- add zypper install command to INSTALL
+- update NEWS, COPYING, README
+- add documentation for FvwmTransSet
+
 11/02/2013
 - add new wallpapers 'wp_fns_blobs' in 4:3, 16:9 and 16:10
 - update config version
@@ -200,9 +233,81 @@ History:
     - change required FVWM version to >= 2.6.5
     - add Xdg menu support
   - update NEWS
-    
+
+08/26/2013
+- add new environment variable to fvwm-nightshade to have a search variable
+  for sound paths
+- add new function FnsSoundPath in fns-init to have the same possibility
+  like ModulePath or ImagePath to create search paths for sounds
+- add new python script fns-find-file to search in path variables like
+  $PATH or $FNS_SOUNDPATH for files
+- add FnsSoundPath to config and update version
+- add sounds in artworks for own system sounds
+- exchange tabs with spaces in fns-init and fvwm-nightshade
+- add new variable __version__ for version in fns-find-icon
+- adapt variables which use 0/1 to false/true in some FvwmScript scripts
+- add documentation for fns-find-file (asciidoc, manpage, html)
+- add new feature description of fns-find-file to NEWS
+
+08/22/2013
+- add FNS-Script-Date based on FvwmScript-Date because the original fits
+  not into the FNS GUI design. Also, setting system time/date needs root
+  permission which is not possible with FvwmScript-Date
+- add FNS-Script-Date in some menus
+- add new clock vector icon for FNS-Script-Date
+- exchange tabs with spaces in FNS-Script-FileBrowser and header.tpl
+
+08/21/2013
+- create new icon directory structure in artworks/icon:
+  16x16/, 24x24/, 64x64/ and 80x64/ for bitmap icons
+- delete fns bitmap icons because they never needed - a svg icon exist
+
+08/18/2013
+- changes in config:
+  - launch new develop versioning: <version_number>-<YYYYMMDD>
+  - exchange tabs with spaces
+  - add icon styles for FNS scripts
+  - add new menus:
+    - MenuClockOps - popups when right click on date/time with:
+      - set time and date
+      - restart Conky clock
+    - MenuCpuOps - popups when right click on cpu bar with:
+      - Cpu Performance tool
+      - restart Conky cpu bar
+- add own_window_title to conkyrc_clock and conkyrc_cpu to make it possible to kill them with xkill
+- add mouse action on conky_cpu and conky_clock button - right click to show menu - in
+  G2likeTopBar, HorizontalPanel and VerticalPanel
+- add some new vector icons to artworks/icons/scalable
+- change some vector icons in artworks/icons/scalable
+
+08/17/2013
+- remove wm-icons package from recommended dependencies in /debian/control
+- add new vector icons to artworks/icons/scalable to replace wm-icons package
+- change bitmap icons to vector icons in G2likeTopBar, VerticalPanel and HorizontalPanel
+  to change icon size on the fly
+- add SetMenuIconSize function in fns-init to set Menu icon size dependent of .FvwmForm-Desktop-Config
+  on the fly in menus and Windowlist
+- changes in config:
+  - change the order in ImagePath that Fvwm search for images in FVWM_USERDIR first
+  - change most of the xpm files to svg
+  - change static menus to dynamic menus and xpm to vector icons to change icon size on the fly
+  - fix variable problem in FuncWriteInfoStoreToFileAndSet
+  - implement SetMenuIconSize in all menus if needed to update icon size variable to enable
+    changing icon size on the fly
+- change static menus to dynamic menus and xpm to vector icons in all layouts to change icon size on the fly
+- remove wm-icons from recommended dependencies in INSTALL and README
+- exchange tabs with spaces in INSTALL and README
+
 08/12/2013
 - FvwmSmartMaximize: make EwmhBaseStruts determination more perlish
+
+08/03/2013
+- rename all FvwmScripts to FNS-Script-<Name>
+- rename all FvwmForms to FNS-Form-<Name>
+- update all names in config to the new name nomenclature
+- rename FNS-BaseSetup helps to FNS-Form-BaseSetup helps and update it
+- update fvwm-nightshade help with the new names
+- adapt Makefile to new name convention
 
 08/01/2013
 - add FvwmSmartMaximize to all themes:

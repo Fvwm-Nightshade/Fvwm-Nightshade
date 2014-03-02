@@ -11,7 +11,7 @@ Required:       Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky,
 Recommended:    gnomes network manager, Volume Icon
 
 Useful:         fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-                qtconfig for qt3, qtconfig for qt4, xneurs
+                qtconfig for qt3, qtconfig for qt4, xneurs, xcompmgr or compton
 
 * unfortunatelly not usable in Arch at the moment. They have changed from
   cpufrequtils to cpupower but it's not supported at the moment 
@@ -268,8 +268,13 @@ To install a downloaded package use yast (as root) to solve package dependencies
 
     # yast -i <path_to_rpm_package>
 
+or, if you have zypper installed use (as root)
+
+    # zypper install <path_to_rpm_package>
+
 Fedora:
 https://apps.fedoraproject.org/packages/
+http://koji.fedoraproject.org/koji/search
 
 To install a downloaded package use yum (as root) to solve package dependencies with
 
@@ -277,11 +282,17 @@ To install a downloaded package use yum (as root) to solve package dependencies 
 
 Arch:
 https://www.archlinux.org/packages/
-https://www.archlinux.org/packages/
+https://aur.archlinux.org/
 
 To install a downloaded package use pacman (as root) to solve package dependencies with
 
     # pacman -U <path_to_arch_package>
+
+Gentoo:
+http://en.znurt.org/
+
+Slackware:
+http://slackfind.net/en/
 
 Some other package search sites:
 http://pkgs.org
