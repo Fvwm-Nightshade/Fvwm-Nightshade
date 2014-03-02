@@ -16,7 +16,7 @@ SRC_URI="https://github.com/${PN}/${PN}/archive/${PN}-${PV}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="wm-icons pcmanfm nm-gnome volumeicon pm-utils lxappearance qtconfig"
+IUSE="pcmanfm nm-gnome volumeicon pm-utils lxappearance qtconfig xcompmgr compton"
 
 RDEPEND="${PYTHON_DEPS}
 	>=x11-wm/fvwm-2.6.5[bidi,doc,gtk2-perl,netpbm,nls,perl,png,readline,rplay,stroke,svg,truetype,vanilla,xinerama,lock]
@@ -30,13 +30,14 @@ RDEPEND="${PYTHON_DEPS}
 	app-admin/conky
 	sys-power/cpufrequtils
 	dev-python/pyxdg
-	wm-icons? ( x11-themes/wm-icons )
 	pcmanfm? ( x11-misc/pcmanfm )
 	nm-gnome? ( gnome-extra/nm-applet )
 	volumeicon? ( media-sound/volumeicon )
 	pm-utils? ( sys-power/pm-utils )
 	lxappearance? ( lxde-base/lxappearance )
-	qtconfig? ( dev-qt/qtgui )"
+	qtconfig? ( dev-qt/qtgui )
+	xcompmgr? ( x11-misc/xcompmgr ) 
+	compton? ( x11-misc/compton )"
 
 S=${WORKDIR}/${MY_P}
 
