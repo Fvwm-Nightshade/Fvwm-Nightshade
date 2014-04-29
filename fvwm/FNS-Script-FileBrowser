@@ -1,0 +1,613 @@
+#-----------------------------------------------------------------------
+# File:         FNS-Script-FileBrowser
+# Version:      1.1.9
+# Licence:      GPL 2
+#
+# Description:  File Browser script based on FvwmScript-FileBrowser
+#
+# Parameters:   <path>
+#                   Start path to browse. Use single or double quotes if
+#                   metacharacters like blanks or so in path name.
+#
+#               -d
+#                   Only use directories
+#
+#               -b
+#                   Escape special characters with backslash in path/dir
+#                
+#               -m
+#                   Module name to send path/directory
+#
+#               -w
+#                   Widget number of module m
+#
+#               -s
+#                   Signal number to the widget w of module m which should
+#                   get the path/directory
+#
+#               -c
+#                   Use FileBrowser to create new file path
+#
+# Output:       With -m, -w, -s:
+#               SendToModule <module> SendString <w_no> <sig_no> <path/dir>
+#            
+#               Without -m, -w, -s:
+#               <path/dir>
+#
+# Author:       Fvwm-workers    
+# Revised by:   Thomas Funk <t.funk@web.de>
+#
+# Created:      ???
+# Changed:      08/22/2013
+#-----------------------------------------------------------------------
+
+UseGettext          {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
+WindowLocaleTitle   {File Browser}
+WindowSize          360 308        # Taille
+
+Init
+Begin
+    Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
+    Set $dir = {false}
+    Set $Module = {}
+    Set $Widget = {}
+    Set $Number = {}
+    Set $useBS = 0
+    Set $BS_CMD = {|sed "s/\([()#|*&;:,'\` ]\)/\\\\\1/g"}
+    Set $Message = {false}
+    Set $cleanupMsg = {false}
+        
+    Set $i = 1
+    Set $arg = (GetScriptArgument $i)
+
+    While $arg <> {} Do
+    Begin
+        Set $Value = {PATH}
+        Set $j = (Add $i 1)
+        Set $value = (GetScriptArgument $j)
+
+        # only use directories
+        If $arg == {-d} Then
+        Begin
+            Set $dir = {true}
+            Set $newWindowTitle = (Gettext {Directory Browser}) 
+            ChangeWindowTitle $newWindowTitle
+            Set $Value = {NO}
+        End
+        
+        # create new file path
+        If $arg == {-c} Then
+        Begin
+            Set $newWindowTitle = (Gettext {Create Filepath}) 
+            ChangeWindowTitle $newWindowTitle
+            ChangeLocaleTitle 8 {Select or enter new file name:}
+            Set $Value = {NO}
+        End
+        
+        # include backslashes in output before special charachters
+        If $arg == {-b} Then
+        Begin
+            Set $useBS = 1
+            Set $Value = {NO}
+        End
+        
+        # If File browser is called from within a menu
+        # which module should get path/directory
+        If $arg == {-m} Then
+        Begin
+            Set $module = $value
+            #Do {echo module: }$module
+            Set $Value = {YES}
+        End
+        
+        # to which widget should it send
+        If $arg == {-w} Then
+        Begin
+            Set $widget = $value
+            #Do {echo widget: }$widget
+            Set $Value = {YES}
+        End
+        
+        # signal number of the widget w should get the path/directory
+        If $arg == {-s} Then
+        Begin
+            Set $signal = $value
+            #Do {echo signal: }$signal
+            Set $Value = {YES}
+        End
+        Do {echo Value: }$Value
+        # only directory path found
+        If $Value == {PATH} Then
+        Begin
+            Set $PWD = $arg
+            Do {echo PWD: }$PWD
+            Set $Value = {NO}
+        End
+
+        If $Value == {NO} Then
+            Set $i = (Add $i 1)
+        Else
+            Set $i = (Add $i 2)
+        Set $arg = (GetScriptArgument $i)
+    End
+
+    Set $Font = {xft:}$defaultFont{:size=10}
+    For $Widget=1 To 11 Do
+        ChangeFont $Widget $Font
+
+    # backquote path
+    Set $CMD = {echo '}$PWD{'}$BS_CMD
+    Set $PWD_BS = (GetOutput $CMD 1 -1)
+    If $PWD_BS == {} Then
+    Begin
+        Set $CMD = {echo "}$PWD{"}$BS_CMD
+        Set $PWD_BS = (GetOutput $CMD 1 -1)
+    End
+    
+    Set $POS=50
+    Set $LOOP=1
+    While $LOOP==1 Do
+    Begin
+        If (StrCopy $PWD_BS $POS $POS)=={/} Then
+            Set $LOOP=0
+        If $POS==0 Then
+            Set $LOOP=0
+        Set $POS=(Add $POS -1)
+    End
+    Set $PWD_BS=(StrCopy $PWD_BS 1 $POS)
+    
+    Set $CMD2={cd;cd } $PWD_BS {; pwd |sed 's/|/°/g'}
+    Set $PWD=(GetOutput $CMD2 1 -1)
+    Do {echo init PWD: }$PWD
+    
+    Set $CMD2={cd;cd } $PWD_BS {; pwd}$BS_CMD
+    Set $PWD_BS = (GetOutput $CMD2 1 -1)
+    Do {echo init PWD_BS: }$PWD_BS
+    
+    Set $PWD2 = $PWD
+    Set $PWD2_BS = $PWD_BS
+    Set $OPT={ }
+    Set $CMD={cd } $PWD_BS {; ls} $OPT {-1 -pHL --group-directories-first |sed 's/|/°/g'}
+    Set $LS=(GetOutput $CMD 1 -1)
+    Set $ID=2
+    While (GetOutput $CMD $ID -1) <> {} Do
+    Begin
+        Set $LS=$LS {|} (GetOutput $CMD $ID -1)
+        Set $ID=(Add $ID 1)
+    End
+    ChangeTitle 7 $LS
+    ChangeTitle 5 $PWD
+    ChangeTitle 9 {}
+    
+    If $dir == {true} Then
+        ChangeLocaleTitle 11 { Show hidden directories}
+    Else
+        ChangeLocaleTitle 11 { Show hidden files}
+    
+    Set $clicks = 0
+    Set $timeElapsed = 0
+    Set $timeMsgElapsed = 0
+End
+
+PeriodicTasks
+Begin
+    ##### Check for one/double click(s)
+    Set $timeElapsed = (Add $timeElapsed 1)
+    If (RemainderOfDiv $timeElapsed 1) == 0 Then
+    Begin
+        If $clicks == 1 Then
+        Begin
+            ChangeTitle 9 (GetOutput $CMD3 (GetValue 7) -1)
+        End
+        If $clicks == 2 Then
+        Begin
+            If $PWD2_BS <> $PWD_BS Then
+            Begin
+                Set $PWD = $PWD2
+                Set $PWD_BS = $PWD2_BS
+                Set $CMD={cd } $PWD_BS {; ls} $OPT {-1 -pHL --group-directories-first |sed 's/|/°/g'}
+                Set $LS=(GetOutput $CMD 1 -1)
+                Set $ID=2
+                While (GetOutput $CMD $ID -1) <> {} Do
+                Begin
+                    Set $LS=$LS {|} (GetOutput $CMD $ID -1)
+                    Set $ID=(Add $ID 1)
+                End
+                ChangeTitle 7 $LS
+                ChangeTitle 5 $PWD
+                ChangeTitle 9 {}
+            End
+            Else
+            Begin
+                ChangeTitle 9 (GetOutput $CMD3 (GetValue 7) -1)
+            End
+        End
+        Set $timeElapsed = 0
+        Set $clicks = 0
+    End
+    
+    If $Message == {true} Then
+    Begin
+        Set $cleanupMsg = {true}
+        Set $timeMsgElapsed = 0
+        Set $Message = {false}
+    End
+    
+    Set $timeMsgElapsed = (Add $timeMsgElapsed 1)
+    If (RemainderOfDiv $timeMsgElapsed 2) == 0 Then
+    Begin
+        If $cleanupMsg == {true} Then
+            ChangeTitle 9 {}
+        Set $timeMsgElapsed = 0
+    End
+
+#    If $Message == {true} Then
+#    Begin
+#        Set $timeMsgElapsed = (Add $timeMsgElapsed 1)
+#        If (RemainderOfDiv $timeMsgElapsed 3) == 0 Then
+#        Begin
+#            ChangeTitle 9 {}
+#            Set $Message = {false}
+#            Set $timeMsgElapsed = 0
+#        End
+#    End
+End
+
+# ok button
+Widget 1
+Property
+    Type        PushButton
+    Size        80 20
+    Position    175 270
+    LocaleTitle {Ok}
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $CMD = {echo "}(GetTitle 9){" |sed 's/°/|/g'}
+        Set $string = (GetOutput $CMD 1 -1)
+        If $string == {} Then
+        Begin
+            Set $CMD = {echo '}(GetTitle 9){' |sed 's/°/|/g'}
+            Set $string = (GetOutput $CMD 1 -1)
+            Set $CMD = $CMD{|grep -o .$}
+            Set $lastChar = (GetOutput $CMD 1 -1)
+        End
+        Else
+        Begin
+            Set $CMD = $CMD{|grep -o .$}
+            Set $lastChar = (GetOutput $CMD 1 -1)
+        End
+
+        #Do {echo string: '}$string{'}
+        If $dir == {false} Then
+        Begin
+            If $string == {} Then
+            Begin
+                ChangeLocaleTitle 9 {No file selected!}
+                Set $Message = {true}
+            End
+            If $lastChar == {/} Then
+            Begin
+                ChangeLocaleTitle 9 {Directory selected!}
+                Set $Message = {true}
+            End
+        End
+        Else
+        Begin
+            If $string <> {} Then
+            Begin
+                If $lastChar <> {/} Then
+                Begin
+                    ChangeLocaleTitle 9 {No directory selected!}
+                    Set $Message = {true}
+                End
+            End
+        End
+
+        If $Message <> {true} Then
+        Begin
+            If $dir == {false} Then
+            Begin
+                If $useBS == 1 Then
+                Begin
+                    Set $CMD = {echo '}(GetTitle 9){' |sed 's/°/|/g'}$BS_CMD
+                    Set $string = (GetOutput $CMD 1 -1)
+                    If $string == {} Then
+                    Begin
+                        Set $CMD = {echo "}(GetTitle 9){" |sed 's/°/|/g'}$BS_CMD
+                        Set $string = (GetOutput $CMD 1 -1)
+                    End
+                End
+            End
+            Else
+                Set $string = {}
+                
+            If $PWD == {/} Then
+                Set $PATH = $PWD $string
+            Else
+            Begin
+                If $useBS == 1 Then
+                    Set $PATH = $PWD_BS{/}$string
+                Else
+                    Set $PATH = $PWD{/}$string
+            End
+                
+            Do {echo PATH: }$PATH
+            
+            If $module == {} Then
+                SendToScript (GetScriptFather) $PATH
+            Else
+                Do {SendToModule }$module{ SendString }$widget{ }$signal{ }$PATH
+
+            Quit
+        End
+    End
+End
+
+# Cancel button
+Widget 2
+Property
+    Type        PushButton
+    LocaleTitle {Cancel}
+    Size        85 20
+    Position    265 270
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Quit
+    End
+End
+
+# big rectangle
+Widget 3
+Property
+    Type        Rectangle
+    Size        340 250
+    Position    10 10
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# Text field 'Path:'
+Widget 4
+Property
+    Type        ItemDraw
+    LocaleTitle {Path:}
+    Position    20 13
+    Size        100 18
+    Flags       NoReliefString NoFocus Left
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# Textedit path
+Widget 5
+Property
+    Type        TextField
+    Title       {*}
+    Size        320 24
+    Position    20 31
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# Up button
+Widget 6
+Property
+    Type        PushButton
+    Title       {Up}
+    #Icon up.xpm
+    Size        50 25
+    Position    20 62
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Do {echo up $PWD_BS: }$PWD_BS
+        Do {echo up $PWD vorher: }$PWD
+        If $PWD_BS == {/} Then
+        Begin
+            Set $CMD={cd /; pwd}
+            Set $PWD=(GetOutput $CMD 1 -1)
+            Set $PWD_BS = $PWD
+        End
+        Else
+        Begin
+            Set $CMD={cd } $PWD_BS {/..; pwd |sed 's/|/°/g'}
+            Set $PWD=(GetOutput $CMD 1 -1)
+            Set $CMD={cd } $PWD_BS {/..; pwd}$BS_CMD
+            Set $PWD_BS = (GetOutput $CMD 1 -1)
+        End
+
+        Set $CMD={cd } $PWD_BS {; ls} $OPT {-1 -pHL --group-directories-first |sed 's/|/°/g'}
+        Set $LS=(GetOutput $CMD 1 -1)
+        Set $ID=2
+        While (GetOutput $CMD $ID -1) <> {} Do
+        Begin
+            Set $LS=$LS {|} (GetOutput $CMD $ID -1)
+            Set $ID=(Add $ID 1)
+        End
+        ChangeTitle 7 $LS
+        ChangeTitle 5 $PWD
+        ChangeTitle 9 {}
+    End
+End
+
+# Listbox directory content
+Widget 7
+Property
+    Type        List
+    Title       {}
+    Size        320 110
+    Position    20 94
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $cleanupMsg = {false}
+        Set $Message = {false}
+        Set $CMD3={cd } $PWD_BS {; ls} $OPT {-1 -pHL --group-directories-first |sed 's/|/°/g'}
+        If $PWD_BS == {/} Then
+        Begin
+            Set $PWD2=$PWD (GetOutput $CMD3 (GetValue 7) -1)
+            Set $CMD={cd } $PWD_BS {; ls} $OPT {-1 -pHL --group-directories-first}$BS_CMD
+            Set $PWD2_BS=$PWD_BS (GetOutput $CMD (GetValue 7) -1)
+        End
+        Else
+        Begin
+            Set $PWD2=$PWD {/} (GetOutput $CMD3 (GetValue 7) -1)
+            Set $CMD={cd } $PWD_BS {; ls} $OPT {-1 -pHL --group-directories-first}$BS_CMD
+            Set $PWD2_BS=$PWD_BS {/} (GetOutput $CMD (GetValue 7) -1)
+        End
+
+        Set $CMD2={cd } $PWD_BS {;cd } $PWD2_BS { 2>/dev/null; pwd |sed 's/|/°/g'}
+        Set $PWD2=(GetOutput $CMD2 1 -1)
+
+        Set $CMD2={cd } $PWD_BS {;cd } $PWD2_BS { 2>/dev/null; pwd}$BS_CMD
+        Set $PWD2_BS = (GetOutput $CMD2 1 -1)
+
+#        Set $clicks = (Add $clicks 1)
+#        If $clicks == 1 Then
+#            Set $timeElapsed = 0
+
+        If $PWD2_BS <> $PWD_BS Then
+        Begin
+            Set $PWD = $PWD2
+            Set $PWD_BS = $PWD2_BS
+            Set $CMD={cd } $PWD_BS {; ls} $OPT {-1 -pHL --group-directories-first |sed 's/|/°/g'}
+            Set $LS=(GetOutput $CMD 1 -1)
+            Set $ID=2
+            While (GetOutput $CMD $ID -1) <> {} Do
+            Begin
+                Set $LS=$LS {|} (GetOutput $CMD $ID -1)
+                Set $ID=(Add $ID 1)
+            End
+            ChangeTitle 7 $LS
+            ChangeTitle 5 $PWD
+            If $dir == {true} Then
+                ChangeTitle 9 (GetOutput $CMD3 (GetValue 7) -1)
+            Else
+                ChangeTitle 9 {}
+        End
+        Else
+        Begin
+            If $dir == {false} Then
+                ChangeTitle 9 (GetOutput $CMD3 (GetValue 7) -1)
+            Else
+            Begin
+                ChangeLocaleTitle 9 {No directory selected!}
+                Set $Message = {true}
+            End
+        End
+    End
+End
+
+# Home button
+Widget 10
+Property
+    Type        PushButton
+    LocaleTitle {Home}
+    #Icon home.xpm
+    Size        50 25
+    Position    80 62
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $CMD = {echo $HOME |sed 's/|/°/g'}
+        Set $PWD=(GetOutput $CMD 1 -1)
+
+        Set $CMD = {echo $HOME}$BS_CMD
+        Set $PWD_BS = (GetOutput $CMD 1 -1)
+
+        Set $CMD={cd } $PWD_BS {; ls} $OPT {-1 -pHL --group-directories-first |sed 's/|/°/g'}
+        Set $LS=(GetOutput $CMD 1 -1)
+        Set $ID=2
+        While (GetOutput $CMD $ID -1) <> {} Do
+        Begin
+            Set $LS=$LS {|} (GetOutput $CMD $ID -1)
+            Set $ID=(Add $ID 1)
+        End
+        ChangeTitle 7 $LS
+        ChangeTitle 5 $PWD
+        ChangeTitle 9 {}
+    End
+End
+
+# Checkbox 'hidden files'
+Widget 11
+Property
+    Type        CheckBox
+    LocaleTitle {_____________________________}
+    Position    140 63
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        If (GetValue 11) == 1 Then
+            Set $OPT={ -A }
+        Else
+            Set $OPT={ }
+        Set $CMD={cd } $PWD_BS {; ls} $OPT {-1 -pHL --group-directories-first |sed 's/|/°/g'}
+        Set $LS=(GetOutput $CMD 1 -1)
+        Set $ID=2
+        While (GetOutput $CMD $ID -1) <> {} Do
+        Begin
+            Set $LS=$LS {|} (GetOutput $CMD $ID -1)
+            Set $ID=(Add $ID 1)
+        End
+        ChangeTitle 7 $LS
+        ChangeTitle 5 $PWD
+        ChangeTitle 9 {}  
+    End
+End
+
+# Text 'Selection'
+Widget 8
+Property
+    Type        ItemDraw
+    LocaleTitle {Selection:}
+    Size        200 18
+    Position    20 205
+    Flags       NoReliefString NoFocus Left
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# Textfield selection
+Widget 9
+Property
+    Type        TextField
+    Title       {}
+    Size        320 24
+    Position    20 223
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+

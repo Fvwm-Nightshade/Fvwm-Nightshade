@@ -98,6 +98,7 @@ InfoStoreAdd ns_version 0.7.5.20140301
 #        6.1.3. Pointer in Window Decorations
 #        6.1.4. Pointer in Icons
 #        6.1.5. Pointer in Window (and in Icon for consistency)
+#        6.1.6. Pointer in FvwmApplets
 #    6.2 Keyboard
 #        6.2.1 ALT + Key
 #        6.2.2 ALT-SHIFT + Key
@@ -122,6 +123,7 @@ InfoStoreAdd ns_version 0.7.5.20140301
 #    7.7 FvwmScript
 #	 7.8 FvwmTransSet
 #    7.9 Others
+#        7.9.1 AppletIconMan
 # 8. FUNCTIONS
 #    8.1 Startup
 #        8.1.1 Start
@@ -132,10 +134,11 @@ InfoStoreAdd ns_version 0.7.5.20140301
 # 9. MENUS
 #    9.1 Root menu
 #    9.2 Help menu
-#    9.3 Modules menu
+#    9.3 Modules and Applets menus
 #    9.4 Configuration menu
 #    9.5 Fvwm Quit menu
 #    9.6 Window Ops menus
+#    9.7 FvwmApplet Ops menus
 #
 ########################################################################
 
@@ -508,6 +511,13 @@ Style FvwmForm-RunCommand !Title
 #-----------------------------------------------------------------------
 Style FvwmForm-About !Title
 
+#-----------------------------------------------------------------------
+# FvwmApplets
+#-----------------------------------------------------------------------
+Style FvwmApplet NoTitle, !Handles, Borderwidth 0
+Style FvwmApplet Sticky, !FixedPosition, FixedSize, !Iconifiable
+Style FvwmApplet StaysOnBottom, WindowListSkip
+
 
 #***********************************************************************
 # 4.1.2 Icons
@@ -527,9 +537,28 @@ Style FvwmScript      EWMHMiniIconOverride, Icon fvwm_footprint.svg:48x48, MiniI
 # FNS related icons
 #-----------------------------------------------------------------------
 Style FNS-Form-BaseSetup            EWMHMiniIconOverride, Icon icon_fns.svg:48x48, MiniIcon icon_fns.svg:16x16
-Style FNS-Script-PersonalMenu       EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
-Style FNS-Script-CpuPerformance     EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
+Style FNS-Script-AppletConfigurator EWMHMiniIconOverride, Icon plugin.svg:48x48, MiniIcon plugin.svg:16x16
 Style FNS-Script-CompConfigurator   EWMHMiniIconOverride, Icon CompConfigurator.svg:48x48, MiniIcon CompConfigurator.svg:16x16
+Style FNS-Script-PersonalMenu       EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
+Style FNS-Script-FileBrowser        EWMHMiniIconOverride, Icon filemanager.svg:48x48, MiniIcon filemanager.svg:16x16
+Style FNS-Script-PlaylistCreator    EWMHMiniIconOverride, Icon playlist-creator.svg:48x48, MiniIcon playlist-creator.svg:16x16
+Style FNS-Script-CpuPerformance     EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
+Style FNS-Script-Date               EWMHMiniIconOverride, Icon clock.svg:48x48, MiniIcon clock.svg:16x16
+Style Chrono                        EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon Chrono.svg:16x16
+Style Kalende                       EWMHMiniIconOverride, Icon Kalende.svg:48x48, MiniIcon Kalende.svg:16x16
+
+
+#-----------------------------------------------------------------------
+# FvwmApplets
+#-----------------------------------------------------------------------
+Style Applet-Plaia          EWMHMiniIconOverride, Icon Plaia.svg:48x48, MiniIcon 80x64/Plaia_Applet.png
+Style Applet-Pagina         EWMHMiniIconOverride, Icon Pagina.svg:48x48, MiniIcon 80x64/Pagina_Applet.png
+Style Applet-Meteo          EWMHMiniIconOverride, Icon Meteo.svg:48x48, MiniIcon 80x64/Meteo_Applet.png
+Style Applet-DriveInn       EWMHMiniIconOverride, Icon DriveInn.svg:48x48, MiniIcon 80x64/DriveInn_Applet.png
+Style Applet-Chrono         EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon 80x64/Chrono_Applet.png
+Style Applet-Empidy         EWMHMiniIconOverride, Icon Empidy.svg:48x48, MiniIcon 80x64/Empidy_Applet.png
+Style Applet-Timpul         EWMHMiniIconOverride, Icon Timpul.svg:48x48, MiniIcon 80x64/Timpul_Applet.png
+Style Applet-Kalende        EWMHMiniIconOverride, Icon Kalende.svg:48x48, MiniIcon 80x64/Kalende_Applet.png
 
 
 ########################################################################
@@ -770,6 +799,12 @@ Mouse 0         I       SCM         FuncShowMessage  "Mouse Bindings for Icons" 
 #***********************************************************************
 #     Button    Context Modifi      Function
 Mouse 1         WI      M           Menu MenuRoot
+
+#***********************************************************************
+# 6.1.6. Pointer in FvwmApplets
+#***********************************************************************
+#     Button    Context Modifi      Function
+Mouse 3         W       A           ThisWindow ("FvwmApplet") Popup MenuAppletOps
 
 
 #=======================================================================
@@ -1030,6 +1065,14 @@ DestroyModuleConfig FvwmTransSet: *
 #=======================================================================
 # Other modules will be located in the modules dir
 
+#***********************************************************************
+# 7.9.1 AppletIconMan
+#***********************************************************************
+#-----------------------------------------------------------------------
+# Shows a windows list of all applets in the actual page
+#-----------------------------------------------------------------------
+Load modules/AppletIconMan
+
 
 ########################################################################
 #                         8. F U N C T I O N S 
@@ -1051,6 +1094,9 @@ DestroyModuleConfig FvwmTransSet: *
 # Manager.
 DestroyFunc StartFunction
 AddToFunc StartFunction
+# check whether softlink FvwmApplet to FvwmScript exist
++ I FuncFvwmAppletLibCheck
+#-----------------------------------------------------------------------
 # check for apps needed for full config functionality
 + I Test (Init) FuncAppCheck
 #-----------------------------------------------------------------------
@@ -1155,6 +1201,19 @@ DestroyFunc FuncRestartModuleByAlias
 AddToFunc   FuncRestartModuleByAlias
 + I FuncStopModuleByAlias $0 $1
 + I Module $0 $1 $2
+
+#-----------------------------------------------------------------------
+# Checks whether the softlink of FvwmApplet pointed to right FvwmScript
+# module related to the current running Fvwm version
+#-----------------------------------------------------------------------
+DestroyFunc FuncFvwmAppletLibCheck
+AddToFunc FuncFvwmAppletLibCheck
++ I PipeRead 'test ! -d "${FVWM_USERDIR}/lib" && mkdir "${FVWM_USERDIR}/lib"; \
+              if [ ! -e "${FVWM_USERDIR}/lib/FvwmApplet" ] || \
+                 [ `readlink -f ${FVWM_USERDIR}/lib/FvwmApplet|xargs dirname` != "$FVWM_MODULEDIR" ]; then \
+                    rm -f ${FVWM_USERDIR}/lib/FvwmApplet; \
+                    ln -s ${FVWM_MODULEDIR}/FvwmScript ${FVWM_USERDIR}/lib/FvwmApplet; \
+              fi'
 
 #-----------------------------------------------------------------------
 # Resets a definition of all colorsets
@@ -1473,12 +1532,14 @@ AddToFunc   FuncOpenURL
 #-----------------------------------------------------------------------
 DestroyFunc FuncFvwmNextWindow
 AddToFunc FuncFvwmNextWindow
-+ I Next (CurrentPage, !Iconic, AcceptsFocus) FlipFocus NoWarp
++ I None (AppletIconMan, !State 2) KeepRc Next (CurrentPage, !Iconic, AcceptsFocus, !FvwmApplet) FlipFocus NoWarp
++ I TestRc (!Match) Next (CurrentPage, !Iconic, AcceptsFocus, FvwmApplet) FlipFocus NoWarp
 + I Current Raise
 
 DestroyFunc FuncFvwmPrevWindow
 AddToFunc FuncFvwmPrevWindow
-+ I Prev (CurrentPage, !Iconic, AcceptsFocus) Focus NoWarp
++ I None (AppletIconMan, !State 2) KeepRc Next (CurrentPage, !Iconic, AcceptsFocus, !FvwmApplet) Focus NoWarp
++ I TestRc (!Match) Next (CurrentPage, !Iconic, AcceptsFocus, FvwmApplet) Focus NoWarp
 + I Current Raise
 
 #-----------------------------------------------------------------------
@@ -1878,6 +1939,7 @@ AddToFunc   FuncMenuRoot
 + I AddToMenu MenuRoot "$[gt.&Help]%help.svg:$[infostore.MenuIconSize]%"                        Popup MenuHelp
 + I AddToMenu MenuRoot "" Nop
 + I AddToMenu MenuRoot "$[gt.Fvwm &Modules]%modules.svg:$[infostore.MenuIconSize]%"             Popup MenuFvwmModules
++ I AddToMenu MenuRoot "$[gt.FNS &Applets]%plugin.svg:$[infostore.MenuIconSize]%"               Popup MenuFnsApplets
 + I AddToMenu MenuRoot "$[gt.&Window Operations]%window.svg:$[infostore.MenuIconSize]%"         Popup MenuWindowOpsFull
 + I AddToMenu MenuRoot "" Nop
 + I AddToMenu MenuRoot "$[gt.Lock Screen]	Alt-Ctrl+L%lock.svg:$[infostore.MenuIconSize]%"     FuncLockScreen
@@ -1996,7 +2058,7 @@ AddToFunc   FuncFNSWebPagesMenu
 
 
 #=======================================================================
-# 9.3 Modules
+# 9.3 Modules and Applets
 #=======================================================================
 AddToMenu MenuFvwmModules DynamicPopupAction FuncMenuFvwmModules
 
@@ -2071,6 +2133,27 @@ AddToFunc   FuncMenuFvwmForms
 + I AddToMenu MenuFvwmForms "$[gt.&QuitVerify]%halt.svg:$[infostore.MenuIconSize]%"     Module FvwmForm FvwmForm-QuitVerify
 
 
+#-----------------------------------------------------------------------
+# FNS Applets menu
+#-----------------------------------------------------------------------
+AddToMenu MenuFnsApplets DynamicPopupAction FuncMenuFnsApplets
+
+DestroyFunc FuncMenuFnsApplets
+AddToFunc   FuncMenuFnsApplets
++ I DestroyMenu  MenuFnsApplets
++ I AddToMenu MenuFnsApplets DynamicPopupAction FuncMenuFnsApplets
++ I AddToMenu MenuFnsApplets "$[gt.FNS Applets]" Title
++ I AddToMenu MenuFnsApplets "$[gt.Chrono (Alarm Clock)]%Chrono.svg:$[infostore.MenuIconSize]%"         FvwmApplet FNS-Applet-Chrono -fns
++ I AddToMenu MenuFnsApplets "$[gt.DriveInn (Drive Manager)]%DriveInn.svg:$[infostore.MenuIconSize]%"   FvwmApplet FNS-Applet-DriveInn -fns
++ I AddToMenu MenuFnsApplets "$[gt.Empidy (MPD Music Player)]%Empidy.svg:$[infostore.MenuIconSize]%"    FvwmApplet FNS-Applet-Empidy -fns
++ I AddToMenu MenuFnsApplets "$[gt.Kalende (Calender)]%Kalende.svg:$[infostore.MenuIconSize]%"          FvwmApplet FNS-Applet-Kalende -fns
++ I AddToMenu MenuFnsApplets "$[gt.Meteo (Weather Forecast)]%Meteo.svg:$[infostore.MenuIconSize]%"      FvwmApplet FNS-Applet-Meteo -fns
++ I AddToMenu MenuFnsApplets "$[gt.Nucleu (CPU State)]%nucleu.svg:$[infostore.MenuIconSize]%"           FvwmApplet FNS-Applet-Nucleu -fns
++ I AddToMenu MenuFnsApplets "$[gt.Pagina (Video Player)]%Pagina.svg:$[infostore.MenuIconSize]%"        FvwmApplet FNS-Applet-Pagina -fns
++ I AddToMenu MenuFnsApplets "$[gt.Plaia (Music Player)]%Plaia.svg:$[infostore.MenuIconSize]%"          FvwmApplet FNS-Applet-Plaia -fns
++ I AddToMenu MenuFnsApplets "$[gt.Timpul (World Clock)]%Timpul.svg:$[infostore.MenuIconSize]%"         FvwmApplet FNS-Applet-Timpul -fns
++ I AddToMenu MenuFnsApplets "$[gt.Yard (Folder and App Access)]%Yard.svg:$[infostore.MenuIconSize]%"   FvwmApplet FNS-Applet-Yard -fns
+
 #=======================================================================
 # 9.4 Configuration Menu
 #=======================================================================
@@ -2134,6 +2217,7 @@ AddToFunc   FuncMenuSystemConfiguration
 + I AddToMenu MenuSystemConfiguration MissingSubmenuFunction FuncMenuXScreenSaver
 + I AddToMenu MenuSystemConfiguration "$[gt.Sc&reen Saver]%screensaver.svg:$[infostore.MenuIconSize]%"  Popup MenuXScreenSaver
 + I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"    FvwmScript FNS-Script-CpuPerformance
++ I AddToMenu MenuSystemConfiguration "$[gt.Set Date/Time]%clock.svg:$[infostore.MenuIconSize]%"        FvwmScript FNS-Script-Date
 
 
 #-----------------------------------------------------------------------
@@ -2223,7 +2307,7 @@ AddToFunc   FuncFvwmLayoutMenu
   do echo AddToMenu FvwmLayoutMenu "${i}%layout2.svg:$[infostore.MenuIconSize]%" FuncChangeLayout $[FVWM_USERDIR] $i; done'
 
 #-----------------------------------------------------------------------
-# Sub menu for Compositing
+# Sub menu for Qt styled windows
 #-----------------------------------------------------------------------
 AddToMenu MenuCompositing DynamicPopupAction FuncMenuCompositing
 
@@ -2587,6 +2671,10 @@ AddToFunc   FuncMenuClockOps
 + I DestroyMenu MenuClockOps
 + I AddToMenu MenuClockOps DynamicPopupAction FuncMenuDesktopOps
 + I AddToMenu MenuClockOps "$[gt.Conky Clock Ops]" Title
++ I AddToMenu MenuClockOps "$[gt.Calender]%Kalende.svg:$[infostore.MenuIconSize]%"              FvwmScript FNS-Applet-Kalende -fns -s
++ I AddToMenu MenuClockOps "$[gt.Alarm]%Chrono.svg:$[infostore.MenuIconSize]%"                  FvwmScript FNS-Applet-Chrono -fns -s
++ I AddToMenu MenuClockOps "" Nop
++ I AddToMenu MenuClockOps "$[gt.Set Date/Time]%system.svg:$[infostore.MenuIconSize]%"          FvwmScript FNS-Script-Date
 + I AddToMenu MenuClockOps "$[gt.Restart Conky Clock]%restart.svg:$[infostore.MenuIconSize]%"   Exec exec xkill -id `xwininfo -name conky_clock|grep "Window id"|cut -d ' ' -f4`
 
 #-----------------------------------------------------------------------
@@ -2601,7 +2689,145 @@ AddToFunc   FuncMenuCpuOps
 + I AddToMenu MenuCpuOps DynamicPopupAction FuncMenuCpuOps
 + I AddToMenu MenuCpuOps "$[gt.Conky Cpu Ops]" Title
 + I AddToMenu MenuCpuOps "$[gt.CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"      FvwmScript FNS-Script-CpuPerformance
++ I AddToMenu MenuCpuOps "$[gt.Nucleu (CPU State)]%nucleu.svg:$[infostore.MenuIconSize]%"   FvwmScript FNS-Applet-Nucleu -fns -s
 + I AddToMenu MenuCpuOps "" Nop
 + I AddToMenu MenuCpuOps "$[gt.Restart Conky CPU]%restart.svg:$[infostore.MenuIconSize]%"   Exec exec xkill -id `xwininfo -name conky_cpu|grep "Window id"|cut -d ' ' -f4`
+
+
+#=======================================================================
+# 9.7 FvwmApplet Ops menus
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# General right click Ops menu
+#-----------------------------------------------------------------------
+AddToMenu MenuAppletOps DynamicPopupAction FuncMenuAppletOps
+
+DestroyFunc FuncMenuAppletOps
+AddToFunc   FuncMenuAppletOps
++ I DestroyMenu recreate MenuAppletOps
+#+ I AddToMenu MenuAppletOps DynamicPopupAction FuncMenuAppletOps
++ I AddToMenu MenuAppletOps "$[gt.Appletmenu]" Title
++ I AddToMenu MenuAppletOps "$[gt.&Move]	Alt+F7%window-move.svg:$[infostore.MenuIconSize]%"      Move
++ I ThisWindow (Layer 2) \
+    AddToMenu MenuAppletOps "$[gt.Stays On &Top]%arrow-up.svg:$[infostore.MenuIconSize]%"           FuncStaysOnTopAndBack
++ I TestRc (!Match) \
+    AddToMenu MenuAppletOps "$[gt.Stays &Back]%arrow-down.svg:$[infostore.MenuIconSize]%"           FuncStaysOnTopAndBack
++ I AddToMenu MenuAppletOps "" Nop
++ I AddToMenu MenuAppletOps "$[gt.&Save Position]%save.svg:$[infostore.MenuIconSize]%"              SaveAppletPosition
++ I AddToMenu MenuAppletOps "$[gt.&Add to Autostart]%autorun.svg:$[infostore.MenuIconSize]%"        AddAppletToAutostart
++ I AddToMenu MenuAppletOps "$[gt.&Change Tint Style]%tint.svg:$[infostore.MenuIconSize]%"          Popup MenuAppletTintOps
++ I AddToMenu MenuAppletOps "$[gt.&Change Font Color]%text-color.svg:$[infostore.MenuIconSize]%"    Popup MenuFontColor
++ I AddToMenu MenuAppletOps "$[gt.&Close]	Alt+F4%exit.svg:$[infostore.MenuIconSize]%"             Close
++ I AddToMenu MenuAppletOps "$[gt.&Destroy]%destroy.svg:$[infostore.MenuIconSize]%"                 Destroy
++ I AddToMenu MenuAppletOps "" Nop
++ I AddToMenu MenuAppletOps "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"    Module FvwmIdent
+
+#-----------------------------------------------------------------------
+# Sub menu for applet tint style
+#-----------------------------------------------------------------------
+AddToMenu MenuAppletTintOps DynamicPopupAction FuncMenuAppletTintOps
+
+DestroyFunc FuncMenuAppletTintOps
+AddToFunc   FuncMenuAppletTintOps
++ I DestroyMenu MenuAppletTintOps
+#+ I DestroyMenu recreate MenuAppletTintOps
++ I AddToMenu MenuAppletTintOps DynamicPopupAction FuncMenuAppletTintOps
++ I PipeRead 'for percent in 0 10 20 30 40 50 60 70 80 90 100; do \
+                if [ "$percent" = "$[infostore.used_applettint]" ]; then \
+                    echo AddToMenu MenuAppletTintOps \"$percent%%%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
+                else \
+                    echo AddToMenu MenuAppletTintOps \"$percent%%%empty.svg:$[infostore.MenuIconSize]%\" UpdateAppletTint $percent; \
+                fi; \
+            done'
+
+#-----------------------------------------------------------------------
+# Sub menu for Font color in applets
+#-----------------------------------------------------------------------
+AddToMenu MenuFontColor DynamicPopupAction FuncMenuFontColor
+
+DestroyFunc FuncMenuFontColor
+AddToFunc   FuncMenuFontColor
++ I DestroyMenu MenuFontColor
+#+ I DestroyMenu recreate MenuFontColor
++ I AddToMenu MenuFontColor DynamicPopupAction FuncMenuFontColor
++ I PipeRead 'if [ "$[infostore.used_appletfontcolor]" = "black" ]; then \
+                echo AddToMenu MenuFontColor \"$[gt.Black]%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
+              else \
+                echo AddToMenu MenuFontColor \"$[gt.Black]%empty.svg:$[infostore.MenuIconSize]%\" UpdateAppletFontColor "black"; \
+              fi'
++ I PipeRead 'if [ "$[infostore.used_appletfontcolor]" = "white" ]; then \
+                echo AddToMenu MenuFontColor \"$[gt.White]%hook.svg:$[infostore.MenuIconSize]%\" Nop; \
+              else \
+                echo AddToMenu MenuFontColor \"$[gt.White]%empty.svg:$[infostore.MenuIconSize]%\" UpdateAppletFontColor "white"; \
+              fi'
+
+#-----------------------------------------------------------------------
+# Plaia Menu menu
+#-----------------------------------------------------------------------
+DestroyFunc FuncMenuPlaiaOps
+AddToFunc   FuncMenuPlaiaOps
++ I DestroyMenu MenuPlaiaOps
++ I AddToMenu MenuPlaiaOps "$[gt.Menu]" Title
++ I AddToMenu MenuPlaiaOps "$[gt.Open File]%file-play.svg:$[infostore.MenuIconSize]%"               FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Plaia" -w 1 -s 1
++ I AddToMenu MenuPlaiaOps "$[gt.Open Folder]%folder-play.svg:$[infostore.MenuIconSize]%"           FvwmScript FNS-Script-FileBrowser "$0" -d -b -m "FNS-Applet-Plaia" -w 1 -s 2
++ I AddToMenu MenuPlaiaOps "$[gt.Load Playlist]%playlist.svg:$[infostore.MenuIconSize]%"            FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Plaia" -w 1 -s 3
++ I AddToMenu MenuPlaiaOps "$[gt.Create Playlist]%playlist-creator.svg:$[infostore.MenuIconSize]%"  FvwmScript FNS-Script-PlaylistCreator
++ I Popup MenuPlaiaOps mouse 0p 0p
+
+#-----------------------------------------------------------------------
+# FNS-Applet-Pagina Menu menu
+#-----------------------------------------------------------------------
+DestroyFunc FuncMenuPaginaFile
+AddToFunc   FuncMenuPaginaFile
++ I DestroyMenu MenuPaginaFile
++ I AddToMenu MenuPaginaFile "$[gt.Play]" Title
++ I AddToMenu MenuPaginaFile "$[gt.Open File]%file-play.svg:$[infostore.MenuIconSize]%"                 FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Pagina" -w 1 -s 1
++ I AddToMenu MenuPaginaFile "$[gt.Open Folder]%folder-play.svg:$[infostore.MenuIconSize]%"             FvwmScript FNS-Script-FileBrowser "$0" -d -b -m "FNS-Applet-Pagina" -w 1 -s 2
++ I AddToMenu MenuPaginaFile "$[gt.Load Playlist]%playlist.svg:$[infostore.MenuIconSize]%"              FvwmScript FNS-Script-FileBrowser "$0" -b -m "FNS-Applet-Pagina" -w 1 -s 3
++ I AddToMenu MenuPaginaFile "$[gt.Create Playlist]%playlist-creator.svg:$[infostore.MenuIconSize]%"    FvwmScript FNS-Script-PlaylistCreator
++ I Popup MenuPaginaFile mouse 0p 0p
+
+#-----------------------------------------------------------------------
+# Pagina Audio menu
+#-----------------------------------------------------------------------
+DestroyFunc FuncMenuPaginaAudio
+AddToFunc   FuncMenuPaginaAudio
++ I DestroyMenu MenuPaginaAudio
++ I AddToMenu MenuPaginaAudio "$[gt.Audio Channels]" Title
++ I AddToMenu MenuPaginaAudio "$[gt.Mono]%mono.svg:$[infostore.MenuIconSize]%"          SendToModule FNS-Applet-Pagina SendString 2 1 1
++ I AddToMenu MenuPaginaAudio "$[gt.Stereo]%stereo.svg:$[infostore.MenuIconSize]%"      SendToModule FNS-Applet-Pagina SendString 2 1 2
++ I AddToMenu MenuPaginaAudio "$[gt.Surround]%quadro.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 1 4
++ I AddToMenu MenuPaginaAudio "$[gt.5.1]%51.svg:$[infostore.MenuIconSize]%"             SendToModule FNS-Applet-Pagina SendString 2 1 6
++ I AddToMenu MenuPaginaAudio "$[gt.Language]" Title
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 1]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 0
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 2]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 1
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 3]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 2
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 4]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 3
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 5]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 4
++ I AddToMenu MenuPaginaAudio "$[gt.Lang. 6]%un-flag.svg:$[infostore.MenuIconSize]%"    SendToModule FNS-Applet-Pagina SendString 2 2 5
++ I Popup MenuPaginaAudio mouse 0p 0p
+
+#-----------------------------------------------------------------------
+# Pagina Subtitle menu
+#-----------------------------------------------------------------------
+DestroyFunc FuncMenuPaginaSub
+AddToFunc   FuncMenuPaginaSub
++ I DestroyMenu MenuPaginaSub
++ I AddToMenu MenuPaginaSub "$[gt.Subtitle]" Title
++ I AddToMenu MenuPaginaSub "$[gt.on]%hook.svg:$[infostore.MenuIconSize]%"          SendToModule FNS-Applet-Pagina SendString 3 1 1
++ I AddToMenu MenuPaginaSub "$[gt.off]%exit.svg:$[infostore.MenuIconSize]%"         SendToModule FNS-Applet-Pagina SendString 3 1 0
++ I AddToMenu MenuPaginaSub "$[gt.Language]" Title
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 1]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 0
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 2]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 1
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 3]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 2
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 4]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 3
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 5]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 4
++ I AddToMenu MenuPaginaSub "$[gt.Lang. 6]%un-flag.svg:$[infostore.MenuIconSize]%"  SendToModule FNS-Applet-Pagina SendString 3 2 5
++ I Popup MenuPaginaSub mouse 0p 0p
+
+
+
+
 
 

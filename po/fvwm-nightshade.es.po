@@ -1046,23 +1046,23 @@ msgstr "Atajos de teclado con ALT"
 msgid "ALT:"
 msgstr "ALT:"
 
-msgid "F1: Open root menu          F7:  Move window"
-msgstr "F1: Abrir Menú Raíz            F7:  Mover ventana"
+msgid "F1: Open root menu           F7:  Move window"
+msgstr "F1: Abrir Menú Raíz                F7:  Mover ventana"
 
-msgid "F2: Launch 'run' dialog box F8:  Resize window"
-msgstr "F2: Ejecutar 'run' diálogo     F8: Cambiar tamaño de ventana"
+msgid "F2: Launch 'run' dialog box  F8:  Resize window"
+msgstr "F2: Ejecutar 'run' diálogo         F8: Cambiar tamaño de ventana"
 
-msgid "F3: Show window list        F9:  Minimize window"
-msgstr "F3: Mostrar lista de ventanas  F9: Minimizar Ventana"
+msgid "F3: Show window list         F9:  Minimize window"
+msgstr "F3: Mostrar lista de ventanas      F9: Minimizar Ventana"
 
-msgid "F4: Close active window     F10: Maximize/restore window"
-msgstr "F4: Cerrar ventana activa      F10: Maximizar/restaurar ventana"
+msgid "F4: Close active window      F10: Maximize/restore window"
+msgstr "F4: Cerrar ventana activa          F10: Maximizar/restaurar ventana"
 
-msgid "F5: Not used                F11: Fullscreen/restore window"
-msgstr "F5: No Usada			       F11: Pantalla Completa/Restaurar ventana"
+msgid "F5: Show/hide AppletIconMan  F11: Fullscreen/restore window"
+msgstr "F5: Mostrar/ocultar AppletIconMan  F11: Pantalla Completa/Restaurar ventana"
 
-msgid "F6: Cycle between same      F12: Identify window"
-msgstr "F6: Alternar entre ventanas    F12: Identificar ventana"
+msgid "F6: Cycle between same       F12: Identify window"
+msgstr "F6: Alternar entre ventanas        F12: Identificar ventana"
 
 msgid "    resource windows"
 msgstr "    con similares recursos"

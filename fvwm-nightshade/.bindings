@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		.bindings
-# Version:	1.1.2
+# Version:	1.1.3
 # Licence: 	GPL 2
 #
 # Description:	keyboard bindings
@@ -8,7 +8,7 @@
 # Author:	Thomas Funk <t.funk@web.de>	
 #
 # Created:	10/24/2012
-# Changed:	06/05/2013
+# Changed:	08/02/2013
 #-----------------------------------------------------------------------
 #
 # Overview:
@@ -63,9 +63,9 @@ Key F3		A		M		WindowList
 #-----------------------------------------------------------------------
 Key F4		A		M		Pick Close
 #-----------------------------------------------------------------------
-# 
+# F5 show/hide AppletIconMan
 #-----------------------------------------------------------------------
-#Key F5		A		SM	  
+Key F5		A		M       ShowHideAppletIconMan
 #-----------------------------------------------------------------------
 # F6 cycle between windows belonging to the current application
 #-----------------------------------------------------------------------
@@ -140,12 +140,12 @@ Key Down	A		SCM		Scroll  +0 +10
 #-----------------------------------------------------------------------
 key A		A	SCM	FuncShowMessage  "ALT Key Bindings" \
 "ALT:" \
-"F1: Open root menu          F7:  Move window" \
-"F2: Launch 'run' dialog box F8:  Resize window" \
-"F3: Show window list        F9:  Minimize window" \
-"F4: Close active window     F10: Maximize/restore window" \
-"F5: Not used                F11: Fullscreen/restore window" \
-"F6: Cycle between same      F12: Identify window" \
+"F1: Open root menu           F7:  Move window" \
+"F2: Launch 'run' dialog box  F8:  Resize window" \
+"F3: Show window list         F9:  Minimize window" \
+"F4: Close active window      F10: Maximize/restore window" \
+"F5: Show/hide AppletIconMan  F11: Fullscreen/restore window" \
+"F6: Cycle between same       F12: Identify window" \
 "    resource windows" \
 "---" \
 "SHIFT-ALT:" \

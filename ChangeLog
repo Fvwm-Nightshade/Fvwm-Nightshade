@@ -50,8 +50,26 @@ History:
 
 11/01/2013
 - add new theme 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
-  (http://alecive.deviantart.com/art/Gray-Revenge-1-7-194633730)
+  (http://alecive.deviantart.com/art/Gray-Revenge-1-7-194633730) and update
+  colorsets to handle nanomoids
 - update NEWS and config version
+
+10/26/2013
+- merge changes from develop branch:
+  - add /etc/* to %files in fvwm-nightshade.spec to add fns-applications.menu to rpm
+  - fix bug in layouts that shortcuts are shown with '&' instead of an underline
+  - add new vector icons for menu and modify some
+  - change #!/usr/bin/env python2 to #!/usr/bin/env python2.7 in fns-find-icon
+  - final update of fvwm-nightshade.pot, german, spanish and french po and mo files
+  - update fvwm-nightshade help in asciidoc, man page and html
+  - update fvwm-menu-desktop2, fvwm-menu-desktop2-config.fpl to final version
+  - add fvwm-menu-desktop man page
+  - add help forms for new fvwm-menu-desktop2-config.fpl
+  - add desktop-directories for fns-applications.menu to system/
+  - add fns-applications.menu to system/
+  - change xpm icons to svg icons in menu and update version
+  - add XDG menu parts to install/uninstal and build-list in Makefile
+  - fix bug in Makefile that shell errors occur while creating fns-install-list
 
 10/20/2013
 - update fvwm-nightshade help in asciidoc, man page and html
@@ -234,6 +252,10 @@ History:
     - add Xdg menu support
   - update NEWS
 
+08/28/2013
+- add new applet FNS-Applet-DriveInn (a storage drives manager)
+- add new vector icons for FNS-Applet-DriveInn to artwork/scalable
+
 08/26/2013
 - add new environment variable to fvwm-nightshade to have a search variable
   for sound paths
@@ -242,10 +264,13 @@ History:
 - add new python script fns-find-file to search in path variables like
   $PATH or $FNS_SOUNDPATH for files
 - add FnsSoundPath to config and update version
+- add new applet FNS-Aplet-Chrono (alarm clock)
+- add new 32x32 icons for FNS-Aplet-Chrono in artwork/icons
 - add sounds in artworks for own system sounds
 - exchange tabs with spaces in fns-init and fvwm-nightshade
 - add new variable __version__ for version in fns-find-icon
 - adapt variables which use 0/1 to false/true in some FvwmScript scripts
+- fix bug in FNS-Applet-Kalende that in script mode the background is transparent
 - add documentation for fns-find-file (asciidoc, manpage, html)
 - add new feature description of fns-find-file to NEWS
 
@@ -261,33 +286,60 @@ History:
 - create new icon directory structure in artworks/icon:
   16x16/, 24x24/, 64x64/ and 80x64/ for bitmap icons
 - delete fns bitmap icons because they never needed - a svg icon exist
+- resize weather icons faenza and google from 40x40 to 24x24
+- update applet icons in config to new icon directory structure
+- adapt in Meteo, Kalende, Plaia and Pagina:
+  - exchange tabs with spaces
+  - rename all window titles to Applet-<name>
+  - make command line parsing more general
+  - exchange svg icons with bitmaps
+- changes in Meteo:
+  - add a bunch of new options
+  - script can now decide which theme should taken - wonderground or system theme icons
 
 08/18/2013
 - changes in config:
   - launch new develop versioning: <version_number>-<YYYYMMDD>
   - exchange tabs with spaces
-  - add icon styles for FNS scripts
+  - add to 9.3 -> Modules and Applets menu
+  - add icon styles for FNS-Applets and other FNS scripts
   - add new menus:
+    - MenuFnsApplets - show all new applets
     - MenuClockOps - popups when right click on date/time with:
+      - calender
+      - alarm clock
       - set time and date
       - restart Conky clock
     - MenuCpuOps - popups when right click on cpu bar with:
       - Cpu Performance tool
+      - Cpu applet Nucleu
       - restart Conky cpu bar
+    - exchange some xpm icons with vector icons in MenuAppletOps
 - add own_window_title to conkyrc_clock and conkyrc_cpu to make it possible to kill them with xkill
+- update FNS-Applet-Kalende:
+  - add new option '-s' to start it as a normal Skript with the same decoration as normal FvwmScripts
+  - move Sebaros settings in a if loop
+  - made changes in Command line argument parsing to can handle more than on option without value
+  - integrate other colors for using applet as a script for better look
+  - fix bug that current day number won't show colorized if month or year changed
+  - remove old useless comment lines
 - add mouse action on conky_cpu and conky_clock button - right click to show menu - in
   G2likeTopBar, HorizontalPanel and VerticalPanel
 - add some new vector icons to artworks/icons/scalable
 - change some vector icons in artworks/icons/scalable
 
 08/17/2013
+- add dependencies for coverlovin in control files for arch, deb and rpm
 - remove wm-icons package from recommended dependencies in /debian/control
+- adapt FNS-Applet-Kalende, FNS-Applet-Pagina and FNS-Applet-Plaia to new structure
 - add new vector icons to artworks/icons/scalable to replace wm-icons package
+- remove Tips entries and mouse actions in AppletIconMan because they're not needed
 - change bitmap icons to vector icons in G2likeTopBar, VerticalPanel and HorizontalPanel
   to change icon size on the fly
 - add SetMenuIconSize function in fns-init to set Menu icon size dependent of .FvwmForm-Desktop-Config
   on the fly in menus and Windowlist
 - changes in config:
+  - add loading of AppletIconMan in 7. Modules under 7.8.1
   - change the order in ImagePath that Fvwm search for images in FVWM_USERDIR first
   - change most of the xpm files to svg
   - change static menus to dynamic menus and xpm to vector icons to change icon size on the fly
@@ -302,12 +354,51 @@ History:
 - FvwmSmartMaximize: make EwmhBaseStruts determination more perlish
 
 08/03/2013
+- move all FNS-Applets from fvwm-nightshade/applets to fvwm/
 - rename all FvwmScripts to FNS-Script-<Name>
 - rename all FvwmForms to FNS-Form-<Name>
+- rename all FvwmApplets to FNS-Applet-<Name>
 - update all names in config to the new name nomenclature
+- add Pagina menus to config
 - rename FNS-BaseSetup helps to FNS-Form-BaseSetup helps and update it
 - update fvwm-nightshade help with the new names
+- update fvwm-nightshade help with new infostore variables and the new tools
 - adapt Makefile to new name convention
+- add weather icons for FNS-Applet-Meteo
+- set permissions of FNS-Applet-Meteo to 644
+- add quit icon to artwork/icons
+- rename coverlovin.py to coverlovin
+
+08/02/2013
+- Changes in config:
+  - add FuncFvwmAppletLibCheck in config to check whether softlink 
+    FvwmApplet to FvwmScript exist
+  - increase in all functions colorsets greater 30 +1 to get more place
+    in theme colorsets for FvwmApplets
+  - update FuncFvwmNextWindow and FuncFvwmPrevWindow to support AppletIconMan
+  - add general Style for FvwmApplets
+  - add icon style for Kalende, Meteo, Plaia and Pagina
+  - add some Ops menu for FvwmApplets
+  - add update functions for tint and font color
+  - add general binding for Ops menu
+- add key binding to show/hide AppletIconMan in .bindings
+- update translation files for new key binding
+- add AppletIconMan to modules to manage FvwmApplets
+  - add Functions to show/hide AppletIconMan and de-/activate focus on applets
+- add some Nanomoids applets in applets/:
+  - Kalende - a Calendar
+  - Meteo - a Weather forecast applet
+  - Plaia - a Musicplayer based on mplayer
+  - Pagina - a Videoplayer based on mplayer
+  - DriveInn - a storage drives manager
+- add Nanomoids icons in artwork/icons
+- add some tools needed for Nanomoids in fvwm/:
+  - FNS-AppletConfigurator - only a GUI at the moment
+  - FNS-FileBrowser - a file browser based on FvwmScript-FileBrowser
+  - FNS-PlaylistCreator - a simple playlist creator
+- add a modified version of coverlovin in bin/ to handle id3 tags and covers
+- add new colorsets for Nanomoids in themes
+- add 2 new infostore variables for FvwmApplets in .settings
 
 08/01/2013
 - add FvwmSmartMaximize to all themes:

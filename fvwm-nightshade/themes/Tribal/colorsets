@@ -243,17 +243,36 @@ Colorset 24 VGradient 255 2 #312b1d 70 #9c9885 30 #e5e4e0, NoShape
 
 
 ########################################################################
-# External Colorsets
+# Nanomoids Colorsets
 ########################################################################
 
 #-----------------------------------------------------------------------
-# reserved for modules@: 25
+# Default Colorset
+#-----------------------------------------------------------------------
+Colorset 25 fg $[infostore.used_appletfontcolor], bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
-# reserved for the future use: 26-28
+# Highlight Colorset or Default Colorset for Icons e.g. in DriveInn to
+# simulate unmounted devices
+#-----------------------------------------------------------------------
+Colorset 26 fg #A4CDF9, bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint], IconAlpha 50
 
 #-----------------------------------------------------------------------
-# temporary colorset: 29, has no static definition, used dynamically
+# Warn Colorset
+#-----------------------------------------------------------------------
+Colorset 27 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+Colorset 28 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+Colorset 29 fg #89D5D7, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#Colorset 30
 
 
 ########################################################################

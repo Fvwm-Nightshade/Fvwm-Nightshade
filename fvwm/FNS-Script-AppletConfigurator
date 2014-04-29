@@ -1,0 +1,800 @@
+#-----------------------------------------------------------------------
+# File:		FNS-Script-AppletConfigurator
+# Version:	0.0.2
+# Licence: 	GPL 2
+#
+# Description:	Applet configurator based on FvwmScript
+#
+# Parameters: 	-n
+#					Name of the applet to configure
+#
+#
+# Author:		Thomas Funk <t.funk@web.de>	
+#
+# Created:	05/28/2013
+# Changed:	08/02/2013
+#-----------------------------------------------------------------------
+
+UseGettext			{$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
+WindowLocaleTitle 	{AppletConfigurator}
+WindowSize 			350 350
+#Colorset 10
+
+Init
+Begin
+    Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
+    Set $defaultFontsize = 9
+    Set $usedFont = {xft:}$defaultFont{:size=}$defaultFontsize
+
+    ##### Commandline Arguments
+    Set $i = 1
+    Set $arg = (GetScriptArgument $i)
+
+    While $arg <> {} Do
+    Begin
+		Set $j = (Add $i 1)
+		Set $value = (GetScriptArgument $j)
+
+		# get name of applet
+		If $arg == {-n} Then
+		Begin
+			Set $Applet = $value
+		End
+
+		Set $i = (Add $i 2)
+		Set $arg = (GetScriptArgument $i)
+    End
+    
+    #### Initiate widgets
+	For $Widget = 9 To 44 Do
+		HideWidget $Widget
+    
+    # Common
+	For $Widget=1 To 8 Do
+		ChangeFont $Widget $usedFont
+		
+	# Applets
+	If $Applet == {Kalende} Then
+	Begin
+		For $Widget=9 To 10 Do
+		Begin
+			ShowWidget $Widget
+			ChangeFont $Widget $usedFont
+		End
+	End
+	If $Applet == {Pagina} Then
+	Begin
+		For $Widget=11 To 15 Do
+		Begin
+			ShowWidget $Widget
+			ChangeFont $Widget $usedFont
+		End
+	End
+	If $Applet == {Plaia} Then
+	Begin
+		For $Widget=16 To 21 Do
+		Begin
+			ShowWidget $Widget
+			ChangeFont $Widget $usedFont
+		End
+	End
+	If $Applet == {DriveInn} Then
+	Begin
+		For $Widget=22 To 26 Do
+		Begin
+			ShowWidget $Widget
+			ChangeFont $Widget $usedFont
+		End
+	End
+	If $Applet == {Yard} Then
+	Begin
+		For $Widget=27 To 42 Do
+		Begin
+			ShowWidget $Widget
+			ChangeFont $Widget $usedFont
+		End
+	End
+	If $Applet == {Chrono} Then
+	Begin
+		For $Widget=43 To 44 Do
+		Begin
+			ShowWidget $Widget
+			ChangeFont $Widget $usedFont
+		End
+	End
+	
+	Set $windowTitle = {AppletConfigurator - }$Applet
+	ChangeWindowTitle $windowTitle
+End
+
+#-----------------------------------------------------------------------
+# Common
+#-----------------------------------------------------------------------
+
+# Listbox Applet list
+Widget		1
+Property
+	Type 		List
+	Title 		{}
+	Size 		240 90
+	Position 	10 10
+	Flags 		NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Button 'Ok'
+Widget		2
+Property
+	Type 		PushButton
+	LocaleTitle {Ok}
+	Size 		80 25
+	Position 	260 10
+	Flags 		NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Button 'New'
+Widget		3
+Property
+	Type 		PushButton
+	LocaleTitle {New}
+	Size 		80 25
+	Position 	260 40
+	Flags 		NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Button 'Cancel'
+Widget		4
+Property
+	Type 		PushButton
+	LocaleTitle {Cancel}
+	Size 		80 25
+	Position 	260 70
+	Flags 		NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+
+# Text 'Icon Theme'
+Widget		5
+Property
+	Type		ItemDraw
+	LocaleTitle {Icon Theme:}
+	Size		90 18
+	Position	10 115
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Popup icon themes
+Widget		6
+Property
+	Type		PopupMenu
+	LocaleTitle {_____________________________}
+	Size		200 24
+	Position	130 110
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Text 'Font size'
+Widget		7
+Property
+	Type		ItemDraw
+	LocaleTitle {Font Size:}
+	Size		90 18
+	Position	10 145
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Popup Font size
+Widget		8
+Property
+	Type		PopupMenu
+	LocaleTitle {____}
+	Size		50 24
+	Position	280 140
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+#-----------------------------------------------------------------------
+# Kalende
+#-----------------------------------------------------------------------
+
+# Text 'First Day'
+Widget		9
+Property
+	Type		ItemDraw
+	LocaleTitle {First Day:}
+	Size		90 18
+	Position	10 175
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Popup Font size
+Widget		10
+Property
+	Type		PopupMenu
+	LocaleTitle {Sun |Mon }
+	Size		50 24
+	Position	280 170
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+
+#-----------------------------------------------------------------------
+# Pagina
+#-----------------------------------------------------------------------
+
+# Text 'Video Width'
+Widget		11
+Property
+	Type		ItemDraw
+	LocaleTitle {Video Width:}
+	Size		90 18
+	Position	10 175
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Textedit Video Width
+Widget 		12
+Property
+	Type 		TextField
+	Title		{____}
+	Size 		65 24
+	Position 	272 170
+	Flags 		NoReliefString Right
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Text 'Video Directory'
+Widget		13
+Property
+	Type		ItemDraw
+	LocaleTitle {Video Directory:}
+	Size		110 18
+	Position	10 205
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Textedit Video Directory
+Widget 		14
+Property
+	Type 		TextField
+	Title		{}
+	Size 		280 24
+	Position 	10 224
+	Flags 		NoReliefString Right
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Button 'Video Directory'
+Widget		15
+Property
+	Type		PushButton
+	LocaleTitle {...}
+	Size		40 25
+	Position	297 223
+	Flags		NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+#-----------------------------------------------------------------------
+# Plaia
+#-----------------------------------------------------------------------
+
+# Text 'Cover Directory'
+Widget		16
+Property
+	Type		ItemDraw
+	LocaleTitle {Cover Directory:}
+	Size		110 18
+	Position	10 175
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Textedit Cover Directory
+Widget 		17
+Property
+	Type 		TextField
+	Title		{}
+	Size 		280 24
+	Position 	10 195
+	Flags 		NoReliefString Right
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Button 'Cover Directory'
+Widget		18
+Property
+	Type		PushButton
+	LocaleTitle {...}
+	Size		40 25
+	Position	297 194
+	Flags		NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Text 'Music Directory'
+Widget		19
+Property
+	Type		ItemDraw
+	LocaleTitle {Music Directory:}
+	Size		110 18
+	Position	10 240
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Textedit Music Directory
+Widget 		20
+Property
+	Type 		TextField
+	Title		{}
+	Size 		280 24
+	Position 	10 259
+	Flags 		NoReliefString Right
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Button 'Music Directory'
+Widget		21
+Property
+	Type		PushButton
+	LocaleTitle {...}
+	Size		40 25
+	Position	297 258
+	Flags		NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+#-----------------------------------------------------------------------
+# DriveInn
+#-----------------------------------------------------------------------
+
+# Text 'Exclude Dirs'
+Widget		22
+Property
+	Type		ItemDraw
+	LocaleTitle {Exclude Dirs:}
+	Size		110 18
+	Position	10 175
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Textedit Exclude Dirs
+Widget 		23
+Property
+	Type 		TextField
+	Title		{}
+	Size 		237 24
+	Position 	100 173
+	Flags 		NoReliefString Right
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Text 'Browser'
+Widget		24
+Property
+	Type		ItemDraw
+	LocaleTitle {Browser:}
+	Size		110 18
+	Position	10 205
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Textedit Browser
+Widget 		25
+Property
+	Type 		TextField
+	Title		{}
+	Size 		190 24
+	Position 	100 203
+	Flags 		NoReliefString Right
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Button 'Browser'
+Widget		26
+Property
+	Type		PushButton
+	LocaleTitle {...}
+	Size		40 25
+	Position	297 202
+	Flags		NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+#-----------------------------------------------------------------------
+# Yard
+#-----------------------------------------------------------------------
+
+# Text 'Icon size'
+Widget		27
+Property
+	Type		ItemDraw
+	LocaleTitle {Icon Size:}
+	Size		90 18
+	Position	10 175
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Popup Icon size
+Widget		28
+Property
+	Type		PopupMenu
+	LocaleTitle {____}
+	Size		50 24
+	Position	280 170
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Item line
+Widget		29
+Property
+	Type 		ItemDraw
+	Title		{-------------------------------------------------------}
+	Size 		330 10
+	Position 	10 200
+	Flags 		NoFocus NoReliefString Center
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Text 'Item'
+Widget		30
+Property
+	Type		ItemDraw
+	LocaleTitle {Item}
+	Size		40 18
+	Position	15 230
+	Flags		NoFocus NoReliefString Center
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Text 'Item counter'
+Widget		31
+Property
+	Type		ItemDraw
+	Title 		{1}
+	Size		40 18
+	Position	15 250
+	Flags		NoFocus NoReliefString Center
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# MiniScroll for item count
+Widget		32
+Property
+	Position	56 232
+	Type		MiniScroll
+	MinValue	1
+	MaxValue	6
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Text 'Type'
+Widget		33
+Property
+	Type		ItemDraw
+	Title 		{Type:}
+	Size		45 18
+	Position	90 225
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Popup Type
+Widget		34
+Property
+	Type		PopupMenu
+	LocaleTitle {Application__}
+	Size		100 24
+	Position	225 220
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Text 'Title'
+Widget		35
+Property
+	Type		ItemDraw
+	Title 		{Title:}
+	Size		45 18
+	Position	90 255
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Textedit Title
+Widget 		36
+Property
+	Type 		TextField
+	Title		{}
+	Size 		200 24
+	Position 	135 252
+	Flags 		NoReliefString Right
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Text 'Path'
+Widget		37
+Property
+	Type		ItemDraw
+	LocaleTitle {Path:}
+	Size		50 18
+	Position	15 285
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Textedit Path
+Widget 		38
+Property
+	Type 		TextField
+	Title		{}
+	Size 		220 24
+	Position 	70 283
+	Flags 		NoReliefString Right
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Button 'Path'
+Widget		39
+Property
+	Type		PushButton
+	LocaleTitle {...}
+	Size		40 25
+	Position	295 282
+	Flags		NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Text 'Icon'
+Widget		40
+Property
+	Type		ItemDraw
+	LocaleTitle {Icon:}
+	Size		50 18
+	Position	15 315
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Textedit Icon
+Widget 		41
+Property
+	Type 		TextField
+	Title		{}
+	Size 		220 24
+	Position 	70 313
+	Flags 		NoReliefString Right
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Button 'Icon'
+Widget		42
+Property
+	Type		PushButton
+	LocaleTitle {...}
+	Size		40 25
+	Position	295 312
+	Flags		NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+#-----------------------------------------------------------------------
+# Chrono
+#-----------------------------------------------------------------------
+
+# Text 'Hour Format'
+Widget		43
+Property
+	Type		ItemDraw
+	LocaleTitle {Hour Format:}
+	Size		90 18
+	Position	10 175
+	Flags		NoFocus NoReliefString Left
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+# Popup Icon size
+Widget		44
+Property
+	Type		PopupMenu
+	LocaleTitle {____}
+	Size		50 24
+	Position	280 170
+	Flags		NoFocus NoReliefString
+Main
+Case message of
+	SingleClic :
+	Begin
+	End
+End
+
+
+

@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		.settings
-# Version:	1.0.7
+# Version:	1.0.8
 # Licence: 	GPL 2
 #
 # Description:	base settings for Fvwm-Nighshade
@@ -23,7 +23,7 @@ InfoStoreAdd used_theme "Tribal"
 #-----------------------------------------------------------------------
 # Banner image for FvwmBanner
 #-----------------------------------------------------------------------
-InfoStoreAdd used_banner "/usr/local/bin/../share/fvwm-nightshade/artwork/splashs/splash_fns_small.png"
+InfoStoreAdd used_banner "/usr/bin/../share/fvwm-nightshade/artwork/splashs/splash_fns_small.png"
 
 #-----------------------------------------------------------------------
 # Run Banner at startup?
@@ -49,6 +49,16 @@ InfoStoreAdd used_layout "Horizontal"
 # The actual menu tint level
 #-----------------------------------------------------------------------
 InfoStoreAdd used_menutint "70"
+
+#-----------------------------------------------------------------------
+# The actual applet tint level
+#-----------------------------------------------------------------------
+InfoStoreAdd used_applettint "20"
+
+#-----------------------------------------------------------------------
+# The actual applet font color
+#-----------------------------------------------------------------------
+InfoStoreAdd used_appletfontcolor "white"
 
 #-----------------------------------------------------------------------
 # use composite manager

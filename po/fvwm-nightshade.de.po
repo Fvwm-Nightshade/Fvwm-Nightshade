@@ -1045,23 +1045,23 @@ msgstr "ALT Tastatur Bindings"
 msgid "ALT:"
 msgstr "ALT:"
 
-msgid "F1: Open root menu          F7:  Move window"
-msgstr "F1: Rootmenü öffnen           F7: Fenster bewegen"
+msgid "F1: Open root menu           F7:  Move window"
+msgstr "F1: Rootmenü öffnen                F7: Fenster bewegen"
 
-msgid "F2: Launch 'run' dialog box F8:  Resize window"
-msgstr "F2: 'Befehl ausführen' Dialog F8: Fenstergröße ändern"
+msgid "F2: Launch 'run' dialog box  F8:  Resize window"
+msgstr "F2: 'Befehl ausführen' Dialog      F8: Fenstergröße ändern"
 
-msgid "F3: Show window list        F9:  Minimize window"
-msgstr "F3: Zeige Fensterliste        F9: Fenster minimieren"
+msgid "F3: Show window list         F9:  Minimize window"
+msgstr "F3: Zeige Fensterliste             F9: Fenster minimieren"
 
-msgid "F4: Close active window     F10: Maximize/restore window"
-msgstr "F4 Schließe aktives Fenster   F10: Fenster maximieren/wiederherstellen"
+msgid "F4: Close active window      F10: Maximize/restore window"
+msgstr "F4 Schließe aktives Fenster        F10: Fenster maximieren/wiederherstellen"
 
-msgid "F5: Not used                F11: Fullscreen/restore window"
-msgstr "F5: Nicht verwendet           F11: Fenster Vollbild/wiederherstellen"
+msgid "F5: Show/hide AppletIconMan  F11: Fullscreen/restore window"
+msgstr "F5: Zeige/verstecke AppletIconMan  F11: Fenster Vollbild/wiederherstellen"
 
-msgid "F6: Cycle between same      F12: Identify window"
-msgstr "F6: Innerhalb von Gruppen-    F12: Fenster identifizieren"
+msgid "F6: Cycle between same       F12: Identify window"
+msgstr "F6: Innerhalb von Gruppen-         F12: Fenster identifizieren"
 
 msgid "    resource windows"
 msgstr "    fenstern wechseln"

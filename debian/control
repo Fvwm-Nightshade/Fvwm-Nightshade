@@ -3,9 +3,9 @@ Version:
 Architecture: all
 Maintainer: Thomas Funk <t.funk@web.de>
 Installed-Size:
-Depends: fvwm (>> 1:2.6.4)|fvwm (>> 2.6.4), python (<< 3), python-xdg, xterm, conky, xscreensaver, feh, imagemagick, librsvg2-bin, stalonetray, cpufrequtils, x11-apps
+Depends: fvwm (>> 1:2.6.4)|fvwm (>> 2.6.4), python (<< 3), python-xdg, xterm, conky, xscreensaver, feh, imagemagick, librsvg2-bin, stalonetray, cpufrequtils, x11-apps, mplayer, python-mutagen, python-simplejson
 Recommends: network-manager-gnome, pcmanfm
-Suggests: volumeicon, fdpowermon, bluetooth-applet, pm-utils, lxapearance, qt3-qtconfig, qt4.qtconfig, xcompmgr || compton
+Suggests: volumeicon, fdpowermon, bluetooth-applet, pm-utils, lxapearance, qt3-qtconfig, qt4.qtconfig, compton || xcompmgr
 Section: x11
 Priority: optional
 Homepage: https://github.com/Fvwm-Nightshade

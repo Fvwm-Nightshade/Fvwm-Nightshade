@@ -1,0 +1,887 @@
+#-----------------------------------------------------------------------
+# File:         Pagina
+# Version:      1.1.1
+# Licence:      GPL 2
+#
+# Description:  Music player applet based on FvwmScript
+#
+# Parameters:   -fns
+#                   initiate applet that it will be used by Fvwm-Nightshade
+#                   with another font, colorset and another icon directory.
+#
+#               -fnt
+#                   set another font than the default one.
+#
+#               -fs
+#                   set another fontsize than the deafult one
+#
+#               -cs
+#                   set another colorset than the default one.
+#
+#               -hcs
+#                   set another highlight colorset. If is not set default
+#                   colorset is used.
+#
+#               -t
+#                   set another theme. Default is gnome.
+#
+# Without parameters it starts with default settings from sebaro.
+#
+# Author:       Bernhard Popp <kermit.popp@googlemail.com>    
+#
+# Created:      03/17/2013
+# Changed:      08/25/2013
+#-----------------------------------------------------------------------
+
+UseGettext      {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
+WindowTitle     {Applet-Pagina}
+WindowSize      185 67
+
+Init
+Begin
+    ##### Widgets Style
+    Set $defaultColorset = 10
+    Set $highlightColorset = 10
+    Set $defaultFont = {DejaVu Sans}
+    Set $defaultFontsize = 8
+    Set $boldFont = {xft:}$defaultFont{:size=}$defaultFontsize{:bold}
+    Set $defaultTheme = {gnome}
+    Set $defaultSize = 24
+
+    ##### Commandline Arguments
+    Set $FnsUseApplet = {false}
+    Set $ColorsetChanged = {false}
+    Set $FontChanged = {false}
+    Set $useThemeIcons = {false}
+    Set $ThemeChanged = {false}
+    Set $i = 1
+    Set $arg = (GetScriptArgument $i)
+
+    While $arg <> {} Do
+    Begin
+        Set $noValue = {false}
+        Set $j = (Add $i 1)
+        Set $value = (GetScriptArgument $j)
+
+        # Fvwm-Nightshade use widget
+        If $arg == {-fns} Then
+        Begin
+            Set $noValue = {false}
+            Set $FnsUseApplet = {true}
+            
+            Set $defaultColorset = 25
+            Set $ColorsetChanged = {true}
+            
+            Set $highlightColorset = 26
+            
+            Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
+            Set $FontChanged = {true}
+        End
+
+        # other default colorset
+        If $arg == {-cs} Then
+        Begin
+            Set $defaultColorset = $value
+            Set $ColorsetChanged = {true}
+        End
+
+        # other highlight colorset
+        If $arg == {-hcs} Then
+            Set $highlightColorset = $value
+
+        # other default font
+        If $arg == {-fnt} Then
+        Begin
+            Set $defaultFont = $value
+            Set $FontChanged = {true}
+        End
+
+        # other default fontsize
+        If $arg == {-fs} Then
+        Begin
+            Set $defaultFontsize = $value
+            Set $FontChanged = {true}
+        End
+
+        # other default theme
+        If $arg == {-t} Then
+        Begin
+            Set $defaultTheme = $value
+            If $defaultTheme == {oxygen} Then
+                Set $defaultSize = 22
+            Set $ThemeChanged = {true}
+        End
+
+        If $noValue == {true} Then
+            Set $i = (Add $i 1)
+        Else
+            Set $i = (Add $i 2)
+            
+        Set $arg = (GetScriptArgument $i)
+    End
+
+    ##### change Settings if needed
+    If $FnsUseApplet == {true} Then
+    Begin
+        Set $iconDir = {24x24/}
+        Set $quitButton = {16x16/quit.png}
+    End
+    Else
+    Begin
+        ChangeWindowTitle {Pagina}
+        Set $iconDir = (GetOutput {echo $[infostore.mScripts]} 1 -1) {/Plaia/icons/}
+        Set $quitButton = $iconDir{quit.png}
+    End
+
+    ##### change Global Styles if needed
+    If $ColorsetChanged == {true} Then
+    Begin
+        For $Widget=1 To 12 Do
+        Begin
+            ChangeColorset $Widget $defaultColorset
+        End
+        ChangeColorset 0 $defaultColorset
+    End
+
+    ##### change Widget Styles if needed
+    If $FontChanged == {true} Then
+    Begin
+        Set $newFont = {xft:}$defaultFont{:size=}$defaultFontsize{:bold}
+        For $Widget=1 To 5 Do
+            ChangeFont $Widget $newFont
+    End
+
+    If $ThemeChanged == {true} Then
+        Set $useThemeIcons = {true}
+    
+    If $useThemeIcons == {true} Then
+    Begin
+        Set $icons = {media-seek-backward media-seek-forward media-skip-backward media-skip-forward media-playback-stop media-playback-start media-playback-pause}
+        For $index = 1 To 7 Do
+        Begin
+            Set $cmd = {echo }$icons
+            Set $icon = (GetOutput $cmd 1 $index)
+            
+            If $ThemeChanged == {true} Then
+                Set $cmd = {fns-find-icon -n }$icon{ -s }$defaultSize{ -c actions -t }$defaultTheme{ --notdesk}
+            Else
+                Set $cmd = {fns-find-icon -n }$icon{ -s }$defaultSize{ -c actions --notdesk}
+            Set $wIcon = (GetOutput $cmd 1 -1)
+            #Do {echo wIcon: }$wIcon
+            If $wIcon == {} Then
+            Begin
+                Set $cmd = {fns-find-icon -n }$icon{ -s }$defaultSize{ -c actions -t gnome --notdesk}
+                Set $wIcon = (GetOutput $cmd 1 -1)
+            End
+
+            If $index == 1 Then
+                Set $seekbackButton = $wIcon
+            If $index == 2 Then
+                Set $seekforwButton = $wIcon
+            If $index == 3 Then
+                Set $backwardButton = $wIcon
+            If $index == 4 Then
+                Set $forwardButton = $wIcon
+            If $index == 5 Then
+                Set $stopButton = $wIcon
+            If $index == 6 Then
+                Set $playButton = $wIcon
+            If $index == 7 Then
+                Set $pauseButton = $wIcon
+        End
+    End
+    Else
+    Begin
+        Set $seekbackButton = $iconDir{media-seek-backward.png}
+        Set $seekforwButton = $iconDir{media-seek-forward.png}
+        Set $backwardButton = $iconDir{media-skip-backward.png}
+        Set $forwardButton = $iconDir{media-skip-forward.png}
+        Set $stopButton = $iconDir{media-playback-stop.png}
+        Set $playButton = $iconDir{media-playback-start.png}
+        Set $pauseButton = $iconDir{media-playback-pause.png}
+    End
+    
+    Set $BS_CMD = {|sed "s/\([()#!|*&'\` ]\)/\\\\\1/g"}
+    Set $Backtic_CMD = {|sed "s/\([\`]\)/\\\\\1/g"}
+
+    Set $Cmd = {echo $HOME}$BS_CMD
+    Set $lastDir = (GetOutput $Cmd 1 -1) {/}
+
+    Set $startPos = 0
+    Set $channels = 2
+    Set $width = 185
+    
+    ##### change Widgets
+    #ChangeTitle 1 {Menu}
+    ChangeIcon 7 $seekbackButton
+    ChangeIcon 10 $seekforwButton
+    ChangeIcon 6 $backwardButton
+    ChangeIcon 9 $playButton
+    ChangeIcon 8 $stopButton
+    ChangeIcon 11 $forwardButton
+    ChangeIcon 12 $quitButton
+
+    ##### key bindings
+    Key Return A 19 1
+    Key Escape A 19 2
+    
+    ##### create named pipes and start mplayer
+    Set $pid = (GetPid)
+    Do {echo pid: }$pid
+    Set $FVWM_USERDIR = (GetOutput {echo $FVWM_USERDIR} 1 -1)
+    #Set $out = $FVWM_USERDIR{/.tmp-com-out-}$pid
+    #Set $inFifo = $FVWM_USERDIR{/.tmp-com-in-}$pid
+    Set $out = $FVWM_USERDIR{/.tmp-com-out}
+    Set $inFifo = $FVWM_USERDIR{/.tmp-com-in}
+    # delete pipes if exist
+    Do {Exec rm -f }$out
+    Do {Exec rm -f }$inFifo
+    # create pipes
+    Do {Exec if [ ! -e }$out{ ];then touch }$out{;fi}
+    Do {Exec if [ ! -p }$inFifo{ ];then rm -f }$inFifo{; mkfifo }$inFifo{;fi}
+    Do {echo inFifo: }$inFifo
+    Do {echo outFifo: }$out
+        
+    # start mplayer
+    Do {Exec TERM=vt100; export TERM; mplayer -ao alsa -ac dts,liba52, -noborder -nomouseinput -channels }$channels{ -vf scale -zoom -xy }$width{ -ss }$startPos{ -idle -slave -input file=}$inFifo{ nodefault-bindings -noconfig all -msglevel all=-1:global=4 2>/dev/null > }$out
+
+    Set $Seconds = 0
+    Set $tenSeconds = 0
+    Set $Minutes = 0
+    Set $tenMinutes = 0
+    Set $Hours = 0
+    
+    Set $checkTitle = {false}
+    Set $get_totalTime = {false}
+    Set $get_currentTime = {false}
+    Set $get_currentTime_2 = {false}
+    Set $currentTitle = {}
+    Set $totalTime = 0
+    Set $currentTime = 0
+    Set $checkTitle = {false}
+    Set $firstStart = {true}
+    Set $playcount = 1
+    Set $playlistcount = 0
+    Set $mode ={}
+    Set $startPos = 0
+    
+End
+
+PeriodicTasks
+Begin
+    If $state == {play} Then
+    Begin
+        Set $currentTime = (Add $currentTime 1)
+        Set $hours = (Div $currentTime 3600)
+        Set $c_Minutes = (Div (Add (Mult $hours -3600) $currentTime) 60)
+        Set $tenMinutes = (Div $c_Minutes 10)
+        Set $Minutes = (Add $c_Minutes (Mult $tenMinutes -10))
+        Set $c_Seconds = (Add $currentTime (Mult (Div $currentTime 60) -60))
+        Set $tenSeconds = (Div $c_Seconds 10)
+        Set $Seconds = (Add $c_Seconds (Mult $tenSeconds -10))
+        Set $str_currentTime = $hours{:}$tenMinutes $Minutes{:}$tenSeconds $Seconds
+        ChangeTitle 4 $str_currentTime
+    End
+
+    If $checkTitle == {true} Then
+    Begin
+        If (Add $currentTime -1) == 0 Then
+        Begin
+            # get current title
+            Set $Cmd = {echo "get_property filename" >}$inFifo{; sleep 0.5; tail -n 1 }$out{ |tr -d '\n'}$BS_CMD
+            Set $currentTitle = (GetOutput $Cmd 1 -1)
+            Set $currentTitle = (StrCopy $currentTitle 14 300)
+            Do {echo currentTitle: }$currentTitle
+            Set $checkTitle = {false}
+            Set $get_totalTime = {true}
+        End
+    End
+
+    If $get_totalTime == {true} Then
+    Begin
+        If (Add $currentTime -2) == 0 Then
+        Begin
+            Set $Cmd = {echo "get_time_length" >}$inFifo{; sleep 0.5; tail -n 1 }$out{ |tr -d '\n'}
+            Set $totalTime = (GetOutput $Cmd 1 -1)
+            Set $totalTime = (StrCopy $totalTime 12 22)
+            Set $totalTime = (Mult $totalTime 1)
+            Set $get_totalTime = {false}
+            Set $get_currentTime = {true}
+            
+            Set $hours = (Div $totalTime 3600)
+            Set $g_Minutes = (Div (Add (Mult $hours -3600) $totalTime) 60)
+            Set $tenMinutes = (Div $g_Minutes 10)
+            Set $Minutes = (Add $g_Minutes (Mult $tenMinutes -10))
+            Set $g_Seconds = (Add $totalTime (Mult (Div $totalTime 60) -60))
+            Set $tenSeconds = (Div $g_Seconds 10)
+            Set $Seconds = (Add $g_Seconds (Mult $tenSeconds -10))
+            Set $_totalTime = $hours{:}$tenMinutes $Minutes{:}$tenSeconds $Seconds
+            ChangeTitle 5 $_totalTime
+        End
+    End
+
+    If $get_currentTime == {true} Then
+    Begin
+        If (Add $currentTime -3) == 0 Then
+        Begin
+            Set $Cmd = {echo "get_time_pos" >}$inFifo{; sleep 0.5; tail -n 1 }$out{ |tr -d '\n'}
+            Set $_currentTime = (GetOutput $Cmd 1 -1)
+            Set $_currentTime = (StrCopy $_currentTime 19 25)
+            Set $Cmd = {perl -e 'printf "%.0f",}$_currentTime{'}
+            Set $currentTime = (GetOutput $Cmd 1 -1)
+            Set $get_currentTime = {false}
+            Set $checkTitle_2 = {true}
+        End
+    End
+    
+    If $get_currentTime_2 == {true} Then
+    Begin
+        Set $Cmd = {echo "get_time_pos" >}$inFifo{; sleep 0.5; tail -n 1 }$out{ |tr -d '\n'}
+        Set $_currentTime = (GetOutput $Cmd 1 -1)
+        Set $_currentTime = (StrCopy $_currentTime 19 25)
+        If $currentTime < $_currentTime Then
+            Set $currentTime = (Mult $_currentTime 1)
+        Set $get_currentTime_2 = {false}
+    End
+    
+    If $currentTime > (Add $startPos 4) Then
+    Begin
+        If checkTitle == {false} Then
+        Begin
+            Set $checkTitle_2 = {true}
+        End
+    End
+    
+    If $mode == {file} Then
+    Begin
+        If $checkTitle_2 == {true} Then
+        Begin
+            If $currentTime > $totalTime Then
+            Begin
+                Set $Seconds = 0
+                Set $tenSeconds = 0
+                Set $Minutes = 0
+                Set $tenMinutes = 0
+                Set $Hours = 0
+                
+                Set $checkTitle = {false}
+                Set $checkTitle_2 = {false}
+                Set $get_totalTime = {false}
+                Set $get_currentTime = {false}
+                Set $get_currentTime_2 = {false}
+                Set $currentTitle = {}
+                Set $totalTime = 0
+                Set $currentTime = 0
+                Set $checkTitle = {false}
+                Set $state = {load}
+                ChangeTitle 4 {0:00:00}
+                ChangeTitle 5 {0:00:00}
+                ChangeIcon 9 $playButton
+            End
+        End
+    End
+
+    If $playcount == $playlistcount Then
+    Begin
+        If $checkTitle_2 == {true} Then
+        Begin
+            If $currentTime > $totalTime Then
+            Begin
+                Set $Seconds = 0
+                Set $tenSeconds = 0
+                Set $Minutes = 0
+                Set $tenMinutes = 0
+                Set $Hours = 0
+                
+                Set $checkTitle = {false}
+                Set $checkTitle_2 = {false}
+                Set $get_totalTime = {false}
+                Set $get_currentTime = {false}
+                Set $get_currentTime_2 = {false}
+                Set $currentTitle = {}
+                Set $totalTime = 0
+                Set $currentTime = 0
+                Set $checkTitle = {false}
+                Set $titlecount = 1
+                Set $playcount = 1
+                Set $state = {load}
+                ChangeTitle 4 {0:00:00}
+                ChangeTitle 5 {0:00:00}
+                ChangeIcon 9 $playButton
+            End
+        End
+    End
+    
+    If $checkTitle_2 == {true} Then
+    Begin
+        If $currentTime > $totalTime Then
+        Begin
+            Set $currentTime = 0
+            Set $checkTitle = {true}
+            Set $playcount = (Add $playcount 1)
+        End
+    End
+    
+End
+
+
+# Popup File
+Widget        1
+Property
+    Type        ItemDraw
+    LocaleTitle    {File}
+    Size        45 16
+    Position    8 2
+    Flags        NoFocus NoReliefString Left
+Main
+Case message of
+    SingleClic :
+    Begin
+#        Do {Popup MenuPaginaFile mouse 0p 0p}
+        Do {FuncMenuPaginaFile }$lastDir
+    End
+    
+    1 :
+    Begin
+        Set $newFile_BS = (LastString)
+        Do {echo newFile_BS: }$newFile_BS
+
+        Set $Cmd = {dirname }$newFile_BS
+        Do {echo lastDir Cmd: }$Cmd
+        Set $lastDir = (GetOutput $Cmd 1 -1)
+
+        If $lastDir <> {/} Then
+            Set $lastDir = $lastDir{/}
+        Do {echo lastDir: }$lastDir
+
+        If $state <> {stop} Then
+        Begin
+            Do {Exec echo stop > }$inFifo
+            ChangeIcon 9 $playButton
+            Set $state = {stop}
+            Set $Seconds = 0
+            Set $tenSeconds = 0
+            Set $Minutes = 0
+            Set $tenMinutes = 0
+            Set $Hours = 0
+            Set $checkTitle = {false}
+            Set $checkTitle_2 = {false}
+            Set $get_totalTime = {false}
+            Set $get_currentTime = {false}
+            Set $get_currentTime_2 = {false}
+            Set $currentTitle = {}
+            Set $totalTime = 0
+            Set $currentTime = 0
+            Set $checkTitle = {false}
+            Set $titlecount = 1
+            Set $playcount = 1
+            Set $startPos = 0
+            ChangeTitle 4 {0:00:00}
+            ChangeTitle 5 {0:00:00}
+        End
+        
+#        Set $file = (LastString)
+        Set $playit = {"loadfile }$newFile_BS{"}
+#        Set $playit = {"loadfile }$file{"}
+#        Set $state = {load}
+        Set $mode = {file}
+        
+        Do {Exec echo }$playit{ > }$inFifo
+        Set $state = {play}
+        Set $checkTitle = {true}
+        Set $firstStart = {false}
+        ChangeIcon 9 $pauseButton
+    End
+
+    2 :
+    Begin
+        Set $directory_BS = (LastString)
+        Do {echo directory_BS: }$directory_BS
+        Set $lastDir = (LastString)
+
+        If $state <> {stop} Then
+        Begin
+            Do {Exec echo stop > }$inFifo
+            ChangeIcon 9 $playButton
+            Set $state = {stop}
+            Set $Seconds = 0
+            Set $tenSeconds = 0
+            Set $Minutes = 0
+            Set $tenMinutes = 0
+            Set $Hours = 0
+            Set $checkTitle = {false}
+            Set $checkTitle_2 = {false}
+            Set $get_totalTime = {false}
+            Set $get_currentTime = {false}
+            Set $get_currentTime_2 = {false}
+            Set $currentTitle = {}
+            Set $totalTime = 0
+            Set $currentTime = 0
+            Set $checkTitle = {false}
+            Set $titlecount = 1
+            Set $playcount = 1
+            Set $startPos = 0
+            ChangeTitle 4 {0:00:00}
+            ChangeTitle 5 {0:00:00}
+        End
+
+        Set $Cmd = {Exec find }$directory_BS{ -maxdepth 1 -type f -iregex ".*\.\(mp4\|wmv\|avi\|flv\|mkv\|qt\|ts\|divx\|xvid\|rv\|mpg\|mjpg\|smjpg\|fli\|flc\|h4v\|ogv\)$" | sort > }$FVWM_USERDIR{/.tmpVplaylist}
+        Do $Cmd
+        Set $playit = {"loadlist }$FVWM_USERDIR{/.tmpVplaylist"}
+        Set $playlist = $FVWM_USERDIR{/.tmpVplaylist}
+        Set $playcount = 1
+#        Set $state = {load}
+        Set $mode = {playlist}
+        
+        Do {Exec if [ ! -e }$out{ ];then touch }$out{;fi;sleep 0.5}
+        Set $Cmd = {exec  sed -n '$=' }$playlist
+        Set $playlistcount = (GetOutput $Cmd 1 -1)
+        Do {Exec echo }$playit{ > }$inFifo
+        Set $state = {play}
+        Set $checkTitle = {true}
+        Set $firstStart = {false}
+        ChangeIcon 9 $pauseButton
+    End
+
+    3 :
+    Begin
+        Set $playlist = (LastString)
+
+        Set $Cmd = {dirname }$playlist
+        Set $lastDir = (GetOutput $Cmd 1 -1)
+
+        If $lastDir <> {/} Then
+            Set $lastDir = $lastDir{/}
+        Do {echo lastDir: }$lastDir
+
+        If $state <> {stop} Then
+        Begin
+            Do {Exec echo stop > }$inFifo
+            ChangeIcon 9 $playButton
+            Set $state = {stop}
+            Set $Seconds = 0
+            Set $tenSeconds = 0
+            Set $Minutes = 0
+            Set $tenMinutes = 0
+            Set $Hours = 0
+            Set $checkTitle = {false}
+            Set $checkTitle_2 = {false}
+            Set $get_totalTime = {false}
+            Set $get_currentTime = {false}
+            Set $get_currentTime_2 = {false}
+            Set $currentTitle = {}
+            Set $totalTime = 0
+            Set $currentTime = 0
+            Set $checkTitle = {false}
+            Set $titlecount = 1
+            Set $playcount = 1
+            Set $startPos = 0
+            ChangeTitle 4 {0:00:00}
+            ChangeTitle 5 {0:00:00}
+        End
+
+#        Set $playlist = (LastString)
+        Set $playit = {"loadlist }$playlist{"}
+        Set $playcount = 1
+#        Set $state = {load}
+        Set $mode = {playlist}
+        
+        Do {Exec if [ ! -e }$out{ ];then touch }$out{;fi;sleep 0.5}
+        Set $Cmd = {exec  sed -n '$=' }$playlist
+        Set $playlistcount = (GetOutput $Cmd 1 -1)
+        Do {Exec echo }$playit{ > }$inFifo
+        Set $state = {play}
+        Set $checkTitle = {true}
+        Set $firstStart = {false}
+        ChangeIcon 9 $pauseButton
+    End
+End
+
+# Popup Audio
+Widget        2
+Property
+    Type        ItemDraw
+    LocaleTitle    {Audio}
+    Size        45 16
+    Position    58 2
+    Flags        NoFocus NoReliefString Left
+Main
+Case message of
+    SingleClic :
+    Begin
+        Do {FuncMenuPaginaAudio}
+    End
+    
+    1 :
+    Begin
+        Set $Cmd = {echo "get_property width" > }$inFifo{; sleep 0.5; tail -n 1 }$out{ |tr -d '\n'}
+        Set $width = (GetOutput $Cmd 1 -1)
+        Set $width = (StrCopy $width 11 25)
+        Do {echo width: }$width
+        Set $startPos = $currentTime
+        Set $channels = (LastString)
+        Do {Exec echo "quit" > }$inFifo
+        Do {Exec sleep 0.5; rm -f }$out
+        Do {Exec if [ ! -e }$out{ ];then touch }$out{;fi}
+        Do {Exec sleep 0.5; TERM=vt100; export TERM; mplayer -ao alsa -ac dts,liba52, -noborder -nomouseinput -channels }$channels{ -vf scale -zoom -xy }$width{ -ss }$startPos{ -idle -slave -input file=}$inFifo{ nodefault-bindings -noconfig all -msglevel all=-1:global=4 2>/dev/null > }$out
+        Do {Exec sleep 1; echo }$playit{ > }$inFifo
+    End
+    
+    2 :
+    Begin
+        Set $AudioLang = (LastString)
+        Do {Exec echo "switch_audio }$AudioLang{" > }$inFifo
+        Do {echo AudioLang: }$AudioLang
+    End
+End
+
+# Popup Subtitle
+Widget        3
+Property
+    Type        ItemDraw
+    LocaleTitle    {Sub}
+    Size        45 16
+    Position    108 2
+    Flags        NoFocus NoReliefString Left
+Main
+Case message of
+    SingleClic :
+    Begin
+        Do {FuncMenuPaginaSub}
+    End
+
+    1 :
+    Begin
+        Set $SubVis = (LastString)
+        Do {Exec echo "sub_visibility }$SubVis{" > }$inFifo
+        Do {echo SubVis: }$SubVis
+    End
+    
+    2 :
+    Begin
+        Set $SubLang = (LastString)
+        Do {Exec echo "sub_select }$SubLang{" > }$inFifo
+        Do {echo SubLang: }$SubLang
+    End
+End
+
+# used time
+Widget        4
+Property
+    Type        ItemDraw
+    Title        {0:00:00}
+    Size        55 16
+    Position    15 49
+    Flags        NoFocus NoReliefString Left
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# total time
+Widget        5
+Property
+    Type        ItemDraw
+    Title        {0:00:00}
+    Size        55 16
+    Position    120 49
+    Flags        NoFocus NoReliefString Left
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# File backward
+Widget        6
+Property
+    Type        ItemDraw
+    Size        24 24
+    Position    8 22
+    Flags        NoFocus
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $mode == {playlist} Then
+        Begin
+            If $playcount > 1 Then
+            Begin
+                Do {Exec echo pt_step -1 > }$inFifo
+                Set $checkTitle = {true}
+                Set $currentTime =     0
+                Set $state = {play}
+                Set $playcount = (Add $playcount -1)
+            End
+        End
+    End
+End
+
+# rewind
+Widget        7
+Property
+    Type        ItemDraw
+    Size        24 24
+    Position    37 22
+    Flags        NoFocus
+Main
+Case message of
+    SingleClic :
+    Begin
+        Do {Exec exec echo "seek -60 0" > }$inFifo
+        Set $currentTime = (Add $currentTime -60)
+        Set $get_currentTime_2 = {true}
+        If $currentTime < 0 Then
+            Set $currentTime = 0
+    End
+End
+
+# stop
+Widget        8
+Property
+    Type        ItemDraw
+    Size        24 24
+    Position    66 22
+    Flags        NoFocus
+Main
+Case message of
+    SingleClic :
+    Begin
+        Do {Exec echo stop > }$inFifo
+        ChangeIcon 9 $playButton
+        Set $state = {stop}
+        Set $Seconds = 0
+        Set $tenSeconds = 0
+        Set $Minutes = 0
+        Set $tenMinutes = 0
+        Set $Hours = 0
+        Set $checkTitle = {false}
+        Set $checkTitle_2 = {false}
+        Set $get_totalTime = {false}
+        Set $get_currentTime = {false}
+        Set $get_currentTime_2 = {false}
+        Set $currentTitle = {}
+        Set $totalTime = 0
+        Set $currentTime = 0
+        Set $checkTitle = {false}
+        Set $titlecount = 1
+        Set $playcount = 1
+        Set $startPos = 0
+        ChangeTitle 4 {0:00:00}
+        ChangeTitle 5 {0:00:00}
+    End
+End
+
+# pause/play
+Widget        9
+Property
+    Type        ItemDraw
+    Size        24 24
+    Position    95 22
+    Flags        NoFocus
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $state == {pause} Then
+        Begin
+            Set $state = {play}
+            Do {Exec echo pause > }$inFifo
+            ChangeIcon 9 $pauseButton
+        End
+        Else
+        Begin
+        If $state == {play} Then
+        Begin
+            Set $state = {pause}
+            Do {Exec echo pause > }$inFifo
+            ChangeIcon 9 $playButton
+        End
+        If $state == {load} Then
+        Begin
+            If $mode == {playlist} Then
+            Begin
+                Set $Cmd = {exec  sed -n '$=' }$playlist
+                Set $playlistcount = (GetOutput $Cmd 1 -1)
+            End
+            Do {Exec echo }$playit{ > }$inFifo
+            Set $state = {play}
+            Set $checkTitle = {true}
+            Set $firstStart = {false}
+            ChangeIcon 9 $pauseButton
+        End
+        If $state == {stop} Then
+        Begin
+            Set $state = {play}
+            Do {Exec echo }$playit{ > }$inFifo
+            Set $checkTitle = {true}
+            ChangeIcon 9 $pauseButton
+        End
+        End
+    End
+End
+
+# forward
+Widget        10
+Property
+    Type        ItemDraw
+    Size        24 24
+    Position    124 22
+    Flags        NoFocus
+Main
+Case message of
+    SingleClic :
+    Begin
+        Do {Exec exec echo "seek 60 0" > }$inFifo
+        Set $currentTime = (Add $currentTime 60)
+        Set $get_currentTime_2 = {true}
+    End
+End
+
+# next file
+Widget        11
+Property
+    Type        ItemDraw
+    Size        24 24
+    Position    153 22
+    Flags        NoFocus
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $mode == {playlist} Then
+        Begin
+            If $playcount < $playlistcount Then
+            Begin
+                Do {Exec echo pt_step 1 > }$inFifo
+                Set $checkTitle = {true}
+                Set $currentTime =     0
+                Set $state = {play}
+                Set $playcount = (Add $playcount 1)
+            End
+        End
+    End
+End
+
+# Close
+Widget        12
+Property
+    Type        ItemDraw
+    Size        16 16
+    Position    168 1
+    Flags        NoFocus
+Main
+Case message of
+    SingleClic :
+    Begin
+        Do {Exec echo "quit" > }$inFifo
+        Do {Exec rm -f }$FVWM_USERDIR{/.tmpAplaylist}
+        Do {Exec rm -f }$out
+        Do {Exec rm -f }$inFifo
+        Do {Exec killall mplayer}
+        Quit
+    End
+End

@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      1.0.2
+# Version:      1.0.3
 # Licence:      GPL 2
 #
 # Description:  colorsets of GreyRevenge theme by alecive
@@ -246,17 +246,36 @@ Colorset 24 BGradient 255 2 #39464c 60 #737c74 40 #939e94, NoShape
 
 
 ########################################################################
-# External Colorsets
+# Nanomoids Colorsets
 ########################################################################
 
 #-----------------------------------------------------------------------
-# reserved for modules@: 25
+# Default Colorset
+#-----------------------------------------------------------------------
+Colorset 25 fg $[infostore.used_appletfontcolor], bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint]
 
 #-----------------------------------------------------------------------
-# reserved for the future use: 26-28
+# Highlight Colorset or Default Colorset for Icons e.g. in DriveInn to
+# simulate unmounted devices
+#-----------------------------------------------------------------------
+Colorset 26 fg #A4CDF9, bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint], IconAlpha 50
 
 #-----------------------------------------------------------------------
-# temporary colorset: 29, has no static definition, used dynamically
+# Warn Colorset
+#-----------------------------------------------------------------------
+Colorset 27 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+Colorset 28 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+Colorset 29 fg #89D5D7, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
+
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#Colorset 30
 
 
 ########################################################################

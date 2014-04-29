@@ -1,0 +1,485 @@
+#-----------------------------------------------------------------------
+# File:         FNS-Script-Date
+# Version:      1.0.0
+# Licence:      GPL 2
+#
+# Description:  Set system time and date. Need root permissions!
+#
+# Author:       Fvwm-workers    
+# Revised by:   Thomas Funk <t.funk@web.de>
+#
+# Created:      ???
+# Changed:      08/22/2013
+#-----------------------------------------------------------------------
+
+UseGettext          {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
+WindowLocaleTitle   {Date}
+WindowSize          310 290        # Taille
+
+Init
+Begin
+    Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
+    Set $Font = {xft:}$defaultFont{:size=10}
+    For $Widget=1 To 26 Do
+        ChangeFont $Widget $Font
+    
+    WarpPointer 1
+    Set $NHour=(GetOutput {date '+%d %m %Y %H %M'} 1 4)
+    ChangeValue 10 $NHour
+    ChangeTitle 8 $NHour
+
+    Set $NMinu=(GetOutput {date '+%d %m %Y %H %M'} 1 5)
+    ChangeValue 14 $NMinu
+    ChangeTitle 12 $NMinu
+
+    Set $Day=(GetOutput {date '+%d %m %Y %H %M'} 1 1)
+    ChangeValue 20 $Day
+    ChangeTitle 18 $Day
+
+    Set $Year=(GetOutput {date '+%d %m %Y %H %M'} 1 3)
+    ChangeValue 24 $Year
+    ChangeTitle 22 $Year
+
+    Set $Month=(GetOutput {date '+%d %m %Y %H %M'} 1 2)
+    ChangeValue 26 $Month
+
+    Set $MaxDay=31
+    Set $cmd={date --date '} $Month {/} $MaxDay {/} $Year {' +%d}
+    While (GetOutput $cmd 1 1)=={} Do
+    Begin
+        Set $MaxDay=(Add $MaxDay -1)
+        Set $cmd={date --date '} $Month {/} $MaxDay {/} $Year {' +%d}
+    End
+    ChangeMaxValue 20 $MaxDay
+End
+ 
+# Set button
+Widget 1
+Property
+    Type        PushButton
+    LocaleTitle {Set}
+    Size        85 20
+    Position    120 253
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Do {Exec gksu date -s '} $NHour {:} $NMinu { } $Month {/} $Day {/} $Year{'}
+        Quit
+    End
+End
+
+# Cancel button
+Widget 2
+Property
+    Type        PushButton
+    LocaleTitle {Cancel}
+    Size        85 20
+    Position    215 253
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Quit
+    End
+End
+
+# Time rectangle
+Widget 3
+Property
+    Type        Rectangle
+    Size        290 120
+    Position    10 10
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# Time rectangle title
+Widget 4
+Property
+    Type        ItemDraw
+    LocaleTitle {Time}
+    Size        40 20
+    Position    20 0
+    Flags       NoReliefString NoFocus
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# xclock
+Widget 5
+Property
+    Type        SwallowExec
+    Title       {xclock}
+    SwallowExec {exec xclock -analog -padding 0 -geometry 70x56-1500-1500 -fg MidnightBlue -hd Blue -hl Blue -bg Grey85 -update 1 &}
+    Size        80 80
+    Position    180 30
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# xclock rectangle
+Widget 6
+Property
+    Type        Rectangle
+    Size        100 100
+    Position    170 20
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# text 'Hours'
+Widget 7
+Property
+    Type        ItemDraw
+    LocaleTitle {Hours:}
+    Size        60 20
+    Position    25 35
+    Flags       NoReliefString NoFocus Left
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# hours value
+Widget 8
+Property
+    Type        ItemDraw
+    Title       {00}
+    Size        20 20
+    Position    98 35
+    Flags       NoReliefString NoFocus Left
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# hours value rectangle
+Widget 9
+Property
+    Type        Rectangle
+    Size        26 26
+    Position    95 32
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# MiniScroll for hours values
+Widget 10
+Property
+    Type        MiniScroll
+    Value       15
+    MinValue    0
+    MaxValue    23
+    Position    127 29
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $NHour=(GetValue 10)
+        If $NHour<10 Then
+            Set $NHour=0 $NHour
+        ChangeTitle 8 $NHour
+    End
+End
+
+# text 'Minutes'
+Widget 11
+Property
+    Type        ItemDraw
+    LocaleTitle {Minutes:}
+    Size        60 20
+    Position    25 85
+    Flags       NoReliefString NoFocus Left
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# minutes value
+Widget 12
+Property
+    Type        ItemDraw
+    Title       {00}
+    Size        20 20
+    Position    98 85
+    Flags       NoReliefString NoFocus
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# minutes value rectangle
+Widget 13
+Property
+    Type        Rectangle
+    Size        26 26
+    Position    95 83
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# MiniScroll for minutes values
+Widget 14
+Property
+    Type        MiniScroll
+    Value       15
+    MinValue    0
+    MaxValue    59
+    Position    127 80
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $NMinu=(GetValue 14)
+        If $NMinu<10 Then
+            Set $NMinu=0 $NMinu
+        ChangeTitle 12 $NMinu
+    End
+End
+
+# Date rectangle
+Widget 15
+Property
+    Type        Rectangle
+    Size        290 105
+    Position    10 140
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# Date rectangle title
+Widget 16
+Property
+    Type        ItemDraw
+    LocaleTitle {Date}
+    Size        40 20
+    Position    20 130
+    Flags       NoReliefString NoFocus
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# text 'Day'
+Widget 17
+Property
+    Type        ItemDraw
+    LocaleTitle {Day:}
+    Size        60 20
+    Position    25 160
+    Flags       NoReliefString Left
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# day value
+Widget 18
+Property
+    Type        ItemDraw
+    Title       {00}
+    Size        20 20
+    Position    98 160
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# day value rectangle
+Widget 19
+Property
+    Type        Rectangle
+    Size        26 26
+    Position    95 158
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# MiniScroll for day values
+Widget 20
+Property
+    Type        MiniScroll
+    Value       1
+    MinValue    1
+    MaxValue    1
+    Position    127 154
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $Day=(GetValue 20)
+        If $Day<10 Then
+            Set $Day=0 $Day
+        ChangeTitle 18 $Day
+    End
+End
+
+# text 'Year'
+Widget 21
+Property
+    Type        ItemDraw
+    Title       {Year:}
+    Size        40 20
+    Position    165 160
+    Flags       NoReliefString Left
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# year value
+Widget 22
+Property
+    Type        ItemDraw
+    Title       {2001}
+    Size        35 20
+    Position    220 160
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# year value rectangle
+Widget 23
+Property
+    Type        Rectangle
+    Size        45 26
+    Position    215 158
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# MiniScroll for year values
+Widget 24
+Property
+    Type        MiniScroll
+    Value       1996
+    MinValue    1970
+    MaxValue    2037
+    Position    267 155
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $Year=(GetValue 24)
+        ChangeTitle 22 $Year
+        Set $MaxDay=31
+        Set $cmd={date --date '} $Month {/} $MaxDay {/} $Year {' +%d}
+        While (GetOutput $cmd 1 1)=={} Do
+        Begin
+            Set $MaxDay=(Add $MaxDay -1)
+            Set $cmd={date --date '} $Month {/} $MaxDay {/} $Year {' +%d}
+        End
+        ChangeMaxValue 20 $MaxDay
+        Set $Day=(GetValue 20)
+        If $Day<10 Then
+            Set $Day=0 $Day
+        ChangeTitle 18 $Day
+    End
+End
+
+# text 'Month'
+Widget 25
+Property
+    Type        ItemDraw
+    Title       {Month:}
+    Size        60 20
+    Position    25 205
+    Flags       NoReliefString Left
+Main
+Case message of
+    SingleClic :
+    Begin
+    End
+End
+
+# Popup for months
+Widget 26
+Property
+    Type        PopupMenu
+    Title       {January|February|March|April|May|June|July|August|September|October|November|December}
+    Position    95 200
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $Month=(GetValue 26)
+        If $Month<10 Then
+            Set $Month=0 $Month
+        Set $MaxDay=31
+        Set $cmd={date --date '} $Month {/} $MaxDay {/} $Year {' +%d}
+        While (GetOutput $cmd 1 1)=={} Do
+        Begin
+            Set $MaxDay=(Add $MaxDay -1)
+            Set $cmd={date --date '} $Month {/} $MaxDay {/} $Year {' +%d}
+        End
+        ChangeMaxValue 20 $MaxDay
+        Set $Day=(GetValue 20)
+        If $Day<10 Then
+            Set $Day=0 $Day
+        ChangeTitle 18 $Day
+    End
+End
+
+
+
+
+
+
