@@ -5,39 +5,36 @@ Maintainer: Thomas Funk <t.funk@web.de>
 Installed-Size:
 Depends: fvwm (>> 1:2.6.4)|fvwm (>> 2.6.4), python (<< 3), python-xdg, xterm, conky, xscreensaver, feh, imagemagick, librsvg2-bin, stalonetray, cpufrequtils, x11-apps, mplayer, python-mutagen, python-simplejson
 Recommends: network-manager-gnome, pcmanfm
-Suggests: volumeicon, fdpowermon, bluetooth-applet, pm-utils, lxapearance, qt3-qtconfig, qt4.qtconfig
+Suggests: volumeicon, fdpowermon, bluetooth-applet, pm-utils, lxapearance, qt3-qtconfig, qt4.qtconfig, compton || xcompmgr
 Section: x11
 Priority: optional
 Homepage: https://github.com/Fvwm-Nightshade
 Description: A lightweight but feature rich and good looking configuration of Fvwm
  Featurelist of Fvwm Nightshade:
  -------------------------------
+ - Own user configuration directory ~/.fvwm-nightshade
+ - Own entry "Fvwm-Nightshade" in graphical login managers
  - Config tool for base settings (Font, layouts, etc)
- - 4 virtual desktop pages (at the moment)
+ - 4 virtual desktop pages
  - Taskbar to show running apps per page
  - Three different layouts: horizontal, vertical and G2like
- - Lock desk & screensaver (xscreensaver)
- - Personal menu via FvwmScript-PersonalMenu
+ - Personal menu via FNS-Script-PersonalMenu
  - Background configurable with thumb browser (imagemagick and feh)
  - Animation control of window moves
- - Some themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab and Air). 
+ - Some themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab, Air and GrayRevenge). 
    Can be changed on the fly without restart
  - Autostart possibility (starting apps while startup)
- - A useful set of GUI tools to configure the global system (Gtk+, Qt, 
-   mouse, keyboard, etc)
- - Help messages for mouse bindings in titlebar, window, corners, sides 
-   and icon with Shift-Alt-Ctrl + click
- - Help messages for key bindings with Shift-Alt-Ctrl + key (see on 
-   "Keybindings")
-   - A global one with Shift-Alt-Ctrl + H
+ - Help messages for mouse and key bindings in titlebar, window, corners, sides 
+   and icon
  - Dynamic menus
- - Switching focus between windows with Alt-Tab (forward) / Shift-Alt-Tab
-   (backward)
- - Governor-tool FvwmScript-CPU-Performance to handle cpufreq
+ - Governor-tool FNS-Script-CPU-Performance to handle cpufreq
  - Create thumbs with mini icon and name for iconified applications 
    instead of their icon
  - Localization support for German, French and Spanish
  - Smart maximize windows - move and resize windows to the largest free 
    area of a desktop/page
- - Support for Xdg menus
+ - New set of icons for menus and internal apps
+ - Own XDG applications menu with it's own directory files
+ - Support for shadows and transparency with XcompMgr and Compton
+ - Support for hald and upower for Suspend/Hibernate
 
