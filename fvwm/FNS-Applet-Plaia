@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Plaia
-# Version:      1.0.17
+# Version:      1.0.18
 # Licence:      GPL 2
 #
 # Description:  Music player applet based on FvwmScript
@@ -33,7 +33,7 @@
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      03/17/2013
-# Changed:      08/25/2013
+# Changed:      04/29/2014
 #-----------------------------------------------------------------------
 
 UseGettext      {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
@@ -323,7 +323,7 @@ Begin
     Do {Exec if [ ! -e }$out{ ];then touch }$out{;fi}
     Do {Exec if [ ! -p }$inFifo{ ];then rm -f }$inFifo{; mkfifo }$inFifo{;fi}
     # start mplayer
-    Do {Exec TERM=vt100; export TERM;mplayer -idle -slave -input file=}$inFifo{ nodefault-bindings -noconfig all -msglevel all=-1:global=4 2>/dev/null > }$out
+    Do {Exec TERM=vt100; export TERM;mplayer -idle -slave -novideo -input file=}$inFifo{ nodefault-bindings -noconfig all -msglevel all=-1:global=4 2>/dev/null > }$out
 
 End
 
