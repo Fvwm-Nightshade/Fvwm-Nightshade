@@ -1,5 +1,10 @@
 History:
 
+04/29/2014 (starting with 0.8 develop branch)
+- merge feature_nanomoids branch
+- fix bug in FNS-Applet-Plaia to prevent mplayer showing a cover if in audio file exists
+- update fvwm-menu-desktop2 to current fvwm-menu-desktop in FVWM CVS
+
 03/01/2014
 - update FvwmForm-MultiMenuHelp2 to last upstream changes
   - 2 line fix by Dominique Michel to correspond correctly with fvwm-nightshade.pot
