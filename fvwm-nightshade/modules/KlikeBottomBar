@@ -1,0 +1,217 @@
+#-----------------------------------------------------------------------
+# File:         KlikeBottomBar
+# Version:      1.0.1
+# Licence:      GPL 2
+#
+# Description:  KDE like bottom bar with menu and iconify/deiconify button,
+#               windows list, pager with 4 virtual pages, systray,
+#               cpu graph and clock
+#
+# Author:       Thomas Funk <t.funk@web.de>    
+#
+# Created:      04/27/2014
+# Changed:      05/04/2014
+#-----------------------------------------------------------------------
+
+# Bottombar
+# +---+---+--------------------------+----------+----------+---------+
+# |   |   |                          |          |          |         |
+# +---+---+--------------------------+----------+----------+---------+
+# Menu     IconMan                    Pager      Systray    Date
+#     Desktop
+
+
+Style KlikeBottomBar !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
+Style KlikeBottomBar StaysOnBottom, !Iconifiable, !Maximizable, FixedSize, FixedPosition
+
+#=======================================================================
+# Calculations
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Systray icons
+#-----------------------------------------------------------------------
+# the count of icons visible in stalonetray must set related to the
+# screen resolution
+PipeRead    'if [ "$[vp.width]" -gt "1600" ]; then \
+                echo InfoStoreAdd tray_icons 7; \
+            elif [ "$[vp.width]" -gt "1400" ]; then \
+                echo InfoStoreAdd tray_icons 6; \
+            elif [ "$[vp.width]" -gt "1200" ]; then \
+                echo InfoStoreAdd tray_icons 5; \
+            else \
+                echo InfoStoreAdd tray_icons 4; \
+            fi'
+
+#-----------------------------------------------------------------------
+# needed tray columns
+#-----------------------------------------------------------------------
+PipeRead 'echo InfoStoreAdd tray_columns $(($[infostore.tray_icons]*2))'
+
+PipeRead 'echo InfostoreAdd tray_max_x $(($[infostore.tray_icons]+1))'
+
+
+#=======================================================================
+# FvwmButtons KlikeBottomBar
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# find desktop icon
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk`"
+
+#-----------------------------------------------------------------------
+# For cpu applet
+#-----------------------------------------------------------------------
+PipeRead 'echo InfostoreAdd graph_width $(($[infostore.column_size]*5))'
+PipeRead "echo InfoStoreAdd graph_voffset `perl -e 'printf \"%.0f\",$[infostore.fontsize]-2*$[infostore.hratio]'`"
+PipeRead "echo InfoStoreAdd percentage_voffset `perl -e 'printf \"%.0f\",$[infostore.bar_height]*1.3'`"
+
+#-----------------------------------------------------------------------
+# For clock applet
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd time_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio]/1.3)'`"
+PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",-($[infostore.hratio]*1.5)'`"
+PipeRead "echo InfoStoreAdd time_hsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/2'`"
+PipeRead "echo InfoStoreAdd date_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio])'`"
+PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",($[infostore.hratio]*4)'`"
+
+
+#=======================================================================
+# Pager
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Set the desk top size in units of physical screen size
+#
+#   +-----+-----+-----+-----+
+#   |     |     |     |     |
+#   +-----+-----+-----+-----+
+#
+#-----------------------------------------------------------------------
+DeskTopSize 4x1
+
+#-----------------------------------------------------------------------
+# FvwmPager height
+#-----------------------------------------------------------------------
+InfoStoreAdd pager_height $[infostore.bar_height]
+
+#-----------------------------------------------------------------------
+# FvwmPager width
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd pager_width `perl -e 'printf \"%.0f\",5+(($[vp.width]/($[vp.height]/$[infostore.bar_height]))*4)'`"
+
+#-----------------------------------------------------------------------
+# FvwmPager columns
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd pager_columns `perl -e 'printf \"%.0f\",$[infostore.pager_width]/$[infostore.column_size]'`"
+
+#-----------------------------------------------------------------------
+# FvwmPager geometry
+#-----------------------------------------------------------------------
+InfoStoreAdd pager_geometry $[infostore.pager_width]x$[infostore.pager_height]-0-0'
+
+
+#=======================================================================
+# GlobalIconMan BottomBar
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# GlobalIconMan columns
+#-----------------------------------------------------------------------
+PipeRead 'echo InfostoreAdd iconman_columns $(($[infostore.columns]-$[infostore.pager_columns]-$[infostore.time_hsize]-5))'
+
+#-----------------------------------------------------------------------
+# GlobalIconMan manager geometry
+#-----------------------------------------------------------------------
+InfoStoreAdd iconman_manager_geometry 8x1+0+0
+
+#-----------------------------------------------------------------------
+# GlobalIconMan geometry
+#-----------------------------------------------------------------------
+InfoStoreAdd iconman_button_geometry 175x$[infostore.bar_height]
+
+#-----------------------------------------------------------------------
+# GlobalIconMan Manager Tips
+#-----------------------------------------------------------------------
+InfoStoreAdd tips_iman always
+
+
+#=======================================================================
+# Bar
+#=======================================================================
+
+#***********************************************************************
+# General
+#***********************************************************************
+DestroyModuleConfig KlikeBottomBar: *
+*KlikeBottomBar: Geometry           $[infostore.bottombar_geometry]
+*KlikeBottomBar: Colorset           13
+*KlikeBottomBar: ActiveColorset     13
+*KlikeBottomBar: PressColorset      13
+
+*KlikeBottomBar: Rows               1
+*KlikeBottomBar: Columns            $[infostore.columns]
+*KlikeBottomBar: Frame              0
+
+#***********************************************************************
+# Buttons
+#***********************************************************************
+
+#-----------------------------------------------------------------------
+# menu button
+#-----------------------------------------------------------------------
+*KlikeBottomBar: (6x1, Colorset 13, ActiveColorset 11, \
+                  Left, Padding 5 0, Title (Side) "$[gt.Menu]", ActionOnPress, \
+                  Icon    icon_fns.svg:24x24, \
+                  ActiveIcon  icon_fns.svg:24x24, \
+                  Action(Mouse 1) `Menu MenuRoot`)
+
+#-----------------------------------------------------------------------
+# ShowDesktop button
+#-----------------------------------------------------------------------
+*KlikeBottomBar: (2x1, Colorset 13, ActiveColorset 11, \
+                  Left, ActionOnPress, \
+                  Icon    $[infostore.desktop_icon], \
+                  ActiveIcon    $[infostore.desktop_icon], \
+                  Action(Mouse 1) Function ShowDesktop)
+
+#-----------------------------------------------------------------------
+# GlobalIconMan
+#-----------------------------------------------------------------------
+*KlikeBottomBar: ($[infostore.iconman_columns]x1, Colorset 13, Swallow "GlobalIconManBar")
+
+#-----------------------------------------------------------------------
+# FvwmPager
+#-----------------------------------------------------------------------
+*KlikeBottomBar: ($[infostore.pager_columns]x1, Colorset 13, Frame -1, Swallow "FvwmPager")
+
+#-----------------------------------------------------------------------
+# Systray
+#-----------------------------------------------------------------------
+*KlikeBottomBar: ($[infostore.tray_columns]x1, Right, Colorset 13, \
+                  Swallow (UseOld, Close, Kill, Respawn) "stalonetray" \
+                  `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_max_x]x1 \
+                  --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
+                  --grow-gravity E --icon-gravity W --kludges force_icons_size -i 24 \
+                  --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
+
+#-----------------------------------------------------------------------
+# Cpuview
+#-----------------------------------------------------------------------
+*KlikeBottomBar: (5x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_cpu" \
+                  `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
+                  -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`, \
+                  Action (mouse 3) `Menu MenuCpuOps`,\
+                  Action (mouse 0) Nop)
+
+#-----------------------------------------------------------------------
+# Clock
+#-----------------------------------------------------------------------
+*KlikeBottomBar: ($[infostore.time_hsize]x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_clock" \
+                  `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset $[infostore.time_voffset]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
+                  -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
+                  Action (mouse 3) `Menu MenuClockOps`,\
+                  Action (mouse 0) Nop)
+
+
