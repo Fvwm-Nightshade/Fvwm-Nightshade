@@ -1,5 +1,14 @@
 History:
 
+05/04/2014
+- fix bug in debian/control - not || but |
+- set use_composite = 0 not 1 in .settings because we don't know whether a composite manager is active
+- switch default theme for 0.8 to "GrayRevenge".
+- set version to 0.7.7.<date> because it's start of 0.8 develop branch
+- set in conky configs own_window_type to 'dock' to prevent invisible cpu_conky and date_conky
+- fix bug #48 - FNS manpages don't show in the help menu
+- add issue #49 - a new layout 'Klike' - a KDE like bottom bar
+
 04/29/2014 (starting with 0.8 develop branch)
 - merge feature_nanomoids branch
 - fix bug in FNS-Applet-Plaia to prevent mplayer showing a cover if in audio file exists

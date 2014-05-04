@@ -8,6 +8,7 @@ Changes:
 - New theme 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
 - Support for shadows and transparency with XcompMgr and Compton
 - Support for hald and upower for Suspend/Hibernate
+- New layout 'Klike' - a KDE like bottom bar
 
 ------------------------------------------------------------------------
 
