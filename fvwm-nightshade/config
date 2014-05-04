@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.6.20140301
+InfoStoreAdd ns_version 0.7.7.20140504
 # Copyright (C) 2014
 #
 # Authors:
@@ -1875,14 +1875,14 @@ AddToFunc   FuncMenuWallpaperConfiguration
 + I TestRc (!Match) FuncShowMessage "Wallpaper browser Info" "Install ImageMagick AND feh for full functionality."
 
 #-----------------------------------------------------------------------
-# Creates a dynamic menu for all available Fvwm manpages
+# Creates a dynamic menu for all available Fvwm and FNS manpages
 #-----------------------------------------------------------------------
-DestroyFunc FuncFvwmManpageMenu
-AddToFunc   FuncFvwmManpageMenu
+DestroyFunc FuncFManpageMenu
+AddToFunc   FuncFManpageMenu
 + I PipeRead 'fvwm-menu-directory \
               --dir "/usr/share/man/man1" \
               --title "Man Pages" --exec-file "^xterm -fg $[fg.cs34] -bg $[bg.cs34] -g 80x40 -n Fvwm-Help -T Fvwm-Help -e man" |\
-              grep "^Destroy\\|^AddTo\\|^+ Dynamic\\|^+ Missing\\|^+ \\"[Ff]vwm*"|sed -e "s#\\.1\\.gz##g" \
+              grep -i "^Destroy\\|^AddTo\\|^+ Dynamic\\|^+ Missing\\|^+ \\"f\\(vwm\\|ns\\)" |sed -e "s#\\.1\\.gz##g" \
               -e "s#/usr/share/man/man1/##g" -e "s#\\"##3" -e "s#\\"##3" '
 
 #-----------------------------------------------------------------------
@@ -1988,8 +1988,8 @@ AddToFunc   FuncMenuHelp
 + I AddToMenu MenuHelp DynamicPopupAction FuncMenuHelp
 + I AddToMenu MenuHelp "$[gt.Help]" Title
 # Dynamic Fvwm Manpages realized with MissingSubmenuFunction
-+ I AddToMenu MenuHelp MissingSubmenuFunction FuncFvwmManpageMenu
-+ I AddToMenu MenuHelp "$[gt.Fvwm &Man Pages]%help.svg:$[infostore.MenuIconSize]%"              Popup "/usr/share/man/man1"
++ I AddToMenu MenuHelp MissingSubmenuFunction FuncFManpageMenu
++ I AddToMenu MenuHelp "$[gt.Fvwm/Fns &Man Pages]%help.svg:$[infostore.MenuIconSize]%"          Popup "/usr/share/man/man1"
 + I AddToMenu MenuHelp "$[gt.Fvwm &Web Pages]%www.svg:$[infostore.MenuIconSize]%"               Popup MenuFvwmWebPages
 + I AddToMenu MenuHelp "$[gt.Fvwm-&Nightshade Web Pages]%www.svg:$[infostore.MenuIconSize]%"    Popup FNSWebPagesMenu
 + I AddToMenu MenuHelp "$[gt.&Other Helps]%help.svg:$[infostore.MenuIconSize]%"                 Popup MenuHelpOthers
