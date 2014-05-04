@@ -18,7 +18,7 @@
 #-----------------------------------------------------------------------
 # The actual theme. Be changed dynamically via FuncChangeDecor
 #-----------------------------------------------------------------------
-InfoStoreAdd used_theme "Tribal"
+InfoStoreAdd used_theme "GrayRevenge"
 
 #-----------------------------------------------------------------------
 # Banner image for FvwmBanner
@@ -63,7 +63,7 @@ InfoStoreAdd used_appletfontcolor "white"
 #-----------------------------------------------------------------------
 # use composite manager
 #-----------------------------------------------------------------------
-SetEnv use_composite "1"
+SetEnv use_composite "0"
 
 #-----------------------------------------------------------------------
 # composite manager command
