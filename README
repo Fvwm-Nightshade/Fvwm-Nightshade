@@ -37,15 +37,16 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
 - Taskbar to show running apps per page
-- Three different layouts: horizontal, vertical and G2like
+- Four different layouts: horizontal, vertical G2like and Klike
 
   - horizontal (top):
-               Top
+
     +--------+        +--------+        +--------+
     |        |        |        |        |        |
     +--------+        +--------+        +--------+
     IconManager       Pager             Panel
-  
+    
+    
   - vertical (top right):
     
     +--------+
@@ -64,6 +65,8 @@ Featurelist of Fvwm-Nightshade 0.7.x:
     - cpu graph (conky)
     - date and time (conky)
 
+
+
   - G2like (top & bottom)
     Topbar
     +---+---+---------------------------------+----------+---------+---+
@@ -79,13 +82,24 @@ Featurelist of Fvwm-Nightshade 0.7.x:
     Desktop                                            Pager
         IconManager
 
+
+
+  - Klike (bottom)
+    Bottombar
+    +---+---+--------------------------+----------+----------+---------+
+    |   |   |                          |          |          |         |
+    +---+---+--------------------------+----------+----------+---------+
+    Menu     IconMan                    Pager      Systray    Date
+        Desktop
+
 - Lock desk & screensaver (xscreensaver)
 - Personal menu via FNS-Script-PersonalMenu
 - Background configurable with thumb browser (imagemagick and feh)
 - Animation control of window moves
 - Simple "Run" command with FvwmForm
-- Some themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab and Air). 
-  Can be changed on the fly without restart
+- Some themes/decors (Can be changed on the fly without restart):
+  Air, Ambience, Clean, CrystalBalls, FlatTab, GrayRevenge, Rocken 
+  and Tribal
 - Own themes and layouts can be created with templates
 - Autostart possibility (starting apps while startup)
 - A useful set of GUI tools to configure the global system (Gtk+, Qt, 

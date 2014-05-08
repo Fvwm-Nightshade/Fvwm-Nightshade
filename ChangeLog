@@ -1,6 +1,15 @@
 History:
 
 05/04/2014
+- add new theme 'Rocken' based on Thibaut's theme (thanks for his admition :-) )
+- add to all decors Greyed style and exchange Colorset 7 because needed for removing bg image if
+  Rocken theme was loaded before.
+- update comments in colorsets to be up to date in all of them
+- exchange tabs with spaces in some files (decors, modules, ...)
+- exchange StaysOnBottom with Layer 4 in some modules because with compositing they're to deep
+- updating colorsets template
+
+05/04/2014
 - fix bug in debian/control - not || but |
 - set use_composite = 0 not 1 in .settings because we don't know whether a composite manager is active
 - switch default theme for 0.8 to "GrayRevenge".

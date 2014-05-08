@@ -9,6 +9,7 @@ Changes:
 - Support for shadows and transparency with XcompMgr and Compton
 - Support for hald and upower for Suspend/Hibernate
 - New layout 'Klike' - a KDE like bottom bar
+- New theme 'Rocken' based on Thibaut's theme (thanks for his admition :-) )
 
 ------------------------------------------------------------------------
 
