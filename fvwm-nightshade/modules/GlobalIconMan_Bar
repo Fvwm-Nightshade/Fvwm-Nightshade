@@ -1,60 +1,60 @@
 #-----------------------------------------------------------------------
-# File:		GlobalIconMan_Bar
-# Version:	1.0.1
-# Licence: 	GPL 2
+# File:         GlobalIconMan_Bar
+# Version:      1.0.2
+# Licence:      GPL 2
 #
-# Description:	Global IconMan swallowed in a bar
+# Description:  Global IconMan swallowed in a bar
 #
-# Author:	Thomas Funk <t.funk@web.de>	
-# Created:	10/09/2012
-# Changed:	10/28/2012
+# Author:       Thomas Funk <t.funk@web.de>    
+# Created:      10/09/2012
+# Changed:      05/08/2014
 #-----------------------------------------------------------------------
 
 
 #***********************************************************************
 # Global FvwmIconMan ("Taskbar")
 #***********************************************************************
-Style GlobalIconManBar !Title, NeverFocus, WindowListSkip, StaysOnBottom, HandleWidth 1
+Style GlobalIconManBar !Title, NeverFocus, WindowListSkip, HandleWidth 1
 
 DestroyModuleConfig GlobalIconManBar: *
-*GlobalIconManBar: 1 IconName					GlobalIconMan
-*GlobalIconManBar: 1 Title						"Global IconMan"
-*GlobalIconManBar: 1 ButtonGeometry				$[infostore.iconman_button_geometry]
-*GlobalIconManBar: 1 ManagerGeometry  			$[infostore.iconman_manager_geometry]
-*GlobalIconManBar: 1 MaxButtonWidthByColumns	4
-*GlobalIconManBar: 1 Colorset					10
-*GlobalIconManBar: 1 IconColorset				12
-*GlobalIconManBar: 1 PlainColorset				10
-*GlobalIconManBar: 1 SelectColorset				11
-*GlobalIconManBar: 1 FocusColorset				11
-*GlobalIconManBar: 1 FocusAndSelectColorset		11
+*GlobalIconManBar: 1 IconName                   GlobalIconMan
+*GlobalIconManBar: 1 Title                      "Global IconMan"
+*GlobalIconManBar: 1 ButtonGeometry             $[infostore.iconman_button_geometry]
+*GlobalIconManBar: 1 ManagerGeometry            $[infostore.iconman_manager_geometry]
+*GlobalIconManBar: 1 MaxButtonWidthByColumns    4
+*GlobalIconManBar: 1 Colorset                   10
+*GlobalIconManBar: 1 IconColorset               12
+*GlobalIconManBar: 1 PlainColorset              10
+*GlobalIconManBar: 1 SelectColorset             11
+*GlobalIconManBar: 1 FocusColorset              11
+*GlobalIconManBar: 1 FocusAndSelectColorset     11
 
-*GlobalIconManBar: 1 IconButton					down
-*GlobalIconManBar: 1 PlainButton				up
-*GlobalIconManBar: 1 SelectButton				down
-*GlobalIconManBar: 1 FocusButton				up
-*GlobalIconManBar: 1 FocusAndSelectButton		down
+*GlobalIconManBar: 1 IconButton                 down
+*GlobalIconManBar: 1 PlainButton                up
+*GlobalIconManBar: 1 SelectButton               down
+*GlobalIconManBar: 1 FocusButton                up
+*GlobalIconManBar: 1 FocusAndSelectButton       down
 
-*GlobalIconManBar: 1 ReliefThickness			1
-*GlobalIconManBar: 1 Resolution					page
-*GlobalIconManBar: 1 UseWinList					true
+*GlobalIconManBar: 1 ReliefThickness            1
+*GlobalIconManBar: 1 Resolution                 page
+*GlobalIconManBar: 1 UseWinList                 true
 
-*GlobalIconManBar: 1 DrawIcons					always
-*GlobalIconManBar: 1 Sort						name
-*GlobalIconManBar: 1 Format						"%c: %t"
-*GlobalIconManBar: 1 Font						"xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
-	
-*GlobalIconManBar: 1 Tips						$[infostore.tips_iman]
-*GlobalIconManBar: 1 TipsFormat					"%c: %t"
-*GlobalIconManBar: 1 TipsColorset				16
-*GlobalIconManBar: 1 TipsFont					"xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+*GlobalIconManBar: 1 DrawIcons                  always
+*GlobalIconManBar: 1 Sort                       name
+*GlobalIconManBar: 1 Format                     "%c: %t"
+*GlobalIconManBar: 1 Font                       "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+    
+*GlobalIconManBar: 1 Tips                       $[infostore.tips_iman]
+*GlobalIconManBar: 1 TipsFormat                 "%c: %t"
+*GlobalIconManBar: 1 TipsColorset               16
+*GlobalIconManBar: 1 TipsFont                   "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 
-*GlobalIconManBar: 1 NoIconAction				"SendToModule FvwmAnimate animate"
-*GlobalIconManBar: 1 Action  Mouse		1	A	sendcommand "FuncSelectWindow"
-*GlobalIconManBar: 1 Action  Mouse		2	A	sendcommand "FuncIconify"
-*GlobalIconManBar: 1 Action  Mouse		3	A	sendcommand "Popup MenuWindowOpsTrimmed Mouse c -102m"
+*GlobalIconManBar: 1 NoIconAction               "SendToModule FvwmAnimate animate"
+*GlobalIconManBar: 1 Action  Mouse        1    A    sendcommand "FuncSelectWindow"
+*GlobalIconManBar: 1 Action  Mouse        2    A    sendcommand "FuncIconify"
+*GlobalIconManBar: 1 Action  Mouse        3    A    sendcommand "Popup MenuWindowOpsTrimmed Mouse c -102m"
 # If you want that the focus follows by hovering, uncomment the line below
-#*GlobalIconManBar: 1 Action  select			sendcommand "Focus"
+#*GlobalIconManBar: 1 Action  select            sendcommand "Focus"
 
 
 

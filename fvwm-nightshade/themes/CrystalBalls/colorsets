@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      1.0.2
+# Version:      1.0.3
 # Licence:      GPL 2
 #
 # Description:  colorsets of CrystalBall theme
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      10/28/2012
-# Changed:      01/10/2014
+# Changed:      05/08/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -67,11 +67,12 @@ Colorset 2  VGradient 255 3 #c3c1c4 35 #b8b8b8 35 #a8a8a8 30 #959595, fg gray15,
 #-----------------------------------------------------------------------
 # window borders and titlebar, inactive
 #
-# ?Gradient = inactive windows titlebar
-# bg = inactive border line color
-#      inactive windows titlebar    _
-# hi = inactive border shade color |
-# sh = inactive border shade color _|
+# ?Gradient = background inactive windows titlebar
+# bg = inactive border line color (FvwmIconman)
+#      inactive windows titlebar            _
+# hi = inactive border (inner) shade color |
+# sh = inactive border color (Window, FvwmPager, FvwmButtons)
+#      inactive border (inner) shade color _| (FvwmPager, FvwmButtons)
 #-----------------------------------------------------------------------
 Colorset 3  VGradient 255 2 #ffffff 70 #fafafa 30 #eeeeee, bg #e8e8e8, hi #aaaaaa, sh #f0f0f0, NoShape
 
@@ -110,9 +111,9 @@ Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #3570be, hi #fafafa, Pla
 Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #3570be, hi #fafafa, Plain
 
 #-----------------------------------------------------------------------
-# greyed menu item if needed
+# Menu title if needed
 #-----------------------------------------------------------------------
-Colorset 7 fg white, hi #a0b2c8, bg #a0b2c8, Plain
+Colorset 7 Plain
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.
@@ -127,8 +128,9 @@ Colorset 7 fg white, hi #a0b2c8, bg #a0b2c8, Plain
 # FvwmButtons, FvwmPager, can be also used for FvwmIconMan, FvwmIconBox.
 #
 # ?Gradient = inactive background
-# fg = inactive font color or border color
-# bg = background of inactive pages
+# fg = inactive font color or border color (FvwmIconMan)
+# bg = background of inactive pages  _
+#      inactive border color        |    (FvwmIconMan)
 #-----------------------------------------------------------------------
 Colorset 10 CGradient 255 2 #e0e0e0 5 #f3f3f3 95 #f9f9f9, fg gray50, bg #e8e8e8, NoShape
 
@@ -146,12 +148,14 @@ Colorset 11 CGradient 255 1 #6b92c6 100 #4a71ad, fg gray15, bg white, NoShape
 
 #-----------------------------------------------------------------------
 # special or funny: a gradient or a pixmap
-# May be used in certain FvwmButtons, FvwmIconMan, FvwmIconBox.
+# May be used in certain FvwmButtons, FvwmIconMan (iconified windows),
+# FvwmIconBox.
 #
 # ?Gradient = inactive background
-# fg = inactive font color
+# fg = inactive font color (FvwmIconMan)
 # optional:                   _
 # hi = inactive border shade |
+#      Pager mini windows inactive
 # sh = inactive border shade _|
 #-----------------------------------------------------------------------
 Colorset 12 VGradient 255 2 #a0a0a0 5 #b3b3b3 95 #b9b9b9, fg gray35, NoShape

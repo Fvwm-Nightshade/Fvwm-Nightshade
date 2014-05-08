@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		decor
-# Version:	1.0.3
+# Version:	1.0.4
 # Licence: 	GPL 2
 #
 # Description:	decor parts (titlebar, buttons, menus) of CrystalBall theme
@@ -9,7 +9,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	10/28/2012
-# Changed:	08/01/2013
+# Changed:      05/08/2014
 #-----------------------------------------------------------------------
 Piperead "echo InfoStoreAdd button_width `perl -e 'printf \"%.0f\",1.6*$[infostore.fontsize]'`"
 Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",1.8*$[infostore.fontsize]'`"
@@ -97,6 +97,7 @@ AddToDecor Default
 # Root menu
 #***********************************************************************
 MenuStyle * fvwm
+MenuStyle * Greyed gray45
 MenuStyle * BorderWidth 1, HilightBack, ActiveFore
 MenuStyle * font "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 MenuStyle * MenuColorset 5, ActiveColorset 6

@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         decor
-# Version:      1.0.0
+# Version:      1.0.1
 # Licence:      GPL 2
 #
 # Description:  decor parts (titlebar, buttons, menus) of GrayRevenge theme
@@ -9,7 +9,7 @@
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      06/15/2013
-# Changed:      11/01/2013
+# Changed:      05/08/2014
 #-----------------------------------------------------------------------
 Piperead "echo InfoStoreAdd button_width `perl -e 'printf \"%.0f\",1.6*$[infostore.fontsize]'`"
 Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",1.8*$[infostore.fontsize]'`"
@@ -97,6 +97,7 @@ AddToDecor Default
 # Root menu
 #***********************************************************************
 MenuStyle * fvwm
+MenuStyle * Greyed gray45
 MenuStyle * BorderWidth 1, HilightBack, ActiveFore
 MenuStyle * font "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 MenuStyle * MenuColorset 5, ActiveColorset 6
@@ -210,19 +211,23 @@ Mouse 0         6           SCM     FuncShowMessage  "Minimize Button Bindings" 
 
 DestroyFunc FuncRemoveAllButtonBindings
 AddToFunc   FuncRemoveAllButtonBindings
-#   Button        Context Modifi     Function
-+ I Mouse 1         1       A           -
-+ I Mouse 2         1       A           -
-+ I Mouse 3         1       A           -
-+ I Mouse 0         2       A           -
-+ I Mouse 1         4       A           -
-+ I Mouse 2         4       A           -
-+ I Mouse 2         4       M           -
-+ I Mouse 3         4       A           -
-+ I Mouse 1         6       A           -
-+ I Mouse 2         6       A           -
-+ I Mouse 3         6       A           -
-+ I Mouse 0         3       SCM         -
-+ I Mouse 0         2       SCM         -
-+ I Mouse 0         4       SCM         -
-+ I Mouse 0         6       SCM         -
+#   Button      Context     Modifi  Function
++ I Mouse 1     1           A       -
++ I Mouse 2     1           A       -
++ I Mouse 3     1           A       -
++ I Mouse 0     2           A       -
++ I Mouse 1     4           A       -
++ I Mouse 2     4           A       -
++ I Mouse 2     4           M       -
++ I Mouse 3     4           A       -
++ I Mouse 1     6           A       -
++ I Mouse 2     6           A       -
++ I Mouse 3     6           A       -
++ I Mouse 1     8           A       -
++ I Mouse 2     8           A       -
++ I Mouse 3     8           A       -
++ I Mouse 0     3           SCM     -
++ I Mouse 0     2           SCM     -
++ I Mouse 0     4           SCM     -
++ I Mouse 0     6           SCM     -
++ I Mouse 0     8           SCM     -

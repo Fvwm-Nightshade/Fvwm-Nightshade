@@ -1,15 +1,15 @@
 #-----------------------------------------------------------------------
-# File:		decor
-# Version:	0.1.6
-# Licence: 	GPL 2
+# File:         decor
+# Version:      0.1.7
+# Licence:      GPL 2
 #
-# Description:	decor parts (titlebar, buttons, menus) of Ambience theme
+# Description:  decor parts (titlebar, buttons, menus) of Ambience theme
 #
-# Author:	Thomas Funk <t.funk@web.de>
-#			Bernhard Popp <kermit.popp@googlemail.com>
+# Author:       Thomas Funk <t.funk@web.de>
+#               Bernhard Popp <kermit.popp@googlemail.com>
 #
-# Created:	06/08/2012
-# Changed:	08/01/2013
+# Created:      06/08/2012
+# Changed:      05/08/2014
 #-----------------------------------------------------------------------
 
 Piperead "echo InfoStoreAdd button_width `perl -e 'printf \"%.0f\",1.9*$[infostore.fontsize]'`"
@@ -19,13 +19,13 @@ Piperead "echo InfoStoreAdd button_width `perl -e 'printf \"%.0f\",1.9*$[infosto
 #***********************************************************************
 # HandleWidth takes a numeric argument which is the width of the border
 Style * Borderwidth 2, HandleWidth 2
-Style *	Colorset 1
+Style * Colorset 1
 
 Style * HilightColorset 2
 Style * BorderColorset 3
 Style * HilightBorderColorset 4
 
-Style *	Button 1, Button 2, Button 4, Button 6
+Style * Button 1, Button 2, Button 4, Button 6
 Style * IconTitleColorset 10
 Style * HilightIconTitleColorset 11
 
@@ -35,14 +35,14 @@ AddToDecor Default
 #***********************************************************************
 # Titlebar
 #***********************************************************************
-+ TitleStyle AllActive		Colorset 2 -- Flat
-+ TitleStyle AllInactive 	Colorset 3 -- Flat
++ TitleStyle AllActive      Colorset 2 -- Flat
++ TitleStyle AllInactive    Colorset 3 -- Flat
 + TitleStyle LeftJustified Height $[infostore.button_width] -- flat
 
 #***********************************************************************
 # Border
 #***********************************************************************
-+ BorderStyle	Simple -- HiddenHandles NoInset
++ BorderStyle    Simple -- HiddenHandles NoInset
 
 #***********************************************************************
 # Buttons
@@ -56,27 +56,27 @@ AddToDecor Default
 #                                                                  
 #
 
-+ ButtonStyle 1 Active		Colorset 2
-+ ButtonStyle 1 Inactive	Colorset 3
++ ButtonStyle 1 Active      Colorset 2
++ ButtonStyle 1 Inactive    Colorset 3
 + ButtonStyle 1 MiniIcon
 
-+ ButtonStyle 2 Active		Colorset 2
-+ ButtonStyle 2 ActiveUp	Pixmap $[FNS_THEMEDIR]/images/close.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 2 ActiveDown	Pixmap $[FNS_THEMEDIR]/images/close_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 2 Inactive	Colorset 3
-+ ButtonStyle 2 InactiveUp	Pixmap $[FNS_THEMEDIR]/images/close_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 Active      Colorset 2
++ ButtonStyle 2 ActiveUp    Pixmap $[FNS_THEMEDIR]/images/close.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 ActiveDown  Pixmap $[FNS_THEMEDIR]/images/close_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 2 Inactive    Colorset 3
++ ButtonStyle 2 InactiveUp  Pixmap $[FNS_THEMEDIR]/images/close_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 
-+ ButtonStyle 4 Active		Colorset 2
-+ ButtonStyle 4 ActiveUp	Pixmap $[FNS_THEMEDIR]/images/maximize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 4 ActiveDown	Pixmap $[FNS_THEMEDIR]/images/maximize_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 4 Inactive	Colorset 3
-+ ButtonStyle 4 InactiveUp	Pixmap $[FNS_THEMEDIR]/images/maximize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 4 Active      Colorset 2
++ ButtonStyle 4 ActiveUp    Pixmap $[FNS_THEMEDIR]/images/maximize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 4 ActiveDown  Pixmap $[FNS_THEMEDIR]/images/maximize_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 4 Inactive    Colorset 3
++ ButtonStyle 4 InactiveUp  Pixmap $[FNS_THEMEDIR]/images/maximize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 
-+ ButtonStyle 6 Active		Colorset 2
-+ ButtonStyle 6 ActiveUp	Pixmap $[FNS_THEMEDIR]/images/minimize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 6 ActiveDown	Pixmap $[FNS_THEMEDIR]/images/minimize_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
-+ ButtonStyle 6 Inactive	Colorset 3
-+ ButtonStyle 6 InactiveUp	Pixmap $[FNS_THEMEDIR]/images/minimize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 6 Active      Colorset 2
++ ButtonStyle 6 ActiveUp    Pixmap $[FNS_THEMEDIR]/images/minimize.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 6 ActiveDown  Pixmap $[FNS_THEMEDIR]/images/minimize_down.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
++ ButtonStyle 6 Inactive    Colorset 3
++ ButtonStyle 6 InactiveUp  Pixmap $[FNS_THEMEDIR]/images/minimize_inactive.svg:$[infostore.button_width]x$[infostore.button_width] -- flat
 
 + ButtonStyle All -- UseTitleStyle
 + ButtonStyle All ActiveUp (-- flat) Inactive (-- flat)
@@ -94,6 +94,7 @@ AddToDecor Default
 # Root menu
 #***********************************************************************
 MenuStyle * fvwm
+MenuStyle * Greyed gray45
 MenuStyle * BorderWidth 1, HilightBack, ActiveFore
 MenuStyle * font "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 MenuStyle * MenuColorset 5, ActiveColorset 6
@@ -119,7 +120,7 @@ MenuStyle winops VerticalItemSpacing 1 2, VerticalTitleSpacing 1 2
 #
 # +------------+
 # | ||  ||  || |
-# |	       	   |
+# |            |
 # +------------+
 #   1   2   3
 
@@ -147,59 +148,59 @@ MenuStyle winops VerticalItemSpacing 1 2, VerticalTitleSpacing 1 2
 #***********************************************************************
 # Pointer in Window Buttons
 #***********************************************************************
-#     Button	Context	Modifi 	Function
+#     Button    Context    Modifi     Function
 
 # Left button (1)
 # Button 1 shows MenuWindowOpsTrimmed menu <- click
-Mouse 1			1      	A		Menu MenuWindowOpsTrimmed
+Mouse 1            1          A        Menu MenuWindowOpsTrimmed
 # Button 2 shows Move to page menu <- click
-Mouse 2       	1      	A     	Menu MenuWindowMoveTo
+Mouse 2           1          A         Menu MenuWindowMoveTo
 # Button 3 shows WindowOps group menu <- click
-Mouse 3       	1		A		Menu MenuWindowGroupOps
+Mouse 3           1        A        Menu MenuWindowGroupOps
 
 # Close button (2)
 # Every button close window <- click
-Mouse 0 		2		A		FuncDeleteOrDestroy
+Mouse 0         2        A        FuncDeleteOrDestroy
 
 # Maximize button (4)
 # Button 1 maximize window <- click
-Mouse 1			4		A		FuncMaximize
+Mouse 1            4        A        FuncMaximize
 # Button 2 maximize window vertically <- click
-Mouse 2			4		A		FuncMaximizeVertically
+Mouse 2            4        A        FuncMaximizeVertically
 # Button 2 + Alt key maximize window horizontally <- click
-Mouse 2			4		M		FuncMaximizeHorizontally
+Mouse 2            4        M        FuncMaximizeHorizontally
 # Button 3 maximize window horizontally <- click
-Mouse 3			4		A		SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
+Mouse 3            4        A        SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
 
 # Minimize button (6)
 # Button 1 iconify window <- click
-Mouse 1			6		A		FuncIconify
+Mouse 1            6        A        FuncIconify
 # Button 2 iconify group of same window resources <- click ???
-Mouse 2			6		A		FuncIconifySameResource on
+Mouse 2            6        A        FuncIconifySameResource on
 # Button 3 iconify group of same window resources <- click ???
-Mouse 3			6		A		FuncIconifySameResource toggle
+Mouse 3            6        A        FuncIconifySameResource toggle
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT to Window Button Pointer
 #-----------------------------------------------------------------------
-#     Button	Context Modifi 	Function
-Mouse 0			1		SCM		FuncShowMessage  "Left Button Bindings" \
+#     Button    Context Modifi     Function
+Mouse 0            1        SCM        FuncShowMessage  "Left Button Bindings" \
 "Mouse 1:  WindowOps menu" \
 "Mouse 2:  Move to page menu" \
 "Mouse 3:  WindowGroupOps menu"
                                                       
-Mouse 0			2		SCM		FuncShowMessage  "Close Button Bindings" \
+Mouse 0            2        SCM        FuncShowMessage  "Close Button Bindings" \
 "Mouse 1:  Delete on click" \
 "          Destroy on double click"
                                                       
-Mouse 0			4		SCM		FuncShowMessage  "Maximize Button Bindings" \
+Mouse 0            4        SCM        FuncShowMessage  "Maximize Button Bindings" \
 "Mouse 1:       Maximize fully on click" \
 "               Maximize menu on double click" \
 "Mouse 2:       Maximize vertically" \
 "Mouse 2 + Alt: Maximize horizontally" \
 "Mouse 3:       Maximize smart"
                                                       
-Mouse 0			6		SCM		FuncShowMessage  "Minimize Button Bindings" \
+Mouse 0            6        SCM        FuncShowMessage  "Minimize Button Bindings" \
 "Mouse 1:  Iconify" \
 "Mouse 2:  Iconify on resource group" \
 "Mouse 3:  Iconify toggle resource group"
@@ -207,19 +208,23 @@ Mouse 0			6		SCM		FuncShowMessage  "Minimize Button Bindings" \
 
 DestroyFunc FuncRemoveAllButtonBindings
 AddToFunc   FuncRemoveAllButtonBindings
-#   Button		Context Modifi 	Function
-+ I Mouse 1 	1      	A		-
-+ I Mouse 2    	1      	A     	-
-+ I Mouse 3    	1 		A		-
-+ I Mouse 0 	2		A		-
-+ I Mouse 1		4		A		-
-+ I Mouse 2		4		A		-
-+ I Mouse 2		4		M		-
-+ I Mouse 3		4		A		-
-+ I Mouse 1		6		A		-
-+ I Mouse 2		6		A		-
-+ I Mouse 3		6		A		-
-+ I Mouse 0		3		SCM		-
-+ I Mouse 0		2		SCM		-
-+ I Mouse 0		4		SCM		-
-+ I Mouse 0		6		SCM		-
+#   Button      Context     Modifi  Function
++ I Mouse 1     1           A       -
++ I Mouse 2     1           A       -
++ I Mouse 3     1           A       -
++ I Mouse 0     2           A       -
++ I Mouse 1     4           A       -
++ I Mouse 2     4           A       -
++ I Mouse 2     4           M       -
++ I Mouse 3     4           A       -
++ I Mouse 1     6           A       -
++ I Mouse 2     6           A       -
++ I Mouse 3     6           A       -
++ I Mouse 1     8           A       -
++ I Mouse 2     8           A       -
++ I Mouse 3     8           A       -
++ I Mouse 0     3           SCM     -
++ I Mouse 0     2           SCM     -
++ I Mouse 0     4           SCM     -
++ I Mouse 0     6           SCM     -
++ I Mouse 0     8           SCM     -

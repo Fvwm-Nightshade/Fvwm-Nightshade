@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      1.0.3
+# Version:      1.0.4
 # Licence:      GPL 2
 #
 # Description:  colorsets of GreyRevenge theme by alecive
@@ -9,7 +9,7 @@
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      06/25/2013
-# Changed:      01/09/2014
+# Changed:      05/08/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -67,11 +67,12 @@ Colorset 2  VGradient 255 1 #3C3C3C 100 #3C3C3C, fg white, NoShape
 #-----------------------------------------------------------------------
 # window borders and titlebar, inactive
 #
-# ?Gradient = inactive windows titlebar
-# bg = inactive border line color
-#      inactive windows titlebar    _
-# hi = inactive border shade color |
-# sh = inactive border shade color _|
+# ?Gradient = background inactive windows titlebar
+# bg = inactive border line color (FvwmIconman)
+#      inactive windows titlebar            _
+# hi = inactive border (inner) shade color |
+# sh = inactive border color (Window, FvwmPager, FvwmButtons)
+#      inactive border (inner) shade color _| (FvwmPager, FvwmButtons)
 #-----------------------------------------------------------------------
 Colorset 3  VGradient 255 1 #3C3C3C 100 #3C3C3C, bg #353535, hi #3C3C3C, sh #333333, NoShape
 
@@ -110,9 +111,9 @@ Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #466464, hi white, Plain
 Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #466464, hi white, Plain
 
 #-----------------------------------------------------------------------
-# greyed menu item if needed
+# Menu title if needed
 #-----------------------------------------------------------------------
-Colorset 7 fg white, hi #a0b2c8, bg #a0b2c8, Plain
+Colorset 7 Plain
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.
@@ -127,8 +128,9 @@ Colorset 7 fg white, hi #a0b2c8, bg #a0b2c8, Plain
 # FvwmButtons, FvwmPager, can be also used for FvwmIconMan, FvwmIconBox.
 #
 # ?Gradient = inactive background
-# fg = inactive font color or border color
-# bg = background of inactive pages
+# fg = inactive font color or border color (FvwmIconMan)
+# bg = background of inactive pages  _
+#      inactive border color        |    (FvwmIconMan)
 #-----------------------------------------------------------------------
 Colorset 10 CGradient 255 1 #4C4C4C 100 #5c5c5c, bg #666666, fg gray50, hi #666666, NoShape
 
@@ -146,12 +148,14 @@ Colorset 11 CGradient 255 1 #567474 100 #466464, fg white, bg gray15, NoShape
 
 #-----------------------------------------------------------------------
 # special or funny: a gradient or a pixmap
-# May be used in certain FvwmButtons, FvwmIconMan, FvwmIconBox.
+# May be used in certain FvwmButtons, FvwmIconMan (iconified windows),
+# FvwmIconBox.
 #
 # ?Gradient = inactive background
-# fg = inactive font color
+# fg = inactive font color (FvwmIconMan)
 # optional:                   _
 # hi = inactive border shade |
+#      Pager mini windows inactive
 # sh = inactive border shade _|
 #-----------------------------------------------------------------------
 Colorset 12 VGradient 255 1 #4C4C4C 100 #5c5c5c, fg gray60, NoShape

@@ -64,7 +64,7 @@ Colorset 1 fg #737373
 Colorset 2 fg #091d68, Plain
 
 #-----------------------------------------------------------------------
-# window borders, inactive
+# window borders and titlebar, inactive
 #
 # ?Gradient = background inactive windows titlebar
 # bg = inactive border line color (FvwmIconman)

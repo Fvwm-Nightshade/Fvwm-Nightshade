@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      0.1.2
+# Version:      0.1.3
 # Licence:      GPL 2
 #
 # Description:  colorsets of FlatTab theme
 #
 # Author:       Thomas Funk <t.funk@web.de>
 # Created:      01/20/2013
-# Changed:      01/10/2014
+# Changed:      05/08/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -63,13 +63,14 @@ Colorset 1 fg #969696, bg #232323
 Colorset 2 fg white, bg #232323, Plain
 
 #-----------------------------------------------------------------------
-# window borders, inactive
+# window borders and titlebar, inactive
 #
-# ?Gradient = inactive windows titlebar
-# bg = inactive border line color
-#      inactive windows titlebar    _
-# hi = inactive border shade color |
-# sh = inactive border shade color _|
+# ?Gradient = background inactive windows titlebar
+# bg = inactive border line color (FvwmIconman)
+#      inactive windows titlebar            _
+# hi = inactive border (inner) shade color |
+# sh = inactive border color (Window, FvwmPager, FvwmButtons)
+#      inactive border (inner) shade color _| (FvwmPager, FvwmButtons)
 #-----------------------------------------------------------------------
 Colorset 3  fg #232323, bg #232323, hi #232323, sh #535353, Plain
 
@@ -108,9 +109,9 @@ Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #838383, hi white, Plain
 Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #838383, hi white, Plain
 
 #-----------------------------------------------------------------------
-# greyed menu item if needed
+# Menu title if needed
 #-----------------------------------------------------------------------
-Colorset 7 fg grey45, bg grey45, Plain
+Colorset 7 Plain
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.
@@ -125,9 +126,9 @@ Colorset 7 fg grey45, bg grey45, Plain
 # FvwmButtons, FvwmPager, can be also used for FvwmIconMan, FvwmIconBox.
 #
 # ?Gradient = inactive background
-# fg = inactive font color or border color
+# fg = inactive font color or border color (FvwmIconMan)
 # bg = background of inactive pages  _
-#      inactive border color        |
+#      inactive border color        |    (FvwmIconMan)
 #-----------------------------------------------------------------------
 Colorset 10 VGradient 255 1 #232323 50 #232323, fg #737373, bg #232323, NoShape
 
@@ -149,7 +150,7 @@ Colorset 11 VGradient 255 1 #838383 50 #838383, fg white, bg #838383, NoShape
 # FvwmIconBox.
 #
 # ?Gradient = inactive background
-# fg = inactive font color
+# fg = inactive font color (FvwmIconMan)
 # optional:                   _
 # hi = inactive border shade |
 #      Pager mini windows inactive

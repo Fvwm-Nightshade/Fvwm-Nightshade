@@ -1,16 +1,16 @@
 #-----------------------------------------------------------------------
-# File:		G2likeTopBar
-# Version:	1.0.10
-# Licence: 	GPL 2
+# File:         G2likeTopBar
+# Version:      1.0.11
+# Licence:      GPL 2
 #
-# Description:	Gnome like top bar with root menu, personal menu, systray,
-#				cpu graph, clock and logout menu
+# Description:  Gnome like top bar with root menu, personal menu, systray,
+#               cpu graph, clock and logout menu
 #
-# Author:	Thomas Funk <t.funk@web.de>	
-#			Bernhard Popp <kermit.popp@googlemail.com>
+# Author:       Thomas Funk <t.funk@web.de>    
+#               Bernhard Popp <kermit.popp@googlemail.com>
 #
-# Created:	10/09/2012
-# Changed:	08/18/2013
+# Created:      10/09/2012
+# Changed:      05/08/2014
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -22,7 +22,7 @@
 
 
 Style G2likeTopBar !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
-Style G2likeTopBar StaysOnBottom, !Iconifiable, !Maximizable, FixedSize, FixedPosition
+Style G2likeTopBar !Iconifiable, !Maximizable, FixedSize, FixedPosition
 
 #=======================================================================
 # Calculations
@@ -33,15 +33,15 @@ Style G2likeTopBar StaysOnBottom, !Iconifiable, !Maximizable, FixedSize, FixedPo
 #-----------------------------------------------------------------------
 # the count of icons visible in stalonetray must set related to the
 # screen resolution
-PipeRead 	'if [ "$[vp.width]" -gt "1600" ]; then \
-				echo InfoStoreAdd tray_icons 12; \
-			elif [ "$[vp.width]" -gt "1400" ]; then \
-				echo InfoStoreAdd tray_icons 10; \
-			elif [ "$[vp.width]" -gt "1200" ]; then \
-				echo InfoStoreAdd tray_icons 8; \
-			else \
-				echo InfoStoreAdd tray_icons 6; \
-			fi'
+PipeRead    'if [ "$[vp.width]" -gt "1600" ]; then \
+                echo InfoStoreAdd tray_icons 12; \
+            elif [ "$[vp.width]" -gt "1400" ]; then \
+                echo InfoStoreAdd tray_icons 10; \
+            elif [ "$[vp.width]" -gt "1200" ]; then \
+                echo InfoStoreAdd tray_icons 8; \
+            else \
+                echo InfoStoreAdd tray_icons 6; \
+            fi'
 
 #-----------------------------------------------------------------------
 # needed tray columns
@@ -102,14 +102,14 @@ PipeRead "echo InfoStoreAdd logout_icon `fns-find-icon -n 'system-log-out' -s 24
 # General
 #***********************************************************************
 DestroyModuleConfig G2likeTopBar: *
-*G2likeTopBar: Geometry			$[infostore.topbar_geometry]
-*G2likeTopBar: Colorset			13
-*G2likeTopBar: ActiveColorset	13
-*G2likeTopBar: PressColorset	13
+*G2likeTopBar: Geometry         $[infostore.topbar_geometry]
+*G2likeTopBar: Colorset         13
+*G2likeTopBar: ActiveColorset   13
+*G2likeTopBar: PressColorset    13
 
-*G2likeTopBar: Rows				1
-*G2likeTopBar: Columns			$[infostore.columns]
-*G2likeTopBar: Frame			0
+*G2likeTopBar: Rows             1
+*G2likeTopBar: Columns          $[infostore.columns]
+*G2likeTopBar: Frame            0
 
 #***********************************************************************
 # Buttons
@@ -119,19 +119,19 @@ DestroyModuleConfig G2likeTopBar: *
 # menu button
 #-----------------------------------------------------------------------
 *G2likeTopBar: (5x1, Colorset 13, ActiveColorset 11, \
-			Left, Padding 5 0, Title (Side) "Menu", ActionOnPress, \
-		    Icon	icon_fns.svg:24x24, \
-		    ActiveIcon	icon_fns.svg:24x24, \
-		    Action(Mouse 1) `Menu MenuRoot`)
+            Left, Padding 5 0, Title (Side) "Menu", ActionOnPress, \
+            Icon    icon_fns.svg:24x24, \
+            ActiveIcon    icon_fns.svg:24x24, \
+            Action(Mouse 1) `Menu MenuRoot`)
 
 #-----------------------------------------------------------------------
 # personal menu button
 #-----------------------------------------------------------------------
 *G2likeTopBar: (6x1, Colorset 13, ActiveColorset 11, \
-			Left, Padding 5 0, Title (Side) "Personal", ActionOnPress, \
-		    Icon	$[infostore.personal_icon], \
-		    ActiveIcon	$[infostore.personal_icon], \
-		    Action(Mouse 1) `Menu MenuFvwmPersonal`)
+            Left, Padding 5 0, Title (Side) "Personal", ActionOnPress, \
+            Icon    $[infostore.personal_icon], \
+            ActiveIcon    $[infostore.personal_icon], \
+            Action(Mouse 1) `Menu MenuFvwmPersonal`)
 
 #-----------------------------------------------------------------------
 # empty field
@@ -142,35 +142,35 @@ DestroyModuleConfig G2likeTopBar: *
 # Systray
 #-----------------------------------------------------------------------
 *G2likeTopBar: ($[infostore.tray_columns]x1, Right, Colorset 13, \
-			Swallow (UseOld, Close, Kill, Respawn) "stalonetray" \
-		    `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_max_x]x1 \
-		    --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
-		    --grow-gravity E --icon-gravity W --kludges force_icons_size -i 24 \
-		    --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
+            Swallow (UseOld, Close, Kill, Respawn) "stalonetray" \
+            `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_max_x]x1 \
+            --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
+            --grow-gravity E --icon-gravity W --kludges force_icons_size -i 24 \
+            --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
 
 #-----------------------------------------------------------------------
 # Cpuview
 #-----------------------------------------------------------------------
 *G2likeTopBar: (5x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_cpu" \
-		    `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
-		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`, \
-			Action (mouse 3) `Menu MenuCpuOps`,\
-			Action (mouse 0) Nop)
+            `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
+            -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`, \
+            Action (mouse 3) `Menu MenuCpuOps`,\
+            Action (mouse 0) Nop)
 
 #-----------------------------------------------------------------------
 # Clock
 #-----------------------------------------------------------------------
 *G2likeTopBar: ($[infostore.time_hsize]x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_clock" \
-		    `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset $[infostore.time_voffset]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
-		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
-		    Action (mouse 3) `Menu MenuClockOps`,\
-		    Action (mouse 0) Nop)
+            `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset $[infostore.time_voffset]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
+            -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
+            Action (mouse 3) `Menu MenuClockOps`,\
+            Action (mouse 0) Nop)
 
 #-----------------------------------------------------------------------
 # logout button
 #-----------------------------------------------------------------------
 *G2likeTopBar: (2x1, Colorset 13, ActiveColorset 11, ActionOnPress, \
-		    Icon	$[infostore.logout_icon], \
-		    ActiveIcon	$[infostore.logout_icon], \
-		    Action(Mouse 1) `Menu MenuFvwmQuit`)
+            Icon    $[infostore.logout_icon], \
+            ActiveIcon    $[infostore.logout_icon], \
+            Action(Mouse 1) `Menu MenuFvwmQuit`)
 

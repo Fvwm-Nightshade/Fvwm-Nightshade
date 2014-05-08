@@ -1,15 +1,15 @@
 #-----------------------------------------------------------------------
-# File:		GlobalIconMan
-# Version:	0.1.4
-# Licence: 	GPL 2
+# File:         GlobalIconMan
+# Version:      0.1.5
+# Licence:      GPL 2
 #
-# Description:	shows a windows list of all windows in the actual page
+# Description:  Shows a windows list of all windows in the actual page
 #
-# Author:	Thomas Funk <t.funk@web.de>	
-#			Bernhard Popp <kermit.popp@googlemail.com>
+# Author:       Thomas Funk <t.funk@web.de>    
+#               Bernhard Popp <kermit.popp@googlemail.com>
 #
-# Created:	06/08/2012
-# Changed:	11/09/2012
+# Created:      06/08/2012
+# Changed:      05/08/2014
 #-----------------------------------------------------------------------
 
 #***********************************************************************
@@ -18,53 +18,53 @@
 Style GlobalIconManTopBottom !Title, NeverFocus, WindowListSkip, StaysOnBottom, HandleWidth 1, !State 1
 
 DestroyModuleConfig GlobalIconManTopBottom: *
-*GlobalIconManTopBottom: 1 IconName					GlobalIconMan
-*GlobalIconManTopBottom: 1 Title					"Global IconMan"
-*GlobalIconManTopBottom: 1 ButtonGeometry			$[infostore.iconman_button_geometry]
-*GlobalIconManTopBottom: 1 ManagerGeometry			$[infostore.iconman_manager_geometry]
+*GlobalIconManTopBottom: 1 IconName                 GlobalIconMan
+*GlobalIconManTopBottom: 1 Title                    "Global IconMan"
+*GlobalIconManTopBottom: 1 ButtonGeometry           $[infostore.iconman_button_geometry]
+*GlobalIconManTopBottom: 1 ManagerGeometry          $[infostore.iconman_manager_geometry]
 
-*GlobalIconManTopBottom: 1 Colorset					10
-*GlobalIconManTopBottom: 1 IconColorset				12
-*GlobalIconManTopBottom: 1 PlainColorset			10
-*GlobalIconManTopBottom: 1 SelectColorset			11
-*GlobalIconManTopBottom: 1 FocusColorset			11
-*GlobalIconManTopBottom: 1 FocusAndSelectColorset	11
+*GlobalIconManTopBottom: 1 Colorset                 10
+*GlobalIconManTopBottom: 1 IconColorset             12
+*GlobalIconManTopBottom: 1 PlainColorset            10
+*GlobalIconManTopBottom: 1 SelectColorset           11
+*GlobalIconManTopBottom: 1 FocusColorset            11
+*GlobalIconManTopBottom: 1 FocusAndSelectColorset   11
 
-*GlobalIconManTopBottom: 1 FollowFocus				true
-*GlobalIconManTopBottom: 1 IconButton				down
-*GlobalIconManTopBottom: 1 PlainButton				up
-*GlobalIconManTopBottom: 1 SelectButton				down
-*GlobalIconManTopBottom: 1 FocusButton				up
-*GlobalIconManTopBottom: 1 FocusAndSelectButton		down
+*GlobalIconManTopBottom: 1 FollowFocus              true
+*GlobalIconManTopBottom: 1 IconButton               down
+*GlobalIconManTopBottom: 1 PlainButton              up
+*GlobalIconManTopBottom: 1 SelectButton             down
+*GlobalIconManTopBottom: 1 FocusButton              up
+*GlobalIconManTopBottom: 1 FocusAndSelectButton     down
 
-*GlobalIconManTopBottom: 1 ReliefThickness			1
-*GlobalIconManTopBottom: 1 Resolution				page
-*GlobalIconManTopBottom: 1 UseWinList				true
+*GlobalIconManTopBottom: 1 ReliefThickness          1
+*GlobalIconManTopBottom: 1 Resolution               page
+*GlobalIconManTopBottom: 1 UseWinList               true
 
-*GlobalIconManTopBottom: 1 DrawIcons				always
-*GlobalIconManTopBottom: 1 Sort						name
-*GlobalIconManTopBottom: 1 Format					"%c: %t"
-*GlobalIconManTopBottom: 1 Font						"xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+*GlobalIconManTopBottom: 1 DrawIcons                always
+*GlobalIconManTopBottom: 1 Sort                     name
+*GlobalIconManTopBottom: 1 Format                   "%c: %t"
+*GlobalIconManTopBottom: 1 Font                     "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 
-*GlobalIconManShowHide: 1 Tips						$[infostore.tips_iman]
-*GlobalIconManShowHide: 1 TipsColorset				16
-*GlobalIconManShowHide: 1 TipsFont					"xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+*GlobalIconManShowHide: 1 Tips                      $[infostore.tips_iman]
+*GlobalIconManShowHide: 1 TipsColorset              16
+*GlobalIconManShowHide: 1 TipsFont                  "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 
-*GlobalIconManTopBottom: 1 NoIconAction				"SendToModule FvwmAnimate animate"
-*GlobalIconManTopBottom: 1 Action  Mouse		1	A	sendcommand "FuncSelectWindow"
-*GlobalIconManTopBottom: 1 Action  Mouse		2	A	sendcommand "FuncIconify"
-*GlobalIconManTopBottom: 1 Action  Mouse		3	A	sendcommand "Popup MenuWindowOpsTrimmed Mouse c -102m"
-*GlobalIconManTopBottom: 1 Action  select			sendcommand "Focus"
+*GlobalIconManTopBottom: 1 NoIconAction             "SendToModule FvwmAnimate animate"
+*GlobalIconManTopBottom: 1 Action  Mouse        1    A    sendcommand "FuncSelectWindow"
+*GlobalIconManTopBottom: 1 Action  Mouse        2    A    sendcommand "FuncIconify"
+*GlobalIconManTopBottom: 1 Action  Mouse        3    A    sendcommand "Popup MenuWindowOpsTrimmed Mouse c -102m"
+*GlobalIconManTopBottom: 1 Action  select           sendcommand "Focus"
 
-*GlobalIconManTopBottom: 1 Action  Key     	Up	 N 	gotobutton Up, select
-*GlobalIconManTopBottom: 1 Action  Key     	Down N 	gotobutton Down, select
+*GlobalIconManTopBottom: 1 Action  Key         Up     N     gotobutton Up, select
+*GlobalIconManTopBottom: 1 Action  Key         Down N     gotobutton Down, select
 
 
 #-----------------------------------------------------------------------
 # Event Handler
 #-----------------------------------------------------------------------
 DestroyModuleConfig FvwmEventTopBottom: *
-*FvwmEventTopBottom: enter_window	FETB-EnterWindow
+*FvwmEventTopBottom: enter_window    FETB-EnterWindow
 
 
 #-----------------------------------------------------------------------
