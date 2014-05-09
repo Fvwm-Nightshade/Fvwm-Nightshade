@@ -1,6 +1,12 @@
 History:
 
-05/04/2014
+05/09/2014
+- adapt Colorset 7 in all themes cause current setting won't remove Rockens title color/pixmap settings
+- change wrong border color in the Clean theme
+- add new svg image for title menu
+- darken the module/pager/iconman background svgs because was too crude
+
+05/08/2014
 - add new theme 'Rocken' based on Thibaut's theme (thanks for his admition :-) )
 - add to all decors Greyed style and exchange Colorset 7 because needed for removing bg image if
   Rocken theme was loaded before.
