@@ -1,13 +1,13 @@
 ########################################################################
 # File:         colorsets
-# Version:      0.1.4
+# Version:      0.1.5
 # Licence:      GPL 2
 #
 # Description:  colorsets of Clean theme
 #
 # Author:       Thomas Funk <t.funk@web.de>
 # Created:      06/08/2012
-# Changed:      05/08/2014
+# Changed:      05/09/2014
 ########################################################################
 # REMARKS:
 #
@@ -72,7 +72,7 @@ Colorset 2  VGradient 255 2 #829aba 40 #657d9d 60 #314969, fg white, fgAlpha 85,
 # sh = inactive border color (Window, FvwmPager, FvwmButtons)
 #      inactive border (inner) shade color _| (FvwmPager, FvwmButtons)
 #-----------------------------------------------------------------------
-Colorset 3 VGradient 255 2 #98a5b5 40 #7c8999 60 #687585, bg #687585, hi #687585, sh #314969, NoShape
+Colorset 3 VGradient 255 2 #98a5b5 40 #7c8999 60 #687585, bg #687585, hi #687585, sh #312b1d, NoShape
 
 #-----------------------------------------------------------------------
 # window borders, active
@@ -111,7 +111,8 @@ Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #687585, hi orange, Plai
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Colorset 7 Plain
+Test (EnvMatch use_composite 1) Colorset 7 fg black, bg #9c9885, hi #424241, NoShape, Plain, RootTransparent, Tint #9c9885 $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 7 fg black, bg #9c9885, hi #424241, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.

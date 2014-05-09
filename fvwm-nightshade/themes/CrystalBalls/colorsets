@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      1.0.3
+# Version:      1.0.4
 # Licence:      GPL 2
 #
 # Description:  colorsets of CrystalBall theme
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      10/28/2012
-# Changed:      05/08/2014
+# Changed:      05/09/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -113,7 +113,8 @@ Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #3570be, hi #fafafa, Pla
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Colorset 7 Plain
+Test (EnvMatch use_composite 1) Colorset 7 bg #f3f3f3, fg gray15, hi #666666, NoShape, RootTransparent, Tint #e0e0e0 $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 7 bg #f3f3f3, fg gray15, hi #666666, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.

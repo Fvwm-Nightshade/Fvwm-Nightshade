@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      0.1.5
+# Version:      0.1.6
 # Licence:      GPL 2
 #
 # Description:  colorsets of Tribal theme
 #
 # Author:       Thomas Funk <t.funk@web.de>
 # Created:      09/27/2012
-# Changed:      05/08/2014
+# Changed:      05/09/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -111,7 +111,8 @@ Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #44a200, hi yellow, Plai
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Colorset 7 Plain
+Test (EnvMatch use_composite 1) Colorset 7 fg white, bg #5e5d5a, hi #4c4b46, NoShape, RootTransparent, Tint #51504d $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 7 fg white, bg #5e5d5a, hi #4c4b46, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.

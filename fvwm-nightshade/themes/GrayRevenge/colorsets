@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      1.0.4
+# Version:      1.0.5
 # Licence:      GPL 2
 #
 # Description:  colorsets of GreyRevenge theme by alecive
@@ -9,7 +9,7 @@
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      06/25/2013
-# Changed:      05/08/2014
+# Changed:      05/09/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -113,7 +113,8 @@ Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #466464, hi white, Plain
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Colorset 7 Plain
+Test (EnvMatch use_composite 1) Colorset 7 bg #4C4C4C, fg white, hi #666666, NoShape, Plain, RootTransparent, Tint #3C3C3C $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 7 bg #4C4C4C, fg white, hi #666666, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.

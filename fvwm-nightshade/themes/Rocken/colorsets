@@ -111,8 +111,8 @@ Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #969696, hi white, Plain
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 7 fg black, bg #a0a0a0, Pixmap $[FNS_THEMEDIR]/images/title.svg, Alpha $[infostore.used_menutint], NoShape
-Test (EnvMatch use_composite 0) Colorset 7 fg black, bg #a0a0a0, Pixmap $[FNS_THEMEDIR]/images/title.svg, NoShape
+Test (EnvMatch use_composite 1) Colorset 7 fg black, bg #a0a0a0, Pixmap $[FNS_THEMEDIR]/images/menu_title.svg, Alpha $[infostore.used_menutint], NoShape
+Test (EnvMatch use_composite 0) Colorset 7 fg black, bg #a0a0a0, Pixmap $[FNS_THEMEDIR]/images/menu_title.svg, NoShape
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.

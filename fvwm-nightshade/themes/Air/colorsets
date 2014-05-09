@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      0.1.5
+# Version:      0.1.6
 # Licence:      GPL 2
 #
 # Description:  colorsets of Air theme
 #
 # Author:       Thomas Funk <t.funk@web.de>
 # Created:      06/08/2012
-# Changed:      05/08/2014
+# Changed:      05/09/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -111,7 +111,8 @@ Test (EnvMatch use_composite 0) Colorset 6 fg black, bg grey95, hi #4098f0, Plai
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Colorset 7 Plain
+Test (EnvMatch use_composite 1) Colorset 7 fg black, bg #e0dfdd, hi grey95, NoShape, Plain, RootTransparent, Tint #bebdbb $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 7 fg black, bg #e0dfdd, hi grey95, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.
