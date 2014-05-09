@@ -141,12 +141,13 @@ Test (EnvMatch use_composite 0) Colorset 6
 #
 # Examples:
 # without special title
-# Colorset 7 Plain 
+Test (EnvMatch use_composite 1) Colorset 7 bg #4C4C4C, fg white, hi #666666, NoShape, Plain, RootTransparent, Tint #3C3C3C $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 7 bg #4C4C4C, fg white, hi #666666, NoShape, Plain, Tint
 # with special title
 # Test (EnvMatch use_composite 1) Colorset 7 fg black, bg #a0a0a0, Pixmap $[FNS_THEMEDIR]/images/title.svg, Alpha $[infostore.used_menutint], NoShape
 # Test (EnvMatch use_composite 0) Colorset 7 fg black, bg #a0a0a0, Pixmap $[FNS_THEMEDIR]/images/title.svg, NoShape
 #-----------------------------------------------------------------------
-Colorset 7 Plain
+Colorset 7
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.
