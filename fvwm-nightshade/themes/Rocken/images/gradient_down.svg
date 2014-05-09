@@ -8,10 +8,34 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    width="20"
    height="280"
-   id="svg4183">
+   id="svg4183"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="gradient_down.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1233"
+     inkscape:window-height="750"
+     id="namedview20"
+     showgrid="false"
+     inkscape:zoom="2.0607138"
+     inkscape:cx="-95.303319"
+     inkscape:cy="140.24266"
+     inkscape:window-x="314"
+     inkscape:window-y="205"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
   <defs
      id="defs4185">
     <linearGradient
@@ -104,4 +128,16 @@
      transform="scale(-1,-1)"
      id="rect3389"
      style="opacity:0.7692308;fill:url(#linearGradient4904);fill-opacity:1;fill-rule:nonzero;stroke:#232323;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Ebene_2">
+    <rect
+       width="19.999983"
+       height="280"
+       x="0"
+       y="0"
+       id="rect3389-7"
+       style="opacity:0.3;fill:#a0a0a0;fill-opacity:1;fill-rule:nonzero;stroke:#232323;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+  </g>
 </svg>
