@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         GlobalIconMan_ShowHide
-# Version:      0.1.5
+# Version:      0.1.6
 # Licence:      GPL 2
 #
 # Description:  Shows a windows list of all windows in the actual page
@@ -10,7 +10,7 @@
 #               Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/02/2012
-# Changed:      05/08/2014
+# Changed:      05/10/2014
 #-----------------------------------------------------------------------
 
 InfoStoreAdd y_move 0
@@ -79,12 +79,12 @@ DestroyModuleConfig FvwmEventShowHide: *
 #-----------------------------------------------------------------------
 DestroyFunc FESH-EnterWindow
 AddToFunc   FESH-EnterWindow
-+ I PointerWindow (GlobalIconManShowHide, !State 1) Schedule 100 FuncShowWindow
++ I PointerWindow (GlobalIconManShowHide, !State 1) Schedule 200 FuncShowWindow
 
 
 DestroyFunc FESH-LeaveWindow
 AddToFunc   FESH-LeaveWindow
-+ I Prev (GlobalIconManShowHide, State 1) Schedule 100 FuncHideWindow
++ I Prev (GlobalIconManShowHide, State 1) Schedule 200 FuncHideWindow
 
 
 DestroyFunc FuncShowWindow
