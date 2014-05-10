@@ -1,5 +1,10 @@
 History:
 
+05/10/2014
+- change some colors in CrystalBall because they were too crude
+- fix annoying bug that Iconman in Horizontal and Vertical layout 
+  moving up and down very often after enter it with mouse
+
 05/09/2014
 - adapt Colorset 7 in all themes cause current setting won't remove Rockens title color/pixmap settings
 - change wrong border color in the Clean theme
