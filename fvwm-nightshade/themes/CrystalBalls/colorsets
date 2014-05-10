@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      1.0.4
+# Version:      1.0.5
 # Licence:      GPL 2
 #
 # Description:  colorsets of CrystalBall theme
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      10/28/2012
-# Changed:      05/09/2014
+# Changed:      05/10/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -74,7 +74,7 @@ Colorset 2  VGradient 255 3 #c3c1c4 35 #b8b8b8 35 #a8a8a8 30 #959595, fg gray15,
 # sh = inactive border color (Window, FvwmPager, FvwmButtons)
 #      inactive border (inner) shade color _| (FvwmPager, FvwmButtons)
 #-----------------------------------------------------------------------
-Colorset 3  VGradient 255 2 #ffffff 70 #fafafa 30 #eeeeee, bg #e8e8e8, hi #aaaaaa, sh #f0f0f0, NoShape
+Colorset 3  VGradient 255 2 #f3f3f3 80 #eeeeee 20 #e0e0e0, bg #e8e8e8, hi #aaaaaa, sh #c7c7c7, NoShape
 
 #-----------------------------------------------------------------------
 # window borders, active
@@ -98,8 +98,8 @@ Colorset 4 hi #f0f0f0, sh #aaaaaa, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 5 VGradient 255 2 #e0e0e0 5 #f3f3f3 95 #f9f9f9, bg #e8e8e8, fg gray15, hi #666666, NoShape, RootTransparent, Tint #e0e0e0 $[infostore.used_menutint]
-Test (EnvMatch use_composite 0) Colorset 5 VGradient 255 2 #e0e0e0 5 #f3f3f3 95 #f9f9f9, bg #e8e8e8, fg gray15, hi #666666, NoShape
+Test (EnvMatch use_composite 1) Colorset 5 VGradient 255 2 #e0e0e0 5 #ededed 95 #f3f3f3, bg #e8e8e8, fg gray15, hi #666666, NoShape, RootTransparent, Tint #e0e0e0 $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 5 VGradient 255 2 #e0e0e0 5 #ededed 95 #f3f3f3, bg #e8e8e8, fg gray15, hi #666666, NoShape
 
 #-----------------------------------------------------------------------
 # active/hilighted menu item
@@ -133,7 +133,7 @@ Test (EnvMatch use_composite 0) Colorset 7 bg #f3f3f3, fg gray15, hi #666666, No
 # bg = background of inactive pages  _
 #      inactive border color        |    (FvwmIconMan)
 #-----------------------------------------------------------------------
-Colorset 10 CGradient 255 2 #e0e0e0 5 #f3f3f3 95 #f9f9f9, fg gray50, bg #e8e8e8, NoShape
+Colorset 10 CGradient 255 2 #e0e0e0 5 #ededed 95 #f3f3f3, fg gray50, bg #e8e8e8, NoShape
 
 #-----------------------------------------------------------------------
 # default for active modules
@@ -145,7 +145,7 @@ Colorset 10 CGradient 255 2 #e0e0e0 5 #f3f3f3 95 #f9f9f9, fg gray50, bg #e8e8e8,
 # bg = active border color (mouse) _| _
 #      active border color           |
 #-----------------------------------------------------------------------
-Colorset 11 CGradient 255 1 #6b92c6 100 #4a71ad, fg gray15, bg white, NoShape
+Colorset 11 CGradient 255 1 #7798c6 100 #5f7ead, fg gray15, bg white, NoShape
 
 #-----------------------------------------------------------------------
 # special or funny: a gradient or a pixmap
@@ -168,7 +168,7 @@ Colorset 12 VGradient 255 2 #a0a0a0 5 #b3b3b3 95 #b9b9b9, fg gray35, NoShape
 # fg = font color
 # bg = background color
 #-----------------------------------------------------------------------
-Colorset 13 VGradient 255 2 #e0e0e0 5 #f3f3f3 95 #f9f9f9, fg gray15, bg #e5e4e0, NoShape
+Colorset 13 VGradient 255 1 #ededed 100 #f3f3f3, fg gray15, bg #e5e4e0, NoShape
 
 #-----------------------------------------------------------------------
 # default #2
