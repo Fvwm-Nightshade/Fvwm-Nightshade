@@ -4,6 +4,7 @@ History:
 - change some colors in CrystalBall because they were too crude
 - fix annoying bug that Iconman in Horizontal and Vertical layout 
   moving up and down very often after enter it with mouse
+- change slackware package search engine in INSTALL because old link is closed
 
 05/09/2014
 - adapt Colorset 7 in all themes cause current setting won't remove Rockens title color/pixmap settings
