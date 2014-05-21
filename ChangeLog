@@ -1,5 +1,8 @@
 History:
 
+05/21/2014
+- adapt Tribal Gtk3 parts to fit appearance of Gtk2 parts and vice versa
+
 05/11/2014
 - add Gtk2+3 theme based on MediterraneanNight Series v2.0 by Rafa Cobreros
   for Tribal
