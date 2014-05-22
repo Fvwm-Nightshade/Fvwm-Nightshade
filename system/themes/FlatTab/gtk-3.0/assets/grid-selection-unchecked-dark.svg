@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.1"
+   width="40"
+   height="40"
+   viewBox="0 0 40 40"
+   id="svg2">
+  <metadata
+     id="metadata18">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient4421">
+      <stop
+         id="stop7"
+         style="stop-color:#262626;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop9"
+         style="stop-color:#393939;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       x1="1.429"
+       x2="38.483002"
+       id="linearGradient3078"
+       xlink:href="#linearGradient4421"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.875,0,0,0.875,2.5385,-37.461334)" />
+  </defs>
+  <rect
+     width="32.422249"
+     height="32.422249"
+     rx="0.875"
+     x="3.7888751"
+     y="-36.211124"
+     transform="matrix(0,1,-1,0,0,0)"
+     id="rect12"
+     style="fill:url(#linearGradient3078)" />
+  <path
+     d="M 6.875,2.5 C 4.45125,2.5 2.5,4.45125 2.5,6.875 l 0,26.25 c 0,2.42375 1.95125,4.375 4.375,4.375 l 26.25,0 c 2.42375,0 4.375,-1.95125 4.375,-4.375 l 0,-26.25 C 37.5,4.45125 35.54875,2.5 33.125,2.5 z m 0,1.7969 26.25,0 c 1.211875,0 2.65625,1.366225 2.65625,2.5781 l 0,26.25 c 0,1.211875 -1.444375,2.656237 -2.65625,2.656237 l -26.25,0 c -1.211875,0 -2.578125,-1.444362 -2.578125,-2.656237 l 0,-26.25 c 0,-1.211875 1.36625,-2.5781 2.578125,-2.5781 z"
+     id="path14"
+     style="fill:#1f1f1f" />
+</svg>

@@ -1,0 +1,20 @@
+FlatTab theme
+=============
+
+This theme is based on two other themes:
+
+Gtk2: elementary. Designed and developed by Daniel Foré <Daniel.p.Fore@gmail.com>
+Gtk3: Evolve. Designed and developed by Satyajit Sahoo <satyajit.happy@gmail.com>
+
+The Theme consists only Gtk2 and Gtk3. If you want it for metacity, unity and xfwm4
+please download the original package from the following links and copy them into 
+your ~/.themes directory:
+
+elementary: http://danrabbit.deviantart.com/art/elementary-gtk-theme-83104033
+Evolve: http://satya164.deviantart.com/art/Evolve-GTK3-Theme-264780816
+
+License: both GPL3
+
+Please do not report bugs to them. Instead send an email to <fvwmnightshade@gmail.com>
+
+Thanks
