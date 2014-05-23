@@ -1,5 +1,8 @@
 History:
 
+05/23/2014
+- fix too dark insensitive fore color in menus
+
 05/22/2014
 - add Gtk2 + 3 theme based on elementary (Gtk2) and Evolve (Gtk3) for FlatTab
 - add theme.index to Tribal theme
