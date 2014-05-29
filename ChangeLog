@@ -1,5 +1,10 @@
 History:
 
+05/30/2014
+- fix other too dark insensitive fore color in menus
+- add README.DarkThemes to help fixing ugly application coloring while
+  using dark themes.
+
 05/23/2014
 - fix too dark insensitive fore color in menus
 
