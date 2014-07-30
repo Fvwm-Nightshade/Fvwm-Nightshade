@@ -1,5 +1,15 @@
 History:
 
+07/30/2014
+- debianize the package correctly. Add changelog (template), copyright, 
+  rules, source/format, watch and update control file.
+- Updating dependencies in README, INSTALL, fvwm-nightshade.spec,
+  fvwm-nightshade.ebuild and PKGBUILD_FNS
+- Updating FuncAppCheck with new dependencies
+- Add FuncStartMountDaemon to start pcmanfm as daemon to support hotplug
+  mounting
+- Updating NEWS about hotplug mounting
+
 05/30/2014
 - fix other too dark insensitive fore color in menus
 - add README.DarkThemes to help fixing ugly application coloring while
