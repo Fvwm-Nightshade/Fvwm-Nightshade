@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20140511
+InfoStoreAdd ns_version 0.7.7.20140730
 # Copyright (C) 2014
 #
 # Authors:
@@ -1134,6 +1134,9 @@ AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # start FvwmTransSet if composite manager is activated
 + I TestRC (Match) FuncStartFvwmTransSet
+#-----------------------------------------------------------------------
+# Start pcmanfm as daemon for mounting
++ I Test (x pcmanfm) FuncStartMountDaemon
 
 #-----------------------------------------------------------------------
 # load layout
@@ -1233,6 +1236,15 @@ AddToFunc   FuncKillCompmgr
                 if [ ! -z `pidof compton` ]; then \
                     killall compton; \
                 fi; \
+            fi'
+
+#-----------------------------------------------------------------------
+# Start mount daemon if not already running
+#-----------------------------------------------------------------------
+DestroyFunc FuncStartMountDaemon
+AddToFunc   FuncStartMountDaemon
++ I PipeRead 'if [ -z `pidof pcmanfm` ]; then \
+                pcmanfm -d &; \
             fi'
 
 #-----------------------------------------------------------------------
@@ -1410,9 +1422,13 @@ AddToFunc   FuncAppCheck
 # systray app nm-applet
 + I Test (!x nm-applet) FuncPrintMsg "AppCheck" "nm-applet (systray network control) not installed"
 # systray app bluetooth-applet
-+ I Test (!x bluetooth-applet) FuncPrintMsg "AppCheck" "bluetooth-applet (systray bluetooth-applet) not installed"
++ I Test (!x blueman) FuncPrintMsg "AppCheck" "bluetooth-applet (systray blueman) not installed"
+# systray clipboard
++ I Test (!x clipit) FuncPrintMsg "AppCheck" "clipit (clipboard) not installed"
 # Suspend, hibernate pm-is-supported
 + I Test (!x pm-is-supported) FuncPrintMsg "AppCheck" "pm-utils (suspend, hibernate) not installed"
+# Mount daemon pcmanfm
++ I Test (!x pcmanfm) FuncPrintMsg "AppCheck" "pcmanfm (mounting) not installed"
 
 #-----------------------------------------------------------------------
 # Starts system tray applets like network, sound, etc
@@ -1428,7 +1444,7 @@ AddToFunc   FuncStartSystrayApplets
 # network
 + I Test (x nm-applet) exec exec nm-applet
 # bluetooth
-+ I Test (x bluetooth-applet) exec exec bluetooth-applet
++ I Test (x blueman) exec exec blueman
 
 #-----------------------------------------------------------------------
 # Starts programs while startup
