@@ -1423,8 +1423,10 @@ AddToFunc   FuncAppCheck
 + I Test (!x nm-applet) FuncPrintMsg "AppCheck" "nm-applet (systray network control) not installed"
 # systray app bluetooth-applet
 + I Test (!x blueman) FuncPrintMsg "AppCheck" "bluetooth-applet (systray blueman) not installed"
-# systray clipboard
+# systray clipboard 1 (main)
 + I Test (!x clipit) FuncPrintMsg "AppCheck" "clipit (clipboard) not installed"
+# systray clipboard 2 (for gentoo)
++ I TestRc (Match) Test (!x parcellite) FuncPrintMsg "AppCheck" "parcellite (clipboard) not installed"
 # Suspend, hibernate pm-is-supported
 + I Test (!x pm-is-supported) FuncPrintMsg "AppCheck" "pm-utils (suspend, hibernate) not installed"
 # Mount daemon pcmanfm
@@ -1445,6 +1447,9 @@ AddToFunc   FuncStartSystrayApplets
 + I Test (x nm-applet) exec exec nm-applet
 # bluetooth
 + I Test (x blueman) exec exec blueman
+# clipboard
++ I Test (x clipit) exec exec clipit
++ I TestRc (!Match) Test (x parcellite) exec exec parcellite
 
 #-----------------------------------------------------------------------
 # Starts programs while startup
