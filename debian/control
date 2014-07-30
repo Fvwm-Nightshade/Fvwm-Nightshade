@@ -1,40 +1,43 @@
-Package: fvwm-nightshade
-Version:
-Architecture: all
+Source: fvwm-nightshade
 Maintainer: Thomas Funk <t.funk@web.de>
-Installed-Size:
-Depends: fvwm (>> 1:2.6.4)|fvwm (>> 2.6.4), python (<< 3), python-xdg, xterm, conky, xscreensaver, feh, imagemagick, librsvg2-bin, stalonetray, cpufrequtils, x11-apps, mplayer, python-mutagen, python-simplejson
-Recommends: network-manager-gnome, pcmanfm
-Suggests: volumeicon, fdpowermon, bluetooth-applet, pm-utils, lxapearance, qt3-qtconfig, qt4.qtconfig, compton | xcompmgr
 Section: x11
 Priority: optional
+Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 9), python (<< 3)
 Homepage: https://github.com/Fvwm-Nightshade
-Description: A lightweight but feature rich and good looking configuration of Fvwm
- Featurelist of Fvwm Nightshade:
- -------------------------------
- - Own user configuration directory ~/.fvwm-nightshade
- - Own entry "Fvwm-Nightshade" in graphical login managers
- - Config tool for base settings (Font, layouts, etc)
- - 4 virtual desktop pages
- - Taskbar to show running apps per page
- - Three different layouts: horizontal, vertical and G2like
- - Personal menu via FNS-Script-PersonalMenu
- - Background configurable with thumb browser (imagemagick and feh)
- - Animation control of window moves
- - Some themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab, Air and GrayRevenge). 
-   Can be changed on the fly without restart
- - Autostart possibility (starting apps while startup)
- - Help messages for mouse and key bindings in titlebar, window, corners, sides 
-   and icon
- - Dynamic menus
- - Governor-tool FNS-Script-CPU-Performance to handle cpufreq
- - Create thumbs with mini icon and name for iconified applications 
-   instead of their icon
- - Localization support for German, French and Spanish
- - Smart maximize windows - move and resize windows to the largest free 
-   area of a desktop/page
- - New set of icons for menus and internal apps
- - Own XDG applications menu with it's own directory files
- - Support for shadows and transparency with XcompMgr and Compton
- - Support for hald and upower for Suspend/Hibernate
 
+Package: fvwm-nightshade
+Architecture: all
+Depends:    ${misc:Depends}, ${perl:Depends}, ${python:Depends},
+            fvwm (>> 1:2.6.4) | fvwm (>> 2.6.4),
+            conky,
+            cpufrequtils,
+            feh,
+            gksu,
+            imagemagick,
+            librsvg2-bin,
+            mplayer,
+            pcmanfm,
+            python (<< 3),
+            python-mutagen,
+            python-simplejson,
+            python-xdg,
+            stalonetray,
+            xscreensaver,
+            xterm,
+            x11-apps
+Recommends: network-manager-gnome,
+            pm-utils,
+            lxapearance,
+            qt4-qtconfig
+Suggests:   volumeicon-alsa,
+            clipit,
+            fdpowermon,
+            blueman,
+            xneurs, 
+            compton | xcompmgr
+            
+Description: Lightweight but feature rich and good looking configuration of Fvwm
+ It contains many useful things to make work and life easier with a flavour of a 
+ modern desktop. But it can be configure by your own. It is good documented and 
+ shows you what is possible with this powerful window manager.
