@@ -27,13 +27,18 @@ RDEPEND="${PYTHON_DEPS}
 	x11-misc/stalonetray
 	x11-misc/xscreensaver
 	x11-terms/xterm
+	x11-misc/pcmanfm
+	x11-libs/gksu
 	app-admin/conky
 	sys-power/cpufrequtils
 	dev-python/pyxdg
-	pcmanfm? ( x11-misc/pcmanfm )
+	dev-python/simplejson
+	media-libs/mutagen
 	nm-gnome? ( gnome-extra/nm-applet )
+	blueman? ( net-wireless/blueman )
 	volumeicon? ( media-sound/volumeicon )
 	pm-utils? ( sys-power/pm-utils )
+	parcellite? ( x11-misc/parcellite )
 	lxappearance? ( lxde-base/lxappearance )
 	qtconfig? ( dev-qt/qtgui )
 	xcompmgr? ( x11-misc/xcompmgr ) 

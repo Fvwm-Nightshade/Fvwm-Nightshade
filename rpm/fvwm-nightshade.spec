@@ -30,6 +30,7 @@ Requires:	beesu
 Requires:	mplayer
 Requires:	python-mutagen
 Requires:	python-simplejson
+Requires:	pcmanfm
 
 %description
 A lightweight but feature rich and good looking configuration of Fvwm.

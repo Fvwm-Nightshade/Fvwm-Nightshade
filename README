@@ -127,20 +127,23 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Restart possibility for Conky clock and CPU applet in panel
 - Support for shadows and transparency with XcompMgr and Compton
 - Support for hald and upower for Suspend/Hibernate
+- Support for hotplug mounting (i.e. usb)
 
 
 
 Requirements:
 =============
-Required:        Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
-                 xscreensaver, feh, imagemagick, librsvg2, xwd,
-                 stalonetray, cpufrequtils*, gksu
+Required:       Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
+                xscreensaver, feh, imagemagick, librsvg2-bin, xwd,
+                stalonetray, cpufrequtils*, gksu, mplayer, pcmanfm,
+                python-mutagen, python-simplejson
 
-Recommended:     gnomes network manager, Volume Icon
+Recommended:    gnome-network-manager, pm-utils, lxapearance,
+                qtconfig for qt4
 
-Useful:          fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
-                 qtconfig for qt3, qtconfig for qt4, xneurs, xcompmgr or compton
-  
+Suggested:      volumeicon-alsa, fdpowermon, blueman, clipit, xneur, 
+                compton or xcompmgr
+
 * unfortunatelly not usable in Arch at the moment. They have changed from
   cpufrequtils to cpupower but it's not supported at the moment 
   -> see issue #40 in the bugtracker.
