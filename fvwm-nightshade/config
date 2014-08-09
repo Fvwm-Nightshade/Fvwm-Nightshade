@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20140730
+InfoStoreAdd ns_version 0.7.7.20140810
 # Copyright (C) 2014
 #
 # Authors:
@@ -1244,7 +1244,7 @@ AddToFunc   FuncKillCompmgr
 DestroyFunc FuncStartMountDaemon
 AddToFunc   FuncStartMountDaemon
 + I PipeRead 'if [ -z `pidof pcmanfm` ]; then \
-                pcmanfm -d &; \
+                nohup nice pcmanfm -d >>/dev/null 2>>/dev/null& \
             fi'
 
 #-----------------------------------------------------------------------
@@ -1417,18 +1417,18 @@ AddToFunc   FuncAppCheck
 + I Test (!x stalonetray) FuncPrintMsg "AppCheck" "stalonetray (systray) not installed"
 # systray app volumeicon
 + I Test (!x volumeicon) FuncPrintMsg "AppCheck" "volumeicon (systray volume control) not installed"
-# systray app fdpowermon
-+ I Test (!x fdpowermon) FuncPrintMsg "AppCheck" "fdpowermon (systray pm control) not installed"
 # systray app nm-applet
 + I Test (!x nm-applet) FuncPrintMsg "AppCheck" "nm-applet (systray network control) not installed"
 # systray app bluetooth-applet
-+ I Test (!x blueman) FuncPrintMsg "AppCheck" "bluetooth-applet (systray blueman) not installed"
++ I Test (!x blueman-applet) FuncPrintMsg "AppCheck" "bluetooth-applet (systray blueman) not installed"
 # systray clipboard 1 (main)
 + I Test (!x clipit) FuncPrintMsg "AppCheck" "clipit (clipboard) not installed"
 # systray clipboard 2 (for gentoo)
 + I TestRc (Match) Test (!x parcellite) FuncPrintMsg "AppCheck" "parcellite (clipboard) not installed"
-# Suspend, hibernate pm-is-supported
-+ I Test (!x pm-is-supported) FuncPrintMsg "AppCheck" "pm-utils (suspend, hibernate) not installed"
+# systray xfce4 power manager
++ I Test (!x xfce4-power-manager) FuncPrintMsg "AppCheck" "xfce4-power-manager (suspend, hibernate) not installed"
+# systray app fdpowermon
++ I TestRc (Match) Test (!x fdpowermon) FuncPrintMsg "AppCheck" "fdpowermon (systray pm control) not installed"
 # Mount daemon pcmanfm
 + I Test (!x pcmanfm) FuncPrintMsg "AppCheck" "pcmanfm (mounting) not installed"
 
@@ -1441,12 +1441,13 @@ AddToFunc   FuncStartSystrayApplets
 + I Test (EnvMatch systray_started 0 ) break
 # volume
 + I Test (x volumeicon) exec exec volumeicon
-# battery
-+ I Test (x fdpowermon) exec exec fdpowermon
+# battery and suspend/hibernate
++ I Test (x xfce4-power-manager) exec exec xfce4-power-manager
++ I TestRc (!Match) Test (x fdpowermon) exec exec fdpowermon
 # network
 + I Test (x nm-applet) exec exec nm-applet
 # bluetooth
-+ I Test (x blueman) exec exec blueman
++ I Test (x blueman-applet) exec exec blueman-applet
 # clipboard
 + I Test (x clipit) exec exec clipit
 + I TestRc (!Match) Test (x parcellite) exec exec parcellite
@@ -1464,7 +1465,7 @@ AddToFunc   FuncAutoStartPrograms
 #-----------------------------------------------------------------------
 DestroyFunc FuncFvwmConsole
 AddToFunc   FuncFvwmConsole
-+ I Module FvwmConsole -fg $[fg.cs22] -bg $[bg.cs22] $*
++ I Module FvwmConsole -terminal xterm -fg $[fg.cs22] -bg $[bg.cs22] $*
 
 #-----------------------------------------------------------------------
 # Starts a xterm to run something in it
@@ -1636,7 +1637,7 @@ AddToFunc   DeThumbnail
 + I UnsetEnv app_name
 
 #-----------------------------------------------------------------------
-# Suspend the machine
+# Suspend the machine. Only as workaround if xfce4-power-manager not installed
 #-----------------------------------------------------------------------
 DestroyFunc FuncSuspend
 AddToFunc   FuncSuspend
@@ -1650,7 +1651,7 @@ AddToFunc   FuncSuspend
 + I TestRc (!Match) FuncShowMessage "Suspend Info" "Suspend not possible - hald nor upower found!"
 
 #-----------------------------------------------------------------------
-# Hibernate the machine
+# Hibernate the machine. Only as workaround if xfce4-power-manager not installed
 #-----------------------------------------------------------------------
 DestroyFunc FuncHibernate
 AddToFunc   FuncHibernate
@@ -2395,9 +2396,12 @@ AddToFunc   FuncMenuFvwmQuit
 + I AddToMenu MenuFvwmQuit "$[gt.&Restart Fvwm]%restart.svg:$[infostore.MenuIconSize]%"         FuncRestart
 + I AddToMenu MenuFvwmQuit "" Nop
 + I AddToMenu MenuFvwmQuit "$[gt.Re&fresh Screen]%refresh.svg:$[infostore.MenuIconSize]%"       Refresh
-+ I AddToMenu MenuFvwmQuit "" Nop
-+ I AddToMenu MenuFvwmQuit "$[gt.&Suspend System]%suspend.svg:$[infostore.MenuIconSize]%"       FuncSuspend
-+ I AddToMenu MenuFvwmQuit "$[gt.&Hibernate System]%hibernate.svg:$[infostore.MenuIconSize]%"   FuncHibernate
++ I Test (!x xfce4-power-manager) \
+    AddToMenu MenuFvwmQuit "" Nop
++ I TestRc (Match) KeepRc \
+    AddToMenu MenuFvwmQuit "$[gt.&Suspend System]%suspend.svg:$[infostore.MenuIconSize]%"       FuncSuspend
++ I TestRc (Match) \
+    AddToMenu MenuFvwmQuit "$[gt.&Hibernate System]%hibernate.svg:$[infostore.MenuIconSize]%"   FuncHibernate
 + I AddToMenu MenuFvwmQuit "" Nop
 + I AddToMenu MenuFvwmQuit "$[gt.&Yes, Really Quit]%hook.svg:$[infostore.MenuIconSize]%"        Quit
 + I AddToMenu MenuFvwmQuit "$[gt.&No, Don't Quit]%exit.svg:$[infostore.MenuIconSize]%"          Nop
