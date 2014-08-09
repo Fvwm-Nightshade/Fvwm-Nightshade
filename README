@@ -130,7 +130,6 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Support for hotplug mounting (i.e. usb)
 
 
-
 Requirements:
 =============
 Required:       Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
@@ -138,11 +137,11 @@ Required:       Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky,
                 stalonetray, cpufrequtils*, gksu, mplayer, pcmanfm,
                 python-mutagen, python-simplejson
 
-Recommended:    gnome-network-manager, pm-utils, lxapearance,
-                qtconfig for qt4
+Recommended:    gnome-network-manager, pm-utils or xfce4-power-manager, 
+                lxapearance, qtconfig for qt4
 
-Suggested:      volumeicon-alsa, fdpowermon, blueman, clipit, xneur, 
-                compton or xcompmgr
+Suggested:      volumeicon-alsa, fdpowermon (for pm-utils), blueman, 
+                clipit, xneur, compton or xcompmgr
 
 * unfortunatelly not usable in Arch at the moment. They have changed from
   cpufrequtils to cpupower but it's not supported at the moment 

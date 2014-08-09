@@ -1,5 +1,20 @@
 History:
 
+08/10/2014
+- add themes installation to Makefile.
+- fix broken 'make deb' because of the debianization of FNS
+- fix annoying flip of IconMan
+- fix bug that pcmanfm doesn't start as daemon
+- set terminal hard to xterm for FvwmConsole to prevent a no-start
+- fix bug in FvwmTransSet whether wmClass is empty after closing of an app.
+- update README, NEWS and INSTALL.
+
+08/08/2014
+- add xfce4 power manager as an optional exchange for pm-utils to 
+  FuncAppCheck, FuncStartSystrayApplets, FuncSuspend and FuncHibernate.
+  Also, if xfce4 power manager is installed no Suspend and hibernate 
+  entry in Quit menu is available.
+
 07/30/2014
 - debianize the package correctly. Add changelog (template), copyright, 
   rules, source/format, watch and update control file.
