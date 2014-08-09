@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         GlobalIconMan_ShowHide
-# Version:      0.1.6
+# Version:      0.1.7
 # Licence:      GPL 2
 #
 # Description:  Shows a windows list of all windows in the actual page
@@ -10,7 +10,7 @@
 #               Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/02/2012
-# Changed:      05/10/2014
+# Changed:      08/09/2014
 #-----------------------------------------------------------------------
 
 InfoStoreAdd y_move 0
@@ -79,22 +79,27 @@ DestroyModuleConfig FvwmEventShowHide: *
 #-----------------------------------------------------------------------
 DestroyFunc FESH-EnterWindow
 AddToFunc   FESH-EnterWindow
-+ I PointerWindow (GlobalIconManShowHide, !State 1) Schedule 200 FuncShowWindow
+#+ I PointerWindow (GlobalIconManShowHide, !State 1) Schedule 200 FuncShowWindow
++ I PointerWindow (GlobalIconManShowHide, !State 1) FuncShowWindow
 
 
 DestroyFunc FESH-LeaveWindow
 AddToFunc   FESH-LeaveWindow
-+ I Prev (GlobalIconManShowHide, State 1) Schedule 200 FuncHideWindow
+#+ I Prev (GlobalIconManShowHide, State 1) Schedule 200 FuncHideWindow
++ I Prev (GlobalIconManShowHide, State 1) FuncHideWindow
 
 
 DestroyFunc FuncShowWindow
 AddToFunc   FuncShowWindow
+#+ I echo w.height: $[w.height]
+#+ I echo fontsize: $[infostore.fontsize]
 + I ThisWindow (GlobalIconManShowHide, !State 1) \
     PipeRead 'if [ $[w.height] -gt $(($[infostore.fontsize]*2)) ]; then \
                 echo InfoStoreAdd y_move $(($[w.height]-($[infostore.fontsize]+9))); \
             else \
                 echo InfoStoreAdd y_move 0; \
             fi'
+#+ I echo y_move: $[infostore.y_move]
 + I ThisWindow (GlobalIconManShowHide) AnimatedMove w+0 w+$[infostore.y_move]p
 + I Schedule 70 ThisWindow (GlobalIconManShowHide) Pick (CirculateHit) Layer 0 6
 + I All (GlobalIconManShowHide) State 1 True
@@ -102,6 +107,7 @@ AddToFunc   FuncShowWindow
 
 DestroyFunc FuncHideWindow
 AddToFunc   FuncHideWindow
+#+ I echo yStartIman: $[infostore.yStartIman]
 + I Prev (GlobalIconManShowHide) Pick (CirculateHit) Layer 0 2
 + I Prev (GlobalIconManShowHide, State 1) AnimatedMove w+0 -$[infostore.yStartIman]p
 + I All (GlobalIconManShowHide) State 1 False
