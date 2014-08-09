@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #-----------------------------------------------------------------------
 # File:         FvwmTransSet
-# Version:      1.0.1
+# Version:      1.0.2
 # Licence:      GPL 2
 #
 # Description:  Module to set true transparency to windows if a composite
@@ -11,7 +11,7 @@
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      2013-11-30
-# Changed:      2014-01-10
+# Changed:      2014-08-09
 #-----------------------------------------------------------------------
 # To get a man page:
 # pod2man --center=" " --section=1 --release="1.0.0" FvwmTransSet > FvwmTransSet.1
@@ -46,6 +46,7 @@ my $lastWinId = 0;
 my $pageTrackerWL;
 my $pageInfo;
 my %winList = ();
+my $global_wmClass;
 
 
 my $module = new FVWM::Module(
@@ -209,6 +210,8 @@ sub updateWinList {
         }
         elsif ($event->type == M_DESTROY_WINDOW) {
             showDebugMsg("---------M_DESTROY_WINDOW----------");
+            $global_wmClass = $winList{$win_id}->{'res_class_name'};
+            showDebugMsg("global_wmClass: $global_wmClass");
             delete $winList{$win_id};
         }
     }
@@ -282,7 +285,17 @@ sub getClass {
     $result =~ s/\"|\s//g;
     chomp($result);
     my @wmClass = split(/,/,$result);
-    return $wmClass[1]
+    my $wmClass = $wmClass[1];
+    showDebugMsg("------- getClass -------");
+    showDebugMsg("wmClass: @wmClass");
+    unless (defined($wmClass)) {
+        $wmClass = $global_wmClass;
+    } else {
+        if ($wmClass eq "") {
+            $wmClass = $global_wmClass;
+        }
+    }
+    return $wmClass;
 }
 
 sub getWindowState {
@@ -294,6 +307,8 @@ sub getWindowState {
 
 sub matchExcludes {
     my ($win_id) = @_;
+    showDebugMsg("----- matchExcludes-----");
+    showDebugMsg("win_id: $win_id");
     my $wmClass = getClass($win_id);
     foreach my $exclude (@Excludes) {
         if ($wmClass eq $exclude) {
