@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      10/26/2013
+# Changed:      08/08/2014
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -36,8 +36,13 @@ man1dir 	= $(mandir)/man1
 docdir 		= $(datadir)/doc
 localedir	= $(datadir)/locale
 xdgdir		= $(datadir)/desktop-directories
+themesdir 	= $(datadir)/themes
 userdir		= ~
 fnsuserdir	= $(userdir)/.$(package)
+
+ifeq ($(local),yes)
+	themesdir = $(userdir)/.themes
+endif
 
 pkgdatadir 	= $(datadir)/$(package)
 pkgdocdir 	= $(docdir)/$(package)
@@ -52,6 +57,8 @@ fns_files 		= $(shell find $(package) -type f|cut -d'/' -f 2-)
 fns_directories = $(shell find $(package)/ -type d|sort -r|cut -d'/' -f 2-)
 fns_mofiles 	= $(shell ls -1 po |grep ".mo")
 fns_xdgfiles	= $(shell find system/desktop-directories -type f|cut -d'/' -f 3-)
+fns_themesfiles	= $(shell find system/themes -type f|cut -d'/' -f 3-)
+fns_themesdirs	= $(shell find system/themes/ -type d|sort -r|cut -d'/' -f 3-)
 id				= $(shell id -un)
 
 fvwm_path	?= $(DESTDIR)/usr/share/fvwm
@@ -215,6 +222,15 @@ build-install-list:
 	done
 	echo $(xdgdir) >> ./fns-install_$(version).lst
 
+	echo "-> Gtk themes"
+	for file in $(fns_themesfiles); do \
+		echo $(themesdir)/$$file >> ./fns-install_$(version).lst; \
+	done
+	for directory in $(fns_themesdirs); do \
+		echo $(themesdir)/$$directory >> ./fns-install_$(version).lst; \
+	done
+	echo $(themesdir) >> ./fns-install_$(version).lst
+
 	echo $(datadir) >> ./fns-install_$(version).lst
 	echo $(pkgprefix) >> ./fns-install_$(version).lst
 
@@ -324,6 +340,10 @@ dist-install:
 		install -m 644 system/desktop-directories/$$file $(xdgdir); \
 	done
 	
+	echo "-> Install Gtk themes"
+	install -d $(themesdir)
+	cp -r system/themes/* $(themesdir)
+
 	if test -z "$(DESTDIR)"; then \
 		echo "Fvwm-Nightshade $(version) is installed. Enjoy ^^"; \
 	fi
@@ -455,6 +475,18 @@ uninstall-alternative:
 	done
 	rmdir $(xdgdir)
 
+	for file in $(fns_themesfiles); do \
+		if test -f "$(themesdir)/$$file"; then \
+			echo "remove $(themesdir)/$$file"; \
+			rm -f $(themesdir)/$$file; \
+		fi; \
+	done
+	for directory in $(fns_themesdirs); do \
+		echo "remove $(themesdir)/$$directory"; \
+		rmdir $(themesdir)/$$directory; \
+	done
+	rmdir $(themesdir)
+
 	echo "Fvwm-Nightshade is now removed (hopefully). Only ~/.fvwm-nightshade exists."
 	echo "If you don't need it anymore remove it by hand."
 
@@ -468,8 +500,8 @@ build-deb:
 	cp debian/copyright $(pkgdocdir)
 
 deb: build-deb dist-install
-	sed -i "s/Version:/Version: $(version)/" $(pkgdir)/DEBIAN/control
-	sed -i "s/Installed-Size:/Installed-Size: `du -s fvwm-nightshade |cut -f1`/" $(pkgdir)/DEBIAN/control
+	sed -i "/^Standards\|^Build\|^Package:\|^Depends:\|^$$/d;s/^[ \t]*fvwm/Depends:    fvwm/" $(pkgdir)/DEBIAN/control
+	sed -i "s/Source: fvwm-nightshade/Package: fvwm-nightshade\nVersion: $(version)\nInstalled-Size: `du -s fvwm-nightshade |cut -f1`/" $(pkgdir)/DEBIAN/control
 	dpkg -b $(pkgdir) ../$(package)_$(version)_all.deb
 	rm -rf $(pkgdir)
 	echo "Done."
