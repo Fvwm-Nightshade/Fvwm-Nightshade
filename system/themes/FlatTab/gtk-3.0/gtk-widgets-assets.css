@@ -121,6 +121,13 @@ GtkIconView.content-view.cell.check:active {
     background-image: url("assets/grid-selection-checked-dark.png");
 }
 
+/***************
+ * resize grip *
+ ***************/
+.grip {
+    background-image: url("assets/resize-grip.png");
+}
+
 /******************
  * pane separator *
  ******************/
