@@ -1,5 +1,16 @@
 History:
 
+08/11/2014
+- adapt FlatTab theme for consistent look:
+  Gtk2:
+  - GtkPaned::handle_size to 6
+  Gtk3:
+  - add missing CSS part for resize grip. Also height and width to 16
+  - add background-color to frame
+  - adapt border-radius in tooltip
+- add Gtk2 + 3 theme based on elementary (Gtk2) and Greybird (Gtk3) for Air
+- update README, NEWS and AUTHORS
+
 08/10/2014
 - add themes installation to Makefile.
 - fix broken 'make deb' because of the debianization of FNS

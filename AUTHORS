@@ -29,7 +29,10 @@ Contributors (in no specific order):
 - Andreas Hoenen for Perl module FvwmSmartMaximize
 - Sebastian Luncan for Gentoo ebuild
 - Thibaut28 (origin author of 'Rocken' theme)
-- Rafa Cobreros (origin author of Tribal Gtk theme - MediterraneanNight Series V2.0)
+- Rafa Cobreros (origin author of MediterraneanNight Series V2.0 theme - base for Tribal Gtk2+3 theme)
+- Simon Steinbeiß and Satyajit Sahoo (origin author of Greybird - base for Gtk3 part of Air theme)
+- Daniel Foré (origin author of elementary - base for Gtk2 part of Air and FlatTab theme)
+- Satyajit Sahoo (origin author of Evolve - base for Gtk3 part of FlatTab theme)
 
 If anybody find code which is from her/him please contact one of the 
 authors of Fvwm-Nightshade that we can add her/him to the list :-)
