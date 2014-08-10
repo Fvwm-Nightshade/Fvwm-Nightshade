@@ -481,7 +481,7 @@ style "overlay-scrollbar" {
 }
 
 style "pixmap-paned" {
-    GtkPaned::handle_size            = 8
+    GtkPaned::handle_size            = 6
 
     engine "pixmap" {    
         image { function = HANDLE overlay_file = "Handle/pane-separator.png" overlay_stretch = FALSE orientation = VERTICAL }
