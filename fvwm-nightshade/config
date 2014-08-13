@@ -1685,6 +1685,14 @@ AddToFunc   FuncMenuXScreenSaver
 + I Test (x xscreensaver-command) Popup MenuXScreenSaver
 + I TestRc (!Match) FuncShowMessage "Screensaver Info" "Install xscreensaver for full functionality"     
 
+#-----------------------------------------------------------------------
+# Run an application launcher
+#-----------------------------------------------------------------------
+DestroyFunc RunAppLauncher
+AddToFunc   RunAppLauncher
++ I Test (x grun) exec exec grun
++ I TestRc (!Match) exec exec gmrun
++ I TestRc (!Match) Module FvwmForm FvwmForm-RunCommand
 
 
 #=======================================================================
@@ -1965,7 +1973,7 @@ AddToFunc   FuncMenuRoot
 + I AddToMenu MenuRoot "$[gt.&Window Operations]%window.svg:$[infostore.MenuIconSize]%"         Popup MenuWindowOpsFull
 + I AddToMenu MenuRoot "" Nop
 + I AddToMenu MenuRoot "$[gt.Lock Screen]	Alt-Ctrl+L%lock.svg:$[infostore.MenuIconSize]%"     FuncLockScreen
-+ I AddToMenu MenuRoot "$[gt.&Run Command]	Alt-F2%executable.svg:$[infostore.MenuIconSize]%"   Module FvwmForm FvwmForm-RunCommand
++ I AddToMenu MenuRoot "$[gt.&Run Command]	Alt-F2%executable.svg:$[infostore.MenuIconSize]%"   RunAppLauncher
 + I AddToMenu MenuRoot "$[gt.&Terminal]	Alt-Ctrl-T%terminal.svg:$[infostore.MenuIconSize]%"     exec exec $[infostore.default_terminal]
 + I AddToMenu MenuRoot "$[gt.&Quit Fvwm-Nightshade]%logout.svg:$[infostore.MenuIconSize]%"      Popup MenuFvwmQuit
 
