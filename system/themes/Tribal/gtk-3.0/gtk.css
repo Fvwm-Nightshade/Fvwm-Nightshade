@@ -221,7 +221,7 @@
 @import url("sidebar.css");
 @import url("gtk-widgets-assets.css");
 @import url("unity-greeter.css");
-@import url("gnome-panel.css");
+/*@import url("gnome-panel.css");*/
 
 /* Select style for TABS 
 
@@ -245,8 +245,8 @@
 */
 @import url("tabs-mono.css");
 
-/* some gnome-mdi-apps */
-@import url("gnome-mdi.css");
+/* some gnome-mdi-apps 
+@import url("gnome-mdi.css");*/
 
 
 /* 
