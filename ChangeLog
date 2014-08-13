@@ -4,6 +4,12 @@ History:
 - fix some display bugs in Tribal Gtk3 theme:
   - commented out gnome-panel.css and gnome-mdi.css in gtk.css
   - add background: transparent for menus i.e. gedit in menu.css
+- add function RunAppLauncher with some application launchers in config
+  and exchange FvwmForm-RunCommand in MenuRoot and .bindings
+- update depends and optdepends in PKGBUILD_FNS
+- update Suggests in debian/control
+- update ebuild dependencies
+- update README, NEWS and INSTALL
 - update version in config
 
 08/11/2014

@@ -14,6 +14,7 @@ Changes:
 - Add xfce4-power-manager as an optional possibility instead of pm-utils
   and fdpowerman.
 - New Gtk2 and 3 themes for Air, Tribal and FlatTab
+- Support for some application launcher: grun and gmrun
 
 ------------------------------------------------------------------------
 
