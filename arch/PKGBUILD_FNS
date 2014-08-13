@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		PKGBUILD_FNS
-# Version:	1.1.6
+# Version:	1.1.7
 # Licence: 	GPL 2
 #
 # Description:	Pkgbuild script for Fvwm-Nightshade
@@ -8,7 +8,7 @@
 # Author:	Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>	
 #
 # Created:	???
-# Changed:	07/30/2014
+# Changed:	08/13/2014
 #-----------------------------------------------------------------------
 
 pkgname=Fvwm-Nightshade
@@ -18,8 +18,8 @@ pkgdesc="A lightweight but feature rich and good looking configuration of Fvwm."
 arch=('any')
 url="https://github.com/Fvwm-Nightshade"
 license=('GPL')
-depends=('fvwm>=2.6.5' 'python2' 'python2-xdg' 'conky' 'xscreensaver' 'feh' 'imagemagick' 'librsvg' 'stalonetray' 'xorg-xwd' 'gksu' 'compton' 'mplayer' 'python-mutagen' 'python-simplejson' 'pcmanfm' 'cpupower')
-optdepends=('volumeicon: volumecontrol in systray' 'network-manager-applet: network controlling tool for systray' 'blueman: bluetooth manager')
+depends=('fvwm>=2.6.5' 'python2' 'python2-xdg' 'conky' 'xscreensaver' 'feh' 'imagemagick' 'librsvg' 'stalonetray' 'xorg-xwd' 'gksu' 'compton' 'mplayer' 'python-mutagen' 'python-simplejson' 'pcmanfm' 'cpupower' 'pm-utils')
+optdepends=('volumeicon: volumecontrol in systray' 'network-manager-applet: network controlling tool for systray' 'blueman: bluetooth manager' 'gmrun: application launcher' 'xfce4-power-manager: xfce power-manager' 'clipit: clipboard in systray')
 provides=('Fvwm-Nightshade')
 source=
 

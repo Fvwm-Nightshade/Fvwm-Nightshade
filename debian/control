@@ -35,7 +35,8 @@ Suggests:   volumeicon-alsa,
             fdpowermon,
             blueman,
             xneurs, 
-            compton | xcompmgr
+            compton | xcompmgr,
+            grun | gmrun
             
 Description: Lightweight but feature rich and good looking configuration of Fvwm
  It contains many useful things to make work and life easier with a flavour of a 
