@@ -1,5 +1,11 @@
 History:
 
+08/13/2014
+- fix some display bugs in Tribal Gtk3 theme:
+  - commented out gnome-panel.css and gnome-mdi.css in gtk.css
+  - add background: transparent for menus i.e. gedit in menu.css
+- update version in config
+
 08/11/2014
 - adapt FlatTab theme for consistent look:
   Gtk2:
