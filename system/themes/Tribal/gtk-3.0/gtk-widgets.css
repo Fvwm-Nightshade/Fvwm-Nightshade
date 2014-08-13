@@ -2008,7 +2008,6 @@ GtkTreeView row:nth-child(even):hover  {
 
 column-header {
     padding: 0px 2px;
-
 }
 
 column-header .button:active,
