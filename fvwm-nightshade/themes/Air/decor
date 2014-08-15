@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         decor
-# Version:      0.1.7
+# Version:      0.1.8
 # Licence:      GPL 2
 #
 # Description:  decor parts (titlebar, buttons, menus) of Air theme
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      06/08/2012
-# Changed:      05/08/2014
+# Changed:      08/15/2014
 #-----------------------------------------------------------------------
 Piperead "echo InfoStoreAdd button_width `perl -e 'printf \"%.0f\",1.6*$[infostore.fontsize]'`"
 Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",1.8*$[infostore.fontsize]'`"
@@ -103,7 +103,7 @@ MenuStyle * Greyed gray45
 MenuStyle * BorderWidth 1, HilightBack, ActiveFore
 MenuStyle * font "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 MenuStyle * MenuColorset 5, ActiveColorset 6
-MenuStyle * Hilight3DThickness 0, TrianglesSolid, Animation
+MenuStyle * Hilight3DThickness 0, TrianglesSolid, !Animation
 MenuStyle * PopupDelay 300, PopdownImmediately, PopupOffset 0 100
 MenuStyle * ItemFormat "%s%|%5.i%5.5l%5.5r%.5>%|"
 MenuStyle * VerticalItemSpacing 2 3, VerticalTitleSpacing 1 2
