@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         G2likeTopBar
-# Version:      1.0.11
+# Version:      1.0.12
 # Licence:      GPL 2
 #
 # Description:  Gnome like top bar with root menu, personal menu, systray,
@@ -10,7 +10,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      10/09/2012
-# Changed:      05/08/2014
+# Changed:      08/14/2014
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -86,12 +86,20 @@ PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",($[infostore.
 #-----------------------------------------------------------------------
 # Find Personal icon
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd personal_icon `fns-find-icon -n 'bookmark-new' -s 24 -c 'actions' --notdesk`"
+PipeRead "if [ `fns-find-icon -n 'bookmark-new' -s 24 -c 'actions' --notdesk` != '' ]; then \
+            echo InfoStoreAdd personal_icon `fns-find-icon -n 'bookmark-new' -s 24 -c 'actions' --notdesk`; \
+          else \
+            echo InfoStoreAdd personal_icon 'home.svg:24x24'; \
+          fi"
 
 #-----------------------------------------------------------------------
 # find logout icon
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd logout_icon `fns-find-icon -n 'system-log-out' -s 24 -c 'actions' --notdesk`"
+PipeRead "if [ `fns-find-icon -n 'system-log-out' -s 24 -c 'actions' --notdesk` != '' ]; then \
+            echo InfoStoreAdd logout_icon `fns-find-icon -n 'system-log-out' -s 24 -c 'actions' --notdesk`; \
+          else \
+            echo InfoStoreAdd logout_icon 'logout.svg:24x24'; \
+          fi"
 
 
 #=======================================================================
@@ -151,7 +159,7 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 # Cpuview
 #-----------------------------------------------------------------------
-*G2likeTopBar: (5x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_cpu" \
+*G2likeTopBar: (5x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
             `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
             -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`, \
             Action (mouse 3) `Menu MenuCpuOps`,\
@@ -160,7 +168,7 @@ DestroyModuleConfig G2likeTopBar: *
 #-----------------------------------------------------------------------
 # Clock
 #-----------------------------------------------------------------------
-*G2likeTopBar: ($[infostore.time_hsize]x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_clock" \
+*G2likeTopBar: ($[infostore.time_hsize]x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_clock" \
             `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset $[infostore.time_voffset]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
             -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
             Action (mouse 3) `Menu MenuClockOps`,\

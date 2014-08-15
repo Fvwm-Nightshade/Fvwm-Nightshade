@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         VerticalPanel
-# Version:      1.0.6
+# Version:      1.0.7
 # Licence:      GPL 2
 #
 # Description:  FvwmButtons panel for vertical layout. Position on the
@@ -23,7 +23,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/15/2012
-# Changed:      05/08/2014
+# Changed:      08/14/2014
 #-----------------------------------------------------------------------
 
 Style VerticalPanel !Title, Sticky, WindowListSkip, Layer 4, HandleWidth 2
@@ -77,16 +77,16 @@ DestroyModuleConfig VerticalPanel: *
 #***********************************************************************
 
 # clock
-*VerticalPanel: (1x1, Colorset 13, Swallow (UseOld,Close,Kill, Respawn) "conky_clock" \
+*VerticalPanel: (1x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_clock" \
         `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset $[infostore.time_voffset]}$alignc${time %a %e %b %H:%M}' \
         -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
         Action (mouse 3) `Menu MenuClockOps`,\
         Action (mouse 0) Nop)
 
 # cpu
-*VerticalPanel: (1x1, Colorset 13, Swallow (UseOld,Close,Kill) "conky_cpu" \
+*VerticalPanel: (1x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
         `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:size=$[infostore.time_fsize]}${voffset $[infostore.graph_voffset]}${cpugraph $[infostore.graph_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
-        -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`, \
+        -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 1`, \
         Action (mouse 3) `Menu MenuCpuOps`,\
         Action (mouse 0) Nop)
 

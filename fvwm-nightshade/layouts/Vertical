@@ -1,15 +1,15 @@
 #-----------------------------------------------------------------------
-# File:		Vertical
-# Version:	1.0.9
-# Licence: 	GPL 2
+# File:         Vertical
+# Version:      1.0.9
+# Licence:      GPL 2
 #
-# Description:	Layout of object positions on desktop
+# Description:  Layout of object positions on desktop
 #
-# Author:	Thomas Funk <t.funk@web.de>	
-#			Bernhard Popp <kermit.popp@googlemail.com>
+# Author:       Thomas Funk <t.funk@web.de>    
+#               Bernhard Popp <kermit.popp@googlemail.com>
 #
-# Created:	08/16/2012
-# Changed:	10/15/2013
+# Created:      08/16/2012
+# Changed:      10/15/2013
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -116,7 +116,7 @@ InfoStoreAdd tips_iman always
 # Define bands at the edge of the screen. It is used to compute the
 # Working Area: EwmhBaseStruts left right top bottom 
 #-----------------------------------------------------------------------
-PipeRead 'echo EwmhBaseStruts 0 $(($[infostore.panel_width]+4)) 0 0'
+Schedule 2000 PipeRead 'echo EwmhBaseStruts 0 $(($[infostore.panel_width]+4)) 0 0'
 
 #-----------------------------------------------------------------------
 # IconBox defines the area where FVWM will place any windows that are
@@ -180,45 +180,45 @@ AddToFunc   ReloadLayoutParts
 # Bindings
 #=======================================================================
 
-#   Keyname	Context Modifi 	Function
+#   Keyname     Context     Modifi      Function
 
 #-----------------------------------------------------------------------
 # press SHIFT-ALT arrow anywhere, move active
 # window to next/previous page
 #-----------------------------------------------------------------------
-Key Left	A		SM		FuncMoveWindowToPage -1p +0p
-Key Right	A		SM		FuncMoveWindowToPage +1p +0p
-Key Up		A		SM		FuncMoveWindowToPage +0p -1p
-Key Down	A		SM		FuncMoveWindowToPage +0p +1p
+Key Left        A           SM          FuncMoveWindowToPage -1p +0p
+Key Right       A           SM          FuncMoveWindowToPage +1p +0p
+Key Up          A           SM          FuncMoveWindowToPage +0p -1p
+Key Down        A           SM          FuncMoveWindowToPage +0p +1p
 
 #-----------------------------------------------------------------------
 # key 1-4 move current window to page n
 #-----------------------------------------------------------------------
-Key 1		A		SM		Current FuncMoveWindowToPage 0 0
-Key 2		A		SM		Current FuncMoveWindowToPage 1 0
-Key 3		A		SM		Current FuncMoveWindowToPage 0 1
-Key 4		A		SM		Current FuncMoveWindowToPage 1 1
+Key 1           A           SM          Current FuncMoveWindowToPage 0 0
+Key 2           A           SM          Current FuncMoveWindowToPage 1 0
+Key 3           A           SM          Current FuncMoveWindowToPage 0 1
+Key 4           A           SM          Current FuncMoveWindowToPage 1 1
 
 #-----------------------------------------------------------------------
 # Go to page n with SHIFT-CTRL + number
 #-----------------------------------------------------------------------
-Key 1		A		SC		FuncGotoPage 0 0
-Key 2		A		SC		FuncGotoPage 1 0
-Key 3		A		SC		FuncGotoPage 0 1
-Key 4		A		SC		FuncGotoPage 1 1
+Key 1           A           SC          FuncGotoPage 0 0
+Key 2           A           SC          FuncGotoPage 1 0
+Key 3           A           SC          FuncGotoPage 0 1
+Key 4           A           SC          FuncGotoPage 1 1
 
 #-----------------------------------------------------------------------
 # press SHIFT-CTRL arrow anywhere, and scroll by one page
 #-----------------------------------------------------------------------
-Key Left	A		SC		FuncGotoPage -1p +0p
-Key Right	A		SC		FuncGotoPage +1p +0p
-Key Up		A		SC		FuncGotoPage +0p -1p
-Key Down	A		SC		FuncGotoPage +0p +1p
+Key Left        A           SC          FuncGotoPage -1p +0p
+Key Right       A           SC          FuncGotoPage +1p +0p
+Key Up          A           SC          FuncGotoPage +0p -1p
+Key Down        A           SC          FuncGotoPage +0p +1p
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT P to show all page related key bindings
 #-----------------------------------------------------------------------
-key P		A	SCM	FuncShowMessage  "Page Key Bindings" \
+key P           A           SCM         FuncShowMessage  "Page Key Bindings" \
 "SHIFT-CTRL:" \
 "Cursor right/left: Switch to page right/left" \
 "Cursor up/down: Switch to page up/down" \
@@ -248,15 +248,15 @@ AddToFunc   FuncMenuWindowGroupQuickMove
 + I SetMenuIconSize
 + I DestroyMenu MenuWindowGroupQuickMove
 + I AddToMenu MenuWindowGroupQuickMove DynamicPopupAction FuncMenuWindowGroupQuickMove
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%" 		Pick All ($[w.resource]) MoveToPage +1p +0p
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%" 		Pick All ($[w.resource]) MoveToPage -1p +0p
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.D&own	Page]%window-move.svg:$[infostore.MenuIconSize]%" 		Pick All ($[w.resource]) MoveToPage +0p +1p
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Up  	Page]%window-move.svg:$[infostore.MenuIconSize]%" 		Pick All ($[w.resource]) MoveToPage +0p -1p
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage +1p +0p
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage -1p +0p
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.D&own	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage +0p +1p
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Up	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage +0p -1p
 + I AddToMenu MenuWindowGroupQuickMove "" Nop
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.&1.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.&2.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.&3.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		Pick All ($[w.resource]) FuncMoveWindowToPage 2 0
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.&4.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		Pick All ($[w.resource]) FuncMoveWindowToPage 3 0
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&1.	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) FuncMoveWindowToPage 0 0
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&2.	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) FuncMoveWindowToPage 1 0
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&3.	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) FuncMoveWindowToPage 2 0
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&4.	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) FuncMoveWindowToPage 3 0
 
 #-----------------------------------------------------------------------
 # Move a window to left/right/1-4 page
@@ -269,15 +269,15 @@ AddToFunc   FuncMenuWindowMoveTo
 + I DestroyMenu MenuWindowMoveTo
 + I AddToMenu MenuWindowMoveTo DynamicPopupAction FuncMenuWindowMoveTo
 + I AddToMenu MenuWindowMoveTo "$[gt.Move to ...]" Title
-+ I AddToMenu MenuWindowMoveTo "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%"		AnimatedMove w+100 w
-+ I AddToMenu MenuWindowMoveTo "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%"		AnimatedMove w-100 w
-+ I AddToMenu MenuWindowMoveTo "$[gt.D&own	Page]%window-move.svg:$[infostore.MenuIconSize]%"		AnimatedMove w w+100
-+ I AddToMenu MenuWindowMoveTo "$[gt.&Up  	Page]%window-move.svg:$[infostore.MenuIconSize]%"		AnimatedMove w w-100
++ I AddToMenu MenuWindowMoveTo "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w+100 w
++ I AddToMenu MenuWindowMoveTo "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w-100 w
++ I AddToMenu MenuWindowMoveTo "$[gt.D&own	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w w+100
++ I AddToMenu MenuWindowMoveTo "$[gt.&Up	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w w-100
 + I AddToMenu MenuWindowMoveTo "" Nop
-+ I AddToMenu MenuWindowMoveTo "$[gt.&1.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		FuncMoveWindowToPage 0 0
-+ I AddToMenu MenuWindowMoveTo "$[gt.&2.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		FuncMoveWindowToPage 1 0
-+ I AddToMenu MenuWindowMoveTo "$[gt.&3.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		FuncMoveWindowToPage 2 0
-+ I AddToMenu MenuWindowMoveTo "$[gt.&4.	Page]%window-move.svg:$[infostore.MenuIconSize]%"		FuncMoveWindowToPage 3 0
++ I AddToMenu MenuWindowMoveTo "$[gt.&1.	Page]%window-move.svg:$[infostore.MenuIconSize]%"        FuncMoveWindowToPage 0 0
++ I AddToMenu MenuWindowMoveTo "$[gt.&2.	Page]%window-move.svg:$[infostore.MenuIconSize]%"        FuncMoveWindowToPage 1 0
++ I AddToMenu MenuWindowMoveTo "$[gt.&3.	Page]%window-move.svg:$[infostore.MenuIconSize]%"        FuncMoveWindowToPage 2 0
++ I AddToMenu MenuWindowMoveTo "$[gt.&4.	Page]%window-move.svg:$[infostore.MenuIconSize]%"        FuncMoveWindowToPage 3 0
 
 
 

@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20140813
+InfoStoreAdd ns_version 0.7.7.20140815
 # Copyright (C) 2014
 #
 # Authors:
@@ -214,6 +214,11 @@ InfoStoreAdd fvwm_wallpaper $[FVWM_USERDIR]/.wallpaper
 # They can configured with the FNS-Form-BaseSetup
 Load .settings
 FuncSetThemeDir $[infostore.used_theme]
+
+#-----------------------------------------------------------------------
+# State of pcmanfm
+#-----------------------------------------------------------------------
+PipeRead 'if [ -z `pidof pcmanfm` ]; then echo SetEnv PcmanFmStatus 0 ;fi'
 
 #***********************************************************************
 # 1.2.3 Others
@@ -1054,7 +1059,7 @@ DestroyModuleConfig FvwmScript: *
 #=======================================================================
 # Module to set true transparency to windows if a composite manager is running
 DestroyModuleConfig FvwmTransSet: *
-*FvwmTransSet: Excludes FvwmButtons, FvwmPager, FvwmIconMan, stalonetray, conky_cpu, conky_clock
+*FvwmTransSet: Excludes FvwmButtons, FvwmPager, FvwmIconMan, stalonetray, conky_cpu, conky_clock, Pcmanfm_Daemon
 *FvwmTransSet: Opacity 1.0
 *FvwmTransSet: Transparency 0.8
 *FvwmTransSet: UsedTransset transset
@@ -1103,10 +1108,13 @@ AddToFunc StartFunction
 # show splash sceen
 + I Test (Init) Test (EnvMatch SplashOn 1) Module FvwmBanner
 #-----------------------------------------------------------------------
+# Start pcmanfm as daemon for mounting 
++ I FuncStartMountDaemon
+#-----------------------------------------------------------------------
 # set the root background image with feh or if no image found start
 # default Fvwm background
-+ I Test (I $[infostore.fvwm_wallpaper]) Exec exec feh --bg-scale $[infostore.fvwm_wallpaper]
-+ I TestRC (!Match) Module FvwmBacker
+#+ I Test (I $[infostore.fvwm_wallpaper]) Exec exec feh --bg-scale $[infostore.fvwm_wallpaper]
+#+ I TestRC (!Match) Module FvwmBacker
 #-----------------------------------------------------------------------
 # activate automatical raise of windows
 + I Module FvwmAuto 300
@@ -1134,9 +1142,6 @@ AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # start FvwmTransSet if composite manager is activated
 + I TestRC (Match) FuncStartFvwmTransSet
-#-----------------------------------------------------------------------
-# Start pcmanfm as daemon for mounting
-+ I Test (x pcmanfm) FuncStartMountDaemon
 
 #-----------------------------------------------------------------------
 # load layout
@@ -1239,13 +1244,43 @@ AddToFunc   FuncKillCompmgr
             fi'
 
 #-----------------------------------------------------------------------
-# Start mount daemon if not already running
+# Start mount daemon if not already running - with or without desktop
 #-----------------------------------------------------------------------
 DestroyFunc FuncStartMountDaemon
 AddToFunc   FuncStartMountDaemon
-+ I PipeRead 'if [ -z `pidof pcmanfm` ]; then \
-                nohup nice pcmanfm -d >>/dev/null 2>>/dev/null& \
-            fi'
+#+ I PipeRead "echo PcmanFmStatus: $PcmanFmStatus >> testem.log"
+#+ I PipeRead "echo DesktopIconsOn: $DesktopIconsOn >> testem.log"
++ I Test (EnvMatch DesktopIconsOn 0) FuncRunPcmanFmWithoutDesktop
++ I TestRc (!Match) FuncRunPcmanFmWithDesktop
+
+#-----------------------------------------------------------------------
+# Run pcmanfm as daemon only
+#-----------------------------------------------------------------------
+DestroyFunc FuncRunPcmanFmWithoutDesktop
+AddToFunc   FuncRunPcmanFmWithoutDesktop
+#+ I PipeRead 'echo FuncRunPcmanFmWithoutDesktop >> testem.log'
+#+ I PipeRead "echo PcmanFm processes: `ps -ef |grep -c pcmanfm` >> testem.log"
++ I Test (EnvMatch PcmanFmStatus 2) Exec exec pcmanfm --desktop-off
++ I Test (EnvMatch PcmanFmStatus 0) Exec exec pcmanfm -d --class Pcmanfm_Daemon
++ I Test (EnvMatch PcmanFmStatus 2) FuncSetWallpaper
++ I Test (!EnvMatch PcmanFmStatus 1) FuncWriteSetEnvToFileAndSet PcmanFmStatus 1 $[FVWM_USERDIR]/.settings
+#+ I PipeRead "echo PcmanFmStatus: $PcmanFmStatus >> testem.log"
+#+ I PipeRead "echo '---------------------------' >> testem.log"
+
+#-----------------------------------------------------------------------
+# Run pcmanfm as desktop
+#-----------------------------------------------------------------------
+DestroyFunc FuncRunPcmanFmWithDesktop
+AddToFunc   FuncRunPcmanFmWithDesktop
+#+ I PipeRead 'echo FuncRunPcmanFmWithDesktop >> testem.log'
+#+ I PipeRead "echo PcmanFm processes: `ps -ef |grep -c pcmanfm` >> testem.log"
++ I Test (EnvMatch PcmanFmStatus 2) PipeRead 'nohup nice pcmanfm --desktop-off >>/dev/null 2>>/dev/null\\&; \
+                                              nohup nice pcmanfm --desktop >>/dev/null 2>>/dev/null'
++ I Test (EnvMatch PcmanFmStatus 0) Exec exec pcmanfm -d --desktop --class Pcmanfm_Daemon
+#+ I Test (EnvMatch PcmanFmStatus 1) FuncSetWallpaper
++ I Test (!EnvMatch PcmanFmStatus 2) FuncWriteSetEnvToFileAndSet PcmanFmStatus 2 $[FVWM_USERDIR]/.settings
+#+ I PipeRead "echo PcmanFmStatus: $PcmanFmStatus >> testem.log"
+#+ I PipeRead "echo '---------------------------' >> testem.log"
 
 #-----------------------------------------------------------------------
 # Start FvwmTransSet and reread colorset
@@ -1564,6 +1599,19 @@ AddToFunc FuncFvwmPrevWindow
 + I TestRc (!Match) Next (CurrentPage, !Iconic, AcceptsFocus, FvwmApplet) Focus NoWarp
 + I Current Raise
 
+
+#-----------------------------------------------------------------------
+# Set which wallpaper mode will use
+#-----------------------------------------------------------------------
+DestroyFunc FuncSetWallpaper
+AddToFunc   FuncSetWallpaper
++ I Test (EnvMatch DesktopIconsOn 1) PipeRead 'echo PcManFm set wallpaper >> testem.log'
++ I Test (EnvMatch DesktopIconsOn 1) Exec pcmanfm -w $[FVWM_USERDIR]/.wallpaper
++ I TestRC (Match) Break
++ I TestRC (!Match) Test (I $[infostore.fvwm_wallpaper]) Exec feh --bg-scale $[infostore.fvwm_wallpaper]
++ I TestRC (!Match) Module FvwmBacker
+
+
 #-----------------------------------------------------------------------
 # Wallpaper Browser by Taviso.
 #-----------------------------------------------------------------------
@@ -1589,7 +1637,8 @@ AddToFunc   WallpaperBrowser
 DestroyFunc FuncNewWallpaper
 AddToFunc   FuncNewWallpaper
 + I PipeRead 'ln -sf $* $[FVWM_USERDIR]/.wallpaper'
-+ I Exec exec feh --bg-scale $[infostore.fvwm_wallpaper]
+#+ I Exec exec feh --bg-scale $[infostore.fvwm_wallpaper]
++ I FuncSetWallpaper
 + I KillModule FvwmBacker
 
 #-----------------------------------------------------------------------
@@ -2368,7 +2417,7 @@ AddToFunc   FuncMenuWallpaperConfiguration
 + I DestroyMenu MenuWallpaperConfiguration
 + I AddToMenu MenuWallpaperConfiguration "$[gt.Background Configuration]" Title
 + I AddToMenu MenuWallpaperConfiguration DynamicPopupAction FuncMenuWallpaperConfiguration
-+ I Test (I $[infostore.fvwm_wallpaper]) \
++ I Test (EnvMatch DesktopIconsOn 0) Test (I $[infostore.fvwm_wallpaper]) \
     AddToMenu MenuWallpaperConfiguration "$[gt.Set &Default background]%delete.svg:$[infostore.MenuIconSize]%"          FuncDelWallpaperlink
 + I AddToMenu MenuWallpaperConfiguration MissingSubmenuFunction WallpaperBrowser
 + I AddToMenu MenuWallpaperConfiguration "$[gt.Set &Wallpaper background]%background.svg:$[infostore.MenuIconSize]%"    Popup $[infostore.wallpaper_dir]

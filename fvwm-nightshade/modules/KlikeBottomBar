@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         KlikeBottomBar
-# Version:      1.0.1
+# Version:      1.0.2
 # Licence:      GPL 2
 #
 # Description:  KDE like bottom bar with menu and iconify/deiconify button,
@@ -10,7 +10,7 @@
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      04/27/2014
-# Changed:      05/04/2014
+# Changed:      08/14/2014
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -22,7 +22,7 @@
 
 
 Style KlikeBottomBar !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
-Style KlikeBottomBar StaysOnBottom, !Iconifiable, !Maximizable, FixedSize, FixedPosition
+Style KlikeBottomBar Layer 4, !Iconifiable, !Maximizable, FixedSize, FixedPosition
 
 #=======================================================================
 # Calculations
@@ -58,7 +58,11 @@ PipeRead 'echo InfostoreAdd tray_max_x $(($[infostore.tray_icons]+1))'
 #-----------------------------------------------------------------------
 # find desktop icon
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk`"
+PipeRead "if [ `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk` != '' ]; then \
+            echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk`; \
+          else \
+            echo InfoStoreAdd desktop_icon 'window-icons.svg:24x24'; \
+          fi"
 
 #-----------------------------------------------------------------------
 # For cpu applet
@@ -170,8 +174,8 @@ DestroyModuleConfig KlikeBottomBar: *
 #-----------------------------------------------------------------------
 # ShowDesktop button
 #-----------------------------------------------------------------------
-*KlikeBottomBar: (2x1, Colorset 13, ActiveColorset 11, \
-                  Left, ActionOnPress, \
+*KlikeBottomBar: (3x1, Colorset 13, ActiveColorset 11, \
+                  Center, ActionOnPress, \
                   Icon    $[infostore.desktop_icon], \
                   ActiveIcon    $[infostore.desktop_icon], \
                   Action(Mouse 1) Function ShowDesktop)
@@ -199,7 +203,7 @@ DestroyModuleConfig KlikeBottomBar: *
 #-----------------------------------------------------------------------
 # Cpuview
 #-----------------------------------------------------------------------
-*KlikeBottomBar: (5x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_cpu" \
+*KlikeBottomBar: (5x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
                   `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
                   -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`, \
                   Action (mouse 3) `Menu MenuCpuOps`,\
@@ -208,7 +212,7 @@ DestroyModuleConfig KlikeBottomBar: *
 #-----------------------------------------------------------------------
 # Clock
 #-----------------------------------------------------------------------
-*KlikeBottomBar: ($[infostore.time_hsize]x1, Colorset 13, Swallow (UseOld, Close, Kill, Respawn) "conky_clock" \
+*KlikeBottomBar: ($[infostore.time_hsize]x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_clock" \
                   `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset $[infostore.time_voffset]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
                   -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
                   Action (mouse 3) `Menu MenuClockOps`,\

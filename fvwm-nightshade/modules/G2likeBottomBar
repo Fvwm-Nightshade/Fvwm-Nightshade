@@ -10,7 +10,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      10/09/2012
-# Changed:      05/08/2014
+# Changed:      08/14/2014
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -37,8 +37,11 @@ Style G2likeBottomBar Layer 4, !Iconifiable, !Maximizable, FixedSize, FixedPosit
 #-----------------------------------------------------------------------
 # find desktop icon
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk`"
-
+PipeRead "if [ `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk` != '' ]; then \
+            echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk`; \
+          else \
+            echo InfoStoreAdd desktop_icon 'window-icons.svg:24x24'; \
+          fi"
 
 #=======================================================================
 # Pager
