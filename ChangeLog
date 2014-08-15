@@ -1,5 +1,25 @@
 History:
 
+08/15/2014
+- exchange in some files tabs with 4 spaces
+- Implementation of PcmanFm as mount daemon AND desktop manager. So
+  icons on desktop now possible. Also mount icons.
+- fix problem that find-desktop-icon sometimes doesn't find the needed
+  icon. If this happens a fns icon will be taken
+- fix disappear bug of conky_clock and conky_cpu while startup/restart
+- put Klike bar to the same layer as application to remove the clause
+  whether a composite manager is running. Also center the ShowDesktop button
+- disable sub menu animation in all decors due to the annoying flipping 
+  whether the menu hits the right screen edge
+- add two new variable to .settings to manage icons on desktop
+- add pcmanfm as deamon to exclude list of FvwmTransSet
+- add functions to stear pcmanfm - only as mount daemon or with icon on
+  desktop support
+- adapt wallpaper functions to use pcmanfm as wallpaper setter if icons on desktop
+  are active because it's not possible to set the pcmanfm desktop transparent
+- add 'icons on desktop' to FNS-Form-BaseSetup. Also the Klike layout
+- fix some display bugs in Tribal Gtk3 theme
+
 08/13/2014
 - fix some display bugs in Tribal Gtk3 theme:
   - commented out gnome-panel.css and gnome-mdi.css in gtk.css
