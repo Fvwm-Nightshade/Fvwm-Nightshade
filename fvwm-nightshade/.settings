@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
-# File:		.settings
-# Version:	1.0.8
-# Licence: 	GPL 2
+# File:         .settings
+# Version:      1.0.9
+# Licence:      GPL 2
 #
-# Description:	base settings for Fvwm-Nighshade
+# Description:  base settings for Fvwm-Nighshade
 #
-# Author:	Thomas Funk <t.funk@web.de>	
-# Created:	08/11/2012
-# Changed:	01/09/2014
+# Author:       Thomas Funk <t.funk@web.de>    
+# Created:      08/11/2012
+# Changed:      08/15/2014
 #-----------------------------------------------------------------------
 
 #***********************************************************************
@@ -79,6 +79,16 @@ InfoStoreAdd used_windowtransparency "80"
 # The actual (active) window opacity level (used by transset)
 #-----------------------------------------------------------------------
 InfoStoreAdd used_windowopacity "100"
+
+#-----------------------------------------------------------------------
+# Use Icons on desktop
+#-----------------------------------------------------------------------
+SetEnv DesktopIconsOn "0"
+
+#-----------------------------------------------------------------------
+# State of pcmanfm
+#-----------------------------------------------------------------------
+SetEnv PcmanFmStatus "0"
 
 
 #***********************************************************************
