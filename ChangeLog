@@ -19,6 +19,7 @@ History:
   are active because it's not possible to set the pcmanfm desktop transparent
 - add 'icons on desktop' to FNS-Form-BaseSetup. Also the Klike layout
 - fix some display bugs in Tribal Gtk3 theme
+- update NEWS and README
 
 08/13/2014
 - fix some display bugs in Tribal Gtk3 theme:

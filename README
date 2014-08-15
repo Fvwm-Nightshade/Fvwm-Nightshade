@@ -130,6 +130,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Support for hotplug mounting (i.e. usb)
 - New Gtk2 and 3 themes for Air, Tribal and FlatTab
 - Support for some application launcher: grun and gmrun
+- Support for icons on desktop. Also for mount icons.
 
 
 Requirements:
