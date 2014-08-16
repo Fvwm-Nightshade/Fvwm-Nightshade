@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Vertical
-# Version:      1.0.9
+# Version:      1.0.10
 # Licence:      GPL 2
 #
 # Description:  Layout of object positions on desktop
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/16/2012
-# Changed:      10/15/2013
+# Changed:      10/16/2014
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -116,7 +116,7 @@ InfoStoreAdd tips_iman always
 # Define bands at the edge of the screen. It is used to compute the
 # Working Area: EwmhBaseStruts left right top bottom 
 #-----------------------------------------------------------------------
-Schedule 2000 PipeRead 'echo EwmhBaseStruts 0 $(($[infostore.panel_width]+4)) 0 0'
+Schedule 1000 PipeRead 'echo EwmhBaseStruts 0 $(($[infostore.panel_width]+4)) 0 0'
 
 #-----------------------------------------------------------------------
 # IconBox defines the area where FVWM will place any windows that are

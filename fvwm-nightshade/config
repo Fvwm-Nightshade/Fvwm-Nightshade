@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20140815
+InfoStoreAdd ns_version 0.7.7.20140816
 # Copyright (C) 2014
 #
 # Authors:
@@ -1275,9 +1275,10 @@ AddToFunc   FuncRunPcmanFmWithDesktop
 #+ I PipeRead 'echo FuncRunPcmanFmWithDesktop >> testem.log'
 #+ I PipeRead "echo PcmanFm processes: `ps -ef |grep -c pcmanfm` >> testem.log"
 + I Test (EnvMatch PcmanFmStatus 2) PipeRead 'nohup nice pcmanfm --desktop-off >>/dev/null 2>>/dev/null\\&; \
+                                              sleep 0.5; \
                                               nohup nice pcmanfm --desktop >>/dev/null 2>>/dev/null'
 + I Test (EnvMatch PcmanFmStatus 0) Exec exec pcmanfm -d --desktop --class Pcmanfm_Daemon
-#+ I Test (EnvMatch PcmanFmStatus 1) FuncSetWallpaper
++ I Test (EnvMatch PcmanFmStatus 0) FuncSetWallpaper
 + I Test (!EnvMatch PcmanFmStatus 2) FuncWriteSetEnvToFileAndSet PcmanFmStatus 2 $[FVWM_USERDIR]/.settings
 #+ I PipeRead "echo PcmanFmStatus: $PcmanFmStatus >> testem.log"
 #+ I PipeRead "echo '---------------------------' >> testem.log"
