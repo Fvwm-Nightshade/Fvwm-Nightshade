@@ -1,5 +1,8 @@
 History:
 
+08/16/2014
+- reduce schedules in layouts and add a sleep FuncRunPcmanFmWithDesktop
+
 08/15/2014
 - exchange in some files tabs with 4 spaces
 - Implementation of PcmanFm as mount daemon AND desktop manager. So
