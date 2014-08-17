@@ -10,6 +10,8 @@ History:
     FuncSetWallpaper and FuncRunPcmanFmWithDesktop
   - extend mouse bindings help messages with new possibility to call the 
     DesktopMenu
+- fix missing cases if layouts will set - only the system wide were used.
+  Now the same named in FVWM_USERDIR/layouts are prefered
 
 08/16/2014
 - reduce schedules in layouts and add a sleep FuncRunPcmanFmWithDesktop
