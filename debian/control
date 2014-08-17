@@ -37,7 +37,7 @@ Suggests:   volumeicon-alsa,
             xneurs, 
             compton | xcompmgr,
             grun | gmrun
-            
+
 Description: Lightweight but feature rich and good looking configuration of Fvwm
  It contains many useful things to make work and life easier with a flavour of a 
  modern desktop. But it can be configure by your own. It is good documented and 
