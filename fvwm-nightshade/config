@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20140816
+InfoStoreAdd ns_version 0.7.7.20140817
 # Copyright (C) 2014
 #
 # Authors:
@@ -667,9 +667,10 @@ Mouse 5         A       SM          Current FuncMoveWindowToPage -1p +0p
 #-----------------------------------------------------------------------
 #     Button    Context Modifi     Function
 Mouse 0         R       SCM        FuncShowMessage  "Mouse Bindings for Root area" \
-"Mouse 1:   Root menu" \
+"Mouse 1:   Root menu. With icons on desktop use left Win key" \
 "Mouse 2:   Window list" \
-"Mouse 3:   Desktop Oops menu" \
+"Mouse 3:   Desktop Oops menu. With icons on desktop use" \
+"           CTRL + left Win key" \
 "Mouse 4/5: Switch to page left/right with" \
 "           SHIFT-ALT + rolling wheel up/down anywhere" \
 "           Switch with window to page left/right with" \
@@ -1248,8 +1249,6 @@ AddToFunc   FuncKillCompmgr
 #-----------------------------------------------------------------------
 DestroyFunc FuncStartMountDaemon
 AddToFunc   FuncStartMountDaemon
-#+ I PipeRead "echo PcmanFmStatus: $PcmanFmStatus >> testem.log"
-#+ I PipeRead "echo DesktopIconsOn: $DesktopIconsOn >> testem.log"
 + I Test (EnvMatch DesktopIconsOn 0) FuncRunPcmanFmWithoutDesktop
 + I TestRc (!Match) FuncRunPcmanFmWithDesktop
 
@@ -1258,30 +1257,21 @@ AddToFunc   FuncStartMountDaemon
 #-----------------------------------------------------------------------
 DestroyFunc FuncRunPcmanFmWithoutDesktop
 AddToFunc   FuncRunPcmanFmWithoutDesktop
-#+ I PipeRead 'echo FuncRunPcmanFmWithoutDesktop >> testem.log'
-#+ I PipeRead "echo PcmanFm processes: `ps -ef |grep -c pcmanfm` >> testem.log"
 + I Test (EnvMatch PcmanFmStatus 2) Exec exec pcmanfm --desktop-off
 + I Test (EnvMatch PcmanFmStatus 0) Exec exec pcmanfm -d --class Pcmanfm_Daemon
-+ I Test (EnvMatch PcmanFmStatus 2) FuncSetWallpaper
-+ I Test (!EnvMatch PcmanFmStatus 1) FuncWriteSetEnvToFileAndSet PcmanFmStatus 1 $[FVWM_USERDIR]/.settings
-#+ I PipeRead "echo PcmanFmStatus: $PcmanFmStatus >> testem.log"
-#+ I PipeRead "echo '---------------------------' >> testem.log"
++ I Test (!EnvMatch PcmanFmStatus 1) FuncSetWallpaper
++ I TestRc (Match) FuncWriteSetEnvToFileAndSet PcmanFmStatus 1 $[FVWM_USERDIR]/.settings
 
 #-----------------------------------------------------------------------
 # Run pcmanfm as desktop
 #-----------------------------------------------------------------------
 DestroyFunc FuncRunPcmanFmWithDesktop
 AddToFunc   FuncRunPcmanFmWithDesktop
-#+ I PipeRead 'echo FuncRunPcmanFmWithDesktop >> testem.log'
-#+ I PipeRead "echo PcmanFm processes: `ps -ef |grep -c pcmanfm` >> testem.log"
 + I Test (EnvMatch PcmanFmStatus 2) PipeRead 'nohup nice pcmanfm --desktop-off >>/dev/null 2>>/dev/null\\&; \
-                                              sleep 0.5; \
                                               nohup nice pcmanfm --desktop >>/dev/null 2>>/dev/null'
++ I Test (EnvMatch PcmanFmStatus 1) Exec exec pcmanfm --desktop
 + I Test (EnvMatch PcmanFmStatus 0) Exec exec pcmanfm -d --desktop --class Pcmanfm_Daemon
-+ I Test (EnvMatch PcmanFmStatus 0) FuncSetWallpaper
 + I Test (!EnvMatch PcmanFmStatus 2) FuncWriteSetEnvToFileAndSet PcmanFmStatus 2 $[FVWM_USERDIR]/.settings
-#+ I PipeRead "echo PcmanFmStatus: $PcmanFmStatus >> testem.log"
-#+ I PipeRead "echo '---------------------------' >> testem.log"
 
 #-----------------------------------------------------------------------
 # Start FvwmTransSet and reread colorset
@@ -1606,7 +1596,6 @@ AddToFunc FuncFvwmPrevWindow
 #-----------------------------------------------------------------------
 DestroyFunc FuncSetWallpaper
 AddToFunc   FuncSetWallpaper
-+ I Test (EnvMatch DesktopIconsOn 1) PipeRead 'echo PcManFm set wallpaper >> testem.log'
 + I Test (EnvMatch DesktopIconsOn 1) Exec pcmanfm -w $[FVWM_USERDIR]/.wallpaper
 + I TestRC (Match) Break
 + I TestRC (!Match) Test (I $[infostore.fvwm_wallpaper]) Exec feh --bg-scale $[infostore.fvwm_wallpaper]
