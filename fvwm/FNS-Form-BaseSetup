@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:         FNS-Form-BaseSetup
-# Version:      1.2.10
+# Version:      1.2.11
 # Licence:      GPL 2
 #
 # Description:  Script to configure base settings of Fvwm-Nightshade
 #
 # Author:       Thomas Funk <t.funk@web.de>    
 # Created:      08/01/2012
-# Changed:      08/15/2014
+# Changed:      08/17/2014
 #-----------------------------------------------------------------------
 
 DestroyModuleConfig  FNS-Form-BaseSetup: *
@@ -126,13 +126,21 @@ DestroyModuleConfig  FNS-Form-BaseSetup: *
 *FNS-Form-BaseSetup: Command    $(DesktopIconsOn? FuncWriteSetEnvToFileAndSet DesktopIconsOn "1" $[FVWM_USERDIR]/.settings)
 *FNS-Form-BaseSetup: Command    $(DesktopIconsOff? FuncWriteSetEnvToFileAndSet DesktopIconsOn "0" $[FVWM_USERDIR]/.settings)
 *FNS-Form-BaseSetup: Command    $(LayoutHorizontal? FuncWriteInfoStoreToFileAndSet used_layout Horizontal $[FVWM_USERDIR]/.settings)
-*FNS-Form-BaseSetup: Command    $(LayoutHorizontal?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Horizontal ${FVWM_USERDIR}/.layout)
+*FNS-Form-BaseSetup: Command    $(LayoutHorizontal?!rm -f ${FVWM_USERDIR}/.layout; test -e ${FVWM_USERDIR}/layouts/Horizontal \
+                                                    && ln -s ${FVWM_USERDIR}/layouts/Horizontal ${FVWM_USERDIR}/.layout \
+                                                    || ln -s ${FNS_SYSTEMDIR}/layouts/Horizontal ${FVWM_USERDIR}/.layout)
 *FNS-Form-BaseSetup: Command    $(LayoutVertical? FuncWriteInfoStoreToFileAndSet used_layout Vertical $[FVWM_USERDIR]/.settings)
-*FNS-Form-BaseSetup: Command    $(LayoutVertical?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Vertical ${FVWM_USERDIR}/.layout)
+*FNS-Form-BaseSetup: Command    $(LayoutVertical?!rm -f ${FVWM_USERDIR}/.layout; test -e ${FVWM_USERDIR}/layouts/Vertical \
+                                                    && ln -s ${FVWM_USERDIR}/layouts/Vertical ${FVWM_USERDIR}/.layout \
+                                                    || ln -s ${FNS_SYSTEMDIR}/layouts/Vertical ${FVWM_USERDIR}/.layout)
 *FNS-Form-BaseSetup: Command    $(LayoutG2like? FuncWriteInfoStoreToFileAndSet used_layout G2like $[FVWM_USERDIR]/.settings)
-*FNS-Form-BaseSetup: Command    $(LayoutG2like?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/G2like ${FVWM_USERDIR}/.layout)
+*FNS-Form-BaseSetup: Command    $(LayoutG2like?!rm -f ${FVWM_USERDIR}/.layout; test -e ${FVWM_USERDIR}/layouts/G2like \
+                                                    && ln -s ${FVWM_USERDIR}/layouts/G2like ${FVWM_USERDIR}/.layout \
+                                                    || ln -s ${FNS_SYSTEMDIR}/layouts/G2like ${FVWM_USERDIR}/.layout)
 *FNS-Form-BaseSetup: Command    $(LayoutKlike? FuncWriteInfoStoreToFileAndSet used_layout Klike $[FVWM_USERDIR]/.settings)
-*FNS-Form-BaseSetup: Command    $(LayoutKlike?!rm -f ${FVWM_USERDIR}/.layout; ln -s ${FNS_SYSTEMDIR}/layouts/Klike ${FVWM_USERDIR}/.layout)
+*FNS-Form-BaseSetup: Command    $(LayoutKlike?!rm -f ${FVWM_USERDIR}/.layout; test -e ${FVWM_USERDIR}/layouts/Klike \
+                                                    && ln -s ${FVWM_USERDIR}/layouts/Klike ${FVWM_USERDIR}/.layout \
+                                                    || ln -s ${FNS_SYSTEMDIR}/layouts/Klike ${FVWM_USERDIR}/.layout)
 *FNS-Form-BaseSetup: Command    $(Font? FuncWriteInfoStoreToFileAndSet used_font $(Font) $[FVWM_USERDIR]/.settings)
 *FNS-Form-BaseSetup: Command    $(Fontsize? FuncWriteInfoStoreToFileAndSet fontsize $(Fontsize) $[FVWM_USERDIR]/.settings)
 *FNS-Form-BaseSetup: Command    $(Terminal? FuncWriteInfoStoreToFileAndSet default_terminal "$(Terminal)" $[FVWM_USERDIR]/.settings)
