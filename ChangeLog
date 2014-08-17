@@ -1,5 +1,9 @@
 History:
 
+08/18/2014
+- remove spaces in empty lines in debian/control to prevent parsing error
+  while building deb package with 'make'
+
 08/17/2014
 - add key binding CTRL + Super_L (left win key) to call DesktopMenu while
   icons on desktop are active. Normally it is on the right mouse key but
