@@ -1,5 +1,16 @@
 History:
 
+08/17/2014
+- add key binding CTRL + Super_L (left win key) to call DesktopMenu while
+  icons on desktop are active. Normally it is on the right mouse key but
+  in this case the pcmanfm menu is there.
+- changes in config:
+  - add missing case in FuncRunPcmanFmWithDesktop
+  - remove test echos in FuncStartMountDaemon, FuncRunPcmanFmWithoutDesktop,
+    FuncSetWallpaper and FuncRunPcmanFmWithDesktop
+  - extend mouse bindings help messages with new possibility to call the 
+    DesktopMenu
+
 08/16/2014
 - reduce schedules in layouts and add a sleep FuncRunPcmanFmWithDesktop
 
