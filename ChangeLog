@@ -1,5 +1,20 @@
 History:
 
+08/26/2014
+- change all FNS function in config that they start with 'Func'
+- remove FNS-Applets:
+  - remove all FNS-Applets entries and menus because they will move to 
+    an extra package in the future
+  - remove AppletIconMan from ALT-TAB functions
+  - remove FNS-Applet colorsets from decor themes
+  - remove dependencies in ARCH, Debian, RPM and Gentoo build control files
+  - remove helper scripts (coverlovin)
+- simplify Qt config menu
+- add seperators in layout and decor menu to show which parts come from system
+  and user (DONE)
+- fix bug fns-start-programs that comments (with # infront) creating errors
+- update docs for fns-start-programs
+
 08/18/2014
 - remove spaces in empty lines in debian/control to prevent parsing error
   while building deb package with 'make'
