@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		fns-start-programs
-# Version:	3.0.3
+# Version:	3.0.4
 # Licence: 	GPL 2
 #
 # Description:	shell script to execute command strings which will be 
@@ -12,7 +12,7 @@
 #
 # Author:	Thomas Funk <t.funk@web.de>	
 # Created:	08/13/2012
-# Changed:	10/22/2012
+# Changed:	08/26/2014
 #-----------------------------------------------------------------------
 
 #!/bin/bash
@@ -58,10 +58,10 @@ infile=$2
 if [ -f $infile ]
 then
     # read startup file
-    commands="$(cat $infile)"
+    commands=$(grep -v "^ *\(#.*\|\)$" $infile)
     while IFS= read -r
     do
-	echo $REPLY
+	#echo $REPLY
 	# check if prog already running
 	prog_started=`ps -ef|grep -c "$REPLY" |grep -v grep`
 	if [ $prog_started -gt 1 ]
