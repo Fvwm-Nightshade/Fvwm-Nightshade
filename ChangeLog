@@ -12,8 +12,10 @@ History:
 - simplify Qt config menu
 - add seperators in layout and decor menu to show which parts come from system
   and user (DONE)
-- fix bug fns-start-programs that comments (with # infront) creating errors
+- fix bug in fns-start-programs that comments (with # infront) creating errors
 - update docs for fns-start-programs
+- update README and INSTALL
+- reduce the amount of wallpapers to shrink the package size. Putting them in an extra package
 
 08/18/2014
 - remove spaces in empty lines in debian/control to prevent parsing error

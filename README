@@ -137,14 +137,14 @@ Requirements:
 =============
 Required:       Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
                 xscreensaver, feh, imagemagick, librsvg2-bin, xwd,
-                stalonetray, cpufrequtils*, gksu, mplayer, pcmanfm,
-                python-mutagen, python-simplejson
+                stalonetray, cpufrequtils*, gksu, pcmanfm
 
 Recommended:    gnome-network-manager, pm-utils or xfce4-power-manager, 
                 lxapearance, qtconfig for qt4
 
-Suggested:      volumeicon-alsa, fdpowermon (for pm-utils), blueman, 
-                clipit, xneur, compton or xcompmgr, grun or gmrun
+Suggested:      fdpowermon (for pm-utils), grun or gmrun, blueman, 
+                volumeicon-alsa, clipit or parcelite, xneur, compton 
+                or xcompmgr
 
 * unfortunatelly not usable in Arch at the moment. They have changed from
   cpufrequtils to cpupower but it's not supported at the moment 
