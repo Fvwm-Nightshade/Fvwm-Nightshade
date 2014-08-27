@@ -1,13 +1,13 @@
 ########################################################################
 # File:         colorsets
-# Version:      0.1.5
+# Version:      0.1.6
 # Licence:      GPL 2
 #
 # Description:  colorsets of Clean theme
 #
 # Author:       Thomas Funk <t.funk@web.de>
 # Created:      06/08/2012
-# Changed:      05/09/2014
+# Changed:      08/25/2014
 ########################################################################
 # REMARKS:
 #
@@ -248,76 +248,40 @@ Colorset 24 VGradient 255 2 #e5e4e0 30 #9c9885 70 #312b1d, NoShape
 
 
 ########################################################################
-# Nanomoids Colorsets
-########################################################################
-
-#-----------------------------------------------------------------------
-# Default Colorset
-#-----------------------------------------------------------------------
-Colorset 25 fg $[infostore.used_appletfontcolor], bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint]
-
-#-----------------------------------------------------------------------
-# Highlight Colorset or Default Colorset for Icons e.g. in DriveInn to
-# simulate unmounted devices
-#-----------------------------------------------------------------------
-Colorset 26 fg #A4CDF9, bg #E0DFDE, hi #EEEEEE, sh #EEEEEE, RootTransparent, Tint #808080 $[infostore.used_applettint], IconAlpha 50
-
-#-----------------------------------------------------------------------
-# Warn Colorset
-#-----------------------------------------------------------------------
-Colorset 27 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
-
-#-----------------------------------------------------------------------
-#-----------------------------------------------------------------------
-Colorset 28 fg #E78787, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
-
-#-----------------------------------------------------------------------
-#-----------------------------------------------------------------------
-Colorset 29 fg #89D5D7, bg #E0DFDE, RootTransparent, Tint #808080 $[infostore.used_applettint]
-
-#-----------------------------------------------------------------------
-#-----------------------------------------------------------------------
-#Colorset 30
-
-
-########################################################################
 # Application Colorsets
 ########################################################################
 
 #-----------------------------------------------------------------------
 # regular terminal (xterm, rxvt, Eterm)
 #-----------------------------------------------------------------------
-Colorset 31 fg white, bg #000050, Plain
+Colorset 25 fg white, bg #000050, Plain
 
 #-----------------------------------------------------------------------
 # admin terminal (su xterm)
 #-----------------------------------------------------------------------
-Colorset 32 fg white, bg #000050, Plain
+Colorset 26 fg white, bg #000050, Plain
 
 #-----------------------------------------------------------------------
 # remote terminal (ssh, telnet)
 #-----------------------------------------------------------------------
-Colorset 33 fg white, bg #500000, Plain
+Colorset 27 fg white, bg #500000, Plain
 
 #-----------------------------------------------------------------------
 # viewer terminal (man, less, tail -f)
 #-----------------------------------------------------------------------
-Colorset 34 fg white, bg SeaGreen4, Plain
+Colorset 28 fg white, bg SeaGreen4, Plain
 
 #-----------------------------------------------------------------------
 # application run in the terminal, text editor using ft-xrdb
 #-----------------------------------------------------------------------
-Colorset 35 fg black, bg snow2, Plain
+Colorset 29 fg black, bg snow2, Plain
 
 #-----------------------------------------------------------------------
 # dialog main background (FvwmScript, FvwmForm, xmessage, ft-xrdb)
 #-----------------------------------------------------------------------
-Colorset 36 fg black, bg #80A080, Plain
+Colorset 30 fg black, bg #80A080, Plain
 
 #-----------------------------------------------------------------------
 # dialog text area (FvwmScript, FvwmForm, xmessage, ft-xrdb)
 #-----------------------------------------------------------------------
-Colorset 37 fg black, bg #A0C8A0, Plain
-
-#-----------------------------------------------------------------------
-# Colorsets 38 to 40 are reserved for the future use.
+Colorset 31 fg black, bg #A0C8A0, Plain
