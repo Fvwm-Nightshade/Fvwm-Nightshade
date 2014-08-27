@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Klike
-# Version:      1.0.3
+# Version:      1.0.4
 # Licence:      GPL 2
 #
 # Description:  KDE like layout with bottom bar
@@ -8,7 +8,7 @@
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      04/27/2014
-# Changed:      08/16/2014
+# Changed:      08/25/2014
 #-----------------------------------------------------------------------
 #
 # Bottombar
@@ -119,7 +119,7 @@ AddToFunc   ShowDesktop
 + I All (CurrentPage, Iconic, State 1) RestoreDesktop
 + I TestRc (Match) Break
 + I All (CurrentPage, !Iconic, !KlikeBottomBar, !State 1) ThisWindow State 1 True
-+ I All (CurrentPage, !Iconic, !KlikeBottomBar, State 1) Thumbnail
++ I All (CurrentPage, !Iconic, !KlikeBottomBar, State 1) FuncThumbnail
 
 DestroyFunc RestoreDesktop
 AddToFunc   RestoreDesktop

@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         G2like
-# Version:      1.0.9
+# Version:      1.0.10
 # Licence:      GPL 2
 #
 # Description:  Gnome like layout with a top and bottom bar
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      10/09/2012
-# Changed:      08/16/2014
+# Changed:      08/25/2014
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -140,7 +140,7 @@ AddToFunc   ShowDesktop
 + I All (CurrentPage, Iconic, State 1) RestoreDesktop
 + I TestRc (Match) Break
 + I All (CurrentPage, !Iconic, !G2likeBottomBar, !G2likeTopBar, !State 1) ThisWindow State 1 True
-+ I All (CurrentPage, !Iconic, !G2likeBottomBar, !G2likeTopBar, State 1) Thumbnail
++ I All (CurrentPage, !Iconic, !G2likeBottomBar, !G2likeTopBar, State 1) FuncThumbnail
 
 DestroyFunc RestoreDesktop
 AddToFunc   RestoreDesktop
