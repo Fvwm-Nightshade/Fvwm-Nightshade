@@ -8,6 +8,7 @@ History:
   - add a new icon folder-images.svg
 - add systemd support in FuncSuspend and FuncHibernate
 - make transset version configurable
+- update fvwm-nightshade documentation
 
 08/26/2014
 - change all FNS function in config that they start with 'Func'
