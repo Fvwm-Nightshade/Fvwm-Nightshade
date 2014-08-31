@@ -43,11 +43,12 @@ Configuration -> Fvwm-Nightshade -> Fvwm-Nightshade-Setup
 
 Desktop Organisation
 ~~~~~~~~~~~~~~~~~~~~
-Three different desktop layouts available:
+Four different desktop layouts available:
 
 * Horizontal (default)
 * Vertical
 * G2like (Gnome 2 based)
+* Klike (KDE based)
 
 You can change it via Fvwm-Nightshade-Setup or over the menu
 ----
@@ -223,6 +224,54 @@ The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So
 it will maximum growing inbetween the two panels. You can use _Alt-F11_ to 
 grow the window to the whole screen.
 
+Klike Layout
+^^^^^^^^^^^^
+The *Klike* layout is based on the KDE layout. It consists one bottom panel.
+
+_The Bottom Panel_::
++
+This panel contains from left to right:
++
+* The root menu. It opens by left clicking the *Fvwm-Nightshade* icon.
+* The "Show desktop" button. It iconify/deiconify all windows on the current page.
+* The "Global Iconman" Taskbar. It is a winlist holding each window on the 
+current page as a horizontal bar labeled with the name and the title of 
+each window. If the mouse hovers over one of the horizontal bars the window 
+related to this bar gets the focus.
++
+There are some mouse bindings available:
++
+- double clicking or scroll down on a bar iconify the window.
+- double clicking or scroll up on a bar deiconify the window.
+- right clicking  on a bar opens a windows operation menu.
++
+* The Pager. It is a miniature illustration of the 4 virtual desktop pages 
+(4x1) with mini windows. By clicking on each of the 4 segments you can 
+change the page. Also you can move each window from one page to another 
+with holding down the middle mouse button. If you hover over a mini window 
+it shows the name and the title of it.
++
+There are also some key combinations available, too:
++
+- _Shift-Ctrl_ and _Arrow_ key right/left switch to the next/previous page.
+- _Shift-Ctrl_ and _number_ 1-4 switch to page 1-4.
+- _Shift-Alt_ and _Arrow_ key right/left moves the active window to the next/previous page.
+- _Shift-Alt_ and _number_ 1-4 moves the active window to page 1-4.
++
+* The systemtray with application applets. The amount of visible applets 
+depends on the screen width. If more applets in the systray than representable 
+a bar on the left and right side appears while hovering over the left or 
+right end of the tray. With scrolling the mouse wheel you can move through 
+the applets.
+* A cpu graph with percentage. With right click on the applet area an 
+opertion menu appears with the possibility to restart the applet or open 
+the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+* A Clock and date applet. With right click on the applet area an opertion 
+menu appears with the possibility to restart the applet.
+
+The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So 
+it will maximum growing above the panel. You can use _Alt-F11_ to 
+grow the window to the whole screen.
 
 Root Menu
 ~~~~~~~~~
@@ -543,6 +592,7 @@ Location of Files and their Function
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |FvwmSmartMaximize         		|Perl module to maximize windows in the largest area of the desktop/page.
+|FvwmTransSet         		|Perl module to set true transparency to windows if a composite manager is running.
 |====
 
 -
@@ -561,16 +611,13 @@ scripts/ sub directory, all others in the <user> root.
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |FNS-Form-BaseSetup            	|Fvwm-Nightshade base setup (FvwmForm script).
-|FNS-Script-CpuPerformance    	|cpufreq settings tool (FvwmForm script).
+|FNS-Script-CpuPerformance    	|Cpufreq settings tool (FvwmForm script).
 |FNS-Script-PersonalMenu        |Personal menu creator (FvwmScript script).
-|FNS-Script-PlaylistCreator     |Tool to create playlists for Pagina and Plaia
+|FNS-Script-CompConfigurator    |Composite configurator (FvwmScript script).
 |FNS-Script-FileBrowser         |File browser based on FvwmScript-FileBrowser
-|FNS-Script-AppletConfigurator  |FNS-Applet Configurator
-|FNS-Applet-Plaia               |Music player applet based on mplayer
-|FNS-Applet-Pagina              |Video player applet based on mplayer
-|FNS-Applet-Meteo               |Weather forecast applet
+|FNS-Script-Date                |Set time/date based on FvwmScript-Date
 |FNS-Applet-Kalende             |Calendar applet
-|FNS-Applet-DriveInn            |Storage drives manager applet
+|FNS-Applet-Chrono              |Alarm applet
 |fvwm-menu-desktop2-config.fpl  |Configuration GUI for fvwm-menu-desktop2.
 |FvwmForm-SingleMenuHelp2       |Help window for single menu section in fvwm-menu-desktop2-config.
 |FvwmForm-MultiMenuHelp2        |Help window for multiple menu section in fvwm-menu-desktop2-config.
@@ -710,16 +757,23 @@ settings::
 +
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|$[infostore.used_theme]            |The actual theme. Changed dynamically via FuncChangeDecor.
-|$[infostore.used_banner]           |Banner image for FvwmBanner.
-|$[infostore.used_font]             |Default used font for all Fvwm parts.
-|$[infostore.fontsize]              |Default font size for all Fvwm parts.
-|$[infostore.used_layout]           |The actual layout.
-|$[infostore.default_terminal]      |The default used terminal program.
-|$[infostore.default_browser]       |The default used browser.
-|$[infostore.used_applettint]       |Transparency value for FNS-Applets.
-|$[infostore.used_appletfontcolor]  |Font color of FNS-Applets.
-|$[SplashOn]                	    |Run Banner at startup.
+|$[infostore.used_theme]                |The actual theme. Changed dynamically via FuncChangeDecor.
+|$[SplashOn]                            |Run Banner at startup.
+|$[infostore.used_banner]               |Banner image for FvwmBanner.
+|$[infostore.used_font]                 |Default used font for all Fvwm parts.
+|$[infostore.fontsize]                  |Default font size for all Fvwm parts.
+|$[infostore.used_layout]               |The actual layout.
+|$[infostore.used_menutint]             |The actual menu tint level.
+|$[use_composite]              	        |Use composite manager.
+|$[infostore.comp_command]              |Composite manager command.
+|$[infostore.used_windowtransparency]   |The actual (inactive) window transparency level (used by transset).
+|$[infostore.used_windowopacity]        |The actual (active) window opacity level (used by transset).
+|$[infostore.DesktopIconsOn]            |Use Icons on desktop.
+|$[infostore.PcmanFmStatus]             |State of pcmanfm.
+|$[infostore.additional_wp_dirs]        |Additional wallpaper directories.
+|$[infostore.default_terminal]          |The default used terminal program.
+|$[infostore.default_browser]           |The default used browser.
+|$[infostore.default_transset]          |The default used transset program.
 |====
 
 
@@ -889,7 +943,7 @@ or in the StartFunction with
 
 AUTHORS
 -------
-(C) 2013 by the Fvwm-Nightshade team <fvwmnightshade@gmail.com>.
+(C) 2014 by the Fvwm-Nightshade team <fvwmnightshade@gmail.com>.
 
 
 COPYRIGHT
