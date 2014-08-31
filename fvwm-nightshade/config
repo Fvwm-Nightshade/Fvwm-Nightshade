@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20140827
+InfoStoreAdd ns_version 0.7.7.20140831
 # Copyright (C) 2014
 #
 # Authors:
@@ -194,11 +194,6 @@ ImagePath +:/usr/share/pixmaps:/usr/share/pixmaps/fvwm
 FnsSoundPath +:/usr/share/sounds
 
 #-----------------------------------------------------------------------
-# wallpaper directory path.
-#-----------------------------------------------------------------------
-InfoStoreAdd wallpaper_dir $[FVWM_USERDIR]/wallpapers                
-
-#-----------------------------------------------------------------------
 # actual wallpaper
 #-----------------------------------------------------------------------
 InfoStoreAdd fvwm_wallpaper $[FVWM_USERDIR]/.wallpaper
@@ -216,6 +211,7 @@ FuncSetThemeDir $[infostore.used_theme]
 # State of pcmanfm
 #-----------------------------------------------------------------------
 PipeRead 'if [ -z `pidof pcmanfm` ]; then echo SetEnv PcmanFmStatus 0 ;fi'
+
 
 #***********************************************************************
 # 1.2.3 Others
@@ -536,11 +532,9 @@ Style FvwmScript      EWMHMiniIconOverride, Icon fvwm_footprint.svg:48x48, MiniI
 # FNS related icons
 #-----------------------------------------------------------------------
 Style FNS-Form-BaseSetup            EWMHMiniIconOverride, Icon icon_fns.svg:48x48, MiniIcon icon_fns.svg:16x16
-Style FNS-Script-AppletConfigurator EWMHMiniIconOverride, Icon plugin.svg:48x48, MiniIcon plugin.svg:16x16
 Style FNS-Script-CompConfigurator   EWMHMiniIconOverride, Icon CompConfigurator.svg:48x48, MiniIcon CompConfigurator.svg:16x16
 Style FNS-Script-PersonalMenu       EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
 Style FNS-Script-FileBrowser        EWMHMiniIconOverride, Icon filemanager.svg:48x48, MiniIcon filemanager.svg:16x16
-Style FNS-Script-PlaylistCreator    EWMHMiniIconOverride, Icon playlist-creator.svg:48x48, MiniIcon playlist-creator.svg:16x16
 Style FNS-Script-CpuPerformance     EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
 Style FNS-Script-Date               EWMHMiniIconOverride, Icon clock.svg:48x48, MiniIcon clock.svg:16x16
 Style Chrono                        EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon Chrono.svg:16x16
@@ -1036,7 +1030,7 @@ DestroyModuleConfig FvwmTransSet: *
 *FvwmTransSet: Excludes FvwmButtons, FvwmPager, FvwmIconMan, stalonetray, conky_cpu, conky_clock, Pcmanfm_Daemon
 *FvwmTransSet: Opacity 1.0
 *FvwmTransSet: Transparency 0.8
-*FvwmTransSet: UsedTransset transset
+*FvwmTransSet: UsedTransset $[infostore.default_transset]
 
 
 #=======================================================================
@@ -1524,6 +1518,64 @@ AddToFunc FuncFvwmPrevWindow
 
 
 #-----------------------------------------------------------------------
+# Wallpaper Browser by Taviso.
+#-----------------------------------------------------------------------
+DestroyFunc FuncWallpaperBrowser
+AddToFunc   FuncWallpaperBrowser
++ I PipeRead 'test ! -d "${FVWM_USERDIR}/wallpapers" && mkdir "${FVWM_USERDIR}/wallpapers"; \
+    test ! -d "${FVWM_USERDIR}/wallpapers/.thumbs" && mkdir "${FVWM_USERDIR}/wallpapers/.thumbs"'
++ I FuncCreateWpDirLinks
++ I PipeRead '_dir_path=`basename "$0"`; \
+              sep=`test "$_dir_path" != "wallpapers" && echo /`; \
+              echo SetEnv dir_path "${sep}`echo \\"\\$_dir_path\\" | sed \\"s#\\.#/#g;s#//#/\\.#g\\"`${sep}"'
++ I PipeRead ' \
+    for i in "$0/"*; do \
+        test -f "${FVWM_USERDIR}/wallpapers/.thumbs/${i##*/}" -a "${i}" -ot "${FVWM_USERDIR}/wallpapers/.thumbs/${i##*/}" || { \
+                convert -define jpeg:size=200 -strip -quality 0 -thumbnail 42 "${i}" "png:${FVWM_USERDIR}/wallpapers/.thumbs/${i##*/}" 2>/dev/null \
+                    || continue; \
+            }; \
+    done; \
+    fvwm-menu-directory --title "$[dir_path]" \
+    --icon-file __PIXMAP__ --links \
+    --icon-dir folder-images.svg:$[infostore.MenuIconSize] \
+    --dir "$0" --command-file="FuncNewWallpaper \\"%f\\"" \
+    --exec-t="^xv -wait 2 *" --func-name FuncWallpaperBrowser | sed \
+    "s#__PIXMAP__\\(.*\\)\\\"\\(.*/\\)\\(.*\\)\\\"#\\$[FVWM_USERDIR]/wallpapers/.thumbs/\\3\\1\\2\\3#g"'
++ I UnsetEnv dir_path
+
+#-----------------------------------------------------------------------
+# Create links in wallpaper directory to additional directories
+#-----------------------------------------------------------------------
+DestroyFunc FuncCreateWpDirLinks
+AddToFunc   FuncCreateWpDirLinks
++ I PipeRead 'for _dir in `echo $[infostore.additional_wp_dirs] | sed "s#:# #g"`; do \
+                if [ -d $_dir ]; then \
+                    _dir_name=`echo $_dir | sed "s#^/##;s#/#.#g"`; \
+                    if [ ! -L ${FVWM_USERDIR}/wallpapers/$_dir_name ]; then \
+                        ln -s $_dir ${FVWM_USERDIR}/wallpapers/$_dir_name; \
+                    fi; \
+                fi; \
+              done'
++ I FuncRemoveWpDirLinks
+
+#-----------------------------------------------------------------------
+# Remove links of obsolete additional directories in wallpaper directory
+#-----------------------------------------------------------------------
+DestroyFunc FuncRemoveWpDirLinks
+AddToFunc   FuncRemoveWpDirLinks
++ I PipeRead ' \
+    _wp_dirs=`echo "$[infostore.additional_wp_dirs]" | sed "s#^/\\|/\\\\$##g;s#:/#:#g;s#/:#:#g;s#/#\\.#g"`; \
+    for _link in `find ${FVWM_USERDIR}/wallpapers -maxdepth 1 -type l`; do \
+        if [ -d "$_link" ]; then \
+            _link=`basename $_link`; \
+            if [ -n "${_wp_dirs##*$_link*}" ]; then \
+                _link="/`echo "$_link" | sed "s#\\.#/#g;s#//#/\\.#g"`/"; \
+                echo $_link removed >> ~/.xsession-errors; \
+            fi; \
+        fi; \
+    done'
+
+#-----------------------------------------------------------------------
 # Set which wallpaper mode will use
 #-----------------------------------------------------------------------
 DestroyFunc FuncSetWallpaper
@@ -1532,26 +1584,6 @@ AddToFunc   FuncSetWallpaper
 + I TestRC (Match) Break
 + I TestRC (!Match) Test (I $[infostore.fvwm_wallpaper]) Exec feh --bg-scale $[infostore.fvwm_wallpaper]
 + I TestRC (!Match) Module FvwmBacker
-
-
-#-----------------------------------------------------------------------
-# Wallpaper Browser by Taviso.
-#-----------------------------------------------------------------------
-DestroyFunc FuncWallpaperBrowser
-AddToFunc   FuncWallpaperBrowser
-+ I PipeRead 'test ! -d "${FVWM_USERDIR}/wallpapers" && mkdir "${FVWM_USERDIR}/wallpapers"; \
-    test ! -d "${FVWM_USERDIR}/wallpapers/.thumbs" && mkdir "${FVWM_USERDIR}/wallpapers/.thumbs"; \
-    for i in "$0/"*; do \
-        test -f "${FVWM_USERDIR}/wallpapers/.thumbs/${i##*/}" -a "${i}" -ot "${FVWM_USERDIR}/wallpapers/.thumbs/${i##*/}" || { \
-                convert -quality 0 -sample 42 "${i}" "png:${FVWM_USERDIR}/wallpapers/.thumbs/${i##*/}" 2>/dev/null \
-                    || continue; \
-            }; \
-    done; \
-    fvwm-menu-directory --icon-title menu/folder-open.xpm --icon-file __PIXMAP__ --links \
-    --icon-dir menu/folder.xpm \
-    --dir "$0" --command-file="FuncNewWallpaper \\"%f\\"" \
-    --exec-t="^xv -wait 2 *" --func-name FuncWallpaperBrowser | sed \
-    "s#__PIXMAP__\\(.*\\)\\\"\\(.*/\\)\\(.*\\)\\\"#\\$[FVWM_USERDIR]/wallpapers/.thumbs/\\3\\1\\2\\3#g"'
 
 #-----------------------------------------------------------------------
 # switch background from FvwmBacker to chosen wallpaper picture
@@ -1608,12 +1640,13 @@ AddToFunc   FuncDeThumbnail
 + I UnsetEnv app_name
 
 #-----------------------------------------------------------------------
-# Suspend the machine. Only as workaround if xfce4-power-manager not installed
+# Suspend the machine if xfce4-power-manager not installed
 #-----------------------------------------------------------------------
 DestroyFunc FuncSuspend
 AddToFunc   FuncSuspend
 + I Test (!x pm-is-supported) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"
 + I TestRc (Match) break
++ I TestRc (!Match) Test (x systemctl) PipeRead 'systemctl suspend'
 + I TestRc (!Match) Test (x /usr/sbin/hald) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
                                                     /org/freedesktop/Hal/devices/computer \
                                                     org.freedesktop.Hal.Device.SystemPowerManagement.Suspend int32:0 1>&2'
@@ -1622,12 +1655,13 @@ AddToFunc   FuncSuspend
 + I TestRc (!Match) FuncShowMessage "Suspend Info" "Suspend not possible - hald nor upower found!"
 
 #-----------------------------------------------------------------------
-# Hibernate the machine. Only as workaround if xfce4-power-manager not installed
+# Hibernate the machine if xfce4-power-manager not installed
 #-----------------------------------------------------------------------
 DestroyFunc FuncHibernate
 AddToFunc   FuncHibernate
 + I Test (!x pm-is-supported) FuncShowMessage "Hibernate Info" "Install pm-utils for full functionality"
 + I TestRc (Match) break
++ I TestRc (!Match) Test (x systemctl) PipeRead 'systemctl hibernate'
 + I TestRc (!Match) Test (x /usr/sbin/hald) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
                                                     /org/freedesktop/Hal/devices/computer \
                                                     org.freedesktop.Hal.Device.SystemPowerManagement.Hibernate 1>&2'
@@ -2320,7 +2354,7 @@ AddToFunc   FuncMenuWallpaperConfiguration
 + I Test (EnvMatch DesktopIconsOn 0) Test (I $[infostore.fvwm_wallpaper]) \
     AddToMenu MenuWallpaperConfiguration "$[gt.Set &Default background]%delete.svg:$[infostore.MenuIconSize]%"          FuncDelWallpaperlink
 + I AddToMenu MenuWallpaperConfiguration MissingSubmenuFunction FuncWallpaperBrowser
-+ I AddToMenu MenuWallpaperConfiguration "$[gt.Set &Wallpaper background]%background.svg:$[infostore.MenuIconSize]%"    Popup $[infostore.wallpaper_dir]
++ I AddToMenu MenuWallpaperConfiguration "$[gt.Set &Wallpaper background]%background.svg:$[infostore.MenuIconSize]%"    Popup $[FVWM_USERDIR]/wallpapers
 
 #-----------------------------------------------------------------------
 # Screensaver sub menu for X configuration
@@ -2671,7 +2705,6 @@ AddToFunc   FuncMenuCpuOps
 + I AddToMenu MenuCpuOps DynamicPopupAction FuncMenuCpuOps
 + I AddToMenu MenuCpuOps "$[gt.Conky Cpu Ops]" Title
 + I AddToMenu MenuCpuOps "$[gt.CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"      FvwmScript FNS-Script-CpuPerformance
-+ I AddToMenu MenuCpuOps "$[gt.Nucleu (CPU State)]%nucleu.svg:$[infostore.MenuIconSize]%"   FvwmScript FNS-Applet-Nucleu -fns -s
 + I AddToMenu MenuCpuOps "" Nop
 + I AddToMenu MenuCpuOps "$[gt.Restart Conky CPU]%restart.svg:$[infostore.MenuIconSize]%"   Exec exec xkill -id `xwininfo -name conky_cpu|grep "Window id"|cut -d ' ' -f4`
 
