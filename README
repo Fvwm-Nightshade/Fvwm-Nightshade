@@ -126,7 +126,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - New fvwm-menu-desktop GUI with help windows
 - Restart possibility for Conky clock and CPU applet in panel
 - Support for shadows and transparency with XcompMgr and Compton
-- Support for hald and upower for Suspend/Hibernate
+- Support for hald, upower and systemd for Suspend/Hibernate
 - Support for hotplug mounting (i.e. usb)
 - New Gtk2 and 3 themes for Air, Tribal and FlatTab
 - Support for some application launcher: grun and gmrun

@@ -1,5 +1,14 @@
 History:
 
+08/31/2015
+- remove FNS-Script-AppletConfigurator and FNS-Script-PlaylistCreator
+- remove all icons needed by FNS-Applets
+- update FuncWallpaperBrowser to support more than one wallpaper directories
+  - add FuncCreateWpDirLinks and FuncRemoveWpDirLinks
+  - add a new icon folder-images.svg
+- add systemd support in FuncSuspend and FuncHibernate
+- make transset version configurable
+
 08/26/2014
 - change all FNS function in config that they start with 'Func'
 - remove FNS-Applets:
