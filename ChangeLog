@@ -1,6 +1,15 @@
 History:
 
-08/31/2015
+09/02/2014
+- remove change from 08/08/2014 that Suspend and Hibernate don't appear
+  in the Quit menu if xfce4 power manager is installed.
+- remove old introduction comments from the beginning of config
+- exchange not needed tabs with spaces in config
+- change Schedule of EwmhBaseStruts to 2000 ms that pcmanfm get the
+  complete screen in desktop mode
+- fix bug in wallpaper functions that spaces break the link deletion
+
+08/31/2014
 - remove FNS-Script-AppletConfigurator and FNS-Script-PlaylistCreator
 - remove all icons needed by FNS-Applets
 - update FuncWallpaperBrowser to support more than one wallpaper directories
