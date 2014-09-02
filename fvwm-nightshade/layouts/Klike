@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Klike
-# Version:      1.0.4
+# Version:      1.0.5
 # Licence:      GPL 2
 #
 # Description:  KDE like layout with bottom bar
@@ -8,7 +8,7 @@
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      04/27/2014
-# Changed:      08/25/2014
+# Changed:      09/02/2014
 #-----------------------------------------------------------------------
 #
 # Bottombar
@@ -56,7 +56,7 @@ InfoStoreAdd bottombar_geometry $[vp.width]x$[infostore.bar_height]+0-0
 # Define bands at the edge of the screen. It is used to compute the
 # Working Area: EwmhBaseStruts left right top bottom 
 #-----------------------------------------------------------------------
-Schedule 1000 PipeRead 'echo EwmhBaseStruts 0 0 0 $(($[infostore.bar_height]+4))'
+Schedule 2000 PipeRead 'echo EwmhBaseStruts 0 0 0 $(($[infostore.bar_height]+4))'
 
 
 #-----------------------------------------------------------------------
