@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20140831
+InfoStoreAdd ns_version 0.7.7.20140902
 # Copyright (C) 2014
 #
 # Authors:
@@ -42,20 +42,6 @@ InfoStoreAdd ns_version 0.7.7.20140831
 #
 # Introductions:
 # 
-# You need the fvwm_icons distribution installed in the fvwm image path.
-# If they are installed in another directory use the ImagePath command
-# below.
-#
-# The suggested way to install this configuration file is to (re)move
-# any .fvwm2rc file you have in ~/.fvwm or ~ and run fvwm without any
-# startup file.
-#
-# For the sound effects to work you need the fvwm_sounds distribution
-# (http://www.fvwm.org/download/icons.php - FVWM Icons and Sounds)
-# installed and an .au player. To set the installation directory of this
-# distribution as your sound player edit the *FvwmEvent commands.
-# Note that if you use rplay, the rplayd daemon must be run.
-#
 # There are many comments, but a good reading of the fvwm FAQ, of the man
 # pages of fvwm and its modules is suggested/recommended.
 #
@@ -120,7 +106,7 @@ InfoStoreAdd ns_version 0.7.7.20140831
 #        7.5.2 Show Colorset
 #    7.6 FvwmIdent
 #    7.7 FvwmScript
-#	 7.8 FvwmTransSet
+#     7.8 FvwmTransSet
 #    7.9 Others
 # 8. FUNCTIONS
 #    8.1 Startup
@@ -1203,8 +1189,8 @@ DestroyFunc FuncRunPcmanFmWithoutDesktop
 AddToFunc   FuncRunPcmanFmWithoutDesktop
 + I Test (EnvMatch PcmanFmStatus 2) Exec exec pcmanfm --desktop-off
 + I Test (EnvMatch PcmanFmStatus 0) Exec exec pcmanfm -d --class Pcmanfm_Daemon
-+ I Test (!EnvMatch PcmanFmStatus 1) FuncSetWallpaper
-+ I TestRc (Match) FuncWriteSetEnvToFileAndSet PcmanFmStatus 1 $[FVWM_USERDIR]/.settings
++ I FuncSetWallpaper
++ I Test (!EnvMatch PcmanFmStatus 1) FuncWriteSetEnvToFileAndSet PcmanFmStatus 1 $[FVWM_USERDIR]/.settings
 
 #-----------------------------------------------------------------------
 # Run pcmanfm as desktop
@@ -1299,7 +1285,7 @@ AddToFunc   FuncWriteSetEnvToFileAndSet
             else \
                 sed -i --follow-symlinks "$ a\SetEnv $0 \\"$Val\\"" $2; \
             fi; \
-			Val=`echo "$Val" | sed "s/ /\\\\\\\\\\ /g"`; \
+            Val=`echo "$Val" | sed "s/ /\\\\\\\\\\ /g"`; \
             echo SetEnv $0 "$Val"'
 
 #-----------------------------------------------------------------------
@@ -1549,10 +1535,10 @@ AddToFunc   FuncWallpaperBrowser
 DestroyFunc FuncCreateWpDirLinks
 AddToFunc   FuncCreateWpDirLinks
 + I PipeRead 'for _dir in `echo $[infostore.additional_wp_dirs] | sed "s#:# #g"`; do \
-                if [ -d $_dir ]; then \
-                    _dir_name=`echo $_dir | sed "s#^/##;s#/#.#g"`; \
-                    if [ ! -L ${FVWM_USERDIR}/wallpapers/$_dir_name ]; then \
-                        ln -s $_dir ${FVWM_USERDIR}/wallpapers/$_dir_name; \
+                if [ -d "$_dir" ]; then \
+                    _dir_name=`echo "$_dir" | sed "s#^/##;s#/#.#g"`; \
+                    if [ ! -L "${FVWM_USERDIR}/wallpapers/$_dir_name" ]; then \
+                        ln -s "$_dir" "${FVWM_USERDIR}/wallpapers/$_dir_name"; \
                     fi; \
                 fi; \
               done'
@@ -1565,12 +1551,11 @@ DestroyFunc FuncRemoveWpDirLinks
 AddToFunc   FuncRemoveWpDirLinks
 + I PipeRead ' \
     _wp_dirs=`echo "$[infostore.additional_wp_dirs]" | sed "s#^/\\|/\\\\$##g;s#:/#:#g;s#/:#:#g;s#/#\\.#g"`; \
-    for _link in `find ${FVWM_USERDIR}/wallpapers -maxdepth 1 -type l`; do \
+    for _link in `find "${FVWM_USERDIR}/wallpapers" -maxdepth 1 -type l`; do \
         if [ -d "$_link" ]; then \
-            _link=`basename $_link`; \
-            if [ -n "${_wp_dirs##*$_link*}" ]; then \
-                _link="/`echo "$_link" | sed "s#\\.#/#g;s#//#/\\.#g"`/"; \
-                echo $_link removed >> ~/.xsession-errors; \
+            _basename=`basename "$_link"`; \
+            if [ -n "${_wp_dirs##*$_basename*}" ]; then \
+                rm -f "$_link"; \
             fi; \
         fi; \
     done'
@@ -1580,9 +1565,9 @@ AddToFunc   FuncRemoveWpDirLinks
 #-----------------------------------------------------------------------
 DestroyFunc FuncSetWallpaper
 AddToFunc   FuncSetWallpaper
-+ I Test (EnvMatch DesktopIconsOn 1) Exec pcmanfm -w $[FVWM_USERDIR]/.wallpaper
++ I Test (EnvMatch DesktopIconsOn 1) Exec exec pcmanfm -w $[FVWM_USERDIR]/.wallpaper --wallpaper-mode=stretch
 + I TestRC (Match) Break
-+ I TestRC (!Match) Test (I $[infostore.fvwm_wallpaper]) Exec feh --bg-scale $[infostore.fvwm_wallpaper]
++ I TestRC (!Match) Test (I $[infostore.fvwm_wallpaper]) Exec exec feh --bg-scale $[infostore.fvwm_wallpaper]
 + I TestRC (!Match) Module FvwmBacker
 
 #-----------------------------------------------------------------------
@@ -1591,7 +1576,6 @@ AddToFunc   FuncSetWallpaper
 DestroyFunc FuncNewWallpaper
 AddToFunc   FuncNewWallpaper
 + I PipeRead 'ln -sf $* $[FVWM_USERDIR]/.wallpaper'
-#+ I Exec exec feh --bg-scale $[infostore.fvwm_wallpaper]
 + I FuncSetWallpaper
 + I KillModule FvwmBacker
 
@@ -2117,8 +2101,8 @@ AddToFunc   FuncMenuStartRegularModules
 + I AddToMenu MenuStartRegularModules "$[gt.&GtkDebug]%bug.svg:$[infostore.MenuIconSize]%"                          Module FvwmGtkDebug
 + I AddToMenu MenuStartRegularModules "$[gt.&Debug Console]%bug.svg:$[infostore.MenuIconSize]%"                     Module FvwmDebug --xconsole
 + I AddToMenu MenuStartRegularModules "$[gt.&Identify]%question.svg:$[infostore.MenuIconSize]%"                     Module FvwmIdent
-+ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (1/2 &app)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"	Module FvwmScroll 2 2
-+ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (75%% &scr)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"	Module FvwmScroll 75p 75p
++ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (1/2 &app)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"  Module FvwmScroll 2 2
++ I AddToMenu MenuStartRegularModules "$[gt.ScrollBar (75%% &scr)]%window-scrollbar.svg:$[infostore.MenuIconSize]%" Module FvwmScroll 75p 75p
 + I AddToMenu MenuStartRegularModules "$[gt.Auto Raise (&1/2 sec)]%arrow-up.svg:$[infostore.MenuIconSize]%"         FuncRestartModule 'FvwmAuto 500 "Silent Raise" Nop'
 + I AddToMenu MenuStartRegularModules "$[gt.Auto Raise (&2 sec)]%arrow-up.svg:$[infostore.MenuIconSize]%"           FuncRestartModule 'FvwmAuto 2000 "Silent Raise" Nop'
 + I AddToMenu MenuStartRegularModules "" Nop
@@ -2291,7 +2275,7 @@ AddToFunc   FuncFvwmDecorMenu
 + I AddToMenu FvwmDecorMenu "$[gt.User]" Nop
 + I AddToMenu FvwmDecorMenu "" Nop
 + I PipeRead 'for i in `ls -Fh $FVWM_USERDIR/themes/ | grep /$ | sed s#/##g`; \
-	do echo AddToMenu FvwmDecorMenu "${i}%decor.svg:$[infostore.MenuIconSize]%" FuncChangeDecor $i; done'
+    do echo AddToMenu FvwmDecorMenu "${i}%decor.svg:$[infostore.MenuIconSize]%" FuncChangeDecor $i; done'
 + I UnsetEnv foundem
 
 #-----------------------------------------------------------------------
@@ -2387,12 +2371,9 @@ AddToFunc   FuncMenuFvwmQuit
 + I AddToMenu MenuFvwmQuit "$[gt.&Restart Fvwm]%restart.svg:$[infostore.MenuIconSize]%"         FuncRestart
 + I AddToMenu MenuFvwmQuit "" Nop
 + I AddToMenu MenuFvwmQuit "$[gt.Re&fresh Screen]%refresh.svg:$[infostore.MenuIconSize]%"       Refresh
-+ I Test (!x xfce4-power-manager) \
-    AddToMenu MenuFvwmQuit "" Nop
-+ I TestRc (Match) KeepRc \
-    AddToMenu MenuFvwmQuit "$[gt.&Suspend System]%suspend.svg:$[infostore.MenuIconSize]%"       FuncSuspend
-+ I TestRc (Match) \
-    AddToMenu MenuFvwmQuit "$[gt.&Hibernate System]%hibernate.svg:$[infostore.MenuIconSize]%"   FuncHibernate
++ I AddToMenu MenuFvwmQuit "" Nop
++ I AddToMenu MenuFvwmQuit "$[gt.&Suspend System]%suspend.svg:$[infostore.MenuIconSize]%" FuncSuspend
++ I AddToMenu MenuFvwmQuit "$[gt.&Hibernate System]%hibernate.svg:$[infostore.MenuIconSize]%" FuncHibernate
 + I AddToMenu MenuFvwmQuit "" Nop
 + I AddToMenu MenuFvwmQuit "$[gt.&Yes, Really Quit]%hook.svg:$[infostore.MenuIconSize]%"        Quit
 + I AddToMenu MenuFvwmQuit "$[gt.&No, Don't Quit]%exit.svg:$[infostore.MenuIconSize]%"          Nop
@@ -2627,13 +2608,13 @@ AddToFunc   FuncMenuRearrangeWindows
 + I DestroyMenu MenuRearrangeWindows
 + I AddToMenu MenuRearrangeWindows DynamicPopupAction FuncMenuRearrangeWindows
 + I AddToMenu MenuRearrangeWindows "$[gt.Rearrange Windows]" Title
-+ I AddToMenu MenuRearrangeWindows "$[gt.&Cascade]%windows-rearrange.svg:$[infostore.MenuIconSize]%"					FvwmRearrange -cascade -m 3 3 -incx 2
-+ I AddToMenu MenuRearrangeWindows "$[gt.&Place Again]%window-replace.svg:$[infostore.MenuIconSize]%"					All (CurrentPage !Sticky) PlaceAgain anim
++ I AddToMenu MenuRearrangeWindows "$[gt.&Cascade]%windows-rearrange.svg:$[infostore.MenuIconSize]%"                    FvwmRearrange -cascade -m 3 3 -incx 2
++ I AddToMenu MenuRearrangeWindows "$[gt.&Place Again]%window-replace.svg:$[infostore.MenuIconSize]%"                   All (CurrentPage !Sticky) PlaceAgain anim
 + I AddToMenu MenuRearrangeWindows "" Nop
 + I AddToMenu MenuRearrangeWindows "$[gt.Tile &horizontally]%windows-tile-horizontal.svg:$[infostore.MenuIconSize]%"    FvwmRearrange -tile -h -m 2 2 98 98
 + I AddToMenu MenuRearrangeWindows "$[gt.Tile &vertically]%windows-tile-vertical.svg:$[infostore.MenuIconSize]%"        FvwmRearrange -tile    -m 2 2 98 98
 + I AddToMenu MenuRearrangeWindows "" Nop
-+ I AddToMenu MenuRearrangeWindows "$[gt.&Arrange Icons]%window-icons.svg:$[infostore.MenuIconSize]%"   				All (CurrentDesk Iconic) RecaptureWindow
++ I AddToMenu MenuRearrangeWindows "$[gt.&Arrange Icons]%window-icons.svg:$[infostore.MenuIconSize]%"                   All (CurrentDesk Iconic) RecaptureWindow
 
 #-----------------------------------------------------------------------
 # Windows Ops sub menu for window utilities like screenshot, layer, etc
