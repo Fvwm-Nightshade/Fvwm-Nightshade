@@ -11,8 +11,6 @@ Changes:
 - New layout 'Klike' - a KDE like bottom bar
 - New theme 'Rocken' based on Thibaut's theme (thanks for his admition :-) )
 - Support for hotplug mounting (i.e. usb)
-- Add xfce4-power-manager as an optional possibility instead of pm-utils
-  and fdpowerman.
 - New Gtk2 and 3 themes for Air, Tribal and FlatTab
 - Support for some application launcher: grun and gmrun
 - Support for icons on desktop. Also for mount icons.
