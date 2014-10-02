@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20140902
+InfoStoreAdd ns_version 0.7.7.20141002
 # Copyright (C) 2014
 #
 # Authors:
@@ -1290,7 +1290,7 @@ AddToFunc   FuncWriteSetEnvToFileAndSet
 
 #-----------------------------------------------------------------------
 # Update layout and theme settings in base setup file .FNS-Form-BaseSetup
-# FuncUpdateBaseSetupFile <Layout/Theme> <layout/theme name>
+# FuncUpdateBaseSetupFile <Layout/Theme/DesktopIconsOn> <layout/theme name/0|1>
 #-----------------------------------------------------------------------
 DestroyFunc FuncUpdateBaseSetupFile
 AddToFunc   FuncUpdateBaseSetupFile
@@ -1300,8 +1300,16 @@ AddToFunc   FuncUpdateBaseSetupFile
                         sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
                         sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup;; \
                 esac; \
-              else \
+              elif [ "$0" = "Theme" ]; then \
                 sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+              elif [ "$0" = "DesktopIconsOn" ]; then \
+                if [ "$1" = "1" ]; then \
+                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOn .*/*SavedBaseSetup: DesktopIconsOn on/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOff .*/*SavedBaseSetup: DesktopIconsOff /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+                else \
+                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOn .*/*SavedBaseSetup: DesktopIconsOn /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOff .*/*SavedBaseSetup: DesktopIconsOff on/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+                fi; \
               fi'
               
 
@@ -1365,8 +1373,6 @@ AddToFunc   FuncAppCheck
 + I Test (!x clipit) FuncPrintMsg "AppCheck" "clipit (clipboard) not installed"
 # systray clipboard 2 (for gentoo)
 + I TestRc (Match) Test (!x parcellite) FuncPrintMsg "AppCheck" "parcellite (clipboard) not installed"
-# systray xfce4 power manager
-+ I Test (!x xfce4-power-manager) FuncPrintMsg "AppCheck" "xfce4-power-manager (suspend, hibernate) not installed"
 # systray app fdpowermon
 + I TestRc (Match) Test (!x fdpowermon) FuncPrintMsg "AppCheck" "fdpowermon (systray pm control) not installed"
 # Mount daemon pcmanfm
@@ -1381,9 +1387,8 @@ AddToFunc   FuncStartSystrayApplets
 + I Test (EnvMatch systray_started 0 ) break
 # volume
 + I Test (x volumeicon) exec exec volumeicon
-# battery and suspend/hibernate
-+ I Test (x xfce4-power-manager) exec exec xfce4-power-manager
-+ I TestRc (!Match) Test (x fdpowermon) exec exec fdpowermon
+# battery
++ I Test (x fdpowermon) exec exec fdpowermon
 # network
 + I Test (x nm-applet) exec exec nm-applet
 # bluetooth
@@ -1575,7 +1580,7 @@ AddToFunc   FuncSetWallpaper
 #-----------------------------------------------------------------------
 DestroyFunc FuncNewWallpaper
 AddToFunc   FuncNewWallpaper
-+ I PipeRead 'ln -sf $* $[FVWM_USERDIR]/.wallpaper'
++ I PipeRead 'ln -sf "$*" "$[FVWM_USERDIR]/.wallpaper"'
 + I FuncSetWallpaper
 + I KillModule FvwmBacker
 
@@ -1624,7 +1629,7 @@ AddToFunc   FuncDeThumbnail
 + I UnsetEnv app_name
 
 #-----------------------------------------------------------------------
-# Suspend the machine if xfce4-power-manager not installed
+# Suspend the machine
 #-----------------------------------------------------------------------
 DestroyFunc FuncSuspend
 AddToFunc   FuncSuspend
@@ -1639,7 +1644,7 @@ AddToFunc   FuncSuspend
 + I TestRc (!Match) FuncShowMessage "Suspend Info" "Suspend not possible - hald nor upower found!"
 
 #-----------------------------------------------------------------------
-# Hibernate the machine if xfce4-power-manager not installed
+# Hibernate the machine
 #-----------------------------------------------------------------------
 DestroyFunc FuncHibernate
 AddToFunc   FuncHibernate
