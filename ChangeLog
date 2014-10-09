@@ -1,6 +1,44 @@
 History:
 
+<<<<<<< HEAD
 10/20/2013 V 0.6.8
+=======
+10/09/2014 V 0.6.9
+- add fix from bstrik for issue #52 - FvwmIdent ColorSet 21 to the following
+  colorsets: Air, Ambience and Tribal
+- update NEWS and AUTHORS
+- fix bug in fns-start-programs that comments (with # infront) creating errors
+- update docs for fns-start-programs
+- update fvwm-menu-desktop2 to current fvwm-menu-desktop in FVWM CVS
+- add CTRL + left Windows key anywhere to open Desktop menu
+- Bugfixes in config:
+  - fix bug in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
+    that strings with space get cut
+  - exchange blutooth-applet with bluemon-applet because it doesn't exist in Gnome3
+    anymore
+  - set terminal hard to xterm for FvwmConsole to prevent a no-start
+  - add support for hald, upower and systemd to FuncSuspend/FuncHibernate
+  - fix bug in FuncFvwmManpageMenu that not all Fvwm manpages are shown
+- updated control files to blueman
+- update README, INSTALL and COPYING
+- fix bugs in G2like, Horizontal and Vertikal that:
+  - sometimes icons not shown
+  - cpu and clock applet won't appear in panel
+- bump config, README and NEWS to 0.6.9
+  
+03/01/2014
+- update FvwmForm-MultiMenuHelp2 to last upstream changes
+  - 2 line fix by Dominique Michel to correspond correctly with fvwm-nightshade.pot
+- update French and Spanish translation to last upstream changes:
+  - Spanish proof read patch by Jesús J. Guerrero Botella
+  - French proof read patches by Dominique Michel
+
+02/25/2014
+- update fvwm-menu-desktop2 to last upstream changes:
+  - Converting of icons always to png
+
+10/20/2013
+>>>>>>> master
 - update fvwm-nightshade help in asciidoc, man page and html
 - changes to fns-applications.menu:
   - add missing categories based on latest XDG menu spec

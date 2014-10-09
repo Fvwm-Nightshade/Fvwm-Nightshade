@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		G2likeBottomBar
-# Version:	1.0.6
+# Version:	1.0.7
 # Licence: 	GPL 2
 #
 # Description:	Gnome like bottom bar with All iconify/deiconify button,
@@ -10,7 +10,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	10/09/2012
-# Changed:	01/20/2013
+# Changed:	10/09/2014
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -37,8 +37,11 @@ Style G2likeBottomBar StaysOnBottom, !Iconifiable, !Maximizable, FixedSize, Fixe
 #-----------------------------------------------------------------------
 # find desktop icon
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk`"
-
+PipeRead "if [ `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk` != '' ]; then \
+            echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk`; \
+          else \
+            echo InfoStoreAdd desktop_icon 'window-icons.svg:24x24'; \
+          fi"
 
 #=======================================================================
 # Pager
