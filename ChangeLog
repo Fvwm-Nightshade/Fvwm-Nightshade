@@ -1,6 +1,6 @@
 History:
 
-10/09/2014
+10/09/2014 V 0.6.9
 - add fix from bstrik for issue #52 - FvwmIdent ColorSet 21 to the following
   colorsets: Air, Ambience and Tribal
 - update NEWS and AUTHORS
@@ -21,6 +21,7 @@ History:
 - fix bugs in G2like, Horizontal and Vertikal that:
   - sometimes icons not shown
   - cpu and clock applet won't appear in panel
+- bump config, README and NEWS to 0.6.9
   
 03/01/2014
 - update FvwmForm-MultiMenuHelp2 to last upstream changes

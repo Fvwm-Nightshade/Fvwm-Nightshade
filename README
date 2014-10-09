@@ -24,7 +24,7 @@ shows you what is possible with this powerful window manager.
 
 Featurelist of Fvwm-Nightshade 0.6.9:
 =====================================
-- Works now with FVWM 2.6.5 but with full support of Xdg menus like in 
+- Works with FVWM 2.6.5 but with full support of Xdg menus like in 
   CVS version
 - Own user configuration directory ~/.fvwm-nightshade (can be used 
   parallel to existing Fvwm configuration)
@@ -32,7 +32,7 @@ Featurelist of Fvwm-Nightshade 0.6.9:
 - Config tool for base settings (Font, layouts, etc)
 - 4 virtual desktop pages (at the moment)
 - Taskbar to show running apps per page
-- Three different layouts: horizontal, vertical and G2like
+- Three different layouts: Horizontal, Vertical and G2like
 
   - horizontal (top):
                Top
@@ -81,17 +81,12 @@ Featurelist of Fvwm-Nightshade 0.6.9:
 - Simple "Run" command with FvwmForm
 - Some themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab and Air). 
   Can be changed on the fly without restart
-- Own themes and layouts can be created with templates
 - Autostart possibility (starting apps while startup)
 - A useful set of GUI tools to configure the global system (Gtk+, Qt, 
   mouse, keyboard, etc)
-- Help messages for mouse bindings in titlebar, window, corners, sides 
-  and icon with Shift-Alt-Ctrl + click
-- Help messages for key bindings with Shift-Alt-Ctrl + key
-  - A global one with Shift-Alt-Ctrl + H
+- Help messages for mouse and key bindings
 - Dynamic menus
-- Switching focus between windows with Alt-Tab (forward) / Shift-Alt-Tab
-  (backward)
+- Switching focus between windows with Alt / Shift-Alt-Tab
 - Splash screen
 - Print messages for needed apps for full config functionality in 
   .xsessions-error
@@ -102,11 +97,11 @@ Featurelist of Fvwm-Nightshade 0.6.9:
 - Localization support for German, French and Spanish
 - Smart maximize windows - move and resize windows to the largest free 
   area of a desktop/page
-- New set of icons for menus and internal apps
+- Own set of icons for menus and internal apps
 - Own XDG applications menu with it's own directory files
 - New fvwm-menu-desktop GUI with help windows
 - Restart possibility for Conky clock and CPU applet in panel
-- Add support for hald, upower and systemd to FuncSuspend/FuncHibernate
+- Support for hald, upower and systemd to FuncSuspend/FuncHibernate
 
 
 Requirements:
