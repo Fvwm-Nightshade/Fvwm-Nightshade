@@ -1239,7 +1239,7 @@ AddToFunc   FuncAppCheck
 # systray app nm-applet
 + I Test (!x nm-applet) FuncPrintMsg "AppCheck" "nm-applet (systray network control) not installed"
 # systray app bluetooth-applet
-+ I Test (!x bluetooth-applet) FuncPrintMsg "AppCheck" "bluetooth-applet (systray bluetooth-applet) not installed"
++ I Test (!x blueman-applet) FuncPrintMsg "AppCheck" "bluetooth-applet (systray blueman-applet) not installed"
 # Suspend, hibernate pm-is-supported
 + I Test (!x pm-is-supported) FuncPrintMsg "AppCheck" "pm-utils (suspend, hibernate) not installed"
 
