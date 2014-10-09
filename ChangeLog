@@ -1,5 +1,10 @@
 History:
 
+10/09/2014
+- add fix from bstrik for issue #52 - FvwmIdent ColorSet 21 to the following
+  colorsets: Air, Ambience and Tribal
+- update NEWS and AUTHORS
+
 03/01/2014
 - update FvwmForm-MultiMenuHelp2 to last upstream changes
   - 2 line fix by Dominique Michel to correspond correctly with fvwm-nightshade.pot
