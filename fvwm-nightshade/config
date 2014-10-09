@@ -15,8 +15,8 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.4.20131020
-# Copyright (C) 2013
+InfoStoreAdd ns_version 0.6.9
+# Copyright (C) 2014
 #
 # Authors:
 #   Thomas Funk <t.funk@web.de>
@@ -1172,6 +1172,7 @@ AddToFunc   FuncWriteInfoStoreToFileAndSet
             else \
                 sed -i --follow-symlinks "$ a\InfoStoreAdd $0 \\"$Val\\"" $2; \
             fi; \
+            Val=`echo "$Val" | sed "s/ /\\\\\\\\\\ /g"`; \
             echo InfoStoreAdd $0 "$Val"'
 
 
@@ -1187,7 +1188,8 @@ AddToFunc   FuncWriteSetEnvToFileAndSet
             else \
                 sed -i --follow-symlinks "$ a\SetEnv $0 \\"$Val\\"" $2; \
             fi; \
-            echo InfoStoreAdd $0 "$Val"'
+            Val=`echo "$Val" | sed "s/ /\\\\\\\\\\ /g"`; \
+            echo SetEnv $0 "$Val"'
 
 #-----------------------------------------------------------------------
 # Update layout and theme settings in base setup file .FNS-Form-BaseSetup
@@ -1255,7 +1257,7 @@ AddToFunc   FuncStartSystrayApplets
 # network
 + I Test (x nm-applet) exec exec nm-applet
 # bluetooth
-+ I Test (x bluetooth-applet) exec exec bluetooth-applet
++ I Test (x blueman-applet) exec exec blueman-applet
 
 #-----------------------------------------------------------------------
 # Starts programs while startup
@@ -1270,7 +1272,7 @@ AddToFunc   FuncAutoStartPrograms
 #-----------------------------------------------------------------------
 DestroyFunc FuncFvwmConsole
 AddToFunc   FuncFvwmConsole
-+ I Module FvwmConsole -fg $[fg.cs22] -bg $[bg.cs22] $*
++ I Module FvwmConsole -terminal xterm -fg $[fg.cs22] -bg $[bg.cs22] $*
 
 #-----------------------------------------------------------------------
 # Starts a xterm to run something in it
@@ -1444,21 +1446,30 @@ AddToFunc   DeThumbnail
 #-----------------------------------------------------------------------
 DestroyFunc FuncSuspend
 AddToFunc   FuncSuspend
-+ I Test (x pm-is-supported) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
-                    /org/freedesktop/Hal/devices/computer \
-                    org.freedesktop.Hal.Device.SystemPowerManagement.Suspend \
-                    int32:0'
-+ I TestRc (!Match) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"         
++ I Test (!x pm-is-supported) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"
++ I TestRc (Match) break
++ I TestRc (!Match) Test (x systemctl) PipeRead 'systemctl suspend'
++ I TestRc (!Match) Test (x /usr/sbin/hald) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
+                                                    /org/freedesktop/Hal/devices/computer \
+                                                    org.freedesktop.Hal.Device.SystemPowerManagement.Suspend int32:0 1>&2'
++ I TestRc (!Match) Test (x upower) PipeRead 'dbus-send --print-reply --system --dest=org.freedesktop.UPower \
+                                            /org/freedesktop/UPower org.freedesktop.UPower.Suspend 1>&2'
++ I TestRc (!Match) FuncShowMessage "Suspend Info" "Suspend not possible - hald nor upower found!"
 
 #-----------------------------------------------------------------------
 # Hibernate the machine
 #-----------------------------------------------------------------------
 DestroyFunc FuncHibernate
 AddToFunc   FuncHibernate
-+ I Test (x pm-is-supported) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
-                    /org/freedesktop/Hal/devices/computer \
-                    org.freedesktop.Hal.Device.SystemPowerManagement.Hibernate'
-+ I TestRc (!Match) FuncShowMessage "Suspend Info" "Install pm-utils for full functionality"          
++ I Test (!x pm-is-supported) FuncShowMessage "Hibernate Info" "Install pm-utils for full functionality"
++ I TestRc (Match) break
++ I TestRc (!Match) Test (x systemctl) PipeRead 'systemctl hibernate'
++ I TestRc (!Match) Test (x /usr/sbin/hald) PipeRead 'dbus-send --system --print-reply --dest=org.freedesktop.Hal \
+                                                    /org/freedesktop/Hal/devices/computer \
+                                                    org.freedesktop.Hal.Device.SystemPowerManagement.Hibernate 1>&2'
++ I TestRc (!Match) Test (x upower) PipeRead 'dbus-send --print-reply --system --dest=org.freedesktop.UPower \
+                                            /org/freedesktop/UPower org.freedesktop.UPower.Hibernate 1>&2'
++ I TestRc (!Match) FuncShowMessage "Suspend Info" "Hibernate not possible - hald nor upower found!"
 
 #-----------------------------------------------------------------------
 # Activate lockscreen if installed
@@ -1700,7 +1711,7 @@ AddToFunc   FuncFvwmManpageMenu
 + I PipeRead 'fvwm-menu-directory \
               --dir "/usr/share/man/man1" \
               --title "Man Pages" --exec-file "^xterm -fg $[fg.cs33] -bg $[bg.cs33] -g 80x40 -n Fvwm-Help -T Fvwm-Help -e man" |\
-              grep "^Destroy\\|^AddTo\\|^+ Dynamic\\|^+ Missing\\|^+ \\"[Ff]vwm*"|sed -e "s#\\.1\\.gz##g" \
+              grep -i "^Destroy\\|^AddTo\\|^+ Dynamic\\|^+ Missing\\|^+ \\"f\\(vwm\\|ns\\)" |sed -e "s#\\.1\\.gz##g" \
               -e "s#/usr/share/man/man1/##g" -e "s#\\"##3" -e "s#\\"##3" '
 
 #-----------------------------------------------------------------------
