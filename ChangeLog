@@ -1,8 +1,6 @@
 History:
-
-<<<<<<< HEAD
-10/20/2013 V 0.6.8
 =======
+
 10/09/2014 V 0.6.9
 - add fix from bstrik for issue #52 - FvwmIdent ColorSet 21 to the following
   colorsets: Air, Ambience and Tribal
@@ -38,7 +36,6 @@ History:
   - Converting of icons always to png
 
 10/20/2013
->>>>>>> master
 - update fvwm-nightshade help in asciidoc, man page and html
 - changes to fns-applications.menu:
   - add missing categories based on latest XDG menu spec
