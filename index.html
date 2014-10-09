@@ -98,19 +98,23 @@
             <a href="images/Screen_BP_01.png" target="_blank"><img src="images/s_Screen_BP_01.png" height="128" align="middle" alt="Vertical with CrystalBalls theme"></a>
             <a href="images/Screen_G2like_TF_Clean.png" target="_blank"><img src="images/s_Screen_G2like_TF_Clean.png" height="128" align="middle" alt="G2like with Clean theme"></a>
             <h1>News:</h1>
-            <ul>New Bugfix and Enhancement Release 0.6.8 is out!
-                <li>Works now with FVWM 2.6.5 without loosing new Xdg menu support from FVWM CVS version.</li>
-                <li>Own XDG applications menu with their own directory files.</li>
-                <li>Revised fvwm-menu-desktop GUI with help windows for each configuration section.</li>
-                <li>Feature 'smart maximize' - moves and resizes a current window to the largest free area of a desktop/page.</li>
-                <li>Set of icons for menus and internal apps to remove wm-icons dependency because this package isn't available in all distributions and of its' unscalability. Special thanks to Alessandro Roncone who gives us the permission to use his <a href="http://www.deviantart.com/art/AwOken-163570862">Awoken icons</a> :-).</li>
-                <li>Support for Gentoo installation. Big thanks to Sebastian Luncan :-).</li>
-                <li>Right click menu for Conky clock and CPU applet in panel to restart them on error and start other related scripts/applets.</li>
+            <ul>9th Oct. 2014 - The definitely last Bugfix Release 0.6.9 of the 0.6 branch is out now!
+                <li>Update fvwm-menu-desktop2, FvwmForm-MultiMenuHelp2 and their French and Spanish translation</b><br />
+                    &nbsp;&nbsp;&nbsp;to last upstream changes.</li>
+                <li>Fix colorset bug in Air, Ambience and Tribal theme which ends up in an empty FvwmIdent</b><br />
+                    &nbsp;&nbsp;&nbsp;(thanks bstrik for his patches :-) ).</li>
+                <li>Fix bug in fns-start-programs that comments (with # infront) creating errors.</li>
+                <li>Add CTRL + left Windows key anywhere to open Desktop menu.</li>
+                <li>Fix bugs in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet that strings with</b><br />
+                    &nbsp;&nbsp;&nbsp;space get cut and therefore .settings get corrupted.</li>
+                <li>Exchange bluetooth-applet with bluemon-applet because it doesn't exist in Gnome3 anymore.</li>
+                <li>Add support for hald, upower and systemd to FuncSuspend/FuncHibernate</li>
             </ul>
-            <h1>Featurelist of Fvwm-Nightshade:</h1>
+            <h1>Featurelist of Fvwm-Nightshade 0.6.9:</h1>
             <ul>
-                <li><span style="font-weight:bold"><font color="red">*New*</font></span> Works now with FVWM 2.6.5 without loosing new Xdg menu support from FVWM CVS version.</li>
-                <li>Own user configuration directory ~/.fvwm-nightshade. Usable parallel to an existing Fvwm configuration.</li>
+                <li>Works with FVWM 2.6.5 without loosing new Xdg menu support from FVWM CVS version.</li>
+                <li>Own user configuration directory ~/.fvwm-nightshade. Usable parallel to an existing Fvwm</b><br />
+                    &nbsp;&nbsp;&nbsp;configuration.</li>
                 <li>Own graphical login entry "Fvwm-Nightshade".</li>
                 <li>Config tool for base settings (Font, layouts, etc).</li>
                 <li>4 virtual desktop pages.</li>
@@ -168,19 +172,21 @@
                 <li>Help messages for mouse bindings in titlebar, window, corners, sides and icons.</li>
                 <li>Help messages for key bindings.</li>    
                 <li>Dynamic menus.</li>
-                <li>Switching focus between windows with Alt-Tab (forward) / Shift-Alt-Tab (backward).</li>
+                <li>Switching focus between windows with Alt / Shift-Alt-Tab.</li>
                 <li>Splash screen</li>
                 <li>Governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.<br />
                   &nbsp;&nbsp;&nbsp;<img src="images/governor.png" width="200" alt="Governor-Tool" style="cursor:pointer" onclick="overlay('display')" onmouseup="return ShowOverlay('div7')" /><br /></li>
                 <li>Create thumbs with mini icon and name for iconified applications instead of their icons.<br />
                  &nbsp;&nbsp;&nbsp;<img src="images/thumbs.png" width="250" alt="thumbs" style="cursor:pointer" onclick="overlay('display')" onmouseup="return ShowOverlay('div8')" /><br /></li>
-                <li>Build support for deb, rpm, Arch and <span style="font-weight:bold"><font color="red">*New*</font></span> - Gentoo packages.</li>
+                <li>Build support for deb, rpm, Arch and Gentoo packages.</li>
                 <li>Support for local installation without root permissions.</li>
                 <li>Localization support for German, French and Spanish</li>
-                <li><span style="font-weight:bold"><font color="red">*New*</font></span>Feature 'smart maximize' - moves and resizes a current window to the largest free area of a desktop/page.</li>
-                <li><span style="font-weight:bold"><font color="red">*New*</font></span>Set of icons for menus and internal apps.</li>
-                <li><span style="font-weight:bold"><font color="red">*New*</font></span>Own XDG applications menu.</li>
-                <li><span style="font-weight:bold"><font color="red">*New*</font></span>Revised fvwm-menu-desktop GUI with help windows.</li>
+                <li>Feature 'smart maximize' - moves and resizes a current window to the largest free area of a desktop/page.</li>
+                <li>Own set of icons for menus and internal apps.</li>
+                <li>Own XDG applications menu.</li>
+                <li>Revised fvwm-menu-desktop GUI with help windows.</li>
+                <li><span style="font-weight:bold"><font color="red">*New*</font></span>Restart possibility for Conky clock and CPU applet in panel.</li>
+                <li><span style="font-weight:bold"><font color="red">*New*</font></span>Support for hald, upower and systemd for Suspend and Hibernate.</li>
             </ul>
             
             <h1>Requirements:</h1>
@@ -190,7 +196,7 @@
                 
                 <p><b style="text-decoration: underline">Recommended:</b>    gnomes network manager, Volume Icon</p>
                 
-                <p><b style="text-decoration: underline">Useful:</b>     fdpowermon, bluetooth-applet, pm-utils, LxApearance, 
+                <p><b style="text-decoration: underline">Useful:</b>     fdpowermon, blueman-applet, pm-utils, LxApearance, 
                         qtconfig for qt3, qtconfig for qt4, xneurs</p>
             
             <h1>Bugs and Feature requests</h1>
@@ -234,12 +240,12 @@
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.8.zip" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip Release'); return false;" class="button">
-            <small>Download Release 0.6.8</small>
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.91.zip" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip Release'); return false;" class="button">
+            <small>Download Release 0.6.9</small>
             .zip file
           </a>
-          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.8.tar.gz" onClick="trackOutboundLink(this, 'Outbound Links', 'Download tar.gz Release'); return false;" class="button">
-            <small>Download Release 0.6.8</small>
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.91.tar.gz" onClick="trackOutboundLink(this, 'Outbound Links', 'Download tar.gz Release'); return false;" class="button">
+            <small>Download Release 0.6.9</small>
             .tar.gz file
           </a>
           <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.7.7.20140818.zip" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip develop'); return false;" class="button">

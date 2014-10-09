@@ -100,19 +100,25 @@
             <a href="images/Screen_BP_01.png" target="_blank"><img src="images/s_Screen_BP_01.png" height="128" align="middle" alt="Vertical with CrystalBalls theme"></a>
             <a href="images/Screen_G2like_TF_Clean.png" target="_blank"><img src="images/s_Screen_G2like_TF_Clean.png" height="128" align="middle" alt="G2like with Clean theme"></a>
             <h1>Neuigkeiten:</h1>
-            <ul>Neues Bugfix- und Erweiterungs-Release 0.6.8 ist da!
-                <li>Arbeitet jetzt mit FVWM 2.6.5 zusammen, ohne dabei die XDG-Menü-Unterstützung von FVWM's CVS-Version zu verlieren.</li>
-                <li>Eigenes XDG-Anwendungen-Menü mit eigenen Menü-Verzeichnis Dateien.</li>
-                <li>Überarbeitete fvwm-menu-desktop GUI mit Hilfe-Fenster für jeden Konfiguration-Abschnitt.</li>
-                <li>Feature 'smart maximize' - bewegt und vergrößert das aktuelle Fenster auf den größten freien Bereich des Desktops/der Seite.</li>
-                <li>Set von Icons für Menüs und internen Apps, um die Abhängigkeit von wm-icons zu entfernen, da dieses Paket nicht in allen Distributionen vorhanden ist und wegen seiner schlechten Skalierbarkeit. Besonderen Dank an Alessandro Roncone, der uns die Erlaubnis gegeben hat, seine <a href="http://www.deviantart.com/art/AwOken-163570862">Awoken Icons</a> zu benutzen :-).</li>
-                <li>Gentoo-Installations-Support. Großen Dank an Sebastian Luncan für die Erstellung des Ebuilds :-).</li>
-                <li>Rechtsklick-Menü für Conky-Uhr und CPU-Applet im Panel, um diese bei Fehlern neu zu starten und um andere Kontextbezogene Skripte zu starten.</li>
+            <ul>09.10.2014 - Das definitiv letzte Bugfix-Release 0.6.9 des 0.6er Zweiges ist endlich da!
+                <li>Upstream-Update von fvwm-menu-desktop2, FvwmForm-MultiMenuHelp2 mit aktuellster</b><br />
+                    &nbsp;&nbsp;&nbsp;französischer und spanischer Übersetzung.</li>
+                <li>Fix des colorset bugs in Air, Ambience and Tribal Theme, welcher in einem leeren</b><br />
+                    &nbsp;&nbsp;&nbsp;FvwmIdent-Fenster endete (Danke an bstrik für seine Patches :-))</li>
+                <li>Bugfix für fns-start-programs - Kommentare (#) funktionieren jetzt in .autostart.</li>
+                <li>Mittels CTRL + left Windows-Taste (egal wo) öffnet sich jetzt ein Desktopmenü.</li>
+                <li>In FuncWriteInfoStoreToFileAndSet und FuncWriteSetEnvToFileAndSet wurden Bugs gefixt,</b><br />
+                    &nbsp;&nbsp;&nbsp;die bei Leerzeichen die .settings kaputt gemacht haben.</li>
+                <li>Das Gnome Bluetooth-Applet wurde durch das Bluemon-Applet ersetzt, da Gnome3 keine</b><br />
+                    &nbsp;&nbsp;&nbsp;Applets mehr für andere Systemtrays mehr bereit stellt.</li>
+                <li>Support für hald, upower und systemd für Suspend und Hibernate.</li>
             </ul>
-            <h1>Features von Fvwm-Nightshade:</h1>
+            <h1>Features von Fvwm-Nightshade 0.6.9:</h1>
             <ul>
-                <li><span style="font-weight:bold"><font color="red">*Neu*</font></span> Arbeitet jetzt mit FVWM 2.6.5 zusammen ohne dabei die XDG-Menü-Unterstützung von FVWM's CVS-Version zu verlieren.</li>
-                <li>Eigenes User-Konfigurationsverzeichnis ~/.fvwm-nightshade. Somit parallel verwendbar zu einer existierenden Fvwm-Konfiguration</li>
+                <li>Arbeitet mit FVWM 2.6.5 zusammen ohne dabei die XDG-Menü-Unterstützung von FVWM's</b><br />
+                    &nbsp;&nbsp;&nbsp;CVS-Version zu verlieren.</li>
+                <li>Eigenes User-Konfigurationsverzeichnis ~/.fvwm-nightshade. Somit parallel verwendbar zu</b><br />
+                    &nbsp;&nbsp;&nbsp;einer existierenden Fvwm-Konfiguration</li>
                 <li>Eigenen Eintrag in graphischen Loginmanagern</li>
                 <li>Konfigurationwerkzeug für die Grundeinstellungen (Schrift, Layouts, usw)</li>
                 <li>4 virtuelle Arbeitsflächen</li>
@@ -170,19 +176,23 @@
                 <li>Hilfemitteilungen für die Mausaktionen in der Titelleiste, Fenster, Ecken, Seiten und Schaltflächen.</li>
                 <li>Hilfemitteilungen für die Tastatureingaben.</li>
                 <li>Dynamische Menüs.</li>
-                <li>Wechseln des Eingabefokus zwischen den Fenstern mit Alt-Tab (vorwärts) / Shift-Alt-Tab (rückwärts).</li>
+                <li>Wechseln des Eingabefokus zwischen den Fenstern mit Alt / Shift-Alt-Tab.</li>
                 <li>Begrüßungsbildschirm.</li>
                 <li>Governor-Tool FvwmScript-CPU-Performance, für die Einstellung der Cpu-Parameter (cpufreq)<br />
                   &nbsp;&nbsp;&nbsp;<img src="images/governor.png" width="200" alt="Governor-Tool" style="cursor:pointer" onclick="overlay('display')" onmouseup="return ShowOverlay('div7')" /><br /></li>
-                <li>Anzeige von Miniaturansichten minimierter Anwendungen und deren Name, anstelle einfacher Symbole.<br />
+                <li>Anzeige von Miniaturansichten minimierter Anwendungen und deren Name, anstelle</b><br />
+                    &nbsp;&nbsp;&nbsp;einfacher Symbole.<br />
                  &nbsp;&nbsp;&nbsp;<img src="images/thumbs.png" width="250" alt="thumbs" style="cursor:pointer" onclick="overlay('display')" onmouseup="return ShowOverlay('div8')" /><br /></li>
-                <li>Build support für deb, rpm, Arch und <span style="font-weight:bold"><font color="red">*Neu*</font></span> - Gentoo Pakete.</li>
+                <li>Build support für deb, rpm, Arch und Gentoo Pakete.</li>
                 <li>Support für lokale Installation ohne Rootrechte.</li>
                 <li>Lokalisierng für Deutsch, Französisch und Spanisch</li>
-                <li><span style="font-weight:bold"><font color="red">*Neu*</font></span>Feature 'smart maximize' - bewegt und die vergrößert das aktuelle Fenster auf den größten freien Bereich des Desktops/der Seite.</li>
-                <li><span style="font-weight:bold"><font color="red">*Neu*</font></span>Set von Icons für Menüs und internen Apps.</li>
-                <li><span style="font-weight:bold"><font color="red">*Neu*</font></span>Eigenes XDG-Anwendungen-Menü.</li>
-                <li><span style="font-weight:bold"><font color="red">*Neu*</font></span>Überarbeitete fvwm-menu-desktop GUI mit Hilfe-Fenster.</li>
+                <li>Feature 'smart maximize' - bewegt und vergrößert das aktuelle Fenster auf den größten freien</b><br />
+                    &nbsp;&nbsp;&nbsp;Bereich des Desktops/der Seite.</li>
+                <li>Eigenes Set von Icons für Menüs und internen Apps.</li>
+                <li>Eigenes XDG-Anwendungen-Menü.</li>
+                <li>Überarbeitete fvwm-menu-desktop GUI mit Hilfe-Fenster.</li>
+                <li><span style="font-weight:bold"><font color="red">*New*</font></span>Restart Möglichkeit für Conky-Uhr- und -CPU-Applet im Panel.</li>
+                <li><span style="font-weight:bold"><font color="red">*New*</font></span>Support für hald, upower und systemd für Suspend und Hibernate.</li>
             </ul>
             
             <h1>Voraussetzungen:</h1>
@@ -237,12 +247,12 @@
         </section>
 
         <aside id="sidebar">
-          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.8.zip" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip Release'); return false;" class="button">
-            <small>Download Release 0.6.8</small>
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.91.zip" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip Release'); return false;" class="button">
+            <small>Download Release 0.6.9</small>
             .zip file
           </a>
-          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.8.tar.gz" onClick="trackOutboundLink(this, 'Outbound Links', 'Download tar.gz Release'); return false;" class="button">
-            <small>Download Release 0.6.8</small>
+          <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.6.91.tar.gz" onClick="trackOutboundLink(this, 'Outbound Links', 'Download tar.gz Release'); return false;" class="button">
+            <small>Download Release 0.6.9</small>
             .tar.gz file
           </a>
           <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/0.7.7.20140818.zip" onClick="trackOutboundLink(this, 'Outbound Links', 'Download zip develop'); return false;" class="button">
