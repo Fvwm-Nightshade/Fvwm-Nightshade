@@ -222,7 +222,7 @@ Colorset 16 fg black, bg #ced9de, Plain
 #-----------------------------------------------------------------------
 # FvwmIdent
 #-----------------------------------------------------------------------
-Colorset 21 bg white, fg white, sh black, fgsh #067faa, RootTransparent buffer, Tint #067faa 70
+Colorset 21 bg white, fg black, sh black, fgsh #067faa, RootTransparent buffer, Tint #067faa 70
 
 #-----------------------------------------------------------------------
 # FvwmConsole
