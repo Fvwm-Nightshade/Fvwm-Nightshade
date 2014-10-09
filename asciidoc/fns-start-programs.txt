@@ -52,6 +52,8 @@ skype
 xterm -fn 10x20
 geany ~/Documents/mytext.txt
 ------
++
+Lines are commented out with a '#'.
 
 
 OPTIONS
