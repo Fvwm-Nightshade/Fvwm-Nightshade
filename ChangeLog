@@ -18,6 +18,9 @@ History:
   - fix bug in FuncFvwmManpageMenu that not all Fvwm manpages are shown
 - updated control files to blueman
 - update README, INSTALL and COPYING
+- fix bugs in G2like, Horizontal and Vertikal that:
+  - sometimes icons not shown
+  - cpu and clock applet won't appear in panel
   
 03/01/2014
 - update FvwmForm-MultiMenuHelp2 to last upstream changes
