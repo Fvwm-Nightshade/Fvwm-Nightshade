@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		colorsets
-# Version:	0.1.3
+# Version:	0.1.4
 # Licence: 	GPL 2
 #
 # Description:	colorsets of Ambience theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	06/08/2012
-# Changed:	01/25/2012
+# Changed:	10/09/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -222,7 +222,7 @@ Colorset 16 fg black, bg #fd9b72, Plain
 #-----------------------------------------------------------------------
 # FvwmIdent
 #-----------------------------------------------------------------------
-Colorset 21 bg white, fg white, sh black, fgsh #d66132, RootTransparent buffer, Tint #d66132 70
+Colorset 21 bg white, fg black, sh black, fgsh #d66132, RootTransparent buffer, Tint #d66132 70
 
 #-----------------------------------------------------------------------
 # FvwmConsole

@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:		colorsets
-# Version:	0.1.3
+# Version:	0.1.4
 # Licence: 	GPL 2
 #
 # Description:	colorsets of Tribal theme
 #
 # Author:	Thomas Funk <t.funk@web.de>
 # Created:	09/27/2012
-# Changed:	11/09/2012
+# Changed:	10/09/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -222,7 +222,7 @@ Colorset 16 fg white, bg #44a200, Plain
 #-----------------------------------------------------------------------
 # FvwmIdent
 #-----------------------------------------------------------------------
-Colorset 21 bg white, fg white, sh black, fgsh #006c00, RootTransparent buffer, Tint #006c00 70
+Colorset 21 bg white, fg black, sh black, fgsh #006c00, RootTransparent buffer, Tint #006c00 70
 
 #-----------------------------------------------------------------------
 # FvwmConsole
