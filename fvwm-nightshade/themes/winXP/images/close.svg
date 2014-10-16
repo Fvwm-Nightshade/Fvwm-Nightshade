@@ -1,0 +1,5 @@
+<svg width="40" height="40">
+  <rect width="40" height="40" stroke="white" stroke-width="3" fill="#dd3c0b"/>
+  <path d="M30 10 L10 30" stroke="white" stroke-width="3" fill="white"/>
+  <path d="M10 10 L30 30" stroke="white" stroke-width="3" fill="white"/>
+</svg>

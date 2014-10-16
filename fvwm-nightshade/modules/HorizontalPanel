@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		HorizontalPanel
-# Version:	1.0.12
+# Version:	1.0.11
 # Licence: 	GPL 2
 #
 # Description:	FvwmButtons panel for horizontal layout. Position on the
@@ -15,7 +15,7 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	08/11/2012
-# Changed:	10/09/2014
+# Changed:	08/18/2013
 #-----------------------------------------------------------------------
 
 Style HorizontalPanel !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
@@ -46,7 +46,7 @@ PipeRead "echo InfoStoreAdd percentage_voffset `perl -e 'printf \"%.0f\",$[infos
 #-----------------------------------------------------------------------
 # For clock applet
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd time_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio]/1.3)'`"
+PipeRead "echo InfoStoreAdd time_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/$[infostore.hratio]'`"
 PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",-($[infostore.hratio]*1.5)'`"
 PipeRead "echo InfoStoreAdd time_hsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/2'`"
 PipeRead "echo InfoStoreAdd date_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio])'`"
@@ -77,10 +77,10 @@ DestroyModuleConfig HorizontalPanel: *
 #-----------------------------------------------------------------------
 # menu button
 #-----------------------------------------------------------------------
-*HorizontalPanel: (3x1, Colorset 13, ActionOnPress, \
-            Icon    icon_fns.svg:24x24, \
-            ActiveIcon    icon_fns.svg:24x24, \
-            Action(Mouse 1) `Menu MenuRoot`)
+*HorizontalPanel: (2x1, Colorset 13, ActionOnPress, \
+		    Icon	icon_fns.svg:24x24, \
+		    ActiveIcon	icon_fns.svg:24x24, \
+		    Action(Mouse 1) `Menu MenuRoot`)
 
 #-----------------------------------------------------------------------
 # Systray
@@ -90,22 +90,22 @@ DestroyModuleConfig HorizontalPanel: *
 		    `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_max_x]x1 \
 		    --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
 		    --grow-gravity E --icon-gravity W --kludges force_icons_size -i 24 \
-		    --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
+		    --parent-bg true  -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
 
 #-----------------------------------------------------------------------
 # Cpuview
 #-----------------------------------------------------------------------
-*HorizontalPanel: (5x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
-            `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.pager_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
-            -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 1`, \
-            Action (mouse 3) `Menu MenuCpuOps`,\
-            Action (mouse 0) Nop)
+*HorizontalPanel: (6x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
+		    `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.pager_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
+		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 1`, \
+			Action (mouse 3) `Menu MenuCpuOps`,\
+			Action (mouse 0) Nop)
 
 #-----------------------------------------------------------------------
 # Clock
 #-----------------------------------------------------------------------
 *HorizontalPanel: ($[infostore.time_hsize]x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_clock" \
-            `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset -$[infostore.hratio]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
-            -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
-            Action (mouse 3) `Menu MenuClockOps`,\
-            Action (mouse 0) Nop)
+		    `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset -$[infostore.hratio]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
+		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
+		    Action (mouse 3) `Menu MenuClockOps`,\
+		    Action (mouse 0) Nop)
