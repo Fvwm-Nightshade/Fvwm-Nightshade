@@ -95,7 +95,7 @@ DestroyModuleConfig HorizontalPanel: *
 #-----------------------------------------------------------------------
 # Cpuview
 #-----------------------------------------------------------------------
-*HorizontalPanel: (5x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
+*HorizontalPanel: (6x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
 		    `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.pager_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
 		    -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 1`, \
 			Action (mouse 3) `Menu MenuCpuOps`,\
