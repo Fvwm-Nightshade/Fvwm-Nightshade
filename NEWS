@@ -5,11 +5,13 @@ Version 0.7.x
 
 Changes:
 --------
-- New theme 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
+- 3 new themes:
+  - 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
+  - 'Rocken' based on Thibaut's theme (thanks for his admition :-) )
+  - 'Redmond from Berno Strik
+- New layout 'Klike' - a KDE like bottom bar
 - Support for shadows and transparency with XcompMgr and Compton
 - Support for hald and upower for Suspend/Hibernate
-- New layout 'Klike' - a KDE like bottom bar
-- New theme 'Rocken' based on Thibaut's theme (thanks for his admition :-) )
 - Support for hotplug mounting (i.e. usb)
 - New Gtk2 and 3 themes for Air, Tribal and FlatTab
 - Support for some application launcher: grun and gmrun

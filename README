@@ -98,8 +98,8 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Animation control of window moves
 - Simple "Run" command with FvwmForm
 - Some themes/decors (Can be changed on the fly without restart):
-  Air, Ambience, Clean, CrystalBalls, FlatTab, GrayRevenge, Rocken 
-  and Tribal
+  Air, Ambience, Clean, CrystalBalls, FlatTab, GrayRevenge, Redmond, 
+  Rocken and Tribal
 - Own themes and layouts can be created with templates
 - Autostart possibility (starting apps while startup)
 - A useful set of GUI tools to configure the global system (Gtk+, Qt, 
