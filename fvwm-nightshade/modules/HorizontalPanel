@@ -45,7 +45,7 @@ PipeRead "echo InfoStoreAdd percentage_voffset `perl -e 'printf \"%.0f\",$[infos
 #-----------------------------------------------------------------------
 # For clock applet
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd time_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/$[infostore.hratio]'`"
+PipeRead "echo InfoStoreAdd time_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio]/1.3)'`"
 PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",-($[infostore.hratio]*1.5)'`"
 PipeRead "echo InfoStoreAdd time_hsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/2'`"
 PipeRead "echo InfoStoreAdd date_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio])'`"
