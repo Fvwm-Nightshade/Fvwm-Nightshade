@@ -69,11 +69,11 @@ PipeRead 'echo InfoStoreAdd pager_geometry $[infostore.pager_width]x$[infostore.
 #        menu stalonetray             cpumon  clock
 #
 # column_size should be 15 pixel long:
-# menu: 1 icon with 24 pixel -> 2x15 = 30 pixel
-# stalonetray: 6 icon with 24 pixel -> 12x15 = 180 pixel
-# cpumon: 5x15 pixel = 75 pixel
-# clock: 5x15 pixel = 75 pixel
-# total: 360 pixel
+# menu: 1 icon with 24 pixel		->  2x15 =   30 pixel
+# stalonetray: 5 icon with 24 pixel 	-> 10x15 =  150 pixel
+# cpumon: 6x15 pixel		->  6x15 =   90 pixel
+# clock: 6x15 pixel		->  6x15 =   90 pixel
+# total: 		                            360 pixel
 
 # first the count of icons visible in stalonetray must set related to the
 # screen resolution
@@ -91,7 +91,7 @@ PipeRead    'if [ "$[vp.width]" -gt "1600" ]; then \
 PipeRead 'echo InfoStoreAdd tray_columns $(($[infostore.tray_icons]*2))'
 
 # needed columns
-PipeRead 'echo InfoStoreAdd columns $(($[infostore.tray_columns]+12))'
+PipeRead 'echo InfoStoreAdd columns $(($[infostore.tray_columns]+14))'
 
 # panel width
 PipeRead 'echo InfoStoreAdd panel_width $(($[infostore.columns]*15))'
