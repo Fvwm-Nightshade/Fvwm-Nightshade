@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      0.1.0
+# Version:      0.1.1
 # Licence:      GPL 2
 #
 # Description:  colorsets of Redmond theme
 #
 # Author:       Berno Strik <dutchman55@gmx.com>
 # Created:      10/01/2014
-# Changed:      10/16/2014
+# Changed:      11/14/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -81,7 +81,7 @@ Colorset 3  bg #45619e, sh #4a5e7d, hi #4c6faf, Plain, NoShape
 # hi = active border shade color |
 # sh = active border shade color _|
 #-----------------------------------------------------------------------
-Colorset 4 bg #0749de, sh #2556a3, hi #065bf6, Plain, NoShape
+Colorset 4 bg #0749de, sh #357FE0, hi #065bf6, Plain, NoShape
 
 
 ########################################################################
@@ -107,14 +107,14 @@ Test (EnvMatch use_composite 0) Colorset 5 BGradient 300 3 #1458bc 1 #1060d0 6 #
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 6 fg #e8f5f5, bg #3488de, fgsh #102840, Plain, NoShape, RootTransparent, Tint #3488de $[infostore.used_menutint]
-Test (EnvMatch use_composite 0) Colorset 6 fg #e8f5f5, bg #3488de, fgsh #102840, Plain, NoShape
+Test (EnvMatch use_composite 1) Colorset 6 fg #e8f5f5, bg #3488de, fgsh #102840, Plain, RootTransparent, Tint #3488de $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 6 fg #e8f5f5, bg #3488de, fgsh #102840, Plain
 
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 7 fg grey, bg grey, Plain, NoShape, RootTransparent, Tint grey $[infostore.used_menutint]
-Test (EnvMatch use_composite 0) Colorset 7 fg grey, bg grey, Plain, NoShape, Tint
+Test (EnvMatch use_composite 1) Colorset 7 fg #d0f8ff, bg #1458bc, NoShape, RootTransparent, Tint grey $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 7 fg #d0f8ff, bg #1458bc, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.
@@ -190,7 +190,7 @@ Colorset 14 VGradient 250 7 #6eacf5 1 #345c9a 3 #1162cd 3 #0e60cc 3 #0f62ce 9 #1
 # bg = background
 #-----------------------------------------------------------------------
 Colorset 15 VGradient 250 7 #6eacf5 1 #345c9a 3 #1162cd 3 #0e60cc 3 #0f62ce 9 #1e70d6 9 #3a89e6 6 #4692f0, \
-            fg #fffff0, bg average, fgsh #22487a, Tint cyan4 48, bgTint cyan4 48, Plain
+            fg #fffff0, bg average, fgsh #22487a, Tint #4ea2aa 48, bgTint #4ea2aa 88, Plain
 
 #-----------------------------------------------------------------------
 # tips/balloons (TaskBar and FvwmPager)
