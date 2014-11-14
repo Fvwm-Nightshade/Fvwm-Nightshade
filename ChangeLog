@@ -1,5 +1,13 @@
 History:
 
+11/14/2014
+- fix bug #55 that the horizontal panel was too small to accept all the
+  swallowed items (thanks to Berno Strik for his patch).
+- change some colors in Redmond theme:
+  - border color of active window for better contrast
+  - use the same colors for fg and bg in menu title as in inactive menu
+  - set the active mini window in pager a little bit darker
+
 10/16/2014
 - add new theme 'Redmond'. Thanks to Berno Strik for his creation :-)
 - update NEWS, README, AUTHORS and config (version number)
