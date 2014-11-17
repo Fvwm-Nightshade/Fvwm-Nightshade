@@ -97,9 +97,9 @@ Colorset 4 bg #0749de, sh #357FE0, hi #065bf6, Plain, NoShape
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
 Test (EnvMatch use_composite 1) Colorset 5 BGradient 300 3 #1458bc 1 #1060d0 6 #2050a8 1 #1458bc, \
-                                           fg #d0f8ff, bg #1458bc, fgsh #4030a8, NoShape, RootTransparent, Tint #1458bc $[infostore.used_menutint]
+                                           fg white, bg #1458bc, fgsh #4030a8, NoShape, RootTransparent, Tint #1458bc $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 5 BGradient 300 3 #1458bc 1 #1060d0 6 #2050a8 1 #1458bc, \
-                                           fg #d0f8ff, bg #1458bc, fgsh #4030a8, NoShape
+                                           fg white, bg #1458bc, fgsh #4030a8, NoShape
 
 #-----------------------------------------------------------------------
 # active/hilighted menu item
@@ -107,14 +107,14 @@ Test (EnvMatch use_composite 0) Colorset 5 BGradient 300 3 #1458bc 1 #1060d0 6 #
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 6 fg #e8f5f5, bg #3488de, fgsh #102840, Plain, RootTransparent, Tint #3488de $[infostore.used_menutint]
-Test (EnvMatch use_composite 0) Colorset 6 fg #e8f5f5, bg #3488de, fgsh #102840, Plain
+Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #3488de, fgsh #102840, Plain, RootTransparent, Tint #3488de $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #3488de, fgsh #102840, Plain
 
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 7 fg #d0f8ff, bg #1458bc, NoShape, RootTransparent, Tint grey $[infostore.used_menutint]
-Test (EnvMatch use_composite 0) Colorset 7 fg #d0f8ff, bg #1458bc, NoShape, Plain, Tint
+Test (EnvMatch use_composite 1) Colorset 7 fg white, bg #1458bc, NoShape, RootTransparent, Tint grey $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 7 fg white, bg #1458bc, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.
