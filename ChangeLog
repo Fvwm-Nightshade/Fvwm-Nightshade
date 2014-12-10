@@ -1,5 +1,21 @@
 History:
 
+10/12/2014
+- add new fns configuration tools based on SimpleGtk2 and fvwm-perllib:
+  - FNS-BaseSetup => will replace FNS-Form-BaseSetup
+  - FNS-CompConfigurator => will replace FNS-Script-CompConfigurator
+  - FNS-MenuConfigurator => will replace fvwm-menu-desktop2-config.fpl
+  - FNS-WindowsBehaviour => implements #46
+- add needed perllib module to start those tools as a module
+- add needed RAD library SimpleGtk2 (#47) for Perl-Gtk2 tools
+- add revised fns-cpu-performance based on SimpleGtk2 (issue #40) with
+  support for cpufreq and cpupower => will replace FNS-Script-CpuPerformance
+- adapt fvwm-menu-desktop2 to support FNS-MenuConfigurator
+- add pot templates for all new configuration tools
+- remove old translation parts from fvwm-nightshade.pot and the german translation
+- add complete german translation for new configuration tools
+- add incomplete spanish and french translations for new configuration tools
+
 11/14/2014
 - fix bug #55 that the horizontal panel was too small to accept all the
   swallowed items (thanks to Berno Strik for his patch).
