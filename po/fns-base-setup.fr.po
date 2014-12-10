@@ -1,0 +1,208 @@
+# French translation for FNS-BaseSetup
+# Copyright (C) 2014 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Maxime Lordier <maxime.lordier@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-BaseSetup\n"
+"POT-Creation-Date: 2014-10-10 21:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
+"Language-Team: French\n"
+"Language: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "Fvwm-Nightshade Base Setup"
+msgstr "Fvwm-Nightshade installation de base"
+
+########################################################################
+# Environment
+########################################################################
+
+msgid " Environment "
+msgstr " Environnement "
+
+msgid "Splash On"
+msgstr "Activer le splash"
+
+msgid "Run Banner at startup? Default: on"
+msgstr ""
+
+msgid "Path to splash image"
+msgstr ""
+
+msgid "Set path to splash image"
+msgstr ""
+
+msgid "Composite Manager On"
+msgstr ""
+
+msgid "Use composite manager? Default: off"
+msgstr ""
+
+msgid "Configure"
+msgstr "Utilisez"
+
+msgid "Open composite settings"
+msgstr ""
+
+########################################################################
+# Desktop
+########################################################################
+
+msgid " Desktop "
+msgstr " Bureau "
+
+msgid "Wallpaper Dirs:"
+msgstr ""
+
+msgid "Wallpaper directories, separated by ':'"
+msgstr ""
+
+msgid "Icons on Desktop"
+msgstr ""
+
+msgid "Use Icons on desktop? Default: off"
+msgstr ""
+
+msgid "Icon Size:"
+msgstr "Taille d'icône:"
+
+msgid "Change size of the desktop icons"
+msgstr ""
+
+msgid "Desktop scrolling On"
+msgstr ""
+
+msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on"
+msgstr ""
+
+########################################################################
+# Decorations & Panels
+########################################################################
+
+msgid " Decorations & Panels "
+msgstr " Decorations & Panels "
+
+msgid "Used Layout:"
+msgstr "Mise en page:"
+
+msgid "The actual FNS layout"
+msgstr ""
+
+msgid "Used Theme:"
+msgstr "Thème utilisé:"
+
+msgid "The actual FNS decor theme"
+msgstr ""
+
+msgid "Used Font:"
+msgstr "Police utilisé:"
+
+msgid "Used default font in FNS"
+msgstr "La police utilisée par défaut en FNS"
+
+########################################################################
+# Default Applications
+########################################################################
+
+msgid " Default Applications "
+msgstr " Applications par défaut "
+
+msgid "Browser:"
+msgstr "Navigateur:"
+
+msgid "Default browser in FNS"
+msgstr "Navigateur par défaut en FNS"
+
+msgid "Set path to browser"
+msgstr ""
+
+msgid "Editor:"
+msgstr "Editeur:"
+
+msgid "Default editor in FNS"
+msgstr "Editeur par défaut en FNS"
+
+msgid "Set path to editor"
+msgstr ""
+
+msgid "Terminal:"
+msgstr "Terminal:"
+
+msgid "Default terminal in FNS"
+msgstr "Terminal par défaut en FNS"
+
+msgid "Set path to terminal"
+msgstr ""
+
+msgid "Transset:"
+msgstr "Transset:"
+
+msgid "Default transset in FNS"
+msgstr "Transset par défaut en FNS"
+
+msgid "Set path to transset"
+msgstr ""
+
+########################################################################
+# Button Bar
+########################################################################
+
+msgid "Help"
+msgstr "Aide"
+
+msgid "Get help"
+msgstr "Obtenez de l'aide."
+
+msgid "Apply"
+msgstr "Appliquer"
+
+msgid "Apply and save new settings"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Cancel / Quit Base Setup"
+msgstr "Annuler / Quitter installation de base"
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr ""
+
+########################################################################
+# Others
+########################################################################
+msgid "Info"
+msgstr "Info"
+
+msgid "Warning"
+msgstr "Avertissement"
+
+msgid "Question"
+msgstr "Question"
+
+msgid "Error"
+msgstr "Erreur"
+
+msgid "Other"
+msgstr "Autre"
+
+msgid "Open File"
+msgstr ""
+
+msgid "Save File"
+msgstr ""
+
+msgid "Select Folder"
+msgstr ""
+
+msgid "Create Folder"
+msgstr ""

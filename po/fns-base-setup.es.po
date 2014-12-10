@@ -1,0 +1,208 @@
+# Spanish translation for FNS-BaseSetup
+# Copyright (C) 2014 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Adonai Martin <adonai.martin@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-BaseSetup\n"
+"POT-Creation-Date: 2014-10-10 21:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "Fvwm-Nightshade Base Setup"
+msgstr "Fvwm-Nightshade Configuración Básica"
+
+########################################################################
+# Environment
+########################################################################
+
+msgid " Environment "
+msgstr " Entorno "
+
+msgid "Splash On"
+msgstr ""
+
+msgid "Run Banner at startup? Default: on"
+msgstr ""
+
+msgid "Path to splash image"
+msgstr ""
+
+msgid "Set path to splash image"
+msgstr ""
+
+msgid "Composite Manager On"
+msgstr ""
+
+msgid "Use composite manager? Default: off"
+msgstr ""
+
+msgid "Configure"
+msgstr "Configurar"
+
+msgid "Open composite settings"
+msgstr ""
+
+########################################################################
+# Desktop
+########################################################################
+
+msgid " Desktop "
+msgstr " Escritorio "
+
+msgid "Wallpaper Dirs:"
+msgstr ""
+
+msgid "Wallpaper directories, separated by ':'"
+msgstr ""
+
+msgid "Icons on Desktop"
+msgstr ""
+
+msgid "Use Icons on desktop? Default: off"
+msgstr ""
+
+msgid "Icon Size:"
+msgstr "Tamaño de icono:"
+
+msgid "Change size of the desktop icons"
+msgstr ""
+
+msgid "Desktop scrolling On"
+msgstr ""
+
+msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on"
+msgstr ""
+
+########################################################################
+# Decorations & Panels
+########################################################################
+
+msgid " Decorations & Panels "
+msgstr " Paneles "
+
+msgid "Used Layout:"
+msgstr "Usar Layout:"
+
+msgid "The actual FNS layout"
+msgstr ""
+
+msgid "Used Theme:"
+msgstr "Tema usado:"
+
+msgid "The actual FNS decor theme"
+msgstr ""
+
+msgid "Used Font:"
+msgstr "Fuente usada:"
+
+msgid "Used default font in FNS"
+msgstr ""
+
+########################################################################
+# Default Applications
+########################################################################
+
+msgid " Default Applications "
+msgstr "Aplicaciones "
+
+msgid "Browser:"
+msgstr "Navegador:"
+
+msgid "Default browser in FNS"
+msgstr ""
+
+msgid "Set path to browser"
+msgstr ""
+
+msgid "Editor:"
+msgstr "Editor:"
+
+msgid "Default editor in FNS"
+msgstr ""
+
+msgid "Set path to editor"
+msgstr ""
+
+msgid "Terminal:"
+msgstr "Terminal:"
+
+msgid "Default terminal in FNS"
+msgstr ""
+
+msgid "Set path to terminal"
+msgstr ""
+
+msgid "Transset:"
+msgstr "Transset:"
+
+msgid "Default transset in FNS"
+msgstr ""
+
+msgid "Set path to transset"
+msgstr ""
+
+########################################################################
+# Button Bar
+########################################################################
+
+msgid "Help"
+msgstr "Ayuda"
+
+msgid "Get help"
+msgstr "Obtenga ayuda"
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Apply and save new settings"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Cancel / Quit Base Setup"
+msgstr "Cancelar / Cerrar Configuración Básica"
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr ""
+
+########################################################################
+# Others
+########################################################################
+msgid "Info"
+msgstr "Info"
+
+msgid "Warning"
+msgstr "Advertencia"
+
+msgid "Question"
+msgstr "Pregunta"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Other"
+msgstr "Otro"
+
+msgid "Open File"
+msgstr "Abrir archivo"
+
+msgid "Save File"
+msgstr "Guardar archivo"
+
+msgid "Select Folder"
+msgstr "Seleccionar carpeta"
+
+msgid "Create Folder"
+msgstr "Crear carpeta"
