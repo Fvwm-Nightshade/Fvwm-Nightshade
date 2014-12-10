@@ -1,0 +1,226 @@
+# LANGUAGE translation for FNS-CompConfigurator
+# Copyright (C) 2014 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-CompConfigurator\n"
+"POT-Creation-Date: 2014-10-29 19:11+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: LANG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "FNS Composite Configurator"
+msgstr ""
+
+########################################################################
+# Composite Manager
+########################################################################
+
+msgid " Composite Manager "
+msgstr ""
+
+msgid "Use"
+msgstr ""
+
+msgid "Activate / deactivate the choosen composite manager."
+msgstr ""
+
+msgid "Composite manager is running! Stopping?"
+msgstr ""
+
+msgid "XcompMgr"
+msgstr ""
+
+msgid ""
+"XcompMgr is the standard composition manager for the X Composite extension. "
+"It implements shadows, fading, proper translucency, and more."
+msgstr ""
+
+msgid "Compton"
+msgstr ""
+
+msgid ""
+"Compton is a compositor based on xcompmgr. In addition to shadows, "
+"fading and translucency, it implements window frame opacity control, inactive "
+"window transparency, and shadows on argb windows."
+msgstr ""
+
+########################################################################
+# Shadows
+########################################################################
+
+msgid " Shadows "
+msgstr ""
+
+msgid "Enable Shadows"
+msgstr ""
+
+msgid ""
+"Enable client-side shadows on windows.\n"
+"Note:\nDesktop windows (with _NET_WM_WINDOW_TYPE_DESKTOP) never get shadow."
+msgstr ""
+
+msgid "On Dock / Panels"
+msgstr ""
+
+msgid "Painting shadows on panels and docks."
+msgstr ""
+
+msgid "While drag'n'drop"
+msgstr ""
+
+msgid "Draw shadows on drag-and-drop windows."
+msgstr ""
+
+msgid "Opacity:"
+msgstr ""
+
+msgid "The opacity of shadows. (0.0 - 1.0, defaults to 0.75)."
+msgstr ""
+
+msgid "Blur Radius:"
+msgstr ""
+
+msgid "The blur radius for shadows, in pixels. (defaults to 12)."
+msgstr ""
+
+msgid "Left Offset:"
+msgstr ""
+
+msgid "The left offset for shadows, in pixels. (defaults to -15)."
+msgstr ""
+
+msgid "Top Offset:"
+msgstr ""
+
+msgid "The top offset for shadows, in pixels. (defaults to -15)."
+msgstr ""
+
+msgid "Shadow color:"
+msgstr ""
+
+msgid "RGB colors of shadows. (defaults to 000000)."
+msgstr ""
+
+########################################################################
+# Fading
+########################################################################
+
+msgid " Fading "
+msgstr ""
+
+msgid "Enable Fading"
+msgstr ""
+
+msgid "Enable in/out fading of windows."
+msgstr ""
+
+msgid "On Opacity changed"
+msgstr ""
+
+msgid "Enables fade effect when windows change their opacity."
+msgstr ""
+
+msgid "On Open / Close"
+msgstr ""
+
+msgid "Enables fade effect when windows open or close."
+msgstr ""
+
+msgid "Fade-in Steps:"
+msgstr ""
+
+msgid "Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)."
+msgstr ""
+
+msgid "Fade-out Steps:"
+msgstr ""
+
+msgid "Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)."
+msgstr ""
+
+msgid "Fade Step Time:"
+msgstr ""
+
+msgid "The time between steps in fade step, in milliseconds. (> 0, defaults to 10)."
+msgstr ""
+
+########################################################################
+# Menus
+########################################################################
+
+msgid " Menus "
+msgstr ""
+
+msgid "Opacity on Menus:"
+msgstr ""
+
+msgid "Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0)."
+msgstr ""
+
+########################################################################
+# Additional Parameters
+########################################################################
+
+msgid " Additional Parameters "
+msgstr ""
+
+msgid "Enter here paramters which not accessible with the configurator"
+msgstr ""
+
+########################################################################
+# Button bar
+########################################################################
+
+msgid "Save"
+msgstr ""
+
+msgid "Save settings."
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Get help."
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Start or stop the coosen composite manager."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cancel / Quit Composite Configurator."
+msgstr ""
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr ""
+
+########################################################################
+# Others
+########################################################################
+
+msgid "Warning"
+msgstr ""
+
+msgid ""
+"No composite manager is installed.\nFor full functionality Xcompmgr "
+"or Compton must installed at least."
+msgstr ""
+
