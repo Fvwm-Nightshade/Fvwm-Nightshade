@@ -1,6 +1,19 @@
 History:
 
-10/12/2014
+12/12/2014
+- rename fvwm-menu-desktop2 to fns-menu-desktop because of the new FNS-MenuConfigurator
+- rename fns-cpu-performance back to FNS-CpuPerformance for consistency
+- add new InfoStoreAdd default_editor and SetEnv DesktopScrollOn to .settings
+- update config:
+  - change all FNS-Form-BaseSetup to FNS-BaseSetup
+  - change all FNS-Script-CompConfigurator to FNS-CompConfigurator
+  - change all FNS-Script-CpuPerformance to FNS-CpuPerformance
+  - change all fvwm-menu-desktop2 to fns-menu-desktop
+  - add new icons for FNS-WindowsBehaviour and FNS-MenuConfigurator
+  - add DesktopScrollOn to support deactivation of page scrolling
+  - remove FuncUpdateBaseSetupFile and its entries because never needed anymore
+
+12/10/2014
 - add new fns configuration tools based on SimpleGtk2 and fvwm-perllib:
   - FNS-BaseSetup => will replace FNS-Form-BaseSetup
   - FNS-CompConfigurator => will replace FNS-Script-CompConfigurator
