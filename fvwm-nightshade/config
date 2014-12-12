@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20141016
+InfoStoreAdd ns_version 0.7.7.20141211
 # Copyright (C) 2014
 #
 # Authors:
@@ -189,7 +189,7 @@ InfoStoreAdd fvwm_wallpaper $[FVWM_USERDIR]/.wallpaper
 # 1.2.2 Environment settings
 #***********************************************************************
 # These settings are rolled out to $[FVWM_USERDIR]/.settings
-# They can configured with the FNS-Form-BaseSetup
+# They can configured with the FNS-BaseSetup
 Load .settings
 FuncSetThemeDir $[infostore.used_theme]
 
@@ -330,7 +330,8 @@ EdgeResistance 350
 # Scrolling complete page when hiting the edge of a page
 # EdgeScroll 0 0 disables scrolling
 #-----------------------------------------------------------------------
-EdgeScroll 100 100
+Test (EnvMatch DesktopScrollOn "1") EdgeScroll 100 100
+TestRc (!Match) EdgeScroll 0 0
 
 #-----------------------------------------------------------------------
 # In order to enable page scrolling via the mouse, four windows called
@@ -517,14 +518,16 @@ Style FvwmScript      EWMHMiniIconOverride, Icon fvwm_footprint.svg:48x48, MiniI
 #-----------------------------------------------------------------------
 # FNS related icons
 #-----------------------------------------------------------------------
-Style FNS-Form-BaseSetup            EWMHMiniIconOverride, Icon icon_fns.svg:48x48, MiniIcon icon_fns.svg:16x16
-Style FNS-Script-CompConfigurator   EWMHMiniIconOverride, Icon CompConfigurator.svg:48x48, MiniIcon CompConfigurator.svg:16x16
-Style FNS-Script-PersonalMenu       EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
-Style FNS-Script-FileBrowser        EWMHMiniIconOverride, Icon filemanager.svg:48x48, MiniIcon filemanager.svg:16x16
-Style FNS-Script-CpuPerformance     EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
-Style FNS-Script-Date               EWMHMiniIconOverride, Icon clock.svg:48x48, MiniIcon clock.svg:16x16
-Style Chrono                        EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon Chrono.svg:16x16
-Style Kalende                       EWMHMiniIconOverride, Icon Kalende.svg:48x48, MiniIcon Kalende.svg:16x16
+Style FNS-BaseSetup             EWMHMiniIconOverride, Icon icon_fns.svg:48x48, MiniIcon icon_fns.svg:16x16
+Style FNS-WindowsBehaviour      EWMHMiniIconOverride, Icon WinBehaviour.svg:48x48, MiniIcon WinBehaviour.svg:16x16
+Style FNS-MenuConfigurator      EWMHMiniIconOverride, Icon MenuConfigurator.svg:48x48, MiniIcon MenuConfigurator.svg:16x16
+Style FNS-CompConfigurator      EWMHMiniIconOverride, Icon CompConfigurator.svg:48x48, MiniIcon CompConfigurator.svg:16x16
+Style FNS-Script-PersonalMenu   EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
+Style FNS-Script-FileBrowser    EWMHMiniIconOverride, Icon filemanager.svg:48x48, MiniIcon filemanager.svg:16x16
+Style FNS-CpuPerformance        EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
+Style FNS-Script-Date           EWMHMiniIconOverride, Icon clock.svg:48x48, MiniIcon clock.svg:16x16
+Style Chrono                    EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon Chrono.svg:16x16
+Style Kalende                   EWMHMiniIconOverride, Icon Kalende.svg:48x48, MiniIcon Kalende.svg:16x16
 
 
 ########################################################################
@@ -1078,8 +1081,8 @@ AddToFunc StartFunction
 # start xscreensaver daemon for locking
 + I Test (x xscreensaver-command) Test (Init) Exec xscreensaver -no-splash
 #-----------------------------------------------------------------------
-# start FNS-Form-BaseSetup if not configured
-+ I Test (!f $[FVWM_USERDIR]/.FNS-Form-BaseSetup) FvwmForm FNS-Form-BaseSetup
+# start FNS-BaseSetup if not configured
++ I Test (!f $[FVWM_USERDIR]/.settings) Module FNS-BaseSetup
 #-----------------------------------------------------------------------
 # start composite manager if it is activated
 + I Test (EnvMatch use_composite 1) Exec exec $[infostore.comp_command]
@@ -1236,7 +1239,7 @@ AddToFunc   FuncRemoveAllButtons
 DestroyFunc FuncChangeDecor
 AddToFunc   FuncChangeDecor
 + I PipeRead 'echo InfoStoreAdd used_theme $0'
-+ I FuncUpdateBaseSetupFile Theme $0
+#+ I FuncUpdateBaseSetupFile Theme $0
 + I FuncSetThemeDir $[infostore.used_theme]
 + I FuncRemoveAllButtons
 + I Load $[FNS_THEMEDIR]/colorsets
@@ -1253,7 +1256,7 @@ AddToFunc   FuncChangeLayout
 + I PipeRead "rm -f ${FVWM_USERDIR}/.layout; \
               ln -s $0/layouts/$1 ${FVWM_USERDIR}/.layout"
 + I FuncWriteInfoStoreToFileAndSet used_layout $1 $[FVWM_USERDIR]/.settings
-+ I FuncUpdateBaseSetupFile Layout $1
+#+ I FuncUpdateBaseSetupFile Layout $1
 + I FuncRestart
 
 
@@ -1292,25 +1295,25 @@ AddToFunc   FuncWriteSetEnvToFileAndSet
 # Update layout and theme settings in base setup file .FNS-Form-BaseSetup
 # FuncUpdateBaseSetupFile <Layout/Theme/DesktopIconsOn> <layout/theme name/0|1>
 #-----------------------------------------------------------------------
-DestroyFunc FuncUpdateBaseSetupFile
-AddToFunc   FuncUpdateBaseSetupFile
-+ I PipeRead 'if [ "$0" = "Layout" ]; then \
-                case $1 in \
-                    Horizontal|Vertical|G2like) \
-                        sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-                        sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup;; \
-                esac; \
-              elif [ "$0" = "Theme" ]; then \
-                sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-              elif [ "$0" = "DesktopIconsOn" ]; then \
-                if [ "$1" = "1" ]; then \
-                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOn .*/*SavedBaseSetup: DesktopIconsOn on/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOff .*/*SavedBaseSetup: DesktopIconsOff /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-                else \
-                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOn .*/*SavedBaseSetup: DesktopIconsOn /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOff .*/*SavedBaseSetup: DesktopIconsOff on/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-                fi; \
-              fi'
+#DestroyFunc FuncUpdateBaseSetupFile
+#AddToFunc   FuncUpdateBaseSetupFile
+#+ I PipeRead 'if [ "$0" = "Layout" ]; then \
+#                case $1 in \
+#                    Horizontal|Vertical|G2like) \
+#                        sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+#                        sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup;; \
+#                esac; \
+#              elif [ "$0" = "Theme" ]; then \
+#                sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+#              elif [ "$0" = "DesktopIconsOn" ]; then \
+#                if [ "$1" = "1" ]; then \
+#                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOn .*/*SavedBaseSetup: DesktopIconsOn on/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+#                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOff .*/*SavedBaseSetup: DesktopIconsOff /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+#                else \
+#                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOn .*/*SavedBaseSetup: DesktopIconsOn /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+#                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOff .*/*SavedBaseSetup: DesktopIconsOff on/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
+#                fi; \
+#              fi'
               
 
 #-----------------------------------------------------------------------
@@ -1976,8 +1979,7 @@ DestroyFunc FuncXdgMenusInRoot
 AddToFunc   FuncXdgMenusInRoot
 + I AddToMenu FvwmMenu DynamicPopupAction FuncXdgMenusInRoot
 + I Test (f $[FVWM_USERDIR]/.menu) Read $[FVWM_USERDIR]/.menu
-+ I TestRC (!Match) Test (Version >= 2.6.6) PipeRead 'fvwm-menu-desktop --insert-in-menu MenuRoot > $[FVWM_USERDIR]/.menu &&  echo "Read $[FVWM_USERDIR]/.menu"'
-+ I TestRC (!Match) PipeRead 'fvwm-menu-desktop2 --insert-in-menu MenuRoot > $[FVWM_USERDIR]/.menu &&  echo "Read $[FVWM_USERDIR]/.menu"'
++ I PipeRead 'fns-menu-desktop --insert-in-menu MenuRoot > $[FVWM_USERDIR]/.menu &&  echo "Read $[FVWM_USERDIR]/.menu"'
 
 
 #-----------------------------------------------------------------------
@@ -2193,10 +2195,11 @@ AddToFunc   FuncMenuFNSConfiguration
 + I AddToMenu MenuFNSConfiguration DynamicPopupAction FuncMenuFNSConfiguration
 + I AddToMenu MenuFNSConfiguration "$[gt.Fvwm-Nightshade]" Title
 + I AddToMenu MenuFNSConfiguration MissingSubmenuFunction FuncMenuWallpaperConfiguration
-+ I AddToMenu MenuFNSConfiguration "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"  Popup MenuWallpaperConfiguration
-+ I AddToMenu MenuFNSConfiguration "$[gt.&Compositing]%compositing.svg:$[infostore.MenuIconSize]%"          Popup MenuCompositing
-+ I AddToMenu MenuFNSConfiguration "$[gt.&Decoration]%themes.svg:$[infostore.MenuIconSize]%"                Popup MenuDecoration
-+ I AddToMenu MenuFNSConfiguration "$[gt.FNS Base Setup]%icon_fns.svg:$[infostore.MenuIconSize]%"           FvwmForm FNS-Form-BaseSetup
++ I AddToMenu MenuFNSConfiguration "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"      Popup MenuWallpaperConfiguration
++ I AddToMenu MenuFNSConfiguration "$[gt.&Compositing]%compositing.svg:$[infostore.MenuIconSize]%"              Popup MenuCompositing
++ I AddToMenu MenuFNSConfiguration "$[gt.&Decoration]%themes.svg:$[infostore.MenuIconSize]%"                    Popup MenuDecoration
++ I AddToMenu MenuFNSConfiguration "$[gt.FNS Base Setup]%icon_fns.svg:$[infostore.MenuIconSize]%"               Module FNS-BaseSetup
++ I AddToMenu MenuFNSConfiguration "$[gt.FNS Windows Behaviour]%WinBehaviour.svg:$[infostore.MenuIconSize]%"    Module FNS-WindowsBehaviour
 
 
 #-----------------------------------------------------------------------
@@ -2213,7 +2216,7 @@ AddToFunc   FuncMenuSystemConfiguration
 + I AddToMenu MenuSystemConfiguration "$[gt.&Mouse]%mouse.svg:$[infostore.MenuIconSize]%"               Popup MenuMouse
 + I AddToMenu MenuSystemConfiguration MissingSubmenuFunction FuncMenuXScreenSaver
 + I AddToMenu MenuSystemConfiguration "$[gt.Sc&reen Saver]%screensaver.svg:$[infostore.MenuIconSize]%"  Popup MenuXScreenSaver
-+ I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"    FvwmScript FNS-Script-CpuPerformance
++ I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"    Exec exec FNS-CpuPerformance
 + I AddToMenu MenuSystemConfiguration "$[gt.Set Date/Time]%clock.svg:$[infostore.MenuIconSize]%"        FvwmScript FNS-Script-Date
 
 
@@ -2318,7 +2321,7 @@ AddToFunc   FuncMenuCompositing
 + I DestroyMenu  MenuCompositing
 + I AddToMenu MenuCompositing DynamicPopupAction FuncMenuCompositing
 + I AddToMenu MenuCompositing "$[gt.Compositing]" Title
-+ I AddToMenu MenuCompositing "$[gt.FNS CompMgr &Configurator]%CompConfigurator.svg:$[infostore.MenuIconSize]%"     FvwmScript FNS-Script-CompConfigurator $[infostore.comp_command]
++ I AddToMenu MenuCompositing "$[gt.FNS CompMgr &Configurator]%CompConfigurator.svg:$[infostore.MenuIconSize]%"     Module FNS-CompConfigurator $[infostore.comp_command]
 + I Test (EnvMatch use_composite 1) \
     AddToMenu MenuCompositing "$[gt.&Menu Transparency]%tint.svg:$[infostore.MenuIconSize]%"                        Popup MenuTintOps
 + I Test (EnvMatch use_composite 1) \
@@ -2377,8 +2380,8 @@ AddToFunc   FuncMenuFvwmQuit
 + I AddToMenu MenuFvwmQuit "" Nop
 + I AddToMenu MenuFvwmQuit "$[gt.Re&fresh Screen]%refresh.svg:$[infostore.MenuIconSize]%"       Refresh
 + I AddToMenu MenuFvwmQuit "" Nop
-+ I AddToMenu MenuFvwmQuit "$[gt.&Suspend System]%suspend.svg:$[infostore.MenuIconSize]%" FuncSuspend
-+ I AddToMenu MenuFvwmQuit "$[gt.&Hibernate System]%hibernate.svg:$[infostore.MenuIconSize]%" FuncHibernate
++ I AddToMenu MenuFvwmQuit "$[gt.&Suspend System]%suspend.svg:$[infostore.MenuIconSize]%"       FuncSuspend
++ I AddToMenu MenuFvwmQuit "$[gt.&Hibernate System]%hibernate.svg:$[infostore.MenuIconSize]%"   FuncHibernate
 + I AddToMenu MenuFvwmQuit "" Nop
 + I AddToMenu MenuFvwmQuit "$[gt.&Yes, Really Quit]%hook.svg:$[infostore.MenuIconSize]%"        Quit
 + I AddToMenu MenuFvwmQuit "$[gt.&No, Don't Quit]%exit.svg:$[infostore.MenuIconSize]%"          Nop
@@ -2444,9 +2447,9 @@ AddToFunc   FuncMenuWindowOpsTrimmed
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.&Close]	Alt+F4%exit.svg:$[infostore.MenuIconSize]%"                 Close
 + I AddToMenu MenuWindowOpsTrimmed "" Nop
 + I Test (EnvMatch use_composite 1) \
-    AddToMenu MenuWindowOpsTrimmed "$[gt.Active Window &Opacity]%tint.svg:$[infostore.MenuIconSize]%"                  Popup MenuOpacityOps
+    AddToMenu MenuWindowOpsTrimmed "$[gt.Active Window &Opacity]%tint.svg:$[infostore.MenuIconSize]%"           Popup MenuOpacityOps
 + I Test (EnvMatch use_composite 1) \
-    AddToMenu MenuWindowOpsTrimmed "$[gt.Inactive Window &Transparency]%tint.svg:$[infostore.MenuIconSize]%"             Popup MenuTransparencyOps
+    AddToMenu MenuWindowOpsTrimmed "$[gt.Inactive Window &Transparency]%tint.svg:$[infostore.MenuIconSize]%"    Popup MenuTransparencyOps
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"            Module FvwmIdent
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.Mor&e...]	%window.svg:$[infostore.MenuIconSize]%"                     Menu MenuWindowOpsFull This 0 0
 
@@ -2572,20 +2575,20 @@ AddToFunc   FuncMenuWindowMaximize
 + I DestroyMenu MenuWindowMaximize
 + I AddToMenu MenuWindowMaximize DynamicPopupAction FuncMenuWindowMaximize
 + I AddToMenu MenuWindowMaximize "$[gt.Maximize Window]" Title
-+ I AddToMenu MenuWindowMaximize "$[gt.&Maximize Fully]%window-maximize.svg:$[infostore.MenuIconSize]%"                     Maximize On 100 100
-+ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize]%window-unmaximize.svg:$[infostore.MenuIconSize]%"                         Maximize Off
++ I AddToMenu MenuWindowMaximize "$[gt.&Maximize Fully]%window-maximize.svg:$[infostore.MenuIconSize]%"                         Maximize On 100 100
++ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize]%window-unmaximize.svg:$[infostore.MenuIconSize]%"                           Maximize Off
 + I AddToMenu MenuWindowMaximize "" Nop
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Vertically]%window-maximize-vertical.svg:$[infostore.MenuIconSize]%"                Pick FuncSimpleMaximizeVertically On
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Horizontally]%window-maximize-horizontal.svg:$[infostore.MenuIconSize]%"              Pick FuncSimpleMaximizeHorizontally On
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Vertically]%window-maximize-vertical.svg:$[infostore.MenuIconSize]%"           Pick FuncSimpleMaximizeVertically On
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Horizontally]%window-maximize-horizontal.svg:$[infostore.MenuIconSize]%"       Pick FuncSimpleMaximizeHorizontally On
 + I AddToMenu MenuWindowMaximize "" Nop
 # these bound functions do not seem to work well if used consequentially
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Grow]%window-smart-maximize.svg:$[infostore.MenuIconSize]%"                      Maximize On grow grow
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Smart]%window-smart-maximize.svg:$[infostore.MenuIconSize]%"                     SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow V&ert.]%window-grow-vertical.svg:$[infostore.MenuIconSize]%"                Maximize On    0 grow
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow H&oriz.]%window-grow-horizontal.svg:$[infostore.MenuIconSize]%"               Maximize On grow    0
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Grow]%window-smart-maximize.svg:$[infostore.MenuIconSize]%"                    Maximize On grow grow
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Smart]%window-smart-maximize.svg:$[infostore.MenuIconSize]%"                   SendToModule FvwmSmartMaximize IgnoreMaxWindows screen
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow V&ert.]%window-grow-vertical.svg:$[infostore.MenuIconSize]%"               Maximize On    0 grow
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize Grow H&oriz.]%window-grow-horizontal.svg:$[infostore.MenuIconSize]%"            Maximize On grow    0
 + I AddToMenu MenuWindowMaximize "" Nop
-+ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Full Screen]	Alt+F11%window-maximize-fs.svg:$[infostore.MenuIconSize]%"     Pick FuncMaximizeFullScreen
-+ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize Full Screen]	Alt+F11%window-unmaximize-fs.svg:$[infostore.MenuIconSize]%"     Pick FuncMaximizeFullScreen
++ I AddToMenu MenuWindowMaximize "$[gt.Maximize &Full Screen]	Alt+F11%window-maximize-fs.svg:$[infostore.MenuIconSize]%"      Pick FuncMaximizeFullScreen
++ I AddToMenu MenuWindowMaximize "$[gt.&Unmaximize Full Screen]	Alt+F11%window-unmaximize-fs.svg:$[infostore.MenuIconSize]%"    Pick FuncMaximizeFullScreen
 
 #-----------------------------------------------------------------------
 # Windows Ops sub menu for window refreshing
@@ -2640,8 +2643,8 @@ AddToFunc   FuncMenuWindowUtility
 + I AddToMenu MenuWindowUtility "$[gt.Layer &-1]%layer--1.svg:$[infostore.MenuIconSize]%"                       Pick (CirculateHit) Layer -1
 + I AddToMenu MenuWindowUtility "$[gt.Stays On &Bottom]%layer-bottom.svg:$[infostore.MenuIconSize]%"            Pick (CirculateHit) Layer 0 2
 + I AddToMenu MenuWindowUtility "" Nop
-+ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (1/2 &app)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"       Pick Module FvwmScroll 2 2
-+ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (75%% &scr)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"      Pick Module FvwmScroll 75p 75p
++ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (1/2 &app)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"    Pick Module FvwmScroll 2 2
++ I AddToMenu MenuWindowUtility "$[gt.ScrollBar (75%% &scr)]%window-scrollbar.svg:$[infostore.MenuIconSize]%"   Pick Module FvwmScroll 75p 75p
 
 #-----------------------------------------------------------------------
 # Desktop Ops menus
@@ -2690,7 +2693,7 @@ AddToFunc   FuncMenuCpuOps
 + I DestroyMenu MenuCpuOps
 + I AddToMenu MenuCpuOps DynamicPopupAction FuncMenuCpuOps
 + I AddToMenu MenuCpuOps "$[gt.Conky Cpu Ops]" Title
-+ I AddToMenu MenuCpuOps "$[gt.CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"      FvwmScript FNS-Script-CpuPerformance
++ I AddToMenu MenuCpuOps "$[gt.CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"          Exec exec FNS-CpuPerformance
 + I AddToMenu MenuCpuOps "" Nop
-+ I AddToMenu MenuCpuOps "$[gt.Restart Conky CPU]%restart.svg:$[infostore.MenuIconSize]%"   Exec exec xkill -id `xwininfo -name conky_cpu|grep "Window id"|cut -d ' ' -f4`
++ I AddToMenu MenuCpuOps "$[gt.Restart Conky CPU]%restart.svg:$[infostore.MenuIconSize]%"       Exec exec xkill -id `xwininfo -name conky_cpu|grep "Window id"|cut -d ' ' -f4`
 
