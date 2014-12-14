@@ -11,7 +11,7 @@ use File::Spec;
 
 #-------------------------------------------------------------------------
 # File:         FNS-BaseSetup
-my $Version =   '2.0.0';
+my $Version =   '2.0.1';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure base settings of Fvwm-Nightshade
@@ -19,7 +19,7 @@ my $Version =   '2.0.0';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/08/2014
-# Changed:      
+# Changed:      12/13/2014
 #-------------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -222,13 +222,14 @@ sub first_start {
     unless (-f $config_path) {
         copy("$FNS_SYSTEMDIR/.settings", $config_path);
     }
-    # copy .FvwmForm-Desktop-Config to FVWM_USERDIR if not available
-    unless (-f "$FVWM_USERDIR/.FvwmForm-Desktop-Config") {
-        copy("$FNS_SYSTEMDIR/.FvwmForm-Desktop-Config", "$FVWM_USERDIR/.FvwmForm-Desktop-Config");
+    # copy .fns-menu.cfg to FVWM_USERDIR if not available
+    unless (-f "$FVWM_USERDIR/.fns-menu.cfg") {
+        copy("$FNS_SYSTEMDIR/.fns-menu.cfg", "$FVWM_USERDIR/.fns-menu.cfg");
     }
     # create the wallpapers directory if not available and symlink all system FNS wallpapers
     unless (-d "$FVWM_USERDIR/wallpapers") {
-        my @files = &get_file_or_dir_list("f", "$FNS_SYSTEMDIR/artwork/wallpapers"); 
+        mkdir ("$FVWM_USERDIR/wallpapers");
+        my @files = &get_file_or_dir_list("f", ["$FNS_SYSTEMDIR/artwork/wallpapers"]);
         foreach my $wallpaper (@files) {
             unless (-l "$FVWM_USERDIR/wallpapers/$wallpaper") {
                 symlink("$FNS_SYSTEMDIR/artwork/wallpapers/$wallpaper", "$FVWM_USERDIR/wallpapers/$wallpaper");
@@ -449,9 +450,9 @@ sub check_deskscroll_on {
     # get current state
     my $check_button_state = $win->is_active('checkDeskScrolling');
     # get config state
-    my $config_state = &get_config_value("checkDeskScrolling");
+    my $config_state = &get_config_value("DesktopScrollOn");
     if ($check_button_state != $config_state) {
-        &set_config_value("checkDeskScrolling", $check_button_state);
+        &set_config_value("DesktopScrollOn", $check_button_state);
     }
 }
 
@@ -733,8 +734,20 @@ sub apply_and_save {
                     $module->send("FuncWriteInfoStoreToFileAndSet $key $config{$key}[0] $config_path");
                 }
             } else {
-                system("sed -i --follow-symlinks \"s#^$key=.*#$key=$config{$key}[0]#\" $pcmanfm_config");
+                if (-f $pcmanfm_config) {
+                    system("sed -i --follow-symlinks \"s#^$key=.*#$key=$config{$key}[0]#\" $pcmanfm_config");
+                }
             }
+
+            if ($key eq "used_layout") {
+                if (-f "$FVWM_USERDIR/.layout") {unlink("$FVWM_USERDIR/.layout");}
+                if (-f "$FVWM_USERDIR/layouts/$config{$key}[0]") {
+                    system("ln -s $FVWM_USERDIR/layouts/$config{$key}[0] $FVWM_USERDIR/.layout");
+                } else {
+                    system("ln -s $FNS_SYSTEMDIR/layouts/$config{$key}[0] $FVWM_USERDIR/.layout");
+                }
+            }
+
             $config{$key}[1] = 0;
         }
     }

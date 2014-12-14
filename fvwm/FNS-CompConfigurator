@@ -9,7 +9,7 @@ use Getopt::Long qw(:config no_ignore_case require_order pass_through);;
 
 #-----------------------------------------------------------------------
 # File:         FNS-CompConfigurator
-my $Version =   '2.0.0';
+my $Version =   '2.0.1';
 # Licence:      GPL 2
 #
 # Description:  Composite configurator Perl script for xcompmgr or compton
@@ -17,7 +17,7 @@ my $Version =   '2.0.0';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/11/2014
-# Changed:      <MM/DD/YYYY>
+# Changed:      12/14/2014
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -123,6 +123,10 @@ if ($numArgs > 0) {
         }
         elsif ($ARGV[$i] =~ /^compton/) {
             $xcompActive = 0;
+            shift (@ARGV);
+        }
+        elsif ($ARGV[$i] =~ /^xcompmgr/) {
+            $xcompActive = 1;
             shift (@ARGV);
         }
         else {$i++;}
@@ -708,6 +712,7 @@ if ($compmgr ne 'none') {
     $win->set_sensitive('CompFrame', 0);
     $win->set_sensitive('ShadowsFrame', 0);
     $win->set_sensitive('FadingFrame', 0);
+    $win->set_sensitive('OpacityFrame', 0);
     $win->set_sensitive('AddParamFrame', 0);
     # deactivate all buttons except cancel
     $win->set_sensitive('saveButton', 0);

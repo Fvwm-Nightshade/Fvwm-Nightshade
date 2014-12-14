@@ -12,7 +12,7 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuConfigurator
-my $Version =   '2.0.0';
+my $Version =   '2.0.1';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure fvwm-menu-desktop
@@ -20,7 +20,7 @@ my $Version =   '2.0.0';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      11/19/2014
-# Changed:      <MM/DD/YYYY>
+# Changed:      12/14/2014
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -185,8 +185,8 @@ sub unset_config_value_state($) {
 ########################################################################
 
 # get the available menus
-my $all = `fvwm-menu-desktop2 --get-menus all`;
-my $selected = `fvwm-menu-desktop2 --get-menus desktop`;
+my $all = `fns-menu-desktop --get-menus all`;
+my $selected = `fns-menu-desktop --get-menus desktop`;
 #my $all = '';
 #my $selected = '';
 
@@ -753,7 +753,7 @@ sub create_menu {
     # first check which tab is active
     my $current_tab = $win->get_value('NB1', 'currentpage');
     # build PipeRead string
-    my $cmd_string = "fvwm-menu-desktop2";
+    my $cmd_string = "fns-menu-desktop";
     my @menus;
     foreach my $key (sort(keys %config)) {
         unless ($key =~ /^Menu\d+$/) {
@@ -770,31 +770,31 @@ sub create_menu {
                     $cmd_string = "$cmd_string --with-titles";
                 }
                 elsif ($key eq 'InsertOn' and &get_config_value($key) == 1) {
-                    $cmd_string = "$cmd_string --insert-in-menu '" . &get_config_value('InMenu') . "'";
+                    $cmd_string = "$cmd_string --insert-in-menu \"" . &get_config_value('InMenu') . "\"";
                 }
                 elsif ($key eq 'IconDir') {
-                    $cmd_string = "$cmd_string --mini-icon-dir '" . &get_config_value($key) . "'";
+                    $cmd_string = "$cmd_string --mini-icon-dir " . &get_config_value($key);
                 }
                 elsif ($key eq 'DirIcon') {
-                    $cmd_string = "$cmd_string --dir-icon '" . &get_config_value($key) . "'";
+                    $cmd_string = "$cmd_string --dir-icon \"" . &get_config_value($key) . "\"";
                 }
                 elsif ($key eq 'AppIcon') {
-                    $cmd_string = "$cmd_string --app-icon '" . &get_config_value($key) . "'";
+                    $cmd_string = "$cmd_string --app-icon \"" . &get_config_value($key) . "\"";
                 }
                 elsif ($key eq 'MenuTitle') {
-                    $cmd_string = "$cmd_string --title '" . &get_config_value($key) . "'";
+                    $cmd_string = "$cmd_string --title \"" . &get_config_value($key) . "\"";
                 }
                 elsif ($key eq 'Installprefix') {
-                    $cmd_string = "$cmd_string --install-prefix '" . &get_config_value($key) . "'";
+                    $cmd_string = "$cmd_string --install-prefix \"" . &get_config_value($key) . "\"";
                 }
                 elsif ($key eq 'Desktop') {
-                    $cmd_string = "$cmd_string --desktop '" . &get_config_value($key) . "'";
+                    $cmd_string = "$cmd_string --desktop \"" . &get_config_value($key) . "\"";
                 }
                 elsif ($key eq 'Menutype') {
-                    $cmd_string = "$cmd_string --menutype '" . &get_config_value($key) . "'";
+                    $cmd_string = "$cmd_string --menutype \"" . &get_config_value($key) . "\"";
                 }
                 elsif ($key eq 'IconTheme') {
-                    $cmd_string = "$cmd_string --theme '" . &get_config_value($key) . "'";
+                    $cmd_string = "$cmd_string --theme \"" . &get_config_value($key) . "\"";
                 }
             }
         } else {
@@ -804,16 +804,18 @@ sub create_menu {
     
     # add menus
     if ($current_tab == 0) {
-        $cmd_string = "$cmd_string --set-menus ";
+        $cmd_string = "$cmd_string --set-menus \"";
+        my @menu_list;
         foreach my $dir (keys %all_menus) {
             foreach my $menux (sort(@menus)) {
                 if (&get_config_value($menux) == 1) {
                     $menux =~ s/Menu//;
                     my @menu = @{$all_menus{$dir}{$menux}};
-                    $cmd_string = "$cmd_string '$dir$menu[0].menu'";
+                    push(@menu_list, "$dir$menu[0].menu");
                 }
             }
         }
+        $cmd_string = $cmd_string . join(' ', @menu_list). "\"";
     }
     
     # add menu path

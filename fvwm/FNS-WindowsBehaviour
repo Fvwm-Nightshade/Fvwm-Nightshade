@@ -9,7 +9,7 @@ use File::Copy qw(copy);
 
 #-----------------------------------------------------------------------
 # File:         FNS-WindowsBehaviour
-my $Version =   '2.0.0';
+my $Version =   '2.0.1';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure some windows behaviour of FNS
@@ -17,7 +17,7 @@ my $Version =   '2.0.0';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/29/2014
-# Changed:      
+# Changed:      12/14/2014
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -1241,6 +1241,7 @@ sub apply {
         #print "\n\napply $temp_cfg:\n";
         #system("cat $temp_cfg");
         $module->send("Read $temp_cfg");
+        sleep(1);
         unlink($temp_cfg) or warn "$0: could not remove $temp_cfg: $!\n";
     }
     $not_applied = 0;
