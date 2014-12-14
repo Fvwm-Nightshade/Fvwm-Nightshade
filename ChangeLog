@@ -1,5 +1,32 @@
 History:
 
+12/14/2014
+- fixes in config:
+  - add TestRc infront of fns-menu-desktop in FuncXdgMenusInRoot to remove double
+    entries in menu
+  - exchange TestRc (!Match) with Test (EnvMatch DesktopScrollOn 0) to make desktop
+    scroll on/off workable
+- exchange .FvwmForm-Desktop-Config with .fns-menu.cfg in fns-init
+- exchange .FvwmForm-Desktop-Config with .fns-menu.cfg
+- fix bugs in FNS-BaseSetup:
+  - in first_start():
+    - .FvwmForm-Desktop-Config was used instead of .fns-menu.cfg
+    - no wallpapers directory was created
+  - desktop scrolling value wasn't insert due to a wrong variable name
+  - in apply_and_save():
+    - no .layout link was created
+    - sed error message occured if no pcmanfm config was found
+- fix display bug in FNS-CompConfigurator if no composite manager available
+- fix bugs in FNS-MenuConfigurator:
+  - fvwm-menu-config2 was used instead of fns-menu-config
+  - in create_menu():
+    - command string was built with quotes on the wrong place
+    - wanted menu string was composed wrong
+- add a sleep(1) between reading the config (FVWM) and deleting it in FNS-WindowsBehaviour
+- expand Makefile with:
+  - un/install routines for new tools, perllib and SimpleGtk2
+  - add an error message for installing FNS desktop file if user not root
+
 12/12/2014
 - rename fvwm-menu-desktop2 to fns-menu-desktop because of the new FNS-MenuConfigurator
 - rename fns-cpu-performance back to FNS-CpuPerformance for consistency
