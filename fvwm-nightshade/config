@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20141211
+InfoStoreAdd ns_version 0.7.7.20141214
 # Copyright (C) 2014
 #
 # Authors:
@@ -330,8 +330,8 @@ EdgeResistance 350
 # Scrolling complete page when hiting the edge of a page
 # EdgeScroll 0 0 disables scrolling
 #-----------------------------------------------------------------------
-Test (EnvMatch DesktopScrollOn "1") EdgeScroll 100 100
-TestRc (!Match) EdgeScroll 0 0
+Test (EnvMatch DesktopScrollOn 1) EdgeScroll 100 100
+Test (EnvMatch DesktopScrollOn 0) EdgeScroll 0 0
 
 #-----------------------------------------------------------------------
 # In order to enable page scrolling via the mouse, four windows called
@@ -1239,7 +1239,6 @@ AddToFunc   FuncRemoveAllButtons
 DestroyFunc FuncChangeDecor
 AddToFunc   FuncChangeDecor
 + I PipeRead 'echo InfoStoreAdd used_theme $0'
-#+ I FuncUpdateBaseSetupFile Theme $0
 + I FuncSetThemeDir $[infostore.used_theme]
 + I FuncRemoveAllButtons
 + I Load $[FNS_THEMEDIR]/colorsets
@@ -1256,7 +1255,6 @@ AddToFunc   FuncChangeLayout
 + I PipeRead "rm -f ${FVWM_USERDIR}/.layout; \
               ln -s $0/layouts/$1 ${FVWM_USERDIR}/.layout"
 + I FuncWriteInfoStoreToFileAndSet used_layout $1 $[FVWM_USERDIR]/.settings
-#+ I FuncUpdateBaseSetupFile Layout $1
 + I FuncRestart
 
 
@@ -1290,31 +1288,6 @@ AddToFunc   FuncWriteSetEnvToFileAndSet
             fi; \
             Val=`echo "$Val" | sed "s/ /\\\\\\\\\\ /g"`; \
             echo SetEnv $0 "$Val"'
-
-#-----------------------------------------------------------------------
-# Update layout and theme settings in base setup file .FNS-Form-BaseSetup
-# FuncUpdateBaseSetupFile <Layout/Theme/DesktopIconsOn> <layout/theme name/0|1>
-#-----------------------------------------------------------------------
-#DestroyFunc FuncUpdateBaseSetupFile
-#AddToFunc   FuncUpdateBaseSetupFile
-#+ I PipeRead 'if [ "$0" = "Layout" ]; then \
-#                case $1 in \
-#                    Horizontal|Vertical|G2like) \
-#                        sed -i --follow-symlinks "/^*SavedBaseSetup: Layout.*/s/on //" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-#                        sed -i --follow-symlinks "s/^*SavedBaseSetup: Layout$1.*/*SavedBaseSetup: Layout$1 on /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup;; \
-#                esac; \
-#              elif [ "$0" = "Theme" ]; then \
-#                sed -i --follow-symlinks "s/^*SavedBaseSetup: Theme .*/*SavedBaseSetup: Theme $1/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-#              elif [ "$0" = "DesktopIconsOn" ]; then \
-#                if [ "$1" = "1" ]; then \
-#                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOn .*/*SavedBaseSetup: DesktopIconsOn on/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-#                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOff .*/*SavedBaseSetup: DesktopIconsOff /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-#                else \
-#                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOn .*/*SavedBaseSetup: DesktopIconsOn /" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-#                    sed -i --follow-symlinks "s/^*SavedBaseSetup: DesktopIconsOff .*/*SavedBaseSetup: DesktopIconsOff on/" ${FVWM_USERDIR}/.FNS-Form-BaseSetup; \
-#                fi; \
-#              fi'
-              
 
 #-----------------------------------------------------------------------
 # Update window opacity
@@ -1979,7 +1952,7 @@ DestroyFunc FuncXdgMenusInRoot
 AddToFunc   FuncXdgMenusInRoot
 + I AddToMenu FvwmMenu DynamicPopupAction FuncXdgMenusInRoot
 + I Test (f $[FVWM_USERDIR]/.menu) Read $[FVWM_USERDIR]/.menu
-+ I PipeRead 'fns-menu-desktop --insert-in-menu MenuRoot > $[FVWM_USERDIR]/.menu &&  echo "Read $[FVWM_USERDIR]/.menu"'
++ I TestRc (!Match) PipeRead 'fns-menu-desktop --insert-in-menu MenuRoot > $[FVWM_USERDIR]/.menu &&  echo "Read $[FVWM_USERDIR]/.menu"'
 
 
 #-----------------------------------------------------------------------
@@ -2697,3 +2670,8 @@ AddToFunc   FuncMenuCpuOps
 + I AddToMenu MenuCpuOps "" Nop
 + I AddToMenu MenuCpuOps "$[gt.Restart Conky CPU]%restart.svg:$[infostore.MenuIconSize]%"       Exec exec xkill -id `xwininfo -name conky_cpu|grep "Window id"|cut -d ' ' -f4`
 
+
+#-----------------------------------------------------------------------
+# user speific changes
+#-----------------------------------------------------------------------
+Test (f $[FVWM_USERDI]/.user) Read $[FVWM_USERDI]/.user
