@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.8
+# Version:      2.1.9
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      08/08/2014
+# Changed:      12/13/2014
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -39,6 +39,7 @@ xdgdir		= $(datadir)/desktop-directories
 themesdir 	= $(datadir)/themes
 userdir		= ~
 fnsuserdir	= $(userdir)/.$(package)
+perlsitedir := $(shell perl -le 'foreach (@INC) {print $$_ if m/site_perl$$/;}')
 
 ifeq ($(local),yes)
 	themesdir = $(userdir)/.themes
@@ -47,7 +48,8 @@ endif
 pkgdatadir 	= $(datadir)/$(package)
 pkgdocdir 	= $(docdir)/$(package)
 
-fns_fvwmscripts = $(shell ls -1 fvwm)
+fns_fvwmscripts = $(shell ls -p1 fvwm|grep -v /)
+fns_perllib		= $(shell find fvwm/perllib|cut -d'/' -f 2-)
 fns_executables = $(shell ls -1 bin)
 fns_manpages 	= $(shell ls -1 man)
 fns_templates 	= $(shell ls -1 templates)
@@ -89,7 +91,7 @@ distcheck: $(distdir).tar.gz
 build-install-list: 
 	rm -f ./fns-install_$(version).lst
 	echo "Build install list 'fns-install_$(version).lst' for Fvwm-Nightshade $(version)"
-	echo "-> FvwmScripts"
+	echo "-> FvwmScripts and perllib modules"
 	if test -z "$(DESTDIR)"; then \
 		if test "$(local)" = "yes"; then \
 			for file in $(fns_fvwmscripts); do \
@@ -103,6 +105,9 @@ build-install-list:
 			if test "$(id)" = "root"; then \
 				if test -d "$(fvwm_path)"; then \
 					for file in $(fns_fvwmscripts); do \
+						echo $(fvwm_path)/$$file >> ./fns-install_$(version).lst; \
+					done; \
+					for file in $(fns_perllib); do \
 						echo $(fvwm_path)/$$file >> ./fns-install_$(version).lst; \
 					done; \
 				else \
@@ -152,6 +157,15 @@ build-install-list:
 	if test "$(displaymanager)" = "yes" && test "$(id)" = "root"; then \
 		echo "-> Login file"; \
 		echo /usr/share/xsessions/fvwm-nightshade.desktop >> ./fns-install_$(version).lst; \
+	else \
+		echo "Can't install fvwm-nightshade.desktop in /usr/share/xsessions/ because you are not root."; \
+		rm -f ./fns-install_$(version).lst; \
+		exit 3; \
+	fi
+
+	echo "-> SimpleGtk2 library"
+	if test "$(id)" = "root"; then \
+		echo $(perlsitedir)/SimpleGtk2.pm >> ./fns-install_$(version).lst; \
 	fi
 
 	echo "-> System files"
@@ -241,7 +255,7 @@ install: build-install-list dist-install
 
 dist-install:
 	echo "Installing Fvwm-Nightshade $(version) to $(pkgprefix)"
-	echo "-> Install FvwmScripts"
+	echo "-> Install FvwmScripts and perllib modules"
 	if test -z "$(DESTDIR)"; then \
 		if test "$(local)" = "yes"; then \
 			install -d $(fnsuserdir)/scripts; \
@@ -258,6 +272,15 @@ dist-install:
 					for file in $(fns_fvwmscripts); do \
 						install -m 644 fvwm/$$file  $(fvwm_path); \
 					done; \
+					for file in $(fns_perllib); do \
+						if test -f "fvwm/$$file"; then \
+							install -m 644 fvwm/$$file  $(fvwm_path)/$$file; \
+						else \
+							if test -f "fvwm/$$file"; then \
+								install -d $(fvwm_path)/$$file; \
+							fi; \
+						fi; \
+					done; \
 				else \
 					exit 2; \
 				fi; \
@@ -269,6 +292,15 @@ dist-install:
 		install -d $(fvwm_path); \
 		for file in $(fns_fvwmscripts); do \
 			install -m 644 fvwm/$$file  $(fvwm_path); \
+		done; \
+		for file in $(fns_perllib); do \
+			if test -f "fvwm/$$file"; then \
+				install -m 644 fvwm/$$file  $(fvwm_path)/$$file; \
+			else \
+				if test -d "fvwm/$$file"; then \
+					install -d $(fvwm_path)/$$file; \
+				fi; \
+			fi; \
 		done; \
 	fi
 
@@ -282,6 +314,12 @@ dist-install:
 		echo "-> Install login file"; \
 		install -d $(DESTDIR)/usr/share/xsessions; \
 		install -m 644 system/fvwm-nightshade.desktop $(DESTDIR)/usr/share/xsessions/;\
+	fi
+
+	echo "-> Install SimpleGtk2 library"
+	if test -n "$(DESTDIR)" || test "$(id)" = "root"; then \
+		install -d $(DESTDIR)$(perlsitedir); \
+		install -m 644 system/libs/SimpleGtk2.pm $(DESTDIR)$(perlsitedir); \
 	fi
 
 	echo "-> Install system files"
@@ -398,6 +436,12 @@ uninstall-alternative:
 	echo "-> Uninstall FvwmScripts"
 	if test -d "$(fvwm_path)"; then \
 		for file in $(fns_fvwmscripts) ; do \
+			if test -f "$(fvwm_path)/$$file"; then \
+				echo "remove $(fvwm_path)/$$file"; \
+				rm -f $(fvwm_path)/$$file; \
+			fi; \
+		done; \
+		for file in $(fns_perllib) ; do \
 			if test -f "$(fvwm_path)/$$file"; then \
 				echo "remove $(fvwm_path)/$$file"; \
 				rm -f $(fvwm_path)/$$file; \
