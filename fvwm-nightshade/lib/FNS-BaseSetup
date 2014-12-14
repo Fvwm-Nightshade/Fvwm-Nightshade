@@ -11,7 +11,7 @@ use File::Spec;
 
 #-------------------------------------------------------------------------
 # File:         FNS-BaseSetup
-my $Version =   '2.0.1';
+my $Version =   '2.0.2';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure base settings of Fvwm-Nightshade
@@ -19,7 +19,7 @@ my $Version =   '2.0.1';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/08/2014
-# Changed:      12/13/2014
+# Changed:      12/14/2014
 #-------------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -736,20 +736,26 @@ sub apply_and_save {
             } else {
                 if (-f $pcmanfm_config) {
                     system("sed -i --follow-symlinks \"s#^$key=.*#$key=$config{$key}[0]#\" $pcmanfm_config");
+                } else {
+                    print STDERR "[" . $win->get_title($win->{name}) . "]: " . $pcmanfm_config . " not found. Ignore changes of 'big_icon_size'.\n";
                 }
             }
 
             if ($key eq "used_layout") {
                 if (-f "$FVWM_USERDIR/.layout") {unlink("$FVWM_USERDIR/.layout");}
                 if (-f "$FVWM_USERDIR/layouts/$config{$key}[0]") {
-                    system("ln -s $FVWM_USERDIR/layouts/$config{$key}[0] $FVWM_USERDIR/.layout");
+                    symlink("$FVWM_USERDIR/layouts/$config{$key}[0]", "$FVWM_USERDIR/.layout");
                 } else {
-                    system("ln -s $FNS_SYSTEMDIR/layouts/$config{$key}[0] $FVWM_USERDIR/.layout");
-                }
+                    symlink("$FNS_SYSTEMDIR/layouts/$config{$key}[0]", "$FVWM_USERDIR/.layout");
+               }
             }
 
             $config{$key}[1] = 0;
         }
+    }
+    # create symlink for .layout with default layout if it is first start
+    unless (-f "$FVWM_USERDIR/.layout") {
+        symlink("$FNS_SYSTEMDIR/layouts/$config{used_layout}[0]", "$FVWM_USERDIR/.layout");
     }
     $module->send("FuncRestart");
 }
