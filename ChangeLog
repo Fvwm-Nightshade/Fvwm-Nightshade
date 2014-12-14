@@ -26,6 +26,19 @@ History:
 - expand Makefile with:
   - un/install routines for new tools, perllib and SimpleGtk2
   - add an error message for installing FNS desktop file if user not root
+- remove old files:
+  - FNS-Form-BaseSetup
+  - FNS-Script-CpuPerformance
+  - FvwmForm-GenOptionHelp2
+  - FvwmForm-MultiMenuHelp2
+  - FvwmForm-SingleMenuHelp2
+  - fvwm-menu-desktop2-config.fpl
+- move new tools from fvwm to fvwm-nightshade/lib:
+  - FNS-BaseSetup
+  - FNS-CompConfigurator
+  - FNS-MenuConfigurator
+  - FNS-WindowsBehaviour
+- add /usr/share/wallpapers to InfoStore additional_wp_dirs because it doesn't be empty
 
 12/12/2014
 - rename fvwm-menu-desktop2 to fns-menu-desktop because of the new FNS-MenuConfigurator
