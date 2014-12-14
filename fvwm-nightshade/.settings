@@ -88,7 +88,7 @@ SetEnv PcmanFmStatus "0"
 #-----------------------------------------------------------------------
 # Additional wallpaper directories
 #-----------------------------------------------------------------------
-InfoStoreAdd additional_wp_dirs ""
+InfoStoreAdd additional_wp_dirs "/usr/share/wallpapers"
 
 
 #***********************************************************************
