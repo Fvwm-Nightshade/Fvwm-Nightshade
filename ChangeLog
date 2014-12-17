@@ -17,6 +17,7 @@ History:
   - lxappearance - fix typo (missing p)
 - update dependencies and featurelist in README
 - update NEWS
+- update dependencies in INSTALL
 
 12/14/2014
 - fixes in config:
