@@ -17,6 +17,12 @@ Changes:
 - Support for some application launcher: grun and gmrun
 - Support for icons on desktop. Also for mount icons.
 - Support for systemd (suspend and hibernate)
+- New Gtk2 Config tools for different settings:
+  - FNS-BaseSetup (layouts, themes, compositing, icons on desktop, etc.)
+  - FNS-WindowsBehaviour (focus policies, placement, etc.)
+  - FNS-CompConfigurator (config tool for xcompmgr or compton)
+  - FNS-MenuConfigurator (exchange original fvwm-menu-config GUI)
+  - FNS-CPU-Performance (governor-tool for cpufreq / cpupower)
 
 ------------------------------------------------------------------------
 

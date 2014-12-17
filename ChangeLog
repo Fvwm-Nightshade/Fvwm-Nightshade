@@ -1,5 +1,23 @@
 History:
 
+12/17/2014
+- config:
+  - while initial start:
+    - deactivate FvwmBanner
+    - position FNS-BaseSetup in the center
+  - update internal use of $[use_composite] to disable/enable the respective menus:
+    0 => no composite
+    1 => composite activated but not started
+    2 => composite started
+  - change Read $[FVWM_USERDIR]/.user to Load .user
+- update $[use_composite] in colorsets to disable/enable the respective colorset settings
+- add to depends in debian/control:
+  - libgtk2-perl - needed by SimpleGtk2
+  - cpupower - alternative to cpufrequtils
+  - lxappearance - fix typo (missing p)
+- update dependencies and featurelist in README
+- update NEWS
+
 12/14/2014
 - fixes in config:
   - add TestRc infront of fns-menu-desktop in FuncXdgMenusInRoot to remove double
