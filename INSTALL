@@ -1,23 +1,20 @@
 Installing Fvwm-Nightshade
 ==========================
 
-Requirements
-============
-
+Requirements:
+=============
 Required:       Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
                 xscreensaver, feh, imagemagick, librsvg2-bin, xwd,
-                stalonetray, cpufrequtils*, gksu, pcmanfm
+                stalonetray, cpufrequtils or cpupower, gksu, pcmanfm,
+                libgtk2-perl
 
-Recommended:    gnome-network-manager, pm-utils, lxapearance, 
-                qtconfig for qt4
+Recommended:    gnome-network-manager, pm-utils, qtconfig for qt4, 
+                lxappearance, gtk2-engines-murrine, gtk2-engines-pixbuf
 
 Suggested:      fdpowermon (for pm-utils), grun or gmrun, blueman, 
                 volumeicon-alsa, clipit or parcelite, xneur, compton 
                 or xcompmgr
 
-* unfortunatelly not usable in Arch at the moment. They have changed from
-  cpufrequtils to cpupower but it's not supported at the moment 
-  -> see issue #40 in the bugtracker.
 
 Preparation
 ===========
