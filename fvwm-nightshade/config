@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20141214
+InfoStoreAdd ns_version 0.7.7.20141217
 # Copyright (C) 2014
 #
 # Authors:
@@ -456,6 +456,7 @@ Style * DecorateTransient
 #-----------------------------------------------------------------------
 Style * IconBackgroundRelief 0
 
+
 ########################################################################
 #                4. A P P L I C A T I O N S  L O O K
 ########################################################################
@@ -497,8 +498,9 @@ Style FvwmForm-RunCommand !Title
 Style FvwmForm-About !Title
 
 #-----------------------------------------------------------------------
-# FvwmApplets
+# FNS-BaseSetup - should be positioned in the center at initial start
 #-----------------------------------------------------------------------
+Test (!f $[FVWM_USERDIR]/.settings) Style FNS-BaseSetup PositionPlacement Center
 
 
 #***********************************************************************
@@ -1053,7 +1055,7 @@ AddToFunc StartFunction
 + I Test (Init) FuncAppCheck
 #-----------------------------------------------------------------------
 # show splash sceen
-+ I Test (Init) Test (EnvMatch SplashOn 1) Module FvwmBanner
++ I Test (Init) Test (EnvMatch SplashOn 1) Test (f $[FVWM_USERDIR]/.settings) Module FvwmBanner
 #-----------------------------------------------------------------------
 # Start pcmanfm as daemon for mounting 
 + I FuncStartMountDaemon
@@ -1085,7 +1087,7 @@ AddToFunc StartFunction
 + I Test (!f $[FVWM_USERDIR]/.settings) Module FNS-BaseSetup
 #-----------------------------------------------------------------------
 # start composite manager if it is activated
-+ I Test (EnvMatch use_composite 1) Exec exec $[infostore.comp_command]
++ I Test (!EnvMatch use_composite 0) Exec exec $[infostore.comp_command]
 #-----------------------------------------------------------------------
 # start FvwmTransSet if composite manager is activated
 + I TestRC (Match) FuncStartFvwmTransSet
@@ -1108,10 +1110,10 @@ AddToFunc StartFunction
 DestroyFunc ExitFunction
 AddToFunc   ExitFunction
 # stop FvwmTransSet and save configuration if composite manager is activated
-+ I Test (EnvMatch use_composite 1) FuncStopFvwmTransSet
++ I Test (!EnvMatch use_composite 0) FuncStopFvwmTransSet
 #-----------------------------------------------------------------------
 # stop composite manager if it is activated
-+ I Test (EnvMatch use_composite 1) FuncKillCompmgr
++ I Test (!EnvMatch use_composite 0) FuncKillCompmgr
 
 
 #=======================================================================
@@ -1212,6 +1214,7 @@ AddToFunc   FuncRunPcmanFmWithDesktop
 DestroyFunc FuncStartFvwmTransSet
 AddToFunc   FuncStartFvwmTransSet
 + I Module FvwmTransSet
++ I Test (!EnvMatch use_composite 2) SetEnv use_composite 2
 + I Load $[FNS_THEMEDIR]/colorsets
 
 #-----------------------------------------------------------------------
@@ -1221,6 +1224,8 @@ DestroyFunc FuncStopFvwmTransSet
 AddToFunc   FuncStopFvwmTransSet
 + I SendToModule FvwmTransSet save
 + I SendToModule FvwmTransSet stop
++ I Test (!EnvMatch use_composite 0) SetEnv use_composite 0
++ I Load $[FNS_THEMEDIR]/colorsets
 
 #-----------------------------------------------------------------------
 # Remove all buttons for a theme and its bindings
@@ -2295,11 +2300,11 @@ AddToFunc   FuncMenuCompositing
 + I AddToMenu MenuCompositing DynamicPopupAction FuncMenuCompositing
 + I AddToMenu MenuCompositing "$[gt.Compositing]" Title
 + I AddToMenu MenuCompositing "$[gt.FNS CompMgr &Configurator]%CompConfigurator.svg:$[infostore.MenuIconSize]%"     Module FNS-CompConfigurator $[infostore.comp_command]
-+ I Test (EnvMatch use_composite 1) \
++ I Test (!EnvMatch use_composite 0) \
     AddToMenu MenuCompositing "$[gt.&Menu Transparency]%tint.svg:$[infostore.MenuIconSize]%"                        Popup MenuTintOps
-+ I Test (EnvMatch use_composite 1) \
++ I Test (!EnvMatch use_composite 0) \
     AddToMenu MenuCompositing "$[gt.Active Window &Opacity]%tint.svg:$[infostore.MenuIconSize]%"                    Popup MenuOpacityOps
-+ I Test (EnvMatch use_composite 1) \
++ I Test (!EnvMatch use_composite 0) \
     AddToMenu MenuCompositing "$[gt.Inactive Window &Transparency]%tint.svg:$[infostore.MenuIconSize]%"             Popup MenuTransparencyOps
 
 
@@ -2419,9 +2424,9 @@ AddToFunc   FuncMenuWindowOpsTrimmed
 + I AddToMenu MenuWindowOpsTrimmed "" Nop
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.&Close]	Alt+F4%exit.svg:$[infostore.MenuIconSize]%"                 Close
 + I AddToMenu MenuWindowOpsTrimmed "" Nop
-+ I Test (EnvMatch use_composite 1) \
++ I Test (!EnvMatch use_composite 0) \
     AddToMenu MenuWindowOpsTrimmed "$[gt.Active Window &Opacity]%tint.svg:$[infostore.MenuIconSize]%"           Popup MenuOpacityOps
-+ I Test (EnvMatch use_composite 1) \
++ I Test (!EnvMatch use_composite 0) \
     AddToMenu MenuWindowOpsTrimmed "$[gt.Inactive Window &Transparency]%tint.svg:$[infostore.MenuIconSize]%"    Popup MenuTransparencyOps
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"            Module FvwmIdent
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.Mor&e...]	%window.svg:$[infostore.MenuIconSize]%"                     Menu MenuWindowOpsFull This 0 0
@@ -2632,7 +2637,7 @@ AddToFunc   FuncMenuDesktopOps
 + I AddToMenu MenuDesktopOps "$[gt.Desktopmenu]" Title
 + I AddToMenu MenuDesktopOps MissingSubmenuFunction FuncMenuWallpaperConfiguration
 + I AddToMenu MenuDesktopOps "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"    Popup MenuWallpaperConfiguration
-+ I Test (EnvMatch use_composite 1) \
++ I Test (!EnvMatch use_composite 0) \
     AddToMenu MenuDesktopOps "$[gt.&Menu Transparency]%tint.svg:$[infostore.MenuIconSize]%"             Popup MenuTintOps
 + I AddToMenu MenuDesktopOps "$[gt.Help]%help.svg:$[infostore.MenuIconSize]%"                           Popup MenuHelp
 + I AddToMenu MenuDesktopOps "" Nop
@@ -2674,4 +2679,4 @@ AddToFunc   FuncMenuCpuOps
 #-----------------------------------------------------------------------
 # user speific changes
 #-----------------------------------------------------------------------
-Test (f $[FVWM_USERDI]/.user) Read $[FVWM_USERDI]/.user
+Test (f $[FVWM_USERDIR]/.user) Load .user
