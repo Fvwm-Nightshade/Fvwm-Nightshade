@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      0.1.8
+# Version:      0.1.9
 # Licence:      GPL 2
 #
 # Description:  colorsets of Ambience theme
 #
 # Author:       Thomas Funk <t.funk@web.de>
 # Created:      06/08/2012
-# Changed:      05/09/2014
+# Changed:      12/17/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -96,7 +96,7 @@ Colorset 4 bg black, hi #4c4b46, sh #4c4b46, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 5 fg white, bg #65645e, hi #4c4b46, Plain, RootTransparent, Tint #65645e $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 5 fg white, bg #65645e, hi #4c4b46, Plain, RootTransparent, Tint #65645e $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 5 fg white, bg #65645e, hi #4c4b46, Plain
 
 #-----------------------------------------------------------------------
@@ -105,13 +105,13 @@ Test (EnvMatch use_composite 0) Colorset 5 fg white, bg #65645e, hi #4c4b46, Pla
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #f37b4c, hi white, Plain, RootTransparent, Tint #f37b4c $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 6 fg white, bg #f37b4c, hi white, Plain, RootTransparent, Tint #f37b4c $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #f37b4c, hi white, Plain
 
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 7 fg white, bg #65645e, hi #4c4b46, Plain, NoShape, RootTransparent, Tint #65645e $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 7 fg white, bg #65645e, hi #4c4b46, Plain, NoShape, RootTransparent, Tint #65645e $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 7 fg white, bg #65645e, hi #4c4b46, Plain, NoShape, Tint
 
 #-----------------------------------------------------------------------

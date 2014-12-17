@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      1.0.6
+# Version:      1.0.7
 # Licence:      GPL 2
 #
 # Description:  colorsets of GreyRevenge theme by alecive
@@ -9,7 +9,7 @@
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      06/25/2013
-# Changed:      08/25/2014
+# Changed:      12/17/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -98,7 +98,7 @@ Colorset 4 bg #353535, hi #666666, sh #555555, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 5 VGradient 255 1 #4C4C4C 100 #3C3C3C, bg #666666, fg white, hi #666666, NoShape, RootTransparent, Tint #3C3C3C $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 5 VGradient 255 1 #4C4C4C 100 #3C3C3C, bg #666666, fg white, hi #666666, NoShape, RootTransparent, Tint #3C3C3C $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 5 VGradient 255 1 #4C4C4C 100 #3C3C3C, bg #666666, fg white, hi #666666, NoShape
 
 #-----------------------------------------------------------------------
@@ -107,13 +107,13 @@ Test (EnvMatch use_composite 0) Colorset 5 VGradient 255 1 #4C4C4C 100 #3C3C3C, 
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #466464, hi white, Plain, RootTransparent, Tint #466464 $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 6 fg white, bg #466464, hi white, Plain, RootTransparent, Tint #466464 $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #466464, hi white, Plain
 
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 7 bg #4C4C4C, fg white, hi #666666, NoShape, Plain, RootTransparent, Tint #3C3C3C $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 7 bg #4C4C4C, fg white, hi #666666, NoShape, Plain, RootTransparent, Tint #3C3C3C $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 7 bg #4C4C4C, fg white, hi #666666, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------
