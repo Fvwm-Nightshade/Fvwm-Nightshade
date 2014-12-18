@@ -1,34 +1,38 @@
-%define       	__spec_install_post %{nil}
-%define         debug_package %{nil}
-%define        	__os_install_post %{_dbpath}/brp-compress
+%define     __spec_install_post %{nil}
+%define     debug_package %{nil}
+%define     __os_install_post %{_dbpath}/brp-compress
 
-Name:		fvwm-nightshade
-Version:	
-Release:	1
-Summary:	Fvwm-Nightshade
+Name:       fvwm-nightshade
+Version:    
+Release:    1
+Summary:    Fvwm-Nightshade
 
-Group:		X11/Window Managers
-License:	GPL v2+
-URL:		https://github.com/Fvwm-Nightshade
-Source0:	%{expand:%%(pwd)}/../%{name}-%{version}.tar.gz
-BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
+Group:      X11/Window Managers
+License:    GPL v2+
+URL:        https://github.com/Fvwm-Nightshade
+Source0:    %{expand:%%(pwd)}/../%{name}-%{version}.tar.gz
+BuildArch:  noarch
+BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}
 
-Requires:	fvwm >= 2.6.5
-Requires:	python < 3
-Requires:	pyxdg
-Requires:	xterm
-Requires:	conky
-Requires:	xscreensaver
-Requires:	feh
-Requires:	ImageMagick
-Requires:	librsvg2
-Requires:	stalonetray
-Requires:	cpufrequtils
-Requires:	xorg-x11-apps
-Requires:	beesu
-Requires:	pcmanfm
-Requires:	gtk-murrine-engine
+Requires:   fvwm >= 2.6.5
+Requires:   python < 3
+Requires:   pyxdg
+Requires:   perl-gtk2
+Requires:   librsvg2
+Requires:   xterm
+Requires:   conky
+Requires:   xscreensaver
+Requires:   feh
+Requires:   ImageMagick
+Requires:   stalonetray
+Requires:   kernel-tools
+Requires:   cpupower
+Requires:   xorg-x11-apps
+Requires:   beesu
+Requires:   gksu
+Requires:   pcmanfm
+Requires:   gtk-murrine-engine
+Requires:   network-manager-applet
 
 %description
 A lightweight but feature rich and good looking configuration of Fvwm.

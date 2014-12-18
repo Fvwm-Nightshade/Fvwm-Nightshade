@@ -1,14 +1,14 @@
 #-----------------------------------------------------------------------
-# File:		PKGBUILD_FNS
-# Version:	1.1.9
-# Licence: 	GPL 2
+# File:         PKGBUILD_FNS
+# Version:      1.2.0
+# Licence:      GPL 2
 #
-# Description:	Pkgbuild script for Fvwm-Nightshade
+# Description:  Pkgbuild script for Fvwm-Nightshade
 #
-# Author:	Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>	
+# Author:       Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>    
 #
-# Created:	???
-# Changed:	10/02/2014
+# Created:      ???
+# Changed:      12/18/2014
 #-----------------------------------------------------------------------
 
 pkgname=Fvwm-Nightshade
@@ -18,8 +18,36 @@ pkgdesc="A lightweight but feature rich and good looking configuration of Fvwm."
 arch=('any')
 url="https://github.com/Fvwm-Nightshade"
 license=('GPL')
-depends=('fvwm>=2.6.5' 'python2' 'python2-xdg' 'conky' 'xscreensaver' 'feh' 'imagemagick' 'librsvg' 'stalonetray' 'xorg-xwd' 'gksu' 'compton' 'pcmanfm' 'cpupower' 'pm-utils')
-optdepends=('volumeicon: volumecontrol in systray' 'network-manager-applet: network controlling tool for systray' 'blueman: bluetooth manager' 'gmrun: application launcher' 'clipit: clipboard in systray')
+depends=(
+    'fvwm>=2.6.5'
+    'conky'
+    'cpupower'
+    'feh'
+    'gksu'
+    'gtk-engine-murrine'
+    'imagemagick'
+    'gtk2-perl'
+    'librsvg'
+    'pcmanfm'
+    'python2'
+    'python2-xdg'
+    'stalonetray'
+    'xscreensaver'
+    'xterm'
+    'xorg-xwd'
+)
+optdepends=(
+    'blueman: Bluetooth Manager for your system tray (AUR)'
+    'clipit: Clipboard manager for your systray'
+    'fdpowermon: battery monitor for your system tray (AUR)'
+    'grun: Application launcher (AUR)'
+    'lxappearance: GTK+ theme switcher from of the LXDE Desktop'
+    'network-manager-applet: Network manager for your system tray'
+    'pm-utils: Utilities for suspend and hibernate power management'
+    'transset-df: Tool for changing window transparencies on the fly. Needed with xcompmgr!'
+    'volumeicon: Volume control for your system tray'
+    'xcompmgr: Composite Window-effects manager for X.org'
+)
 provides=('Fvwm-Nightshade')
 source=
 

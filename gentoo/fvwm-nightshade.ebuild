@@ -32,6 +32,7 @@ RDEPEND="${PYTHON_DEPS}
 	app-admin/conky
 	sys-power/cpufrequtils
 	dev-python/pyxdg
+	dev-perl/gtk2-perl
 	nm-gnome? ( gnome-extra/nm-applet )
 	blueman? ( net-wireless/blueman )
 	volumeicon? ( media-sound/volumeicon )
