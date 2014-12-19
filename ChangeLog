@@ -1,5 +1,14 @@
 History:
 
+12/19/2014
+- update package build control files for rpm, pkgbuild and ebuild
+- exchange tabs with spaces in fns-start-programs
+- add support for pkexec (policykit):
+  - update all control files
+  - add new shell script fns-poladd to add or remove policies for different
+    programs needed gui autentification. It's based on Bresiyel's script from here:
+    http://pastebin.com/PbGTZ0jc
+
 12/17/2014
 - config:
   - while initial start:
