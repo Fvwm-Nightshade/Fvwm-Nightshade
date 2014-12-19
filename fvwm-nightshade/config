@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20141217
+InfoStoreAdd ns_version 0.7.7.20141219
 # Copyright (C) 2014
 #
 # Authors:
@@ -1060,6 +1060,9 @@ AddToFunc StartFunction
 # Start pcmanfm as daemon for mounting 
 + I FuncStartMountDaemon
 #-----------------------------------------------------------------------
+# Start policykit for using pkexec 
++ I FuncStartPolkit
+#-----------------------------------------------------------------------
 # set the root background image with feh or if no image found start
 # default Fvwm background
 #+ I Test (I $[infostore.fvwm_wallpaper]) Exec exec feh --bg-scale $[infostore.fvwm_wallpaper]
@@ -1358,6 +1361,25 @@ AddToFunc   FuncAppCheck
 + I TestRc (Match) Test (!x fdpowermon) FuncPrintMsg "AppCheck" "fdpowermon (systray pm control) not installed"
 # Mount daemon pcmanfm
 + I Test (!x pcmanfm) FuncPrintMsg "AppCheck" "pcmanfm (mounting) not installed"
+# policy kit agent
++ I FuncCheck4Polkit
+
+#-----------------------------------------------------------------------
+# Check for policykit and set path
+#-----------------------------------------------------------------------
+DestroyFunc FuncCheck4Polkit
+AddToFunc   FuncCheck4Polkit
++ I PipeRead 'echo SetEnv polkit `find /usr/lib/pol* -name polkit-gnome-authentication-agent-1`'
++ I Test (!x $[polkit]) FuncPrintMsg "AppCheck" "polkit-gnome (pkexec) not installed"
+
+#-----------------------------------------------------------------------
+# Starts policykit for pkexec use
+#-----------------------------------------------------------------------
+DestroyFunc FuncStartPolkit
+AddToFunc   FuncStartPolkit
++ I PipeRead 'if [ -z `pidof polkit-gnome-authentication-agent-1` ]; then \
+                $[polkit] &; \
+             fi'
 
 #-----------------------------------------------------------------------
 # Starts system tray applets like network, sound, etc
