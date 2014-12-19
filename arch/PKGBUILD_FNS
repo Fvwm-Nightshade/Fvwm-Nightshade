@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         PKGBUILD_FNS
-# Version:      1.2.0
+# Version:      1.2.1
 # Licence:      GPL 2
 #
 # Description:  Pkgbuild script for Fvwm-Nightshade
@@ -29,6 +29,7 @@ depends=(
     'gtk2-perl'
     'librsvg'
     'pcmanfm'
+    'polkit-gnome'
     'python2'
     'python2-xdg'
     'stalonetray'

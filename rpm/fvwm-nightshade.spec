@@ -31,6 +31,7 @@ Requires:   xorg-x11-apps
 Requires:   beesu
 Requires:   gksu
 Requires:   pcmanfm
+Requires:   polkit-gnome
 Requires:   gtk-murrine-engine
 Requires:   network-manager-applet
 
