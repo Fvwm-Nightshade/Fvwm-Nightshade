@@ -28,8 +28,6 @@ Requires:   stalonetray
 Requires:   kernel-tools
 Requires:   cpupower
 Requires:   xorg-x11-apps
-Requires:   beesu
-Requires:   gksu
 Requires:   pcmanfm
 Requires:   polkit-gnome
 Requires:   gtk-murrine-engine

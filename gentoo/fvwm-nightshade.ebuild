@@ -28,7 +28,6 @@ RDEPEND="${PYTHON_DEPS}
 	x11-misc/xscreensaver
 	x11-terms/xterm
 	x11-misc/pcmanfm
-	x11-libs/gksu
 	app-admin/conky
 	sys-power/cpufrequtils
 	dev-python/pyxdg

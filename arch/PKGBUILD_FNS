@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         PKGBUILD_FNS
-# Version:      1.2.1
+# Version:      1.2.2
 # Licence:      GPL 2
 #
 # Description:  Pkgbuild script for Fvwm-Nightshade
@@ -8,7 +8,7 @@
 # Author:       Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>    
 #
 # Created:      ???
-# Changed:      12/18/2014
+# Changed:      12/19/2014
 #-----------------------------------------------------------------------
 
 pkgname=Fvwm-Nightshade
@@ -23,7 +23,6 @@ depends=(
     'conky'
     'cpupower'
     'feh'
-    'gksu'
     'gtk-engine-murrine'
     'imagemagick'
     'gtk2-perl'
