@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.9
+# Version:      2.2.0
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      12/13/2014
+# Changed:      12/19/2014
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -326,6 +326,14 @@ dist-install:
 	install -d $(datadir)
 	cp -r $(package) $(pkgdatadir)
 	
+	echo "-> Register apps at polkit"
+	for app in cpufreq-set cpupower; do \
+		if test -n `which $$app`; then \
+			echo "   $$app"; \
+			bin/fns-poladd $$app; \
+		fi; \
+	done
+	
 	echo "-> Install documentation, Readmes, examples and templates"
 	install -d $(pkgdocdir)
 	cp -r doc/* $(pkgdocdir)
@@ -409,6 +417,13 @@ uninstall:
 						echo "not found: $$path"; \
 					fi; \
 				done; \
+				echo "-> Unregister apps at polkit"; \
+				for app in cpufreq-set cpupower; do \
+					if test -n `which $$app`; then \
+						echo "   $$app"; \
+						bin/fns-poladd -r $$app; \
+					fi; \
+				done; \
 				echo "Fvwm-Nightshade is now removed. Only ~/.fvwm-nightshade exists."; \
 				echo "If you don't need it anymore remove it by hand."; \
 				exit 0; \
@@ -473,6 +488,14 @@ uninstall-alternative:
 		rm -rf $(pkgdatadir); \
 	fi
 	
+	echo "-> Unregister apps at polkit"
+	for app in cpufreq-set cpupower; do \
+		if test -n `which $$app`; then \
+			echo "   $$app"; \
+			bin/fns-poladd -r $$app; \
+		fi; \
+	done
+
 	echo "-> Uninstall documentation"
 	if test -d "$(pkgdocdir)"; then \
 		echo "remove $(pkgdocdir) completelly"; \
@@ -519,6 +542,7 @@ uninstall-alternative:
 	done
 	rmdir $(xdgdir)
 
+	echo "-> Uninstall Gtk themes"
 	for file in $(fns_themesfiles); do \
 		if test -f "$(themesdir)/$$file"; then \
 			echo "remove $(themesdir)/$$file"; \
