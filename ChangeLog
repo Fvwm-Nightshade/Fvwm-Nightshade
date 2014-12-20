@@ -1,6 +1,16 @@
 History:
 
 12/19/2014
+- add further support for pkexec (policykit):
+  - add register and unregister functions in Makefile for apps in policy for pkexec
+  - add functions for checking and starting polkit in config
+  - exchange gksu with pkexec in FNS-Cpu-Performance
+  - remove gksu and beesu in control files
+  - update dependency polkit-gnome in README and INSTALL
+  - add Bresiyel to AUTHORS
+  - update NEWS
+
+12/18/2014
 - update package build control files for rpm, pkgbuild and ebuild
 - exchange tabs with spaces in fns-start-programs
 - add support for pkexec (policykit):
