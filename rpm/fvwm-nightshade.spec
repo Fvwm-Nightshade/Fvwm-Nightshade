@@ -48,6 +48,29 @@ cp %{SOURCEURL0} %{_topdir}/SOURCES/
 rm -rf $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT prefix=/usr dist-install
 
+%post
+if [ $1 -gt 1 ] ; then
+    for app in cpufreq-set cpupower; do
+        if [ "`which $app`" != "" ]; then
+            echo "register $app"
+            fns-poladd "$app"
+        fi
+    done
+fi
+
+%preun
+if [ $1 -eq 1 ] ; then
+    for app in "cpufreq-set" "cpupower"; do
+        if [ "`which $app`" != "" ]; then
+            alreadyHere=`cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$app"`
+            if [ "$alreadyHere" != "" ]; then
+                echo "unregister $app"
+                fns-poladd -r "$app"
+            fi
+        fi
+    done
+fi
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
