@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.2.0
+# Version:      2.2.1
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      12/19/2014
+# Changed:      12/21/2014
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -326,13 +326,15 @@ dist-install:
 	install -d $(datadir)
 	cp -r $(package) $(pkgdatadir)
 	
-	echo "-> Register apps at polkit"
-	for app in cpufreq-set cpupower; do \
-		if test -n `which $$app`; then \
-			echo "   $$app"; \
-			bin/fns-poladd $$app; \
-		fi; \
-	done
+	if test -z "$(DESTDIR)"; then \
+		echo "-> Register apps at polkit"; \
+		for app in cpufreq-set cpupower; do \
+			if test -n `which $$app`; then \
+				echo "   $$app"; \
+				bin/fns-poladd $$app; \
+			fi; \
+		done; \
+	fi
 	
 	echo "-> Install documentation, Readmes, examples and templates"
 	install -d $(pkgdocdir)
@@ -418,10 +420,13 @@ uninstall:
 					fi; \
 				done; \
 				echo "-> Unregister apps at polkit"; \
-				for app in cpufreq-set cpupower; do \
+				for app in "cpufreq-set" "cpupower"; do
 					if test -n `which $$app`; then \
-						echo "   $$app"; \
-						bin/fns-poladd -r $$app; \
+						alreadyHere=`cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$$app"`; \
+						if [ "$$alreadyHere" != "" ]; then \
+							echo "   $$app"; \
+							bin/fns-poladd -r "$$app"; \
+						fi; \
 					fi; \
 				done; \
 				echo "Fvwm-Nightshade is now removed. Only ~/.fvwm-nightshade exists."; \
@@ -564,6 +569,8 @@ build-deb:
 	mkdir -p $(pkgdir)
 	mkdir -p $(pkgdir)/DEBIAN
 	cp debian/control $(pkgdir)/DEBIAN
+	cp debian/fvwm-nightshade.postinst $(pkgdir)/DEBIAN/postinst
+	cp debian/fvwm-nightshade.prerm $(pkgdir)/DEBIAN/prerm
 	mkdir -p $(pkgdocdir)
 	cp debian/copyright $(pkgdocdir)
 
