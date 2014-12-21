@@ -6,6 +6,8 @@ History:
 - update dist-install, uninstall and build-deb rules in Makefile to support postinst and prerm
 - fix bugs in fns-poladd to return the correct exit codes
 - restructure debian/rules
+- add %post and %preun to rpm spec file for register and unregister apps
+  in policy file for pkexec
 
 12/19/2014
 - add further support for pkexec (policykit):
