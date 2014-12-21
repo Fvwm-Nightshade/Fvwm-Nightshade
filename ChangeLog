@@ -1,5 +1,12 @@
 History:
 
+12/21/2014
+- add debian/postinst and debian/prerm for register and unregister apps
+  in policy file for pkexec
+- update dist-install, uninstall and build-deb rules in Makefile to support postinst and prerm
+- fix bugs in fns-poladd to return the correct exit codes
+- restructure debian/rules
+
 12/19/2014
 - add further support for pkexec (policykit):
   - add register and unregister functions in Makefile for apps in policy for pkexec
