@@ -1,7 +1,7 @@
 #!/usr/bin/env bash 
 #-----------------------------------------------------------------------
 # File:         fns-poladd
-version=1.0.0
+version=1.0.1
 # Licence:      GPL 2
 #
 # Description:  Adds or remove programs to/from polkit for gui view
@@ -10,17 +10,18 @@ version=1.0.0
 # Original:     Bresiyel 28-01-2012
 #
 # Created:      12/18/2014
-# Changed:      
+# Changed:      12/20/2014
 #-----------------------------------------------------------------------
 
 if [ `id -un` != "root" ];
 then
-    echo "`basename $0` needs root rights. You're not root, sorry. Exiting."
+    echo "`basename $0` needs root rights. You're not root, sorry. Exiting." >&2
     exit 1
 fi
 
 VERBOSE=false
 REMOVE=false
+POLICY_FILE="/usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy"
 
 ########################################################################
 # functions
@@ -69,8 +70,6 @@ verify()
         exit 1
     fi
     
-    exists
-    
     return
 }
 
@@ -79,9 +78,9 @@ verify()
 #-----------------------------------------------------------------------
 exists()
 {
-    if [ -e /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy ];
+    if [ -f $POLICY_FILE ];
     then
-        alreadyHere=$(cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$progAdd")
+        alreadyHere=$(cat $POLICY_FILE | grep "$progAdd")
         
         if [ "$alreadyHere" != "" ] && [ "$REMOVE" == "false" ];
         then
@@ -102,17 +101,15 @@ exists()
 #-----------------------------------------------------------------------
 createPolicyFile()
 {
-    if [ ! -e /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy ];
-    then
-        echo '<?xml version="1.0" encoding="UTF-8"?>
+	echo '<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC
   "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
   "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 <policyconfig>
   <vendor>The PolicyKit Project</vendor>
   <vendor_url>http://hal.freedesktop.org/docs/PolicyKit/</vendor_url>
-</policyconfig>' > /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy
-    fi
+</policyconfig>' > $POLICY_FILE
+
     return
 }
 
@@ -121,12 +118,12 @@ createPolicyFile()
 #-----------------------------------------------------------------------
 addProgram()
 {
-    if [ ! -e /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy ];
+    if [ ! -f $POLICY_FILE ];
     then
         createPolicyFile
     fi
     
-    sed -i 's_</policyconfig>__' /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy
+    sed -i 's_</policyconfig>__' $POLICY_FILE
     echo "  <action id=\"org.freedesktop.policykit.pkexec."$progAdd"\">
     <description>Run "$progAdd"</description>
     <message>Authentication is required to run "$progAdd"</message>
@@ -138,7 +135,7 @@ addProgram()
     <annotate key=\"org.freedesktop.policykit.exec.path\">"$progLoc"</annotate>
     <annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>
   </action>
-</policyconfig>" >> /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy
+</policyconfig>" >> $POLICY_FILE
 
     return
 }
@@ -148,7 +145,7 @@ addProgram()
 #-----------------------------------------------------------------------
 removeProgram()
 {
-    if [ -e /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy ];
+    if [ -f $POLICY_FILE ];
     then
         echo "  <action id=\"org.freedesktop.policykit.pkexec."$progAdd"\">
     <description>Run "$progAdd"</description>
@@ -160,13 +157,12 @@ removeProgram()
     </defaults>
     <annotate key=\"org.freedesktop.policykit.exec.path\">"$progLoc"</annotate>
     <annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>
-  </action>
-" >> /tmp/delete_pol.txt
-        cp -f /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy.bak
-        diff -u /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy.bak \
+  </action>" >> /tmp/delete_pol.txt
+        cp -f $POLICY_FILE $POLICY_FILE.bak
+        diff -u $POLICY_FILE.bak \
                 /tmp/delete_pol.txt | sed '/^---/d;/^+++/d;/^@@/d;/^ /d' | sed 's/^-//' \
-                > /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy
-        rm -f /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy.bak
+                > $POLICY_FILE
+        rm -f $POLICY_FILE.bak
         rm -f /tmp/delete_pol.txt
     fi
     return
@@ -247,4 +243,4 @@ else
     addProgram
 fi
 
-exit
+exit 0
