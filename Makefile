@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.2.1
+# Version:      2.2.2
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      12/21/2014
+# Changed:      12/30/2014
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -39,7 +39,7 @@ xdgdir		= $(datadir)/desktop-directories
 themesdir 	= $(datadir)/themes
 userdir		= ~
 fnsuserdir	= $(userdir)/.$(package)
-perlsitedir := $(shell perl -le 'foreach (@INC) {print $$_ if m/site_perl$$/;}')
+perlsitedir := $(shell perl -le 'foreach (@INC) {print $$_ if m/\/usr\/local\/lib\/(site_perl|perl5)$$/;}')
 
 ifeq ($(local),yes)
 	themesdir = $(userdir)/.themes
@@ -590,7 +590,19 @@ prepare-rpm:
 		if test ! -f "~/.rpmmacros"; then \
 			echo "%_topdir /home/$(id)/redhat" > ~/.rpmmacros; \
 		fi; \
+		sed -i "s#_perlsitedir#_perlsitedir $(perlsitedir)#" rpm/fvwm-nightshade.spec; \
 		sed -i "s/Version:.*/Version:\t$(version)/" rpm/fvwm-nightshade.spec; \
+		if test "`rpm -q yum|cut -d '-' -f -1`" == "yum"; then \
+			if test "`cat /etc/*release |grep ^NAME |cut -d '=' -f2`" != "fedora"; then \
+				if test "`cat /etc/*release |grep VERSION_ID |cut -d '=' -f2`" -lt "7"; then \
+					sed -i "s/^Requires:\tcpupower/Requires:\tcpufrequtils/" rpm/fvwm-nightshade.spec; \
+				else \
+					sed -i "s/^Requires:\tcpupower/Requires:\tkernel-tools/" rpm/fvwm-nightshade.spec; \
+				fi; \
+			else \
+				sed -i "s/^Requires:\tcpupower/Requires:\tkernel-tools/" rpm/fvwm-nightshade.spec; \
+			fi; \
+		fi; \
 		srcdir=`rpmbuild --showrc |grep " _topdir" |cut -f2`/SOURCES; \
 		mkdir -p $$srcdir; \
 		cp $(distdir).tar.gz $$srcdir; \
