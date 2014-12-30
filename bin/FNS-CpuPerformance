@@ -7,16 +7,16 @@ use File::Copy qw(copy);
 
 #-------------------------------------------------------------------------
 # File:         fns-cpu-performance
-my $Version =   '2.0.1';
+my $Version =   '2.0.2';
 # Licence:      GPL 2
 #
-# Description:  Perl script to configure cpufreq or cpupowermon based on
+# Description:  Perl script to configure cpufreq or cpupower based on
 #               FNS-Script-CpuPerformance by Bernhard Popp
 #
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      11/29/2014
-# Changed:      12/19/2014
+# Changed:      12/30/2014
 #-------------------------------------------------------------------------
 
 
@@ -28,6 +28,9 @@ SimpleGtk2::use_gettext("fns-cpu-performance", "$ENV{FVWM_USERDIR}/locale:$ENV{F
 # FNS userdir
 my $FVWM_USERDIR = "$ENV{FVWM_USERDIR}";
 
+# FNS systemdir
+my $FNS_SYSTEMDIR = "$ENV{FNS_SYSTEMDIR}";
+
 # governor file path
 my $gov_file = "$FVWM_USERDIR/.governor";
 
@@ -36,926 +39,969 @@ my $scaler = &get_scaler();
 
 my $values_changed = 0;
 
-# get informations from /proc/cpuinfo
-my $cpu_Vendor = &get_cpu_infos("vendor_id");
-my @cpu_Model = &get_cpu_infos("model name", 30, 2);
-my $cpu_count = &get_cpu_infos("cpu cores");
-my $cpu_cache = &get_cpu_infos("cache size");
-my $cpu_bogo = &get_cpu_infos("bogomips");
-my $cpu_siblings = &get_cpu_infos("siblings");
-
-# get information about the governors for common tab
-# use the first cpu with the assumption that those values for each cpu equal
-my @governors = &get_governor_info('governors', 0);
-my @frequencies = &get_governor_info('frequencies', 0);
-my $min_frequency = &get_governor_info('min_freq', 0);
-my $max_frequency = &get_governor_info('max_freq', 0);
-
-# config state constants
-use constant {
-    DEFAULT => 0,
-    SET     => 1
-};
-
-# config hash. Will be built while GUI is creating. Entries looks like
-#"key" => ['value', DEFAULT, 'start_value']
-my %config = ();
-
-########################################################################
-# Common functions
-########################################################################
-
-#-----------------------------------------------------------------------
-# find the available scaler. Supported: cpufreq and cpupower
-#-----------------------------------------------------------------------
-sub get_scaler {
-    my $cpufreq = `which cpufreq-set |xargs basename 2>/dev/null` || undef;
-    my $cpupower = `which cpupower |xargs basename 2>/dev/null` || undef;
-    my $scaler = undef;
-    if (defined($cpufreq)) {$scaler = chomp($cpufreq);} 
-    elsif (defined($cpupower)) {$scaler = chomp($cpupower);}
-    return $scaler;
+# check if a cpufreq driver is allready active
+my $driver_info = &get_governor_info('driver', 0);
+if ($driver_info =~ /unknown/) {
+    # create error dialog
+    my $dialog = SimpleGtk2->new_window(  Name => 'errorDialog', 
+                            Size => [360, 125],
+                            ThemeIcon => 'gtk-dialog-warning',
+                            Title => "Error");
+    $dialog->add_signal_handler('errorDialog', 'delete_event', sub {Gtk2->main_quit;});
+    
+    $dialog->add_image(Name => 'image1', 
+                Pos => [10, 10], 
+                Stock => ['gtk-dialog-warning']);
+    
+    $dialog->add_label( Name => 'labelError', 
+            Pos     => [80, 10], 
+            Title   => "Error !",
+            Color   => ["Red"],
+            Font    => [undef, 14, undef]);
+    
+    $dialog->add_label( Name => 'labelMessage', 
+            Pos     => [80, 40], 
+            Title   => "No or unknown cpufreq driver is active!\nFNS Cpu Performance not usable.");
+    
+    $dialog->add_button( Name => 'exitButton', 
+            Pos     => [135, 85], 
+            Size    => [90, 25], 
+            Title   => "Exit");
+    $dialog->add_signal_handler('exitButton', 'clicked', sub {Gtk2->main_quit;});
 }
+else {
+    # get informations from /proc/cpuinfo
+    my $cpu_Vendor = &get_cpu_infos("vendor_id");
+    my @cpu_Model = &get_cpu_infos("model name", 30, 2);
+    my $cpu_count = &get_cpu_infos("cpu cores");
+    my $cpu_cache = &get_cpu_infos("cache size");
+    my $cpu_bogo = &get_cpu_infos("bogomips");
+    
+    # get information about the governors for common tab
+    # use the first cpu with the assumption that those values for each cpu equal
+    my @governors = &get_governor_info('governors', 0);
+    my @frequencies = &get_governor_info('frequencies', 0);
+    my $min_frequency = &get_governor_info('min_freq', 0);
+    my $max_frequency = &get_governor_info('max_freq', 0);
+
+    # config state constants
+    use constant {
+        DEFAULT => 0,
+        SET     => 1
+    };
+
+    # config hash. Will be built while GUI is creating. Entries looks like
+    #"key" => ['value', DEFAULT, 'start_value']
+    my %config = ();
+
+    ########################################################################
+    # Common functions
+    ########################################################################
+
+    #-----------------------------------------------------------------------
+    # find the available scaler. Supported: cpufreq and cpupower
+    #-----------------------------------------------------------------------
+    sub get_scaler {
+        my $cpufreq = undef;
+        if (`which cpufreq-set &> /dev/null`) {
+            $cpufreq = "cpufreq-set";
+        }
+        my $cpupower = undef;
+        if (`which cpupower &> /dev/null`) {
+            $cpufreq = "cpupower";
+        }
+        my $scaler = undef;
+        if (defined($cpufreq)) {$scaler = chomp($cpufreq);} 
+        elsif (defined($cpupower)) {$scaler = chomp($cpupower);}
+        return $scaler;
+    }
 
 
-#-----------------------------------------------------------------------
-# Get a config value
-# get_config_value(key, index)
-#-----------------------------------------------------------------------
-sub get_config_value(@) {
-    my ($key, $index) = @_;
-    $index = 0 unless defined($index);
-    my $value = undef;
-    $value = $config{$key}[$index] if (defined($config{$key}));
-    return $value;
-}
+    #-----------------------------------------------------------------------
+    # Get a config value
+    # get_config_value(key, index)
+    #-----------------------------------------------------------------------
+    sub get_config_value(@) {
+        my ($key, $index) = @_;
+        $index = 0 unless defined($index);
+        my $value = undef;
+        $value = $config{$key}[$index] if (defined($config{$key}));
+        return $value;
+    }
 
 
-#-----------------------------------------------------------------------
-# Set a config value
-# set_config_value(key, value, index)
-#-----------------------------------------------------------------------
-sub set_config_value(@) {
-    my ($key, $value, $index) = @_;
-    unless (defined($index)) {
-        $config{$key}[0] = $value;
-        # set to changed (1)
-        $config{$key}[1] = SET;
-        $values_changed = 1;
-        &set_apply_button_active($values_changed);
-    } else {
-        unless ($index == DEFAULT) {
-            $config{$key}[$index] = $value;
+    #-----------------------------------------------------------------------
+    # Set a config value
+    # set_config_value(key, value, index)
+    #-----------------------------------------------------------------------
+    sub set_config_value(@) {
+        my ($key, $value, $index) = @_;
+        unless (defined($index)) {
+            $config{$key}[0] = $value;
+            # set to changed (1)
+            $config{$key}[1] = SET;
+            $values_changed = 1;
+            &set_apply_button_active($values_changed);
         } else {
-            $config{$key} = [$value, DEFAULT, $value];
-        }
-    }
-}
-
-
-#-----------------------------------------------------------------------
-# Check if any parameter has changed since start. Returns 1 if yes
-#-----------------------------------------------------------------------
-sub isAllSet2Default {
-    my $rc = 0;
-    foreach my $key (keys %config) {
-        if ($config{$key}[1] == SET) {$rc = SET;}
-    }
-    return $rc;
-}
-
-
-#-----------------------------------------------------------------------
-# Get information strings from /proc/cpuinfo
-# get_cpu_infos ('searchstring'[, sentence_length, count_of_sentences])
-#-----------------------------------------------------------------------
-sub get_cpu_infos {
-    my ($search_str, $char_count, $str_parts) = @_;
-    my $cmd1 = "LANG=C cat /proc/cpuinfo | grep -m1 '";
-    my $cmd2 = "'| cut -d\":\" -f2 | sed -e 's/^\\s*//g'";
-    my $cmd = $cmd1 . $search_str . $cmd2;
-    my @result = split(' ', `$cmd`);
-    # if char_count is given try to split it into x string parts
-    if (defined($char_count)) {
-        unless (defined($str_parts)) {$str_parts = 1;}
-        my @sentences;
-        my $i = 0;
-        my $word_count = 0;
-        while ($i < $str_parts) {
-            my $chars = 0;
-            foreach my $word (@result[$word_count..$#result]) {
-                $chars = $chars + length($word);
-                if ($chars < $char_count) {
-                    unless (defined($sentences[$i])) {$sentences[$i] = '';}
-                    $sentences[$i] = $sentences[$i] . $word;
-                    # add space
-                    if ($chars <= $char_count-1) {
-                        $sentences[$i] = $sentences[$i] . ' ';
-                        $chars += 1;
-                    }
-                    $word_count += 1;
-                } else {
-                    last;
-                }
-            }
-            $i += 1;
-        }
-        return @sentences;
-    } else {
-        return join(' ', @result);
-    }
-}
-
-
-#-----------------------------------------------------------------------
-# get information about the different parts for the governor
-# get_governor_info ('searchstring', 'core')
-# core starts with 0 !
-#-----------------------------------------------------------------------
-sub get_governor_info {
-    my ($wanted, $core) = @_;
-    my $scmd;
-    my $info = "frequency-info ";
-    my $all = "-c all ";
-    my $cmd;
-    my @info_out;
-    if ($scaler eq 'cpupower') {
-        $scmd = "$scaler ";
-    } else {
-        $scmd = "cpufreq-info ";
-        $info = "";
-        $all = "";
-    }
-    if ($wanted eq "governors") {
-        if ("$core" eq "all") {$core = 0;}
-        $cmd = "LANG=C $scmd -c $core $info -g";
-        my @governors = split(' ', `$cmd`);
-        return @governors;
-    }
-    elsif ($wanted eq "governor") {
-        if ("$core" eq "all") {
-            unless (&is_equal('governor')) {return 'ondemand';}
-            else {$core = 0;}
-        }
-        $cmd = "LANG=C $scmd -c $core $info -p";
-        my @governor = split(' ', `$cmd`);
-        return $governor[2];
-    }
-    elsif ($wanted eq "frequencies") {
-        $cmd = "LANG=C $scmd $all $info | grep 'steps:'";
-        my @frequencies = split('\n', `$cmd`);
-        @frequencies = split(':', $frequencies[$core]);
-        $frequencies[1] =~ s/\s//g; # remove spaces
-        $frequencies[1] =~ s/(G|M|k)/,$1/g; # add spaces before G|M|kHz again :P
-        @frequencies = split(',', $frequencies[1]);
-        my $i = 0;
-        my $j = 0;
-        my $factor;
-        my @new_freqs;
-        while ($i <= $#frequencies) {
-            if ($frequencies[$i+1] =~ m/^T/) {$factor = 10**(6);}
-            elsif ($frequencies[$i+1] =~ m/^G/) {$factor = 10**(3);}
-            elsif ($frequencies[$i+1] =~ m/^M/) {$factor = 10**(0);}
-            elsif ($frequencies[$i+1] =~ m/^k/) {$factor = 10**(-3);}
-            if ($i == 0) {
-                # get the max freq over this way because it is in kHz
-                # In times of GHz eg 2001 MHz won't show
-                @new_freqs = split(' ', `LANG=C $scmd -c $core $info -l`);
-                $new_freqs[$j] = $new_freqs[1]*10**(-3) . 'MHz';
+            unless ($index == DEFAULT) {
+                $config{$key}[$index] = $value;
             } else {
-                $new_freqs[$j] =  $frequencies[$i]*$factor . 'MHz';
+                $config{$key} = [$value, DEFAULT, $value];
             }
-            $i += 2;
-            $j += 1;
-        }
-        return @new_freqs;
-    }
-    elsif ($wanted eq "min_freq") {
-        if ("$core" eq "all") {$core = 0;}
-        $cmd = "LANG=C $scmd -c $core $info -l";
-        my @min_freq = split(' ', `$cmd`);
-        $min_freq[0] = $min_freq[0]/1000 . 'MHz';
-        return $min_freq[0];
-    }
-    elsif ($wanted eq "max_freq") {
-        if ("$core" eq "all") {$core = 0;}
-        $cmd = "LANG=C $scmd -c $core $info -l";
-        my @max_freq = split(' ', `$cmd`);
-        $max_freq[1] = $max_freq[1]/1000 . 'MHz';
-        return $max_freq[1];
-    }
-    elsif ($wanted eq "info") {
-        if ("$core" eq "all") {$cmd = "$scmd $all $info";}
-        else {$cmd = "$scmd -c $core $info";}
-        return `$cmd`;
-    }
-}
-
-
-#-----------------------------------------------------------------------
-# Check if all settings or special values equal in cores
-# is_equal('all|governor|min_freq|max_freq', 'inverted')
-#-----------------------------------------------------------------------
-sub is_equal {
-    my ($value, $inverted) = @_;
-    my $locked = 1;
-    my $gov = &get_governor_info('governor', 0);
-    my $min = &get_governor_info('min_freq', 0);
-    my $max = &get_governor_info('max_freq', 0);
-    for (my $a = 1; $a < $cpu_count; $a = $a + 1) {
-        if ($value eq 'all' or $value eq 'governor') {
-            if (&get_governor_info('governor', $a) ne $gov) {$locked = 0;}
-        }
-        if ($value eq 'all' or $value eq 'min_freq') {
-            if (&get_governor_info('min_freq', $a) ne $min) {$locked = 0;}
-        }
-        if ($value eq 'all' or $value eq 'max_freq') {
-            if (&get_governor_info('max_freq', $a) ne $max) {$locked = 0;}
         }
     }
-    if (defined($inverted)) {
-        if ($locked) {$locked = 0;}
-        else {$locked = 1;}
+
+
+    #-----------------------------------------------------------------------
+    # Check if any parameter has changed since start. Returns 1 if yes
+    #-----------------------------------------------------------------------
+    sub isAllSet2Default {
+        my $rc = 0;
+        foreach my $key (keys %config) {
+            if ($config{$key}[1] == SET) {$rc = SET;}
+        }
+        return $rc;
     }
-    return $locked;
-}
 
 
-#-----------------------------------------------------------------------
-# Get array index for a word
-# get_index_of(word, array)
-#-----------------------------------------------------------------------
-sub get_index_of(@) {
-    my ($word, @array) = @_;
-    my ($index) = grep { $array[$_] =~ /$word/ } 0..$#array;
-    return $index;
-}
-
-
-########################################################################
-# Main
-########################################################################
-
-
-########################################################################
-# Graphical User Interface + corresponding functions
-########################################################################
-
-#-------------------------------------------------------------------------
-# Toplevel window
-#-------------------------------------------------------------------------
-my $win = SimpleGtk2->new_window(  Name => 'mainWindow', 
-                        Version => $Version,
-                        Size => [500, 350], 
-                        Title => "FNS Cpu Performance");
-$win->add_signal_handler('mainWindow', 'delete_event', \&check_before_quit);
-
-
-#-----------------------------------------------------------------------
-# CPU Information Frame
-#-----------------------------------------------------------------------
-$win->add_frame( Name => 'CpuInfoFrame', 
-        Pos     => [10, 10], 
-        Size    => [480, 110], 
-        Title   => ' CPU Information ');
-
-
-# Cpu model ------------------------------------------------------------
-$win->add_label( Name => 'labelModel', 
-        Pos     => [10, 15], 
-        Title   => "Model:", 
-        Frame   => 'CpuInfoFrame');
-
-$win->add_label( Name => 'labelModelContent1', 
-        Pos     => [120, 15], 
-        Title   => $cpu_Model[0],
-        Frame   => 'CpuInfoFrame');
-
-$win->add_label( Name => 'labelModelContent1', 
-        Pos     => [120, 35], 
-        Title   => $cpu_Model[1] || '', 
-        Frame   => 'CpuInfoFrame');
-
-
-# Cpu count ------------------------------------------------------------
-$win->add_label( Name => 'labelCpuCount', 
-        Pos     => [10, 55], 
-        Title   => "CPU Count:", 
-        Frame   => 'CpuInfoFrame');
-
-$win->add_label( Name => 'labelCpuCountContent', 
-        Pos     => [120, 55], 
-        Title   => $cpu_count, 
-        Frame   => 'CpuInfoFrame');
-
-
-# Cpu manufacturer -----------------------------------------------------
-$win->add_label( Name => 'labelManufacturer', 
-        Pos     => [10, 75], 
-        Title   => "Manufacturer:", 
-        Frame   => 'CpuInfoFrame');
-
-$win->add_label( Name => 'labelManufacturerContent', 
-        Pos     => [120, 75], 
-        Title   => $cpu_Vendor, 
-        Frame   => 'CpuInfoFrame');
-
-
-# Picture --------------------------------------------------------------
-$win->add_image( Name => 'image1', 
-        Pos => [345, 10], 
-        Size => [120, 80], 
-        Path => './GovernorLogo.png',
-        Frame => 'CpuInfoFrame');
-
-
-#-----------------------------------------------------------------------
-# Core Notebook
-#-----------------------------------------------------------------------
-
-$win->add_notebook( Name => 'NB1', 
-                    Pos => [10, 130], 
-                    Size => [480, 160], 
-                    Tabs => 'top', 
-                    scroll => 1, 
-                    Popup => 1);
-
-
-#-----------------------------------------------------------------------
-# Notebook page 1 for all cpus
-#-----------------------------------------------------------------------
-
-$win->add_nb_page(Name => "NB_page0", 
-        Pos_n   => 0, 
-        Title   => "Joined",
-        Tip     => "This is the tab for modifying ALL cores together if they're not unlocked.",
-        Notebook => 'NB1');
-
-
-#-----------------------------------------------------------------------
-# Core Information Frame
-#-----------------------------------------------------------------------
-$win->add_frame( Name => 'CoreInfoFrameCommon', 
-        Pos     => [10, 10], 
-        Size    => [160, 110], 
-        Title   => ' Information to Cores ',
-        Frame => 'NB_page0');
-
-
-# L2 Cache Common ------------------------------------------------------
-$win->add_label( Name => 'labelL2CacheCommon', 
-        Pos     => [10, 15], 
-        Title   => "L2 Cache:", 
-        Frame   => 'CoreInfoFrameCommon');
-
-$win->add_label( Name => 'labelL2CacheContentCommon', 
-        Pos     => [90, 15], 
-        Title   => $cpu_cache, 
-        Frame   => 'CoreInfoFrameCommon');
-
-
-# Bogomips Common ------------------------------------------------------
-$win->add_label( Name => 'labelBogomipsCommon', 
-        Pos     => [10, 35], 
-        Title   => "Bogomips:", 
-        Frame   => 'CoreInfoFrameCommon');
-
-$win->add_label( Name => 'labelBogomipsContentCommon', 
-        Pos     => [90, 35], 
-        Title   => $cpu_bogo, 
-        Frame   => 'CoreInfoFrameCommon');
-
-
-# Show More Common -----------------------------------------------------
-$win->add_button( Name => 'ButtonShowMoreCommon', 
-        Pos     => [30, 62], 
-        Size    => [90, 25], 
-        Title   => "More", 
-        Tip     => "Show information about the cpu.", 
-        Frame   => 'CoreInfoFrameCommon');
-$win->add_signal_handler('ButtonShowMoreCommon', 'clicked', \&open_text_box);
-
-
-#-----------------------------------------------------------------------
-# Notebook page rest
-#-----------------------------------------------------------------------
-
-# Cores Unlocked -------------------------------------------------------
-my $enabled_if_locked = &is_equal('all');
-my $disabled_if_locked = &is_equal('all', 'inverted');
-
-&set_config_value('cores_unlocked', $disabled_if_locked, DEFAULT);
-$win->add_check_button( Name => 'checkCoresUnlocked', 
-        Pos     => [198, 7], 
-        Title   => 'Unlock cores', 
-        Tip     => "Unlock cores to set governor and frequencies separately.", 
-        Active  => $disabled_if_locked, 
-        Frame   => 'NB_page0');
-$win->add_signal_handler('checkCoresUnlocked', 'toggled', \&check_cores_unlocked_on);
-
-sub check_cores_unlocked_on {
-    # get current state
-    my $check_button_state = $win->is_active('checkCoresUnlocked');
-    my $default = undef;
-    if ($check_button_state == 0 and (&is_equal('all') == 0 or &are_settings_equal() == 0)) {
-        my $response = $win->show_msg_dialog('warning', 'yes-no', "All cores will set to common values! Continue anyway?");
-        if ($response eq 'no') {
-            $win->set_value('checkCoresUnlocked', Active => 0);
-            return;
+    #-----------------------------------------------------------------------
+    # Get information strings from /proc/cpuinfo
+    # get_cpu_infos ('searchstring'[, sentence_length, count_of_sentences])
+    #-----------------------------------------------------------------------
+    sub get_cpu_infos {
+        my ($search_str, $char_count, $str_parts) = @_;
+        my $cmd1 = "LANG=C cat /proc/cpuinfo | grep -m1 '";
+        my $cmd2 = "'| cut -d\":\" -f2 | sed -e 's/^\\s*//g'";
+        my $cmd = $cmd1 . $search_str . $cmd2;
+        my @result = split(' ', `$cmd`);
+        # if char_count is given try to split it into x string parts
+        if (defined($char_count)) {
+            unless (defined($str_parts)) {$str_parts = 1;}
+            my @sentences;
+            my $i = 0;
+            my $word_count = 0;
+            while ($i < $str_parts) {
+                my $chars = 0;
+                foreach my $word (@result[$word_count..$#result]) {
+                    $chars = $chars + length($word);
+                    if ($chars < $char_count) {
+                        unless (defined($sentences[$i])) {$sentences[$i] = '';}
+                        $sentences[$i] = $sentences[$i] . $word;
+                        # add space
+                        if ($chars <= $char_count-1) {
+                            $sentences[$i] = $sentences[$i] . ' ';
+                            $chars += 1;
+                        }
+                        $word_count += 1;
+                    } else {
+                        last;
+                    }
+                }
+                $i += 1;
+            }
+            return @sentences;
         } else {
-            &join_settings();
-            $default = DEFAULT;
+            return join(' ', @result);
         }
     }
-    if (defined($win->exist_object('labelGovernorCommon' . $cpu_count))) {
-        $win->set_sensitive('labelGovernorCommon', !$check_button_state);
-        $win->set_sensitive('comboGovernorCommon', !$check_button_state);
-        $win->set_sensitive('labelMinFreqCommon', !$check_button_state);
-        $win->set_sensitive('comboMinFreqCommon', !$check_button_state);
-        $win->set_sensitive('labelMaxFreqCommon', !$check_button_state);
-        $win->set_sensitive('comboMaxFreqCommon', !$check_button_state);
-        for (my $a = 1; $a <= $cpu_count; $a = $a + 1) {
-            $win->set_sensitive('labelGovernor' . $a, $check_button_state);
-            $win->set_sensitive('comboGovernor' . $a, $check_button_state);
-            $win->set_sensitive('labelMinFreq' . $a, $check_button_state);
-            $win->set_sensitive('comboMinFreq' . $a, $check_button_state);
-            $win->set_sensitive('labelMaxFreq' . $a, $check_button_state);
-            $win->set_sensitive('comboMaxFreq' . $a, $check_button_state);
+
+
+    #-----------------------------------------------------------------------
+    # get information about the different parts for the governor
+    # get_governor_info ('searchstring', 'core')
+    # core starts with 0 !
+    #-----------------------------------------------------------------------
+    sub get_governor_info {
+        my ($wanted, $core) = @_;
+        my $scmd;
+        my $info = "frequency-info ";
+        my $all = "-c all ";
+        my $cmd;
+        my @info_out;
+        if ($scaler eq 'cpupower') {
+            $scmd = "$scaler ";
+        } else {
+            $scmd = "cpufreq-info ";
+            $info = "";
+            $all = "";
+        }
+        if ($wanted eq "governors") {
+            if ("$core" eq "all") {$core = 0;}
+            $cmd = "LANG=C $scmd -c $core $info -g";
+            my @governors = split(' ', `$cmd`);
+            return @governors;
+        }
+        elsif ($wanted eq "governor") {
+            if ("$core" eq "all") {
+                unless (&is_equal('governor')) {return 'ondemand';}
+                else {$core = 0;}
+            }
+            $cmd = "LANG=C $scmd -c $core $info -p";
+            my @governor = split(' ', `$cmd`);
+            return $governor[2];
+        }
+        elsif ($wanted eq "frequencies") {
+            $cmd = "LANG=C $scmd $all $info | grep 'steps:'";
+            my @frequencies = split('\n', `$cmd`);
+            @frequencies = split(':', $frequencies[$core]);
+            $frequencies[1] =~ s/\s//g; # remove spaces
+            $frequencies[1] =~ s/(G|M|k)/,$1/g; # add spaces before G|M|kHz again :P
+            @frequencies = split(',', $frequencies[1]);
+            my $i = 0;
+            my $j = 0;
+            my $factor;
+            my @new_freqs;
+            while ($i <= $#frequencies) {
+                if ($frequencies[$i+1] =~ m/^T/) {$factor = 10**(6);}
+                elsif ($frequencies[$i+1] =~ m/^G/) {$factor = 10**(3);}
+                elsif ($frequencies[$i+1] =~ m/^M/) {$factor = 10**(0);}
+                elsif ($frequencies[$i+1] =~ m/^k/) {$factor = 10**(-3);}
+                if ($i == 0) {
+                    # get the max freq over this way because it is in kHz
+                    # In times of GHz eg 2001 MHz won't show
+                    @new_freqs = split(' ', `LANG=C $scmd -c $core $info -l`);
+                    $new_freqs[$j] = $new_freqs[1]*10**(-3) . 'MHz';
+                } else {
+                    $new_freqs[$j] =  $frequencies[$i]*$factor . 'MHz';
+                }
+                $i += 2;
+                $j += 1;
+            }
+            return @new_freqs;
+        }
+        elsif ($wanted eq "min_freq") {
+            if ("$core" eq "all") {$core = 0;}
+            $cmd = "LANG=C $scmd -c $core $info -l";
+            my @min_freq = split(' ', `$cmd`);
+            $min_freq[0] = $min_freq[0]/1000 . 'MHz';
+            return $min_freq[0];
+        }
+        elsif ($wanted eq "max_freq") {
+            if ("$core" eq "all") {$core = 0;}
+            $cmd = "LANG=C $scmd -c $core $info -l";
+            my @max_freq = split(' ', `$cmd`);
+            $max_freq[1] = $max_freq[1]/1000 . 'MHz';
+            return $max_freq[1];
+        }
+        elsif ($wanted eq "info") {
+            if ("$core" eq "all") {$cmd = "$scmd $all $info";}
+            else {$cmd = "$scmd -c $core $info";}
+            return `$cmd`;
+        }
+        elsif ($wanted eq "driver") {
+            $cmd = "$scmd $info";
+            my @content = split(' ', `$cmd`);
+            $content[1] =~ s/\s//g; # remove spaces
+            $content[1] = chomp($content[1]);
+            return $content[1];
         }
     }
-    &set_config_value('cores_unlocked', $check_button_state, $default);
-    &set_apply_button_active(&isAllSet2Default());
-}
 
-sub are_settings_equal {
-    my $equal = 1;
-    for (my $a = 1; $a <= $cpu_count; $a = $a + 1) {
-        if ($win->get_value('comboGovernor' . $a, 'active') != $win->get_value('comboGovernorCommon', 'active')) {
-            $equal = 0;}
-        if ($win->get_value('comboMinFreq' . $a, 'active') != $win->get_value('comboMinFreqCommon', 'active')) {
-            $equal = 0;}
-        if ($win->get_value('comboMaxFreq' . $a, 'active') != $win->get_value('comboMaxFreqCommon', 'active')) {
-            $equal = 0;}
+
+    #-----------------------------------------------------------------------
+    # Check if all settings or special values equal in cores
+    # is_equal('all|governor|min_freq|max_freq', 'inverted')
+    #-----------------------------------------------------------------------
+    sub is_equal {
+        my ($value, $inverted) = @_;
+        my $locked = 1;
+        my $gov = &get_governor_info('governor', 0);
+        my $min = &get_governor_info('min_freq', 0);
+        my $max = &get_governor_info('max_freq', 0);
+        for (my $a = 1; $a < $cpu_count; $a = $a + 1) {
+            if ($value eq 'all' or $value eq 'governor') {
+                if (&get_governor_info('governor', $a) ne $gov) {$locked = 0;}
+            }
+            if ($value eq 'all' or $value eq 'min_freq') {
+                if (&get_governor_info('min_freq', $a) ne $min) {$locked = 0;}
+            }
+            if ($value eq 'all' or $value eq 'max_freq') {
+                if (&get_governor_info('max_freq', $a) ne $max) {$locked = 0;}
+            }
+        }
+        if (defined($inverted)) {
+            if ($locked) {$locked = 0;}
+            else {$locked = 1;}
+        }
+        return $locked;
     }
-    return $equal;
-}
 
-sub join_settings {
-    for (my $a = 1; $a <= $cpu_count; $a = $a + 1) {
-        $win->set_value('comboGovernor' . $a, active => $win->get_value('comboGovernorCommon', 'active'));
-        $win->set_value('comboMinFreq' . $a, active => $win->get_value('comboMinFreqCommon', 'active'));
-        $win->set_value('comboMaxFreq' . $a, active => $win->get_value('comboMaxFreqCommon', 'active'));
-        # set it in the config to default
-        &set_config_value('governor' . $a, $win->get_title('comboGovernorCommon'), DEFAULT);
-        &set_config_value('min_freq' . $a, $win->get_title('comboMinFreqCommon'), DEFAULT);
-        &set_config_value('max_freq' . $a, $win->get_title('comboMaxFreqCommon'), DEFAULT);
+
+    #-----------------------------------------------------------------------
+    # Get array index for a word
+    # get_index_of(word, array)
+    #-----------------------------------------------------------------------
+    sub get_index_of(@) {
+        my ($word, @array) = @_;
+        my ($index) = grep { $array[$_] =~ /$word/ } 0..$#array;
+        return $index;
     }
-}
 
 
-# Governor Common ------------------------------------------------------
-$win->add_label( Name => 'labelGovernorCommon', 
-        Pos     => [200, 40], 
-        Title   => "Governor:",
-        Sens    => $enabled_if_locked,
-        Frame   => 'NB_page0');
-
-my $index = &get_index_of(&get_governor_info('governor', "all"), @governors);
-&set_config_value('governor_common', $governors[$index], DEFAULT);
-$win->add_combo_box( Name => 'comboGovernorCommon', 
-        Pos     => [330, 35], 
-        Size    => [130, 25], 
-        Tip     =>  $win->translate("Sets the global used governor (if cores not unlocked). ") . 
-                    $win->translate("The following governors are available:\n\n\
-                    Performance:\nThis governor sets the CPU statically to the highest frequency within the borders \
-                    of Min Frequency and Max Frequency. Consequently, saving power is not the focus of this governor.\n\n\
-                    Powersave:\nThe CPU frequency is statically set to the lowest possibility. This can have severe \
-                    impact on the performance, as the system will never rise above this frequency no matter how busy \
-                    the processors are.\nHowever, using this governor often does not lead to the expected power \
-                    savings as the highest savings can usually be achieved at idle through entering C-states. Due \
-                    to running processes at the lowest frequency with the powersave governor, processes will take \
-                    longer to finish, thus prolonging the time for the system to enter any idle C-states.\n\n\
-                    On-demand:\nThe kernel implementation of a dynamic CPU frequency policy: The governor monitors \
-                    the processor utilization. As soon as it exceeds a certain threshold, the governor will set the \
-                    frequency to the highest available. If the utilization is less than the threshold, the next \
-                    lowest frequency is used. If the system continues to be underutilized, the frequency is again \
-                    reduced until the lowest available frequency is set.\n\n\
-                    Conservative:\nSimilar to the on-demand implementation, this governor also dynamically adjusts \
-                    frequencies based on processor utilization, except that it allows for a more gradual increase in \
-                    power. If processor utilization exceeds a certain threshold, the governor does not immediately \
-                    switch to the highest available frequency (as the on-demand governor does), but only to next higher \
-                    frequency available.\n\n\
-                    Userspace:\nThis governor allows the user, or any userspace program running with UID 'root', to \
-                    set the CPU to a specific frequency. 'userspace' is not supported yet, but to get the same result \
-                    use governor 'powersave' and one of the frequencies in 'Min Frequency', or governor 'performance' \
-                    in combination with 'Max Frequency'."), 
-        Sens    => $enabled_if_locked,
-        Frame   => 'NB_page0', 
-        Data    => \@governors,
-        Start   => $index);
-$win->add_signal_handler('comboGovernorCommon', 'changed', sub {&set_config_value("governor_common",$win->get_title('comboGovernorCommon'));});
+    ########################################################################
+    # Main
+    ########################################################################
 
 
-# MinFreq Common -------------------------------------------------------
-$win->add_label( Name => 'labelMinFreqCommon', 
-        Pos     => [200, 70], 
-        Title   => "Min Frequency:", 
-        Sens    => $enabled_if_locked,
-        Frame   => 'NB_page0');
+    ########################################################################
+    # Graphical User Interface + corresponding functions
+    ########################################################################
 
-$index = &get_index_of(&get_governor_info('min_freq', "all"), @frequencies);
-&set_config_value('min_freq_common', $frequencies[$index], DEFAULT);
-$win->add_combo_box( Name => 'comboMinFreqCommon', 
-        Pos     => [330, 65], 
-        Size    => [130, 25], 
-        Tip     => "Sets the minimum used frequency from the range of available frequencies.", 
-        Frame   => 'NB_page0', 
-        Sens    => $enabled_if_locked,
-        Data    => \@frequencies,
-        Start   => $index);
-$win->add_signal_handler('comboMinFreqCommon', 'changed', sub {&set_config_value("min_freq_common",$win->get_title('comboMinFreqCommon'));});
+    #-------------------------------------------------------------------------
+    # Toplevel window
+    #-------------------------------------------------------------------------
+    my $win = SimpleGtk2->new_window(  Name => 'mainWindow', 
+                            Version => $Version,
+                            Size => [500, 350], 
+                            Title => "FNS Cpu Performance");
+    $win->add_signal_handler('mainWindow', 'delete_event', \&check_before_quit);
 
 
-# MaxFreq Common -------------------------------------------------------
-$win->add_label( Name => 'labelMaxFreqCommon', 
-        Pos     => [200, 100], 
-        Title   => "Max Frequency:", 
-        Sens    => $enabled_if_locked,
-        Frame   => 'NB_page0');
-
-$index = &get_index_of(&get_governor_info('max_freq', "all"), @frequencies);
-&set_config_value('max_freq_common', $frequencies[$index], DEFAULT);
-$win->add_combo_box( Name => 'comboMaxFreqCommon', 
-        Pos     => [330, 95], 
-        Size    => [130, 25], 
-        Tip     => "Sets the maximum used frequency from the range of available frequencies.", 
-        Frame   => 'NB_page0', 
-        Sens    => $enabled_if_locked,
-        Data    => \@frequencies,
-        Start   => $index);
-$win->add_signal_handler('comboMaxFreqCommon', 'changed', sub {&set_config_value("max_freq_common",$win->get_title('comboMaxFreqCommon'));});
+    #-----------------------------------------------------------------------
+    # CPU Information Frame
+    #-----------------------------------------------------------------------
+    $win->add_frame( Name => 'CpuInfoFrame', 
+            Pos     => [10, 10], 
+            Size    => [480, 110], 
+            Title   => ' CPU Information ');
 
 
-#-----------------------------------------------------------------------
-# build tabs per core
-#-----------------------------------------------------------------------
-for (my $a = 0; $a < $cpu_count; $a = $a + 1) {
-    my $nr = $a + 1;
+    # Cpu model ------------------------------------------------------------
+    $win->add_label( Name => 'labelModel', 
+            Pos     => [10, 15], 
+            Title   => "Model:", 
+            Frame   => 'CpuInfoFrame');
 
-    #-------------------------------------------------------------------
-    # Notebook page x for Core1
-    #-------------------------------------------------------------------
-    $win->add_nb_page(Name => "NB_page" . $nr, 
-            Pos_n   => $nr, 
-            Title   => $win->translate("Core ") . $nr, 
-            Tip     => $win->translate("This is the tab for modifying core ") . $nr . $win->translate("if unlocked at the joined tab."),
+    $win->add_label( Name => 'labelModelContent1', 
+            Pos     => [120, 15], 
+            Title   => $cpu_Model[0],
+            Frame   => 'CpuInfoFrame');
+
+    $win->add_label( Name => 'labelModelContent1', 
+            Pos     => [120, 35], 
+            Title   => $cpu_Model[1] || '', 
+            Frame   => 'CpuInfoFrame');
+
+
+    # Cpu count ------------------------------------------------------------
+    $win->add_label( Name => 'labelCpuCount', 
+            Pos     => [10, 55], 
+            Title   => "CPU Count:", 
+            Frame   => 'CpuInfoFrame');
+
+    $win->add_label( Name => 'labelCpuCountContent', 
+            Pos     => [120, 55], 
+            Title   => $cpu_count, 
+            Frame   => 'CpuInfoFrame');
+
+
+    # Cpu manufacturer -----------------------------------------------------
+    $win->add_label( Name => 'labelManufacturer', 
+            Pos     => [10, 75], 
+            Title   => "Manufacturer:", 
+            Frame   => 'CpuInfoFrame');
+
+    $win->add_label( Name => 'labelManufacturerContent', 
+            Pos     => [120, 75], 
+            Title   => $cpu_Vendor, 
+            Frame   => 'CpuInfoFrame');
+
+
+    # Picture --------------------------------------------------------------
+    $win->add_image( Name => 'image1', 
+            Pos => [345, 10], 
+            Size => [120, 80], 
+            Path => "$FNS_SYSTEMDIR/artwork/icons/GovernorLogo.png",
+            Frame => 'CpuInfoFrame');
+
+
+    #-----------------------------------------------------------------------
+    # Core Notebook
+    #-----------------------------------------------------------------------
+
+    $win->add_notebook( Name => 'NB1', 
+                        Pos => [10, 130], 
+                        Size => [480, 160], 
+                        Tabs => 'top', 
+                        scroll => 1, 
+                        Popup => 1);
+
+
+    #-----------------------------------------------------------------------
+    # Notebook page 1 for all cpus
+    #-----------------------------------------------------------------------
+
+    $win->add_nb_page(Name => "NB_page0", 
+            Pos_n   => 0, 
+            Title   => "Joined",
+            Tip     => "This is the tab for modifying ALL cores together if they're not unlocked.",
             Notebook => 'NB1');
 
 
-    #-------------------------------------------------------------------
+    #-----------------------------------------------------------------------
     # Core Information Frame
-    #-------------------------------------------------------------------
-    my $title = " " . $win->translate("Information to Core") . " $a ";
-    $win->add_frame( Name => 'CoreInfoFrame' . $nr, 
+    #-----------------------------------------------------------------------
+    $win->add_frame( Name => 'CoreInfoFrameCommon', 
             Pos     => [10, 10], 
             Size    => [160, 110], 
-            Title   => $title,
-            Frame => 'NB_page' . $nr);
-    
-    
-    # L2Cache ----------------------------------------------------------
-    $win->add_label( Name => 'labelL2Cache' . $nr, 
+            Title   => ' Information to Cores ',
+            Frame => 'NB_page0');
+
+
+    # L2 Cache Common ------------------------------------------------------
+    $win->add_label( Name => 'labelL2CacheCommon', 
             Pos     => [10, 15], 
             Title   => "L2 Cache:", 
-            Frame   => 'CoreInfoFrame' . $nr);
-    
-    $win->add_label( Name => 'labelL2CacheContent' . $nr, 
+            Frame   => 'CoreInfoFrameCommon');
+
+    $win->add_label( Name => 'labelL2CacheContentCommon', 
             Pos     => [90, 15], 
-            Title   => &get_cpu_infos("cache size"), 
-            Frame   => 'CoreInfoFrame' . $nr);
-    
-    
-    # Bogomips ---------------------------------------------------------
-    $win->add_label( Name => 'labelBogomips' . $nr, 
+            Title   => $cpu_cache, 
+            Frame   => 'CoreInfoFrameCommon');
+
+
+    # Bogomips Common ------------------------------------------------------
+    $win->add_label( Name => 'labelBogomipsCommon', 
             Pos     => [10, 35], 
             Title   => "Bogomips:", 
-            Frame   => 'CoreInfoFrame' . $nr);
-    
-    $win->add_label( Name => 'labelBogomipsContent' . $nr, 
+            Frame   => 'CoreInfoFrameCommon');
+
+    $win->add_label( Name => 'labelBogomipsContentCommon', 
             Pos     => [90, 35], 
-            Title   => &get_cpu_infos("bogomips"), 
-            Frame   => 'CoreInfoFrame' . $nr);
-    
-    
-    # Show More --------------------------------------------------------
-    $win->add_button( Name => 'ButtonShowMore' . $nr, 
+            Title   => $cpu_bogo, 
+            Frame   => 'CoreInfoFrameCommon');
+
+
+    # Show More Common -----------------------------------------------------
+    $win->add_button( Name => 'ButtonShowMoreCommon', 
             Pos     => [30, 62], 
             Size    => [90, 25], 
             Title   => "More", 
-            Tip     => "Show information about this core.", 
-            Frame   => 'CoreInfoFrame' . $nr);
-    $win->add_signal_handler('ButtonShowMore' . $nr, 'clicked', \&open_text_box, $a);
-    
-    
-    #-------------------------------------------------------------------
+            Tip     => "Show information about the cpu.", 
+            Frame   => 'CoreInfoFrameCommon');
+    $win->add_signal_handler('ButtonShowMoreCommon', 'clicked', \&open_text_box);
+
+
+    #-----------------------------------------------------------------------
     # Notebook page rest
-    #-------------------------------------------------------------------
+    #-----------------------------------------------------------------------
 
-    # Governor x -------------------------------------------------------
-    $win->add_label( Name => 'labelGovernor' . $nr, 
-            Pos     => [200, 30], 
-            Title   => "Governor:", 
-            Sens    => $disabled_if_locked,
-            Frame   => 'NB_page' . $nr);
-    
-    $index = &get_index_of(&get_governor_info('governor', $a), @governors);
-    &set_config_value('governor' . $nr, $governors[$index], DEFAULT);
-    $win->add_combo_box( Name => 'comboGovernor' . $nr, 
-            Pos     => [330, 25], 
-            Size    => [130, 25], 
-            Tip     => $win->translate("Sets the used governor (if cores unlocked). ") . 
-                       $win->translate("The following governors are available:\n\n\
-                       Performance:\nThis governor sets the CPU statically to the highest frequency within the borders \
-                       of Min Frequency and Max Frequency. Consequently, saving power is not the focus of this governor.\n\n\
-                       Powersave:\nThe CPU frequency is statically set to the lowest possibility. This can have severe \
-                       impact on the performance, as the system will never rise above this frequency no matter how busy \
-                       the processors are.\nHowever, using this governor often does not lead to the expected power \
-                       savings as the highest savings can usually be achieved at idle through entering C-states. Due \
-                       to running processes at the lowest frequency with the powersave governor, processes will take \
-                       longer to finish, thus prolonging the time for the system to enter any idle C-states.\n\n\
-                       On-demand:\nThe kernel implementation of a dynamic CPU frequency policy: The governor monitors \
-                       the processor utilization. As soon as it exceeds a certain threshold, the governor will set the \
-                       frequency to the highest available. If the utilization is less than the threshold, the next \
-                       lowest frequency is used. If the system continues to be underutilized, the frequency is again \
-                       reduced until the lowest available frequency is set.\n\n\
-                       Conservative:\nSimilar to the on-demand implementation, this governor also dynamically adjusts \
-                       frequencies based on processor utilization, except that it allows for a more gradual increase in \
-                       power. If processor utilization exceeds a certain threshold, the governor does not immediately \
-                       switch to the highest available frequency (as the on-demand governor does), but only to next higher \
-                       frequency available.\n\n\
-                       Userspace:\nThis governor allows the user, or any userspace program running with UID 'root', to \
-                       set the CPU to a specific frequency. 'userspace' is not supported yet, but to get the same result \
-                       use governor 'powersave' and one of the frequencies in 'Min Frequency', or governor 'performance' \
-                       in combination with 'Max Frequency'."),
-            Frame   => 'NB_page' . $nr, 
-            Sens    => $disabled_if_locked,
-            Data    => \@governors,
-            Start   => $index);
-    $win->add_signal_handler('comboGovernor' . $nr, 'changed', sub {&set_config_value('governor' . $nr,$win->get_title('comboGovernor' . $nr));});
-    
-    
-    # MinFreq x --------------------------------------------------------
-    $win->add_label( Name => 'labelMinFreq' . $nr, 
-            Pos     => [200, 60], 
-            Title   => "Min Frequency:", 
-            Sens    => $disabled_if_locked,
-            Frame   => 'NB_page' . $nr);
-    
-    $index = &get_index_of(&get_governor_info('min_freq', $a), @frequencies);
-    &set_config_value('min_freq' . $nr, $frequencies[$index], DEFAULT);
-    $win->add_combo_box( Name => 'comboMinFreq' . $nr, 
-            Pos     => [330, 55], 
-            Size    => [130, 25], 
-            Tip     => "Sets the minimum used frequency from the range of available frequencies.", 
-            Frame   => 'NB_page' . $nr, 
-            Sens    => $disabled_if_locked,
-            Data    => \@frequencies,
-            Start   => $index);
-    $win->add_signal_handler('comboMinFreq' . $nr, 'changed', sub {&set_config_value('min_freq' . $nr,$win->get_title('comboMinFreq' . $nr));});
-    
-    
-    # MaxFreq x --------------------------------------------------------
-    $win->add_label( Name => 'labelMaxFreq' . $nr, 
-            Pos     => [200, 90], 
-            Title   => "Max Frequency:", 
-            Sens    => $disabled_if_locked,
-            Frame   => 'NB_page' . $nr);
-    
-    $index = &get_index_of(&get_governor_info('max_freq', $a), @frequencies);
-    &set_config_value('max_freq' . $nr, $frequencies[$index], DEFAULT);
-    $win->add_combo_box( Name => 'comboMaxFreq' . $nr, 
-            Pos     => [330, 85], 
-            Size    => [130, 25], 
-            Tip     => "Sets the maximum used frequency from the range of available frequencies.", 
-            Frame   => 'NB_page' . $nr, 
-            Sens    => $disabled_if_locked,
-            Data    => \@frequencies,
-            Start   => $index);
-    $win->add_signal_handler('comboMaxFreq' . $nr, 'changed', sub {&set_config_value('max_freq' . $nr,$win->get_title('comboMaxFreq' . $nr));});
-}
+    # Cores Unlocked -------------------------------------------------------
+    my $enabled_if_locked = &is_equal('all');
+    my $disabled_if_locked = &is_equal('all', 'inverted');
 
+    &set_config_value('cores_unlocked', $disabled_if_locked, DEFAULT);
+    $win->add_check_button( Name => 'checkCoresUnlocked', 
+            Pos     => [198, 7], 
+            Title   => 'Unlock cores', 
+            Tip     => "Unlock cores to set governor and frequencies separately.", 
+            Active  => $disabled_if_locked, 
+            Frame   => 'NB_page0');
+    $win->add_signal_handler('checkCoresUnlocked', 'toggled', \&check_cores_unlocked_on);
 
+    sub check_cores_unlocked_on {
+        # get current state
+        my $check_button_state = $win->is_active('checkCoresUnlocked');
+        my $default = undef;
+        if ($check_button_state == 0 and (&is_equal('all') == 0 or &are_settings_equal() == 0)) {
+            my $response = $win->show_msg_dialog('warning', 'yes-no', "All cores will set to common values! Continue anyway?");
+            if ($response eq 'no') {
+                $win->set_value('checkCoresUnlocked', Active => 0);
+                return;
+            } else {
+                &join_settings();
+                $default = DEFAULT;
+            }
+        }
+        if (defined($win->exist_object('labelGovernorCommon' . $cpu_count))) {
+            $win->set_sensitive('labelGovernorCommon', !$check_button_state);
+            $win->set_sensitive('comboGovernorCommon', !$check_button_state);
+            $win->set_sensitive('labelMinFreqCommon', !$check_button_state);
+            $win->set_sensitive('comboMinFreqCommon', !$check_button_state);
+            $win->set_sensitive('labelMaxFreqCommon', !$check_button_state);
+            $win->set_sensitive('comboMaxFreqCommon', !$check_button_state);
+            for (my $a = 1; $a <= $cpu_count; $a = $a + 1) {
+                $win->set_sensitive('labelGovernor' . $a, $check_button_state);
+                $win->set_sensitive('comboGovernor' . $a, $check_button_state);
+                $win->set_sensitive('labelMinFreq' . $a, $check_button_state);
+                $win->set_sensitive('comboMinFreq' . $a, $check_button_state);
+                $win->set_sensitive('labelMaxFreq' . $a, $check_button_state);
+                $win->set_sensitive('comboMaxFreq' . $a, $check_button_state);
+            }
+        }
+        &set_config_value('cores_unlocked', $check_button_state, $default);
+        &set_apply_button_active(&isAllSet2Default());
+    }
 
-#-----------------------------------------------------------------------
-# Button bar
-#-----------------------------------------------------------------------
+    sub are_settings_equal {
+        my $equal = 1;
+        for (my $a = 1; $a <= $cpu_count; $a = $a + 1) {
+            if ($win->get_value('comboGovernor' . $a, 'active') != $win->get_value('comboGovernorCommon', 'active')) {
+                $equal = 0;}
+            if ($win->get_value('comboMinFreq' . $a, 'active') != $win->get_value('comboMinFreqCommon', 'active')) {
+                $equal = 0;}
+            if ($win->get_value('comboMaxFreq' . $a, 'active') != $win->get_value('comboMaxFreqCommon', 'active')) {
+                $equal = 0;}
+        }
+        return $equal;
+    }
 
-# Apply ----------------------------------------------------------------
-sub isAdded2Autostart {
-    my $first_time = shift;
-    my $available = 0;
-    # is governor file available
-    if (-f $gov_file) {
-        # is autostart file available
-        if (-f "$FVWM_USERDIR/.autostart") {
-            # is added ?
-            $available = `grep -c '.governor' $FVWM_USERDIR/.autostart`;
-            chomp($available);
+    sub join_settings {
+        for (my $a = 1; $a <= $cpu_count; $a = $a + 1) {
+            $win->set_value('comboGovernor' . $a, active => $win->get_value('comboGovernorCommon', 'active'));
+            $win->set_value('comboMinFreq' . $a, active => $win->get_value('comboMinFreqCommon', 'active'));
+            $win->set_value('comboMaxFreq' . $a, active => $win->get_value('comboMaxFreqCommon', 'active'));
+            # set it in the config to default
+            &set_config_value('governor' . $a, $win->get_title('comboGovernorCommon'), DEFAULT);
+            &set_config_value('min_freq' . $a, $win->get_title('comboMinFreqCommon'), DEFAULT);
+            &set_config_value('max_freq' . $a, $win->get_title('comboMaxFreqCommon'), DEFAULT);
         }
     }
-    &set_config_value('add_2_auto', $available, DEFAULT) if defined($first_time);
-    return $available;
-}
-$win->add_check_button( Name => 'checkAdd2Autostart', 
-        Pos     => [15, 307], 
-        Title   => "Add to Autostart", 
-        Tip     => "Add custom settings to autostart for permanency.", 
-        Active  => &isAdded2Autostart('init'));
-$win->add_signal_handler('checkAdd2Autostart', 'toggled', \&check_to_autostart_on);
 
-sub check_to_autostart_on {
-    # get current state
-    my $check_button_state = $win->is_active('checkAdd2Autostart');
-    &set_config_value('add_2_auto', $check_button_state);
-}
 
-$win->add_button( Name => 'applyButton', 
-        Pos     => [285, 305], 
-        Size    => [90, 25], 
-        Title   => "Apply", 
-        Sens    => $values_changed,
-        Tip     => "Apply settings to the cpufreq system. Also save them in \$FVWM_USERDIR/.governor for using it with autostart if set.");
-$win->add_signal_handler('applyButton', 'clicked', \&apply);
+    # Governor Common ------------------------------------------------------
+    $win->add_label( Name => 'labelGovernorCommon', 
+            Pos     => [200, 40], 
+            Title   => "Governor:",
+            Sens    => $enabled_if_locked,
+            Frame   => 'NB_page0');
 
-sub apply {
-    # check if governor file exists and make a backup
-    if (-f $gov_file) {copy($gov_file, $gov_file . '.bak');}
-    # open the governor file for writing
-    my $out;
-    open $out, '>', $gov_file or die "Can't open $gov_file: $!";
-    
-    # build commands and write it to governor file
-    my $scmd;
-    my $set = "frequency-set";
-    my $cmd;
-    my @info_out;
-    if ($scaler eq 'cpupower') {
-        $scmd = "pkexec $scaler";
-    } else {
-        $scmd = "pkexec cpufreq-set";
-        $set = "";
-    }
-    for (my $core = 0; $core < $cpu_count; $core = $core + 1) {
-        my $nr = $core + 1;
-        unless (&get_config_value('cores_unlocked')) {
-            $cmd = "$scmd -c $core $set -g " . get_config_value('governor_common') . " -d " . get_config_value('min_freq_common') . " -u " . get_config_value('max_freq_common');
-        } else {
-            $cmd = "$scmd -c $core $set -g " . get_config_value('governor' . $nr) . " -d " . get_config_value('min_freq' . $nr) . " -u " . get_config_value('max_freq' . $nr);
-        }
-        print $out "$cmd\n";
-    }
-    close $out;
-    # change user rights
-    system("chmod 4775 $gov_file");
-
-    unless (&get_config_value('cores_unlocked')) {&join_settings();}
-    $values_changed = 0;
-    &set_apply_button_active($values_changed);
-    
-    # if wanted to use while starting
-    if (&get_config_value('add_2_auto')) {
-        unless (&isAdded2Autostart) {
-            system("echo $gov_file >> $FVWM_USERDIR/.autostart");
-        }
-        &isAdded2Autostart('init');
-    }
-    
-    # apply changes
-    unless (&isAllSet2Default()) {
-        system("$gov_file");
-        &update_settings();
-    }
-}
-
-sub set_apply_button_active($) {
-    my $state = shift;
-    $win->set_sensitive('applyButton', $state); 
-}
-
-sub update_settings {
-    # Joined tab
     my $index = &get_index_of(&get_governor_info('governor', "all"), @governors);
     &set_config_value('governor_common', $governors[$index], DEFAULT);
-    
+    $win->add_combo_box( Name => 'comboGovernorCommon', 
+            Pos     => [330, 35], 
+            Size    => [130, 25], 
+            Tip     =>  $win->translate("Sets the global used governor (if cores not unlocked). ") . 
+                        $win->translate("The following governors are available:\n\n\
+                        Performance:\nThis governor sets the CPU statically to the highest frequency within the borders \
+                        of Min Frequency and Max Frequency. Consequently, saving power is not the focus of this governor.\n\n\
+                        Powersave:\nThe CPU frequency is statically set to the lowest possibility. This can have severe \
+                        impact on the performance, as the system will never rise above this frequency no matter how busy \
+                        the processors are.\nHowever, using this governor often does not lead to the expected power \
+                        savings as the highest savings can usually be achieved at idle through entering C-states. Due \
+                        to running processes at the lowest frequency with the powersave governor, processes will take \
+                        longer to finish, thus prolonging the time for the system to enter any idle C-states.\n\n\
+                        On-demand:\nThe kernel implementation of a dynamic CPU frequency policy: The governor monitors \
+                        the processor utilization. As soon as it exceeds a certain threshold, the governor will set the \
+                        frequency to the highest available. If the utilization is less than the threshold, the next \
+                        lowest frequency is used. If the system continues to be underutilized, the frequency is again \
+                        reduced until the lowest available frequency is set.\n\n\
+                        Conservative:\nSimilar to the on-demand implementation, this governor also dynamically adjusts \
+                        frequencies based on processor utilization, except that it allows for a more gradual increase in \
+                        power. If processor utilization exceeds a certain threshold, the governor does not immediately \
+                        switch to the highest available frequency (as the on-demand governor does), but only to next higher \
+                        frequency available.\n\n\
+                        Userspace:\nThis governor allows the user, or any userspace program running with UID 'root', to \
+                        set the CPU to a specific frequency. 'userspace' is not supported yet, but to get the same result \
+                        use governor 'powersave' and one of the frequencies in 'Min Frequency', or governor 'performance' \
+                        in combination with 'Max Frequency'."), 
+            Sens    => $enabled_if_locked,
+            Frame   => 'NB_page0', 
+            Data    => \@governors,
+            Start   => $index);
+    $win->add_signal_handler('comboGovernorCommon', 'changed', sub {&set_config_value("governor_common",$win->get_title('comboGovernorCommon'));});
+
+
+    # MinFreq Common -------------------------------------------------------
+    $win->add_label( Name => 'labelMinFreqCommon', 
+            Pos     => [200, 70], 
+            Title   => "Min Frequency:", 
+            Sens    => $enabled_if_locked,
+            Frame   => 'NB_page0');
+
     $index = &get_index_of(&get_governor_info('min_freq', "all"), @frequencies);
     &set_config_value('min_freq_common', $frequencies[$index], DEFAULT);
-    
+    $win->add_combo_box( Name => 'comboMinFreqCommon', 
+            Pos     => [330, 65], 
+            Size    => [130, 25], 
+            Tip     => "Sets the minimum used frequency from the range of available frequencies.", 
+            Frame   => 'NB_page0', 
+            Sens    => $enabled_if_locked,
+            Data    => \@frequencies,
+            Start   => $index);
+    $win->add_signal_handler('comboMinFreqCommon', 'changed', sub {&set_config_value("min_freq_common",$win->get_title('comboMinFreqCommon'));});
+
+
+    # MaxFreq Common -------------------------------------------------------
+    $win->add_label( Name => 'labelMaxFreqCommon', 
+            Pos     => [200, 100], 
+            Title   => "Max Frequency:", 
+            Sens    => $enabled_if_locked,
+            Frame   => 'NB_page0');
+
     $index = &get_index_of(&get_governor_info('max_freq', "all"), @frequencies);
     &set_config_value('max_freq_common', $frequencies[$index], DEFAULT);
-    
-    &set_config_value('cores_unlocked', &is_equal('all', 'inverted'), DEFAULT);
+    $win->add_combo_box( Name => 'comboMaxFreqCommon', 
+            Pos     => [330, 95], 
+            Size    => [130, 25], 
+            Tip     => "Sets the maximum used frequency from the range of available frequencies.", 
+            Frame   => 'NB_page0', 
+            Sens    => $enabled_if_locked,
+            Data    => \@frequencies,
+            Start   => $index);
+    $win->add_signal_handler('comboMaxFreqCommon', 'changed', sub {&set_config_value("max_freq_common",$win->get_title('comboMaxFreqCommon'));});
 
-    # core tabs
+
+    #-----------------------------------------------------------------------
+    # build tabs per core
+    #-----------------------------------------------------------------------
     for (my $a = 0; $a < $cpu_count; $a = $a + 1) {
         my $nr = $a + 1;
+
+        #-------------------------------------------------------------------
+        # Notebook page x for Core1
+        #-------------------------------------------------------------------
+        $win->add_nb_page(Name => "NB_page" . $nr, 
+                Pos_n   => $nr, 
+                Title   => $win->translate("Core ") . $nr, 
+                Tip     => $win->translate("This is the tab for modifying core ") . $nr . $win->translate("if unlocked at the joined tab."),
+                Notebook => 'NB1');
+
+
+        #-------------------------------------------------------------------
+        # Core Information Frame
+        #-------------------------------------------------------------------
+        my $title = " " . $win->translate("Information to Core") . " $nr ";
+        $win->add_frame( Name => 'CoreInfoFrame' . $nr, 
+                Pos     => [10, 10], 
+                Size    => [160, 110], 
+                Title   => $title,
+                Frame => 'NB_page' . $nr);
+        
+        
+        # L2Cache ----------------------------------------------------------
+        $win->add_label( Name => 'labelL2Cache' . $nr, 
+                Pos     => [10, 15], 
+                Title   => "L2 Cache:", 
+                Frame   => 'CoreInfoFrame' . $nr);
+        
+        $win->add_label( Name => 'labelL2CacheContent' . $nr, 
+                Pos     => [90, 15], 
+                Title   => &get_cpu_infos("cache size"), 
+                Frame   => 'CoreInfoFrame' . $nr);
+        
+        
+        # Bogomips ---------------------------------------------------------
+        $win->add_label( Name => 'labelBogomips' . $nr, 
+                Pos     => [10, 35], 
+                Title   => "Bogomips:", 
+                Frame   => 'CoreInfoFrame' . $nr);
+        
+        $win->add_label( Name => 'labelBogomipsContent' . $nr, 
+                Pos     => [90, 35], 
+                Title   => &get_cpu_infos("bogomips"), 
+                Frame   => 'CoreInfoFrame' . $nr);
+        
+        
+        # Show More --------------------------------------------------------
+        $win->add_button( Name => 'ButtonShowMore' . $nr, 
+                Pos     => [30, 62], 
+                Size    => [90, 25], 
+                Title   => "More", 
+                Tip     => "Show information about this core.", 
+                Frame   => 'CoreInfoFrame' . $nr);
+        $win->add_signal_handler('ButtonShowMore' . $nr, 'clicked', \&open_text_box, $a);
+        
+        
+        #-------------------------------------------------------------------
+        # Notebook page rest
+        #-------------------------------------------------------------------
+
+        # Governor x -------------------------------------------------------
+        $win->add_label( Name => 'labelGovernor' . $nr, 
+                Pos     => [200, 30], 
+                Title   => "Governor:", 
+                Sens    => $disabled_if_locked,
+                Frame   => 'NB_page' . $nr);
+        
         $index = &get_index_of(&get_governor_info('governor', $a), @governors);
         &set_config_value('governor' . $nr, $governors[$index], DEFAULT);
-    
+        $win->add_combo_box( Name => 'comboGovernor' . $nr, 
+                Pos     => [330, 25], 
+                Size    => [130, 25], 
+                Tip     => $win->translate("Sets the used governor (if cores unlocked). ") . 
+                           $win->translate("The following governors are available:\n\n\
+                           Performance:\nThis governor sets the CPU statically to the highest frequency within the borders \
+                           of Min Frequency and Max Frequency. Consequently, saving power is not the focus of this governor.\n\n\
+                           Powersave:\nThe CPU frequency is statically set to the lowest possibility. This can have severe \
+                           impact on the performance, as the system will never rise above this frequency no matter how busy \
+                           the processors are.\nHowever, using this governor often does not lead to the expected power \
+                           savings as the highest savings can usually be achieved at idle through entering C-states. Due \
+                           to running processes at the lowest frequency with the powersave governor, processes will take \
+                           longer to finish, thus prolonging the time for the system to enter any idle C-states.\n\n\
+                           On-demand:\nThe kernel implementation of a dynamic CPU frequency policy: The governor monitors \
+                           the processor utilization. As soon as it exceeds a certain threshold, the governor will set the \
+                           frequency to the highest available. If the utilization is less than the threshold, the next \
+                           lowest frequency is used. If the system continues to be underutilized, the frequency is again \
+                           reduced until the lowest available frequency is set.\n\n\
+                           Conservative:\nSimilar to the on-demand implementation, this governor also dynamically adjusts \
+                           frequencies based on processor utilization, except that it allows for a more gradual increase in \
+                           power. If processor utilization exceeds a certain threshold, the governor does not immediately \
+                           switch to the highest available frequency (as the on-demand governor does), but only to next higher \
+                           frequency available.\n\n\
+                           Userspace:\nThis governor allows the user, or any userspace program running with UID 'root', to \
+                           set the CPU to a specific frequency. 'userspace' is not supported yet, but to get the same result \
+                           use governor 'powersave' and one of the frequencies in 'Min Frequency', or governor 'performance' \
+                           in combination with 'Max Frequency'."),
+                Frame   => 'NB_page' . $nr, 
+                Sens    => $disabled_if_locked,
+                Data    => \@governors,
+                Start   => $index);
+        $win->add_signal_handler('comboGovernor' . $nr, 'changed', sub {&set_config_value('governor' . $nr,$win->get_title('comboGovernor' . $nr));});
+        
+        
+        # MinFreq x --------------------------------------------------------
+        $win->add_label( Name => 'labelMinFreq' . $nr, 
+                Pos     => [200, 60], 
+                Title   => "Min Frequency:", 
+                Sens    => $disabled_if_locked,
+                Frame   => 'NB_page' . $nr);
+        
         $index = &get_index_of(&get_governor_info('min_freq', $a), @frequencies);
         &set_config_value('min_freq' . $nr, $frequencies[$index], DEFAULT);
-    
+        $win->add_combo_box( Name => 'comboMinFreq' . $nr, 
+                Pos     => [330, 55], 
+                Size    => [130, 25], 
+                Tip     => "Sets the minimum used frequency from the range of available frequencies.", 
+                Frame   => 'NB_page' . $nr, 
+                Sens    => $disabled_if_locked,
+                Data    => \@frequencies,
+                Start   => $index);
+        $win->add_signal_handler('comboMinFreq' . $nr, 'changed', sub {&set_config_value('min_freq' . $nr,$win->get_title('comboMinFreq' . $nr));});
+        
+        
+        # MaxFreq x --------------------------------------------------------
+        $win->add_label( Name => 'labelMaxFreq' . $nr, 
+                Pos     => [200, 90], 
+                Title   => "Max Frequency:", 
+                Sens    => $disabled_if_locked,
+                Frame   => 'NB_page' . $nr);
+        
         $index = &get_index_of(&get_governor_info('max_freq', $a), @frequencies);
         &set_config_value('max_freq' . $nr, $frequencies[$index], DEFAULT);
+        $win->add_combo_box( Name => 'comboMaxFreq' . $nr, 
+                Pos     => [330, 85], 
+                Size    => [130, 25], 
+                Tip     => "Sets the maximum used frequency from the range of available frequencies.", 
+                Frame   => 'NB_page' . $nr, 
+                Sens    => $disabled_if_locked,
+                Data    => \@frequencies,
+                Start   => $index);
+        $win->add_signal_handler('comboMaxFreq' . $nr, 'changed', sub {&set_config_value('max_freq' . $nr,$win->get_title('comboMaxFreq' . $nr));});
     }
-    
-    # other widgets
-    &isAdded2Autostart('init');
-}
 
 
-# Cancel ---------------------------------------------------------------
-$win->add_button( Name => 'cancelButton', 
-        Pos     => [395, 305], 
-        Size    => [90, 25], 
-        Title   => "Cancel", 
-        Tip     => "Cancel/Quit Cpu Performance tool.");
-$win->add_signal_handler('cancelButton', 'clicked', \&check_before_quit);
 
-sub check_before_quit {
-    if ($values_changed == SET) {
-        my $response = $win->show_msg_dialog('warning', 'yes-no', "You have unapplied changes! Continue anyway?");
-        if ($response eq 'no') {
-            return;
+    #-----------------------------------------------------------------------
+    # Button bar
+    #-----------------------------------------------------------------------
+
+    # Apply ----------------------------------------------------------------
+    sub isAdded2Autostart {
+        my $first_time = shift;
+        my $available = 0;
+        # is governor file available
+        if (-f $gov_file) {
+            # is autostart file available
+            if (-f "$FVWM_USERDIR/.autostart") {
+                # is added ?
+                $available = `grep -c '.governor' $FVWM_USERDIR/.autostart`;
+                chomp($available);
+            }
+        }
+        &set_config_value('add_2_auto', $available, DEFAULT) if defined($first_time);
+        return $available;
+    }
+    $win->add_check_button( Name => 'checkAdd2Autostart', 
+            Pos     => [15, 307], 
+            Title   => "Add to Autostart", 
+            Tip     => "Add custom settings to autostart for permanency.", 
+            Active  => &isAdded2Autostart('init'));
+    $win->add_signal_handler('checkAdd2Autostart', 'toggled', \&check_to_autostart_on);
+
+    sub check_to_autostart_on {
+        # get current state
+        my $check_button_state = $win->is_active('checkAdd2Autostart');
+        &set_config_value('add_2_auto', $check_button_state);
+    }
+
+    $win->add_button( Name => 'applyButton', 
+            Pos     => [285, 305], 
+            Size    => [90, 25], 
+            Title   => "Apply", 
+            Sens    => $values_changed,
+            Tip     => "Apply settings to the cpufreq system. Also save them in \$FVWM_USERDIR/.governor for using it with autostart if set.");
+    $win->add_signal_handler('applyButton', 'clicked', \&apply);
+
+    sub apply {
+        # check if governor file exists and make a backup
+        if (-f $gov_file) {copy($gov_file, $gov_file . '.bak');}
+        # open the governor file for writing
+        my $out;
+        open $out, '>', $gov_file or die "Can't open $gov_file: $!";
+        
+        # build commands and write it to governor file
+        my $scmd;
+        my $set = "frequency-set";
+        my $cmd;
+        my @info_out;
+        if ($scaler eq 'cpupower') {
+            $scmd = "pkexec $scaler";
+        } else {
+            $scmd = "pkexec cpufreq-set";
+            $set = "";
+        }
+        for (my $core = 0; $core < $cpu_count; $core = $core + 1) {
+            my $nr = $core + 1;
+            unless (&get_config_value('cores_unlocked')) {
+                $cmd = "$scmd -c $core $set -g " . get_config_value('governor_common') . " -d " . get_config_value('min_freq_common') . " -u " . get_config_value('max_freq_common');
+            } else {
+                $cmd = "$scmd -c $core $set -g " . get_config_value('governor' . $nr) . " -d " . get_config_value('min_freq' . $nr) . " -u " . get_config_value('max_freq' . $nr);
+            }
+            print $out "$cmd\n";
+        }
+        close $out;
+        # change user rights
+        system("chmod 4775 $gov_file");
+
+        unless (&get_config_value('cores_unlocked')) {&join_settings();}
+        $values_changed = 0;
+        &set_apply_button_active($values_changed);
+        
+        # if wanted to use while starting
+        if (&get_config_value('add_2_auto')) {
+            unless (&isAdded2Autostart) {
+                system("echo $gov_file >> $FVWM_USERDIR/.autostart");
+            }
+            &isAdded2Autostart('init');
+        }
+        
+        # apply changes
+        unless (&isAllSet2Default()) {
+            system("$gov_file");
+            &update_settings();
         }
     }
-    Gtk2->main_quit;
-}
 
-unless (defined($scaler)) {
-    # deactivate all frames and notebook pages
-    $win->set_sensitive('CpuInfoFrame', 0);
-    $win->set_sensitive('CoreInfoFrameCommon', 0);
-    $win->set_sensitive('NB_page0', 0);
-    for (my $a = 1; $a <= $cpu_count; $a = $a + 1) {
-        $win->set_sensitive('CoreInfoFrame' . $a, 0);
-        $win->set_sensitive('NB_page' . $a, 0);
+    sub set_apply_button_active($) {
+        my $state = shift;
+        $win->set_sensitive('applyButton', $state); 
     }
-    # deactivate all buttons except cancel
-    $win->set_sensitive('checkAdd2Autostart', 0);
-    $win->set_sensitive('helpButton', 0);
-    $win->set_sensitive('applyButton', 0);
-    $win->show_msg_dialog('info', 'ok', "No cpu scaler is installed.\nFor full functionality cpufreq-utils or cpupower must installed at least.");
-}
 
+    sub update_settings {
+        # Joined tab
+        my $index = &get_index_of(&get_governor_info('governor', "all"), @governors);
+        &set_config_value('governor_common', $governors[$index], DEFAULT);
+        
+        $index = &get_index_of(&get_governor_info('min_freq', "all"), @frequencies);
+        &set_config_value('min_freq_common', $frequencies[$index], DEFAULT);
+        
+        $index = &get_index_of(&get_governor_info('max_freq', "all"), @frequencies);
+        &set_config_value('max_freq_common', $frequencies[$index], DEFAULT);
+        
+        &set_config_value('cores_unlocked', &is_equal('all', 'inverted'), DEFAULT);
 
-#-----------------------------------------------------------------------
-# Info text box
-#-----------------------------------------------------------------------
-
-sub open_text_box {
-    my ($widget, $data) = @_;
-    my $title = "CPU Information";
-    if (defined($data)) {
-        $title = "Core $data Information"
-    } else {
-        $data = 'all';
+        # core tabs
+        for (my $a = 0; $a < $cpu_count; $a = $a + 1) {
+            my $nr = $a + 1;
+            $index = &get_index_of(&get_governor_info('governor', $a), @governors);
+            &set_config_value('governor' . $nr, $governors[$index], DEFAULT);
+        
+            $index = &get_index_of(&get_governor_info('min_freq', $a), @frequencies);
+            &set_config_value('min_freq' . $nr, $frequencies[$index], DEFAULT);
+        
+            $index = &get_index_of(&get_governor_info('max_freq', $a), @frequencies);
+            &set_config_value('max_freq' . $nr, $frequencies[$index], DEFAULT);
+        }
+        
+        # other widgets
+        &isAdded2Autostart('init');
     }
-    
-    # Text window ------------------------------------------------------
-    my $dialog = SimpleGtk2->new_window(  Name => 'textbox', 
-                            Size => [500, 550], 
-                            Title => $title);
-    $dialog->add_signal_handler('textbox', 'delete_event', sub {Gtk2->main_quit;});
-    
-    
-    # Text context -----------------------------------------------------
 
-    # add output of lscpu and of the current scaler
-    my $text;
-    if ("$data" eq 'all') {
-        $text = "\n" . `lscpu` . "\n" . &get_governor_info('info', $data);
-    } else {
-        $text = "\n" . `cat /proc/cpuinfo | awk '/\^processor\\s\*: $data/, /\^\\s\*\$/'` . &get_governor_info('info', $data);
+
+    # Cancel ---------------------------------------------------------------
+    $win->add_button( Name => 'cancelButton', 
+            Pos     => [395, 305], 
+            Size    => [90, 25], 
+            Title   => "Cancel", 
+            Tip     => "Cancel/Quit Cpu Performance tool.");
+    $win->add_signal_handler('cancelButton', 'clicked', \&check_before_quit);
+
+    sub check_before_quit {
+        if ($values_changed == SET) {
+            my $response = $win->show_msg_dialog('warning', 'yes-no', "You have unapplied changes! Continue anyway?");
+            if ($response eq 'no') {
+                return;
+            }
+        }
+        Gtk2->main_quit;
     }
-    $dialog->add_text_view(Name => 'tview1', 
-                Pos     => [10, 10], 
-                Size    => [480, 500], 
-                Text    => $text,
-                Font    => ['Monospace'], 
-                LeftMargin  => 10);
-    
-    
-    # Cancel -----------------------------------------------------------
-    $dialog->add_button( Name => 'okButton', 
-                Pos     => [210, 515], 
-                Size    => [80, 25], 
-                Title   => "Ok");
-    $dialog->add_signal_handler('okButton', 'clicked', sub {$dialog->get_widget('textbox')->destroy();});
-    
-    $dialog->show_and_run();
+
+    unless (defined($scaler)) {
+        # deactivate all frames and notebook pages
+        $win->set_sensitive('CpuInfoFrame', 0);
+        $win->set_sensitive('CoreInfoFrameCommon', 0);
+        $win->set_sensitive('NB_page0', 0);
+        for (my $a = 1; $a <= $cpu_count; $a = $a + 1) {
+            $win->set_sensitive('CoreInfoFrame' . $a, 0);
+            $win->set_sensitive('NB_page' . $a, 0);
+        }
+        # deactivate all buttons except cancel
+        $win->set_sensitive('checkAdd2Autostart', 0);
+        $win->set_sensitive('helpButton', 0);
+        $win->set_sensitive('applyButton', 0);
+        $win->show_msg_dialog('info', 'ok', "No cpu scaler is installed.\nFor full functionality cpufreq-utils or cpupower must installed at least.");
+    }
+
+
+    #-----------------------------------------------------------------------
+    # Info text box
+    #-----------------------------------------------------------------------
+
+    sub open_text_box {
+        my ($widget, $data) = @_;
+        my $title = "CPU Information";
+        if (defined($data)) {
+            $title = "Core $data Information"
+        } else {
+            $data = 'all';
+        }
+        
+        # Text window ------------------------------------------------------
+        my $dialog = SimpleGtk2->new_window(  Name => 'textbox', 
+                                Size => [500, 550], 
+                                Title => $title);
+        $dialog->add_signal_handler('textbox', 'delete_event', sub {Gtk2->main_quit;});
+        
+        
+        # Text context -----------------------------------------------------
+
+        # add output of lscpu and of the current scaler
+        my $text;
+        if ("$data" eq 'all') {
+            $text = "\n" . `lscpu` . "\n" . &get_governor_info('info', $data);
+        } else {
+            $text = "\n" . `cat /proc/cpuinfo | awk '/\^processor\\s\*: $data/, /\^\\s\*\$/'` . &get_governor_info('info', $data);
+        }
+        $dialog->add_text_view(Name => 'tview1', 
+                    Pos     => [10, 10], 
+                    Size    => [480, 500], 
+                    Text    => $text,
+                    Font    => ['Monospace'], 
+                    LeftMargin  => 10);
+        
+        
+        # Cancel -----------------------------------------------------------
+        $dialog->add_button( Name => 'okButton', 
+                    Pos     => [210, 515], 
+                    Size    => [80, 25], 
+                    Title   => "Ok");
+        $dialog->add_signal_handler('okButton', 'clicked', sub {$dialog->get_widget('textbox')->destroy();});
+        
+        $dialog->show_and_run();
+    }
+
+
+    $win->show_and_run();
 }
-
-
-$win->show_and_run();
-
 
