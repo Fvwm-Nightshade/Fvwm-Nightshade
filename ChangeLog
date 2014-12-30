@@ -1,5 +1,20 @@
 History:
 
+12/30/2014
+- update spec file:
+  - with post and preun scriptlets for register and unregister apps
+    in policy file for pkexec
+  - add missing dependencies and perlsitedir
+- add perlsitedir support to Makefile for rpm
+- rename too long svg file names to eliminate build errors in 'make rpm'
+- update new file names in gtk.css and gtkrc in the Gtk2+3 themes
+- exchange shell commands in FNS-CpuPerformance to prevent errors while
+  searching for governors
+- add error dialog in FNS-CpuPerformance if no cpufreq driver is active
+- update SimpleGtk2 to 0.64 to support font and color changing for some widgets
+  => needed for error dialog ^^
+- update version in config
+
 12/21/2014
 - add debian/postinst and debian/prerm for register and unregister apps
   in policy file for pkexec
