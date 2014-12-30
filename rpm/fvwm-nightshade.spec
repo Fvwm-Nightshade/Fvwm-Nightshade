@@ -1,6 +1,7 @@
 %define     __spec_install_post %{nil}
 %define     debug_package %{nil}
 %define     __os_install_post %{_dbpath}/brp-compress
+%define		_perlsitedir
 
 Name:       fvwm-nightshade
 Version:    
@@ -17,7 +18,8 @@ BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}
 Requires:   fvwm >= 2.6.5
 Requires:   python < 3
 Requires:   pyxdg
-Requires:   perl-gtk2
+Requires:   perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+Requires:   perl(Gtk2)
 Requires:   librsvg2
 Requires:   xterm
 Requires:   conky
@@ -25,13 +27,14 @@ Requires:   xscreensaver
 Requires:   feh
 Requires:   ImageMagick
 Requires:   stalonetray
-Requires:   kernel-tools
-Requires:   cpupower
+Requires:	cpupower
 Requires:   xorg-x11-apps
 Requires:   pcmanfm
 Requires:   polkit-gnome
 Requires:   gtk-murrine-engine
 Requires:   network-manager-applet
+
+Provides: 	perl(governor)
 
 %description
 A lightweight but feature rich and good looking configuration of Fvwm.
@@ -49,27 +52,30 @@ rm -rf $RPM_BUILD_ROOT
 make DESTDIR=$RPM_BUILD_ROOT prefix=/usr dist-install
 
 %post
-if [ $1 -gt 1 ] ; then
+if [ "$1" -eq 1 ] ; then
     for app in cpufreq-set cpupower; do
-        if [ "`which $app`" != "" ]; then
-            echo "register $app"
-            fns-poladd "$app"
+        if [ `which $app &> /dev/null ;echo $?` == "0" ]; then
+            echo "register $app at pkexec"
+            /usr/bin/fns-poladd $app
         fi
     done
 fi
+exit 0
 
 %preun
-if [ $1 -eq 1 ] ; then
-    for app in "cpufreq-set" "cpupower"; do
-        if [ "`which $app`" != "" ]; then
+if [ "$1" -eq 0 ] ; then
+	echo "run preuninstall"
+    for app in cpufreq-set cpupower; do
+        if [ `which $app &> /dev/null ;echo $?` == "0" ]; then
             alreadyHere=`cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$app"`
             if [ "$alreadyHere" != "" ]; then
-                echo "unregister $app"
-                fns-poladd -r "$app"
+                echo "unregister $app from pkexec"
+                /usr/bin/fns-poladd -r $app
             fi
         fi
     done
 fi
+exit 0
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -78,6 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %{_bindir}/*
 %{_datadir}/*
+%{_perlsitedir}/*
 /etc/*
 
 %define date%(echo `LC_ALL="C" date +"%a %b %d %Y"`)
