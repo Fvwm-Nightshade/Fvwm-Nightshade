@@ -1,5 +1,22 @@
 History:
 
+12/31/2014
+- update config:
+  - reduce search path for polkit agent in FuncCheck4Polkit because in Fedora
+    it is found in /usr/libexec/ and not like in Debian /usr/lib/pol*. Also fix
+    too few backslashes before '&' in FuncStartPolkit
+  - if 'Icons on desktop' is active no wm menus are accessible. In PcmanFm desktop
+    preference dialog an option is available to activate at least the right one.
+    So for that RootMenu is available additionally to Super_L key
+- add new svg icon for PcmanFm desktop preference dialog
+- adaptions in FNS-CpuPerformance:
+  - add missing show_and_run() for error dialog
+  - exchange '&> /dev/null' with '2> /dev/null' to find available scaler
+  - split frequency info text with '\n' and not ' ' to find the correct sentence
+- adaption in FNS-BaseSetup:
+  - add ~/.config/pcmanfm/default/pcmanfm.conf to change show_wm_menu to activate
+    wm menus while 'Icons on desktop' are active.
+
 12/30/2014
 - update spec file:
   - with post and preun scriptlets for register and unregister apps
