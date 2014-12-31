@@ -11,7 +11,7 @@ use File::Spec;
 
 #-------------------------------------------------------------------------
 # File:         FNS-BaseSetup
-my $Version =   '2.0.2';
+my $Version =   '2.0.3';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure base settings of Fvwm-Nightshade
@@ -19,7 +19,7 @@ my $Version =   '2.0.2';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/08/2014
-# Changed:      12/14/2014
+# Changed:      12/31/2014
 #-------------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -60,7 +60,10 @@ my $FVWM_USERDIR = "$ENV{FVWM_USERDIR}";
 my $config_path = "$FVWM_USERDIR/.settings";
 
 # used pcmanfm config path
-my $pcmanfm_config = "$ENV{HOME}/.config/libfm/libfm.conf";
+my $pcmanfm_config = "$ENV{HOME}/.config/pcmanfm/default/pcmanfm.conf";
+
+# used libfm config path
+my $libfm_config = "$ENV{HOME}/.config/libfm/libfm.conf";
 
 
 ##########################################################################
@@ -248,7 +251,7 @@ sub first_start {
 # get the main parameters
 &parse_config($config_path);
 # get additional parameters
-&parse_config($pcmanfm_config, '=');
+&parse_config($libfm_config, '=');
 
 
 ########################################################################
@@ -734,10 +737,17 @@ sub apply_and_save {
                     $module->send("FuncWriteInfoStoreToFileAndSet $key $config{$key}[0] $config_path");
                 }
             } else {
-                if (-f $pcmanfm_config) {
-                    system("sed -i --follow-symlinks \"s#^$key=.*#$key=$config{$key}[0]#\" $pcmanfm_config");
+                if (-f $libfm_config) {
+                    system("sed -i --follow-symlinks \"s#^$key=.*#$key=$config{$key}[0]#\" $libfm_config");
                 } else {
-                    print STDERR "[" . $win->get_title($win->{name}) . "]: " . $pcmanfm_config . " not found. Ignore changes of 'big_icon_size'.\n";
+                    print STDERR "[" . $win->get_title($win->{name}) . "]: " . $libfm_config . " not found. Ignore changes of 'big_icon_size'.\n";
+                }
+                if (-f $pcmanfm_config) {
+                    if ($config{DesktopIconsOn}[0] == 1 and `grep -c "^show_wm_menu=0" $pcmanfm_config`) {
+                        system("sed -i --follow-symlinks \"s#^show_wm_menu=.*#show_wm_menu=1#\" $pcmanfm_config");
+                    }
+                } else {
+                    print STDERR "[" . $win->get_title($win->{name}) . "]: " . $pcmanfm_config . " not found. Can't change show_wm_menu to 1.\n";
                 }
             }
 
