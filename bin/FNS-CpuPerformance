@@ -7,7 +7,7 @@ use File::Copy qw(copy);
 
 #-------------------------------------------------------------------------
 # File:         fns-cpu-performance
-my $Version =   '2.0.2';
+my $Version =   '2.0.3';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure cpufreq or cpupower based on
@@ -16,7 +16,7 @@ my $Version =   '2.0.2';
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      11/29/2014
-# Changed:      12/30/2014
+# Changed:      12/31/2014
 #-------------------------------------------------------------------------
 
 
@@ -68,6 +68,8 @@ if ($driver_info =~ /unknown/) {
             Size    => [90, 25], 
             Title   => "Exit");
     $dialog->add_signal_handler('exitButton', 'clicked', sub {Gtk2->main_quit;});
+    
+    $dialog->show_and_run();
 }
 else {
     # get informations from /proc/cpuinfo
@@ -103,16 +105,16 @@ else {
     #-----------------------------------------------------------------------
     sub get_scaler {
         my $cpufreq = undef;
-        if (`which cpufreq-set &> /dev/null`) {
+        if (`which cpufreq-set 2> /dev/null`) {
             $cpufreq = "cpufreq-set";
         }
         my $cpupower = undef;
-        if (`which cpupower &> /dev/null`) {
+        if (`which cpupower 2> /dev/null`) {
             $cpufreq = "cpupower";
         }
         my $scaler = undef;
-        if (defined($cpufreq)) {$scaler = chomp($cpufreq);} 
-        elsif (defined($cpupower)) {$scaler = chomp($cpupower);}
+        if (defined($cpufreq)) {$scaler = $cpufreq;} 
+        elsif (defined($cpupower)) {$scaler = $cpupower;}
         return $scaler;
     }
 
@@ -290,9 +292,7 @@ else {
         }
         elsif ($wanted eq "driver") {
             $cmd = "$scmd $info";
-            my @content = split(' ', `$cmd`);
-            $content[1] =~ s/\s//g; # remove spaces
-            $content[1] = chomp($content[1]);
+            my @content = split('\n', `$cmd`);
             return $content[1];
         }
     }
