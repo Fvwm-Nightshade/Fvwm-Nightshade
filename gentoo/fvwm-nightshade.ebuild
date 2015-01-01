@@ -32,6 +32,7 @@ RDEPEND="${PYTHON_DEPS}
 	sys-power/cpufrequtils
 	dev-python/pyxdg
 	dev-perl/gtk2-perl
+    dev-perl/Locale-gettext
 	gnome-extra/polkit-gnome
 	nm-gnome? ( gnome-extra/nm-applet )
 	blueman? ( net-wireless/blueman )

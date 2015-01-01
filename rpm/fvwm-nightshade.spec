@@ -20,6 +20,7 @@ Requires:   python < 3
 Requires:   pyxdg
 Requires:   perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Requires:   perl(Gtk2)
+Requires:   perl(gettext)
 Requires:   librsvg2
 Requires:   xterm
 Requires:   conky
