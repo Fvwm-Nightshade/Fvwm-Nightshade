@@ -1,0 +1,23 @@
+post_install() {
+	echo "(1/1) Register applications at pkexec"
+    for app in cpufreq-set cpupower; do
+        if [ `which $app &> /dev/null ;echo $?` == "0" ]; then
+            echo "       register $app"
+            /usr/bin/fns-poladd $app
+            let i=i+1
+        fi
+    done
+}
+
+pre_remove() {
+	echo "(1/1) Unregister applications from pkexec"
+    for app in cpufreq-set cpupower; do
+        if [ `which $app &> /dev/null ;echo $?` == "0" ]; then
+            alreadyHere=`cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$app"`
+            if [ "$alreadyHere" != "" ]; then
+                echo "       unregister $app"
+                /usr/bin/fns-poladd -r $app
+            fi
+        fi
+    done
+}
