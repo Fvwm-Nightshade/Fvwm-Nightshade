@@ -1,8 +1,11 @@
 History:
 
 01/01/2015
-- update Makefile and arch/PKBUILD_FNS to support changes for upcoming 0.8 release
+- update Makefile and arch/PKBUILD_FNS to support changes for upcoming 0.8 release.
+  Also fix missing regex for perlsitedir
 - add fns.install with scriptlets to support postinstall and preuninstall in Arch
+- add missing dependency perl-locale-gettext to PKGBUILD_FNS
+- fix hangup of policy agent while startup in function FuncStartPolkit in config
 
 12/31/2014
 - update config:
