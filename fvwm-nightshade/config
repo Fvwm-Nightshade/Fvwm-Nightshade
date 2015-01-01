@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20141231
+InfoStoreAdd ns_version 0.7.7.20150101
 # Copyright (C) 2014
 #
 # Authors:
@@ -1365,21 +1365,24 @@ AddToFunc   FuncAppCheck
 + I FuncCheck4Polkit
 
 #-----------------------------------------------------------------------
+# Starts policykit for pkexec use
+#-----------------------------------------------------------------------
+DestroyFunc FuncStartPolkit
+AddToFunc   FuncStartPolkit
++ I PipeRead 'echo SetEnv polkit `find /usr/lib* -name polkit-gnome-authentication-agent-1 2> /dev/null`'
++ I Test (EnvIsSet polkit) PipeRead 'if [ -z `pidof polkit-gnome-authentication-agent-1` ]; then \
+                                        echo SetEnv notRun 1; \
+                                    fi'
++ I Test (EnvIsSet notRun) Exec exec $[polkit]
++ I UnsetEnv notRun
+
+#-----------------------------------------------------------------------
 # Check for policykit and set path
 #-----------------------------------------------------------------------
 DestroyFunc FuncCheck4Polkit
 AddToFunc   FuncCheck4Polkit
 + I PipeRead 'echo SetEnv polkit `find /usr/lib* -name polkit-gnome-authentication-agent-1 2> /dev/null`'
 + I Test (!x $[polkit]) FuncPrintMsg "AppCheck" "polkit-gnome (pkexec) not installed"
-
-#-----------------------------------------------------------------------
-# Starts policykit for pkexec use
-#-----------------------------------------------------------------------
-DestroyFunc FuncStartPolkit
-AddToFunc   FuncStartPolkit
-+ I PipeRead 'if [ -z `pidof polkit-gnome-authentication-agent-1` ]; then \
-                $[polkit] \\&; \
-             fi'
 
 #-----------------------------------------------------------------------
 # Starts system tray applets like network, sound, etc
