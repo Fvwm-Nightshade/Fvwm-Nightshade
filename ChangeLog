@@ -1,5 +1,9 @@
 History:
 
+01/01/2015
+- update Makefile and arch/PKBUILD_FNS to support changes for upcoming 0.8 release
+- add fns.install with scriptlets to support postinstall and preuninstall in Arch
+
 12/31/2014
 - update config:
   - reduce search path for polkit agent in FuncCheck4Polkit because in Fedora
