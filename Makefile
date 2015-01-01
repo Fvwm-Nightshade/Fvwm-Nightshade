@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      12/30/2014
+# Changed:      01/01/2015
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -39,7 +39,7 @@ xdgdir		= $(datadir)/desktop-directories
 themesdir 	= $(datadir)/themes
 userdir		= ~
 fnsuserdir	= $(userdir)/.$(package)
-perlsitedir := $(shell perl -le 'foreach (@INC) {print $$_ if m/\/usr\/local\/lib\/(site_perl|perl5)$$/;}')
+perlsitedir := $(shell perl -le 'foreach (@INC) {print $$_ if (m/\/usr\/lib\/(site_perl|perl5)$$/ or m/\/usr\/local\/lib\/(site_perl|perl5)$$/); break;}')
 
 ifeq ($(local),yes)
 	themesdir = $(userdir)/.themes
@@ -80,8 +80,8 @@ $(distdir):
 	cp -r * $(distdir)
 	
 FORCE:
-	-rm $(distdir).tar.gz &> /dev/null
-	-rm -rf $(distdir) &> /dev/null
+	rm -f $(distdir).tar.gz
+	rm -rf $(distdir)
 
 distcheck: $(distdir).tar.gz
 	gzip -cd $+ | tar xvf -
@@ -617,15 +617,18 @@ prepare-arch: dist
 	rm -rf $(pkgdir)
 	mkdir -p $(pkgdir)
 	cp arch/PKGBUILD_FNS $(pkgdir)/PKGBUILD
+	cp arch/makepkg.conf $(pkgdir)/
+	cp arch/fns.install $(pkgdir)/
 	mv $(distdir).tar.gz $(pkgdir)/
 	sed -i "s/pkgver=.*/pkgver=$(version)/" $(pkgdir)/PKGBUILD
 	sed -i "s#source=.*#source=\"$(package)-$(version).tar.gz\"#" $(pkgdir)/PKGBUILD
 	sed -i "s#^  cd \"\$$srcdir/.*#  cd \"\$$srcdir/$(package)-$(version)\"#" $(pkgdir)/PKGBUILD
 
 arch: prepare-arch
-	makepkg --config arch/makepkg.conf -p $(pkgdir)/PKGBUILD -g >> $(pkgdir)/PKGBUILD
-	makepkg -s --config arch/makepkg.conf -p $(pkgdir)/PKGBUILD
-	rm -f *.xz
+	cd $(pkgdir); \
+	makepkg --config $(pkgdir)/makepkg.conf -p PKGBUILD -g >> PKGBUILD; \
+	makepkg --config $(pkgdir)/makepkg.conf -p PKGBUILD; \
+	cd -
 	mv $(pkgdir)/*.xz ../
 	rm -rf $(pkgdir)
 
