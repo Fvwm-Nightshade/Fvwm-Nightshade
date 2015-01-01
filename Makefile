@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.2.2
+# Version:      2.2.3
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -39,7 +39,7 @@ xdgdir		= $(datadir)/desktop-directories
 themesdir 	= $(datadir)/themes
 userdir		= ~
 fnsuserdir	= $(userdir)/.$(package)
-perlsitedir := $(shell perl -le 'foreach (@INC) {print $$_ if (m/\/usr\/lib\/(site_perl|perl5)$$/ or m/\/usr\/local\/lib\/(site_perl|perl5)$$/); break;}')
+perlsitedir := $(shell perl -le 'foreach (@INC) {print $$_ if (m/\/usr\/lib\/.*(site_perl|perl5)$$/ or m/\/usr\/local\/lib\/.*(site_perl|perl5)$$/); break;}')
 
 ifeq ($(local),yes)
 	themesdir = $(userdir)/.themes
