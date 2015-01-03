@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -16,7 +16,7 @@ SRC_URI="https://github.com/${PN}/${PN}/archive/${PN}-${PV}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="pcmanfm nm-gnome volumeicon pm-utils lxappearance qtconfig compton blueman transset-df grun polkit-gnome"
+IUSE="pcmanfm nm-gnome volumeicon upower-pm-utils lxappearance qtconfig compton blueman transset-df grun polkit-gnome"
 
 RDEPEND="${PYTHON_DEPS}
 	>=x11-wm/fvwm-2.6.5[bidi,doc,gtk2-perl,netpbm,nls,perl,png,readline,rplay,stroke,svg,truetype,vanilla,xinerama,lock]
@@ -29,15 +29,15 @@ RDEPEND="${PYTHON_DEPS}
 	x11-terms/xterm
 	x11-misc/pcmanfm
 	app-admin/conky
-	sys-power/cpufrequtils
+	sys-power/cpupower
 	dev-python/pyxdg
 	dev-perl/gtk2-perl
-    dev-perl/Locale-gettext
+	dev-perl/Locale-gettext
 	gnome-extra/polkit-gnome
 	nm-gnome? ( gnome-extra/nm-applet )
 	blueman? ( net-wireless/blueman )
 	volumeicon? ( media-sound/volumeicon )
-	pm-utils? ( sys-power/pm-utils )
+	upower-pm-utils? ( sys-power/upower-pm-utils )
 	parcellite? ( x11-misc/parcellite )
 	lxappearance? ( lxde-base/lxappearance )
 	qtconfig? ( dev-qt/qtgui )
