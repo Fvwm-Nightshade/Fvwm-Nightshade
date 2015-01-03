@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20150101
+InfoStoreAdd ns_version 0.7.7.20150102
 # Copyright (C) 2014
 #
 # Authors:
@@ -526,7 +526,7 @@ Style FNS-MenuConfigurator      EWMHMiniIconOverride, Icon MenuConfigurator.svg:
 Style FNS-CompConfigurator      EWMHMiniIconOverride, Icon CompConfigurator.svg:48x48, MiniIcon CompConfigurator.svg:16x16
 Style FNS-Script-PersonalMenu   EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
 Style FNS-Script-FileBrowser    EWMHMiniIconOverride, Icon filemanager.svg:48x48, MiniIcon filemanager.svg:16x16
-Style FNS-CpuPerformance        EWMHMiniIconOverride, Icon nucleu.svg:48x48, MiniIcon nucleu.svg:16x16
+Style FNS-CpuPerformance        EWMHMiniIconOverride, Icon cpu.svg:48x48, MiniIcon cpu.svg:16x16
 Style FNS-Script-Date           EWMHMiniIconOverride, Icon clock.svg:48x48, MiniIcon clock.svg:16x16
 Style Chrono                    EWMHMiniIconOverride, Icon Chrono.svg:48x48, MiniIcon Chrono.svg:16x16
 Style Kalende                   EWMHMiniIconOverride, Icon Kalende.svg:48x48, MiniIcon Kalende.svg:16x16
@@ -2219,7 +2219,7 @@ AddToFunc   FuncMenuSystemConfiguration
 + I AddToMenu MenuSystemConfiguration "$[gt.&Mouse]%mouse.svg:$[infostore.MenuIconSize]%"               Popup MenuMouse
 + I AddToMenu MenuSystemConfiguration MissingSubmenuFunction FuncMenuXScreenSaver
 + I AddToMenu MenuSystemConfiguration "$[gt.Sc&reen Saver]%screensaver.svg:$[infostore.MenuIconSize]%"  Popup MenuXScreenSaver
-+ I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"    Exec exec FNS-CpuPerformance
++ I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%cpu.svg:$[infostore.MenuIconSize]%"    Exec exec FNS-CpuPerformance
 + I AddToMenu MenuSystemConfiguration "$[gt.Set Date/Time]%clock.svg:$[infostore.MenuIconSize]%"        FvwmScript FNS-Script-Date
 
 
@@ -2304,14 +2304,14 @@ AddToFunc   FuncFvwmLayoutMenu
 + I Test (EnvMatch foundem 1) AddToMenu FvwmLayoutMenu "$[gt.System]" Nop
 + I TestRc (Match) AddToMenu FvwmLayoutMenu "" Nop
 + I PipeRead 'for i in `ls -Fh $FNS_SYSTEMDIR/layouts/ | grep -v /$ | sed s/\*//`; \
-  do echo AddToMenu FvwmLayoutMenu "${i}%layout2.svg:$[infostore.MenuIconSize]%" FuncChangeLayout $[FNS_SYSTEMDIR] $i; done'
+  do echo AddToMenu FvwmLayoutMenu "${i}%layout.svg:$[infostore.MenuIconSize]%" FuncChangeLayout $[FNS_SYSTEMDIR] $i; done'
 + I Test (EnvMatch foundem 0) UnsetEnv foundem
 + I TestRc (Match) Break
 + I AddToMenu FvwmLayoutMenu "" Nop
 + I AddToMenu FvwmLayoutMenu "$[gt.User]" Nop
 + I AddToMenu FvwmLayoutMenu "" Nop
 + I PipeRead 'for i in `ls -Fh $FVWM_USERDIR/layouts/ | grep -v /$ | sed s/\*//`; \
-  do echo AddToMenu FvwmLayoutMenu "${i}%layout2.svg:$[infostore.MenuIconSize]%" FuncChangeLayout $[FVWM_USERDIR] $i; done'
+  do echo AddToMenu FvwmLayoutMenu "${i}%layout.svg:$[infostore.MenuIconSize]%" FuncChangeLayout $[FVWM_USERDIR] $i; done'
 + I UnsetEnv foundem
 
 #-----------------------------------------------------------------------
@@ -2702,7 +2702,7 @@ AddToFunc   FuncMenuCpuOps
 + I DestroyMenu MenuCpuOps
 + I AddToMenu MenuCpuOps DynamicPopupAction FuncMenuCpuOps
 + I AddToMenu MenuCpuOps "$[gt.Conky Cpu Ops]" Title
-+ I AddToMenu MenuCpuOps "$[gt.CPU Performance]%nucleu.svg:$[infostore.MenuIconSize]%"          Exec exec FNS-CpuPerformance
++ I AddToMenu MenuCpuOps "$[gt.CPU Performance]%cpu.svg:$[infostore.MenuIconSize]%"          Exec exec FNS-CpuPerformance
 + I AddToMenu MenuCpuOps "" Nop
 + I AddToMenu MenuCpuOps "$[gt.Restart Conky CPU]%restart.svg:$[infostore.MenuIconSize]%"       Exec exec xkill -id `xwininfo -name conky_cpu|grep "Window id"|cut -d ' ' -f4`
 
