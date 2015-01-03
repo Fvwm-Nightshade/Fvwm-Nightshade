@@ -1,5 +1,12 @@
 History:
 
+01/02/2015
+- exchange nucleo.svg with cpu.svg because of better icon quality. Also in
+  menus in config
+- change color of bug.svg from black to grey because of better visibility
+- exchange old fns icon with newer and more stylish fns icon
+- add new dependency liblocale-gettext-perl to Required in INSTALL
+
 01/01/2015
 - update Makefile and arch/PKBUILD_FNS to support changes for upcoming 0.8 release.
   Also fix missing regex for perlsitedir
