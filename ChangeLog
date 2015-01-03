@@ -6,6 +6,9 @@ History:
 - change color of bug.svg from black to grey because of better visibility
 - exchange old fns icon with newer and more stylish fns icon
 - add new dependency liblocale-gettext-perl to Required in INSTALL
+- exchange orphaned/deprecated packages in the ebuild with their replacements:
+  - pm-utils => upower-pm-utils
+  - cpufrequtils => cpupower
 
 01/01/2015
 - update Makefile and arch/PKBUILD_FNS to support changes for upcoming 0.8 release.
