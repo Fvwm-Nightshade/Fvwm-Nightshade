@@ -4,6 +4,15 @@ History:
 - add post and preun scriptlets in ebuild for register and unregister apps
   in policy file for pkexec
 - remove forgotten line in fns.install arch script
+- changes in config:
+  - FuncAutoStartPrograms starts only on Init now because most programs will
+    survive a restart of FNS
+  - screenshots will be created in $FVWM_USERDIR/screenshots now
+- exchange <allow_active>auth_admin</allow_active> in fns-poladd with
+  <allow_active>auth_admin_keep</allow_active> to set authorization like sudo
+  to a few minutes.
+- fix bug in FNS-CpuPerformance that changes won't set immediately
+- set SetEnv PcmanFmStatus in .settings to '2' to prevent start of pcmanfm GUI
 
 01/03/2015
 - exchange nucleo.svg with cpu.svg because of better icon quality. Also in
