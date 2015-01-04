@@ -56,6 +56,14 @@ src_install() {
 
 pkg_postinst() {
 	einfo
+	einfo "Register applications at pkexec"
+	for app in cpupower; do
+		if [ `which $app &> /dev/null ;echo $?` == "0" ]; then
+			einfo "  register $app"
+			/usr/bin/fns-poladd $app
+		fi
+	done
+	einfo
 	einfo "If you haven't a graphical login manager copy xinitrc template into your home directory"
 	einfo " $ cp ${ROOT}usr/share/doc/fvwm-nightshade/xinitrc-example ~/.xinitrc"
 	einfo "or add the following lin in your .xinitrc:"
@@ -72,5 +80,26 @@ pkg_postinst() {
 	einfo "They are listed in ${ROOT}usr/share/doc/${PF}/INSTALL.gz."
 	einfo ""
 	einfo "Read the manual pages for more details."
+	einfo ""
+}
+
+pkg_prerm()
+{
+	einfo
+	einfo "Unregister applications from pkexec"
+	for app in cpupower; do
+		if [ `which $app &> /dev/null ;echo $?` == "0" ]; then
+			alreadyHere=`cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$app"`
+			if [ "$alreadyHere" != "" ]; then
+				einfo "  unregister $app"
+				/usr/bin/fns-poladd -r $app
+			fi
+		fi
+	done
+	einfo
+	einfo "If you haven't a graphical login manager remove exec fvwm-nightshade from your ~/.xinitrc."
+	einfo ""
+	einfo "If you have installed Fvwm-Nightshade locally and using a display-manager remove"
+	einfo "fvwm-nightshade.desktop from /usr/share/xsessions."
 	einfo ""
 }
