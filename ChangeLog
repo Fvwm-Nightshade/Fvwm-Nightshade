@@ -3,6 +3,7 @@ History:
 01/04/2015
 - add post and preun scriptlets in ebuild for register and unregister apps
   in policy file for pkexec
+- remove forgotten line in fns.install arch script
 
 01/03/2015
 - exchange nucleo.svg with cpu.svg because of better icon quality. Also in
