@@ -1,6 +1,10 @@
 History:
 
-01/02/2015
+01/04/2015
+- add post and preun scriptlets in ebuild for register and unregister apps
+  in policy file for pkexec
+
+01/03/2015
 - exchange nucleo.svg with cpu.svg because of better icon quality. Also in
   menus in config
 - change color of bug.svg from black to grey because of better visibility
