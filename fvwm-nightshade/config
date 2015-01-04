@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.7.20150102
+InfoStoreAdd ns_version 0.7.7.20150104
 # Copyright (C) 2014
 #
 # Authors:
@@ -1103,7 +1103,7 @@ AddToFunc StartFunction
 AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # start programs found in .autostart
-+ I FuncAutoStartPrograms
++ I Test (Init) FuncAutoStartPrograms
 
 #***********************************************************************
 # 8.1.2 Exit
@@ -1455,7 +1455,8 @@ AddToFunc   FuncViewFileTail
 #-----------------------------------------------------------------------
 DestroyFunc FuncWindowCreateScreenshot
 AddToFunc   FuncWindowCreateScreenshot
-+ I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%H%M%S`.$[w.id].png"'
++ I PipeRead 'test ! -d "${FVWM_USERDIR}/screenshots" && mkdir "${FVWM_USERDIR}/screenshots"'
++ I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshots/screenshot-`date +%F-%H%M%S`.$[w.id].png"'
 + I Test (x import) ThisWindow (!Shaded, !Iconic, Iconifiable) \
                   PipeRead 'import -frame -window $[w.id] $[infostore.picpath]'
 + I TestRc (Match)  FuncShowMessage "\$\[gt.Screenshot Info for window\] $[w.id]" \
@@ -1469,11 +1470,11 @@ AddToFunc   FuncWindowCreateScreenshot
 #-----------------------------------------------------------------------
 DestroyFunc FuncDesktopCreateScreenshot
 AddToFunc   FuncDesktopCreateScreenshot
++ I PipeRead 'test ! -d "${FVWM_USERDIR}/screenshots" && mkdir "${FVWM_USERDIR}/screenshots"'
 + I Test (!x import) FuncShowMessage "Desktop Screenshot Info" \
                                      "ImageMagick isn't installed. No screenshot created."
-
 + I TestRc (Match) Break 1
-+ I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshot-`date +%F-%H%M%S`.png"'
++ I PipeRead 'echo InfoStoreAdd picpath "$[FVWM_USERDIR]/screenshots/screenshot-`date +%F-%H%M%S`.png"'
 + I Exec sleep $0; import -window root -quality 100 -silent $[infostore.picpath]
 + I PipeRead 'echo InfoStoreAdd pause `expr $0 \\* 1000`'
 + I Schedule $[infostore.pause] FuncShowMessage "Desktop Screenshot Info" \
