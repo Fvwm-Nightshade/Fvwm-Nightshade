@@ -7,7 +7,7 @@ use File::Copy qw(copy);
 
 #-------------------------------------------------------------------------
 # File:         fns-cpu-performance
-my $Version =   '2.0.3';
+my $Version =   '2.0.4';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure cpufreq or cpupower based on
@@ -16,7 +16,7 @@ my $Version =   '2.0.3';
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      11/29/2014
-# Changed:      12/31/2014
+# Changed:      01/04/2015
 #-------------------------------------------------------------------------
 
 
@@ -157,7 +157,7 @@ else {
     #-----------------------------------------------------------------------
     # Check if any parameter has changed since start. Returns 1 if yes
     #-----------------------------------------------------------------------
-    sub isAllSet2Default {
+    sub isSomethingSet {
         my $rc = 0;
         foreach my $key (keys %config) {
             if ($config{$key}[1] == SET) {$rc = SET;}
@@ -530,7 +530,7 @@ else {
             }
         }
         &set_config_value('cores_unlocked', $check_button_state, $default);
-        &set_apply_button_active(&isAllSet2Default());
+        &set_apply_button_active(&isSomethingSet());
     }
 
     sub are_settings_equal {
@@ -877,7 +877,7 @@ else {
         }
         
         # apply changes
-        unless (&isAllSet2Default()) {
+        if (&isSomethingSet()) {
             system("$gov_file");
             &update_settings();
         }
