@@ -1,5 +1,19 @@
 History:
 
+01/05/2015
+- exchange dev-qt/qtgui with dev-qt/qtgui:4 in ebuild (thanks to Sebaro).
+  Also remove some einfo lines not needed on package installation
+- add support for more than 4 desktop pages (currently 10 depending on the
+  limits of available key bindings => SHIFT+ALT+0-9 for window move to page
+  and SHIFT+CTRL+0-9 for goto page):
+  - add 2 new infostore variables: x_desks and y_desks in .settings
+  - update all layouts to set the menu entries and key bindings automatically.
+    Also calculating the correct used space and position of the pager
+  - update G2likeBottomBar and KlikeBottomBar to calculate the correct used
+    space and positions of the pager
+- add missing FuncWriteSetEnvToFileAndSet call for use_composite in FNS-CompConfigurator
+  Also update shell call to get compositors paths (supress errors)
+
 01/04/2015
 - add post and preun scriptlets in ebuild for register and unregister apps
   in policy file for pkexec
