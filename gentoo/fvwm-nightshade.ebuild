@@ -16,7 +16,7 @@ SRC_URI="https://github.com/${PN}/${PN}/archive/${PN}-${PV}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="pcmanfm nm-gnome volumeicon upower-pm-utils lxappearance qtconfig compton blueman transset-df grun polkit-gnome"
+IUSE="pcmanfm nm-gnome blueman volumeicon upower-pm-utils lxappearance qtconfig compton transset-df grun"
 
 RDEPEND="${PYTHON_DEPS}
 	>=x11-wm/fvwm-2.6.5[bidi,doc,gtk2-perl,netpbm,nls,perl,png,readline,rplay,stroke,svg,truetype,vanilla,xinerama,lock]
@@ -40,7 +40,7 @@ RDEPEND="${PYTHON_DEPS}
 	upower-pm-utils? ( sys-power/upower-pm-utils )
 	parcellite? ( x11-misc/parcellite )
 	lxappearance? ( lxde-base/lxappearance )
-	qtconfig? ( dev-qt/qtgui )
+	qtconfig? ( dev-qt/qtgui:4 )
 	compton? ( x11-misc/compton )
 	transset-df? ( x11-misc/transset-df )
 	grun? ( x11-misc/grun )"
@@ -66,15 +66,11 @@ pkg_postinst() {
 	einfo
 	einfo "If you haven't a graphical login manager copy xinitrc template into your home directory"
 	einfo " $ cp ${ROOT}usr/share/doc/fvwm-nightshade/xinitrc-example ~/.xinitrc"
-	einfo "or add the following lin in your .xinitrc:"
+	einfo "or add the following line in your .xinitrc:"
 	einfo " exec fvwm-nightshade"
 	einfo "and start the xserver with"
 	einfo " $ startx"
 	einfo "change the base settings and enjoy."
-	einfo ""
-	einfo "If you have installed Fvwm-Nightshade locally and want to use a display-manager copy"
-	einfo "fvwm-nightshade.desktop-example from the doc directory to /usr/share/xsessions:"
-	einfo " # cp ${ROOT}usr/share/doc/fvwm-nightshade/fvwm-nightshade.desktop-example /usr/share/xsessions/fvwm-nightshade.desktop"
 	einfo ""
 	einfo "Many applications can extend functionality of Fvwm-Nightshade."
 	einfo "They are listed in ${ROOT}usr/share/doc/${PF}/INSTALL.gz."
