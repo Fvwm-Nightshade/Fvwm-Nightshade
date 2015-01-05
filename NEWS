@@ -24,7 +24,8 @@ Changes:
   - FNS-MenuConfigurator (exchange original fvwm-menu-config GUI)
   - FNS-CPU-Performance (governor-tool for cpufreq / cpupower)
 - Support for pkexec (adding programs to polkit for gui view as root)
-
+- Support for 10 virtual desktop pages (depending on the limit of
+  available numeric key bindings => SHIFT+ALT/CTRL+0-9)
 ------------------------------------------------------------------------
 
 Version 0.6.8 (20th October 2013)

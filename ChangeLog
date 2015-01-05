@@ -13,6 +13,7 @@ History:
     space and positions of the pager
 - add missing FuncWriteSetEnvToFileAndSet call for use_composite in FNS-CompConfigurator
   Also update shell call to get compositors paths (supress errors)
+- update NEWS and README
 
 01/04/2015
 - add post and preun scriptlets in ebuild for register and unregister apps
