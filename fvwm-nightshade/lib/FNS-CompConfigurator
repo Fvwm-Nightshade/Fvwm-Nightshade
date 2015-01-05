@@ -9,7 +9,7 @@ use Getopt::Long qw(:config no_ignore_case require_order pass_through);;
 
 #-----------------------------------------------------------------------
 # File:         FNS-CompConfigurator
-my $Version =   '2.0.1';
+my $Version =   '2.0.2';
 # Licence:      GPL 2
 #
 # Description:  Composite configurator Perl script for xcompmgr or compton
@@ -17,7 +17,7 @@ my $Version =   '2.0.1';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/11/2014
-# Changed:      12/14/2014
+# Changed:      01/05/2015
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -35,12 +35,12 @@ my $FNS_SYSTEMDIR = "$ENV{FNS_SYSTEMDIR}";
 my $FVWM_USERDIR = "$ENV{FVWM_USERDIR}";
 
 # used config path
-my $config_path = "$FVWM_USERDIR/.settings.tmp";
+my $config_path = "$FVWM_USERDIR/.settings";
 
 my $compmgr = "none";
-my $xcompmgr = `which xcompmgr |xargs basename`;
+my $xcompmgr = `which xcompmgr  2> /dev/null |xargs basename  2> /dev/null`;
 chomp($xcompmgr);
-my $compton = `which compton |xargs basename`;
+my $compton = `which compton  2> /dev/null |xargs basename  2> /dev/null`;
 chomp($compton);
 my $xcompActive = 1;
 
@@ -215,6 +215,7 @@ sub check_use_on {
     # get current state
     my $check_button_state = $win->is_active('checkUse');
     if ($check_button_state != $useCompositor) {
+        &config_changed();
         # set sensitivity of the radio buttons if the respective
         # composite manager is installed.
         unless ($compmgr eq "none") {
@@ -593,8 +594,9 @@ $win->add_signal_handler('saveButton', 'clicked', sub{&save();});
 # save the configuration
 sub save {
     &build_cmd();
-    print "comp_command \"$execString\" $config_path";
+    #print "comp_command \"$execString\" $config_path";
     $module->send("FuncWriteInfoStoreToFileAndSet comp_command \"$execString\" $config_path");
+    $module->send("FuncWriteSetEnvToFileAndSet use_composite $useCompositor $config_path");
     $win->set_sensitive('saveButton', 0);
     $cfg_changed = 0;
 }
@@ -705,7 +707,7 @@ if ($compmgr ne 'none') {
     if ($useCompositor == 1) {
         $useCompositor = 0;
         $win->set_value('checkUse', $useCompositor);
-        $module->send("FuncWriteSetEnvToFileAndSet use_composite 0 $config_path");
+        $module->send("FuncWriteSetEnvToFileAndSet use_composite $useCompositor $config_path");
     }
     
     # deactivate all frames
