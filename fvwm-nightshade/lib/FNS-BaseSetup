@@ -8,10 +8,11 @@ use FVWM::Module::SimpleGtk2;
 use File::Copy qw(copy);
 use File::Path qw(make_path);
 use File::Spec;
+#use Data::Dumper;
 
 #-------------------------------------------------------------------------
 # File:         FNS-BaseSetup
-my $Version =   '2.0.3';
+my $Version =   '2.1.0';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure base settings of Fvwm-Nightshade
@@ -19,11 +20,21 @@ my $Version =   '2.0.3';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/08/2014
-# Changed:      12/31/2014
+# Changed:      01/09/2015
 #-------------------------------------------------------------------------
 
-my $module = new FVWM::Module::SimpleGtk2(
-);
+
+##########################################################################
+# module initialisation and getting of needed FVWM variables
+##########################################################################
+my $module = new FVWM::Module::SimpleGtk2(Name => 'FNS-BaseSetup');
+
+# get needed FVWM variables
+$module->request_reply('$[vp.width] $[vp.height] $[infostore.hratio] $[infostore.fontsize]', $module->{win_id});
+my @fvwm_vars = $module->readPacket();
+$fvwm_vars[1] =~ s/\0//g;
+@fvwm_vars = split(' ', $fvwm_vars[1]);
+
 
 ##########################################################################
 # Global values
@@ -38,6 +49,8 @@ my %config = (
                 "used_font" => ['Sans', 0, 'InfoStoreAdd'],
                 "fontsize" => ['12', 0, 'InfoStoreAdd'],
                 "used_layout" => ['Horizontal', 0, 'InfoStoreAdd'],
+                "x_desks" => ['4', 0, 'InfoStoreAdd'],
+                "y_desks" => ['1', 0, 'InfoStoreAdd'],
                 "use_composite" => ['0', 0, 'SetEnv'],
                 "DesktopIconsOn" => ['0', 0, 'SetEnv'],
                 "DesktopScrollOn" => ['1', 0, 'SetEnv'],
@@ -64,6 +77,9 @@ my $pcmanfm_config = "$ENV{HOME}/.config/pcmanfm/default/pcmanfm.conf";
 
 # used libfm config path
 my $libfm_config = "$ENV{HOME}/.config/libfm/libfm.conf";
+
+# first start
+my $init = 1;
 
 
 ##########################################################################
@@ -145,13 +161,17 @@ sub get_config_value(@) {
 
 #-----------------------------------------------------------------------
 # Set a config value
-# set_config_value(key, value)
+# set_config_value(key, value, init)
 #-----------------------------------------------------------------------
 sub set_config_value(@) {
-    my ($key, $value) = @_;
-    $config{$key}[0] = $value;
-    # set to changed (1)
-    $config{$key}[1] = 1;
+    my ($key, $value, $init) = @_;
+    unless ($init or defined($init)) {
+        $config{$key}[0] = $value;
+        # set to changed (1)
+        $config{$key}[1] = 1;
+    } else {
+        $config{$key}[0] = $value;
+    }
 }
 
 
@@ -459,33 +479,6 @@ sub check_deskscroll_on {
     }
 }
 
-## Desktop size -------------------------------------------------------
-#$win->add_label( Name => 'labelDesktops', 
-#        Pos     => [280, 70], 
-#        Title   => "Desktops:", 
-#        Justify => 'left', 
-#        Frame   => 'DeskFrame');
-#
-#$win->add_spin_button( Name => 'spinDesktopX', 
-#        Pos     => [390, 66], 
-#        Start   => 4, Min => 1, Max => 10, Step => 1, 
-#        Tip     => '', 
-#        Align   => 'right', 
-#        Frame   => 'DeskFrame');
-#
-#$win->add_label( Name => 'labelx', 
-#        Pos     => [450, 70], 
-#        Title   => "x", 
-#        Justify => 'left', 
-#        Frame   => 'DeskFrame');
-#
-#$win->add_spin_button( Name => 'spinDesktopY', 
-#        Pos     => [460, 66], 
-#        Start   => 1, Min => 1, Max => 10, Step => 1, 
-#        Tip     => '', 
-#        Align   => 'right', 
-#        Frame   => 'DeskFrame');
-
 
 #-----------------------------------------------------------------------
 # Decorations & Panels
@@ -512,8 +505,144 @@ $win->add_combo_box( Name => 'comboLayout',
         Frame   => 'DekoFrame', 
         Data    => \@layouts, 
         Start   => $index);
-$win->add_signal_handler('comboLayout', 'changed', sub {&set_config_value("used_layout",$win->get_title('comboLayout'));});
+$win->add_signal_handler('comboLayout', 'changed', sub {&set_layout($win->get_title('comboLayout'));});
 
+sub set_layout($) {
+    my $layout = shift;
+    &set_config_value("used_layout",$layout);
+    &set_desktop_spins($layout);
+}
+
+# Desktop size -------------------------------------------------------
+
+sub set_desktop_spins($) {
+    my $layout = shift;
+    $win->set_sensitive('spinDesktopY', 1);
+    my $current_x_desks = &get_config_value("x_desks");
+    my $current_y_desks = &get_config_value("y_desks");
+    my $current_desks = $current_x_desks*$current_y_desks;
+    my $vp_width = $fvwm_vars[0];
+    my $vp_height = $fvwm_vars[1];
+    my $hratio = $fvwm_vars[2];
+    my $fontsize = $fvwm_vars[3];
+
+    if ($layout eq "Vertical") {
+        # set spinDesktopX and spinDesktopY
+        my $max = 10;
+        $max = 5 if $current_y_desks == 2;
+        if ($init) {
+            $win->set_values('spinDesktopX', Start => $current_x_desks, Min => 1, Max => $max, Step => 1);
+            $win->set_values('spinDesktopY', Start => $current_y_desks, Min => 1, Max => 2, Step => 1);
+        } else {
+            $win->set_values('spinDesktopX', Active => $current_x_desks, Min => 1, Max => $max, Step => 1);
+            $win->set_values('spinDesktopY', Active => $current_y_desks, Min => 1, Max => 2, Step => 1);
+        }
+    } else {
+        my $max;
+        if ($layout eq "Horizontal") {
+            my $tray_icons;
+            # first the count of icons visible in stalonetray must set related to the
+            # screen resolution
+            if ($vp_width gt 1600) {$tray_icons = 7;}
+            elsif ($vp_width gt 1400) {$tray_icons = 6;}
+            elsif ($vp_width gt 1200) {$tray_icons = 5;}
+            else {$tray_icons = 4;}
+
+            # panel width
+            my $panel_width = (($tray_icons*2)+14)*15;
+
+            # pager
+            my $pager_height = sprintf("%.0f", $fontsize*3.5);
+            my $pager_width = sprintf("%.0f", ($pager_height*($vp_width/$vp_height)*$current_desks)+4);
+            my $max_pager_width = $vp_width - (2 * $panel_width) - (2 * $fontsize) - sprintf("%.0f", $vp_width*0.01);
+            my $one_pager_size = sprintf("%.0f", $pager_width/$current_x_desks);
+            
+            # maximum pagers
+            $max = sprintf("%.0f", $max_pager_width/$one_pager_size);
+       } else { # G2like, Klike
+            # colums
+            my $columns = sprintf("%.0f", $vp_width/15);
+            
+            # Bar height
+            my $bar_height = sprintf("%.0f", ($fontsize*2)+(6*$hratio));
+            
+            # pager
+            my $pager_width = sprintf("%.0f", 5+(($vp_width/($vp_height/$bar_height))*$current_desks));
+            my $pager_columns = sprintf("%.0f", $pager_width/15);
+            my $one_pager_columns = sprintf("%.0f", $pager_columns / $current_desks);
+            my $max_pager_columns = sprintf("%.0f", $columns / 3);
+
+            # maximum pagers
+            $max = sprintf("%.0f", $max_pager_columns/$one_pager_columns);
+            
+       }
+       # set spinDesktopX and spinDesktopY
+       $max = 10 if $max > 10;
+       $current_desks = $max if $current_desks > $max;
+       
+       if ($init) {
+           $win->set_values('spinDesktopX', Start => $current_desks, Min => 1, Max => $max, Step => 1);
+           $win->set_values('spinDesktopY', Start => 1, Min => 1, Max => 1, Step => 1);
+       } else {
+           $win->set_values('spinDesktopX', Active => $current_desks, Min => 1, Max => $max, Step => 1);
+           $win->set_values('spinDesktopY', Active => 1, Min => 1, Max => 1, Step => 1);
+       }
+       # disable spinDesktopY
+       $win->set_sensitive('spinDesktopY', 0);
+       $init = 0;
+    }
+}
+
+$win->add_label( Name => 'labelDesktops', 
+        Pos     => [280, 70], 
+        Title   => "Desktops:", 
+        Justify => 'left', 
+        Frame   => 'DeskFrame');
+
+$win->add_spin_button( Name => 'spinDesktopX', 
+        Pos     => [390, 66], 
+        Start   => 4, Min => 1, Max => 10, Step => 1, 
+        Tip     => '', 
+        Align   => 'right', 
+        Frame   => 'DeskFrame');
+$win->add_signal_handler('spinDesktopX', 'value-changed', sub {&set_config_value("x_desks", $win->get_value('spinDesktopX', 'active'), $init);});
+
+$win->add_label( Name => 'labelx', 
+        Pos     => [450, 70], 
+        Title   => "x", 
+        Justify => 'left', 
+        Frame   => 'DeskFrame');
+
+$win->add_spin_button( Name => 'spinDesktopY', 
+        Pos     => [460, 66], 
+        Start   => 1, Min => 1, Max => 10, Step => 1, 
+        Tip     => '', 
+        Align   => 'right', 
+        Frame   => 'DeskFrame');
+#$win->add_signal_handler('spinDesktopY', 'value-changed', sub {&set_config_value("y_desks", $win->get_value('spinDesktopY', 'active'));});
+$win->add_signal_handler('spinDesktopY', 'value-changed', \&set_xy_desks);
+
+&set_desktop_spins(&get_config_value("used_layout"));
+
+sub set_xy_desks() {
+    &set_config_value("y_desks", $win->get_value('spinDesktopY', 'active'), $init);
+    # check if layout is Vertical because x_desks depends of y_desks
+    if (&get_config_value("used_layout") eq 'Vertical') {
+        my $x_desks = &get_config_value("x_desks");
+        my $y_desks = &get_config_value("y_desks");
+        my $xmax = $win->get_value('spinDesktopX', 'Max');
+        if ($y_desks == 2 and $xmax == 10) {
+            if ($x_desks % 2) { # odd
+                $x_desks++;
+            }
+            $win->set_value('spinDesktopX', Active => $x_desks/2);
+            $win->set_value('spinDesktopX', Max => 5);
+        }
+        elsif ($y_desks == 1) {
+            $win->set_value('spinDesktopX', Max => 10);
+        }
+    }
+}
 
 # Used theme ----------------------------------------------------------
 $win->add_label( Name => 'labelTheme', 
@@ -732,8 +861,10 @@ sub apply_and_save {
             #print "$key => $config{$key}[0]\n";
             if (defined($config{$key}[2])) {
                 if ($config{$key}[2] eq 'SetEnv') {
+                    #print "module->send(\"FuncWriteSetEnvToFileAndSet $key $config{$key}[0] $config_path\")";
                     $module->send("FuncWriteSetEnvToFileAndSet $key $config{$key}[0] $config_path");
                 } else {
+                    #print "module->send(\"FuncWriteInfoStoreToFileAndSet $key $config{$key}[0] $config_path\")";
                     $module->send("FuncWriteInfoStoreToFileAndSet $key $config{$key}[0] $config_path");
                 }
             } else {
@@ -767,6 +898,7 @@ sub apply_and_save {
     unless (-f "$FVWM_USERDIR/.layout") {
         symlink("$FNS_SYSTEMDIR/layouts/$config{used_layout}[0]", "$FVWM_USERDIR/.layout");
     }
+    #print "module->send(\"FuncRestart\")";
     $module->send("FuncRestart");
 }
 
