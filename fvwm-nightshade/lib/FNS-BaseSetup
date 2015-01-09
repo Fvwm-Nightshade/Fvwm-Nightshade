@@ -1,0 +1,933 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+#use SimpleGtk2;
+use lib `fvwm-perllib dir`;
+use FVWM::Module::SimpleGtk2;
+use File::Copy qw(copy);
+use File::Path qw(make_path);
+use File::Spec;
+#use Data::Dumper;
+
+#-------------------------------------------------------------------------
+# File:         FNS-BaseSetup
+my $Version =   '2.1.0';
+# Licence:      GPL 2
+#
+# Description:  Perl script to configure base settings of Fvwm-Nightshade
+#
+# Author:       Thomas Funk <t.funk@web.de>    
+#
+# Created:      10/08/2014
+# Changed:      01/09/2015
+#-------------------------------------------------------------------------
+
+
+##########################################################################
+# module initialisation and getting of needed FVWM variables
+##########################################################################
+my $module = new FVWM::Module::SimpleGtk2(Name => 'FNS-BaseSetup');
+
+# get needed FVWM variables
+$module->request_reply('$[vp.width] $[vp.height] $[infostore.hratio] $[infostore.fontsize]', $module->{win_id});
+my @fvwm_vars = $module->readPacket();
+$fvwm_vars[1] =~ s/\0//g;
+@fvwm_vars = split(' ', $fvwm_vars[1]);
+
+
+##########################################################################
+# Global values
+##########################################################################
+SimpleGtk2::use_gettext("fns-base-setup", "$ENV{FVWM_USERDIR}/locale:$ENV{FNS_SYSTEMDIR}/locale:+");
+
+# default config
+my %config = (
+                "used_theme" => ['Tribal', 0, 'InfoStoreAdd'],
+                "used_banner" => ['/usr/bin/../share/fvwm-nightshade/artwork/splashs/splash_fns_small.png', 0, 'InfoStoreAdd'],
+                "SplashOn" => ['1', 0, 'SetEnv'],
+                "used_font" => ['Sans', 0, 'InfoStoreAdd'],
+                "fontsize" => ['12', 0, 'InfoStoreAdd'],
+                "used_layout" => ['Horizontal', 0, 'InfoStoreAdd'],
+                "x_desks" => ['4', 0, 'InfoStoreAdd'],
+                "y_desks" => ['1', 0, 'InfoStoreAdd'],
+                "use_composite" => ['0', 0, 'SetEnv'],
+                "DesktopIconsOn" => ['0', 0, 'SetEnv'],
+                "DesktopScrollOn" => ['1', 0, 'SetEnv'],
+                "PcmanFmStatus" => ['1', 0, 'SetEnv'],
+                "additional_wp_dirs" => ['/usr/share/wallpapers:/home/tf/Bilder/wallpapers', 0, 'InfoStoreAdd'],
+                "big_icon_size" => ['32', 0, undef],
+                "default_terminal" => ['xterm', 0, 'InfoStoreAdd'],
+                "default_browser" => ['iceweasel', 0, 'InfoStoreAdd'],
+                "default_transset" => ['transset', 0, 'InfoStoreAdd'],
+                "default_editor" => ['mousepad', 0, 'InfoStoreAdd'],
+                );
+
+# FNS systemdir
+my $FNS_SYSTEMDIR = "$ENV{FNS_SYSTEMDIR}";
+
+# FNS userdir
+my $FVWM_USERDIR = "$ENV{FVWM_USERDIR}";
+
+# used config path
+my $config_path = "$FVWM_USERDIR/.settings";
+
+# used pcmanfm config path
+my $pcmanfm_config = "$ENV{HOME}/.config/pcmanfm/default/pcmanfm.conf";
+
+# used libfm config path
+my $libfm_config = "$ENV{HOME}/.config/libfm/libfm.conf";
+
+# first start
+my $init = 1;
+
+
+##########################################################################
+# Parsing routines
+########################################################################
+sub parse_config(@) {
+    my ($file, $sep) = @_;
+    $sep = ' ' unless defined $sep;
+    # used parameters in config
+    my @used_params = keys %config;
+    local *CF;
+    
+    if (-f $file) {
+        open(CF,'<'.$file) or die "Open $file: $!";
+        read(CF, my $data, -s $file);
+        close(CF);
+        
+        my @lines  = split(/\015\012|\012|\015/,$data);
+        my $config = {};
+        my $count  = 0;
+        
+        foreach my $line(@lines) {
+            $count++;
+            my $fns_var = undef;
+            
+            # skip comments
+            next if($line =~ /^\s*#/);
+            
+            # check for 'Infostore' or 'Setenv' if seperator is a space
+            if ($sep eq ' ' and $line =~ /^\s*infostoreadd/i) {
+                $line =~ s/^\s*infostoreadd //i;
+                $fns_var = "InfoStoreAdd";
+            }
+            if ($sep eq ' ' and $line =~ /^\s*setenv/i) {
+                $line =~ s/^\s*setenv //i;
+                $fns_var = "SetEnv";
+            }
+            
+            next if($line !~ /^\s*\S+\s*$sep.*$/);
+            
+            # Remove whitespaces at the beginning and the end before splitting
+            $line =~ s/^\s+//g;
+            $line =~ s/\s+$//g;
+            
+            my ($key,$value) = split(/$sep/,$line,2);
+            
+            # Remove whitespaces at the beginning and the end again
+            $key   =~ s/^\s+//g;
+            $key   =~ s/\s+$//g;
+            $value =~ s/^\s+//g;
+            $value =~ s/\s+$//g;
+            # remove quotes at the beginning and the end
+            $value =~ s/^("|')//;
+            $value =~ s/("|')$//;
+            
+            # if value overwritting is not welcome uncomment it
+            #die "Configuration option '$key' defined twice in line $count of configuration file '$file'" if($config->{$key});
+            
+            if ("@used_params" =~ /$key/) {
+                $config{$key} = [$value, 0, $fns_var]; # [value, changed-flag(0/1), fns variable]
+            }
+        }
+    }
+}
+
+#-----------------------------------------------------------------------
+# Get a config value
+# get_config_value(key, index)
+# structure of a config entry: "parameter" => [value, changed-flag, SetEnv/InfostoreAdd]
+#-----------------------------------------------------------------------
+sub get_config_value(@) {
+    my ($key, $index) = @_;
+    $index = 0 unless defined($index);
+    my $value = undef;
+    $value = $config{$key}[$index] if (defined($config{$key}));
+    return $value;
+}
+
+
+#-----------------------------------------------------------------------
+# Set a config value
+# set_config_value(key, value, init)
+#-----------------------------------------------------------------------
+sub set_config_value(@) {
+    my ($key, $value, $init) = @_;
+    unless ($init or defined($init)) {
+        $config{$key}[0] = $value;
+        # set to changed (1)
+        $config{$key}[1] = 1;
+    } else {
+        $config{$key}[0] = $value;
+    }
+}
+
+
+########################################################################
+# Common functions
+########################################################################
+
+#-----------------------------------------------------------------------
+# Get a list of files("f") or directories("d") for the listed directories
+# get_file_or_dir_list(["f/d"],[directory/ies], [extension])
+#-----------------------------------------------------------------------
+sub get_file_or_dir_list(@) {
+    my ($type, $dirs, $ext) = @_;
+    my @filedir_list;
+    foreach my $dir (@{$dirs}) {
+        if (-d $dir) {
+            opendir(DIR, $dir);
+            
+            while (my $filedir = readdir(DIR)) {
+                # We only want files or directories (without . or ..)
+                if ($type eq "d") {
+                    next unless (-d "$dir/$filedir");
+                    next if ($filedir =~ m/^(.|..)$/);
+                } else {
+                    next unless (-f "$dir/$filedir");
+
+                    # Use a regular expression to find files ending in $ext
+                    if (defined $ext) {
+                        next unless ($filedir =~ m/\.$ext$/);
+                    }
+                }
+            
+                push(@filedir_list, $filedir);
+            }
+            closedir(DIR);
+        }
+    }
+    return @filedir_list;
+}
+
+
+#-----------------------------------------------------------------------
+# Get a unique list of files for the listed directory/ies
+# get_unique_list([directory/ies], [extension])
+#-----------------------------------------------------------------------
+sub get_unique_list(@) {
+    my ($type, $dirs, $ext) = @_;
+    my @full_list = get_file_or_dir_list($type, $dirs, $ext);
+    my %seen;
+    my @unique = grep { !$seen{$_}++ } @full_list;
+    return @unique;  
+}
+
+
+#-----------------------------------------------------------------------
+# Get array index for a word
+# get_index_of(word, array)
+#-----------------------------------------------------------------------
+sub get_index_of(@) {
+    my ($word, @array) = @_;
+    my ($index) = grep { $array[$_] =~ /$word/ } 0..$#array;
+    return $index;
+}
+
+
+#-----------------------------------------------------------------------
+# Initialize Fvwm-Nightshade if needed
+#-----------------------------------------------------------------------
+sub first_start {
+    # copy .settings to FVWM_USERDIR if not available
+    unless (-f $config_path) {
+        copy("$FNS_SYSTEMDIR/.settings", $config_path);
+    }
+    # copy .fns-menu.cfg to FVWM_USERDIR if not available
+    unless (-f "$FVWM_USERDIR/.fns-menu.cfg") {
+        copy("$FNS_SYSTEMDIR/.fns-menu.cfg", "$FVWM_USERDIR/.fns-menu.cfg");
+    }
+    # create the wallpapers directory if not available and symlink all system FNS wallpapers
+    unless (-d "$FVWM_USERDIR/wallpapers") {
+        mkdir ("$FVWM_USERDIR/wallpapers");
+        my @files = &get_file_or_dir_list("f", ["$FNS_SYSTEMDIR/artwork/wallpapers"]);
+        foreach my $wallpaper (@files) {
+            unless (-l "$FVWM_USERDIR/wallpapers/$wallpaper") {
+                symlink("$FNS_SYSTEMDIR/artwork/wallpapers/$wallpaper", "$FVWM_USERDIR/wallpapers/$wallpaper");
+            }
+        }
+    }    
+}
+
+
+########################################################################
+# Main
+########################################################################
+
+# is it the first start of FNS?
+&first_start();
+# get the main parameters
+&parse_config($config_path);
+# get additional parameters
+&parse_config($libfm_config, '=');
+
+
+########################################################################
+# Graphical User Interface + corresponding functions
+########################################################################
+
+#-------------------------------------------------------------------------
+# Toplevel window
+#-------------------------------------------------------------------------
+my $win = SimpleGtk2->new_window(  Name => 'mainWindow', 
+                        Version => $Version,
+                        Size => [550, 415], 
+                        Title => "Fvwm-Nightshade Base Setup");
+$win->add_signal_handler('mainWindow', 'delete_event', sub{Gtk2->main_quit;});
+
+
+#-----------------------------------------------------------------------
+# Environment Frame
+#-----------------------------------------------------------------------
+$win->add_frame( Name => 'EnvFrame', 
+        Pos     => [10, 10], 
+        Size    => [530, 80], 
+        Title   => ' Environment ');
+
+
+# Splash --------------------------------------------------------------
+$win->add_check_button( Name => 'checkSplashOn', 
+        Pos     => [5, 10], 
+        Title   => 'Splash On', 
+        Tip     => 'Run Banner at startup? Default: on', 
+        Active  => &get_config_value("SplashOn"), 
+        Frame   => 'EnvFrame');
+$win->add_signal_handler('checkSplashOn', 'toggled', \&check_splash_on);
+
+sub check_splash_on {
+    # get current state
+    my $check_button_state = $win->is_active('checkSplashOn');
+    # get config state
+    my $config_state = &get_config_value("SplashOn");
+    if ($check_button_state != $config_state) {
+        &set_config_value("SplashOn", $check_button_state);
+        # set sensitivity of the entry and the button
+        if (defined($win->exist_object('entrySplashPath'))) {
+            $win->set_sensitive('entrySplashPath', $check_button_state);
+            $win->set_sensitive('changeSplashPathButton', $check_button_state);
+        }
+    }
+}
+
+$win->add_entry( Name => 'entrySplashPath', 
+        Pos     => [110, 9], 
+        Size    => [345, 25], 
+        Title   => &get_config_value("used_banner"), 
+        Tip     => 'Path to splash image',
+        Sens    => &get_config_value("SplashOn"), 
+        Frame   => 'EnvFrame');
+
+$win->add_button( Name => 'changeSplashPathButton', 
+        Pos     => [465, 9], 
+        Size => [50, 25], 
+        Title   => "...", 
+        Tip     => 'Set path to splash image', 
+        Sens    => &get_config_value("SplashOn"), 
+        Frame   => 'EnvFrame');
+$win->add_signal_handler('changeSplashPathButton', 'clicked', \&change_splash_path);
+
+sub change_splash_path {
+    # get current filepath
+    my $path = $win->get_title('entrySplashPath');
+    my $resp = $win->show_filechooser_dialog('open', $path);
+    unless ($resp eq '0') {
+        $win->set_title('entrySplashPath', $resp);
+        &set_config_value("used_banner", $resp);
+    }
+}
+
+
+# Composite Manager ---------------------------------------------------
+$win->add_check_button( Name => 'checkCompOn', 
+        Pos     => [5, 40], 
+        Title   => 'Composite Manager On', 
+        Tip     => 'Use composite manager? Default: off', 
+        Active  => &get_config_value("use_composite"), 
+        Frame   => 'EnvFrame');
+$win->add_signal_handler('checkCompOn', 'toggled', \&check_comp_on);
+
+sub check_comp_on {
+    # get current state
+    my $check_button_state = $win->is_active('checkCompOn');
+    # get config state
+    my $config_state = &get_config_value("use_composite");
+    if ($check_button_state != $config_state) {
+        &set_config_value("use_composite", $check_button_state);
+        # set sensitivity of the button
+        if (defined($win->exist_object('openCompMgrButton'))) {
+            $win->set_sensitive('openCompMgrButton', $check_button_state);
+        }
+    }
+}
+
+$win->add_button( Name => 'openCompMgrButton', 
+        Pos     => [415, 37], 
+        Size    => [100, 25], 
+        Title   => "Configure", 
+        Tip     => 'Open composite settings', 
+        Sens    => &get_config_value("use_composite"), 
+        Frame   => 'EnvFrame');
+#$win->add_signal_handler('openCompMgrButton', 'clicked', sub {system("./FNS-CompConfigurator.pl &");});
+$win->add_signal_handler('openCompMgrButton', 'clicked', sub {$module->send("Module FNS-CompConfigurator " . &get_config_value('use_composite') . " \$[infostore.comp_command]");});
+
+
+#-----------------------------------------------------------------------
+# Desktop
+#-----------------------------------------------------------------------
+$win->add_frame( Name => 'DeskFrame', 
+        Pos     => [10, 100], 
+        Size    => [530, 110], 
+        Title   => ' Desktop ');
+
+
+# Wallpaper dirs ------------------------------------------------------
+$win->add_label( Name => 'labelWpDirs', 
+        Pos     => [8, 15], 
+        Title   => "Wallpaper Dirs:", 
+        Frame   => 'DeskFrame');
+
+$win->add_entry( Name => 'entryWpDirs', 
+        Pos     => [110, 10], 
+        Size    => [405, 25], 
+        Title   => &get_config_value("additional_wp_dirs"), 
+        Tip     => "Wallpaper directories, separated by ':'", 
+        Frame   => 'DeskFrame');
+$win->add_signal_handler('entryWpDirs', 'changed', sub {&set_config_value("additional_wp_dirs", $win->get_title('entryWpDirs')); return 0;});
+
+
+# Desktop Icons -------------------------------------------------------
+$win->add_check_button( Name => 'checkDeskIcons', 
+        Pos     => [5, 37], 
+        Title   => 'Icons on Desktop', 
+        Tip     => 'Use Icons on desktop? Default: off', 
+        Active  => &get_config_value("DesktopIconsOn"), 
+        Frame   => 'DeskFrame');
+$win->add_signal_handler('checkDeskIcons', 'toggled', \&check_deskicons_on);
+
+sub check_deskicons_on {
+    # get current state
+    my $check_button_state = $win->is_active('checkDeskIcons');
+    # get config state
+    my $config_state = &get_config_value("DesktopIconsOn");
+    if ($check_button_state != $config_state) {
+        &set_config_value("DesktopIconsOn", $check_button_state);
+        # set sensitivity of the button
+        if (defined($win->exist_object('comboIconSize'))) {
+            $win->set_sensitive('labelIconSize', $check_button_state);
+            $win->set_sensitive('comboIconSize', $check_button_state);
+        }
+    }
+}
+
+
+# Icon Size ------------------------------------------------------------
+$win->add_label( Name => 'labelIconSize', 
+        Pos     => [280, 43], 
+        Title   => "Icon Size:", 
+        Sens    => &get_config_value("DesktopIconsOn"), 
+        Frame   => 'DeskFrame');
+
+# set the possible icon sizes and get the current from pmanfm config
+my @icon_sizes = ('96x96', '72x72', '64x64', '48x48', '36x36', '32x32', '24x24', '20x20');
+my $iconsize = &get_config_value("big_icon_size") . "x" . &get_config_value("big_icon_size");
+my $index = &get_index_of($iconsize, @icon_sizes);
+$win->add_combo_box( Name => 'comboIconSize', 
+        Pos     => [435, 37], 
+        Size    => [80, 25],
+        Tip     => 'Change size of the desktop icons', 
+        Sens    => &get_config_value("DesktopIconsOn"), 
+        Frame   => 'DeskFrame', 
+        Data    => \@icon_sizes, 
+        Start   => $index);
+$win->add_signal_handler('comboIconSize', 'changed', sub {&set_config_value("big_icon_size", get_big_iconsize($win->get_title('comboIconSize')));});
+
+sub get_big_iconsize($) {
+    my $big_icon_size = shift;
+    $big_icon_size =~ s/x.*//;
+    return $big_icon_size;
+}
+
+
+# Desktop scrolling --------------------------------------------------
+$win->add_check_button( Name => 'checkDeskScrolling', 
+        Pos     => [5, 67], 
+        Title   => 'Desktop scrolling On', 
+        Tip     => 'Activate page scrolling when the cursor hits the edge of a page? Default: on', 
+        Active  => &get_config_value("DesktopScrollOn"), 
+        Frame   => 'DeskFrame');
+$win->add_signal_handler('checkDeskScrolling', 'toggled', \&check_deskscroll_on, $win);
+
+sub check_deskscroll_on {
+    # get current state
+    my $check_button_state = $win->is_active('checkDeskScrolling');
+    # get config state
+    my $config_state = &get_config_value("DesktopScrollOn");
+    if ($check_button_state != $config_state) {
+        &set_config_value("DesktopScrollOn", $check_button_state);
+    }
+}
+
+
+#-----------------------------------------------------------------------
+# Decorations & Panels
+#-----------------------------------------------------------------------
+$win->add_frame( Name => 'DekoFrame', 
+        Pos     => [10, 220], 
+        Size    => [260, 140], 
+        Title   => ' Decorations & Panels ');
+
+
+# Used Layout ---------------------------------------------------------
+$win->add_label( Name => 'labelLayout', 
+        Pos     => [8, 15], 
+        Title   => "Used Layout:", 
+        Frame   => 'DekoFrame');
+
+# get all layouts and remove double entries
+my @layouts = &get_unique_list("f", ["$FNS_SYSTEMDIR/layouts/", "$FVWM_USERDIR/layouts/"]);
+$index = &get_index_of(&get_config_value("used_layout"), @layouts);
+$win->add_combo_box( Name => 'comboLayout', 
+        Pos     => [125, 10], 
+        Size    => [120, 25], 
+        Tip     => 'The actual FNS layout', 
+        Frame   => 'DekoFrame', 
+        Data    => \@layouts, 
+        Start   => $index);
+$win->add_signal_handler('comboLayout', 'changed', sub {&set_layout($win->get_title('comboLayout'));});
+
+sub set_layout($) {
+    my $layout = shift;
+    &set_config_value("used_layout",$layout);
+    &set_desktop_spins($layout);
+}
+
+# Desktop size -------------------------------------------------------
+
+sub set_desktop_spins($) {
+    my $layout = shift;
+    $win->set_sensitive('spinDesktopY', 1);
+    my $current_x_desks = &get_config_value("x_desks");
+    my $current_y_desks = &get_config_value("y_desks");
+    my $current_desks = $current_x_desks*$current_y_desks;
+    my $vp_width = $fvwm_vars[0];
+    my $vp_height = $fvwm_vars[1];
+    my $hratio = $fvwm_vars[2];
+    my $fontsize = $fvwm_vars[3];
+
+    if ($layout eq "Vertical") {
+        # set spinDesktopX and spinDesktopY
+        my $max = 10;
+        $max = 5 if $current_y_desks == 2;
+        if ($init) {
+            $win->set_values('spinDesktopX', Start => $current_x_desks, Min => 1, Max => $max, Step => 1);
+            $win->set_values('spinDesktopY', Start => $current_y_desks, Min => 1, Max => 2, Step => 1);
+        } else {
+            $win->set_values('spinDesktopX', Active => $current_x_desks, Min => 1, Max => $max, Step => 1);
+            $win->set_values('spinDesktopY', Active => $current_y_desks, Min => 1, Max => 2, Step => 1);
+        }
+    } else {
+        my $max;
+        if ($layout eq "Horizontal") {
+            my $tray_icons;
+            # first the count of icons visible in stalonetray must set related to the
+            # screen resolution
+            if ($vp_width gt 1600) {$tray_icons = 7;}
+            elsif ($vp_width gt 1400) {$tray_icons = 6;}
+            elsif ($vp_width gt 1200) {$tray_icons = 5;}
+            else {$tray_icons = 4;}
+
+            # panel width
+            my $panel_width = (($tray_icons*2)+14)*15;
+
+            # pager
+            my $pager_height = sprintf("%.0f", $fontsize*3.5);
+            my $pager_width = sprintf("%.0f", ($pager_height*($vp_width/$vp_height)*$current_desks)+4);
+            my $max_pager_width = $vp_width - (2 * $panel_width) - (2 * $fontsize) - sprintf("%.0f", $vp_width*0.01);
+            my $one_pager_size = sprintf("%.0f", $pager_width/$current_x_desks);
+            
+            # maximum pagers
+            $max = sprintf("%.0f", $max_pager_width/$one_pager_size);
+       } else { # G2like, Klike
+            # colums
+            my $columns = sprintf("%.0f", $vp_width/15);
+            
+            # Bar height
+            my $bar_height = sprintf("%.0f", ($fontsize*2)+(6*$hratio));
+            
+            # pager
+            my $pager_width = sprintf("%.0f", 5+(($vp_width/($vp_height/$bar_height))*$current_desks));
+            my $pager_columns = sprintf("%.0f", $pager_width/15);
+            my $one_pager_columns = sprintf("%.0f", $pager_columns / $current_desks);
+            my $max_pager_columns = sprintf("%.0f", $columns / 3);
+
+            # maximum pagers
+            $max = sprintf("%.0f", $max_pager_columns/$one_pager_columns);
+            
+       }
+       # set spinDesktopX and spinDesktopY
+       $max = 10 if $max > 10;
+       $current_desks = $max if $current_desks > $max;
+       
+       if ($init) {
+           $win->set_values('spinDesktopX', Start => $current_desks, Min => 1, Max => $max, Step => 1);
+           $win->set_values('spinDesktopY', Start => 1, Min => 1, Max => 1, Step => 1);
+       } else {
+           $win->set_values('spinDesktopX', Active => $current_desks, Min => 1, Max => $max, Step => 1);
+           $win->set_values('spinDesktopY', Active => 1, Min => 1, Max => 1, Step => 1);
+       }
+       # disable spinDesktopY
+       $win->set_sensitive('spinDesktopY', 0);
+       $init = 0;
+    }
+}
+
+$win->add_label( Name => 'labelDesktops', 
+        Pos     => [280, 70], 
+        Title   => "Desktops:", 
+        Justify => 'left', 
+        Frame   => 'DeskFrame');
+
+$win->add_spin_button( Name => 'spinDesktopX', 
+        Pos     => [390, 66], 
+        Start   => 4, Min => 1, Max => 10, Step => 1, 
+        Tip     => '', 
+        Align   => 'right', 
+        Frame   => 'DeskFrame');
+$win->add_signal_handler('spinDesktopX', 'value-changed', sub {&set_config_value("x_desks", $win->get_value('spinDesktopX', 'active'), $init);});
+
+$win->add_label( Name => 'labelx', 
+        Pos     => [450, 70], 
+        Title   => "x", 
+        Justify => 'left', 
+        Frame   => 'DeskFrame');
+
+$win->add_spin_button( Name => 'spinDesktopY', 
+        Pos     => [460, 66], 
+        Start   => 1, Min => 1, Max => 10, Step => 1, 
+        Tip     => '', 
+        Align   => 'right', 
+        Frame   => 'DeskFrame');
+#$win->add_signal_handler('spinDesktopY', 'value-changed', sub {&set_config_value("y_desks", $win->get_value('spinDesktopY', 'active'));});
+$win->add_signal_handler('spinDesktopY', 'value-changed', \&set_xy_desks);
+
+&set_desktop_spins(&get_config_value("used_layout"));
+
+sub set_xy_desks() {
+    &set_config_value("y_desks", $win->get_value('spinDesktopY', 'active'), $init);
+    # check if layout is Vertical because x_desks depends of y_desks
+    if (&get_config_value("used_layout") eq 'Vertical') {
+        my $x_desks = &get_config_value("x_desks");
+        my $y_desks = &get_config_value("y_desks");
+        my $xmax = $win->get_value('spinDesktopX', 'Max');
+        if ($y_desks == 2 and $xmax == 10) {
+            if ($x_desks % 2) { # odd
+                $x_desks++;
+            }
+            $win->set_value('spinDesktopX', Active => $x_desks/2);
+            $win->set_value('spinDesktopX', Max => 5);
+        }
+        elsif ($y_desks == 1) {
+            $win->set_value('spinDesktopX', Max => 10);
+        }
+    }
+}
+
+# Used theme ----------------------------------------------------------
+$win->add_label( Name => 'labelTheme', 
+        Pos     => [8, 43], 
+        Title   => "Used Theme:", 
+        Frame   => 'DekoFrame');
+
+# get all themes and remove double entries
+my @themes = &get_unique_list("d",["$FNS_SYSTEMDIR/themes/", "$FVWM_USERDIR/themes/"]);
+$index = &get_index_of(&get_config_value("used_theme"), @themes);
+$win->add_combo_box( Name => 'comboTheme', 
+        Pos     => [125, 38], 
+        Size    => [120, 25], 
+        Tip     => 'The actual FNS decor theme', 
+        Frame   => 'DekoFrame', 
+        Data    => \@themes,
+        Start   => $index);
+$win->add_signal_handler('comboTheme', 'changed', sub {&set_config_value("used_theme",$win->get_title('comboTheme'));});
+
+
+# Used font -----------------------------------------------------------
+$win->add_label( Name => 'labelFont', 
+        Pos     => [8, 73], 
+        Title   => "Used Font:", 
+        Frame   => 'DekoFrame');
+
+$win->add_font_button( Name => 'FontButton', 
+        Pos     => [125, 68], 
+        Size    => [120, 25],
+        Font    => [&get_config_value("used_font"), &get_config_value("fontsize")],
+        Tip     => 'Used default font in FNS', 
+        Frame   => 'DekoFrame');
+$win->add_signal_handler('FontButton', 'font-set', \&set_new_font_size);
+
+sub set_new_font_size {
+    my @font = $win->get_font_as_array('FontButton');
+    &set_config_value("used_font", $font[0]);
+    &set_config_value("fontsize", $font[1]);
+}
+
+#-----------------------------------------------------------------------
+# Default Applications
+#-----------------------------------------------------------------------
+sub get_full_path {
+    my ($name_path) = shift;
+    # is it a name or a path
+    unless (-f $name_path) {
+        $name_path = `which $name_path`;
+        chomp($name_path);
+    }
+    return $name_path;
+}
+
+# reduce the full path to the name if found in $PATH
+sub reduce_path {
+    my $path_name = shift;
+    # check if it is in $PATH
+    my($vol,$dir,$file) = File::Spec->splitpath($path_name);
+    chop($dir);
+    if ($ENV{PATH} =~ m!$dir!) {
+        $path_name = $file;
+    }
+    return $path_name;
+}
+
+
+sub change_path {
+    my ($widget, $data) = @_;
+    my $self = $$data[0];
+    my $name = $$data[1];
+    # get object
+    my $object = $self->get_object($name);
+    # get current filepath from entry
+    my $path = &get_full_path($self->get_title($object->{name}));
+    my $resp = $self->show_filechooser_dialog('open', $path);
+    unless ($resp eq '0') {
+        my $title = &reduce_path($resp);
+        $self->set_title($name, $title);
+        if ($name eq 'entryBrowser') {
+            &set_config_value("default_browser", $title);
+        }
+        elsif ($name eq 'entryEditor') {
+            &set_config_value("default_editor", $title);
+        }
+        elsif ($name eq 'entryTerminal') {
+            &set_config_value("default_terminal", $title);
+        }
+        elsif ($name eq 'entryTransset') {
+            &set_config_value("default_transset", $title);
+        }
+    }
+}
+
+$win->add_frame( Name => 'AppFrame', 
+        Pos     => [280, 220], 
+        Size    => [260, 140], 
+        Title   => ' Default Applications ');
+
+
+# Browser -------------------------------------------------------------
+$win->add_label( Name => 'labelBrowser', 
+        Pos     => [8, 15], 
+        Title   => "Browser:", 
+        Frame   => 'AppFrame');
+
+$win->add_entry( Name => 'entryBrowser', 
+        Pos     => [80, 10], 
+        Size    => [100, 25], 
+        Title   => &get_config_value("default_browser"), 
+        Tip     => 'Default browser in FNS', 
+        Frame   => 'AppFrame');
+$win->add_signal_handler('entryBrowser', 'changed', sub {&set_config_value("default_browser", $win->get_title('entryBrowser')); return 0;});
+
+$win->add_button( Name => 'changeBrowserButton',
+        Pos     => [195, 10], 
+        Size    => [50, 25], 
+        Title   => "...", 
+        Tip     => 'Set path to browser', 
+        Frame   => 'AppFrame');
+$win->add_signal_handler('changeBrowserButton', 'clicked', \&change_path, [$win, 'entryBrowser']);
+
+
+# Editor --------------------------------------------------------------
+$win->add_label( Name => 'labelEditor', 
+        Pos     => [8, 43], 
+        Title   => "Editor:", 
+        Frame   => 'AppFrame');
+
+$win->add_entry( Name => 'entryEditor', 
+        Pos     => [80, 38], 
+        Size    => [100, 25], 
+        Title   => &get_config_value("default_editor"), 
+        Tip     => 'Default editor in FNS', 
+        Frame   => 'AppFrame');
+$win->add_signal_handler('entryEditor', 'changed', sub {&set_config_value("default_editor", $win->get_title('entryEditor')); return 0;});
+
+$win->add_button( Name => 'changeEditorButton', 
+        Pos     => [195, 38], 
+        Size    => [50, 25], 
+        Title   => "...", 
+        Tip     => 'Set path to editor', 
+        Frame   => 'AppFrame');
+$win->add_signal_handler('changeEditorButton', 'clicked', \&change_path, [$win, 'entryEditor']);
+
+
+# Terminal ------------------------------------------------------------
+$win->add_label( Name => 'labelTerminal', 
+        Pos     => [8, 73], 
+        Title   => "Terminal:", 
+        Frame   => 'AppFrame');
+
+$win->add_entry( Name => 'entryTerminal', 
+        Pos     => [80, 68], 
+        Size    => [100, 25], 
+        Title   => &get_config_value("default_terminal"), 
+        Tip     => 'Default terminal in FNS', 
+        Frame   => 'AppFrame');
+$win->add_signal_handler('entryTerminal', 'changed', sub {&set_config_value("default_terminal", $win->get_title('entryTerminal')); return 0;});
+
+$win->add_button( Name => 'changeTerminalButton', 
+        Pos     => [195, 68], 
+        Size    => [50, 25], 
+        Title   => "...", 
+        Tip     => 'Set path to terminal', 
+        Frame   => 'AppFrame');
+$win->add_signal_handler('changeTerminalButton', 'clicked', \&change_path, [$win, 'entryTerminal']);
+
+
+# Transset ------------------------------------------------------------
+$win->add_label( Name => 'labelTransset', 
+        Pos     => [8, 101], 
+        Title   => "Transset:", 
+        Frame   => 'AppFrame');
+
+$win->add_entry( Name => 'entryTransset', 
+        Pos     => [80, 97], 
+        Size    => [100, 25], 
+        Title   => &get_config_value("default_transset"), 
+        Tip     => 'Default transset in FNS', 
+        Frame   => 'AppFrame');
+$win->add_signal_handler('entryTransset', 'changed', sub {&set_config_value("default_transset", $win->get_title('entryTransset')); return 0;});
+
+$win->add_button( Name => 'changeTranssetButton', 
+        Pos     => [195, 97], 
+        Size    => [50, 25], 
+        Title   => "...", 
+        Tip     => 'Set path to transset', 
+        Frame   => 'AppFrame');
+$win->add_signal_handler('changeTranssetButton', 'clicked', \&change_path, [$win, 'entryTransset']);
+
+
+#-----------------------------------------------------------------------
+# Button bar
+#-----------------------------------------------------------------------
+
+# Help -----------------------------------------------------------------
+$win->add_button( Name => 'helpButton', 
+        Pos     => [15, 375], 
+        Size    => [80, 25], 
+        Title   => "Help", 
+        Tip     => 'Get help');
+$win->add_signal_handler('helpButton', 'clicked', sub {system("xterm -g 100x50 -n \"Help fvwm-menu-desktop2\" -T \"Help fvwm-menu-desktop2\" -e \"man fvwm-menu-desktop2\" &");});
+
+
+# Apply and Save -------------------------------------------------------
+$win->add_button( Name => 'apply_saveButton', 
+        Pos     => [335, 375], 
+        Size    => [90, 25], 
+        Title   => "Apply", 
+        Tip     => 'Apply and save new settings');
+$win->add_signal_handler('apply_saveButton', 'clicked', \&apply_and_save);
+
+sub apply_and_save {
+    foreach my $key (keys %config) {
+        if ($config{$key}[1] == 1) {
+            #print "$key => $config{$key}[0]\n";
+            if (defined($config{$key}[2])) {
+                if ($config{$key}[2] eq 'SetEnv') {
+                    #print "module->send(\"FuncWriteSetEnvToFileAndSet $key $config{$key}[0] $config_path\")";
+                    $module->send("FuncWriteSetEnvToFileAndSet $key $config{$key}[0] $config_path");
+                } else {
+                    #print "module->send(\"FuncWriteInfoStoreToFileAndSet $key $config{$key}[0] $config_path\")";
+                    $module->send("FuncWriteInfoStoreToFileAndSet $key $config{$key}[0] $config_path");
+                }
+            } else {
+                if (-f $libfm_config) {
+                    system("sed -i --follow-symlinks \"s#^$key=.*#$key=$config{$key}[0]#\" $libfm_config");
+                } else {
+                    print STDERR "[" . $win->get_title($win->{name}) . "]: " . $libfm_config . " not found. Ignore changes of 'big_icon_size'.\n";
+                }
+                if (-f $pcmanfm_config) {
+                    if ($config{DesktopIconsOn}[0] == 1 and `grep -c "^show_wm_menu=0" $pcmanfm_config`) {
+                        system("sed -i --follow-symlinks \"s#^show_wm_menu=.*#show_wm_menu=1#\" $pcmanfm_config");
+                    }
+                } else {
+                    print STDERR "[" . $win->get_title($win->{name}) . "]: " . $pcmanfm_config . " not found. Can't change show_wm_menu to 1.\n";
+                }
+            }
+
+            if ($key eq "used_layout") {
+                if (-f "$FVWM_USERDIR/.layout") {unlink("$FVWM_USERDIR/.layout");}
+                if (-f "$FVWM_USERDIR/layouts/$config{$key}[0]") {
+                    symlink("$FVWM_USERDIR/layouts/$config{$key}[0]", "$FVWM_USERDIR/.layout");
+                } else {
+                    symlink("$FNS_SYSTEMDIR/layouts/$config{$key}[0]", "$FVWM_USERDIR/.layout");
+               }
+            }
+
+            $config{$key}[1] = 0;
+        }
+    }
+    # create symlink for .layout with default layout if it is first start
+    unless (-f "$FVWM_USERDIR/.layout") {
+        symlink("$FNS_SYSTEMDIR/layouts/$config{used_layout}[0]", "$FVWM_USERDIR/.layout");
+    }
+    #print "module->send(\"FuncRestart\")";
+    $module->send("FuncRestart");
+}
+
+
+# Cancel ---------------------------------------------------------------
+$win->add_button( Name => 'cancelButton', 
+        Pos     => [445, 375], 
+        Size    => [90, 25], 
+        Title   => "Cancel", 
+        Tip     => 'Cancel / Quit Base Setup');
+$win->add_signal_handler('cancelButton', 'clicked', \&check_before_quit);
+
+sub check_before_quit {
+    my $changed = 0;
+    foreach my $key (keys %config) {
+        if ($config{$key}[1] == 1) {
+            my $response = $win->show_msg_dialog('warning', 'yes-no', "You have unsaved changes! Continue anyway?");
+            if ($response eq 'yes') {
+                last;
+            } else {
+                return;
+            }
+        }
+    }
+    Gtk2->main_quit;
+}
+
+#$win->show_and_run();
+$win->show();
+
+$module->eventLoop;
+

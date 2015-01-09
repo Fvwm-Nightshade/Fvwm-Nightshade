@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      0.1.7
+# Version:      0.1.8
 # Licence:      GPL 2
 #
 # Description:  colorsets of Tribal theme
 #
 # Author:       Thomas Funk <t.funk@web.de>
 # Created:      09/27/2012
-# Changed:      08/25/2014
+# Changed:      12/17/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -96,7 +96,7 @@ Colorset 4 bg #e0dedc, hi #006c00, sh #3a8a00, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 5 DGradient 255 2 #51504d 60 #7c7b78 40 #86857f, fg white, bg #65645e, hi #4c4b46, NoShape, RootTransparent, Tint #51504d $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 5 DGradient 255 2 #51504d 60 #7c7b78 40 #86857f, fg white, bg #65645e, hi #4c4b46, NoShape, RootTransparent, Tint #51504d $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 5 DGradient 255 2 #51504d 60 #7c7b78 40 #86857f, fg white, bg #65645e, hi #4c4b46, NoShape
 
 #-----------------------------------------------------------------------
@@ -105,13 +105,13 @@ Test (EnvMatch use_composite 0) Colorset 5 DGradient 255 2 #51504d 60 #7c7b78 40
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #44a200, hi yellow, Plain, RootTransparent, Tint #44a200 $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 6 fg white, bg #44a200, hi yellow, Plain, RootTransparent, Tint #44a200 $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #44a200, hi yellow, Plain
 
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 7 fg white, bg #5e5d5a, hi #4c4b46, NoShape, RootTransparent, Tint #51504d $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 7 fg white, bg #5e5d5a, hi #4c4b46, NoShape, RootTransparent, Tint #51504d $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 7 fg white, bg #5e5d5a, hi #4c4b46, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------

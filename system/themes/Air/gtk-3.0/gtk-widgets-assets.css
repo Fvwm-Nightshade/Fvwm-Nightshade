@@ -11,7 +11,7 @@
 .check:insensitive,
 .check row:selected:insensitive,
 .check row:selected:focus:insensitive {
-    background-image: url("assets/checkbox-unchecked-insensitive.png");
+    background-image: url("assets/unchecked-insensitive.png");
 }
 
 .check:active,
@@ -107,7 +107,7 @@
 }*/
 
 .menuitem.check:active:insensitive {
-    background-image: url("assets/menuitem-checkbox-checked-insensitive.png");
+    background-image: url("assets/item-checked-insensitive.png");
 }
 
 /*.menuitem.check:inconsistent:hover,
@@ -122,7 +122,7 @@
 
 .menuitem.check:inconsistent:insensitive,
 .menuitem.radio:inconsistent:insensitive {
-    background-image: url("assets/menuitem-checkbox-mixed-insensitive.png");
+    background-image: url("assets/item-mixed-insensitive.png");
 }
 
 .menuitem.radio:active {
@@ -134,7 +134,7 @@
 }*/
 
 .menuitem.radio:active:insensitive {
-    background-image: url("assets/menuitem-radio-checked-insensitive.png");
+    background-image: url("assets/item-radio-checked-insens.png");
 }
 
 GtkIconView.content-view.cell.check {

@@ -131,7 +131,7 @@ Standard output is a series Fvwm commands."""
     global verbose, force, size, current_theme, icon_dir, top, install_prefix, menu_type, menu_list_length 
     global with_titles, menu_entry_count, get_menus, timestamp, set_menus, printmode, insert_in_menu, previous_theme
     global default_app_icon, default_dir_icon
-    version = "2.3.2"
+    version = "2.3.1"
     verbose = False
     force = False
     desktop=''
@@ -159,7 +159,7 @@ Standard output is a series Fvwm commands."""
             print usage
             sys.exit()
         elif o in ("--version") :
-            print "fvwm-menu-desktop2 version " + version
+            print "fns-menu-desktop version " + version
             sys.exit()
         elif o in ("--enable-mini-icons") :
             force=True
@@ -538,7 +538,7 @@ def parsemenus(menulist, desktop):
                 printmenu(title, '', 'Popup "%s"' % name)
         
             printtext('+ "" Nop')
-            printmenu("$[gt.Regenerate XDG Menu(s)]", "system-software-update", "Module FvwmPerl -l fvwm-menu-desktop2-config.fpl" )
+            printmenu("$[gt.Regenerate XDG Menu(s)]", "system-software-update", "Module FNS-MenuConfigurator" )
 
     if not get_menus == '':
         printtext('%s' % ' '.join(new_menulist))
@@ -587,7 +587,7 @@ def parsemenu(menu, name="", title=""):
         # should only appear in a single menu. For more it will insert in parsemenus() when the top menu will built
         if menu_list_length == 1 and name == top:
             printtext('+ "" Nop')
-            printmenu("$[gt.Regenerate XDG Menu(s)]", "system-software-update", "Module FvwmPerl -l fvwm-menu-desktop2-config.fpl" )
+            printmenu("$[gt.Regenerate XDG Menu(s)]", "system-software-update", "Module FNS-MenuConfigurator" )
         printtext('')
 
     for entry in menu.getEntries():

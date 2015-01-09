@@ -1,5 +1,206 @@
 History:
 
+01/09/2015
+- add possibility to configure size of desktops/pages to FNS-BaseSetup
+- merge gtk_configs branch into develop branch
+- update version to 0.7.8.20150109
+
+01/05/2015
+- exchange dev-qt/qtgui with dev-qt/qtgui:4 in ebuild (thanks to Sebaro).
+  Also remove some einfo lines not needed on package installation
+- add support for more than 4 desktop pages (currently 10 depending on the
+  limits of available key bindings => SHIFT+ALT+0-9 for window move to page
+  and SHIFT+CTRL+0-9 for goto page):
+  - add 2 new infostore variables: x_desks and y_desks in .settings
+  - update all layouts to set the menu entries and key bindings automatically.
+    Also calculating the correct used space and position of the pager
+  - update G2likeBottomBar and KlikeBottomBar to calculate the correct used
+    space and positions of the pager
+- add missing FuncWriteSetEnvToFileAndSet call for use_composite in FNS-CompConfigurator
+  Also update shell call to get compositors paths (supress errors)
+- update NEWS and README
+
+01/04/2015
+- add post and preun scriptlets in ebuild for register and unregister apps
+  in policy file for pkexec
+- remove forgotten line in fns.install arch script
+- changes in config:
+  - FuncAutoStartPrograms starts only on Init now because most programs will
+    survive a restart of FNS
+  - screenshots will be created in $FVWM_USERDIR/screenshots now
+- exchange <allow_active>auth_admin</allow_active> in fns-poladd with
+  <allow_active>auth_admin_keep</allow_active> to set authorization like sudo
+  to a few minutes.
+- fix bug in FNS-CpuPerformance that changes won't set immediately
+- set SetEnv PcmanFmStatus in .settings to '2' to prevent start of pcmanfm GUI
+
+01/03/2015
+- exchange nucleo.svg with cpu.svg because of better icon quality. Also in
+  menus in config
+- change color of bug.svg from black to grey because of better visibility
+- exchange old fns icon with newer and more stylish fns icon
+- add new dependency liblocale-gettext-perl to Required in INSTALL
+- exchange orphaned/deprecated packages in the ebuild with their replacements:
+  - pm-utils => upower-pm-utils
+  - cpufrequtils => cpupower
+
+01/01/2015
+- update Makefile and arch/PKBUILD_FNS to support changes for upcoming 0.8 release.
+  Also fix missing regex for perlsitedir
+- add fns.install with scriptlets to support postinstall and preuninstall in Arch
+- add missing dependency perl-locale-gettext to PKGBUILD_FNS, spec, ebuild and control
+- fix hangup of policy agent while startup in function FuncStartPolkit in config
+
+12/31/2014
+- update config:
+  - reduce search path for polkit agent in FuncCheck4Polkit because in Fedora
+    it is found in /usr/libexec/ and not like in Debian /usr/lib/pol*. Also fix
+    too few backslashes before '&' in FuncStartPolkit
+  - if 'Icons on desktop' is active no wm menus are accessible. In PcmanFm desktop
+    preference dialog an option is available to activate at least the right one.
+    So for that RootMenu is available additionally to Super_L key
+- add new svg icon for PcmanFm desktop preference dialog
+- adaptions in FNS-CpuPerformance:
+  - add missing show_and_run() for error dialog
+  - exchange '&> /dev/null' with '2> /dev/null' to find available scaler
+  - split frequency info text with '\n' and not ' ' to find the correct sentence
+- adaption in FNS-BaseSetup:
+  - add ~/.config/pcmanfm/default/pcmanfm.conf to change show_wm_menu to activate
+    wm menus while 'Icons on desktop' are active.
+
+12/30/2014
+- update spec file:
+  - with post and preun scriptlets for register and unregister apps
+    in policy file for pkexec
+  - add missing dependencies and perlsitedir
+- add perlsitedir support to Makefile for rpm
+- rename too long svg file names to eliminate build errors in 'make rpm'
+- update new file names in gtk.css and gtkrc in the Gtk2+3 themes
+- exchange shell commands in FNS-CpuPerformance to prevent errors while
+  searching for governors
+- add error dialog in FNS-CpuPerformance if no cpufreq driver is active
+- update SimpleGtk2 to 0.64 to support font and color changing for some widgets
+  => needed for error dialog ^^
+- update version in config
+
+12/21/2014
+- add debian/postinst and debian/prerm for register and unregister apps
+  in policy file for pkexec
+- update dist-install, uninstall and build-deb rules in Makefile to support postinst and prerm
+- fix bugs in fns-poladd to return the correct exit codes
+- restructure debian/rules
+- add %post and %preun to rpm spec file for register and unregister apps
+  in policy file for pkexec
+
+12/19/2014
+- add further support for pkexec (policykit):
+  - add register and unregister functions in Makefile for apps in policy for pkexec
+  - add functions for checking and starting polkit in config
+  - exchange gksu with pkexec in FNS-Cpu-Performance
+  - remove gksu and beesu in control files
+  - update dependency polkit-gnome in README and INSTALL
+  - add Bresiyel to AUTHORS
+  - update NEWS
+
+12/18/2014
+- update package build control files for rpm, pkgbuild and ebuild
+- exchange tabs with spaces in fns-start-programs
+- add support for pkexec (policykit):
+  - update all control files
+  - add new shell script fns-poladd to add or remove policies for different
+    programs needed gui autentification. It's based on Bresiyel's script from here:
+    http://pastebin.com/PbGTZ0jc
+
+12/17/2014
+- config:
+  - while initial start:
+    - deactivate FvwmBanner
+    - position FNS-BaseSetup in the center
+  - update internal use of $[use_composite] to disable/enable the respective menus:
+    0 => no composite
+    1 => composite activated but not started
+    2 => composite started
+  - change Read $[FVWM_USERDIR]/.user to Load .user
+- update $[use_composite] in colorsets to disable/enable the respective colorset settings
+- add to depends in debian/control:
+  - libgtk2-perl - needed by SimpleGtk2
+  - cpupower - alternative to cpufrequtils
+  - lxappearance - fix typo (missing p)
+- update dependencies and featurelist in README
+- update NEWS
+- update dependencies in INSTALL
+
+12/14/2014
+- fixes in config:
+  - add TestRc infront of fns-menu-desktop in FuncXdgMenusInRoot to remove double
+    entries in menu
+  - exchange TestRc (!Match) with Test (EnvMatch DesktopScrollOn 0) to make desktop
+    scroll on/off workable
+- exchange .FvwmForm-Desktop-Config with .fns-menu.cfg in fns-init
+- exchange .FvwmForm-Desktop-Config with .fns-menu.cfg
+- fix bugs in FNS-BaseSetup:
+  - in first_start():
+    - .FvwmForm-Desktop-Config was used instead of .fns-menu.cfg
+    - no wallpapers directory was created
+  - desktop scrolling value wasn't insert due to a wrong variable name
+  - in apply_and_save():
+    - no .layout link was created ever
+    - sed error message occured if no pcmanfm config was found
+    - no error message occur if ~/.config/libfm/libfm.conf" not exist
+    - exchange system(ln -s ...) with symlink()
+- fix display bug in FNS-CompConfigurator if no composite manager available
+- fix bugs in FNS-MenuConfigurator:
+  - fvwm-menu-config2 was used instead of fns-menu-config
+  - in create_menu():
+    - command string was built with quotes on the wrong place
+    - wanted menu string was composed wrong
+- add a sleep(1) between reading the config (FVWM) and deleting it in FNS-WindowsBehaviour
+- expand Makefile with:
+  - un/install routines for new tools, perllib and SimpleGtk2
+  - add an error message for installing FNS desktop file if user not root
+- remove old files:
+  - FNS-Form-BaseSetup
+  - FNS-Script-CpuPerformance
+  - FvwmForm-GenOptionHelp2
+  - FvwmForm-MultiMenuHelp2
+  - FvwmForm-SingleMenuHelp2
+  - fvwm-menu-desktop2-config.fpl
+- move new tools from fvwm to fvwm-nightshade/lib:
+  - FNS-BaseSetup
+  - FNS-CompConfigurator
+  - FNS-MenuConfigurator
+  - FNS-WindowsBehaviour
+- add ' ' to InfoStore additional_wp_dirs because it doesn't be empty
+
+12/12/2014
+- rename fvwm-menu-desktop2 to fns-menu-desktop because of the new FNS-MenuConfigurator
+- rename fns-cpu-performance back to FNS-CpuPerformance for consistency
+- add new InfoStoreAdd default_editor and SetEnv DesktopScrollOn to .settings
+- update config:
+  - change all FNS-Form-BaseSetup to FNS-BaseSetup
+  - change all FNS-Script-CompConfigurator to FNS-CompConfigurator
+  - change all FNS-Script-CpuPerformance to FNS-CpuPerformance
+  - change all fvwm-menu-desktop2 to fns-menu-desktop
+  - add new icons for FNS-WindowsBehaviour and FNS-MenuConfigurator
+  - add DesktopScrollOn to support deactivation of page scrolling
+  - remove FuncUpdateBaseSetupFile and its entries because never needed anymore
+
+12/10/2014
+- add new fns configuration tools based on SimpleGtk2 and fvwm-perllib:
+  - FNS-BaseSetup => will replace FNS-Form-BaseSetup
+  - FNS-CompConfigurator => will replace FNS-Script-CompConfigurator
+  - FNS-MenuConfigurator => will replace fvwm-menu-desktop2-config.fpl
+  - FNS-WindowsBehaviour => implements #46
+- add needed perllib module to start those tools as a module
+- add needed RAD library SimpleGtk2 (#47) for Perl-Gtk2 tools
+- add revised fns-cpu-performance based on SimpleGtk2 (issue #40) with
+  support for cpufreq and cpupower => will replace FNS-Script-CpuPerformance
+- adapt fvwm-menu-desktop2 to support FNS-MenuConfigurator
+- add pot templates for all new configuration tools
+- remove old translation parts from fvwm-nightshade.pot and the german translation
+- add complete german translation for new configuration tools
+- add incomplete spanish and french translations for new configuration tools
+
 11/17/2014
 - update Redmond colorset: better contrast in menu. Thanks to Berno Strik
   for his patch

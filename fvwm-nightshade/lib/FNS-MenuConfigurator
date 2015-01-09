@@ -1,0 +1,913 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+#use SimpleGtk2;
+use lib `fvwm-perllib dir`;
+use FVWM::Module::SimpleGtk2;
+use File::Basename;
+use File::Copy qw(copy);
+use File::Spec;
+use File::Find;
+
+#-----------------------------------------------------------------------
+# File:         FNS-MenuConfigurator
+my $Version =   '2.0.1';
+# Licence:      GPL 2
+#
+# Description:  Perl script to configure fvwm-menu-desktop
+#
+# Author:       Thomas Funk <t.funk@web.de>    
+#
+# Created:      11/19/2014
+# Changed:      12/14/2014
+#-----------------------------------------------------------------------
+
+my $module = new FVWM::Module::SimpleGtk2(
+);
+
+########################################################################
+# Global values
+########################################################################
+SimpleGtk2::use_gettext("fns-menu-configurator", "$ENV{FVWM_USERDIR}/locale:$ENV{FNS_SYSTEMDIR}/locale:+");
+
+# FNS systemdir
+my $FNS_SYSTEMDIR = "$ENV{FNS_SYSTEMDIR}";
+
+# FNS userdir
+my $FVWM_USERDIR = "$ENV{FVWM_USERDIR}";
+
+# FNS menu config
+my $menu_cfg = "$FVWM_USERDIR/.fns-menu.cfg";
+
+# values were changed
+my $values_changed = 0;
+
+# config state constants
+use constant {
+    DEFAULT => 0,
+    SET     => 1,
+    CONFIG  => 2
+};
+
+# default config. Hash: Parameter => Array: value, state, default_value)
+my %config = (
+                "MenuTitle" => ['FvwmMenu', DEFAULT, 'FvwmMenu'],
+                "Installprefix" => ['', DEFAULT, ''],
+                "Desktop" => ['', DEFAULT, ''],
+                "Menutype" => ['', DEFAULT, ''],
+                "MultiOn" => [1, DEFAULT, 1],
+                "IconsOn" => [0, DEFAULT, 0],
+                "IconSize" => [24, DEFAULT, 24],
+                "TitlesOn" => [0, DEFAULT, 0],
+                "IconTheme" => ['gnome', DEFAULT, 'gnome'],
+                "InsertOn" => [0, DEFAULT, 0],
+                "InMenu" => ['', DEFAULT, ''],
+                "DirIcon" => ['gnome-fs-directory', DEFAULT, 'gnome-fs-directory'],
+                "AppIcon" => ['gnome-applications', DEFAULT, 'gnome-applications'],
+                "IconDir" => ['$FVWM_USERDIR/icons', DEFAULT, '$FVWM_USERDIR/icons'],
+                "MenuPath" => ['$FVWM_USERDIR/.menu', DEFAULT, '$FVWM_USERDIR/.menu'],
+                );
+
+
+########################################################################
+# Common functions
+########################################################################
+
+#-------------------------------------------------------------------------
+# Parsing routine
+#-------------------------------------------------------------------------
+sub parse_config(@) {
+    my ($file, $sep) = @_;
+    $sep = ' ' unless defined $sep;
+    # used parameters in config
+    my @used_params = keys %config;
+    local *CF;
+    
+    if (-f $file) {
+        open(CF,'<'.$file) or die "Open $file: $!";
+        read(CF, my $data, -s $file);
+        close(CF);
+        
+        my @lines  = split(/\015\012|\012|\015/,$data);
+        my $config = {};
+        my $count  = 0;
+        
+        foreach my $line(@lines) {
+            $count++;
+            my $fns_var = undef;
+            
+            # skip comments
+            next if($line =~ /^\s*#/);
+            
+            next if($line !~ /^\s*\S+\s*$sep.*$/);
+            
+            # Remove whitespaces at the beginning and the end before splitting
+            $line =~ s/^\s+//g;
+            $line =~ s/\s+$//g;
+            
+            my ($key,$value) = split(/$sep/,$line,2);
+            
+            # Remove whitespaces at the beginning and the end again
+            $key   =~ s/^\s+//g;
+            $key   =~ s/\s+$//g;
+            $value =~ s/^\s+//g;
+            $value =~ s/\s+$//g;
+            # remove quotes at the beginning and the end
+            $value =~ s/^("|')//;
+            $value =~ s/("|')$//;
+            
+            if ("@used_params" =~ /$key/) {
+                set_config_value($key, $value, 0);
+                set_config_value($key, CONFIG, 1);
+            }
+            elsif ($key =~ /^Menu/) {
+                $config{$key} = [$value, CONFIG, 0];
+            }
+            
+        }
+    }
+}
+
+
+#-----------------------------------------------------------------------
+# Get a config value
+# get_config_value(key, index)
+#-----------------------------------------------------------------------
+sub get_config_value(@) {
+    my ($key, $index) = @_;
+    $index = 0 unless defined($index);
+    my $value = undef;
+    $value = $config{$key}[$index] if (defined($config{$key}));
+    return $value;
+}
+
+
+#-----------------------------------------------------------------------
+# Set a config value
+# set_config_value(key, value, index)
+#-----------------------------------------------------------------------
+sub set_config_value(@) {
+    my ($key, $value, $index) = @_;
+    unless (defined($index)) {
+        $config{$key}[0] = $value;
+        # set to changed (1)
+        $config{$key}[1] = SET;
+        $values_changed = 1;
+        &set_save_button_active($values_changed);
+    } else {
+        $config{$key}[$index] = $value;
+    }
+}
+
+
+#-----------------------------------------------------------------------
+# unset the state of a config value or all
+# unset_config_value_state(<key|all>)
+#-----------------------------------------------------------------------
+sub unset_config_value_state($) {
+    my $key = shift;
+    if ($key eq "all") {
+        foreach my $key (keys %config) {
+            if ($config{$key}[1] == 1) {
+                $config{$key}[1] = 2; # because it is saved in the user config
+            }
+        }
+    } else {
+        # unset if set
+        $config{$key}[1] = 2 if $config{$key}[1] == 1;
+    }
+}
+
+
+########################################################################
+# Main
+########################################################################
+
+# get the available menus
+my $all = `fns-menu-desktop --get-menus all`;
+my $selected = `fns-menu-desktop --get-menus desktop`;
+#my $all = '';
+#my $selected = '';
+
+my @all_filelist = split(/ /,$all);
+my @selected_filelist = split(/ /,$selected);
+
+my %all_menus = ();
+my %selected__menus = ();
+foreach my $path (@selected_filelist) {
+    my ($filename, $directories, $suffix) = fileparse($path, qr/\.[^.]*/);
+    push (@{$selected__menus{$directories}}, $filename);
+}
+
+my $i = 1;
+foreach my $path (@all_filelist) {
+    my $name = "Menu" . $i;
+    # qr matched against the end of the $filename. 
+    # The matching portion is removed and becomes the $suffix.
+    my ($filename, $directories, $suffix) = fileparse($path, qr/\.[^.]*/);
+    push (@{$all_menus{$directories}{$i}}, ($filename, $name, "0"));
+    next if !defined $selected__menus{$directories};
+    foreach my $hit (@{$selected__menus{$directories}}) {
+        if ($filename eq $hit) {
+            pop (@{$all_menus{$directories}{$i}});
+            push (@{$all_menus{$directories}{$i}}, "1");
+        }
+    }
+    $i++;
+}
+
+# put them in the config
+if (scalar keys %all_menus != 0) {
+    foreach my $key (sort( keys %all_menus)) {
+        foreach my $count (sort(keys %{$all_menus{$key}})) {
+            my @menu = @{$all_menus{$key}{$count}};
+            $config{$menu[1]} = [$menu[2], DEFAULT, $menu[2]];
+        }
+    }
+}
+
+# parse the config file now to update the config hash
+&parse_config($menu_cfg, '=');
+
+
+########################################################################
+# Graphical User Interface + corresponding functions
+########################################################################
+
+#-----------------------------------------------------------------------
+# Toplevel window
+#-----------------------------------------------------------------------
+my $win = SimpleGtk2->new_window(  Name => 'mainWindow', 
+                        Version => $Version,
+                        Size    => [460, 505], 
+                        Title   => 'FNS Menu Desktop Configurator');
+$win->add_signal_handler('mainWindow', 'delete_event', \&check_before_quit);
+
+
+#-----------------------------------------------------------------------
+# Notebook
+#-----------------------------------------------------------------------
+$win->add_notebook(Name => 'NB1', 
+        Pos     => [10, 10], 
+        Size    => [440, 180], 
+        Tabs    => 'top', 
+        scroll  => 1);
+
+#-----------------------------------------------------------------------
+# Notebook page 1 for multiple menu
+#-----------------------------------------------------------------------
+$win->add_nb_page(Name => "NB_page1", 
+        Pos_n   => 0, 
+        Title   => "Multiple Menu", 
+        Notebook => 'NB1', 
+        Tip => "In this tab all XDG menus found on the system are shown. All \
+                selected menus will integrate in one Fvwm menu. Note that equal \
+                menus found under /etc/xdg/menus AND ~/.config/menus/ following \
+                the XDG menu specification only shown in ~/.config/menus/. \
+                \nIf you want to generate a custom-assembled menu switch to \
+                the 'Single Menu' tab.");
+
+# build dynamic menu entries
+if (scalar keys %all_menus != 0) {
+    my $menu_dirs = 1;
+    my $dir_label_x = 13;
+    my $dir_label_y = 12;
+    my $menu_check_x = 10;
+    my $menu_check_y = 35;
+    foreach my $key (sort( keys %all_menus)) {
+
+        my $multi_menu_title = $win->translate('Menus in') . ' ' . $key;
+        $win->add_label( Name => 'labelMenusIn' . $menu_dirs, 
+                Pos     => [$dir_label_x, $dir_label_y], 
+                Title   => $multi_menu_title, 
+                Frame   => 'NB_page1');
+
+        my $m_count = 1;
+        foreach my $count (sort(keys %{$all_menus{$key}})) {
+            my @menu = @{$all_menus{$key}{$count}};
+            unless ($m_count == 1) {
+                if ($m_count % 2 == 1) { #odd
+                    $menu_check_y += 25;
+                    $menu_check_x = 10;
+                }
+                else { # even
+                    $menu_check_x += 220;
+                }
+            }
+            my $menu_active = get_config_value($menu[1]);
+            $win->add_check_button( Name => 'check' . $menu[1], 
+                    Pos     => [$menu_check_x, $menu_check_y], 
+                    Title   => $menu[0], 
+                    Active  => $menu_active, 
+                    Frame   => 'NB_page1');
+            $win->add_signal_handler('check' . $menu[1], 'toggled', \&check_menu_on);
+            $m_count += 1;
+        }
+        $dir_label_y = $menu_check_y + 37;
+        $menu_check_y = $dir_label_y + 23;
+        $menu_check_x = 10;
+    }
+} else {
+    $win->add_label( Name => 'labelNoMenus1', 
+            Pos     => [25, 10], 
+            Title   => "No menus found! Check why from within a terminal with\n' fvwm-menu-desktop -v '",
+            Justify => 'center',
+            Frame   => 'NB_page1');
+
+    $win->add_label( Name => 'labelNoMenus2', 
+            Pos     => [25, 50], 
+            Title   => "It is a good idea to check .xsession-errors in the user home\nfor errors, too. \
+                        One limitation exists - if there are too much\nmenus found an error occurs \
+                        in .xsession-errors:\n\n'Module(0xXXX) command is too big (1008), \
+                        limit is 1000.'\n\nThis happens because PipeRead used for menu generation\nhas \
+                        a command length limit of 1000 characters. Sorry for\nthat inconvinience.", 
+            Justify => 'left',
+            Frame   => 'NB_page1');
+}
+
+sub check_menu_on {
+    my $widget = shift;
+    my $state = $widget->get_active();
+    $state = 0 if $state eq '';
+    my $menu = $win->get_object($widget)->{name};
+    $menu =~ s/check//;
+    &set_config_value($menu, $state);
+}
+
+#-----------------------------------------------------------------------
+# Notebook page 2 for single menu
+#-----------------------------------------------------------------------
+$win->add_nb_page(Name => "NB_page2", 
+        Pos_n   => 1, 
+        Title   => "Single Menu", 
+        Notebook => 'NB1', 
+        Tip => "In this tab you can define a custom-assembled menu 'foo-bar.menu' \
+                placed on another location as defined in the XDG menu definitions.\n\
+                But remember, if the menu doesn't exist, nothing happens.");
+
+
+# Top title ------------------------------------------------------------
+$win->add_label( Name => 'labelTopTitle', 
+        Pos     => [12, 20], 
+        Title   => 'Menu Top Title:', 
+        Frame   => 'NB_page2');
+
+$win->add_entry( Name => 'entryTopTitle', 
+        Pos     => [250, 15], 
+        Size    => [160, 25], 
+        Title   => &get_config_value("MenuTitle"), 
+        Tip     => "Specifies the menu title of the top menu used by Fvwm's Popup command. \
+                    Default is 'FvwmMenu'.", 
+        Frame   => 'NB_page2');
+$win->add_signal_handler('entryTopTitle', 'changed', sub {&set_config_value("MenuTitle", $win->get_title('entryTopTitle')); return 0;});
+
+
+# Desktop --------------------------------------------------------------
+$win->add_label( Name => 'labelDesktop', 
+        Pos     => [12, 50], 
+        Title   => 'Desktop:', 
+        Frame   => 'NB_page2');
+
+$win->add_entry( Name => 'entryDesktop', 
+        Pos     => [250, 45], 
+        Size    => [160, 25], 
+        Title   => &get_config_value("Desktop"), 
+        Tip     => "Overrides the name of the main desktop environment installed on the system. \
+                    If a system offers multiple desktop environments \$XDG_MENU_PREFIX is typically \
+                    set. It is ignored if this field is used. Possible names: gnome, kde, lxde, etc.", 
+        Frame   => 'NB_page2');
+$win->add_signal_handler('entryDesktop', 'changed', sub {&set_config_value("Desktop", $win->get_title('entryDesktop')); return 0;});
+
+
+# Install-Prefix -------------------------------------------------------
+$win->add_label( Name => 'labelIPrefix', 
+        Pos     => [12, 80], 
+        Title   => 'Install-Prefix:', 
+        Frame   => 'NB_page2');
+
+$win->add_entry( Name => 'entryIPrefix', 
+        Pos     => [250, 75], 
+        Size    => [160, 25], 
+        Title   => &get_config_value("Installprefix"), 
+        Tip     => "Overrides the standard locations for XDG menu definitions. The standard \
+                    locations are /etc/xdg/menus and ~/.config/menus if available.", 
+        Frame   => 'NB_page2');
+$win->add_signal_handler('entryIPrefix', 'changed', sub {&set_config_value("Installprefix", $win->get_title('entryIPrefix')); return 0;});
+
+
+# Menu Type ------------------------------------------------------------
+$win->add_label( Name => 'labelMenuType', 
+        Pos     => [12, 110], 
+        Title   => 'Menu Type:', 
+        Frame   => 'NB_page2');
+
+$win->add_entry( Name => 'entryMenuType', 
+        Pos     => [250, 105], 
+        Size    => [160, 25], 
+        Title   => &get_config_value("Menutype"), 
+        Tip     => "Defines which type of menu should be found. Possible name types could \
+                    be: applications, settings, preferences, etc. Note if the specified \
+                    menu type doesn't exist the generated menu is empty!", 
+        Frame   => 'NB_page2');
+$win->add_signal_handler('entryMenuType', 'changed', sub {&set_config_value("Menutype", $win->get_title('entryMenuType')); return 0;});
+
+
+#-----------------------------------------------------------------------
+# Menu Options 
+#-----------------------------------------------------------------------
+$win->add_frame( Name => 'OptionFrame', 
+        Pos     => [10, 200], 
+        Size    => [440, 250],
+        Title   => " General Options ");
+
+
+# Use Icons ------------------------------------------------------------
+$win->add_check_button( Name => 'checkIconUse', 
+        Pos     => [10, 15], 
+        Title   => "Use Icons", 
+        Active  => &get_config_value("IconsOn"), 
+        Tip     => "Option enables mini-icons in the menu(s).", 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('checkIconUse', 'toggled', \&check_icon_use_on);
+
+sub check_icon_use_on {
+    # get current state
+    my $check_button_state = $win->is_active('checkIconUse');
+    # get config state
+    my $config_state = &get_config_value("IconsOn");
+    if ($check_button_state != $config_state) {
+        &set_config_value("IconsOn", $check_button_state);
+        # set sensitivity of the icon releated widgets
+        if (defined($win->exist_object('labelIconSize'))) {
+            $win->set_sensitive('labelIconSize', $check_button_state);
+            $win->set_sensitive('spinIconSize', $check_button_state);
+            
+            $win->set_sensitive('labelIconTheme', $check_button_state);
+            $win->set_sensitive('entryIconTheme', $check_button_state);
+            $win->set_sensitive('changeIconTheme', $check_button_state);
+            
+            $win->set_sensitive('labelDirIcon', $check_button_state);
+            $win->set_sensitive('entryDirIcon', $check_button_state);
+            $win->set_sensitive('changeDirIcon', $check_button_state);
+            
+            $win->set_sensitive('labelAppIcon', $check_button_state);
+            $win->set_sensitive('entryAppIcon', $check_button_state);
+            $win->set_sensitive('changeAppIcon', $check_button_state);
+            
+            $win->set_sensitive('labelIconDir', $check_button_state);
+            $win->set_sensitive('entryIconDir', $check_button_state);
+            $win->set_sensitive('changeIconDir', $check_button_state);
+        }
+    }
+}
+
+
+# Icon Size ------------------------------------------------------------
+$win->add_label( Name => 'labelIconSize', 
+        Pos     => [173, 20], 
+        Title   => 'Icon Size:', 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+
+$win->add_spin_button( Name => 'spinIconSize', 
+        Pos     => [360, 15], 
+        Start   => &get_config_value("IconSize"), Min => 16, Max => 96, Step => 1, 
+        Tip     => "If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size \
+                    is desired change the wanted size in this field.", 
+        Align   => 'right', 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('spinIconSize', 'value-changed', sub {&set_config_value("IconSize", $win->get_value('spinIconSize', 'active'));});
+
+
+# Icon Theme -----------------------------------------------------------
+$win->add_label( Name => 'labelIconTheme', 
+        Pos     => [35, 50], 
+        Title   => 'Icon Theme:', 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+
+$win->add_entry( Name => 'entryIconTheme', 
+        Pos     => [170, 45], 
+        Size    => [160, 25], 
+        Title   => &get_config_value("IconTheme"), 
+        Tip     => "Sets the used icon theme. Default is 'gnome' but all others found in ~/.icons or \
+                    /usr/share/icons can used except the hicolor theme because it's the default \
+                    fallback theme if no icon is found. Note that the theme name must be written \
+                    exactly as the icon directory e.g. /usr/share/icons/Mint-X => 'Mint-X'.", 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('entryIconTheme', 'changed', sub {&set_config_value("IconTheme", $win->get_title('entryIconTheme')); return 0;});
+
+$win->add_button( Name => 'changeIconTheme',
+        Pos     => [360, 45], 
+        Size    => [55, 25], 
+        Title   => "...", 
+        Tip     => "Change icon theme path.", 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('changeIconTheme', 'clicked', \&change_path, [$win, 'entryIconTheme']);
+
+
+# Directory Icon -------------------------------------------------------
+$win->add_label( Name => 'labelDirIcon', 
+        Pos     => [35, 80], 
+        Title   => 'Directory Icon:', 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+
+$win->add_entry( Name => 'entryDirIcon', 
+        Pos     => [170, 75], 
+        Size    => [160, 25], 
+        Title   => &get_config_value("DirIcon"), 
+        Tip     => "If 'Use Icons' is enabled and for a directory in a menu no icon is found \
+                    'gnome-fs-directory' as default icon is used. But if the gnome icon theme \
+                    isn't installed no default icon appears. Another icon can defined here. \
+                    Only the name of an icon is needed not the path!", 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('entryDirIcon', 'changed', sub {&set_config_value("DirIcon", $win->get_title('entryDirIcon')); return 0;});
+
+$win->add_button( Name => 'changeDirIcon',
+        Pos     => [360, 75], 
+        Size    => [55, 25], 
+        Title   => "...", 
+        Tip     => "Change directoy icon path.", 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('changeDirIcon', 'clicked', \&change_path, [$win, 'entryDirIcon']);
+
+
+# Application Icon -----------------------------------------------------
+$win->add_label( Name => 'labelAppIcon', 
+        Pos     => [35, 110], 
+        Title   => 'Application Icon:', 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+
+$win->add_entry( Name => 'entryAppIcon', 
+        Pos     => [170, 105], 
+        Size    => [160, 25], 
+        Title   => &get_config_value("AppIcon"), 
+        Tip     => "If 'Use Icons' is enabled and for an application no icon is found 'gnome-applications' \
+                    as default icon is used. But if the gnome icon theme isn't installed no default icon \
+                    appears. Another icon can defined here. Only the name of an icon is needed not the path!", 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('entryAppIcon', 'changed', sub {&set_config_value("AppIcon", $win->get_title('entryAppIcon')); return 0;});
+
+$win->add_button( Name => 'changeAppIcon',
+        Pos     => [360, 105], 
+        Size    => [55, 25], 
+        Title   => "...", 
+        Tip     => "Change application icon path.", 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('changeAppIcon', 'clicked', \&change_path, [$win, 'entryAppIcon']);
+
+
+# Icon Directory -------------------------------------------------------
+$win->add_label( Name => 'labelIconDir', 
+        Pos     => [35, 140], 
+        Title   => 'Icon Directory:', 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+
+$win->add_entry( Name => 'entryIconDir', 
+        Pos     => [170, 135], 
+        Size    => [160, 25], 
+        Title   => &get_config_value("IconDir"), 
+        Tip     => "If the specified icon isn't that size it is converted if ImageMagick is installed. \
+                    Generated icons are saved in \$FVWM_USERDIR/icons or the directory specified here. \
+                    Otherwise no icon appears in the menu for that entry.", 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('entryIconDir', 'changed', sub {&set_config_value("IconDir", $win->get_title('entryIconDir')); return 0;});
+
+$win->add_button( Name => 'changeIconDir',
+        Pos     => [360, 135], 
+        Size    => [55, 25], 
+        Title   => "...", 
+        Tip     => "Change icon directory path.", 
+        Sens    => &get_config_value("IconsOn"), 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('changeIconDir', 'clicked', \&change_path, [$win, 'entryIconDir']);
+
+
+# Use Titles -----------------------------------------------------------
+$win->add_check_button( Name => 'checkTitlesUse', 
+        Pos     => [10, 172], 
+        Title   => "Use Titles", 
+        Active  => &get_config_value("TitlesOn"), 
+        Sens    => 1, 
+        Tip     => "If this option is set menus are generated with titles. Default is no titles.", 
+        Frame   => 'OptionFrame');
+
+
+# Menus in Menu --------------------------------------------------------
+$win->add_check_button( Name => 'checkMenusInMenu', 
+        Pos     => [170, 172], 
+        Title   => "Menus in Menu:", 
+        Active  => &get_config_value("InsertOn"), 
+        Tip     => "Enable this checkbox to insert generated menu(s) IN a menu.", 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('checkMenusInMenu', 'toggled', \&check_menus_in_menu_on);
+
+sub check_menus_in_menu_on {
+    # get current state
+    my $check_button_state = $win->is_active('checkMenusInMenu');
+    # get config state
+    my $config_state = &get_config_value("InsertOn");
+    if ($check_button_state != $config_state) {
+        &set_config_value("InsertOn", $check_button_state);
+        # set sensitivity of the icon releated widgets
+        if (defined($win->exist_object('entryInMenu'))) {
+            $win->set_sensitive('entryInMenu', $check_button_state);
+        }
+    }
+}
+
+$win->add_entry( Name => 'entryInMenu', 
+        Pos     => [325, 170], 
+        Size    => [90, 25], 
+        Title   => &get_config_value("InMenu"), 
+        Tip     => "Enter in this field the name of the menu (its top title) where the generated \
+                    menu(s) should insert. For more information see the USAGE section in the man \
+                    page of fvwm-menu-desktop.", 
+        Sens    => &get_config_value("InsertOn"), 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('entryInMenu', 'changed', sub {&set_config_value("InMenu", $win->get_title('entryInMenu')); return 0;});
+
+
+# Output Path ----------------------------------------------------------
+$win->add_label( Name => 'labelOutPath', 
+        Pos     => [12, 210], 
+        Title   => 'Output Path:', 
+        Sens    => 1, 
+        Frame   => 'OptionFrame');
+
+$win->add_entry( Name => 'entryOutPath', 
+        Pos     => [115, 205], 
+        Size    => [215, 25], 
+        Title   => &get_config_value("MenuPath"), 
+        Tip     => "Enter here the FULL path of the menu to store. Default path is \$FVWM_USERDIR/.menu.", 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('entryOutPath', 'changed', sub {&set_config_value("MenuPath", $win->get_title('entryOutPath')); return 0;});
+
+$win->add_button( Name => 'changeOutPath',
+        Pos     => [360, 205], 
+        Size    => [55, 25], 
+        Title   => "...", 
+        Tip     => "Change output path of the menu file.", 
+        Frame   => 'OptionFrame');
+$win->add_signal_handler('changeOutPath', 'clicked', \&change_path, [$win, 'entryOutPath']);
+
+sub change_path {
+    my ($widget, $data) = @_;
+    my $self = $$data[0];
+    my $name = $$data[1];
+    # get object
+    my $object = $self->get_object($name);
+    # get current filepath from entry
+    my $path;
+    my $action;
+    my $param_key;
+    if ($name eq 'entryOutPath') {
+        $action = 'open';
+        $param_key = "MenuPath";
+        $path = &get_real_path($self->get_title($object->{name}));
+    }
+    elsif ($name =~ /^entryIcon/) {
+        $action = 'select-folder';
+        if ($name eq 'entryIconDir') {
+            $param_key = "IconDir";
+            $path = &get_real_path($self->get_title($object->{name}));
+        } else {
+            $param_key = "IconTheme";
+            my $theme = $self->get_title($object->{name});
+            if (-d "~/.themes/$theme") {
+                $path = &get_real_path("~/.themes/$theme");
+            } else {
+                $path = "/usr/share/icons/$theme/";
+            }
+        }
+    } else { # AppIcon, DirIcon
+        $action = 'open';
+        $param_key = $name;
+        $param_key =~ s/entry//;
+        #create path to the icon
+        my $theme = &get_config_value('IconTheme');
+        my $iconsize = &get_config_value("IconSize");
+        my @files;
+        if (-d "~/.themes/$theme") {
+            $path = &get_real_path("~/.themes/$theme");
+        } else {
+            $path = "/usr/share/icons/$theme/";
+        }
+        my $icon = $self->get_title($object->{name});
+        find(sub {push @files, $File::Find::name if /^$icon\./}, $path);
+        # get the first path from the array
+        foreach (@files) {
+            if ($_ =~/$iconsize/) {
+                $path = $_;
+                last;
+            }
+        }
+    }
+    my $resp = $self->show_filechooser_dialog($action, $path);
+    unless ($resp eq '0') {
+        my $title = $resp;
+        # reduce path to filename for AppIcon, DirIcon
+        if ($name =~ /Icon$/) {
+            my ($filename, $directories, $suffix) = fileparse($title, qr/\.[^.]*/);
+            $title = $filename;
+        }
+        $self->set_title($name, $title);
+        &set_config_value($param_key, $title);
+    }
+}
+
+# if a environment variable like $FVWM_USERDIR is in the path
+# change it to the real path
+sub get_real_path {
+    my ($file_path) = shift;
+    $file_path =~ s/~/\$HOME/;
+    $file_path =~ s/\$(\w+)/$ENV{$1}/g;
+    return $file_path;
+}
+
+#-----------------------------------------------------------------------
+# Button bar
+#-----------------------------------------------------------------------
+
+# Create ---------------------------------------------------------------
+$win->add_button( Name => 'createButton', 
+        Pos     => [15, 465], 
+        Size    => [90, 25], 
+        Title   => "Generate", 
+        Tip     => "Generate menu(s).");
+$win->add_signal_handler('createButton', 'clicked', \&create_menu);
+
+sub create_menu {
+    # first check which tab is active
+    my $current_tab = $win->get_value('NB1', 'currentpage');
+    # build PipeRead string
+    my $cmd_string = "fns-menu-desktop";
+    my @menus;
+    foreach my $key (sort(keys %config)) {
+        unless ($key =~ /^Menu\d+$/) {
+            unless ("&get_config_value($key)" eq "&get_config_value($key, 2)" or
+                     &get_config_value($key,1) == DEFAULT) {
+                next if $key eq 'InMenu';
+                if ($key eq 'IconsOn' and &get_config_value($key) == 1) {
+                    $cmd_string = "$cmd_string --enable-mini-icons";
+                }
+                elsif ($key eq 'IconSize') {
+                    $cmd_string = "$cmd_string -s '" . &get_config_value($key) . "'";
+                }
+                elsif ($key eq 'TitlesOn' and &get_config_value($key) == 1) {
+                    $cmd_string = "$cmd_string --with-titles";
+                }
+                elsif ($key eq 'InsertOn' and &get_config_value($key) == 1) {
+                    $cmd_string = "$cmd_string --insert-in-menu \"" . &get_config_value('InMenu') . "\"";
+                }
+                elsif ($key eq 'IconDir') {
+                    $cmd_string = "$cmd_string --mini-icon-dir " . &get_config_value($key);
+                }
+                elsif ($key eq 'DirIcon') {
+                    $cmd_string = "$cmd_string --dir-icon \"" . &get_config_value($key) . "\"";
+                }
+                elsif ($key eq 'AppIcon') {
+                    $cmd_string = "$cmd_string --app-icon \"" . &get_config_value($key) . "\"";
+                }
+                elsif ($key eq 'MenuTitle') {
+                    $cmd_string = "$cmd_string --title \"" . &get_config_value($key) . "\"";
+                }
+                elsif ($key eq 'Installprefix') {
+                    $cmd_string = "$cmd_string --install-prefix \"" . &get_config_value($key) . "\"";
+                }
+                elsif ($key eq 'Desktop') {
+                    $cmd_string = "$cmd_string --desktop \"" . &get_config_value($key) . "\"";
+                }
+                elsif ($key eq 'Menutype') {
+                    $cmd_string = "$cmd_string --menutype \"" . &get_config_value($key) . "\"";
+                }
+                elsif ($key eq 'IconTheme') {
+                    $cmd_string = "$cmd_string --theme \"" . &get_config_value($key) . "\"";
+                }
+            }
+        } else {
+            push (@menus, $key);
+        }
+    }
+    
+    # add menus
+    if ($current_tab == 0) {
+        $cmd_string = "$cmd_string --set-menus \"";
+        my @menu_list;
+        foreach my $dir (keys %all_menus) {
+            foreach my $menux (sort(@menus)) {
+                if (&get_config_value($menux) == 1) {
+                    $menux =~ s/Menu//;
+                    my @menu = @{$all_menus{$dir}{$menux}};
+                    push(@menu_list, "$dir$menu[0].menu");
+                }
+            }
+        }
+        $cmd_string = $cmd_string . join(' ', @menu_list). "\"";
+    }
+    
+    # add menu path
+    $cmd_string = "$cmd_string > \"" . &get_config_value('MenuPath') . "\" 2> ~/.xsession-errors && echo Read \"" . &get_config_value('MenuPath') . "\"";
+    #print $cmd_string;
+    $module->send("PipeRead `$cmd_string`");
+}
+
+# Help -----------------------------------------------------------------
+$win->add_button( Name => 'helpButton', 
+        Pos     => [135, 465], 
+        Size    => [80, 25], 
+        Title   => "Help", 
+        Tip     => "Get help.");
+
+
+# Save -----------------------------------------------------------------
+$win->add_button( Name => 'saveButton', 
+        Pos     => [245, 465], 
+        Size    => [90, 25], 
+        Title   => 'Save', 
+        Sens    => $values_changed,
+        Tip     => "Save settings.");
+$win->add_signal_handler('saveButton', 'clicked', \&save_config);
+
+sub set_save_button_active($) {
+    my $state = shift;
+    $win->set_sensitive('saveButton', $state); 
+}
+
+sub save_config {
+    # check if user config exist and make a copy
+    if (-f $menu_cfg) {
+        my $cfg_backup = $menu_cfg;
+        $cfg_backup =~ s/\.cfg/\.bak/;
+        copy($menu_cfg, $cfg_backup);
+    }
+    
+    # open the config file for writing
+    my $out;
+    open $out, '>', $menu_cfg or die "Can't write $menu_cfg: $!";
+    
+    # add header
+    print $out "# This file last created by FNS-MenuConfigurator on " . gmtime() . "\n";
+
+    # add all 'key = value' except MenuX
+    my @menus;
+    foreach my $key (keys %config) {
+        unless ($key =~ /^Menu\d+$/) {
+            unless ("&get_config_value($key)" eq "&get_config_value($key, 2)" or
+                     &get_config_value($key,1) == DEFAULT) {
+                print $out "$key = '" . &get_config_value($key) . "'\n";
+            }
+        } else {
+            push (@menus, $key);
+        }
+    }
+    
+    # add menus
+    print $out "\n";
+    foreach my $menu (sort(@menus)) {
+        print $out "$menu = '" . &get_config_value($menu) . "'\n";
+    }
+    
+    close $out;
+    $values_changed = 0;
+    &unset_config_value_state('all');
+    &set_save_button_active($values_changed);
+}
+
+
+# Cancel ---------------------------------------------------------------
+$win->add_button( Name => 'cancelButton', 
+        Pos     => [355, 465], 
+        Size    => [90, 25], 
+        Title   => "Cancel", 
+        Tip     => "Cancel/Quit Menu Configurator.");
+$win->add_signal_handler('cancelButton', 'clicked', \&check_before_quit);
+
+# check before quit for unsaved changes
+sub check_before_quit {
+    if ($values_changed == SET) {
+        my $response = $win->show_msg_dialog('warning', 'yes-no', "You have unsaved changes! Continue anyway?");
+        if ($response eq 'no') {
+            return;
+        }
+    }
+    Gtk2->main_quit;
+}
+
+
+#$win->show_and_run();
+$win->show();
+
+$module->eventLoop;

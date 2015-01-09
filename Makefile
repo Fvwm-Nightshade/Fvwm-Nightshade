@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.1.8
+# Version:      2.2.3
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      08/08/2014
+# Changed:      01/01/2015
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -39,6 +39,7 @@ xdgdir		= $(datadir)/desktop-directories
 themesdir 	= $(datadir)/themes
 userdir		= ~
 fnsuserdir	= $(userdir)/.$(package)
+perlsitedir := $(shell perl -le 'foreach (@INC) {print $$_ if (m/\/usr\/lib\/.*(site_perl|perl5)$$/ or m/\/usr\/local\/lib\/.*(site_perl|perl5)$$/); break;}')
 
 ifeq ($(local),yes)
 	themesdir = $(userdir)/.themes
@@ -47,7 +48,8 @@ endif
 pkgdatadir 	= $(datadir)/$(package)
 pkgdocdir 	= $(docdir)/$(package)
 
-fns_fvwmscripts = $(shell ls -1 fvwm)
+fns_fvwmscripts = $(shell ls -p1 fvwm|grep -v /)
+fns_perllib		= $(shell find fvwm/perllib|cut -d'/' -f 2-)
 fns_executables = $(shell ls -1 bin)
 fns_manpages 	= $(shell ls -1 man)
 fns_templates 	= $(shell ls -1 templates)
@@ -78,8 +80,8 @@ $(distdir):
 	cp -r * $(distdir)
 	
 FORCE:
-	-rm $(distdir).tar.gz &> /dev/null
-	-rm -rf $(distdir) &> /dev/null
+	rm -f $(distdir).tar.gz
+	rm -rf $(distdir)
 
 distcheck: $(distdir).tar.gz
 	gzip -cd $+ | tar xvf -
@@ -89,7 +91,7 @@ distcheck: $(distdir).tar.gz
 build-install-list: 
 	rm -f ./fns-install_$(version).lst
 	echo "Build install list 'fns-install_$(version).lst' for Fvwm-Nightshade $(version)"
-	echo "-> FvwmScripts"
+	echo "-> FvwmScripts and perllib modules"
 	if test -z "$(DESTDIR)"; then \
 		if test "$(local)" = "yes"; then \
 			for file in $(fns_fvwmscripts); do \
@@ -103,6 +105,9 @@ build-install-list:
 			if test "$(id)" = "root"; then \
 				if test -d "$(fvwm_path)"; then \
 					for file in $(fns_fvwmscripts); do \
+						echo $(fvwm_path)/$$file >> ./fns-install_$(version).lst; \
+					done; \
+					for file in $(fns_perllib); do \
 						echo $(fvwm_path)/$$file >> ./fns-install_$(version).lst; \
 					done; \
 				else \
@@ -152,6 +157,15 @@ build-install-list:
 	if test "$(displaymanager)" = "yes" && test "$(id)" = "root"; then \
 		echo "-> Login file"; \
 		echo /usr/share/xsessions/fvwm-nightshade.desktop >> ./fns-install_$(version).lst; \
+	else \
+		echo "Can't install fvwm-nightshade.desktop in /usr/share/xsessions/ because you are not root."; \
+		rm -f ./fns-install_$(version).lst; \
+		exit 3; \
+	fi
+
+	echo "-> SimpleGtk2 library"
+	if test "$(id)" = "root"; then \
+		echo $(perlsitedir)/SimpleGtk2.pm >> ./fns-install_$(version).lst; \
 	fi
 
 	echo "-> System files"
@@ -241,7 +255,7 @@ install: build-install-list dist-install
 
 dist-install:
 	echo "Installing Fvwm-Nightshade $(version) to $(pkgprefix)"
-	echo "-> Install FvwmScripts"
+	echo "-> Install FvwmScripts and perllib modules"
 	if test -z "$(DESTDIR)"; then \
 		if test "$(local)" = "yes"; then \
 			install -d $(fnsuserdir)/scripts; \
@@ -258,6 +272,15 @@ dist-install:
 					for file in $(fns_fvwmscripts); do \
 						install -m 644 fvwm/$$file  $(fvwm_path); \
 					done; \
+					for file in $(fns_perllib); do \
+						if test -f "fvwm/$$file"; then \
+							install -m 644 fvwm/$$file  $(fvwm_path)/$$file; \
+						else \
+							if test -f "fvwm/$$file"; then \
+								install -d $(fvwm_path)/$$file; \
+							fi; \
+						fi; \
+					done; \
 				else \
 					exit 2; \
 				fi; \
@@ -269,6 +292,15 @@ dist-install:
 		install -d $(fvwm_path); \
 		for file in $(fns_fvwmscripts); do \
 			install -m 644 fvwm/$$file  $(fvwm_path); \
+		done; \
+		for file in $(fns_perllib); do \
+			if test -f "fvwm/$$file"; then \
+				install -m 644 fvwm/$$file  $(fvwm_path)/$$file; \
+			else \
+				if test -d "fvwm/$$file"; then \
+					install -d $(fvwm_path)/$$file; \
+				fi; \
+			fi; \
 		done; \
 	fi
 
@@ -284,9 +316,25 @@ dist-install:
 		install -m 644 system/fvwm-nightshade.desktop $(DESTDIR)/usr/share/xsessions/;\
 	fi
 
+	echo "-> Install SimpleGtk2 library"
+	if test -n "$(DESTDIR)" || test "$(id)" = "root"; then \
+		install -d $(DESTDIR)$(perlsitedir); \
+		install -m 644 system/libs/SimpleGtk2.pm $(DESTDIR)$(perlsitedir); \
+	fi
+
 	echo "-> Install system files"
 	install -d $(datadir)
 	cp -r $(package) $(pkgdatadir)
+	
+	if test -z "$(DESTDIR)"; then \
+		echo "-> Register apps at polkit"; \
+		for app in cpufreq-set cpupower; do \
+			if test -n `which $$app`; then \
+				echo "   $$app"; \
+				bin/fns-poladd $$app; \
+			fi; \
+		done; \
+	fi
 	
 	echo "-> Install documentation, Readmes, examples and templates"
 	install -d $(pkgdocdir)
@@ -371,6 +419,16 @@ uninstall:
 						echo "not found: $$path"; \
 					fi; \
 				done; \
+				echo "-> Unregister apps at polkit"; \
+				for app in "cpufreq-set" "cpupower"; do
+					if test -n `which $$app`; then \
+						alreadyHere=`cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$$app"`; \
+						if [ "$$alreadyHere" != "" ]; then \
+							echo "   $$app"; \
+							bin/fns-poladd -r "$$app"; \
+						fi; \
+					fi; \
+				done; \
 				echo "Fvwm-Nightshade is now removed. Only ~/.fvwm-nightshade exists."; \
 				echo "If you don't need it anymore remove it by hand."; \
 				exit 0; \
@@ -403,6 +461,12 @@ uninstall-alternative:
 				rm -f $(fvwm_path)/$$file; \
 			fi; \
 		done; \
+		for file in $(fns_perllib) ; do \
+			if test -f "$(fvwm_path)/$$file"; then \
+				echo "remove $(fvwm_path)/$$file"; \
+				rm -f $(fvwm_path)/$$file; \
+			fi; \
+		done; \
 	else \
 		echo "Fvwm isn't installed in $(fvwm_path)"; \
 		echo "Please set fvwm_path=<path_to_fvwm> and rerun make uninstall."; \
@@ -429,6 +493,14 @@ uninstall-alternative:
 		rm -rf $(pkgdatadir); \
 	fi
 	
+	echo "-> Unregister apps at polkit"
+	for app in cpufreq-set cpupower; do \
+		if test -n `which $$app`; then \
+			echo "   $$app"; \
+			bin/fns-poladd -r $$app; \
+		fi; \
+	done
+
 	echo "-> Uninstall documentation"
 	if test -d "$(pkgdocdir)"; then \
 		echo "remove $(pkgdocdir) completelly"; \
@@ -475,6 +547,7 @@ uninstall-alternative:
 	done
 	rmdir $(xdgdir)
 
+	echo "-> Uninstall Gtk themes"
 	for file in $(fns_themesfiles); do \
 		if test -f "$(themesdir)/$$file"; then \
 			echo "remove $(themesdir)/$$file"; \
@@ -496,6 +569,8 @@ build-deb:
 	mkdir -p $(pkgdir)
 	mkdir -p $(pkgdir)/DEBIAN
 	cp debian/control $(pkgdir)/DEBIAN
+	cp debian/fvwm-nightshade.postinst $(pkgdir)/DEBIAN/postinst
+	cp debian/fvwm-nightshade.prerm $(pkgdir)/DEBIAN/prerm
 	mkdir -p $(pkgdocdir)
 	cp debian/copyright $(pkgdocdir)
 
@@ -515,7 +590,19 @@ prepare-rpm:
 		if test ! -f "~/.rpmmacros"; then \
 			echo "%_topdir /home/$(id)/redhat" > ~/.rpmmacros; \
 		fi; \
+		sed -i "s#_perlsitedir#_perlsitedir $(perlsitedir)#" rpm/fvwm-nightshade.spec; \
 		sed -i "s/Version:.*/Version:\t$(version)/" rpm/fvwm-nightshade.spec; \
+		if test "`rpm -q yum|cut -d '-' -f -1`" == "yum"; then \
+			if test "`cat /etc/*release |grep ^NAME |cut -d '=' -f2`" != "fedora"; then \
+				if test "`cat /etc/*release |grep VERSION_ID |cut -d '=' -f2`" -lt "7"; then \
+					sed -i "s/^Requires:\tcpupower/Requires:\tcpufrequtils/" rpm/fvwm-nightshade.spec; \
+				else \
+					sed -i "s/^Requires:\tcpupower/Requires:\tkernel-tools/" rpm/fvwm-nightshade.spec; \
+				fi; \
+			else \
+				sed -i "s/^Requires:\tcpupower/Requires:\tkernel-tools/" rpm/fvwm-nightshade.spec; \
+			fi; \
+		fi; \
 		srcdir=`rpmbuild --showrc |grep " _topdir" |cut -f2`/SOURCES; \
 		mkdir -p $$srcdir; \
 		cp $(distdir).tar.gz $$srcdir; \
@@ -530,15 +617,18 @@ prepare-arch: dist
 	rm -rf $(pkgdir)
 	mkdir -p $(pkgdir)
 	cp arch/PKGBUILD_FNS $(pkgdir)/PKGBUILD
+	cp arch/makepkg.conf $(pkgdir)/
+	cp arch/fns.install $(pkgdir)/
 	mv $(distdir).tar.gz $(pkgdir)/
 	sed -i "s/pkgver=.*/pkgver=$(version)/" $(pkgdir)/PKGBUILD
 	sed -i "s#source=.*#source=\"$(package)-$(version).tar.gz\"#" $(pkgdir)/PKGBUILD
 	sed -i "s#^  cd \"\$$srcdir/.*#  cd \"\$$srcdir/$(package)-$(version)\"#" $(pkgdir)/PKGBUILD
 
 arch: prepare-arch
-	makepkg --config arch/makepkg.conf -p $(pkgdir)/PKGBUILD -g >> $(pkgdir)/PKGBUILD
-	makepkg -s --config arch/makepkg.conf -p $(pkgdir)/PKGBUILD
-	rm -f *.xz
+	cd $(pkgdir); \
+	makepkg --config $(pkgdir)/makepkg.conf -p PKGBUILD -g >> PKGBUILD; \
+	makepkg --config $(pkgdir)/makepkg.conf -p PKGBUILD; \
+	cd -
 	mv $(pkgdir)/*.xz ../
 	rm -rf $(pkgdir)
 

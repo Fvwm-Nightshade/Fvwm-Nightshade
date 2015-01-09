@@ -1,13 +1,13 @@
 ########################################################################
 # File:         colorsets
-# Version:      0.1.6
+# Version:      0.1.7
 # Licence:      GPL 2
 #
 # Description:  colorsets of Clean theme
 #
 # Author:       Thomas Funk <t.funk@web.de>
 # Created:      06/08/2012
-# Changed:      08/25/2014
+# Changed:      12/17/2014
 ########################################################################
 # REMARKS:
 #
@@ -96,7 +96,7 @@ Colorset 4 bg #829aba, hi #657d9d, sh #657d9d, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 5 VGradient 255 2 #9c9885 60 #e5e4e0 40 white, fg black, bg #424241, hi #424241, NoShape, RootTransparent, Tint #9c9885 $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 5 VGradient 255 2 #9c9885 60 #e5e4e0 40 white, fg black, bg #424241, hi #424241, NoShape, RootTransparent, Tint #9c9885 $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 5 VGradient 255 2 #9c9885 60 #e5e4e0 40 white, fg black, bg #424241, hi #424241, NoShape
 
 #-----------------------------------------------------------------------
@@ -105,13 +105,13 @@ Test (EnvMatch use_composite 0) Colorset 5 VGradient 255 2 #9c9885 60 #e5e4e0 40
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #687585, hi orange, Plain, RootTransparent, Tint #687585 $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 6 fg white, bg #687585, hi orange, Plain, RootTransparent, Tint #687585 $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #687585, hi orange, Plain
 
 #-----------------------------------------------------------------------
 # Menu title if needed
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 7 fg black, bg #9c9885, hi #424241, NoShape, Plain, RootTransparent, Tint #9c9885 $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 7 fg black, bg #9c9885, hi #424241, NoShape, Plain, RootTransparent, Tint #9c9885 $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 7 fg black, bg #9c9885, hi #424241, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------

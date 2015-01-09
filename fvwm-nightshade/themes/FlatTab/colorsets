@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      0.1.4
+# Version:      0.1.5
 # Licence:      GPL 2
 #
 # Description:  colorsets of FlatTab theme
 #
 # Author:       Thomas Funk <t.funk@web.de>
 # Created:      01/20/2013
-# Changed:      08/25/2014
+# Changed:      12/17/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -96,7 +96,7 @@ Colorset 4 bg #232323, hi #939393, sh #535353, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 5 fg white, bg #232323, hi #535353, Plain, RootTransparent, Tint #232323 $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 5 fg white, bg #232323, hi #535353, Plain, RootTransparent, Tint #232323 $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 5 fg white, bg #232323, hi #535353, Plain
 
 #-----------------------------------------------------------------------
@@ -105,7 +105,7 @@ Test (EnvMatch use_composite 0) Colorset 5 fg white, bg #232323, hi #535353, Pla
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Test (EnvMatch use_composite 1) Colorset 6 fg white, bg #838383, hi white, Plain, RootTransparent, Tint #838383 $[infostore.used_menutint]
+Test (!EnvMatch use_composite 0) Colorset 6 fg white, bg #838383, hi white, Plain, RootTransparent, Tint #838383 $[infostore.used_menutint]
 Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #838383, hi white, Plain
 
 #-----------------------------------------------------------------------

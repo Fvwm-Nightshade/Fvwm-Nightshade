@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         KlikeBottomBar
-# Version:      1.0.2
+# Version:      1.1.0
 # Licence:      GPL 2
 #
 # Description:  KDE like bottom bar with menu and iconify/deiconify button,
@@ -10,7 +10,7 @@
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      04/27/2014
-# Changed:      08/14/2014
+# Changed:      01/05/2015
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -46,7 +46,7 @@ PipeRead    'if [ "$[vp.width]" -gt "1600" ]; then \
 #-----------------------------------------------------------------------
 # needed tray columns
 #-----------------------------------------------------------------------
-PipeRead 'echo InfoStoreAdd tray_columns $(($[infostore.tray_icons]*2))'
+PipeRead "echo InfoStoreAdd tray_columns `perl -e 'printf \"%.0f\",$[infostore.tray_icons]*1.7'`"
 
 PipeRead 'echo InfostoreAdd tray_max_x $(($[infostore.tray_icons]+1))'
 
@@ -93,7 +93,7 @@ PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",($[infostore.
 #   +-----+-----+-----+-----+
 #
 #-----------------------------------------------------------------------
-DeskTopSize 4x1
+DeskTopSize "$[infostore.x_desks]x$[infostore.y_desks]"
 
 #-----------------------------------------------------------------------
 # FvwmPager height
@@ -103,7 +103,7 @@ InfoStoreAdd pager_height $[infostore.bar_height]
 #-----------------------------------------------------------------------
 # FvwmPager width
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd pager_width `perl -e 'printf \"%.0f\",5+(($[vp.width]/($[vp.height]/$[infostore.bar_height]))*4)'`"
+PipeRead "echo InfoStoreAdd pager_width `perl -e 'printf \"%.0f\",5+(($[vp.width]/($[vp.height]/$[infostore.bar_height]))*$[infostore.x_desks])'`"
 
 #-----------------------------------------------------------------------
 # FvwmPager columns

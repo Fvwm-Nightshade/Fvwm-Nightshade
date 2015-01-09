@@ -1,12 +1,19 @@
 #!/usr/bin/make -f
-%:
-	dh $@ --with python2
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
 
 override_dh_auto_install:
 	$(MAKE) DESTDIR=$$(pwd)/debian/fvwm-nightshade prefix=/usr dist-install
+	
 	rm -f debian/fvwm-nightshade/usr/share/doc/fvwm-nightshade/ChangeLog
 	rm -f debian/fvwm-nightshade/usr/share/doc/fvwm-nightshade/LICENSE
 	rm -f debian/fvwm-nightshade/usr/share/doc/fvwm-nightshade/License
 	rm -f debian/fvwm-nightshade/usr/share/doc/fvwm-nightshade/INSTALL
 	rm -f debian/fvwm-nightshade/usr/share/doc/fvwm-nightshade/COPYING
 	rm -f debian/fvwm-nightshade/usr/share/doc/fvwm-nightshade/TODO
+### end dh overrides
+
+%:
+	dh $@ --with python2
+

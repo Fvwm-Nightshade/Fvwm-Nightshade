@@ -1,0 +1,305 @@
+# Spanish translation for FNS-WindowsBehaviour
+# Copyright (C) 2014 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Adonai Martin <adonai.martin@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-WindowsBehaviour\n"
+"POT-Creation-Date: 2014-11-16 00:01+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "FNS Windows Behaviour"
+msgstr ""
+
+########################################################################
+# Focus Policies
+########################################################################
+msgid " Focus Policies "
+msgstr ""
+
+msgid "Click to Focus"
+msgstr ""
+
+msgid "Give the focus to a window when it is clicked in."
+msgstr ""
+
+msgid "Focus follows Mouse"
+msgstr ""
+
+msgid "Give a window the focus as the pointer enters the window, and take it away when leaving."
+msgstr ""
+
+msgid "Sloopy Focus"
+msgstr ""
+
+msgid ""
+"Give a window the focus as the pointer enters the window, but doesn't give "
+"up the focus if the pointer leaves the window to pass over the root window."
+msgstr ""
+
+########################################################################
+# Raise Options
+########################################################################
+msgid " Raise Options "
+msgstr ""
+
+msgid "Raise if focused"
+msgstr ""
+
+msgid "Controls if the window is raised when focused (depending on the focus model)."
+msgstr ""
+
+msgid "Stack Transient Parent"
+msgstr ""
+
+msgid ""
+"This style transfers the raise action to the main window makes raise on a "
+"transient act just like raise on its main - the whole group is raised."
+msgstr ""
+
+msgid "No Raise Click on Motion"
+msgstr ""
+
+msgid ""
+"If this style is used, clicking in a window and then dragging the pointer with "
+"the button held down does not count as the click to raise the window. Instead, "
+"the application processes these events normally. This is useful to select text "
+"in a terminal window with the mouse without raising the window. However, mouse "
+"bindings on the client window are not guaranteed to work anymore. The distance "
+"that the pointer must be moved to trigger this is controlled by the MoveThreshold below."
+msgstr ""
+
+########################################################################
+# Focus Options
+########################################################################
+msgid " Focus Options "
+msgstr ""
+
+msgid "Grab Focus"
+msgstr ""
+
+msgid ""
+"New normal windows with the 'Grab Focus' style automatically receive the focus "
+"when they are created. GrabFocus is the default for windows with the ClickToFocus "
+"style. Note that even if this style is disabled, the application may take the focus "
+"itself. Fvwm can not prevent this."
+msgstr ""
+
+msgid "Grab Focus Transient"
+msgstr ""
+
+msgid ""
+"New transient windows with the 'Grab Focus Transient' style automatically "
+"receive the focus when they are created. Note that even if this style is "
+"disabled, the application may take the focus itself. Fvwm can not prevent this."
+msgstr ""
+
+msgid "No Focus Click on Motion"
+msgstr ""
+
+msgid ""
+"If this style is used, clicking in a window and then dragging the pointer with the "
+"button held down does not count as the click to focus the window. Instead, the "
+"application processes these events normally. This is useful to select text in a "
+"terminal window with the mouse without focusing the window. However, mouse bindings "
+"on the client window are not guaranteed to work anymore. The distance that the pointer "
+"must be moved to trigger this is controlled by the MoveThreshold below."
+msgstr ""
+
+msgid "Focus by Program"
+msgstr ""
+
+msgid "Allows windows to take the focus themselves."
+msgstr ""
+
+########################################################################
+# Window Placement
+########################################################################
+msgid " Window Placement "
+msgstr ""
+
+msgid "Tile Cascade Placement"
+msgstr ""
+
+msgid ""
+"Places new windows in a smart location - a location in which they do not overlap any "
+"other windows on the screen. If no such position can be found Cascade Placement is "
+"used as a fall-back method."
+msgstr ""
+
+msgid "Manual Placement"
+msgstr ""
+
+msgid "This is the same as Tile Cascade Placement, but uses Manual Placement as the fall-back method."
+msgstr ""
+
+msgid "Cascade Placement"
+msgstr ""
+
+msgid "Place new windows in a cascading fashion."
+msgstr ""
+
+msgid "Tile Manual Placement"
+msgstr ""
+
+msgid ""
+"The user is required to place every new window manually. The window only shows as a rubber "
+"band until a place is selected manually. The window is placed when a mouse button or any "
+"key except Escape is pressed. Escape aborts manual placement which places the window in the "
+"top left corner of the screen."
+msgstr ""
+
+msgid "Position Placement"
+msgstr ""
+
+msgid ""
+"When used with 'TopLeft', new windows are placed in the top left corner of the display. "
+"With 'Center', all new window appear at the center of the screen, and with 'UnderMouse', "
+"windows are centered under the mouse pointer where possible."
+msgstr ""
+
+msgid "Window:"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "TopLeft"
+msgstr ""
+
+msgid "UnderMouse"
+msgstr ""
+
+msgid ""
+"With 'TopLeft', new windows are placed in the top left corner of the display. With 'Center', "
+"all new window appear at the center of the screen, and with 'UnderMouse', windows are centered "
+"under the mouse pointer where possible."
+msgstr ""
+
+msgid "Min Overlap Placement"
+msgstr ""
+
+msgid ""
+"Automatically places new windows in a location in which the overlapping area in pixels "
+"of other windows is minimized. By default this placement policy tries to avoid "
+"overlapping icons and windows on higher layers."
+msgstr ""
+
+msgid "Penalties:"
+msgstr ""
+
+msgid ""
+"The Penalties takes at most 6 positive or null decimal arguments: 'normal' 'ontop' 'icon' 'sticky' "
+"'below' 'strut'. \n\nThe 'normal' factor affects normal windows, the 'ontop' factor affects windows "
+"with a greater layer than the window being placed, the 'icon' factor affects icons, the 'sticky' "
+"factor affects sticky windows, the 'below' factor affects windows with a smaller layer than the window "
+"being placed, the 'strut' factor affects the complement of the EWMH working area if the window being "
+"placed has the EWMHPlacementUseWorkingArea style and windows with an EWMH strut hint (i.e., a 'please "
+"do not cover me' hint) if the window being placed has the EWMHPlacementUseDynamicWorkingArea style. "
+"These 'factors' represent the amount of area that these types of windows (or area) are counted as, when "
+"a new window is placed. For example, by default the area of ontop windows is counted 5 times as much as normal windows."
+msgstr ""
+
+msgid "Min Overlap Percent Placement"
+msgstr ""
+
+msgid ""
+"Tries to minimize the overlapped percentages of other windows instead of the overlapped area in pixels. "
+"This placement policy tries to avoid covering other windows completely and tries even harder not to cover small windows."
+msgstr ""
+
+msgid ""
+"The Penalties takes at most 4 positive or null integer arguments: 'cover_100' 'cover_95' 'cover_85' "
+"'cover_75'. The 'cover_xx' factor is used when the window being placed covers at least xx percent of "
+"the window. This factor is added to the factor determined by the Min Overlap Placement Penalties."
+msgstr ""
+
+########################################################################
+# Miscellaneous
+########################################################################
+msgid " Miscellaneous "
+msgstr ""
+
+msgid "Hide Geometry Window"
+msgstr ""
+
+msgid "Hides the position or size window that is usually shown when a window is moved or resized interactively."
+msgstr ""
+
+msgid "Resize Opaque"
+msgstr ""
+
+msgid ""
+"Instructs fvwm to resize the corresponding windows with their contents visible "
+"instead of using an outline. Since this causes the application to redraw frequently "
+"it can be quite slow and make the window flicker excessively, depending on the amount "
+"of graphics the application redraws. Some applications do not like their windows being "
+"resized opaque, e.g. XEmacs or terminals with a pixmap background."
+msgstr ""
+
+msgid "Move Threshold:"
+msgstr ""
+
+msgid ""
+"When the user presses a mouse button upon an object fvwm waits to see if the action "
+"is a click or a drag. If the mouse moves by more than x pixels (default is 3) it is "
+"assumed to be a drag (the default value might be increased when 16000x9000 pixel displays become affordable)."
+msgstr ""
+
+msgid "Opaque Move Size:"
+msgstr ""
+
+msgid ""
+"Tells fvwm the maximum size window with which opaque window movement should be used. "
+"The percentage is percent of the total screen area (may be greater than 100). With a "
+"value of 0 all windows are moved using the traditional rubber-band outline. -1 is "
+"given all windows are moved as solid windows. The default is 5 which allows small "
+"windows to be moved in an opaque manner but large windows are moved as rubber-bands."
+msgstr ""
+
+########################################################################
+# Button bar
+########################################################################
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Save new settings"
+msgstr ""
+
+msgid "Help"
+msgstr "Ayuda"
+
+msgid "Get help"
+msgstr "Obtenga ayuda"
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Apply new settings"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Cancel/Quit windows behaviour settings."
+msgstr ""
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr ""
+
+msgid "You have unapplied changes! Continue anyway?"
+msgstr ""
+
+msgid "Warning"
+msgstr "Advertencia"

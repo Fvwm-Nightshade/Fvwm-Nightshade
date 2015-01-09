@@ -1,0 +1,202 @@
+# German translation for FNS-BaseSetup
+# Copyright (C) 2014 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Thomas Funk <t.funk@web.de>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: FNS-BaseSetup\n"
+"POT-Creation-Date: 2014-10-10 21:54+0200\n"
+"PO-Revision-Date: 2014-10-11 00:18+0100\n"
+"Last-Translator: Thomas Funk <t.funk@web.de>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "Fvwm-Nightshade Base Setup"
+msgstr "Fvwm-Nightshade Basis Konfiguration"
+
+########################################################################
+# Environment
+########################################################################
+msgid " Environment "
+msgstr " Umgebung "
+
+msgid "Splash On"
+msgstr "Splash An"
+
+msgid "Run Banner at startup? Default: on"
+msgstr "Splash/Banner beim Start anzeigen?  Default: an"
+
+msgid "Path to splash image"
+msgstr "Pfad zum Splash-Bild"
+
+msgid "Set path to splash image"
+msgstr "Pfad zum Splash-Bild setzen"
+
+msgid "Composite Manager On"
+msgstr "Composite Manager An"
+
+msgid "Use composite manager? Default: off"
+msgstr "Composite Manager nutzen? Default: aus"
+
+msgid "Configure"
+msgstr "Konfigurieren"
+
+msgid "Open composite settings"
+msgstr "Öffne Composite Einstellungen"
+
+########################################################################
+# Desktop
+########################################################################
+msgid " Desktop "
+msgstr " Desktop "
+
+msgid "Wallpaper Dirs:"
+msgstr "Wallpaper Verz:"
+
+msgid "Wallpaper directories, separated by ':'"
+msgstr "Verzeichnisse von Hintergrundbildern, getrennt durch ':'"
+
+msgid "Icons on Desktop"
+msgstr "Icons auf dem Desktop"
+
+msgid "Use Icons on desktop? Default: off"
+msgstr "Icons auf Desktop aktivieren? Default: aus"
+
+msgid "Icon Size:"
+msgstr "Icon Größe:"
+
+msgid "Change size of the desktop icons"
+msgstr "Icongröße auf dem Desktop ändern"
+
+msgid "Desktop scrolling On"
+msgstr "Desktop Scrolling An"
+
+msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on"
+msgstr "Seitenscrolling an, wenn der Cursor die Ränder der Bildschirmseite berührt? Default: an"
+
+########################################################################
+# Decorations & Panels
+########################################################################
+msgid " Decorations & Panels "
+msgstr " Dekoration & Panels "
+
+msgid "Used Layout:"
+msgstr "Verw. Layout:"
+
+msgid "The actual FNS layout"
+msgstr "Das aktuelle FNS Layout"
+
+msgid "Used Theme:"
+msgstr "Verw. Theme:"
+
+msgid "The actual FNS decor theme"
+msgstr "Das aktuelle FNS Dekorations-Theme"
+
+msgid "Used Font:"
+msgstr "Verw. Font:"
+
+msgid "Used default font in FNS"
+msgstr "Der aktuell benutzte FNS-Font"
+
+########################################################################
+# Default Applications
+########################################################################
+msgid " Default Applications "
+msgstr " Standard Applikationen "
+
+msgid "Browser:"
+msgstr "Browser:"
+
+msgid "Default browser in FNS"
+msgstr "Standard Browser in FNS"
+
+msgid "Set path to browser"
+msgstr "Pfad zu Browser setzen"
+
+msgid "Editor:"
+msgstr "Editor:"
+
+msgid "Default editor in FNS"
+msgstr "Standard Editor in FNS"
+
+msgid "Set path to editor"
+msgstr "Pfad zu Editor setzen"
+
+msgid "Terminal:"
+msgstr "Terminal:"
+
+msgid "Default terminal in FNS"
+msgstr "Standard Terminal in FNS"
+
+msgid "Set path to terminal"
+msgstr "Pfad zu Terminal setzen"
+
+msgid "Transset:"
+msgstr "Transset:"
+
+msgid "Default transset in FNS"
+msgstr "Standard Transset in FNS"
+
+msgid "Set path to transset"
+msgstr "Pfad zu Transset setzen"
+
+########################################################################
+# Button Bar
+########################################################################
+msgid "Help"
+msgstr "Hilfe"
+
+msgid "Get help"
+msgstr "Hilfe anzeigen"
+
+msgid "Apply"
+msgstr "Anwenden"
+
+msgid "Apply and save new settings"
+msgstr "Neue Einstellungen speichern und anwenden"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Cancel / Quit Base Setup"
+msgstr "Basis Konfiguration Abbrechen / Beenden"
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr "Sie haben ungespeicherte Änderungen! Trotzdem fortfahren?"
+
+########################################################################
+# Others
+########################################################################
+msgid "Info"
+msgstr "Info"
+
+msgid "Warning"
+msgstr "Warnung"
+
+msgid "Question"
+msgstr "Frage"
+
+msgid "Error"
+msgstr "Fehler"
+
+msgid "Other"
+msgstr "Anderes"
+
+msgid "Open File"
+msgstr "Datei öffnen"
+
+msgid "Save File"
+msgstr "Datei speichern"
+
+msgid "Select Folder"
+msgstr "Ordner wählen"
+
+msgid "Create Folder"
+msgstr "Ordner erstellen"

@@ -267,7 +267,7 @@ style "checkbutton" {
             recolorable = TRUE
             state = INSENSITIVE
             shadow = OUT
-            overlay_file = "assets/checkbox-unchecked-insensitive.png"
+            overlay_file = "assets/unchecked-insensitive.png"
             overlay_stretch = FALSE
         }
 
