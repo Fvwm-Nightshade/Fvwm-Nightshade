@@ -4,6 +4,7 @@ History:
 - add possibility to configure size of desktops/pages to FNS-BaseSetup
 - merge gtk_configs branch into develop branch
 - update version to 0.7.8.20150109
+- update README and NEWS
 
 01/05/2015
 - exchange dev-qt/qtgui with dev-qt/qtgui:4 in ebuild (thanks to Sebaro).

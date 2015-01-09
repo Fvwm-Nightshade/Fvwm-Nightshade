@@ -23,8 +23,7 @@ shows you what is possible with this powerful window manager.
 
 ***********************************************************************
 ************* ATTENTION: THIS IS A DEVELOPMENT VERSION!   *************
-*************         CURRENTLY IT DOESN'T WORK!          *************
-*************            WAIT WITH TESTING!               *************
+*************           CURRENTLY IT WORKS ^^ !          *************
 ***********************************************************************
 
 Featurelist of Fvwm-Nightshade 0.7.x:
@@ -37,7 +36,8 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Own entry "Fvwm-Nightshade" in graphical login manager.
 - Own XDG applications menu with it's own directory files.
 
-- Build support for deb, rpm, Arch, Gentoo and local installation.
+- Build support for deb, rpm and Arch installation (Gentoo and local in
+  progress).
 - Localization support for German (French and Spanish in progress).
 
 - Support for shadows and transparency with XcompMgr and Compton.
