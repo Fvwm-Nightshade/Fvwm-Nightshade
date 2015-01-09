@@ -1,5 +1,8 @@
 History:
 
+01/09/2015
+- add possibility to configure size of desktops/pages to FNS-BaseSetup
+
 01/05/2015
 - exchange dev-qt/qtgui with dev-qt/qtgui:4 in ebuild (thanks to Sebaro).
   Also remove some einfo lines not needed on package installation
