@@ -12,7 +12,7 @@ use File::Spec;
 
 #-------------------------------------------------------------------------
 # File:         FNS-BaseSetup
-my $Version =   '2.1.0';
+my $Version =   '2.1.1';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure base settings of Fvwm-Nightshade
@@ -20,21 +20,11 @@ my $Version =   '2.1.0';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/08/2014
-# Changed:      01/09/2015
+# Changed:      01/10/2015
 #-------------------------------------------------------------------------
 
 
-##########################################################################
-# module initialisation and getting of needed FVWM variables
-##########################################################################
 my $module = new FVWM::Module::SimpleGtk2(Name => 'FNS-BaseSetup');
-
-# get needed FVWM variables
-$module->request_reply('$[vp.width] $[vp.height] $[infostore.hratio] $[infostore.fontsize]', $module->{win_id});
-my @fvwm_vars = $module->readPacket();
-$fvwm_vars[1] =~ s/\0//g;
-@fvwm_vars = split(' ', $fvwm_vars[1]);
-
 
 ##########################################################################
 # Global values
@@ -272,6 +262,12 @@ sub first_start {
 &parse_config($config_path);
 # get additional parameters
 &parse_config($libfm_config, '=');
+# get needed FVWM variables
+my $pageTracker = $module->track('PageInfo');
+my $vp_width = $pageTracker->data->{vp_width};
+my $vp_height = $pageTracker->data->{vp_height};
+my $hratio = sprintf("%.1f", ($vp_height/1024)*(4/3));
+
 
 
 ########################################################################
@@ -521,10 +517,7 @@ sub set_desktop_spins($) {
     my $current_x_desks = &get_config_value("x_desks");
     my $current_y_desks = &get_config_value("y_desks");
     my $current_desks = $current_x_desks*$current_y_desks;
-    my $vp_width = $fvwm_vars[0];
-    my $vp_height = $fvwm_vars[1];
-    my $hratio = $fvwm_vars[2];
-    my $fontsize = $fvwm_vars[3];
+    my $fontsize = &get_config_value("fontsize");
 
     if ($layout eq "Vertical") {
         # set spinDesktopX and spinDesktopY
@@ -681,6 +674,7 @@ sub set_new_font_size {
     my @font = $win->get_font_as_array('FontButton');
     &set_config_value("used_font", $font[0]);
     &set_config_value("fontsize", $font[1]);
+    &set_desktop_spins(&get_config_value("used_layout"));
 }
 
 #-----------------------------------------------------------------------
