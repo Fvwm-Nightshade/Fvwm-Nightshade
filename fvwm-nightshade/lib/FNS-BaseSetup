@@ -12,7 +12,7 @@ use File::Spec;
 
 #-------------------------------------------------------------------------
 # File:         FNS-BaseSetup
-my $Version =   '2.1.1';
+my $Version =   '2.1.2';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure base settings of Fvwm-Nightshade
@@ -155,7 +155,7 @@ sub get_config_value(@) {
 #-----------------------------------------------------------------------
 sub set_config_value(@) {
     my ($key, $value, $init) = @_;
-    unless ($init or defined($init)) {
+    unless ($init and defined($init)) {
         $config{$key}[0] = $value;
         # set to changed (1)
         $config{$key}[1] = 1;
@@ -266,6 +266,8 @@ sub first_start {
 my $pageTracker = $module->track('PageInfo');
 my $vp_width = $pageTracker->data->{vp_width};
 my $vp_height = $pageTracker->data->{vp_height};
+#my $vp_width = 1920;
+#my $vp_height = 1080;
 my $hratio = sprintf("%.1f", ($vp_height/1024)*(4/3));
 
 
@@ -548,7 +550,7 @@ sub set_desktop_spins($) {
             my $pager_height = sprintf("%.0f", $fontsize*3.5);
             my $pager_width = sprintf("%.0f", ($pager_height*($vp_width/$vp_height)*$current_desks)+4);
             my $max_pager_width = $vp_width - (2 * $panel_width) - (2 * $fontsize) - sprintf("%.0f", $vp_width*0.01);
-            my $one_pager_size = sprintf("%.0f", $pager_width/$current_x_desks);
+            my $one_pager_size = sprintf("%.0f", $pager_width/$current_desks);
             
             # maximum pagers
             $max = sprintf("%.0f", $max_pager_width/$one_pager_size);
@@ -582,8 +584,8 @@ sub set_desktop_spins($) {
        }
        # disable spinDesktopY
        $win->set_sensitive('spinDesktopY', 0);
-       $init = 0;
-    }
+   }
+   $init = 0;
 }
 
 $win->add_label( Name => 'labelDesktops', 
@@ -595,7 +597,7 @@ $win->add_label( Name => 'labelDesktops',
 $win->add_spin_button( Name => 'spinDesktopX', 
         Pos     => [390, 66], 
         Start   => 4, Min => 1, Max => 10, Step => 1, 
-        Tip     => '', 
+        Tip     => 'Set horizontal count of desktop pages.', 
         Align   => 'right', 
         Frame   => 'DeskFrame');
 $win->add_signal_handler('spinDesktopX', 'value-changed', sub {&set_config_value("x_desks", $win->get_value('spinDesktopX', 'active'), $init);});
@@ -609,7 +611,7 @@ $win->add_label( Name => 'labelx',
 $win->add_spin_button( Name => 'spinDesktopY', 
         Pos     => [460, 66], 
         Start   => 1, Min => 1, Max => 10, Step => 1, 
-        Tip     => '', 
+        Tip     => 'Set vertical count of desktop pages.', 
         Align   => 'right', 
         Frame   => 'DeskFrame');
 #$win->add_signal_handler('spinDesktopY', 'value-changed', sub {&set_config_value("y_desks", $win->get_value('spinDesktopY', 'active'));});
