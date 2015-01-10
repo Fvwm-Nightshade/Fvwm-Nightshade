@@ -23,8 +23,7 @@ shows you what is possible with this powerful window manager.
 
 ***********************************************************************
 ************* ATTENTION: THIS IS A DEVELOPMENT VERSION!   *************
-*************         CURRENTLY IT DOESN'T WORK!          *************
-*************            WAIT WITH TESTING!               *************
+*************           CURRENTLY IT WORKS ^^ !          *************
 ***********************************************************************
 
 Featurelist of Fvwm-Nightshade 0.7.x:
@@ -47,7 +46,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Support for icons on desktop. Also for mount icons.
 
 - Up to 10 virtual desktop pages (more possible but only keys 0-9 
-  for different key bindings available).
+  for different key bindings are available).
 - Taskbar to show running apps per page.
 - Lock desk & screen (xscreensaver).
 - Autostart possibility (starting apps while startup).

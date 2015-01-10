@@ -1,7 +1,10 @@
 History:
 
 01/10/2015
-- fix bug which prevents starting of FNS-BaseSetup
+- fix bug which prevents starting FNS-BaseSetup. Add also Tips to the
+  desktop spin buttons.
+- update version to 0.7.8.20150110
+- update README and NEWS
 
 01/09/2015
 - add possibility to configure size of desktops/pages to FNS-BaseSetup
