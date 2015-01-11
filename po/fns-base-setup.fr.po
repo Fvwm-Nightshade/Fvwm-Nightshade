@@ -84,6 +84,15 @@ msgstr ""
 msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on"
 msgstr ""
 
+msgid "Desktops:"
+msgstr ""
+
+msgid "Set horizontal count of desktop pages."
+msgstr ""
+
+msgid "Set vertical count of desktop pages."
+msgstr ""
+
 ########################################################################
 # Decorations & Panels
 ########################################################################

@@ -152,7 +152,7 @@ msgstr ""
 msgid "Apply"
 msgstr "Appliquer"
 
-msgid "Apply settings to the cpufreq system. Also save them in \$FVWM_USERDIR/.governor for using it with autostart if set."
+msgid "Apply settings to the cpufreq system. Also save them in $FVWM_USERDIR/.governor for using it with autostart if set."
 msgstr ""
 
 msgid "Cancel"

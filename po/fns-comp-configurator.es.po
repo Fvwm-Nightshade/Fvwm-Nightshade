@@ -2,13 +2,14 @@
 # Copyright (C) 2014 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
 # Adonai Martin <adonai.martin@gmail.com>, 2014.
+# Reviewed by: Jesús J. Guerrero Botella <jesus.guerrero.botella@gmail.com>, 2015.
 #
 msgid ""
 msgstr ""
 
 "Project-Id-Version: FNS-CompConfigurator\n"
 "POT-Creation-Date: 2014-10-29 19:11+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-01-11 16:04+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
@@ -20,23 +21,23 @@ msgstr ""
 # Titlebar
 ########################################################################
 msgid "FNS Composite Configurator"
-msgstr ""
+msgstr "Configurador de composición de FNS"
 
 ########################################################################
 # Composite Manager
 ########################################################################
 
 msgid " Composite Manager "
-msgstr ""
+msgstr " Gestor de Composición "
 
 msgid "Use"
-msgstr ""
+msgstr "Usar"
 
 msgid "Activate / deactivate the choosen composite manager."
-msgstr ""
+msgstr "Activar / desactivar el gestor de composición elegido"
 
 msgid "Composite manager is running! Stopping?"
-msgstr ""
+msgstr "¡El gestor de composición está siendo ejecutado! ¿Parar?"
 
 msgid "XcompMgr"
 msgstr "XcompMgr"
@@ -45,6 +46,8 @@ msgid ""
 "XcompMgr is the standard composition manager for the X Composite extension. "
 "It implements shadows, fading, proper translucency, and more."
 msgstr ""
+"XcompMgr es el gestor de composición estándar para la extensión X Composite. "
+"Implementa sombras, desvanecimientos, translucidez auténtica y más."
 
 msgid "Compton"
 msgstr "Compton"
@@ -54,7 +57,9 @@ msgid ""
 "fading and translucency, it implements window frame opacity control, inactive "
 "window transparency, and shadows on argb windows."
 msgstr ""
-
+"Compton es un gestor de composición basado en xcompmgr. Además de sombras, "
+"desvanecimientos y translucidez, implementa control de opacidad para el marco de ventana, "
+"transparencia de ventana inactiva, y sombras sobre ventanas argb."
 ########################################################################
 # Shadows
 ########################################################################
@@ -63,97 +68,99 @@ msgid " Shadows "
 msgstr " Sombras "
 
 msgid "Enable Shadows"
-msgstr ""
+msgstr "Activar sombras"
 
 msgid ""
 "Enable client-side shadows on windows.\n"
 "Note:\nDesktop windows (with _NET_WM_WINDOW_TYPE_DESKTOP) never get shadow."
 msgstr ""
+"Activar sombras del lado de cliente en ventanas.\n"
+"Nota:\nVentanas de escritorio (con _NET_WM_WINDOW_TYPE_DESKTOP) nunca tienen sombra."
 
 msgid "On Dock / Panels"
-msgstr ""
+msgstr "En Muelles / Paneles"
 
 msgid "Painting shadows on panels and docks."
-msgstr ""
+msgstr "Pintando sombras en paneles y muelles."
 
 msgid "While drag'n'drop"
-msgstr ""
+msgstr "Durrante el arrastre"
 
 msgid "Draw shadows on drag-and-drop windows."
-msgstr ""
+msgstr "Dibujar sombras en ventanas arrastradas"
 
 msgid "Opacity:"
-msgstr ""
+msgstr "Opacidad"
 
 msgid "The opacity of shadows. (0.0 - 1.0, defaults to 0.75)."
-msgstr ""
+msgstr "La opacidad de las sombras. (0.0 - 1.0, por defecto 0.75)."
 
 msgid "Blur Radius:"
-msgstr ""
+msgstr "Radio de difuminado:"
 
 msgid "The blur radius for shadows, in pixels. (defaults to 12)."
-msgstr ""
+msgstr "El radio de difuminado para sombras, en píxeles. (por defecto a 12)."
 
 msgid "Left Offset:"
-msgstr ""
+msgstr "Desplazamiento izquierda:"
 
 msgid "The left offset for shadows, in pixels. (defaults to -15)."
-msgstr ""
+msgstr "Desplazamiento a la izquierda para sombras, en píxeles. (por defecto -15)"
 
 msgid "Top Offset:"
-msgstr ""
+msgstr "Desplazamiento superior"
 
 msgid "The top offset for shadows, in pixels. (defaults to -15)."
-msgstr ""
+msgstr "Desplazamiento superior para sombras, en píxeles. (por defecto -15)."
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Color de la sombra"
 
 msgid "RGB colors of shadows. (defaults to 000000)."
-msgstr ""
+msgstr "Color RGB de la sombra. (por defecto a 00000)."
 
 ########################################################################
 # Fading
 ########################################################################
 
 msgid " Fading "
-msgstr ""
+msgstr "Desvanecimiento"
 
 msgid "Enable Fading"
-msgstr ""
+msgstr "Activar desvanecimiento"
 
 msgid "Enable in/out fading of windows."
-msgstr ""
+msgstr "Activar in/out desvaneciento de ventanas"
 
 msgid "On Opacity changed"
-msgstr ""
+msgstr "En cambio de opacidad"
 
 msgid "Enables fade effect when windows change their opacity."
-msgstr ""
+msgstr "Activar efecto de desvanecimento cuando las ventanas cambien su opacidad"
 
 msgid "On Open / Close"
-msgstr ""
+msgstr "Para Abrir / Cerrar"
 
 msgid "Enables fade effect when windows open or close."
-msgstr ""
+msgstr "Activar efecto de desvenecimiento cuando las ventanas se abran o cierren"
 
 msgid "Fade-in Steps:"
-msgstr ""
+msgstr "Pasos para Decololar"
 
 msgid "Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)."
-msgstr ""
+msgstr "La opacidad cambia entre pasos mientras se decolora. (0.01 - 1.0, por defecto 0.028)."
 
 msgid "Fade-out Steps:"
-msgstr ""
+msgstr "Pasos del desvanecimiento"
 
 msgid "Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)."
-msgstr ""
-
+msgstr "La opacidad cambia entre pasos mientras aumenta. (0.01 - 1.0, por defecto 0.03"
+ 
 msgid "Fade Step Time:"
-msgstr ""
+msgstr "Paso de tiempo para desvanecimiento"
 
 msgid "The time between steps in fade step, in milliseconds. (> 0, defaults to 10)."
-msgstr ""
+msgstr "El tiempo entre pasos en el paso de desvanecimiento, en milisegundos. (> 0, por defecto 10)."
 
 ########################################################################
 # Menus
@@ -163,20 +170,20 @@ msgid " Menus "
 msgstr " Menús "
 
 msgid "Opacity on Menus:"
-msgstr ""
+msgstr "Opacidad en Menús:"
 
 msgid "Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0)."
-msgstr ""
+msgstr "Opacidad por defecto para menús despegables y emergentes. (0.0 - 1.0, por defecto 1.0)."
 
 ########################################################################
 # Additional Parameters
 ########################################################################
 
 msgid " Additional Parameters "
-msgstr ""
+msgstr " Parámetros Adicionales"
 
 msgid "Enter here paramters which not accessible with the configurator"
-msgstr ""
+msgstr "Introduza aquí los parámetros que no son accesibles con el configurador"
 
 ########################################################################
 # Button bar
@@ -192,25 +199,25 @@ msgid "Help"
 msgstr "Ayuda"
 
 msgid "Get help."
-msgstr "Obtenga ayuda"
+msgstr "Obtener ayuda"
 
 msgid "Start"
-msgstr ""
+msgstr "Comenzar"
 
 msgid "Stop"
-msgstr ""
+msgstr "Parar"
 
 msgid "Start or stop the coosen composite manager."
-msgstr ""
+msgstr "Comenzar o parar el gestor de composición elegido"
 
 msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Cancel / Quit Composite Configurator."
-msgstr "Cancelar / Cerrar"
+msgstr "Cancelar / Cerrar configurador del Gestor de Composición "
 
 msgid "You have unsaved changes! Continue anyway?"
-msgstr ""
+msgstr "¡Tiene cambios no guardados! ¿Continuar de todas formas?"
 
 ########################################################################
 # Others
@@ -221,6 +228,7 @@ msgstr "Advertencia"
 
 msgid ""
 "No composite manager is installed.\nFor full functionality Xcompmgr "
-"or Compton must installed at least."
+"or Compton must installed at least." 
 msgstr ""
-
+"Ningún composite manager ha sido instalado.\nPara total funcionalidad, Xcompmgr "
+"o Compton debe de ser instalado al menos."

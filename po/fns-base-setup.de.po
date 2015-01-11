@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FNS-BaseSetup\n"
 "POT-Creation-Date: 2014-10-10 21:54+0200\n"
-"PO-Revision-Date: 2014-10-11 00:18+0100\n"
+"PO-Revision-Date: 2015-01-11 00:16+0100\n"
 "Last-Translator: Thomas Funk <t.funk@web.de>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -80,6 +80,15 @@ msgstr "Desktop Scrolling An"
 
 msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on"
 msgstr "Seitenscrolling an, wenn der Cursor die Ränder der Bildschirmseite berührt? Default: an"
+
+msgid "Desktops:"
+msgstr "Desktops:"
+
+msgid "Set horizontal count of desktop pages."
+msgstr "Setzt die Anzahle der horizontalen Desktops."
+
+msgid "Set vertical count of desktop pages."
+msgstr "Setzt die Anzahle der vertikalen Desktops."
 
 ########################################################################
 # Decorations & Panels
