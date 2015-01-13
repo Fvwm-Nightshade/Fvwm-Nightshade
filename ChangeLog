@@ -1,5 +1,17 @@
 History:
 
+01/13/2015
+- update fns-base-setup.pot because of possibility to configure size of desktops/pages
+- update some po files (Spanish and German)
+- update all mo files
+- remove old documentation for FNS-Form-BaseSetup and fvwm-menu-desktop2
+- add man page for fns-menu-desktop (adapted fvwm-menu-desktop man page)
+- update all documentation files (asciidoc, man and html)
+- add new documentation (asciidoc, man and html) for FNS-BaseSetup and FNS-WindowsBehaviour
+- adapt click event for Help button in FNS-BaseSetup to show the correct help document
+- add missing click event for Help button in FNS-MenuConfigurator to show the fns-menu-desktop help document
+- add missing click event for Help button in FNS-WindowsBehaviour to show the new help document
+
 01/10/2015
 - fix bug which prevents starting FNS-BaseSetup. Add also Tips to the
   desktop spin buttons.
