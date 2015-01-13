@@ -12,15 +12,16 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuConfigurator
-my $Version =   '2.0.1';
+my $Version =   '2.0.2';
 # Licence:      GPL 2
 #
-# Description:  Perl script to configure fvwm-menu-desktop
+# Description:  Perl script to configure fns-menu-desktop to create
+#               XDG menu(s).
 #
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      11/19/2014
-# Changed:      12/14/2014
+# Changed:      01/13/2015
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -830,6 +831,7 @@ $win->add_button( Name => 'helpButton',
         Size    => [80, 25], 
         Title   => "Help", 
         Tip     => "Get help.");
+$win->add_signal_handler('helpButton', 'clicked', sub {system("xterm -g 100x50 -n \"Help fns-menu-desktop\" -T \"Help fns-menu-desktop\" -e \"man fns-menu-desktop\" &");});
 
 
 # Save -----------------------------------------------------------------
