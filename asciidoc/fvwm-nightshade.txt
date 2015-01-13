@@ -30,27 +30,27 @@ USAGE
 First Start
 ~~~~~~~~~~~
 *Fvwm-Nightshade* checks while your first login if +~/.fvwm-nightshade+ exist. 
-If not a setup dialog appears where you can change things like used theme 
-and font, which layout, default terminal and browser you want.
+If not a setup dialog appears where you can change things like desktop size, 
+used theme and font, which layout, default terminal and browser you want.
 
 After clicking "Apply & Save" your settings will be activated and 
 *Fvwm-Nightshade* is ready to use. If you want to change the settings 
 again you can do that over the menu point
 ----
-Configuration -> Fvwm-Nightshade -> Fvwm-Nightshade-Setup
+Configuration -> Fvwm-Nightshade -> FNS Base Setup
 ----
 
 
 Desktop Organisation
 ~~~~~~~~~~~~~~~~~~~~
-Four different desktop layouts available:
+Four different desktop layouts are available:
 
 * Horizontal (default)
 * Vertical
 * G2like (Gnome 2 based)
 * Klike (KDE based)
 
-You can change it via Fvwm-Nightshade-Setup or over the menu
+You can change it via _FNS Base Setup_ or over the menu
 ----
 Configuration -> Fvwm-Nightshade -> Decorations -> Layouts
 ----
@@ -78,8 +78,8 @@ There are some mouse bindings available:
 
 _The Pager_::
 +
-It is a miniature illustration of the 4 virtual desktop pages (4x1) with 
-mini windows. By clicking on each of the 4 segments you can change the page. 
+It is a miniature illustration of up to 10 virtual desktop pages (10x1) with 
+mini windows. By clicking on each of a segment you can change the page. 
 Also you can move each window from one page to another with holding down 
 the middle mouse button. If you hover over a mini window it shows the name 
 and the title of it.
@@ -87,9 +87,9 @@ and the title of it.
 There are also some key combinations available:
 +
 * _Shift-Ctrl_ and _Arrow_ key right/left switch to the next/previous page.
-* _Shift-Ctrl_ and _number_ 1-4 switch to page 1-4.
+* _Shift-Ctrl_ and _number_ 1-0 switch to page 1-10.
 * _Shift-Alt_ and _Arrow_ key right/left moves the active window to the next/previous page.
-* _Shift-Alt_ and _number_ 1-4 moves the active window to page 1-4.
+* _Shift-Alt_ and _number_ 1-0 moves the active window to page 1-10.
 
 _The Panel_::
 +
@@ -103,11 +103,14 @@ right end of the tray. With scrolling the mouse wheel you can move throug
 the applets.
 * A cpu graph with percentage. With right click on the applet area an 
 opertion menu appears with the possibility to restart the applet or open 
-the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+the governor-tool FNS-CpuPerformance to handle cpufreq or cpupower settings.
 * A Clock and date applet. With right click on the applet area an opertion 
-menu appears with the possibility to restart the applet.
+menu appears with the possibility to open a calender or an alarm clock. Is 
+it also possible to set the clock and date but root or sudo permission is 
+required. Sometimes this applets have problems to swallow into the panel. 
+With the last point it can tried to restart.
 
-The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So it 
+The maximum size of a window is limited by Fvwm its' EwmhBaseStruts. So it 
 will maximum growing underneath the horizontal elements. You can use _Alt-F11_ 
 to grow the window to the whole screen.
 
@@ -121,10 +124,13 @@ _The Panel_::
 It contains from above to below:
 +
 * A Clock and date applet. With right click on the applet area an opertion 
-menu appears with the possibility to restart the applet.
+menu appears with the possibility to open a calender or an alarm clock. Is 
+it also possible to set the clock and date but root or sudo permission is 
+required. Sometimes this applets have problems to swallow into the panel. 
+With the last point it can tried to restart.
 * A cpu graph with percentage. With right click on the applet area an 
 opertion menu appears with the possibility to restart the applet or open 
-the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+the governor-tool FNS-CpuPerformance to handle cpufreq or cpupower settings.
 * The systemtray with application applets. The amount of visible applets 
 depends on the screen width. If more applets in the systray than representable 
 a bar on the left and right side appears while hovering over the left or 
@@ -136,8 +142,8 @@ winlist icon.
 
 _The Pager_::
 +
-It is a miniature illustration of the 4 virtual desktop pages (2x2) with 
-mini windows. By clicking on each of the 4 segments you can change the page. 
+It is a miniature illustration of up to 10 virtual desktop pages (10x1 or 5x2) 
+with mini windows. By clicking on each of a segment you can change the page. 
 Also you can move each window from one page to another with holding down 
 the middle mouse button. If you hover over a mini window it shows the name 
 and the title of it.
@@ -145,10 +151,10 @@ and the title of it.
 There are also some key combinations available:
 +
 * _Shift-Ctrl_ and _Arrow_ key right/left/up/down switch to the next/previous/upper/down page.
-* _Shift-Ctrl_ and _number_ 1-4 switch to page 1-4.
+* _Shift-Ctrl_ and _number_ 1-0 switch to page 1-10.
 * _Shift-Alt_ and _Arrow_ key right/left/up/down moves the active window to 
 the next/previous/upper/down page.
-* _Shift-Alt_ and _number_ 1-4 moves the active window to page 1-4.
+* _Shift-Alt_ and _number_ 1-0 moves the active window to page 1-10.
 
 _The "Global Iconman" Taskbar_::
 +
@@ -164,7 +170,7 @@ There are some mouse bindings available:
 * double clicking or scroll up on a bar deiconify the window.
 * right clicking  on a bar opens a windows operation menu.
 
-The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So 
+The maximum size of a window is limited by Fvwm its' EwmhBaseStruts. So 
 it will maximum growing left to the vertical elements. You can use _Alt-F11_ 
 to grow the window to the whole screen.
 
@@ -186,9 +192,12 @@ right end of the tray. With scrolling the mouse wheel you can move through
 the applets.
 * A cpu graph with percentage. With right click on the applet area an 
 opertion menu appears with the possibility to restart the applet or open 
-the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+the governor-tool FNS-CpuPerformance to handle cpufreq or cpupower settings.
 * A Clock and date applet. With right click on the applet area an opertion 
-menu appears with the possibility to restart the applet.
+menu appears with the possibility to open a calender or an alarm clock. Is 
+it also possible to set the clock and date but root or sudo permission is 
+required. Sometimes this applets have problems to swallow into the panel. 
+With the last point it can tried to restart.
 * The Exit menu. It opens by left clicking the exit icon.
 
 _The Bottom Panel_::
@@ -207,20 +216,20 @@ There are some mouse bindings available:
 - double clicking or scroll up on a bar deiconify the window.
 - right clicking  on a bar opens a windows operation menu.
 +
-* The Pager. It is a miniature illustration of the 4 virtual desktop pages 
-(4x1) with mini windows. By clicking on each of the 4 segments you can 
-change the page. Also you can move each window from one page to another 
-with holding down the middle mouse button. If you hover over a mini window 
-it shows the name and the title of it.
+* The Pager. It is a miniature illustration of up to 10 virtual desktop pages 
+(10x1) with mini windows. By clicking on each of a segment you can change the 
+page. Also you can move each window from one page to another with holding down 
+the middle mouse button. If you hover over a mini window it shows the name 
+and the title of it.
 +
-There are also some key combinations available, too:
+There are also some key combinations available:
 +
-- _Shift-Ctrl_ and _Arrow_ key right/left switch to the next/previous page.
-- _Shift-Ctrl_ and _number_ 1-4 switch to page 1-4.
-- _Shift-Alt_ and _Arrow_ key right/left moves the active window to the next/previous page.
-- _Shift-Alt_ and _number_ 1-4 moves the active window to page 1-4.
+* _Shift-Ctrl_ and _Arrow_ key right/left switch to the next/previous page.
+* _Shift-Ctrl_ and _number_ 1-0 switch to page 1-10.
+* _Shift-Alt_ and _Arrow_ key right/left moves the active window to the next/previous page.
+* _Shift-Alt_ and _number_ 1-0 moves the active window to page 1-10.
 
-The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So 
+The maximum size of a window is limited by Fvwm its' EwmhBaseStruts. So 
 it will maximum growing inbetween the two panels. You can use _Alt-F11_ to 
 grow the window to the whole screen.
 
@@ -245,18 +254,18 @@ There are some mouse bindings available:
 - double clicking or scroll up on a bar deiconify the window.
 - right clicking  on a bar opens a windows operation menu.
 +
-* The Pager. It is a miniature illustration of the 4 virtual desktop pages 
-(4x1) with mini windows. By clicking on each of the 4 segments you can 
-change the page. Also you can move each window from one page to another 
-with holding down the middle mouse button. If you hover over a mini window 
-it shows the name and the title of it.
+* The Pager. It is a miniature illustration of up to 10 virtual desktop pages 
+(10x1) with mini windows. By clicking on each of a segment you can change the 
+page. Also you can move each window from one page to another with holding down 
+the middle mouse button. If you hover over a mini window it shows the name 
+and the title of it.
 +
-There are also some key combinations available, too:
+There are also some key combinations available:
 +
-- _Shift-Ctrl_ and _Arrow_ key right/left switch to the next/previous page.
-- _Shift-Ctrl_ and _number_ 1-4 switch to page 1-4.
-- _Shift-Alt_ and _Arrow_ key right/left moves the active window to the next/previous page.
-- _Shift-Alt_ and _number_ 1-4 moves the active window to page 1-4.
+* _Shift-Ctrl_ and _Arrow_ key right/left switch to the next/previous page.
+* _Shift-Ctrl_ and _number_ 1-0 switch to page 1-10.
+* _Shift-Alt_ and _Arrow_ key right/left moves the active window to the next/previous page.
+* _Shift-Alt_ and _number_ 1-0 moves the active window to page 1-10.
 +
 * The systemtray with application applets. The amount of visible applets 
 depends on the screen width. If more applets in the systray than representable 
@@ -265,11 +274,14 @@ right end of the tray. With scrolling the mouse wheel you can move through
 the applets.
 * A cpu graph with percentage. With right click on the applet area an 
 opertion menu appears with the possibility to restart the applet or open 
-the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+the governor-tool FNS-CpuPerformance to handle cpufreq or cpupower settings.
 * A Clock and date applet. With right click on the applet area an opertion 
-menu appears with the possibility to restart the applet.
+menu appears with the possibility to open a calender or an alarm clock. Is 
+it also possible to set the clock and date but root or sudo permission is 
+required. Sometimes this applets have problems to swallow into the panel. 
+With the last point it can tried to restart.
 
-The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So 
+The maximum size of a window is limited by Fvwm its' EwmhBaseStruts. So 
 it will maximum growing above the panel. You can use _Alt-F11_ to 
 grow the window to the whole screen.
 
@@ -278,7 +290,10 @@ Root Menu
 The Root menu is the main menu of *Fvwm-Nightshade*. You can call it in 
 different areas with mouse or key combinations:
 
-* In the root area with left click or with _Alt+F1_ or with the left _Window_ key.
+* In the root area with left click or with _Alt+F1_ or with the left _Window_ key. 
+If icons on desktop are enabled the menu is moved around to the right click 
+desktop menu because PcmanFm offered this feature take the root window is under 
+its' control.
 * In each window area or in an iconified windows with _Alt+left click_.
 
 Personal Applications
@@ -311,13 +326,9 @@ Regenerate (XDG) Menu
 The "Regenerate (XDG) Menu" point is to reconfigure or refresh the XDG 
 application menus after software installation. 
 
-For information about each possibility click on the "Help" button right 
-hand of the section headline. A help window appears describing each entry 
-shortly. 
-
-For more information about _fvwm-menu-desktop_ itself click on the "Help" 
-button in the action section left hand of the Quit button or in each help
-section window.
+For information about each possibility hover over the widgets to get a help 
+tip or click on the "Help" button on the bottom. This will open the man page 
+of fns-menu-desktop the main tool behind the GUI. 
 
 Configuration
 ^^^^^^^^^^^^^
@@ -331,13 +342,14 @@ FvwmForm windows appear (font, color, background).
 
 Fvwm-Nightshade::
 +
-Here you can configure the background, which theme you want, the look of 
-your Gtk and Qt applications and the base settings of *Fvwm-Nightshade*.
+Here you can configure the background, the composite manager, which theme and 
+layout you want, the look of your Gtk and Qt applications, the base settings and 
+window behaviour of *Fvwm-Nightshade*.
 
 System::
 +
-Here you can configure the keyboard, mouse, xscreensaver and, if you have 
-a multi cpu system your CPU settings.
+Here you can configure the keyboard, mouse, time and date, xscreensaver and, if 
+you have a multi cpu system your CPU governor settings.
 
 Help
 ^^^^
@@ -347,7 +359,7 @@ and other programs like manpage viewers, online helps, etc.
 Fvwm modules
 ^^^^^^^^^^^^
 In this menu you can start and stop Fvwm modules on the fly. Also a submenu directory 
-for useful FvwmForms exist.
+exists for useful FvwmForms.
 
 Window Operations
 ^^^^^^^^^^^^^^^^^
@@ -361,8 +373,8 @@ clicking this menu point. Or with the keyboard shortcut _Alt+Ctrl+L_.
 
 Run Command
 ^^^^^^^^^^^
-If you want to run a program you can open a mini window by clicking to 
-enter your command. Or with _Alt+F2_.
+If you want to run a program you can open a mini window to enter your command. 
+Or with _Alt+F2_.
 
 Terminal
 ^^^^^^^^
@@ -393,7 +405,7 @@ Button 1:   Root menu.
 +
 Button 2:   Window list.
 +
-Button 3:   Desktop menu.
+Button 3:   Desktop menu. If you have configured icons on desktop there's a root menu, too.
 
 Windows Area::
 +
@@ -491,7 +503,7 @@ Page related::
 +
 [cols="25%,75%",frame="none",grid="none"]
 |====
-|Shift-Ctrl + 1-4	|Switch to page 1-4.
+|Shift-Ctrl + 1-0	|Switch to page 1-10.
 |Shift-Ctrl + cursor right/left	|Switch to page right/left.
 |Shift-Ctrl + cursor up/down	|Switch to page up/down (only used in Vertical Layout).
 |	|
@@ -501,7 +513,7 @@ Page related::
 |Ctrl-Alt + cursor right/left	|Move mouse pointer right/left by 1% of a page.
 |Ctrl-Alt + cursor up/down	|Move mouse pointer up/down by 1% of a page.
 |	|
-|Shift-Alt + 1-4	|Switch to page 1-4 with active window.
+|Shift-Alt + 1-0	|Switch to page 1-10 with active window.
 |	|
 |Shift-Alt + Cursor right/left	|Switch to page right/left with active window.
 |Shift-Alt + Cursor up/down	|Switch to page up/down with active window (only used in Vertical Layout).
@@ -514,7 +526,7 @@ General::
 |Print	|Screenshot of the whole desktop (page).
 |Alt + Print	|Screenshot of the active window.
 |Alt-Ctrl + L	|Lock Screen.
-|Alt-Ctrl + T	|Launch Terminal.
+|Alt-Ctrl + T	|Launch your favorite terminal.
 |	|
 |Windows	|Open root menu.
 |Alt + F1	|Open root menu.
@@ -555,9 +567,9 @@ Structure of Fvwm-Nightshade
 
 The system part is located in +/usr/local+ (default), +/usr+ (distribution 
 related) or if you use the local installation under +<chosen_dir>+. In the 
-followed named as <system>.
+following named as <system>.
 
-The user part is located in +~/.fvwm-nightshade+. Followed named as <user>.
+The user part is located in +~/.fvwm-nightshade+. Following named as <user>.
 
 Location of Files and their Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -565,9 +577,10 @@ Location of Files and their Function
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |fvwm-nightshade    |start script.
-|fns-built-trayapplist    |python script for stalonetray to build applet list. Used for restoring applets after restart stalonetray.
-|fns-find-icon        |python script to find the correct icon for iconified apps or for icons used in layouts.
-|fvwm-menu-desktop2     |adapted fvwm-menu-desktop from Fvwm's CVS to create Fvwm menu(s).
+|fns-built-trayapplist    |Python script for stalonetray to build applet list. Used for restoring applets after restart stalonetray.
+|FNS-CpuPerformance     |Perl-SimpleGtk2 script to set CPU frequency governor.
+|fns-find-icon        |Python script to find the correct icon for iconified apps or for icons used in layouts.
+|fns-menu-desktop     |adapted fvwm-menu-desktop from Fvwm's CVS to create XDG menu(s).
 |fns-start-programs    |shell script to start apps from a file list. Used for autostart and starting applets for stalonetray.
 |====
 
@@ -593,6 +606,10 @@ Location of Files and their Function
 |====
 |FvwmSmartMaximize         		|Perl module to maximize windows in the largest area of the desktop/page.
 |FvwmTransSet         		|Perl module to set true transparency to windows if a composite manager is running.
+|FNS-BaseSetup              |Perl-SimpleGtk2 script to configure base settings of Fvwm-Nightshade (layouts, themes, compositing, icons on desktop, etc.).
+|FNS-WindowsBehaviour       |Perl-SimpleGtk2 script to configure window behaviours (focus policies, placement, etc.).
+|FNS-CompConfigurator       |Perl-SimpleGtk2 script to configure composite manager if installed (shadows, translucency, etc).
+|FNS-MenuConfigurator       |Perl-SimpleGtk2 script to configure the XDG menu creation. It exchange fvwm-menu-desktop2-config.fpl.
 |====
 
 -
@@ -610,18 +627,11 @@ local installation is chosen in the <user> directories - FvwmScripts in the
 scripts/ sub directory, all others in the <user> root.
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|FNS-Form-BaseSetup            	|Fvwm-Nightshade base setup (FvwmForm script).
-|FNS-Script-CpuPerformance    	|Cpufreq settings tool (FvwmForm script).
 |FNS-Script-PersonalMenu        |Personal menu creator (FvwmScript script).
-|FNS-Script-CompConfigurator    |Composite configurator (FvwmScript script).
 |FNS-Script-FileBrowser         |File browser based on FvwmScript-FileBrowser
 |FNS-Script-Date                |Set time/date based on FvwmScript-Date
 |FNS-Applet-Kalende             |Calendar applet
 |FNS-Applet-Chrono              |Alarm applet
-|fvwm-menu-desktop2-config.fpl  |Configuration GUI for fvwm-menu-desktop2.
-|FvwmForm-SingleMenuHelp2       |Help window for single menu section in fvwm-menu-desktop2-config.
-|FvwmForm-MultiMenuHelp2        |Help window for multiple menu section in fvwm-menu-desktop2-config.
-|FvwmForm-GenOptionHelp2        |Help window for general option section in fvwm-menu-desktop2-config.
 |====
 
 -
@@ -652,24 +662,35 @@ installation is chosen it is located in <chosen_dir>/share/desktop-directories/.
 
 -
 
+*/usr/local/lib/perl-site|Perl5* -> Perl directories for 3rd party libraries
+[cols="20%,80%",frame="none",grid="none"]
+|====
+|SimpleGtk2.pm        |a wrapper around Perl-Gtk2 to allow RAD.
+|====
+
+-
+
 *~/.fvwm-nightshade/* -> the user home directory (<user>)
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |.autostart			|optional file with application commands.
-|.FNS-Form-BaseSetup		|config file of FNS-Form-BaseSetup.
-|.FvwmForm-Desktop-Config	|config file of Regenerate XDG Menus.
+|.fns-menu.cfg	    |config file of Regenerate XDG Menus.
+|.FvwmTransSet      |local config file of FvwmTransSet.
 |.layout			|link to current layout file.
 |.menu				|Fvwm menu file.
 |.personal			|Menu file of your personal apps.
 |.settings        	|settings like layout, theme, font, splash, etc.
 |.systray.log		|stalonetray log file.
 |.trayapplist		|internal list of current systray apps.
+|.user              |config file for FNS-WindowsBehaviour and custom user settings.
 |.wallpaper			|link to current wallpaper
 |====
 
 -
 
 *<user>/wallpapers/* -> default wallpaper directory.
+
+*<user>/screenshots/* -> default screenshots directory.
 
 *<user>/scripts/* -> Optional user FvwmScripts directory.
 
@@ -714,8 +735,8 @@ thunderbird
 ----
 
 Another possibility is to use the function "FuncStartSystrayApplets" in the 
-config file but then you have to copy the system config into the <user> directory
-and add your app like
+config file but then you have to copy the system file 'config' into the <user> 
+directory and add your app like
 -----
 + I Test (x nm-applet) exec exec nm-applet
 -----
@@ -763,15 +784,19 @@ settings::
 |$[infostore.used_font]                 |Default used font for all Fvwm parts.
 |$[infostore.fontsize]                  |Default font size for all Fvwm parts.
 |$[infostore.used_layout]               |The actual layout.
+|$[infostore.x_desks]                   |The actual desktop count X.
+|$[infostore.y_desks]                   |The actual desktop count Y.
 |$[infostore.used_menutint]             |The actual menu tint level.
 |$[use_composite]              	        |Use composite manager.
 |$[infostore.comp_command]              |Composite manager command.
 |$[infostore.used_windowtransparency]   |The actual (inactive) window transparency level (used by transset).
 |$[infostore.used_windowopacity]        |The actual (active) window opacity level (used by transset).
 |$[infostore.DesktopIconsOn]            |Use Icons on desktop.
+|$[infostore.DesktopScrollOn]           |Activate page scrolling.
 |$[infostore.PcmanFmStatus]             |State of pcmanfm.
 |$[infostore.additional_wp_dirs]        |Additional wallpaper directories.
 |$[infostore.default_terminal]          |The default used terminal program.
+|$[infostore.default_editor]            |The default used editor.
 |$[infostore.default_browser]           |The default used browser.
 |$[infostore.default_transset]          |The default used transset program.
 |====
@@ -805,7 +830,7 @@ with it’s name and copy the colorset template from +<system>/share/docs/fvwm-n
 into the directory.
 
 Two different decors exist - vector based (Clean theme) and image based (Air, Ambiance, 
-CrystalBalls and Tribal). Copy one of these decor files into your theme directory.
+CrystalBalls, etc.). Copy one of these decor files into your theme directory.
 
 If you want to build an image related theme create also an "images" folder for 
 the button images.
@@ -943,7 +968,7 @@ or in the StartFunction with
 
 AUTHORS
 -------
-(C) 2014 by the Fvwm-Nightshade team <fvwmnightshade@gmail.com>.
+(C) 2013 - 2015 by the Fvwm-Nightshade team <fvwmnightshade@gmail.com>.
 
 
 COPYRIGHT

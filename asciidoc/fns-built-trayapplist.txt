@@ -56,4 +56,4 @@ Show the version and exiting.
 AUTHOR
 ------
 
-(C) 2012 Thomas Funk <t.funk@web.de>
+(C) 2012 - 2015 Thomas Funk <t.funk@web.de>

@@ -115,7 +115,7 @@ COPYRIGHTS
 ----------
 *FvwmTransSet* is based on *FvwmPeteTransFocus* by Peter Blair.
 
-This program stands under the GPL V2. (C) 2014.
+This program stands under the GPL V2. (C) 2014 - 2015.
 
 AUTHORS
 -------

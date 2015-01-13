@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.7" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
 <title>fns-find-file(1)</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -87,9 +87,15 @@ ul, ol, li > p {
 ul > li     { color: #aaa; }
 ul > li > * { color: black; }
 
-pre {
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
   padding: 0;
   margin: 0;
+}
+pre {
+  white-space: pre-wrap;
 }
 
 #author {
@@ -219,7 +225,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; }
+span.image img { border-style: none; vertical-align: text-bottom; }
 a.image:visited { color: white; }
 
 dl {
@@ -415,12 +421,6 @@ div.unbreakable { page-break-inside: avoid; }
  *
  * */
 
-tt {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-}
-
 div.tableblock {
   margin-top: 1.0em;
   margin-bottom: 1.5em;
@@ -453,12 +453,6 @@ div.tableblock > table[frame="vsides"] {
  * html5 specific
  *
  * */
-
-.monospaced {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-}
 
 table.tableblock {
   margin-top: 1.0em;
@@ -539,6 +533,8 @@ body.manpage div.sectionbody {
 @media print {
   body.manpage div#toc { display: none; }
 }
+
+
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
@@ -759,7 +755,7 @@ fns-find-file(1) Manual Page
 <div class="sectionbody">
 <div class="paragraph"><p><strong>fns-find-file</strong> is used to find the correct path of a file depending of
 the directories specified in a search path. The default search path is
-<tt>$FNS_SOUNDPATH</tt>. But other search paths like <tt>$PATH</tt> can be used.</p></div>
+<code>$FNS_SOUNDPATH</code>. But other search paths like <code>$PATH</code> can be used.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -772,12 +768,12 @@ the directories specified in a search path. The default search path is
 </dt>
 <dd>
 <div class="paragraph"><p>Find the appropriate path of a file depending of the directories specified
-in a search path. The default search path is <tt>$FNS_SOUNDPATH</tt>. But other
-search paths like <tt>$PATH</tt> can be used instead with <strong>--path</strong>.</p></div>
+in a search path. The default search path is <code>$FNS_SOUNDPATH</code>. But other
+search paths like <code>$PATH</code> can be used instead with <strong>--path</strong>.</p></div>
 <div class="paragraph"><p>Example for a file search:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ fns-find-file alarm.wav</tt></pre>
+<pre><code>$ fns-find-file alarm.wav</code></pre>
 </div></div>
 </dd>
 <dt class="hdlist1">
@@ -788,7 +784,7 @@ search paths like <tt>$PATH</tt> can be used instead with <strong>--path</strong
 path:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ fns-find-file --path $PATH gksu</tt></pre>
+<pre><code>$ fns-find-file --path $PATH gksu</code></pre>
 </div></div>
 </dd>
 <dt class="hdlist1">
@@ -801,7 +797,7 @@ path:</p></div>
 <strong>--version</strong>
 </dt>
 <dd>
-<div class="paragraph"><p>Shows program&#8217;s version number and exit.</p></div>
+<div class="paragraph"><p>Shows program's version number and exit.</p></div>
 </dd>
 <dt class="hdlist1">
 <strong>-h | --help</strong>
@@ -815,14 +811,15 @@ path:</p></div>
 <div class="sect1">
 <h2 id="_author">AUTHOR</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>&#169; 2013 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+<div class="paragraph"><p>(C) 2013 - 2015 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-08-26 16:45:23 CEST
+Last updated
+ 2015-01-11 16:45:03 CET
 </div>
 </div>
 </body>

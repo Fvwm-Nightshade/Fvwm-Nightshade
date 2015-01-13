@@ -766,19 +766,19 @@ how you can customize it (e.g. new themes or layouts).</p></div>
 <div class="sect2">
 <h3 id="_first_start">First Start</h3>
 <div class="paragraph"><p><strong>Fvwm-Nightshade</strong> checks while your first login if <code>~/.fvwm-nightshade</code> exist.
-If not a setup dialog appears where you can change things like used theme
-and font, which layout, default terminal and browser you want.</p></div>
+If not a setup dialog appears where you can change things like desktop size,
+used theme and font, which layout, default terminal and browser you want.</p></div>
 <div class="paragraph"><p>After clicking "Apply &amp; Save" your settings will be activated and
 <strong>Fvwm-Nightshade</strong> is ready to use. If you want to change the settings
 again you can do that over the menu point</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>Configuration -&gt; Fvwm-Nightshade -&gt; Fvwm-Nightshade-Setup</code></pre>
+<pre><code>Configuration -&gt; Fvwm-Nightshade -&gt; FNS Base Setup</code></pre>
 </div></div>
 </div>
 <div class="sect2">
 <h3 id="_desktop_organisation">Desktop Organisation</h3>
-<div class="paragraph"><p>Four different desktop layouts available:</p></div>
+<div class="paragraph"><p>Four different desktop layouts are available:</p></div>
 <div class="ulist"><ul>
 <li>
 <p>
@@ -801,7 +801,7 @@ Klike (KDE based)
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>You can change it via Fvwm-Nightshade-Setup or over the menu</p></div>
+<div class="paragraph"><p>You can change it via <em>FNS Base Setup</em> or over the menu</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><code>Configuration -&gt; Fvwm-Nightshade -&gt; Decorations -&gt; Layouts</code></pre>
@@ -844,8 +844,8 @@ right clicking  on a bar opens a windows operation menu
 <em>The Pager</em>
 </dt>
 <dd>
-<div class="paragraph"><p>It is a miniature illustration of the 4 virtual desktop pages (4x1) with
-mini windows. By clicking on each of the 4 segments you can change the page.
+<div class="paragraph"><p>It is a miniature illustration of up to 10 virtual desktop pages (10x1) with
+mini windows. By clicking on each of a segment you can change the page.
 Also you can move each window from one page to another with holding down
 the middle mouse button. If you hover over a mini window it shows the name
 and the title of it.</p></div>
@@ -858,7 +858,7 @@ and the title of it.</p></div>
 </li>
 <li>
 <p>
-<em>Shift-Ctrl</em> and <em>number</em> 1-4 switch to page 1-4.
+<em>Shift-Ctrl</em> and <em>number</em> 1-0 switch to page 1-10.
 </p>
 </li>
 <li>
@@ -868,7 +868,7 @@ and the title of it.</p></div>
 </li>
 <li>
 <p>
-<em>Shift-Alt</em> and <em>number</em> 1-4 moves the active window to page 1-4.
+<em>Shift-Alt</em> and <em>number</em> 1-0 moves the active window to page 1-10.
 </p>
 </li>
 </ul></div>
@@ -897,19 +897,22 @@ the applets.
 <p>
 A cpu graph with percentage. With right click on the applet area an
 opertion menu appears with the possibility to restart the applet or open
-the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+the governor-tool FNS-CpuPerformance to handle cpufreq or cpupower settings.
 </p>
 </li>
 <li>
 <p>
 A Clock and date applet. With right click on the applet area an opertion
-menu appears with the possibility to restart the applet.
+menu appears with the possibility to open a calender or an alarm clock. Is
+it also possible to set the clock and date but root or sudo permission is
+required. Sometimes this applets have problems to swallow into the panel.
+With the last point it can tried to restart.
 </p>
 </li>
 </ul></div>
 </dd>
 </dl></div>
-<div class="paragraph"><p>The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So it
+<div class="paragraph"><p>The maximum size of a window is limited by Fvwm its' EwmhBaseStruts. So it
 will maximum growing underneath the horizontal elements. You can use <em>Alt-F11</em>
 to grow the window to the whole screen.</p></div>
 </div>
@@ -927,14 +930,17 @@ consists from above to below:</p></div>
 <li>
 <p>
 A Clock and date applet. With right click on the applet area an opertion
-menu appears with the possibility to restart the applet.
+menu appears with the possibility to open a calender or an alarm clock. Is
+it also possible to set the clock and date but root or sudo permission is
+required. Sometimes this applets have problems to swallow into the panel.
+With the last point it can tried to restart.
 </p>
 </li>
 <li>
 <p>
 A cpu graph with percentage. With right click on the applet area an
 opertion menu appears with the possibility to restart the applet or open
-the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+the governor-tool FNS-CpuPerformance to handle cpufreq or cpupower settings.
 </p>
 </li>
 <li>
@@ -963,8 +969,8 @@ winlist icon.
 <em>The Pager</em>
 </dt>
 <dd>
-<div class="paragraph"><p>It is a miniature illustration of the 4 virtual desktop pages (2x2) with
-mini windows. By clicking on each of the 4 segments you can change the page.
+<div class="paragraph"><p>It is a miniature illustration of up to 10 virtual desktop pages (10x1 or 5x2)
+with mini windows. By clicking on each of a segment you can change the page.
 Also you can move each window from one page to another with holding down
 the middle mouse button. If you hover over a mini window it shows the name
 and the title of it.</p></div>
@@ -977,7 +983,7 @@ and the title of it.</p></div>
 </li>
 <li>
 <p>
-<em>Shift-Ctrl</em> and <em>number</em> 1-4 switch to page 1-4.
+<em>Shift-Ctrl</em> and <em>number</em> 1-0 switch to page 1-10.
 </p>
 </li>
 <li>
@@ -988,7 +994,7 @@ the next/previous/upper/down page.
 </li>
 <li>
 <p>
-<em>Shift-Alt</em> and <em>number</em> 1-4 moves the active window to page 1-4.
+<em>Shift-Alt</em> and <em>number</em> 1-0 moves the active window to page 1-10.
 </p>
 </li>
 </ul></div>
@@ -1022,7 +1028,7 @@ right clicking  on a bar opens a windows operation menu.
 </ul></div>
 </dd>
 </dl></div>
-<div class="paragraph"><p>The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So
+<div class="paragraph"><p>The maximum size of a window is limited by Fvwm its' EwmhBaseStruts. So
 it will maximum growing left to the vertical elements. You can use <em>Alt-F11</em>
 to grow the window to the whole screen.</p></div>
 </div>
@@ -1060,13 +1066,16 @@ the applets.
 <p>
 A cpu graph with percentage. With right click on the applet area an
 opertion menu appears with the possibility to restart the applet or open
-the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+the governor-tool FNS-CpuPerformance to handle cpufreq or cpupower settings.
 </p>
 </li>
 <li>
 <p>
 A Clock and date applet. With right click on the applet area an opertion
-menu appears with the possibility to restart the applet.
+menu appears with the possibility to open a calender or an alarm clock. Is
+it also possible to set the clock and date but root or sudo permission is
+required. Sometimes this applets have problems to swallow into the panel.
+With the last point it can tried to restart.
 </p>
 </li>
 <li>
@@ -1115,14 +1124,14 @@ right clicking  on a bar opens a windows operation menu.
 </li>
 <li>
 <p>
-The Pager. It is a miniature illustration of the 4 virtual desktop pages
-(4x1) with mini windows. By clicking on each of the 4 segments you can
-change the page. Also you can move each window from one page to another
-with holding down the middle mouse button. If you hover over a mini window
-it shows the name and the title of it.
+The Pager. It is a miniature illustration of up to 10 virtual desktop pages
+(10x1) with mini windows. By clicking on each of a segment you can change the
+page. Also you can move each window from one page to another with holding down
+the middle mouse button. If you hover over a mini window it shows the name
+and the title of it.
 </p>
-<div class="paragraph"><p>There are also some key combinations available, too:</p></div>
-<div class="ulist"><ul>
+<div class="paragraph"><p>There are also some key combinations available:</p></div>
+</li>
 <li>
 <p>
 <em>Shift-Ctrl</em> and <em>Arrow</em> key right/left switch to the next/previous page.
@@ -1130,7 +1139,7 @@ it shows the name and the title of it.
 </li>
 <li>
 <p>
-<em>Shift-Ctrl</em> and <em>number</em> 1-4 switch to page 1-4.
+<em>Shift-Ctrl</em> and <em>number</em> 1-0 switch to page 1-10.
 </p>
 </li>
 <li>
@@ -1140,15 +1149,13 @@ it shows the name and the title of it.
 </li>
 <li>
 <p>
-<em>Shift-Alt</em> and <em>number</em> 1-4 moves the active window to page 1-4.
+<em>Shift-Alt</em> and <em>number</em> 1-0 moves the active window to page 1-10.
 </p>
-</li>
-</ul></div>
 </li>
 </ul></div>
 </dd>
 </dl></div>
-<div class="paragraph"><p>The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So
+<div class="paragraph"><p>The maximum size of a window is limited by Fvwm its' EwmhBaseStruts. So
 it will maximum growing inbetween the two panels. You can use <em>Alt-F11</em> to
 grow the window to the whole screen.</p></div>
 </div>
@@ -1200,14 +1207,14 @@ right clicking  on a bar opens a windows operation menu.
 </li>
 <li>
 <p>
-The Pager. It is a miniature illustration of the 4 virtual desktop pages
-(4x1) with mini windows. By clicking on each of the 4 segments you can
-change the page. Also you can move each window from one page to another
-with holding down the middle mouse button. If you hover over a mini window
-it shows the name and the title of it.
+The Pager. It is a miniature illustration of up to 10 virtual desktop pages
+(10x1) with mini windows. By clicking on each of a segment you can change the
+page. Also you can move each window from one page to another with holding down
+the middle mouse button. If you hover over a mini window it shows the name
+and the title of it.
 </p>
-<div class="paragraph"><p>There are also some key combinations available, too:</p></div>
-<div class="ulist"><ul>
+<div class="paragraph"><p>There are also some key combinations available:</p></div>
+</li>
 <li>
 <p>
 <em>Shift-Ctrl</em> and <em>Arrow</em> key right/left switch to the next/previous page.
@@ -1215,7 +1222,7 @@ it shows the name and the title of it.
 </li>
 <li>
 <p>
-<em>Shift-Ctrl</em> and <em>number</em> 1-4 switch to page 1-4.
+<em>Shift-Ctrl</em> and <em>number</em> 1-0 switch to page 1-10.
 </p>
 </li>
 <li>
@@ -1225,10 +1232,8 @@ it shows the name and the title of it.
 </li>
 <li>
 <p>
-<em>Shift-Alt</em> and <em>number</em> 1-4 moves the active window to page 1-4.
+<em>Shift-Alt</em> and <em>number</em> 1-0 moves the active window to page 1-10.
 </p>
-</li>
-</ul></div>
 </li>
 <li>
 <p>
@@ -1243,19 +1248,22 @@ the applets.
 <p>
 A cpu graph with percentage. With right click on the applet area an
 opertion menu appears with the possibility to restart the applet or open
-the governor-tool FvwmScript-CPU-Performance to handle cpufreq settings.
+the governor-tool FNS-CpuPerformance to handle cpufreq or cpupower settings.
 </p>
 </li>
 <li>
 <p>
 A Clock and date applet. With right click on the applet area an opertion
-menu appears with the possibility to restart the applet.
+menu appears with the possibility to open a calender or an alarm clock. Is
+it also possible to set the clock and date but root or sudo permission is
+required. Sometimes this applets have problems to swallow into the panel.
+With the last point it can tried to restart.
 </p>
 </li>
 </ul></div>
 </dd>
 </dl></div>
-<div class="paragraph"><p>The maximum size of a window is limited by Fvwm it’s EwmhBaseStruts. So
+<div class="paragraph"><p>The maximum size of a window is limited by Fvwm its' EwmhBaseStruts. So
 it will maximum growing above the panel. You can use <em>Alt-F11</em> to
 grow the window to the whole screen.</p></div>
 </div>
@@ -1268,6 +1276,9 @@ different areas with mouse or key combinations:</p></div>
 <li>
 <p>
 In the root area with left click or with <em>Alt+F1</em> or with the left <em>Window</em> key.
+If icons on desktop are enabled the menu is moved around to the right click
+desktop menu because PcmanFm offered this feature take the root window is under
+its' control.
 </p>
 </li>
 <li>
@@ -1343,12 +1354,9 @@ can configure the choice with "Regenerate (XDG) Menu".</p></div>
 <h4 id="_regenerate_xdg_menu">Regenerate (XDG) Menu</h4>
 <div class="paragraph"><p>The "Regenerate (XDG) Menu" point is to reconfigure or refresh the XDG
 application menus after software installation.</p></div>
-<div class="paragraph"><p>For information about each possibility click on the "Help" button right
-hand of the section headline. A help window appears describing each entry
-shortly.</p></div>
-<div class="paragraph"><p>For more information about <em>fvwm-menu-desktop</em> itself click on the "Help"
-button in the action section left hand of the Quit button or in each help
-section window.</p></div>
+<div class="paragraph"><p>For information about each possibility hover over the widgets to get a help
+tip or click on the "Help" button on the bottom. This will open the man page
+of fns-menu-desktop the main tool behind the GUI.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_configuration">Configuration</h4>
@@ -1366,15 +1374,16 @@ FvwmForm windows appear (font, color, background).</p></div>
 Fvwm-Nightshade
 </dt>
 <dd>
-<div class="paragraph"><p>Here you can configure the background, which theme you want, the look of
-your Gtk and Qt applications and the base settings of <strong>Fvwm-Nightshade</strong>.</p></div>
+<div class="paragraph"><p>Here you can configure the background, the composite manager, which theme and
+layout you want, the look of your Gtk and Qt applications, the base settings and
+window behaviour of <strong>Fvwm-Nightshade</strong>.</p></div>
 </dd>
 <dt class="hdlist1">
 System
 </dt>
 <dd>
-<div class="paragraph"><p>Here you can configure the keyboard, mouse, xscreensaver and, if you have
-a multi cpu system your CPU settings.</p></div>
+<div class="paragraph"><p>Here you can configure the keyboard, mouse, time and date, xscreensaver and, if
+you have a multi cpu system your CPU governor settings.</p></div>
 </dd>
 </dl></div>
 </div>
@@ -1386,7 +1395,7 @@ and other programs like manpage viewers, online helps, etc.</p></div>
 <div class="sect3">
 <h4 id="_fvwm_modules">Fvwm modules</h4>
 <div class="paragraph"><p>In this menu you can start and stop Fvwm modules on the fly. Also a submenu directory
-for useful FvwmForms exist.</p></div>
+exists for useful FvwmForms.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_window_operations">Window Operations</h4>
@@ -1400,8 +1409,8 @@ clicking this menu point. Or with the keyboard shortcut <em>Alt+Ctrl+L</em>.</p>
 </div>
 <div class="sect3">
 <h4 id="_run_command">Run Command</h4>
-<div class="paragraph"><p>If you want to run a program you can open a mini window by clicking to
-enter your command. Or with <em>Alt+F2</em>.</p></div>
+<div class="paragraph"><p>If you want to run a program you can open a mini window to enter your command.
+Or with <em>Alt+F2</em>.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_terminal">Terminal</h4>
@@ -1429,7 +1438,7 @@ Root Area
 <dd>
 <div class="paragraph"><p>Button 1:   Root menu.</p></div>
 <div class="paragraph"><p>Button 2:   Window list.</p></div>
-<div class="paragraph"><p>Button 3:   Desktop menu.</p></div>
+<div class="paragraph"><p>Button 3:   Desktop menu. If you have configured icons on desktop there's a root menu, too.</p></div>
 </dd>
 <dt class="hdlist1">
 Windows Area
@@ -1593,8 +1602,8 @@ cellspacing="0" cellpadding="4">
 <col width="75%" />
 <tbody>
 <tr>
-<td align="left" valign="top"><p class="table">Shift-Ctrl + 1-4</p></td>
-<td align="left" valign="top"><p class="table">Switch to page 1-4.</p></td>
+<td align="left" valign="top"><p class="table">Shift-Ctrl + 1-0</p></td>
+<td align="left" valign="top"><p class="table">Switch to page 1-10.</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Shift-Ctrl + cursor right/left</p></td>
@@ -1633,8 +1642,8 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table"></p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">Shift-Alt + 1-4</p></td>
-<td align="left" valign="top"><p class="table">Switch to page 1-4 with active window.</p></td>
+<td align="left" valign="top"><p class="table">Shift-Alt + 1-0</p></td>
+<td align="left" valign="top"><p class="table">Switch to page 1-10 with active window.</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table"></p></td>
@@ -1678,7 +1687,7 @@ cellspacing="0" cellpadding="4">
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">Alt-Ctrl + T</p></td>
-<td align="left" valign="top"><p class="table">Launch Terminal.</p></td>
+<td align="left" valign="top"><p class="table">Launch your favorite terminal.</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table"></p></td>
@@ -1769,8 +1778,8 @@ files are loaded, how you can debug problems and how you can customize
 <div class="paragraph"><p><strong>Fvwm-Nightshade</strong> is splitted in a system and an user part.</p></div>
 <div class="paragraph"><p>The system part is located in <code>/usr/local</code> (default), <code>/usr</code> (distribution
 related) or if you use the local installation under <code>&lt;chosen_dir&gt;</code>. In the
-followed named as &lt;system&gt;.</p></div>
-<div class="paragraph"><p>The user part is located in <code>~/.fvwm-nightshade</code>. Followed named as &lt;user&gt;.</p></div>
+following named as &lt;system&gt;.</p></div>
+<div class="paragraph"><p>The user part is located in <code>~/.fvwm-nightshade</code>. Following named as &lt;user&gt;.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_location_of_files_and_their_function">Location of Files and their Function</h3>
@@ -1789,15 +1798,19 @@ cellspacing="0" cellpadding="4">
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">fns-built-trayapplist</p></td>
-<td align="left" valign="top"><p class="table">python script for stalonetray to build applet list. Used for restoring applets after restart stalonetray.</p></td>
+<td align="left" valign="top"><p class="table">Python script for stalonetray to build applet list. Used for restoring applets after restart stalonetray.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FNS-CpuPerformance</p></td>
+<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 script to set CPU frequency governor.</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">fns-find-icon</p></td>
-<td align="left" valign="top"><p class="table">python script to find the correct icon for iconified apps or for icons used in layouts.</p></td>
+<td align="left" valign="top"><p class="table">Python script to find the correct icon for iconified apps or for icons used in layouts.</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">fvwm-menu-desktop2</p></td>
-<td align="left" valign="top"><p class="table">adapted fvwm-menu-desktop from Fvwm's CVS to create Fvwm menu(s).</p></td>
+<td align="left" valign="top"><p class="table">fns-menu-desktop</p></td>
+<td align="left" valign="top"><p class="table">adapted fvwm-menu-desktop from Fvwm's CVS to create XDG menu(s).</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">fns-start-programs</p></td>
@@ -1855,6 +1868,22 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">FvwmTransSet</p></td>
 <td align="left" valign="top"><p class="table">Perl module to set true transparency to windows if a composite manager is running.</p></td>
 </tr>
+<tr>
+<td align="left" valign="top"><p class="table">FNS-BaseSetup</p></td>
+<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 script to configure base settings of Fvwm-Nightshade (layouts, themes, compositing, icons on desktop, etc.).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FNS-WindowsBehaviour</p></td>
+<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 script to configure window behaviours (focus policies, placement, etc.).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FNS-CompConfigurator</p></td>
+<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 script to configure composite manager if installed (shadows, translucency, etc).</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">FNS-MenuConfigurator</p></td>
+<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 script to configure the XDG menu creation. It exchange fvwm-menu-desktop2-config.fpl.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1875,20 +1904,8 @@ cellspacing="0" cellpadding="4">
 <col width="80%" />
 <tbody>
 <tr>
-<td align="left" valign="top"><p class="table">FNS-Form-BaseSetup</p></td>
-<td align="left" valign="top"><p class="table">Fvwm-Nightshade base setup (FvwmForm script).</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">FNS-Script-CpuPerformance</p></td>
-<td align="left" valign="top"><p class="table">Cpufreq settings tool (FvwmForm script).</p></td>
-</tr>
-<tr>
 <td align="left" valign="top"><p class="table">FNS-Script-PersonalMenu</p></td>
 <td align="left" valign="top"><p class="table">Personal menu creator (FvwmScript script).</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">FNS-Script-CompConfigurator</p></td>
-<td align="left" valign="top"><p class="table">Composite configurator (FvwmScript script).</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">FNS-Script-FileBrowser</p></td>
@@ -1905,22 +1922,6 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table">FNS-Applet-Chrono</p></td>
 <td align="left" valign="top"><p class="table">Alarm applet</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">fvwm-menu-desktop2-config.fpl</p></td>
-<td align="left" valign="top"><p class="table">Configuration GUI for fvwm-menu-desktop2.</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">FvwmForm-SingleMenuHelp2</p></td>
-<td align="left" valign="top"><p class="table">Help window for single menu section in fvwm-menu-desktop2-config.</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">FvwmForm-MultiMenuHelp2</p></td>
-<td align="left" valign="top"><p class="table">Help window for multiple menu section in fvwm-menu-desktop2-config.</p></td>
-</tr>
-<tr>
-<td align="left" valign="top"><p class="table">FvwmForm-GenOptionHelp2</p></td>
-<td align="left" valign="top"><p class="table">Help window for general option section in fvwm-menu-desktop2-config.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1979,6 +1980,23 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
+<div class="paragraph"><p><strong>/usr/local/lib/perl-site|Perl5</strong> -&gt; Perl directories for 3rd party libraries</p></div>
+<div class="tableblock">
+<table rules="none"
+width="100%"
+frame="void"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="80%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">SimpleGtk2.pm</p></td>
+<td align="left" valign="top"><p class="table">a wrapper around Perl-Gtk2 to allow RAD.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>-</p></div>
 <div class="paragraph"><p><strong>~/.fvwm-nightshade/</strong> -&gt; the user home directory (&lt;user&gt;)</p></div>
 <div class="tableblock">
 <table rules="none"
@@ -1993,12 +2011,12 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">optional file with application commands.</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">.FNS-Form-BaseSetup</p></td>
-<td align="left" valign="top"><p class="table">config file of FNS-Form-BaseSetup.</p></td>
+<td align="left" valign="top"><p class="table">.fns-menu.cfg</p></td>
+<td align="left" valign="top"><p class="table">config file of Regenerate XDG Menus.</p></td>
 </tr>
 <tr>
-<td align="left" valign="top"><p class="table">.FvwmForm-Desktop-Config</p></td>
-<td align="left" valign="top"><p class="table">config file of Regenerate XDG Menus.</p></td>
+<td align="left" valign="top"><p class="table">.FvwmTransSet</p></td>
+<td align="left" valign="top"><p class="table">local config file of FvwmTransSet.</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">.layout</p></td>
@@ -2025,6 +2043,10 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">internal list of current systray apps.</p></td>
 </tr>
 <tr>
+<td align="left" valign="top"><p class="table">.user</p></td>
+<td align="left" valign="top"><p class="table">config file for FNS-WindowsBehaviour and custom user settings.</p></td>
+</tr>
+<tr>
 <td align="left" valign="top"><p class="table">.wallpaper</p></td>
 <td align="left" valign="top"><p class="table">link to current wallpaper</p></td>
 </tr>
@@ -2033,6 +2055,7 @@ cellspacing="0" cellpadding="4">
 </div>
 <div class="paragraph"><p>-</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/wallpapers/</strong> -&gt; default wallpaper directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/screenshots/</strong> -&gt; default screenshots directory.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/scripts/</strong> -&gt; Optional user FvwmScripts directory.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/icons/</strong> -&gt; Menu icon directory created by Regenerate XDG Menus.</p></div>
 <div class="paragraph"><p><strong>&lt;user&gt;/layouts/</strong> -&gt; Optional user layout directory.</p></div>
@@ -2068,8 +2091,8 @@ line e.g.</p></div>
 <pre><code>thunderbird</code></pre>
 </div></div>
 <div class="paragraph"><p>Another possibility is to use the function "FuncStartSystrayApplets" in the
-config file but then you have to copy the system config into the &lt;user&gt; directory
-and add your app like</p></div>
+config file but then you have to copy the system file <em>config</em> into the &lt;user&gt;
+directory and add your app like</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><code>+ I Test (x nm-applet) exec exec nm-applet</code></pre>
@@ -2194,6 +2217,14 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">The actual layout.</p></td>
 </tr>
 <tr>
+<td align="left" valign="top"><p class="table">$[infostore.x_desks]</p></td>
+<td align="left" valign="top"><p class="table">The actual desktop count X.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.y_desks]</p></td>
+<td align="left" valign="top"><p class="table">The actual desktop count Y.</p></td>
+</tr>
+<tr>
 <td align="left" valign="top"><p class="table">$[infostore.used_menutint]</p></td>
 <td align="left" valign="top"><p class="table">The actual menu tint level.</p></td>
 </tr>
@@ -2218,6 +2249,10 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">Use Icons on desktop.</p></td>
 </tr>
 <tr>
+<td align="left" valign="top"><p class="table">$[infostore.DesktopScrollOn]</p></td>
+<td align="left" valign="top"><p class="table">Activate page scrolling.</p></td>
+</tr>
+<tr>
 <td align="left" valign="top"><p class="table">$[infostore.PcmanFmStatus]</p></td>
 <td align="left" valign="top"><p class="table">State of pcmanfm.</p></td>
 </tr>
@@ -2228,6 +2263,10 @@ cellspacing="0" cellpadding="4">
 <tr>
 <td align="left" valign="top"><p class="table">$[infostore.default_terminal]</p></td>
 <td align="left" valign="top"><p class="table">The default used terminal program.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">$[infostore.default_editor]</p></td>
+<td align="left" valign="top"><p class="table">The default used editor.</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">$[infostore.default_browser]</p></td>
@@ -2303,7 +2342,7 @@ cellspacing="0" cellpadding="4">
 with it’s name and copy the colorset template from <code>&lt;system&gt;/share/docs/fvwm-nightshade/templates</code>
 into the directory.</p></div>
 <div class="paragraph"><p>Two different decors exist - vector based (Clean theme) and image based (Air, Ambiance,
-CrystalBalls and Tribal). Copy one of these decor files into your theme directory.</p></div>
+CrystalBalls, etc.). Copy one of these decor files into your theme directory.</p></div>
 <div class="paragraph"><p>If you want to build an image related theme create also an "images" folder for
 the button images.</p></div>
 <div class="admonitionblock">
@@ -2537,7 +2576,7 @@ and put your module in it. Now you can start it from within FvwmConsole with</p>
 <div class="sect1">
 <h2 id="_authors">AUTHORS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>(C) 2014 by the Fvwm-Nightshade team &lt;<a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a>&gt;.</p></div>
+<div class="paragraph"><p>(C) 2013 - 2015 by the Fvwm-Nightshade team &lt;<a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a>&gt;.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -2560,7 +2599,8 @@ or submit them under <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-08-31 23:50:39 CEST
+Last updated
+ 2015-01-13 22:22:42 CET
 </div>
 </div>
 </body>
