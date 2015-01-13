@@ -9,7 +9,7 @@ use File::Copy qw(copy);
 
 #-----------------------------------------------------------------------
 # File:         FNS-WindowsBehaviour
-my $Version =   '2.0.1';
+my $Version =   '2.0.2';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure some windows behaviour of FNS
@@ -17,7 +17,7 @@ my $Version =   '2.0.1';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/29/2014
-# Changed:      12/14/2014
+# Changed:      01/12/2015
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -1223,6 +1223,7 @@ $win->add_button( Name => 'helpButton',
         Size    => [80, 25], 
         Title   => "Help", 
         Tip     => 'Get help');
+$win->add_signal_handler('helpButton', 'clicked', sub {system("xterm -g 100x50 -n \"Help FNS-WindowsBehaviour\" -T \"Help FNS-WindowsBehaviour\" -e \"man FNS-WindowsBehaviour\" &");});
 
 
 # Apply ----------------------------------------------------------------
