@@ -12,7 +12,7 @@ use File::Spec;
 
 #-------------------------------------------------------------------------
 # File:         FNS-BaseSetup
-my $Version =   '2.1.2';
+my $Version =   '2.1.3';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure base settings of Fvwm-Nightshade
@@ -20,7 +20,7 @@ my $Version =   '2.1.2';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/08/2014
-# Changed:      01/10/2015
+# Changed:      01/12/2015
 #-------------------------------------------------------------------------
 
 
@@ -840,7 +840,7 @@ $win->add_button( Name => 'helpButton',
         Size    => [80, 25], 
         Title   => "Help", 
         Tip     => 'Get help');
-$win->add_signal_handler('helpButton', 'clicked', sub {system("xterm -g 100x50 -n \"Help fvwm-menu-desktop2\" -T \"Help fvwm-menu-desktop2\" -e \"man fvwm-menu-desktop2\" &");});
+$win->add_signal_handler('helpButton', 'clicked', sub {system("xterm -g 100x50 -n \"Help FNS-BaseSetup\" -T \"Help FNS-BaseSetup\" -e \"man FNS-BaseSetup\" &");});
 
 
 # Apply and Save -------------------------------------------------------
