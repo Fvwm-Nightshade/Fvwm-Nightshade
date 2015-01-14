@@ -1,5 +1,8 @@
 History:
 
+01/14/2015
+- fix bug in Makefile to identify only one correct Perl lib path
+
 01/13/2015
 - update fns-base-setup.pot because of possibility to configure size of desktops/pages
 - update some po files (Spanish and German)
