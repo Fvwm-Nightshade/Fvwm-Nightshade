@@ -29,6 +29,24 @@ Changes:
 
 ------------------------------------------------------------------------
 
+Version 0.6.9 (09th October 2014)
+
+Changes:
+---------
+- Update fvwm-menu-desktop2, FvwmForm-MultiMenuHelp2 and their French and 
+  Spanish translation to last upstream changes.
+- Fix colorset bug in Air, Ambience and Tribal which ends up in an empty
+  FvwmIdent (thanks for the patches from bstrik :-) ).
+- Fix bug in fns-start-programs that comments (with # infront) creating errors
+- Add CTRL + left Windows key anywhere to open Desktop menu.
+- Fix bugs in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
+  that strings with space get cut and therefore .settings get corrupted.
+- Exchange blutooth-applet with bluemon-applet because it doesn't exist in
+  Gnome3 anymore.
+- Add support for hald, upower and systemd to FuncSuspend/FuncHibernate
+
+------------------------------------------------------------------------
+
 Version 0.6.8 (20th October 2013)
 
 Changes:
