@@ -1,7 +1,7 @@
 # Russian translation for fns-cpu-performance
 # Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Artashes Mkhitaryan <artashm@mytum.de>, 2015. 
 #
 msgid ""
 msgstr ""
@@ -86,7 +86,7 @@ msgid ""
 "Powersave:\nThe CPU frequency is statically set to the lowest possibility. This can have severe "
 "impact on the performance, as the system will never rise above this frequency no matter how busy "
 "the processors are.\nHowever, using this governor often does not lead to the expected power "
-"savings !!!!  Я ТУТ    !!!!! as the highest savings can usually be achieved at idle through entering C-states. Due "
+"savings as the highest savings can usually be achieved at idle through entering C-states. Due "
 "to running processes at the lowest frequency with the powersave governor, processes will take "
 "longer to finish, thus prolonging the time for the system to enter any idle C-states.\n\n"
 "On-demand:\nThe kernel implementation of a dynamic CPU frequency policy: The governor monitors "
@@ -104,87 +104,102 @@ msgid ""
 "use governor 'powersave' and one of the frequencies in 'Min Frequency', or governor 'performance' "
 "in combination with 'Max Frequency'."
 msgstr "Последующие регуляторы доступны:\n\n"
-"Производительность:\n Этот регулятор статически устанавливает частоту процессора на высочайшее значение"
-"в пределах Мин и Макс частот. Следовательно сбережение энергии не является фокусом этого регулятора.\n\n"
-"Энергосберегательность: Частота процессора установлена на наименьшее возможное значение. Это может привести"
-"к сильному ухудшению производительности, поскольку частота процессора будет зафиксированна и не изменется"
-"в зафисимости от его нагрузки.\nНесмотря на это, употребления етого регулятора не всегда приводет к желанному"
-"уровню энергосбережения. "
-""
-""
+"Производительный:\n Этот регулятор статически устанавливает частоту процессора на высочайшее значение "
+"в пределах Мин и Макс частот. Следовательно сбережение энергии не является фокусом этого регулятора.\n\n "
+"Энергосберегательнный: Частота процессора установлена на наименьшее возможное значение. Это может привести "
+"к сильному ухудшению производительности, поскольку частота процессора будет зафиксирована и не изменится "
+"в зависимости от его нагрузки.\nНесмотря на это, употребления этого регулятора не всегда приводит к желанному "
+"уровню энергосбережения. Употребление энергии минимально когда система находится в холостых С-состояниях. "
+"Поскольку частота процессора зафиксирована на минимуме, процессы системы работают с меньшей скоростью и требуют "
+"больше времени для выполнения. В результате время в течении которого система может находится в холостых С-состояниях " 
+"сокращается.\n\n"
+"По-Запросу:\n Реализация ядра с динамичной стратегии установки частот: Регулятор наблюдает за нагрузкой "
+"процессора. Как только нагрузка процессора перешагнет через определенный порог, регулятор установит частоту "
+"процессора на высочайшую ступень. В ситуациях когда нагрузка процессора меньше порога, частота процессора "
+"устанавливается на ступень меньше. Если малая нагрузка системы продолжительна то частота процессора будет постепенно"
+"уменьшатся пока наименьшая ступень не достигнута. \n\n"
+"Консервативный: Так же как и реализация По-Запросу этот регулятор динамично настраивает частоту процессора "
+"соответственно  с нагрузкой системы. Разница между двумя регуляторами является в том что Консервативный "
+"регулятор позволяет постепенное повышение частот. Как только нагрузка системы перешагнет через определенный порог, "
+"регулятор увеличит частоту процессора на одну ступень выше.\n\n"
+"Userspace: Этот регулятор позволяет пользователю, а так же любой программе работающей с UID 'root' в userspace-е, "
+"установить частоту на определенное значение. 'userspace' пока что не поддерживается, для получения аналогичных "
+"результатов рекомендуется использование энергосберегательного регулятора совместно с одной из 'Мин Частот', иле же "
+"производительного регулятора совместно с одной из 'Макс Частот'. "
 
 
 
 
 msgid "Min Frequency:"
-msgstr ""
+msgstr "Минимальная Частота"
 
 msgid "Sets the minimum used frequency from the range of available frequencies."
-msgstr ""
+msgstr "Устанавливает минимальную частоту из доступного сектора частот"
 
 msgid "Max Frequency:"
-msgstr ""
+msgstr "Максимальная Частота"
 
 msgid "Sets the maximum used frequency from the range of available frequencies."
-msgstr ""
+msgstr "Устанавливает максимальную частоту из доступного сектора частот"
 
 ########################################################################
 # Notebook page x for CoreX
 ########################################################################
 
 msgid "Core "
-msgstr ""
+msgstr "Ядро"
 
 msgid "This is the tab for modifying core "
-msgstr ""
+msgstr "В этом табе можно модифицировать ядро"
 
 msgid "if unlocked at the joined tab."
-msgstr ""
+msgstr "если оно разблокировано в совместном табе"
 
 msgid "Information to Core"
-msgstr ""
+msgstr "Информация о Ядре"
 
 msgid "Show information about this core."
-msgstr ""
+msgstr "Показать информацию о ядре."
 
 msgid "Sets the used governor (if cores unlocked). "
-msgstr ""
+msgstr "Установить регулятор (если ядро разблокировано)"
 
 ########################################################################
 # Button bar
 ########################################################################
 
 msgid "Add to Autostart"
-msgstr ""
+msgstr "Добавить в авто-старт"
 
 msgid "Add custom settings to autostart for permanency."
-msgstr ""
+msgstr "Добавить пользовательские настройки в авто-старт для постоянности?"
 
 msgid "Apply"
-msgstr ""
+msgstr "Применить"
 
 msgid "Apply settings to the cpufreq system. Also save them in \$FVWM_USERDIR/.governor for using it with autostart if set."
-msgstr ""
+msgstr "Применить настройки к cpufreq системе. Так же сохранить их в \$FVWM_USERDIR/.governor для употребления авто-стартом."
 
 msgid "Cancel"
-msgstr ""
+msgstr "Отменить"
 
 msgid "Cancel/Quit Cpu Performance tool."
-msgstr ""
+msgstr "Отменить/Выйти из инструмента производительности процессора."
 
 msgid "You have unapplied changes! Continue anyway?"
-msgstr ""
+msgstr "Присутствуют не сохраненные изменения! Продолжить?"
 
 msgid "No cpu scaler is installed.\nFor full functionality cpufreq-utils or cpupower must installed at least."
-msgstr ""
+msgstr "Не найдены установленные scaler-ы процессора.\n Для полной функциональности необходима установка cpufreq-utils  
+иле же  cpupower как минимум."
 
 ########################################################################
 # Others
 ########################################################################
 
 msgid "Info"
-msgstr ""
+msgstr "Информация"
 
 msgid "Warning"
-msgstr ""
+msgstr "Предупреждение"
 
