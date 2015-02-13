@@ -1,14 +1,14 @@
 # French translation for FNS-WindowsBehaviour
-# Copyright (C) 2014 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
-# Maxime Lordier <maxime.lordier@gmail.com>, 2014.
+# Maxime Lordier <maxime.lordier@gmail.com>, 2015.
 #
 msgid ""
 msgstr ""
 
 "Project-Id-Version: FNS-WindowsBehaviour\n"
 "POT-Creation-Date: 2014-11-16 00:01+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-01-26 14:11+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -20,56 +20,59 @@ msgstr ""
 # Titlebar
 ########################################################################
 msgid "FNS Windows Behaviour"
-msgstr ""
+msgstr "Comportement Fenêtre FNS"
 
 ########################################################################
 # Focus Policies
 ########################################################################
 msgid " Focus Policies "
-msgstr ""
+msgstr " Focus Policies "
 
 msgid "Click to Focus"
-msgstr ""
+msgstr "Cliquez pour Focus"
 
 msgid "Give the focus to a window when it is clicked in."
-msgstr ""
+msgstr "Donnez le focus à la fenêtre quand on clique dessus."
 
 msgid "Focus follows Mouse"
-msgstr ""
+msgstr "Focus suit la souris"
 
 msgid "Give a window the focus as the pointer enters the window, and take it away when leaving."
-msgstr ""
+msgstr "Donnez à la fenêtre le focus quand le pointeur entre dans la fenêtre, et l'enlever nous nous quittant la fenêtre."
 
 msgid "Sloopy Focus"
-msgstr ""
+msgstr "Sloopy Focus"
 
 msgid ""
 "Give a window the focus as the pointer enters the window, but doesn't give "
 "up the focus if the pointer leaves the window to pass over the root window."
-msgstr ""
+msgstr "Donnez à une fenêtre le focus que le pointeur entre dans la fenêtre, mais ne donne pas "
+"la mise au point si le pointeur quitte la fenêtre pour passer sur la fenêtre racine."
 
 ########################################################################
 # Raise Options
 ########################################################################
 msgid " Raise Options "
-msgstr ""
+msgstr " Raise Options "
 
 msgid "Raise if focused"
-msgstr ""
+msgstr "Raise if focused"
 
 msgid "Controls if the window is raised when focused (depending on the focus model)."
-msgstr ""
+msgstr "Contrôle si la fenêtre est déclenché lorsque concentré (en fonction du modèle de mise au point)."
 
 msgid "Stack Transient Parent"
-msgstr ""
+msgstr "Stack Transient Parent"
 
 msgid ""
 "This style transfers the raise action to the main window makes raise on a "
 "transient act just like raise on its main - the whole group is raised."
 msgstr ""
+"Ce style transfère l'action de relance à la fenêtre principale fait élever sur un "
+"acte transitoire juste comme élever sur sa principale - l'ensemble du groupe est élevé."
 
 msgid "No Raise Click on Motion"
-msgstr ""
+msgstr "No Raise Click on Motion"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with "
@@ -79,15 +82,21 @@ msgid ""
 "bindings on the client window are not guaranteed to work anymore. The distance "
 "that the pointer must be moved to trigger this is controlled by the MoveThreshold below."
 msgstr ""
+"Si ce style est utilisé, en cliquant dans une fenêtre puis en faisant glisser le pointeur avec "
+"le bouton enfoncé ne compte pas come le clic de soulever la fenêtre. Au lieu de cela, "
+"l'application traite ces événements normalement. Ce est utile pour sélectionner du texte "
+"dans une fenêtre de terminal avec la souris sans élever la fenêtre. Toutefois, la souris "
+"fixations sur la fenêtre du client ne sont pas garantis de travailler plus. La distance "
+"que le pointeur doit être déplacé pour déclencher cette contrôlée par le MoveThreshold ci-dessous."
 
 ########################################################################
 # Focus Options
 ########################################################################
 msgid " Focus Options "
-msgstr ""
+msgstr " Focus Options "
 
 msgid "Grab Focus"
-msgstr ""
+msgstr "Grab Focus"
 
 msgid ""
 "New normal windows with the 'Grab Focus' style automatically receive the focus "
@@ -95,18 +104,25 @@ msgid ""
 "style. Note that even if this style is disabled, the application may take the focus "
 "itself. Fvwm can not prevent this."
 msgstr ""
+"Les nouvelles fenêtres normales avec le style 'Grab Focus' reçoivent automatiquement la mise au point "
+"quand ils sont créés. GrabFocus est la valeur par défaut pour les fenêtres avec le click to focus "
+"style. Notez que même si ce style est désactivée, l'application peut prendre le focus "
+"lui-même. Fvwm ne peut pas empêcher cela."
 
 msgid "Grab Focus Transient"
-msgstr ""
+msgstr "Grab Focus Transient"
 
 msgid ""
 "New transient windows with the 'Grab Focus Transient' style automatically "
 "receive the focus when they are created. Note that even if this style is "
 "disabled, the application may take the focus itself. Fvwm can not prevent this."
 msgstr ""
+"Les nouvelles fenêtres transitoires avec style 'Grab Focus Transient' automatiquement"
+"recevoir le focus quand ils sont créés. Notez que même si ce style est"
+"désactivé, l'application peut prendre le focus lui-même. Fvwm ne peut pas empêcher cela."
 
 msgid "No Focus Click on Motion"
-msgstr ""
+msgstr "No Focus Click on Motion"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with the "
@@ -116,42 +132,51 @@ msgid ""
 "on the client window are not guaranteed to work anymore. The distance that the pointer "
 "must be moved to trigger this is controlled by the MoveThreshold below."
 msgstr ""
+"Si ce style est utilisé, en cliquant dans une fenêtre puis en faisant glisser le pointeur de la "
+"bouton enfoncé ne compte pas que le clic se concentrer la fenêtre. Au lieu de cela, le "
+"application traite ces événements normalement. Ce est utile pour sélectionner du texte dans un "
+"fenêtre de terminal avec la souris sans se focaliser la fenêtre. Cependant, fixations de souris "
+"sur la fenêtre du client ne sont pas garantis de travailler plus. La distance que le pointeur "
+"doit être déplacé pour déclencher cela est contrôlé par le MoveThreshold ci-dessous."
 
 msgid "Focus by Program"
-msgstr ""
+msgstr "Focus by Program"
 
 msgid "Allows windows to take the focus themselves."
-msgstr ""
+msgstr "Permet à Windows de prendre l'accent eux-mêmes."
 
 ########################################################################
 # Window Placement
 ########################################################################
 msgid " Window Placement "
-msgstr ""
+msgstr " Placement de fenêtre "
 
 msgid "Tile Cascade Placement"
-msgstr ""
+msgstr "Tile Cascade Placement"
 
 msgid ""
 "Places new windows in a smart location - a location in which they do not overlap any "
 "other windows on the screen. If no such position can be found Cascade Placement is "
 "used as a fall-back method."
 msgstr ""
+"Lieux de nouvelles fenêtres dans un endroit intelligente - un endroit où ils ne empiètent pas sur une quelconque "
+"autres fenêtres sur l'écran. Si une telle position peut être trouvé Cascade placement est "
+"utilisé comme une méthode de repli."
 
 msgid "Manual Placement"
-msgstr ""
+msgstr "Manual Placement"
 
 msgid "This is the same as Tile Cascade Placement, but uses Manual Placement as the fall-back method."
-msgstr ""
+msgstr "Ce est le même que Tile Cascade placement, mais utilise Manual Placement comme méthode de repli."
 
 msgid "Cascade Placement"
-msgstr ""
+msgstr "Cascade Placement"
 
 msgid "Place new windows in a cascading fashion."
-msgstr ""
+msgstr "Placez de nouvelles fenêtres dans un mode cascade."
 
 msgid "Tile Manual Placement"
-msgstr ""
+msgstr "Tile Manual Placement"
 
 msgid ""
 "The user is required to place every new window manually. The window only shows as a rubber "
@@ -159,45 +184,58 @@ msgid ""
 "key except Escape is pressed. Escape aborts manual placement which places the window in the "
 "top left corner of the screen."
 msgstr ""
+"L'utilisateur doit placer chaque nouvelle fenêtre manuellement. La fenêtre affiche seulement comme un caoutchouc "
+"bande jusqu'à un endroit est sélectionné manuellement. La fenêtre est placée quand un bouton de la souris ou tout "
+"touche sauf Escape est pressé. Évadez interrompt placement manuel qui place la fenêtre dans le "
+"coin supérieur gauche de l'écran."
 
 msgid "Position Placement"
-msgstr ""
+msgstr "Position Placement"
 
 msgid ""
 "When used with 'TopLeft', new windows are placed in the top left corner of the display. "
 "With 'Center', all new window appear at the center of the screen, and with 'UnderMouse', "
 "windows are centered under the mouse pointer where possible."
 msgstr ""
+"Lorsqu'il est utilisé avec 'TopLeft', de nouvelles fenêtres sont placées dans le coin supérieur gauche de l'écran."
+"Avec 'Centre', tout nouvelle fenêtre apparaît au centre de l'écran, et 'UnderMouse", "
+"fenêtres sont centrées sous le pointeur de la souris lorsque cela est possible."
 
 msgid "Window:"
-msgstr ""
+msgstr "Fenêtre:"
 
 msgid "Center"
-msgstr ""
+msgstr "Centre"
 
 msgid "TopLeft"
-msgstr ""
+msgstr "TopLeft"
 
 msgid "UnderMouse"
-msgstr ""
+msgstr "UnderMouse"
 
 msgid ""
 "With 'TopLeft', new windows are placed in the top left corner of the display. With 'Center', "
 "all new window appear at the center of the screen, and with 'UnderMouse', windows are centered "
 "under the mouse pointer where possible."
 msgstr ""
+"Avec 'TopLeft', de nouvelles fenêtres sont placées dans le coin supérieur gauche de l'écran. Avec 'Centre', "
+"tout nouvelle fenêtre apparaît au centre de l'écran, et 'UnderMouse', fenêtres sont centrées "
+"sous le pointeur de la souris lorsque cela est possible."
 
 msgid "Min Overlap Placement"
-msgstr ""
+msgstr "Min Overlap Placement"
 
 msgid ""
 "Automatically places new windows in a location in which the overlapping area in pixels "
 "of other windows is minimized. By default this placement policy tries to avoid "
 "overlapping icons and windows on higher layers."
 msgstr ""
+"Place automatiquement de nouvelles fenêtres dans un endroit dans lequel la zone de chevauchement en pixels "
+"des autres fenêtres est réduit au minimum. Par défaut, cette politique de placement cherche à éviter "
+"icônes se chevauchant et les fenêtres sur les couches supérieures."
 
 msgid "Penalties:"
-msgstr ""
+msgstr "Sanctions:"
 
 msgid ""
 "The Penalties takes at most 6 positive or null decimal arguments: 'normal' 'ontop' 'icon' 'sticky' "
@@ -210,35 +248,49 @@ msgid ""
 "These 'factors' represent the amount of area that these types of windows (or area) are counted as, when "
 "a new window is placed. For example, by default the area of ontop windows is counted 5 times as much as normal windows."
 msgstr ""
+"Les sanctions prend au plus six arguments décimaux positifs ou nuls:'icône' ontop 'normale' 'collant' "
+"'ci-dessous' 'strut'.\n\nLe 'normal' facteur affecte fenêtres normales, le facteur 'ontop' affecte la fenêtre "
+"avec une plus grande couche de la fenêtre étant placée, le facteur 'icône' affecte icônes, le 'collant' "
+"facteur affecte fenêtres collantes, le 'bas'facteur affecte fenêtres avec une couche inférieure à la fenêtre "
+"étant placé, le 'strut' facteur affecte le complément de la zone de travail EWMH si la fenêtre étant "
+"placé a le style de EWMHPlacementUseWorkingArea et les fenêtres avec un soupçon EWMH de strut de force (c'est à dire, un 's'il vous plaît' "
+"Ne pas me couvrir' indice) si la fenêtre placé a le style de EWMHPlacementUseDynamicWorkingArea."
+"Ces 'facteurs' représentent le montant de la zone que ces types de fenêtres (ou région) sont comptés comme, lorsque "
+"une nouvelle fenêtre est placée. Par exemple, par défaut, la zone de fenêtres ontop est compté cinq fois plus que les fenêtres normales."
 
 msgid "Min Overlap Percent Placement"
-msgstr ""
+msgstr "Min Overlap Percent Placement"
 
 msgid ""
 "Tries to minimize the overlapped percentages of other windows instead of the overlapped area in pixels. "
 "This placement policy tries to avoid covering other windows completely and tries even harder not to cover small windows."
 msgstr ""
+"Tente de minimiser les pourcentages de chevauchent d'autres fenêtres au lieu de la zone de chevauchement en pixels."
+"Cette politique de placement tente d'éviter de couvrir les autres fenêtres complètement et tente encore plus difficile de ne pas couvrir de petites fenêtres."
 
 msgid ""
 "The Penalties takes at most 4 positive or null integer arguments: 'cover_100' 'cover_95' 'cover_85' "
 "'cover_75'. The 'cover_xx' factor is used when the window being placed covers at least xx percent of "
 "the window. This factor is added to the factor determined by the Min Overlap Placement Penalties."
 msgstr ""
+"Les sanctions prend au plus quatre arguments positifs ou nuls entiers: 'cover_100' 'cover_95' 'cover_85' "
+"'cover_75'. Le facteur 'cover_xx' est utilisé lorsque la fenêtre étant placée couvre au moins xx pour cent des "
+"la fenêtre. Ce facteur est ajouté au facteur déterminé par les sanctions Min Overlap stage."
 
 ########################################################################
 # Miscellaneous
 ########################################################################
 msgid " Miscellaneous "
-msgstr ""
+msgstr " Divers "
 
 msgid "Hide Geometry Window"
-msgstr ""
+msgstr "Hide Geometry Window"
 
 msgid "Hides the position or size window that is usually shown when a window is moved or resized interactively."
-msgstr ""
+msgstr "Masque la position ou de la fenêtre de taille qui est généralement représenté lorsqu'une fenêtre est déplacée ou redimensionnée de manière interactive."
 
 msgid "Resize Opaque"
-msgstr ""
+msgstr "Resize Opaque"
 
 msgid ""
 "Instructs fvwm to resize the corresponding windows with their contents visible "
@@ -247,18 +299,26 @@ msgid ""
 "of graphics the application redraws. Some applications do not like their windows being "
 "resized opaque, e.g. XEmacs or terminals with a pixmap background."
 msgstr ""
+"Charge fvwm pour redimensionner les fenêtres correspondantes avec leur contenu visibles "
+"au lieu d'utiliser un contour. Depuis ce qui provoque l'application de redessiner fréquemment "
+"il peut être assez lent et faire clignoter la fenêtre trop, selon la quantité "
+"de l'infographie retrace l'application. Certaines applications ne aiment pas leurs fenêtres étant "
+"redimensionnée opaque, par exemple XEmacs ou des terminaux avec un fond de pixmap."
 
 msgid "Move Threshold:"
-msgstr ""
+msgstr "Déplacez Seuil:"
 
 msgid ""
 "When the user presses a mouse button upon an object fvwm waits to see if the action "
 "is a click or a drag. If the mouse moves by more than x pixels (default is 3) it is "
 "assumed to be a drag (the default value might be increased when 16000x9000 pixel displays become affordable)."
 msgstr ""
+"Lorsque l'utilisateur appuie sur un bouton de la souris sur un objet fvwm attend de voir si l'action "
+"est un clic ou un glisser. Si la souris se déplace de plus de x pixels (par défaut est 3), il est "
+"supposé être un frein (la valeur par défaut peut être augmenté lorsque 16000x9000 pixels affiche deviennent abordables)."
 
 msgid "Opaque Move Size:"
-msgstr ""
+msgstr "Opaque Move Size:"
 
 msgid ""
 "Tells fvwm the maximum size window with which opaque window movement should be used. "
@@ -267,6 +327,11 @@ msgid ""
 "given all windows are moved as solid windows. The default is 5 which allows small "
 "windows to be moved in an opaque manner but large windows are moved as rubber-bands."
 msgstr ""
+"Indique Fvwm la fenêtre de taille maximale avec laquelle le mouvement de la fenêtre opaque devrait être utilisé."
+"Le pourcentage est de pour cent de la superficie totale de l'écran (peut être supérieur à 100). Avec une "
+"valeur de 0 toutes les fenêtres sont déplacées en utilisant le traditionnel contour en rubber-bands. -1 est "
+"Compte tenu de toutes les fenêtres sont déplacées comme des fenêtres solides. La valeur par défaut est 5 qui permet des petites "
+"fenêtres pour être déplacés de manière opaque, mais de grandes fenêtres sont déplacées en rubber-bands."
 
 ########################################################################
 # Button bar
@@ -287,19 +352,19 @@ msgid "Apply"
 msgstr "Appliquer"
 
 msgid "Apply new settings"
-msgstr ""
+msgstr "Appliquez nouveaux parémêtres de configuration"
 
 msgid "Cancel"
 msgstr "Annuler"
 
 msgid "Cancel/Quit windows behaviour settings."
-msgstr ""
+msgstr "Annulez/Quiitez la fenêtre des paramêtres."
 
 msgid "You have unsaved changes! Continue anyway?"
-msgstr ""
+msgstr "Vous n'avez pas sauvegardé! Souhaitez-vous continuer?"
 
 msgid "You have unapplied changes! Continue anyway?"
-msgstr ""
+msgstr "Vous n'avez pas appliqué les changement! Souhaitez-vous continuer?"
 
 msgid "Warning"
 msgstr "Avertissement"

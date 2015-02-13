@@ -1,14 +1,14 @@
 # French translation for FNS-MenuConfigurator
-# Copyright (C) 2014 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
-# Maxime Lordier <maxime.lordier@gmail.com>, 2014.
+# Maxime Lordier <maxime.lordier@gmail.com>, 2015.
 #
 msgid ""
 msgstr ""
 
 "Project-Id-Version: FNS-MenuConfigurator\n"
 "POT-Creation-Date: 2014-11-26 21:51+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-01-26 11:12+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -166,7 +166,7 @@ msgstr ""
 "par exemple: /usr/share/icons/Mint-X => 'Mint-X'."
 
 msgid "Change icon theme path."
-msgstr ""
+msgstr "Changez le chemin des thèmes d'icônes."
 
 msgid "Directory Icon:"
 msgstr "Annuaire d'icône:"
@@ -223,7 +223,7 @@ msgid "Use Titles"
 msgstr "Utiliser des titres"
 
 msgid "If this option is set menus are generated with titles. Default is no titles."
-msgstr "Si cet option est active les menus sont générés avec des titres. Par défaut sans titre."
+msgstr "Si cette option est active les menus sont générés avec des titres. Par défaut sans titre."
 
 msgid "Menus in Menu:"
 msgstr "Menus dans un menu"
@@ -238,7 +238,7 @@ msgid ""
 msgstr ""
 "Entrez dans ce chanp le nom du menu (son titre principal) où le menu généré "
 "devra être inséré. Pour plus d'information regardez la section USAGE dans la "
-"page man de fvwm-menu-desktop."
+"page d'accueil de fvwm-menu-desktop."
 
 msgid "Output Path:"
 msgstr "Chemin de sortie:"
@@ -278,7 +278,7 @@ msgid "Cancel/Quit Menu Configurator."
 msgstr "Annuler/Quitter Menu Configurator."
 
 msgid "You have unsaved changes! Continue anyway?"
-msgstr ""
+msgstr "Vous n'avez pas sauvegardé! Souhaitez-vous continuer?"
 
 ########################################################################
 # Others

@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-BaseSetup\n"
 "POT-Creation-Date: 2014-10-10 21:54+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2014-12-11 11:14+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -33,25 +33,25 @@ msgid "Splash On"
 msgstr "Activer le splash"
 
 msgid "Run Banner at startup? Default: on"
-msgstr ""
+msgstr "Afficher Banner au démarage? Defaut: on"
 
 msgid "Path to splash image"
-msgstr ""
+msgstr "Chemin pour l'image splash"
 
 msgid "Set path to splash image"
-msgstr ""
+msgstr "répertoire le chemn pour l'image splash"
 
 msgid "Composite Manager On"
-msgstr ""
+msgstr "Composite Manager On"
 
 msgid "Use composite manager? Default: off"
-msgstr ""
+msgstr "Utilisez le manager composite? Default: off"
 
 msgid "Configure"
 msgstr "Utilisez"
 
 msgid "Open composite settings"
-msgstr ""
+msgstr "ouvrir les paramétres coöposite"
 
 ########################################################################
 # Desktop
@@ -61,28 +61,28 @@ msgid " Desktop "
 msgstr " Bureau "
 
 msgid "Wallpaper Dirs:"
-msgstr ""
+msgstr "Papier peint dirs:"
 
 msgid "Wallpaper directories, separated by ':'"
-msgstr ""
+msgstr "répertoire papier pient, séparé par ':'"
 
 msgid "Icons on Desktop"
-msgstr ""
+msgstr "Icones sur le bureau"
 
 msgid "Use Icons on desktop? Default: off"
-msgstr ""
+msgstr "Utilisez les icones du bureau? par defaut: off"
 
 msgid "Icon Size:"
 msgstr "Taille d'icône:"
 
 msgid "Change size of the desktop icons"
-msgstr ""
+msgstr "Changer la taille des icones sur le bureau"
 
 msgid "Desktop scrolling On"
-msgstr ""
+msgstr "Déroulement du bureau On"
 
 msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on"
-msgstr ""
+msgstr "Activation du scrolling quand le curseur est dand le coin en haut de la page? par defaut: on"
 
 msgid "Desktops:"
 msgstr ""
@@ -104,13 +104,13 @@ msgid "Used Layout:"
 msgstr "Mise en page:"
 
 msgid "The actual FNS layout"
-msgstr ""
+msgstr "Actuelle mise en page FNS"
 
 msgid "Used Theme:"
 msgstr "Thème utilisé:"
 
 msgid "The actual FNS decor theme"
-msgstr ""
+msgstr "Actuel thème FNS"
 
 msgid "Used Font:"
 msgstr "Police utilisé:"
@@ -132,7 +132,7 @@ msgid "Default browser in FNS"
 msgstr "Navigateur par défaut en FNS"
 
 msgid "Set path to browser"
-msgstr ""
+msgstr "indiquez chemin du navigateur"
 
 msgid "Editor:"
 msgstr "Editeur:"
@@ -141,7 +141,7 @@ msgid "Default editor in FNS"
 msgstr "Editeur par défaut en FNS"
 
 msgid "Set path to editor"
-msgstr ""
+msgstr "indiquez chemin de l'éditeur"
 
 msgid "Terminal:"
 msgstr "Terminal:"
@@ -150,7 +150,7 @@ msgid "Default terminal in FNS"
 msgstr "Terminal par défaut en FNS"
 
 msgid "Set path to terminal"
-msgstr ""
+msgstr "indiquez chemin du terminal"
 
 msgid "Transset:"
 msgstr "Transset:"
@@ -159,7 +159,7 @@ msgid "Default transset in FNS"
 msgstr "Transset par défaut en FNS"
 
 msgid "Set path to transset"
-msgstr ""
+msgstr "indiquez chemin du transet"
 
 ########################################################################
 # Button Bar
@@ -175,7 +175,7 @@ msgid "Apply"
 msgstr "Appliquer"
 
 msgid "Apply and save new settings"
-msgstr ""
+msgstr "Appliquez et sauvegarer les nouveaux paramétres"
 
 msgid "Cancel"
 msgstr "Annuler"
@@ -184,7 +184,7 @@ msgid "Cancel / Quit Base Setup"
 msgstr "Annuler / Quitter installation de base"
 
 msgid "You have unsaved changes! Continue anyway?"
-msgstr ""
+msgstr "Vous n'avez pas sauvegardé les changements! Souhaitez-vous continuer?"
 
 ########################################################################
 # Others
@@ -205,13 +205,13 @@ msgid "Other"
 msgstr "Autre"
 
 msgid "Open File"
-msgstr ""
+msgstr "Ouvrir Fichier"
 
 msgid "Save File"
-msgstr ""
+msgstr "Sauvegarder Fichier"
 
 msgid "Select Folder"
-msgstr ""
+msgstr "Selectionner répertoire"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Créer répertoire"
