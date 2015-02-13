@@ -2,6 +2,7 @@
 # Copyright (C) 2014 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
 # Adonai Martin <adonai.martin@gmail.com>, 2014.
+# Reviewed by: Jesús J. Guerrero Botella <jesus.guerrero.botella@gmail.com>, 2015.
 #
 msgid ""
 msgstr ""
@@ -20,7 +21,7 @@ msgstr ""
 # Titlebar
 ########################################################################
 msgid "FNS Menu Desktop Configurator"
-msgstr "FNS Menú Escritorio Configurador"
+msgstr "FNS Configurador del Menú Escritorio"
 
 ########################################################################
 # Notebook page 1 for multiple menu
@@ -37,9 +38,9 @@ msgid ""
 "\nIf you want to generate a custom-assembled menu switch to "
 "the 'Single Menu' tab."
 msgstr ""
-"En esta tabulación todos los menús XDG encontrados en el sistema son "
+"En esta pestaña todos los menús XDG encontrados en el sistema son "
 "mostrados. Todos los menús seleccionados, son integrados en un menú Fvwm. "
-"Nota: menús iguales encontrados en /etc/xdg/menus UND ~/.config/menus/, "
+"Nota: los menús idénticos encontrados en /etc/xdg/menus UND ~/.config/menus/, "
 "siguiendo la especificación de menú XDG, son solamente mostrados en "
 "~/.config/menus/.\nSi desea crear su menú propio, utilice la sección "
 "'Menú único'."
@@ -48,8 +49,7 @@ msgid "Menus in"
 msgstr "Menús en"
 
 msgid "No menus found! Check why from within a terminal with\n' fvwm-menu-desktop -v '"
-msgstr ""
-"No se han encontrado menús! Compruebe porque desde un terminal con\n' fvwm-menu-desktop -v '"
+msgstr "¡No se han encontrado menús! Compruebe la causa desde un terminal con\n' fvwm-menu-desktop -v '"
 
 msgid ""
 "It is a good idea to check .xsession-errors in the user home\nfor errors, too. "
@@ -58,7 +58,7 @@ msgid ""
 "limit is 1000.'\n\nThis happens because PipeRead used for menu generation\nhas "
 "a command length limit of 1000 characters. Sorry for\nthat inconvinience."
 msgstr ""
-"Una buena idea, es comprobar los mensajes de error en .xsession-errors. "
+"Una buena idea es comprobar los mensajes de error en .xsession-errors. "
 "Existe un límite - Si se encuentran muchos menús,\naparece el siguiente error "
 "en .xsession-errors:\n\n'Module(0xXXX) command is too big (1008), "
 "limit is 1000.'\n\nEsto sucede, porque PipeRead usada para generar el menú\n"
@@ -82,14 +82,14 @@ msgstr ""
 "Pero recuerde, si el menú no existe, no pasa nada."
 
 msgid "Menu Top Title:"
-msgstr "Menú top título:"
+msgstr "Título superior del menú:"
 
 msgid ""
 "Specifies the menu title of the top menu used by Fvwm's Popup command. "
 "Default is 'FvwmMenu'."
 msgstr ""
-"Especifica el título del menú principal que es usado por el popup comando "
-"Fvwm's. Predeterminado es 'FvwmMenu'."
+"Especifica el título del menú principal que es usado por el comando Fvwm popup. " 
+"Por defecto es 'FvwmMenu'."
 
 msgid "Desktop:"
 msgstr "Escritorio:"
@@ -99,7 +99,7 @@ msgid ""
 "If a system offers multiple desktop environments $XDG_MENU_PREFIX is typically "
 "set. It is ignored if this field is used. Possible names: gnome, kde, lxde, etc."
 msgstr ""
-"Sobreescribir el nombre del escritorio principal, que fue instalado en el sistema. "
+"Sobreescribe el nombre del escritorio principal, que fue instalado en el sistema. "
 "Si un sistema ofrece múltiples escritorios, $XDG_MENU_PREFIX es típicamente "
 "seleccionado, pero se ignora si este campo es usado. Posibles nombres: gnome, "
 "kde, lxde, etc."
@@ -166,7 +166,7 @@ msgstr ""
 "iconos: /usr/share/icons/Mint-X => 'Mint-X'."
 
 msgid "Change icon theme path."
-msgstr ""
+msgstr "Cambiar directorio de temas de icono"
 
 msgid "Directory Icon:"
 msgstr "Icono de carpeta:"
@@ -177,16 +177,16 @@ msgid ""
 "isn't installed no default icon appears. Another icon can defined here. "
 "Only the name of an icon is needed not the path!"
 msgstr ""
-"Si 'Usar Iconos' está activado y para un directorio en un menú ningún icono "
-"es encontrado, 'gnome-fs-directory' será usado por defecto. Pero si el icono "
+"Si 'Usar Iconos' está activado y para un directorio en un menú sin ningún icono "
+"encontrado, 'gnome-fs-directory' será usado por defecto. Pero si el icono "
 "del tema de gnome no está instalado, ningún icono aparecerá por defecto. Otro "
-"icono puede ser definido aquí. Sólo el nombre de un icono es necesario, no la ruta!"
+"icono puede ser definido aquí. ¡Sólo el nombre de un icono es necesario, no la ruta!"
 
 msgid "Change directoy icon path."
-msgstr ""
+msgstr "Cambiar aplicación de directorio de iconos"
 
 msgid "Application Icon:"
-msgstr "Aplicación icono:"
+msgstr "Icono de Aplicación:"
 
 msgid ""
 "If 'Use Icons' is enabled and for an application no icon is found 'gnome-applications' "
@@ -196,10 +196,10 @@ msgstr ""
 "Si 'Usar Iconos' está habilitado y para una aplicación ningún icono es encontrado, "
 "'gnome-applications' será usado por defecto. Pero si el icono del tema de gnome no "
 "está instalado, ningún icono aparecerá por defecto. Otro icono puede ser definido "
-"aquí. Sólo el nombre de un icono es necesario, no la ruta!"
+"aquí. Sólo el nombre de un icono es necesario, ¡no la ruta!"
 
 msgid "Change application icon path."
-msgstr ""
+msgstr "Cambiar la ruta de iconos de aplicación"
 
 msgid "Icon Directory:"
 msgstr "Directorio de iconos:"
@@ -214,7 +214,7 @@ msgstr ""
 "especificado aquí. De otra manera ningún icono aparecerá en el menú para esa entrada."
 
 msgid "Change icon directory path."
-msgstr ""
+msgstr "Cambiar ruta de directorio de icono"
 
 msgid "Use Titles"
 msgstr "Utilizar títulos"
@@ -245,7 +245,7 @@ msgid "Enter here the FULL path of the menu to store. Default path is $FVWM_USER
 msgstr "Escriba aquí la ruta COMPLETA en el menú para guardarla. Estándar es $FVWM_USERDIR/.menu."
 
 msgid "Change output path of the menu file."
-msgstr ""
+msgstr "Cambiar directorio de salida del menú de archivos"
 
 ########################################################################
 # Button bar
@@ -276,7 +276,7 @@ msgid "Cancel/Quit Menu Configurator."
 msgstr "Cancelar/Cerrar Menú Configurador."
 
 msgid "You have unsaved changes! Continue anyway?"
-msgstr ""
+msgstr "¡Tiene cambios no guardados! ¿Continuar de todas formas?"
 
 ########################################################################
 # Others
