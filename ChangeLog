@@ -1,5 +1,14 @@
 History:
 
+02/13/2015
+- fix wrong conversion from hex to float in FNS-CompConfigurator. Also
+  rounding errors from float to hex and vice versa.
+- Merge pull request of Russian translation po files from Artashm (thanks Art! ^^)
+- update French translation po files from Maxime (thanks Maxime! ^^)
+- update Spanish translation po files from Ado (thanks Ado! ^^) with the reviewed
+  versions from Jesus (thanks Jesus! ^^)
+- add Artashm to AUTHORS
+
 01/14/2015
 - fix bug in Makefile to identify only one correct Perl lib path
 - add forgotten Version 0.6.9 changes in NEWS
