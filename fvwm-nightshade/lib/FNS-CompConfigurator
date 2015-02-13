@@ -9,7 +9,7 @@ use Getopt::Long qw(:config no_ignore_case require_order pass_through);;
 
 #-----------------------------------------------------------------------
 # File:         FNS-CompConfigurator
-my $Version =   '2.0.2';
+my $Version =   '2.0.3';
 # Licence:      GPL 2
 #
 # Description:  Composite configurator Perl script for xcompmgr or compton
@@ -17,7 +17,7 @@ my $Version =   '2.0.2';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/11/2014
-# Changed:      01/05/2015
+# Changed:      02/13/2015
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -160,11 +160,15 @@ if ($numArgs > 0) {
 }
 
 # Set shadow RGB value from float
-my $hex = sprintf("%02X",($ShadowColorR*255));
+# hint: the $rounded is needed to round correct
+my $rounded = sprintf("%.0f",($ShadowColorR*255));
+my $hex = sprintf("%02X", $rounded);
 $ShadowColor = $ShadowColor . $hex;
-$hex = sprintf("%02X",($ShadowColorG*255));
+$rounded = sprintf("%.0f",($ShadowColorG*255));
+$hex = sprintf("%02X", $rounded);
 $ShadowColor = $ShadowColor . $hex;
-$hex = sprintf("%02X",($ShadowColorB*255));
+$rounded = sprintf("%.0f",($ShadowColorB*255));
+$hex = sprintf("%02X", $rounded);
 $ShadowColor = $ShadowColor . $hex;
 
 # Check if one or both composite managers are installed and set the respective variables
@@ -754,16 +758,19 @@ sub build_cmd {
     }
     
     if ($ShadowColor ne "000000") {
-        my $dec_num = sprintf("%d", hex(substr($ShadowColor,0,1)));
-        $ShadowColorR = sprintf "%.2f",($dec_num/256);
+        my $dec_num = sprintf("%d", hex(substr($ShadowColor,0,2)));
+        my $float_num = $dec_num/255;
+        $ShadowColorR = sprintf("%.4f", $float_num);
         $execString = "$execString --shadow-red $ShadowColorR";
 
-        $dec_num = sprintf("%d", hex(substr($ShadowColor,2,3)));
-        $ShadowColorG = sprintf "%.2f",($dec_num/256);
+        $dec_num = sprintf("%d", hex(substr($ShadowColor,2,2)));
+        $float_num = $dec_num/255;
+        $ShadowColorG = sprintf("%.4f", $float_num);
         $execString = "$execString --shadow-green $ShadowColorG";
 
-        $dec_num = sprintf("%d", hex(substr($ShadowColor,4,5)));
-        $ShadowColorB = sprintf "%.2f",($dec_num/256);
+        $dec_num = sprintf("%d", hex(substr($ShadowColor,4,2)));
+        $float_num = $dec_num/255;
+        $ShadowColorB = sprintf("%.4f", $float_num);
         $execString = "$execString --shadow-blue $ShadowColorB";
     }
     
