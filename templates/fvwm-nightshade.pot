@@ -722,6 +722,7 @@ msgstr ""
 # FvwmForm-Messages
 #-----------------------------------------------------------------------
 # FuncShowMessage "Fvwm Version Info"
+
 msgid "Fvwm Version Info"
 msgstr ""
 

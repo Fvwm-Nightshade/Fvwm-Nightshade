@@ -34,22 +34,22 @@ msgstr ""
 msgid "Run Banner at startup? Default: on"
 msgstr ""
 
-msgid "Path to splash image"
+msgid "Path to splash image."
 msgstr ""
 
-msgid "Set path to splash image"
+msgid "Set path to splash image."
 msgstr ""
 
 msgid "Composite Manager On"
 msgstr ""
 
-msgid "Use composite manager? Default: off"
+msgid "Use composite manager? Default: off."
 msgstr ""
 
 msgid "Configure"
 msgstr ""
 
-msgid "Open composite settings"
+msgid "Open composite settings."
 msgstr ""
 
 ########################################################################
@@ -62,25 +62,25 @@ msgstr ""
 msgid "Wallpaper Dirs:"
 msgstr ""
 
-msgid "Wallpaper directories, separated by ':'"
+msgid "Wallpaper directories, separated by ':'."
 msgstr ""
 
 msgid "Icons on Desktop"
 msgstr ""
 
-msgid "Use Icons on desktop? Default: off"
+msgid "Use Icons on desktop? Default: off."
 msgstr ""
 
 msgid "Icon Size:"
 msgstr ""
 
-msgid "Change size of the desktop icons"
+msgid "Change size of the desktop icons."
 msgstr ""
 
 msgid "Desktop scrolling On"
 msgstr ""
 
-msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on"
+msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on."
 msgstr ""
 
 msgid "Desktops:"
@@ -102,19 +102,19 @@ msgstr ""
 msgid "Used Layout:"
 msgstr ""
 
-msgid "The actual FNS layout"
+msgid "The actual FNS layout."
 msgstr ""
 
 msgid "Used Theme:"
 msgstr ""
 
-msgid "The actual FNS decor theme"
+msgid "The actual FNS decor theme."
 msgstr ""
 
 msgid "Used Font:"
 msgstr ""
 
-msgid "Used default font in FNS"
+msgid "Used default font in FNS."
 msgstr ""
 
 ########################################################################
@@ -127,37 +127,37 @@ msgstr ""
 msgid "Browser:"
 msgstr ""
 
-msgid "Default browser in FNS"
+msgid "Default browser in FNS."
 msgstr ""
 
-msgid "Set path to browser"
+msgid "Set path to browser."
 msgstr ""
 
 msgid "Editor:"
 msgstr ""
 
-msgid "Default editor in FNS"
+msgid "Default editor in FNS."
 msgstr ""
 
-msgid "Set path to editor"
+msgid "Set path to editor."
 msgstr ""
 
 msgid "Terminal:"
 msgstr ""
 
-msgid "Default terminal in FNS"
+msgid "Default terminal in FNS."
 msgstr ""
 
-msgid "Set path to terminal"
+msgid "Set path to terminal."
 msgstr ""
 
 msgid "Transset:"
 msgstr ""
 
-msgid "Default transset in FNS"
+msgid "Default transset in FNS."
 msgstr ""
 
-msgid "Set path to transset"
+msgid "Set path to transset."
 msgstr ""
 
 ########################################################################
@@ -173,13 +173,13 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-msgid "Apply and save new settings"
+msgid "Apply and save new settings."
 msgstr ""
 
 msgid "Cancel"
 msgstr ""
 
-msgid "Cancel / Quit Base Setup"
+msgid "Cancel / Quit Base Setup."
 msgstr ""
 
 msgid "You have unsaved changes! Continue anyway?"

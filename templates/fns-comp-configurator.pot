@@ -70,7 +70,7 @@ msgid ""
 "Note:\nDesktop windows (with _NET_WM_WINDOW_TYPE_DESKTOP) never get shadow."
 msgstr ""
 
-msgid "On Dock / Panels"
+msgid "On Docks / Panels"
 msgstr ""
 
 msgid "Painting shadows on panels and docks."
@@ -175,7 +175,7 @@ msgstr ""
 msgid " Additional Parameters "
 msgstr ""
 
-msgid "Enter here paramters which not accessible with the configurator"
+msgid "Enter here paramters which are not accessible with the configurator."
 msgstr ""
 
 ########################################################################
@@ -200,7 +200,7 @@ msgstr ""
 msgid "Stop"
 msgstr ""
 
-msgid "Start or stop the coosen composite manager."
+msgid "Start or stop the choosen composite manager."
 msgstr ""
 
 msgid "Cancel"

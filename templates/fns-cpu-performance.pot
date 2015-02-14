@@ -70,7 +70,7 @@ msgstr ""
 msgid "Unlock cores to set governor and frequencies separately."
 msgstr ""
 
-msgid "All cores will set to common values! Continue anyway?"
+msgid "All cores will be set to common values! Continue anyway?"
 msgstr ""
 
 msgid "Governor:"
@@ -152,7 +152,7 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-msgid "Apply settings to the cpufreq system. Also save them in \$FVWM_USERDIR/.governor for using it with autostart if set."
+msgid "Apply settings to the cpufreq system. Also save them in $FVWM_USERDIR/.governor for using it with autostart if set."
 msgstr ""
 
 msgid "Cancel"
