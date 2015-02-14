@@ -1,5 +1,5 @@
 # Spanish translation for fns-cpu-performance
-# Copyright (C) 2014 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
 # Adonai Martin <adonai.martin@gmail.com>, 2014.
 # Reviewed by: Jesús J. Guerrero Botella <jesus.guerrero.botella@gmail.com>, 2015.
@@ -9,7 +9,7 @@ msgstr ""
 
 "Project-Id-Version: fns-cpu-performance\n"
 "POT-Creation-Date: 2014-12-08 23:37+0200\n"
-"PO-Revision-Date: 2015-01-11 16:04+0200\n"
+"PO-Revision-Date: 2015-02-14 11:34+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
@@ -48,10 +48,10 @@ msgid "Joined"
 msgstr "Acoplado"
 
 msgid "This is the tab for modifying ALL cores together if they're not unlocked."
-msgstr "Esta es la pestaña para modificar TODOS los núcleos a la vez si no estuvieran desbloqueados"
+msgstr "Esta es la pestaña para modificar TODOS los núcleos a la vez si no estuvieran desbloqueados."
 
 msgid " Information to Cores "
-msgstr " Información a Núcleos"
+msgstr " Información a Núcleos "
 
 msgid "L2 Cache:"
 msgstr "Caché L2:"
@@ -69,16 +69,16 @@ msgid "Unlock cores"
 msgstr "Desbloquear núcleos"
 
 msgid "Unlock cores to set governor and frequencies separately."
-msgstr "Desbloquear núcleos para establecer gobernante y frecuencias separadamente"
+msgstr "Desbloquear núcleos para establecer gobernante y frecuencias separadamente."
 
-msgid "All cores will set to common values! Continue anyway?"
+msgid "All cores will be set to common values! Continue anyway?"
 msgstr "¡Se establecerán valores comunes para todos los núcleos! ¿Continuar de todas formas?"
 
 msgid "Governor:"
 msgstr "Gobernante:"
 
 msgid "Sets the global used governor (if cores not unlocked). "
-msgstr "Establece el gobernante global usado (si los núcleos no están desbloqueados)"
+msgstr "Establece el gobernante global usado (si los núcleos no están desbloqueados). "
 
 msgid ""
 "The following governors are available:\n\n"
@@ -106,16 +106,16 @@ msgid ""
 "in combination with 'Max Frequency'."
 msgstr ""
 "Los siguientes gobernantes están disponibles:\n\n"
-"Rendimiento:\nEste gobernante fija la CPU a la mayor frecuencia dentro de los límites mínimo y máximo de frecuencia.\n\n"
-"Por consiguiente, el ahorro de energía no es el objetivo de este manejador.\n\n"
+"Rendimiento:\nEste gobernante fija la CPU a la mayor frecuencia dentro de los límites mínimo y máximo "
+"de frecuencia.\n\nPor consiguiente, el ahorro de energía no es el objetivo de este manejador.\n\n"
 "Ahorro de energía:\nLa frecuencia de CPU se fija al menor valor posible. Esto puede tener un severo "
 "impacto en el rendimiento, siempre y cuando el sistema nunca aumentará esta frecuencia sin importar la carga "
 "de los procesadores.\nEl uso de este manejador, a menudo no conduce al ahorro de energía esperado "
 "ya que el mayor ahorro se consigue normalmente en el modo inactivo al entrar en los C-states. "
 "Debido al uso de una menor frecuencia con el gobernante de ahorro de energía, los procesos tardarán "
 "más tiempo en terminar, lo que conlleva un mayor intervalo de tiempo para entrar en los C-states.\n\n"
-"Bajo demanda:\nLa implementación del núcleo de una política de frecuencia dinámica de CPU: El manejador monitorea "
-"el uso del procesador. Tan pronto como se exceda un cierto umbral, el manejador establecerá la "
+"Bajo demanda:\nLa implementación del núcleo de una política de frecuencia dinámica de CPU: El manejador "
+monitorea el uso del procesador. Tan pronto como se exceda un cierto umbral, el manejador establecerá la "
 "la mayor frecuencia disponible. Si el uso es menor que el umbral, la siguiente "
 "menor frecuencia será usada. Si el sistema continúa siendo infrautilizado, la frecuencia es de nuevo "
 "reducida hasta que la más baja disponible sea establecida.\n\n"
@@ -124,16 +124,16 @@ msgstr ""
 "potencia. Si el uso del procesador excede un cierto umbral, el manejador no cambia immediatamente "
 "a la más alta frecuencia disponible (como el manejador bajo demanda), pero sólo a la siguiente mayor "
 "frecuencia disponible.\n\n"
-"Espacio de usuario:\nEste manejador permite al usuario, o a cualquier programa en ejecución de espacio de usuario con UID 'root', "
-"establecer la CPU a una frecuencia específica. 'espacio de usuario' no está soportada todavía, pero para obtener el mismo resultado, "
-"usa el manejador de 'ahorro de potencia' y una de las frecuencias en 'Mín Frecuencia', o manejador 'rendimiento' "
-"en combinación con 'Máx Frecuencia'."
+"Espacio de usuario:\nEste manejador permite al usuario, o a cualquier programa en ejecución de espacio de "
+"usuario con UID 'root', establecer la CPU a una frecuencia específica. 'espacio de usuario' no está soportada "
+"todavía, pero para obtener el mismo resultado, usa el manejador de 'ahorro de potencia' y una de las "
+"frecuencias en 'Mín Frecuencia', o manejador 'rendimiento' en combinación con 'Máx Frecuencia'."
 
 msgid "Min Frequency:"
 msgstr "Frec. mínima:"
 
 msgid "Sets the minimum used frequency from the range of available frequencies."
-msgstr "Establece la mínima frecuencia usada desde el rango de frecuencias disponibles. "
+msgstr "Establece la mínima frecuencia usada desde el rango de frecuencias disponibles."
 
 msgid "Max Frequency:"
 msgstr "Frec. máxima:"
@@ -146,10 +146,10 @@ msgstr "Establece la máxima frecuencia usada desde el rango de frecuencias disp
 ########################################################################
 
 msgid "Core "
-msgstr "Núcleo"
+msgstr "Núcleo "
 
 msgid "This is the tab for modifying core "
-msgstr "Esta es la pestaña para modificar el núcleo"
+msgstr "Esta es la pestaña para modificar el núcleo "
 
 msgid "if unlocked at the joined tab."
 msgstr "si está desbloqueado en la pestaña 'Acoplado'."
@@ -158,7 +158,7 @@ msgid "Information to Core"
 msgstr "Información al Núcleo"
 
 msgid "Show information about this core."
-msgstr "Mostrar información sobre este núcleo"
+msgstr "Mostrar información sobre este núcleo."
 
 msgid "Sets the used governor (if cores unlocked). "
 msgstr "Establece el gobernante usado(si los núcleos están desbloqueados)."
@@ -176,8 +176,12 @@ msgstr "Añadir ajustes a medida a auto-inicio para permanencia."
 msgid "Apply"
 msgstr "Aplicar"
 
-msgid "Apply settings to the cpufreq system. Also save them in $FVWM_USERDIR/.governor for using it with autostart if set."
-msgstr "Aplicar ajustes a la cpufreq del sistema. Guardarlos en $FVWM_USERDIR/.governor para usarlo con auto-inicio si establecido."
+msgid ""
+"Apply settings to the cpufreq system. Also save them in $FVWM_USERDIR/.governor for using it with "
+"autostart if set."
+msgstr ""
+"Aplicar ajustes a la cpufreq del sistema. Guardarlos en $FVWM_USERDIR/.governor para usarlo con "
+"auto-inicio si establecido."
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -189,7 +193,9 @@ msgid "You have unapplied changes! Continue anyway?"
 msgstr "¡Tiene cambios no aplicados! ¿Continuar de todas formas?"
 
 msgid "No cpu scaler is installed.\nFor full functionality cpufreq-utils or cpupower must installed at least."
-msgstr "Ningún CPU-Scaler está instalado. \nPara una funcionalidad completa de cpufreq-utils o cpupower debe ser instalado al menos"
+msgstr ""
+"Ningún CPU-Scaler está instalado.\nPara una funcionalidad completa de cpufreq-utils o cpupower debe ser "
+"instalado al menos."
 
 ########################################################################
 # Others

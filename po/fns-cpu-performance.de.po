@@ -47,7 +47,7 @@ msgid "Joined"
 msgstr "Gekoppelt"
 
 msgid "This is the tab for modifying ALL cores together if they're not unlocked."
-msgstr "Dieser Tab ist zum gemeinsamen modifizieren ALLER Kerne, wenn sie entsperrt sind"
+msgstr "Dieser Tab ist zum gemeinsamen modifizieren ALLER Kerne, wenn sie entsperrt sind."
 
 msgid " Information to Cores "
 msgstr " Infos zu den Kernen "
@@ -70,7 +70,7 @@ msgstr "Kerne entsperren"
 msgid "Unlock cores to set governor and frequencies separately."
 msgstr "Entsperren der Kerne, um den Governor und die Frequenzen seperat zu setzen."
 
-msgid "All cores will set to common values! Continue anyway?"
+msgid "All cores will be set to common values! Continue anyway?"
 msgstr "Alle Kerne werden auf gemeinsame Werte gesetzt! Trotzdem fortfahren?"
 
 msgid "Governor:"
@@ -192,7 +192,7 @@ msgid "You have unapplied changes! Continue anyway?"
 msgstr "Sie haben nicht angewendete Änderungen! Trotzdem fortfahren?"
 
 msgid "No cpu scaler is installed.\nFor full functionality cpufreq-utils or cpupower must installed at least."
-msgstr "Kein Cpu-Scaler ist installiert.\nFür volle Funktionalität muss mindestens cpufreq-utils oder cpupower installiert sein"
+msgstr "Kein Cpu-Scaler ist installiert.\nFür volle Funktionalität muss mindestens cpufreq-utils oder cpupower installiert sein."
 
 ########################################################################
 # Others

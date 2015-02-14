@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fns-cpu-performance\n"
 "POT-Creation-Date: 2014-12-08 23:37+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-02-14 12:14+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
@@ -26,16 +26,16 @@ msgstr "FNS Производительность процессора"
 ########################################################################
 
 msgid " CPU Information "
-msgstr " Информация о Процессоре"
+msgstr " Информация о Процессоре "
 
 msgid "Model:"
-msgstr " Модель"
+msgstr "Модель:"
 
 msgid "CPU Count:"
-msgstr " Число Процессоров"
+msgstr "Число Процессоров:"
 
 msgid "Manufacturer:"
-msgstr "Производитель"
+msgstr "Производитель:"
 
 
 ########################################################################
@@ -46,13 +46,13 @@ msgid "Joined"
 msgstr "Вступил"
 
 msgid "This is the tab for modifying ALL cores together if they're not unlocked."
-msgstr "Этот таб для модификации всех не разблокированных ядер вместе взята"
+msgstr "Этот таб для модификации всех не разблокированных ядер вместе взята."
 
 msgid " Information to Cores "
-msgstr "Информация о Ядрах"
+msgstr " Информация о Ядрах "
 
 msgid "L2 Cache:"
-msgstr "Кэш L2"
+msgstr "Кэш L2:"
 
 msgid "Bogomips:"
 msgstr "Bogomips:"
@@ -61,23 +61,22 @@ msgid "More"
 msgstr "Больше"
 
 msgid "Show information about the cpu."
-msgstr "Показать информацию о процессоре"
+msgstr "Показать информацию о процессоре."
 
 msgid "Unlock cores"
 msgstr "Разблокировать ядра"
 
 msgid "Unlock cores to set governor and frequencies separately."
-msgstr "Разблокировать ядра для установки частот и регуляторов по раздельности"
+msgstr "Разблокировать ядра для установки частот и регуляторов по раздельности."
 
-# !! I think it should be "All cores will be set ..."
-msgid "All cores will set to common values! Continue anyway?"
+msgid "All cores will be set to common values! Continue anyway?"
 msgstr "Параметры всех ядер будут установлены общим значениям! Продолжить?"
 
 msgid "Governor:"
 msgstr "Регулятор:"
 
 msgid "Sets the global used governor (if cores not unlocked). "
-msgstr "Устанавливает глобальный регулятор (если ядра не разблокированы) "
+msgstr "Устанавливает глобальный регулятор (если ядра не разблокированы). "
 
 msgid ""
 "The following governors are available:\n\n"
@@ -103,7 +102,8 @@ msgid ""
 "set the CPU to a specific frequency. 'userspace' is not supported yet, but to get the same result "
 "use governor 'powersave' and one of the frequencies in 'Min Frequency', or governor 'performance' "
 "in combination with 'Max Frequency'."
-msgstr "Последующие регуляторы доступны:\n\n"
+msgstr ""
+"Последующие регуляторы доступны:\n\n"
 "Производительный:\n Этот регулятор статически устанавливает частоту процессора на высочайшее значение "
 "в пределах Мин и Макс частот. Следовательно сбережение энергии не является фокусом этого регулятора.\n\n "
 "Энергосберегательнный: Частота процессора установлена на наименьшее возможное значение. Это может привести "
@@ -131,29 +131,29 @@ msgstr "Последующие регуляторы доступны:\n\n"
 
 
 msgid "Min Frequency:"
-msgstr "Минимальная Частота"
+msgstr "Минимальная Частота:"
 
 msgid "Sets the minimum used frequency from the range of available frequencies."
-msgstr "Устанавливает минимальную частоту из доступного сектора частот"
+msgstr "Устанавливает минимальную частоту из доступного сектора частот."
 
 msgid "Max Frequency:"
-msgstr "Максимальная Частота"
+msgstr "Максимальная Частота:"
 
 msgid "Sets the maximum used frequency from the range of available frequencies."
-msgstr "Устанавливает максимальную частоту из доступного сектора частот"
+msgstr "Устанавливает максимальную частоту из доступного сектора частот."
 
 ########################################################################
 # Notebook page x for CoreX
 ########################################################################
 
 msgid "Core "
-msgstr "Ядро"
+msgstr "Ядро "
 
 msgid "This is the tab for modifying core "
-msgstr "В этом табе можно модифицировать ядро"
+msgstr "В этом табе можно модифицировать ядро "
 
 msgid "if unlocked at the joined tab."
-msgstr "если оно разблокировано в совместном табе"
+msgstr "если оно разблокировано в совместном табе."
 
 msgid "Information to Core"
 msgstr "Информация о Ядре"
@@ -162,7 +162,7 @@ msgid "Show information about this core."
 msgstr "Показать информацию о ядре."
 
 msgid "Sets the used governor (if cores unlocked). "
-msgstr "Установить регулятор (если ядро разблокировано)"
+msgstr "Установить регулятор (если ядро разблокировано). "
 
 ########################################################################
 # Button bar
@@ -172,13 +172,13 @@ msgid "Add to Autostart"
 msgstr "Добавить в авто-старт"
 
 msgid "Add custom settings to autostart for permanency."
-msgstr "Добавить пользовательские настройки в авто-старт для постоянности?"
+msgstr "Добавить пользовательские настройки в авто-старт для постоянности."
 
 msgid "Apply"
 msgstr "Применить"
 
-msgid "Apply settings to the cpufreq system. Also save them in \$FVWM_USERDIR/.governor for using it with autostart if set."
-msgstr "Применить настройки к cpufreq системе. Так же сохранить их в \$FVWM_USERDIR/.governor для употребления авто-стартом."
+msgid "Apply settings to the cpufreq system. Also save them in $FVWM_USERDIR/.governor for using it with autostart if set."
+msgstr "Применить настройки к cpufreq системе. Так же сохранить их в $FVWM_USERDIR/.governor для употребления авто-стартом."
 
 msgid "Cancel"
 msgstr "Отменить"
@@ -190,8 +190,9 @@ msgid "You have unapplied changes! Continue anyway?"
 msgstr "Присутствуют не сохраненные изменения! Продолжить?"
 
 msgid "No cpu scaler is installed.\nFor full functionality cpufreq-utils or cpupower must installed at least."
-msgstr "Не найдены установленные scaler-ы процессора.\n Для полной функциональности необходима установка cpufreq-utils  
-иле же  cpupower как минимум."
+msgstr ""
+"Не найдены установленные scaler-ы процессора.\nДля полной функциональности необходима установка "
+"cpufreq-utils иле же cpupower как минимум."
 
 ########################################################################
 # Others

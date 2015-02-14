@@ -260,7 +260,7 @@ msgid "Help"
 msgstr "Hilfe"
 
 msgid "Get help."
-msgstr "Hilfe anzeigen"
+msgstr "Hilfe anzeigen."
 
 msgid "Save"
 msgstr "Speichern"

@@ -33,23 +33,23 @@ msgstr "Splash An"
 msgid "Run Banner at startup? Default: on"
 msgstr "Splash/Banner beim Start anzeigen?  Default: an"
 
-msgid "Path to splash image"
-msgstr "Pfad zum Splash-Bild"
+msgid "Path to splash image."
+msgstr "Pfad zum Splash-Bild."
 
-msgid "Set path to splash image"
-msgstr "Pfad zum Splash-Bild setzen"
+msgid "Set path to splash image."
+msgstr "Pfad zum Splash-Bild setzen."
 
 msgid "Composite Manager On"
 msgstr "Composite Manager An"
 
-msgid "Use composite manager? Default: off"
-msgstr "Composite Manager nutzen? Default: aus"
+msgid "Use composite manager? Default: off."
+msgstr "Composite Manager nutzen? Default: aus."
 
 msgid "Configure"
 msgstr "Konfigurieren"
 
-msgid "Open composite settings"
-msgstr "Öffne Composite Einstellungen"
+msgid "Open composite settings."
+msgstr "Öffne Composite Einstellungen."
 
 ########################################################################
 # Desktop
@@ -60,26 +60,26 @@ msgstr " Desktop "
 msgid "Wallpaper Dirs:"
 msgstr "Wallpaper Verz:"
 
-msgid "Wallpaper directories, separated by ':'"
-msgstr "Verzeichnisse von Hintergrundbildern, getrennt durch ':'"
+msgid "Wallpaper directories, separated by ':'."
+msgstr "Verzeichnisse von Hintergrundbildern, getrennt durch ':'."
 
 msgid "Icons on Desktop"
 msgstr "Icons auf dem Desktop"
 
-msgid "Use Icons on desktop? Default: off"
-msgstr "Icons auf Desktop aktivieren? Default: aus"
+msgid "Use Icons on desktop? Default: off."
+msgstr "Icons auf Desktop aktivieren? Default: aus."
 
 msgid "Icon Size:"
 msgstr "Icon Größe:"
 
-msgid "Change size of the desktop icons"
-msgstr "Icongröße auf dem Desktop ändern"
+msgid "Change size of the desktop icons."
+msgstr "Icongröße auf dem Desktop ändern."
 
 msgid "Desktop scrolling On"
 msgstr "Desktop Scrolling An"
 
-msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on"
-msgstr "Seitenscrolling an, wenn der Cursor die Ränder der Bildschirmseite berührt? Default: an"
+msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on."
+msgstr "Seitenscrolling an, wenn der Cursor die Ränder der Bildschirmseite berührt? Default: an."
 
 msgid "Desktops:"
 msgstr "Desktops:"
@@ -99,20 +99,20 @@ msgstr " Dekoration & Panels "
 msgid "Used Layout:"
 msgstr "Verw. Layout:"
 
-msgid "The actual FNS layout"
-msgstr "Das aktuelle FNS Layout"
+msgid "The actual FNS layout."
+msgstr "Das aktuelle FNS Layout."
 
 msgid "Used Theme:"
 msgstr "Verw. Theme:"
 
-msgid "The actual FNS decor theme"
-msgstr "Das aktuelle FNS Dekorations-Theme"
+msgid "The actual FNS decor theme."
+msgstr "Das aktuelle FNS Dekorations-Theme."
 
 msgid "Used Font:"
 msgstr "Verw. Font:"
 
-msgid "Used default font in FNS"
-msgstr "Der aktuell benutzte FNS-Font"
+msgid "Used default font in FNS."
+msgstr "Der aktuell benutzte FNS-Font."
 
 ########################################################################
 # Default Applications
@@ -123,38 +123,38 @@ msgstr " Standard Applikationen "
 msgid "Browser:"
 msgstr "Browser:"
 
-msgid "Default browser in FNS"
-msgstr "Standard Browser in FNS"
+msgid "Default browser in FNS."
+msgstr "Standard Browser in FNS."
 
-msgid "Set path to browser"
-msgstr "Pfad zu Browser setzen"
+msgid "Set path to browser."
+msgstr "Pfad zu Browser setzen."
 
 msgid "Editor:"
 msgstr "Editor:"
 
-msgid "Default editor in FNS"
-msgstr "Standard Editor in FNS"
+msgid "Default editor in FNS."
+msgstr "Standard Editor in FNS."
 
-msgid "Set path to editor"
-msgstr "Pfad zu Editor setzen"
+msgid "Set path to editor."
+msgstr "Pfad zu Editor setzen."
 
 msgid "Terminal:"
 msgstr "Terminal:"
 
-msgid "Default terminal in FNS"
-msgstr "Standard Terminal in FNS"
+msgid "Default terminal in FNS."
+msgstr "Standard Terminal in FNS."
 
-msgid "Set path to terminal"
-msgstr "Pfad zu Terminal setzen"
+msgid "Set path to terminal."
+msgstr "Pfad zu Terminal setzen."
 
 msgid "Transset:"
 msgstr "Transset:"
 
-msgid "Default transset in FNS"
-msgstr "Standard Transset in FNS"
+msgid "Default transset in FNS."
+msgstr "Standard Transset in FNS."
 
-msgid "Set path to transset"
-msgstr "Pfad zu Transset setzen"
+msgid "Set path to transset."
+msgstr "Pfad zu Transset setzen."
 
 ########################################################################
 # Button Bar
@@ -168,14 +168,14 @@ msgstr "Hilfe anzeigen"
 msgid "Apply"
 msgstr "Anwenden"
 
-msgid "Apply and save new settings"
-msgstr "Neue Einstellungen speichern und anwenden"
+msgid "Apply and save new settings."
+msgstr "Neue Einstellungen speichern und anwenden."
 
 msgid "Cancel"
 msgstr "Abbrechen"
 
-msgid "Cancel / Quit Base Setup"
-msgstr "Basis Konfiguration Abbrechen / Beenden"
+msgid "Cancel / Quit Base Setup."
+msgstr "Basis Konfiguration Abbrechen / Beenden."
 
 msgid "You have unsaved changes! Continue anyway?"
 msgstr "Sie haben ungespeicherte Änderungen! Trotzdem fortfahren?"

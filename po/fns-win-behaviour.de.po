@@ -54,7 +54,7 @@ msgstr ""
 # Raise Options
 ########################################################################
 msgid " Raise Options "
-msgstr "Anhebe Optionen"
+msgstr " Anhebe Optionen "
 
 msgid "Raise if focused"
 msgstr "Anheben wenn fokusiert"
@@ -95,7 +95,7 @@ msgstr ""
 # Focus Options
 ########################################################################
 msgid " Focus Options "
-msgstr "Fokus Optionen"
+msgstr " Fokus Optionen "
 
 msgid "Grab Focus"
 msgstr "Fokus aneignen"
@@ -222,7 +222,7 @@ msgid ""
 "all new window appear at the center of the screen, and with 'UnderMouse', windows are centered "
 "under the mouse pointer where possible."
 msgstr ""
-"Mit 'ObenLinks' vwerden Fenster in der oberen linken Ecke des Desktops platziert. "
+"Mit 'ObenLinks' werden Fenster in der oberen linken Ecke des Desktops platziert. "
 "Mit 'Mitte' tauchen alle Fenster in der Mitte des Bildschirms auf, und mit 'UnterMaus' werden "
 "Fenster mittig unter dem Mauszeiger positioniert (wenn möglich)."
 
@@ -366,19 +366,19 @@ msgstr ""
 msgid "Save"
 msgstr "Speichern"
 
-msgid "Save new settings"
+msgid "Save new settings."
 msgstr "Speichert die neuen Einstellungen."
 
 msgid "Help"
 msgstr "Hilfe"
 
-msgid "Get help"
-msgstr "Hilfe anzeigen"
+msgid "Get help."
+msgstr "Hilfe anzeigen."
 
 msgid "Apply"
 msgstr "Anwenden"
 
-msgid "Apply new settings"
+msgid "Apply new settings."
 msgstr "Neue Einstellungen anwenden."
 
 msgid "Cancel"

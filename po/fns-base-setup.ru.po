@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-BaseSetup\n"
 "POT-Creation-Date: 2014-10-10 21:54+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-02-14 12:29+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Fvwm-Nightshade базовая конфигурация"
 ########################################################################
 
 msgid " Environment "
-msgstr " Среда"
+msgstr " Среда "
 
 msgid "Splash On"
 msgstr "Баннер Включен"
@@ -34,54 +34,54 @@ msgstr "Баннер Включен"
 msgid "Run Banner at startup? Default: on"
 msgstr "Показывать баннер при запуске? По умолчанию: да"
 
-msgid "Path to splash image"
-msgstr "Путь к банеру "
+msgid "Path to splash image."
+msgstr "Путь к банеру."
 
-msgid "Set path to splash image"
-msgstr "Установит путь к банеру"
+msgid "Set path to splash image."
+msgstr "Установит путь к банеру."
 
 msgid "Composite Manager On"
 msgstr "Композит Менеджер Включено"
 
-msgid "Use composite manager? Default: off"
-msgstr "Использовать композит менеджер? По умолчанию: Выключено" 
+msgid "Use composite manager? Default: off."
+msgstr "Использовать композит менеджер? По умолчанию: Выключено." 
 
 msgid "Configure"
 msgstr "Настроить"
 
-msgid "Open composite settings"
-msgstr "Открыть опции композита"
+msgid "Open composite settings."
+msgstr "Открыть опции композита."
 
 ########################################################################
 # Desktop
 ########################################################################
 
 msgid " Desktop "
-msgstr " Рабочий стол"
+msgstr " Рабочий стол "
 
 msgid "Wallpaper Dirs:"
-msgstr "Обои"
+msgstr "Обои:"
 
-msgid "Wallpaper directories, separated by ':'"
-msgstr "Директории обоев разделены ':'"
+msgid "Wallpaper directories, separated by ':'."
+msgstr "Директории обоев разделены ':'."
 
 msgid "Icons on Desktop"
 msgstr "Иконки на Рабочем столе"
 
-msgid "Use Icons on desktop? Default: off"
-msgstr "Использовать Иконки на рабочем столе? По умолчанию: Включено"
+msgid "Use Icons on desktop? Default: off."
+msgstr "Использовать Иконки на рабочем столе? По умолчанию: Включено."
 
 msgid "Icon Size:"
-msgstr "Размер Иконки"
+msgstr "Размер Иконки:"
 
-msgid "Change size of the desktop icons"
-msgstr "Изменить размер иконок на рабочем столе"
+msgid "Change size of the desktop icons."
+msgstr "Изменить размер иконок на рабочем столе."
 
 msgid "Desktop scrolling On"
 msgstr "Прокрутка рабочего стола Включена"
 
-msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on"
-msgstr "При касании курсора края страницы, включить прокрутку страницы? По умолчанию: Включено "
+msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on."
+msgstr "При касании курсора края страницы, включить прокрутку страницы? По умолчанию: Включено."
 
 msgid "Desktops:"
 msgstr "Рабочие Столы"
@@ -90,75 +90,75 @@ msgid "Set horizontal count of desktop pages."
 msgstr "Установить число горизонтальных рабочих столов."
 
 msgid "Set vertical count of desktop pages."
-msgstr "Установить число вертикальных рабочих столов"
+msgstr "Установить число вертикальных рабочих столов."
 
 ########################################################################
 # Decorations & Panels
 ########################################################################
 
 msgid " Decorations & Panels "
-msgstr " Декорации и Панели"
+msgstr " Декорации и Панели "
 
 msgid "Used Layout:"
-msgstr "Примененная Выкладка"
+msgstr "Примененная Выкладка:"
 
-msgid "The actual FNS layout"
-msgstr "Актуальная выкладка FNS"
+msgid "The actual FNS layout."
+msgstr "Актуальная выкладка FNS."
 
 msgid "Used Theme:"
-msgstr "Примененная Тема"
+msgstr "Примененная Тема:"
 
-msgid "The actual FNS decor theme"
-msgstr "Актуальный декор FNS темы"
+msgid "The actual FNS decor theme."
+msgstr "Актуальный декор FNS темы."
 
 msgid "Used Font:"
-msgstr "Примененный Фонт"
+msgstr "Примененный Фонт:"
 
-msgid "Used default font in FNS"
-msgstr "Применить стандартные фонты в FNS"
+msgid "Used default font in FNS."
+msgstr "Применить стандартные фонты в FNS."
 
 ########################################################################
 # Default Applications
 ########################################################################
 
 msgid " Default Applications "
-msgstr "Приложения По умолчанию"
+msgstr " Приложения По умолчанию "
 
 msgid "Browser:"
 msgstr "Браузер:"
 
-msgid "Default browser in FNS"
-msgstr "Браузер по умолчанию в FNS"
+msgid "Default browser in FNS."
+msgstr "Браузер по умолчанию в FNS."
 
-msgid "Set path to browser"
-msgstr "Установить путь к браузеру"
+msgid "Set path to browser."
+msgstr "Установить путь к браузеру."
 
 msgid "Editor:"
-msgstr "Редактор:""
+msgstr "Редактор:"
 
-msgid "Default editor in FNS"
-msgstr "Редактор по умолчанию в FNS"
+msgid "Default editor in FNS."
+msgstr "Редактор по умолчанию в FNS."
 
-msgid "Set path to editor"
-msgstr "Установить путь к редактору"
+msgid "Set path to editor."
+msgstr "Установить путь к редактору."
 
 msgid "Terminal:"
-msgstr "Терминал"
+msgstr "Терминал:"
 
-msgid "Default terminal in FNS"
-msgstr "Терминал по умолчанию в FNS"
+msgid "Default terminal in FNS."
+msgstr "Терминал по умолчанию в FNS."
 
-msgid "Set path to terminal"
-msgstr "Установить путь к терминалу"
+msgid "Set path to terminal."
+msgstr "Установить путь к терминалу."
 
 msgid "Transset:"
-msgstr "Транссет"
+msgstr "Транссет:"
 
-msgid "Default transset in FNS"
-msgstr "Транссет по умолчанию в FNS"
+msgid "Default transset in FNS."
+msgstr "Транссет по умолчанию в FNS."
 
-msgid "Set path to transset"
-msgstr "Установить путь к транссету"
+msgid "Set path to transset."
+msgstr "Установить путь к транссету."
 
 ########################################################################
 # Button Bar
@@ -173,14 +173,14 @@ msgstr "Запросить помощь"
 msgid "Apply"
 msgstr "Применить"
 
-msgid "Apply and save new settings"
-msgstr "Применить и сохранить новые опции"
+msgid "Apply and save new settings."
+msgstr "Применить и сохранить новые опции."
 
 msgid "Cancel"
 msgstr "Отменить"
 
-msgid "Cancel / Quit Base Setup"
-msgstr "Отменить / Выйти из Базовой Установки "
+msgid "Cancel / Quit Base Setup."
+msgstr "Отменить / Выйти из Базовой Установки."
 
 msgid "You have unsaved changes! Continue anyway?"
 msgstr "У вас ест не сохраненные изменения, продолжить?"

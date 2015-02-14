@@ -1,5 +1,5 @@
 # Spanish translation for FNS-CompConfigurator
-# Copyright (C) 2014 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
 # Adonai Martin <adonai.martin@gmail.com>, 2014.
 # Reviewed by: Jesús J. Guerrero Botella <jesus.guerrero.botella@gmail.com>, 2015.
@@ -9,7 +9,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-CompConfigurator\n"
 "POT-Creation-Date: 2014-10-29 19:11+0200\n"
-"PO-Revision-Date: 2015-01-11 16:04+0200\n"
+"PO-Revision-Date: 2015-02-14 11:33+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
@@ -34,7 +34,7 @@ msgid "Use"
 msgstr "Usar"
 
 msgid "Activate / deactivate the choosen composite manager."
-msgstr "Activar / desactivar el gestor de composición elegido"
+msgstr "Activar / desactivar el gestor de composición elegido."
 
 msgid "Composite manager is running! Stopping?"
 msgstr "¡El gestor de composición está siendo ejecutado! ¿Parar?"
@@ -77,7 +77,7 @@ msgstr ""
 "Activar sombras del lado de cliente en ventanas.\n"
 "Nota:\nVentanas de escritorio (con _NET_WM_WINDOW_TYPE_DESKTOP) nunca tienen sombra."
 
-msgid "On Dock / Panels"
+msgid "On Docks / Panels"
 msgstr "En Muelles / Paneles"
 
 msgid "Painting shadows on panels and docks."
@@ -87,10 +87,10 @@ msgid "While drag'n'drop"
 msgstr "Durrante el arrastre"
 
 msgid "Draw shadows on drag-and-drop windows."
-msgstr "Dibujar sombras en ventanas arrastradas"
+msgstr "Dibujar sombras en ventanas arrastradas."
 
 msgid "Opacity:"
-msgstr "Opacidad"
+msgstr "Opacidad:"
 
 msgid "The opacity of shadows. (0.0 - 1.0, defaults to 0.75)."
 msgstr "La opacidad de las sombras. (0.0 - 1.0, por defecto 0.75)."
@@ -108,13 +108,13 @@ msgid "The left offset for shadows, in pixels. (defaults to -15)."
 msgstr "Desplazamiento a la izquierda para sombras, en píxeles. (por defecto -15)"
 
 msgid "Top Offset:"
-msgstr "Desplazamiento superior"
+msgstr "Desplazamiento superior:"
 
 msgid "The top offset for shadows, in pixels. (defaults to -15)."
 msgstr "Desplazamiento superior para sombras, en píxeles. (por defecto -15)."
 
 msgid "Shadow color:"
-msgstr "Color de la sombra"
+msgstr "Color de la sombra:"
 
 msgid "RGB colors of shadows. (defaults to 000000)."
 msgstr "Color RGB de la sombra. (por defecto a 00000)."
@@ -124,40 +124,40 @@ msgstr "Color RGB de la sombra. (por defecto a 00000)."
 ########################################################################
 
 msgid " Fading "
-msgstr "Desvanecimiento"
+msgstr " Desvanecimiento "
 
 msgid "Enable Fading"
 msgstr "Activar desvanecimiento"
 
 msgid "Enable in/out fading of windows."
-msgstr "Activar in/out desvaneciento de ventanas"
+msgstr "Activar in/out desvaneciento de ventanas."
 
 msgid "On Opacity changed"
 msgstr "En cambio de opacidad"
 
 msgid "Enables fade effect when windows change their opacity."
-msgstr "Activar efecto de desvanecimento cuando las ventanas cambien su opacidad"
+msgstr "Activar efecto de desvanecimento cuando las ventanas cambien su opacidad."
 
 msgid "On Open / Close"
 msgstr "Para Abrir / Cerrar"
 
 msgid "Enables fade effect when windows open or close."
-msgstr "Activar efecto de desvenecimiento cuando las ventanas se abran o cierren"
+msgstr "Activar efecto de desvenecimiento cuando las ventanas se abran o cierren."
 
 msgid "Fade-in Steps:"
-msgstr "Pasos para Decololar"
+msgstr "Pasos para Decololar:"
 
 msgid "Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)."
 msgstr "La opacidad cambia entre pasos mientras se decolora. (0.01 - 1.0, por defecto 0.028)."
 
 msgid "Fade-out Steps:"
-msgstr "Pasos del desvanecimiento"
+msgstr "Pasos del desvanecimiento:"
 
 msgid "Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)."
-msgstr "La opacidad cambia entre pasos mientras aumenta. (0.01 - 1.0, por defecto 0.03"
+msgstr "La opacidad cambia entre pasos mientras aumenta. (0.01 - 1.0, por defecto 0.03)."
  
 msgid "Fade Step Time:"
-msgstr "Paso de tiempo para desvanecimiento"
+msgstr "Paso de tiempo para desvanecimiento:"
 
 msgid "The time between steps in fade step, in milliseconds. (> 0, defaults to 10)."
 msgstr "El tiempo entre pasos en el paso de desvanecimiento, en milisegundos. (> 0, por defecto 10)."
@@ -180,10 +180,10 @@ msgstr "Opacidad por defecto para menús despegables y emergentes. (0.0 - 1.0, p
 ########################################################################
 
 msgid " Additional Parameters "
-msgstr " Parámetros Adicionales"
+msgstr " Parámetros Adicionales "
 
-msgid "Enter here paramters which not accessible with the configurator"
-msgstr "Introduza aquí los parámetros que no son accesibles con el configurador"
+msgid "Enter here paramters which are not accessible with the configurator."
+msgstr "Introduza aquí los parámetros que no son accesibles con el configurador."
 
 ########################################################################
 # Button bar
@@ -193,13 +193,13 @@ msgid "Save"
 msgstr "Guardar"
 
 msgid "Save settings."
-msgstr "Guardar configuración"
+msgstr "Guardar configuración."
 
 msgid "Help"
 msgstr "Ayuda"
 
 msgid "Get help."
-msgstr "Obtener ayuda"
+msgstr "Obtener ayuda."
 
 msgid "Start"
 msgstr "Comenzar"
@@ -207,14 +207,14 @@ msgstr "Comenzar"
 msgid "Stop"
 msgstr "Parar"
 
-msgid "Start or stop the coosen composite manager."
-msgstr "Comenzar o parar el gestor de composición elegido"
+msgid "Start or stop the choosen composite manager."
+msgstr "Comenzar o parar el gestor de composición elegido."
 
 msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Cancel / Quit Composite Configurator."
-msgstr "Cancelar / Cerrar configurador del Gestor de Composición "
+msgstr "Cancelar / Cerrar configurador del Gestor de Composición."
 
 msgid "You have unsaved changes! Continue anyway?"
 msgstr "¡Tiene cambios no guardados! ¿Continuar de todas formas?"
@@ -228,7 +228,7 @@ msgstr "Advertencia"
 
 msgid ""
 "No composite manager is installed.\nFor full functionality Xcompmgr "
-"or Compton must installed at least." 
+"or Compton must installed at least."
 msgstr ""
 "Ningún composite manager ha sido instalado.\nPara total funcionalidad, Xcompmgr "
 "o Compton debe de ser instalado al menos."

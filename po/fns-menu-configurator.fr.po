@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-MenuConfigurator\n"
 "POT-Creation-Date: 2014-11-26 21:51+0200\n"
-"PO-Revision-Date: 2015-01-26 11:12+0200\n"
+"PO-Revision-Date: 2015-02-14 11:48+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -63,7 +63,7 @@ msgstr ""
 "apparaît dans .xsession-errors:\n\n'Module(0xXXX) command is too big (1008), "
 "limit is 1000.'\n\nCela se produit quand PipeRead a utilisé pour la generation\n"
 "du menu une commande qui dépasse la limite de 1000 caractéres.\n"
-"Désolé pour la gêne occassionnée"
+"Désolé pour la gêne occassionnée."
 
 ########################################################################
 # Notebook page 2 for single menu
@@ -226,10 +226,10 @@ msgid "If this option is set menus are generated with titles. Default is no titl
 msgstr "Si cette option est active les menus sont générés avec des titres. Par défaut sans titre."
 
 msgid "Menus in Menu:"
-msgstr "Menus dans un menu"
+msgstr "Menus dans un menu:"
 
 msgid "Enable this checkbox to insert generated menu(s) IN a menu."
-msgstr "Activez cette case à cocher pour insérer le menu généré dans un menu."
+msgstr "Activez cette case à cocher pour insérer le menu généré dans UN menu."
 
 msgid ""
 "Enter in this field the name of the menu (its top title) where the generated "

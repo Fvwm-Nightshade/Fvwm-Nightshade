@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-CompConfigurator\n"
 "POT-Creation-Date: 2014-10-29 19:11+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-02-14 12:10+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
@@ -26,13 +26,13 @@ msgstr "FNS Композит Менеджер"
 ########################################################################
 
 msgid " Composite Manager "
-msgstr "Композит Менеджер"
+msgstr " Композит Менеджер "
 
 msgid "Use"
 msgstr "Использовать"
 
 msgid "Activate / deactivate the choosen composite manager."
-msgstr "Активировать / Дезактивировать избранный композит менеджер"
+msgstr "Активировать / Дезактивировать избранный композит менеджер."
 
 msgid "Composite manager is running! Stopping?"
 msgstr "Композит менеджер запущен! Остановить?"
@@ -44,8 +44,8 @@ msgid ""
 "XcompMgr is the standard composition manager for the X Composite extension. "
 "It implements shadows, fading, proper translucency, and more."
 msgstr "" 
-"XcompMgr является стандартным композит менеджером для Х композит экзекуций"
-"Он осуществляет тени, затухание, истинную прозрачность, и более"
+"XcompMgr является стандартным композит менеджером для Х композит экзекуций. "
+"Он осуществляет тени, затухание, истинную прозрачность, и более."
 
 msgid "Compton"
 msgstr "Compton"
@@ -71,41 +71,42 @@ msgstr " Включить Тени"
 msgid ""
 "Enable client-side shadows on windows.\n"
 "Note:\nDesktop windows (with _NET_WM_WINDOW_TYPE_DESKTOP) never get shadow."
-msgstr "Включить оконные тени со стороны клиента.\n"
-"Заметка:\nРабочие столы (с _NET_WM_WINDOW_TYPE_DESKTOP) никогда не получают теней"
+msgstr ""
+"Включить оконные тени со стороны клиента.\n"
+"Заметка:\nРабочие столы (с _NET_WM_WINDOW_TYPE_DESKTOP) никогда не получают теней."
 
-msgid "On Dock / Panels"
+msgid "On Docks / Panels"
 msgstr "Включен Док/Панели"
 
 msgid "Painting shadows on panels and docks."
-msgstr "Рисовать тени на панелях и доках"
+msgstr "Рисовать тени на панелях и доках."
 
 msgid "While drag'n'drop"
 msgstr "при перетаскивании"
 
 msgid "Draw shadows on drag-and-drop windows."
-msgstr "Рисовать тени при перетаскивании окон"
+msgstr "Рисовать тени при перетаскивании окон."
 
 msgid "Opacity:"
-msgstr "Прозрачность"
+msgstr "Прозрачность:"
 
 msgid "The opacity of shadows. (0.0 - 1.0, defaults to 0.75)."
 msgstr "Прозрачность теней. (0.0 - 1.0, по умолчанию 0.75)."
 
 msgid "Blur Radius:"
-msgstr "Радиус Размытия"
+msgstr "Радиус Размытия:"
 
 msgid "The blur radius for shadows, in pixels. (defaults to 12)."
 msgstr "Радиус размытия для теней, в пикселях. (По умолчанию 12)."
 
 msgid "Left Offset:"
-msgstr "Смещение с Лева "
+msgstr "Смещение с Лева:"
 
 msgid "The left offset for shadows, in pixels. (defaults to -15)."
 msgstr "Смещение с лева для теней, в пикселях. (По умолчанию -15)."
 
 msgid "Top Offset:"
-msgstr "Смещение с Верху"
+msgstr "Смещение с Верху:"
 
 msgid "The top offset for shadows, in pixels. (defaults to -15)."
 msgstr "Смещение с верху для теней, в пикселях (По умолчанию -15)."
@@ -121,19 +122,19 @@ msgstr "RGB цвета для теней. (По умолчанию 000000)."
 ########################################################################
 
 msgid " Fading "
-msgstr " Затухание"
+msgstr " Затухание "
 
 msgid "Enable Fading"
 msgstr " Включить Затухание"
 
 msgid "Enable in/out fading of windows."
-msgstr "Включить в/из затухание окон"
+msgstr "Включить в/из затухание окон."
 
 msgid "On Opacity changed"
 msgstr "При перемене прозрачности"
 
 msgid "Enables fade effect when windows change their opacity."
-msgstr "Включить эффект затухания при перемене прозрачности окон"
+msgstr "Включить эффект затухания при перемене прозрачности окон."
 
 msgid "On Open / Close"
 msgstr "При Открытии / Закрытии"
@@ -148,13 +149,13 @@ msgid "Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.
 msgstr "Перемена прозрачности между стадиями переменного появления. (0.01 - 1.0, По умолчанию 0.28)."
 
 msgid "Fade-out Steps:"
-msgstr "Стадии Переменного Угасания"
+msgstr "Стадии Переменного Угасания:"
 
 msgid "Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)."
 msgstr "Перемена прозрачности между стадиями переменного угасания. (0.01 - 1.0, По умолчанию 0.28)."
 
 msgid "Fade Step Time:"
-msgstr "Время между стадиями затухания"
+msgstr "Время между стадиями затухания:"
 
 msgid "The time between steps in fade step, in milliseconds. (> 0, defaults to 10)."
 msgstr "Время между стадиями затухания, в миллисекундах. (> 0, По умолчанию 10)."
@@ -167,21 +168,20 @@ msgid " Menus "
 msgstr " Меню "
 
 msgid "Opacity on Menus:"
-msgstr " Прозрачность Меню "
+msgstr "Прозрачность Меню:"
 
 msgid "Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0)."
-msgstr " Прозрачность по умолчанию для выпадающих и всплывающих меню "
+msgstr "Прозрачность по умолчанию для выпадающих и всплывающих меню."
 
 ########################################################################
 # Additional Parameters
 ########################################################################
 
 msgid " Additional Parameters "
-msgstr " Дополнительные Параметры"
+msgstr " Дополнительные Параметры "
 
-#!!-- I think thre is an "are" missing --!!
-msgid "Enter here paramters which not accessible with the configurator" 
-msgstr "Введите параметре которые не доступны в конфигураторе"
+msgid "Enter here paramters which are not accessible with the configurator." 
+msgstr "Введите параметре которые не доступны в конфигураторе."
 
 ########################################################################
 # Button bar
@@ -191,13 +191,13 @@ msgid "Save"
 msgstr "Сохранить"
 
 msgid "Save settings."
-msgstr "Сохранить настройки"
+msgstr "Сохранить настройки."
 
 msgid "Help"
 msgstr "Помощь"
 
 msgid "Get help."
-msgstr "Получить Помощь"
+msgstr "Получить Помощь."
 
 msgid "Start"
 msgstr "Старт"
@@ -205,15 +205,14 @@ msgstr "Старт"
 msgid "Stop"
 msgstr "Стоп"
 
-#!!-- I think coosen = choosen ? --!!
-msgid "Start or stop the coosen composite manager."
+msgid "Start or stop the choosen composite manager."
 msgstr "Включить или выключить выбранный композит менеджер."
 
 msgid "Cancel"
 msgstr "Отменить"
 
 msgid "Cancel / Quit Composite Configurator."
-msgstr "Отменить / Выйти из Композит конфигуратора"
+msgstr "Отменить / Выйти из Композит конфигуратора."
 
 msgid "You have unsaved changes! Continue anyway?"
 msgstr "Присутствуют не сохранённые изменения! Продолжить?"
@@ -229,6 +228,7 @@ msgstr "Внимание"
 msgid ""
 "No composite manager is installed.\nFor full functionality Xcompmgr "
 "or Compton must installed at least."
-msgstr "Не найдены инсталлированные композит менеджеры.\nДля плохой функциональности Xcompmgr"
+msgstr ""
+"Не найдены инсталлированные композит менеджеры.\nДля плохой функциональности Xcompmgr"
 "иле Compton необходим хотя бы один."
 

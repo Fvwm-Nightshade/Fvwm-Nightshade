@@ -45,7 +45,7 @@ msgid ""
 "XcompMgr is the standard composition manager for the X Composite extension. "
 "It implements shadows, fading, proper translucency, and more."
 msgstr ""
-"XcompMgr ist der standard Composition Manager für die X Composite Erweiterung. "
+"XcompMgr ist der Standard Composition Manager für die X Composite Erweiterung. "
 "Sie beinhaltet Schatten, ein-/ausblenden, ordentliche Durchlässigkeit und mehr."
 
 msgid "Compton"
@@ -157,7 +157,7 @@ msgid "Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0
 msgstr "Ändern der Deckkraft in Schritten während des ausblendens. (0.01 - 1.0, Vorgabe ist 0.03)."
 
 msgid "Fade Step Time:"
-msgstr "Blendschrittzeit"
+msgstr "Blendschrittzeit:"
 
 msgid "The time between steps in fade step, in milliseconds. (> 0, defaults to 10)."
 msgstr "Die Zeit zwischen den Ein-/Ausblendschritten in Millisekunden. (> 0, Default is 10)."
@@ -199,7 +199,7 @@ msgid "Help"
 msgstr "Hilfe"
 
 msgid "Get help."
-msgstr "Hilfe bekommen"
+msgstr "Hilfe bekommen."
 
 msgid "Start"
 msgstr "Starten"
@@ -207,7 +207,7 @@ msgstr "Starten"
 msgid "Stop"
 msgstr "Stoppen"
 
-msgid "Start or stop the coosen composite manager."
+msgid "Start or stop the choosen composite manager."
 msgstr "Starten oder stoppen des verwendeten Composite Managers."
 
 msgid "Cancel"

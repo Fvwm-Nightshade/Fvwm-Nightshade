@@ -1,14 +1,15 @@
 # Spanish translation for FNS-WindowsBehaviour
-# Copyright (C) 2014 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
-# Adonai Martin <adonai.martin@gmail.com>, 2014.
+# Adonai Martin <adonai.martin@gmail.com>, 2015.
+# Reviewed by: Jesús J. Guerrero Botella <jesus.guerrero.botella@gmail.com>, 2015.
 #
 msgid ""
 msgstr ""
 
 "Project-Id-Version: FNS-WindowsBehaviour\n"
 "POT-Creation-Date: 2014-11-16 00:01+0200\n"
-"PO-Revision-Date: 2014-12-29 01:28+0200\n"
+"PO-Revision-Date: 2015-02-14 11:29+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
@@ -26,69 +27,70 @@ msgstr "Funcionamiento de FNS Windows"
 # Focus Policies
 ########################################################################
 msgid " Focus Policies "
-msgstr "Políticas de enfoque"
+msgstr " Políticas de enfoque "
 
 msgid "Click to Focus"
-msgstr "Clicar para enfoque"
+msgstr "Clic para enfocar"
 
 msgid "Give the focus to a window when it is clicked in."
-msgstr "Dar enfoque a una ventana cuando esta está clicada"
+msgstr "Enfocar ventana al hacer clic."
 
 msgid "Focus follows Mouse"
 msgstr "Enfoque sigue al ratón"
 
 msgid "Give a window the focus as the pointer enters the window, and take it away when leaving."
-msgstr "Dar enfoque a una ventana como el puntero entra en la ventana, y quitarlo cuando se abandona"
+msgstr "Enfocar ventana cuando el puntero entra en la ventana, desenfocar cuando se abandona."
 
 msgid "Sloopy Focus"
-msgstr "Enfoque borroso"
+msgstr "Enfoque Relajado"
 
 msgid ""
 "Give a window the focus as the pointer enters the window, but doesn't give "
 "up the focus if the pointer leaves the window to pass over the root window."
 msgstr ""
-"Dar el enfoque a una ventana así como el puntero entra en la ventana, pero no abandonar "
-"el enfoque si el puntero deja la ventana para pasar sobre la ventana prinicpal."
+"Enfocar ventana cuando el puntero entra en la ventana, pero no desenfocar "
+"si el puntero deja la ventana para pasar sobre el fondo del escritorio."
 
 ########################################################################
 # Raise Options
 ########################################################################
 msgid " Raise Options "
-msgstr " Opciones de Crecimiento "
+msgstr " Opciones de Levantamiento "
 
 msgid "Raise if focused"
-msgstr "Crecimiento si enfocado"
+msgstr "Levantar al enfocar"
 
 msgid "Controls if the window is raised when focused (depending on the focus model)."
-msgstr "Controlar si la ventana crece cuando está enfocada (dependiendo del modelo de enfoque)"
+msgstr "Controlar si la ventana se levanta cuando está enfocada (dependiendo del modelo de enfoque)."
 
 msgid "Stack Transient Parent"
-msgstr "Stack Transient Parent"
+msgstr "Apilar Padre de ventana transitoria"
 
 msgid ""
 "This style transfers the raise action to the main window makes raise on a "
 "transient act just like raise on its main - the whole group is raised."
 msgstr ""
-"Este estilo transfiere el aumento a la ventana principal creciento transitoriamente "
-"al igual que el aumento en su ventana pricipal - todo el grupo es aumentado."
+"Transfiere la acción de levantar también a la ventana padre de la transitoria "
+"de forma que todo el grupo es levantado al mismo tiempo."
 
 msgid "No Raise Click on Motion"
-msgstr "Ningún Aumento al Clickear en Movimiento"
+msgstr "No levantar al hacer clic en movimiento"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with "
 "the button held down does not count as the click to raise the window. Instead, "
 "the application processes these events normally. This is useful to select text "
 "in a terminal window with the mouse without raising the window. However, mouse "
-"bindings on the client window are not guaranteed to work anymore. The distance "
-"that the pointer must be moved to trigger this is controlled by the MoveThreshold below."
+"bindings on the client window are not guaranteed to work anymore.\nThe distance "
+"that the pointer must be moved to trigger this is controlled by the MoveThreshold "
+"(in 'Miscellaneous')."
 msgstr ""
-"Si este estilo es usado, cliqueando en una ventana y luego arrastrando el puntero con "
-"el botón pulsado, entonces no cuenta como click para aumento de ventana. En lugar de ello, "
+"Si este estilo es usado, el clic para iniciar una operación de movimiento/arrastre con "
+"el botón pulsado no cuenta como click para levantar la ventana. En lugar de ello, "
 "la aplicación procesa estos eventos con normalidad. Ésto es útil para seleccionar texto "
-"en un terminal con el ratón sin aumentar la ventana. Sin embargo, el mouse-bindings "
-"en la ventana cliente no garantiza que vuelva a funcionar. La distancia que "
-"el puntero debe moverse para activarse debe ser controlada por el MoveThreshold de abajo."
+"en un terminal con el ratón sin levantar la ventana. Sin embargo los atajos de ratón en "
+"la ventana cliente podrían dejar de funcionar.\nLa distancia que el puntero debe moverse "
+"para activar esta característica se controla con MoveThreshold (en 'Miscelanea')."
 
 ########################################################################
 # Focus Options
@@ -97,18 +99,18 @@ msgid " Focus Options "
 msgstr " Opciones de Enfoque "
 
 msgid "Grab Focus"
-msgstr " Enfoque Apropiado"
+msgstr "Apropiamiento de Enfoque"
 
 msgid ""
 "New normal windows with the 'Grab Focus' style automatically receive the focus "
-"when they are created. GrabFocus is the default for windows with the ClickToFocus "
+"when they are created. 'Grab Focus' is the default for windows with the 'Click to Focus' "
 "style. Note that even if this style is disabled, the application may take the focus "
 "itself. Fvwm can not prevent this."
 msgstr ""
-"Las nuevas venatanas normales con el estilo de 'Enfoque Apropiado' automáticamente obtienen el enfoque "
-"cuando son creadas. GrabFocus es por defecto para ventanas con el estilo ClickToFocus. "
-"Notificar que incluso si este estilo estás deshabilitado, la aplicación debe tomar su propio enfoque. "
-"Fvwm no puede prevenir esto."
+"Las nuevas ventanas normales con el estilo de 'Enfoque Apropiado' automáticamente obtienen el enfoque "
+"cuando son creadas. GrabFocus se aplica de forma predeterminada para ventanas con el estilo ClickToFocus. "
+"Nótese que incluso si este estilo estás deshabilitado, la aplicación podría tomar enfoque por sí misma. "
+"Fvwm no puede evitar esto."
 
 msgid "Grab Focus Transient"
 msgstr "Enfoque Apropiado Transitorio"
@@ -119,11 +121,11 @@ msgid ""
 "disabled, the application may take the focus itself. Fvwm can not prevent this."
 msgstr ""
 "Las nuevas ventanas transitorias con el estilo de 'Enfoque Apropiado Transitorio' automáticamente "
-"obtienen el enfoque cuando son creadas. Notificar que incluso si este estilo es "
-"deshabilitado, la aplicación debe tomar su propio enfoque. Fvwm no puede prevenir esto."
+"obtienen el enfoque cuando son creadas. Nótese que incluso si este estilo está "
+"deshabilitado, la aplicación podría tomar enfoque por sí misma. Fvwm no puede evitar esto."
 
 msgid "No Focus Click on Motion"
-msgstr "Ningún Enfoque al Clicar en Movimiento"
+msgstr "Ningún Enfoque al hacer Clic en Movimiento"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with the "
@@ -133,18 +135,18 @@ msgid ""
 "on the client window are not guaranteed to work anymore. The distance that the pointer "
 "must be moved to trigger this is controlled by the MoveThreshold below."
 msgstr ""
-"Si este estilo es usado, cliqueando en una ventana y luego desplazando el puntero con el "
+"Si este estilo es usado, haciendo clic en una ventana y luego desplazando el puntero con el "
 "botón pulsado no cuenta como pulsar para enfocar la ventana. Por el contrario, la "
-"aplicación procesa estos eventos normalmente. Esto es útil para seleccionar texto en un"
-"terminal con el ratón sin enfocar la ventana. Sin embargo, el mouse-bindings "
-"en la ventana cliente no garantiza que vaya a funcionar más. La distancia que el puntero "
-"tiene que ser movida para activar esto es controlada por el MoveThreshold de abajo."
+"aplicación procesa estos eventos normalmente. Esto es útil para seleccionar texto en un "
+"terminal con el ratón sin enfocar la ventana. Sin embargo, los atajos de ratón "
+"en la ventana cliente podrían dejar de funcionar. La distancia que el puntero "
+"tiene que ser movida para activar esto es controlada por MoveThreshold, abajo."
 
 msgid "Focus by Program"
 msgstr "Enfoque por el Programa"
 
 msgid "Allows windows to take the focus themselves."
-msgstr "Permite que las ventanas tomen el enfoque ellas mismas"
+msgstr "Permite que las ventanas tomen el enfoque ellas mismas."
 
 ########################################################################
 # Window Placement
@@ -160,24 +162,12 @@ msgid ""
 "other windows on the screen. If no such position can be found Cascade Placement is "
 "used as a fall-back method."
 msgstr ""
-"Coloca las nuevas ventanas en una localización inteligente - una localización en la cual ellas no se solapan sobre cualquier "
-"cualquier otra venanta en la pantalla. Si esta posición no puede ser encontrada, la Colocación Cascada es "
-"usada como una método de retroceso."
+"Coloca las nuevas ventanas en una localización inteligente, en la cual no se solapen con "
+"cualquier otra ventana. Si esta posición no puede ser encontrada, la Colocación Cascada es "
+"usada como una método alternativo."
 
 msgid "Manual Placement"
 msgstr "Colocación Manual"
-
-msgid "This is the same as Tile Cascade Placement, but uses Manual Placement as the fall-back method."
-msgstr "Esto es lo mismo que la Colocación Cascada de Baldosas, pero usa la Colocación Manual como el método de retroceso"
-
-msgid "Cascade Placement"
-msgstr "Colocación Cascada"
-
-msgid "Place new windows in a cascading fashion."
-msgstr "Colocar nuevas ventanas en una moda de cascada"
-
-msgid "Tile Manual Placement"
-msgstr "Colocación Manual de Baldosas"
 
 msgid ""
 "The user is required to place every new window manually. The window only shows as a rubber "
@@ -185,10 +175,22 @@ msgid ""
 "key except Escape is pressed. Escape aborts manual placement which places the window in the "
 "top left corner of the screen."
 msgstr ""
-"Se requiere al usuario para colocar cada nueva ventana manualmente. La ventana solo se muestra como una banda "
-"hasta que un lugar sea seleccionado manualmente. La ventana es colocada cuando un botón de ratón o cualquier otra "
-"tecla excepto Escape es pulsada. Escape aborta la colocación manual, la cual ubica la ventana en la "
-"esquina superior izquierda de la pantalla."
+"Elusuario colocará cada nueva ventana manualmente. La ventana solo se muestra como una banda "
+"hasta que un lugar sea seleccionado manualmente. La ventana es colocada cuando un botón de ratón "
+"o cualquier otra tecla excepto Escape es pulsada. Escape aborta la colocación manual, la cual ubica "
+"la ventana en la esquina superior izquierda de la pantalla."
+
+msgid "Cascade Placement"
+msgstr "Colocación Cascada"
+
+msgid "Place new windows in a cascading fashion."
+msgstr "Colocar nuevas ventanas siguiendo un patrón de cascada."
+
+msgid "Tile Manual Placement"
+msgstr "Colocación Manual de Baldosas"
+
+msgid "This is the same as Tile Cascade Placement, but uses Manual Placement as the fall-back method."
+msgstr "Esto es lo mismo que la Colocación Cascada de Baldosas, pero usa la Colocación Manual como el método alternativo."
 
 msgid "Position Placement"
 msgstr "Colocación de Posición"
@@ -198,21 +200,21 @@ msgid ""
 "With 'Center', all new window appear at the center of the screen, and with 'UnderMouse', "
 "windows are centered under the mouse pointer where possible."
 msgstr ""
-"Cuando se usa con 'TopLeft', las nuevas ventanas son colocadas en la esquina superior izquierdade la pantalla. "
-"Con 'Center', todas las nuevas ventanas aparecerán en el centro de la pantalla, y con 'UnderMouse', "
-"las ventanas serán centradas bajo el puntero del ratón donde sea posible."
+"Cuando se usa con 'TopLeft', las nuevas ventanas son colocadas en la esquina superior izquierda "
+"de la pantalla. Con 'Center', todas las nuevas ventanas aparecerán en el centro de la pantalla, y "
+con 'UnderMouse', las ventanas serán centradas bajo el puntero del ratón donde sea posible."
 
 msgid "Window:"
 msgstr "Ventana:"
 
 msgid "Center"
-msgstr "Centro"
+msgstr "Center"
 
 msgid "TopLeft"
-msgstr "ArribaIzquierda"
+msgstr "TopLeft"
 
 msgid "UnderMouse"
-msgstr "DebajoRatón"
+msgstr "UnderMouse"
 
 msgid ""
 "With 'TopLeft', new windows are placed in the top left corner of the display. With 'Center', "
@@ -224,7 +226,7 @@ msgstr ""
 "bajo el puntero del ratón donde sea posible."
 
 msgid "Min Overlap Placement"
-msgstr "Colocación de Mín Solapamiento"
+msgstr "Colocación de Mínimo Solapamiento"
 
 msgid ""
 "Automatically places new windows in a location in which the overlapping area in pixels "
@@ -232,22 +234,26 @@ msgid ""
 "overlapping icons and windows on higher layers."
 msgstr ""
 "Coloca automáticamente las nuevas ventanas en una localización en la cual el área solapamiento en píxeles "
-"de otras ventanas está minimizada. Por defecto esta política de colocación intenta evitar "
-"iconos de solapamiento y ventanas en capas superiores."
+"de otras ventanas sea mínima. Por defecto esta política de colocación intenta evitar "
+"el solapamiento de iconos y ventanas en capas superiores."
 
 msgid "Penalties:"
 msgstr "Sanciones:"
 
 msgid ""
 "The Penalties takes at most 6 positive or null decimal arguments: 'normal' 'ontop' 'icon' 'sticky' "
-"'below' 'strut'. \n\nThe 'normal' factor affects normal windows, the 'ontop' factor affects windows "
-"with a greater layer than the window being placed, the 'icon' factor affects icons, the 'sticky' "
-"factor affects sticky windows, the 'below' factor affects windows with a smaller layer than the window "
-"being placed, the 'strut' factor affects the complement of the EWMH working area if the window being "
-"placed has the EWMHPlacementUseWorkingArea style and windows with an EWMH strut hint (i.e., a 'please "
-"do not cover me' hint) if the window being placed has the EWMHPlacementUseDynamicWorkingArea style. "
-"These 'factors' represent the amount of area that these types of windows (or area) are counted as, when "
-"a new window is placed. For example, by default the area of ontop windows is counted 5 times as much as normal windows."
+"'below' 'strut'. The defaults are 1 5 10 1 0.05 50.\n\nThe 'normal' factor affects normal windows, "
+"the 'ontop' factor affects windows with a greater layer than the window being placed, the 'icon' "
+"factor affects icons, the 'sticky' factor affects sticky windows, the 'below' factor affects windows "
+"with a smaller layer than the window being placed, the 'strut' factor affects the complement of the "
+"EWMH working area if the window being placed has the EWMHPlacementUseWorkingArea style and windows "
+"with an EWMH strut hint (i.e., a 'please do not cover me' hint) if the window being placed has the "
+"EWMHPlacementUseDynamicWorkingArea style. These 'factors' represent the amount of area that these "
+"types of windows (or area) are counted as, when a new window is placed. For example, by default the "
+"area of ontop windows is counted 5 times as much as normal windows. So it covers 5 times as much area of "
+"another window before it will cover an ontop window. To treat ontop windows the same as other windows, "
+"set this to 1. To really, really avoid putting windows under ontop windows, set this to a high value, say "
+"1000.\nThis style affects the window already mapped and not the window which is currently placed."
 msgstr ""
 "Las sanciones toman como máximo 6 argumentos positivos o un valor decimal nulo: 'normal' 'ontop' 'icon' 'sticky' "
 "'below' 'strut'. \n\nEl factor 'normal' afecta a ventanas normales, el factor 'ontop' afecta a ventanas "
@@ -259,8 +265,20 @@ msgstr ""
 "Estos 'factors' representan la cantidad de área estos tipos de ventana (o área) son conotados, cuando "
 "una nueva ventana es colocada. Por ejemplo, por defecto el área superior de las ventanas está contada 5 veces más que las ventanas normales."
 
+msgid "normal"
+msgstr "normal"
+
+msgid "ontop"
+msgstr "ontop"
+
+msgid "icon"
+msgstr "icon"
+
+msgid "sticky"
+msgstr "sticky"
+
 msgid "Min Overlap Percent Placement"
-msgstr "Colocación de Mín Porcentaje de Solapamiento"
+msgstr "Colocación de Mínimo Porcentaje de Solapamiento"
 
 msgid ""
 "Tries to minimize the overlapped percentages of other windows instead of the overlapped area in pixels. "
@@ -289,7 +307,7 @@ msgid "Hide Geometry Window"
 msgstr "Ocultar ventana de geometría"
 
 msgid "Hides the position or size window that is usually shown when a window is moved or resized interactively."
-msgstr "Ocultar la posición o el tamaño que es normalmente mostrado cuando una ventana es movida o redimensionada iterativamente "
+msgstr "Ocultar la posición o el tamaño que es normalmente mostrado cuando una ventana es movida o redimensionada iterativamente."
 
 msgid "Resize Opaque"
 msgstr "Redimensionar Opaca"
@@ -301,14 +319,14 @@ msgid ""
 "of graphics the application redraws. Some applications do not like their windows being "
 "resized opaque, e.g. XEmacs or terminals with a pixmap background."
 msgstr ""
-"Manda fvwm a redimensionar la correspondiente ventana con sus contenidos visibles "
-"en lugar de usar un contorno. Desde entonces, motiva a la aplicación a redibujar frecuentemente "
-"lo puede ser bastante lento y hace que la ventana parpadee excesivamente, dependiendo del número "
-"de gráficos que la aplicación redibuja. Algunas aplicaciones no les gusta que se redimensione "
+"Instruye a fvwm para redimensionar las ventanas correspondientes con sus contenidos visibles "
+"en lugar de usar un contorno. Ya que esto lleva a la aplicación a redibujar frecuentemente "
+"puede provocar lentitud y hacer que la ventana parpadee excesivamente, dependiendo del número "
+"de gráficos que la aplicación necesite dibujar. A algunas aplicaciones no les gusta que se redimensione "
 "sus ventanas opacas, por ejemplo XEmacs o terminales con un fondeo de mapa de píxeles."
 
 msgid "Move Threshold:"
-msgstr "Mover umbral:"
+msgstr "Umbral para mover:"
 
 msgid ""
 "When the user presses a mouse button upon an object fvwm waits to see if the action "
@@ -320,7 +338,7 @@ msgstr ""
 "asume un arrastre (el valor por defecto debería ser incrementado cuando 16000x9000 pixel se muestran y se convierte en alcanzable)."
 
 msgid "Opaque Move Size:"
-msgstr "Tamaño de movimiento opaco"
+msgstr "Tamaño de movimiento opaco:"
 
 msgid ""
 "Tells fvwm the maximum size window with which opaque window movement should be used. "
@@ -341,26 +359,26 @@ msgstr ""
 msgid "Save"
 msgstr "Guardar"
 
-msgid "Save new settings"
-msgstr "Guardar nuevos ajustes"
+msgid "Save new settings."
+msgstr "Guardar nuevos ajustes."
 
 msgid "Help"
 msgstr "Ayuda"
 
-msgid "Get help"
-msgstr "Obtenga ayuda"
+msgid "Get help."
+msgstr "Obtenga ayuda."
 
 msgid "Apply"
 msgstr "Aplicar"
 
-msgid "Apply new settings"
-msgstr "Aplicar nuevos ajustes"
+msgid "Apply new settings."
+msgstr "Aplicar nuevos ajustes."
 
 msgid "Cancel"
 msgstr "Cancelar"
 
 msgid "Cancel/Quit windows behaviour settings."
-msgstr "Cancelar/Cerrar ventana ajustes de funcionamiento"
+msgstr "Cancelar/Cerrar ventana ajustes de funcionamiento."
 
 msgid "You have unsaved changes! Continue anyway?"
 msgstr "¡Tiene cambios sin guardar! ¿Continuar de todas formas?"

@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fns-cpu-performance\n"
 "POT-Creation-Date: 2014-12-08 23:37+0200\n"
-"PO-Revision-Date: 2015-01-26 13:40+0200\n"
+"PO-Revision-Date: 2015-02-14 11:47+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -70,14 +70,14 @@ msgstr "Déverrouilléz les cores"
 msgid "Unlock cores to set governor and frequencies separately."
 msgstr "Déverrouilléz les cores pour modifier le governor et la fréquence séparemment."
 
-msgid "All cores will set to common values! Continue anyway?"
+msgid "All cores will be set to common values! Continue anyway?"
 msgstr "Tous les cores seront mis à leur valeurs initiale! Souhaitez-vous continuer?"
 
 msgid "Governor:"
 msgstr "Governor:"
 
 msgid "Sets the global used governor (if cores not unlocked). "
-msgstr "Activez le gouvernor global utilisé (si les cores sont déverroullés)."
+msgstr "Activez le gouvernor global utilisé (si les cores sont déverroullés). "
 
 msgid ""
 "The following governors are available:\n\n"
@@ -129,7 +129,7 @@ msgstr ""
 "en combinaison avec 'Fréquence Max'."
 
 msgid "Min Frequency:"
-msgstr "Fréquence min"
+msgstr "Fréquence min:"
 
 msgid "Sets the minimum used frequency from the range of available frequencies."
 msgstr "Appliquez la fréquence minimale utilisée de léchelle de fréquence disponible."
@@ -145,7 +145,7 @@ msgstr "Appliquez la fréquence maximale utilisée de léchelle de fréquence di
 ########################################################################
 
 msgid "Core "
-msgstr " Core "
+msgstr "Core "
 
 msgid "This is the tab for modifying core "
 msgstr "Cet onglet pour modifier les cores "
@@ -170,7 +170,7 @@ msgid "Add to Autostart"
 msgstr "Ajoutez Autostart"
 
 msgid "Add custom settings to autostart for permanency."
-msgstr "Ajoutez de facon permanente les paramêtrez de customisation pour autostart"
+msgstr "Ajoutez de facon permanente les paramêtrez de customisation pour autostart."
 
 msgid "Apply"
 msgstr "Appliquer"

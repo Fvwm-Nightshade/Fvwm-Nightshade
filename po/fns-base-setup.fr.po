@@ -1,5 +1,5 @@
 # French translation for FNS-BaseSetup
-# Copyright (C) 2014 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
 # Maxime Lordier <maxime.lordier@gmail.com>, 2014.
 #
@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-BaseSetup\n"
 "POT-Creation-Date: 2014-10-10 21:54+0200\n"
-"PO-Revision-Date: 2014-12-11 11:14+0200\n"
+"PO-Revision-Date: 2015-02-14 11:41+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -35,23 +35,23 @@ msgstr "Activer le splash"
 msgid "Run Banner at startup? Default: on"
 msgstr "Afficher Banner au démarage? Defaut: on"
 
-msgid "Path to splash image"
-msgstr "Chemin pour l'image splash"
+msgid "Path to splash image."
+msgstr "Chemin pour l'image splash."
 
-msgid "Set path to splash image"
-msgstr "répertoire le chemn pour l'image splash"
+msgid "Set path to splash image."
+msgstr "Répertoire le chemn pour l'image splash."
 
 msgid "Composite Manager On"
 msgstr "Composite Manager On"
 
-msgid "Use composite manager? Default: off"
-msgstr "Utilisez le manager composite? Default: off"
+msgid "Use composite manager? Default: off."
+msgstr "Utilisez le manager composite? Default: off."
 
 msgid "Configure"
 msgstr "Utilisez"
 
-msgid "Open composite settings"
-msgstr "ouvrir les paramétres coöposite"
+msgid "Open composite settings."
+msgstr "ouvrir les paramétres coöposite."
 
 ########################################################################
 # Desktop
@@ -63,26 +63,26 @@ msgstr " Bureau "
 msgid "Wallpaper Dirs:"
 msgstr "Papier peint dirs:"
 
-msgid "Wallpaper directories, separated by ':'"
-msgstr "répertoire papier pient, séparé par ':'"
+msgid "Wallpaper directories, separated by ':'."
+msgstr "Répertoire papier pient, séparé par ':'."
 
 msgid "Icons on Desktop"
 msgstr "Icones sur le bureau"
 
-msgid "Use Icons on desktop? Default: off"
-msgstr "Utilisez les icones du bureau? par defaut: off"
+msgid "Use Icons on desktop? Default: off."
+msgstr "Utilisez les icones du bureau? par defaut: off."
 
 msgid "Icon Size:"
 msgstr "Taille d'icône:"
 
-msgid "Change size of the desktop icons"
-msgstr "Changer la taille des icones sur le bureau"
+msgid "Change size of the desktop icons."
+msgstr "Changer la taille des icones sur le bureau."
 
 msgid "Desktop scrolling On"
 msgstr "Déroulement du bureau On"
 
-msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on"
-msgstr "Activation du scrolling quand le curseur est dand le coin en haut de la page? par defaut: on"
+msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on."
+msgstr "Activation du scrolling quand le curseur est dand le coin en haut de la page? par defaut: on."
 
 msgid "Desktops:"
 msgstr ""
@@ -103,20 +103,20 @@ msgstr " Decorations & Panels "
 msgid "Used Layout:"
 msgstr "Mise en page:"
 
-msgid "The actual FNS layout"
-msgstr "Actuelle mise en page FNS"
+msgid "The actual FNS layout."
+msgstr "Actuelle mise en page FNS."
 
 msgid "Used Theme:"
 msgstr "Thème utilisé:"
 
-msgid "The actual FNS decor theme"
-msgstr "Actuel thème FNS"
+msgid "The actual FNS decor theme."
+msgstr "Actuel thème FNS."
 
 msgid "Used Font:"
 msgstr "Police utilisé:"
 
-msgid "Used default font in FNS"
-msgstr "La police utilisée par défaut en FNS"
+msgid "Used default font in FNS."
+msgstr "La police utilisée par défaut en FNS."
 
 ########################################################################
 # Default Applications
@@ -128,38 +128,38 @@ msgstr " Applications par défaut "
 msgid "Browser:"
 msgstr "Navigateur:"
 
-msgid "Default browser in FNS"
-msgstr "Navigateur par défaut en FNS"
+msgid "Default browser in FNS."
+msgstr "Navigateur par défaut en FNS."
 
-msgid "Set path to browser"
-msgstr "indiquez chemin du navigateur"
+msgid "Set path to browser."
+msgstr "indiquez chemin du navigateur."
 
 msgid "Editor:"
 msgstr "Editeur:"
 
-msgid "Default editor in FNS"
-msgstr "Editeur par défaut en FNS"
+msgid "Default editor in FNS."
+msgstr "Editeur par défaut en FNS."
 
-msgid "Set path to editor"
-msgstr "indiquez chemin de l'éditeur"
+msgid "Set path to editor."
+msgstr "Indiquez chemin de l'éditeur."
 
 msgid "Terminal:"
 msgstr "Terminal:"
 
-msgid "Default terminal in FNS"
-msgstr "Terminal par défaut en FNS"
+msgid "Default terminal in FNS."
+msgstr "Terminal par défaut en FNS."
 
-msgid "Set path to terminal"
-msgstr "indiquez chemin du terminal"
+msgid "Set path to terminal."
+msgstr "Indiquez chemin du terminal."
 
 msgid "Transset:"
 msgstr "Transset:"
 
-msgid "Default transset in FNS"
-msgstr "Transset par défaut en FNS"
+msgid "Default transset in FNS."
+msgstr "Transset par défaut en FNS."
 
-msgid "Set path to transset"
-msgstr "indiquez chemin du transet"
+msgid "Set path to transset."
+msgstr "Indiquez chemin du transet."
 
 ########################################################################
 # Button Bar
@@ -168,20 +168,20 @@ msgstr "indiquez chemin du transet"
 msgid "Help"
 msgstr "Aide"
 
-msgid "Get help"
+msgid "Get help."
 msgstr "Obtenez de l'aide."
 
 msgid "Apply"
 msgstr "Appliquer"
 
-msgid "Apply and save new settings"
-msgstr "Appliquez et sauvegarer les nouveaux paramétres"
+msgid "Apply and save new settings."
+msgstr "Appliquez et sauvegarer les nouveaux paramétres."
 
 msgid "Cancel"
 msgstr "Annuler"
 
-msgid "Cancel / Quit Base Setup"
-msgstr "Annuler / Quitter installation de base"
+msgid "Cancel / Quit Base Setup."
+msgstr "Annuler / Quitter installation de base."
 
 msgid "You have unsaved changes! Continue anyway?"
 msgstr "Vous n'avez pas sauvegardé les changements! Souhaitez-vous continuer?"

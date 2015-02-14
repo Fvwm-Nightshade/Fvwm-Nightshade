@@ -1,5 +1,5 @@
 # French translation for FNS-CompConfigurator
-# Copyright (C) 2014 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
 # Maxime Lordier <maxime.lordier@gmail.com>, 2015.
 #
@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-CompConfigurator\n"
 "POT-Creation-Date: 2014-10-29 19:11+0200\n"
-"PO-Revision-Date: 2015-01-26 13:37+0200\n"
+"PO-Revision-Date: 2015-05-14 11:44+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -44,7 +44,8 @@ msgstr "XcompMgr"
 msgid ""
 "XcompMgr is the standard composition manager for the X Composite extension. "
 "It implements shadows, fading, proper translucency, and more."
-msgstr "XcompMgr is le composite manager standard pour les extension X composite. "
+msgstr ""
+""XcompMgr is le composite manager standard pour les extension X composite. "
 "Cela implemente ombres, , et plus."
 
 msgid "Compton"
@@ -55,8 +56,8 @@ msgid ""
 "fading and translucency, it implements window frame opacity control, inactive "
 "window transparency, and shadows on argb windows."
 msgstr ""
-"Compton est un compositeur basé sur xcompmgr. En plus des ombres"
-"fading et la translucidité, il met en oeuvre la fenêtre de contrôle cadre d'opacité, inactive"
+"Compton est un compositeur basé sur xcompmgr. En plus des ombres "
+"fading et la translucidité, il met en oeuvre la fenêtre de contrôle cadre d'opacité, inactive "
 "La transparence de la fenêtre, et les ombres sur les fenêtres argb."
 
 ########################################################################
@@ -72,9 +73,11 @@ msgstr "Activer Ombres"
 msgid ""
 "Enable client-side shadows on windows.\n"
 "Note:\nDesktop windows (with _NET_WM_WINDOW_TYPE_DESKTOP) never get shadow."
-msgstr "Activez ombre côté client sur la fenêtre"
+msgstr ""
+"Activez ombre côté client sur la fenêtre.\n"
+"???"
 
-msgid "On Dock / Panels"
+msgid "On Docks / Panels"
 msgstr "Sur le planneaux"
 
 msgid "Painting shadows on panels and docks."
@@ -87,13 +90,13 @@ msgid "Draw shadows on drag-and-drop windows."
 msgstr "Dessiner des ombres sur les fenêtres de glisser-déposer."
 
 msgid "Opacity:"
-msgstr "L'opacité des ombres. (De 0,0 à 1,0, par défaut à 0,75)."
+msgstr "Opacité:"
 
 msgid "The opacity of shadows. (0.0 - 1.0, defaults to 0.75)."
-msgstr ""
+msgstr "L'opacité des ombres. (De 0,0 à 1,0, par défaut à 0,75)."
 
 msgid "Blur Radius:"
-msgstr "Le rayon de flou"
+msgstr "Le rayon de flou:"
 
 msgid "The blur radius for shadows, in pixels. (defaults to 12)."
 msgstr "Le rayon de flou pour les ombres, en pixels. (par défaut à 12)."
@@ -133,7 +136,7 @@ msgid "On Opacity changed"
 msgstr "Sur Opacité changé"
 
 msgid "Enables fade effect when windows change their opacity."
-msgstr "Activer effet de fondu lorsque les fenêtres changent leur opacité"
+msgstr "Activer effet de fondu lorsque les fenêtres changent leur opacité."
 
 msgid "On Open / Close"
 msgstr "Sur Ouvrir / Fermer"
@@ -179,8 +182,8 @@ msgstr "Opacité par défaut pour les menus dropdown et popup. (0.0 - 1.0, par d
 msgid " Additional Parameters "
 msgstr " Paramétres additionnels "
 
-msgid "Enter here paramters which not accessible with the configurator"
-msgstr "Entrez ici les paramétres qui nesont pas accesible depuis le configuration"
+msgid "Enter here paramters which not accessible with the configurator."
+msgstr "Entrez ici les paramétres qui nesont pas accesible depuis le configuration."
 
 ########################################################################
 # Button bar
@@ -227,5 +230,5 @@ msgid ""
 "No composite manager is installed.\nFor full functionality Xcompmgr "
 "or Compton must installed at least."
 msgstr "aucun composite maanger installé.\nPour toute les fonctionalité de Xcompmgr "
-"ou Compton doit être au moins installé"
+"ou Compton doit être au moins installé."
 

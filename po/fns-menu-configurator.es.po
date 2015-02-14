@@ -1,5 +1,5 @@
 # Spanish translation for FNS-MenuConfigurator
-# Copyright (C) 2014 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
 # Adonai Martin <adonai.martin@gmail.com>, 2014.
 # Reviewed by: Jesús J. Guerrero Botella <jesus.guerrero.botella@gmail.com>, 2015.
@@ -9,7 +9,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-MenuConfigurator\n"
 "POT-Creation-Date: 2014-11-26 21:51+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-02-14 11:30+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
@@ -111,7 +111,7 @@ msgid ""
 "Overrides the standard locations for XDG menu definitions. The standard "
 "locations are /etc/xdg/menus and ~/.config/menus if available."
 msgstr ""
-"Sobreescribir la ubicación estándar para las definiciones de menú XDG. Los sitios"
+"Sobreescribir la ubicación estándar para las definiciones de menú XDG. Los sitios "
 "estándar son /etc/xdg/menus y ~/.config/menus si está disponible."
 
 msgid "Menu Type:"
@@ -166,7 +166,7 @@ msgstr ""
 "iconos: /usr/share/icons/Mint-X => 'Mint-X'."
 
 msgid "Change icon theme path."
-msgstr "Cambiar directorio de temas de icono"
+msgstr "Cambiar directorio de temas de icono."
 
 msgid "Directory Icon:"
 msgstr "Icono de carpeta:"
@@ -183,7 +183,7 @@ msgstr ""
 "icono puede ser definido aquí. ¡Sólo el nombre de un icono es necesario, no la ruta!"
 
 msgid "Change directoy icon path."
-msgstr "Cambiar aplicación de directorio de iconos"
+msgstr "Cambiar aplicación de directorio de iconos."
 
 msgid "Application Icon:"
 msgstr "Icono de Aplicación:"
@@ -199,7 +199,7 @@ msgstr ""
 "aquí. Sólo el nombre de un icono es necesario, ¡no la ruta!"
 
 msgid "Change application icon path."
-msgstr "Cambiar la ruta de iconos de aplicación"
+msgstr "Cambiar la ruta de iconos de aplicación."
 
 msgid "Icon Directory:"
 msgstr "Directorio de iconos:"
@@ -214,7 +214,7 @@ msgstr ""
 "especificado aquí. De otra manera ningún icono aparecerá en el menú para esa entrada."
 
 msgid "Change icon directory path."
-msgstr "Cambiar ruta de directorio de icono"
+msgstr "Cambiar ruta de directorio de icono."
 
 msgid "Use Titles"
 msgstr "Utilizar títulos"
@@ -245,7 +245,7 @@ msgid "Enter here the FULL path of the menu to store. Default path is $FVWM_USER
 msgstr "Escriba aquí la ruta COMPLETA en el menú para guardarla. Estándar es $FVWM_USERDIR/.menu."
 
 msgid "Change output path of the menu file."
-msgstr "Cambiar directorio de salida del menú de archivos"
+msgstr "Cambiar directorio de salida del menú de archivos."
 
 ########################################################################
 # Button bar
@@ -255,13 +255,13 @@ msgid "Generate"
 msgstr "Generar"
 
 msgid "Generate menu(s)."
-msgstr "Generar Menú(s)"
+msgstr "Generar Menú(s)."
 
 msgid "Help"
 msgstr "Ayuda"
 
-msgid "Get help"
-msgstr "Obtenga ayuda"
+msgid "Get help."
+msgstr "Obtenga ayuda."
 
 msgid "Save"
 msgstr "Guardar"
