@@ -1,5 +1,10 @@
 History:
 
+02/14/2015
+- update po templates and fix typos or wrong grammar
+- update po files to fit state of their templates and fix typos
+- add full name of Art to AUTHORS
+
 02/13/2015
 - fix wrong conversion from hex to float in FNS-CompConfigurator. Also
   rounding errors from float to hex and vice versa.
