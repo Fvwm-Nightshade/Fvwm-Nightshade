@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2015-02-14 23:11+0200\n"
+"PO-Revision-Date: 2015-02-15 00:39+0200\n"
 "Last-Translator: Thomas Funk <t.funk@web.de>\n"
 "Language-Team: German\n"
 "Language: \n"
@@ -729,9 +729,6 @@ msgstr "Fvwm Versions Info"
 
 msgid " Ok "
 msgstr " Ok "
-
-msgid "Fvwm Version Info"
-msgstr "Fvwm Versions Info"
 
 # config - Help info with SHIFT-CTRL-ALT in Root
 msgid "Mouse Bindings for Root area"
