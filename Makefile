@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.2.4
+# Version:      2.3.0
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      01/14/2015
+# Changed:      02/15/2015
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -27,6 +27,9 @@ absprefix	= $(abspath $(prefix))
 
 displaymanager ?= yes
 local		?= no
+
+po-file		?=
+po-lang		?=
 
 pkgprefix	= $(DESTDIR)$(absprefix)
 bindir 		= $(pkgprefix)/bin
@@ -636,6 +639,26 @@ gentoo-prepare: dist
 	echo "Create ebuild with current version in name"
 	cp gentoo/fvwm-nightshade.ebuild fvwm-nightshade-$(version).ebuild
 
+update-mo:
+	cd po; \
+	if test $(po-file); then \
+		what="$(po-file).*.po"; \
+		echo "Recompile .mo files with name $(po-file)"; \
+	elif test $(po-lang); then \
+		what="*.$(po-lang).po"; \
+		echo "Recompile .mo files with lang $(po-lang)"; \
+	else \
+		what="*.po"; \
+		echo "Recompile all .mo files"; \
+	fi; \
+	for file in `find . -name "$$what" -type f -printf "%f\n"`; do \
+		basename=$${file%%.*}; \
+		extensions=$${file#*.}; \
+		lang=$${extensions%%.*}; \
+		echo "  $$basename.$$lang.mo"; \
+		msgfmt $$file -o $$basename.$$lang.mo;\
+	done
+
 .PHONY: dist distcheck install uninstall uninstall-alternative deb rpm arch gentoo-prepare
-.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list uninstall-alternative dist-install gentoo-prepare
+.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list uninstall-alternative dist-install gentoo-prepare update-mo
 	
