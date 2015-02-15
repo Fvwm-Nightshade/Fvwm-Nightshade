@@ -1,5 +1,11 @@
 History:
 
+02/15/2015
+- add new rule 'update-mo' to Makefile to update all mo files or with
+  make update-mo po-file=<filename> <= all mo's named <filename>.*.mo
+  make update-mo po-lang=<language> <= all mo's named *.<language.mo
+- update all mo files
+
 02/14/2015
 - update po templates and fix typos or wrong grammar
 - update po files to fit state of their templates and fix typos
