@@ -9,7 +9,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-WindowsBehaviour\n"
 "POT-Creation-Date: 2014-11-16 00:01+0200\n"
-"PO-Revision-Date: 2015-02-15 00:39+0200\n"
+"PO-Revision-Date: 2015-02-15 21:44+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
@@ -21,7 +21,7 @@ msgstr ""
 # Titlebar
 ########################################################################
 msgid "FNS Windows Behaviour"
-msgstr "Funcionamiento de FNS Windows"
+msgstr "FNS Comportamiento de ventana"
 
 ########################################################################
 # Focus Policies
