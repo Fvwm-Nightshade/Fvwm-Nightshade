@@ -1,14 +1,14 @@
 # German translation for FNS-MenuConfigurator
-# Copyright (C) 2014 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
-# Thomas Funk <t.funk@web.de>, 2014.
+# Thomas Funk <t.funk@web.de>, 2015.
 #
 msgid ""
 msgstr ""
 
 "Project-Id-Version: FNS-MenuConfigurator\n"
 "POT-Creation-Date: 2014-11-26 21:51+0200\n"
-"PO-Revision-Date: 2014-11-26 23:20+0200\n"
+"PO-Revision-Date: 2015-02-15 23:33+0200\n"
 "Last-Translator: Thomas Funk <t.funk@web.de>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -231,11 +231,11 @@ msgstr "Aktivieren Sie diese Checkbox, um erstellte Menüs IN einem Menü einzub
 msgid ""
 "Enter in this field the name of the menu (its top title) where the generated "
 "menu(s) should insert. For more information see the USAGE section in the man "
-"page of fvwm-menu-desktop."
+"page of fns-menu-desktop."
 msgstr ""
 "Hier den Namen des Menüs (seinen Toptitel) eintragen, wo die erstellten Menüs "
 "eingebunden werden sollen. Für weitere Informationen siehe die USAGE Sektion von "
-"fvwm-menu-desktop."
+"fns-menu-desktop."
 
 msgid "Output Path:"
 msgstr "Ausgabepfad:"

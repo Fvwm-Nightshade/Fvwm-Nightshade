@@ -184,7 +184,7 @@ msgstr ""
 msgid ""
 "Enter in this field the name of the menu (its top title) where the generated "
 "menu(s) should insert. For more information see the USAGE section in the man "
-"page of fvwm-menu-desktop."
+"page of fns-menu-desktop."
 msgstr ""
 
 msgid "Output Path:"
