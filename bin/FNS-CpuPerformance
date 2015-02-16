@@ -7,7 +7,7 @@ use File::Copy qw(copy);
 
 #-------------------------------------------------------------------------
 # File:         fns-cpu-performance
-my $Version =   '2.0.4';
+my $Version =   '2.0.5';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure cpufreq or cpupower based on
@@ -16,7 +16,7 @@ my $Version =   '2.0.4';
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      11/29/2014
-# Changed:      01/04/2015
+# Changed:      02/16/2015
 #-------------------------------------------------------------------------
 
 
@@ -292,8 +292,8 @@ else {
         }
         elsif ($wanted eq "driver") {
             $cmd = "$scmd $info";
-            my @content = split('\n', `$cmd`);
-            return $content[1];
+            my $content = `$cmd`;
+            return $content;
         }
     }
 
