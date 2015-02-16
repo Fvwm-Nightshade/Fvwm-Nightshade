@@ -9,7 +9,7 @@ use Getopt::Long qw(:config no_ignore_case require_order pass_through);;
 
 #-----------------------------------------------------------------------
 # File:         FNS-CompConfigurator
-my $Version =   '2.0.4';
+my $Version =   '2.0.5';
 # Licence:      GPL 2
 #
 # Description:  Composite configurator Perl script for xcompmgr or compton
@@ -17,7 +17,7 @@ my $Version =   '2.0.4';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/11/2014
-# Changed:      02/15/2015
+# Changed:      02/16/2015
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -177,7 +177,7 @@ if ($xcompmgr ne "") { $compmgr = $xcompmgr;}
 # check if compton is installed
 if ($compton ne "") {$compmgr ne "none" ? $compmgr = $compton : $compmgr = "both";}
 # set $useCompositor to 0 if no composite manager is installed
-if ($compmgr eq "none") {$useCompositor = 0};
+if ($compmgr eq "none") {$useCompositor = 0;}
 
 # Check if a comp manager is running
 &CompOnTheRun();
