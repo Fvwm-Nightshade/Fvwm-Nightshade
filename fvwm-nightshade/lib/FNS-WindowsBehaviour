@@ -9,7 +9,7 @@ use File::Copy qw(copy);
 
 #-----------------------------------------------------------------------
 # File:         FNS-WindowsBehaviour
-my $Version =   '2.0.2';
+my $Version =   '2.0.4';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure some windows behaviour of FNS
@@ -17,7 +17,7 @@ my $Version =   '2.0.2';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/29/2014
-# Changed:      01/12/2015
+# Changed:      02/16/2015
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -63,8 +63,8 @@ use constant {
 # default config. Hash: Style/Cmd => Array: style_in_cfg|value, state, default_value)
 my %config = (
                 "FocusPolicy" => ['FocusFollowsMouse', DEFAULT, 'FocusFollowsMouse'],
-                "GrabFocus" => ['', DEFAULT, 0],
-                "GrabFocusTransient" => ['', DEFAULT, 0],
+                "FPGrabFocus" => ['', DEFAULT, 0],
+                "FPGrabFocusTransient" => ['', DEFAULT, 0],
                 "FPIgnoreFocusClickMotion" => [0, DEFAULT, 0],
                 "FPFocusByProgram" => [0, DEFAULT, 0],
                 "MouseFocusClickRaises" => [0, DEFAULT, 0],
@@ -198,16 +198,16 @@ sub parse_configs {
             }
             
             # check for Focus options ---------------------------------
-            # GrabFocusTransient = 1 GrabFocusTransientOff = 0
-            if ($line =~ /^\s*GrabFocusTransient/i) {
-                if ($line =~ /^\s*GrabFocusTransientOff$/i) {$value = 0;} else {$value = 1;}
-                &init_config_value('GrabFocusTransient', $value, $type);
+            # FPGrabFocusTransient = 1 !FPGrabFocusTransient = 0
+            if ($line =~ /^\s*FPGrabFocusTransient/i) {
+                if ($line =~ /^\s*!FPGrabFocusTransient$/i) {$value = 0;} else {$value = 1;}
+                &init_config_value('FPGrabFocusTransient', $value, $type);
                 next;
             }
-            # GrabFocus = 1, GrabFocusOff = 0
-            if ($line =~ /^\s*GrabFocus/i) {
-                if ($line =~ /^\s*GrabFocusOff$/i) {$value = 0;} else {$value = 1;}
-                &init_config_value('GrabFocus', $value, $type);
+            # FPGrabFocus = 1, !FPGrabFocus = 0
+            if ($line =~ /^\s*FPGrabFocus/i) {
+                if ($line =~ /^\s*!FPGrabFocus$/i) {$value = 0;} else {$value = 1;}
+                &init_config_value('FPGrabFocus', $value, $type);
                 next;
             }
             # FPIgnoreFocusClickMotion = 1, !FPIgnoreFocusClickMotion = 0
@@ -333,21 +333,21 @@ sub parse_configs {
         }
     }
     # some commands depends on each other, so we check this now
-    # GrabFocus and GrabFocusTransient are default set on ClickToFocus
-    unless ($config{GrabFocus}[0] =~ /\d/){
+    # FPGrabFocus and FPGrabFocusTransient are default set on ClickToFocus
+    unless ($config{FPGrabFocus}[0] =~ /\d/){
         if ($config{FocusPolicy}[0] eq "ClickToFocus") {$value = 1;} else {$value = 0;}
-        &set_config_value('GrabFocus', $value, 0);
+        &set_config_value('FPGrabFocus', $value, 0);
         if ($config{FocusPolicy}[1] == CONFIG) {
-            &set_config_value('GrabFocus', CONFIG, 1);
-            &set_config_value('GrabFocus', $config{GrabFocus}[0], 2);
+            &set_config_value('FPGrabFocus', CONFIG, 1);
+            &set_config_value('FPGrabFocus', $config{FPGrabFocus}[0], 2);
         }
     }
-    unless ($config{GrabFocusTransient}[0] =~ /\d/){
+    unless ($config{FPGrabFocusTransient}[0] =~ /\d/){
         if ($config{FocusPolicy}[0] eq "ClickToFocus") {$value = 1;} else {$value = 0;}
-        &set_config_value('GrabFocusTransient', $value, 0);
+        &set_config_value('FPGrabFocusTransient', $value, 0);
         if ($config{FocusPolicy}[1] == CONFIG) {
-            &set_config_value('GrabFocusTransient', CONFIG, 1);
-            &set_config_value('GrabFocusTransient', $config{GrabFocusTransient}[0], 2);
+            &set_config_value('FPGrabFocusTransient', CONFIG, 1);
+            &set_config_value('FPGrabFocusTransient', $config{FPGrabFocusTransient}[0], 2);
         }
     }
 }
@@ -403,12 +403,12 @@ sub unset_config_value_state($) {
         # unset if set
         $config{$key}[1] = 2 if $config{$key}[1] == 1;
     }
-    # set GrabFocus/GrabFocusTransient to default values if the default value differs from the current
-    if (get_config_value('GrabFocus', 1) == DEFAULT and (get_config_value('GrabFocus', 0) ne get_config_value('GrabFocus', 2))) {
-        &set_config_value('GrabFocus', get_config_value('GrabFocus', 0), 2);
+    # set FPGrabFocus/FPGrabFocusTransient to default values if the default value differs from the current
+    if (get_config_value('FPGrabFocus', 1) == DEFAULT and (get_config_value('FPGrabFocus', 0) ne get_config_value('FPGrabFocus', 2))) {
+        &set_config_value('FPGrabFocus', get_config_value('FPGrabFocus', 0), 2);
     }
-    if (get_config_value('GrabFocusTransient', 1) == DEFAULT and (get_config_value('GrabFocusTransient', 0) ne get_config_value('GrabFocusTransient', 2))) {
-        &set_config_value('GrabFocusTransient', get_config_value('GrabFocusTransient', 0), 2);
+    if (get_config_value('FPGrabFocusTransient', 1) == DEFAULT and (get_config_value('FPGrabFocusTransient', 0) ne get_config_value('FPGrabFocusTransient', 2))) {
+        &set_config_value('FPGrabFocusTransient', get_config_value('FPGrabFocusTransient', 0), 2);
     }
 }
 
@@ -443,7 +443,7 @@ sub init_config_value(@) {
 sub get_lol_4_cfg {
     my $do_apply = shift;
     my %order = (0 => ["FocusPolicy"], 
-                 1 => ["GrabFocus", "GrabFocusTransient", "FPIgnoreFocusClickMotion", "FPFocusByProgram"],
+                 1 => ["FPGrabFocus", "FPGrabFocusTransient", "FPIgnoreFocusClickMotion", "FPFocusByProgram"],
                  2 => ["MouseFocusClickRaises", "StackTransientParent", "FPIgnoreRaiseClickMotion"],
                  3 => ["WindowsPlacement", "WindowsPlacementParams"],
                  4 => ["HideGeometryWindow", "ResizeOpaque", "OpaqueMoveSize", "MoveThreshold"]);
@@ -534,12 +534,10 @@ sub build_config($) {
             print $out "#=======================================================================\n";
             print $out "# Focus Options\n";
             print $out "#=======================================================================\n";
-            foreach (@{$in_order{1}}) {
-                if ($_ eq 'GrabFocus' or $_ eq 'GrabFocusTransient') {
-                    if (get_config_value($_) == 1) {$entry = $_;} else {$entry = $_ . "Off";}
-                }
-                if ($_ eq 'FPIgnoreFocusClickMotion' or $_ eq 'FPFocusByProgram') {
-                    if (get_config_value($_) == 1) {$entry = $_;} else {$entry = "!" . $_;}
+            foreach my $opt (@{$in_order{1}}) {
+                if ($opt eq 'FPGrabFocus' or $opt eq 'FPGrabFocusTransient' or
+                    $opt eq 'FPIgnoreFocusClickMotion' or $opt eq 'FPFocusByProgram') {
+                        if (get_config_value($opt) == 1) {$entry = $opt;} else {$entry = "!" . $opt;}
                 }
                 print $out "Style * $entry\n";
             }
@@ -550,16 +548,16 @@ sub build_config($) {
             print $out "#=======================================================================\n";
             print $out "# Raise Options\n";
             print $out "#=======================================================================\n";
-            foreach (@{$in_order{2}}) {
-                if ($_ eq 'MouseFocusClickRaises') {
-                    if (get_config_value($_) == 1) {$entry = $_;} else {$entry = $_ . "Off";}
+            foreach my $opt (@{$in_order{2}}) {
+                if ($opt eq 'MouseFocusClickRaises') {
+                    if (get_config_value($opt) == 1) {$entry = $opt;} else {$entry = $opt . "Off";}
                 }
-                if ($_ eq 'FPIgnoreRaiseClickMotion') {
-                    if (get_config_value($_) == 1) {$entry = $_;} else {$entry = "!" . $_;}
+                if ($opt eq 'FPIgnoreRaiseClickMotion') {
+                    if (get_config_value($opt) == 1) {$entry = $opt;} else {$entry = "!" . $opt;}
                 }
                 else {
-                    print $out "Style * $_\n";
-                    if (get_config_value($_) == 1) {
+                    print $out "Style * $opt\n";
+                    if (get_config_value($opt) == 1) {
                         print $out "Style * RaiseTransient\n";
                         print $out "Style * LowerTransient\n";
                         print $out "Style * StackTransientParent\n";
@@ -605,16 +603,16 @@ sub build_config($) {
             print $out "#=======================================================================\n";
             print $out "# Miscellaneous\n";
             print $out "#=======================================================================\n";
-            foreach (@{$in_order{4}}) {
-                if ($_ eq "ResizeOpaque"){
-                    if (get_config_value($_) == 1) {$entry = "ResizeOpaque";} else {$entry = "ResizeOutline";}
+            foreach my $misc (@{$in_order{4}}) {
+                if ($misc eq "ResizeOpaque"){
+                    if (get_config_value($misc) == 1) {$entry = "ResizeOpaque";} else {$entry = "ResizeOutline";}
                     print $out "Style * " . $entry . "\n";
                 } else {
-                    if ($_ eq "HideGeometryWindow"){
+                    if ($misc eq "HideGeometryWindow"){
                         if (get_config_value($_) == 0) {$entry = "Never";} else {$entry = "";}
-                        print $out "$_ " . $entry . "\n";
+                        print $out "$misc " . $entry . "\n";
                     } else {
-                        print $out "$_ " . get_config_value($_) . "\n";
+                        print $out "$misc " . get_config_value($misc) . "\n";
                     }
                 }
             }
@@ -672,7 +670,7 @@ sub build_config($) {
 my $win = SimpleGtk2->new_window(  Name => 'mainWindow', 
                         Version => $Version,
                         Size    => [500, 510], 
-                        Title   => 'FNS Windows Behaviour');
+                        Title   => "FNS Windows Behaviour");
 $win->add_signal_handler('mainWindow', 'delete_event', \&check_before_quit);
 
 
@@ -682,7 +680,7 @@ $win->add_signal_handler('mainWindow', 'delete_event', \&check_before_quit);
 $win->add_frame( Name => 'PoliciesFrame', 
         Pos     => [10, 10], 
         Size    => [230, 85], 
-        Title   => ' Focus Policies ');
+        Title   => " Focus Policies ");
 
 
 # ClickToFocus ---------------------------------------------------------
@@ -729,18 +727,18 @@ sub check_policy_on {
                 $policy = $radio_button;
                 $policy =~ s/^radio//; 
                 &set_config_value("FocusPolicy", $policy);
-                # check if GrabFocus and GrabFocusTransient un/set by user
+                # check if FPGrabFocus and FPGrabFocusTransient un/set by user
                 my $value = 0;
                 if ($policy eq 'ClickToFocus') {
                     $value = 1;
                 }
-                unless (&get_config_value('GrabFocus', 1) == SET) {
-                    &init_config_value('GrabFocus', $value, DEFAULT);
+                unless (&get_config_value('FPGrabFocus', 1) == SET) {
+                    &init_config_value('FPGrabFocus', $value, DEFAULT);
                     $focus_policy_changed = 1;
                     $win->set_value('checkGrabFocus', 'Active' => $value);
                 }
-                unless (&get_config_value('GrabFocusTransient', 1) == SET) {
-                    &init_config_value('GrabFocusTransient', $value, DEFAULT);
+                unless (&get_config_value('FPGrabFocusTransient', 1) == SET) {
+                    &init_config_value('FPGrabFocusTransient', $value, DEFAULT);
                     $focus_policy_changed = 1,
                     $win->set_value('checkGrabFocusTransient', 'Active' => $value);
                 }
@@ -766,14 +764,14 @@ sub check_policy_on {
 $win->add_frame( Name => 'RaiseOptionsFrame', 
         Pos     => [250, 10], 
         Size    => [240, 85], 
-        Title   => ' Raise Options ');
+        Title   => " Raise Options ");
 
 
 # MouseFocusClickRaises ------------------------------------------------
 $win->add_check_button( Name => 'checkRaisesIfFocused', 
         Pos     => [10, 10], 
-        Title   => 'Raise if focused', 
-        Tip     => 'Controls if the window is raised when focused (depending on the focus model).', 
+        Title   => "Raise if focused", 
+        Tip     => "Controls if the window is raised when focused (depending on the focus model).", 
         Active  => &get_config_value("MouseFocusClickRaises"), 
         Frame   => 'RaiseOptionsFrame');
 $win->add_signal_handler('checkRaisesIfFocused', 'toggled', sub {&set_config_value("MouseFocusClickRaises", $win->is_active('checkRaisesIfFocused'));});
@@ -782,7 +780,7 @@ $win->add_signal_handler('checkRaisesIfFocused', 'toggled', sub {&set_config_val
 # StackTransientParent -------------------------------------------------
 $win->add_check_button( Name => 'checkStackTransientParent', 
         Pos     => [10, 30], 
-        Title   => 'Stack Transient Parent', 
+        Title   => "Stack Transient Parent", 
         Tip     => "This style transfers the raise action to the main window makes raise on a \
                     transient act just like raise on its main - the whole group is raised.", 
         Active  => &get_config_value("StackTransientParent"), 
@@ -793,13 +791,14 @@ $win->add_signal_handler('checkStackTransientParent', 'toggled', sub {&set_confi
 # FPIgnoreRaiseClickMotion ---------------------------------------------
 $win->add_check_button( Name => 'checkIgnoreRaiseClickMotion', 
         Pos     => [10, 50], 
-        Title   => 'No Raise Click on Motion', 
+        Title   => "No Raise Click on Motion", 
         Tip     => "If this style is used, clicking in a window and then dragging the pointer with \
                     the button held down does not count as the click to raise the window. Instead, \
                     the application processes these events normally. This is useful to select text \
                     in a terminal window with the mouse without raising the window. However, mouse \
                     bindings on the client window are not guaranteed to work anymore.\nThe distance \
-                    that the pointer must be moved to trigger this is controlled by the MoveThreshold (in 'Miscellaneous').", 
+                    that the pointer must be moved to trigger this is controlled by the MoveThreshold \
+                    (in 'Miscellaneous').", 
         Active  => &get_config_value("FPIgnoreRaiseClickMotion"), 
         Frame   => 'RaiseOptionsFrame');
 $win->add_signal_handler('checkIgnoreRaiseClickMotion', 'toggled', sub {&set_config_value("FPIgnoreRaiseClickMotion", $win->is_active('checkIgnoreRaiseClickMotion'));});
@@ -811,18 +810,18 @@ $win->add_signal_handler('checkIgnoreRaiseClickMotion', 'toggled', sub {&set_con
 $win->add_frame( Name => 'FocusOptionsFrame', 
         Pos     => [10, 105], 
         Size    => [480, 70], 
-        Title   => ' Focus Options ');
+        Title   => " Focus Options ");
 
 
 # GrabFocus ------------------------------------------------------------
 $win->add_check_button( Name => 'checkGrabFocus', 
         Pos     => [10, 10], 
-        Title   => 'Grab Focus', 
+        Title   => "Grab Focus", 
         Tip     => "New normal windows with the 'Grab Focus' style automatically receive the focus \
                     when they are created. 'Grab Focus' is the default for windows with the 'Click to Focus' \
                     style. Note that even if this style is disabled, the application may take the focus \
                     itself. Fvwm can not prevent this.", 
-        Active  => &get_config_value("GrabFocus"), 
+        Active  => &get_config_value("FPGrabFocus"), 
         Frame   => 'FocusOptionsFrame');
 $win->add_signal_handler('checkGrabFocus', 'toggled', \&check_grab_x_on);
 
@@ -830,11 +829,11 @@ $win->add_signal_handler('checkGrabFocus', 'toggled', \&check_grab_x_on);
 # GrabFocusTransient ---------------------------------------------------
 $win->add_check_button( Name => 'checkGrabFocusTransient', 
         Pos     => [10, 30], 
-        Title   => 'Grab Focus Transient', 
+        Title   => "Grab Focus Transient", 
         Tip     => "New transient windows with the 'Grab Focus Transient' style automatically receive \
                     the focus when they are created. Note that even if this style is disabled, the \
                     application may take the focus itself. Fvwm can not prevent this.", 
-        Active  => &get_config_value("GrabFocusTransient"), 
+        Active  => &get_config_value("FPGrabFocusTransient"), 
         Frame   => 'FocusOptionsFrame');
 $win->add_signal_handler('checkGrabFocusTransient', 'toggled', \&check_grab_x_on);
 
@@ -843,6 +842,7 @@ sub check_grab_x_on {
     my $object_name = $win->get_object($widget)->{name};
     my $grab_option = $object_name;
     $grab_option =~ s/^check//;
+    $grab_option = 'FP' . $grab_option;
     &set_config_value($grab_option, $win->is_active($object_name)) unless $focus_policy_changed;
     $focus_policy_changed = 0;
 }
@@ -851,7 +851,7 @@ sub check_grab_x_on {
 # FPIgnoreFocusClickMotion ---------------------------------------------
 $win->add_check_button( Name => 'checkIgnoreFocusClickMotion', 
         Pos     => [250, 10], 
-        Title   => 'No Focus Click on Motion', 
+        Title   => "No Focus Click on Motion", 
         Tip     => "If this style is used, clicking in a window and then dragging the pointer with the \
                     button held down does not count as the click to focus the window. Instead, the \
                     application processes these events normally. This is useful to select text in a \
@@ -866,8 +866,8 @@ $win->add_signal_handler('checkIgnoreFocusClickMotion', 'toggled', sub {&set_con
 # FPFocusByProgram -----------------------------------------------------
 $win->add_check_button( Name => 'checkFocusByProgram', 
         Pos     => [250, 30], 
-        Title   => 'Focus by Program', 
-        Tip     => 'Allows windows to take the focus themselves.', 
+        Title   => "Focus by Program", 
+        Tip     => "Allows windows to take the focus themselves.", 
         Active  => &get_config_value("FPFocusByProgram"), 
         Frame   => 'FocusOptionsFrame');
 $win->add_signal_handler('checkFocusByProgram', 'toggled', sub {&set_config_value("FPFocusByProgram", $win->is_active('checkFocusByProgram'));});
@@ -879,7 +879,7 @@ $win->add_signal_handler('checkFocusByProgram', 'toggled', sub {&set_config_valu
 $win->add_frame( Name => 'PlacementFrame', 
         Pos     => [10, 185], 
         Size    => [480, 175], 
-        Title   => ' Window Placement ');
+        Title   => " Window Placement ");
 
 
 # TileCascadePlacement -------------------------------------------------
@@ -945,7 +945,7 @@ $win->add_label( Name => 'labelWindow',
         Sens    => 0,
         Frame   => 'PlacementFrame');
 
-my @window_places = ('Center', 'TopLeft', 'UnderMouse');
+my @window_places = ("Center", "TopLeft", "UnderMouse");
 my $index = &get_config_value("WindowsPlacement") eq 'PositionPlacement' ? &get_index_of(&get_config_value("WindowsPlacementParams"), @window_places) : 1;
 $win->add_combo_box( Name => 'comboWindow', 
         Pos     => [340, 68], 
@@ -1107,7 +1107,7 @@ sub check_placement_on {
 $win->add_frame( Name => 'MiscFrame', 
         Pos     => [10, 370], 
         Size    => [480, 85], 
-        Title   => ' Miscellaneous ');
+        Title   => " Miscellaneous ");
 
 #$win->add_label( Name => 'labelClickTime', 
 #        Pos     => [15, 15], 
@@ -1118,8 +1118,8 @@ $win->add_frame( Name => 'MiscFrame',
 #$win->add_spin_button( Name => 'spinClickTime', 
 #        Pos     => [145, 10], 
 #        Start   => 150, Min => 50, Max => 1000, Step => 10, 
-#        Tip     => 'Specifies the maximum delay in milliseconds between a button press and a button \
-#                   release for the Function command to consider the action a mouse click. Default is 150 ms.', 
+#        Tip     => "Specifies the maximum delay in milliseconds between a button press and a button \
+#                   release for the Function command to consider the action a mouse click. Default is 150 ms.", 
 #        Align   => 'right', 
 #        Frame   => 'MiscFrame');
 
@@ -1127,8 +1127,9 @@ $win->add_frame( Name => 'MiscFrame',
 # HideGeometryWindow ---------------------------------------------------
 $win->add_check_button( Name => 'checkHideGeometryWindow', 
         Pos     => [10, 12], 
-        Title   => 'Hide Geometry Window', 
-        Tip     => "Hides the position or size window that is usually shown when a window is moved or resized interactively.", 
+        Title   => "Hide Geometry Window", 
+        Tip     => "Hides the position or size window that is usually shown when a window is moved or resized \
+                    interactively.", 
         Active  => &get_config_value("HideGeometryWindow"), 
         Frame   => 'MiscFrame');
 $win->add_signal_handler('checkHideGeometryWindow', 'toggled', sub {&set_config_value("HideGeometryWindow", $win->is_active('checkHideGeometryWindow'));});
@@ -1137,7 +1138,7 @@ $win->add_signal_handler('checkHideGeometryWindow', 'toggled', sub {&set_config_
 # ResizeOpaque ---------------------------------------------------------
 $win->add_check_button( Name => 'checkResizeOpaque', 
         Pos     => [10, 40], 
-        Title   => 'Resize Opaque', 
+        Title   => "Resize Opaque", 
         Tip     => "Instructs fvwm to resize the corresponding windows with their contents visible \
                     instead of using an outline. Since this causes the application to redraw frequently \
                     it can be quite slow and make the window flicker excessively, depending on the amount \
@@ -1196,7 +1197,7 @@ $win->add_button( Name => 'saveButton',
         Size    => [80, 25], 
         Title   => "Save",
         Sens    => $values_changed,
-        Tip     => 'Save new settings');
+        Tip     => "Save new settings.");
 $win->add_signal_handler('saveButton', 'clicked', \&save);
 
 sub set_save_button_active($) {
@@ -1222,7 +1223,7 @@ $win->add_button( Name => 'helpButton',
         Pos     => [155, 470], 
         Size    => [80, 25], 
         Title   => "Help", 
-        Tip     => 'Get help');
+        Tip     => "Get help.");
 $win->add_signal_handler('helpButton', 'clicked', sub {system("xterm -g 100x50 -n \"Help FNS-WindowsBehaviour\" -T \"Help FNS-WindowsBehaviour\" -e \"man FNS-WindowsBehaviour\" &");});
 
 
@@ -1233,7 +1234,7 @@ $win->add_button( Name => 'applyButton',
         Size    => [80, 25], 
         Title   => "Apply", 
         Sens    => $values_changed,
-        Tip     => 'Apply new settings');
+        Tip     => "Apply new settings.");
 $win->add_signal_handler('applyButton', 'clicked', \&apply);
 
 sub apply {
@@ -1261,7 +1262,7 @@ $win->add_button( Name => 'cancelButton',
         Pos     => [395, 470], 
         Size    => [90, 25], 
         Title   => "Cancel", 
-        Tip     => 'Cancel/Quit windows behaviour settings.');
+        Tip     => "Cancel/Quit windows behaviour settings.");
 $win->add_signal_handler('cancelButton', 'clicked', \&check_before_quit);
 
 sub check_before_quit {
@@ -1270,11 +1271,11 @@ sub check_before_quit {
         if ($config{$key}[1] == 1) {
             my $response;
             if ($not_saved) {
-                $response = $win->show_msg_dialog('warning', 'yes-no', "You have unsaved changes! Continue anyway?");
+                $response = $win->show_msg_dialog("warning", "yes-no", "You have unsaved changes! Continue anyway?");
             } else {
-                $response = $win->show_msg_dialog('warning', 'yes-no', "You have unapplied changes! Continue anyway?");
+                $response = $win->show_msg_dialog("warning", "yes-no", "You have unapplied changes! Continue anyway?");
             } 
-            if ($response eq 'yes') {
+            if ($response eq "yes") {
                 last;
             } else {
                 return;
