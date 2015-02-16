@@ -3,7 +3,7 @@ History:
 02/16/2015
 - update text parts in FNS-BaseSetup, FNS-CompConfigurator, FNS-MenuConfigurator
   and FNS-WindowsBehaviour to the changes in their pot files (missing dots, grammar)
-- add missing text parts in fns-cpu-performance to its pot file and update 
+- add missing text parts in FNS-CpuPerformance to its pot file and update 
   all po files
 - exchange wrong text part fvwm-menu-desktop with fns-menu-desktop in FNS-MenuConfigurator
   and update pot and all po files
@@ -12,6 +12,8 @@ History:
   in FNS-WindowsBehaviour because they're not used with e.g. ClickToFocus. Also 
   they're using FPReleaseFocus/FPReleaseFocusTransient which is not a wanted
   default behaviour.
+- fix wrong placed semicolon in FNS-CompConfigurator.
+- fix problem in FNS-CpuPerformance that if no cpufreq driver is installed no error dialog occurs
 
 02/15/2015
 - add new rule 'update-mo' to Makefile to update all mo files or with
