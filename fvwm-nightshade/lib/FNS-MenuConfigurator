@@ -12,7 +12,7 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuConfigurator
-my $Version =   '2.0.2';
+my $Version =   '2.0.4';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure fns-menu-desktop to create
@@ -21,7 +21,7 @@ my $Version =   '2.0.2';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      11/19/2014
-# Changed:      01/13/2015
+# Changed:      02/16/2015
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -278,7 +278,7 @@ if (scalar keys %all_menus != 0) {
     my $menu_check_y = 35;
     foreach my $key (sort( keys %all_menus)) {
 
-        my $multi_menu_title = $win->translate('Menus in') . ' ' . $key;
+        my $multi_menu_title = $win->translate("Menus in") . ' ' . $key;
         $win->add_label( Name => 'labelMenusIn' . $menu_dirs, 
                 Pos     => [$dir_label_x, $dir_label_y], 
                 Title   => $multi_menu_title, 
@@ -312,7 +312,7 @@ if (scalar keys %all_menus != 0) {
 } else {
     $win->add_label( Name => 'labelNoMenus1', 
             Pos     => [25, 10], 
-            Title   => "No menus found! Check why from within a terminal with\n' fvwm-menu-desktop -v '",
+            Title   => "No menus found! Check why from within a terminal with\n' fns-menu-desktop -v '",
             Justify => 'center',
             Frame   => 'NB_page1');
 
@@ -351,7 +351,7 @@ $win->add_nb_page(Name => "NB_page2",
 # Top title ------------------------------------------------------------
 $win->add_label( Name => 'labelTopTitle', 
         Pos     => [12, 20], 
-        Title   => 'Menu Top Title:', 
+        Title   => "Menu Top Title:", 
         Frame   => 'NB_page2');
 
 $win->add_entry( Name => 'entryTopTitle', 
@@ -367,7 +367,7 @@ $win->add_signal_handler('entryTopTitle', 'changed', sub {&set_config_value("Men
 # Desktop --------------------------------------------------------------
 $win->add_label( Name => 'labelDesktop', 
         Pos     => [12, 50], 
-        Title   => 'Desktop:', 
+        Title   => "Desktop:", 
         Frame   => 'NB_page2');
 
 $win->add_entry( Name => 'entryDesktop', 
@@ -384,7 +384,7 @@ $win->add_signal_handler('entryDesktop', 'changed', sub {&set_config_value("Desk
 # Install-Prefix -------------------------------------------------------
 $win->add_label( Name => 'labelIPrefix', 
         Pos     => [12, 80], 
-        Title   => 'Install-Prefix:', 
+        Title   => "Install-Prefix:", 
         Frame   => 'NB_page2');
 
 $win->add_entry( Name => 'entryIPrefix', 
@@ -400,7 +400,7 @@ $win->add_signal_handler('entryIPrefix', 'changed', sub {&set_config_value("Inst
 # Menu Type ------------------------------------------------------------
 $win->add_label( Name => 'labelMenuType', 
         Pos     => [12, 110], 
-        Title   => 'Menu Type:', 
+        Title   => "Menu Type:", 
         Frame   => 'NB_page2');
 
 $win->add_entry( Name => 'entryMenuType', 
@@ -467,7 +467,7 @@ sub check_icon_use_on {
 # Icon Size ------------------------------------------------------------
 $win->add_label( Name => 'labelIconSize', 
         Pos     => [173, 20], 
-        Title   => 'Icon Size:', 
+        Title   => "Icon Size:", 
         Sens    => &get_config_value("IconsOn"), 
         Frame   => 'OptionFrame');
 
@@ -485,7 +485,7 @@ $win->add_signal_handler('spinIconSize', 'value-changed', sub {&set_config_value
 # Icon Theme -----------------------------------------------------------
 $win->add_label( Name => 'labelIconTheme', 
         Pos     => [35, 50], 
-        Title   => 'Icon Theme:', 
+        Title   => "Icon Theme:", 
         Sens    => &get_config_value("IconsOn"), 
         Frame   => 'OptionFrame');
 
@@ -514,7 +514,7 @@ $win->add_signal_handler('changeIconTheme', 'clicked', \&change_path, [$win, 'en
 # Directory Icon -------------------------------------------------------
 $win->add_label( Name => 'labelDirIcon', 
         Pos     => [35, 80], 
-        Title   => 'Directory Icon:', 
+        Title   => "Directory Icon:", 
         Sens    => &get_config_value("IconsOn"), 
         Frame   => 'OptionFrame');
 
@@ -543,7 +543,7 @@ $win->add_signal_handler('changeDirIcon', 'clicked', \&change_path, [$win, 'entr
 # Application Icon -----------------------------------------------------
 $win->add_label( Name => 'labelAppIcon', 
         Pos     => [35, 110], 
-        Title   => 'Application Icon:', 
+        Title   => "Application Icon:", 
         Sens    => &get_config_value("IconsOn"), 
         Frame   => 'OptionFrame');
 
@@ -571,7 +571,7 @@ $win->add_signal_handler('changeAppIcon', 'clicked', \&change_path, [$win, 'entr
 # Icon Directory -------------------------------------------------------
 $win->add_label( Name => 'labelIconDir', 
         Pos     => [35, 140], 
-        Title   => 'Icon Directory:', 
+        Title   => "Icon Directory:", 
         Sens    => &get_config_value("IconsOn"), 
         Frame   => 'OptionFrame');
 
@@ -635,7 +635,7 @@ $win->add_entry( Name => 'entryInMenu',
         Title   => &get_config_value("InMenu"), 
         Tip     => "Enter in this field the name of the menu (its top title) where the generated \
                     menu(s) should insert. For more information see the USAGE section in the man \
-                    page of fvwm-menu-desktop.", 
+                    page of fns-menu-desktop.", 
         Sens    => &get_config_value("InsertOn"), 
         Frame   => 'OptionFrame');
 $win->add_signal_handler('entryInMenu', 'changed', sub {&set_config_value("InMenu", $win->get_title('entryInMenu')); return 0;});
@@ -644,7 +644,7 @@ $win->add_signal_handler('entryInMenu', 'changed', sub {&set_config_value("InMen
 # Output Path ----------------------------------------------------------
 $win->add_label( Name => 'labelOutPath', 
         Pos     => [12, 210], 
-        Title   => 'Output Path:', 
+        Title   => "Output Path:", 
         Sens    => 1, 
         Frame   => 'OptionFrame');
 
@@ -900,7 +900,7 @@ $win->add_signal_handler('cancelButton', 'clicked', \&check_before_quit);
 # check before quit for unsaved changes
 sub check_before_quit {
     if ($values_changed == SET) {
-        my $response = $win->show_msg_dialog('warning', 'yes-no', "You have unsaved changes! Continue anyway?");
+        my $response = $win->show_msg_dialog("warning", "yes-no", "You have unsaved changes! Continue anyway?");
         if ($response eq 'no') {
             return;
         }

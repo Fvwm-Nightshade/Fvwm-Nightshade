@@ -9,7 +9,7 @@ use Getopt::Long qw(:config no_ignore_case require_order pass_through);;
 
 #-----------------------------------------------------------------------
 # File:         FNS-CompConfigurator
-my $Version =   '2.0.3';
+my $Version =   '2.0.4';
 # Licence:      GPL 2
 #
 # Description:  Composite configurator Perl script for xcompmgr or compton
@@ -17,7 +17,7 @@ my $Version =   '2.0.3';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/11/2014
-# Changed:      02/13/2015
+# Changed:      02/15/2015
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -193,7 +193,7 @@ if ($compmgr eq "none") {$useCompositor = 0};
 my $win = SimpleGtk2->new_window(  Name => 'mainWindow', 
                         Version => $Version,
                         Size => [470, 440], 
-                        Title => 'FNS Composite Configurator');
+                        Title => "FNS Composite Configurator");
 $win->add_signal_handler('mainWindow', 'delete_event', \&check_before_quit);
 
 
@@ -203,7 +203,7 @@ $win->add_signal_handler('mainWindow', 'delete_event', \&check_before_quit);
 $win->add_frame( Name => 'CompFrame', 
         Pos     => [10, 10], 
         Size    => [450, 50], 
-        Title   => ' Composite Manager ');
+        Title   => " Composite Manager ");
 
 
 # Use Comp -------------------------------------------------------------
@@ -250,7 +250,8 @@ $win->add_radio_button( Name => 'radioXcompmgr',
         Title   => "XcompMgr", 
         Group   => "CompGroup", 
         Sens    => $useCompositor, 
-        Tip     => "XcompMgr is the standard composition manager for the X Composite extension. It implements shadows, fading, proper translucency, and more.", 
+        Tip     => "XcompMgr is the standard composition manager for the X Composite extension. \
+                    It implements shadows, fading, proper translucency, and more.", 
         Frame   => 'CompFrame');
 $win->add_signal_handler('radioXcompmgr', 'toggled', sub {&check_comp_on();});
 
@@ -261,7 +262,9 @@ $win->add_radio_button( Name => 'radioCompton',
         Title   => "Compton", 
         Group   => "CompGroup", 
         Sens    => $useCompositor, 
-        Tip     => "Compton is a compositor based on xcompmgr. In addition to shadows, fading and translucency, it implements window frame opacity control, inactive window transparency, and shadows on argb windows.", 
+        Tip     => "Compton is a compositor based on xcompmgr. In addition to shadows, \
+                    fading and translucency, it implements window frame opacity control, inactive \
+                    window transparency, and shadows on argb windows.", 
         Frame   => 'CompFrame');
 
 sub check_comp_on {
@@ -282,15 +285,16 @@ sub check_comp_on {
 $win->add_frame( Name => 'ShadowsFrame', 
         Pos     => [10, 70], 
         Size    => [220, 250], 
-        Title   => ' Shadows ');
+        Title   => " Shadows ");
 
 
 # Enable Shadows -------------------------------------------------------
 $win->add_check_button( Name => 'checkShadowsOn', 
         Pos     => [10, 15], 
-        Title   => 'Enable Shadows', 
+        Title   => "Enable Shadows", 
         Active  => $enableShadows, 
-        Tip     => "Enable client-side shadows on windows.\nNote:\nDesktop windows (with _NET_WM_WINDOW_TYPE_DESKTOP) never get shadow.", 
+        Tip     => "Enable client-side shadows on windows.\nNote:\nDesktop windows \
+                    (with _NET_WM_WINDOW_TYPE_DESKTOP) never get shadow.", 
         Frame   => 'ShadowsFrame');
 $win->add_signal_handler('checkShadowsOn', 'clicked', sub {&check_shadows_on();});
 
@@ -321,7 +325,7 @@ sub check_shadows_on {
 # On Docks / Panels ----------------------------------------------------
 $win->add_check_button( Name => 'checkDocksOn', 
         Pos     => [10, 35], 
-        Title   => 'On Docks / Panels', 
+        Title   => "On Docks / Panels", 
         Active  => $noDockPanels, 
         Sens    => $enableShadows, 
         Tip     => "Painting shadows on panels and docks.", 
@@ -352,7 +356,7 @@ $win->add_entry( Name => 'entryOpacity',
         Size    => [60, 25], 
         Title   => $ShadowOpacity, 
         Sens    => $enableShadows, 
-        Tip     => 'The opacity of shadows. (0.0 - 1.0, defaults to 0.75).',
+        Tip     => "The opacity of shadows. (0.0 - 1.0, defaults to 0.75).",
         Align   => 'right',  
         Frame   => 'ShadowsFrame');
 $win->add_signal_handler('entryOpacity', 'changed', sub {$ShadowOpacity = $win->get_title('entryOpacity'); &config_changed(); return 0;});
@@ -370,7 +374,7 @@ $win->add_entry( Name => 'entryBlurRadius',
         Size    => [60, 25], 
         Title   => $BlurRadius, 
         Sens    => $enableShadows, 
-        Tip     => 'The blur radius for shadows, in pixels. (defaults to 12).',
+        Tip     => "The blur radius for shadows, in pixels. (defaults to 12).",
         Align   => 'right',  
         Frame   => 'ShadowsFrame');
 $win->add_signal_handler('entryBlurRadius', 'changed', sub {$BlurRadius = $win->get_title('entryBlurRadius'); &config_changed(); return 0;});
@@ -388,7 +392,7 @@ $win->add_entry( Name => 'entryLeftOffset',
         Size    => [60, 25], 
         Title   => $LeftOffset, 
         Sens    => $enableShadows, 
-        Tip     => 'The left offset for shadows, in pixels. (defaults to -15).',
+        Tip     => "The left offset for shadows, in pixels. (defaults to -15).",
         Align   => 'right',  
         Frame   => 'ShadowsFrame');
 $win->add_signal_handler('entryLeftOffset', 'changed', sub {$LeftOffset = $win->get_title('entryLeftOffset'); &config_changed(); return 0;});
@@ -406,7 +410,7 @@ $win->add_entry( Name => 'entryTopOffset',
         Size    => [60, 25], 
         Title   => $TopOffset, 
         Sens    => $enableShadows, 
-        Tip     => 'The top offset for shadows, in pixels. (defaults to -15).',
+        Tip     => "The top offset for shadows, in pixels. (defaults to -15).",
         Align   => 'right',  
         Frame   => 'ShadowsFrame');
 $win->add_signal_handler('entryTopOffset', 'changed', sub {$TopOffset = $win->get_title('entryTopOffset'); &config_changed(); return 0;});
@@ -424,7 +428,7 @@ $win->add_entry( Name => 'entryShadowColor',
         Size    => [60, 25], 
         Title   => $ShadowColor, 
         Sens    => $enableShadows, 
-        Tip     => 'RGB colors of shadows. (defaults to 000000).',
+        Tip     => "RGB colors of shadows. (defaults to 000000).",
         Align   => 'right',  
         Frame   => 'ShadowsFrame');
 $win->add_signal_handler('entryShadowColor', 'changed', sub {$ShadowColor = $win->get_title('entryShadowColor'); &config_changed(); return 0;});
@@ -436,13 +440,13 @@ $win->add_signal_handler('entryShadowColor', 'changed', sub {$ShadowColor = $win
 $win->add_frame( Name => 'FadingFrame', 
         Pos     => [240, 70], 
         Size    => [220, 190], 
-        Title   => ' Fading ');
+        Title   => " Fading ");
 
 
 # Enable Fading --------------------------------------------------------
 $win->add_check_button( Name => 'checkFadingOn', 
         Pos     => [10, 15], 
-        Title   => 'Enable Fading', 
+        Title   => "Enable Fading", 
         Active  => $enableFading,
         Tip     => "Enable in/out fading of windows.", 
         Frame   => 'FadingFrame');
@@ -466,7 +470,7 @@ sub check_fading_on {
 # On Opacity changed ---------------------------------------------------
 $win->add_check_button( Name => 'checkOpacityChanged', 
         Pos     => [10, 35], 
-        Title   => 'On Opacity changed', 
+        Title   => "On Opacity changed", 
         Active  => $onOpacityChanged,
         Sens    => $enableFading, 
         Tip     => "Enables fade effect when windows change their opacity.", 
@@ -497,7 +501,7 @@ $win->add_entry( Name => 'entryFadeInSteps',
         Size    => [60, 25], 
         Title   => $FadeInSteps, 
         Sens    => $enableFading, 
-        Tip     => 'Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028).',
+        Tip     => "Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028).",
         Align   => 'right',  
         Frame   => 'FadingFrame');
 $win->add_signal_handler('entryFadeInSteps', 'changed', sub {$FadeInSteps = $win->get_title('entryFadeInSteps'); &config_changed(); return 0;});
@@ -515,7 +519,7 @@ $win->add_entry( Name => 'entryFadeOutSteps',
         Size    => [60, 25], 
         Title   => $FadeOutSteps, 
         Sens    => $enableFading, 
-        Tip     => 'Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03).',
+        Tip     => "Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03).",
         Align   => 'right',  
         Frame   => 'FadingFrame');
 $win->add_signal_handler('entryFadeOutSteps', 'changed', sub {$FadeOutSteps = $win->get_title('entryFadeOutSteps'); &config_changed(); return 0;});
@@ -533,7 +537,7 @@ $win->add_entry( Name => 'entryFadeStepTime',
         Size    => [60, 25], 
         Title   => $FadeStepTime, 
         Sens    => $enableFading, 
-        Tip     => 'The time between steps in fade step, in milliseconds. (> 0, defaults to 10).',
+        Tip     => "The time between steps in fade step, in milliseconds. (> 0, defaults to 10).",
         Align   => 'right',  
         Frame   => 'FadingFrame');
 $win->add_signal_handler('entryFadeStepTime', 'changed', sub {$FadeStepTime = $win->get_title('entryFadeStepTime'); &config_changed(); return 0;});
@@ -546,7 +550,7 @@ $win->add_frame( Name => 'OpacityFrame',
         Pos     => [240, 270], 
         Size    => [220, 50], 
         Sens    => $xcompActive, 
-        Title   => ' Opacity ');
+        Title   => " Opacity ");
 
 # Opacity on Menus -----------------------------------------------------
 $win->add_label( Name => 'labelOpacityOnMenus', 
@@ -558,7 +562,7 @@ $win->add_entry( Name => 'entryOpacityOnMenus',
         Pos     => [145, 10], 
         Size    => [60, 25], 
         Title   => $OpacityOnMenus, 
-        Tip     => 'Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0).',
+        Tip     => "Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0).",
         Align   => 'right',  
         Frame   => 'OpacityFrame');
 $win->add_signal_handler('entryOpacityOnMenus', 'changed', sub {$OpacityOnMenus = $win->get_title('entryOpacityOnMenus'); &config_changed(); return 0;});
@@ -570,13 +574,13 @@ $win->add_signal_handler('entryOpacityOnMenus', 'changed', sub {$OpacityOnMenus 
 $win->add_frame( Name => 'AddParamFrame', 
         Pos     => [10, 330], 
         Size    => [450, 50], 
-        Title   => ' Additional Parameters ');
+        Title   => " Additional Parameters ");
 
 $win->add_entry( Name => 'entryAdditionalParams', 
         Pos     => [10, 10], 
         Size    => [425, 25], 
         Title   => $AdditionalParams, 
-        Tip     => 'Enter here paramters which not accessible with the configurator.',
+        Tip     => "Enter here paramters which are not accessible with the configurator.",
         Sens    => 1, 
         Frame   => 'AddParamFrame');
 $win->add_signal_handler('entryAdditionalParams', 'changed', sub {$AdditionalParams = $win->get_title('entryAdditionalParams'); &config_changed(); return 0;});
@@ -592,7 +596,7 @@ $win->add_button( Name => 'saveButton',
         Size    => [80, 25], 
         Title   => "Save", 
         Sens    => 0,
-        Tip     => 'Save settings.');
+        Tip     => "Save settings.");
 $win->add_signal_handler('saveButton', 'clicked', sub{&save();});
 
 # save the configuration
@@ -623,7 +627,7 @@ $win->add_button( Name => 'helpButton',
         Pos     => [135, 395], 
         Size    => [80, 25], 
         Title   => "Help", 
-        Tip     => 'Get help.');
+        Tip     => "Get help.");
 $win->add_signal_handler('helpButton', 'clicked', \&open_help);
 
 sub open_help {
@@ -640,7 +644,7 @@ $win->add_button( Name => 'runButton',
         Pos     => [255, 395], 
         Size    => [90, 25], 
         Title   => $runButtonTitle, 
-        Tip     => 'Start or stop the coosen composite manager.');
+        Tip     => "Start or stop the choosen composite manager.");
 $win->add_signal_handler('runButton', 'clicked', sub{&start_stop();});
 
 # click-function to start or stop the composite manager
@@ -658,13 +662,13 @@ $win->add_button( Name => 'cancelButton',
         Pos     => [365, 395], 
         Size    => [90, 25], 
         Title   => "Cancel", 
-        Tip     => 'Cancel / Quit Composite Configurator.');
+        Tip     => "Cancel / Quit Composite Configurator.");
 $win->add_signal_handler('cancelButton', 'clicked', \&check_before_quit);
 
 # check before quit for unsaved changes
 sub check_before_quit {
     if ($cfg_changed == 1) {
-        my $response = $win->show_msg_dialog('warning', 'yes-no', "You have unsaved changes! Continue anyway?");
+        my $response = $win->show_msg_dialog("warning", "yes-no", "You have unsaved changes! Continue anyway?");
         if ($response eq 'no') {
             return;
         }
@@ -724,7 +728,7 @@ if ($compmgr ne 'none') {
     $win->set_sensitive('saveButton', 0);
     $win->set_sensitive('helpButton', 0);
     $win->set_sensitive('runButton', 0);
-    $win->show_msg_dialog('info', 'ok', "No composite manager is installed.\nFor full functionality Xcompmgr or Compton must installed at least.");
+    $win->show_msg_dialog("info", "ok", "No composite manager is installed.\nFor full functionality Xcompmgr or Compton must installed at least.");
 }
 
 
