@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fns-cpu-performance\n"
 "POT-Creation-Date: 2014-12-08 23:37+0200\n"
-"PO-Revision-Date: 2015-02-14 12:14+0200\n"
+"PO-Revision-Date: 2015-02-16 19:12+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
@@ -203,4 +203,20 @@ msgstr "Информация"
 
 msgid "Warning"
 msgstr "Предупреждение"
+
+msgid "Error"
+msgstr "ошибка"
+
+########################################################################
+# Error Dialog
+########################################################################
+
+msgid "Error !"
+msgstr "ошибка !"
+
+msgid "No or unknown cpufreq driver is active!\nFNS Cpu Performance not usable."
+msgstr ""
+
+msgid "Exit"
+msgstr "выход"
 

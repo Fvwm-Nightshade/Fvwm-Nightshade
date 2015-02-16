@@ -9,7 +9,7 @@ msgstr ""
 
 "Project-Id-Version: fns-cpu-performance\n"
 "POT-Creation-Date: 2014-12-08 23:37+0200\n"
-"PO-Revision-Date: 2015-02-15 00:38+0200\n"
+"PO-Revision-Date: 2015-02-16 18:51+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
@@ -206,4 +206,20 @@ msgstr "Info"
 
 msgid "Warning"
 msgstr "Advertencia"
+
+msgid "Error"
+msgstr "Error"
+
+########################################################################
+# Error Dialog
+########################################################################
+
+msgid "Error !"
+msgstr "Error !"
+
+msgid "No or unknown cpufreq driver is active!\nFNS Cpu Performance not usable."
+msgstr "No o controlador cpufreq desconocido está activo!\nFNS Rendimiento CPU no utilizable."
+
+msgid "Exit"
+msgstr "Salida"
 

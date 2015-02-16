@@ -1,14 +1,14 @@
 # German translation for fns-cpu-performance
-# Copyright (C) 2014 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
-# Thomas Funk <t.funk@web.de>, 2014.
+# Thomas Funk <t.funk@web.de>, 2015.
 #
 msgid ""
 msgstr ""
 
 "Project-Id-Version: fns-cpu-performance\n"
 "POT-Creation-Date: 2014-12-08 23:37+0200\n"
-"PO-Revision-Date: 2014-12-08 23:56+0200\n"
+"PO-Revision-Date: 2015-02-16 18:45+0200\n"
 "Last-Translator: Thomas Funk <t.funk@web.de>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -203,4 +203,20 @@ msgstr "Info"
 
 msgid "Warning"
 msgstr "Warnung"
+
+msgid "Error"
+msgstr "Fehler"
+
+########################################################################
+# Error Dialog
+########################################################################
+
+msgid "Error !"
+msgstr "Fehler !"
+
+msgid "No or unknown cpufreq driver is active!\nFNS Cpu Performance not usable."
+msgstr "Keiner oder unbekannter cpufreq-Treiber aktiv!\nFNS CPU Leistungseinstellungen nicht verwendbar!"
+
+msgid "Exit"
+msgstr "Beenden"
 
