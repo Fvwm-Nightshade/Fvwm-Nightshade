@@ -1,5 +1,8 @@
 History:
 
+03/17/2015
+- add missing translation in fns-cpu-performance.ru.po and update the mo
+
 02/16/2015
 - update text parts in FNS-BaseSetup, FNS-CompConfigurator, FNS-MenuConfigurator
   and FNS-WindowsBehaviour to the changes in their pot files (missing dots, grammar)
