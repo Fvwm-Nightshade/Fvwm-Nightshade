@@ -1,5 +1,12 @@
 History:
 
+07/13/2015
+- change download procedure in standard ebuild to git.
+- fix bug in Makefile that perlsitedir could get empty and remove Gentoo-prepare rule
+  because it's never needed anymore.
+- add a develop ebuild + metadata.xml to gentoo/develop folder. Thanks to Dominique Michel for that :-)
+- add Dominique to AUTHORS
+
 03/17/2015
 - add missing translation in fns-cpu-performance.ru.po and update the mo
 
