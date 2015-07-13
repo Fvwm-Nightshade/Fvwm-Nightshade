@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.3.0
+# Version:      2.3.1
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      02/15/2015
+# Changed:      07/13/2015
 #-----------------------------------------------------------------------
 
 package 	= fvwm-nightshade
@@ -42,7 +42,7 @@ xdgdir		= $(datadir)/desktop-directories
 themesdir 	= $(datadir)/themes
 userdir		= ~
 fnsuserdir	= $(userdir)/.$(package)
-perlsitedir := $(shell perl -le 'foreach (@INC) {if (m/\/usr\/lib\/.*(site_perl|perl5)$$/ or m/\/usr\/local\/lib\/.*(site_perl|perl5)$$/){print $$_; last;}}')
+perlsitedir ?= $(shell perl -le 'foreach (@INC) {if (m/\/usr\/lib\/.*(site_perl|perl5|vendor_perl)/|m/\/usr\/local\/lib\/.*(site_perl|perl5|vendor_perl)/){print $$_; last;}}')
 
 ifeq ($(local),yes)
 	themesdir = $(userdir)/.themes
@@ -635,10 +635,6 @@ arch: prepare-arch
 	mv $(pkgdir)/*.xz ../
 	rm -rf $(pkgdir)
 
-gentoo-prepare: dist
-	echo "Create ebuild with current version in name"
-	cp gentoo/fvwm-nightshade.ebuild fvwm-nightshade-$(version).ebuild
-
 update-mo:
 	cd po; \
 	if test $(po-file); then \
@@ -660,5 +656,5 @@ update-mo:
 	done
 
 .PHONY: dist distcheck install uninstall uninstall-alternative deb rpm arch gentoo-prepare
-.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list uninstall-alternative dist-install gentoo-prepare update-mo
+.SILENT: FORCE dist install uninstall build-deb deb rpm prepare-rpm arch prepare-arch build-install-list uninstall-alternative dist-install update-mo
 	
