@@ -1,15 +1,26 @@
-#!/usr/bin/python
+#!/usr/bin/env python2.7
 #-----------------------------------------------------------------------
 # File:        fns-find-file
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 # Licence:     GPL 2
 #
-# Description: get the full path of a specified file
-# Parameters:  [file name]
+# Description: Find the full path of a file depending of the directories
+#              specified in a search path. The default search path is
+#              $FNS_SOUNDPATH.
+#              But other search paths like $PATH can be used instead 
+#              with -p or --path.
+#
+# fns-find-file [-h|--help] [--version] [-s|--silent] [-p|--path] [-r|--recursive] [FILENAME]
+#
+# Parameters:  <FILENAME>                              search name of a file
+#              -h, --help                              show this help message and exit
+#              -p <OTHER_PATH>, --path <OTHER_PATH>    other path variable
+#              -s, --silent                            no error output
+#              -r, --recursive                         search recursive
 #
 # Author:      Thomas Funk <t.funk@web.de>
 # Created:     08/26/2013
-# Changed:     
+# Changed:     09/21/2015
 #-----------------------------------------------------------------------
 
 import os, sys
@@ -20,13 +31,19 @@ import argparse
 def print_(s):
     sys.stdout.write(str(s))
     
-def search_file(filename, searchpaths, pathsep=os.pathsep):
+def search_file(filename, searchpaths, recursive, pathsep=os.pathsep):
     """ Given a search path, find file with requested name """
     for path in searchpaths.split(pathsep):
         if os.path.exists(path):
             file_list = os.listdir(path)
             pattern = '*'+filename+'*'
-            filenames = fnmatch.filter(file_list, pattern)
+            filenames = []
+            if recursive:
+                for root, subdirs, file_list in os.walk(path, followlinks=True):
+                  for file in fnmatch.filter(file_list, pattern):
+                    filenames.append(os.path.join(root, file))
+            else:
+                filenames = fnmatch.filter(file_list, pattern)
             if len(filenames) == 0:
                 continue
             else:
@@ -35,23 +52,25 @@ def search_file(filename, searchpaths, pathsep=os.pathsep):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='get the full path of a specified file')
+    parser = argparse.ArgumentParser(description='Find the full path of a file depending of the directories specified in a search path.')
     parser.add_argument('--version', action='version', version="%(prog)s V " + __version__)
-    parser.add_argument('--path', action="store", dest="other_path", help='other path variable')
+    parser.add_argument('-p','--path', action="store", dest="other_path", help='other path variable')
     parser.add_argument('-s','--silent', action="store_true", dest="silent", help='no error output')
-    parser.add_argument('filename', help='file name of a sound file')
+    parser.add_argument('-r','--recursive', action="store_true", dest="recursive", help='search recursive')
+    parser.add_argument('filename', help='search name of a sound or another file')
 
     args = parser.parse_args()
     
     filename = args.filename
     other_path = args.other_path
     silent = args.silent
+    recursive = args.recursive
     
     if other_path == None:
         searchpath = ((os.environ['FNS_SOUNDPATH'] if os.environ.has_key('FNS_SOUNDPATH') else ''))
         path_name = 'FNS_SOUNDPATH'
     else:
-        searchpath = ((os.environ[other_path] if os.environ.has_key(other_path) else ''))
+        searchpath = ((os.environ[other_path] if os.environ.has_key(other_path) else other_path))
         path_name = other_path
     if searchpath == '':
         if silent:
@@ -60,7 +79,7 @@ if __name__ == '__main__':
             sys.stderr.write("'"+path_name+"' not exist. Exiting.\n")
             sys.exit(1)
 
-    file_path = search_file(filename, searchpath)
+    file_path = search_file(filename, searchpath, recursive)
     if file_path == '':
         if silent:
             print_('')
