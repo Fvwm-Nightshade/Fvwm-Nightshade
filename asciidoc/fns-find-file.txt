@@ -11,7 +11,7 @@ fns-find-file - command line tool to get the path of a file
 SYNOPSIS
 --------
 
-fns-find-file [-h|--help] [--version] [-s|--silent] [FILENAME]
+fns-find-file [-h | --help] [--version] [-s | --silent] [-p | --path] [-r | --recursive] [FILENAME]
 
 
 
@@ -38,7 +38,7 @@ Example for a file search:
 $ fns-find-file alarm.wav
 ------
 
-*--path* 'OTHER_PATH'::
+*-p | --path* 'OTHER_PATH'::
 +
 Sometimes it is useful to told *fns-find-file* to search in another search 
 path:
@@ -47,7 +47,16 @@ path:
 $ fns-find-file --path $PATH gksu
 ------
 
-*-s|--silent*::
+*-r | --recursive*::
++
+Normally *fns-find-file* searches in the given search path(s). But sometimes 
+it is useful to search recursive:
++
+------
+$ fns-find-file --path $FVWM_USERDIR --recursive 16x16-geany.png
+------
+
+*-s | --silent*::
 +
 The 'silent' option is useful if no error output is welcome.
 

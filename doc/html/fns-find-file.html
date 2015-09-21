@@ -747,7 +747,7 @@ fns-find-file(1) Manual Page
 <div class="sect1">
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>fns-find-file [-h|--help] [--version] [-s|--silent] [FILENAME]</p></div>
+<div class="paragraph"><p>fns-find-file [-h | --help] [--version] [-s | --silent] [-p | --path] [-r | --recursive] [FILENAME]</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -777,7 +777,7 @@ search paths like <code>$PATH</code> can be used instead with <strong>--path</st
 </div></div>
 </dd>
 <dt class="hdlist1">
-<strong>--path</strong> <em>OTHER_PATH</em>
+<strong>-p | --path</strong> <em>OTHER_PATH</em>
 </dt>
 <dd>
 <div class="paragraph"><p>Sometimes it is useful to told <strong>fns-find-file</strong> to search in another search
@@ -788,7 +788,18 @@ path:</p></div>
 </div></div>
 </dd>
 <dt class="hdlist1">
-<strong>-s|--silent</strong>
+<strong>-r | --recursive</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Normally <strong>fns-find-file</strong> searches in the given search path(s). But sometimes
+it is useful to search recursive:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ fns-find-file --path $FVWM_USERDIR --recursive 16x16-geany.png</code></pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+<strong>-s | --silent</strong>
 </dt>
 <dd>
 <div class="paragraph"><p>The <em>silent</em> option is useful if no error output is welcome.</p></div>
@@ -819,7 +830,7 @@ path:</p></div>
 <div id="footer">
 <div id="footer-text">
 Last updated
- 2015-01-11 16:45:03 CET
+ 2015-09-21 22:29:25 CEST
 </div>
 </div>
 </body>
