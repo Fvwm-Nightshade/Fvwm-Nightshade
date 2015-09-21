@@ -1,5 +1,11 @@
 History:
 
+09/21/2015
+- update fns-find-file:
+  - fix error if another path is used
+  - add -r | --recursive to search recursively
+- update documentation of fns-find-file - asciidoc, manpage and html
+
 08/15/2015
 - add new icon add_bookmark.svg
 - update po and mo with revised French translations. Thanks to Dominique Michel ^^
