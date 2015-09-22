@@ -1,5 +1,18 @@
 History:
 
+09/22/2015
+- cleanup conky configs (cpu, clock)
+- adapt panel configs that conky configs will be found in FVWM_USERDIR, too.
+- adapt percentage_voffset calculation in G2likeTopBar for a better fit of cpu percentage
+- fix bug in KlikeBottomBar that systray overlaps pager
+- change background color and transparency of FvwmIdent window in GrayRevenge colorsets
+  for better readability
+- update Russian translation file fvwm-nightshade.ru.po and its .mo. Thanks Art ^^
+- fix discrepancies in original text sections in fns-cpu-performance.fr.po,
+  fns-menu-configurator.fr.po, fns-win-behaviour.fr.po and update the .mo files
+- add parameter '--svg' to fns-find-icon that svg can prefer instead of bitmap formats.
+- update documentation of fns-find-icon - asciidoc, manpage and html
+
 09/21/2015
 - update fns-find-file:
   - fix error if another path is used
