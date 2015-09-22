@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         HorizontalPanel
-# Version:      1.0.15
+# Version:      1.0.16
 # Licence:      GPL 2
 #
 # Description:  FvwmButtons panel for horizontal layout. Position on the
@@ -15,7 +15,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/11/2012
-# Changed:      11/14/2014
+# Changed:      09/22/2015
 #-----------------------------------------------------------------------
 
 Style HorizontalPanel !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
@@ -92,19 +92,37 @@ DestroyModuleConfig HorizontalPanel: *
             --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
 
 #-----------------------------------------------------------------------
+# find conky config for cpu applet
+#-----------------------------------------------------------------------
+PipeRead "if [ `fns-find-file -p $FVWM_USERDIR/layouts -r -s conkyrc_cpu` != '' ]; then \
+            echo InfoStoreAdd conky_rc_path $FVWM_USERDIR; \
+          else \
+            echo InfoStoreAdd root_dir $FNS_SYSTEMDIR; \
+          fi"
+
+#-----------------------------------------------------------------------
 # Cpuview
 #-----------------------------------------------------------------------
 *HorizontalPanel: (6x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
             `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.pager_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
-            -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 1`, \
+            -c $[infostore.root_dir]/layouts/rc-files/conkyrc_cpu -p 1`, \
             Action (mouse 3) `Menu MenuCpuOps`,\
             Action (mouse 0) Nop)
+
+#-----------------------------------------------------------------------
+# find conky config for clock applet
+#-----------------------------------------------------------------------
+PipeRead "if [ `fns-find-file -p $FVWM_USERDIR/layouts -r -s conkyrc_clock` != '' ]; then \
+            echo InfoStoreAdd root_dir $FVWM_USERDIR; \
+          else \
+            echo InfoStoreAdd root_dir $FNS_SYSTEMDIR; \
+          fi"
 
 #-----------------------------------------------------------------------
 # Clock
 #-----------------------------------------------------------------------
 *HorizontalPanel: ($[infostore.time_hsize]x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_clock" \
             `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset -$[infostore.hratio]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
-            -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
+            -c $[infostore.root_dir]/layouts/rc-files/conkyrc_clock -p 1`, \
             Action (mouse 3) `Menu MenuClockOps`,\
             Action (mouse 0) Nop)

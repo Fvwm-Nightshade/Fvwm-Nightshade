@@ -1,16 +1,16 @@
 #-----------------------------------------------------------------------
 # File:         KlikeBottomBar
-# Version:      1.1.0
+# Version:      1.2.0
 # Licence:      GPL 2
 #
 # Description:  KDE like bottom bar with menu and iconify/deiconify button,
-#               windows list, pager with 4 virtual pages, systray,
+#               windows list, pager with x virtual pages, systray,
 #               cpu graph and clock
 #
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      04/27/2014
-# Changed:      01/05/2015
+# Changed:      09/21/2015
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -48,8 +48,6 @@ PipeRead    'if [ "$[vp.width]" -gt "1600" ]; then \
 #-----------------------------------------------------------------------
 PipeRead "echo InfoStoreAdd tray_columns `perl -e 'printf \"%.0f\",$[infostore.tray_icons]*1.7'`"
 
-PipeRead 'echo InfostoreAdd tray_max_x $(($[infostore.tray_icons]+1))'
-
 
 #=======================================================================
 # FvwmButtons KlikeBottomBar
@@ -65,20 +63,20 @@ PipeRead "if [ `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk` !
           fi"
 
 #-----------------------------------------------------------------------
-# For cpu applet
-#-----------------------------------------------------------------------
-PipeRead 'echo InfostoreAdd graph_width $(($[infostore.column_size]*5))'
-PipeRead "echo InfoStoreAdd graph_voffset `perl -e 'printf \"%.0f\",$[infostore.fontsize]-2*$[infostore.hratio]'`"
-PipeRead "echo InfoStoreAdd percentage_voffset `perl -e 'printf \"%.0f\",$[infostore.bar_height]*1.3'`"
-
-#-----------------------------------------------------------------------
 # For clock applet
 #-----------------------------------------------------------------------
 PipeRead "echo InfoStoreAdd time_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio]/1.3)'`"
-PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",-($[infostore.hratio]*1.5)'`"
+PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",($[infostore.bar_height]/4-$[infostore.time_fsize]/2)'`"
 PipeRead "echo InfoStoreAdd time_hsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/2'`"
 PipeRead "echo InfoStoreAdd date_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio])'`"
-PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",($[infostore.hratio]*4)'`"
+PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",($[infostore.fontsize]/2)'`"
+
+#-----------------------------------------------------------------------
+# For cpu applet
+#-----------------------------------------------------------------------
+PipeRead 'echo InfostoreAdd graph_width $(($[infostore.column_size]*4))'
+PipeRead "echo InfoStoreAdd graph_voffset `perl -e 'printf \"%.0f\",$[infostore.date_fsize]/$[infostore.hratio]'`"
+PipeRead "echo InfoStoreAdd percentage_voffset `perl -e 'printf \"%.0f\",($[infostore.date_fsize]/$[infostore.hratio])*5'`"
 
 
 #=======================================================================
@@ -123,7 +121,7 @@ InfoStoreAdd pager_geometry $[infostore.pager_width]x$[infostore.pager_height]-0
 #-----------------------------------------------------------------------
 # GlobalIconMan columns
 #-----------------------------------------------------------------------
-PipeRead 'echo InfostoreAdd iconman_columns $(($[infostore.columns]-$[infostore.pager_columns]-$[infostore.time_hsize]-5))'
+PipeRead 'echo InfostoreAdd iconman_columns $(($[infostore.columns]-(5+3+$[infostore.pager_columns]+$[infostore.tray_columns]+1+5+$[infostore.time_hsize])))'
 
 #-----------------------------------------------------------------------
 # GlobalIconMan manager geometry
@@ -165,7 +163,7 @@ DestroyModuleConfig KlikeBottomBar: *
 #-----------------------------------------------------------------------
 # menu button
 #-----------------------------------------------------------------------
-*KlikeBottomBar: (6x1, Colorset 13, ActiveColorset 11, \
+*KlikeBottomBar: (5x1, Colorset 13, ActiveColorset 11, \
                   Left, Padding 5 0, Title (Side) "$[gt.Menu]", ActionOnPress, \
                   Icon    icon_fns.svg:24x24, \
                   ActiveIcon  icon_fns.svg:24x24, \
@@ -191,30 +189,56 @@ DestroyModuleConfig KlikeBottomBar: *
 *KlikeBottomBar: ($[infostore.pager_columns]x1, Colorset 13, Frame -1, Swallow "FvwmPager")
 
 #-----------------------------------------------------------------------
+# empty field
+#-----------------------------------------------------------------------
+*KlikeBottomBar: (1x1, Colorset 13)
+
+#-----------------------------------------------------------------------
 # Systray
 #-----------------------------------------------------------------------
 *KlikeBottomBar: ($[infostore.tray_columns]x1, Right, Colorset 13, \
                   Swallow (UseOld, Close, Kill, Respawn) "stalonetray" \
-                  `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_max_x]x1 \
+                  `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_icons]x1 \
                   --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
                   --grow-gravity E --icon-gravity W --kludges force_icons_size -i 24 \
                   --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
+
+
+#-----------------------------------------------------------------------
+# find conky config for clock applet
+#-----------------------------------------------------------------------
+PipeRead "if [ `fns-find-file -p $FVWM_USERDIR/layouts -r -s conkyrc_clock` != '' ]; then \
+            echo InfoStoreAdd root_dir $FVWM_USERDIR; \
+          else \
+            echo InfoStoreAdd root_dir $FNS_SYSTEMDIR; \
+          fi"
 
 #-----------------------------------------------------------------------
 # Cpuview
 #-----------------------------------------------------------------------
 *KlikeBottomBar: (5x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
-                  `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
-                  -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 2`, \
+                  `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 \
+                  -t}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
+                  -c $[infostore.root_dir]/layouts/rc-files/conkyrc_cpu -p 2`, \
                   Action (mouse 3) `Menu MenuCpuOps`,\
                   Action (mouse 0) Nop)
+
+
+#-----------------------------------------------------------------------
+# find conky config for cpu applet
+#-----------------------------------------------------------------------
+PipeRead "if [ `fns-find-file -p $FVWM_USERDIR/layouts -r -s conkyrc_cpu` != '' ]; then \
+            echo InfoStoreAdd conky_rc_path $FVWM_USERDIR; \
+          else \
+            echo InfoStoreAdd root_dir $FNS_SYSTEMDIR; \
+          fi"
 
 #-----------------------------------------------------------------------
 # Clock
 #-----------------------------------------------------------------------
 *KlikeBottomBar: ($[infostore.time_hsize]x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_clock" \
-                  `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset $[infostore.time_voffset]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
-                  -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
+                  `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.fontsize]}${voffset -$[infostore.time_voffset]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
+                  -c $[infostore.root_dir]/layouts/rc-files/conkyrc_clock -p 1`, \
                   Action (mouse 3) `Menu MenuClockOps`,\
                   Action (mouse 0) Nop)
 
