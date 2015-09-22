@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         colorsets
-# Version:      1.0.7
+# Version:      1.0.8
 # Licence:      GPL 2
 #
 # Description:  colorsets of GreyRevenge theme by alecive
@@ -9,7 +9,7 @@
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      06/25/2013
-# Changed:      12/17/2014
+# Changed:      08/19/2015
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -231,7 +231,7 @@ Colorset 16 fg white, bg #57868a, Plain
 #-----------------------------------------------------------------------
 # FvwmIdent
 #-----------------------------------------------------------------------
-Colorset 21 bg grey65, fg gray15, sh black, fgsh #777777, RootTransparent buffer, Tint #777777 40
+Colorset 21 bg grey65, fg gray15, sh black, fgsh #777777, RootTransparent buffer, Tint #989898 90
 
 #-----------------------------------------------------------------------
 # FvwmConsole
