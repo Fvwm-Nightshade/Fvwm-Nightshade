@@ -44,7 +44,8 @@ RDEPEND="${PYTHON_DEPS}
 	qtconfig? ( dev-qt/qtgui:4 )
 	compton? ( x11-misc/compton )
 	transset? ( x11-apps/transset )
-	grun? ( x11-misc/grun )"
+	grun? ( x11-misc/grun )
+	cbatticon? ( x11-misc/cbatticon )"
 
 S=${WORKDIR}/${MY_P}
 
