@@ -1,5 +1,13 @@
 History:
 
+10/01/2015
+- change optional dependencies in PKGBUILD_FNS:
+  - fdpowermon => cbatticon-gtk2
+  - xcompmgr => compton
+- add cbatticon to 
+  - FuncAppCheck in config
+  - suggested requirements in README and INSTALL
+
 09/22/2015
 - cleanup conky configs (cpu, clock)
 - adapt panel configs that conky configs will be found in FVWM_USERDIR, too.
