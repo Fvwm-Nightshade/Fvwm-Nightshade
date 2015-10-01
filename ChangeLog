@@ -7,6 +7,7 @@ History:
 - add cbatticon to 
   - FuncAppCheck in config
   - suggested requirements in README and INSTALL
+- add cbatticon to optional dependencies in gentoo ebuild
 
 09/22/2015
 - cleanup conky configs (cpu, clock)
