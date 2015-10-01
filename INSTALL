@@ -11,9 +11,9 @@ Required:       Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky,
 Recommended:    gnome-network-manager, pm-utils, qtconfig for qt4, 
                 lxappearance, gtk2-engines-murrine, gtk2-engines-pixbuf
 
-Suggested:      fdpowermon (for pm-utils), grun or gmrun, blueman, 
-                volumeicon-alsa, clipit or parcelite, xneur, compton 
-                or xcompmgr
+Suggested:      fdpowermon or cbatticon-gtk2 (for pm-utils), blueman, 
+                grun or gmrun, volumeicon-alsa, clipit or parcelite, 
+                xneur, compton or xcompmgr
 
 
 Preparation
