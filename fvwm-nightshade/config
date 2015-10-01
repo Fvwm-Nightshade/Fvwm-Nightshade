@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.8.20150922
+InfoStoreAdd ns_version 0.7.8.20151001
 # Copyright (C) 2015
 #
 # Authors:
@@ -1357,8 +1357,10 @@ AddToFunc   FuncAppCheck
 + I Test (!x clipit) FuncPrintMsg "AppCheck" "clipit (clipboard) not installed"
 # systray clipboard 2 (for gentoo)
 + I TestRc (Match) Test (!x parcellite) FuncPrintMsg "AppCheck" "parcellite (clipboard) not installed"
-# systray app fdpowermon
-+ I TestRc (Match) Test (!x fdpowermon) FuncPrintMsg "AppCheck" "fdpowermon (systray pm control) not installed"
+# systray battery app 1 (main)
++ I Test (!x fdpowermon) FuncPrintMsg "AppCheck" "fdpowermon (systray pm control) not installed"
+# systray battery app 2 (for Arch)
++ I TestRc (Match) Test (!x cbatticon) FuncPrintMsg "AppCheck" "cbatticon (systray pm control) not installed"
 # Mount daemon pcmanfm
 + I Test (!x pcmanfm) FuncPrintMsg "AppCheck" "pcmanfm (mounting) not installed"
 # policy kit agent
