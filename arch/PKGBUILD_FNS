@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         PKGBUILD_FNS
-# Version:      1.2.4
+# Version:      1.2.5
 # Licence:      GPL 2
 #
 # Description:  Pkgbuild script for Fvwm-Nightshade
@@ -8,7 +8,7 @@
 # Author:       Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>    
 #
 # Created:      ???
-# Changed:      01/01/2015
+# Changed:      10/01/2015
 #-----------------------------------------------------------------------
 
 pkgname=fvwm-nightshade
@@ -43,14 +43,14 @@ package_fvwm-nightshade() {
     optdepends=(
         'blueman: Bluetooth Manager for your system tray (AUR)'
         'clipit: Clipboard manager for your systray'
-        'fdpowermon: battery monitor for your system tray (AUR)'
+        'cbatticon-gtk2: battery monitor for your system tray (AUR)'
         'grun: Application launcher (AUR)'
         'lxappearance: GTK+ theme switcher from of the LXDE Desktop'
         'network-manager-applet: Network manager for your system tray'
         'pm-utils: Utilities for suspend and hibernate power management'
         'transset-df: Tool for changing window transparencies on the fly. Needed with xcompmgr!'
         'volumeicon: Volume control for your system tray'
-        'xcompmgr: Composite Window-effects manager for X.org'
+        'compton: Composite Window-effects manager for X.org'
     )
     provides=('fvwm-nightshade')
     install=fns.install
