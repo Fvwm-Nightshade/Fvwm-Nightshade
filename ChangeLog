@@ -9,6 +9,7 @@ History:
     - remove line above Description
   - add rm lines in override_dh_auto_install to remove license files in GTK themes
   - change wrong file permission attributes to 644 in Gtk themes
+  - update unreleased entry in changelog
 
 10/01/2015
 - change optional dependencies in PKGBUILD_FNS:
