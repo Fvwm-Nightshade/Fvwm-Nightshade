@@ -1,6 +1,16 @@
 History:
 
 10/01/2015
+- continue debianizing:
+  - add #DEBHELPER# in postinst and prerm script
+  - change in control:
+    - Standards-Version to 3.9.6
+    - remove in Build-Depends and Depends '(<< 3)' from python
+    - remove line above Description
+  - add rm lines in override_dh_auto_install to remove license files in GTK themes
+  - change wrong file permission attributes to 644 in Gtk themes
+
+10/01/2015
 - change optional dependencies in PKGBUILD_FNS:
   - fdpowermon => cbatticon-gtk2
   - xcompmgr => compton
