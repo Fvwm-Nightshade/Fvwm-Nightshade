@@ -2,6 +2,7 @@
 # postinst script for fvwm-nightshade
 #
 # see: dh_installdeb(1)
+#DEBHELPER#
 
 set -e
 
