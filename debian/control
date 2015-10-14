@@ -2,8 +2,8 @@ Source: fvwm-nightshade
 Maintainer: Thomas Funk <t.funk@web.de>
 Section: x11
 Priority: optional
-Standards-Version: 3.9.5
-Build-Depends: debhelper (>= 9), python (<< 3)
+Standards-Version: 3.9.6
+Build-Depends: debhelper (>= 9), python
 Homepage: https://github.com/Fvwm-Nightshade
 
 Package: fvwm-nightshade
@@ -21,7 +21,7 @@ Depends:    ${misc:Depends}, ${perl:Depends}, ${python:Depends},
             librsvg2-bin,
             pcmanfm,
             policykit-1-gnome,
-            python (<< 3),
+            python,
             python-xdg,
             stalonetray,
             xscreensaver,
@@ -38,7 +38,6 @@ Suggests:   volumeicon-alsa,
             xneurs, 
             compton | xcompmgr,
             grun | gmrun
-
 Description: Lightweight but feature rich and good looking configuration of Fvwm
  It contains many useful things to make work and life easier with a flavour of a 
  modern desktop. But it can be configure by your own. It is good documented and 
