@@ -1,5 +1,12 @@
 History:
 
+12/26/2015
+- remove prototypes in function definitions in SimpleGtk2.pm (perllib) to 
+  prevent error messages in new Perl versions
+- add new Gtk2 + Gtk3 theme 'PitchBlack'
+- add new FNS theme 'PitchBlack'
+- change in .settings default layout from 'Horizontal' to 'Klike' and default theme from 'GrayRevenge' to 'PitchBlack'
+
 10/01/2015
 - continue debianizing:
   - add #DEBHELPER# in postinst and prerm script
