@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
 # File:         .settings
-# Version:      1.0.14
+# Version:      1.0.15
 # Licence:      GPL 2
 #
 # Description:  base settings for Fvwm-Nighshade
 #
 # Author:       Thomas Funk <t.funk@web.de>    
 # Created:      08/11/2012
-# Changed:      01/05/2015
+# Changed:      12/26/2015
 #-----------------------------------------------------------------------
 
 #***********************************************************************
@@ -18,7 +18,7 @@
 #-----------------------------------------------------------------------
 # The actual theme. Be changed dynamically via FuncChangeDecor
 #-----------------------------------------------------------------------
-InfoStoreAdd used_theme "GrayRevenge"
+InfoStoreAdd used_theme "PitchBlack"
 
 #-----------------------------------------------------------------------
 # Banner image for FvwmBanner
@@ -43,7 +43,7 @@ InfoStoreAdd fontsize "12"
 #-----------------------------------------------------------------------
 # The actual layout
 #-----------------------------------------------------------------------
-InfoStoreAdd used_layout "Horizontal"
+InfoStoreAdd used_layout "Klike"
 
 #-----------------------------------------------------------------------
 # The actual desktop count X
