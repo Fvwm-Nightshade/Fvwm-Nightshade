@@ -76,11 +76,12 @@ Featurelist of Fvwm-Nightshade 0.7.x:
   - CrystalBalls
   - FlatTab
   - GrayRevenge
+  - PitchBlack
   - Redmond, 
   - Rocken
   - Tribal
 
-- Own Gtk2 and 3 themes for Air, Tribal and FlatTab.
+- Own Gtk2 and 3 themes for Air, Tribal, FlatTab and PitchBlack.
 - Set of nice icons for menus and internal apps.
 
 - Animation control of window moves.

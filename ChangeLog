@@ -6,6 +6,7 @@ History:
 - add new Gtk2 + Gtk3 theme 'PitchBlack'
 - add new FNS theme 'PitchBlack'
 - change in .settings default layout from 'Horizontal' to 'Klike' and default theme from 'GrayRevenge' to 'PitchBlack'
+- update README
 
 10/01/2015
 - continue debianizing:
