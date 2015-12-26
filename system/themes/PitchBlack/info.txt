@@ -1,0 +1,15 @@
+PitchBlack theme
+================
+
+This theme is based on MediterraneanNight Series v2.0 by Rafa Cobreros <rafacobreros@gmail.com>
+http://gnome-look.org/content/show.php/MediterraneanNight+Series?content=156782
+
+The Theme consists only Gtk2 and Gtk3. If you want it for metacity, unity and xfwm4
+please download the original package from link above and copy MediterraneanNight folder
+into your ~/.themes directory.
+
+License: GPL
+
+Please do not report bugs to him. Instead send an email to <fvwmnightshade@gmail.com>
+
+Thanks

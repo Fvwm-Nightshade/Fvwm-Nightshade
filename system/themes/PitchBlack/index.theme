@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=PitchBlack
+Comment=a dark violet theme based on GreyRevenge
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=PitchBlack
+CursorTheme=DMZ-Black
+ButtonLayout=close,minimize,maximize:
