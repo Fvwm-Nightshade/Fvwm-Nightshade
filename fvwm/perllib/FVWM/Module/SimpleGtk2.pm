@@ -1,4 +1,4 @@
-# Copyright (c) 2014, Thomas Funk
+# Copyright (c) 2015, Thomas Funk
 # Module based on FVWM::Module::Gtk2 by Mikhael Goikhman
 #
 # This program is free software; you can redistribute it and/or modify
@@ -43,7 +43,7 @@ sub event_loop ($@) {
     $self->event_loop_finished(@params);
 }
 
-sub show_error ($$;$) {
+sub show_error {
     my $self = shift;
     my $msg = shift;
     my $title = shift || ($self->name . " Error");
@@ -71,7 +71,7 @@ sub show_error ($$;$) {
     $dialog->show_all;
 }
 
-sub show_message ($$;$) {
+sub show_message {
     my $self = shift;
     my $msg = shift;
     my $title = shift || ($self->name . " Message");
@@ -90,7 +90,7 @@ sub show_message ($$;$) {
     $dialog->show_all;
 }
 
-sub show_debug ($$;$) {
+sub show_debug {
     my $self = shift;
     my $msg = shift;
     my $title = shift || ($self->name . " Debug");
