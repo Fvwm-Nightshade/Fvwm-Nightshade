@@ -1,5 +1,16 @@
 History:
 
+01/24/2015
+- update calculations in all layouts and their modules to allow scaling up to 4K
+- update ratio calculations in config to allow scaling up to 4K
+- removing IconMan modules (GlobalIconMan_Bar, GlobalIconMan_ShowHide, GlobalIconMan_TopBottom)
+  for reorganization. Split them into
+  - a general GlobalIconMan
+  - a Bar_GlobalIconMan: swallowed in a bar
+  - a ShowHide_GlobalIconMan: moves down while mouse hovers over it and hide if leaves
+  - a TopBottom_GlobalIconMan: moving from bottom to top layer and after loosing focus back to bottom layer
+- README and NEWS updated
+
 12/26/2015
 - remove prototypes in function definitions in SimpleGtk2.pm (perllib) to 
   prevent error messages in new Perl versions
