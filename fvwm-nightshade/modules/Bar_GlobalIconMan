@@ -1,0 +1,26 @@
+#-----------------------------------------------------------------------
+# File:         Bar_GlobalIconMan
+# Version:      1.0.0
+# Licence:      GPL 2
+#
+# Description:  Global IconMan swallowed in a bar
+#
+# Author:       Thomas Funk <t.funk@web.de>    
+# Created:      08/21/2015
+# Changed:      
+#-----------------------------------------------------------------------
+
+
+#-----------------------------------------------------------------------
+# Additional Style for Global FvwmIconMan ("Taskbar")
+#-----------------------------------------------------------------------
+Style GlobalIconMan !Title
+
+*GlobalIconMan: 1 MaxButtonWidthByColumns    4
+
+
+
+
+
+
+
