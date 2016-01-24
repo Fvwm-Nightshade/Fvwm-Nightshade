@@ -15,8 +15,8 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.8.20151226
-# Copyright (C) 2015
+InfoStoreAdd ns_version 0.7.8.20160124
+# Copyright (C) 2016
 #
 # Authors:
 #   Thomas Funk <t.funk@web.de>
@@ -206,9 +206,33 @@ PipeRead 'if [ -z `pidof pcmanfm` ]; then echo SetEnv PcmanFmStatus 0 ;fi'
 #-----------------------------------------------------------------------
 # Adjust ratio to calculate resolution dependant things
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd ratio `perl -e 'printf \"%.1f\",log($[vp.width]*$[vp.height])/log(10)-log(1024*768)/log(10)+1'`"
-PipeRead "echo InfoStoreAdd hratio `perl -e 'printf \"%.1f\",($[vp.height]/1024)*(4/3)'`"
-PipeRead "echo InfoStoreAdd wratio `perl -e 'printf \"%.1f\",$[infostore.hratio]*(($[vp.width]/$[vp.height])/(4/3))'`"
+PipeRead "echo InfoStoreAdd aspect_ratio `perl -e 'printf \"%.2f\",$[vp.width]/$[vp.height]'`"
+
+# find the smallest resolution depending on the aspect ratio
+PipeRead `perl -e 'if ($[infostore.aspect_ratio] > 2.0) { \
+                         print "InfoStoreAdd ref_width 800\\n"; \
+                         print "InfoStoreAdd ref_height 384\\n"; \
+                   } elsif ($[infostore.aspect_ratio] > 1.6) { \
+                         print "InfoStoreAdd ref_width 960\\n"; \
+                         print "InfoStoreAdd ref_height 540\\n"; \
+                   } elsif ($[infostore.aspect_ratio] > 1.4) { \
+                         print "InfoStoreAdd ref_width 960\\n"; \
+                         print "InfoStoreAdd ref_height 640\\n"; \
+                   } else { \
+                         print "InfoStoreAdd ref_width 800\\n"; \
+                         print "InfoStoreAdd ref_height 600\\n"; \
+                   }'`
+
+
+#InfoStoreAdd ratio 1.1
+PipeRead "echo InfoStoreAdd ratio `perl -e 'printf \"%.2f\",log($[vp.width]*$[vp.height])/log(10)-log($[infostore.ref_width]*$[infostore.ref_height])/log(10)+1'`"
+
+#InfoStoreAdd hratio 0.8
+PipeRead "echo InfoStoreAdd hratio `perl -e 'printf \"%.2f\",($[vp.height]/540)'`"
+
+#InfoStoreAdd wratio 2
+PipeRead "echo InfoStoreAdd wratio `perl -e 'printf \"%.2f\",($[vp.width]/800)'`"
+
 
 
 #=======================================================================
