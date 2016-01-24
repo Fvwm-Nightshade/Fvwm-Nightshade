@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         G2likeBottomBar
-# Version:      1.1.0
+# Version:      1.2.0
 # Licence:      GPL 2
 #
 # Description:  Gnome like bottom bar with All iconify/deiconify button,
@@ -10,7 +10,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      10/09/2012
-# Changed:      01/05/2015
+# Changed:      01/19/2016
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -20,10 +20,6 @@
 # Desktop                                             Pager        End
 #      IconMan
 
-# Desktop:    2
-# End:        1
-# ------------
-#           3
 
 
 Style G2likeBottomBar !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
@@ -37,10 +33,10 @@ Style G2likeBottomBar Layer 4, !Iconifiable, !Maximizable, FixedSize, FixedPosit
 #-----------------------------------------------------------------------
 # find desktop icon
 #-----------------------------------------------------------------------
-PipeRead "if [ `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk` != '' ]; then \
-            echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk`; \
+PipeRead "if [ `fns-find-icon -n 'preferences-system-windows' -s $[infostore.i_size] --notdesk` != '' ]; then \
+            echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s $[infostore.i_size] --notdesk`; \
           else \
-            echo InfoStoreAdd desktop_icon 'window-icons.svg:24x24'; \
+            echo InfoStoreAdd desktop_icon 'window-icons.svg:$[infostore.i_size]x$[infostore.i_size]'; \
           fi"
 
 #=======================================================================
