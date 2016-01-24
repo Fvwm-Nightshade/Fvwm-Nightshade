@@ -23,7 +23,7 @@ shows you what is possible with this powerful window manager.
 
 ***********************************************************************
 ************* ATTENTION: THIS IS A DEVELOPMENT VERSION!   *************
-*************           CURRENTLY IT WORKS ^^ !          *************
+*************        CURRENTLY IT DOESN'T WORK !          *************
 ***********************************************************************
 
 Featurelist of Fvwm-Nightshade 0.7.x:
@@ -36,9 +36,8 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Own entry "Fvwm-Nightshade" in graphical login manager.
 - Own XDG applications menu with it's own directory files.
 
-- Build support for deb, rpm and Arch installation (Gentoo and local in
-  progress).
-- Localization support for German (French and Spanish in progress).
+- Build support for deb, rpm, Gentoo and Arch installation.
+- Localization support for German, French and Spanish.
 
 - Support for shadows and transparency with XcompMgr and Compton.
 - Support for hald, upower and systemd for Suspend/Hibernate.
@@ -63,7 +62,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 - Background configurable with a thumb browser which can scan different
   wallpaper locations.
 
-- Four different layouts:
+- Four different layouts scalable up to 4K:
   - horizontal (top)
   - vertical (top right)
   - G2like (top & bottom)
@@ -76,12 +75,12 @@ Featurelist of Fvwm-Nightshade 0.7.x:
   - CrystalBalls
   - FlatTab
   - GrayRevenge
-  - PitchBlack
-  - Redmond, 
+  - PitchBlack (default)
+  - Redmond 
   - Rocken
   - Tribal
 
-- Own Gtk2 and 3 themes for Air, Tribal, FlatTab and PitchBlack.
+- Own Gtk2 and 3 themes for Air, Tribal, FlatTab and PitchBlack (default).
 - Set of nice icons for menus and internal apps.
 
 - Animation control of window moves.
