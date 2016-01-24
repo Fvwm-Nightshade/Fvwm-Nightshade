@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         KlikeBottomBar
-# Version:      1.2.0
+# Version:      1.3.0
 # Licence:      GPL 2
 #
 # Description:  KDE like bottom bar with menu and iconify/deiconify button,
@@ -10,7 +10,7 @@
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      04/27/2014
-# Changed:      09/21/2015
+# Changed:      01/19/2016
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -33,7 +33,13 @@ Style KlikeBottomBar Layer 4, !Iconifiable, !Maximizable, FixedSize, FixedPositi
 #-----------------------------------------------------------------------
 # the count of icons visible in stalonetray must set related to the
 # screen resolution
-PipeRead    'if [ "$[vp.width]" -gt "1600" ]; then \
+PipeRead    'if [ "$[vp.width]" -gt "2400" ]; then \
+                echo InfoStoreAdd tray_icons 10; \
+            elif [ "$[vp.width]" -gt "2000" ]; then \
+                echo InfoStoreAdd tray_icons 9; \
+            elif [ "$[vp.width]" -gt "1800" ]; then \
+                echo InfoStoreAdd tray_icons 8; \
+            elif [ "$[vp.width]" -gt "1600" ]; then \
                 echo InfoStoreAdd tray_icons 7; \
             elif [ "$[vp.width]" -gt "1400" ]; then \
                 echo InfoStoreAdd tray_icons 6; \
@@ -56,28 +62,77 @@ PipeRead "echo InfoStoreAdd tray_columns `perl -e 'printf \"%.0f\",$[infostore.t
 #-----------------------------------------------------------------------
 # find desktop icon
 #-----------------------------------------------------------------------
-PipeRead "if [ `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk` != '' ]; then \
-            echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s 24 --notdesk`; \
+PipeRead "if [ `fns-find-icon -n 'preferences-system-windows' -s $[infostore.i_size] --notdesk` != '' ]; then \
+            echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s $[infostore.i_size] --notdesk`; \
           else \
-            echo InfoStoreAdd desktop_icon 'window-icons.svg:24x24'; \
+            echo InfoStoreAdd desktop_icon 'window-icons.svg:$[infostore.i_size]x$[infostore.i_size]'; \
           fi"
 
 #-----------------------------------------------------------------------
 # For clock applet
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd time_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio]/1.3)'`"
-PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",($[infostore.bar_height]/4-$[infostore.time_fsize]/2)'`"
-PipeRead "echo InfoStoreAdd time_hsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/2'`"
-PipeRead "echo InfoStoreAdd date_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio])'`"
-PipeRead "echo InfoStoreAdd date_voffset `perl -e 'printf \"%.0f\",($[infostore.fontsize]/2)'`"
+#InfoStoreAdd time_fsize 10
+PipeRead "echo InfoStoreAdd time_fsize `perl -e \
+    'printf \"%.0f\",(-5.313E-10*$[vp.height]**3+1.194E-5*$[vp.height]**2+4.031E-3*$[vp.height]+3.9)/$[infostore.hratio]'`"
+
+#InfoStoreAdd time_voffset 2
+PipeRead `perl -e 'if ($[vp.height] > 1200) { \
+                         print "InfoStoreAdd time_voffset 0\\n"; \
+                   } else { \
+                         printf "InfoStoreAdd time_voffset %.0f\\n", \
+                         (2.58E-13*$[vp.height]**5-1.258E-9*$[vp.height]**4+2.393E-6*$[vp.height]**3-2.215E-3*$[vp.height]**2+0.991*$[vp.height]-167.165); \
+                   }'`
+
+#InfoStoreAdd time_hsize 6
+PipeRead `perl -e 'if ($[vp.height] < 1200 or $[vp.height] > 1440) { \
+                         printf "InfoStoreAdd time_hsize %.0f\\n", \
+                         (-1.829E-13*$[vp.height]**4+1.028E-9*$[vp.height]**3-2.018E-6*$[vp.height]**2+1.624E-3*$[vp.height]+4.55); \
+                   } else { \
+                         print "InfoStoreAdd time_hsize 6\\n"; \
+                   }'`
+
+#InfoStoreAdd date_fsize 8
+PipeRead `perl -e 'if ($[vp.height] > 768) { \
+                         printf "InfoStoreAdd date_fsize %.0f\\n", \
+                         (-3.445E-12*$[vp.height]**4+2.2213E-8*$[vp.height]**3-4.378E-5*$[vp.height]**2+0.0511*$[vp.height]-10.27)/$[infostore.hratio]; \
+                   } else { \
+                         print "InfoStoreAdd date_fsize 7\\n"; \
+                   }'`
+
+#InfoStoreAdd date_voffset 2
+PipeRead `perl -e 'if ($[vp.height] > 1400) { \
+                         printf "InfoStoreAdd date_voffset %.0f\\n", \
+                         (-3.746E-11*$[vp.height]**4+3.261E-7*$[vp.height]**3-1.017E-3*$[vp.height]**2+1.372*$[vp.height]-664.219)/$[infostore.hratio]; \
+                   } elsif ($[vp.height] > 1024) { \
+                         printf "InfoStoreAdd date_voffset %.0f\\n", \
+                         (-2.96E-7*$[vp.height]**3+1.079E-3*$[vp.height]**2-1.28*$[vp.height]+504.448)/$[infostore.hratio]; \
+                   } else { \
+                         printf "InfoStoreAdd date_voffset %.0f\\n", \
+                         (-2.016E-10*$[vp.height]**4+7.574E-7*$[vp.height]**3-1.001E-3*$[vp.height]**2+0.561*$[vp.height]-109.315)/$[infostore.hratio]; \
+                   }'`
 
 #-----------------------------------------------------------------------
 # For cpu applet
 #-----------------------------------------------------------------------
 PipeRead 'echo InfostoreAdd graph_width $(($[infostore.column_size]*4))'
-PipeRead "echo InfoStoreAdd graph_voffset `perl -e 'printf \"%.0f\",$[infostore.date_fsize]/$[infostore.hratio]'`"
-PipeRead "echo InfoStoreAdd percentage_voffset `perl -e 'printf \"%.0f\",($[infostore.date_fsize]/$[infostore.hratio])*5'`"
 
+#InfoStoreAdd graph_voffset 9
+PipeRead `perl -e 'if ($[vp.height] > 1080) { \
+                         printf "InfoStoreAdd graph_voffset %.0f\\n", \
+                         (2.281E-8*$[vp.height]**3-1.326E-4*$[vp.height]**2+0.28*$[vp.height]-157.047)/$[infostore.hratio]; \
+                   } else { \
+                         printf "InfoStoreAdd graph_voffset %.0f\\n", \
+                         (-4.891E-7*$[vp.height]**2+0.021*$[vp.height]-2.7)/$[infostore.hratio]; \
+                   }'`
+
+#InfoStoreAdd percentage_voffset 44
+PipeRead `perl -e 'if ($[vp.height] > 900) { \
+                         printf "InfoStoreAdd percentage_voffset %.0f\\n", \
+                         (5.71E-13*$[vp.height]**4-7.57E-9*$[vp.height]**3+3.498E-5*$[vp.height]**2-0.0716*$[vp.height]+67.317)*$[infostore.hratio]; \
+                   } else { \
+                         printf "InfoStoreAdd percentage_voffset %.0f\\n", \
+                         (9.568E-10*$[vp.height]**4-2.973E-6*$[vp.height]**3+3.476E-3*$[vp.height]**2-1.844*$[vp.height]+409.991)*$[infostore.hratio]; \
+                   }'`
 
 #=======================================================================
 # Pager
@@ -101,7 +156,7 @@ InfoStoreAdd pager_height $[infostore.bar_height]
 #-----------------------------------------------------------------------
 # FvwmPager width
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd pager_width `perl -e 'printf \"%.0f\",5+(($[vp.width]/($[vp.height]/$[infostore.bar_height]))*$[infostore.x_desks])'`"
+PipeRead "echo InfoStoreAdd pager_width `perl -e 'printf \"%.0f\",(($[vp.width]/($[vp.height]/$[infostore.bar_height]))*$[infostore.x_desks])+($[infostore.x_desks]+1)'`"
 
 #-----------------------------------------------------------------------
 # FvwmPager columns
@@ -165,8 +220,8 @@ DestroyModuleConfig KlikeBottomBar: *
 #-----------------------------------------------------------------------
 *KlikeBottomBar: (5x1, Colorset 13, ActiveColorset 11, \
                   Left, Padding 5 0, Title (Side) "$[gt.Menu]", ActionOnPress, \
-                  Icon    icon_fns.svg:24x24, \
-                  ActiveIcon  icon_fns.svg:24x24, \
+                  Icon    icon_fns.svg:$[infostore.i_size]x$[infostore.i_size], \
+                  ActiveIcon  icon_fns.svg:$[infostore.i_size]x$[infostore.i_size], \
                   Action(Mouse 1) `Menu MenuRoot`)
 
 #-----------------------------------------------------------------------
@@ -181,7 +236,7 @@ DestroyModuleConfig KlikeBottomBar: *
 #-----------------------------------------------------------------------
 # GlobalIconMan
 #-----------------------------------------------------------------------
-*KlikeBottomBar: ($[infostore.iconman_columns]x1, Colorset 13, Swallow "GlobalIconManBar")
+*KlikeBottomBar: ($[infostore.iconman_columns]x1, Colorset 13, Swallow "GlobalIconMan")
 
 #-----------------------------------------------------------------------
 # FvwmPager
@@ -200,9 +255,14 @@ DestroyModuleConfig KlikeBottomBar: *
                   Swallow (UseOld, Close, Kill, Respawn) "stalonetray" \
                   `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_icons]x1 \
                   --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
-                  --grow-gravity E --icon-gravity W --kludges force_icons_size -i 24 \
+                  --grow-gravity E --icon-gravity W --kludges force_icons_size -i $[infostore.i_size] \
                   --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
 
+
+#-----------------------------------------------------------------------
+# empty field
+#-----------------------------------------------------------------------
+*KlikeBottomBar: (1x1, Colorset 13)
 
 #-----------------------------------------------------------------------
 # find conky config for clock applet
@@ -217,10 +277,11 @@ PipeRead "if [ `fns-find-file -p $FVWM_USERDIR/layouts -r -s conkyrc_clock` != '
 # Cpuview
 #-----------------------------------------------------------------------
 *KlikeBottomBar: (5x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
-                  `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 \
+                  `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph \
+                  $[infostore.bar_height],$[infostore.graph_width] 71fb06 fb0634 \
                   -t}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
                   -c $[infostore.root_dir]/layouts/rc-files/conkyrc_cpu -p 2`, \
-                  Action (mouse 3) `Menu MenuCpuOps`,\
+                  Action (mouse 3) `Menu MenuCpuOps`, \
                   Action (mouse 0) Nop)
 
 
@@ -237,9 +298,11 @@ PipeRead "if [ `fns-find-file -p $FVWM_USERDIR/layouts -r -s conkyrc_cpu` != '' 
 # Clock
 #-----------------------------------------------------------------------
 *KlikeBottomBar: ($[infostore.time_hsize]x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_clock" \
-                  `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.fontsize]}${voffset -$[infostore.time_voffset]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
+                  `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset \
+                  -$[infostore.time_voffset]}$alignc${time %H:%M}\\n${font $[infostore.used_font]:size=$[infostore.date_fsize]}${voffset \
+                  -$[infostore.date_voffset]}$alignc${time %a %e %b}' \
                   -c $[infostore.root_dir]/layouts/rc-files/conkyrc_clock -p 1`, \
-                  Action (mouse 3) `Menu MenuClockOps`,\
+                  Action (mouse 3) `Menu MenuClockOps`, \
                   Action (mouse 0) Nop)
 
 

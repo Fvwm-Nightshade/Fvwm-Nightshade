@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Klike
-# Version:      1.1.0
+# Version:      1.2.0
 # Licence:      GPL 2
 #
 # Description:  KDE like layout with bottom bar
@@ -8,7 +8,7 @@
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      04/27/2014
-# Changed:      01/05/2015
+# Changed:      01/19/2016
 #-----------------------------------------------------------------------
 #
 # Bottombar
@@ -28,7 +28,32 @@
 #=======================================================================
 # General
 #=======================================================================
-InfoStoreAdd column_size 15
+
+#-----------------------------------------------------------------------
+# set bar and tray icon size depending on the screen height
+#-----------------------------------------------------------------------
+PipeRead    'if [ "$[vp.height]" -gt "2800" ]; then \
+                echo InfoStoreAdd i_size 48; \
+            elif [ "$[vp.height]" -gt "2500" ]; then \
+                echo InfoStoreAdd i_size 36; \
+            elif [ "$[vp.height]" -gt "1800" ]; then \
+                echo InfoStoreAdd i_size 30; \
+            elif [ "$[vp.height]" -gt "1600" ]; then \
+                echo InfoStoreAdd i_size 28; \
+            elif [ "$[vp.height]" -gt "1500" ]; then \
+                echo InfoStoreAdd i_size 26; \
+            elif [ "$[vp.height]" -gt "1050" ]; then \
+                echo InfoStoreAdd i_size 24; \
+            elif [ "$[vp.height]" -gt "640" ]; then \
+                echo InfoStoreAdd i_size 24; \
+            elif [ "$[vp.height]" -gt "580" ]; then \
+                echo InfoStoreAdd i_size 22; \
+            else \
+                echo InfoStoreAdd i_size 20; \
+            fi'
+
+#InfoStoreAdd column_size 15
+PipeRead "echo InfoStoreAdd column_size `perl -e 'printf \"%.0f\",$[infostore.i_size]/1.7'`"
 
 PipeRead "echo InfoStoreAdd columns `perl -e 'printf \"%.0f\",$[vp.width]/$[infostore.column_size]'`"
 
@@ -40,7 +65,7 @@ PipeRead "echo InfoStoreAdd columns `perl -e 'printf \"%.0f\",$[vp.width]/$[info
 #-----------------------------------------------------------------------
 # Bar height
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd bar_height `perl -e 'printf \"%.0f\",($[infostore.fontsize]*2)+(6*$[infostore.hratio])'`"
+PipeRead "echo InfoStoreAdd bar_height `perl -e 'printf \"%.0f\",(-1.57E-6*$[vp.height]**2+0.017*$[vp.height]+17.929)'`"
 
 #-----------------------------------------------------------------------
 # Bar geometry
@@ -82,7 +107,8 @@ Style * IconBox 20 80 -100 -60, \
 #=======================================================================
 Load modules/KlikeBottomBar
 Load modules/Pager
-Load modules/GlobalIconMan_Bar
+Load modules/GlobalIconMan
+Load modules/Bar_GlobalIconMan
 
 
 #=======================================================================
@@ -95,7 +121,7 @@ AddToFunc StartFunction
 + I Module FvwmPager
 #-----------------------------------------------------------------------
 # start window list module
-+ I Module FvwmIconMan GlobalIconManBar
++ I Module FvwmIconMan GlobalIconMan
 #-----------------------------------------------------------------------
 # start bottom bar panel
 + I Module FvwmButtons KlikeBottomBar

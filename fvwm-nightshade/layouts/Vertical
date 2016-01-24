@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Vertical
-# Version:      1.1.0
+# Version:      1.2.0
 # Licence:      GPL 2
 #
 # Description:  Layout of object positions on desktop
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/16/2012
-# Changed:      01/05/2015
+# Changed:      01/22/2016
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -35,18 +35,46 @@
 #=======================================================================
 
 #-----------------------------------------------------------------------
+# set bar and tray icon size depending on the screen height
+#-----------------------------------------------------------------------
+PipeRead    'if [ "$[vp.height]" -gt "2800" ]; then \
+                echo InfoStoreAdd i_size 48; \
+            elif [ "$[vp.height]" -gt "2500" ]; then \
+                echo InfoStoreAdd i_size 36; \
+            elif [ "$[vp.height]" -gt "2000" ]; then \
+                echo InfoStoreAdd i_size 32; \
+            elif [ "$[vp.height]" -gt "1800" ]; then \
+                echo InfoStoreAdd i_size 30; \
+            elif [ "$[vp.height]" -gt "1600" ]; then \
+                echo InfoStoreAdd i_size 28; \
+            elif [ "$[vp.height]" -gt "1500" ]; then \
+                echo InfoStoreAdd i_size 26; \
+            elif [ "$[vp.height]" -gt "1050" ]; then \
+                echo InfoStoreAdd i_size 25; \
+            elif [ "$[vp.height]" -gt "640" ]; then \
+                echo InfoStoreAdd i_size 24; \
+            elif [ "$[vp.height]" -gt "580" ]; then \
+                echo InfoStoreAdd i_size 22; \
+            else \
+                echo InfoStoreAdd i_size 20; \
+            fi'
+
+#-----------------------------------------------------------------------
 # Panel height
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd row_height $((($[infostore.fontsize]*2)+6))"
+PipeRead "echo InfoStoreAdd row_height $(($[infostore.i_size]+8))"
+
 PipeRead "echo InfoStoreAdd panel_height $(($[infostore.row_height]*5))"
 
 #-----------------------------------------------------------------------
 # Panel width
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd panel_width `perl -e 'printf \"%.0f\",(($[infostore.row_height]*3)*($[vp.width]/$[vp.height]))+1'`"
+#InfoStoreAdd panel_width 125
+PipeRead "echo InfoStoreAdd panel_width `perl -e \
+	'printf \"%.0f\",($[infostore.row_height]*3*($[infostore.aspect_ratio]))+2'`"
 
 # the count of systray icons is calculated by the panel width/icon size - 1 icon
-PipeRead "echo InfoStoreAdd tray_icons `perl -e 'printf \"%.0f\",($[infostore.panel_width]/24)-1'`"
+PipeRead "echo InfoStoreAdd tray_icons `perl -e 'printf \"%.0f\",($[infostore.panel_width]/$[infostore.i_size])-1'`"
 
 #-----------------------------------------------------------------------
 # Panel geometry
@@ -72,8 +100,7 @@ DeskTopSize "$[infostore.x_desks]x$[infostore.y_desks]"
 #-----------------------------------------------------------------------
 # actual pager height
 #-----------------------------------------------------------------------
-#PipeRead 'echo InfoStoreAdd pager_height $((($[infostore.row_height]*3)+1))'
-PipeRead "echo InfoStoreAdd pager_height `perl -e 'printf \"%.0f\",($[infostore.row_height]*($[infostore.y_desks]+1)+1)'`"
+PipeRead "echo InfoStoreAdd pager_height `perl -e 'printf \"%.0f\",(($[infostore.row_height]+($[infostore.wratio]-$[infostore.ratio]))*($[infostore.y_desks]+1)+1)'`"
 
 
 #-----------------------------------------------------------------------
