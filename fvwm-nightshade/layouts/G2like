@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         G2like
-# Version:      1.2.0
+# Version:      1.2.1
 # Licence:      GPL 2
 #
 # Description:  Gnome like layout with a top and bottom bar
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      10/09/2012
-# Changed:      01/19/2016
+# Changed:      01/25/2016
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -124,7 +124,8 @@ Style * IconBox 20 80 -100 -60, \
 Load modules/G2likeTopBar
 Load modules/G2likeBottomBar
 Load modules/Pager
-Load modules/GlobalIconMan_Bar
+Load modules/GlobalIconMan
+Load modules/Bar_GlobalIconMan
 
 
 #=======================================================================
@@ -137,7 +138,7 @@ AddToFunc StartFunction
 + I Module FvwmPager
 #-----------------------------------------------------------------------
 # start window list module
-+ I Module FvwmIconMan GlobalIconManBar
++ I Module FvwmIconMan GlobalIconMan
 #-----------------------------------------------------------------------
 # start bottom bar panel
 + I Module FvwmButtons G2likeBottomBar

@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Horizontal
-# Version:      1.2.0
+# Version:      1.2.1
 # Licence:      GPL 2
 #
 # Description:  Layout of object positions on desktop
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/16/2012
-# Changed:      01/03/2016
+# Changed:      01/26/2016
 #-----------------------------------------------------------------------
 #               Top
 #
@@ -216,8 +216,6 @@ AddToFunc   ReloadLayoutParts
 + I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.systray.log $FVWM_USERDIR/.trayapplist'
 + I FuncUnsetDeskKeyBindings
 + I Load modules/HorizontalPanel
-+ I Load modules/GlobalIconMan
-+ I Load modules/ShowHide_GlobalIconMan
 + I FuncRestartModuleByAlias FvwmButtons HorizontalPanel
 + I Wait stalonetray
 + I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist

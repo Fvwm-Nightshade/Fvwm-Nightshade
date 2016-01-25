@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Vertical
-# Version:      1.2.0
+# Version:      1.2.1
 # Licence:      GPL 2
 #
 # Description:  Layout of object positions on desktop
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/16/2012
-# Changed:      01/22/2016
+# Changed:      01/26/2016
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -71,7 +71,7 @@ PipeRead "echo InfoStoreAdd panel_height $(($[infostore.row_height]*5))"
 #-----------------------------------------------------------------------
 #InfoStoreAdd panel_width 125
 PipeRead "echo InfoStoreAdd panel_width `perl -e \
-	'printf \"%.0f\",($[infostore.row_height]*3*($[infostore.aspect_ratio]))+2'`"
+    'printf \"%.0f\",($[infostore.row_height]*3*($[infostore.aspect_ratio]))+2'`"
 
 # the count of systray icons is calculated by the panel width/icon size - 1 icon
 PipeRead "echo InfoStoreAdd tray_icons `perl -e 'printf \"%.0f\",($[infostore.panel_width]/$[infostore.i_size])-1'`"
@@ -100,7 +100,8 @@ DeskTopSize "$[infostore.x_desks]x$[infostore.y_desks]"
 #-----------------------------------------------------------------------
 # actual pager height
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd pager_height `perl -e 'printf \"%.0f\",(($[infostore.row_height]+($[infostore.wratio]-$[infostore.ratio]))*($[infostore.y_desks]+1)+1)'`"
+PipeRead "echo InfoStoreAdd pager_height `perl -e 'printf \"%.0f\", \
+    (($[infostore.row_height]+($[infostore.wratio]-$[infostore.ratio]))*($[infostore.y_desks]+1)+1)'`"
 
 
 #-----------------------------------------------------------------------
@@ -121,14 +122,15 @@ PipeRead 'echo InfoStoreAdd iconman_button_geometry $(($[infostore.panel_width]-
 #-----------------------------------------------------------------------
 # GlobalIconMan Manager Geometry
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd yStartIman `perl -e 'printf \"%.0f\",(($[vp.height]-($[infostore.panel_height]+$[infostore.pager_height])-($[infostore.fontsize]+15)))'`"
+PipeRead "echo InfoStoreAdd yStartIman `perl -e 'printf \"%.0f\", \
+    (($[vp.height]-($[infostore.panel_height]+$[infostore.pager_height])-($[infostore.fontsize]+15)))'`"
 PipeRead "echo InfoStoreAdd xStartIman `perl -e 'printf \"%.0f\",$[vp.width]-$[infostore.panel_width]-4'`"
 InfoStoreAdd iconman_manager_geometry 1x0+$[infostore.xStartIman]-$[infostore.yStartIman]
 
 #-----------------------------------------------------------------------
 # GlobalIconMan Manager Titlebar position
 #-----------------------------------------------------------------------
-Style GlobalIconManShowHide TitleAtLeft
+Style GlobalIconMan TitleAtLeft
 
 #-----------------------------------------------------------------------
 # GlobalIconMan Manager Tips
@@ -167,7 +169,8 @@ Style * IconBox 20 80 -$[infostore.panel_width] -20, \
 #=======================================================================
 # Load layout elements
 #=======================================================================
-Load modules/GlobalIconMan_ShowHide
+Load modules/GlobalIconMan
+Load modules/ShowHide_GlobalIconMan
 Load modules/Pager
 Load modules/VerticalPanel
 
@@ -176,11 +179,11 @@ Load modules/VerticalPanel
 #=======================================================================
 
 AddToFunc StartFunction
-# start event handler for GlobalIconMan_ShowHide
-+ I Module FvwmEvent FvwmEventShowHide
+# start event handler for GlobalIconMan with ShowHide
++ I Module FvwmEvent FvwmEventGlobalIconMan
 #-----------------------------------------------------------------------
 # start window list module
-+ I Module FvwmIconMan GlobalIconManShowHide
++ I Module FvwmIconMan GlobalIconMan
 #-----------------------------------------------------------------------
 # start Pager
 + I Module FvwmPager
@@ -199,7 +202,6 @@ AddToFunc   ReloadLayoutParts
 + I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.systray.log $FVWM_USERDIR/.trayapplist'
 + I FuncUnsetDeskKeyBindings
 + I Load modules/VerticalPanel
-+ I Load modules/GlobalIconMan_ShowHide
 + I FuncRestartModuleByAlias FvwmButtons VerticalPanel
 + I Wait stalonetray
 + I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist
