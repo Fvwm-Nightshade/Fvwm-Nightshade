@@ -1,15 +1,15 @@
 # Russian translation for FNS-WindowsBehaviour
-# Copyright (C) 2015 Fvwm-Nightshade team
+# Copyright (C) 2016 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Artashes Mkhitaryan <artashm@mytum.de>, 2016.
 #
 msgid ""
 msgstr ""
 
 "Project-Id-Version: FNS-WindowsBehaviour\n"
 "POT-Creation-Date: 2014-11-16 00:01+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2016-01-26 10:50+0200\n"
+"Last-Translator: Artashes Mkhitaryan <artashm@mytum.de>\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,56 +19,60 @@ msgstr ""
 # Titlebar
 ########################################################################
 msgid "FNS Windows Behaviour"
-msgstr ""
+msgstr "FNS Поведение Окон"
 
 ########################################################################
 # Focus Policies
 ########################################################################
 msgid " Focus Policies "
-msgstr ""
+msgstr " Вариации Фокуса "
 
 msgid "Click to Focus"
-msgstr ""
+msgstr "Кликни для Фокуса"
 
 msgid "Give the focus to a window when it is clicked in."
-msgstr ""
+msgstr "Фокусирования на окне пре клике"
 
 msgid "Focus follows Mouse"
-msgstr ""
+msgstr "Фокусирования на окне находящемся под мышью"
 
 msgid "Give a window the focus as the pointer enters the window, and take it away when leaving."
-msgstr ""
+msgstr "Пре входе пойнтера в окно, сфокусировать на окне. Пре выходе пойнтера рас-фокусировать окно."
 
 msgid "Sloopy Focus"
-msgstr ""
+msgstr "Неуклюжий Фокус"
 
 msgid ""
 "Give a window the focus as the pointer enters the window, but doesn't give "
 "up the focus if the pointer leaves the window to pass over the root window."
 msgstr ""
+"Пре входе пойнтера в окно, сфокусироваться на окне. Пре выходе пойнтера в коренное "
+"окно, оригинальное окно остается в фокусе."
 
 ########################################################################
 # Raise Options
 ########################################################################
 msgid " Raise Options "
-msgstr ""
+msgstr " Всплыть Опции "
 
 msgid "Raise if focused"
-msgstr ""
+msgstr "Всплыть если в фокусе"
 
 msgid "Controls if the window is raised when focused (depending on the focus model)."
-msgstr ""
+msgstr "Контроль всплыть окон в фокусе (В зависимости от модели фокуса)"
 
 msgid "Stack Transient Parent"
-msgstr ""
+msgstr "Стек Преходящего Родителя"
 
 msgid ""
 "This style transfers the raise action to the main window makes raise on a "
 "transient act just like raise on its main - the whole group is raised."
 msgstr ""
+"Этот стиль передает акт всплытия основному окну при переходящем акте. Вся группа "
+"всплывает точно так же как и основное окно."
 
 msgid "No Raise Click on Motion"
-msgstr ""
+msgstr "Всплывающий Клик Де-активирован Пре Движении."
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with "
@@ -78,15 +82,20 @@ msgid ""
 "bindings on the client window are not guaranteed to work anymore. The distance "
 "that the pointer must be moved to trigger this is controlled by the MoveThreshold below."
 msgstr ""
+"Если этот стиль активирован, то клик в окне и перетаскивания пойнтера (не отпуская "
+"кнопки) не считается как клик для всплытия окна. Программа обработает этот процесс "
+"как нормальный. Этот стиль удобен для выделения текста в терминале, без всплывающего окна. "
+"Правильная работа связок мыши в окне клиента не гарантируется. Минимальная дистанция "
+"для активации этой функции контролируется MoveThreshold переменной."
 
 ########################################################################
 # Focus Options
 ########################################################################
 msgid " Focus Options "
-msgstr ""
+msgstr " Опции Фокуса "
 
 msgid "Grab Focus"
-msgstr ""
+msgstr "Сфокусироваться"
 
 msgid ""
 "New normal windows with the 'Grab Focus' style automatically receive the focus "
@@ -94,18 +103,25 @@ msgid ""
 "style. Note that even if this style is disabled, the application may take the focus "
 "itself. Fvwm can not prevent this."
 msgstr ""
+"Пре стиле 'Сфокусироваться' новое нормальное окно автоматически перенимает фокус. "
+"GrabFocus является умолчаниям для окон с стилем ClickToFocus. Даже если этот стиль "
+"не активен программа может забрать фокус самостоятельно. Предотвращение этого Fvwm-ом "
+"невозможно."
 
 msgid "Grab Focus Transient"
-msgstr ""
+msgstr "Захват переходящего фокуса"
 
 msgid ""
 "New transient windows with the 'Grab Focus Transient' style automatically "
 "receive the focus when they are created. Note that even if this style is "
 "disabled, the application may take the focus itself. Fvwm can not prevent this."
 msgstr ""
+"Новые переходящие окна в стиле 'Захват переходящего фокуса' перенимают фокус пре создании. "
+"Даже если этот стиль не активен, программы могут забрать фокус сомостоятелно. Fvwm неможет "
+"превратить эти действие."
 
 msgid "No Focus Click on Motion"
-msgstr ""
+msgstr "Вез фокус клика пре движении"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with the "
@@ -115,42 +131,52 @@ msgid ""
 "on the client window are not guaranteed to work anymore. The distance that the pointer "
 "must be moved to trigger this is controlled by the MoveThreshold below."
 msgstr ""
+"Если этот стиль активирован, то клик в окне и перетаскивания пойнтера (не отпуская "
+"кнопки) не считается как клик для всплытия окна. Программа обработает этот процесс "
+"как нормальный. Этот стиль удобен для выделения текста в терминале, без всплывания окна. "
+"Правильная работа связок мыши в окне клиента не гарантируется. Минимальная дистанция "
+"для активации этой функции контролируется переменной MoveThreshold."
 
 msgid "Focus by Program"
-msgstr ""
+msgstr "Фокус Программой"
 
 msgid "Allows windows to take the focus themselves."
-msgstr ""
+msgstr "Позволяет окнам самостоятельно переносить фокус."
 
 ########################################################################
 # Window Placement
 ########################################################################
 msgid " Window Placement "
-msgstr ""
+msgstr " Размещение Окон "
 
 msgid "Tile Cascade Placement"
-msgstr ""
+msgstr "Размещение Каскада Заглавий"
 
 msgid ""
 "Places new windows in a smart location - a location in which they do not overlap any "
 "other windows on the screen. If no such position can be found Cascade Placement is "
 "used as a fall-back method."
 msgstr ""
+"Умное размещение окон. Окна размещены так что они не покрывают другие окна на экране. "
+"Если такое размещение не возможно, употребляется метод каскадного размещения как план Б."
+
 
 msgid "Manual Placement"
-msgstr ""
+msgstr "Мануальное Размещение"
 
 msgid "This is the same as Tile Cascade Placement, but uses Manual Placement as the fall-back method."
 msgstr ""
+"Так же как и Размещение Каскада Заглавий, но в этом методе Мануальное Размещение употребляется "
+"как план Б"
 
 msgid "Cascade Placement"
-msgstr ""
+msgstr "Каскадное Размещение"
 
 msgid "Place new windows in a cascading fashion."
-msgstr ""
+msgstr "Размещает новые окна в каскадном стиле."
 
 msgid "Tile Manual Placement"
-msgstr ""
+msgstr "Мануальное Размещение Заглавий"
 
 msgid ""
 "The user is required to place every new window manually. The window only shows as a rubber "
@@ -158,15 +184,22 @@ msgid ""
 "key except Escape is pressed. Escape aborts manual placement which places the window in the "
 "top left corner of the screen."
 msgstr ""
+"Каждое новое окно должно быть размещено мануально. Окно будет показано как резинка до "
+"мануального выделения позиции. Окно размещается при нажатии кнопки мыши, иле же любой "
+"кнопки на клавиатуре за исключением Выхода. Пре нажатии Выхода мануально размещение окна "
+"отменяется и окно размещается в левом верхнем углу экрана."
 
 msgid "Position Placement"
-msgstr ""
+msgstr "Позиция Размещения"
 
 msgid ""
 "When used with 'TopLeft', new windows are placed in the top left corner of the display. "
 "With 'Center', all new window appear at the center of the screen, and with 'UnderMouse', "
 "windows are centered under the mouse pointer where possible."
 msgstr ""
+"Пре употреблении 'TopLeft' новые окна размещены в левом верхнем углу экрана. "
+"Пре употреблении 'Center' новые окна размещены в центре экрана. Пре употреблении "
+"'UnderMouse', новые окна размещены в под курсором, пре возможности. "
 
 msgid "Window:"
 msgstr ""
@@ -185,18 +218,23 @@ msgid ""
 "all new window appear at the center of the screen, and with 'UnderMouse', windows are centered "
 "under the mouse pointer where possible."
 msgstr ""
+"Пре употреблении 'TopLeft' новые окна размещены в левом верхнем углу экрана. "
+"Пре употреблении 'Center' новые окна размещены в центре экрана. Пре употреблении "
+"'UnderMouse', новые окна размещены в под курсором, пре возможности."
 
 msgid "Min Overlap Placement"
-msgstr ""
+msgstr "Размещение с минимальной накладкой"
 
 msgid ""
 "Automatically places new windows in a location in which the overlapping area in pixels "
 "of other windows is minimized. By default this placement policy tries to avoid "
 "overlapping icons and windows on higher layers."
 msgstr ""
+"Автоматическое размещение окон с минимальной накладкой в пикселях. По умолчанию этот стиль "
+"пытается предотвратить накладку иконок и окон в высших уровнях."
 
 msgid "Penalties:"
-msgstr ""
+msgstr "Пенальти:"
 
 msgid ""
 "The Penalties takes at most 6 positive or null decimal arguments: 'normal' 'ontop' 'icon' 'sticky' "
@@ -209,35 +247,47 @@ msgid ""
 "These 'factors' represent the amount of area that these types of windows (or area) are counted as, when "
 "a new window is placed. For example, by default the area of ontop windows is counted 5 times as much as normal windows."
 msgstr ""
+"Пенальти принимает максимум 6 позитивных иле нулевых децимальных аргументов: 'normal' 'ontop' 'icon' 'sticky' "
+"'below' 'strut'. \n\n  Фактор 'normal' влияет на нормальные окна. Фактор 'ontop' влияет на окна в высших уровнях "
+"чем новое окно. Фактор 'icon' влияет на иконки. Фактор 'sticky' влияет на ликие окна. Фактор 'below' влияет на "
+"окна в нижних уровнях чем новое окно. Фактор 'strut' влияет на комплимент EWMH рабочей площади. Если новое окно "
+"имеет стиль EWMHPlacementUseWorkingArea и существующие окна имеют EWMH strut (т.е. 'please do not cover me'). "
+"Эти факторы репрезентируют площади занимаемыми вверху упомянутыми окнами, при создании нового окна. К премьеру, "
+"по умолчанию окна с 'ontop' имеют в 5 раз большую площадь чем нормальные окна. "
 
 msgid "Min Overlap Percent Placement"
-msgstr ""
+msgstr "Размещение с Минимальным Процентом Накладки"
 
 msgid ""
 "Tries to minimize the overlapped percentages of other windows instead of the overlapped area in pixels. "
 "This placement policy tries to avoid covering other windows completely and tries even harder not to cover small windows."
 msgstr ""
+"Минимизирует процент накладки окон в место пикселей. Этот стиль пытается полностью избежать накладку окон, специальный "
+"приоритет отдан маленьким окнам."
 
 msgid ""
 "The Penalties takes at most 4 positive or null integer arguments: 'cover_100' 'cover_95' 'cover_85' "
 "'cover_75'. The 'cover_xx' factor is used when the window being placed covers at least xx percent of "
 "the window. This factor is added to the factor determined by the Min Overlap Placement Penalties."
 msgstr ""
+"Пенальти принимает максимум 4 позитивных иле нулевых интегральных аргументов: 'cover_100' 'cover_95' 'cover_85' "
+"'cover_75'. Фактор 'cover_xx' используется когда новое окно перекрывает xx процент существующего окна. Этот фактор "
+"добавляется к фактору определенному пенальти 'Размещение с Минимальным Процентом Накладки'."
 
 ########################################################################
 # Miscellaneous
 ########################################################################
 msgid " Miscellaneous "
-msgstr ""
+msgstr " Разное "
 
 msgid "Hide Geometry Window"
-msgstr ""
+msgstr "Скрыть Окно Геометрии"
 
 msgid "Hides the position or size window that is usually shown when a window is moved or resized interactively."
-msgstr ""
+msgstr "Скрыть позицию иле размер окна при интерактивном передвижении окна."
 
 msgid "Resize Opaque"
-msgstr ""
+msgstr "Не прозрачное Смена Размера."
 
 msgid ""
 "Instructs fvwm to resize the corresponding windows with their contents visible "
@@ -246,18 +296,25 @@ msgid ""
 "of graphics the application redraws. Some applications do not like their windows being "
 "resized opaque, e.g. XEmacs or terminals with a pixmap background."
 msgstr ""
+"fvwm изменяет размер окна с видимым содержанием, нормальное изменение размера показывает "
+"только контур окна. Поскольку в этом состоянии окно должно постоянно перерисовываются, процесс медленный и "
+"возможно экстенсивное мигание окна в зависимости от графических запросов окна. Некоторые программы не любят "
+"прозрачное изменение окна, к примеру XEmacs или терминалы с пиксмаповым фоном."
 
 msgid "Move Threshold:"
-msgstr ""
+msgstr "Трешолд Движения:"
 
 msgid ""
 "When the user presses a mouse button upon an object fvwm waits to see if the action "
 "is a click or a drag. If the mouse moves by more than x pixels (default is 3) it is "
 "assumed to be a drag (the default value might be increased when 16000x9000 pixel displays become affordable)."
 msgstr ""
+"При нажатии кнопки на обьекте fvwm ждет чтобы определить тип действия: клик, драг. Пре передвижении курсора на "
+"х пикселей (3 по умолчанию) действие считается драгом (Значение по умолчанию может быть больше для дисплеев "
+"с резолюцией в 16000x9000)."
 
 msgid "Opaque Move Size:"
-msgstr ""
+msgstr "Прозрачный Размер Движения:"
 
 msgid ""
 "Tells fvwm the maximum size window with which opaque window movement should be used. "
@@ -266,39 +323,43 @@ msgid ""
 "given all windows are moved as solid windows. The default is 5 which allows small "
 "windows to be moved in an opaque manner but large windows are moved as rubber-bands."
 msgstr ""
+"Определяет максимальный размер окна для прозрачных окон. Процент определяет процент всего экрана "
+"(может принять значение больше 100). Пре 0 все окна передвигаются с употреблением традиционной "
+"резинки. Пре -1 все окна передвигаются как солидные объекты. 5 является значением по умолчанию, "
+"маленькие окна передвигаются в прозрачной манере а большие окна как резинка."
 
 ########################################################################
 # Button bar
 ########################################################################
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 msgid "Save new settings"
-msgstr ""
+msgstr "Сохранить новые опции"
 
 msgid "Help"
-msgstr ""
+msgstr "Помощ"
 
 msgid "Get help"
-msgstr ""
+msgstr "Попросить о Помощи"
 
 msgid "Apply"
-msgstr ""
+msgstr "Применить"
 
 msgid "Apply new settings"
-msgstr ""
+msgstr "Применить новые опции"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Отменить"
 
 msgid "Cancel/Quit windows behaviour settings."
-msgstr ""
+msgstr "Отменить/Выйти из меню поведения окон"
 
 msgid "You have unsaved changes! Continue anyway?"
-msgstr ""
+msgstr "Присутствуют не сохраненные изменения! Продолжить?"
 
 msgid "You have unapplied changes! Continue anyway?"
-msgstr ""
+msgstr "Присутствуют не примененные изменения! Продолжить?"
 
 msgid "Warning"
-msgstr ""
+msgstr "Внимание"
