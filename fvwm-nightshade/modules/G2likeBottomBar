@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         G2likeBottomBar
-# Version:      1.2.0
+# Version:      1.2.1
 # Licence:      GPL 2
 #
 # Description:  Gnome like bottom bar with All iconify/deiconify button,
@@ -10,7 +10,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      10/09/2012
-# Changed:      01/19/2016
+# Changed:      01/26/2016
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -132,7 +132,7 @@ DestroyModuleConfig G2likeBottomBar: *
 #-----------------------------------------------------------------------
 # GlobalIconMan
 #-----------------------------------------------------------------------
-*G2likeBottomBar: ($[infostore.iconman_columns]x1, Colorset 13, Swallow "GlobalIconManBar")
+*G2likeBottomBar: ($[infostore.iconman_columns]x1, Colorset 13, Swallow "GlobalIconMan")
 
 #-----------------------------------------------------------------------
 # FvwmPager
