@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         KlikeBottomBar
-# Version:      1.3.1
+# Version:      1.3.2
 # Licence:      GPL 2
 #
 # Description:  KDE like bottom bar with menu and iconify/deiconify button,
@@ -52,7 +52,8 @@ PipeRead    'if [ "$[vp.width]" -gt "2400" ]; then \
 #-----------------------------------------------------------------------
 # needed tray columns
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd tray_columns `perl -e 'printf \"%.0f\",$[infostore.tray_icons]*1.7'`"
+PipeRead 'echo InfostoreAdd tray_max_x $(($[infostore.tray_icons]+1))'
+PipeRead "echo InfoStoreAdd tray_columns `perl -e 'printf \"%.0f\",$[infostore.tray_max_x]*1.7'`"
 
 
 #=======================================================================
@@ -255,7 +256,7 @@ DestroyModuleConfig KlikeBottomBar: *
 #-----------------------------------------------------------------------
 *KlikeBottomBar: ($[infostore.tray_columns]x1, Right, Colorset 13, \
                   Swallow (UseOld, Close, Kill, Respawn) "stalonetray" \
-                  `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_icons]x1 \
+                  `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_max_x]x1 \
                   --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
                   --grow-gravity E --icon-gravity W --kludges force_icons_size -i $[infostore.i_size] \
                   --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
