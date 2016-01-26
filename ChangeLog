@@ -1,5 +1,12 @@
 History:
 
+01/26/2015
+- update layouts (G2like, Horizontal, Vertical) to new reorganized Iconman modules 
+- subtract one column from IconMan in KlikeBottomBar to prevent overlapping with systray
+- rename IconMan to GlobalIconMan in G2likeBottomBar
+- update G2likeTopBar to new scaling calculations
+- update version in config
+
 01/24/2015
 - update calculations in all layouts and their modules to allow scaling up to 4K
 - update ratio calculations in config to allow scaling up to 4K
