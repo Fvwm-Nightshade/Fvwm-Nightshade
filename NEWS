@@ -27,6 +27,7 @@ Changes:
 - Support for up to 10 virtual desktop pages. Depends on the limit of
   available numeric keys (0-9)
 - Layouts now scalable up to 4K resolutions
+- Add support for conky >= 1.10
 
 ------------------------------------------------------------------------
 
