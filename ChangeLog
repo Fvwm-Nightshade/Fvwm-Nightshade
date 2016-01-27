@@ -6,6 +6,8 @@ History:
 - rename IconMan to GlobalIconMan in G2likeBottomBar
 - update G2likeTopBar to new scaling calculations
 - update version in config
+- add forgotten tray_max_x in KlikeBottomBar for systray
+- add last Russian translation file fns-win-behaviour.ru.po from Art and its .mo \0/
 
 01/24/2015
 - update calculations in all layouts and their modules to allow scaling up to 4K
