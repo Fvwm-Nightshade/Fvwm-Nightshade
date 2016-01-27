@@ -1,15 +1,21 @@
 History:
 
-01/26/2015
+01/27/2016
+- add forgotten tray_max_x in KlikeBottomBar for systray
+- add last Russian translation file fns-win-behaviour.ru.po from Art and its .mo \0/
+- rename conkyrc_clock to conky0Xrc_clock and conkyrc_cpu to conky0Xrc_cpu. 0X means conky version <= 1.9
+- add conky1Xrc_clock and conky1Xrc_cpu to layouts/rc-files. 1X means conky version >= 1.10. 
+- add conky version check in all modules with conky swallowed in FvwmButtons to fix issue #59
+- update NEWS that FNS now supports conky >= 1.10 (new config format)
+
+01/26/2016
 - update layouts (G2like, Horizontal, Vertical) to new reorganized Iconman modules 
 - subtract one column from IconMan in KlikeBottomBar to prevent overlapping with systray
 - rename IconMan to GlobalIconMan in G2likeBottomBar
 - update G2likeTopBar to new scaling calculations
 - update version in config
-- add forgotten tray_max_x in KlikeBottomBar for systray
-- add last Russian translation file fns-win-behaviour.ru.po from Art and its .mo \0/
 
-01/24/2015
+01/24/2016
 - update calculations in all layouts and their modules to allow scaling up to 4K
 - update ratio calculations in config to allow scaling up to 4K
 - removing IconMan modules (GlobalIconMan_Bar, GlobalIconMan_ShowHide, GlobalIconMan_TopBottom)
