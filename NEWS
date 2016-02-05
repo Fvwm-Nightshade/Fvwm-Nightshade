@@ -28,6 +28,7 @@ Changes:
   available numeric keys (0-9)
 - Layouts now scalable up to 4K resolutions
 - Add support for conky >= 1.10
+- Support for Russian language
 
 ------------------------------------------------------------------------
 
