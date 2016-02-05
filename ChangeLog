@@ -1,5 +1,11 @@
 History:
 
+02/05/2016
+- fix missing comment in .settings
+- update README that version works again ^^
+- add 'Support for Russian language' in NEWS
+- update version in config
+
 01/27/2016
 - add forgotten tray_max_x in KlikeBottomBar for systray
 - add last Russian translation file fns-win-behaviour.ru.po from Art and its .mo \0/
