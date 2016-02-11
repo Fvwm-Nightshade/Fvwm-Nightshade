@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         G2likeTopBar
-# Version:      1.2.1
+# Version:      1.2.2
 # Licence:      GPL 2
 #
 # Description:  Gnome like top bar with root menu, personal menu, systray,
@@ -10,7 +10,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      10/09/2012
-# Changed:      01/27/2016
+# Changed:      02/10/2016
 #-----------------------------------------------------------------------
 #
 # Topbar
@@ -122,7 +122,7 @@ PipeRead `perl -e 'if ($[vp.height] > 1400) { \
 #-----------------------------------------------------------------------
 # Find Personal icon
 #-----------------------------------------------------------------------
-PipeRead "if [ `fns-find-icon -n 'bookmark-new' -s $[infostore.i_size] -c 'actions' --notdesk` != '' ]; then \
+PipeRead "if [ `fns-find-icon -n 'bookmark-new' -s $[infostore.i_size] -c 'actions' --notdesk` ]; then \
             echo InfoStoreAdd personal_icon `fns-find-icon -n 'bookmark-new' -s $[infostore.i_size] -c 'actions' --notdesk`; \
           else \
             echo InfoStoreAdd personal_icon 'home.svg:$[infostore.i_size]x$[infostore.i_size]'; \
@@ -131,7 +131,7 @@ PipeRead "if [ `fns-find-icon -n 'bookmark-new' -s $[infostore.i_size] -c 'actio
 #-----------------------------------------------------------------------
 # find logout icon
 #-----------------------------------------------------------------------
-PipeRead "if [ `fns-find-icon -n 'system-log-out' -s $[infostore.i_size] -c 'actions' --notdesk` != '' ]; then \
+PipeRead "if [ `fns-find-icon -n 'system-log-out' -s $[infostore.i_size] -c 'actions' --notdesk` ]; then \
             echo InfoStoreAdd logout_icon `fns-find-icon -n 'system-log-out' -s $[infostore.i_size] -c 'actions' --notdesk`; \
           else \
             echo InfoStoreAdd logout_icon 'logout.svg:$[infostore.i_size]x$[infostore.i_size]'; \

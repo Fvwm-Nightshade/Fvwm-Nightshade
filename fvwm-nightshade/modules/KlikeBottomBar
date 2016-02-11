@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         KlikeBottomBar
-# Version:      1.3.3
+# Version:      1.3.4
 # Licence:      GPL 2
 #
 # Description:  KDE like bottom bar with menu and iconify/deiconify button,
@@ -10,7 +10,7 @@
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      04/27/2014
-# Changed:      01/27/2016
+# Changed:      02/10/2016
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -63,7 +63,7 @@ PipeRead "echo InfoStoreAdd tray_columns `perl -e 'printf \"%.0f\",$[infostore.t
 #-----------------------------------------------------------------------
 # find desktop icon
 #-----------------------------------------------------------------------
-PipeRead "if [ `fns-find-icon -n 'preferences-system-windows' -s $[infostore.i_size] --notdesk` != '' ]; then \
+PipeRead "if [ `fns-find-icon -n 'preferences-system-windows' -s $[infostore.i_size] --notdesk` ]; then \
             echo InfoStoreAdd desktop_icon `fns-find-icon -n 'preferences-system-windows' -s $[infostore.i_size] --notdesk`; \
           else \
             echo InfoStoreAdd desktop_icon 'window-icons.svg:$[infostore.i_size]x$[infostore.i_size]'; \
