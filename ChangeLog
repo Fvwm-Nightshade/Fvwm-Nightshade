@@ -1,5 +1,9 @@
 History:
 
+02/11/2016
+- fix some if constructs that no error occur if an icon or file not found
+- update version in config
+
 02/10/2016
 - remove old marple wallpaper
 - add new pitchblack wallpapers (16:9 and 4:3)
