@@ -14,7 +14,7 @@ msgstr ""
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 ########################################################################
@@ -31,7 +31,7 @@ msgid " Environment "
 msgstr " Entorno "
 
 msgid "Splash On"
-msgstr "Pantalla de bienvenida Activada"
+msgstr "Activar pantalla inicio"
 
 msgid "Run Banner at startup? Default: on"
 msgstr "¿Ejecutar Banner al inicio? Por defecto: activado"
@@ -62,10 +62,10 @@ msgid " Desktop "
 msgstr " Escritorio "
 
 msgid "Wallpaper Dirs:"
-msgstr "Directorios para tapices:"
+msgstr "Papel pintado dirs:"
 
 msgid "Wallpaper directories, separated by ':'."
-msgstr "Directorios para tapices, separado por ':'."
+msgstr "Directorios papel pintado, separado por ':'."
 
 msgid "Icons on Desktop"
 msgstr "Iconos en el escritorio"
@@ -102,7 +102,7 @@ msgid " Decorations & Panels "
 msgstr " Paneles y decoraciones"
 
 msgid "Used Layout:"
-msgstr "Disposición usada:"
+msgstr "Diseño usada:"
 
 msgid "The actual FNS layout."
 msgstr "La disposición FNS actual."
@@ -124,10 +124,10 @@ msgstr "Fuente utilizada por defecto en FNS."
 ########################################################################
 
 msgid " Default Applications "
-msgstr " Aplicaciones Predeterminadas "
+msgstr " Aplicaciones predeterminadas "
 
 msgid "Browser:"
-msgstr "Navegador:"
+msgstr "Browser:"
 
 msgid "Default browser in FNS."
 msgstr "Navegador por defecto en FNS."

@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fns-cpu-performance\n"
 "POT-Creation-Date: 2014-12-08 23:37+0200\n"
-"PO-Revision-Date: 2015-09-22 22:28+0200\n"
+"PO-Revision-Date: 2016-02-14 03:49+0200\n"
 "Last-Translator: Dominique Michel <dominique_libre@users.sourceforge.net>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -33,7 +33,7 @@ msgid "Model:"
 msgstr "Modèle:"
 
 msgid "CPU Count:"
-msgstr "Nombre de CPU:"
+msgstr "Nombre d CPU:"
 
 msgid "Manufacturer:"
 msgstr "Fabricant:"
@@ -137,13 +137,13 @@ msgstr ""
 "l'une des fréquences dans 'Fréquence min', ou le gouverneur 'Performance' en combinaison avec 'Fréquence max'."
 
 msgid "Min Frequency:"
-msgstr "Fréquence minimum:"
+msgstr "Fréquence min:"
 
 msgid "Sets the minimum used frequency from the range of available frequencies."
 msgstr "Règlez la fréquence minimale utilisée de l'échelle des fréquences disponibles."
 
 msgid "Max Frequency:"
-msgstr "Fréquence maximum:"
+msgstr "Fréquence max:"
 
 msgid "Sets the maximum used frequency from the range of available frequencies."
 msgstr "Règlez la fréquence maximale utilisée de l'échelle des fréquences disponibles."

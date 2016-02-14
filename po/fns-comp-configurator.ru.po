@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: FNS-CompConfigurator\n"
 "POT-Creation-Date: 2014-10-29 19:11+0200\n"
 "PO-Revision-Date: 2015-02-14 12:10+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Artashes Mkhitaryan artashm@mytum.de\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
 "Conten-Type: text/plain; charset=UTF-8\n"
@@ -66,7 +66,7 @@ msgid " Shadows "
 msgstr " Тени "
 
 msgid "Enable Shadows"
-msgstr " Включить Тени"
+msgstr "Включить Тени"
 
 msgid ""
 "Enable client-side shadows on windows.\n"
@@ -125,37 +125,37 @@ msgid " Fading "
 msgstr " Затухание "
 
 msgid "Enable Fading"
-msgstr " Включить Затухание"
+msgstr "Включить Затухание"
 
 msgid "Enable in/out fading of windows."
 msgstr "Включить в/из затухание окон."
 
 msgid "On Opacity changed"
-msgstr "При перемене прозрачности"
+msgstr "изменения Прозрачность"
 
 msgid "Enables fade effect when windows change their opacity."
 msgstr "Включить эффект затухания при перемене прозрачности окон."
 
 msgid "On Open / Close"
-msgstr "При Открытии / Закрытии"
+msgstr "При открыть/близко"
 
 msgid "Enables fade effect when windows open or close."
 msgstr "Включить эффект затухания при открытии закрытии окон."
 
 msgid "Fade-in Steps:"
-msgstr "Стадии Постепенного Появления:"
+msgstr "исчезать в шаг:"
 
 msgid "Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)."
 msgstr "Перемена прозрачности между стадиями переменного появления. (0.01 - 1.0, По умолчанию 0.28)."
 
 msgid "Fade-out Steps:"
-msgstr "Стадии Переменного Угасания:"
+msgstr "исчезать шаг:"
 
 msgid "Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)."
 msgstr "Перемена прозрачности между стадиями переменного угасания. (0.01 - 1.0, По умолчанию 0.28)."
 
 msgid "Fade Step Time:"
-msgstr "Время между стадиями затухания:"
+msgstr "Fade Шаг Время:"
 
 msgid "The time between steps in fade step, in milliseconds. (> 0, defaults to 10)."
 msgstr "Время между стадиями затухания, в миллисекундах. (> 0, По умолчанию 10)."
@@ -168,7 +168,7 @@ msgid " Menus "
 msgstr " Меню "
 
 msgid "Opacity on Menus:"
-msgstr "Прозрачность Меню:"
+msgstr "помутнение меню:"
 
 msgid "Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0)."
 msgstr "Прозрачность по умолчанию для выпадающих и всплывающих меню."

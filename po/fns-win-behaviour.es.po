@@ -14,7 +14,7 @@ msgstr ""
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 ########################################################################
@@ -64,7 +64,7 @@ msgid "Controls if the window is raised when focused (depending on the focus mod
 msgstr "Controlar si la ventana se levanta cuando está enfocada (dependiendo del modelo de enfoque)."
 
 msgid "Stack Transient Parent"
-msgstr "Apilar Padre de ventana transitoria"
+msgstr "Apilar padre transitorio"
 
 msgid ""
 "This style transfers the raise action to the main window makes raise on a "
@@ -74,7 +74,7 @@ msgstr ""
 "de forma que todo el grupo es levantado al mismo tiempo."
 
 msgid "No Raise Click on Motion"
-msgstr "No levantar al hacer clic en movimiento"
+msgstr "No levantar clic en moción"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with "
@@ -125,7 +125,7 @@ msgstr ""
 "deshabilitado, la aplicación podría tomar enfoque por sí misma. Fvwm no puede evitar esto."
 
 msgid "No Focus Click on Motion"
-msgstr "Ningún Enfoque al hacer Clic en Movimiento"
+msgstr "No foco clic en moción"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with the "
@@ -155,7 +155,7 @@ msgid " Window Placement "
 msgstr " Colocación de Ventana "
 
 msgid "Tile Cascade Placement"
-msgstr " Colocación Cascada de Baldosas"
+msgstr "Cascada de Baldosas"
 
 msgid ""
 "Places new windows in a smart location - a location in which they do not overlap any "
@@ -187,7 +187,7 @@ msgid "Place new windows in a cascading fashion."
 msgstr "Colocar nuevas ventanas siguiendo un patrón de cascada."
 
 msgid "Tile Manual Placement"
-msgstr "Colocación Manual de Baldosas"
+msgstr "Manual de Baldosas"
 
 msgid "This is the same as Tile Cascade Placement, but uses Manual Placement as the fall-back method."
 msgstr "Esto es lo mismo que la Colocación Cascada de Baldosas, pero usa la Colocación Manual como el método alternativo."
@@ -226,7 +226,7 @@ msgstr ""
 "bajo el puntero del ratón donde sea posible."
 
 msgid "Min Overlap Placement"
-msgstr "Colocación de Mínimo Solapamiento"
+msgstr "Mínimo Solapamiento"
 
 msgid ""
 "Automatically places new windows in a location in which the overlapping area in pixels "
@@ -278,7 +278,7 @@ msgid "sticky"
 msgstr "sticky"
 
 msgid "Min Overlap Percent Placement"
-msgstr "Colocación de Mínimo Porcentaje de Solapamiento"
+msgstr "Mínimo Porcentaje Solapamiento"
 
 msgid ""
 "Tries to minimize the overlapped percentages of other windows instead of the overlapped area in pixels. "
@@ -304,7 +304,7 @@ msgid " Miscellaneous "
 msgstr " Miscelanea "
 
 msgid "Hide Geometry Window"
-msgstr "Ocultar ventana de geometría"
+msgstr "Ocultar ventana geometría"
 
 msgid "Hides the position or size window that is usually shown when a window is moved or resized interactively."
 msgstr "Ocultar la posición o el tamaño que es normalmente mostrado cuando una ventana es movida o redimensionada iterativamente."
@@ -338,7 +338,7 @@ msgstr ""
 "asume un arrastre (el valor por defecto debería ser incrementado cuando 16000x9000 pixel se muestran y se convierte en alcanzable)."
 
 msgid "Opaque Move Size:"
-msgstr "Tamaño de movimiento opaco:"
+msgstr "Talla movimiento opaco:"
 
 msgid ""
 "Tells fvwm the maximum size window with which opaque window movement should be used. "

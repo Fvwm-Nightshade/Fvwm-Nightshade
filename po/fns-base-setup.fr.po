@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-BaseSetup\n"
 "POT-Creation-Date: 2014-10-10 21:54+0200\n"
-"PO-Revision-Date: 2015-07-23 18:09+0100\n"
+"PO-Revision-Date: 2016-02-14 03:46+0200\n"
 "Last-Translator: Dominique Michel <dominique_libre@users.sourceforge.net>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -61,7 +61,7 @@ msgid " Desktop "
 msgstr " Bureau "
 
 msgid "Wallpaper Dirs:"
-msgstr "Répertoire des papiers peints:"
+msgstr "Rép. papiers peints:"
 
 msgid "Wallpaper directories, separated by ':'."
 msgstr "Répertoires des papiers peints, séparés par ':'."
@@ -126,7 +126,7 @@ msgid " Default Applications "
 msgstr " Applications par défaut "
 
 msgid "Browser:"
-msgstr "Navigateur:"
+msgstr "Browser:"
 
 msgid "Default browser in FNS."
 msgstr "Navigateur par défaut de FNS."

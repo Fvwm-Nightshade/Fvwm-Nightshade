@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: FNS-BaseSetup\n"
 "POT-Creation-Date: 2014-10-10 21:54+0200\n"
 "PO-Revision-Date: 2015-02-14 12:29+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Artashes Mkhitaryan artashm@mytum.de\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,7 +60,7 @@ msgid " Desktop "
 msgstr " Рабочий стол "
 
 msgid "Wallpaper Dirs:"
-msgstr "Обои:"
+msgstr "Обои директории:"
 
 msgid "Wallpaper directories, separated by ':'."
 msgstr "Директории обоев разделены ':'."
@@ -78,7 +78,7 @@ msgid "Change size of the desktop icons."
 msgstr "Изменить размер иконок на рабочем столе."
 
 msgid "Desktop scrolling On"
-msgstr "Прокрутка рабочего стола Включена"
+msgstr "Прокрутка рабочего стола"
 
 msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on."
 msgstr "При касании курсора края страницы, включить прокрутку страницы? По умолчанию: Включено."
@@ -100,19 +100,19 @@ msgid " Decorations & Panels "
 msgstr " Декорации и Панели "
 
 msgid "Used Layout:"
-msgstr "Примененная Выкладка:"
+msgstr "конструкции:"
 
 msgid "The actual FNS layout."
 msgstr "Актуальная выкладка FNS."
 
 msgid "Used Theme:"
-msgstr "Примененная Тема:"
+msgstr "Тема:"
 
 msgid "The actual FNS decor theme."
 msgstr "Актуальный декор FNS темы."
 
 msgid "Used Font:"
-msgstr "Примененный Фонт:"
+msgstr "Фонт:"
 
 msgid "Used default font in FNS."
 msgstr "Применить стандартные фонты в FNS."

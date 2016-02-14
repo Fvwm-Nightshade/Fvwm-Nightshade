@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-CompConfigurator\n"
 "POT-Creation-Date: 2014-10-29 19:11+0200\n"
-"PO-Revision-Date: 2015-07-24 18:50+0100\n"
+"PO-Revision-Date: 2016-02-14 03:47+0200\n"
 "Last-Translator: Dominique Michel <dominique_libre@users.sourceforge.net>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -82,7 +82,7 @@ msgstr ""
 "jamais d'ombre."
 
 msgid "On Docks / Panels"
-msgstr "Sur les panneaux et les boutons"
+msgstr "Sur panneaux/boutons"
 
 msgid "Painting shadows on panels and docks."
 msgstr "Peindre des ombres sur les panneaux et les boutons."
@@ -137,25 +137,25 @@ msgid "Enable in/out fading of windows."
 msgstr "Activer le fondu entrant / sortant des fenêtres."
 
 msgid "On Opacity changed"
-msgstr "Effet de changement d'opacité"
+msgstr "Sur changement d'opacité"
 
 msgid "Enables fade effect when windows change their opacity."
 msgstr "Activer l'effet de fondu lorsque les fenêtres changent leur opacité."
 
 msgid "On Open / Close"
-msgstr "Effet lors d'ouverture / fermeture"
+msgstr "Sur d'ouverture/fermeture"
 
 msgid "Enables fade effect when windows open or close."
 msgstr "Activer l'effet de fondu lors de l'ouverture et de la fermeture des fenêtres."
 
 msgid "Fade-in Steps:"
-msgstr "Pas du fondu entrant:"
+msgstr "Intervalle en fondu:"
 
 msgid "Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)."
 msgstr "Changement d'opacité entre les étapes du renforcement. (0,01 à 1,0, par défaut à 0,028)."
 
 msgid "Fade-out Steps:"
-msgstr "Pas du fondu sortant:"
+msgstr "Intervalle disparaître:"
 
 msgid "Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)."
 msgstr "Changement d'opacité entre les étapes de l'estompement. (0,01 à 1,0, par défaut à 0,03)."
@@ -174,7 +174,7 @@ msgid " Menus "
 msgstr " Menus "
 
 msgid "Opacity on Menus:"
-msgstr "Opacité sur les menus:"
+msgstr "Opacité sur menus:"
 
 msgid "Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0)."
 msgstr "Opacité par défaut pour les menus déroulants et contextuels. (0.0 - 1.0, par défaut 1.0)."

@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-WindowsBehaviour\n"
 "POT-Creation-Date: 2014-11-16 00:01+0200\n"
-"PO-Revision-Date: 2015-02-14 11:50+0200\n"
+"PO-Revision-Date: 2016-02-14 03:51+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -75,7 +75,7 @@ msgstr ""
 "- l'ensemble du groupe est élevé."
 
 msgid "No Raise Click on Motion"
-msgstr "Pas d'élévation lors d'un clic en mouvement"
+msgstr "Non élever clic en mouvement"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with "
@@ -131,7 +131,7 @@ msgstr ""
 "cela."
 
 msgid "No Focus Click on Motion"
-msgstr "Pas de focus lors d'un clic en mouvement"
+msgstr "Non focus clic en mouvement"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with the "
@@ -163,7 +163,7 @@ msgid " Window Placement "
 msgstr " Placement des fenêtres "
 
 msgid "Tile Cascade Placement"
-msgstr "Placement en cascade des fenêtres"
+msgstr "Cascade des fenêtres"
 
 msgid ""
 "Places new windows in a smart location - a location in which they do not overlap any "
@@ -198,7 +198,7 @@ msgid "Place new windows in a cascading fashion."
 msgstr "Placez les nouvelles fenêtres dans un mode en cascade."
 
 msgid "Tile Manual Placement"
-msgstr "Placement manuel de fenêtres"
+msgstr "Manuel de fenêtres"
 
 msgid "This is the same as Tile Cascade Placement, but uses Manual Placement as the fall-back method."
 msgstr "Ce est le même que Placement en cascade des titres, mais utilise Placement manuel comme méthode de repli."
@@ -221,26 +221,26 @@ msgid "Window:"
 msgstr "Fenêtre:"
 
 msgid "Center"
-msgstr "Centre"
+msgstr "Center"
 
 msgid "TopLeft"
-msgstr "En haut à gauche"
+msgstr "TopLeft"
 
 msgid "UnderMouse"
-msgstr "Sous la souris"
+msgstr "UnderMouse"
 
 msgid ""
 "With 'TopLeft', new windows are placed in the top left corner of the display. With 'Center', "
 "all new window appear at the center of the screen, and with 'UnderMouse', windows are centered "
 "under the mouse pointer where possible."
 msgstr ""
-"Avec 'En haut à gauche', les nouvelles fenêtres sont placées dans le coin "
-"supérieur gauche de l'écran. Avec 'Centre', toute nouvelle fenêtre apparaît "
-"au centre de l'écran, et avec 'Sous la souris', les fenêtres sont centrées "
+"Avec 'Center', les nouvelles fenêtres sont placées dans le coin "
+"supérieur gauche de l'écran. Avec 'Center', toute nouvelle fenêtre apparaît "
+"au centre de l'écran, et avec 'UnderMouse', les fenêtres sont centrées "
 "sous le pointeur de la souris lorsque cela est possible."
 
 msgid "Min Overlap Placement"
-msgstr "Recouvrement minimumt"
+msgstr "Recouvrement minimum"
 
 msgid ""
 "Automatically places new windows in a location in which the overlapping area in pixels "
@@ -299,7 +299,7 @@ msgid "sticky"
 msgstr "collant"
 
 msgid "Min Overlap Percent Placement"
-msgstr "Pourcentage de recouvrement minimum"
+msgstr "Pourcentage recouvrement min"
 
 msgid ""
 "Tries to minimize the overlapped percentages of other windows instead of the overlapped area in pixels. "
@@ -328,7 +328,7 @@ msgid " Miscellaneous "
 msgstr " Divers "
 
 msgid "Hide Geometry Window"
-msgstr "Cacher la géométrie de la fenêtre"
+msgstr "Cacher géométrie fenêtre"
 
 msgid "Hides the position or size window that is usually shown when a window is moved or resized interactively."
 msgstr ""
@@ -369,7 +369,7 @@ msgstr ""
 "pixels seront abordables)."
 
 msgid "Opaque Move Size:"
-msgstr "Taille du mouvement opaque:"
+msgstr "Opaque bouger taille:"
 
 msgid ""
 "Tells fvwm the maximum size window with which opaque window movement should be used. "

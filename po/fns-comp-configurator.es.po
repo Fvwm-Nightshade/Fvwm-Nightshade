@@ -14,7 +14,7 @@ msgstr ""
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 ########################################################################
@@ -96,19 +96,19 @@ msgid "The opacity of shadows. (0.0 - 1.0, defaults to 0.75)."
 msgstr "La opacidad de las sombras. (0.0 - 1.0, por defecto 0.75)."
 
 msgid "Blur Radius:"
-msgstr "Radio de difuminado:"
+msgstr "Difuminado radio:"
 
 msgid "The blur radius for shadows, in pixels. (defaults to 12)."
 msgstr "El radio de difuminado para sombras, en píxeles. (por defecto a 12)."
 
 msgid "Left Offset:"
-msgstr "Desplazamiento izquierda:"
+msgstr "Dejado compensar:"
 
 msgid "The left offset for shadows, in pixels. (defaults to -15)."
 msgstr "Desplazamiento a la izquierda para sombras, en píxeles. (por defecto -15)"
 
 msgid "Top Offset:"
-msgstr "Desplazamiento superior:"
+msgstr "Cima compensar:"
 
 msgid "The top offset for shadows, in pixels. (defaults to -15)."
 msgstr "Desplazamiento superior para sombras, en píxeles. (por defecto -15)."
@@ -145,19 +145,19 @@ msgid "Enables fade effect when windows open or close."
 msgstr "Activar efecto de desvenecimiento cuando las ventanas se abran o cierren."
 
 msgid "Fade-in Steps:"
-msgstr "Pasos para Decololar:"
+msgstr "Pasos encadenar:"
 
 msgid "Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)."
 msgstr "La opacidad cambia entre pasos mientras se decolora. (0.01 - 1.0, por defecto 0.028)."
 
 msgid "Fade-out Steps:"
-msgstr "Pasos del desvanecimiento:"
+msgstr "Pasos desaparecer:"
 
 msgid "Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)."
 msgstr "La opacidad cambia entre pasos mientras aumenta. (0.01 - 1.0, por defecto 0.03)."
  
 msgid "Fade Step Time:"
-msgstr "Paso de tiempo para desvanecimiento:"
+msgstr "Desteñir tiempo:"
 
 msgid "The time between steps in fade step, in milliseconds. (> 0, defaults to 10)."
 msgstr "El tiempo entre pasos en el paso de desvanecimiento, en milisegundos. (> 0, por defecto 10)."

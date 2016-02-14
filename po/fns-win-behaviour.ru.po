@@ -34,7 +34,7 @@ msgid "Give the focus to a window when it is clicked in."
 msgstr "Фокусирования на окне пре клике"
 
 msgid "Focus follows Mouse"
-msgstr "Фокусирования на окне находящемся под мышью"
+msgstr "Фокуса за курсором мыши"
 
 msgid "Give a window the focus as the pointer enters the window, and take it away when leaving."
 msgstr "Пре входе пойнтера в окно, сфокусировать на окне. Пре выходе пойнтера рас-фокусировать окно."
@@ -72,7 +72,7 @@ msgstr ""
 "всплывает точно так же как и основное окно."
 
 msgid "No Raise Click on Motion"
-msgstr "Всплывающий Клик Де-активирован Пре Движении."
+msgstr "Нет рейз нажмите а ход"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with "
@@ -121,7 +121,7 @@ msgstr ""
 "превратить эти действие."
 
 msgid "No Focus Click on Motion"
-msgstr "Вез фокус клика пре движении"
+msgstr "фокус Нет нажмите а ход"
 
 msgid ""
 "If this style is used, clicking in a window and then dragging the pointer with the "
@@ -150,7 +150,7 @@ msgid " Window Placement "
 msgstr " Размещение Окон "
 
 msgid "Tile Cascade Placement"
-msgstr "Размещение Каскада Заглавий"
+msgstr "Плитка Каскад"
 
 msgid ""
 "Places new windows in a smart location - a location in which they do not overlap any "
@@ -176,7 +176,7 @@ msgid "Place new windows in a cascading fashion."
 msgstr "Размещает новые окна в каскадном стиле."
 
 msgid "Tile Manual Placement"
-msgstr "Мануальное Размещение Заглавий"
+msgstr "Плитка ручной"
 
 msgid ""
 "The user is required to place every new window manually. The window only shows as a rubber "
@@ -223,7 +223,7 @@ msgstr ""
 "'UnderMouse', новые окна размещены в под курсором, пре возможности."
 
 msgid "Min Overlap Placement"
-msgstr "Размещение с минимальной накладкой"
+msgstr "минимальным напуском"
 
 msgid ""
 "Automatically places new windows in a location in which the overlapping area in pixels "
@@ -256,7 +256,7 @@ msgstr ""
 "по умолчанию окна с 'ontop' имеют в 5 раз большую площадь чем нормальные окна. "
 
 msgid "Min Overlap Percent Placement"
-msgstr "Размещение с Минимальным Процентом Накладки"
+msgstr "минимум внахлест Процент"
 
 msgid ""
 "Tries to minimize the overlapped percentages of other windows instead of the overlapped area in pixels. "
@@ -287,7 +287,7 @@ msgid "Hides the position or size window that is usually shown when a window is 
 msgstr "Скрыть позицию иле размер окна при интерактивном передвижении окна."
 
 msgid "Resize Opaque"
-msgstr "Не прозрачное Смена Размера."
+msgstr "Не прозрачное Смена Размера"
 
 msgid ""
 "Instructs fvwm to resize the corresponding windows with their contents visible "
@@ -314,7 +314,7 @@ msgstr ""
 "с резолюцией в 16000x9000)."
 
 msgid "Opaque Move Size:"
-msgstr "Прозрачный Размер Движения:"
+msgstr "Кроющий двигаться:"
 
 msgid ""
 "Tells fvwm the maximum size window with which opaque window movement should be used. "

@@ -14,7 +14,7 @@ msgstr ""
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 ########################################################################
@@ -51,7 +51,7 @@ msgid "This is the tab for modifying ALL cores together if they're not unlocked.
 msgstr "Esta es la pestaña para modificar TODOS los núcleos a la vez si no estuvieran desbloqueados."
 
 msgid " Information to Cores "
-msgstr " Información a Núcleos "
+msgstr " Informes a Núcleos "
 
 msgid "L2 Cache:"
 msgstr "Caché L2:"
@@ -155,7 +155,7 @@ msgid "if unlocked at the joined tab."
 msgstr "si está desbloqueado en la pestaña 'Acoplado'."
 
 msgid "Information to Core"
-msgstr "Información al Núcleo"
+msgstr "Informes al Núcleo"
 
 msgid "Show information about this core."
 msgstr "Mostrar información sobre este núcleo."
