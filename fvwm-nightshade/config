@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.8.20160211
+InfoStoreAdd ns_version 0.7.8.20160214
 # Copyright (C) 2016
 #
 # Authors:
@@ -157,7 +157,7 @@ ModulePath $[FVWM_USERDIR]/lib:$[FNS_SYSTEMDIR]/lib:+
 # to search for string translations. A locale path is constituted by a
 # directory path and a text domain separated by a semicolon (';').
 #-----------------------------------------------------------------------
-LocalePath ;fvwm-nightshade:$[FVWM_USERDIR]/locale;fvwm-nightshade:+
+LocalePath $[FVWM_USERDIR]/locale;fvwm-nightshade:;fvwm-nightshade:+
 
 #-----------------------------------------------------------------------
 # The default ImagePath for icons is: 
@@ -2228,8 +2228,8 @@ AddToFunc   FuncMenuFNSConfiguration
 + I AddToMenu MenuFNSConfiguration "$[gt.Configure &Background]%background.svg:$[infostore.MenuIconSize]%"      Popup MenuWallpaperConfiguration
 + I AddToMenu MenuFNSConfiguration "$[gt.&Compositing]%compositing.svg:$[infostore.MenuIconSize]%"              Popup MenuCompositing
 + I AddToMenu MenuFNSConfiguration "$[gt.&Decoration]%themes.svg:$[infostore.MenuIconSize]%"                    Popup MenuDecoration
-+ I AddToMenu MenuFNSConfiguration "$[gt.FNS Base Setup]%icon_fns.svg:$[infostore.MenuIconSize]%"               Module FNS-BaseSetup
-+ I AddToMenu MenuFNSConfiguration "$[gt.FNS Windows Behaviour]%WinBehaviour.svg:$[infostore.MenuIconSize]%"    Module FNS-WindowsBehaviour
++ I AddToMenu MenuFNSConfiguration "$[gt.FNS Base &Setup]%icon_fns.svg:$[infostore.MenuIconSize]%"       		Module FNS-BaseSetup
++ I AddToMenu MenuFNSConfiguration "$[gt.FNS &Windows Behaviour]%WinBehaviour.svg:$[infostore.MenuIconSize]%"	Module FNS-WindowsBehaviour
 
 
 #-----------------------------------------------------------------------
@@ -2246,8 +2246,8 @@ AddToFunc   FuncMenuSystemConfiguration
 + I AddToMenu MenuSystemConfiguration "$[gt.&Mouse]%mouse.svg:$[infostore.MenuIconSize]%"               Popup MenuMouse
 + I AddToMenu MenuSystemConfiguration MissingSubmenuFunction FuncMenuXScreenSaver
 + I AddToMenu MenuSystemConfiguration "$[gt.Sc&reen Saver]%screensaver.svg:$[infostore.MenuIconSize]%"  Popup MenuXScreenSaver
-+ I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%cpu.svg:$[infostore.MenuIconSize]%"    Exec exec FNS-CpuPerformance
-+ I AddToMenu MenuSystemConfiguration "$[gt.Set Date/Time]%clock.svg:$[infostore.MenuIconSize]%"        FvwmScript FNS-Script-Date
++ I AddToMenu MenuSystemConfiguration "$[gt.&CPU Performance]%cpu.svg:$[infostore.MenuIconSize]%"    	Exec exec FNS-CpuPerformance
++ I AddToMenu MenuSystemConfiguration "$[gt.Set &Date/Time]%clock.svg:$[infostore.MenuIconSize]%"    	FvwmScript FNS-Script-Date
 
 
 #-----------------------------------------------------------------------
