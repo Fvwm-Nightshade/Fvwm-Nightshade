@@ -12,7 +12,7 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuConfigurator
-my $Version =   '2.0.4';
+my $Version =   '2.0.5';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure fns-menu-desktop to create
@@ -21,7 +21,7 @@ my $Version =   '2.0.4';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      11/19/2014
-# Changed:      02/16/2015
+# Changed:      02/12/2016
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -472,7 +472,7 @@ $win->add_label( Name => 'labelIconSize',
         Frame   => 'OptionFrame');
 
 $win->add_spin_button( Name => 'spinIconSize', 
-        Pos     => [360, 15], 
+        Pos     => [370, 15], 
         Start   => &get_config_value("IconSize"), Min => 16, Max => 96, Step => 1, 
         Tip     => "If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size \
                     is desired change the wanted size in this field.", 
@@ -484,14 +484,14 @@ $win->add_signal_handler('spinIconSize', 'value-changed', sub {&set_config_value
 
 # Icon Theme -----------------------------------------------------------
 $win->add_label( Name => 'labelIconTheme', 
-        Pos     => [35, 50], 
+        Pos     => [15, 50], 
         Title   => "Icon Theme:", 
         Sens    => &get_config_value("IconsOn"), 
         Frame   => 'OptionFrame');
 
 $win->add_entry( Name => 'entryIconTheme', 
         Pos     => [170, 45], 
-        Size    => [160, 25], 
+        Size    => [170, 25], 
         Title   => &get_config_value("IconTheme"), 
         Tip     => "Sets the used icon theme. Default is 'gnome' but all others found in ~/.icons or \
                     /usr/share/icons can used except the hicolor theme because it's the default \
@@ -502,7 +502,7 @@ $win->add_entry( Name => 'entryIconTheme',
 $win->add_signal_handler('entryIconTheme', 'changed', sub {&set_config_value("IconTheme", $win->get_title('entryIconTheme')); return 0;});
 
 $win->add_button( Name => 'changeIconTheme',
-        Pos     => [360, 45], 
+        Pos     => [370, 45], 
         Size    => [55, 25], 
         Title   => "...", 
         Tip     => "Change icon theme path.", 
@@ -513,14 +513,14 @@ $win->add_signal_handler('changeIconTheme', 'clicked', \&change_path, [$win, 'en
 
 # Directory Icon -------------------------------------------------------
 $win->add_label( Name => 'labelDirIcon', 
-        Pos     => [35, 80], 
+        Pos     => [15, 80], 
         Title   => "Directory Icon:", 
         Sens    => &get_config_value("IconsOn"), 
         Frame   => 'OptionFrame');
 
 $win->add_entry( Name => 'entryDirIcon', 
         Pos     => [170, 75], 
-        Size    => [160, 25], 
+        Size    => [170, 25], 
         Title   => &get_config_value("DirIcon"), 
         Tip     => "If 'Use Icons' is enabled and for a directory in a menu no icon is found \
                     'gnome-fs-directory' as default icon is used. But if the gnome icon theme \
@@ -531,7 +531,7 @@ $win->add_entry( Name => 'entryDirIcon',
 $win->add_signal_handler('entryDirIcon', 'changed', sub {&set_config_value("DirIcon", $win->get_title('entryDirIcon')); return 0;});
 
 $win->add_button( Name => 'changeDirIcon',
-        Pos     => [360, 75], 
+        Pos     => [370, 75], 
         Size    => [55, 25], 
         Title   => "...", 
         Tip     => "Change directoy icon path.", 
@@ -542,14 +542,14 @@ $win->add_signal_handler('changeDirIcon', 'clicked', \&change_path, [$win, 'entr
 
 # Application Icon -----------------------------------------------------
 $win->add_label( Name => 'labelAppIcon', 
-        Pos     => [35, 110], 
+        Pos     => [15, 110], 
         Title   => "Application Icon:", 
         Sens    => &get_config_value("IconsOn"), 
         Frame   => 'OptionFrame');
 
 $win->add_entry( Name => 'entryAppIcon', 
         Pos     => [170, 105], 
-        Size    => [160, 25], 
+        Size    => [170, 25], 
         Title   => &get_config_value("AppIcon"), 
         Tip     => "If 'Use Icons' is enabled and for an application no icon is found 'gnome-applications' \
                     as default icon is used. But if the gnome icon theme isn't installed no default icon \
@@ -559,7 +559,7 @@ $win->add_entry( Name => 'entryAppIcon',
 $win->add_signal_handler('entryAppIcon', 'changed', sub {&set_config_value("AppIcon", $win->get_title('entryAppIcon')); return 0;});
 
 $win->add_button( Name => 'changeAppIcon',
-        Pos     => [360, 105], 
+        Pos     => [370, 105], 
         Size    => [55, 25], 
         Title   => "...", 
         Tip     => "Change application icon path.", 
@@ -570,14 +570,14 @@ $win->add_signal_handler('changeAppIcon', 'clicked', \&change_path, [$win, 'entr
 
 # Icon Directory -------------------------------------------------------
 $win->add_label( Name => 'labelIconDir', 
-        Pos     => [35, 140], 
+        Pos     => [15, 140], 
         Title   => "Icon Directory:", 
         Sens    => &get_config_value("IconsOn"), 
         Frame   => 'OptionFrame');
 
 $win->add_entry( Name => 'entryIconDir', 
         Pos     => [170, 135], 
-        Size    => [160, 25], 
+        Size    => [170, 25], 
         Title   => &get_config_value("IconDir"), 
         Tip     => "If the specified icon isn't that size it is converted if ImageMagick is installed. \
                     Generated icons are saved in \$FVWM_USERDIR/icons or the directory specified here. \
@@ -587,7 +587,7 @@ $win->add_entry( Name => 'entryIconDir',
 $win->add_signal_handler('entryIconDir', 'changed', sub {&set_config_value("IconDir", $win->get_title('entryIconDir')); return 0;});
 
 $win->add_button( Name => 'changeIconDir',
-        Pos     => [360, 135], 
+        Pos     => [370, 135], 
         Size    => [55, 25], 
         Title   => "...", 
         Tip     => "Change icon directory path.", 
@@ -630,8 +630,8 @@ sub check_menus_in_menu_on {
 }
 
 $win->add_entry( Name => 'entryInMenu', 
-        Pos     => [325, 170], 
-        Size    => [90, 25], 
+        Pos     => [350, 170], 
+        Size    => [75, 25], 
         Title   => &get_config_value("InMenu"), 
         Tip     => "Enter in this field the name of the menu (its top title) where the generated \
                     menu(s) should insert. For more information see the USAGE section in the man \
@@ -649,15 +649,15 @@ $win->add_label( Name => 'labelOutPath',
         Frame   => 'OptionFrame');
 
 $win->add_entry( Name => 'entryOutPath', 
-        Pos     => [115, 205], 
-        Size    => [215, 25], 
+        Pos     => [170, 205], 
+        Size    => [170, 25], 
         Title   => &get_config_value("MenuPath"), 
         Tip     => "Enter here the FULL path of the menu to store. Default path is \$FVWM_USERDIR/.menu.", 
         Frame   => 'OptionFrame');
 $win->add_signal_handler('entryOutPath', 'changed', sub {&set_config_value("MenuPath", $win->get_title('entryOutPath')); return 0;});
 
 $win->add_button( Name => 'changeOutPath',
-        Pos     => [360, 205], 
+        Pos     => [370, 205], 
         Size    => [55, 25], 
         Title   => "...", 
         Tip     => "Change output path of the menu file.", 

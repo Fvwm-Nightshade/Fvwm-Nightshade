@@ -12,7 +12,7 @@ use File::Spec;
 
 #-------------------------------------------------------------------------
 # File:         FNS-BaseSetup
-my $Version =   '2.1.4';
+my $Version =   '2.1.5';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure base settings of Fvwm-Nightshade
@@ -20,7 +20,7 @@ my $Version =   '2.1.4';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      10/08/2014
-# Changed:      02/15/2015
+# Changed:      02/14/2016
 #-------------------------------------------------------------------------
 
 
@@ -320,8 +320,8 @@ sub check_splash_on {
 }
 
 $win->add_entry( Name => 'entrySplashPath', 
-        Pos     => [110, 9], 
-        Size    => [345, 25], 
+        Pos     => [170, 9], 
+        Size    => [285, 25], 
         Title   => &get_config_value("used_banner"), 
         Tip     => "Path to splash image.",
         Sens    => &get_config_value("SplashOn"), 
@@ -397,8 +397,8 @@ $win->add_label( Name => 'labelWpDirs',
         Frame   => 'DeskFrame');
 
 $win->add_entry( Name => 'entryWpDirs', 
-        Pos     => [110, 10], 
-        Size    => [405, 25], 
+        Pos     => [170, 10], 
+        Size    => [345, 25], 
         Title   => &get_config_value("additional_wp_dirs"), 
         Tip     => "Wallpaper directories, separated by ':'.", 
         Frame   => 'DeskFrame');
