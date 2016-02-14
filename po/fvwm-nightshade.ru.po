@@ -8,8 +8,8 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2016-02-12 17:16+0200\n"
+"Last-Translator: Artashes Mkhitaryan <artashm@mytum.de>\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,6 +142,12 @@ msgid "Fvwm-Nightshade Wiki"
 msgstr "Fvwm-Nightshade Вики"
 
 #-----------------------------------------------------------------------
+# MenuFvwmModules
+#-----------------------------------------------------------------------
+msgid "Fvwm Modules"
+msgstr "Fvwm Модули"
+
+#-----------------------------------------------------------------------
 # MenuStartRegularModules
 #-----------------------------------------------------------------------
 msgid "Start Regular Modules"
@@ -219,11 +225,17 @@ msgstr "Fvwm из Параметров &По Умолчанию"
 msgid "Configure &Background"
 msgstr "Конфигурировать &Задний Фон"
 
+msgid "&Compositing"
+msgstr "&композитинга"
+
 msgid "&Decoration"
 msgstr "&Декорации"
 
-msgid "Fvwm-&Nightshade Setup"
-msgstr "Fvwm-&Nightshade Инсталляция"
+msgid "FNS Base &Setup"
+msgstr "FNS &базовая конфигурация"
+
+msgid "FNS &Windows Behaviour"
+msgstr "FNS &Поведение Окон"
 
 #-----------------------------------------------------------------------
 # MenuSystemConfiguration
@@ -239,6 +251,9 @@ msgstr "&Заставка"
 
 msgid "&CPU Performance"
 msgstr "&Производительность Процессора"
+
+msgid "Set &Date/Time"
+msgstr "Установить &дату/время"
 
 #-----------------------------------------------------------------------
 # MenuKeyboard
@@ -304,6 +319,24 @@ msgid "Layouts"
 msgstr "Расположение"
 
 #-----------------------------------------------------------------------
+# MenuCompositing
+#-----------------------------------------------------------------------
+msgid "Compositing"
+msgstr "композитинга"
+
+msgid "FNS CompMgr &Configurator"
+msgstr "FNS CompMgr &Конфигуратор"
+
+msgid "&Menu Transparency"
+msgstr "прозрачность &меню"
+
+msgid "Active Window &Opacity"
+msgstr "Активное окно непрозрачности"
+
+msgid "Inactive Window &Transparency"
+msgstr "прозрачность &неактивного окна"
+
+#-----------------------------------------------------------------------
 # MenuWallpaperConfiguration
 #-----------------------------------------------------------------------
 msgid "Background Configuration"
@@ -366,6 +399,12 @@ msgstr "&Нет, Не Выходить"
 msgid "Window Operations"
 msgstr "Оконные Операции"
 
+msgid "&Move"
+msgstr "&Переместить"
+
+msgid "&Resize"
+msgstr "измените &размер"
+
 msgid "(De)&Iconify"
 msgstr "(Де)&Иконыфикация"
 
@@ -383,6 +422,12 @@ msgstr "&Всплыть"
 
 msgid "&Lower"
 msgstr "&Ниже"
+
+msgid "&Delete"
+msgstr "У&далить"
+
+msgid "&Close"
+msgstr "&Закрыть"
 
 msgid "&Destroy"
 msgstr "&Уничтожить"
@@ -405,7 +450,7 @@ msgstr "&Обновить Окно"
 msgid "R&earrange All"
 msgstr "П&ереместить Все"
 
-msgid "Window &Utility"
+msgid "Window &Utilities"
 msgstr "&Утилиты Окна"
 
 msgid "Sw&itch to...(WinList)"
@@ -433,7 +478,7 @@ msgid "(Un)&Stick"
 msgstr "(Не)&Липкий"
 
 msgid "Mor&e..."
-msgstr "Боль&ше"
+msgstr "Боль&ше..."
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupOps
@@ -603,7 +648,7 @@ msgstr "&Упорядочить Иконки"
 #-----------------------------------------------------------------------
 # MenuWindowUtility
 #-----------------------------------------------------------------------
-msgid "Window Utility"
+msgid "Window Utilities"
 msgstr "Утилита Окна"
 
 msgid "Create &Screenshot"
@@ -630,6 +675,12 @@ msgstr "Остается &Позади"
 msgid "Desktopmenu"
 msgstr "Меню Рабочего Стола"
 
+msgid "Desktop Preferences"
+msgstr "Настольные предпочтения"
+
+msgid "Root Menu"
+msgstr "Корневое меню"
+
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
 #-----------------------------------------------------------------------
@@ -640,17 +691,8 @@ msgstr "&Правая	Страница"
 msgid "&Left	Page"
 msgstr "&Левая	Страница"
 
-msgid "&1.	Page"
-msgstr "&1.	Страница"
-
-msgid "&2.	Page"
-msgstr "&2.	Страница"
-
-msgid "&3.	Page"
-msgstr "&3.	Страница"
-
-msgid "&4.	Page"
-msgstr "&4.	Страница"
+msgid "Page"
+msgstr "Страница"
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
@@ -672,6 +714,15 @@ msgstr "&Верхняя	Страница"
 msgid "Conky Clock Ops"
 msgstr "Опс часов Conky"
 
+msgid "Calender"
+msgstr "Календарь"
+
+msgid "Alarm"
+msgstr "тревога"
+
+msgid "Set Date/Time"
+msgstr "Установить дату/время"
+
 msgid "Restart Conky Clock"
 msgstr "Перезагрузить часы Conky"
 
@@ -680,6 +731,9 @@ msgstr "Перезагрузить часы Conky"
 #-----------------------------------------------------------------------
 msgid "Conky Cpu Ops"
 msgstr "Conky Опс Процессора"
+
+msgid "CPU Performance"
+msgstr "Производительность процессора"
 
 msgid "Restart Conky CPU"
 msgstr "Перезагрузить Процессор Conky"
@@ -873,7 +927,7 @@ msgid "Keyboard Layout Info"
 msgstr "Информация о Клавиатуре"
 
 msgid "Install xneur/gxneur for full functionality"
-msgstr ""
+msgstr "Для полной функциональности нужен xneur/gxneur"
 
 # config - FuncLxappearance
 msgid "Gtk+ Decor Info"
@@ -1125,3 +1179,26 @@ msgstr "Регенерировать XDG Меню"
 #. ./bin/fvwm-menu-desktop.in: line 515
 msgid "Regenerate XDG Menu"
 msgstr "Регенерировать XDG Меню"
+
+########################################################################
+# Layouts modules
+########################################################################
+#-----------------------------------------------------------------------
+# KlikeBottomBar, VerticalPanel, G2likeTopBar
+#-----------------------------------------------------------------------
+msgid "Menu"
+msgstr "Меню"
+
+#-----------------------------------------------------------------------
+# VerticalPanel
+#-----------------------------------------------------------------------
+msgid "Window List"
+msgstr "лист окон"
+
+#-----------------------------------------------------------------------
+# G2likeTopBar
+#-----------------------------------------------------------------------
+msgid "Personal"
+msgstr "Персональное"
+
+

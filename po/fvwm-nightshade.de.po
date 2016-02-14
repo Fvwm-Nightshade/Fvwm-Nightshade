@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2015-02-15 00:39+0200\n"
+"PO-Revision-Date: 2016-02-12 18:44+0200\n"
 "Last-Translator: Thomas Funk <t.funk@web.de>\n"
 "Language-Team: German\n"
 "Language: \n"
@@ -143,6 +143,12 @@ msgid "Fvwm-Nightshade Wiki"
 msgstr "Fvwm-Nightshade Wiki"
 
 #-----------------------------------------------------------------------
+# MenuFvwmModules
+#-----------------------------------------------------------------------
+msgid "Fvwm Modules"
+msgstr "Fvwm Module"
+
+#-----------------------------------------------------------------------
 # MenuStartRegularModules
 #-----------------------------------------------------------------------
 msgid "Start Regular Modules"
@@ -220,11 +226,17 @@ msgstr "Fvwm Form &Grundeinstellungen"
 msgid "Configure &Background"
 msgstr "&Hintergrund setzen"
 
+msgid "&Compositing"
+msgstr "&Compositing"
+
 msgid "&Decoration"
 msgstr "&Dekoration"
 
-msgid "Fvwm-&Nightshade Setup"
-msgstr "Fvwm-&Nightshade Einstellungen"
+msgid "FNS Base &Setup"
+msgstr "FNS Basis &Setup"
+
+msgid "FNS &Windows Behaviour"
+msgstr "FNS &Fensterverhalten"
 
 #-----------------------------------------------------------------------
 # MenuSystemConfiguration
@@ -240,6 +252,9 @@ msgstr "&Bildschirmschoner"
 
 msgid "&CPU Performance"
 msgstr "&CPU Leistungseinstellungen"
+
+msgid "Set &Date/Time"
+msgstr "&Datum/Uhrzeit setzen"
 
 #-----------------------------------------------------------------------
 # MenuKeyboard
@@ -305,6 +320,24 @@ msgid "Layouts"
 msgstr "Layouts"
 
 #-----------------------------------------------------------------------
+# MenuCompositing
+#-----------------------------------------------------------------------
+msgid "Compositing"
+msgstr "Compositing"
+
+msgid "FNS CompMgr &Configurator"
+msgstr "FNS CompMgr &Konfigurator"
+
+msgid "&Menu Transparency"
+msgstr "&Menü Transparenz"
+
+msgid "Active Window &Opacity"
+msgstr "Deckkraft aktives Fenster"
+
+msgid "Inactive Window &Transparency"
+msgstr "Deckkraft inaktives Fenster"
+
+#-----------------------------------------------------------------------
 # MenuWallpaperConfiguration
 #-----------------------------------------------------------------------
 msgid "Background Configuration"
@@ -367,6 +400,12 @@ msgstr "&Nein, nicht verlassen"
 msgid "Window Operations"
 msgstr "Fenster Operationen"
 
+msgid "&Move"
+msgstr "&Verschieben"
+
+msgid "&Resize"
+msgstr "&Größe ändern"
+
 msgid "(De)&Iconify"
 msgstr "(Ent-)M&inimieren"
 
@@ -384,6 +423,12 @@ msgstr "&Anheben"
 
 msgid "&Lower"
 msgstr "Ab&senken"
+
+msgid "&Delete"
+msgstr "&Löschen"
+
+msgid "&Close"
+msgstr "Schlie&ßen"
 
 msgid "&Destroy"
 msgstr "&Zerstören"
@@ -631,6 +676,12 @@ msgstr "In &Hintergrund"
 msgid "Desktopmenu"
 msgstr "Desktopmenü"
 
+msgid "Desktop Preferences"
+msgstr "Desktop Einstellungen"
+
+msgid "Root Menu"
+msgstr "Hauptmenü"
+
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
 #-----------------------------------------------------------------------
@@ -641,17 +692,8 @@ msgstr "&Rechte	Seite"
 msgid "&Left	Page"
 msgstr "&Linke	Seite"
 
-msgid "&1.	Page"
-msgstr "&1.	Seite"
-
-msgid "&2.	Page"
-msgstr "&2.	Seite"
-
-msgid "&3.	Page"
-msgstr "&3.	Seite"
-
-msgid "&4.	Page"
-msgstr "&4.	Seite"
+msgid "Page"
+msgstr "Seite"
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
@@ -673,6 +715,15 @@ msgstr "&Obere	Seite"
 msgid "Conky Clock Ops"
 msgstr "Conky Uhr Ops"
 
+msgid "Calender"
+msgstr "Kalender"
+
+msgid "Alarm"
+msgstr "Alarm"
+
+msgid "Set Date/Time"
+msgstr "Datum/Uhrzeit setzen"
+
 msgid "Restart Conky Clock"
 msgstr "Neustart Conky Uhr"
 
@@ -681,6 +732,9 @@ msgstr "Neustart Conky Uhr"
 #-----------------------------------------------------------------------
 msgid "Conky Cpu Ops"
 msgstr "Conky Cpu Ops"
+
+msgid "CPU Performance"
+msgstr "CPU Leistung"
 
 msgid "Restart Conky CPU"
 msgstr "Neustart Conky CPU"
@@ -1125,4 +1179,27 @@ msgstr "XDG Menu(s) neu erstellen"
 
 #. ./bin/fvwm-menu-desktop.in: line 515
 msgid "Regenerate XDG Menu"
-msgstr "XDG Menu neu erstellen"
+msgstr ""
+
+########################################################################
+# Layouts modules
+########################################################################
+#-----------------------------------------------------------------------
+# KlikeBottomBar, VerticalPanel, G2likeTopBar
+#-----------------------------------------------------------------------
+msgid "Menu"
+msgstr "Menü"
+
+#-----------------------------------------------------------------------
+# VerticalPanel
+#-----------------------------------------------------------------------
+msgid "Window List"
+msgstr "Fensterliste"
+
+#-----------------------------------------------------------------------
+# G2likeTopBar
+#-----------------------------------------------------------------------
+msgid "Personal"
+msgstr "Favoriten"
+
+

@@ -8,12 +8,12 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2015-02-14 23:18+0200\n"
+"PO-Revision-Date: 2016-02-12 19:52+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 ########################################################################
@@ -143,6 +143,12 @@ msgid "Fvwm-Nightshade Wiki"
 msgstr "Fvwm-Nightshade Wiki"
 
 #-----------------------------------------------------------------------
+# MenuFvwmModules
+#-----------------------------------------------------------------------
+msgid "Fvwm Modules"
+msgstr "Módulos Fvwm"
+
+#-----------------------------------------------------------------------
 # MenuStartRegularModules
 #-----------------------------------------------------------------------
 msgid "Start Regular Modules"
@@ -220,11 +226,17 @@ msgstr "Formas Fvwm por &Defecto"
 msgid "Configure &Background"
 msgstr "Configurar &Fondo"
 
+msgid "&Compositing"
+msgstr "&Composición"
+
 msgid "&Decoration"
 msgstr "&Decoración"
 
-msgid "Fvwm-&Nightshade Setup"
-msgstr "Instalación Fvwm-&Nightshade"
+msgid "FNS Base &Setup"
+msgstr "FNS Configuración Básica"
+
+msgid "FNS &Windows Behaviour"
+msgstr "FNS Comportamiento de ventana"
 
 #-----------------------------------------------------------------------
 # MenuSystemConfiguration
@@ -240,6 +252,9 @@ msgstr "&Protector de Pantalla"
 
 msgid "&CPU Performance"
 msgstr "Rendimiento &CPU"
+
+msgid "Set &Date/Time"
+msgstr "Fondo por &fecha/hora"
 
 #-----------------------------------------------------------------------
 # MenuKeyboard
@@ -305,6 +320,24 @@ msgid "Layouts"
 msgstr "Layouts"
 
 #-----------------------------------------------------------------------
+# MenuCompositing
+#-----------------------------------------------------------------------
+msgid "Compositing"
+msgstr "Composición"
+
+msgid "FNS CompMgr &Configurator"
+msgstr "FNS CompMgr &Configurador"
+
+msgid "&Menu Transparency"
+msgstr "Transparencia de &menú "
+
+msgid "Active Window &Opacity"
+msgstr "&Opacidad de ventana activa"
+
+msgid "Inactive Window &Transparency"
+msgstr "Transparencia de &ventana inactiva"
+
+#-----------------------------------------------------------------------
 # MenuWallpaperConfiguration
 #-----------------------------------------------------------------------
 msgid "Background Configuration"
@@ -367,6 +400,12 @@ msgstr "&No, no cerrar"
 msgid "Window Operations"
 msgstr "Operaciones de Ventana"
 
+msgid "&Move"
+msgstr "&Mover"
+
+msgid "&Resize"
+msgstr "Cambiar el &tamaño"
+
 msgid "(De)&Iconify"
 msgstr "(De)&Iconificar"
 
@@ -384,6 +423,12 @@ msgstr "&Elevar"
 
 msgid "&Lower"
 msgstr "&Bajar"
+
+msgid "&Delete"
+msgstr "E&liminar"
+
+msgid "&Close"
+msgstr "&Cerrar"
 
 msgid "&Destroy"
 msgstr "&Destruir"
@@ -406,7 +451,7 @@ msgstr "&Refrescar Ventana"
 msgid "R&earrange All"
 msgstr "R&eorganizar todo"
 
-msgid "Window &Utility"
+msgid "Window &Utilities"
 msgstr "&Utilidad de Ventana"
 
 msgid "Sw&itch to...(WinList)"
@@ -604,7 +649,7 @@ msgstr "&Organizar Iconos"
 #-----------------------------------------------------------------------
 # MenuWindowUtility
 #-----------------------------------------------------------------------
-msgid "Window Utility"
+msgid "Window Utilities"
 msgstr "Utilidades de Ventana"
 
 msgid "Create &Screenshot"
@@ -631,6 +676,12 @@ msgstr "Permanecer de&bajo"
 msgid "Desktopmenu"
 msgstr "Menú de Escritorio"
 
+msgid "Desktop Preferences"
+msgstr "Configuración de Escritorio"
+
+msgid "Root Menu"
+msgstr "Menú Raíz"
+
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
 #-----------------------------------------------------------------------
@@ -641,17 +692,8 @@ msgstr "Página &Derecha"
 msgid "&Left	Page"
 msgstr "Página &Izquierda"
 
-msgid "&1.	Page"
-msgstr "&1.	Página"
-
-msgid "&2.	Page"
-msgstr "&2.	Página"
-
-msgid "&3.	Page"
-msgstr "&3.	Página"
-
-msgid "&4.	Page"
-msgstr "&4.	Página"
+msgid "Page"
+msgstr "Página"
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
@@ -673,6 +715,15 @@ msgstr "Página &Arriba"
 msgid "Conky Clock Ops"
 msgstr "Conky Hora Ops"
 
+msgid "Calender"
+msgstr "Calendario"
+
+msgid "Alarm"
+msgstr "Alarma"
+
+msgid "Set Date/Time"
+msgstr "Fondo por fecha/hora"
+
 msgid "Restart Conky Clock"
 msgstr "Reiniciar Conky Hora"
 
@@ -681,6 +732,9 @@ msgstr "Reiniciar Conky Hora"
 #-----------------------------------------------------------------------
 msgid "Conky Cpu Ops"
 msgstr "Conky Cpu Ops"
+
+msgid "CPU Performance"
+msgstr "Rendimiento CPU"
 
 msgid "Restart Conky CPU"
 msgstr "Reiniciar Conky CPU"
@@ -1126,4 +1180,26 @@ msgstr "Regenerar Menú(s) XDG"
 #. ./bin/fvwm-menu-desktop.in: line 515
 msgid "Regenerate XDG Menu"
 msgstr "Regenerar Menú XDG"
+
+########################################################################
+# Layouts modules
+########################################################################
+#-----------------------------------------------------------------------
+# KlikeBottomBar, VerticalPanel, G2likeTopBar
+#-----------------------------------------------------------------------
+msgid "Menu"
+msgstr "Menú"
+
+#-----------------------------------------------------------------------
+# VerticalPanel
+#-----------------------------------------------------------------------
+msgid "Window List"
+msgstr "Lista de ventanas"
+
+#-----------------------------------------------------------------------
+# G2likeTopBar
+#-----------------------------------------------------------------------
+msgid "Personal"
+msgstr "Favorita"
+
 
