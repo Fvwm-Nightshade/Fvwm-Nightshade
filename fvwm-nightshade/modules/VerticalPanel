@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         VerticalPanel
-# Version:      1.1.1
+# Version:      1.1.2
 # Licence:      GPL 2
 #
 # Description:  FvwmButtons panel for vertical layout. Position on the
@@ -23,7 +23,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/15/2012
-# Changed:      01/27/2016
+# Changed:      02/12/2016
 #-----------------------------------------------------------------------
 
 Style VerticalPanel !Title, Sticky, WindowListSkip, Layer 4, HandleWidth 2
@@ -201,7 +201,7 @@ PipeRead "if [ `fns-find-file -p $FVWM_USERDIR/layouts -r -s $[infostore.conky_v
 #-----------------------------------------------------------------------
 # menu button
 #-----------------------------------------------------------------------
-*VerticalPanel: (1x1, Colorset 13, Left, Padding 5 0, Title (Side) "Root Menu", ActionOnPress, \
+*VerticalPanel: (1x1, Colorset 13, Left, Padding 5 0, Title (Side) "$[gt.Menu]", ActionOnPress, \
         Icon icon_fns.svg:$[infostore.i_size]x$[infostore.i_size], \
         ActiveIcon icon_fns.svg:$[infostore.i_size]x$[infostore.i_size], \
         Action(Mouse 1) `Menu MenuRoot`)
@@ -209,7 +209,7 @@ PipeRead "if [ `fns-find-file -p $FVWM_USERDIR/layouts -r -s $[infostore.conky_v
 #-----------------------------------------------------------------------
 # winlist button
 #-----------------------------------------------------------------------
-*VerticalPanel: (1x1, Colorset 13, Left, Padding 5 0, Title (Side) "Window List", ActionOnPress, \
+*VerticalPanel: (1x1, Colorset 13, Left, Padding 5 0, Title (Side) "$[gt.Window List]", ActionOnPress, \
         Icon windows.svg:$[infostore.i_size]x$[infostore.i_size], \
         ActiveIcon windows.svg:$[infostore.i_size]x$[infostore.i_size], \
         Action(Mouse 1) `WindowList`)
