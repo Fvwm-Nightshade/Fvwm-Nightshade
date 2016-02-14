@@ -1,5 +1,16 @@
 History:
 
+02/14/2016
+- change some widget sizes and positions in FNS-BaseSetup and FNS-MenuConfigurator
+  to fit different language translations
+- fix missing $[gt.] entries to support text translation in G2likeTopBar and VerticalPanel
+- fixes in config:
+  - change sort order of locale paths in LocalePath string
+  - add missing hotkeys to some menu entries
+- add missing msgids to fvwm-nightshade.pot
+- update fvwm-nightshade.pos and their binaries
+- trim long sentences in pos to fit text in FNS GUIs. Also change encoding of some po files to UTF-8
+
 02/11/2016
 - fix some if constructs that no error occur if an icon or file not found
 - update version in config
