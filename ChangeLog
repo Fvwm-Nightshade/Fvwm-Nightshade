@@ -1,5 +1,30 @@
 History:
 
+04/03/2016
+- add third party perl libs to SimpleGtk2:
+  - Gtk2-Ex-Simple-List
+  - Gtk2-Ex-Simple-Tree
+- update Makefile:
+  - build-install-list:
+    - fix bug that display manager path is added whether not root
+    - add path building of SimpleGtk2 and the third party libs
+    - fix path order of localization files => first files than folders
+  - dist-install:
+    - add correct installation of SimpleGtk2 if local=yes is set
+    - add possibility that fvwm perllib module for SimpleGtk2 can installed whether not root
+    - fix bug that apps will register to polkit which not installed
+  - uninstall-alternative:
+    - improve remove process that also local installation can be deleted
+    - add deletion of SimpleGtk2 and other used perl files
+- update INSTALL:
+  - exchange 'Fvwm' with 'FVWM' which is the more correct spelling
+  - add additional description for prefix=<other_dir> to be more specific
+  - add description for local Perl directory
+- update README:
+  - add support for local installation without root rights
+- update AUTHORS:
+  - add gtk2-perl team for perl modules Gtk2-Ex-Simple-List and Gtk2-Ex-Simple-Tree
+
 02/14/2016
 - change some widget sizes and positions in FNS-BaseSetup and FNS-MenuConfigurator
   to fit different language translations
