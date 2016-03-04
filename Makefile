@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.3.1
+# Version:      2.4.0
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,51 +8,65 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      07/13/2015
+# Changed:      03/03/2016
 #-----------------------------------------------------------------------
 
-package 	= fvwm-nightshade
-version 	= $(shell grep ns_version fvwm-nightshade/config |sed q |cut -d' ' -f3)
-tarname 	= $(package)
-distdir 	= ../$(tarname)-$(version)
-pkgdir		= ../$(package)
-arch: pkgdir = /tmp/$(package)
+package 		= fvwm-nightshade
+version 		= $(shell grep ns_version fvwm-nightshade/config |sed q |cut -d' ' -f3)
+tarname 		= $(package)
+distdir 		= ../$(tarname)-$(version)
+pkgdir			= ../$(package)
+arch: pkgdir 	= /tmp/$(package)
 
-DESTDIR		?=
-deb: DESTDIR = $(pkgdir)
+DESTDIR			?=
+deb: DESTDIR 	= $(pkgdir)
 
-prefix 		?= /usr/local
-deb: prefix = /usr
-absprefix	= $(abspath $(prefix))
+prefix 			?= /usr/local
+deb: prefix 	= /usr
+absprefix		= $(abspath $(prefix))
 
-displaymanager ?= yes
-local		?= no
+displaymanager	?= yes
+local			?= no
+purge			?= no
+localperldir	?=
 
-po-file		?=
-po-lang		?=
+po-file			?=
+po-lang			?=
 
-pkgprefix	= $(DESTDIR)$(absprefix)
-bindir 		= $(pkgprefix)/bin
-datadir 	= $(pkgprefix)/share
-mandir 		= $(datadir)/man
-man1dir 	= $(mandir)/man1
-docdir 		= $(datadir)/doc
-localedir	= $(datadir)/locale
-xdgdir		= $(datadir)/desktop-directories
-themesdir 	= $(datadir)/themes
-userdir		= ~
-fnsuserdir	= $(userdir)/.$(package)
-perlsitedir ?= $(shell perl -le 'foreach (@INC) {if (m/\/usr\/lib\/.*(site_perl|perl5|vendor_perl)/|m/\/usr\/local\/lib\/.*(site_perl|perl5|vendor_perl)/){print $$_; last;}}')
+pkgprefix		= $(DESTDIR)$(absprefix)
+bindir 			= $(pkgprefix)/bin
+datadir 		= $(pkgprefix)/share
+mandir 			= $(datadir)/man
+man1dir 		= $(mandir)/man1
+docdir 			= $(datadir)/doc
+localedir		= $(datadir)/locale
+xdgdir			= $(datadir)/desktop-directories
+themesdir 		= $(datadir)/themes
+userdir			= ~
+fnsuserdir		= $(userdir)/.$(package)
+perlsitedir 	?= $(shell perl -le 'foreach (@INC) {if (m/\/usr\/lib\/.*(site_perl|perl5|vendor_perl)/|m/\/usr\/local\/lib\/.*(site_perl|perl5|vendor_perl)/){print $$_; last;}}')
 
 ifeq ($(local),yes)
-	themesdir = $(userdir)/.themes
+  themesdir = $(userdir)/.themes
+  ifdef localperldir
+    perlsitedir = $(localperldir)
+  else
+    ifdef PERLLIB
+      perlsitedir = $(shell echo $(PERLLIB)|cut -d':' -f1)
+    else
+      ifdef PERL5LIB
+        perlsitedir = $(shell echo $(PERL5LIB)|cut -d':' -f1)
+      else
+        $(error No local Perl library path is defined! Use 'localperldir=<local_perl_path>' in the make call.)
+      endif
+    endif
+  endif
 endif
 
-pkgdatadir 	= $(datadir)/$(package)
-pkgdocdir 	= $(docdir)/$(package)
+pkgdatadir 		= $(datadir)/$(package)
+pkgdocdir 		= $(docdir)/$(package)
 
 fns_fvwmscripts = $(shell ls -p1 fvwm|grep -v /)
-fns_perllib		= $(shell find fvwm/perllib|cut -d'/' -f 2-)
 fns_executables = $(shell ls -1 bin)
 fns_manpages 	= $(shell ls -1 man)
 fns_templates 	= $(shell ls -1 templates)
@@ -61,12 +75,17 @@ fns_docdirs		= $(shell find doc/ -type d|sort -r|cut -d'/' -f 2-)
 fns_files 		= $(shell find $(package) -type f|cut -d'/' -f 2-)
 fns_directories = $(shell find $(package)/ -type d|sort -r|cut -d'/' -f 2-)
 fns_mofiles 	= $(shell ls -1 po |grep ".mo")
+fns_languages 	= $(shell ls -1 po |grep ".mo" |cut -d"." -f2 |sort |uniq)
 fns_xdgfiles	= $(shell find system/desktop-directories -type f|cut -d'/' -f 3-)
 fns_themesfiles	= $(shell find system/themes -type f|cut -d'/' -f 3-)
 fns_themesdirs	= $(shell find system/themes/ -type d|sort -r|cut -d'/' -f 3-)
 id				= $(shell id -un)
+simplegtk2files = $(shell find system/libs -type f|cut -d'/' -f 3-)
+simplegtk2dirs	= $(shell find system/libs/ -type d|sort -r|cut -d'/' -f 3-)
 
-fvwm_path	?= $(DESTDIR)/usr/share/fvwm
+fvwm_path		?= $(DESTDIR)/usr/share/fvwm
+new_perllibfiles = $(shell find fvwm/perllib -type f|cut -d'/' -f 3-)
+perllibdirs		= $(shell find fvwm/perllib/ -type d|sort -r|cut -d'/' -f 3-)
 
 all:
 	@echo "There is nothing to compile."
@@ -93,8 +112,8 @@ distcheck: $(distdir).tar.gz
 
 build-install-list: 
 	rm -f ./fns-install_$(version).lst
-	echo "Build install list 'fns-install_$(version).lst' for Fvwm-Nightshade $(version)"
-	echo "-> FvwmScripts and perllib modules"
+	echo "Building install list 'fns-install_$(version).lst' for Fvwm-Nightshade $(version)"
+	echo "-> Fvwm scripts"
 	if test -z "$(DESTDIR)"; then \
 		if test "$(local)" = "yes"; then \
 			for file in $(fns_fvwmscripts); do \
@@ -110,7 +129,7 @@ build-install-list:
 					for file in $(fns_fvwmscripts); do \
 						echo $(fvwm_path)/$$file >> ./fns-install_$(version).lst; \
 					done; \
-					for file in $(fns_perllib); do \
+					for file in $(new_perllibfiles); do \
 						echo $(fvwm_path)/$$file >> ./fns-install_$(version).lst; \
 					done; \
 				else \
@@ -120,7 +139,7 @@ build-install-list:
 					exit 2; \
 				fi; \
 			else \
-				echo "Can't install FvwmScripts later in $(fvwm_path) because you are not root."; \
+				echo "Can't install FvwmScripts and new perllib modules later in $(fvwm_path) because you are not root."; \
 				echo "If you want install Fvwm-Nightshade locally use 'local=yes' in the make call."; \
 				rm -f ./fns-install_$(version).lst; \
 				exit 3; \
@@ -160,15 +179,39 @@ build-install-list:
 	if test "$(displaymanager)" = "yes" && test "$(id)" = "root"; then \
 		echo "-> Login file"; \
 		echo /usr/share/xsessions/fvwm-nightshade.desktop >> ./fns-install_$(version).lst; \
-	else \
+	elif test "$(displaymanager)" = "yes" && test "$(id)" != "root"; then \
 		echo "Can't install fvwm-nightshade.desktop in /usr/share/xsessions/ because you are not root."; \
 		rm -f ./fns-install_$(version).lst; \
 		exit 3; \
 	fi
 
 	echo "-> SimpleGtk2 library"
-	if test "$(id)" = "root"; then \
-		echo $(perlsitedir)/SimpleGtk2.pm >> ./fns-install_$(version).lst; \
+	for file in $(simplegtk2files); do \
+		filename=$${file##*/}; \
+		dirs=$${file%/*}; \
+		if test "$$dirs" != "$$filename"; then \
+			echo $(perlsitedir)/$$dirs/$$filename >> ./fns-install_$(version).lst; \
+		else \
+			echo $(perlsitedir)/$$filename >> ./fns-install_$(version).lst; \
+		fi; \
+	done; \
+	for directory in $(simplegtk2dirs); do \
+		echo $(perlsitedir)/$$directory >> ./fns-install_$(version).lst; \
+	done
+
+	echo "-> Perllib modules"
+	for file in $(new_perllibfiles); do \
+		if test "$(id)" = "root"; then \
+			echo $(fvwm_path)/perllib/$$file >> ./fns-install_$(version).lst; \
+		else \
+			echo $(perlsitedir)/$$file >> ./fns-install_$(version).lst; \
+		fi; \
+	done; \
+	if test "$(local)" = "yes"; then \
+		for directory in $(perllibdirs); do \
+			echo $(perlsitedir)/$$directory >> ./fns-install_$(version).lst; \
+		done; \
+		echo $(perlsitedir) >> ./fns-install_$(version).lst; \
 	fi
 
 	echo "-> System files"
@@ -225,7 +268,21 @@ build-install-list:
 		else \
 			echo $(localedir)/$$lang/LC_MESSAGES/$$basename.mo >> ./fns-install_$(version).lst; \
 		fi; \
-	done
+	done; \
+	for lang in $(fns_languages); do \
+		if test "$(local)" = "yes" && test "$(id)" != "root"; then \
+			echo $(fnsuserdir)/locale/$$lang/LC_MESSAGES >> ./fns-install_$(version).lst; \
+			echo $(fnsuserdir)/locale/$$lang >> ./fns-install_$(version).lst; \
+		else \
+			echo $(localedir)/$$lang/LC_MESSAGES >> ./fns-install_$(version).lst; \
+			echo $(localedir)/$$lang >> ./fns-install_$(version).lst; \
+		fi; \
+	done; \
+	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
+		echo $(fnsuserdir)/locale >> ./fns-install_$(version).lst; \
+	else \
+		echo $(localedir) >> ./fns-install_$(version).lst; \
+	fi
 
 	echo "-> XDG menu files"
 	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
@@ -275,11 +332,11 @@ dist-install:
 					for file in $(fns_fvwmscripts); do \
 						install -m 644 fvwm/$$file  $(fvwm_path); \
 					done; \
-					for file in $(fns_perllib); do \
+					for file in $(new_perllibfiles); do \
 						if test -f "fvwm/$$file"; then \
 							install -m 644 fvwm/$$file  $(fvwm_path)/$$file; \
 						else \
-							if test -f "fvwm/$$file"; then \
+							if test -d "fvwm/$$file"; then \
 								install -d $(fvwm_path)/$$file; \
 							fi; \
 						fi; \
@@ -296,15 +353,6 @@ dist-install:
 		for file in $(fns_fvwmscripts); do \
 			install -m 644 fvwm/$$file  $(fvwm_path); \
 		done; \
-		for file in $(fns_perllib); do \
-			if test -f "fvwm/$$file"; then \
-				install -m 644 fvwm/$$file  $(fvwm_path)/$$file; \
-			else \
-				if test -d "fvwm/$$file"; then \
-					install -d $(fvwm_path)/$$file; \
-				fi; \
-			fi; \
-		done; \
 	fi
 
 	echo "-> Install all executables"
@@ -320,10 +368,30 @@ dist-install:
 	fi
 
 	echo "-> Install SimpleGtk2 library"
-	if test -n "$(DESTDIR)" || test "$(id)" = "root"; then \
-		install -d $(DESTDIR)$(perlsitedir); \
-		install -m 644 system/libs/SimpleGtk2.pm $(DESTDIR)$(perlsitedir); \
-	fi
+	install -d $(DESTDIR)$(perlsitedir); \
+	for file in $(simplegtk2files); do \
+		filename=$${file##*/}; \
+		dirs=$${file%/*}; \
+		if test "$$dirs" != "$$filename"; then \
+			install -d $(DESTDIR)$(perlsitedir)/$$dirs/; \
+			install -m 644 system/libs/$$dirs/$$filename $(DESTDIR)$(perlsitedir)/$$dirs/; \
+		else \
+			install -d $(DESTDIR)$(perlsitedir); \
+			install -m 644 system/libs/$$filename $(DESTDIR)$(perlsitedir)/; \
+		fi; \
+	done; \
+
+	echo "-> Install Perllib modules"
+	for file in $(new_perllibfiles); do \
+		dirs=$${file%/*}; \
+		if test "$(id)" = "root" || test -n "$(DESTDIR)"; then \
+			install -d $(fvwm_path)/perllib/$$dirs/; \
+			install -m 644 fvwm/perllib/$$file $(fvwm_path)/perllib/$$dirs/; \
+		else \
+			install -d $(DESTDIR)$(perlsitedir)/$$dirs/; \
+			install -m 644 fvwm/perllib/$$file $(DESTDIR)$(perlsitedir)/$$dirs/; \
+		fi; \
+	done; \
 
 	echo "-> Install system files"
 	install -d $(datadir)
@@ -332,7 +400,7 @@ dist-install:
 	if test -z "$(DESTDIR)"; then \
 		echo "-> Register apps at polkit"; \
 		for app in cpufreq-set cpupower; do \
-			if test -n `which $$app`; then \
+			if ! test -z `which $$app`; then \
 				echo "   $$app"; \
 				bin/fns-poladd $$app; \
 			fi; \
@@ -386,8 +454,8 @@ dist-install:
 		install -m 644 system/fns-applications.menu $(DESTDIR)/etc/xdg/menus/; \
 	fi; \
 	
+	install -d $(xdgdir)
 	for file in $(fns_xdgfiles); do \
-		install -d $(xdgdir); \
 		install -m 644 system/desktop-directories/$$file $(xdgdir); \
 	done
 	
@@ -423,8 +491,8 @@ uninstall:
 					fi; \
 				done; \
 				echo "-> Unregister apps at polkit"; \
-				for app in "cpufreq-set" "cpupower"; do
-					if test -n `which $$app`; then \
+				for app in "cpufreq-set" "cpupower"; do \
+					if ! test -z `which $$app`; then \
 						alreadyHere=`cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$$app"`; \
 						if [ "$$alreadyHere" != "" ]; then \
 							echo "   $$app"; \
@@ -455,115 +523,214 @@ uninstall:
 	fi
 
 uninstall-alternative:
-	echo "Try to uninstall previous version of Fvwm-Nightshade"
-	echo "-> Uninstall FvwmScripts"
-	if test -d "$(fvwm_path)"; then \
-		for file in $(fns_fvwmscripts) ; do \
-			if test -f "$(fvwm_path)/$$file"; then \
-				echo "remove $(fvwm_path)/$$file"; \
+	echo "Try to remove previous version of Fvwm-Nightshade"
+	if test "$(local)" = "yes"; then \
+		if test "$(purge)" = "yes"; then \
+			echo "-> Remove Fvwm Scripts"; \
+			for file in $(fns_fvwmscripts); do \
+				if test "$${file#*Form}" != "$$file" || test "$${file#*fvwm}" != "$$file"; then \
+					echo "removing $(fnsuserdir)/$$file"; \
+					rm -f $(fnsuserdir)/$$file; \
+				else \
+					echo "removing $(fnsuserdir)/scripts/$$file"; \
+					rm -f $(fnsuserdir)/scripts/$$file; \
+				fi; \
+			done; \
+			if test -d "$(fnsuserdir)/scripts/"; then \
+				echo "removing $(fnsuserdir)/scripts/ if empty"; \
+				rmdir $(fnsuserdir)/scripts 2>/dev/null; \
+			fi; \
+		fi; \
+	else \
+		echo "-> Remove Fvwm Scripts"; \
+		if test -d "$(fvwm_path)"; then \
+			for file in $(fns_fvwmscripts); do \
+				echo "removing $(fvwm_path)/$$file"; \
 				rm -f $(fvwm_path)/$$file; \
+			done; \
+			for file in $(new_perllibfiles); do \
+				echo "removing $(fvwm_path)/$$file"; \
+				rm -f $(fvwm_path)/$$file; \
+			done; \
+		else \
+			echo "Fvwm isn't installed in $(fvwm_path)"; \
+			echo "Please set fvwm_path=<path_to_fvwm> and rerun make uninstall-alternative."; \
+			exit 2; \
+		fi; \
+	fi; \
+
+	echo "-> Remove executables"
+	ok=0; \
+	slashes=`echo $(bindir) | awk '{print gsub("/","")}'|xargs expr 1 +`; \
+	while test "$$slashes" -gt "1"; do \
+		part=`echo $(bindir) |cut -d'/' -f-$$slashes`; \
+		if test -d "$$part" && test -w "$$part"; then \
+			ok=1; \
+			break; \
+		else \
+			slashes=`expr $$slashes - 1`; \
+		fi; \
+	done; \
+	if (test "$(local)" = "yes" && test "$$ok" = "1") || test "$(id)" = "root"; then \
+		for file in $(fns_executables); do \
+			echo "removing $(bindir)/$$file"; \
+			rm -f $(bindir)/$$file; \
+		done; \
+		echo removing $(bindir) if empty; \
+		rmdir $(bindir) 2>/dev/null; \
+	else \
+		echo "Can't remove FNS executables in $(bindir) because you are not root."; \
+		echo "If you want to remove a local installation use 'prefix=<path>' in the make call"; \
+		echo "additionally to 'local=yes'."; \
+		exit 3; \
+	fi; \
+
+	if test -f "/usr/share/xsessions/fvwm-nightshade.desktop" && test "$(id)" = "root"; then \
+		echo "-> Remove login file"; \
+		echo /usr/share/xsessions/fvwm-nightshade.desktop >> ./fns-install_$(version).lst; \
+	elif test -f "/usr/share/xsessions/fvwm-nightshade.desktop" && test "$(id)" != "root"; then \
+		echo "Can't remove fvwm-nightshade.desktop in /usr/share/xsessions/ because you are not root."; \
+		exit 3; \
+	fi
+
+	if test -O "$(perlsitedir)"; then \
+		echo "-> Remove SimpleGtk2 library"
+		for file in $(simplegtk2files); do \
+			filename=$${file##*/}; \
+			dirs=$${file%/*}; \
+			if test "$$dirs" != "$$filename"; then \
+				echo "removing $(perlsitedir)/$$dirs/$$filename"; \
+				rm -f $(perlsitedir)/$$dirs/$$filename; \
+			else \
+				echo "removing $(perlsitedir)/$$filename"; \
+				rm -f $(perlsitedir)/$$filename; \
 			fi; \
 		done; \
-		for file in $(fns_perllib) ; do \
-			if test -f "$(fvwm_path)/$$file"; then \
-				echo "remove $(fvwm_path)/$$file"; \
-				rm -f $(fvwm_path)/$$file; \
-			fi; \
+		for directory in $(simplegtk2dirs); do \
+			echo "removing $(perlsitedir)/$$directory if empty"; \
+			rmdir $(perlsitedir)/$$directory 2>/dev/null; \
 		done; \
 	else \
-		echo "Fvwm isn't installed in $(fvwm_path)"; \
-		echo "Please set fvwm_path=<path_to_fvwm> and rerun make uninstall."; \
-		exit 2; \
+		echo "Can't remove SimpleGtk2 files in $(perlsitedir) because you are not root."; \
+		echo "If you want to remove a local installation use 'localperldir=<path>' in the make call"; \
+		echo "additionally to 'local=yes'."; \
+		exit 3; \
 	fi
+
+	echo "-> Remove perllib modules"
+	for file in $(new_perllibfiles); do \
+		if test "$(id)" = "root"; then \
+			echo "removing $(fvwm_path)/perllib/$$file"; \
+			rm -f $(fvwm_path)/perllib/$$file; \
+		else \
+			echo "removing $(perlsitedir)/$$file"; \
+			rm -f $(perlsitedir)/$$file; \
+		fi; \
+	done; \
+	if test "$(local)" = "yes"; then \
+		for directory in $(perllibdirs); do \
+			echo "removing $(perlsitedir)/$$directory if empty"; \
+			rmdir $(perlsitedir)/$$directory 2>/dev/null; \
+		done; \
+		echo "removing $(perlsitedir) if empty"; \
+		rmdir $(perlsitedir) 2>/dev/null; \
+	fi
+
+	echo "-> Remove system files and directories"
+	for file in $(fns_files); do \
+		echo "removing $(pkgdatadir)/$$file"; \
+		rm -f $(pkgdatadir)/$$file; \
+	done
+	for directory in $(fns_directories); do \
+		echo "removing $(pkgdatadir)/$$directory if empty"; \
+		rmdir $(pkgdatadir)/$$directory 2>/dev/null; \
+	done
+	echo "removing $(pkgdatadir) if empty"
+	rmdir $(pkgdatadir) 2>/dev/null
 	
-	echo "-> Uninstall executables"
-	for file in $(fns_executables) ; do \
-		if test -f "$(bindir)/$$file"; then \
-			echo "remove $(bindir)/$$file"; \
-			rm -f $(bindir)/$$file; \
-		fi; \
+	echo "-> Remove documentation files"
+	rm -rf $(pkgdocdir)
+	rmdir $(docdir) 2>/dev/null
+
+	echo "-> Remove manpage files"
+	for file in $(fns_manpages); do \
+		echo "removing $(man1dir)/$$file"; \
+		rm -f $(man1dir)/$$file; \
 	done
+	echo "removing $(man1dir) if empty"
+	rmdir $(mandir) 2>/dev/null
 
-	if test -f "/usr/share/xsessions/fvwm-nightshade.desktop"; then \
-		echo "-> Uninstall login file"; \
-		echo "remove /usr/share/xsessions/fvwm-nightshade.desktop"; \
-		rm -f /usr/share/xsessions/fvwm-nightshade.desktop; \
-	fi
-
-	echo "-> Uninstall system files"
-	if test -d "$(pkgdatadir)"; then \
-		echo "remove $(pkgdatadir) completelly"; \
-		rm -rf $(pkgdatadir); \
-	fi
-	
-	echo "-> Unregister apps at polkit"
-	for app in cpufreq-set cpupower; do \
-		if test -n `which $$app`; then \
-			echo "   $$app"; \
-			bin/fns-poladd -r $$app; \
-		fi; \
-	done
-
-	echo "-> Uninstall documentation"
-	if test -d "$(pkgdocdir)"; then \
-		echo "remove $(pkgdocdir) completelly"; \
-		rm -rf $(pkgdocdir); \
-	fi
-
-	echo "-> Uninstall manpages"
-	for file in $(fns_manpages) ; do \
-		if test -f "$(man1dir)/$$file"; then \
-			echo "remove $(man1dir)/$$file"; \
-			rm -f $(man1dir)/$$file; \
-		fi; \
-	done
-
-	echo "-> Uninstall localization files"
+	echo "-> Removing localization files"
 	for file in $(fns_mofiles); do \
 		basename=$${file%%.*}; \
 		extensions=$${file#*.}; \
 		lang=$${extensions%%.*}; \
-		if test -f "$(localedir)/$$lang/LC_MESSAGES/$$basename.mo"; then \
-			echo "remove $(localedir)/$$lang/LC_MESSAGES/$$basename.mo"; \
+		if test "$(local)" = "yes" && test "$(id)" != "root"; then \
+			if test "purge" = "yes"; then \
+				echo "removing $(fnsuserdir)/locale/$$lang/LC_MESSAGES/$$basename.mo"; \
+				rm -f $(fnsuserdir)/locale/$$lang/LC_MESSAGES/$$basename.mo; \
+				echo "removing $(fnsuserdir)/locale/$$lang if empty"; \
+				rmdir $(fnsuserdir)/locale/$$lang/LC_MESSAGES 2>/dev/null; \
+				rmdir $(fnsuserdir)/locale/$$lang 2>/dev/null; \
+			else \
+				echo "Can't remove locales in $(fnsuserdir)/locale/ because purge=yes"; \
+				echo "is not set in make call. Remove it by hand please."; \
+			fi; \
+		else \
+			echo "removing $(localedir)/$$lang/LC_MESSAGES/$$basename.mo"; \
 			rm -f $(localedir)/$$lang/LC_MESSAGES/$$basename.mo; \
 		fi; \
 	done
+	if test "$(local)" = "yes" && test "purge" = "yes"; then \
+		rmdir $(fnsuserdir)/locale 2>/dev/null; \
+	fi
 
-	echo "-> Uninstall XDG menu files"
+	echo "-> Remove XDG menu files"
 	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
-		if test -f "$(userdir)/.config/menus/fns-applications.menu"; then \
-			echo "remove $(userdir)/.config/menus/fns-applications.menu"; \
-			rm -f $(userdir)/.config/menus/fns-applications.menu; \
-		fi; \
+		echo "removing $(userdir)/.config/menus/fns-applications.menu"; \
+		rm -f $(userdir)/.config/menus/fns-applications.menu; \
 	else \
-		if test -f "/etc/xdg/menus/fns-applications.menu"; then \
-			echo "remove /etc/xdg/menus/fns-applications.menu"; \
-			rm -f /etc/xdg/menus/fns-applications.menu; \
-		fi; \
+		echo "removing /etc/xdg/menus/fns-applications.menu"; \
+		rm -f /etc/xdg/menus/fns-applications.menu; \
 	fi; \
 	
 	for file in $(fns_xdgfiles); do \
-		if test -f "$(xdgdir)/$$file"; then \
-			echo "remove $(xdgdir)/$$file"; \
-			rm -f $(xdgdir)/$$file; \
-		fi; \
+		echo "removing $(xdgdir)/$$file"; \
+		rm -f $(xdgdir)/$$file; \
 	done
-	rmdir $(xdgdir)
+	echo "removing $(xdgdir) if empty"
+	rmdir $(xdgdir) 2>/dev/null
 
-	echo "-> Uninstall Gtk themes"
+	echo "-> Remove Gtk themes"
 	for file in $(fns_themesfiles); do \
-		if test -f "$(themesdir)/$$file"; then \
-			echo "remove $(themesdir)/$$file"; \
-			rm -f $(themesdir)/$$file; \
-		fi; \
+		echo "removing $(themesdir)/$$file"; \
+		rm -f $(themesdir)/$$file; \
 	done
 	for directory in $(fns_themesdirs); do \
-		echo "remove $(themesdir)/$$directory"; \
-		rmdir $(themesdir)/$$directory; \
+		echo "removing $(themesdir)/$$directory if empty"; \
+		rmdir $(themesdir)/$$directory 2>/dev/null; \
 	done
-	rmdir $(themesdir)
+	echo "removing $(themesdir) if empty"
+	rmdir $(themesdir) 2>/dev/null
 
-	echo "Fvwm-Nightshade is now removed (hopefully). Only ~/.fvwm-nightshade exists."
+	echo "removing $(datadir) if empty"
+	rmdir $(datadir) 2>/dev/null
+	echo "removing $(pkgprefix) if empty"
+	rmdir $(pkgprefix) 2>/dev/null
+
+	echo "-> Unregister apps at polkit if set"; \
+	for app in "cpufreq-set" "cpupower"; do
+		if test -n `which $$app`; then \
+			alreadyHere=`cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$$app"`; \
+			if [ "$$alreadyHere" != "" ]; then \
+				echo "   $$app"; \
+				bin/fns-poladd -r "$$app"; \
+			fi; \
+		fi; \
+	done; \
+
+	echo
+	echo "Fvwm-Nightshade is now hopefully removed. Only ~/.fvwm-nightshade exists."
 	echo "If you don't need it anymore remove it by hand."
 
 build-deb: 
