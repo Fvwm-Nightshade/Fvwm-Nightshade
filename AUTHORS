@@ -37,6 +37,8 @@ Contributors (in no specific order):
 - Bresiyel (origin author of poladd - Adds programs to polkit for gui view. Base for fns-poladd)
 - Artashes Mkhitaryan for Russian translation
 - Dominique Michel for the develop ebuild and the correct installation from git
+- The gtk2-perl team for perl modules Gtk2-Ex-Simple-List and Gtk2-Ex-Simple-Tree
+
 
 If anybody find code which is from her/him please contact one of the 
 authors of Fvwm-Nightshade that we can add her/him to the list :-)
