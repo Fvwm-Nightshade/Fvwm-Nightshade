@@ -12,7 +12,7 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuConfigurator
-my $Version =   '2.0.5';
+my $Version =   '2.0.6';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure fns-menu-desktop to create
@@ -21,7 +21,7 @@ my $Version =   '2.0.5';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      11/19/2014
-# Changed:      02/12/2016
+# Changed:      03/10/2016
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -809,10 +809,13 @@ sub create_menu {
         my @menu_list;
         foreach my $dir (keys %all_menus) {
             foreach my $menux (sort(@menus)) {
-                if (&get_config_value($menux) == 1) {
-                    $menux =~ s/Menu//;
-                    my @menu = @{$all_menus{$dir}{$menux}};
-                    push(@menu_list, "$dir$menu[0].menu");
+                my $x = $menux;
+                $x =~ s/Menu//;
+                if (exists($all_menus{$dir}{$x})) {
+                    if (&get_config_value($menux) == 1) {
+                        my @menu_array = @{$all_menus{$dir}{$x}};
+                        push(@menu_list, "$dir$menu_array[0].menu");
+                    }
                 }
             }
         }
