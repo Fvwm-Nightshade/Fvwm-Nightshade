@@ -1,5 +1,18 @@
 History:
 
+03/11/2016
+- fix bug in FNS-MenuConfigurator that an undefined array prevents creation
+  of menu list if a local menu is available
+- add check to bin/fvwm-nightshade that script .fnssession will be sourced
+  if FNS is installed locally (extend $PATH and PERL5LIB)
+- update Makefile:
+  - fix issue #51 - Installation isn't possible in different locations
+  - adapt build-install-list to create correct install list for local installation
+  - disable register apps at polkit for local installation
+  - add .fnssession for local installation
+- add fnssession.tpl to templates/
+- update NEWS with Re-add support for different install locations
+
 03/05/2016
 - add third party perl libs to SimpleGtk2:
   - Gtk2-Ex-Simple-List
