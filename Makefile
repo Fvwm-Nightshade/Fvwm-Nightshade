@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.4.0
+# Version:      2.5.0
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      03/03/2016
+# Changed:      03/10/2016
 #-----------------------------------------------------------------------
 
 package 		= fvwm-nightshade
@@ -36,12 +36,26 @@ po-lang			?=
 pkgprefix		= $(DESTDIR)$(absprefix)
 bindir 			= $(pkgprefix)/bin
 datadir 		= $(pkgprefix)/share
-mandir 			= $(datadir)/man
+
+sysdatadir 		= $(datadir)
+standarddirs	= yes
+ifndef $(DESTDIR)
+  ifneq ($(local),yes)
+    ifneq ($(prefix),/usr/local)
+      ifneq ($(prefix),/usr)
+        sysdatadir   = /usr/local/share
+        standarddirs = no
+      endif
+    endif
+  endif
+endif
+
+mandir 			= $(sysdatadir)/man
 man1dir 		= $(mandir)/man1
 docdir 			= $(datadir)/doc
-localedir		= $(datadir)/locale
-xdgdir			= $(datadir)/desktop-directories
-themesdir 		= $(datadir)/themes
+localedir		= $(sysdatadir)/locale
+xdgdir			= $(sysdatadir)/desktop-directories
+themesdir 		= $(sysdatadir)/themes
 userdir			= ~
 fnsuserdir		= $(userdir)/.$(package)
 perlsitedir 	?= $(shell perl -le 'foreach (@INC) {if (m/\/usr\/lib\/.*(site_perl|perl5|vendor_perl)/|m/\/usr\/local\/lib\/.*(site_perl|perl5|vendor_perl)/){print $$_; last;}}')
@@ -123,6 +137,7 @@ build-install-list:
 					echo $(fnsuserdir)/scripts/$$file >> ./fns-install_$(version).lst; \
 				fi; \
 			done; \
+			echo $(fnsuserdir)/scripts >> ./fns-install_$(version).lst; \
 		else \
 			if test "$(id)" = "root"; then \
 				if test -d "$(fvwm_path)"; then \
@@ -167,11 +182,14 @@ build-install-list:
 		for file in $(fns_executables); do \
 			echo $(bindir)/$$file >> ./fns-install_$(version).lst; \
 		done; \
+		if test "$(local)" = "yes"; then \
+			echo $(bindir)/.fnssession >> ./fns-install_$(version).lst; \
+		fi; \
 		echo $(bindir) >> ./fns-install_$(version).lst; \
 	else \
 		echo "Can't install FNS executables later in $(bindir) because you are not root."; \
 		echo "If you want install Fvwm-Nightshade locally use 'prefix=<path>' in the make call"; \
-		echo "additionally to 'local=yes' you have permissions to install it e.g. ~/local."; \
+		echo "additionally to 'local=yes' you have permissions to install it e.g. ~/.local."; \
 		rm -f ./fns-install_$(version).lst; \
 		exit 3; \
 	fi; \
@@ -280,6 +298,7 @@ build-install-list:
 	done; \
 	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
 		echo $(fnsuserdir)/locale >> ./fns-install_$(version).lst; \
+		echo $(fnsuserdir) >> ./fns-install_$(version).lst; \
 	else \
 		echo $(localedir) >> ./fns-install_$(version).lst; \
 	fi
@@ -287,6 +306,7 @@ build-install-list:
 	echo "-> XDG menu files"
 	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
 		echo $(userdir)/.config/menus/fns-applications.menu >> ./fns-install_$(version).lst; \
+		echo $(userdir)/.config/menus >> ./fns-install_$(version).lst; \
 	else \
 		echo /etc/xdg/menus/fns-applications.menu >> ./fns-install_$(version).lst; \
 	fi; \
@@ -364,11 +384,14 @@ dist-install:
 	if test -n "$(DESTDIR)" || (test "$(displaymanager)" = "yes" && test "$(id)" = "root"); then \
 		echo "-> Install login file"; \
 		install -d $(DESTDIR)/usr/share/xsessions; \
-		install -m 644 system/fvwm-nightshade.desktop $(DESTDIR)/usr/share/xsessions/;\
+		if test "$(standarddirs)" = "no"; then \
+			sed s#Exec=#Exec=$(bindir)/# -i system/fvwm-nightshade.desktop; \
+		fi; \
+		install -m 644 system/fvwm-nightshade.desktop $(DESTDIR)/usr/share/xsessions/; \
 	fi
 
 	echo "-> Install SimpleGtk2 library"
-	install -d $(DESTDIR)$(perlsitedir); \
+	install -d $(DESTDIR)$(perlsitedir)
 	for file in $(simplegtk2files); do \
 		filename=$${file##*/}; \
 		dirs=$${file%/*}; \
@@ -391,13 +414,13 @@ dist-install:
 			install -d $(DESTDIR)$(perlsitedir)/$$dirs/; \
 			install -m 644 fvwm/perllib/$$file $(DESTDIR)$(perlsitedir)/$$dirs/; \
 		fi; \
-	done; \
+	done
 
 	echo "-> Install system files"
 	install -d $(datadir)
 	cp -r $(package) $(pkgdatadir)
 	
-	if test -z "$(DESTDIR)"; then \
+	if test -z "$(DESTDIR)" && test "$(local)" = "no"; then \
 		echo "-> Register apps at polkit"; \
 		for app in cpufreq-set cpupower; do \
 			if ! test -z `which $$app`; then \
@@ -405,6 +428,12 @@ dist-install:
 				bin/fns-poladd $$app; \
 			fi; \
 		done; \
+	fi
+
+	if test "$(local)" = "yes" && test "$(id)" != "root"; then \
+		install -m 644 templates/fnssession.tpl $(bindir)/.fnssession; \
+		sed s#^localbin=#localbin=$(bindir)# -i $(bindir)/.fnssession; \
+		sed s#^localperl=#localperl=$(perlsitedir)# -i $(bindir)/.fnssession; \
 	fi
 	
 	echo "-> Install documentation, Readmes, examples and templates"
@@ -452,7 +481,7 @@ dist-install:
 	else \
 		install -d $(DESTDIR)/etc/xdg/menus; \
 		install -m 644 system/fns-applications.menu $(DESTDIR)/etc/xdg/menus/; \
-	fi; \
+	fi
 	
 	install -d $(xdgdir)
 	for file in $(fns_xdgfiles); do \
@@ -465,6 +494,12 @@ dist-install:
 
 	if test -z "$(DESTDIR)"; then \
 		echo "Fvwm-Nightshade $(version) is installed. Enjoy ^^"; \
+		if test "$(local)" = "no" && test "$(id)" = "root"; then \
+			if test "$(standarddirs)" = "no"; then \
+				echo -n "\nBut don't forget to add your $(bindir) to PATH"; \
+				echo "in <no>_common_xsessionrc or so in /etc/X11/Xsession.d/."; \
+			fi; \
+		fi; \
 	fi
 
 uninstall:
@@ -490,16 +525,18 @@ uninstall:
 						echo "not found: $$path"; \
 					fi; \
 				done; \
-				echo "-> Unregister apps at polkit"; \
-				for app in "cpufreq-set" "cpupower"; do \
-					if ! test -z `which $$app`; then \
-						alreadyHere=`cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$$app"`; \
-						if [ "$$alreadyHere" != "" ]; then \
-							echo "   $$app"; \
-							bin/fns-poladd -r "$$app"; \
+				if test -z "$(DESTDIR)" && test "$(local)" = "no"; then \
+					echo "-> Unregister apps at polkit"; \
+					for app in "cpufreq-set" "cpupower"; do \
+						if ! test -z `which $$app`; then \
+							alreadyHere=`cat /usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy | grep "$$app"`; \
+							if [ "$$alreadyHere" != "" ]; then \
+								echo "   $$app"; \
+								bin/fns-poladd -r "$$app"; \
+							fi; \
 						fi; \
-					fi; \
-				done; \
+					done; \
+				fi; \
 				echo "Fvwm-Nightshade is now removed. Only ~/.fvwm-nightshade exists."; \
 				echo "If you don't need it anymore remove it by hand."; \
 				exit 0; \
