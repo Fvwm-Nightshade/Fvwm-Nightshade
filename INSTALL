@@ -122,11 +122,16 @@ Installation of Fvwm-Nightshade
 
             # make prefix=<other_dir> install
         
-        But if you want to install it to another directory then /usr you have to
-        add <other_dir>/bin to PATH so that Fvwm-Nightshades executables will be found.
+        If you want to install FNS to a directory else then /usr you have to
+        add 
         
-        If you haven't installed a display-manager like GDM you can add the option
-        displaymanager=no to the make call:
+			PATH="<other_dir>/bin:$PATH"
+        
+        in a file called <No>_common_xsessionrc or so in /etc/X11/Xsession.d/ that
+        Fvwm-Nightshades executables will be found.
+        
+        If you haven't installed a display-manager like GDM, XDM or LightDM you can
+        add the option 'displaymanager=no' to the make call:
 
 			# make install displaymanager=no
 
@@ -137,19 +142,11 @@ Installation of Fvwm-Nightshade
             # make fvwm_path=<path_to_fvwm> install
           
         If you haven't root rights you can install Fvwm-Nightshade locally. All you
-        need is a directory e.g. ~/.local with write permissions. Also an entry in 
-        your PATH variable in your .bashrc, .bash_profile or .profile like
-          
-            PATH=$PATH:$HOME/.local/bin
-          
-        Since version 0.8 a local Perl directory is needed, too. Create in your $HOME
-        for example .perl/ and add to your .bashrc, .bash_profile or .profile
-        
-			export PERL5LIB=$PERL5LIB:~/.perl
+        need is a directory e.g. ~/.local with write permissions.
 			
         Now you can install Fvwm-Nightshade with the following make call:
 
-            $ make prefix=~/.local install local=yes localperldir=~/.perl
+            $ make prefix=~/.local install local=yes localperldir=~/.perl displaymanager=no
           
         Don't forget to install the required packages from the beginning of this document!
 
