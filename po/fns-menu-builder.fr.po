@@ -1,0 +1,138 @@
+# French translation for Fvwm-Nightshade
+# Copyright (C) 2016 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-MenuBuilder\n"
+"POT-Creation-Date: 2016-04-20 10:41+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: LANG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "FNS Personal Menu Builder"
+msgstr ""
+
+########################################################################
+# Root menu
+########################################################################
+
+msgid "Root Menu"
+msgstr ""
+
+msgid "Folder"
+msgstr ""
+
+msgid "Application"
+msgstr ""
+
+########################################################################
+# Personal menu
+########################################################################
+
+msgid "Personal Menu"
+msgstr ""
+
+msgid "Sort entries with drag'n drop."
+msgstr ""
+
+########################################################################
+# Buttons
+########################################################################
+
+msgid "Add >"
+msgstr ""
+
+msgid "Add the selected menu entry."
+msgstr ""
+
+msgid "< Remove"
+msgstr ""
+
+msgid "Remove the selected menu entry.\nAttention:\nRemoving a folder removes all entries below!"
+msgstr ""
+
+msgid "You haven't selected a menu entry to remove!"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Create a new folder or application entry below of the selected position."
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Save the new personal menu."
+msgstr ""
+
+msgid "Quit"
+msgstr ""
+
+msgid "Quit Personal Menu Builder."
+msgstr ""
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr ""
+
+########################################################################
+# Creation dialog
+########################################################################
+
+msgid "Create new application or folder entry"
+msgstr ""
+
+msgid "Click to choose an icon. No change creates no icon."
+msgstr ""
+
+msgid "Create a folder entry."
+msgstr ""
+
+msgid "Create an application entry."
+msgstr ""
+
+msgid "Commandstring"
+msgstr ""
+
+msgid "Add a command string or choose a path to an executable.\nHint:\n'Exec exec' will be prepended."
+msgstr ""
+
+msgid "Choose an executable."
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "The label for this entry."
+msgstr ""
+
+msgid "Create the new entry."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cancel entry creation."
+msgstr ""
+
+########################################################################
+# Others
+########################################################################
+msgid "Warning"
+msgstr ""
+
+msgid "Open File"
+msgstr ""
+
+msgid "Select Folder"
+msgstr ""
