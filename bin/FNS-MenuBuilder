@@ -1,0 +1,948 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use SimpleGtk2;
+#use lib `fvwm-perllib dir`;
+#use FVWM::Module::SimpleGtk2;
+use File::Basename;
+use File::Copy qw(copy);
+use File::Spec;
+use File::Find;
+use Data::Dumper;
+use Data::Dump qw(dump);
+
+#-----------------------------------------------------------------------
+# File:         FNS-MenuBuilder
+my $Version =   '1.0.0';
+# Licence:      GPL 2
+#
+# Description:  Perl script to create/modify personal menu
+#
+# Author:       Thomas Funk <t.funk@web.de>
+#
+# Created:      03/27/2016
+# Changed:      
+#-----------------------------------------------------------------------
+
+#my $module = new FVWM::Module::SimpleGtk2(
+#);
+
+########################################################################
+# Global values
+########################################################################
+# FNS userdir
+my $FVWM_USERDIR = "$ENV{FVWM_USERDIR}";
+
+# values were changed
+my $values_changed = 0;
+
+# config state constants
+use constant {
+    NOTSET  => 0,
+    SET     => 1,
+};
+
+# FNS menu
+#my $menu = "$FVWM_USERDIR/.menu-test_wo_icons";
+#my $menu = "$FVWM_USERDIR/.menu-test";
+my $menu = "$FVWM_USERDIR/.menu";
+
+# FNS menu config
+my $menu_cfg = "$FVWM_USERDIR/.fns-menu.cfg";
+
+# FNS personal menu
+my $personal_menu = "$FVWM_USERDIR/.personal";
+
+# default icon directory
+my $default_icon_dir = &get_fns_menu_value('IconTheme');
+unless (defined($default_icon_dir)) {
+    $default_icon_dir = get_full_icon_path('gnome');
+}
+
+# used icon size
+my $default_icon_size = &get_fns_menu_value('IconSize');
+unless (defined($default_icon_size)) {
+    $default_icon_size = '24';
+}
+
+# tree data array for root menu
+my @src_tree; 
+
+# tree data array for personal menu
+my @dest_tree; 
+
+
+########################################################################
+# Common functions
+########################################################################
+SimpleGtk2::use_gettext("fns-menu-builder", "$ENV{FVWM_USERDIR}/locale:$ENV{FNS_SYSTEMDIR}/locale:+");
+
+sub get_full_icon_path {
+    my $HOME = "$ENV{HOME}";
+    my $XDG_DATA_DIRS = "$ENV{XDG_DATA_DIRS}" || '/usr/share/';
+    my ($name_path) = shift;
+    # search in home icon dir
+    if (-d "$HOME/.icons/$name_path") {
+        $name_path = "$HOME/.icons/$name_path";
+    }
+    elsif (-d "/usr/share/pixmaps/$name_path") {
+        $name_path = "/usr/share/pixmaps/$name_path";
+    }
+    else {
+        unless ($XDG_DATA_DIRS eq "") {
+            my @data_dirs = split(":", $XDG_DATA_DIRS);
+            foreach my $dir (@data_dirs) {
+                if (-d "$dir/icons/$name_path") {
+                    $name_path = "$XDG_DATA_DIRS/icons/$name_path";
+                    last;
+                }
+            }
+        }
+    }
+    return $name_path;
+}
+
+#-------------------------------------------------------------------------
+# get values from fns-menu.cfg
+#-------------------------------------------------------------------------
+sub get_fns_menu_value {
+    my $wanted = shift;
+    my $value = undef;
+    if (-f $menu_cfg) {
+        my $cfg_line = `grep '^$wanted' $menu_cfg`;
+        my @array = split('=', $cfg_line);
+#        $value = chomp($array[-1]);
+        $value = $array[-1];
+        # Remove whitespaces at the beginning and the end
+        $value = &del_spaces($value);
+        # remove quotes at the beginning and the end
+        $value = &del_quotes($value);
+        chomp($value);
+    }
+    return $value;
+}
+
+#-------------------------------------------------------------------------
+# Parsing routine
+#-------------------------------------------------------------------------
+sub parse_menu(@) {
+    my ($parse_file, $tree_ref, $menu_cfg) = @_;
+    # used parameters in config
+    local *CF;
+    my $have_icons = 0;
+    my $is_personal = 0;
+    
+    if (-f $parse_file) {
+        my $root_menu;
+        if ($parse_file =~ /personal/) {
+            $root_menu = 'MenuFvwmPersonal';
+            $is_personal = 1;
+        } else {
+            $root_menu = 'MenuRoot';
+            # check if fns-menu.cfg exist and get name of menu root
+            if (-f $menu_cfg) {
+                my $cfg_line = `grep '^InMenu' $menu_cfg`;
+                unless ($cfg_line =~ /MenuRoot/) {
+                    my @array = split(' ', $cfg_line);
+                    $root_menu = chomp($array[-1]);
+                    # Remove whitespaces at the beginning and the end
+                    $root_menu = &del_spaces($root_menu);
+                    # remove quotes at the beginning and the end
+                    $root_menu = &del_quotes($root_menu);
+                }
+            }
+        }
+        
+        open(CF,"<:encoding(UTF-8)", $parse_file) or die "Open $parse_file: $!";
+        read(CF, my $data, -s $parse_file);
+        close(CF);
+        
+        my @lines  = split(/\015\012|\012|\015/,$data);
+        unshift(@lines, 'AddToMenu "MenuFvwmPersonal"') if $is_personal;
+
+        my %menu_structure;
+        my $is_menu = 0;
+        my $main_submenu = '';
+        my $current_submenu = '/';
+        my $menus;
+        foreach my $line(@lines) {
+            my @tmp_array;
+            my @parts;
+            my $entry = undef;
+            my $in_menu = '';
+            
+            if ($is_personal) {
+                # exchange "AddToMenu <menu>" with '+'
+                unless ($line =~ /Title/ or $line eq 'AddToMenu "MenuFvwmPersonal"' or
+                        $line =~ /^\s*#/ or $line =~ /^\s*DestroyMenu/ or
+                        $line =~ /^\s+$/ or $line eq '') {
+                    # exchange quote + space with quote
+                    $line =~ s/\s"/_"/g;
+                    @tmp_array = split('_', $line);
+                    # save menu in element is found
+                    $in_menu = &del_quotes($tmp_array[1]);
+                    splice(@tmp_array, 0, 2, '+');
+                    $line = join(' ', @tmp_array);
+                }
+            }
+
+            # skip comments/DestroyMenu/Nop lines
+            next if($line =~ /^\s*#/ or $line =~ /^\s*DestroyMenu/ or $line =~ /Nop/);
+            
+            # skip empty lines but copy sub menu into main menu before resetting
+            if ($line =~ /^\s+$/ or $line eq '') {
+                $is_menu = 0;
+                next;
+            }
+            
+            # Remove whitespaces at the beginning and the end before splitting
+            $line = &del_spaces($line);
+            
+            # first split in quote parts
+            @tmp_array = split('"', $line);
+            
+            # remove double entries if 'Title' is available
+            my @unique = @tmp_array;
+            if ($line =~ /Title/) {
+                my %seen = ();
+                @unique = grep {! $seen{$_}++} @tmp_array;
+            }
+            
+            # remove empty entries and reduce it to max 3 parts
+            @tmp_array = ();
+            foreach my $part (@unique) {
+                next if $part =~ /^\s+$/ or $part =~ /Title/;
+                if (scalar @parts == 2 and not $line =~ /Popup/) {
+                    push(@tmp_array, $part);
+                } else {
+                    push(@parts, &del_spaces($part));
+                }
+            }
+            # put all of parts in @tmp_array as string into @parts
+            unless (scalar @tmp_array == 0){
+                push(@parts, &del_spaces(join(' ', @tmp_array)));
+            }
+            
+            # menu starts?
+            if ($parts[0] =~ /^AddToMenu/) {
+                $is_menu = 1;
+                # check for multiple main menus under root menu
+                unless ($parts[1] eq $root_menu) {
+                    if ($parts[1] =~ /^Fvwm/) {
+                        $main_submenu = '/' . $parts[1];
+                        # remove 'Fvwm'
+                        $main_submenu =~ s/^\/Fvwm/\//;
+                    } else {
+                        # add sub menu(s) to menu name
+                        $current_submenu = $parts[1];
+                    }
+                } else {
+                    $main_submenu = '/';
+                    $menu_structure{$root_menu} = $main_submenu if $is_personal;
+                }
+                next;
+            }
+            # menu entry
+            elsif ($parts[0] =~ /^\+/ and $is_menu) {
+                # has an icon?
+                my @pixbuf_obj;
+                if ($parts[1] =~ /%/) {
+                    $have_icons = 1;
+                    @tmp_array = split('%', $parts[1]);
+                    # put path temporarily in pixbuf
+                    my $pixbuf_path = pop(@tmp_array);
+                    # add it infront of the parts array
+                    push(@tmp_array, splice(@parts, -($#parts-1), ($#parts)));
+                    @parts = @tmp_array;
+                    push(@pixbuf_obj, Gtk2::Gdk::Pixbuf->new_from_file("$pixbuf_path"));
+                    push(@pixbuf_obj, $pixbuf_path);
+                } else {
+                    # remove +
+                    shift(@parts);
+                }
+                
+                # $[gt.] string? Remove $[gt.] and convert it with gettext
+                if ($parts[0] =~ /\$\[gt/) {
+                    $parts[0] =~ s/^\$\[gt\.//;
+                    $parts[0] =~ s/\]//;
+                    $parts[0] = SimpleGtk2::translate(undef, $parts[0]);
+                }
+                
+                # check if entry is a sub menu
+                if ($line =~ /Popup/) {
+                    my $sub_menus;
+                    # first get sub-sub-menus
+                    $sub_menus = &del_quotes(pop(@parts));
+                    if ($is_personal) {
+                        unless (exists $menu_structure{$sub_menus}) {
+                            unless ($in_menu eq $root_menu) {
+                                $menu_structure{$sub_menus} = $menu_structure{$in_menu} . '/' . $sub_menus;
+                                $sub_menus = $menu_structure{$sub_menus};
+                            } else {
+                                $menu_structure{$sub_menus} = $sub_menus;
+                            }
+                        }
+                    }
+                    # remove 'Fvwm' at the beginning as $main_submenu = '/'
+                    $sub_menus =~ s/^Fvwm// if $main_submenu eq '/';
+                    # remove 'Popup'
+                    pop(@parts);
+                    # now add $main_submenu if not '/'
+                    unless ($main_submenu eq '/') {
+                        $menus = $main_submenu . '/' . $sub_menus;
+                    } else {
+                        $menus = $main_submenu . $sub_menus;
+                    }
+                } else {
+                    $entry = \@parts;
+                    unless ($main_submenu eq '/'or $current_submenu eq '/') {
+                        $menus = $main_submenu . '/' . $current_submenu;
+                    } else {
+                        if ($current_submenu eq '/') {
+                            $menus = $main_submenu;
+                        } else {
+                            $current_submenu = $menu_structure{$current_submenu} if $is_personal;
+                            $menus = $main_submenu . $current_submenu;
+                        }
+                    }
+                }
+                # create sub menu structure
+                &build_tree($tree_ref, $menus, \@pixbuf_obj, $entry);
+            }
+            else {
+                print "Bad line '". $line . "' in menu! Skipping.\n";
+                next;
+            }
+        }
+    }
+    return $have_icons;
+}
+
+#-------------------------------------------------------------------------
+# Build the menu tree
+#-------------------------------------------------------------------------
+sub build_tree(@) {
+    my ($tree_array_ref, $popup_str, $p_icon_obj, $app_entries) = @_;
+    my @popups = split('/', $popup_str);
+    my $p_icon = undef;
+    unless (scalar $p_icon_obj == 0) {
+        $p_icon = $$p_icon_obj[0];
+    }
+    push(@popups, '') if scalar @popups == 0; # needed for root menu
+    while (scalar @popups > 0) {
+        my $find_element = 0;
+        my $new_array_ref;
+        my $popup = shift(@popups);
+        # root menu?
+        if ($popup eq '') {
+            if (defined($app_entries)) {
+                ($find_element, $new_array_ref) = &search_4_element($tree_array_ref, $popup, $$app_entries[0]);
+                next unless ($find_element or scalar @popups == 0);
+            } else {
+                next;
+            }
+        } else {
+            if (defined($app_entries)) {
+                ($find_element, $new_array_ref) = &search_4_element($tree_array_ref, $popup, $$app_entries[0]);
+                unless ($find_element) {
+                    $tree_array_ref = $new_array_ref;
+                    next unless scalar @popups == 0;
+                }
+            } else {
+                ($find_element, $new_array_ref) = &search_4_element($tree_array_ref, $popup, undef);
+            }
+        }
+
+        # found something?
+        if ($find_element) {
+            if (scalar @popups > 0) {
+                $tree_array_ref = $new_array_ref if defined($new_array_ref);
+                next;
+            }
+        } else {
+            my $hash_element = {};
+            # add sub menu
+            my $count = scalar @popups;
+            if ($count >= 0 and not defined($app_entries)) {
+                $hash_element->{value} = [$popup];
+                if (defined($p_icon)) {
+                    unshift(@{$hash_element->{value}}, $p_icon) ;
+                    push(@{$hash_element->{value}}, $$p_icon_obj[1]);
+                }
+                $hash_element->{children} = [];
+                push(@{$tree_array_ref}, $hash_element);
+                # create next sub menu structure
+                unless ($count == 0) {
+                    @popups = &build_tree($hash_element->{children}, join('/', @popups), $p_icon_obj, $app_entries);
+                }
+            } else {
+                if (defined($app_entries)) {
+                    # add entry to the menu
+                    $hash_element->{value} = $app_entries;
+                    if (defined($p_icon)) {
+                        unshift(@{$hash_element->{value}}, $p_icon) ;
+                        push(@{$hash_element->{value}}, $$p_icon_obj[1]);
+                    }
+                    push(@{$tree_array_ref}, $hash_element);
+                } else {
+                    print "count = $count; app_entries not defined!\n"
+                }
+            }
+        }
+    }
+    return @popups;
+}
+
+sub search_4_element(@) {
+    my ($array_ref, $submenu, $element) = @_;
+    my $found = 0;
+    my $new_ref = undef;
+    foreach my $hash (@{$array_ref}) {
+        my $j = 0;
+        # has an icon?
+        $j = 1 if scalar @{$hash->{value}} > 1;
+        if ($submenu eq $hash->{value}[$j]) {
+            $found = 1 unless defined($element);
+            $new_ref = $hash->{children};
+        }
+        if (defined($element)) {
+            $j = 0;
+            # has an icon?
+            $j = 1 if scalar @{$hash->{value}} > 1;
+            $found = 1 if $element eq $hash->{value}[$j];
+        }
+    }
+    return ($found, $new_ref);
+}
+
+
+sub del_quotes($) {
+    my $string = shift;
+    $string =~ s/^("|')//;
+    $string =~ s/("|')$//;
+    return $string;
+}
+
+sub del_spaces($) {
+    my $string = shift;
+    $string =~ s/^\s+//g;
+    $string =~ s/\s+$//g;
+    return $string;
+}
+
+
+########################################################################
+# Main
+########################################################################
+# .menu
+my $icons_src = &parse_menu($menu, \@src_tree, $menu_cfg);
+# .personal
+my $icons_dest = &parse_menu($personal_menu, \@dest_tree);
+
+
+########################################################################
+# Graphical User Interface + corresponding functions
+########################################################################
+
+#-----------------------------------------------------------------------
+# Toplevel window
+#-----------------------------------------------------------------------
+
+my $win = SimpleGtk2->new_window(  Name => 'mainWindow', 
+                        Version => $Version,
+                        Size    => [560, 280],
+                        Statusbar   => 1,
+                        Title   => "FNS Personal Menu Builder");
+$win->add_signal_handler('mainWindow', 'delete_event', \&check_before_quit);
+
+# get current font to set some labels bold
+my @label_fontarray = $win->get_font_array('mainWindow');
+$label_fontarray[2] = 'bold';
+
+
+#-----------------------------------------------------------------------
+# Treeview Root menu
+#-----------------------------------------------------------------------
+
+# Label ----------------------------------------------------------------
+$win->add_label( Name => 'labelRootMenu', 
+        Pos     => [15, 5], 
+        Font => \@label_fontarray,
+        Title   => "Root Menu");
+
+my $headers_src = ['Text1' => 'text', 'Text2' => 'text', 'Text3' => 'text'];
+if ($icons_src) {
+    unshift(@{$headers_src}, 'Icon' => 'pixbuf');
+}
+
+$win->add_treeview(Name => 'stree',
+        Type    => 'Tree',
+        Pos     => [10, 25],
+        Size    => [210, 225],
+        Headers => $headers_src,
+        Data    => \@src_tree,
+        Sens    => 1);
+$win->add_signal_handler('stree', 'cursor-changed', \&show_src_cmd);
+
+# get the 2nd entry and show it in the status bar
+sub show_src_cmd {
+    my $iter = $win->get_value('stree', 'iter');
+    if (defined($iter)) {
+        my @row = @{$win->get_value('stree', 'row')};
+        my $text;
+        if (ref($row[0]) =~ /Pixbuf/) {
+            unless (defined($row[3])) {
+                $text = $win->translate("Folder") . ": \"$row[1]\"";
+            } else {
+                $text = $win->translate("Application") . "$row[1]: \"$row[2]\"";
+            }
+        } else {
+            unless (defined($row[1])) {
+                $text = $win->translate("Folder") . ": \"$row[0]\"";
+            } else {
+                $text = $win->translate("Application") . "$row[0]: \"$row[1]\"";
+            }
+        }
+        $win->set_sb_text($text);
+    }
+}
+
+# turn headers off
+my $src_tree_obj = $win->get_treeview('stree');
+$src_tree_obj->set_headers_visible(0);
+
+# turn 3rd and 4th column off
+my $num = (scalar @{$headers_src}) / 2 - 1;
+my $src_treecolumn = $src_tree_obj->get_column($num);
+$src_treecolumn->set_visible(0);
+$src_treecolumn = $src_tree_obj->get_column($num-1);
+$src_treecolumn->set_visible(0);
+
+
+#-----------------------------------------------------------------------
+# Treeview Personal Menu
+#-----------------------------------------------------------------------
+
+# Personal Menu --------------------------------------------------------
+$win->add_label( Name => 'labelPersonalMenu', 
+        Pos     => [345, 5], 
+        Font => \@label_fontarray,
+        Title   => "Personal Menu",
+        Tip     => "Sort entries with drag'n drop.");
+
+my $headers_dest = ['Text1' => 'text', 'Text2' => 'text', 'Text3' => 'text'];
+if ($icons_dest) {
+    unshift(@{$headers_dest}, 'Icon' => 'pixbuf');
+}
+
+$win->add_treeview(Name => 'dtree',
+        Type    => 'Tree',
+        Pos     => [340, 25],
+        Size    => [210, 225],
+        Headers => $headers_dest,
+        Data    => \@dest_tree,
+        Sens    => 1);
+$win->add_signal_handler('dtree', 'cursor-changed', \&show_dest_cmd);
+
+# get the 2nd entry and show it in the status bar
+sub show_dest_cmd {
+    my $iter = $win->get_value('dtree', 'iter');
+    if (defined($iter)) {
+        my @row = @{$win->get_value('dtree', 'row')};
+        my $text;
+        if (ref($row[0]) =~ /Pixbuf/) {
+            unless (defined($row[3])) {
+                $text = $win->translate("Folder") . ": \"$row[1]\"";
+            } else {
+                $text = $win->translate("Application") . "$row[1]: \"$row[2]\"";
+            }
+        } else {
+            unless (defined($row[1])) {
+                $text = $win->translate("Folder") . ": \"$row[0]\"";
+            } else {
+                $text = $win->translate("Application") . "$row[0]: \"$row[1]\"";
+            }
+        }
+        $win->set_sb_text($text);
+    }
+}
+
+# set tree reordable
+$win->set_value('dtree', reordable => 1);
+
+# turn headers off
+my $dest_tree_obj = $win->get_treeview('dtree');
+$dest_tree_obj->set_headers_visible(0);
+
+# turn 3rd and 4th column off
+$num = (scalar @{$headers_dest}) / 2 - 1;
+my $dest_treecolumn = $dest_tree_obj->get_column($num);
+$dest_treecolumn->set_visible(0);
+$dest_treecolumn = $dest_tree_obj->get_column($num-1);
+$dest_treecolumn->set_visible(0);
+
+# expand all
+$dest_tree_obj->expand_all();
+
+# set signal handler for reordering
+my $dest_treemodel = $dest_tree_obj->get_model();
+$dest_treemodel->signal_connect('row-changed', \&personal_changed);
+$dest_treemodel->signal_connect('row_deleted', \&personal_changed);
+
+sub personal_changed {
+    if ($values_changed == 0) {
+        $values_changed = 1;
+        &set_save_button_active($values_changed);
+    }
+}
+
+
+#-----------------------------------------------------------------------
+# Middle Buttons
+#-----------------------------------------------------------------------
+
+# Add > ----------------------------------------------------------------
+$win->add_button( Name => 'addButton', 
+        Pos     => [240, 35], 
+        Size    => [80, 25], 
+        Title   => "Add >", 
+        Tip     => "Add the selected menu entry.");
+$win->add_signal_handler('addButton', 'clicked', \&add_menu_entry);
+
+sub add_menu_entry {
+    # get selected src row
+    my $src_row = $win->get_value('stree', 'row');
+    unless (defined($src_row)) {
+        $win->show_msg_dialog("warning", "ok", "You haven't selected a source entry.");
+    } else {
+        &add_dest_entry($src_row);
+    }
+}
+
+sub add_dest_entry {
+    my $src_row = shift;
+    # get selected dest row
+    my $child_iter = $win->get_value('dtree', 'iter');
+    my $new_iter;
+    unless (defined($child_iter)) {
+        # put selection at the end of the top level
+        $new_iter = $dest_treemodel->append(undef);
+    } else {
+        # get parent if any
+        my $parent_iter = $dest_treemodel->iter_parent($child_iter);
+        $new_iter = $dest_treemodel->insert_after($parent_iter, $child_iter);
+    }
+    # add src row values into new empty dest row
+    my $i = 0;
+    while ($i < scalar @{$src_row}) {
+        $dest_treemodel->set($new_iter, $i, $$src_row[$i]);
+        $i++;
+    }
+}
+
+
+# < Remove -------------------------------------------------------------
+$win->add_button( Name => 'removeButton', 
+        Pos     => [240, 70], 
+        Size    => [80, 25], 
+        Title   => "< Remove", 
+        Tip     => "Remove the selected menu entry.\nAttention:\nRemoving a folder removes all entries below!");
+$win->add_signal_handler('removeButton', 'clicked', \&remove_menu_entry);
+
+sub remove_menu_entry {
+    # get selected dest row
+    my $dest_iter = $win->get_value('dtree', 'iter');
+    unless (defined($dest_iter)) {
+        $win->show_msg_dialog("warning", "ok", "You haven't selected a menu entry to remove!");
+    } else {
+        $dest_treemodel->remove($dest_iter);
+    }
+}
+
+
+# New directory --------------------------------------------------------
+$win->add_button( Name => 'createDirButton', 
+        Pos     => [240, 105], 
+        Size    => [80, 25], 
+        Title   => "Create", 
+        Tip     => "Create a new folder or application entry below of the selected position.");
+$win->add_signal_handler('createDirButton', 'clicked', \&create_new_entry);
+
+sub create_new_entry {
+    # get selected dest row
+    my $new_dest_row = [];
+    my $rc = &open_entry_dialog($new_dest_row, $default_icon_size);
+    if (defined($new_dest_row)) {
+        &add_dest_entry($new_dest_row);
+    }
+}
+
+
+# Save -----------------------------------------------------------------
+$win->add_button( Name => 'saveButton', 
+        Pos     => [240, 165], 
+        Size    => [80, 25], 
+        Title   => "Save", 
+        Sens    => $values_changed,
+        Tip     => "Save the new personal menu.");
+$win->add_signal_handler('saveButton', 'clicked', \&save_menu);
+
+sub set_save_button_active($) {
+    my $state = shift;
+    $win->set_sensitive('saveButton', $state); 
+}
+
+sub save_menu {
+    # create backup
+    if (-f $personal_menu) {
+        copy($personal_menu, $personal_menu . ".bak");
+    }
+    # get tree object
+    my $tree_obj = $win->get_treeview('dtree');
+    
+    # row array for menu entries
+    my $row_lines = [];
+    # create the menu lines
+    &build_lines($tree_obj->{data}, $row_lines, 'MenuFvwmPersonal');
+    
+    # write them into .personal
+    open FILE, ">$personal_menu" or die "Write $personal_menu: $!";
+    foreach my $line (@{$row_lines}) {
+        print FILE "$line\n";
+    }
+    close FILE;
+    
+    $values_changed = 0;
+    &set_save_button_active($values_changed);
+}
+
+sub build_lines {
+    my ($data_ref, $row_array_ref, $sub_menu) = @_;
+    my $i = 0;
+    while ($i < length($data_ref)) {
+        my $hash_ref = $data_ref->[$i];
+        my $menu_string = '';
+        
+        # check end of recursion
+        unless (defined($hash_ref->{children})) {return;}
+        
+        # is entry only an application or a folder?
+        if (scalar @{$hash_ref->{children}} == 0) {
+            # application
+            # AddToMenu "MenuFvwmPersonal" "Icedove%/home/tf/.fvwm-nightshade/icons/16x16-icedove.png%" Exec exec  icedove 
+            $menu_string = 'AddToMenu "' . $sub_menu . '" "' . $hash_ref->{value}[1];
+            $menu_string = $menu_string . '%' . $hash_ref->{value}[3] . '%" ' if defined($icons_dest);
+            $menu_string = $menu_string . $hash_ref->{value}[2];
+            push(@{$row_array_ref}, $menu_string);
+        } else {
+            # folder
+            # AddToMenu "MenuFvwmPersonal" "File tools%/home/tf/.fvwm-nightshade/icons/16x16-applications-accessories.png%" Popup "File tools"
+            $menu_string = 'AddToMenu "' . $sub_menu . '" "' . $hash_ref->{value}[1];
+            $menu_string = $menu_string . '%' . $hash_ref->{value}[2] . '%" ' if defined($icons_dest);
+            $menu_string = $menu_string . 'Popup "' . $hash_ref->{value}[1] . '"';
+            push(@{$row_array_ref}, $menu_string);
+            
+            # <space>
+            push(@{$row_array_ref}, '');
+            
+            # DestroyMenu "File tools"
+            $menu_string = 'DestroyMenu "' . $hash_ref->{value}[1] . '"';
+            push(@{$row_array_ref}, $menu_string);
+            
+            # AddToMenu "File tools" "File tools" Title
+            $menu_string = 'AddToMenu "' . $hash_ref->{value}[1] . '" "' . $hash_ref->{value}[1] . '" Title';
+            push(@{$row_array_ref}, $menu_string);
+            
+            &build_lines($hash_ref->{children}, $row_array_ref, $hash_ref->{value}[1]);
+        }
+        $i++;
+    }
+    return;
+}
+
+# Cancel ---------------------------------------------------------------
+$win->add_button( Name => 'quitButton', 
+        Pos     => [240, 200], 
+        Size    => [80, 25], 
+        Title   => "Quit", 
+        Tip     => "Quit Personal Menu Builder.");
+$win->add_signal_handler('quitButton', 'clicked', \&check_before_quit);
+
+# check before quit for unsaved changes
+sub check_before_quit {
+    if ($values_changed == SET) {
+        my $response = $win->show_msg_dialog("warning", "yes-no", "You have unsaved changes! Continue anyway?");
+        if ($response eq 'no') {
+            return;
+        }
+    }
+    Gtk2->main_quit;
+}
+
+
+#-----------------------------------------------------------------------
+# Creation dialog
+#-----------------------------------------------------------------------
+
+sub open_entry_dialog {
+    my $row_ref = shift;
+    my $icon_size = shift;
+    my $icon_changed = 0;
+    # open creation dialog
+    my $dialog = SimpleGtk2->new_window( Name => 'createDialog', 
+                            Version => $Version,
+                            Size    => [310, 110],
+                            Title   => "Create new application or folder entry");
+    $dialog->add_signal_handler('createDialog', 'delete_event', sub {Gtk2->main_quit;});
+    
+    
+    # Choose an icon ---------------------------------------------------
+    $dialog->add_image( Name => 'ChooseIcon', 
+            Pos     => [10, 13], 
+            Size    => [48, 48], 
+            Sens    => $icons_dest, 
+            Tip     => "Click to choose an icon. No change creates no icon.", 
+            Stock   => ['gtk-missing-image']);
+    $dialog->add_signal_handler('ChooseIcon', 'button_press_event', sub{&open_icon_dir($dialog, 'ChooseIcon')});
+    
+    sub open_icon_dir {
+        my ($self, $name) = @_;
+        # get object
+        my $object = $self->get_object($name);
+        my $resp = $self->show_filechooser_dialog('open', $default_icon_dir);
+        unless ($resp eq '0') {
+            $self->set_image($name, Path => $resp);
+        }
+    }
+    
+    # Create a folder entry --------------------------------------------
+    $dialog->add_radio_button( Name => 'radioCreateFolder', 
+            Pos     => [70, 10], 
+            Title   => "Folder", 
+            Group   => "ChoiceGroup", 
+            Tip     => "Create a folder entry.");
+    $dialog->add_signal_handler('radioCreateFolder', 'toggled', \&activate_cmdline, [$dialog, 'folder']);
+    
+    # Create an application entry --------------------------------------
+    $dialog->add_radio_button( Name => 'radioCreateApp', 
+            Pos     => [170, 10], 
+            Title   => "Application", 
+            Group   => "ChoiceGroup", 
+            Tip     => "Create an application entry.");
+    $dialog->add_signal_handler('radioCreateApp', 'toggled', \&activate_cmdline, [$dialog, 'application']);
+    
+    sub activate_cmdline {
+        my ($widget, $data) = @_;
+        my $self = $$data[0];
+        my $what = $$data[1];
+        if ($what eq 'folder') {
+            $self->set_sensitive('entryCommandString', 0);
+            $self->set_sensitive('addPath', 0);
+        } else {
+            $self->set_sensitive('entryCommandString', 1);
+            $self->set_sensitive('addPath', 1);
+        }
+    }
+    
+    
+    # Entry for a command string ---------------------------------------
+    $dialog->add_entry( Name => 'entryCommandString', 
+            Pos     => [68, 40], 
+            Size    => [180, 25], 
+            Sens    => 0, 
+            Title   => "Commandstring", 
+            Tip     => "Add a command string or choose a path to an executable.\nHint:\n'Exec exec' will be prepended.");
+    
+    $dialog->add_button( Name => 'addPath',
+            Pos     => [260, 40], 
+            Size    => [40, 25], 
+            Sens    => 0, 
+            Title   => "...", 
+            Tip     => "Choose an executable.");
+    $dialog->add_signal_handler('addPath', 'clicked', \&add_path, [$dialog, 'entryCommandString']);
+    
+    # reduce the full path to the name if found in $PATH
+    sub reduce_path {
+        my $path_name = shift;
+        # check if it is in $PATH
+        my($vol,$dir,$file) = File::Spec->splitpath($path_name);
+        chop($dir);
+        if ($ENV{PATH} =~ m!$dir!) {
+            $path_name = $file;
+        }
+        return $path_name;
+    }
+    
+    sub add_path {
+        my ($widget, $data) = @_;
+        my $self = $$data[0];
+        my $name = $$data[1];
+        # get object
+        my $object = $self->get_object($name);
+        # get current filepath from entry
+        my $path = "$ENV{HOME}";
+        my $resp = $self->show_filechooser_dialog('open', $path);
+        unless ($resp eq '0') {
+            my $title = &reduce_path($resp);
+            $self->set_title($name, $title);
+        }
+    }
+    
+    
+    # Entry for the label ----------------------------------------------
+    $dialog->add_entry( Name => 'entryLabel', 
+            Pos     => [10, 75], 
+            Size    => [100, 25], 
+            Title   => "Label", 
+            Tip     => "The label for this entry.");
+    
+    
+    # Ok ---------------------------------------------------------------
+    $dialog->add_button( Name => 'okButton', 
+            Pos     => [130, 75], 
+            Size    => [80, 25], 
+            Title   => "Create", 
+            Tip     => "Create the new entry.");
+    $dialog->add_signal_handler('okButton', 'clicked', \&build_row, [$dialog, $row_ref, $icon_size, $icon_changed]);
+    
+    sub build_row {
+        my ($widget, $data) = @_;
+        my $self = $$data[0];
+        my $row_ref = $$data[1];
+        my $icon_size = $$data[2];
+        my $icon_changed = $$data[3];
+        
+        # Icon
+        if ($self->is_sensitive('ChooseIcon') and $icon_changed) {
+            # get icon pixbuf and resize it
+            my $pixbuf = $self->get_image('ChooseIcon', 'Pixbuf');
+            my $scaled = $pixbuf->scale_simple($icon_size,$icon_size,'bilinear');
+            push(@{$row_ref}, $scaled);
+        }
+        # Label
+        push(@{$row_ref}, $self->get_title('entryLabel'));
+        # is application active?
+        if ($self->is_sensitive('radioCreateApp')) {
+            my $cmd_string = "Exec exec " . $self->get_title('entryCommandString');
+            push(@{$row_ref}, $cmd_string) if $self->is_sensitive('entryCommandString');
+        }
+        $self->get_widget('createDialog')->destroy();
+    }
+    
+    # Cancel -----------------------------------------------------------
+    $dialog->add_button( Name => 'cancelButton', 
+            Pos     => [220, 75], 
+            Size    => [80, 25], 
+            Title   => "Cancel", 
+            Tip     => "Cancel entry creation.");
+    $dialog->add_signal_handler('cancelButton', 'clicked', sub {$dialog->get_widget('createDialog')->destroy();});
+    
+    $dialog->show_and_run();
+}
+
+
+$win->show_and_run();
+#$win->show();
+
+#$module->eventLoop;
