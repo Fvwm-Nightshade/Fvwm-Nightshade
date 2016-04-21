@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.8.20160310
+InfoStoreAdd ns_version 0.7.9.20160422
 # Copyright (C) 2016
 #
 # Authors:
@@ -548,7 +548,7 @@ Style FNS-BaseSetup             EWMHMiniIconOverride, Icon icon_fns.svg:48x48, M
 Style FNS-WindowsBehaviour      EWMHMiniIconOverride, Icon WinBehaviour.svg:48x48, MiniIcon WinBehaviour.svg:16x16
 Style FNS-MenuConfigurator      EWMHMiniIconOverride, Icon MenuConfigurator.svg:48x48, MiniIcon MenuConfigurator.svg:16x16
 Style FNS-CompConfigurator      EWMHMiniIconOverride, Icon CompConfigurator.svg:48x48, MiniIcon CompConfigurator.svg:16x16
-Style FNS-Script-PersonalMenu   EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
+Style FNS-MenuBuilder           EWMHMiniIconOverride, Icon PersonalMenuCreator.svg:48x48, MiniIcon PersonalMenuCreator.svg:16x16
 Style FNS-Script-FileBrowser    EWMHMiniIconOverride, Icon filemanager.svg:48x48, MiniIcon filemanager.svg:16x16
 Style FNS-CpuPerformance        EWMHMiniIconOverride, Icon cpu.svg:48x48, MiniIcon cpu.svg:16x16
 Style FNS-Script-Date           EWMHMiniIconOverride, Icon clock.svg:48x48, MiniIcon clock.svg:16x16
@@ -2023,8 +2023,8 @@ AddToFunc   FuncMenuFvwmPersonal
 + I DestroyMenu MenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal DynamicPopupAction FuncMenuFvwmPersonal
 + I AddToMenu MenuFvwmPersonal "$[gt.Personal Applications]" Title
-+ I AddToMenu MenuFvwmPersonal "$[gt.&Configure Personal Applications]%PersonalMenuCreator.svg:$[infostore.MenuIconSize]%"    FvwmScript FNS-Script-PersonalMenu
-+ I Test (f  $[FVWM_USERDIR]/.personal) PipeRead `sed -e '/^# personal menu/ d;/^ *$/,$ d' $[FVWM_USERDIR]/.personal`
++ I AddToMenu MenuFvwmPersonal "$[gt.&Configure Personal Applications]%PersonalMenuCreator.svg:$[infostore.MenuIconSize]%"    Exec exec FNS-MenuBuilder
++ I Test (f  $[FVWM_USERDIR]/.personal) PipeRead `sed -e '/^#/ d;/^ *$/ d;/^ *$/,$ d' $FVWM_USERDIR/.personal`
 
 
 #=======================================================================
