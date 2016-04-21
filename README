@@ -57,8 +57,8 @@ Featurelist of Fvwm-Nightshade 0.7.x:
   - FNS-CompConfigurator (config tool for xcompmgr or compton).
   - FNS-MenuConfigurator (exchange original fvwm-menu-config GUI).
   - FNS-CPU-Performance (governor-tool for cpufreq / cpupower).
+  - FNS-MenuBuilder (configuration tool for personal menu).
 
-- Personal menu via FNS-Script-PersonalMenu.
 - "Run" command depending on installed software (grun, gmrun or FvwmForm).
 - Background configurable with a thumb browser which can scan different
   wallpaper locations.

@@ -23,6 +23,7 @@ Changes:
   - FNS-CompConfigurator (config tool for xcompmgr or compton)
   - FNS-MenuConfigurator (exchange original fvwm-menu-config GUI)
   - FNS-CPU-Performance (governor-tool for cpufreq / cpupower)
+  - FNS-MenuBuilder (configuration tool for personal menu).
 - Support for pkexec (adding programs to polkit for gui view as root)
 - Support for up to 10 virtual desktop pages. Depends on the limit of
   available numeric keys (0-9)
