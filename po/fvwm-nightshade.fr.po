@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2016-02-12 16:58+0200\n"
+"PO-Revision-Date: 2016-04-21 22:19+0200\n"
 "Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "Language: French\n"
@@ -1087,7 +1087,7 @@ msgid "Mouse 1:  Delete on click"
 msgstr "Mouse 1:  Effacer au click"
 
 msgid "          Destroy on double click"
-msgstr "		  Détruire avec le double clic"
+msgstr "          Détruire avec le double clic"
 
 msgid "Maximize Button Bindings"
 msgstr "Button maximiser enfoncé"
@@ -1096,7 +1096,7 @@ msgid "Mouse 1:       Maximize fully on click"
 msgstr "Mouse 1:       Maximiser pleinement cliquez sur"
 
 msgid "               Maximize menu on double click"
-msgstr "		       Menu maximiser avec le double clic"
+msgstr "               Menu maximiser avec le double clic"
 
 msgid "Mouse 2:       Maximize vertically"
 msgstr "Mouse 2:       Maximiser verticallement"
@@ -1122,53 +1122,6 @@ msgstr "Mouse 3:  Iconify toggle resource group"
 ########################################################################
 # FvwmScript
 ########################################################################
-#-----------------------------------------------------------------------
-# FvwmScript-PersonalMenu
-#-----------------------------------------------------------------------
-msgid "Menu Folders"
-msgstr "Menu dossiers"
-
-msgid "Menu Entries"
-msgstr "menu entrée"
-
-msgid "Add >"
-msgstr "Ajouter >"
-
-msgid "< Remove"
-msgstr "< Enlever"
-
-msgid "Save"
-msgstr "Sauvegarder"
-
-msgid "Quit"
-msgstr "Quitter"
-
-msgid "!!! Changed menu not saved !!! Next click will quit."
-msgstr "!!! Le menu a changé sans être sauvegarder!!! Prochain clic quittera le menu."
-
-msgid "Personal Entries "
-msgstr "Entrées personnelle"
-
-msgid "Personal Entries"
-msgstr "Entrées personnelle "
-
-msgid "Personal applications*"
-msgstr "Application personnelle*"
-
-msgid "Personal menu saved"
-msgstr "Menu personnel sauvegardé"
-
-msgid "Added '"
-msgstr "Ajouté '"
-
-msgid "' to menu"
-msgstr "' au menu"
-
-msgid "Removed '"
-msgstr "Enlevé  '"
-
-msgid "' from menu"
-msgstr "' du menu"
 
 #-----------------------------------------------------------------------
 # fvwm-menu-desktop which are in the CVS version of FVWM

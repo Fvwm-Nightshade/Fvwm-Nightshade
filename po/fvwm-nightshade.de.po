@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2016-02-12 18:44+0200\n"
+"PO-Revision-Date: 2016-04-21 22:21+0200\n"
 "Last-Translator: Thomas Funk <t.funk@web.de>\n"
 "Language-Team: German\n"
 "Language: \n"
@@ -1122,53 +1122,6 @@ msgstr "Maus 3:   Fenstergruppe zu minimieren/wiederherstellen"
 ########################################################################
 # FvwmScript
 ########################################################################
-#-----------------------------------------------------------------------
-# FvwmScript-PersonalMenu
-#-----------------------------------------------------------------------
-msgid "Menu Folders"
-msgstr "Menüordner"
-
-msgid "Menu Entries"
-msgstr "Menüeinträge"
-
-msgid "Add >"
-msgstr "Hinzufügen >"
-
-msgid "< Remove"
-msgstr "< Entfernen"
-
-msgid "Save"
-msgstr "Speichern"
-
-msgid "Quit"
-msgstr "Beenden"
-
-msgid "!!! Changed menu not saved !!! Next click will quit."
-msgstr "!!! Geändertes Menü nicht gespeichert !!! Nächster Klick beendet."
-
-msgid "Personal Entries "
-msgstr "Persönliche Einträge "
-
-msgid "Personal Entries"
-msgstr "Persönliche Einträge"
-
-msgid "Personal applications*"
-msgstr "Persönliche Programme*"
-
-msgid "Personal menu saved"
-msgstr "Persönliches Menü gespeichert"
-
-msgid "Added '"
-msgstr "Füge '"
-
-msgid "' to menu"
-msgstr "' zu Menü hinzu"
-
-msgid "Removed '"
-msgstr "Entferne '"
-
-msgid "' from menu"
-msgstr "' von Menü"
 
 #-----------------------------------------------------------------------
 # fvwm-menu-desktop which are in the CVS version of FVWM

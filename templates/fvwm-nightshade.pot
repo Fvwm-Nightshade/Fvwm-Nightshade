@@ -1121,53 +1121,6 @@ msgstr ""
 ########################################################################
 # FvwmScript
 ########################################################################
-#-----------------------------------------------------------------------
-# FvwmScript-PersonalMenu
-#-----------------------------------------------------------------------
-msgid "Menu Folders"
-msgstr ""
-
-msgid "Menu Entries"
-msgstr ""
-
-msgid "Add >"
-msgstr ""
-
-msgid "< Remove"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Quit"
-msgstr ""
-
-msgid "!!! Changed menu not saved !!! Next click will quit."
-msgstr ""
-
-msgid "Personal Entries "
-msgstr ""
-
-msgid "Personal Entries"
-msgstr ""
-
-msgid "Personal applications*"
-msgstr ""
-
-msgid "Personal menu saved"
-msgstr ""
-
-msgid "Added '"
-msgstr ""
-
-msgid "' to menu"
-msgstr ""
-
-msgid "Removed '"
-msgstr ""
-
-msgid "' from menu"
-msgstr ""
 
 #-----------------------------------------------------------------------
 # fvwm-menu-desktop which are in the CVS version of FVWM

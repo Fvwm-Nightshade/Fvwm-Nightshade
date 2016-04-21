@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2016-02-12 17:16+0200\n"
+"PO-Revision-Date: 2016-04-21 22:23+0200\n"
 "Last-Translator: Artashes Mkhitaryan <artashm@mytum.de>\n"
 "Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
@@ -705,7 +705,7 @@ msgstr "Переместить в ..."
 msgid "D&own	Page"
 msgstr "Н&ижняя	Страница"
 
-msgid "&Up  	Page"
+msgid "&Up	Page"
 msgstr "&Верхняя	Страница"
 
 #-----------------------------------------------------------------------
@@ -822,19 +822,19 @@ msgid "Mouse 2:   Drag moves window"
 msgstr "Мышь 2:   окна переместятся тасканием"
 
 msgid "           Raise or lower with click"
-msgstr "	  поднять или спустить при клике"
+msgstr "      поднять или спустить при клике"
 
 msgid "Mouse 3:   WindowOpsTrimmed menu with click"
 msgstr "Мышь 3:   WindowOpsTrimmed меню с кликом"
 
 msgid "           WindowOpsFull menu with ALT + click"
-msgstr "	  WindowOpsFull	меню с ALT + клик"
+msgstr "      WindowOpsFull меню с ALT + клик"
 
 msgid "Mouse 4/5: Shade/unshade window"
 msgstr "Мышь 4/5: Окно Тонирования/нетонирпвамия "
 
 msgid "           with rolling wheel up/down"
-msgstr "	  с барабаном вверх/вниз"
+msgstr "      с барабаном вверх/вниз"
 
 msgid "Mouse Bindings for Corners and Sides"
 msgstr "Связки мыши для углов и сторон"
@@ -1121,53 +1121,6 @@ msgstr "Мышь 3:  Иконывикация активировать груп�
 ########################################################################
 # FvwmScript
 ########################################################################
-#-----------------------------------------------------------------------
-# FvwmScript-PersonalMenu
-#-----------------------------------------------------------------------
-msgid "Menu Folders"
-msgstr "Меню Папок"
-
-msgid "Menu Entries"
-msgstr "Меню Записей"
-
-msgid "Add >"
-msgstr "Добавить >"
-
-msgid "< Remove"
-msgstr "< Удалить"
-
-msgid "Save"
-msgstr "Сохранить"
-
-msgid "Quit"
-msgstr "Выйти"
-
-msgid "!!! Changed menu not saved !!! Next click will quit."
-msgstr "!!! Меню Не сохранено !!! Следующий клик выйдет."
-
-msgid "Personal Entries "
-msgstr "Персональные Записи"
-
-msgid "Personal Entries"
-msgstr "Персональные Записи"
-
-msgid "Personal applications*"
-msgstr "Персональные Программы"
-
-msgid "Personal menu saved"
-msgstr "Персональное меню сохранено"
-
-msgid "Added '"
-msgstr "Добавлено '"
-
-msgid "' to menu"
-msgstr "' в меню"
-
-msgid "Removed '"
-msgstr "Удалено '"
-
-msgid "' from menu"
-msgstr "' из меню"
 
 #-----------------------------------------------------------------------
 # fvwm-menu-desktop which are in the CVS version of FVWM

@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2016-02-12 19:52+0200\n"
+"PO-Revision-Date: 2016-02-21 22:20+0200\n"
 "Last-Translator: Adonai Martin <adonai.martin@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: Spanish\n"
@@ -26,13 +26,13 @@ msgid "&Personal Applications"
 msgstr "&Programas Personales"
 
 msgid "&Configuration"
-msgstr "&Configuración"
+msgstr "&ConfiguraciÃ³n"
 
 msgid "&Help"
 msgstr "&Ayuda"
 
 msgid "Fvwm &Modules"
-msgstr "&Módulos Fvwm"
+msgstr "&MÃ³dulos Fvwm"
 
 msgid "&Window Operations"
 msgstr "Funciones de &Ventana"
@@ -65,13 +65,13 @@ msgid "Help"
 msgstr "Ayuda"
 
 msgid "Fvwm &Man Pages"
-msgstr "Páginas &Man de Fvwm"
+msgstr "PÃ¡ginas &Man de Fvwm"
 
 msgid "Fvwm &Web Pages"
-msgstr "Páginas &Web de Fvwm"
+msgstr "PÃ¡ginas &Web de Fvwm"
 
 msgid "Fvwm-&Nightshade Web Pages"
-msgstr "Páginas Web de Fvwm-&Nightshade"
+msgstr "PÃ¡ginas Web de Fvwm-&Nightshade"
 
 msgid "&Other Helps"
 msgstr "&Otras Ayudas"
@@ -89,7 +89,7 @@ msgid "Others"
 msgstr "Otros"
 
 msgid "&X Man Pages"
-msgstr "Páginas Man de &X"
+msgstr "PÃ¡ginas Man de &X"
 
 msgid "&GNOME Help"
 msgstr "Ayuda de &GNOME"
@@ -101,16 +101,16 @@ msgstr "Ayuda de &KDE"
 # MenuFvwmWebPages
 #-----------------------------------------------------------------------
 msgid "Fvwm Web Pages"
-msgstr "Páginas Web de Fvwm"
+msgstr "PÃ¡ginas Web de Fvwm"
 
 msgid "Home Page"
-msgstr "Página de Inicio"
+msgstr "PÃ¡gina de Inicio"
 
 msgid "FAQ"
 msgstr "Preguntas frecuentes"
 
 msgid "Documentation"
-msgstr "Documentación"
+msgstr "DocumentaciÃ³n"
 
 msgid "Wiki"
 msgstr "Wiki"
@@ -122,22 +122,22 @@ msgid "In the beginning was ..."
 msgstr "En el comienzo fue ..."
 
 msgid "Beginners Guide"
-msgstr "Guía para Principiantes"
+msgstr "GuÃ­a para Principiantes"
 
 msgid "FAQ inofficial"
 msgstr "FAQ Extraoficial"
 
 msgid "How Styles are Applied"
-msgstr "Cómo son aplicados los estilos"
+msgstr "CÃ³mo son aplicados los estilos"
 
 msgid "Session Management"
-msgstr "Gestión de Sesiones"
+msgstr "GestiÃ³n de Sesiones"
 
 #-----------------------------------------------------------------------
 # FNSWebPagesMenu
 #-----------------------------------------------------------------------
 msgid "FNS Web Pages"
-msgstr "FNS Páginas Web"
+msgstr "FNS PÃ¡ginas Web"
 
 msgid "Fvwm-Nightshade Wiki"
 msgstr "Fvwm-Nightshade Wiki"
@@ -146,19 +146,19 @@ msgstr "Fvwm-Nightshade Wiki"
 # MenuFvwmModules
 #-----------------------------------------------------------------------
 msgid "Fvwm Modules"
-msgstr "Módulos Fvwm"
+msgstr "MÃ³dulos Fvwm"
 
 #-----------------------------------------------------------------------
 # MenuStartRegularModules
 #-----------------------------------------------------------------------
 msgid "Start Regular Modules"
-msgstr "Lanzar Módulos Regulares"
+msgstr "Lanzar MÃ³dulos Regulares"
 
 msgid "&Animation"
-msgstr "&Animación"
+msgstr "&AnimaciÃ³n"
 
 msgid "&Debug Console"
-msgstr "Consola de &Depuración"
+msgstr "Consola de &DepuraciÃ³n"
 
 msgid "&Identify"
 msgstr "&Identificar"
@@ -179,7 +179,7 @@ msgstr "Auto-Elevar (&2 sec)"
 # MenuStopRegularModules
 #-----------------------------------------------------------------------
 msgid "Stop Regular Modules"
-msgstr "Parar Módulos Regulares"
+msgstr "Parar MÃ³dulos Regulares"
 
 #-----------------------------------------------------------------------
 # MenuFvwmForms
@@ -197,13 +197,13 @@ msgid "&Talk"
 msgstr "&Hablar"
 
 msgid "&QuitVerify"
-msgstr "&Verificación de Salir"
+msgstr "&VerificaciÃ³n de Salir"
 
 #-----------------------------------------------------------------------
 # MenuConfiguration
 #-----------------------------------------------------------------------
 msgid "Configuration"
-msgstr "Configuración"
+msgstr "ConfiguraciÃ³n"
 
 msgid "&System"
 msgstr "&Sistema"
@@ -215,7 +215,7 @@ msgstr "&Seguir .xsession-errors"
 # MenuFvwmConfiguration
 #-----------------------------------------------------------------------
 msgid "&Animation Control"
-msgstr "Control de &Animación"
+msgstr "Control de &AnimaciÃ³n"
 
 msgid "Fvwm Form &Defaults"
 msgstr "Formas Fvwm por &Defecto"
@@ -227,13 +227,13 @@ msgid "Configure &Background"
 msgstr "Configurar &Fondo"
 
 msgid "&Compositing"
-msgstr "&Composición"
+msgstr "&ComposiciÃ³n"
 
 msgid "&Decoration"
-msgstr "&Decoración"
+msgstr "&DecoraciÃ³n"
 
 msgid "FNS Base &Setup"
-msgstr "FNS Configuración Básica"
+msgstr "FNS ConfiguraciÃ³n BÃ¡sica"
 
 msgid "FNS &Windows Behaviour"
 msgstr "FNS Comportamiento de ventana"
@@ -245,7 +245,7 @@ msgid "&Keyboard"
 msgstr "&Teclado"
 
 msgid "&Mouse"
-msgstr "&Ratón"
+msgstr "&RatÃ³n"
 
 msgid "Sc&reen Saver"
 msgstr "&Protector de Pantalla"
@@ -263,7 +263,7 @@ msgid "Keyboard"
 msgstr "Teclado"
 
 msgid "&Settings"
-msgstr "&Configuración"
+msgstr "&ConfiguraciÃ³n"
 
 msgid "&Layout"
 msgstr "&Layout"
@@ -272,46 +272,46 @@ msgstr "&Layout"
 # MenuMouse
 #-----------------------------------------------------------------------
 msgid "Mouse"
-msgstr "Ratón"
+msgstr "RatÃ³n"
 
 msgid "Root &Cursor"
-msgstr "&Cursor Raíz"
+msgstr "&Cursor RaÃ­z"
 
 #-----------------------------------------------------------------------
 # MenuDecoration
 #-----------------------------------------------------------------------
 msgid "Decoration"
-msgstr "Decoración"
+msgstr "DecoraciÃ³n"
 
 msgid "&Decors"
-msgstr "&Diseño"
+msgstr "&DiseÃ±o"
 
 msgid "&Layouts"
 msgstr "&Layouts"
 
 msgid "&Qt Decor"
-msgstr "Diseño &Qt"
+msgstr "DiseÃ±o &Qt"
 
 msgid "&Gtk+ Decor"
-msgstr "Diseño &Gtk+"
+msgstr "DiseÃ±o &Gtk+"
 
 #-----------------------------------------------------------------------
 # MenuQtDecor
 #-----------------------------------------------------------------------
 msgid "Qt Decor"
-msgstr "Diseño Qt"
+msgstr "DiseÃ±o Qt"
 
 msgid "Qt-&3 Decor"
-msgstr "Diseño Qt-&3"
+msgstr "DiseÃ±o Qt-&3"
 
 msgid "Qt-&4 Decor"
-msgstr "Diseño Qt-&4"
+msgstr "DiseÃ±o Qt-&4"
 
 #-----------------------------------------------------------------------
 # FvwmDecorMenu
 #-----------------------------------------------------------------------
 msgid "Decors"
-msgstr "Diseño"
+msgstr "DiseÃ±o"
 
 #-----------------------------------------------------------------------
 # FvwmLayoutMenu
@@ -323,13 +323,13 @@ msgstr "Layouts"
 # MenuCompositing
 #-----------------------------------------------------------------------
 msgid "Compositing"
-msgstr "Composición"
+msgstr "ComposiciÃ³n"
 
 msgid "FNS CompMgr &Configurator"
 msgstr "FNS CompMgr &Configurador"
 
 msgid "&Menu Transparency"
-msgstr "Transparencia de &menú "
+msgstr "Transparencia de &menÃº "
 
 msgid "Active Window &Opacity"
 msgstr "&Opacidad de ventana activa"
@@ -341,7 +341,7 @@ msgstr "Transparencia de &ventana inactiva"
 # MenuWallpaperConfiguration
 #-----------------------------------------------------------------------
 msgid "Background Configuration"
-msgstr "Configuración de fondo"
+msgstr "ConfiguraciÃ³n de fondo"
 
 msgid "Set &Default background"
 msgstr "Fondo por &Defecto"
@@ -356,7 +356,7 @@ msgid "Screen Saver"
 msgstr "Protector de Pantalla"
 
 msgid "XscreenSaver &Settings"
-msgstr "&Configuración de XscreenSaver"
+msgstr "&ConfiguraciÃ³n de XscreenSaver"
 
 msgid "&XscreenSaver (Re)start"
 msgstr "(re)iniciar &XscreenSaver"
@@ -389,7 +389,7 @@ msgid "&Hibernate System"
 msgstr "&Hibernar Sistema"
 
 msgid "&Yes, Really Quit"
-msgstr "&Sí, confirmar cierre"
+msgstr "&SÃ­, confirmar cierre"
 
 msgid "&No, Don't Quit"
 msgstr "&No, no cerrar"
@@ -404,7 +404,7 @@ msgid "&Move"
 msgstr "&Mover"
 
 msgid "&Resize"
-msgstr "Cambiar el &tamaño"
+msgstr "Cambiar el &tamaÃ±o"
 
 msgid "(De)&Iconify"
 msgstr "(De)&Iconificar"
@@ -434,7 +434,7 @@ msgid "&Destroy"
 msgstr "&Destruir"
 
 msgid "Move to &Page"
-msgstr "Mover a la &Página"
+msgstr "Mover a la &PÃ¡gina"
 
 msgid "&Group Operations"
 msgstr "Operaciones de &grupo"
@@ -479,7 +479,7 @@ msgid "(Un)&Stick"
 msgstr "(Des)P&egar"
 
 msgid "Mor&e..."
-msgstr "Má&s..."
+msgstr "MÃ¡&s..."
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupOps
@@ -503,7 +503,7 @@ msgid "Lo&wer"
 msgstr "&Bajar"
 
 msgid "&Quick Move To ..."
-msgstr "&Mover Rápido a..."
+msgstr "&Mover RÃ¡pido a..."
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupOps
@@ -512,16 +512,16 @@ msgid "Window Style"
 msgstr "Estilo de Ventana"
 
 msgid "TitleAtT&op"
-msgstr "Títul&o Arriba"
+msgstr "TÃ­tul&o Arriba"
 
 msgid "TitleAt&Bottom"
-msgstr "Título &al fondo"
+msgstr "TÃ­tulo &al fondo"
 
 msgid "&Title"
-msgstr "&Título"
+msgstr "&TÃ­tulo"
 
 msgid "&NoTitle"
-msgstr "Si&n Título"
+msgstr "Si&n TÃ­tulo"
 
 msgid "&FvwmBorder"
 msgstr "&BordeFvwm"
@@ -554,10 +554,10 @@ msgid "HandleWidth &7"
 msgstr "Ancho del asa &7"
 
 msgid "Re&sizeOpaque"
-msgstr "&Cambiar tamaño Opaco"
+msgstr "&Cambiar tamaÃ±o Opaco"
 
 msgid "Resi&zeOutline"
-msgstr "&Marco al cambiar tamaño"
+msgstr "&Marco al cambiar tamaÃ±o"
 
 msgid "S&loppyFocus"
 msgstr "Foco Re&lajado"
@@ -566,7 +566,7 @@ msgid "&ClickToFocus"
 msgstr "&Click para Enfocar"
 
 msgid "Mo&useFocus"
-msgstr "Foco sigue al Ratón"
+msgstr "Foco sigue al RatÃ³n"
 
 msgid "N&everFocus"
 msgstr "No &Enfocar"
@@ -674,26 +674,26 @@ msgstr "Permanecer de&bajo"
 # MenuDesktopOps
 #-----------------------------------------------------------------------
 msgid "Desktopmenu"
-msgstr "Menú de Escritorio"
+msgstr "MenÃº de Escritorio"
 
 msgid "Desktop Preferences"
-msgstr "Configuración de Escritorio"
+msgstr "ConfiguraciÃ³n de Escritorio"
 
 msgid "Root Menu"
-msgstr "Menú Raíz"
+msgstr "MenÃº RaÃ­z"
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
 #-----------------------------------------------------------------------
 # layout Horizontal, Vertical & G2like
 msgid "&Right	Page"
-msgstr "Página &Derecha"
+msgstr "PÃ¡gina	&Derecha"
 
 msgid "&Left	Page"
-msgstr "Página &Izquierda"
+msgstr "PÃ¡gina	&Izquierda"
 
 msgid "Page"
-msgstr "Página"
+msgstr "PÃ¡gina"
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
@@ -704,10 +704,10 @@ msgstr "Mover a ..."
 
 # layout Vertical
 msgid "D&own	Page"
-msgstr "Página A&bajo"
+msgstr "PÃ¡gina	A&bajo"
 
 msgid "&Up  	Page"
-msgstr "Página &Arriba"
+msgstr "PÃ¡gina	&Arriba"
 
 #-----------------------------------------------------------------------
 # MenuClockOps
@@ -765,7 +765,7 @@ msgid "About"
 msgstr "Acerca de"
 
 msgid "Version"
-msgstr "Versión"
+msgstr "VersiÃ³n"
 
 msgid "Authors"
 msgstr "Autores"
@@ -786,96 +786,96 @@ msgstr " Ok "
 
 # config - Help info with SHIFT-CTRL-ALT in Root
 msgid "Mouse Bindings for Root area"
-msgstr "Vincular Ratón para area Root"
+msgstr "Vincular RatÃ³n para area Root"
 
 msgid "Mouse 1:   Root menu"
-msgstr "Ratón 1:   Menú Raíz"
+msgstr "RatÃ³n 1:   MenÃº RaÃ­z"
 
 msgid "Mouse 2:   Window list"
-msgstr "Ratón 2:   Lista de Ventanas"
+msgstr "RatÃ³n 2:   Lista de Ventanas"
 
 msgid "Mouse 3:   Desktop Oops menu"
-msgstr "Ratón 3:   Menú Oops de Escritorio"
+msgstr "RatÃ³n 3:   MenÃº Oops de Escritorio"
 
 msgid "Mouse 4/5: Switch to page left/right with"
-msgstr "Ratón 4/5: Cambiar a página izquierda/derecha con"
+msgstr "RatÃ³n 4/5: Cambiar a pÃ¡gina izquierda/derecha con"
 
 msgid "           SHIFT-ALT + rolling wheel up/down anywhere"
 msgstr "           SHIFT-ALT + rueda arriba/abajo"
 
 msgid "           Switch with window to page left/right with"
-msgstr "           Mandar ventana a página izquierda/derecha with"
+msgstr "           Mandar ventana a pÃ¡gina izquierda/derecha with"
 
 msgid "           SHIFT-CTRL + rolling wheel up/down anywhere"
 msgstr "           SHIFT-CTRL + ruleta arriba/abajo"
 
 # config - Help info with SHIFT-CTRL-ALT to Pointer in Window Decorations
 msgid "Mouse Bindings for Titlebar"
-msgstr "Atajos de Ratón para Barra de Título"
+msgstr "Atajos de RatÃ³n para Barra de TÃ­tulo"
 
 msgid "Mouse 1:   Drag moves window"
-msgstr "Ratón 1:   Arrastrar para mover la ventana"
+msgstr "RatÃ³n 1:   Arrastrar para mover la ventana"
 
 msgid "           Maximize on double click"
 msgstr "           Maximizar con doble click"
 
 msgid "Mouse 2:   Drag moves window"
-msgstr "Ratón 2:   Arrastrar para mover la ventana"
+msgstr "RatÃ³n 2:   Arrastrar para mover la ventana"
 
 msgid "           Raise or lower with click"
 msgstr "           Elevar o bajar con Click"
 
 msgid "Mouse 3:   WindowOpsTrimmed menu with click"
-msgstr "Ratón 3:   Menú resumido de Ops de Ventana con click"
+msgstr "RatÃ³n 3:   MenÃº resumido de Ops de Ventana con click"
 
 msgid "           WindowOpsFull menu with ALT + click"
-msgstr "           Menú Completo de Ops de Ventana con ALT + click"
+msgstr "           MenÃº Completo de Ops de Ventana con ALT + click"
 
 msgid "Mouse 4/5: Shade/unshade window"
-msgstr "Ratón 4/5: Enrrollar/Desenrrollar ventana"
+msgstr "RatÃ³n 4/5: Enrrollar/Desenrrollar ventana"
 
 msgid "           with rolling wheel up/down"
 msgstr "           con rueda arriba/abajo"
 
 msgid "Mouse Bindings for Corners and Sides"
-msgstr "Atajos de Ratón para Esquinas y Lados"
+msgstr "Atajos de RatÃ³n para Esquinas y Lados"
 
 msgid "Mouse 1:   Drag resize window"
-msgstr "Ratón 1:   Arrastrar para cambiar el tamaño de Ventana"
+msgstr "RatÃ³n 1:   Arrastrar para cambiar el tamaÃ±o de Ventana"
 
 msgid "Mouse Bindings for Window area"
-msgstr "Atajos de Ratón para area de Ventana"
+msgstr "Atajos de RatÃ³n para area de Ventana"
 
 msgid "Mouse 1:   Root menu with ALT + click"
-msgstr "Ratón 1:   Menú Raíz con ALT + click"
+msgstr "RatÃ³n 1:   MenÃº RaÃ­z con ALT + click"
 
 msgid "Mouse 2:   Drag + ALT moves window"
-msgstr "Ratón 2:   Arrastrar + ALT mover ventana"
+msgstr "RatÃ³n 2:   Arrastrar + ALT mover ventana"
 
 msgid "           Raise or lower with ALT + click"
 msgstr "           Elevar o bajar con ALT + click"
 
 # config - Help info with SHIFT-CTRL-ALT to Pointer in Icons
 msgid "Mouse Bindings for Icons"
-msgstr "Atajos de Ratón para Iconos"
+msgstr "Atajos de RatÃ³n para Iconos"
 
 msgid "Mouse 1:   Drag moves icon"
-msgstr "Ratón 1:   Arrastrar para mover Icono"
+msgstr "RatÃ³n 1:   Arrastrar para mover Icono"
 
 msgid "           Deiconify with double click"
 msgstr "           Deiconificar con doble click"
 
 msgid "           Root menu with ALT + click"
-msgstr "           Menú Raíz con ALT + click"
+msgstr "           MenÃº RaÃ­z con ALT + click"
 
 msgid "Mouse 2:   Deiconify icon with click"
-msgstr "Ratón 2:   Deiconificar icono con click"
+msgstr "RatÃ³n 2:   Deiconificar icono con click"
 
 msgid "           All of same resource group with CTRL + click"
 msgstr "           Todos los del mismo grupo de recursos con CTRL + click"
 
 msgid "           WindowGroupOps menu with CTRL + click"
-msgstr "           Menú de Ops Grupos de Ventana con CTRL + click"
+msgstr "           MenÃº de Ops Grupos de Ventana con CTRL + click"
 
 # config - FuncWindowCreateScreenshot
 msgid "Screenshot Info for window"
@@ -885,7 +885,7 @@ msgid "Screenshot created:"
 msgstr "Captura creada: "
 
 msgid "ImageMagick isn't installed. No screenshot created."
-msgstr "ImageMagick no está instalado. Ninguna captura fue realizada."
+msgstr "ImageMagick no estÃ¡ instalado. Ninguna captura fue realizada."
 
 # config - FuncDesktopCreateScreenshot
 msgid "Desktop Screenshot Info"
@@ -893,14 +893,14 @@ msgstr "Info de Captura de Escritorio"
 
 # config - FuncSuspend
 msgid "Suspend Info"
-msgstr "Info de Suspensión"
+msgstr "Info de SuspensiÃ³n"
 
 msgid "Install pm-utils for full functionality"
 msgstr "Instalar pm-utils para funcionalidad completa"
 
 # config - FuncHibernate
 msgid "Hibernate Info"
-msgstr "Info Hibernación"
+msgstr "Info HibernaciÃ³n"
 
 # config - FuncLockScreen
 msgid "Lock screen Info"
@@ -932,21 +932,21 @@ msgstr "Instalar xneur/gxneur para funcionalidad completa"
 
 # config - FuncLxappearance
 msgid "Gtk+ Decor Info"
-msgstr "Info Decoración Gtk+"
+msgstr "Info DecoraciÃ³n Gtk+"
 
 msgid "Install LxApearance for Gtk+ apps"
 msgstr "Instalar LxAppearance para aplicaciones Gtk+"
 
 # config - FuncQt3Decor
 msgid "Qt3 Decor Info"
-msgstr "Info Decoración Qt3"
+msgstr "Info DecoraciÃ³n Qt3"
 
 msgid "Install qtconfig-qt3 for Qt3 apps"
 msgstr "Instalar qtconfig-qt3 para aplicaciones Qt3"
 
 # config - FuncQt4Decor
 msgid "Qt4 Decor Info"
-msgstr "Info Decoración Qt4"
+msgstr "Info DecoraciÃ³n Qt4"
 
 msgid "Install qtconfig-qt4 for Qt4 apps"
 msgstr "Instalar qtconfig-qt4 para aplicaciones Qt4"
@@ -954,44 +954,44 @@ msgstr "Instalar qtconfig-qt4 para aplicaciones Qt4"
 # Help info with SHIFT-CTRL-ALT P to show all page related key bindings
 # layout Horizontal & G2like
 msgid "Page Key Bindings"
-msgstr "Atajos de teclado para páginas"
+msgstr "Atajos de teclado para pÃ¡ginas"
 
 msgid "SHIFT-CTRL:"
 msgstr "SHIFT-CTRL:"
 
 msgid "Cursor right/left: Switch to page right/left"
-msgstr "Cursor derecha/izquierda: Cambiar a página derecha/izquierda"
+msgstr "Cursor derecha/izquierda: Cambiar a pÃ¡gina derecha/izquierda"
 
 msgid "1-4: Switch to page n"
-msgstr "1-4: Cambiar a página n"
+msgstr "1-4: Cambiar a pÃ¡gina n"
 
 msgid "SHIFT-ALT:"
 msgstr "SHIFT-ALT:"
 
 msgid "Cursor right/left: Switch active window to page right/left"
-msgstr "Cursor derecha/izquierda: Enviar ventana activa a página derecha/izquierda"
+msgstr "Cursor derecha/izquierda: Enviar ventana activa a pÃ¡gina derecha/izquierda"
 
 msgid "1-4: Switch active window to page n"
-msgstr "1-4: Cambiar ventana activa a página n"
+msgstr "1-4: Cambiar ventana activa a pÃ¡gina n"
 
 msgid "ALT-CTRL:"
 msgstr "ALT-CTRL:"
 
 msgid "Cursor right/left/up/down: Move mouse pointer by 1% of a page"
-msgstr "Cursor derecha/izquierda/arriba/abajo: Mover puntero del ratón un 1% de una página"
+msgstr "Cursor derecha/izquierda/arriba/abajo: Mover puntero del ratÃ³n un 1% de una pÃ¡gina"
 
 msgid "SHIFT-ALT-CTRL:"
 msgstr "SHIFT-ALT-CTRL:"
 
 msgid "Cursor right/left/up/down: Scroll right/left by 10% of a page"
-msgstr "Cursor derecha/izquierda/arriba/abajo: Desplazarse a la derecha/izquierda un 10% de una página"
+msgstr "Cursor derecha/izquierda/arriba/abajo: Desplazarse a la derecha/izquierda un 10% de una pÃ¡gina"
 
 # layout Vertical
 msgid "Cursor up/down: Switch to page up/down"
-msgstr "Cursor arriba/abajo: Cambiar a página arriba/abajo"
+msgstr "Cursor arriba/abajo: Cambiar a pÃ¡gina arriba/abajo"
 
 msgid "Cursor up/down: Switch active window to page up/down"
-msgstr "Cursor arriba/abajo: Enviar ventana activa a página arriba/abajo"
+msgstr "Cursor arriba/abajo: Enviar ventana activa a pÃ¡gina arriba/abajo"
 
 # .bindings
 # Help info with SHIFT-CTRL-ALT A to show all ALT related key bindings
@@ -1002,10 +1002,10 @@ msgid "ALT:"
 msgstr "ALT:"
 
 msgid "F1: Open root menu           F7:  Move window"
-msgstr "F1: Abrir Menú Raíz                F7:  Mover ventana"
+msgstr "F1: Abrir MenÃº RaÃ­z                F7:  Mover ventana"
 
 msgid "F2: Launch 'run' dialog box  F8:  Resize window"
-msgstr "F2: Ejecutar 'run' diálogo         F8: Cambiar tamaño de ventana"
+msgstr "F2: Ejecutar 'run' diÃ¡logo         F8: Cambiar tamaÃ±o de ventana"
 
 msgid "F3: Show window list         F9:  Minimize window"
 msgstr "F3: Mostrar lista de ventanas      F9: Minimizar Ventana"
@@ -1035,7 +1035,7 @@ msgid "None:"
 msgstr "Ninguno:"
 
 msgid "Print: Screenshot of current page"
-msgstr "Imprimir: Captura de página actual"
+msgstr "Imprimir: Captura de pÃ¡gina actual"
 
 # Help info with SHIFT-CTRL-ALT H to show the global key bindings help window
 msgid "Help Keys with CTRL-ALT"
@@ -1048,14 +1048,14 @@ msgid "C: List CTRL bindings"
 msgstr "C: Lista de atajos con CTRL"
 
 msgid "P: List Page bindings"
-msgstr "P: Lista de atajos de Página"
+msgstr "P: Lista de atajos de PÃ¡gina"
 
 # Help info with SHIFT-CTRL-ALT C to show all CTRL related key bindings
 msgid "CTRL Key Bindings"
 msgstr "Atajos de teclado con CTRL"
 
 msgid "F1: Open full Oops menu     F2: Launch FvwmConsole"
-msgstr "F1: Abrir menú Ooops completo F2: Lanzar FvwmConsole"
+msgstr "F1: Abrir menÃº Ooops completo F2: Lanzar FvwmConsole"
 
 msgid "CTRL-ALT:"
 msgstr "CTRL-ALT"
@@ -1069,117 +1069,70 @@ msgstr "L:  Bloquear Pantalla"
 # decor theme file
 # Help info with SHIFT-CTRL-ALT to Window Button Pointer
 msgid "Left Button Bindings"
-msgstr "Atajos con Botón Izquierdo"
+msgstr "Atajos con BotÃ³n Izquierdo"
 
 msgid "Mouse 1:  WindowOps menu"
-msgstr "Ratón 1:  Menú de Ops de ventana"
+msgstr "RatÃ³n 1:  MenÃº de Ops de ventana"
 
 msgid "Mouse 2:  Move to page menu"
-msgstr "Ratón 2:  Menú Mover-a-Página"
+msgstr "RatÃ³n 2:  MenÃº Mover-a-PÃ¡gina"
 
 msgid "Mouse 3:  WindowGroupOps menu"
-msgstr "Ratón 3:  Menú Ops de grupo de ventanas"
+msgstr "RatÃ³n 3:  MenÃº Ops de grupo de ventanas"
 
 msgid "Close Button Bindings"
-msgstr "Atajos del Botón Cerrar"
+msgstr "Atajos del BotÃ³n Cerrar"
 
 msgid "Mouse 1:  Delete on click"
-msgstr "Ratón 1:  Eliminar con click"
+msgstr "RatÃ³n 1:  Eliminar con click"
 
 msgid "          Destroy on double click"
 msgstr "          Destruir con doble click"
 
 msgid "Maximize Button Bindings"
-msgstr "Atajos del Botón Maximizar"
+msgstr "Atajos del BotÃ³n Maximizar"
 
 msgid "Mouse 1:       Maximize fully on click"
-msgstr "Ratón 1:       Maximizar completamente con click"
+msgstr "RatÃ³n 1:       Maximizar completamente con click"
 
 msgid "               Maximize menu on double click"
-msgstr "               Menú Maximizar con doble click"
+msgstr "               MenÃº Maximizar con doble click"
 
 msgid "Mouse 2:       Maximize vertically"
-msgstr "Ratón 2:       Maximizar verticalmente"
+msgstr "RatÃ³n 2:       Maximizar verticalmente"
 
 msgid "Mouse 2 + Alt: Maximize horizontally"
-msgstr "Ratón 2 + Alt: Maximizar horizontalmente"
+msgstr "RatÃ³n 2 + Alt: Maximizar horizontalmente"
 
 msgid "Mouse 3:       Maximize smart"
-msgstr "Ratón 2:       Maximizar intelligente"
+msgstr "RatÃ³n 2:       Maximizar intelligente"
 
 msgid "Minimize Button Bindings"
-msgstr "Atajos del Botón Minimizar"
+msgstr "Atajos del BotÃ³n Minimizar"
 
 msgid "Mouse 1:  Iconify"
-msgstr "Ratón 1:  Iconificar"
+msgstr "RatÃ³n 1:  Iconificar"
 
 msgid "Mouse 2:  Iconify on resource group"
-msgstr "Ratón 2:  Iconificar el grupo de recursos"
+msgstr "RatÃ³n 2:  Iconificar el grupo de recursos"
 
 msgid "Mouse 3:  Iconify toggle resource group"
-msgstr "Ratón 3:  (Des)Iconificar grupo de recursos"
+msgstr "RatÃ³n 3:  (Des)Iconificar grupo de recursos"
 
 ########################################################################
 # FvwmScript
 ########################################################################
-#-----------------------------------------------------------------------
-# FvwmScript-PersonalMenu
-#-----------------------------------------------------------------------
-msgid "Menu Folders"
-msgstr "Menú de Carpetas"
-
-msgid "Menu Entries"
-msgstr "Menú de Entradas"
-
-msgid "Add >"
-msgstr "Añadir >"
-
-msgid "< Remove"
-msgstr "< Eliminar"
-
-msgid "Save"
-msgstr "Guardar"
-
-msgid "Quit"
-msgstr "Cerrar"
-
-msgid "!!! Changed menu not saved !!! Next click will quit."
-msgstr "!!!Menú cambiado no guardado!!! Siguiente click lo cerrará"
-
-msgid "Personal Entries "
-msgstr "Entradas Personales "
-
-msgid "Personal Entries"
-msgstr "Entradas Personales"
-
-msgid "Personal applications*"
-msgstr "Aplicaciones Personales"
-
-msgid "Personal menu saved"
-msgstr "Menú Personal guardado"
-
-msgid "Added '"
-msgstr "Añadir '"
-
-msgid "' to menu"
-msgstr "' a menú"
-
-msgid "Removed '"
-msgstr "Eliminado '"
-
-msgid "' from menu"
-msgstr "' del menú"
 
 #-----------------------------------------------------------------------
 # fvwm-menu-desktop which are in the CVS version of FVWM
 #-----------------------------------------------------------------------
 #. ./bin/fvwm-menu-desktop.in: line 472
 msgid "Regenerate XDG Menu(s)"
-msgstr "Regenerar Menú(s) XDG"
+msgstr "Regenerar MenÃº(s) XDG"
 
 #. ./bin/fvwm-menu-desktop.in: line 515
 msgid "Regenerate XDG Menu"
-msgstr "Regenerar Menú XDG"
+msgstr "Regenerar MenÃº XDG"
 
 ########################################################################
 # Layouts modules
@@ -1188,7 +1141,7 @@ msgstr "Regenerar Menú XDG"
 # KlikeBottomBar, VerticalPanel, G2likeTopBar
 #-----------------------------------------------------------------------
 msgid "Menu"
-msgstr "Menú"
+msgstr "MenÃº"
 
 #-----------------------------------------------------------------------
 # VerticalPanel
