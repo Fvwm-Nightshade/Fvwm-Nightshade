@@ -1,5 +1,18 @@
 History:
 
+04/22/2016
+- exchange FNS-Script-PersonalMenu with new SimpleGtk2 based application 
+  FNS-MenuBuilder. Fixed issue #61
+- add template fns-menu-builder.pot, po and mo files for German, Spanish,
+  French and Russian language. French po not complete yet
+- remove FNS-Script-PersonalMenu translations in fvwm-nightshade.po/pot files
+- update SimpleGtk2 library to 0.68
+- changes in config:
+  - update version to 0.7.9.20160422 - now beta cycle starting :-)
+  - exchange FNS-Script-PersonalMenu with FNS-MenuBuilder
+  - update sed command in FuncMenuFvwmPersonal for correct reading of .personal
+- update NEWS and README
+
 03/11/2016
 - fix bug in FNS-MenuConfigurator that an undefined array prevents creation
   of menu list if a local menu is available
