@@ -1,5 +1,20 @@
 History:
 
+04/26/2016
+- fix bugs in FNS-MenuBuilder:
+  - correct check if XDG_DATA_DIRS is empty
+  - in parse_menu():
+    - add forgotten case if empty line in .personal appears while parsing
+    - add case that .personal not exists
+  - use the correct array entries for text in status bar
+  - build correct folder/application entries with/without icons
+- update asciidoc documents:
+  - add PitchBlack theme description in FNS-BaseSetup.txt
+  - update copyright year in fns-built-trayapplist, fns-find-file, fns-find-icon,
+    FNS-WindowsBehaviour, FvwmSmartMaximize and FvwmTransSet
+  - fix typo in fns-start-programs
+  - update fvwm-nightshade asciidoc manpage
+  
 04/22/2016
 - exchange FNS-Script-PersonalMenu with new SimpleGtk2 based application 
   FNS-MenuBuilder. Fixed issue #61
