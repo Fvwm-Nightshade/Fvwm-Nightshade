@@ -30,10 +30,10 @@ USAGE
 First Start
 ~~~~~~~~~~~
 *Fvwm-Nightshade* checks while your first login if +~/.fvwm-nightshade+ exist. 
-If not a setup dialog appears where you can change things like desktop size, 
+If not *FNS-BaseSetup* dialog appears where you can change things like desktop size, 
 used theme and font, which layout, default terminal and browser you want.
 
-After clicking "Apply & Save" your settings will be activated and 
+After clicking "Apply" your settings will be activated and 
 *Fvwm-Nightshade* is ready to use. If you want to change the settings 
 again you can do that over the menu point
 ----
@@ -299,21 +299,11 @@ its' control.
 Personal Applications
 ^^^^^^^^^^^^^^^^^^^^^
 The Personal Applications menu is for your favorite applications. As you 
-open it the first entry is a FvwmScript tool to choose applications from 
-the application menus found on the system.
+open it the first entry is a graphical tool to choose applications or folders 
+from the application menus found on the system. Also it is possible to create 
+own application or folder entries. Entries can be sorted with drag'n'drop.
 
-Add an application::
-+
-1. In the "Menu Folder" list choose a menu.
-2. In the "Menu Entries" list choose an application.
-3. Click on the "Add" button and the app appears in the "Personal Entries" list.
-4. To finish your selection click on the "Save" button.
-
-Remove an application::
-+
-1. Choose an app to remove in the "Personal Entries" list.
-2. Click on the "Remove" button - the selected app disappears from the list.
-3. To finish your remove action click on the "Save" button.
+For more information see manpage of FNS-MenuBuilder.
 
 XDG Application Menus
 ^^^^^^^^^^^^^^^^^^^^^
@@ -576,12 +566,13 @@ Location of Files and their Function
 *<system>/bin* -> Executables.
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|fvwm-nightshade    |start script.
-|fns-built-trayapplist    |Python script for stalonetray to build applet list. Used for restoring applets after restart stalonetray.
+|fvwm-nightshade        |start script.
+|fns-built-trayapplist  |Python script for stalonetray to build applet list. Used for restoring applets after restart stalonetray.
 |FNS-CpuPerformance     |Perl-SimpleGtk2 script to set CPU frequency governor.
-|fns-find-icon        |Python script to find the correct icon for iconified apps or for icons used in layouts.
-|fns-menu-desktop     |adapted fvwm-menu-desktop from Fvwm's CVS to create XDG menu(s).
-|fns-start-programs    |shell script to start apps from a file list. Used for autostart and starting applets for stalonetray.
+|fns-find-icon          |Python script to find the correct icon for iconified apps or for icons used in layouts.
+|FNS-MenuBuilder        |Perl-SimpleGtk2 script to build personal menu.
+|fns-menu-desktop       |adapted fvwm-menu-desktop from Fvwm's CVS to create XDG menu(s).
+|fns-start-programs     |shell script to start apps from a file list. Used for autostart and starting applets for stalonetray.
 |====
 
 -
@@ -589,10 +580,10 @@ Location of Files and their Function
 *<system>/share/fvwm-nightshade/* -> System home of *Fvwm-Nightshade*.
 [cols="10%,90%",frame="none",grid="none"]
 |====
-|config            	|system wide configuration file.
+|config             |system wide configuration file.
 |fns-init           |initial config with the base functions.
-|.settings        	|template of the base settings. Will be copied into <user> dir.
-|.bindings        	|system wide key bindings.
+|.settings          |template of the base settings. Will be copied into <user> dir.
+|.bindings          |system wide key bindings.
 |====
 
 -
@@ -604,8 +595,8 @@ Location of Files and their Function
 *<system>/share/fvwm-nightshade/lib/* -> Fvwm modules written in Perl or C/C++. Directory is in the ModulePath.
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|FvwmSmartMaximize         		|Perl module to maximize windows in the largest area of the desktop/page.
-|FvwmTransSet         		|Perl module to set true transparency to windows if a composite manager is running.
+|FvwmSmartMaximize          |Perl module to maximize windows in the largest area of the desktop/page.
+|FvwmTransSet               |Perl module to set true transparency to windows if a composite manager is running.
 |FNS-BaseSetup              |Perl-SimpleGtk2 script to configure base settings of Fvwm-Nightshade (layouts, themes, compositing, icons on desktop, etc.).
 |FNS-WindowsBehaviour       |Perl-SimpleGtk2 script to configure window behaviours (focus policies, placement, etc.).
 |FNS-CompConfigurator       |Perl-SimpleGtk2 script to configure composite manager if installed (shadows, translucency, etc).
@@ -627,7 +618,6 @@ local installation is chosen in the <user> directories - FvwmScripts in the
 scripts/ sub directory, all others in the <user> root.
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|FNS-Script-PersonalMenu        |Personal menu creator (FvwmScript script).
 |FNS-Script-FileBrowser         |File browser based on FvwmScript-FileBrowser
 |FNS-Script-Date                |Set time/date based on FvwmScript-Date
 |FNS-Applet-Kalende             |Calendar applet
@@ -673,17 +663,17 @@ installation is chosen it is located in <chosen_dir>/share/desktop-directories/.
 *~/.fvwm-nightshade/* -> the user home directory (<user>)
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|.autostart			|optional file with application commands.
-|.fns-menu.cfg	    |config file of Regenerate XDG Menus.
+|.autostart         |optional file with application commands.
+|.fns-menu.cfg      |config file of Regenerate XDG Menus.
 |.FvwmTransSet      |local config file of FvwmTransSet.
-|.layout			|link to current layout file.
-|.menu				|Fvwm menu file.
-|.personal			|Menu file of your personal apps.
-|.settings        	|settings like layout, theme, font, splash, etc.
-|.systray.log		|stalonetray log file.
-|.trayapplist		|internal list of current systray apps.
+|.layout            |link to current layout file.
+|.menu              |Fvwm menu file.
+|.personal          |Menu file of your personal apps.
+|.settings          |settings like layout, theme, font, splash, etc.
+|.systray.log       |stalonetray log file.
+|.trayapplist       |internal list of current systray apps.
 |.user              |config file for FNS-WindowsBehaviour and custom user settings.
-|.wallpaper			|link to current wallpaper
+|.wallpaper         |link to current wallpaper
 |====
 
 -
@@ -751,10 +741,10 @@ There are some *Fvwm-Nightshade* specific variables. Valid in the shell and
 Fvwm namespace:
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|FVWM_USERDIR    	|It holds the user directory ~/.fvwm-nightshade.
-|FNS_SYSTEMDIR    	|It contains the system path to the shared files of Fvwm-Nightshade - /usr/local/share/fvwm-nightshade or /usr/share/fvwm-nightshade.
+|FVWM_USERDIR       |It holds the user directory ~/.fvwm-nightshade.
+|FNS_SYSTEMDIR      |It contains the system path to the shared files of Fvwm-Nightshade - /usr/local/share/fvwm-nightshade or /usr/share/fvwm-nightshade.
 |FNS_INITFILE       |It holds the path to the pre config fns-init.
-|FNS_DEBUG        	|If you want to raise the message output of Fvwm-Nightshade into ~/.xsession-errors set it to 1. Default is 0.
+|FNS_DEBUG          |If you want to raise the message output of Fvwm-Nightshade into ~/.xsession-errors set it to 1. Default is 0.
 |$[MenuIconSize]    |It holds the used menu icon size set with fvwm-menu-desktop2-config to adapt menu icons on the fly.
 |====
 
@@ -767,11 +757,11 @@ config::
 +
 [cols="20%,80%",frame="none",grid="none"]
 |====
-|$[infostore.wallpaper_dir]    	|The wallpaper directory located in $[FVWM_USERDIR]/wallpapers.
+|$[infostore.wallpaper_dir]     |The wallpaper directory located in $[FVWM_USERDIR]/wallpapers.
 |$[infostore.fvwm_wallpaper]    |The current wallpaper located in $[FVWM_USERDIR]/.wallpaper.
-|$[infostore.ratio]        		|The screen ratio used for layout, panel, pager calculations.
-|$[infostore.hratio]        	|The height ratio used for layout, panel, pager calculations.
-|$[infostore.wratio]        	|The width ratio used for layout, panel, pager calculations.
+|$[infostore.ratio]             |The screen ratio used for layout, panel, pager calculations.
+|$[infostore.hratio]            |The height ratio used for layout, panel, pager calculations.
+|$[infostore.wratio]            |The width ratio used for layout, panel, pager calculations.
 |====
 
 settings::
@@ -968,7 +958,7 @@ or in the StartFunction with
 
 AUTHORS
 -------
-(C) 2013 - 2015 by the Fvwm-Nightshade team <fvwmnightshade@gmail.com>.
+(C) 2013 - 2016 by the Fvwm-Nightshade team <fvwmnightshade@gmail.com>.
 
 
 COPYRIGHT
