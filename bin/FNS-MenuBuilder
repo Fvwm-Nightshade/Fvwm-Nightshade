@@ -9,12 +9,10 @@ use File::Basename;
 use File::Copy qw(copy);
 use File::Spec;
 use File::Find;
-use Data::Dumper;
-use Data::Dump qw(dump);
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuBuilder
-my $Version =   '1.0.0';
+my $Version =   '1.0.1';
 # Licence:      GPL 2
 #
 # Description:  Perl script to create/modify personal menu
@@ -22,7 +20,7 @@ my $Version =   '1.0.0';
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      03/27/2016
-# Changed:      
+# Changed:      04/24/2016
 #-----------------------------------------------------------------------
 
 #my $module = new FVWM::Module::SimpleGtk2(
@@ -80,7 +78,12 @@ SimpleGtk2::use_gettext("fns-menu-builder", "$ENV{FVWM_USERDIR}/locale:$ENV{FNS_
 
 sub get_full_icon_path {
     my $HOME = "$ENV{HOME}";
-    my $XDG_DATA_DIRS = "$ENV{XDG_DATA_DIRS}" || '/usr/share/';
+    my $XDG_DATA_DIRS;
+    unless (defined($ENV{XDG_DATA_DIRS})) {
+        $XDG_DATA_DIRS = '/usr/share/';
+    } else {
+        $XDG_DATA_DIRS = $ENV{XDG_DATA_DIRS};
+    }
     my ($name_path) = shift;
     # search in home icon dir
     if (-d "$HOME/.icons/$name_path") {
@@ -90,13 +93,11 @@ sub get_full_icon_path {
         $name_path = "/usr/share/pixmaps/$name_path";
     }
     else {
-        unless ($XDG_DATA_DIRS eq "") {
-            my @data_dirs = split(":", $XDG_DATA_DIRS);
-            foreach my $dir (@data_dirs) {
-                if (-d "$dir/icons/$name_path") {
-                    $name_path = "$XDG_DATA_DIRS/icons/$name_path";
-                    last;
-                }
+        my @data_dirs = split(":", $XDG_DATA_DIRS);
+        foreach my $dir (@data_dirs) {
+            if (-d "$dir/icons/$name_path") {
+                $name_path = "$XDG_DATA_DIRS/icons/$name_path";
+                last;
             }
         }
     }
@@ -111,14 +112,16 @@ sub get_fns_menu_value {
     my $value = undef;
     if (-f $menu_cfg) {
         my $cfg_line = `grep '^$wanted' $menu_cfg`;
-        my @array = split('=', $cfg_line);
-#        $value = chomp($array[-1]);
-        $value = $array[-1];
-        # Remove whitespaces at the beginning and the end
-        $value = &del_spaces($value);
-        # remove quotes at the beginning and the end
-        $value = &del_quotes($value);
-        chomp($value);
+        unless ($cfg_line eq '') {
+            my @array = split('=', $cfg_line);
+    #        $value = chomp($array[-1]);
+            $value = $array[-1];
+            # Remove whitespaces at the beginning and the end
+            $value = &del_spaces($value);
+            # remove quotes at the beginning and the end
+            $value = &del_quotes($value);
+            chomp($value);
+        }
     }
     return $value;
 }
@@ -315,6 +318,9 @@ sub parse_menu(@) {
                 next;
             }
         }
+    } else {
+        # no menu exist
+        $have_icons = undef;
     }
     return $have_icons;
 }
@@ -439,6 +445,8 @@ sub del_spaces($) {
 my $icons_src = &parse_menu($menu, \@src_tree, $menu_cfg);
 # .personal
 my $icons_dest = &parse_menu($personal_menu, \@dest_tree);
+# if no .personal found
+unless (defined($icons_dest)) {$icons_dest = $icons_src;}
 
 
 ########################################################################
@@ -495,13 +503,13 @@ sub show_src_cmd {
             unless (defined($row[3])) {
                 $text = $win->translate("Folder") . ": \"$row[1]\"";
             } else {
-                $text = $win->translate("Application") . "$row[1]: \"$row[2]\"";
+                $text = $win->translate("Application") . ": $row[1] => \"$row[2]\"";
             }
         } else {
             unless (defined($row[1])) {
                 $text = $win->translate("Folder") . ": \"$row[0]\"";
             } else {
-                $text = $win->translate("Application") . "$row[0]: \"$row[1]\"";
+                $text = $win->translate("Application") . ": $row[0] => \"$row[1]\"";
             }
         }
         $win->set_sb_text($text);
@@ -555,13 +563,13 @@ sub show_dest_cmd {
             unless (defined($row[3])) {
                 $text = $win->translate("Folder") . ": \"$row[1]\"";
             } else {
-                $text = $win->translate("Application") . "$row[1]: \"$row[2]\"";
+                $text = $win->translate("Application") . ": $row[1] => \"$row[2]\"";
             }
         } else {
             unless (defined($row[1])) {
                 $text = $win->translate("Folder") . ": \"$row[0]\"";
             } else {
-                $text = $win->translate("Application") . "$row[0]: \"$row[1]\"";
+                $text = $win->translate("Application") . ": $row[0] => \"$row[1]\"";
             }
         }
         $win->set_sb_text($text);
@@ -730,31 +738,41 @@ sub build_lines {
         # is entry only an application or a folder?
         if (scalar @{$hash_ref->{children}} == 0) {
             # application
-            # AddToMenu "MenuFvwmPersonal" "Icedove%/home/tf/.fvwm-nightshade/icons/16x16-icedove.png%" Exec exec  icedove 
-            $menu_string = 'AddToMenu "' . $sub_menu . '" "' . $hash_ref->{value}[1];
-            $menu_string = $menu_string . '%' . $hash_ref->{value}[3] . '%" ' if defined($icons_dest);
-            $menu_string = $menu_string . $hash_ref->{value}[2];
+            # AddToMenu "MenuFvwmPersonal" "Icedove%/home/tf/.fvwm-nightshade/icons/16x16-icedove.png%" Exec exec  icedove
+            # AddToMenu "MenuFvwmPersonal" "Font Manager" Exec exec  font-manager
+            $menu_string = 'AddToMenu "' . $sub_menu . '" "' . $hash_ref->{value}[$icons_dest];
+            if ($icons_dest) {
+                $menu_string = $menu_string . '%' . $hash_ref->{value}[3] . '%" ';
+            } else {
+                $menu_string = $menu_string . '" ';
+            }
+            $menu_string = $menu_string . $hash_ref->{value}[1+$icons_dest];
             push(@{$row_array_ref}, $menu_string);
         } else {
             # folder
             # AddToMenu "MenuFvwmPersonal" "File tools%/home/tf/.fvwm-nightshade/icons/16x16-applications-accessories.png%" Popup "File tools"
-            $menu_string = 'AddToMenu "' . $sub_menu . '" "' . $hash_ref->{value}[1];
-            $menu_string = $menu_string . '%' . $hash_ref->{value}[2] . '%" ' if defined($icons_dest);
-            $menu_string = $menu_string . 'Popup "' . $hash_ref->{value}[1] . '"';
+            # AddToMenu "MenuFvwmPersonal" "Development" Popup "Development"
+            $menu_string = 'AddToMenu "' . $sub_menu . '" "' . $hash_ref->{value}[$icons_dest];
+            if ($icons_dest) {
+                $menu_string = $menu_string . '%' . $hash_ref->{value}[2] . '%" ';
+            } else {
+                $menu_string = $menu_string . '" ';
+            }
+            $menu_string = $menu_string . 'Popup "' . $hash_ref->{value}[$icons_dest] . '"';
             push(@{$row_array_ref}, $menu_string);
             
             # <space>
             push(@{$row_array_ref}, '');
             
             # DestroyMenu "File tools"
-            $menu_string = 'DestroyMenu "' . $hash_ref->{value}[1] . '"';
+            $menu_string = 'DestroyMenu "' . $hash_ref->{value}[$icons_dest] . '"';
             push(@{$row_array_ref}, $menu_string);
             
             # AddToMenu "File tools" "File tools" Title
-            $menu_string = 'AddToMenu "' . $hash_ref->{value}[1] . '" "' . $hash_ref->{value}[1] . '" Title';
+            $menu_string = 'AddToMenu "' . $hash_ref->{value}[$icons_dest] . '" "' . $hash_ref->{value}[$icons_dest] . '" Title';
             push(@{$row_array_ref}, $menu_string);
             
-            &build_lines($hash_ref->{children}, $row_array_ref, $hash_ref->{value}[1]);
+            &build_lines($hash_ref->{children}, $row_array_ref, $hash_ref->{value}[$icons_dest]);
         }
         $i++;
     }
@@ -804,15 +822,16 @@ sub open_entry_dialog {
             Sens    => $icons_dest, 
             Tip     => "Click to choose an icon. No change creates no icon.", 
             Stock   => ['gtk-missing-image']);
-    $dialog->add_signal_handler('ChooseIcon', 'button_press_event', sub{&open_icon_dir($dialog, 'ChooseIcon')});
+    $dialog->add_signal_handler('ChooseIcon', 'button_press_event', sub{&open_icon_dir($dialog, 'ChooseIcon', \$icon_changed)});
     
     sub open_icon_dir {
-        my ($self, $name) = @_;
+        my ($self, $name, $icon_changed_ref) = @_;
         # get object
         my $object = $self->get_object($name);
         my $resp = $self->show_filechooser_dialog('open', $default_icon_dir);
         unless ($resp eq '0') {
             $self->set_image($name, Path => $resp);
+            $$icon_changed_ref = 1;
         }
     }
     
@@ -904,7 +923,7 @@ sub open_entry_dialog {
             Size    => [80, 25], 
             Title   => "Create", 
             Tip     => "Create the new entry.");
-    $dialog->add_signal_handler('okButton', 'clicked', \&build_row, [$dialog, $row_ref, $icon_size, $icon_changed]);
+    $dialog->add_signal_handler('okButton', 'clicked', \&build_row, [$dialog, $row_ref, $icon_size, \$icon_changed]);
     
     sub build_row {
         my ($widget, $data) = @_;
