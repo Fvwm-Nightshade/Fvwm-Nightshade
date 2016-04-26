@@ -153,8 +153,12 @@ Simple flat theme, mostly black and white, based on xeNULL's openbox theme.
 
 GrayRevenge::::
 +
-The default theme of Fvwm-Nightshade. A dark gray and plain theme based on 
-Alessandro Roncone's Gray-Revenge-1-7.
+A dark gray and plain theme based on Alessandro Roncone's Gray-Revenge-1-7.
+
+PitchBlack::::
++
+The default theme of Fvwm-Nightshade. A dark violet and plain theme based on 
+GrayRevenge.
 
 Redmond::::
 +
@@ -215,7 +219,7 @@ while first startup into ~/.fvwm-nightshade/ .
 
 
 == AUTHOR
-(C) 2015 Thomas Funk <t.funk@web.de>
+(C) 2015 - 2016 Thomas Funk <t.funk@web.de>
 
 
 
