@@ -278,7 +278,7 @@ The settings are saved in +~/.fvwm-nightshade/.users+. In this file the user can
 
 
 == AUTHOR
-(C) 2015 Thomas Funk <t.funk@web.de>
+(C) 2015 - 2016 Thomas Funk <t.funk@web.de>
 
 
 

@@ -133,6 +133,6 @@ Shows short help and exit.
 AUTHOR
 ------
 
-(C) 2013 - 2015 Thomas Funk <t.funk@web.de>
+(C) 2013 - 2016 Thomas Funk <t.funk@web.de>
 
 
