@@ -50,7 +50,7 @@ Four different desktop layouts are available:
 * G2like (Gnome 2 based)
 * Klike (KDE based)
 
-You can change it via _FNS Base Setup_ or over the menu
+You can change it via *FNS Base Setup* or over the menu
 ----
 Configuration -> Fvwm-Nightshade -> Decorations -> Layouts
 ----
@@ -303,7 +303,7 @@ open it the first entry is a graphical tool to choose applications or folders
 from the application menus found on the system. Also it is possible to create 
 own application or folder entries. Entries can be sorted with drag'n'drop.
 
-For more information see manpage of FNS-MenuBuilder.
+For more information about the graphical tool see manpage of *FNS-MenuBuilder*.
 
 XDG Application Menus
 ^^^^^^^^^^^^^^^^^^^^^
@@ -475,16 +475,16 @@ Window related::
 +
 [cols="10%,90%",frame="none",grid="none"]
 |====
-|Alt + F4	|Close active window.
-|Alt + F6	|Cycle between same resource windows.
-|Alt + F7	|Move active window.
-|Alt + F8	|Resize active window.
-|Alt + F9	|Minimize active window.
-|Alt + F10	|Maximize/restore active window.
-|Alt + F11	|Maximize active window to fullscreen and back.
-|Alt + F12	|Identify active window.
-|	|
-|Alt + Tab	|Switching focus to next window.
+|Alt + F4    |Close active window.
+|Alt + F6    |Cycle between same resource windows.
+|Alt + F7    |Move active window.
+|Alt + F8    |Resize active window.
+|Alt + F9    |Minimize active window.
+|Alt + F10    |Maximize/restore active window.
+|Alt + F11    |Maximize active window to fullscreen and back.
+|Alt + F12    |Identify active window.
+|    |
+|Alt + Tab    |Switching focus to next window.
 |Alt-Shift + Tab|Switching focus to previous window.
 |Alt-Ctrl + D|Hide/unhide all windows.
 |====
@@ -493,38 +493,38 @@ Page related::
 +
 [cols="25%,75%",frame="none",grid="none"]
 |====
-|Shift-Ctrl + 1-0	|Switch to page 1-10.
-|Shift-Ctrl + cursor right/left	|Switch to page right/left.
-|Shift-Ctrl + cursor up/down	|Switch to page up/down (only used in Vertical Layout).
-|	|
-|Shift-Alt-Ctrl + cursor right/left	|Scroll right/left by 10% of a page.
-|Shift-Alt-Ctrl + cursor up/down	|Scroll up/down by 10% of a page.
-|	|
-|Ctrl-Alt + cursor right/left	|Move mouse pointer right/left by 1% of a page.
-|Ctrl-Alt + cursor up/down	|Move mouse pointer up/down by 1% of a page.
-|	|
-|Shift-Alt + 1-0	|Switch to page 1-10 with active window.
-|	|
-|Shift-Alt + Cursor right/left	|Switch to page right/left with active window.
-|Shift-Alt + Cursor up/down	|Switch to page up/down with active window (only used in Vertical Layout).
+|Shift-Ctrl + 1-0                   |Switch to page 1-10.
+|Shift-Ctrl + cursor right/left     |Switch to page right/left.
+|Shift-Ctrl + cursor up/down        |Switch to page up/down (only used in Vertical Layout).
+|                                   |
+|Shift-Alt-Ctrl + cursor right/left |Scroll right/left by 10% of a page.
+|Shift-Alt-Ctrl + cursor up/down    |Scroll up/down by 10% of a page.
+|                                   |
+|Ctrl-Alt + cursor right/left       |Move mouse pointer right/left by 1% of a page.
+|Ctrl-Alt + cursor up/down          |Move mouse pointer up/down by 1% of a page.
+|                                   |
+|Shift-Alt + 1-0                    |Switch to page 1-10 with active window.
+|                                   |
+|Shift-Alt + Cursor right/left      |Switch to page right/left with active window.
+|Shift-Alt + Cursor up/down         |Switch to page up/down with active window (only used in Vertical Layout).
 |====
 
 General::
 +
 [cols="15%,85%",frame="none",grid="none"]
 |====
-|Print	|Screenshot of the whole desktop (page).
-|Alt + Print	|Screenshot of the active window.
-|Alt-Ctrl + L	|Lock Screen.
-|Alt-Ctrl + T	|Launch your favorite terminal.
-|	|
-|Windows	|Open root menu.
-|Alt + F1	|Open root menu.
-|Alt + F2	|Launch 'run' dialog box.
-|Alt + F3	|Show window list.
-|	|
-|Shift-Ctrl + F1	|Open full windows oops menu.
-|Shift-Ctrl + F2	|Launch FvwmConsole.
+|Print              |Screenshot of the whole desktop (page).
+|Alt + Print        |Screenshot of the active window.
+|Alt-Ctrl + L       |Lock Screen.
+|Alt-Ctrl + T       |Launch your favorite terminal.
+|                   |
+|Windows            |Open root menu.
+|Alt + F1           |Open root menu.
+|Alt + F2           |Launch 'run' dialog box.
+|Alt + F3           |Show window list.
+|                   |
+|Shift-Ctrl + F1    |Open full windows oops menu.
+|Shift-Ctrl + F2    |Launch FvwmConsole.
 |====
 
 Help::
@@ -534,10 +534,10 @@ key bindings (the same as with mouse bindings)
 +
 [cols="15%,85%",frame="none",grid="none"]
 |====
-|Shift-Ctrl-Alt + A	|Help message for all Alt bindings.
-|Shift-Ctrl-Alt + C	|Help message for all Ctrl bindings.
-|Shift-Ctrl-Alt + P	|Help message for all Page bindings.
-|Shift-Ctrl-Alt + H	|Help message for summary.
+|Shift-Ctrl-Alt + A     |Help message for all Alt bindings.
+|Shift-Ctrl-Alt + C     |Help message for all Ctrl bindings.
+|Shift-Ctrl-Alt + P     |Help message for all Page bindings.
+|Shift-Ctrl-Alt + H     |Help message for summary.
 |====
 
 To change the key bindings to your own needs copy +<system>/share/fvwm-nightshade/.bindings+ 
@@ -563,7 +563,7 @@ The user part is located in +~/.fvwm-nightshade+. Following named as <user>.
 
 Location of Files and their Function
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*<system>/bin* -> Executables.
+*<system>/bin* => Executables.
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |fvwm-nightshade        |start script.
@@ -577,7 +577,7 @@ Location of Files and their Function
 
 -
 
-*<system>/share/fvwm-nightshade/* -> System home of *Fvwm-Nightshade*.
+*<system>/share/fvwm-nightshade/* => System home of *Fvwm-Nightshade*.
 [cols="10%,90%",frame="none",grid="none"]
 |====
 |config             |system wide configuration file.
@@ -588,32 +588,32 @@ Location of Files and their Function
 
 -
 
-*<system>/share/fvwm-nightshade/artwork/* -> *Fvwm-Nightshade* icons, splash and wallpapers.
+*<system>/share/fvwm-nightshade/artwork/*   => *Fvwm-Nightshade* icons, splash and wallpapers.
 
-*<system>/share/fvwm-nightshade/layouts/* -> System layout files and conky rc-files.
+*<system>/share/fvwm-nightshade/layouts/*   => System layout files and conky rc-files.
 
-*<system>/share/fvwm-nightshade/lib/* -> Fvwm modules written in Perl or C/C++. Directory is in the ModulePath.
+*<system>/share/fvwm-nightshade/lib/*       => Fvwm modules written in Perl or C/C++. Directory is in the ModulePath.
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |FvwmSmartMaximize          |Perl module to maximize windows in the largest area of the desktop/page.
 |FvwmTransSet               |Perl module to set true transparency to windows if a composite manager is running.
-|FNS-BaseSetup              |Perl-SimpleGtk2 script to configure base settings of Fvwm-Nightshade (layouts, themes, compositing, icons on desktop, etc.).
-|FNS-WindowsBehaviour       |Perl-SimpleGtk2 script to configure window behaviours (focus policies, placement, etc.).
-|FNS-CompConfigurator       |Perl-SimpleGtk2 script to configure composite manager if installed (shadows, translucency, etc).
-|FNS-MenuConfigurator       |Perl-SimpleGtk2 script to configure the XDG menu creation. It exchange fvwm-menu-desktop2-config.fpl.
+|FNS-BaseSetup              |Perl-SimpleGtk2 module to configure base settings of Fvwm-Nightshade (layouts, themes, compositing, icons on desktop, etc.).
+|FNS-WindowsBehaviour       |Perl-SimpleGtk2 module to configure window behaviours (focus policies, placement, etc.).
+|FNS-CompConfigurator       |Perl-SimpleGtk2 module to configure composite manager if installed (shadows, translucency, etc).
+|FNS-MenuConfigurator       |Perl-SimpleGtk2 module to configure the XDG menu creation. It exchange fvwm-menu-desktop2-config.fpl.
 |====
 
 -
 
-*<system>/share/fvwm-nightshade/modules/* -> Pager, pannels and Iconman modules.
+*<system>/share/fvwm-nightshade/modules/*   => Pager, pannels and Iconman modules.
 
-*<system>/share/fvwm-nightshade/themes/* -> Theme files and icons.
+*<system>/share/fvwm-nightshade/themes/*    => Theme files and icons.
 
-*<system>/share/doc/fvwm-nightshade/* -> Html pages, templates, readmes.
+*<system>/share/doc/fvwm-nightshade/*       => Html pages, templates, readmes.
 
 - 
 
-*/usr/share/fvwm/* -> Scripts which must resides in Fvwm's directory or if 
+*/usr/share/fvwm/* => Scripts which must resides in Fvwm's directory or if 
 local installation is chosen in the <user> directories - FvwmScripts in the 
 scripts/ sub directory, all others in the <user> root.
 [cols="20%,80%",frame="none",grid="none"]
@@ -626,7 +626,7 @@ scripts/ sub directory, all others in the <user> root.
 
 -
 
-*/etc/xdg/menus/* -> XDG applications menu directory. If local installation 
+*/etc/xdg/menus/* => XDG applications menu directory. If local installation 
 is chosen it is located in ~/.config/menus/.
 [cols="20%,80%",frame="none",grid="none"]
 |====
@@ -635,7 +635,7 @@ is chosen it is located in ~/.config/menus/.
 
 -
 
-*/usr/share/desktop-directories/* -> Directory for XDG directory files. If local 
+*/usr/share/desktop-directories/* => Directory for XDG directory files. If local 
 installation is chosen it is located in <chosen_dir>/share/desktop-directories/.
 [cols="20%,80%",frame="none",grid="none"]
 |====
@@ -644,7 +644,7 @@ installation is chosen it is located in <chosen_dir>/share/desktop-directories/.
 
 -
 
-*/usr/share/xsessions/* -> Login manager directory if a display-manager is available.
+*/usr/share/xsessions/* => Login manager directory if a display-manager is available.
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |fvwm-nightshade.desktop        |login script.
@@ -652,7 +652,7 @@ installation is chosen it is located in <chosen_dir>/share/desktop-directories/.
 
 -
 
-*/usr/local/lib/perl-site|Perl5* -> Perl directories for 3rd party libraries
+*/usr/local/lib/perl-site|Perl5* => Perl directories for 3rd party libraries
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |SimpleGtk2.pm        |a wrapper around Perl-Gtk2 to allow RAD.
@@ -660,7 +660,7 @@ installation is chosen it is located in <chosen_dir>/share/desktop-directories/.
 
 -
 
-*~/.fvwm-nightshade/* -> the user home directory (<user>)
+*~/.fvwm-nightshade/* => the user home directory (<user>)
 [cols="20%,80%",frame="none",grid="none"]
 |====
 |.autostart         |optional file with application commands.
@@ -678,21 +678,21 @@ installation is chosen it is located in <chosen_dir>/share/desktop-directories/.
 
 -
 
-*<user>/wallpapers/* -> default wallpaper directory.
+*<user>/wallpapers/*    => default wallpaper directory.
 
-*<user>/screenshots/* -> default screenshots directory.
+*<user>/screenshots/*   => default screenshots directory.
 
-*<user>/scripts/* -> Optional user FvwmScripts directory.
+*<user>/scripts/*       => Optional user FvwmScripts directory.
 
-*<user>/icons/* -> Menu icon directory created by Regenerate XDG Menus.
+*<user>/icons/*         => Menu icon directory created by Regenerate XDG Menus.
 
-*<user>/layouts/* -> Optional user layout directory.
+*<user>/layouts/*       => Optional user layout directory.
 
-*<user>/lib/* -> Optional user module directory. Is in the ModulPath.
+*<user>/lib/*           => Optional user module directory. Is in the ModulPath.
 
-*<user>/themes/* -> Optional user themes directory.
+*<user>/themes/*        => Optional user themes directory.
 
-*<user>/locales/* -> Optional user language directory.
+*<user>/locales/*       => Optional user language directory.
 
 Call Sequence while Startup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -812,7 +812,7 @@ or +<user>/themes/<name>/+:
 |====
 |colorsets  |Colorsets of decorations, menus, modules etc.
 |decor      |Styles of titlebar, buttons, menus and theme related mouse bindings.
-|images    	|optional folder for button images (SVG).
+|images     |optional folder for button images (SVG).
 |====
 
 If you want to build a new theme create in +<user>/themes/+ a theme directory 
@@ -866,7 +866,7 @@ pager module or if you have other special things implemented.
 You can test it easily by clicking your layout name under
 ----
 Configuration -> Fvwm-Nightshade -> Decoration -> Layouts
-------
+----
 
 if it found under +<user>/layouts/+. It appears automatically.
 

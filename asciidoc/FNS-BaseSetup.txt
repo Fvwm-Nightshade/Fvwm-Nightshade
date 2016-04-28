@@ -5,7 +5,7 @@ FNS-BaseSetup(1)
 
 == NAME
 
-FNS-BaseSetup - Perl module to configure base settings of Fvwm-Nightshade
+FNS-BaseSetup - SimpleGtk2 perl module to configure base settings of Fvwm-Nightshade.
 
 
 == SYNOPSIS
@@ -30,7 +30,8 @@ default terminal, etc.
 +
 Fvwm-Nightshade supports startup images (png, xpm or gif) called "splashs"  
 shown with FvwmBanner. You can activate or deactivate the showing of it by 
-seting the checkbox. The path of the image can entered directly or via button.
+seting the checkbox. The path of the image can entered directly or via the
+right button.
 
 
 *Composite Manager On*::
@@ -59,29 +60,29 @@ Configurator*.
 *Wallpaper Dirs*::
 +
 Since version 0.8 of Fvwm-Nightshade more than one wallpaper directory in 
-addition to ~/.fvwm-nightshade/wallpapers is supported. They can be 
+addition to +~/.fvwm-nightshade/wallpapers+ is supported. They can be 
 specified in the text entry separated with a _colon_.
 
 
 *Icons on Desktop*::
 +
 With this checkbox icons on desktop can be enabled. This feature is 
-offered by PcmanFm so if activated the root window is under its' control. 
+offered by PcmanFm. If activated the root window is under its' control. 
 Therefore the root menu of Fvwm-Nightshade must moved around to the right 
 click desktop menu. Anyway it can be shown already with the Super_L key.
 
 
 *Icon Size*::
 +
-Over this combo box the size of the desktop icons can be set. Over 
-PcmanFM's settings => display => Big Symbols the can set, too.
+Over this combo box the size of the desktop icons can be set. With 
+PcmanFM's Settings => Display => Big Symbols it can be set, too.
 
 
 *Desktop scrolling On*::
 +
 Desktop scrolling is set per default but some people don't like those 
 switching to another desktop while scrolling with the mouse to the edges 
-of the current screen. So with this checkbox it can be disabled.
+of the current screen. Disable it with this checkbox.
 
 
 *Desktops*::
@@ -105,8 +106,7 @@ manager, panels are positioned:
 +
 Horizontal::::
 +
-The default layout. All components are seperated and arranged at the top 
-of the screen.
+All components are seperated and arranged at the top of the screen.
 
 Vertical::::
 +
@@ -119,8 +119,8 @@ favorites, systray, cpu bar and clock/date. A bottom panel with a minimize
 all button, the task bar and a pager.
 
 Klike::::
-This one is based on the KDE layout - a bottom panel with menu, task bar, 
-pager, systray, cpu bar and clock/date.
+The default layout. This one is based on the KDE layout - a bottom panel 
+with menu, task bar, pager, systray, cpu bar and clock/date.
 
 
 *Used Theme*::
@@ -214,8 +214,8 @@ xterm -fn 10x20
 
 == FILES
 
-Standard settings are found in /usr/share/fvwm-nightshade/.settings copied 
-while first startup into ~/.fvwm-nightshade/ .
+Standard settings are found in +/usr/share/fvwm-nightshade/.settings+ copied 
+while first startup into +~/.fvwm-nightshade/+ .
 
 
 == AUTHOR

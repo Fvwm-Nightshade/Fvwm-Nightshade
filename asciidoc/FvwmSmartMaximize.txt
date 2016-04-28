@@ -5,7 +5,7 @@ FvwmSmartMaximize(1)
 NAME
 ----
 
-FvwmSmartMaximize - The smart maximize module
+FvwmSmartMaximize - Perl module to smart maximize windows.
 
 
 SYNOPSIS

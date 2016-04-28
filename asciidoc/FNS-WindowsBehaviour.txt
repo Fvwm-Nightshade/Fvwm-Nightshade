@@ -5,7 +5,7 @@ FNS-WindowsBehaviour(1)
 
 == NAME
 
-FNS-WindowsBehaviour - Perl module to configure the windows behaviour in Fvwm-Nightshade.
+FNS-WindowsBehaviour - SimpleGtk2 perl module to configure the windows behaviour in Fvwm-Nightshade.
 
 
 == SYNOPSIS
