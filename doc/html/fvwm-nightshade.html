@@ -766,9 +766,9 @@ how you can customize it (e.g. new themes or layouts).</p></div>
 <div class="sect2">
 <h3 id="_first_start">First Start</h3>
 <div class="paragraph"><p><strong>Fvwm-Nightshade</strong> checks while your first login if <code>~/.fvwm-nightshade</code> exist.
-If not a setup dialog appears where you can change things like desktop size,
+If not <strong>FNS-BaseSetup</strong> dialog appears where you can change things like desktop size,
 used theme and font, which layout, default terminal and browser you want.</p></div>
-<div class="paragraph"><p>After clicking "Apply &amp; Save" your settings will be activated and
+<div class="paragraph"><p>After clicking "Apply" your settings will be activated and
 <strong>Fvwm-Nightshade</strong> is ready to use. If you want to change the settings
 again you can do that over the menu point</p></div>
 <div class="listingblock">
@@ -801,7 +801,7 @@ Klike (KDE based)
 </p>
 </li>
 </ul></div>
-<div class="paragraph"><p>You can change it via <em>FNS Base Setup</em> or over the menu</p></div>
+<div class="paragraph"><p>You can change it via <strong>FNS Base Setup</strong> or over the menu</p></div>
 <div class="listingblock">
 <div class="content">
 <pre><code>Configuration -&gt; Fvwm-Nightshade -&gt; Decorations -&gt; Layouts</code></pre>
@@ -1290,59 +1290,10 @@ In each window area or in an iconified windows with <em>Alt+left click</em>.
 <div class="sect3">
 <h4 id="_personal_applications">Personal Applications</h4>
 <div class="paragraph"><p>The Personal Applications menu is for your favorite applications. As you
-open it the first entry is a FvwmScript tool to choose applications from
-the application menus found on the system.</p></div>
-<div class="dlist"><dl>
-<dt class="hdlist1">
-Add an application
-</dt>
-<dd>
-<div class="olist arabic"><ol class="arabic">
-<li>
-<p>
-In the "Menu Folder" list choose a menu.
-</p>
-</li>
-<li>
-<p>
-In the "Menu Entries" list choose an application.
-</p>
-</li>
-<li>
-<p>
-Click on the "Add" button and the app appears in the "Personal Entries" list.
-</p>
-</li>
-<li>
-<p>
-To finish your selection click on the "Save" button.
-</p>
-</li>
-</ol></div>
-</dd>
-<dt class="hdlist1">
-Remove an application
-</dt>
-<dd>
-<div class="olist arabic"><ol class="arabic">
-<li>
-<p>
-Choose an app to remove in the "Personal Entries" list.
-</p>
-</li>
-<li>
-<p>
-Click on the "Remove" button - the selected app disappears from the list.
-</p>
-</li>
-<li>
-<p>
-To finish your remove action click on the "Save" button.
-</p>
-</li>
-</ol></div>
-</dd>
-</dl></div>
+open it the first entry is a graphical tool to choose applications or folders
+from the application menus found on the system. Also it is possible to create
+own application or folder entries. Entries can be sorted with drag&#8217;n'drop.</p></div>
+<div class="paragraph"><p>For more information about the graphical tool see manpage of <strong>FNS-MenuBuilder</strong>.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_xdg_application_menus">XDG Application Menus</h4>
@@ -1438,7 +1389,7 @@ Root Area
 <dd>
 <div class="paragraph"><p>Button 1:   Root menu.</p></div>
 <div class="paragraph"><p>Button 2:   Window list.</p></div>
-<div class="paragraph"><p>Button 3:   Desktop menu. If you have configured icons on desktop there's a root menu, too.</p></div>
+<div class="paragraph"><p>Button 3:   Desktop menu. If you have configured icons on desktop there&#8217;s a root menu, too.</p></div>
 </dd>
 <dt class="hdlist1">
 Windows Area
@@ -1783,7 +1734,7 @@ following named as &lt;system&gt;.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_location_of_files_and_their_function">Location of Files and their Function</h3>
-<div class="paragraph"><p><strong>&lt;system&gt;/bin</strong> -&gt; Executables.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/bin</strong> &#8658; Executables.</p></div>
 <div class="tableblock">
 <table rules="none"
 width="100%"
@@ -1809,8 +1760,12 @@ cellspacing="0" cellpadding="4">
 <td align="left" valign="top"><p class="table">Python script to find the correct icon for iconified apps or for icons used in layouts.</p></td>
 </tr>
 <tr>
+<td align="left" valign="top"><p class="table">FNS-MenuBuilder</p></td>
+<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 script to build personal menu.</p></td>
+</tr>
+<tr>
 <td align="left" valign="top"><p class="table">fns-menu-desktop</p></td>
-<td align="left" valign="top"><p class="table">adapted fvwm-menu-desktop from Fvwm's CVS to create XDG menu(s).</p></td>
+<td align="left" valign="top"><p class="table">adapted fvwm-menu-desktop from Fvwm&#8217;s CVS to create XDG menu(s).</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">fns-start-programs</p></td>
@@ -1820,7 +1775,7 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/</strong> -&gt; System home of <strong>Fvwm-Nightshade</strong>.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/</strong> &#8658; System home of <strong>Fvwm-Nightshade</strong>.</p></div>
 <div class="tableblock">
 <table rules="none"
 width="100%"
@@ -1849,9 +1804,9 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/artwork/</strong> -&gt; <strong>Fvwm-Nightshade</strong> icons, splash and wallpapers.</p></div>
-<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/layouts/</strong> -&gt; System layout files and conky rc-files.</p></div>
-<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/lib/</strong> -&gt; Fvwm modules written in Perl or C/C++. Directory is in the ModulePath.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/artwork/</strong>   &#8658; <strong>Fvwm-Nightshade</strong> icons, splash and wallpapers.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/layouts/</strong>   &#8658; System layout files and conky rc-files.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/lib/</strong>       &#8658; Fvwm modules written in Perl or C/C++. Directory is in the ModulePath.</p></div>
 <div class="tableblock">
 <table rules="none"
 width="100%"
@@ -1870,29 +1825,29 @@ cellspacing="0" cellpadding="4">
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">FNS-BaseSetup</p></td>
-<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 script to configure base settings of Fvwm-Nightshade (layouts, themes, compositing, icons on desktop, etc.).</p></td>
+<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 module to configure base settings of Fvwm-Nightshade (layouts, themes, compositing, icons on desktop, etc.).</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">FNS-WindowsBehaviour</p></td>
-<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 script to configure window behaviours (focus policies, placement, etc.).</p></td>
+<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 module to configure window behaviours (focus policies, placement, etc.).</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">FNS-CompConfigurator</p></td>
-<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 script to configure composite manager if installed (shadows, translucency, etc).</p></td>
+<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 module to configure composite manager if installed (shadows, translucency, etc).</p></td>
 </tr>
 <tr>
 <td align="left" valign="top"><p class="table">FNS-MenuConfigurator</p></td>
-<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 script to configure the XDG menu creation. It exchange fvwm-menu-desktop2-config.fpl.</p></td>
+<td align="left" valign="top"><p class="table">Perl-SimpleGtk2 module to configure the XDG menu creation. It exchange fvwm-menu-desktop2-config.fpl.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/modules/</strong> -&gt; Pager, pannels and Iconman modules.</p></div>
-<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/themes/</strong> -&gt; Theme files and icons.</p></div>
-<div class="paragraph"><p><strong>&lt;system&gt;/share/doc/fvwm-nightshade/</strong> -&gt; Html pages, templates, readmes.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/modules/</strong>   &#8658; Pager, pannels and Iconman modules.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/fvwm-nightshade/themes/</strong>    &#8658; Theme files and icons.</p></div>
+<div class="paragraph"><p><strong>&lt;system&gt;/share/doc/fvwm-nightshade/</strong>       &#8658; Html pages, templates, readmes.</p></div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>/usr/share/fvwm/</strong> -&gt; Scripts which must resides in Fvwm's directory or if
+<div class="paragraph"><p><strong>/usr/share/fvwm/</strong> &#8658; Scripts which must resides in Fvwm&#8217;s directory or if
 local installation is chosen in the &lt;user&gt; directories - FvwmScripts in the
 scripts/ sub directory, all others in the &lt;user&gt; root.</p></div>
 <div class="tableblock">
@@ -1903,10 +1858,6 @@ cellspacing="0" cellpadding="4">
 <col width="20%" />
 <col width="80%" />
 <tbody>
-<tr>
-<td align="left" valign="top"><p class="table">FNS-Script-PersonalMenu</p></td>
-<td align="left" valign="top"><p class="table">Personal menu creator (FvwmScript script).</p></td>
-</tr>
 <tr>
 <td align="left" valign="top"><p class="table">FNS-Script-FileBrowser</p></td>
 <td align="left" valign="top"><p class="table">File browser based on FvwmScript-FileBrowser</p></td>
@@ -1927,7 +1878,7 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>/etc/xdg/menus/</strong> -&gt; XDG applications menu directory. If local installation
+<div class="paragraph"><p><strong>/etc/xdg/menus/</strong> &#8658; XDG applications menu directory. If local installation
 is chosen it is located in ~/.config/menus/.</p></div>
 <div class="tableblock">
 <table rules="none"
@@ -1939,13 +1890,13 @@ cellspacing="0" cellpadding="4">
 <tbody>
 <tr>
 <td align="left" valign="top"><p class="table">fns-applications.menu</p></td>
-<td align="left" valign="top"><p class="table">Fvwm-Nightshade's application menu.</p></td>
+<td align="left" valign="top"><p class="table">Fvwm-Nightshade&#8217;s application menu.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>/usr/share/desktop-directories/</strong> -&gt; Directory for XDG directory files. If local
+<div class="paragraph"><p><strong>/usr/share/desktop-directories/</strong> &#8658; Directory for XDG directory files. If local
 installation is chosen it is located in &lt;chosen_dir&gt;/share/desktop-directories/.</p></div>
 <div class="tableblock">
 <table rules="none"
@@ -1963,7 +1914,7 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>/usr/share/xsessions/</strong> -&gt; Login manager directory if a display-manager is available.</p></div>
+<div class="paragraph"><p><strong>/usr/share/xsessions/</strong> &#8658; Login manager directory if a display-manager is available.</p></div>
 <div class="tableblock">
 <table rules="none"
 width="100%"
@@ -1980,7 +1931,7 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>/usr/local/lib/perl-site|Perl5</strong> -&gt; Perl directories for 3rd party libraries</p></div>
+<div class="paragraph"><p><strong>/usr/local/lib/perl-site|Perl5</strong> &#8658; Perl directories for 3rd party libraries</p></div>
 <div class="tableblock">
 <table rules="none"
 width="100%"
@@ -1997,7 +1948,7 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>~/.fvwm-nightshade/</strong> -&gt; the user home directory (&lt;user&gt;)</p></div>
+<div class="paragraph"><p><strong>~/.fvwm-nightshade/</strong> &#8658; the user home directory (&lt;user&gt;)</p></div>
 <div class="tableblock">
 <table rules="none"
 width="100%"
@@ -2054,14 +2005,14 @@ cellspacing="0" cellpadding="4">
 </table>
 </div>
 <div class="paragraph"><p>-</p></div>
-<div class="paragraph"><p><strong>&lt;user&gt;/wallpapers/</strong> -&gt; default wallpaper directory.</p></div>
-<div class="paragraph"><p><strong>&lt;user&gt;/screenshots/</strong> -&gt; default screenshots directory.</p></div>
-<div class="paragraph"><p><strong>&lt;user&gt;/scripts/</strong> -&gt; Optional user FvwmScripts directory.</p></div>
-<div class="paragraph"><p><strong>&lt;user&gt;/icons/</strong> -&gt; Menu icon directory created by Regenerate XDG Menus.</p></div>
-<div class="paragraph"><p><strong>&lt;user&gt;/layouts/</strong> -&gt; Optional user layout directory.</p></div>
-<div class="paragraph"><p><strong>&lt;user&gt;/lib/</strong> -&gt; Optional user module directory. Is in the ModulPath.</p></div>
-<div class="paragraph"><p><strong>&lt;user&gt;/themes/</strong> -&gt; Optional user themes directory.</p></div>
-<div class="paragraph"><p><strong>&lt;user&gt;/locales/</strong> -&gt; Optional user language directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/wallpapers/</strong>    &#8658; default wallpaper directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/screenshots/</strong>   &#8658; default screenshots directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/scripts/</strong>       &#8658; Optional user FvwmScripts directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/icons/</strong>         &#8658; Menu icon directory created by Regenerate XDG Menus.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/layouts/</strong>       &#8658; Optional user layout directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/lib/</strong>           &#8658; Optional user module directory. Is in the ModulPath.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/themes/</strong>        &#8658; Optional user themes directory.</p></div>
+<div class="paragraph"><p><strong>&lt;user&gt;/locales/</strong>       &#8658; Optional user language directory.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_call_sequence_while_startup">Call Sequence while Startup</h3>
@@ -2529,8 +2480,8 @@ or <strong>FvwmForms</strong> are shown after restart of the application.
 <td class="icon">
 <div class="title">Tip</div>
 </td>
-<td class="content">You can use <strong>poedit</strong> or <strong>KBabel</strong> instead of an editor for translation. It's
-a matter of choice ;-) ...</td>
+<td class="content">You can use <strong>poedit</strong> or <strong>KBabel</strong> instead of an editor for translation. It&#8217;s
+a matter of choice ;-) &#8230;</td>
 </tr></table>
 </div>
 <div class="paragraph"><p>If you need more information about the used translation process see
@@ -2576,7 +2527,7 @@ and put your module in it. Now you can start it from within FvwmConsole with</p>
 <div class="sect1">
 <h2 id="_authors">AUTHORS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>(C) 2013 - 2015 by the Fvwm-Nightshade team &lt;<a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a>&gt;.</p></div>
+<div class="paragraph"><p>&#169; 2013 - 2016 by the Fvwm-Nightshade team &lt;<a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a>&gt;.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -2600,7 +2551,7 @@ or submit them under <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade
 <div id="footer">
 <div id="footer-text">
 Last updated
- 2015-01-13 22:22:42 CET
+ 2016-04-28 20:36:42 CEST
 </div>
 </div>
 </body>

@@ -739,7 +739,7 @@ FNS-BaseSetup(1) Manual Page
 <h2>NAME</h2>
 <div class="sectionbody">
 <p>FNS-BaseSetup -
-   Perl module to configure base settings of Fvwm-Nightshade
+   SimpleGtk2 perl module to configure base settings of Fvwm-Nightshade.
 </p>
 </div>
 </div>
@@ -772,7 +772,8 @@ default terminal, etc.</p></div>
 <dd>
 <div class="paragraph"><p>Fvwm-Nightshade supports startup images (png, xpm or gif) called "splashs"
 shown with FvwmBanner. You can activate or deactivate the showing of it by
-seting the checkbox. The path of the image can entered directly or via button.</p></div>
+seting the checkbox. The path of the image can entered directly or via the
+right button.</p></div>
 </dd>
 <dt class="hdlist1">
 <strong>Composite Manager On</strong>
@@ -810,7 +811,7 @@ Configurator</strong>.</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>Since version 0.8 of Fvwm-Nightshade more than one wallpaper directory in
-addition to ~/.fvwm-nightshade/wallpapers is supported. They can be
+addition to <code>~/.fvwm-nightshade/wallpapers</code> is supported. They can be
 specified in the text entry separated with a <em>colon</em>.</p></div>
 </dd>
 <dt class="hdlist1">
@@ -818,7 +819,7 @@ specified in the text entry separated with a <em>colon</em>.</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>With this checkbox icons on desktop can be enabled. This feature is
-offered by PcmanFm so if activated the root window is under its' control.
+offered by PcmanFm. If activated the root window is under its' control.
 Therefore the root menu of Fvwm-Nightshade must moved around to the right
 click desktop menu. Anyway it can be shown already with the Super_L key.</p></div>
 </dd>
@@ -826,16 +827,16 @@ click desktop menu. Anyway it can be shown already with the Super_L key.</p></di
 <strong>Icon Size</strong>
 </dt>
 <dd>
-<div class="paragraph"><p>Over this combo box the size of the desktop icons can be set. Over
-PcmanFM's settings =&gt; display =&gt; Big Symbols the can set, too.</p></div>
+<div class="paragraph"><p>Over this combo box the size of the desktop icons can be set. With
+PcmanFM&#8217;s Settings &#8658; Display &#8658; Big Symbols it can be set, too.</p></div>
 </dd>
 <dt class="hdlist1">
 <strong>Desktop scrolling On</strong>
 </dt>
 <dd>
-<div class="paragraph"><p>Desktop scrolling is set per default but some people don't like those
+<div class="paragraph"><p>Desktop scrolling is set per default but some people don&#8217;t like those
 switching to another desktop while scrolling with the mouse to the edges
-of the current screen. So with this checkbox it can be disabled.</p></div>
+of the current screen. Disable it with this checkbox.</p></div>
 </dd>
 <dt class="hdlist1">
 <strong>Desktops</strong>
@@ -868,8 +869,7 @@ manager, panels are positioned:
 Horizontal
 </dt>
 <dd>
-<div class="paragraph"><p>The default layout. All components are seperated and arranged at the top
-of the screen.</p></div>
+<div class="paragraph"><p>All components are seperated and arranged at the top of the screen.</p></div>
 </dd>
 <dt class="hdlist1">
 Vertical
@@ -890,8 +890,8 @@ Klike
 </dt>
 <dd>
 <p>
-This one is based on the KDE layout - a bottom panel with menu, task bar,
-pager, systray, cpu bar and clock/date.
+The default layout. This one is based on the KDE layout - a bottom panel
+with menu, task bar, pager, systray, cpu bar and clock/date.
 </p>
 </dd>
 </dl></div>
@@ -933,14 +933,20 @@ CrystalBalls
 FlatTab
 </dt>
 <dd>
-<div class="paragraph"><p>Simple flat theme, mostly black and white, based on xeNULL's openbox theme.</p></div>
+<div class="paragraph"><p>Simple flat theme, mostly black and white, based on xeNULL&#8217;s openbox theme.</p></div>
 </dd>
 <dt class="hdlist1">
 GrayRevenge
 </dt>
 <dd>
-<div class="paragraph"><p>The default theme of Fvwm-Nightshade. A dark gray and plain theme based on
-Alessandro Roncone's Gray-Revenge-1-7.</p></div>
+<div class="paragraph"><p>A dark gray and plain theme based on Alessandro Roncone&#8217;s Gray-Revenge-1-7.</p></div>
+</dd>
+<dt class="hdlist1">
+PitchBlack
+</dt>
+<dd>
+<div class="paragraph"><p>The default theme of Fvwm-Nightshade. A dark violet and plain theme based on
+GrayRevenge.</p></div>
 </dd>
 <dt class="hdlist1">
 Redmond
@@ -953,7 +959,7 @@ nostalgists.</p></div>
 Rocken
 </dt>
 <dd>
-<div class="paragraph"><p>A great bright and beautiful theme based on Thibaut's theme <em>Rocken</em> from 2010
+<div class="paragraph"><p>A great bright and beautiful theme based on Thibaut&#8217;s theme <em>Rocken</em> from 2010
 with silver bars and black buttons.</p></div>
 </dd>
 <dt class="hdlist1">
@@ -1024,14 +1030,14 @@ of the Fvwm components can be chosen here.</p></div>
 <div class="sect1">
 <h2 id="_files">FILES</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>Standard settings are found in /usr/share/fvwm-nightshade/.settings copied
-while first startup into ~/.fvwm-nightshade/ .</p></div>
+<div class="paragraph"><p>Standard settings are found in <code>/usr/share/fvwm-nightshade/.settings</code> copied
+while first startup into <code>~/.fvwm-nightshade/</code> .</p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_author">AUTHOR</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>(C) 2015 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+<div class="paragraph"><p>&#169; 2015 - 2016 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
 </div>
 </div>
 </div>
@@ -1039,7 +1045,7 @@ while first startup into ~/.fvwm-nightshade/ .</p></div>
 <div id="footer">
 <div id="footer-text">
 Last updated
- 2015-01-12 21:54:44 CET
+ 2016-04-28 20:10:12 CEST
 </div>
 </div>
 </body>
