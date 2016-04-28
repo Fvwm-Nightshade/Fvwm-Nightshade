@@ -1,5 +1,10 @@
 History:
 
+04/28/2016
+- add asciidoc document for FNS-MenuBuilder
+- update all asciidoc documents before building new manpages and html pages
+- update all manpages and html pages
+
 04/26/2016
 - fix bugs in FNS-MenuBuilder:
   - correct check if XDG_DATA_DIRS is empty
