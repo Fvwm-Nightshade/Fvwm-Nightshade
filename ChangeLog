@@ -1,5 +1,9 @@
 History:
 
+04/29/2016
+- add asciidoc document for FNS-CpuPerformance
+- add manpage and html page for FNS-MenuBuilder
+
 04/28/2016
 - add asciidoc document for FNS-MenuBuilder
 - update all asciidoc documents before building new manpages and html pages
