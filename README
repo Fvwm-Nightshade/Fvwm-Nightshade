@@ -86,7 +86,7 @@ Featurelist of Fvwm-Nightshade 0.7.x:
 
 - Animation control of window moves (FvwmAnimate).
 - Window focus switching with Alt-Tab / Shift-Alt-Tab.
-- Animated Splash screen (in progress).
+- Splash screen based on ImageMagick to support more image formats.
 - Creation of thumbs with mini icon and name for iconified applications 
   instead of a simple icon.
 - Smart maximize windows - move and resize windows to the largest free 
