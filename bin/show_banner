@@ -1,0 +1,86 @@
+#!/bin/bash
+#-----------------------------------------------------------------------
+# File:         show_banner
+version=1.2.0
+# Licence:      GPL 2
+#
+# Description:  Bash script to show a static banner with transparency
+#
+# Parameters:   show_banner <image> <time>
+#
+# Author:       Bernhard Popp <kermit.popp@googlemail.com>    
+#
+# Created:      04/29/2016
+# Changed:      04/30/2016
+#-----------------------------------------------------------------------
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+then
+    echo "------------------------------------------------------------------------"
+    echo "Usage: `basename $0` <type> <infile>"
+    echo "       <image>        path to banner image"
+    echo "       <time>         time in seconds banner should shown."
+    echo "       -h|--help      show help"
+    echo "       -v|--version   version"
+    echo
+    echo "Example:"
+    echo "`basename $0` ~/images/banner.png 3"
+    echo " => shows banner 3 seconds."
+    echo "------------------------------------------------------------------------"
+    exit 0
+elif [ "$1" = "-v" ] || [ "$1" = "--version" ]
+then
+    echo `basename $0` V $version
+    exit 0
+fi
+
+if [ $# -lt 2 ]
+then
+    echo Not enough parameter! Exiting.
+    exit 1
+elif  [ $# -gt 2 ]
+then
+    echo Too much parameter! Exiting.
+    exit 1
+fi
+
+image=$1
+time=$2
+
+# check whether infile exist
+if [ ! -f $image ]
+then
+    echo $image not found! Exiting.
+    exit 1
+fi
+
+
+########################################################################
+# Initialization
+########################################################################
+
+# get desktop size
+desk_x=($(xrandr | grep current | cut -d" " -f8 | sed 's/[^0-9]//g'))
+desk_y=($(xrandr | grep current | cut -d" " -f10 | sed 's/[^0-9]//g'))
+
+# get banner size
+banner_x=($(identify -format %w $image))
+banner_y=($(identify -format %h $image))
+
+# calculate offsets
+offset_x=$((($desk_x - $banner_x) / 2))
+offset_y=$((($desk_y - $banner_y) / 2))
+
+
+########################################################################
+# ImageMagick mysteries ^^
+########################################################################
+
+import -window root -crop "$banner_x x $banner_y + $offset_x + $offset_y" miff:- | \
+        composite -gravity Center "$image" - miff:- | \
+        display -title FvwmBanner -geometry   +"$offset_x"+"$offset_y" \
+        -gravity Center - &
+
+TASK_PID=$!
+sleep $time
+kill $TASK_PID
