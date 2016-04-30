@@ -1,12 +1,12 @@
 #!/bin/bash
 #-----------------------------------------------------------------------
-# File:         show_banner
-version=1.2.0
+# File:         fns-show-banner
+version=1.2.1
 # Licence:      GPL 2
 #
 # Description:  Bash script to show a static banner with transparency
 #
-# Parameters:   show_banner <image> <time>
+# Parameters:   fns-show-banner <IMAGE> <TIME>
 #
 # Author:       Bernhard Popp <kermit.popp@googlemail.com>    
 #
