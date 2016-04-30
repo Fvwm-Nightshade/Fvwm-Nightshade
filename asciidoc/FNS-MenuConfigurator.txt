@@ -1,0 +1,152 @@
+FNS-MenuConfigurator(1)
+=======================
+:doctype: manpage
+
+
+== NAME
+
+FNS-MenuConfigurator - SimpleGtk2 perl program to configure the root menu 
+in Fvwm-Nightshade.
+
+
+== SYNOPSIS
+
+Module FNS-MenuConfigurator
+
+*FNS-MenuConfigurator* can only be invoked by fvwm. Command line invocation 
+of the *FNS-MenuConfigurator* module will not work.
+
+== DESCRIPTION
+
+*FNS-MenuConfigurator* is used to configure the appearance of the root menu. 
+It is the graphical user interface of *fns-menu-desktop* - a revised version 
+of _fvwm-menu-desktop_ which reads XDG menu files and creates Fvwm menus.
+
+== OPTIONS
+
+=== Multiple Menu
+
+In this tab all XDG menus found on the system are shown. All selected menus 
+will integrate in one Fvwm menu. Note that equal menus found under 
++/etc/xdg/menus+ AND +\~/.config/menus/+ following the XDG menu specification 
+only shown in +~/.config/menus/+. If you want to generate a custom-assembled 
+menu switch to the 'Single Menu' tab.
+
+=== Single Menu
+
+In this tab you can define a custom-assembled menu 'foo-bar.menu' placed on 
+another location as defined in the XDG menu definitions. 
+
+Note:
+===============================
+If the menu doesn't exist, nothing happens.
+===============================
+
+*Menu Top Title*::
++
+pecifies the menu title of the top menu used by Fvwm's Popup command. Default is 'FvwmMenu'.
+
+*Desktop*::
++
+Overrides the name of the main desktop environment installed on the system. If a 
+system offers multiple desktop environments +$XDG_MENU_PREFIX+ is typically set. 
+It is ignored if this field is used. Possible names: _gnome, kde, lxde_, etc.
+
+*Install-Prefix*::
++
+Overrides the standard locations for XDG menu definitions. The standard locations 
+are +/etc/xdg/menus+ and +~/.config/menus+ if available.
+
+*Menu Type*::
++
+Defines which type of menu should be found. Possible name types could be: 
+_applications, settings, preferences_, etc. 
+
+Note:
+===============================
+If the specified menu type doesn't exist the generated menu is empty!
+===============================
+
+=== General Options
+
+*Use Icons*::
++
+Option enables mini-icons in the menu(s).
+
+*Icon Size*::
++
+If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size 
+is desired change the wanted size in this field.
+
+*Icon Theme*::
++
+Sets the used icon theme. Default is 'gnome' but all others found in +~/.icons+ or 
++/usr/share/icons+ can used except the hicolor theme because it's the default 
+fallback theme if no icon is found. Note that the theme name must be written 
+exactly as the icon directory e.g. +/usr/share/icons/Mint-X+ => 'Mint-X'.
+
+*Directory Icon*::
++
+If 'Use Icons' is enabled and for a directory in a menu no icon is found 
+'gnome-fs-directory' as default icon is used. But if the gnome icon theme 
+isn't installed no default icon appears. Another icon can defined here. 
+Only the name of an icon is needed not the path!
+
+*Application Icon*::
++
+If 'Use Icons' is enabled and for an application no icon is found 'gnome-applications' 
+as default icon is used. But if the gnome icon theme isn't installed no default icon 
+appears. Another icon can defined here. Only the name of an icon is needed not the path!
+
+*Icon Directory*::
++
+If the specified icon isn't that size it is converted if ImageMagick is installed. 
+Generated icons are saved in +$FVWM_USERDIR/icons+ or the directory specified here. 
+Otherwise no icon appears in the menu for that entry.
+
+*Use Titles*::
++
+If this option is set menus are generated with titles. Default is no titles.
+
+*Menus in Menu*::
++
+Enable this checkbox to insert generated menu(s) IN a menu.
+
+*InMenu*::
++
+Enter in this field the name of the menu (its top title) where the generated 
+menu(s) should insert. For more information see the USAGE section in the man 
+page of fns-menu-desktop.
+
+*Output Path*::
++
+Enter here the FULL path of the menu to store. Default path is +$FVWM_USERDIR/.menu+.
+
+=== Buttons
+
+*Generate*::
++
+Generates the menu(s).
+
+*Help*::
++
+Opens the manpage of *fns-menu-desktop*.
+
+*Save*::
++
+Saves the new menu settings.
+
+*Cancel*::
++
+Closes *FNS-MenuConfigurator*.
+
+== FILES
+
+Menu settings are saved in +/usr/share/fvwm-nightshade/.fns-menu.cfg+.   
+The previous settings are saved as +.fns-menu.bak+.
+
+== AUTHOR
+(C) 2016 Thomas Funk <t.funk@web.de>
+
+
+
