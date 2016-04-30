@@ -15,8 +15,8 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.7.9.20160429
-# Copyright (C) 2016
+InfoStoreAdd ns_version 0.7.9.20160430
+# Copyright (C) 2012 - 2016
 #
 # Authors:
 #   Thomas Funk <t.funk@web.de>
@@ -504,7 +504,9 @@ Style Fvwm* Colorset 0
 #-----------------------------------------------------------------------
 # FvwmBanner
 #-----------------------------------------------------------------------
-Style FvwmBanner !Title
+Style FvwmBanner !Title, !Borders, !Handles
+Style FvwmBanner Sticky, StaysOnTop
+Style FvwmBanner WindowListSkip, CirculateSkip
 
 #-----------------------------------------------------------------------
 # FvwmForm-Messages 
@@ -582,14 +584,6 @@ Style Kalende                   EWMHMiniIconOverride, Icon Kalende.svg:48x48, Mi
 #-----------------------------------------------------------------------
 Style stalonetray EWMHUseStackingOrderHints
 Style stalonetray WindowListSkip
-
-#-----------------------------------------------------------------------
-# FvwmBanner
-#-----------------------------------------------------------------------
-Style FvwmBanner Sticky
-Style FvwmBanner StaysOnTop
-Style FvwmBanner WindowListSkip
-Style FvwmBanner CirculateSkip
 
 
 ########################################################################
@@ -1042,7 +1036,7 @@ DestroyModuleConfig FvwmScript: *
 #=======================================================================
 # Module to set true transparency to windows if a composite manager is running
 DestroyModuleConfig FvwmTransSet: *
-*FvwmTransSet: Excludes FvwmButtons, FvwmPager, FvwmIconMan, stalonetray, conky_cpu, conky_clock, Pcmanfm_Daemon
+*FvwmTransSet: Excludes FvwmButtons, FvwmPager, FvwmIconMan, stalonetray, conky_cpu, conky_clock, Pcmanfm_Daemon, FvwmBanner
 *FvwmTransSet: Opacity 1.0
 *FvwmTransSet: Transparency 0.8
 *FvwmTransSet: UsedTransset $[infostore.default_transset]
@@ -1079,18 +1073,13 @@ AddToFunc StartFunction
 + I Test (Init) FuncAppCheck
 #-----------------------------------------------------------------------
 # show splash sceen
-+ I Test (Init) Test (EnvMatch SplashOn 1) Test (f $[FVWM_USERDIR]/.settings) Module FvwmBanner
+#+ I Test (Init) Test (EnvMatch SplashOn 1) Test (f $[FVWM_USERDIR]/.settings) Module FvwmBanner
 #-----------------------------------------------------------------------
 # Start pcmanfm as daemon for mounting 
 + I FuncStartMountDaemon
 #-----------------------------------------------------------------------
 # Start policykit for using pkexec 
 + I FuncStartPolkit
-#-----------------------------------------------------------------------
-# set the root background image with feh or if no image found start
-# default Fvwm background
-#+ I Test (I $[infostore.fvwm_wallpaper]) Exec exec feh --bg-scale $[infostore.fvwm_wallpaper]
-#+ I TestRC (!Match) Module FvwmBacker
 #-----------------------------------------------------------------------
 # activate automatical raise of windows
 + I Module FvwmAuto 300
@@ -1118,6 +1107,10 @@ AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # start FvwmTransSet if composite manager is activated
 + I TestRC (Match) FuncStartFvwmTransSet
+#-----------------------------------------------------------------------
+# show splash sceen
++ I Test (Init) Test (EnvMatch SplashOn 1) Test (f $[FVWM_USERDIR]/.settings) \
+    Schedule 500 Exec exec show_banner $[infostore.used_banner] 2
 
 #-----------------------------------------------------------------------
 # load layout
