@@ -1,5 +1,18 @@
 History:
 
+04/30/2016
+- add new splash tool show_banner based on ImageMagick to get better quality 
+  and more image format support than in FvwmBanner
+- add new transparent splash "splash_fns_transparent.png" to Artwork
+- changes in config depending on new splash tool:
+  - move FvwmBanner styles to one point instead of two
+  - add FvwmBanner to Excludes in FvwmTranset
+  - comment out FvwmBanner line in StartFunctions
+  - remove depreceated entries of show wallpaper in StartFunctions
+  - add new entry based on show_banner to show splash
+- change banner in .settings to new transparent splash
+- update NEWS and README for new splash
+
 04/29/2016
 - add asciidoc document for FNS-CpuPerformance
 - add manpage and html page for FNS-MenuBuilder
