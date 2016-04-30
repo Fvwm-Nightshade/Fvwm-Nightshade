@@ -1110,7 +1110,7 @@ AddToFunc StartFunction
 #-----------------------------------------------------------------------
 # show splash sceen
 + I Test (Init) Test (EnvMatch SplashOn 1) Test (f $[FVWM_USERDIR]/.settings) \
-    Schedule 500 Exec exec show_banner $[infostore.used_banner] 2
+    Schedule 500 Exec exec fns-show-banner $[infostore.used_banner] 2
 
 #-----------------------------------------------------------------------
 # load layout
