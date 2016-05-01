@@ -1,5 +1,12 @@
 History:
 
+05/01/2016
+- rename show_banner to fns-show-banner to fullfill FNS naming. In config, too.
+- add fns-show-banner asciidoc document, manpage and html page
+- add FNS-CompConfigurator asciidoc document, manpage and html page
+- add FNS-MenuConfigurator asciidoc document, manpage and html page
+- add fns-poladd asciidoc document, manpage and html page
+
 04/30/2016
 - add new splash tool show_banner based on ImageMagick to get better quality 
   and more image format support than in FvwmBanner
