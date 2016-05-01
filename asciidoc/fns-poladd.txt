@@ -1,0 +1,55 @@
+fns-poladd(1)
+=============
+:doctype: manpage
+
+NAME
+----
+
+fns-poladd - shell script to add or remove programs to/from polkit for gui view.
+
+
+SYNOPSIS
+--------
+
+fns-poladd [-r|--remove] [PROGRAM_NAME] [-l|--verbose] [-h|--help] [-v|--version]
+
+
+
+DESCRIPTION
+-----------
+
+*fns-poladd* is used to add or remove a program to or from polkit for gui view.
+
+
+[NOTE]
+This programm needs root rights!
+
+
+PARAMETERS
+----------
+
+*PROGRAM_NAME*::
++
+Add or remove program PROGRAM_NAME to or from policykit.
+
+*-r|--remove*::
++
+remove PROGRAM_NAME from policykit.
+
+*-l|--verbose*::
++
+verbose output. Default is silent.
+
+*-h|--help*::
++
+Show a short help and exiting.
+
+*-v|--version*::
++
+Show the version and exiting.
+
+
+AUTHOR
+------
+
+(C) 2014 - 2016 Thomas Funk <t.funk@web.de>
