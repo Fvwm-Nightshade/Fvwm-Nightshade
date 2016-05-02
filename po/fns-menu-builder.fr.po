@@ -1,138 +1,138 @@
 # French translation for Fvwm-Nightshade
 # Copyright (C) 2016 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Thomas Funk <t.funk@web.de>, 2016.
 #
 msgid ""
 msgstr ""
 
 "Project-Id-Version: FNS-MenuBuilder\n"
 "POT-Creation-Date: 2016-04-20 10:41+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: LANG\n"
+"PO-Revision-Date: 2016-05-02 15:58+0200\n"
+"Last-Translator: Axel Lagre\n"
+"Language-Team: French\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 ########################################################################
 # Titlebar
 ########################################################################
 msgid "FNS Personal Menu Builder"
-msgstr ""
+msgstr "FNS Menu Builder Personnel"
 
 ########################################################################
 # Root menu
 ########################################################################
 
 msgid "Root Menu"
-msgstr ""
+msgstr "Menu principal"
 
 msgid "Folder"
-msgstr ""
+msgstr "Dossier"
 
 msgid "Application"
-msgstr ""
+msgstr "Application"
 
 ########################################################################
 # Personal menu
 ########################################################################
 
 msgid "Personal Menu"
-msgstr ""
+msgstr "Menu personnel"
 
 msgid "Sort entries with drag'n drop."
-msgstr ""
+msgstr "Glisser-déposer les entrées pour les classer."
 
 ########################################################################
 # Buttons
 ########################################################################
 
 msgid "Add >"
-msgstr ""
+msgstr "Ajouter >"
 
 msgid "Add the selected menu entry."
-msgstr ""
+msgstr "Ajouter l'entrée du menu selectionné."
 
 msgid "< Remove"
-msgstr ""
+msgstr "< Enlever"
 
 msgid "Remove the selected menu entry.\nAttention:\nRemoving a folder removes all entries below!"
-msgstr ""
+msgstr "Effacer l'entrée du menu selectionné.\nAttention:\nLes entrées des sous menus seront aussi effacées!"
 
 msgid "You haven't selected a menu entry to remove!"
-msgstr ""
+msgstr "Vous n'avez seléctionné aucune entrée de menu à effacer!"
 
 msgid "Create"
-msgstr ""
+msgstr "Créer"
 
 msgid "Create a new folder or application entry below of the selected position."
-msgstr ""
+msgstr "Créer une nouvelle entrée de dossier ou une nouvelle entrée d'application en dessous de la position sélectionnée."
 
 msgid "Save"
-msgstr ""
+msgstr "Sauvegarder"
 
 msgid "Save the new personal menu."
-msgstr ""
+msgstr "Enregistrer le nouveau menu personnel."
 
 msgid "Quit"
-msgstr ""
+msgstr "Quitter"
 
 msgid "Quit Personal Menu Builder."
-msgstr ""
+msgstr "Quitter Menu Builder personnel."
 
 msgid "You have unsaved changes! Continue anyway?"
-msgstr ""
+msgstr "Vous n'avez pas sauvegardé les changements! Souhaitez-vous continuer?"
 
 ########################################################################
 # Creation dialog
 ########################################################################
 
 msgid "Create new application or folder entry"
-msgstr ""
+msgstr "Créer une nouvelle entrée d'application ou un nouvelle entrée de dossier"
 
 msgid "Click to choose an icon. No change creates no icon."
-msgstr ""
+msgstr "Choisissez un icône en cliquant dessus. Aucun choix d'icône ne creera aucun icône."
 
 msgid "Create a folder entry."
-msgstr ""
+msgstr "Créer une entrée de dossier."
 
 msgid "Create an application entry."
-msgstr ""
+msgstr "Créer une entrée d'application."
 
 msgid "Commandstring"
-msgstr ""
+msgstr "Chaîne de commandes"
 
 msgid "Add a command string or choose a path to an executable.\nHint:\n'Exec exec' will be prepended."
-msgstr ""
+msgstr "entrez une chaîne de commandes ou le chemin de l'emplacement de l'executable .\nHint:\n'Exec exec' va être ajouté."
 
 msgid "Choose an executable."
-msgstr ""
+msgstr "Choississez un executable."
 
 msgid "Label"
-msgstr ""
+msgstr "Etiquette"
 
 msgid "The label for this entry."
-msgstr ""
+msgstr "Etiquette pour cette entrée."
 
 msgid "Create the new entry."
-msgstr ""
+msgstr "Créer la nouvelle entrée."
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 msgid "Cancel entry creation."
-msgstr ""
+msgstr "Annuler la création de l'entrée."
 
 ########################################################################
 # Others
 ########################################################################
 msgid "Warning"
-msgstr ""
+msgstr "Avertissement"
 
 msgid "Open File"
-msgstr ""
+msgstr "Ouvrir un fichier"
 
 msgid "Select Folder"
-msgstr ""
+msgstr "Selectionner un répertoire"
