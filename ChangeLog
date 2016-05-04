@@ -1,8 +1,10 @@
 History:
 
-05/02/2016
+05/05/2016
 - update fns-menubuilder.fr.po and add the .mo for (thanks Axel Lagre for helping out :-)
 - add Axel to AUTHORS
+- remove description how to build and install Fvwm from INSTALL because Fvwm has moved 
+  to Github and all have to be tested and verified again.
 
 05/01/2016
 - rename show_banner to fns-show-banner to fullfill FNS naming. In config, too.
