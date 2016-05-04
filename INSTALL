@@ -22,83 +22,20 @@ Preparation
 Fvwm
 ----
 
-1. Get latest FVWM 
+Get latest FVWM (>= 2.6.5)
     a. from distribution if available
     b. from FVWM homepage
-    - open http://www.fvwm.org/download/ and download latest release
-    - unpack it
-    c. from FVWM CVS:
-    - Open http://www.fvwm.org/documentation/dev_cvs.php
-    - Do the Initial Setup
-    - Checking Out Source Code:
-       $ cvs -d :pserver:anonymous@cvs.fvwm.org:/home/cvs/fvwm co -r branch-2_6 fvwm
+        - open http://www.fvwm.org/ and download latest release or one
+          from https://github.com/fvwmorg/fvwm/releases
+        - unpack it and follow the instructions in INSTALL and INSTALL.fvwm
 
-    If distribution package is not available (b and c)
-    1. Prepare environment 
-        rpm:
-        - follow instructions under http://www.fvwm.org/documentation/dev_creating_rpms.php
-          "Before you Begin" and install listed packages (don't forget 'rpm-build' ^^).
-        - next step "Where rpms will be created" and create ~/.rpmmacros file with
-          %_topdir /home/<your_user_home>/redhat
-        - read "Creating binary and source rpm packages" but wait ...
-            unfortunatelly rpm-dist doesn't work at the moment. You've to fix the following:
-            - rename bin/fvwm-menu-desktop-config.fpl into bin/fvwm-menu-desktop-config.fpl.in
-            - add in configure.ac after line 1766:
-              bin/fvwm-menu-desktop-config.fpl
-        
-        deb:
-        - it's mostly easier to do "3. Building the Tree" before installing packages because the 
-          absent packages/dev-libs are in braces in the "no" lines at the end of the summary ;)
-        - if X11/Intrinsic.h not found while make you need package libXt-dev, too.
-        
-        Arch:
-        - xsltproc is equivalent to libxslt. librplay not available but normally not needed.
-        - next step: 4. Compile Fvwm
-    
-    2. Building the Tree:
-    - execute in the terminal
-        $ utils/configure_dev.sh
-       
-       Hint:
-       You can ignore "With GNOME libs support in FvwmGtk? no: Can't find working gnome-config" 
-       because FVWM wants Gtk+ Version 1 which is obsolete since ages and newer distributions 
-       don't has it anymore. 
+NOTE:
+-----
+Since Fvwm has been switched to https://github.com/fvwmorg/fvwm 
+the different build processes (rpm, deb, src) have to be tested again 
+and if remained described in the future below.
 
-    3. Compile Fvwm:
-        deb:
-        - run 
-           $ ./configure --prefix=/usr
-        - after that
-           $ make deb-inplace
-            
-        rpm:
-        - run
-        $ make rpm-dist
-        
-        Arch:
-        - build the package:
-            1. Create directory where you want to build the package and change to
-                $ mkdir -p /home/<your_user_name>/packages/fvwm
-                $ cd /home/<your_user_name>/packages/fvwm
-            2. Copy from arch/PKGBUILD_FVWM into the directory rename it to PKGBUILD and run
-                $ makepkg -s
-            3. enter password 'guest' for CVS login
-
-2. Install Fvwm
-    - To install FVWM you need root rights!
-    a. from distribution
-        use the package manager
-    b/c. from FVWM homepage
-        rpm:
-            - The package is located under /home/[your_user_name]/redhat/RPMS/i386/
-            # rpm -ivh /home/<your_user_name>/redhat/RPMS/i386/fvwm-2.6.x-0.<date>.i386.rpm
-        deb:
-            - The package is created one level higher than the FVWM folder
-            # dpkg -i ../<path_to_fvwm>/fvwm-2.6.x-0.<date>.i386.deb
-        Arch:
-            - The package is created in the previous generated directory. Run
-            # pacman -U fvwm-cvs-2.6.6-1-architecture.pkg.tar.xz
-    
+Sorry for this inconvenience.
 
 
 Installation of Fvwm-Nightshade
@@ -125,7 +62,7 @@ Installation of Fvwm-Nightshade
         If you want to install FNS to a directory else then /usr you have to
         add 
         
-			PATH="<other_dir>/bin:$PATH"
+            PATH="<other_dir>/bin:$PATH"
         
         in a file called <No>_common_xsessionrc or so in /etc/X11/Xsession.d/ that
         Fvwm-Nightshades executables will be found.
@@ -133,7 +70,7 @@ Installation of Fvwm-Nightshade
         If you haven't installed a display-manager like GDM, XDM or LightDM you can
         add the option 'displaymanager=no' to the make call:
 
-			# make install displaymanager=no
+            # make install displaymanager=no
 
         If FVWM is installed in another directory then /usr/share/fvwm you have
         to told make where because there are some scripts which have to be installed
@@ -143,7 +80,7 @@ Installation of Fvwm-Nightshade
           
         If you haven't root rights you can install Fvwm-Nightshade locally. All you
         need is a directory e.g. ~/.local with write permissions.
-			
+            
         Now you can install Fvwm-Nightshade with the following make call:
 
             $ make prefix=~/.local install local=yes localperldir=~/.perl displaymanager=no
