@@ -1,5 +1,9 @@
 History:
 
+05/02/2016
+- update fns-menubuilder.fr.po and add the .mo for (thanks Axel Lagre for helping out :-)
+- add Axel to AUTHORS
+
 05/01/2016
 - rename show_banner to fns-show-banner to fullfill FNS naming. In config, too.
 - add fns-show-banner asciidoc document, manpage and html page
@@ -52,7 +56,7 @@ History:
 - remove FNS-Script-PersonalMenu translations in fvwm-nightshade.po/pot files
 - update SimpleGtk2 library to 0.68
 - changes in config:
-  - update version to 0.7.9.20160422 - now beta cycle starting :-)
+  - update version to 0.7.9.20160422 - now alpha cycle is starting :-)
   - exchange FNS-Script-PersonalMenu with FNS-MenuBuilder
   - update sed command in FuncMenuFvwmPersonal for correct reading of .personal
 - update NEWS and README
