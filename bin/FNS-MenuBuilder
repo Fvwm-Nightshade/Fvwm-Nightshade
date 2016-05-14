@@ -12,7 +12,7 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuBuilder
-my $Version =   '1.0.1';
+my $Version =   '1.0.2';
 # Licence:      GPL 2
 #
 # Description:  Perl script to create/modify personal menu
@@ -20,7 +20,7 @@ my $Version =   '1.0.1';
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      03/27/2016
-# Changed:      04/24/2016
+# Changed:      05/14/2016
 #-----------------------------------------------------------------------
 
 #my $module = new FVWM::Module::SimpleGtk2(
@@ -170,6 +170,7 @@ sub parse_menu(@) {
         my $current_submenu = '/';
         my $menus;
         foreach my $line(@lines) {
+            my $orig_line = $line;
             my @tmp_array;
             my @parts;
             my $entry = undef;
@@ -299,13 +300,22 @@ sub parse_menu(@) {
                     }
                 } else {
                     $entry = \@parts;
+                    if ($is_personal) {
+                        unless ($in_menu eq $root_menu) {
+                            if (index($current_submenu, $in_menu) == -1) {
+                                $current_submenu = $menu_structure{$in_menu};
+                            }
+                        } else {
+                            $current_submenu = '/';
+                        }
+                    } 
                     unless ($main_submenu eq '/'or $current_submenu eq '/') {
                         $menus = $main_submenu . '/' . $current_submenu;
                     } else {
                         if ($current_submenu eq '/') {
                             $menus = $main_submenu;
                         } else {
-                            $current_submenu = $menu_structure{$current_submenu} if $is_personal;
+                            $current_submenu = $menu_structure{$current_submenu} if $is_personal and exists($menu_structure{$current_submenu});
                             $menus = $main_submenu . $current_submenu;
                         }
                     }
@@ -314,7 +324,7 @@ sub parse_menu(@) {
                 &build_tree($tree_ref, $menus, \@pixbuf_obj, $entry);
             }
             else {
-                print "Bad line '". $line . "' in menu! Skipping.\n";
+                print "Bad line '". $orig_line . "' in menu! Skipping.\n";
                 next;
             }
         }
