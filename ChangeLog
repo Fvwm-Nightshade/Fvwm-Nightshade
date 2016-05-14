@@ -1,5 +1,14 @@
 History:
 
+05/15/2016
+- fix bug in FNS-MenuBuilder that personal menu tree isn't sorted correctly
+- add fns-menu-desktop asciidoc document, manpage and html page. It exists 
+  as manpage only but needed for new website, too.
+- fix some bugs in all layouts:
+  - in different shell functions change some variables to biunique names
+  - menu entries for pages show page numbers + translation of 'Page' again
+- update version in config
+
 05/05/2016
 - update fns-menubuilder.fr.po and add the .mo for (thanks Axel Lagre for helping out :-)
 - add Axel to AUTHORS
