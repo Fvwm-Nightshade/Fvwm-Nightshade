@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Horizontal
-# Version:      1.2.1
+# Version:      1.2.2
 # Licence:      GPL 2
 #
 # Description:  Layout of object positions on desktop
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/16/2012
-# Changed:      01/26/2016
+# Changed:      05/15/2016
 #-----------------------------------------------------------------------
 #               Top
 #
@@ -227,11 +227,11 @@ AddToFunc   ReloadLayoutParts
 #-----------------------------------------------------------------------
 DestroyFunc FuncUnsetDeskKeyBindings
 AddToFunc   FuncUnsetDeskKeyBindings
-+ I PipeRead 'i=10; \
-              while [ "$i" -gt "$[infostore.x_desks]" ]; do \
-                echo "Key $i A SM -"; \
-                echo "Key $i A SC -"; \
-                i=$(($i-1)); \
++ I PipeRead 'unst=10; \
+              while [ "$unst" -gt "$[infostore.x_desks]" ]; do \
+                echo "Key $unst A SM -"; \
+                echo "Key $unst A SC -"; \
+                unst=$(($unst-1)); \
               done'
 
 
@@ -251,19 +251,19 @@ Key Right       A       SM          FuncMoveWindowToPage +1p +0p
 #-----------------------------------------------------------------------
 # key 1-n move current window to page n
 #-----------------------------------------------------------------------
-PipeRead 'i=0; \
-          while [ "$i" -lt "$[infostore.x_desks]" ]; do \
-              echo "Key $(($i+1)) A SM Current FuncMoveWindowToPage $i 0"; \
-              i=$(($i+1)); \
+PipeRead 'keyn=0; \
+          while [ "$keyn" -lt "$[infostore.x_desks]" ]; do \
+              echo "Key $(($keyn+1)) A SM Current FuncMoveWindowToPage $keyn 0"; \
+              keyn=$(($keyn+1)); \
           done'
 
 #-----------------------------------------------------------------------
 # Go to page n with SHIFT-CTRL + number
 #-----------------------------------------------------------------------
-PipeRead 'i=0; \
-          while [ "$i" -lt "$[infostore.x_desks]" ]; do \
-              echo "Key $(($i+1)) A SC FuncGotoPage $i 0"; \
-              i=$(($i+1)); \
+PipeRead 'pgn=0; \
+          while [ "$pgn" -lt "$[infostore.x_desks]" ]; do \
+              echo "Key $(($pgn+1)) A SC FuncGotoPage $pgn 0"; \
+              pgn=$(($pgn+1)); \
           done'
 
 #-----------------------------------------------------------------------
@@ -306,10 +306,10 @@ AddToFunc   FuncMenuWindowGroupQuickMove
 + I AddToMenu MenuWindowGroupQuickMove "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage +1p +0p
 + I AddToMenu MenuWindowGroupQuickMove "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage -1p +0p
 + I AddToMenu MenuWindowGroupQuickMove "" Nop
-+ I PipeRead 'i=0; \
-              while [ "$i" -lt "$[infostore.x_desks]" ]; do \
-                  echo AddToMenu MenuWindowGroupQuickMove "$[gt.&$(($i+1)).\\	Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All ($[w.resource]) FuncMoveWindowToPage $i 0; \
-                  i=$(($i+1)); \
++ I PipeRead 'g=0; \
+              while [ "$g" -lt "$[infostore.x_desks]" ]; do \
+                  echo AddToMenu MenuWindowGroupQuickMove "&$(($g+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All ($[w.resource]) FuncMoveWindowToPage $g 0; \
+                  g=$(($g+1)); \
               done'
 
 #-----------------------------------------------------------------------
@@ -326,9 +326,9 @@ AddToFunc   FuncMenuWindowMoveTo
 + I AddToMenu MenuWindowMoveTo "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w+100 w
 + I AddToMenu MenuWindowMoveTo "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w-100 w
 + I AddToMenu MenuWindowMoveTo "" Nop
-+ I PipeRead 'i=0; \
-              while [ "$i" -lt "$[infostore.x_desks]" ]; do \
-                  echo AddToMenu MenuWindowMoveTo "$[gt.&$(($i+1)).\\	Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage $i 0; \
-                  i=$(($i+1)); \
++ I PipeRead 'mv=0; \
+              while [ "$mv" -lt "$[infostore.x_desks]" ]; do \
+                  echo AddToMenu MenuWindowMoveTo "&$(($mv+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage $mv 0; \
+                  mv=$(($mv+1)); \
               done'
 

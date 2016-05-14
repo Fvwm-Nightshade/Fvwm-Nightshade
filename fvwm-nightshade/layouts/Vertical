@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Vertical
-# Version:      1.2.1
+# Version:      1.2.2
 # Licence:      GPL 2
 #
 # Description:  Layout of object positions on desktop
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/16/2012
-# Changed:      01/26/2016
+# Changed:      05/15/2016
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -213,12 +213,12 @@ AddToFunc   ReloadLayoutParts
 #-----------------------------------------------------------------------
 DestroyFunc FuncUnsetDeskKeyBindings
 AddToFunc   FuncUnsetDeskKeyBindings
-+ I PipeRead 'i=10; \
++ I PipeRead 'unst=10; \
               max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
-              while [ "$i" -gt "$max" ]; do \
-                echo "Key $i A SM -"; \
-                echo "Key $i A SC -"; \
-                i=$(($i-1)); \
+              while [ "$unst" -gt "$max" ]; do \
+                echo "Key $unst A SM -"; \
+                echo "Key $unst A SC -"; \
+                unst=$(($unst-1)); \
               done'
 
 
@@ -240,31 +240,31 @@ Key Down        A           SM          FuncMoveWindowToPage +0p +1p
 #-----------------------------------------------------------------------
 # key 1-4 move current window to page n
 #-----------------------------------------------------------------------
-PipeRead   'i=0; en=0; \
+PipeRead   'keyn=0; en=0; \
             max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
-            while [ "$i" -lt "$max" ]; do \
-                if [ `expr $i % 2` -eq 0 ]; then \
-                    echo "Key $(($i+1)) A SM Current FuncMoveWindowToPage 0 $en"; \
+            while [ "$keyn" -lt "$max" ]; do \
+                if [ `expr $keyn % 2` -eq 0 ]; then \
+                    echo "Key $(($keyn+1)) A SM Current FuncMoveWindowToPage 0 $en"; \
                 else \
-                    echo "Key $(($i+1)) A SM Current FuncMoveWindowToPage 1 $en"; \
+                    echo "Key $(($keyn+1)) A SM Current FuncMoveWindowToPage 1 $en"; \
                     en=$(($en+1)); \
                 fi; \
-                i=$(($i+1)); \
+                keyn=$(($keyn+1)); \
             done'
 
 #-----------------------------------------------------------------------
 # Go to page n with SHIFT-CTRL + number
 #-----------------------------------------------------------------------
-PipeRead   'i=0; en=0; \
+PipeRead   'pgn=0; en=0; \
             max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
-            while [ "$i" -lt "$max" ]; do \
-                if [ `expr $i % 2` -eq 0 ]; then \
-                    echo "Key $(($i+1)) A SC FuncGotoPage 0 $en"; \
+            while [ "$pgn" -lt "$max" ]; do \
+                if [ `expr $pgn % 2` -eq 0 ]; then \
+                    echo "Key $(($pgn+1)) A SC FuncGotoPage 0 $en"; \
                 else \
-                    echo "Key $(($i+1)) A SC FuncGotoPage 1 $en"; \
+                    echo "Key $(($pgn+1)) A SC FuncGotoPage 1 $en"; \
                     en=$(($en+1)); \
                 fi; \
-                i=$(($i+1)); \
+                pgn=$(($pgn+1)); \
             done'
 
 #-----------------------------------------------------------------------
@@ -313,16 +313,16 @@ AddToFunc   FuncMenuWindowGroupQuickMove
 + I AddToMenu MenuWindowGroupQuickMove "$[gt.D&own	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage +0p +1p
 + I AddToMenu MenuWindowGroupQuickMove "$[gt.&Up	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage +0p -1p
 + I AddToMenu MenuWindowGroupQuickMove "" Nop
-+ I PipeRead   'i=0; en=0; \
++ I PipeRead   'g=0; en=0; \
                 max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
-                while [ "$i" -lt "$max" ]; do \
-                    if [ `expr $i % 2` -eq 0 ]; then \
-                        echo AddToMenu MenuWindowGroupQuickMove "$[gt.&$(($i+1)).\\	Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All ($[w.resource]) FuncMoveWindowToPage 0 $en; \
+                while [ "$g" -lt "$max" ]; do \
+                    if [ `expr $g % 2` -eq 0 ]; then \
+                        echo AddToMenu MenuWindowGroupQuickMove "&$(($g+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All ($[w.resource]) FuncMoveWindowToPage 0 $en; \
                     else \
-                        echo AddToMenu MenuWindowGroupQuickMove "$[gt.&$(($i+1)).\\	Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All ($[w.resource]) FuncMoveWindowToPage 1 $en; \
+                        echo AddToMenu MenuWindowGroupQuickMove "&$(($g+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All ($[w.resource]) FuncMoveWindowToPage 1 $en; \
                         en=$(($en+1)); \
                     fi; \
-                    i=$(($i+1)); \
+                    g=$(($g+1)); \
                 done'
 
 #-----------------------------------------------------------------------
@@ -341,14 +341,14 @@ AddToFunc   FuncMenuWindowMoveTo
 + I AddToMenu MenuWindowMoveTo "$[gt.D&own	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w w+100
 + I AddToMenu MenuWindowMoveTo "$[gt.&Up	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w w-100
 + I AddToMenu MenuWindowMoveTo "" Nop
-+ I PipeRead   'i=0; en=0; \
++ I PipeRead   'mv=0; en=0; \
                 max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
-                while [ "$i" -lt "$max" ]; do \
-                    if [ `expr $i % 2` -eq 0 ]; then \
-                        echo AddToMenu MenuWindowMoveTo "$[gt.&$(($i+1)).\\	Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage 0 $en; \
+                while [ "$mv" -lt "$max" ]; do \
+                    if [ `expr $mv % 2` -eq 0 ]; then \
+                        echo AddToMenu MenuWindowMoveTo "&$(($mv+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage 0 $en; \
                     else \
-                        echo AddToMenu MenuWindowMoveTo "$[gt.&$(($i+1)).\\	Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage 1 $en; \
+                        echo AddToMenu MenuWindowMoveTo "&$(($mv+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage 1 $en; \
                         en=$(($en+1)); \
                     fi; \
-                    i=$(($i+1)); \
+                    mv=$(($mv+1)); \
                 done'
