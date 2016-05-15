@@ -1,0 +1,265 @@
+#-----------------------------------------------------------------------
+# File:         Klike
+# Version:      1.2.1
+# Licence:      GPL 2
+#
+# Description:  KDE like layout with bottom bar
+#
+# Author:       Thomas Funk <t.funk@web.de>    
+#
+# Created:      04/27/2014
+# Changed:      05/15/2016
+#-----------------------------------------------------------------------
+#
+# Bottombar
+# +---+---+--------------------------+----------+----------+---------+
+# |   |   |                          |          |          |         |
+# +---+---+--------------------------+----------+----------+---------+
+# Menu     IconMan                    Pager      Systray    Date
+#     Desktop
+#
+#-----------------------------------------------------------------------
+
+
+########################################################################
+#                        Positioning
+########################################################################
+
+#=======================================================================
+# General
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# set bar and tray icon size depending on the screen height
+#-----------------------------------------------------------------------
+PipeRead    'if [ "$[vp.height]" -gt "2800" ]; then \
+                echo InfoStoreAdd i_size 48; \
+            elif [ "$[vp.height]" -gt "2500" ]; then \
+                echo InfoStoreAdd i_size 36; \
+            elif [ "$[vp.height]" -gt "1800" ]; then \
+                echo InfoStoreAdd i_size 30; \
+            elif [ "$[vp.height]" -gt "1600" ]; then \
+                echo InfoStoreAdd i_size 28; \
+            elif [ "$[vp.height]" -gt "1500" ]; then \
+                echo InfoStoreAdd i_size 26; \
+            elif [ "$[vp.height]" -gt "1050" ]; then \
+                echo InfoStoreAdd i_size 24; \
+            elif [ "$[vp.height]" -gt "640" ]; then \
+                echo InfoStoreAdd i_size 24; \
+            elif [ "$[vp.height]" -gt "580" ]; then \
+                echo InfoStoreAdd i_size 22; \
+            else \
+                echo InfoStoreAdd i_size 20; \
+            fi'
+
+#InfoStoreAdd column_size 15
+PipeRead "echo InfoStoreAdd column_size `perl -e 'printf \"%.0f\",$[infostore.i_size]/1.7'`"
+
+PipeRead "echo InfoStoreAdd columns `perl -e 'printf \"%.0f\",$[vp.width]/$[infostore.column_size]'`"
+
+
+#=======================================================================
+# FvwmButtons BottomBarK
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Bar height
+#-----------------------------------------------------------------------
+PipeRead "echo InfoStoreAdd bar_height `perl -e 'printf \"%.0f\",(-1.57E-6*$[vp.height]**2+0.017*$[vp.height]+17.929)'`"
+
+#-----------------------------------------------------------------------
+# Bar geometry
+#-----------------------------------------------------------------------
+InfoStoreAdd bottombar_geometry $[vp.width]x$[infostore.bar_height]+0-0
+
+
+#=======================================================================
+# Others
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Define bands at the edge of the screen. It is used to compute the
+# Working Area: EwmhBaseStruts left right top bottom 
+#-----------------------------------------------------------------------
+Schedule 2000 PipeRead 'echo EwmhBaseStruts 0 0 0 $(($[infostore.bar_height]+4))'
+
+
+#-----------------------------------------------------------------------
+# IconBox defines the area where FVWM will place any windows that are
+# in the iconic state: 
+#  IconBox left top right bottom
+#
+# IconGrid ist the distance between each icon. Default grid is 3x3 pixels:
+#  IconGrid x y
+#
+# IconFill defines the direction icons will place. Default is from left
+# to right. To fill an icon box in columns instead of rows, specify the
+# vertical direction (top or bottom) first.
+#-----------------------------------------------------------------------
+Style * IconBox 20 80 -100 -60, \
+        IconGrid 40 40, \
+        IconFill left bottom, \
+        StaysOnBottom
+
+
+#=======================================================================
+# Load layout elements
+#=======================================================================
+Load modules/KlikeBottomBar
+Load modules/Pager
+Load modules/GlobalIconMan
+Load modules/Bar_GlobalIconMan
+
+
+#=======================================================================
+# Functions
+#=======================================================================
+
+AddToFunc StartFunction
+#-----------------------------------------------------------------------
+# start Pager
++ I Module FvwmPager
+#-----------------------------------------------------------------------
+# start window list module
++ I Module FvwmIconMan GlobalIconMan
+#-----------------------------------------------------------------------
+# start bottom bar panel
++ I Module FvwmButtons KlikeBottomBar
+#-----------------------------------------------------------------------
+# start systray applets
++ I Wait stalonetray
++ I FuncStartSystrayApplets
+
+
+DestroyFunc ReloadLayoutParts
+AddToFunc   ReloadLayoutParts
++ I FuncPrintDbgMsg ReloadLayoutParts
++ I PipeRead 'fns-built-trayapplist $FVWM_USERDIR/.systray.log $FVWM_USERDIR/.trayapplist'
++ I FuncUnsetDeskKeyBindings
++ I Load modules/KlikeBottomBar
++ I FuncRestartModuleByAlias FvwmButtons KlikeBottomBar
++ I Wait stalonetray
++ I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist
+
+#-----------------------------------------------------------------------
+# Remove all key bindings higher than the current desks/pages.
+# - key 1-x move current window to page n
+# - Go to page n with SHIFT-CTRL + number
+#-----------------------------------------------------------------------
+DestroyFunc FuncUnsetDeskKeyBindings
+AddToFunc   FuncUnsetDeskKeyBindings
++ I PipeRead 'unst=10; \
+              while [ "$unst" -gt "$[infostore.x_desks]" ]; do \
+                echo "Key $unst A SM -"; \
+                echo "Key $unst A SC -"; \
+                unst=$(($unst-1)); \
+              done'
+
+DestroyFunc ShowDesktop
+AddToFunc   ShowDesktop
++ I All (CurrentPage, Iconic, State 1) RestoreDesktop
++ I TestRc (Match) Break
++ I All (CurrentPage, !Iconic, !KlikeBottomBar, !State 1) ThisWindow State 1 True
++ I All (CurrentPage, !Iconic, !KlikeBottomBar, State 1) FuncThumbnail
+
+DestroyFunc RestoreDesktop
+AddToFunc   RestoreDesktop
++ I All (CurrentPage, Iconic, State 1) Iconify off
++ I All (CurrentPage, State 1) ThisWindow State 1 False
+
+#=======================================================================
+# Bindings
+#=======================================================================
+
+#   Keyname Context Modifi  Function
+
+#-----------------------------------------------------------------------
+# press SHIFT-ALT arrow anywhere, move active
+# window to next/previous page
+#-----------------------------------------------------------------------
+Key Left    A       SM      FuncMoveWindowToPage -1p +0p
+Key Right   A       SM      FuncMoveWindowToPage +1p +0p
+
+#-----------------------------------------------------------------------
+# key 1-n move current window to page n
+#-----------------------------------------------------------------------
+PipeRead 'keyn=0; \
+          while [ "$keyn" -lt "$[infostore.x_desks]" ]; do \
+              echo "Key $(($keyn+1)) A SM Current FuncMoveWindowToPage $keyn 0"; \
+              keyn=$(($keyn+1)); \
+          done'
+
+#-----------------------------------------------------------------------
+# Go to page n with SHIFT-CTRL + number
+#-----------------------------------------------------------------------
+PipeRead 'pgn=0; \
+          while [ "$pgn" -lt "$[infostore.x_desks]" ]; do \
+              echo "Key $(($pgn+1)) A SC FuncGotoPage $pgn 0"; \
+              pgn=$(($pgn+1)); \
+          done'
+
+#-----------------------------------------------------------------------
+# press SHIFT-CTRL arrow anywhere, and scroll by one page
+#-----------------------------------------------------------------------
+Key Left    A       SC      FuncGotoPage -1p +0p
+Key Right   A       SC      FuncGotoPage +1p +0p
+
+#-----------------------------------------------------------------------
+# Help info with SHIFT-CTRL-ALT P to show all page related key bindings
+#-----------------------------------------------------------------------
+key P       A       SCM     FuncShowMessage  "Page Key Bindings" \
+"SHIFT-CTRL:" \
+"Cursor right/left: Switch to page right/left" \
+"1-n: Switch to page n" \
+"SHIFT-ALT:" \
+"Cursor right/left: Switch active window to page right/left" \
+"1-n: Switch active window to page n" \
+"ALT-CTRL:" \
+"Cursor right/left/up/down: Move mouse pointer by 1% of a page" \
+"SHIFT-ALT-CTRL:" \
+"Cursor right/left/up/down: Scroll right/left by 10% of a page"
+
+
+
+#=======================================================================
+# Menus
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# Moves all windows of the same resource to another page
+#-----------------------------------------------------------------------
+AddToMenu MenuWindowGroupQuickMove DynamicPopupAction FuncMenuWindowGroupQuickMove
+
+DestroyFunc FuncMenuWindowGroupQuickMove
+AddToFunc   FuncMenuWindowGroupQuickMove
++ I SetMenuIconSize
++ I DestroyMenu MenuWindowGroupQuickMove
++ I AddToMenu MenuWindowGroupQuickMove DynamicPopupAction FuncMenuWindowGroupQuickMove
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%"   Pick All ($[w.resource]) MoveToPage +1p +0p
++ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%"   Pick All ($[w.resource]) MoveToPage -1p +0p
++ I AddToMenu MenuWindowGroupQuickMove "" Nop
++ I PipeRead 'g=0; \
+              while [ "$g" -lt "$[infostore.x_desks]" ]; do \
+                  echo AddToMenu MenuWindowGroupQuickMove "&$(($g+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All ($[w.resource]) FuncMoveWindowToPage "$g" 0; \
+                  g=$(($g+1)); \
+              done'
+
+#-----------------------------------------------------------------------
+# Move a window to left/right/1-n page
+#-----------------------------------------------------------------------
+AddToMenu MenuWindowMoveTo DynamicPopupAction FuncMenuWindowMoveTo
+
+DestroyFunc FuncMenuWindowMoveTo
+AddToFunc   FuncMenuWindowMoveTo
++ I SetMenuIconSize
++ I DestroyMenu MenuWindowMoveTo
++ I AddToMenu MenuWindowMoveTo DynamicPopupAction FuncMenuWindowMoveTo
++ I AddToMenu MenuWindowMoveTo "$[gt.Move to ...]" Title
++ I AddToMenu MenuWindowMoveTo "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%"   AnimatedMove w+100 w
++ I AddToMenu MenuWindowMoveTo "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%"   AnimatedMove w-100 w
++ I AddToMenu MenuWindowMoveTo "" Nop
++ I PipeRead 'mv=0; \
+              while [ "$mv" -lt "$[infostore.x_desks]" ]; do \
+                  echo AddToMenu MenuWindowMoveTo "&$(($mv+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage "$mv" 0; \
+                  mv=$(($mv+1)); \
+              done'

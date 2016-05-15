@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
-# File:		colorsets
-# Version:	0.1.3
-# Licence: 	GPL 2
+# File:         colorsets
+# Version:      0.1.8
+# Licence:      GPL 2
 #
-# Description:	colorsets of Air theme
+# Description:  colorsets of Air theme
 #
-# Author:	Thomas Funk <t.funk@web.de>
-# Created:	06/08/2012
-# Changed:	10/09/2014
+# Author:       Thomas Funk <t.funk@web.de>
+# Created:      06/08/2012
+# Changed:      12/17/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -63,13 +63,14 @@ Colorset 1 fg darkgrey, IconAlpha 60
 Colorset 2  fg black, bg #e0dedc, Plain
 
 #-----------------------------------------------------------------------
-# window borders, inactive
+# window borders and titlebar, inactive
 #
-# ?Gradient = inactive windows titlebar
-# bg = inactive border line color
-#      inactive windows titlebar    _
-# hi = inactive border shade color |
-# sh = inactive border shade color _|
+# ?Gradient = background inactive windows titlebar
+# bg = inactive border line color (FvwmIconman)
+#      inactive windows titlebar            _
+# hi = inactive border (inner) shade color |
+# sh = inactive border color (Window, FvwmPager, FvwmButtons)
+#      inactive border (inner) shade color _| (FvwmPager, FvwmButtons)
 #-----------------------------------------------------------------------
 Colorset 3  bg #e0dedc, hi grey80, sh #bebdbb, Plain
 
@@ -95,7 +96,8 @@ Colorset 4 bg #e0dedc, hi #edf9ff, sh #657994, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Colorset 5 VGradient 255 2 #e0dfdd 50 #d9d5d2 50 #bebdbb, fg black, bg snow2, hi grey95, NoShape
+Test (!EnvMatch use_composite 0) Colorset 5 VGradient 255 2 #e0dfdd 50 #d9d5d2 50 #bebdbb, fg black, bg snow2, hi grey95, NoShape, RootTransparent, Tint #bebdbb $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 5 VGradient 255 2 #e0dfdd 50 #d9d5d2 50 #bebdbb, fg black, bg snow2, hi grey95, NoShape
 
 #-----------------------------------------------------------------------
 # active/hilighted menu item
@@ -103,12 +105,14 @@ Colorset 5 VGradient 255 2 #e0dfdd 50 #d9d5d2 50 #bebdbb, fg black, bg snow2, hi
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Colorset 6 fg black, bg grey95, hi #4098f0, Plain
+Test (!EnvMatch use_composite 0) Colorset 6 fg black, bg grey95, hi #4098f0, Plain, RootTransparent, Tint grey95 $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 6 fg black, bg grey95, hi #4098f0, Plain
 
 #-----------------------------------------------------------------------
-# greyed menu item if needed
+# Menu title if needed
 #-----------------------------------------------------------------------
-Colorset 7 fg grey45, bg grey45, Plain
+Test (!EnvMatch use_composite 0) Colorset 7 fg black, bg #e0dfdd, hi grey95, NoShape, Plain, RootTransparent, Tint #bebdbb $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 7 fg black, bg #e0dfdd, hi grey95, NoShape, Plain, Tint
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.
@@ -123,8 +127,9 @@ Colorset 7 fg grey45, bg grey45, Plain
 # FvwmButtons, FvwmPager, can be also used for FvwmIconMan, FvwmIconBox.
 #
 # ?Gradient = inactive background
-# fg = inactive font color or border color
-# bg = background of inactive pages
+# fg = inactive font color or border color (FvwmIconMan)
+# bg = background of inactive pages  _
+#      inactive border color        |    (FvwmIconMan)
 #-----------------------------------------------------------------------
 Colorset 10 VGradient 255 2 #b3d2de 40 #a1c5d3 60 #75aec3, fg grey95, bg #75aec3, NoShape
 
@@ -142,12 +147,14 @@ Colorset 11 VGradient 255 2 #dde4e7 30 #dce3e6 70 #b3cbd5, fg black, bg white, N
 
 #-----------------------------------------------------------------------
 # special or funny: a gradient or a pixmap
-# May be used in certain FvwmButtons, FvwmIconMan, FvwmIconBox.
+# May be used in certain FvwmButtons, FvwmIconMan (iconified windows),
+# FvwmIconBox.
 #
 # ?Gradient = inactive background
-# fg = inactive font color
+# fg = inactive font color (FvwmIconMan)
 # optional:                   _
 # hi = inactive border shade |
+#      Pager mini windows inactive
 # sh = inactive border shade _|
 #-----------------------------------------------------------------------
 Colorset 12 VGradient 255 2 #6794a7 70 #7398aa 30 #90b0bd, fg grey95, NoShape
@@ -222,7 +229,7 @@ Colorset 16 fg black, bg #ced9de, Plain
 #-----------------------------------------------------------------------
 # FvwmIdent
 #-----------------------------------------------------------------------
-Colorset 21 bg white, fg black, sh black, fgsh #067faa, RootTransparent buffer, Tint #067faa 70
+Colorset 21 bg white, fg white, sh black, fgsh #067faa, RootTransparent buffer, Tint #067faa 70
 
 #-----------------------------------------------------------------------
 # FvwmConsole
@@ -241,57 +248,40 @@ Colorset 24 BGradient 255 2 #6aa7b7 50 #07668c 50 #034467, NoShape
 
 
 ########################################################################
-# External Colorsets
-########################################################################
-
-#-----------------------------------------------------------------------
-# reserved for modules@: 25
-
-#-----------------------------------------------------------------------
-# reserved for the future use: 26-28
-
-#-----------------------------------------------------------------------
-# temporary colorset: 29, has no static definition, used dynamically
-
-
-########################################################################
 # Application Colorsets
 ########################################################################
 
 #-----------------------------------------------------------------------
 # regular terminal (xterm, rxvt, Eterm)
 #-----------------------------------------------------------------------
-Colorset 30 fg white, bg #000050, Plain
+Colorset 25 fg white, bg #000050, Plain
 
 #-----------------------------------------------------------------------
 # admin terminal (su xterm)
 #-----------------------------------------------------------------------
-Colorset 31 fg white, bg #000050, Plain
+Colorset 26 fg white, bg #000050, Plain
 
 #-----------------------------------------------------------------------
 # remote terminal (ssh, telnet)
 #-----------------------------------------------------------------------
-Colorset 32 fg white, bg #500000, Plain
+Colorset 27 fg white, bg #500000, Plain
 
 #-----------------------------------------------------------------------
 # viewer terminal (man, less, tail -f)
 #-----------------------------------------------------------------------
-Colorset 33 fg white, bg SeaGreen4, Plain
+Colorset 28 fg white, bg SeaGreen4, Plain
 
 #-----------------------------------------------------------------------
 # application run in the terminal, text editor using ft-xrdb
 #-----------------------------------------------------------------------
-Colorset 34 fg black, bg snow2, Plain
+Colorset 29 fg black, bg snow2, Plain
 
 #-----------------------------------------------------------------------
 # dialog main background (FvwmScript, FvwmForm, xmessage, ft-xrdb)
 #-----------------------------------------------------------------------
-Colorset 35 fg black, bg #80A080, Plain
+Colorset 30 fg black, bg #80A080, Plain
 
 #-----------------------------------------------------------------------
 # dialog text area (FvwmScript, FvwmForm, xmessage, ft-xrdb)
 #-----------------------------------------------------------------------
-Colorset 36 fg black, bg #A0C8A0, Plain
-
-#-----------------------------------------------------------------------
-# Colorsets 37 to 39 are reserved for the future use.
+Colorset 31 fg black, bg #A0C8A0, Plain

@@ -1,0 +1,138 @@
+# Russian translation for Fvwm-Nightshade
+# Copyright (C) 2016 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Artashes Mkhitaryan <artashm@mytum.de>, 2016.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-MenuBuilder\n"
+"POT-Creation-Date: 2016-04-20 10:41+0200\n"
+"PO-Revision-Date: 2016-04-21 21:37+0200\n"
+"Last-Translator: Artashes Mkhitaryan <artashm@mytum.de>\n"
+"Language-Team: Russian\n"
+"Language: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "FNS Personal Menu Builder"
+msgstr "FNS Конструктор Персонального Меню"
+
+########################################################################
+# Root menu
+########################################################################
+
+msgid "Root Menu"
+msgstr "Корневое меню"
+
+msgid "Folder"
+msgstr "Папка"
+
+msgid "Application"
+msgstr "Программа"
+
+########################################################################
+# Personal menu
+########################################################################
+
+msgid "Personal Menu"
+msgstr "Персональное меню"
+
+msgid "Sort entries with drag'n drop."
+msgstr "Сортировка записей путем перетаскивания."
+
+########################################################################
+# Buttons
+########################################################################
+
+msgid "Add >"
+msgstr "Добавить >"
+
+msgid "Add the selected menu entry."
+msgstr "Добавить запись выбранного меню."
+
+msgid "< Remove"
+msgstr "< Удалить"
+
+msgid "Remove the selected menu entry.\nAttention:\nRemoving a folder removes all entries below!"
+msgstr "Удалить выбранную запись меню.\nВнимание:\nУдаление папок приводит к удалению всех под-записей!"
+
+msgid "You haven't selected a menu entry to remove!"
+msgstr "Запись меню для удаления не выбрана!"
+
+msgid "Create"
+msgstr "Созидать"
+
+msgid "Create a new folder or application entry below of the selected position."
+msgstr "Создать новую запись папки/программы под выбранной позицией."
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save the new personal menu."
+msgstr "Сохранить новое персональное меню."
+
+msgid "Quit"
+msgstr "Выйти"
+
+msgid "Quit Personal Menu Builder."
+msgstr "Выйти из Персонального Конструктора Меню."
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr "У вас ест не сохраненные изменения, продолжить?"
+
+########################################################################
+# Creation dialog
+########################################################################
+
+msgid "Create new application or folder entry"
+msgstr "Создать новую запись программы/папки"
+
+msgid "Click to choose an icon. No change creates no icon."
+msgstr "Нажмите для выбора иконки. Отсутствие перемен приведет к отсутствию иконки."
+
+msgid "Create a folder entry."
+msgstr "Создать запись папки."
+
+msgid "Create an application entry."
+msgstr "Создать запись программы. "
+
+msgid "Commandstring"
+msgstr "командная строка"
+
+msgid "Add a command string or choose a path to an executable.\nHint:\n'Exec exec' will be prepended."
+msgstr "Добавить команду, или выбрать путь к программе. \nНамек:\n'Exec exec' будет указан как префикс."
+
+msgid "Choose an executable."
+msgstr "Выбор программы."
+
+msgid "Label"
+msgstr "метка"
+
+msgid "The label for this entry."
+msgstr "Метка для этой записи."
+
+msgid "Create the new entry."
+msgstr "Создать новую запись."
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Cancel entry creation."
+msgstr "Предотвратить создания записи."
+
+########################################################################
+# Others
+########################################################################
+msgid "Warning"
+msgstr "Предупреждение"
+
+msgid "Open File"
+msgstr "Открыть Файл"
+
+msgid "Select Folder"
+msgstr "Выбрать Папку"

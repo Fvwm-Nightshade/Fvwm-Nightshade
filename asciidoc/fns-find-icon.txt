@@ -12,7 +12,7 @@ or the icon of an application
 SYNOPSIS
 --------
 
-fns-find-icon [-h|--help] [--version] [-n NAME] [-i W_ID] [-p EXTEND_PATH] [-s ICON_SIZE] [-c CATEGORY] [--notdesk]
+fns-find-icon [-h|--help] [--version] [-n NAME] [-i W_ID] [-p EXTEND_PATH] [-s ICON_SIZE] [--svg] [-c CATEGORY] [--notdesk]
 
 
 
@@ -102,6 +102,11 @@ with a ":".
 +
 The 'ICON_SIZE' defines the the icon size to search for. Default is '48'.
 
+*--svg*::
++
+Prefer svg instead of bitmaps and if found add :<size>x<size> at the 
+end of the path.
+
 *-c* 'CATEGORY'::
 +
 The 'CATEGORY' defines the category in the theme to search for an icon. 
@@ -128,6 +133,6 @@ Shows short help and exit.
 AUTHOR
 ------
 
-(C) 2013 Thomas Funk <t.funk@web.de>
+(C) 2013 - 2016 Thomas Funk <t.funk@web.de>
 
 

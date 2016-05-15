@@ -1,0 +1,308 @@
+# German translation for FNS-MenuConfigurator
+# Copyright (C) 2015 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Thomas Funk <t.funk@web.de>, 2015.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-MenuConfigurator\n"
+"POT-Creation-Date: 2014-11-26 21:51+0200\n"
+"PO-Revision-Date: 2015-02-15 23:33+0200\n"
+"Last-Translator: Thomas Funk <t.funk@web.de>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "FNS Menu Desktop Configurator"
+msgstr "FNS Desktop Menü Konfigurator"
+
+########################################################################
+# Notebook page 1 for multiple menu
+########################################################################
+
+msgid "Multiple Menu"
+msgstr "Mehrfachmenü"
+
+msgid ""
+"In this tab all XDG menus found on the system are shown. All "
+"selected menus will integrate in one Fvwm menu. Note that equal "
+"menus found under /etc/xdg/menus AND ~/.config/menus/ following "
+"the XDG menu specification only shown in ~/.config/menus/. "
+"\nIf you want to generate a custom-assembled menu switch to "
+"the 'Single Menu' tab."
+msgstr ""
+"In diesem Tab werden alle XDG Menüs angezeigt, die auf dem System gefunden "
+"werden. Alle ausgewählten Menüs werden in einem Fvwm-Menü integriert. Zu "
+"beachten ist, dass gleiche Menüs, die unter /etc/xdg/menus UND ~/.config/menus/ "
+"gefunden werden, nach der XDG Menü Specifikation nur in ~/.config/menus/ "
+"angezeigt werden.\nWenn Sie ein eigens zusammengestelltes Menu erstellen "
+"wollen, benutzen Sie den 'Einzelmenü' Tab."
+
+msgid "Menus in"
+msgstr "Menüs in"
+
+msgid "No menus found! Check why from within a terminal with\n' fvwm-menu-desktop -v '"
+msgstr "Keine Menüs gefunden! In einem Terminal checken warum mit\n' fvwm-menu-desktop -v '"
+
+msgid ""
+"It is a good idea to check .xsession-errors in the user home\nfor errors, too. "
+"One limitation exists - if there are too much\nmenus found an error occurs "
+"in .xsession-errors:\n\n'Module(0xXXX) command is too big (1008), "
+"limit is 1000.'\n\nThis happens because PipeRead used for menu generation\nhas "
+"a command length limit of 1000 characters. Sorry for\nthat inconvinience."
+msgstr ""
+"Auch ist es eine gute Idee, in .xsession-errors nach Fehlermeldungen zu schauen. "
+"Es existiert eine Limitierung - Wenn zuviele Menüs gefunden werden, taucht "
+"folgende Fehlemeldung in .xsession-errors auf:\n\n'Module(0xXXX) command is too big (1008), "
+"limit is 1000.'\n\nDas passiert, weil PipeRead, das zum generieren des Menüs "
+"verwendet wird, eine Limitierung von 1000 Zeichen für ein Kommando hat. Entschuldigung\nfür "
+"diese Unannehmlichkeit."
+
+########################################################################
+# Notebook page 2 for single menu
+########################################################################
+
+msgid "Single Menu"
+msgstr "Einzelmenü"
+
+msgid ""
+"In this tab you can define a custom-assembled menu 'foo-bar.menu' "
+"placed on another location as defined in the XDG menu definitions.\n"
+"But remember, if the menu doesn't exist, nothing happens."
+msgstr ""
+"In diesem Tab können Sie ein eigen-erstelltes Menü 'foo-bar.menu', das "
+"an einem anderen Ort als in den XDG Menüspezifikationen definiert ist, "
+"erstellen.\nAchtung, wenn das hier spezifizierte Menü nicht existiert, "
+"passiert nichts!"
+
+msgid "Menu Top Title:"
+msgstr "Menü Top Titel:"
+
+msgid ""
+"Specifies the menu title of the top menu used by Fvwm's Popup command. "
+"Default is 'FvwmMenu'."
+msgstr ""
+"Spezifiziert den Menütitel des Topmenüs, das Fvwm's Popup Kommando verwendet. "
+"Standard ist 'FvwmMenu'."
+
+msgid "Desktop:"
+msgstr "Desktop:"
+
+msgid ""
+"Overrides the name of the main desktop environment installed on the system. "
+"If a system offers multiple desktop environments $XDG_MENU_PREFIX is typically "
+"set. It is ignored if this field is used. Possible names: gnome, kde, lxde, etc."
+msgstr ""
+"Überschreibt den Namen der Haupt-Desktop-Umgebung, welche auf dem System "
+"installiert ist. Wenn ein System mehrere Desktop-Umgebungen bereitstellt, "
+"ist normalerweise $XDG_MENU_PREFIX gesetzt. Die Variable wird jedoch ignoriert, "
+"wenn dieses Feld benutzt wird. Mögliche Namen: gnome, kde, lxde, etc."
+
+msgid "Install-Prefix:"
+msgstr "Install-Prefix:"
+
+msgid ""
+"Overrides the standard locations for XDG menu definitions. The standard "
+"locations are /etc/xdg/menus and ~/.config/menus if available."
+msgstr ""
+"Überschreibt die Standardorte für die XDG Menüdefinitionen. Die Standardorte "
+"sind /etc/xdg/menus und ~/.config/menus (wenn vorhanden)."
+
+msgid "Menu Type:"
+msgstr "Menütyp:"
+
+msgid ""
+"Defines which type of menu should be found. Possible name types could "
+"be: applications, settings, preferences, etc. Note if the specified "
+"menu type doesn't exist the generated menu is empty!"
+msgstr ""
+"Definiert welcher Menütyp gefunden werden soll. Mögliche Typen könnten "
+"sein: applications, settings, preferences, etc. Achtung, wenn das hier "
+"spezifizierte Menü nicht existiert, ist das erstellte Menü leer!"
+
+########################################################################
+# Menu Options
+########################################################################
+
+msgid " General Options "
+msgstr "Generelle Optionen"
+
+msgid "Use Icons"
+msgstr "Icons verwenden"
+
+msgid "Option enables mini-icons in the menu(s)."
+msgstr "Option aktiviert Mini-Icons in dem/den Menü(s)."
+
+msgid "Icon Size:"
+msgstr "Icongröße:"
+
+msgid ""
+"If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size "
+"is desired change the wanted size in this field."
+msgstr ""
+"Wenn 'Icons verwenden' gesetzt ist, werden per default 24x24 Mini-Icons verwendet. "
+"Wenn eine andere Größe verwendet werden soll, in diesem Feld ändern."
+
+msgid "Icon Theme:"
+msgstr "Icon Thema:"
+
+msgid ""
+"Sets the used icon theme. Default is 'gnome' but all others found in ~/.icons "
+"or /usr/share/icons can used except the hicolor theme because it's the default "
+"fallback theme if no icon is found. Note that the theme name must be written "
+"exactly as the icon directory e.g. /usr/share/icons/Mint-X => 'Mint-X'."
+msgstr ""
+"Setzt das Icon Thema. Standard ist 'gnome', aber alle, die unter ~/.icons oder "
+"/usr/share/icons gefunden werden, können verwendet werden. Ausgenommen 'hicolor', "
+"weil dieser das default Fallback Thema ist, wenn kein Icon gefunden wird. Es ist "
+"wichtig, dass der Themaname exakt gleich wie das Verzeichnis geschrieben wird: "
+"/usr/share/icons/Mint-X => 'Mint-X'."
+
+msgid "Change icon theme path."
+msgstr "Ändern des Icon Thema Pfades."
+
+msgid "Directory Icon:"
+msgstr "Verzeichnis-Icon:"
+
+msgid ""
+"If 'Use Icons' is enabled and for a directory in a menu no icon is found "
+"'gnome-fs-directory' as default icon is used. But if the gnome icon theme "
+"isn't installed no default icon appears. Another icon can defined here. "
+"Only the name of an icon is needed not the path!"
+msgstr ""
+"Wenn 'Icons verwenden' gesetzt ist und für ein Verzeichnis kein Icon gefunden "
+"wird, wird 'gnome-fs-directory' als Defaulticon verwendet. Wenn jedoch das "
+"Gnome-Iconthema nicht installiert ist, taucht auch kein Icon für den Eintrag auf. "
+"Darum kann hier ein anderes Defaulticon definiert werden. Es muss nur der Name, "
+"nicht der Pfad angegeben werden!"
+
+msgid "Change directoy icon path."
+msgstr "Ändern des Verzeichnis Icon Pfades."
+
+msgid "Application Icon:"
+msgstr "Applikations-Icon:"
+
+msgid ""
+"If 'Use Icons' is enabled and for an application no icon is found 'gnome-applications' "
+"as default icon is used. But if the gnome icon theme isn't installed no default icon "
+"appears. Another icon can defined here. Only the name of an icon is needed not the path!"
+msgstr ""
+"Wenn 'Icons verwenden' gesetzt ist, aber für eine Applikation kein Icon gefunden wird, "
+"wird 'gnome-applications' als Defaulticon verwendet. Wenn jedoch das Gnome-Iconthema "
+"nicht installiert ist, taucht auch kein Icon für den Eintrag auf. Darum kann hier ein "
+"anderes Defaulticon definiert werden. Es muss nur der Name, nicht der Pfad angegeben werden!"
+
+msgid "Change application icon path."
+msgstr "Ändern des Applikations Icon Pfades."
+
+msgid "Icon Directory:"
+msgstr "Icon-Verzeichnis:"
+
+msgid ""
+"If the specified icon isn't that size it is converted if ImageMagick is installed. "
+"Generated icons are saved in $FVWM_USERDIR/icons or the directory specified here. "
+"Otherwise no icon appears in the menu for that entry."
+msgstr ""
+"Wenn das Icon in der Größe nicht vorhanden ist, wird es konvertiert, falls ImageMagick "
+"installiert ist. Generierte Icons werden unter $FVWM_USERDIR/icons oder dem hier "
+"angegebenen Verzeichnis gespeichert. Sonst taucht kein Icon im Menü für den Eintrag auf."
+
+msgid "Change icon directory path."
+msgstr "Ändern des Icon Verzeichnis Pfades."
+
+msgid "Use Titles"
+msgstr "Titel verwenden"
+
+msgid "If this option is set menus are generated with titles. Default is no titles."
+msgstr "Wenn diese Option gesetzt ist, werden Menüs mit Titeln erstellt. Standard ist ohne Titel."
+
+msgid "Menus in Menu:"
+msgstr "Menü(s) im Menü:"
+
+msgid "Enable this checkbox to insert generated menu(s) IN a menu."
+msgstr "Aktivieren Sie diese Checkbox, um erstellte Menüs IN einem Menü einzubinden."
+
+msgid ""
+"Enter in this field the name of the menu (its top title) where the generated "
+"menu(s) should insert. For more information see the USAGE section in the man "
+"page of fns-menu-desktop."
+msgstr ""
+"Hier den Namen des Menüs (seinen Toptitel) eintragen, wo die erstellten Menüs "
+"eingebunden werden sollen. Für weitere Informationen siehe die USAGE Sektion von "
+"fns-menu-desktop."
+
+msgid "Output Path:"
+msgstr "Ausgabepfad:"
+
+msgid "Enter here the FULL path of the menu to store. Default path is $FVWM_USERDIR/.menu."
+msgstr "Hier den VOLLEN Speicherpfad des Fvwm-Menüs eintragen. Default ist $FVWM_USERDIR/.menu."
+
+msgid "Change output path of the menu file."
+msgstr "Ändern des Menü Ausgabe Pfades."
+
+########################################################################
+# Button bar
+########################################################################
+
+msgid "Generate"
+msgstr "Erstellen"
+
+msgid "Generate menu(s)."
+msgstr "Erstelle Menü(s)."
+
+msgid "Help"
+msgstr "Hilfe"
+
+msgid "Get help."
+msgstr "Hilfe anzeigen."
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Save settings."
+msgstr "Einstellungen speichern."
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Cancel/Quit Menu Configurator."
+msgstr "Abbrechen/Beenden des Menü Konfigurators."
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr "Sie haben ungespeicherte Änderungen! Trotzdem fortfahren?"
+
+########################################################################
+# Others
+########################################################################
+msgid "Info"
+msgstr "Info"
+
+msgid "Warning"
+msgstr "Warnung"
+
+msgid "Question"
+msgstr "Frage"
+
+msgid "Error"
+msgstr "Fehler"
+
+msgid "Other"
+msgstr "Anderes"
+
+msgid "Open File"
+msgstr "Datei öffnen"
+
+msgid "Save File"
+msgstr "Datei speichern"
+
+msgid "Select Folder"
+msgstr "Ordner wählen"
+
+msgid "Create Folder"
+msgstr "Ordner erstellen"

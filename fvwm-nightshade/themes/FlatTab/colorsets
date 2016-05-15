@@ -1,13 +1,13 @@
 #-----------------------------------------------------------------------
-# File:		colorsets
-# Version:	0.1.0
-# Licence: 	GPL 2
+# File:         colorsets
+# Version:      0.1.5
+# Licence:      GPL 2
 #
-# Description:	colorsets of FlatTab theme
+# Description:  colorsets of FlatTab theme
 #
-# Author:	Thomas Funk <t.funk@web.de>
-# Created:	01/20/2013
-# Changed:	
+# Author:       Thomas Funk <t.funk@web.de>
+# Created:      01/20/2013
+# Changed:      12/17/2014
 #-----------------------------------------------------------------------
 # REMARKS:
 #
@@ -63,13 +63,14 @@ Colorset 1 fg #969696, bg #232323
 Colorset 2 fg white, bg #232323, Plain
 
 #-----------------------------------------------------------------------
-# window borders, inactive
+# window borders and titlebar, inactive
 #
-# ?Gradient = inactive windows titlebar
-# bg = inactive border line color
-#      inactive windows titlebar    _
-# hi = inactive border shade color |
-# sh = inactive border shade color _|
+# ?Gradient = background inactive windows titlebar
+# bg = inactive border line color (FvwmIconman)
+#      inactive windows titlebar            _
+# hi = inactive border (inner) shade color |
+# sh = inactive border color (Window, FvwmPager, FvwmButtons)
+#      inactive border (inner) shade color _| (FvwmPager, FvwmButtons)
 #-----------------------------------------------------------------------
 Colorset 3  fg #232323, bg #232323, hi #232323, sh #535353, Plain
 
@@ -95,7 +96,8 @@ Colorset 4 bg #232323, hi #939393, sh #535353, Plain
 # bg =
 # hi = inactive arrow color und menu border
 #-----------------------------------------------------------------------
-Colorset 5 fg white, bg #232323, hi #535353, Plain
+Test (!EnvMatch use_composite 0) Colorset 5 fg white, bg #232323, hi #535353, Plain, RootTransparent, Tint #232323 $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 5 fg white, bg #232323, hi #535353, Plain
 
 #-----------------------------------------------------------------------
 # active/hilighted menu item
@@ -103,12 +105,13 @@ Colorset 5 fg white, bg #232323, hi #535353, Plain
 # bg = highlight bar color
 # hi = arrow color if higlighted
 #-----------------------------------------------------------------------
-Colorset 6 fg white, bg #838383, hi white, Plain
+Test (!EnvMatch use_composite 0) Colorset 6 fg white, bg #838383, hi white, Plain, RootTransparent, Tint #838383 $[infostore.used_menutint]
+Test (EnvMatch use_composite 0) Colorset 6 fg white, bg #838383, hi white, Plain
 
 #-----------------------------------------------------------------------
-# greyed menu item if needed
+# Menu title if needed
 #-----------------------------------------------------------------------
-Colorset 7 fg grey45, bg grey45, Plain
+Colorset 7 Plain
 
 #-----------------------------------------------------------------------
 # Colorsets 8 and 9 are reserved for the future use.
@@ -123,9 +126,9 @@ Colorset 7 fg grey45, bg grey45, Plain
 # FvwmButtons, FvwmPager, can be also used for FvwmIconMan, FvwmIconBox.
 #
 # ?Gradient = inactive background
-# fg = inactive font color or border color
+# fg = inactive font color or border color (FvwmIconMan)
 # bg = background of inactive pages  _
-#      inactive border color        |
+#      inactive border color        |    (FvwmIconMan)
 #-----------------------------------------------------------------------
 Colorset 10 VGradient 255 1 #232323 50 #232323, fg #737373, bg #232323, NoShape
 
@@ -147,7 +150,7 @@ Colorset 11 VGradient 255 1 #838383 50 #838383, fg white, bg #838383, NoShape
 # FvwmIconBox.
 #
 # ?Gradient = inactive background
-# fg = inactive font color
+# fg = inactive font color (FvwmIconMan)
 # optional:                   _
 # hi = inactive border shade |
 #      Pager mini windows inactive
@@ -244,57 +247,40 @@ Colorset 24 VGradient 255 2 #c0c0c0 50 #838383 50 #737373, NoShape
 
 
 ########################################################################
-# External Colorsets
-########################################################################
-
-#-----------------------------------------------------------------------
-# reserved for modules@: 25
-
-#-----------------------------------------------------------------------
-# reserved for the future use: 26-28
-
-#-----------------------------------------------------------------------
-# temporary colorset: 29, has no static definition, used dynamically
-
-
-########################################################################
 # Application Colorsets
 ########################################################################
 
 #-----------------------------------------------------------------------
 # regular terminal (xterm, rxvt, Eterm)
 #-----------------------------------------------------------------------
-Colorset 30 fg white, bg #000050, Plain
+Colorset 25 fg white, bg #000050, Plain
 
 #-----------------------------------------------------------------------
 # admin terminal (su xterm)
 #-----------------------------------------------------------------------
-Colorset 31 fg white, bg #000050, Plain
+Colorset 26 fg white, bg #000050, Plain
 
 #-----------------------------------------------------------------------
 # remote terminal (ssh, telnet)
 #-----------------------------------------------------------------------
-Colorset 32 fg white, bg #500000, Plain
+Colorset 27 fg white, bg #500000, Plain
 
 #-----------------------------------------------------------------------
 # viewer terminal (man, less, tail -f)
 #-----------------------------------------------------------------------
-Colorset 33 fg white, bg #434343, Plain
+Colorset 28 fg white, bg #434343, Plain
 
 #-----------------------------------------------------------------------
 # application run in the terminal, text editor using ft-xrdb
 #-----------------------------------------------------------------------
-Colorset 34 fg black, bg snow2, Plain
+Colorset 29 fg black, bg snow2, Plain
 
 #-----------------------------------------------------------------------
 # dialog main background (FvwmScript, FvwmForm, xmessage, ft-xrdb)
 #-----------------------------------------------------------------------
-Colorset 35 fg black, bg #80A080, Plain
+Colorset 30 fg black, bg #80A080, Plain
 
 #-----------------------------------------------------------------------
 # dialog text area (FvwmScript, FvwmForm, xmessage, ft-xrdb)
 #-----------------------------------------------------------------------
-Colorset 36 fg black, bg #A0C8A0, Plain
-
-#-----------------------------------------------------------------------
-# Colorsets 37 to 39 are reserved for the future use.
+Colorset 31 fg black, bg #A0C8A0, Plain

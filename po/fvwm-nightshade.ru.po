@@ -1,0 +1,1157 @@
+# Russian translation for Fvwm-Nightshade
+# Copyright (C) 2015 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Artashes Mkhitaryan <artashm@mytum.de>, 2015.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: fvwm-nightshade\n"
+"POT-Creation-Date: 2013-07-07 18:40+0200\n"
+"PO-Revision-Date: 2016-04-21 22:23+0200\n"
+"Last-Translator: Artashes Mkhitaryan <artashm@mytum.de>\n"
+"Language-Team: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# MENUS
+########################################################################
+#-----------------------------------------------------------------------
+# MenuRoot
+#-----------------------------------------------------------------------
+msgid "&Personal Applications"
+msgstr "П&ерсональные Программы"
+
+msgid "&Configuration"
+msgstr "&Настройки"
+
+msgid "&Help"
+msgstr "&Помощь"
+
+msgid "Fvwm &Modules"
+msgstr "Fvwm &Модули"
+
+msgid "&Window Operations"
+msgstr "&Оконные Операции"
+
+msgid "Lock Screen"
+msgstr "Экран Блокировки"
+
+msgid "&Run Command"
+msgstr "&Запуск Команды"
+
+msgid "&Terminal"
+msgstr "&Терминал"
+
+msgid "&Quit Fvwm-Nightshade"
+msgstr "&Выйти из Fvwm-Nightshade"
+
+#-----------------------------------------------------------------------
+# MenuFvwmPersonal
+#-----------------------------------------------------------------------
+msgid "Personal Applications"
+msgstr "Персональные Программы"
+
+msgid "&Configure Personal Applications"
+msgstr "&Конфигурация Персональных Программ"
+
+#-----------------------------------------------------------------------
+# MenuHelp
+#-----------------------------------------------------------------------
+msgid "Help"
+msgstr "Помощь"
+
+msgid "Fvwm &Man Pages"
+msgstr "Fvwm &Man Страницы"
+
+msgid "Fvwm &Web Pages"
+msgstr "Fvwm &Web Страницы"
+
+msgid "Fvwm-&Nightshade Web Pages"
+msgstr "Fvwm-&Nightshade Web Страницы"
+
+msgid "&Other Helps"
+msgstr "&Другая Помощь"
+
+msgid "&Show Fvwm Version"
+msgstr "&Показать Версии Fvwm"
+
+msgid "&About Fvwm-Nightshade"
+msgstr "&Про Fvwm-Nightshade"
+
+#-----------------------------------------------------------------------
+# MenuHelpOthers
+#-----------------------------------------------------------------------
+msgid "Others"
+msgstr "Другие"
+
+msgid "&X Man Pages"
+msgstr "&X Man Страницы"
+
+msgid "&GNOME Help"
+msgstr "&GNOME Помощь"
+
+msgid "&KDE Help"
+msgstr "&KDE Помощь"
+
+#-----------------------------------------------------------------------
+# MenuFvwmWebPages
+#-----------------------------------------------------------------------
+msgid "Fvwm Web Pages"
+msgstr "Fvwm Web Страницы"
+
+msgid "Home Page"
+msgstr "Домашняя Страница"
+
+msgid "FAQ"
+msgstr "ЧЗВ"
+
+msgid "Documentation"
+msgstr "Документация"
+
+msgid "Wiki"
+msgstr "Вики"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "In the beginning was ..."
+msgstr "В начале было ..."
+
+msgid "Beginners Guide"
+msgstr "Путеводитель для Чайников"
+
+msgid "FAQ inofficial"
+msgstr "неофициальное ЧЗВ"
+
+msgid "How Styles are Applied"
+msgstr "Как Применяются Стаийлы"
+
+msgid "Session Management"
+msgstr "Управление Сессии"
+
+#-----------------------------------------------------------------------
+# FNSWebPagesMenu
+#-----------------------------------------------------------------------
+msgid "FNS Web Pages"
+msgstr "FNS Web Страницы"
+
+msgid "Fvwm-Nightshade Wiki"
+msgstr "Fvwm-Nightshade Вики"
+
+#-----------------------------------------------------------------------
+# MenuFvwmModules
+#-----------------------------------------------------------------------
+msgid "Fvwm Modules"
+msgstr "Fvwm Модули"
+
+#-----------------------------------------------------------------------
+# MenuStartRegularModules
+#-----------------------------------------------------------------------
+msgid "Start Regular Modules"
+msgstr "Запустить Регулярные Модули"
+
+msgid "&Animation"
+msgstr "&Анимации"
+
+msgid "&Debug Console"
+msgstr "&Дебаг Консоль"
+
+msgid "&Identify"
+msgstr "&Идентифицировать"
+
+msgid "ScrollBar (1/2 &app)"
+msgstr "Полоса Прокрутки (1/2 &апп)"
+
+msgid "ScrollBar (75%% &scr)"
+msgstr "Полоса Прокрутки (75%% &скр)"
+
+msgid "Auto Raise (&1/2 sec)"
+msgstr "Автоматический Всплыв (&1/2 сек)"
+
+msgid "Auto Raise (&2 sec)"
+msgstr "Автоматический Всплыв (&2 sec)"
+
+#-----------------------------------------------------------------------
+# MenuStopRegularModules
+#-----------------------------------------------------------------------
+msgid "Stop Regular Modules"
+msgstr "Остановить Регулярные Модули"
+
+#-----------------------------------------------------------------------
+# MenuFvwmForms
+#-----------------------------------------------------------------------
+msgid "FvwmForm Tools"
+msgstr "FvwmForm Инструменты"
+
+msgid "&Capture"
+msgstr "&Захват"
+
+msgid "&Rlogin"
+msgstr "&Рлогин"
+
+msgid "&Talk"
+msgstr "&Говорить"
+
+msgid "&QuitVerify"
+msgstr "&Выход из Проверки"
+
+#-----------------------------------------------------------------------
+# MenuConfiguration
+#-----------------------------------------------------------------------
+msgid "Configuration"
+msgstr "Конфигурация"
+
+msgid "&System"
+msgstr "&Система"
+
+msgid "&Tail .xsession-errors"
+msgstr "&Хвост .xsession-errors"
+
+#-----------------------------------------------------------------------
+# MenuFvwmConfiguration
+#-----------------------------------------------------------------------
+msgid "&Animation Control"
+msgstr "&Контроль Анимации"
+
+msgid "Fvwm Form &Defaults"
+msgstr "Fvwm из Параметров &По Умолчанию"
+
+#-----------------------------------------------------------------------
+# MenuFNSConfiguration
+#-----------------------------------------------------------------------
+msgid "Configure &Background"
+msgstr "Конфигурировать &Задний Фон"
+
+msgid "&Compositing"
+msgstr "&композитинга"
+
+msgid "&Decoration"
+msgstr "&Декорации"
+
+msgid "FNS Base &Setup"
+msgstr "FNS &базовая конфигурация"
+
+msgid "FNS &Windows Behaviour"
+msgstr "FNS &Поведение Окон"
+
+#-----------------------------------------------------------------------
+# MenuSystemConfiguration
+#-----------------------------------------------------------------------
+msgid "&Keyboard"
+msgstr "&Клавиатура"
+
+msgid "&Mouse"
+msgstr "&Мышь"
+
+msgid "Sc&reen Saver"
+msgstr "&Заставка"
+
+msgid "&CPU Performance"
+msgstr "&Производительность Процессора"
+
+msgid "Set &Date/Time"
+msgstr "Установить &дату/время"
+
+#-----------------------------------------------------------------------
+# MenuKeyboard
+#-----------------------------------------------------------------------
+msgid "Keyboard"
+msgstr "Клавиатура"
+
+msgid "&Settings"
+msgstr "&Настройки"
+
+msgid "&Layout"
+msgstr "&Расположение"
+
+#-----------------------------------------------------------------------
+# MenuMouse
+#-----------------------------------------------------------------------
+msgid "Mouse"
+msgstr "Мышь"
+
+msgid "Root &Cursor"
+msgstr "Корневой &Курсор"
+
+#-----------------------------------------------------------------------
+# MenuDecoration
+#-----------------------------------------------------------------------
+msgid "Decoration"
+msgstr "Декорации"
+
+msgid "&Decors"
+msgstr "&Декор"
+
+msgid "&Layouts"
+msgstr "&Расположение"
+
+msgid "&Qt Decor"
+msgstr "Qt Декор"
+
+msgid "&Gtk+ Decor"
+msgstr "&Gtk+ Декор"
+
+#-----------------------------------------------------------------------
+# MenuQtDecor
+#-----------------------------------------------------------------------
+msgid "Qt Decor"
+msgstr "Qt Декор"
+
+msgid "Qt-&3 Decor"
+msgstr "Qt-&3 Декор"
+
+msgid "Qt-&4 Decor"
+msgstr "Qt-&4 Декор"
+
+#-----------------------------------------------------------------------
+# FvwmDecorMenu
+#-----------------------------------------------------------------------
+msgid "Decors"
+msgstr "Декоры"
+
+#-----------------------------------------------------------------------
+# FvwmLayoutMenu
+#-----------------------------------------------------------------------
+msgid "Layouts"
+msgstr "Расположение"
+
+#-----------------------------------------------------------------------
+# MenuCompositing
+#-----------------------------------------------------------------------
+msgid "Compositing"
+msgstr "композитинга"
+
+msgid "FNS CompMgr &Configurator"
+msgstr "FNS CompMgr &Конфигуратор"
+
+msgid "&Menu Transparency"
+msgstr "прозрачность &меню"
+
+msgid "Active Window &Opacity"
+msgstr "Активное окно непрозрачности"
+
+msgid "Inactive Window &Transparency"
+msgstr "прозрачность &неактивного окна"
+
+#-----------------------------------------------------------------------
+# MenuWallpaperConfiguration
+#-----------------------------------------------------------------------
+msgid "Background Configuration"
+msgstr "Конфигурация Заднего Фона"
+
+msgid "Set &Default background"
+msgstr "Установить задний фон по &умолчанию"
+
+msgid "Set &Wallpaper background"
+msgstr "Установить &Обои заднего фона"
+
+#-----------------------------------------------------------------------
+# MenuXScreenSaver
+#-----------------------------------------------------------------------
+msgid "Screen Saver"
+msgstr "Заставка"
+
+msgid "XscreenSaver &Settings"
+msgstr "XscreenSaver &Настройки"
+
+msgid "&XscreenSaver (Re)start"
+msgstr "&XscreenSaver (пере)запуск"
+
+msgid "XscreenSaver &Stop"
+msgstr "XscreenSaver &Стоп"
+
+msgid "XscreenSaver &Lock"
+msgstr "XscreenSaver &Закрыть"
+
+msgid "XscreenSaver &Activate"
+msgstr "XscreenSaver &Активировать"
+
+#-----------------------------------------------------------------------
+# MenuFvwmQuit
+#-----------------------------------------------------------------------
+msgid "Really Quit"
+msgstr "Выйти по Настоящему"
+
+msgid "&Restart Fvwm"
+msgstr "&Перезагрузить Fvwm"
+
+msgid "Re&fresh Screen"
+msgstr "&Обновить Экран"
+
+msgid "&Suspend System"
+msgstr "&Приостановить Систему"
+
+msgid "&Hibernate System"
+msgstr "&Спящий Режим Системы"
+
+msgid "&Yes, Really Quit"
+msgstr "&Да, Выйти по Настоящему"
+
+msgid "&No, Don't Quit"
+msgstr "&Нет, Не Выходить"
+
+#-----------------------------------------------------------------------
+# MenuWindowOpsFull
+#-----------------------------------------------------------------------
+msgid "Window Operations"
+msgstr "Оконные Операции"
+
+msgid "&Move"
+msgstr "&Переместить"
+
+msgid "&Resize"
+msgstr "измените &размер"
+
+msgid "(De)&Iconify"
+msgstr "(Де)&Иконыфикация"
+
+msgid "(Un)Ma&ximize"
+msgstr "(Не)У&величить"
+
+msgid "(Un)&Shade"
+msgstr "(Не)&Тень"
+
+msgid "(Un)S&tick"
+msgstr "(Не)&Липкий"
+
+msgid "R&aise"
+msgstr "&Всплыть"
+
+msgid "&Lower"
+msgstr "&Ниже"
+
+msgid "&Delete"
+msgstr "У&далить"
+
+msgid "&Close"
+msgstr "&Закрыть"
+
+msgid "&Destroy"
+msgstr "&Уничтожить"
+
+msgid "Move to &Page"
+msgstr "Переместить в &Страницу"
+
+msgid "&Group Operations"
+msgstr "&Групповые Операции"
+
+msgid "&Window Style"
+msgstr "&Стиль Окна"
+
+msgid "&Maximize Window"
+msgstr "У&величить Окно"
+
+msgid "&Refresh Window"
+msgstr "&Обновить Окно"
+
+msgid "R&earrange All"
+msgstr "П&ереместить Все"
+
+msgid "Window &Utilities"
+msgstr "&Утилиты Окна"
+
+msgid "Sw&itch to...(WinList)"
+msgstr "&Перейти на...(WinList)"
+
+#-----------------------------------------------------------------------
+# MenuWindowOpsTrimmed
+#-----------------------------------------------------------------------
+msgid "Re&store"
+msgstr "Возобновит&ь"
+
+msgid "&Iconify"
+msgstr "&Иконыфикация"
+
+msgid "Ma&ximize"
+msgstr "У&величить"
+
+msgid "Stays On &Top"
+msgstr "Остается &Впереди"
+
+msgid "Stays &Back"
+msgstr "Остается &Позади"
+
+msgid "(Un)&Stick"
+msgstr "(Не)&Липкий"
+
+msgid "Mor&e..."
+msgstr "Боль&ше..."
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupOps
+#-----------------------------------------------------------------------
+msgid "Resource Group Ops"
+msgstr "Группа Ресурсов ОПС"
+
+msgid "Iconify"
+msgstr "Иконыфицироват"
+
+msgid "De&Iconify"
+msgstr "Не&Иконыфицировать"
+
+msgid "&Shade"
+msgstr "&Тень"
+
+msgid "&UnShade"
+msgstr "&НеТень"
+
+msgid "Lo&wer"
+msgstr "Ни&же"
+
+msgid "&Quick Move To ..."
+msgstr "&Быстрый Перевод В ..."
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupOps
+#-----------------------------------------------------------------------
+msgid "Window Style"
+msgstr "Стиль Окна"
+
+msgid "TitleAtT&op"
+msgstr "ТитулВп&ереди"
+
+msgid "TitleAt&Bottom"
+msgstr "ТитулС&Зади"
+
+msgid "&Title"
+msgstr "&Титул"
+
+msgid "&NoTitle"
+msgstr "&БезТитула"
+
+msgid "&FvwmBorder"
+msgstr "&FvwmГраница"
+
+msgid "&MWMBorder"
+msgstr "&MWMГраница"
+
+msgid "&DepressableBorder"
+msgstr "&ДепресивнаяГраница"
+
+msgid "F&irmBorder"
+msgstr "Ф&ирменнаяГраница"
+
+msgid "&Handles"
+msgstr "&Ручки"
+
+msgid "NoH&andles"
+msgstr "БезР&учек"
+
+msgid "BorderWidth &0"
+msgstr "ШыренаГраницы &0"
+
+msgid "BorderWidth &5"
+msgstr "ШыренаГраницы &5"
+
+msgid "Handle&Width 0"
+msgstr "ШыренаРучки 0"
+
+msgid "HandleWidth &7"
+msgstr "ШыренаРучки &7"
+
+msgid "Re&sizeOpaque"
+msgstr "Непрозрачное, Из&менение размера"
+
+msgid "Resi&zeOutline"
+msgstr "Из&менение размера контура"
+
+msgid "S&loppyFocus"
+msgstr "Н&ебрежный Фокус"
+
+msgid "&ClickToFocus"
+msgstr "КликнийДляФокуса"
+
+msgid "Mo&useFocus"
+msgstr "ФокусМы&ши"
+
+msgid "N&everFocus"
+msgstr "Не &Фокусироваться"
+
+#-----------------------------------------------------------------------
+# MenuWindowMaximize
+#-----------------------------------------------------------------------
+msgid "Maximize Window"
+msgstr "Увеличеть Окно"
+
+msgid "&Maximize Fully"
+msgstr " Полностью &Увеличить"
+
+msgid "&Unmaximize"
+msgstr "Неувеличить"
+
+msgid "Maximize &Partially"
+msgstr "Увеличить &Частично"
+
+msgid "Maximize &Vertically"
+msgstr "Увеличить &Вертикально"
+
+msgid "Maximize &Horizontally"
+msgstr "Увеличить &Горизонтально"
+
+msgid "Maximize &Grow"
+msgstr "Увеличить &Вырост"
+
+msgid "Maximize &Smart"
+msgstr "Увеличить &Умно"
+
+msgid "Maximize Grow V&ert."
+msgstr "Увеличить Вырост В&ерт."
+
+msgid "Maximize Grow H&oriz."
+msgstr "Увеличить Вырост Г&ориз."
+
+msgid "Maximize &Full Screen"
+msgstr "Увеличить &Полный Экран"
+
+msgid "&Unmaximize Full Screen"
+msgstr "&Неувеличить Полный Экран"
+
+#-----------------------------------------------------------------------
+# MenuWindowRefresh
+#-----------------------------------------------------------------------
+msgid "Refresh Window"
+msgstr "Обновить Окно"
+
+msgid "Re&fresh Window"
+msgstr "Об&новить Окно"
+
+msgid "Re&capture Window"
+msgstr "Пере-&захватить Окно"
+
+msgid "&Place Again"
+msgstr "&Поставить Опять"
+
+msgid "&Restore"
+msgstr "&Возобновить"
+
+#-----------------------------------------------------------------------
+# MenuRearrangeWindows
+#-----------------------------------------------------------------------
+msgid "Rearrange Windows"
+msgstr "Переставить Окна"
+
+msgid "&Cascade"
+msgstr "&Каскад"
+
+msgid "Tile &horizontally"
+msgstr "Разделить &горизонтально"
+
+msgid "Tile &vertically"
+msgstr "Разделить &вертикально"
+
+msgid "&Arrange Icons"
+msgstr "&Упорядочить Иконки"
+
+#-----------------------------------------------------------------------
+# MenuWindowUtility
+#-----------------------------------------------------------------------
+msgid "Window Utilities"
+msgstr "Утилита Окна"
+
+msgid "Create &Screenshot"
+msgstr "Сделать &Скриншот"
+
+msgid "&Desktop Screenshot"
+msgstr "Скриншот &Рабочего Стола"
+
+msgid "Layer &+1"
+msgstr "Уровень &+1"
+
+msgid "Stays &Put"
+msgstr "Остается &Поставить"
+
+msgid "Layer &-1"
+msgstr "Уровень &-1"
+
+msgid "Stays On &Bottom"
+msgstr "Остается &Позади"
+
+#-----------------------------------------------------------------------
+# MenuDesktopOps
+#-----------------------------------------------------------------------
+msgid "Desktopmenu"
+msgstr "Меню Рабочего Стола"
+
+msgid "Desktop Preferences"
+msgstr "Настольные предпочтения"
+
+msgid "Root Menu"
+msgstr "Корневое меню"
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupQuickMove
+#-----------------------------------------------------------------------
+# layout Horizontal, Vertical & G2like
+msgid "&Right	Page"
+msgstr "&Правая	Страница"
+
+msgid "&Left	Page"
+msgstr "&Левая	Страница"
+
+msgid "Page"
+msgstr "Страница"
+
+#-----------------------------------------------------------------------
+# MenuWindowGroupQuickMove
+#-----------------------------------------------------------------------
+# layout Horizontal, Vertical & G2like
+msgid "Move to ..."
+msgstr "Переместить в ..."
+
+# layout Vertical
+msgid "D&own	Page"
+msgstr "Н&ижняя	Страница"
+
+msgid "&Up	Page"
+msgstr "&Верхняя	Страница"
+
+#-----------------------------------------------------------------------
+# MenuClockOps
+#-----------------------------------------------------------------------
+msgid "Conky Clock Ops"
+msgstr "Опс часов Conky"
+
+msgid "Calender"
+msgstr "Календарь"
+
+msgid "Alarm"
+msgstr "тревога"
+
+msgid "Set Date/Time"
+msgstr "Установить дату/время"
+
+msgid "Restart Conky Clock"
+msgstr "Перезагрузить часы Conky"
+
+#-----------------------------------------------------------------------
+# MenuCpuOps
+#-----------------------------------------------------------------------
+msgid "Conky Cpu Ops"
+msgstr "Conky Опс Процессора"
+
+msgid "CPU Performance"
+msgstr "Производительность процессора"
+
+msgid "Restart Conky CPU"
+msgstr "Перезагрузить Процессор Conky"
+
+########################################################################
+# FvwmForm
+########################################################################
+
+#-----------------------------------------------------------------------
+# FvwmForm-RunCommand
+#-----------------------------------------------------------------------
+msgid "Run Command"
+msgstr "Запуск Команды"
+
+msgid "Command:"
+msgstr "Команда:"
+
+msgid "Run in Terminal"
+msgstr "Запустить в Терминале"
+
+msgid "Execute"
+msgstr "Запустить"
+
+#-----------------------------------------------------------------------
+# FvwmForm-About
+#-----------------------------------------------------------------------
+msgid "About"
+msgstr "Про..."
+
+msgid "Version"
+msgstr "Версия"
+
+msgid "Authors"
+msgstr "Авторы"
+
+msgid "Close"
+msgstr "Закрыть"
+
+#-----------------------------------------------------------------------
+# FvwmForm-Messages
+#-----------------------------------------------------------------------
+# FuncShowMessage "Fvwm Version Info"
+
+msgid "Fvwm Version Info"
+msgstr "Информация о версии Fvwm"
+
+msgid " Ok "
+msgstr " Ок "
+
+# config - Help info with SHIFT-CTRL-ALT in Root
+msgid "Mouse Bindings for Root area"
+msgstr "Связки мыши для корневой площади"
+
+msgid "Mouse 1:   Root menu"
+msgstr "Мышь 1:   Корневое меню"
+
+msgid "Mouse 2:   Window list"
+msgstr "Мышь 2:   Лист Окна"
+
+msgid "Mouse 3:   Desktop Oops menu"
+msgstr "Мышь 3:   Оопс меню рабочего стола"
+
+msgid "Mouse 4/5: Switch to page left/right with"
+msgstr "Мышь 4/5: Перейти на страницу левый/правый с"
+
+msgid "           SHIFT-ALT + rolling wheel up/down anywhere"
+msgstr "          SHIFT-ALT + барабан мыши  вверх/вниз в любом направлении"
+
+msgid "           Switch with window to page left/right with"
+msgstr "          Перейти вместе с окном на страницу  левый/правый с"
+
+msgid "           SHIFT-CTRL + rolling wheel up/down anywhere"
+msgstr "          SHIFT-ALT + барабан мыши  вверх/вниз в любом направлении"
+
+# config - Help info with SHIFT-CTRL-ALT to Pointer in Window Decorations
+msgid "Mouse Bindings for Titlebar"
+msgstr "Связки мыши для заглавия"
+
+msgid "Mouse 1:   Drag moves window"
+msgstr "Мышь 1: окна переместятся тасканием "
+
+msgid "           Maximize on double click"
+msgstr "          Увеличить при двойном клике"
+
+msgid "Mouse 2:   Drag moves window"
+msgstr "Мышь 2:   окна переместятся тасканием"
+
+msgid "           Raise or lower with click"
+msgstr "      поднять или спустить при клике"
+
+msgid "Mouse 3:   WindowOpsTrimmed menu with click"
+msgstr "Мышь 3:   WindowOpsTrimmed меню с кликом"
+
+msgid "           WindowOpsFull menu with ALT + click"
+msgstr "      WindowOpsFull меню с ALT + клик"
+
+msgid "Mouse 4/5: Shade/unshade window"
+msgstr "Мышь 4/5: Окно Тонирования/нетонирпвамия "
+
+msgid "           with rolling wheel up/down"
+msgstr "      с барабаном вверх/вниз"
+
+msgid "Mouse Bindings for Corners and Sides"
+msgstr "Связки мыши для углов и сторон"
+
+msgid "Mouse 1:   Drag resize window"
+msgstr "Мышь 1:   окна меняют величему тасканием"
+
+msgid "Mouse Bindings for Window area"
+msgstr "Связки мыши для площади окна"
+
+msgid "Mouse 1:   Root menu with ALT + click"
+msgstr "Мышь 1:   Корневое меню с ALT + клик"
+
+msgid "Mouse 2:   Drag + ALT moves window"
+msgstr "Мышь 2:   таскать + ALT перемещает окно"
+
+msgid "           Raise or lower with ALT + click"
+msgstr "          Поднять или спустить с ALT + клик"
+
+# config - Help info with SHIFT-CTRL-ALT to Pointer in Icons
+msgid "Mouse Bindings for Icons"
+msgstr "Связки мыши для икон"
+
+msgid "Mouse 1:   Drag moves icon"
+msgstr "Мышь 1:   Таскание перемещает иконки"
+
+msgid "           Deiconify with double click"
+msgstr "          Убрать иконки двойным щелчком"
+
+msgid "           Root menu with ALT + click"
+msgstr "          Корень меню с ALT + клик"
+
+msgid "Mouse 2:   Deiconify icon with click"
+msgstr "Мышь 2:   Убрать иконки одним щелчком"
+
+msgid "           All of same resource group with CTRL + click"
+msgstr "          Сгруппировать похожие ресурсы с CTRL + клик"
+
+msgid "           WindowGroupOps menu with CTRL + click"
+msgstr "          WindowGroupOps меню с CTRL + клик "
+
+# config - FuncWindowCreateScreenshot
+msgid "Screenshot Info for window"
+msgstr "Информация скриншота для окна"
+
+msgid "Screenshot created:"
+msgstr "Скриншота создан:"
+
+msgid "ImageMagick isn't installed. No screenshot created."
+msgstr "ImageMagick не найден. скриншот не создан."
+
+# config - FuncDesktopCreateScreenshot
+msgid "Desktop Screenshot Info"
+msgstr "Информация скриншота рабочего стола"
+
+# config - FuncSuspend
+msgid "Suspend Info"
+msgstr "Информация приостоновки"
+
+msgid "Install pm-utils for full functionality"
+msgstr "Для полной функциональности нужен pm-utils"
+
+# config - FuncHibernate
+msgid "Hibernate Info"
+msgstr "Информация о Гипернации"
+
+# config - FuncLockScreen
+msgid "Lock screen Info"
+msgstr "Информация о лок скрине"
+
+msgid "'xscreensaver' not running or not installed."
+msgstr "'xscreensaver' не работает, иле не найден. "
+
+# config - FuncMenuXScreenSaver
+msgid "Screensaver Info"
+msgstr "Информация о заставке"
+
+msgid "Install xscreensaver for full functionality"
+msgstr "Для полной функциональности нужен xscreensaver"
+
+# config - FuncMenuWallpaperConfiguration
+msgid "Wallpaper browser Info"
+msgstr "Информация об обойах"
+
+msgid "Install ImageMagick AND feh for full functionality."
+msgstr "Для полной функциональности нужны feh и ImageMagick"
+
+# config - FuncKbdLayouter
+msgid "Keyboard Layout Info"
+msgstr "Информация о Клавиатуре"
+
+msgid "Install xneur/gxneur for full functionality"
+msgstr "Для полной функциональности нужен xneur/gxneur"
+
+# config - FuncLxappearance
+msgid "Gtk+ Decor Info"
+msgstr "Информация об Gtk+ Декоре"
+
+msgid "Install LxApearance for Gtk+ apps"
+msgstr "Нужна установка LxApearance программ Gtk+"
+
+# config - FuncQt3Decor
+msgid "Qt3 Decor Info"
+msgstr "Информация об Qt3 Декоре"
+
+msgid "Install qtconfig-qt3 for Qt3 apps"
+msgstr "Информация qtconfig-qt3 для программ Qt3"
+
+# config - FuncQt4Decor
+msgid "Qt4 Decor Info"
+msgstr "Информация об Qt3 Декоре"
+
+msgid "Install qtconfig-qt4 for Qt4 apps"
+msgstr "Информация qtconfig-qt4 для программ Qt4 "
+
+# Help info with SHIFT-CTRL-ALT P to show all page related key bindings
+# layout Horizontal & G2like
+msgid "Page Key Bindings"
+msgstr "Ключевые Связки Страницы"
+
+msgid "SHIFT-CTRL:"
+msgstr "SHIFT-CTRL:"
+
+msgid "Cursor right/left: Switch to page right/left"
+msgstr "Курсор правый/левый: сменить страницу правый/левый"
+
+msgid "1-4: Switch to page n"
+msgstr "1-4: Переменит на страницу n"
+
+msgid "SHIFT-ALT:"
+msgstr "SHIFT-ALT:"
+
+msgid "Cursor right/left: Switch active window to page right/left"
+msgstr "Курсор правый/левый: Переместить активное окно на страницу правый/левый"
+
+msgid "1-4: Switch active window to page n"
+msgstr "1-4: Переместить активное окно на страницу n"
+
+msgid "ALT-CTRL:"
+msgstr "ALT-CTRL:"
+
+msgid "Cursor right/left/up/down: Move mouse pointer by 1% of a page"
+msgstr "Курсор левый/правый/вверх/вниз: Переместить пойнтер на 1% страницы"
+
+msgid "SHIFT-ALT-CTRL:"
+msgstr "SHIFT-ALT-CTRL:"
+
+msgid "Cursor right/left/up/down: Scroll right/left by 10% of a page"
+msgstr "Курсор левый/правый/вверх/вниз: Прокрутка левый/правый на 10% страницы"
+
+# layout Vertical
+msgid "Cursor up/down: Switch to page up/down"
+msgstr "Курсор вверх/вниз: Переместиться на страницу вверх/вниз"
+
+msgid "Cursor up/down: Switch active window to page up/down"
+msgstr "Курсор вверх/вниз: Переместить активное окно на страницу вверх/вниз"
+
+# .bindings
+# Help info with SHIFT-CTRL-ALT A to show all ALT related key bindings
+msgid "ALT Key Bindings"
+msgstr "ALT связки кнопок"
+
+msgid "ALT:"
+msgstr "ALT:"
+
+msgid "F1: Open root menu           F7:  Move window"
+msgstr "F1: Открыть корневое окно F7: Переместить окно"
+
+msgid "F2: Launch 'run' dialog box  F8:  Resize window"
+msgstr "F2: запустить диалог 'run'  F8: Сменить размер окна"
+
+msgid "F3: Show window list         F9:  Minimize window"
+msgstr "F3: Показать лист окон      F9:  Уменьшить окно"
+
+msgid "F4: Close active window      F10: Maximize/restore window"
+msgstr "F4: Закрыть активное окно   F10: Увеличить/Возобновить окно"
+
+msgid "F5: Show/hide AppletIconMan  F11: Fullscreen/restore window"
+msgstr "F5: Показа/спрятать AppletIconMan F11: Полный экран/возобновить окно"
+
+msgid "F6: Cycle between same       F12: Identify window"
+msgstr "F6: Цикл между тем же самым F12: Идентифицировать Окно"
+
+msgid "    resource windows"
+msgstr "    Окно ресурсов"
+
+msgid "Tab:   Switching focus to next window"
+msgstr "Tab:   Переменить фокус на следующее окно"
+
+msgid "Tab:   Switching focus to previous window"
+msgstr "Tab:   Переменить фокус на предведущее окно"
+
+msgid "Print: Screenshot of the active window"
+msgstr "Print: Скриншот активного окна"
+
+msgid "None:"
+msgstr "ни:"
+
+msgid "Print: Screenshot of current page"
+msgstr "Print: Скриншот настоящего окна"
+
+# Help info with SHIFT-CTRL-ALT H to show the global key bindings help window
+msgid "Help Keys with CTRL-ALT"
+msgstr "Кнопки помощи с CTRL-ALT"
+
+msgid "A: List ALT bindings"
+msgstr "A: Лист ALT связок"
+
+msgid "C: List CTRL bindings"
+msgstr "C: Лист CTRL связок"
+
+msgid "P: List Page bindings"
+msgstr "P: Лист Страничмых связок"
+
+# Help info with SHIFT-CTRL-ALT C to show all CTRL related key bindings
+msgid "CTRL Key Bindings"
+msgstr "CTRL Ключевые связки"
+
+msgid "F1: Open full Oops menu     F2: Launch FvwmConsole"
+msgstr "F1: Открыть полное меню Oops  F2: Запустить FvwmConsole"
+
+msgid "CTRL-ALT:"
+msgstr "CTRL-ALT:"
+
+msgid "D:  Hide/unhide all windows T:  Launch Terminal"
+msgstr "D: Скрыть/Показать все окна T: Запустить Терминал"
+
+msgid "L:  Lock Screen"
+msgstr "L: Лок Скрин"
+
+# decor theme file
+# Help info with SHIFT-CTRL-ALT to Window Button Pointer
+msgid "Left Button Bindings"
+msgstr "Связки левой кнопки"
+
+msgid "Mouse 1:  WindowOps menu"
+msgstr "Мышь 1:  WindowOps меню"
+
+msgid "Mouse 2:  Move to page menu"
+msgstr "Мышь 2:  Переместить на страницу меню"
+
+msgid "Mouse 3:  WindowGroupOps menu"
+msgstr "Мышь 3:  WindowGroupOps меню"
+
+msgid "Close Button Bindings"
+msgstr "Связки кнопки 'Закрыть'"
+
+msgid "Mouse 1:  Delete on click"
+msgstr "Мышь 1:  Удалить при нажатии"
+
+msgid "          Destroy on double click"
+msgstr "         Уничтожить при двойном щелчке"
+
+msgid "Maximize Button Bindings"
+msgstr "Связки кнопки 'Увеличить'"
+
+msgid "Mouse 1:       Maximize fully on click"
+msgstr "Мышь 1:       Увеличить полностью при клике"
+
+msgid "               Maximize menu on double click"
+msgstr "              Увеличить меню при двойном клике"
+
+msgid "Mouse 2:       Maximize vertically"
+msgstr "Мышь 2:       Увеличить вертикально"
+
+msgid "Mouse 2 + Alt: Maximize horizontally"
+msgstr "Мышь 2 + Alt: Увеличить горизонтально"
+
+msgid "Mouse 3:       Maximize smart"
+msgstr "Мышь 3:       Увеличить умно"
+
+msgid "Minimize Button Bindings"
+msgstr "Связки кнопки 'Уменьшить'"
+
+msgid "Mouse 1:  Iconify"
+msgstr "Мышь 1:  Иконывикация"
+
+msgid "Mouse 2:  Iconify on resource group"
+msgstr "Мышь 2:  Иконывикация при группировке ресурсов"
+
+msgid "Mouse 3:  Iconify toggle resource group"
+msgstr "Мышь 3:  Иконывикация активировать группировку ресурсов"
+
+########################################################################
+# FvwmScript
+########################################################################
+
+#-----------------------------------------------------------------------
+# fvwm-menu-desktop which are in the CVS version of FVWM
+#-----------------------------------------------------------------------
+#. ./bin/fvwm-menu-desktop.in: line 472
+msgid "Regenerate XDG Menu(s)"
+msgstr "Регенерировать XDG Меню"
+
+#. ./bin/fvwm-menu-desktop.in: line 515
+msgid "Regenerate XDG Menu"
+msgstr "Регенерировать XDG Меню"
+
+########################################################################
+# Layouts modules
+########################################################################
+#-----------------------------------------------------------------------
+# KlikeBottomBar, VerticalPanel, G2likeTopBar
+#-----------------------------------------------------------------------
+msgid "Menu"
+msgstr "Меню"
+
+#-----------------------------------------------------------------------
+# VerticalPanel
+#-----------------------------------------------------------------------
+msgid "Window List"
+msgstr "лист окон"
+
+#-----------------------------------------------------------------------
+# G2likeTopBar
+#-----------------------------------------------------------------------
+msgid "Personal"
+msgstr "Персональное"
+
+

@@ -1,0 +1,216 @@
+# Russian translation for FNS-BaseSetup
+# Copyright (C) 2015 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Artashes Mkhitaryan <artashm@mytum.de>, 2015.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-BaseSetup\n"
+"POT-Creation-Date: 2014-10-10 21:54+0200\n"
+"PO-Revision-Date: 2015-02-14 12:29+0200\n"
+"Last-Translator: Artashes Mkhitaryan artashm@mytum.de\n"
+"Language-Team: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "Fvwm-Nightshade Base Setup"
+msgstr "Fvwm-Nightshade базовая конфигурация"
+
+########################################################################
+# Environment
+########################################################################
+
+msgid " Environment "
+msgstr " Среда "
+
+msgid "Splash On"
+msgstr "Баннер Включен"
+
+msgid "Run Banner at startup? Default: on"
+msgstr "Показывать баннер при запуске? По умолчанию: да"
+
+msgid "Path to splash image."
+msgstr "Путь к банеру."
+
+msgid "Set path to splash image."
+msgstr "Установит путь к банеру."
+
+msgid "Composite Manager On"
+msgstr "Композит Менеджер Включено"
+
+msgid "Use composite manager? Default: off."
+msgstr "Использовать композит менеджер? По умолчанию: Выключено." 
+
+msgid "Configure"
+msgstr "Настроить"
+
+msgid "Open composite settings."
+msgstr "Открыть опции композита."
+
+########################################################################
+# Desktop
+########################################################################
+
+msgid " Desktop "
+msgstr " Рабочий стол "
+
+msgid "Wallpaper Dirs:"
+msgstr "Обои директории:"
+
+msgid "Wallpaper directories, separated by ':'."
+msgstr "Директории обоев разделены ':'."
+
+msgid "Icons on Desktop"
+msgstr "Иконки на Рабочем столе"
+
+msgid "Use Icons on desktop? Default: off."
+msgstr "Использовать Иконки на рабочем столе? По умолчанию: Включено."
+
+msgid "Icon Size:"
+msgstr "Размер Иконки:"
+
+msgid "Change size of the desktop icons."
+msgstr "Изменить размер иконок на рабочем столе."
+
+msgid "Desktop scrolling On"
+msgstr "Прокрутка рабочего стола"
+
+msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on."
+msgstr "При касании курсора края страницы, включить прокрутку страницы? По умолчанию: Включено."
+
+msgid "Desktops:"
+msgstr "Рабочие Столы"
+
+msgid "Set horizontal count of desktop pages."
+msgstr "Установить число горизонтальных рабочих столов."
+
+msgid "Set vertical count of desktop pages."
+msgstr "Установить число вертикальных рабочих столов."
+
+########################################################################
+# Decorations & Panels
+########################################################################
+
+msgid " Decorations & Panels "
+msgstr " Декорации и Панели "
+
+msgid "Used Layout:"
+msgstr "конструкции:"
+
+msgid "The actual FNS layout."
+msgstr "Актуальная выкладка FNS."
+
+msgid "Used Theme:"
+msgstr "Тема:"
+
+msgid "The actual FNS decor theme."
+msgstr "Актуальный декор FNS темы."
+
+msgid "Used Font:"
+msgstr "Фонт:"
+
+msgid "Used default font in FNS."
+msgstr "Применить стандартные фонты в FNS."
+
+########################################################################
+# Default Applications
+########################################################################
+
+msgid " Default Applications "
+msgstr " Приложения По умолчанию "
+
+msgid "Browser:"
+msgstr "Браузер:"
+
+msgid "Default browser in FNS."
+msgstr "Браузер по умолчанию в FNS."
+
+msgid "Set path to browser."
+msgstr "Установить путь к браузеру."
+
+msgid "Editor:"
+msgstr "Редактор:"
+
+msgid "Default editor in FNS."
+msgstr "Редактор по умолчанию в FNS."
+
+msgid "Set path to editor."
+msgstr "Установить путь к редактору."
+
+msgid "Terminal:"
+msgstr "Терминал:"
+
+msgid "Default terminal in FNS."
+msgstr "Терминал по умолчанию в FNS."
+
+msgid "Set path to terminal."
+msgstr "Установить путь к терминалу."
+
+msgid "Transset:"
+msgstr "Транссет:"
+
+msgid "Default transset in FNS."
+msgstr "Транссет по умолчанию в FNS."
+
+msgid "Set path to transset."
+msgstr "Установить путь к транссету."
+
+########################################################################
+# Button Bar
+########################################################################
+
+msgid "Help"
+msgstr "Помощь"
+
+msgid "Get help"
+msgstr "Запросить помощь"
+
+msgid "Apply"
+msgstr "Применить"
+
+msgid "Apply and save new settings."
+msgstr "Применить и сохранить новые опции."
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Cancel / Quit Base Setup."
+msgstr "Отменить / Выйти из Базовой Установки."
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr "У вас ест не сохраненные изменения, продолжить?"
+
+########################################################################
+# Others
+########################################################################
+msgid "Info"
+msgstr "Информация"
+
+msgid "Warning"
+msgstr "Предупреждение"
+
+msgid "Question"
+msgstr "Вопрос"
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Other"
+msgstr "Другое"
+
+msgid "Open File"
+msgstr "Открыть Файл"
+
+msgid "Save File"
+msgstr "Сохранить Файл"
+
+msgid "Select Folder"
+msgstr "Выбрать Папку"
+
+msgid "Create Folder"
+msgstr "Создать Папку"

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.6" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
 <title>FNS-BaseSetup(1)</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -87,9 +87,15 @@ ul, ol, li > p {
 ul > li     { color: #aaa; }
 ul > li > * { color: black; }
 
-pre {
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
   padding: 0;
   margin: 0;
+}
+pre {
+  white-space: pre-wrap;
 }
 
 #author {
@@ -219,7 +225,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; }
+span.image img { border-style: none; vertical-align: text-bottom; }
 a.image:visited { color: white; }
 
 dl {
@@ -349,7 +355,7 @@ div.colist td img {
   margin-bottom: 0.1em;
 }
 
-div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -407,17 +413,13 @@ span.underline { text-decoration: underline; }
 span.overline { text-decoration: overline; }
 span.line-through { text-decoration: line-through; }
 
+div.unbreakable { page-break-inside: avoid; }
+
 
 /*
  * xhtml11 specific
  *
  * */
-
-tt {
-  font-family: monospace;
-  font-size: inherit;
-  color: navy;
-}
 
 div.tableblock {
   margin-top: 1.0em;
@@ -451,12 +453,6 @@ div.tableblock > table[frame="vsides"] {
  * html5 specific
  *
  * */
-
-.monospaced {
-  font-family: monospace;
-  font-size: inherit;
-  color: navy;
-}
 
 table.tableblock {
   margin-top: 1.0em;
@@ -537,6 +533,8 @@ body.manpage div.sectionbody {
 @media print {
   body.manpage div#toc { display: none; }
 }
+
+
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
@@ -581,7 +579,7 @@ toc: function (toclevels) {
 
   function tocEntries(el, toclevels) {
     var result = new Array;
-    var re = new RegExp('[hH]([2-'+(toclevels+1)+'])');
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
     // Function that scans the DOM tree for header elements (the DOM2
     // nodeIterator API would be a better technique but not supported by all
     // browsers).
@@ -610,7 +608,7 @@ toc: function (toclevels) {
   var i;
   for (i = 0; i < toc.childNodes.length; i++) {
     var entry = toc.childNodes[i];
-    if (entry.nodeName == 'div'
+    if (entry.nodeName.toLowerCase() == 'div'
      && entry.getAttribute("class")
      && entry.getAttribute("class").match(/^toclevel/))
       tocEntriesToRemove.push(entry);
@@ -656,7 +654,7 @@ footnotes: function () {
   var entriesToRemove = [];
   for (i = 0; i < noteholder.childNodes.length; i++) {
     var entry = noteholder.childNodes[i];
-    if (entry.nodeName == 'div' && entry.getAttribute("class") == "footnote")
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
       entriesToRemove.push(entry);
   }
   for (i = 0; i < entriesToRemove.length; i++) {
@@ -741,7 +739,7 @@ FNS-BaseSetup(1) Manual Page
 <h2>NAME</h2>
 <div class="sectionbody">
 <p>FNS-BaseSetup -
-   FvwmForm script to configure base settings of Fvwm-Nightshade
+   SimpleGtk2 perl module to configure base settings of Fvwm-Nightshade.
 </p>
 </div>
 </div>
@@ -749,7 +747,9 @@ FNS-BaseSetup(1) Manual Page
 <div class="sect1">
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>FvwmForm FNS-BaseSetup</p></div>
+<div class="paragraph"><p>Module FNS-BaseSetup</p></div>
+<div class="paragraph"><p><strong>FNS-BaseSetup</strong> can only be invoked by fvwm. Command line invocation
+of the <strong>FNS-BaseSetup</strong> module will not work.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -763,90 +763,113 @@ default terminal, etc.</p></div>
 <div class="sect1">
 <h2 id="_options">OPTIONS</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_environment">Environment</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<strong>Used Splash</strong>
+<strong>Splash On</strong>
 </dt>
 <dd>
 <div class="paragraph"><p>Fvwm-Nightshade supports startup images (png, xpm or gif) called "splashs"
-shown with FvwmBanner. Here you can enter the path to the image displayed
-after login.</p></div>
+shown with FvwmBanner. You can activate or deactivate the showing of it by
+seting the checkbox. The path of the image can entered directly or via the
+right button.</p></div>
 </dd>
 <dt class="hdlist1">
-<strong>Show on start</strong>
+<strong>Composite Manager On</strong>
 </dt>
 <dd>
-<div class="paragraph"><p>Activate or deactivate FvwmBanner to show the splash image stated under <strong>Used Splash</strong></p></div>
-</dd>
-<dt class="hdlist1">
-<strong>Used Theme</strong>
-</dt>
-<dd>
-<div class="paragraph"><p>In this field you can enter which theme/decor shall be used for windows, panels, pager
-or other Fvwm modules.</p></div>
-<div class="paragraph"><p>Possible Themes are:</p></div>
+<div class="paragraph"><p>With the checkbox a composite manager for shadows and translucency can be
+enabled (if installed). Two of them are supported:</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-Tribal
+XcompMgr
 </dt>
 <dd>
-<div class="paragraph"><p>Default theme of Fvwm-Nightshade held in green/black tones with yellow font collors and
-tribal signs as buttons.</p></div>
+<div class="paragraph"><p>It is the standard composition manager for the X Composite
+extension. It implements shadows, fading, proper translucency, and more.</p></div>
 </dd>
 <dt class="hdlist1">
-Clean
+Compton
 </dt>
 <dd>
-<div class="paragraph"><p>Simple vector theme with -, +, v and x as buttons. Blue/gray color gradients for title bar
-and Fvwm modules.</p></div>
-</dd>
-<dt class="hdlist1">
-Ambience
-</dt>
-<dd>
-<div class="paragraph"><p>Dark Ubuntu 10.04 theme with black gradients for title bar and orange for highlighting.</p></div>
-</dd>
-<dt class="hdlist1">
-Air
-</dt>
-<dd>
-<div class="paragraph"><p>Kde 4 Oxygen theme held in grey and blue tones.</p></div>
-</dd>
-<dt class="hdlist1">
-CrystalBalls
-</dt>
-<dd>
-<div class="paragraph"><p>Milky Mac OSX theme with white, grey and blue tones.</p></div>
+<div class="paragraph"><p>It is a compositor based on xcompmgr.  In addition to shadows,
+fading and translucency, it implements window frame opacity control,
+inactive window transparency, and shadows on argb windows.</p></div>
 </dd>
 </dl></div>
+<div class="paragraph"><p>Configure one by clicking the <em>Configure</em> button to open <strong>FNS Composite
+Configurator</strong>.</p></div>
 </dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_desktop">Desktop</h3>
+<div class="dlist"><dl>
 <dt class="hdlist1">
-<strong>Used Font</strong>
+<strong>Wallpaper Dirs</strong>
 </dt>
 <dd>
-<div class="paragraph"><p>Enter an installed Xft font into the field. This font is for menus, modules and other
-Fvwm components.</p></div>
+<div class="paragraph"><p>Since version 0.8 of Fvwm-Nightshade more than one wallpaper directory in
+addition to <code>~/.fvwm-nightshade/wallpapers</code> is supported. They can be
+specified in the text entry separated with a <em>colon</em>.</p></div>
 </dd>
 <dt class="hdlist1">
-<strong>Used Fontsize</strong>
+<strong>Icons on Desktop</strong>
 </dt>
 <dd>
-<div class="paragraph"><p>Defines the used font size of the Fvwm components.</p></div>
+<div class="paragraph"><p>With this checkbox icons on desktop can be enabled. This feature is
+offered by PcmanFm. If activated the root window is under its' control.
+Therefore the root menu of Fvwm-Nightshade must moved around to the right
+click desktop menu. Anyway it can be shown already with the Super_L key.</p></div>
 </dd>
+<dt class="hdlist1">
+<strong>Icon Size</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Over this combo box the size of the desktop icons can be set. With
+PcmanFM&#8217;s Settings &#8658; Display &#8658; Big Symbols it can be set, too.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Desktop scrolling On</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Desktop scrolling is set per default but some people don&#8217;t like those
+switching to another desktop while scrolling with the mouse to the edges
+of the current screen. Disable it with this checkbox.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Desktops</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>In earlier versions of Fvwm-Nightshade only 4 desktop pages were possible.
+Now up to 10 desktop pages can be configured. More are possible but as only
+numbers from 0-9 are available needed for key bindings to move windows
+(SHIFT+ALT+0-9) or switch to another desktop (SHIFT+CTRL+0-9) we decided to
+limit it to 10.</p></div>
+<div class="paragraph"><p>The raster depends on the set layout. Mostly the horizontal amount can be
+changed. Only the <em>Vertical</em> layout has the possibility to change the
+vertical amount.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_decoration_amp_panels">Decoration &amp; Panels</h3>
+<div class="dlist"><dl>
 <dt class="hdlist1">
 <strong>Used Layout</strong>
 </dt>
 <dd>
 <p>
-Fvwm-Nightshade has 3 different layouts how components like pager, icon manager, panels
-are positioned:
+Fvwm-Nightshade has 4 different layouts how components like pager, icon
+manager, panels are positioned:
 </p>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 Horizontal
 </dt>
 <dd>
-<div class="paragraph"><p>The default layout. All components are seperated and arranged at the top of the screen.</p></div>
+<div class="paragraph"><p>All components are seperated and arranged at the top of the screen.</p></div>
 </dd>
 <dt class="hdlist1">
 Vertical
@@ -858,16 +881,133 @@ Vertical
 G2like
 </dt>
 <dd>
-<div class="paragraph"><p>This layout is based on the Gnome 2 layout - a top panel with menu, favorites, systray,
-cpu bar and clock/date. A bottom panel with a minimize all button, the task bar and a pager.</p></div>
+<div class="paragraph"><p>This layout is based on the Gnome 2 layout - a top panel with menu,
+favorites, systray, cpu bar and clock/date. A bottom panel with a minimize
+all button, the task bar and a pager.</p></div>
+</dd>
+<dt class="hdlist1">
+Klike
+</dt>
+<dd>
+<p>
+The default layout. This one is based on the KDE layout - a bottom panel
+with menu, task bar, pager, systray, cpu bar and clock/date.
+</p>
 </dd>
 </dl></div>
 </dd>
 <dt class="hdlist1">
-<strong>Used Terminal</strong>
+<strong>Used Theme</strong>
 </dt>
 <dd>
-<div class="paragraph"><p>here you can define your favorite terminal.</p></div>
+<div class="paragraph"><p>In this combobox you can choose which theme/decor shall be used for windows,
+panels, pager or other Fvwm modules.</p></div>
+<div class="paragraph"><p>Possible Themes are:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Air
+</dt>
+<dd>
+<div class="paragraph"><p>Kde 4 Oxygen theme held in grey and blue tones.</p></div>
+</dd>
+<dt class="hdlist1">
+Ambience
+</dt>
+<dd>
+<div class="paragraph"><p>Dark Ubuntu 10.04 theme with black gradients for title bar and orange for highlighting.</p></div>
+</dd>
+<dt class="hdlist1">
+Clean
+</dt>
+<dd>
+<div class="paragraph"><p>Simple vector theme with -, +, v and x as buttons. Blue/gray color gradients for title bar
+and Fvwm modules.</p></div>
+</dd>
+<dt class="hdlist1">
+CrystalBalls
+</dt>
+<dd>
+<div class="paragraph"><p>Milky Mac OSX theme with white, grey and blue tones.</p></div>
+</dd>
+<dt class="hdlist1">
+FlatTab
+</dt>
+<dd>
+<div class="paragraph"><p>Simple flat theme, mostly black and white, based on xeNULL&#8217;s openbox theme.</p></div>
+</dd>
+<dt class="hdlist1">
+GrayRevenge
+</dt>
+<dd>
+<div class="paragraph"><p>A dark gray and plain theme based on Alessandro Roncone&#8217;s Gray-Revenge-1-7.</p></div>
+</dd>
+<dt class="hdlist1">
+PitchBlack
+</dt>
+<dd>
+<div class="paragraph"><p>The default theme of Fvwm-Nightshade. A dark violet and plain theme based on
+GrayRevenge.</p></div>
+</dd>
+<dt class="hdlist1">
+Redmond
+</dt>
+<dd>
+<div class="paragraph"><p>The all known theme - for people who switching the operating system or for
+nostalgists.</p></div>
+</dd>
+<dt class="hdlist1">
+Rocken
+</dt>
+<dd>
+<div class="paragraph"><p>A great bright and beautiful theme based on Thibaut&#8217;s theme <em>Rocken</em> from 2010
+with silver bars and black buttons.</p></div>
+</dd>
+<dt class="hdlist1">
+Tribal
+</dt>
+<dd>
+<div class="paragraph"><p>The theme is held in green/black tones with yellow font collors and tribal
+signs as buttons.</p></div>
+</dd>
+</dl></div>
+</dd>
+<dt class="hdlist1">
+<strong>Used Font</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Choose here an installed Xft font via the FontSelection button. This font
+is for menus, modules and other Fvwm components. Also the used font size
+of the Fvwm components can be chosen here.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_default_applications">Default Applications</h3>
+<div class="paragraph"><p>In this section the applications for default actions can be set.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Browser</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Default browser for html help pages.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Editor</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Default editor for editing Fvwm-Nightshade configuration files.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Terminal</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>The default favorite terminal.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Transset</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Default translucency application. Possible are <strong>transset</strong> or <strong>transset-df</strong>.</p></div>
 </dd>
 </dl></div>
 <div class="admonitionblock">
@@ -876,35 +1016,36 @@ cpu bar and clock/date. A bottom panel with a minimize all button, the task bar 
 <div class="title">Note</div>
 </td>
 <td class="content">
-<div class="paragraph"><p>Parameters are possible:</p></div>
+<div class="paragraph"><p>Parameters are possible e.g.:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>xterm -fn 10x20</tt></pre>
+<pre><code>xterm -fn 10x20</code></pre>
 </div></div>
 </td>
 </tr></table>
 </div>
-<div class="dlist"><dl>
-<dt class="hdlist1">
-<strong>Used Browser</strong>
-</dt>
-<dd>
-<div class="paragraph"><p>This field is for your favorite browser.</p></div>
-</dd>
-</dl></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_files">FILES</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Standard settings are found in <code>/usr/share/fvwm-nightshade/.settings</code> copied
+while first startup into <code>~/.fvwm-nightshade/</code> .</p></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_author">AUTHOR</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>&#169; 2012 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+<div class="paragraph"><p>&#169; 2015 - 2016 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2012-11-11 02:31:50 CET
+Last updated
+ 2016-04-28 20:10:12 CEST
 </div>
 </div>
 </body>

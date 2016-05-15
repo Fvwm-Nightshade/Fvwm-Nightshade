@@ -1,0 +1,73 @@
+conky.config = {
+-------------------------------------------------------------------------
+-- File:        conky1Xrc_cpu
+-- Version:     1.0.0
+-- Licence:     GPL 2
+
+-- Description: conky (> 1.9) config for cpu applet
+
+-- Author:      Thomas Funk <t.funk@web.de>    
+
+-- Created:     01/27/2016
+-- Changed:     
+-------------------------------------------------------------------------
+
+-- Use Xft?
+    use_xft = true,
+
+-- Update interval in seconds
+    update_interval = 1,
+
+-- This is the number of times Conky will update before quitting.
+-- Set to zero to run forever.
+    total_run_times = 0,
+
+-- Create own window instead of using desktop (required in nautilus)
+    background = false,
+    own_window = true,
+    own_window_title = 'conky_cpu',
+    own_window_class = 'conky_cpu',
+    own_window_transparent = true,
+    own_window_argb_value = 255,
+    own_window_type = 'dock',
+
+-- Use double buffering (reduces flicker, may not work for everyone)
+    double_buffer = true,
+
+-- Draw shades?
+    draw_shades = false,
+
+-- Draw outlines?
+    draw_outline = false,
+
+-- Draw borders around graph
+    draw_graph_borders = false,
+
+-- Stippled borders?
+    stippled_borders = 0,
+
+-- border margins
+    border_inner_margin = 0,
+    border_outer_margin = 0,
+
+-- Default colors and also border colors
+    default_color = '#B1B1B1',--default text color
+    default_shade_color = 'black',
+
+-- Text alignment
+    alignment = 'top_left',
+
+-- Subtract file system buffers from used memory?
+    no_buffers = false,
+
+-- number of cpu samples to average
+-- set to 1 to disable averaging
+    cpu_avg_samples = 2,
+
+-- Force UTF8? note that UTF8 support required XFT
+    override_utf8_locale = true,
+
+};
+
+conky.text = [[
+]];

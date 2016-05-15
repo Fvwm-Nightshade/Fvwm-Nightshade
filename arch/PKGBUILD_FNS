@@ -1,29 +1,60 @@
 #-----------------------------------------------------------------------
-# File:		PKGBUILD_FNS
-# Version:	1.1.4
-# Licence: 	GPL 2
+# File:         PKGBUILD_FNS
+# Version:      1.2.5
+# Licence:      GPL 2
 #
-# Description:	Pkgbuild script for Fvwm-Nightshade
+# Description:  Pkgbuild script for Fvwm-Nightshade
 #
-# Author:	Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>	
+# Author:       Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>    
 #
-# Created:	???
-# Changed:	10/09/2014
+# Created:      ???
+# Changed:      10/01/2015
 #-----------------------------------------------------------------------
 
-pkgname=Fvwm-Nightshade
+pkgname=fvwm-nightshade
 pkgver=
 pkgrel=1
-pkgdesc="A lightweight but feature rich and good looking configuration of Fvwm."
 arch=('any')
 url="https://github.com/Fvwm-Nightshade"
 license=('GPL')
-depends=('fvwm>=2.6.5' 'python2' 'python2-xdg' 'conky' 'xscreensaver' 'feh' 'imagemagick' 'librsvg' 'stalonetray' 'xorg-xwd' 'gksu')
-optdepends=('pcmanfm: lightweight filemanager' 'volumeicon: volumecontrol in systray' 'network-manager-applet: network controlling tool for systray' 'blueman: bluetooth manager')
-provides=('Fvwm-Nightshade')
 source=
 
-package() {
-  cd "$srcdir/"
-  make DESTDIR=$pkgdir prefix=/usr dist-install
+package_fvwm-nightshade() {
+    pkgdesc="A lightweight but feature rich and good looking configuration of Fvwm."
+    depends=(
+        'fvwm>=2.6.5'
+        'conky'
+        'cpupower'
+        'feh'
+        'gtk-engine-murrine'
+        'imagemagick'
+        'gtk2-perl'
+        'perl-locale-gettext'
+        'librsvg'
+        'pcmanfm'
+        'polkit-gnome'
+        'python2'
+        'python2-xdg'
+        'stalonetray'
+        'xscreensaver'
+        'xterm'
+        'xorg-xwd'
+    )
+    optdepends=(
+        'blueman: Bluetooth Manager for your system tray (AUR)'
+        'clipit: Clipboard manager for your systray'
+        'cbatticon-gtk2: battery monitor for your system tray (AUR)'
+        'grun: Application launcher (AUR)'
+        'lxappearance: GTK+ theme switcher from of the LXDE Desktop'
+        'network-manager-applet: Network manager for your system tray'
+        'pm-utils: Utilities for suspend and hibernate power management'
+        'transset-df: Tool for changing window transparencies on the fly. Needed with xcompmgr!'
+        'volumeicon: Volume control for your system tray'
+        'compton: Composite Window-effects manager for X.org'
+    )
+    provides=('fvwm-nightshade')
+    install=fns.install
+    
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR=${pkgdir} prefix=/usr dist-install
 }

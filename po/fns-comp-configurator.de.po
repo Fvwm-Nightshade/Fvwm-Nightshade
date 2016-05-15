@@ -1,0 +1,235 @@
+# German translation for FNS-CompConfigurator
+# Copyright (C) 2014 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Thomas Funk <t.funk@web.de>, 2014.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-CompConfigurator\n"
+"POT-Creation-Date: 2014-10-29 19:11+0200\n"
+"PO-Revision-Date: 2014-10-29 19:30+0200\n"
+"Last-Translator: Thomas Funk <t.funk@web.de>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "FNS Composite Configurator"
+msgstr "FNS Composite Konfigurator"
+
+########################################################################
+# Composite Manager
+########################################################################
+
+msgid " Composite Manager "
+msgstr " Composite Manager "
+
+msgid "Use"
+msgstr "Aktivieren"
+
+msgid "Activate / deactivate the choosen composite manager."
+msgstr "Aktivieren / deaktivieren des gewählten Composite Managers."
+
+msgid "Composite manager is running! Stopping?"
+msgstr "Composite Manager läuft! Stoppen?"
+
+msgid "XcompMgr"
+msgstr "XcompMgr"
+
+msgid ""
+"XcompMgr is the standard composition manager for the X Composite extension. "
+"It implements shadows, fading, proper translucency, and more."
+msgstr ""
+"XcompMgr ist der Standard Composition Manager für die X Composite Erweiterung. "
+"Sie beinhaltet Schatten, ein-/ausblenden, ordentliche Durchlässigkeit und mehr."
+
+msgid "Compton"
+msgstr "Compton"
+
+msgid ""
+"Compton is a compositor based on xcompmgr. In addition to shadows, "
+"fading and translucency, it implements window frame opacity control, inactive "
+"window transparency, and shadows on argb windows."
+msgstr ""
+"Compton ist ein auf dem xcompmgr basierender Compositor. Zusätzlich "
+"zu Schatten, ein-/ausblenden und Durchlässigkeit hat er noch Kontrolle für "
+"Fensterrahmen-Deckkraft, farbige Schatten und mehr."
+
+########################################################################
+# Shadows
+########################################################################
+
+msgid " Shadows "
+msgstr " Schatten "
+
+msgid "Enable Shadows"
+msgstr "Aktiviere Schatten"
+
+msgid ""
+"Enable client-side shadows on windows.\n"
+"Note:\nDesktop windows (with _NET_WM_WINDOW_TYPE_DESKTOP) never get shadow."
+msgstr ""
+"Aktiviert Client-seitige Schatten an Fenstern.\n"
+"Bemerkung:\nDesktop Fenster (mit _NET_WM_WINDOW_TYPE_DESKTOP) bekommen niemals einen Schatten."
+
+msgid "On Docks / Panels"
+msgstr "Bei Docks / Panels"
+
+msgid "Painting shadows on panels and docks."
+msgstr "Zeichnen von Schatten an Panels und Docks."
+
+msgid "While drag'n'drop"
+msgstr "Während Drag'n'Drop"
+
+msgid "Draw shadows on drag-and-drop windows."
+msgstr "Zeichne Schatten beim Drag'n'Drop von Fenstern."
+
+msgid "Opacity:"
+msgstr "Deckkraft:"
+
+msgid "The opacity of shadows. (0.0 - 1.0, defaults to 0.75)."
+msgstr "Die Deckkraft der Schatten. (0.0 - 1.0, Vorgabe ist 0.75)."
+
+msgid "Blur Radius:"
+msgstr "Unschärferadius:"
+
+msgid "The blur radius for shadows, in pixels. (defaults to 12)."
+msgstr "Der Unschärferadius der Schatten in Pixel (Vorgabe ist 12)."
+
+msgid "Left Offset:"
+msgstr "Linker Offset:"
+
+msgid "The left offset for shadows, in pixels. (defaults to -15)."
+msgstr "Der Linke Offset der Schatten in Pixel (Vorgabe ist -15)."
+
+msgid "Top Offset:"
+msgstr "Oberer Offset:"
+
+msgid "The top offset for shadows, in pixels. (defaults to -15)."
+msgstr "Der obere Offset der Schatten in Pixel (Vorgabe ist -15)."
+
+msgid "Shadow color:"
+msgstr "Schattenfarbe:"
+
+msgid "RGB colors of shadows. (defaults to 000000)."
+msgstr "RGB Farbe der Schatten(Vorgabe ist 000000)."
+
+########################################################################
+# Fading
+########################################################################
+
+msgid " Fading "
+msgstr " Ein-/Ausblenden "
+
+msgid "Enable Fading"
+msgstr "Aktiviere Ein-/Ausblenden"
+
+msgid "Enable in/out fading of windows."
+msgstr "Aktiviert Ein-/Ausblenden von Fenster."
+
+msgid "On Opacity changed"
+msgstr "Beim Deckkraft ändern"
+
+msgid "Enables fade effect when windows change their opacity."
+msgstr "Aktiviert den Ein-/Ausblend-Effekt, wenn Fenster ihre Deckkraft ändern."
+
+msgid "On Open / Close"
+msgstr "Beim Öffnen / Schließen"
+
+msgid "Enables fade effect when windows open or close."
+msgstr "Aktiviert den Ein-/Ausblend-Effekt, wenn Fenster geöffnet bzw. geschlossen werden."
+
+msgid "Fade-in Steps:"
+msgstr "Einblendschritte:"
+
+msgid "Opacity change between steps while fading in. (0.01 - 1.0, defaults to 0.028)."
+msgstr "Ändern der Deckkraft in Schritten während des einblendens. (0.01 - 1.0, Vorgabe ist 0.028)."
+
+msgid "Fade-out Steps:"
+msgstr "Ausblendschritte:"
+
+msgid "Opacity change between steps while fading out. (0.01 - 1.0, defaults to 0.03)."
+msgstr "Ändern der Deckkraft in Schritten während des ausblendens. (0.01 - 1.0, Vorgabe ist 0.03)."
+
+msgid "Fade Step Time:"
+msgstr "Blendschrittzeit:"
+
+msgid "The time between steps in fade step, in milliseconds. (> 0, defaults to 10)."
+msgstr "Die Zeit zwischen den Ein-/Ausblendschritten in Millisekunden. (> 0, Default is 10)."
+
+########################################################################
+# Menus
+########################################################################
+
+msgid " Menus "
+msgstr " Menüs "
+
+msgid "Opacity on Menus:"
+msgstr "Deckkraft v. Menüs:"
+
+msgid "Default opacity for dropdown menus and popup menus. (0.0 - 1.0, defaults to 1.0)."
+msgstr "Deckkraftvorgabe für Dropdown- und Popup-Menüs. (0.0 - 1.0, Vorgabe ist 1.0)."
+
+########################################################################
+# Additional Parameters
+########################################################################
+
+msgid " Additional Parameters "
+msgstr " Zusätzliche Parameter "
+
+msgid "Enter here paramters which not accessible with the configurator."
+msgstr "Hier Parameter eingeben, die nicht über den Konfigurator gesetzt werden können."
+
+########################################################################
+# Button bar
+########################################################################
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Save settings."
+msgstr "Einstellungen speichern."
+
+msgid "Help"
+msgstr "Hilfe"
+
+msgid "Get help."
+msgstr "Hilfe bekommen."
+
+msgid "Start"
+msgstr "Starten"
+
+msgid "Stop"
+msgstr "Stoppen"
+
+msgid "Start or stop the choosen composite manager."
+msgstr "Starten oder stoppen des verwendeten Composite Managers."
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Cancel / Quit Composite Configurator."
+msgstr "Abbrechen / Beenden des Composite Konfigurator."
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr "Sie haben ungespeicherte Änderungen! Trotzdem fortfahren?"
+
+########################################################################
+# Others
+########################################################################
+
+msgid "Warning"
+msgstr "Warnung"
+
+msgid ""
+"No composite manager is installed.\nFor full functionality Xcompmgr "
+"or Compton must installed at least."
+msgstr ""
+"Kein Composite Manager is installiert.\n Für volle Funktionalität "
+"installieren Sie mindesten Xcompmgr oder Compton."
+

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Air
+Comment=a nice clean and light theme based on Greybird and elementary
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Air
+CursorTheme=DMZ-Black
+ButtonLayout=close,minimize,maximize:

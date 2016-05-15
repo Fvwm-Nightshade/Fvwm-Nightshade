@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.7" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
 <title>fns-find-icon(1)</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -87,9 +87,15 @@ ul, ol, li > p {
 ul > li     { color: #aaa; }
 ul > li > * { color: black; }
 
-pre {
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
   padding: 0;
   margin: 0;
+}
+pre {
+  white-space: pre-wrap;
 }
 
 #author {
@@ -219,7 +225,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; }
+span.image img { border-style: none; vertical-align: text-bottom; }
 a.image:visited { color: white; }
 
 dl {
@@ -415,12 +421,6 @@ div.unbreakable { page-break-inside: avoid; }
  *
  * */
 
-tt {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-}
-
 div.tableblock {
   margin-top: 1.0em;
   margin-bottom: 1.5em;
@@ -453,12 +453,6 @@ div.tableblock > table[frame="vsides"] {
  * html5 specific
  *
  * */
-
-.monospaced {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-}
 
 table.tableblock {
   margin-top: 1.0em;
@@ -539,6 +533,8 @@ body.manpage div.sectionbody {
 @media print {
   body.manpage div#toc { display: none; }
 }
+
+
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
@@ -751,7 +747,7 @@ fns-find-icon(1) Manual Page
 <div class="sect1">
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>fns-find-icon [-h|--help] [--version] [-n NAME] [-i W_ID] [-p EXTEND_PATH] [-s ICON_SIZE] [-c CATEGORY] [--notdesk]</p></div>
+<div class="paragraph"><p>fns-find-icon [-h|--help] [--version] [-n NAME] [-i W_ID] [-p EXTEND_PATH] [-s ICON_SIZE] [--svg] [-c CATEGORY] [--notdesk]</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -777,12 +773,12 @@ Or if <strong>--notdesk</strong> is given find the icon in /usr/share/icons/.</p
 <div class="paragraph"><p>Example for .desktop file search:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ fns-find-icon -n meld</tt></pre>
+<pre><code>$ fns-find-icon -n meld</code></pre>
 </div></div>
 <div class="paragraph"><p>Desktop file of meld:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>[Desktop Entry]
+<pre><code>[Desktop Entry]
 Encoding=UTF-8
 Name=Meld
 GenericName=Diff Viewer
@@ -793,7 +789,7 @@ Terminal=false
 Type=Application
 Icon=meld
 StartupNotify=true
-Categories=GNOME;Application;Development;</tt></pre>
+Categories=GNOME;Application;Development;</code></pre>
 </div></div>
 <div class="paragraph"><p>First <strong>fns-find-icon</strong> tries to find the full path. If only the name is given
 in the .desktop file it searches for the used theme in $FVWM_USERDIR/.FvwmForm-Desktop-Config.
@@ -804,7 +800,7 @@ If the search was successfully it converts the icon to the needed size
 <div class="paragraph"><p>Example for normal icon search:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ fns-find-icon -n 'system-log-out' -s 24 -c 'actions' --notdesk</tt></pre>
+<pre><code>$ fns-find-icon -n 'system-log-out' -s 24 -c 'actions' --notdesk</code></pre>
 </div></div>
 <div class="paragraph"><p>Here <strong>fns-find-icon</strong> tries to find the icon "system-log-out" with the
 size of "24x24" in the category "actions". The <strong>--notdesk</strong> tolds <strong>fns-find-icon</strong>
@@ -829,10 +825,10 @@ for the used name and then makes the same steps as in <strong>-n</strong> <em>NA
 also. The defaults are:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>/usr/share/icons/[theme]/[icon-size]/[category]/
+<pre><code>/usr/share/icons/[theme]/[icon-size]/[category]/
 /usr/share/icons/[theme]/[category]/[icon-size]/
 /usr/share/icons/hicolor/[icon-size]/[category]/
-/usr/share/pixmaps/</tt></pre>
+/usr/share/pixmaps/</code></pre>
 </div></div>
 <div class="paragraph"><p>You can extend the defaults with this option. Different paths are sperated
 with a ":".</p></div>
@@ -842,6 +838,13 @@ with a ":".</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>The <em>ICON_SIZE</em> defines the the icon size to search for. Default is <em>48</em>.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--svg</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Prefer svg instead of bitmaps and if found add :&lt;size&gt;x&lt;size&gt; at the
+end of the path.</p></div>
 </dd>
 <dt class="hdlist1">
 <strong>-c</strong> <em>CATEGORY</em>
@@ -882,14 +885,15 @@ this option.</p></div>
 <div class="sect1">
 <h2 id="_author">AUTHOR</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>&#169; 2013 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+<div class="paragraph"><p>&#169; 2013 - 2016 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
 </div>
 </div>
 </div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-06-06 23:02:01 CEST
+Last updated
+ 2016-04-26 22:57:19 CEST
 </div>
 </div>
 </body>

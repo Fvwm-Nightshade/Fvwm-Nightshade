@@ -1,16 +1,44 @@
-Package: fvwm-nightshade
-Version:
-Architecture: all
+Source: fvwm-nightshade
 Maintainer: Thomas Funk <t.funk@web.de>
-Installed-Size:
-Depends: fvwm (>> 1:2.6.4)|fvwm (>> 2.6.4), python (<< 3), python-xdg, xterm, conky, xscreensaver, feh, imagemagick, librsvg2-bin, stalonetray, cpufrequtils, x11-apps
-Recommends: network-manager-gnome, pcmanfm
-Suggests: volumeicon, fdpowermon, blueman-applet, pm-utils, lxapearance, qt3-qtconfig, qt4.qtconfig
 Section: x11
 Priority: optional
+Standards-Version: 3.9.6
+Build-Depends: debhelper (>= 9), python
 Homepage: https://github.com/Fvwm-Nightshade
+
+Package: fvwm-nightshade
+Architecture: all
+Depends:    ${misc:Depends}, ${perl:Depends}, ${python:Depends},
+            fvwm (>> 1:2.6.4) | fvwm (>> 2.6.4),
+            conky,
+            cpufrequtils | cpupower,
+            feh,
+            gtk2-engines-murrine,
+            gtk2-engines-pixbuf,
+            imagemagick,
+            libgtk2-perl,
+            liblocale-gettext-perl,
+            librsvg2-bin,
+            pcmanfm,
+            policykit-1-gnome,
+            python,
+            python-xdg,
+            stalonetray,
+            xscreensaver,
+            xterm,
+            x11-apps
+Recommends: network-manager-gnome,
+            pm-utils,
+            lxappearance,
+            qt4-qtconfig
+Suggests:   volumeicon-alsa,
+            clipit,
+            fdpowermon,
+            blueman,
+            xneurs, 
+            compton | xcompmgr,
+            grun | gmrun
 Description: Lightweight but feature rich and good looking configuration of Fvwm
  It contains many useful things to make work and life easier with a flavour of a 
  modern desktop. But it can be configure by your own. It is good documented and 
  shows you what is possible with this powerful window manager.
-

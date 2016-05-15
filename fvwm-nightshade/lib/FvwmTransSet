@@ -1,0 +1,470 @@
+#!/usr/bin/perl
+#-----------------------------------------------------------------------
+# File:         FvwmTransSet
+# Version:      1.0.2
+# Licence:      GPL 2
+#
+# Description:  Module to set true transparency to windows if a composite
+#               manager is running. 
+#               Based on FvwmPeteTransFocus by Peter Blair.
+#
+# Author:       Thomas Funk <t.funk@web.de>
+#
+# Created:      2013-11-30
+# Changed:      2014-08-09
+#-----------------------------------------------------------------------
+# To get a man page:
+# pod2man --center=" " --section=1 --release="1.0.0" FvwmTransSet > FvwmTransSet.1
+# To get a Html page:
+# pod2html --noindex --infile FvwmTransSet --outfile FvwmTransSet.html
+
+
+use warnings;
+use strict;
+use Data::Dumper;
+use lib `fvwm-perllib dir`;
+use FVWM::Module;
+use Text::ParseWords;
+use Scalar::Util qw(looks_like_number);
+
+my $debug = 0;
+
+# defaults
+my %initialConfig = (
+  'Excludes' => '',
+  'Opacity' => '1.0',
+  'Transparency' => '0.8',
+  'UsedTransset' => 'transset'
+);
+my $UsedOpacity;
+my $UsedTransparency;
+my @Excludes = ();
+my $UsedTransset;
+
+my $transCfgPath = "$ENV{FVWM_USERDIR}/.FvwmTransSet";
+my $lastWinId = 0;
+my $pageTrackerWL;
+my $pageInfo;
+my %winList = ();
+my $global_wmClass;
+
+
+my $module = new FVWM::Module(
+    Name => 'FvwmTransSet', 
+    Mask => M_FOCUS_CHANGE | M_STRING | M_CONFIG_INFO | M_END_CONFIG_INFO | M_DESTROY_WINDOW | M_ADD_WINDOW,
+    Debug => $debug,
+    );
+
+$module->showMessage("starting");
+
+# check, if user has own config
+$module->send("Read $transCfgPath") if -e $transCfgPath;
+# update config hash
+my $configTracker = $module->track("ModuleConfig");
+foreach (keys $configTracker->data) {
+    $initialConfig{$_} = $configTracker->data->{$_};
+}
+#resetConfig();
+    
+$module->addHandler(M_CONFIG_INFO, \&readConfig);
+$module->addHandler(M_END_CONFIG_INFO, sub {
+    $module->addHandler(M_STRING, \&getMsg);
+    $module->addHandler(M_DESTROY_WINDOW | M_ADD_WINDOW, \&updateWinList);
+    $module->addHandler(M_FOCUS_CHANGE, \&transFocus);
+
+    $pageTrackerWL = $module->track('WindowList');
+
+    # needed for updating data
+    $pageInfo = $module->track('PageInfo');
+    $pageInfo->observe("desk/page changed", \&updateData);
+    updateData($module, $pageInfo, $pageInfo->data);
+});
+
+$module->send("Send_ConfigInfo");
+$module->eventLoop;
+
+# configuration --------------------------------------------------------
+sub readConfig {
+    my ($module, $event) = @_;
+    my $modname = $module->name;
+    return unless $event->_text =~ /^\*$modname(.*)$/;
+    processConfig($1);
+}
+
+sub processConfig {
+    my ($s) = @_;
+    my ($option, $args)= $s =~/\s*(\w+)\s*(.*)/;
+
+    my %opts = (
+        Opacity => sub {$UsedOpacity = $args;},
+        Transparency => sub {$UsedTransparency = $args;},
+        Excludes => sub {\&addExcludes($args);},
+        UsedTransset => sub {$UsedTransset = $args;}
+    );
+
+    if (defined $opts{$option}) {
+        $opts{$option}() ;
+    } else {
+        $module->showMessage("unknown option \"$option\"");
+    }
+}
+
+sub resetConfig {
+    $UsedOpacity = $initialConfig{Opacity};
+    $UsedTransparency = $initialConfig{Transparency};
+    @Excludes = ();
+    addExcludes($initialConfig{Excludes});
+    $UsedTransset = $initialConfig{UsedTransset};
+    showVars();
+}
+
+sub updateConfig {
+    $initialConfig{Opacity} = $UsedOpacity;
+    $initialConfig{Transparency} = $UsedTransparency;
+    $initialConfig{Excludes} = join(', ', @Excludes);;
+    $initialConfig{UsedTransset} = $UsedTransset;
+    showVars();
+}
+
+sub saveConfig {
+    updateConfig();
+    open(CONFIG, ">", $transCfgPath);
+    print CONFIG "DestroyModuleConfig FvwmTransSet: *\n";
+    while (my ($key, $value) = each %initialConfig) {
+        print CONFIG "*FvwmTransSet: $key $value\n";
+    }
+    close(CONFIG);
+}
+
+# commands -------------------------------------------------------------
+sub getMsg {
+    my ($module, $event) = @_;
+    processCmd($event->_text);
+}
+
+sub processCmd {
+    my ($s) = @_;
+    my ($command, $args)= $s =~/\s*(\w+)\s*(.*)/;
+
+    my %cmd = (
+        opac => sub {$UsedOpacity = looks_like_number($args) ? $args : $UsedOpacity;},
+        trans => sub {$UsedTransparency = looks_like_number($args) ? $args : $UsedTransparency;},
+        exclude => sub {\&addExcludes($args);},
+        reset => sub {\&resetConfig();},
+        stop => sub {\&stopModule();},
+        save => sub {\&saveConfig();}
+    );
+
+    if (defined $cmd{$command}) {
+        $cmd{$command}() ;
+        setTransparency();
+        showVars();
+    } else {
+        $module->showMessage("unknown command \"$command\"");
+    }
+}
+
+sub addExcludes {
+    my ($args) = @_;
+    $args =~ s/\s+//g;
+    if (length($args) != 0) {
+        my @newExcludes = quotewords(",",0, $args);
+        my %union = ();
+        foreach(@Excludes,@newExcludes) {
+            $union{$_}=1;
+        }
+        @Excludes = keys %union;
+    }
+}
+
+sub stopModule {
+    # set transparency to opaque before terminating
+    $UsedOpacity = 1.0;
+    $UsedTransparency = 1.0;
+    setTransparency();
+    
+    $module->showMessage("stopped");
+    $module->terminate;
+}
+
+# updating -------------------------------------------------------------
+sub updateWinList {
+    my $wmClass;
+    my $win_id;
+    my $useTransset = 0;
+    if (scalar(@_) == 1) {
+        ($win_id) = @_;
+        unless (exists $winList{$win_id}) {
+            $wmClass = getClass($win_id);
+            $winList{$win_id}{'res_class_name'} = $wmClass;
+            $winList{$win_id}{'transparency'} = 1.0;
+        }
+    } else {
+        my ($module, $event) = @_;
+        $win_id = $event->_win_id;
+        if ($event->type == M_ADD_WINDOW) {
+            showDebugMsg("---------M_ADD_WINDOW----------");
+            $wmClass = getClass($win_id);
+            $winList{$win_id}{'res_class_name'} = $wmClass;
+            $winList{$win_id}{'transparency'} = $UsedTransparency;
+        }
+        elsif ($event->type == M_DESTROY_WINDOW) {
+            showDebugMsg("---------M_DESTROY_WINDOW----------");
+            $global_wmClass = $winList{$win_id}->{'res_class_name'};
+            showDebugMsg("global_wmClass: $global_wmClass");
+            delete $winList{$win_id};
+        }
+    }
+}
+
+sub updateTransparency {
+    my ($win_id, $opacity) = @_;
+    my $changed = 0;
+
+    if (matchExcludes($win_id) == 1 or $opacity == 1) {
+        if ($winList{$win_id}->{'transparency'} != $UsedOpacity) {
+            $winList{$win_id}{'transparency'} = $UsedOpacity;
+            showDebugMsg("set opacity");
+            $changed = 1;
+        }
+    }
+    else {
+        if ($winList{$win_id}->{'transparency'} != $UsedTransparency) {
+            $winList{$win_id}{'transparency'} = $UsedTransparency;
+            showDebugMsg("set transparency");
+            $changed = 1;
+        }
+    }
+   if ($debug != 0) {
+       showDebugMsg("---------updateWinList----------");
+       print Dumper(\%winList);
+   }
+    return $changed;
+}
+
+sub updateData {
+    my ($module, $tracker, $data) = @_;
+    setTransparency();
+}
+
+# opacity/transparency -------------------------------------------------
+sub setTransparency {
+    foreach my $window ($pageTrackerWL->windows) {
+        if ($window->{win_id} != $lastWinId and
+            matchExcludes($window->{win_id}) == 0) {
+                setWindowTransparent($window->{win_id});
+        } else {
+            setWindowOpaque($window->{win_id});
+        }
+    }
+}
+
+sub setWindowTransparent {
+    my ($win_id) = @_;
+    updateWinList($win_id);
+    my $useTransset = updateTransparency($win_id, 0);
+    if ($useTransset) {
+        my $ex = "$UsedTransset -i $win_id $UsedTransparency";
+        system($ex);
+    }
+}
+
+sub setWindowOpaque {
+    my ($win_id) = @_;
+    updateWinList($win_id);
+    my $useTransset = updateTransparency($win_id, 1);
+    if ($useTransset) {
+        my $ex = "$UsedTransset -i $win_id $UsedOpacity";
+        system($ex);
+    }
+}
+
+sub getClass {
+    my ($win_id) = @_;
+    my $result = `xprop -id $win_id | grep ^WM_CLASS | cut -d= -f2`;
+    $result =~ s/\"|\s//g;
+    chomp($result);
+    my @wmClass = split(/,/,$result);
+    my $wmClass = $wmClass[1];
+    showDebugMsg("------- getClass -------");
+    showDebugMsg("wmClass: @wmClass");
+    unless (defined($wmClass)) {
+        $wmClass = $global_wmClass;
+    } else {
+        if ($wmClass eq "") {
+            $wmClass = $global_wmClass;
+        }
+    }
+    return $wmClass;
+}
+
+sub getWindowState {
+    my ($win_id) = @_;
+    my $result = `xprop -id $win_id |grep '^_NET_WM_WINDOW_TYPE(ATOM)'|cut -d" " -f3`;
+    $result =~ s/\"|\s//g;
+    return $result;
+}
+
+sub matchExcludes {
+    my ($win_id) = @_;
+    showDebugMsg("----- matchExcludes-----");
+    showDebugMsg("win_id: $win_id");
+    my $wmClass = getClass($win_id);
+    foreach my $exclude (@Excludes) {
+        if ($wmClass eq $exclude) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+# focus changed --------------------------------------------------------
+sub transFocus {
+    my ($module, $event) = @_;
+    my $win_id = $event->_win_id;
+
+    if ($lastWinId == 0) {
+        $lastWinId = $win_id;
+    }
+    elsif ($win_id == 0) {
+        $module->send("Next (AcceptsFocus, CurrentPage, AnyScreen) Focus");
+    }
+    # If we're leaving a window focus, then
+    # the _win_id will not equal the $lastWinId
+    else {
+        if ($lastWinId != $win_id) {
+            # We're leaving
+            showDebugMsg("leaving");
+            # Check if the window is not a dialog. If so
+            # we don't set the last window transparent
+            if (getWindowState($win_id) ne '_NET_WM_WINDOW_TYPE_DIALOG') {
+                setWindowTransparent($lastWinId);
+            }
+        }
+        $lastWinId = $win_id;
+    }
+    
+    if ($lastWinId == $win_id) {
+        # We're entering
+        showDebugMsg("entering");
+        setWindowOpaque($win_id);
+    }
+}
+
+# debugging ------------------------------------------------------------
+sub showDebugMsg {
+    my ($msg)=@_;
+    $module->debug($msg);
+}
+
+sub showVars {
+    my $excl = join(', ', @Excludes);
+    my $msg="
+        UsedOpacity:        $UsedOpacity
+        UsedTransparency:   $UsedTransparency
+        Excludes:           $excl
+        UsedTransset:       $UsedTransset
+    ";
+    showDebugMsg($msg);
+}
+
+__END__
+
+# ----------------------------------------------------------------------
+
+=head1 NAME
+
+FvwmTransSet - set true transparency to windows if a composite manager is 
+running.
+
+=head1 SYNOPSIS
+
+I<Module FvwmTransSet>
+
+FvwmTransSet can only be invoked by fvwm. Command line invocation of the 
+FvwmTransSet module will not work.
+
+=head1 DESCRIPTION
+
+This module sets the transparency to inactive and opacity to active windows 
+with transset or df-transset if a composite manager like xcompmgr, compton 
+or Cairo Composite manager is running.
+
+=head1 INVOCATION
+
+FvwmTransSet can be invoked by inserting the line 'Module FvwmTransSet' 
+in the .fvwm2rc file. This should be placed in the StartFunction if 
+FvwmTransSet is to be spawned during fvwm's initialization.
+
+=head1 CONFIGURATION OPTIONS
+
+The following commands are understood by FvwmTransSet:
+
+*FvwmTransSet: Excludes I<list of WM_CLASS names>
+    On this line one or a comma seperated list of applications or modules 
+    with their WM_CLASS names can specified which shall not get transparent.
+    
+    Example:
+    *FvwmTransSet: Excludes FvwmButtons, FvwmPager, FvwmIconMan
+
+*FvwmTransSet: Opacity I<value>
+    Sets the opacity value for the active/focused window and if defined 
+    the excluded applications or modules. Default is I<1.0>.
+
+*FvwmTransSet: Transparency  I<value>
+    Sets the transparency value for all inactive/unfocused windows.
+    Default is I<0.7>.
+
+*FvwmTransSet: UsedTransset I<type>
+    Sets the used transset type. Default is I<transset>. Not all transset
+    version can used. Only those with the -i option. Otherwise 'transset-df'
+    (http://forchheimer.se/transset-df/) should use instead.
+
+=head1 DYNAMICAL ACTIONS
+
+A running FvwmTransSet instance may receive some dynamical actions. 
+This is achived using the fvwm command
+
+I<SendToModule FvwmTransSet <action> <params>>
+
+Supported actions: 
+
+    opac I<value>
+        Change the opacity for the active/focused window and if defined
+        the excluded applications or modules.
+
+    trans I<value>
+        Change the transparency for all inactive/unfocused windows.
+
+    exclude I<list of WM_CLASS names>
+        Add one or a comma seperated list of applications or modules to 
+        the existing exclude list.
+
+    stop
+        Set transparency and opacity to 1.0 and terminate FvwmTransSet.
+
+    reset
+        Resets all FvwmTransSet values to the initials loaded at 
+        startup and update all windows.
+
+    save
+        Tells *FvwmTransSet* to save the current configuration in a file 
+        named ".FvwmTransSet" in the users home directory. This same file 
+        is read automatically by *FvwmTransSet* during startup. 
+
+=head1 BUGS
+
+Bug reports can be sent to fvwmnightshade-workers mailing list at 
+https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers 
+or submit them under 
+https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues.
+
+=head1 COPYRIGHTS
+
+FvwmTransSet is based on FvwmPeteTransFocus by Peter Blair.
+
+This program stands under the GPL V2. (C) 2014.
+
+=head1 AUTHOR
+
+Thomas Funk <t.funk@web.de>.

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>t.funk@web.de</email>
+		<name>Thomas Funk</name>
+	</maintainer>
+	<use>
+	    <flag name="blueman">Install blueman</flag>
+	    <flag name="compton">Install comton</flag>
+	    <flag name="grun">install grun</flag>
+	    <flag name="lxappearance">install lxappearance</flag>
+	    <flag name="nm-gnome">Install Gnome network manager applet</flag>
+	    <flag name="parcellite">install parcelllite</flag>
+	    <flag name="pcmanfm">Install pcmanfm</flag>
+	    <flag name="pkexec">Install gnome-polkit for cpu governor change</flag>
+	    <flag name="qtconfig">install qtconfig</flag>
+	    <flag name="transset">transparency support</flag>
+	    <flag name="upower-pm-utils">install upower-pm-utils</flag>
+	    <flag name="volumeicon">install simple ALSA mixer applet</flag>
+	</use>
+</pkgmetadata>

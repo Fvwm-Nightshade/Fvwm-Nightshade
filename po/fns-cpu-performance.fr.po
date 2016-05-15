@@ -1,0 +1,232 @@
+# French translation for fns-cpu-performance
+# Copyright (C) 2015 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Maxime Lordier <maxime.lordier@gmail.com>, 2015.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: fns-cpu-performance\n"
+"POT-Creation-Date: 2014-12-08 23:37+0200\n"
+"PO-Revision-Date: 2016-02-14 03:49+0200\n"
+"Last-Translator: Dominique Michel <dominique_libre@users.sourceforge.net>\n"
+"Language-Team: French\n"
+"Language: French\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "FNS Cpu Performance"
+msgstr "FNS Performance du CPU"
+
+########################################################################
+# CPU Information Frame
+########################################################################
+
+msgid " CPU Information "
+msgstr " Information CPU "
+
+msgid "Model:"
+msgstr "Modèle:"
+
+msgid "CPU Count:"
+msgstr "Nombre d CPU:"
+
+msgid "Manufacturer:"
+msgstr "Fabricant:"
+
+
+########################################################################
+# Notebook page 1 for all cpus
+########################################################################
+
+msgid "Joined"
+msgstr "Joints"
+
+msgid "This is the tab for modifying ALL cores together if they're not unlocked."
+msgstr "Cet onglet est pour la modification de tous les coeurs ensemble, s'ils ne sont pas verrouillés."
+
+msgid " Information to Cores "
+msgstr " Information des coeurs "
+
+msgid "L2 Cache:"
+msgstr "Cache L2:"
+
+msgid "Bogomips:"
+msgstr "Bogomips:"
+
+msgid "More"
+msgstr "Plus"
+
+msgid "Show information about the cpu."
+msgstr "Montrez les information à propos du CPU."
+
+msgid "Unlock cores"
+msgstr "Déverrouiller les coeurs"
+
+msgid "Unlock cores to set governor and frequencies separately."
+msgstr ""
+"Déverrouiller les coeurs pour modifier séparemment le gouverneur et la "
+"fréquence."
+
+msgid "All cores will be set to common values! Continue anyway?"
+msgstr ""
+"Tous les coeurs seront mis à des valeurs communes ! Souhaitez-vous "
+"continuer ?"
+
+msgid "Governor:"
+msgstr "Gouverneur:"
+
+msgid "Sets the global used governor (if cores not unlocked). "
+msgstr ""
+"Activez le gouverneur global utilisé (si les coeurs ne sont pas "
+"déverroullés)."
+
+msgid ""
+"The following governors are available:\n\n"
+"Performance:\nThis governor sets the CPU statically to the highest frequency within the borders "
+"of Min Frequency and Max Frequency. Consequently, saving power is not the focus of this governor.\n\n"
+"Powersave:\nThe CPU frequency is statically set to the lowest possibility. This can have severe "
+"impact on the performance, as the system will never rise above this frequency no matter how busy "
+"the processors are.\nHowever, using this governor often does not lead to the expected power "
+"savings as the highest savings can usually be achieved at idle through entering C-states. Due "
+"to running processes at the lowest frequency with the powersave governor, processes will take "
+"longer to finish, thus prolonging the time for the system to enter any idle C-states.\n\n"
+"On-demand:\nThe kernel implementation of a dynamic CPU frequency policy: The governor monitors "
+"the processor utilization. As soon as it exceeds a certain threshold, the governor will set the "
+"frequency to the highest available. If the utilization is less than the threshold, the next "
+"lowest frequency is used. If the system continues to be underutilized, the frequency is again "
+"reduced until the lowest available frequency is set.\n\n"
+"Conservative:\nSimilar to the on-demand implementation, this governor also dynamically adjusts "
+"frequencies based on processor utilization, except that it allows for a more gradual increase in "
+"power. If processor utilization exceeds a certain threshold, the governor does not immediately "
+"switch to the highest available frequency (as the on-demand governor does), but only to next higher "
+"frequency available.\n\n"
+"Userspace:\nThis governor allows the user, or any userspace program running with UID 'root', to "
+"set the CPU to a specific frequency. 'userspace' is not supported yet, but to get the same result "
+"use governor 'powersave' and one of the frequencies in 'Min Frequency', or governor 'performance' "
+"in combination with 'Max Frequency'."
+msgstr ""
+"Les gouverneurs suivants sont disponibles:\n\n"
+"Performance:\nCe gouverneur règle le CPU statiquement à la fréquence la plus élevée entre "
+"les frontières de Fréquence min et Fréquence max. Par conséquent, l'économie d'énergie n'est pas l'objet de ce "
+"gouverneur.\n\n"
+"Économie d'énergie:\n"
+"Le CPU est règlé statiquement à la fréquence la plus basse possible. Cela peut avoir de graves impacts sur la performance, car le système ne sera "
+"jamais élevé au-dessus de cette fréquence sans égard pour le taux d'occupation des processeurs.\n"
+"Toutefois, l'utilisation de ce gouvernor ne conduit souvent pas aux économies de puissance attendues car les économies les plus élevées peuvent "
+"généralement être atteintes au repos en entrant dans les états C. En travaillant à la fréquence la plus basse, les processus gérés par le "
+"gouverneur powersave prendront plus de temps pour se terminer, prolongeant ainsi le temps nécessaaire au système pour entrer dans les états C de "
+"repos.\n\n"
+"À la demande:\n"
+"Mise en œuvre par le noyau d'une politique dynamique de la fréquence du processeur: Le gouverneur surveille l'utilisation du processeur. Dès qu'elle "
+"dépasse un certain seuil, le gouverneur règlera la fréquence à la valeur la plus élevée disponible. Si l'utilisation est inférieure au seuil, la "
+"prochain fréquence plus basse est utilisée. Si le système continue à être sous-utilisé, la fréquence est à nouveau réduite jusqu'à obtention de la "
+"plus basse fréquence disponible.\n\n"
+"Conservateur:\n"
+"Similaire à la mise en œuvre à la demande, ce gouverneur ajuste aussi dynamiquement les fréquences sur la base de l'utilisation du processeur, "
+"sauf qu'il permet une augmentation plus progressive de la puissance. Si l'utilisation du processeur dépasse un certain seuil, le gouvernor n'est pas "
+"immédiatement passé à la plus haute fréquence disponible (comme le fait le gouverneur à la demande), mais seulement jusqu'à la prochaine fréquence "
+"supérieure disponible.\n\n"
+"Espace utilisateur:\n"
+"Ce gouverneur permet à l'utilisateur, ou à tout autre programme de l'espace utilisateur travaillant avec l'UID 'root', de mettre le CPU à une fréquence "
+"spécifique. 'espace utilisateur' n'est pas encore pris en charge, mais pour obtenir le même résultat utiliser le gouverneur 'Économie d'énergie' et "
+"l'une des fréquences dans 'Fréquence min', ou le gouverneur 'Performance' en combinaison avec 'Fréquence max'."
+
+msgid "Min Frequency:"
+msgstr "Fréquence min:"
+
+msgid "Sets the minimum used frequency from the range of available frequencies."
+msgstr "Règlez la fréquence minimale utilisée de l'échelle des fréquences disponibles."
+
+msgid "Max Frequency:"
+msgstr "Fréquence max:"
+
+msgid "Sets the maximum used frequency from the range of available frequencies."
+msgstr "Règlez la fréquence maximale utilisée de l'échelle des fréquences disponibles."
+
+########################################################################
+# Notebook page x for CoreX
+########################################################################
+
+msgid "Core "
+msgstr "Coeur "
+
+msgid "This is the tab for modifying core "
+msgstr "C'est l'onglet pour modifier le coeur "
+
+msgid "if unlocked at the joined tab."
+msgstr " si dévérouillé dans l'onglet Joints."
+
+msgid "Information to Core"
+msgstr "Information du coeur"
+
+msgid "Show information about this core."
+msgstr "Affichez les information à propos de ce coeur."
+
+msgid "Sets the used governor (if cores unlocked). "
+msgstr "Règle le gouverneur utilisé (si les cores sont déverroullés). "
+
+########################################################################
+# Button bar
+########################################################################
+
+msgid "Add to Autostart"
+msgstr "Ajoutez automatiquement"
+
+msgid "Add custom settings to autostart for permanency."
+msgstr "Ajoutez de facon permanente les paramêtrez personnels au démarrage."
+
+msgid "Apply"
+msgstr "Appliquer"
+
+msgid "Apply settings to the cpufreq system. Also save them in $FVWM_USERDIR/.governor for using it with autostart if set."
+msgstr ""
+"Appliquez les paramêtres au système cpufreq, et les sauver dans "
+"$FVWM_USERDIR/.governor pour utilisation lorsque Ajoutez automatiquement est "
+"activé."
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Cancel/Quit Cpu Performance tool."
+msgstr "Annuler/Quitter l'outil de performance CPU."
+
+msgid "You have unapplied changes! Continue anyway?"
+msgstr "Vous n'avez pas appliqué les changements ! Souhaitez-vous continuer ?"
+
+msgid "No cpu scaler is installed.\nFor full functionality cpufreq-utils or cpupower must installed at least."
+msgstr ""
+"Pas de controleur de cpu installé.\n"
+"Pour obtenir toutes les fonctionnalités, au moins un de cpufreq-utils ou "
+"cpupower doit être installé."
+
+########################################################################
+# Others
+########################################################################
+
+msgid "Info"
+msgstr "Information"
+
+msgid "Warning"
+msgstr "Avertissement"
+
+msgid "Error"
+msgstr "Erreur"
+
+########################################################################
+# Error Dialog
+########################################################################
+
+msgid "Error !"
+msgstr "Erreur !"
+
+msgid "No or unknown cpufreq driver is active!\nFNS Cpu Performance not usable."
+msgstr "Non ou pilote cpufreq inconnue est active!\nFNS Performance du CPU inutilisable."
+
+msgid "Exit"
+msgstr "Sortie"
+

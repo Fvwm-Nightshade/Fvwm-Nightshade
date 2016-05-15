@@ -1,0 +1,47 @@
+#-----------------------------------------------------------------------
+# File:         TopBottom_GlobalIconMan
+# Version:      1.0.0
+# Licence:      GPL 2
+#
+# Description:  Shows the Global IconMan in the actual page moving from
+#               bottom to top layer and after loosing focus back to bottom layer
+#
+# Author:       Thomas Funk <t.funk@web.de>    
+#
+# Created:      08/21/2015
+# Changed:      
+#-----------------------------------------------------------------------
+
+#-----------------------------------------------------------------------
+# Additional Style for Global FvwmIconMan ("Taskbar")
+#-----------------------------------------------------------------------
+Style GlobalIconMan !Title, !State 1
+
+#-----------------------------------------------------------------------
+# Event Handler
+#-----------------------------------------------------------------------
+DestroyModuleConfig FvwmEventGlobalIconMan: *
+*FvwmEventGlobalIconMan: enter_window    GIMTB-EnterWindow
+
+
+#-----------------------------------------------------------------------
+# Functions for moving global iconman from bottom to top layer and 
+# after loosing focus back to bottom layer
+#-----------------------------------------------------------------------
+DestroyFunc GIMTB-EnterWindow
+AddToFunc GIMTB-EnterWindow
++ I PointerWindow (GlobalIconMan, !root)
++ I TestRc (!Match) KeepRc All (GlobalIconMan, State 1) FuncWindowToBottom
++ I ThisWindow (!GlobalIconMan) All (GlobalIconMan, State 1) FuncWindowToBottom
++ I ThisWindow (GlobalIconMan, !State 1) FuncWindowOnTop
+
+DestroyFunc FuncWindowOnTop
+AddToFunc FuncWindowOnTop
++ I ThisWindow (GlobalIconMan) All State 1
++ I ThisWindow (GlobalIconMan) Pick (CirculateHit) Layer 0 6
+
+DestroyFunc FuncWindowToBottom
+AddToFunc FuncWindowToBottom
++ I ThisWindow (GlobalIconMan) All State 1 False
++ I ThisWindow (GlobalIconMan) Pick (CirculateHit) Layer 0 2
++ I Break

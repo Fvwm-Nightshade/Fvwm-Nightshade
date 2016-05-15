@@ -12,7 +12,7 @@ a file
 SYNOPSIS
 --------
 
-fns-find-icon [TYPE] [FILE] [-h|--help] [-v|--version]
+fns-start-programs [TYPE] [FILE] [-h|--help] [-v|--version]
 
 
 
@@ -72,4 +72,4 @@ Show the version and exiting.
 AUTHOR
 ------
 
-(C) 2012 Thomas Funk <t.funk@web.de>
+(C) 2012 - 2016 Thomas Funk <t.funk@web.de>

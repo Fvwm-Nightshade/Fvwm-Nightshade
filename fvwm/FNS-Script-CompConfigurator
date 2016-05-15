@@ -1,0 +1,1492 @@
+#-----------------------------------------------------------------------
+# File:         FNS-Script-CompConfigurator
+# Version:      1.0.2
+# Licence:      GPL 2
+#
+# Description:  Composite configurator script for xcompmgr or compton
+#
+# Author:       Thomas Funk <t.funk@web.de>    
+#
+# Created:      01/02/2014
+# Changed:      01/09/2014
+#-----------------------------------------------------------------------
+
+UseGettext          {$FVWM_USERDIR/locale;fvwm-nightshade:$FNS_SYSTEMDIR/locale;fvwm-nightshade:+}
+WindowLocaleTitle   {Composite Configurator}
+WindowSize          470 415        # Taille
+
+Init
+Begin
+    Set $userDir = (GetOutput {echo "$FVWM_USERDIR"} 1 -1)
+    Set $configPath = $userDir{/.xcomp.cfg}
+
+    # important: hex value of colors in lower cases!
+    Set $inactiveColor = {#bebebe}
+    Set $activeColor = {#000000}
+    Set $compmgr = {none}
+    Set $xcompActive = 1
+    Set $xcompmgr = {}
+    Set $compton = {}
+    Set $update = {false}
+    Set $save = {false}
+    Set $execString = {}
+    Set $state = 0
+    Set $runButton = {NOP}
+    Set $stopCompmgr = {}
+
+    # set default parameters
+    Set $useCompositor = (GetOutput {echo $use_composite} 1 -1)
+    Set $enableShadows = 0
+    Set $onDockPanels = 0
+    Set $whileDnD = 0
+    Set $ShadowOpacity = {0.1}
+    Set $BlurRadius = {12}
+    Set $LeftOffset = {-15}
+    Set $TopOffset = {-15}
+    Set $ShadowColor = {000000}
+    Set $ShadowColorSet = 0
+    Set $ShadowColorR = {0.0}
+    Set $ShadowColorG = {0.0}
+    Set $ShadowColorB = {0.0}
+    
+    Set $enableFading = 0
+    Set $onOpacityChanged = 0
+    Set $onOpenClose = 0
+    Set $FadeInSteps = {0.028}
+    Set $FadeOutSteps = {0.03}
+    Set $FadeStepTime = {10}
+    
+    Set $OpacityOnMenus = {1.0}
+    Set $AdditionalParams = {}
+
+    # parse commandline
+    Set $i = 1
+    Set $arg = (GetScriptArgument $i)
+
+    While $arg <> {} Do
+    Begin
+        Set $noValue = {false}
+        Set $found = {false}
+        Set $j = (Add $i 1)
+        Set $value = (GetScriptArgument $j)
+
+        # use compton
+        If $arg == {compton} Then
+        Begin
+            Set $noValue = {true}
+            Set $xcompActive = 0
+            Set $found = {true}
+        End
+        
+        # use xcompmgr
+        If $arg == {xcompmgr} Then
+        Begin
+            Set $noValue = {true}
+            Set $found = {true}
+            #Set $xcompActive = 1
+        End
+        
+        # avoid painting shadows on panels and docks
+        If $arg == {-C} Then
+        Begin
+            Set $noValue = {true}
+            Set $onDockPanels = 0
+            Set $found = {true}
+        End
+
+        # use shadows
+        If $arg == {-c} Then
+        Begin
+            Set $noValue = {true}
+            Set $enableShadows = 1
+            Set $found = {true}
+        End
+
+        # opacity of shadows
+        If $arg == {-o} Then
+        Begin
+            Set $ShadowOpacity = $value
+            Set $found = {true}
+        End
+
+        # blur radius for shadows
+        If $arg == {-r} Then
+        Begin
+            Set $BlurRadius = $value
+            Set $found = {true}
+        End
+
+        # left offset for shadows
+        If $arg == {-l} Then
+        Begin
+            Set $LeftOffset = $value
+            Set $found = {true}
+        End
+
+        # top offset for shadows
+        If $arg == {-t} Then
+        Begin
+            Set $TopOffset = $value
+            Set $found = {true}
+        End
+
+        # use fading
+        If $arg == {-f} Then
+        Begin
+            Set $noValue = {true}
+            Set $enableFading = 1
+            Set $found = {true}
+        End
+
+        # enables fade effect when windows change their opacity
+        If $arg == {-F} Then
+        Begin
+            Set $noValue = {true}
+            Set $onOpacityChanged = 1
+            Set $found = {true}
+        End
+
+        # Opacity change between steps while fading in
+        If $arg == {-I} Then
+        Begin
+            Set $FadeInSteps = $value
+            Set $found = {true}
+        End
+
+        # Opacity change between steps while fading out
+        If $arg == {-O} Then
+        Begin
+            Set $FadeOutSteps = $value
+            Set $found = {true}
+        End
+
+        # time between steps in fade step
+        If $arg == {-D} Then
+        Begin
+            Set $FadeStepTime = $value
+            Set $found = {true}
+        End
+
+        # Don’t draw shadows on drag-and-drop windows
+        If $arg == {-G} Then
+        Begin
+            Set $noValue = {true}
+            Set $whileDnD = 1
+            Set $found = {true}
+        End
+
+        # Red color value of shadow
+        If $arg == {--shadow-red} Then
+        Begin
+            Set $ShadowColorR = $value
+            Set $found = {true}
+            Set $ShadowColorSet = (Add $ShadowColorSet 1)
+        End
+
+        # Green color value of shadow
+        If $arg == {--shadow-green} Then
+        Begin
+            Set $ShadowColorG = $value
+            Set $found = {true}
+            Set $ShadowColorSet = (Add $ShadowColorSet 1)
+        End
+
+        # Blue color value of shadow
+        If $arg == {--shadow-blue} Then
+        Begin
+            Set $ShadowColorB = $value
+            Set $found = {true}
+            Set $ShadowColorSet = (Add $ShadowColorSet 1)
+        End
+
+        # Do not fade on window open/close
+        If $arg == {--no-fading-openclose} Then
+        Begin
+            Set $noValue = {true}
+            Set $onOpenClose = 1
+            Set $found = {true}
+        End
+
+        # opacity for dropdown menus and popup menus
+        If $arg == {-m} Then
+        Begin
+            Set $OpacityOnMenus = $value
+            Set $found = {true}
+        End
+        
+        # other which are not found in additional parameter list
+        If $found <> {true} Then
+        Begin
+            Set $noValue = {true}
+            Set $AdditionalParams = $AdditionalParams $arg { }
+        End
+        
+        If $noValue == {true} Then
+            Set $i = (Add $i 1)
+        Else
+            Set $i = (Add $i 2)
+            
+        Set $arg = (GetScriptArgument $i)
+    End
+
+    # build hex value of Shadow color if '--shadow-xxx' is/are found
+    If $ShadowColorSet > 0 Then
+    Begin
+        Set $cmd = {perl -e 'printf("%02X",(}$ShadowColorR{*255))'}
+        Set $hex = (GetOutput $cmd 1 -1)
+        Set $ShadowColor = $hex
+
+        Set $cmd = {perl -e 'printf "%02X",(}$ShadowColorG{*255)'}
+        Set $hex = (GetOutput $cmd 1 -1)
+        Set $ShadowColor = $ShadowColor $hex
+
+        Set $cmd = {perl -e 'printf "%02X",(}$ShadowColorB{*255)'}
+        Set $hex = (GetOutput $cmd 1 -1)
+        Set $ShadowColor = $ShadowColor $hex
+    End
+
+    # check if xcompmgr is installed
+    Set $xcompmgr = (GetOutput {which xcompmgr} 1 -1)
+    If $xcompmgr <> {} Then
+    Begin
+        Set $compmgr = {xcompmgr}
+        Set $cmd = {echo }$xcompmgr{ |xargs basename}
+        Set $xcompmgr = (GetOutput $cmd 1 -1)
+    End
+
+    # check if compton is installed
+    Set $compton = (GetOutput {which compton} 1 -1)
+    If $compton <> {} Then
+    Begin
+        If $compmgr == {none} Then
+            Set $compmgr = {compton}
+        Else
+            Set $compmgr = {both}
+        Set $cmd = {echo }$compton{ |xargs basename}
+        Set $compton = (GetOutput $cmd 1 -1)
+    End
+    
+    # update widgets font
+    Set $defaultFont = (GetOutput {echo $[infostore.used_font]} 1 -1)
+    Set $Font = {xft:}$defaultFont{:size=10}
+    For $Widget=1 To 8 Do
+        ChangeFont $Widget $Font
+    For $Widget=10 To 28 Do
+        ChangeFont $Widget $Font
+    For $Widget=50 To 66 Do
+        ChangeFont $Widget $Font
+    For $Widget=100 To 106 Do
+        ChangeFont $Widget $Font
+    
+    # set widgets with initial/parsed values
+    ChangeValue 7 $useCompositor
+    ChangeValue 12 $enableShadows
+    ChangeValue 14 $onDockPanels
+    ChangeValue 16 $whileDnD
+    ChangeTitle 19 $ShadowOpacity
+    ChangeTitle 21 $BlurRadius
+    ChangeTitle 23 $LeftOffset
+    ChangeTitle 25 $TopOffset
+    ChangeTitle 27 $ShadowColor
+
+    ChangeValue 52 $enableFading
+    ChangeValue 54 $onOpacityChanged
+    ChangeValue 56 $onOpenClose
+    ChangeTitle 59 $FadeInSteps
+    ChangeTitle 61 $FadeOutSteps
+    ChangeTitle 63 $FadeStepTime
+
+    ChangeTitle 65 $OpacityOnMenus
+    ChangeTitle 102 $AdditionalParams
+    
+    # set widgets depending on the composite manager
+    If $compmgr <> {none} Then
+    Begin
+        If $xcompActive == 1 Then
+        Begin
+            If $compmgr == {compton} Then
+            Begin
+                Do {echo xcompmgr not installed. Switching to compton.}
+                ChangeForeColor 4 $inactiveColor
+                ChangeForeColor 54 $inactiveColor
+                ChangeForeColor 55 $inactiveColor
+                Set $xcompActive = 0
+                HideWidget 28
+                HideWidget 66
+                ChangeValue 3 0
+                ChangeValue 5 1
+            End
+            Else
+            Begin
+                If $compmgr == {xcompmgr} Then
+                Begin
+                    ChangeForeColor 6 $inactiveColor
+                End
+                # deactivate compton specific options
+                ChangeForeColor 16 $inactiveColor
+                ChangeForeColor 17 $inactiveColor
+                ChangeForeColor 26 $inactiveColor
+                ChangeForeColor 56 $inactiveColor
+                ChangeForeColor 57 $inactiveColor
+                ChangeForeColor 64 $inactiveColor
+                ChangeTitle 28 (GetTitle 27)
+                ChangeForeColor 28 $inactiveColor
+                ShowWidget 28
+                ChangeTitle 66 (GetTitle 65)
+                ChangeForeColor 66 $inactiveColor
+                ShowWidget 66
+            End
+        End
+        Else
+        Begin
+            If $compmgr == {xcompmgr} Then
+            Begin
+                Do {echo compton not installed. Switching to xcompmgr.}
+                ChangeForeColor 6 $inactiveColor
+                Set $xcompActive = 1
+                # deactivate compton specific options
+                ChangeForeColor 17 $inactiveColor
+                ChangeForeColor 26 $inactiveColor
+                ChangeForeColor 54 $inactiveColor
+                ChangeForeColor 55 $inactiveColor
+                ChangeForeColor 57 $inactiveColor
+                ChangeForeColor 64 $inactiveColor
+                ChangeTitle 28 (GetTitle 27)
+                ChangeForeColor 28 $inactiveColor
+                ShowWidget 28
+                ChangeTitle 66 (GetTitle 65)
+                ChangeForeColor 66 $inactiveColor
+                ShowWidget 66
+            End
+            Else
+            Begin
+                HideWidget 28
+                HideWidget 66
+                ChangeValue 3 0
+                ChangeValue 5 1
+            End
+        End
+    End
+    Else
+    Begin
+        If $useCompositor == 1 Then
+        Begin
+            Set $useCompositor = 0
+            ChangeValue 7 $useCompositor
+            Do {FuncWriteSetEnvToFileAndSet use_composite 0 }$userDir{/.settings}
+        End
+        
+        # deactivate all widgets
+        For $Widget=1 To 8 Do
+            ChangeForeColor $Widget $inactiveColor
+        For $Widget=10 To 28 Do
+            ChangeForeColor $Widget $inactiveColor
+        For $Widget=50 To 66 Do
+            ChangeForeColor $Widget $inactiveColor
+        For $Widget=100 To 102 Do
+            ChangeForeColor $Widget $inactiveColor
+        
+    End
+
+
+    # Check if a comp manager is running
+    If $xcompActive == 1 Then
+    Begin
+        Set $Cmd1 = {pidof xcompmgr}
+        Set $Cmd2 = {pidof compton}
+        Set $stopCompmgr = {xcompmgr}
+    End
+    Else
+    Begin
+        Set $Cmd1 = {pidof compton}
+        Set $Cmd2 = {pidof xcompmgr}
+        Set $stopCompmgr = {compton}
+    End
+    
+    If (GetOutput $Cmd1 1 -1) <> {} Then
+        Set $runButton = {Stop}
+    Else
+    Begin
+        If (GetOutput $Cmd2 1 -1) <> {} Then
+            Set $runButton = {Stop}
+        Else
+            Set $runButton = {Start}
+    End
+
+    If $useCompositor == 1 Then
+    Begin
+        ChangeForeColor 103 $inactiveColor
+        ChangeForeColor 105 $activeColor
+    End
+    Else
+    Begin
+        ChangeForeColor 103 $inactiveColor
+        ChangeForeColor 105 $inactiveColor
+    End
+    
+    ChangeTitle 105 $runButton
+End
+
+PeriodicTasks
+Begin
+    # update values
+    If $state <> 0 Then
+    Begin
+        If $useCompositor <> (GetValue 7) Then
+        Begin
+            Set $useCompositor = (GetValue 7)
+            Set $state = (Add $state 1)
+        End
+        If $ShadowOpacity <> (GetTitle 19) Then
+        Begin
+            Set $ShadowOpacity = (GetTitle 19)
+            Set $state = (Add $state 1)
+        End
+        If $BlurRadius <> (GetTitle 21) Then
+        Begin
+            Set $BlurRadius = (GetTitle 21)
+            Set $state = (Add $state 1)
+        End
+        If $LeftOffset <> (GetTitle 23) Then
+        Begin
+            Set $LeftOffset = (GetTitle 23)
+            Set $state = (Add $state 1)
+        End
+        If $TopOffset <> (GetTitle 25) Then
+        Begin
+            Set $TopOffset = (GetTitle 25)
+            Set $state = (Add $state 1)
+        End
+
+        If $FadeInSteps <> (GetTitle 59) Then
+        Begin
+            Set $FadeInSteps = (GetTitle 59)
+            Set $state = (Add $state 1)
+        End
+        If $FadeOutSteps <> (GetTitle 61) Then
+        Begin
+            Set $FadeOutSteps = (GetTitle 61)
+            Set $state = (Add $state 1)
+        End
+        If $FadeStepTime <> (GetTitle 63) Then
+        Begin
+            Set $FadeStepTime = (GetTitle 63)
+            Set $state = (Add $state 1)
+        End
+        If $ShadowColor <> (GetTitle 27) Then
+        Begin
+            Set $ShadowColor = (GetTitle 27)
+            Set $state = (Add $state 1)
+        End
+
+        If $OpacityOnMenus <> (GetTitle 65) Then
+        Begin
+            Set $OpacityOnMenus = (GetTitle 65)
+            Set $state = (Add $state 1)
+        End
+        If $AdditionalParams <> (GetTitle 102) Then
+        Begin
+            Set $AdditionalParams = (GetTitle 102)
+            Set $state = (Add $state 1)
+        End
+
+        If $state == 2 Then
+        Begin
+            Set $state = (Add $state 1)
+            Set $update = {gui}
+        End
+    End
+
+    If $update == {gui} Then
+    Begin
+        If $xcompActive == 0 Then
+        Begin
+            ChangeForeColor 54 $inactiveColor
+            ChangeForeColor 55 $inactiveColor
+            ChangeForeColor 16 $activeColor
+            ChangeForeColor 17 $activeColor
+            ChangeForeColor 26 $activeColor
+            ChangeForeColor 56 $activeColor
+            ChangeForeColor 57 $activeColor
+            ChangeForeColor 64 $activeColor
+            ChangeForeColor 28 $activeColor
+            HideWidget 28
+            ChangeForeColor 66 $activeColor
+            HideWidget 66
+        End
+        Else
+        Begin
+            ChangeForeColor 16 $inactiveColor
+            ChangeForeColor 17 $inactiveColor
+            ChangeForeColor 26 $inactiveColor
+            ChangeForeColor 56 $inactiveColor
+            ChangeForeColor 57 $inactiveColor
+            ChangeForeColor 64 $inactiveColor
+            ChangeTitle 28 (GetTitle 27)
+            ChangeForeColor 28 $inactiveColor
+            ShowWidget 28
+            ChangeTitle 66 (GetTitle 65)
+            ChangeForeColor 66 $inactiveColor
+            ShowWidget 66
+            ChangeForeColor 54 $activeColor
+            ChangeForeColor 55 $activeColor
+        End
+
+        # Check if compmgr running
+        If $xcompActive == 1 Then
+        Begin
+            Set $Cmd1 = {pidof xcompmgr}
+            Set $Cmd2 = {pidof compton}
+        End
+        Else
+        Begin
+            Set $Cmd1 = {pidof compton}
+            Set $Cmd2 = {pidof xcompmgr}
+        End
+        
+        If (GetOutput $Cmd1 1 -1) <> {} Then
+        Begin
+            Set $runButton = {Stop}
+            If $xcompActive == 1 Then
+                Set $stopCompmgr = {xcompmgr}
+            Else
+                Set $stopCompmgr = {compton}
+        End
+        Else
+        Begin
+            If (GetOutput $Cmd2 1 -1) <> {} Then
+            Begin
+                Set $runButton = {Stop}
+                If $xcompActive == 0 Then
+                    Set $stopCompmgr = {xcompmgr}
+                Else
+                    Set $stopCompmgr = {compton}
+            End
+            Else
+                Set $runButton = {Start}
+        End
+
+        If $useCompositor == 1 Then
+        Begin
+            ChangeForeColor 103 $activeColor
+            ChangeForeColor 105 $activeColor
+        End
+        Else
+        Begin
+            If $state > 2 Then
+                ChangeForeColor 103 $activeColor
+            If $runButton == {Start} Then
+            Begin
+                ChangeForeColor 105 $inactiveColor
+                Set $runButton = {NOP}
+            End
+        End
+        
+        ChangeTitle 105 $runButton
+        Set $update = {false}
+    End
+
+
+    If $update == {running} Then
+    Begin
+        # Check if starting is successful
+        If $xcompActive <> 0 Then
+            Set $Cmd = {pidof }$xcompmgr
+        Else
+            Set $Cmd = {pidof }$compton
+        If (GetOutput $Cmd 1 -1) <> {} Then
+        Begin
+            Set $runButton = {Stop}
+            ChangeTitle 105 $runButton
+            Set $update = {false}
+        End
+    End
+
+    If $update == {killed} Then
+    Begin
+        # Check if stopping is successful
+        Set $Cmd = {pidof }$stopCompmgr
+        If (GetOutput $Cmd 1 -1) == {} Then
+        Begin
+            If $useCompositor == 0 Then
+            Begin
+                Set $runButton = {NOP}
+                ChangeForeColor 105 $inactiveColor
+            End
+            Else
+            Begin
+                Set $runButton = {Start}
+            End
+            ChangeTitle 105 $runButton
+            Set $update = {false}
+        End
+    End
+    
+    If $update == {stop} Then
+    Begin
+        Set $execString = {killall }$stopCompmgr
+        Do {Exec }$execString
+        Do {FuncStopFvwmTransSet}
+        Set $update = {killed}
+    End
+    
+    If $update == {save} Then
+    Begin
+        If $useCompositor == 0 Then
+        Begin
+            Do {FuncWriteSetEnvToFileAndSet use_composite "0" }$userDir{/.settings}
+            Set $update = {killed}
+        End
+        Else
+        Begin
+            Do {FuncWriteSetEnvToFileAndSet use_composite "1" }$userDir{/.settings}
+            Set $update = {start}
+            Set $save = {true}
+        End
+    End
+
+    If $update == {start} Then
+    Begin
+        If $xcompActive <> 0 Then
+            Set $execString = $xcompmgr
+        Else
+            Set $execString = $compton
+
+        If $enableShadows <> 0 Then
+        Begin
+            Set $execString = $execString{ -c}
+            
+            If $onDockPanels <> 1 Then
+                Set $execString = $execString{ -C}
+
+            If (GetTitle 19) <> {0.1} Then
+                Set $execString = $execString{ -o }$ShadowOpacity
+
+            If (GetTitle 21) <> {12} Then
+                Set $execString = $execString{ -r }$BlurRadius
+
+            If (GetTitle 23) <> {-15} Then
+                Set $execString = $execString{ -l }$LeftOffset
+
+            If (GetTitle 25) <> {-15} Then
+                Set $execString = $execString{ -t }$TopOffset
+        End
+
+        If $enableFading <> 0 Then
+        Begin
+            Set $execString = $execString{ -f}
+            
+            If $onOpacityChanged <> 0 Then
+            Begin
+                If $xcompActive == 1 Then
+                    Set $execString = $execString{ -F}
+            End
+
+            If (GetTitle 59) <> {0.028} Then
+                Set $execString = $execString{ -I }$FadeInSteps
+
+            If (GetTitle 61) <> {0.03} Then
+                Set $execString = $execString{ -O }$FadeOutSteps
+
+            If (GetTitle 63) <> {10} Then
+                Set $execString = $execString{ -D }$FadeStepTime
+        End
+
+        If $xcompActive == 0 Then
+        Begin
+            If $enableShadows <> 0 Then
+            Begin
+                If $whileDnD <> 1 Then
+                    Set $execString = $execString{ -G}
+
+                If (GetTitle 27) <> {000000} Then
+                Begin
+                    Set $dec = (HexToNum (StrCopy $ShadowColor 1 2))
+                    Set $cmd = {perl -e 'printf "%.2f",(}$dec{/256)'}
+                    Set $ShadowColorR = (GetOutput $cmd 1 -1)
+                    Set $execString = $execString{ --shadow-red }$ShadowColorR
+
+                    Set $dec = (HexToNum (StrCopy $ShadowColor 3 4))
+                    Set $cmd = {perl -e 'printf "%.2f",(}$dec{/256)'}
+                    Set $ShadowColorG = (GetOutput $cmd 1 -1)
+                    Set $execString = $execString{ --shadow-green }$ShadowColorG
+
+                    Set $dec = (HexToNum (StrCopy $ShadowColor 5 6))
+                    Set $cmd = {perl -e 'printf "%.2f",(}$dec{/256)'}
+                    Set $ShadowColorB = (GetOutput $cmd 1 -1)
+                    Set $execString = $execString{ --shadow-blue }$ShadowColorB
+                End
+            End
+
+            If $enableFading <> 0 Then
+            Begin
+                If $onOpenClose <> 1 Then
+                    Set $execString = $execString{ --no-fading-openclose}
+            End
+
+            If (GetTitle 65) <> {0.0} Then
+                Set $execString = $execString{ -m }$OpacityOnMenus
+        End
+
+        If (GetTitle 102) <> {} Then
+            Set $execString = $execString{ }$AdditionalParams
+
+        If $save <> {true} Then
+        Begin
+            Do {Exec }$execString
+            Do {FuncStartFvwmTransSet}
+            Set $update = {running}
+        End
+        Else
+        Begin
+            Do {FuncWriteInfoStoreToFileAndSet comp_command "}$execString{" }$userDir{/.settings}
+            Set $update = {false}
+            Set $save = {false}
+            ChangeForeColor 103 $inactiveColor
+        End
+    End
+End
+
+# composite manager rectangle
+Widget 1
+Property
+    Type        Rectangle
+    Size        450 40
+    Position    10 10
+    Flags       NoReliefString
+End
+
+# Text 'Composite Managers'
+Widget 2
+Property
+    Type        ItemDraw
+    LocaleTitle {Composite Managers}
+    Size        140 18
+    Position    20 0
+    Flags       NoReliefString NoFocus Left
+End
+
+# Radio button xcompmgr
+Widget 3
+Property
+    Position    180 23
+    Type        RadioButton
+    Value       1
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $compmgr <> {none} Then
+        Begin
+            If $compmgr == {compton} Then
+                ChangeValue 3 0
+            Else
+            Begin
+                ChangeValue 5 0
+                ChangeValue 3 1
+                Set $xcompActive = 1
+                Set $update = {gui}
+                Set $state = (Add $state 2)
+            End
+        End
+    End
+End
+
+# Text 'Xcompmgr'
+Widget 4
+Property
+    Type        ItemDraw
+    LocaleTitle {Xcompmgr}
+    Size        90 18
+    Position    200 20
+    Flags       NoReliefString NoFocus Left
+End
+
+# Radio button compton
+Widget 5
+Property
+    Position    330 23
+    Type        RadioButton
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $compmgr <> {none} Then
+        Begin
+            If $compmgr == {xcompmgr} Then
+                ChangeValue 5 0
+            Else
+            Begin
+                ChangeValue 3 0
+                ChangeValue 5 1
+                Set $xcompActive = 0
+                Set $update = {gui}
+                Set $state = (Add $state 2)
+            End
+        End
+    End
+End
+
+# Text 'Compton'
+Widget 6
+Property
+    Type        ItemDraw
+    LocaleTitle {Compton}
+    Size        80 18
+    Position    350 20
+    Flags       NoReliefString NoFocus Left
+End
+
+# Check box 'Use'
+Widget 7
+Property
+    Type        CheckBox
+    Position    20 20
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $compmgr <> {none} Then
+        Begin
+            Set $update = {gui}
+            Set $state = 1
+        End
+        Else
+            ChangeValue 7 0
+    End
+End
+
+# Text 'Use'
+Widget 8
+Property
+    Type        ItemDraw
+    LocaleTitle {Use}
+    Size        100 18
+    Position    50 20
+    Flags       NoReliefString NoFocus Left
+End
+
+
+#-----------------------------------------------------------------------
+
+# shadows rectangle
+Widget 10
+Property
+    Type        Rectangle
+    Size        220 250
+    Position    10 60
+    Flags       NoReliefString
+End
+
+# Text 'Shadows'
+Widget 11
+Property
+    Type        ItemDraw
+    LocaleTitle {Shadows}
+    Size        60 18
+    Position    20 50
+    Flags       NoReliefString NoFocus Left
+End
+
+# Check box 'Enable Shadows'
+Widget 12
+Property
+    Type        CheckBox
+    Position    20 80
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $compmgr <> {none} Then
+        Begin
+            Set $enableShadows = (GetValue 12)
+            Set $state = 2
+        End
+        Else
+            ChangeValue 12 $enableShadows
+    End
+End
+
+# Text 'Enable Shadows'
+Widget 13
+Property
+    Type        ItemDraw
+    LocaleTitle {Enable Shadows}
+    Size        110 18
+    Position    50 80
+    Flags       NoReliefString NoFocus Left
+End
+
+# Check box 'On Dock/Panels'
+Widget 14
+Property
+    Type        CheckBox
+    Position    20 100
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $compmgr <> {none} Then
+        Begin
+            Set $onDockPanels = (GetValue 14)
+            Set $state = 2
+        End
+        Else
+            ChangeValue 14 $onDockPanels
+    End
+End
+
+# Text 'On Dock/Panels'
+Widget 15
+Property
+    Type        ItemDraw
+    LocaleTitle {on Dock/Panels}
+    Size        110 18
+    Position    50 100
+    Flags       NoReliefString NoFocus Left
+End
+
+# Check box 'while drag'n'drop'
+Widget 16
+Property
+    Type        CheckBox
+    Position    20 120
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $compmgr <> {none} Then
+        Begin
+            If $xcompActive == 1 Then
+                ChangeValue 16 $whileDnD
+            Else
+            Begin
+                Set $whileDnD = (GetValue 16)
+                Set $state = 2
+            End
+        End
+        Else
+            ChangeValue 16 $whileDnD
+    End
+End
+
+# Text 'while drag'n'drop'
+Widget 17
+Property
+    Type        ItemDraw
+    LocaleTitle {while drag'n'drop}
+    Size        140 18
+    Position    50 120
+    Flags       NoReliefString NoFocus Left
+End
+
+# Text 'Opacity'
+Widget 18
+Property
+    Type        ItemDraw
+    LocaleTitle {Opacity:}
+    Size        100 18
+    Position    20 155
+    Flags       NoReliefString NoFocus Left
+End
+
+# Textedit Opacity
+Widget 19
+Property
+    Type        TextField
+    Title       {1234}
+    Size        40 24
+    Position    155 150
+    Flags       NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $state = 1
+    End
+End
+
+# Text 'Blur Radius'
+Widget 20
+Property
+    Type        ItemDraw
+    LocaleTitle {Blur Radius:}
+    Size        100 18
+    Position    20 185
+    Flags       NoReliefString NoFocus Left
+End
+
+# Textedit Blur Radius
+Widget 21
+Property
+    Type        TextField
+    Title       {1234}
+    Size        40 24
+    Position    155 180
+    Flags       NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $state = 1
+    End
+End
+
+# Text 'Left Offset'
+Widget 22
+Property
+    Type        ItemDraw
+    LocaleTitle {Left Offset:}
+    Size        100 18
+    Position    20 215
+    Flags       NoReliefString NoFocus Left
+End
+
+# Textedit Left Offset
+Widget 23
+Property
+    Type        TextField
+    Title       {1234}
+    Size        45 24
+    Position    155 210
+    Flags       NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $state = 1
+    End
+End
+
+# Text 'Top Offset'
+Widget 24
+Property
+    Type        ItemDraw
+    LocaleTitle {Top Offset:}
+    Size        100 18
+    Position    20 245
+    Flags       NoReliefString NoFocus Left
+End
+
+# Textedit Top Offset
+Widget 25
+Property
+    Type        TextField
+    Title       {1234}
+    Size        45 24
+    Position    155 240
+    Flags       NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $state = 1
+    End
+End
+
+# Text 'Shadow color'
+Widget 26
+Property
+    Type        ItemDraw
+    LocaleTitle {Shadow color:}
+    Size        100 18
+    Position    20 275
+    Flags       NoReliefString NoFocus Left
+End
+
+# Textedit Shadow color
+Widget 27
+Property
+    Type        TextField
+    Title       {1234}
+    Size        45 24
+    Position    155 270
+    Flags       NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $state = 1
+    End
+End
+
+# ItemDraw 'Textedit Shadow color inactive'
+Widget 28
+Property
+    Type        ItemDraw
+    Title       {}
+    Size        57 19
+    Position    158 273
+    Flags       NoReliefString NoFocus Left
+End
+
+#-----------------------------------------------------------------------
+
+# fading rectangle
+Widget 50
+Property
+    Type        Rectangle
+    Size        220 250
+    Position    240 60
+    Flags       NoReliefString
+End
+
+# Text 'Fading'
+Widget 51
+Property
+    Type        ItemDraw
+    LocaleTitle {Fading}
+    Size        50 18
+    Position    250 50
+    Flags       NoReliefString NoFocus Left
+End
+
+# Check box 'Enable Fading'
+Widget 52
+Property
+    Type        CheckBox
+    Position    250 80
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $compmgr <> {none} Then
+        Begin
+            Set $enableFading = (GetValue 52)
+            Set $state = 2
+        End
+        Else
+            ChangeValue 52 $enableFading
+    End
+End
+
+# Text 'Enable Fading'
+Widget 53
+Property
+    Type        ItemDraw
+    LocaleTitle {Enable Fading}
+    Size        110 18
+    Position    280 80
+    Flags       NoReliefString NoFocus Left
+End
+
+# Check box 'on Opacity change'
+Widget 54
+Property
+    Type        CheckBox
+    Position    250 100
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $compmgr <> {none} Then
+        Begin
+            If $xcompActive == 0 Then
+                ChangeValue 54 $onOpacityChanged
+            Else
+            Begin
+                Set $onOpacityChanged = (GetValue 54)
+                Set $state = 2
+            End
+        End
+        Else
+            ChangeValue 54 $onOpacityChanged
+    End
+End
+
+# Text 'on Opacity change'
+Widget 55
+Property
+    Type        ItemDraw
+    LocaleTitle {on Opacity change}
+    Size        130 18
+    Position    280 100
+    Flags       NoReliefString NoFocus Left
+End
+
+# Check box 'on Open/Close'
+Widget 56
+Property
+    Type        CheckBox
+    Position    250 120
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $compmgr <> {none} Then
+        Begin
+            If $xcompActive == 1 Then
+                ChangeValue 56 $onOpenClose
+            Else
+            Begin
+                Set $onOpenClose = (GetValue 56)
+                Set $state = 2
+            End
+        End
+        Else
+            ChangeValue 56 $onOpenClose
+    End
+End
+
+# Text 'on Open/Close'
+Widget 57
+Property
+    Type        ItemDraw
+    LocaleTitle {on Open/Close}
+    Size        140 18
+    Position    280 120
+    Flags       NoReliefString NoFocus Left
+End
+
+# Text 'Fade-in Steps'
+Widget 58
+Property
+    Type        ItemDraw
+    LocaleTitle {Fade-in Steps:}
+    Size        100 18
+    Position    250 155
+    Flags       NoReliefString NoFocus Left
+End
+
+# Textedit Fade-in Steps
+Widget 59
+Property
+    Type        TextField
+    Title       {1234}
+    Size        40 24
+    Position    385 150
+    Flags       NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $state = 1
+    End
+End
+
+# Text 'Fade-out Steps'
+Widget 60
+Property
+    Type        ItemDraw
+    LocaleTitle {Fade-out Steps:}
+    Size        110 18
+    Position    250 185
+    Flags       NoReliefString NoFocus Left
+End
+
+# Textedit Fade-out Steps
+Widget 61
+Property
+    Type        TextField
+    Title       {1234}
+    Size        40 24
+    Position    385 180
+    Flags       NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $state = 1
+    End
+End
+
+# Text 'Fade Step Time'
+Widget 62
+Property
+    Type        ItemDraw
+    LocaleTitle {Fade Step Time:}
+    Size        120 18
+    Position    250 215
+    Flags       NoReliefString NoFocus Left
+End
+
+# Textedit Fade Step Time
+Widget 63
+Property
+    Type        TextField
+    Title       {1234}
+    Size        45 24
+    Position    385 210
+    Flags       NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $state = 1
+    End
+End
+
+# Text 'Opacity on menus'
+Widget 64
+Property
+    Type        ItemDraw
+    LocaleTitle {Opacity on menus:}
+    Size        130 18
+    Position    250 275
+    Flags       NoReliefString NoFocus Left
+End
+
+# Textedit Opacity on menus
+Widget 65
+Property
+    Type        TextField
+    Title       {1234}
+    Size        45 24
+    Position    385 270
+    Flags       NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $state = 1
+    End
+End
+
+# ItemDraw 'Textedit Opacity on menus inactive'
+Widget 66
+Property
+    Type        ItemDraw
+    Title       {}
+    Size        57 19
+    Position    388 273
+    Flags       NoReliefString Left
+End
+
+#-----------------------------------------------------------------------
+
+# additional options rectangle
+Widget 100
+Property
+    Type        Rectangle
+    Size        450 45
+    Position    10 320
+    Flags       NoReliefString
+End
+
+# Text 'Additional Parameters'
+Widget 101
+Property
+    Type        ItemDraw
+    LocaleTitle {Additional Parameters}
+    Size        150 18
+    Position    20 310
+    Flags       NoReliefString NoFocus Left
+End
+
+# Textedit Additional Parameters
+Widget 102
+Property
+    Type        TextField
+    Title       {1234}
+    Size        430 24
+    Position    20 330
+    Flags       NoReliefString Right
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $state = 1
+    End
+End
+
+
+# Button 'Save'
+Widget 103
+Property
+    Type        PushButton
+    LocaleTitle {Save}
+    Size        80 25
+    Position    10 375
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $fore = {#}(GetFore 103)
+        If $fore <> $inactiveColor Then
+        Begin
+            Set $update = {save}
+        End
+    End
+End
+
+# Button 'Help'
+Widget 104
+Property
+    Type        PushButton
+    LocaleTitle {Help}
+    Size        80 25
+    Position    145 375
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        If $compmgr == {none} Then
+            Do {FuncShowMessage "CompConfigurator Info" "Neither xcompmgr nor compton installed." "No Help available!"}
+        Else
+        Begin
+            If $xcompActive == 1 Then
+                Do {Exec xterm -g 100x50 -n "Help XcompMgr" -T "Help XcompMgr" -e "man xcompmgr"}
+            Else
+                Do {Exec xterm -g 100x50 -n "Help Compton" -T "Help Compton" -e "man compton"}
+        End
+    End
+End
+
+# Button 'Ok'
+Widget 105
+Property
+    Type        PushButton
+    LocaleTitle {NOP}
+    Size        80 25
+    Position    285 375
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Set $fore = {#}(GetFore 105)
+        If $fore <> $inactiveColor Then
+        Begin
+            If $runButton == {Stop} Then
+                Set $update = {stop}
+            If $runButton == {Start} Then
+                Set $update = {start}
+        End
+    End
+End
+
+# Button 'Cancel'
+Widget 106
+Property
+    Type        PushButton
+    LocaleTitle {Cancel}
+    Size        80 25
+    Position    380 375
+    Flags       NoReliefString
+Main
+Case message of
+    SingleClic :
+    Begin
+        Quit
+    End
+End
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

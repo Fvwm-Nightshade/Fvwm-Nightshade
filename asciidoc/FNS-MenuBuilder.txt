@@ -1,0 +1,132 @@
+FNS-MenuBuilder(1)
+==================
+:doctype: manpage
+
+
+== NAME
+
+FNS-MenuBuilder - SimpleGtk2 perl program to customize personal application menu.
+
+
+== SYNOPSIS
+
+FNS-MenuBuilder
+
+== DESCRIPTION
+
+*FNS-MenuBuilder* is used to customize the personal application menu. From 
+the menus found on the system applications or folders can be copied into it.
+
+Also it is possible to create own application or folder entries. The personal 
+entries can be sorted with drag'n'drop.
+
+
+== OPTIONS
+
+=== Root Menu
+
+Contains the application menu(s) found on the system and activated in 
+*FNS-MenuConfigurator*. Choose a folder or an application entry which 
+should appear in the personal menu.
+
+[NOTE]
+===============================
+Respectively only one entry per selection is possible.
+===============================
+
+=== Personal Menu
+
+Contains the favorite application entries and folders if +.personal+ found 
+in +~/.fvwm-nightshade/+. The entries can be sorted with drag'n'drop.
+
+[NOTE]
+===============================
+In the Statusbar at the bottom of the window the last selected entry 
+(Root or Personal) is shown with the type (Application/Folder), its name 
+and the command (application only).
+===============================
+
+=== Buttons
+
+*Add >*::
++
+Adds the selected root menu entry. It will be pasted below of the selected 
+personal menu entry. If no one is selected it will be put at the end of the list.
+
+*< Remove*::
++
+Removes the selected personal menu entry.
++
+[NOTE]
+===============================
+Removing a folder removes ALL entries below!
+===============================
+
+*Create*::
++
+Opens a dialog to add a custom application or folder entry to personal menu.
++
+For more details see _Create Dialog_ chapter below.
+
+*Save*::
++
+Saves the changed menu in +.personal+. A backup of the previous personal menu 
+will be created, too (+.personal.bak+).
+
+*Quit*::
++
+Closes *FNS-MenuBuilder*.
+
+
+=== Create Dialog
+
+With the _Create_ button a dialog appears to build a custom entry. Two types 
+can be chosen - an application or folder entry.
+
+*Icon Button*::
++
+With the Icon button an own icon can be selected. Clicking opens a selection dialog 
+in the icon theme directory set in *FNS Base Setup*. No icon change creates an entry 
+without an icon.
++
+[NOTE]
+===============================
+For highest quality choose a greater size than set in *Regenerate Menu(s)*. 
+Default is 24.
+===============================
+
+*Commandstring*::
++
+Add here the command with or without parameters. Clicking the button to the right 
+opens a dialog to choose the wanted executable/script. Both are active if _Application_ 
+is chosen.
+
+*Label*::
++
+The shown menu name of the folder or application.
+
+*Create*::
++
+Adds the custom entry under the selected personal menu entry. If no one selected it appears 
+at the end of the list.
+
+*Cancel*::
++
+Closes the dialog without adding a custom entry to personal menu.
+
+== FILES
+
+The new menu entries are saved in +~/.fvwm-nightshade/.personal+.
+
+A backup file +.personal.bak+ is created every time a new menu is saved.
+
+[NOTE]
+===============================
+It overwrites an existing backup. So only the previous personal menu exists!
+===============================
+
+== AUTHOR
+(C) 2016 Thomas Funk <t.funk@web.de>
+
+
+

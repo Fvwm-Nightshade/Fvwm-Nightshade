@@ -1,0 +1,222 @@
+# German translation for fns-cpu-performance
+# Copyright (C) 2015 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Thomas Funk <t.funk@web.de>, 2015.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: fns-cpu-performance\n"
+"POT-Creation-Date: 2014-12-08 23:37+0200\n"
+"PO-Revision-Date: 2015-02-16 18:45+0200\n"
+"Last-Translator: Thomas Funk <t.funk@web.de>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "FNS Cpu Performance"
+msgstr "FNS CPU Leistungseinstellungen"
+
+########################################################################
+# CPU Information Frame
+########################################################################
+
+msgid " CPU Information "
+msgstr " CPU Informationen "
+
+msgid "Model:"
+msgstr "Model:"
+
+msgid "CPU Count:"
+msgstr "CPU Anzahl:"
+
+msgid "Manufacturer:"
+msgstr "Hersteller:"
+
+
+########################################################################
+# Notebook page 1 for all cpus
+########################################################################
+
+msgid "Joined"
+msgstr "Gekoppelt"
+
+msgid "This is the tab for modifying ALL cores together if they're not unlocked."
+msgstr "Dieser Tab ist zum gemeinsamen modifizieren ALLER Kerne, wenn sie entsperrt sind."
+
+msgid " Information to Cores "
+msgstr " Infos zu den Kernen "
+
+msgid "L2 Cache:"
+msgstr "L2 Cache:"
+
+msgid "Bogomips:"
+msgstr "Bogomips:"
+
+msgid "More"
+msgstr "Mehr"
+
+msgid "Show information about the cpu."
+msgstr "Zeigt Informationen über die Cpu."
+
+msgid "Unlock cores"
+msgstr "Kerne entsperren"
+
+msgid "Unlock cores to set governor and frequencies separately."
+msgstr "Entsperren der Kerne, um den Governor und die Frequenzen seperat zu setzen."
+
+msgid "All cores will be set to common values! Continue anyway?"
+msgstr "Alle Kerne werden auf gemeinsame Werte gesetzt! Trotzdem fortfahren?"
+
+msgid "Governor:"
+msgstr "Governor:"
+
+msgid "Sets the global used governor (if cores not unlocked). "
+msgstr "Setzt den globalen Governor (wenn die Kerne nicht entsperrt sind). "
+
+msgid ""
+"The following governors are available:\n\n"
+"Performance:\nThis governor sets the CPU statically to the highest frequency within the borders "
+"of Min Frequency and Max Frequency. Consequently, saving power is not the focus of this governor.\n\n"
+"Powersave:\nThe CPU frequency is statically set to the lowest possibility. This can have severe "
+"impact on the performance, as the system will never rise above this frequency no matter how busy "
+"the processors are.\nHowever, using this governor often does not lead to the expected power "
+"savings as the highest savings can usually be achieved at idle through entering C-states. Due "
+"to running processes at the lowest frequency with the powersave governor, processes will take "
+"longer to finish, thus prolonging the time for the system to enter any idle C-states.\n\n"
+"On-demand:\nThe kernel implementation of a dynamic CPU frequency policy: The governor monitors "
+"the processor utilization. As soon as it exceeds a certain threshold, the governor will set the "
+"frequency to the highest available. If the utilization is less than the threshold, the next "
+"lowest frequency is used. If the system continues to be underutilized, the frequency is again "
+"reduced until the lowest available frequency is set.\n\n"
+"Conservative:\nSimilar to the on-demand implementation, this governor also dynamically adjusts "
+"frequencies based on processor utilization, except that it allows for a more gradual increase in "
+"power. If processor utilization exceeds a certain threshold, the governor does not immediately "
+"switch to the highest available frequency (as the on-demand governor does), but only to next higher "
+"frequency available.\n\n"
+"Userspace:\nThis governor allows the user, or any userspace program running with UID 'root', to "
+"set the CPU to a specific frequency. 'userspace' is not supported yet, but to get the same result "
+"use governor 'powersave' and one of the frequencies in 'Min Frequency', or governor 'performance' "
+"in combination with 'Max Frequency'."
+msgstr ""
+"Folgende Governors sind verfügbar:\n\n"
+"Performance:\nsetzt die CPU statisch auf die höchste Frequenz, die zwischen Min und Max Frequenz "
+"möglich ist. Infolgedessen ist Energiesparen nicht im Fokus dieses Governors.\n\n"
+"Powersave:\nDie CPU-Frequenz ist hier statisch auf den niedrigsten Wert gesetzt. Dies kann "
+"ernstliche Folgen für die Performance haben, da das System nie höher wie die eingestellte Frequenz "
+"takten kann, egal wie beschäftigt die Kerne gerade sind.\nEs werden, anders als angenommen, mit diesem "
+"Governor nicht die zu erwarteten Stromeinsparungen erreicht, sondern durch das Wechseln in andere "
+"C-States während des Leerlaufs.\nDa laufende Prozesse auf der niedriegsten Frequenz arbeiten müssen, "
+"brauchen sie länger, um fertig zu werden. Somit verlängert sich die Zeit, die das System nicht im "
+"Leerlauf verbringen kann, um in die stromsparenden C-States zu wechseln.\n\n"
+"On-demand:\nDer Governor überwacht die Prozessorauslastung (im Kernel implementierte dynamische "
+"Frequenz-Strategie). Wenn die Auslastung einen bestimmten Schwellwert übeschreitet, wechselt er "
+"auf die höchstmögliche Frequenz. Unterschreitet sie den Schwellwert wieder, wird auf die nächst kleinere "
+"geschaltet. Bleibt die Auslastung weiter niedrig, wird weiter auf die nächst kleinere Frequenz gewechselt, "
+"bis die niedrigste Frequenz, die möglich ist, erreicht wurde.\n\n"
+"Conservative:\nWie bei der on-demand Implementierung, passt dieser Governor die Frequenzen dynamisch zur "
+"CPU-Auslastung an, jedoch wird die Leistung allmählich angehoben. Wenn die Prozessorauslastung "
+"einen gewissen Schwellwert überschreitet, wechselt der Governor nicht sofort zur höchstmöglichen Frequenz "
+"(wie der on-demand Governor), sondern zur nächst höheren.\n\n"
+"Userspace:\nDieser Governor erlaubt dem Benutzer, oder jedem anderen Benutzerprogramm, das mit der UUID 'root' "
+"läuft, die CPU auf eine bestimmte Frequenz zu setzen. 'Userspace' wird derzeit nicht unterstützt, aber "
+"man kann das gleiche Verhalten mit 'Powersave' und einer der Min Frequenzen, oder mit 'Performance' und einer "
+"der Max Frequenzen erreichen."
+
+
+msgid "Min Frequency:"
+msgstr "Min Frequenz:"
+
+msgid "Sets the minimum used frequency from the range of available frequencies."
+msgstr "Setzt die minimal zu benutzende Frequenz aus den möglichen Frequenzbereichen."
+
+msgid "Max Frequency:"
+msgstr "Max Frequenz:"
+
+msgid "Sets the maximum used frequency from the range of available frequencies."
+msgstr "Setzt die maximal zu benutzende Frequenz aus den möglichen Frequenzbereichen."
+
+
+########################################################################
+# Notebook page x for CoreX
+########################################################################
+
+msgid "Core "
+msgstr "Kern "
+
+msgid "This is the tab for modifying core "
+msgstr "Das ist der Tab zum modifizieren des Kern "
+
+msgid "if unlocked at the joined tab."
+msgstr ", wenn im Tab 'Gekoppelt' die Kerne entsperrt sind."
+
+msgid "Information to Core"
+msgstr "Infos zum Kern"
+
+msgid "Show information about this core."
+msgstr "Zeigt Informationen zu diesem Kern."
+
+msgid "Sets the used governor (if cores unlocked). "
+msgstr "Setzt den zu benutenden Governor (wenn die Kerne entsperrt sind). "
+
+########################################################################
+# Button bar
+########################################################################
+
+msgid "Add to Autostart"
+msgstr "Hinzufügen zum Autostart"
+
+msgid "Add custom settings to autostart for permanency."
+msgstr "Fügt die Benutzer-Einstellungen zum Autostart hinzu, damit sie dauerhaft aktiviert sind."
+
+msgid "Apply"
+msgstr "Anwenden"
+
+msgid "Apply settings to the cpufreq system. Also save them in $FVWM_USERDIR/.governor for using it with autostart if set."
+msgstr ""
+"Wendet die Einstellungen auf das Cpufreq-System an. Ausserdem werden sie in $FVWM_USERDIR/.governor "
+"gespeichert, falls sie über den Autostart gesetzt werden wollen."
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Cancel/Quit Cpu Performance tool."
+msgstr "Abbrechen/Beenden der CPU Leistungseinstellungen."
+
+msgid "You have unapplied changes! Continue anyway?"
+msgstr "Sie haben nicht angewendete Änderungen! Trotzdem fortfahren?"
+
+msgid "No cpu scaler is installed.\nFor full functionality cpufreq-utils or cpupower must installed at least."
+msgstr "Kein Cpu-Scaler ist installiert.\nFür volle Funktionalität muss mindestens cpufreq-utils oder cpupower installiert sein."
+
+########################################################################
+# Others
+########################################################################
+
+msgid "Info"
+msgstr "Info"
+
+msgid "Warning"
+msgstr "Warnung"
+
+msgid "Error"
+msgstr "Fehler"
+
+########################################################################
+# Error Dialog
+########################################################################
+
+msgid "Error !"
+msgstr "Fehler !"
+
+msgid "No or unknown cpufreq driver is active!\nFNS Cpu Performance not usable."
+msgstr "Keiner oder unbekannter cpufreq-Treiber aktiv!\nFNS CPU Leistungseinstellungen nicht verwendbar!"
+
+msgid "Exit"
+msgstr "Beenden"
+

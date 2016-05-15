@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Tribal
+Comment=a dark theme based on MediterraneanNight Series v2.0
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Tribal
+CursorTheme=DMZ-Black
+ButtonLayout=close,minimize,maximize:

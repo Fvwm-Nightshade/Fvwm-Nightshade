@@ -1,0 +1,79 @@
+#-----------------------------------------------------------------------
+# File:         ShowHide_GlobalIconMan
+# Version:      1.0.0
+# Licence:      GPL 2
+#
+# Description:  Shows a windows list of all windows in the actual page
+#               moves down while mouse hovers over it and hide if leaves
+#
+# Author:       Thomas Funk <t.funk@web.de>    
+#
+# Created:      08/21/2015
+# Changed:      
+#-----------------------------------------------------------------------
+
+InfoStoreAdd y_move 0
+
+#-----------------------------------------------------------------------
+# Additional Style for Global FvwmIconMan ("Taskbar")
+#-----------------------------------------------------------------------
+Style GlobalIconMan !Button 1, !Button 3, !Button 5, !Button 7, !Button 9
+Style GlobalIconMan !Button 2, !Button 4, !Button 6, !Button 8, !Button 0
+Style GlobalIconMan Layer 0, HandleWidth 1, !State 1
+
+
+#-----------------------------------------------------------------------
+# Event Handler
+#-----------------------------------------------------------------------
+DestroyModuleConfig FvwmEventGlobalIconMan: *
+*FvwmEventGlobalIconMan: enter_window    GIMSH-EnterWindow
+*FvwmEventGlobalIconMan: leave_window    GIMSH-LeaveWindow
+*FvwmEventGlobalIconMan: new_page        FuncResetPos
+
+
+#-----------------------------------------------------------------------
+# Functions for moving global iconman down and after loosing focus back
+#-----------------------------------------------------------------------
+DestroyFunc GIMSH-EnterWindow
+AddToFunc   GIMSH-EnterWindow
+#+ I PointerWindow (GlobalIconMan, !State 1) Schedule 200 FuncShowWindow
++ I PointerWindow (GlobalIconMan, !State 1) FuncShowWindow
+
+
+DestroyFunc GIMSH-LeaveWindow
+AddToFunc   GIMSH-LeaveWindow
+#+ I Prev (GlobalIconMan, State 1) Schedule 200 FuncHideWindow
++ I Prev (GlobalIconMan, State 1) FuncHideWindow
+
+
+DestroyFunc FuncShowWindow
+AddToFunc   FuncShowWindow
+#+ I echo w.height: $[w.height]
+#+ I echo fontsize: $[infostore.fontsize]
++ I ThisWindow (GlobalIconMan, !State 1) \
+    PipeRead 'if [ $[w.height] -gt $(($[infostore.fontsize]*2)) ]; then \
+                echo InfoStoreAdd y_move $(($[w.height]-($[infostore.fontsize]+9))); \
+            else \
+                echo InfoStoreAdd y_move 0; \
+            fi'
+#+ I echo y_move: $[infostore.y_move]
++ I ThisWindow (GlobalIconMan) AnimatedMove w+0 w+$[infostore.y_move]p
++ I Schedule 70 ThisWindow (GlobalIconMan) Pick (CirculateHit) Layer 0 6
++ I All (GlobalIconMan) State 1 True
+    
+
+DestroyFunc FuncHideWindow
+AddToFunc   FuncHideWindow
+#+ I echo yStartIman: $[infostore.yStartIman]
++ I Prev (GlobalIconMan) Pick (CirculateHit) Layer 0 2
++ I Prev (GlobalIconMan, State 1) AnimatedMove w+0 -$[infostore.yStartIman]p
++ I All (GlobalIconMan) State 1 False
+
+
+# needed to reset all parts and set iconman on its start position
+DestroyFunc FuncResetPos
+AddToFunc   FuncResetPos
++ I InfoStoreAdd y_move 0
++ I All (GlobalIconMan) State 1 False
++ I All (GlobalIconMan) Pick (CirculateHit) Layer 0 2
++ I All (GlobalIconMan) Schedule 200 Move +$[infostore.xStartIman]p -$[infostore.yStartIman]p

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=FlatTab
+Comment=a soft and subtle dark theme based on Evolve and elementary
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=FlatTab
+CursorTheme=DMZ-Black
+ButtonLayout=close,minimize,maximize:

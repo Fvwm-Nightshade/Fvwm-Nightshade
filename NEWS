@@ -1,6 +1,40 @@
 Fvwm-Nightshade Release Notes
 =============================
 
+Version 0.7.x
+
+Changes:
+--------
+- 3 new themes:
+  - 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
+  - 'Rocken' based on Thibaut's theme (thanks for his admition :-) )
+  - 'Redmond' from Berno Strik (Yeah, we keep the good work ^^)
+- New layout 'Klike' - a KDE like bottom bar
+- Support for shadows and transparency with XcompMgr and Compton
+- Support for hald and upower for Suspend/Hibernate
+- Support for hotplug mounting (i.e. usb)
+- New Gtk2 and 3 themes for Air, Tribal and FlatTab
+- Support for some application launcher: grun and gmrun
+- Support for icons on desktop. Also for mount icons.
+- Support for systemd (suspend and hibernate)
+- New Gtk2 Config tools for different settings:
+  - FNS-BaseSetup (layouts, themes, compositing, icons on desktop, etc.)
+  - FNS-WindowsBehaviour (focus policies, placement, etc.)
+  - FNS-CompConfigurator (config tool for xcompmgr or compton)
+  - FNS-MenuConfigurator (exchange original fvwm-menu-config GUI)
+  - FNS-CPU-Performance (governor-tool for cpufreq / cpupower)
+  - FNS-MenuBuilder (configuration tool for personal menu).
+- Support for pkexec (adding programs to polkit for gui view as root)
+- Support for up to 10 virtual desktop pages. Depends on the limit of
+  available numeric keys (0-9)
+- Layouts now scalable up to 4K resolutions
+- Add support for conky >= 1.10
+- Support for Russian language
+- Re-add support for different install locations
+- Splash screen based on ImageMagick to support more image formats.
+
+------------------------------------------------------------------------
+
 Version 0.6.9 (09th October 2014)
 
 Changes:

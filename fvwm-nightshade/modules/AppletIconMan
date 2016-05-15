@@ -1,0 +1,84 @@
+#-----------------------------------------------------------------------
+# File:         AppletIconMan
+# Version:      0.1.3
+# Licence:      GPL 2
+#
+# Description:  Shows a windows list of all applets in the actual page
+#
+# Author:       Thomas Funk <t.funk@web.de>    
+#
+# Created:      07/20/2013
+# Changed:      05/08/2014
+#-----------------------------------------------------------------------
+
+
+#***********************************************************************
+# Applet IconMan ("Applet list")
+#***********************************************************************
+Style AppletIconMan !Button 1, !Button 3, !Button 5, !Button 7, !Button 9
+Style AppletIconMan !Button 2, !Button 4, !Button 6, !Button 8, !Button 0
+Style AppletIconMan !Title, Sticky, !Iconifiable, !Maximizable, WindowListSkip, HandleWidth 1, !State 2
+Style AppletIconMan PositionPlacement Center, StaysOnTop
+
+DestroyModuleConfig AppletIconMan: *
+*AppletIconMan: 1 IconName                  AppletIconMan
+*AppletIconMan: 1 Title                     ""
+*AppletIconMan: 1 ButtonGeometry            88x68
+*AppletIconMan: 1 ManagerGeometry           0x1
+
+*AppletIconMan: 1 Colorset                  10
+*AppletIconMan: 1 IconColorset              12
+*AppletIconMan: 1 PlainColorset             10
+*AppletIconMan: 1 SelectColorset            11
+*AppletIconMan: 1 FocusColorset             11
+*AppletIconMan: 1 FocusAndSelectColorset    11
+
+*AppletIconMan: 1 FollowFocus               true
+*AppletIconMan: 1 IconButton                down
+*AppletIconMan: 1 PlainButton               up
+*AppletIconMan: 1 SelectButton              down
+*AppletIconMan: 1 FocusButton               up
+*AppletIconMan: 1 FocusAndSelectButton      down
+
+*AppletIconMan: 1 ReliefThickness           1
+*AppletIconMan: 1 Resolution                page
+*AppletIconMan: 1 UseWinList                false
+*AppletIconMan: 1 Show                      FvwmApplet
+
+*AppletIconMan: 1 DrawIcons                 always
+*AppletIconMan: 1 Sort                      name
+*AppletIconMan: 1 Format                    ""
+*AppletIconMan: 1 Font                      "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+    
+*AppletIconMan: 1 NoIconAction              "SendToModule FvwmAnimate animate"
+*AppletIconMan: 1 Action  Mouse        1    A    sendcommand "FuncSelectWindow"
+*AppletIconMan: 1 Action  select            sendcommand "Focus"
+
+*AppletIconMan: 1 Action  Key         Left  N     gotobutton Next, select
+*AppletIconMan: 1 Action  Key         Right N     gotobutton Prev, select
+
+
+#-----------------------------------------------------------------------
+# Functions to show/hide AppletIconMan and de-/activate focus on applets
+#-----------------------------------------------------------------------
+DestroyFunc ShowHideAppletIconMan
+AddToFunc   ShowHideAppletIconMan
++ I None (AppletIconMan, !State 2) Module FvwmIconMan AppletIconMan
++ I TestRc (Match) KeepRc ActivateFocusOnApplets
++ I TestRc (!Match) KeepRc KillModule FvwmIconMan AppletIconMan
++ I TestRc (!Match) DeactivateFocusOnApplets
+
+DestroyFunc ActivateFocusOnApplets
+AddToFunc   ActivateFocusOnApplets
++ I All (FvwmApplet) Layer 0 6
++ I All (FvwmApplet) Style "FvwmApplet" Borderwidth 2
++ I All (AppletIconMan) State 2 True
+
+DestroyFunc DeactivateFocusOnApplets
+AddToFunc   DeactivateFocusOnApplets
++ I All (AppletIconMan) State 2 False
++ I All (FvwmApplet) Style "FvwmApplet" Borderwidth 0
++ I Prev (CurrentPage, !Iconic, AcceptsFocus, !FvwmApplet) Focus NoWarp
++ I All (FvwmApplet) Layer 0 2
+
+

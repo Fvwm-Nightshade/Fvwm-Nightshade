@@ -1,0 +1,300 @@
+# Russian translation for FNS-MenuConfigurator
+# Copyright (C) 2015 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# Artashes Mkhitaryan artashm@mytum.de, 2015.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-MenuConfigurator\n"
+"POT-Creation-Date: 2014-11-26 21:51+0200\n"
+"PO-Revision-Date: 2016-02-13 18:25+0200\n"
+"Last-Translator: Artashes Mkhitaryan artashm@mytum.de\n"
+"Language-Team: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "FNS Menu Desktop Configurator"
+msgstr "FNS Меню Конфигурацией Рабочего Стола"
+
+########################################################################
+# Notebook page 1 for multiple menu
+########################################################################
+
+msgid "Multiple Menu"
+msgstr "Множественное Меню"
+
+msgid ""
+"In this tab all XDG menus found on the system are shown. All "
+"selected menus will integrate in one Fvwm menu. Note that equal "
+"menus found under /etc/xdg/menus AND ~/.config/menus/ following "
+"the XDG menu specification only shown in ~/.config/menus/. "
+"\nIf you want to generate a custom-assembled menu switch to "
+"the 'Single Menu' tab."
+msgstr "В этом табе показаны  все XDG меню найденные в системе. Все "
+"выбранные меню будут включены в одно Fvwm меню. Похожие меню найденные в"
+"/etc/xdg/menus и ~/.config/menus/ following которые соблюдают спецификации"
+"XDG меню показаны только в ~/.config/menus/. \n Для пользовательской настройки меню"
+"переключитесь в 'Single Menu' таб"
+
+msgid "Menus in"
+msgstr "Меню в"
+
+msgid "No menus found! Check why from within a terminal with\n' fvwm-menu-desktop -v '"
+msgstr "Меню не найденные. Для нахождения причины введите в терминал: \n' fvwm-menu-desktop -v '"
+
+msgid ""
+"It is a good idea to check .xsession-errors in the user home\nfor errors, too. "
+"One limitation exists - if there are too much\nmenus found an error occurs "
+"in .xsession-errors:\n\n'Module(0xXXX) command is too big (1008), "
+"limit is 1000.'\n\nThis happens because PipeRead used for menu generation\nhas "
+"a command length limit of 1000 characters. Sorry for\nthat inconvinience."
+msgstr ""
+"Далее проверьте содержание .xsession-errors в домашней папке,\n для выявления ошибок."
+"При наличии большого количества меню выдается ошибка в .xsession-errors:\n\n "
+"'Module(0xXXX) command is too big (1008), limit is 1000.'\n\n "
+"Причиной является лимит длинны в 1000 символов у PipeRead а который использован для"
+"генерации меню. Мы извиняемся из за проявленные неудобства."
+
+########################################################################
+# Notebook page 2 for single menu
+########################################################################
+
+msgid "Single Menu"
+msgstr "Одиночное Меню"
+
+msgid ""
+"In this tab you can define a custom-assembled menu 'foo-bar.menu' "
+"placed on another location as defined in the XDG menu definitions.\n"
+"But remember, if the menu doesn't exist, nothing happens."
+msgstr ""
+"В этом табе вы можете настроит custom-assembled меню 'foo-bar.menu'"
+"директория пользовательских меню описана в XDG меню.\n"
+"Запомните, если меню не существует то ничего не произойдет."
+
+
+msgid "Menu Top Title:"
+msgstr "Меню Заглавие:"
+
+msgid ""
+"Specifies the menu title of the top menu used by Fvwm's Popup command. "
+"Default is 'FvwmMenu'."
+msgstr ""
+"Специфицирует заглавие главного меню использованного всплывающего окна команды Fvwm-а"
+"По умолчанию 'FvwmMenu'."
+
+msgid "Desktop:"
+msgstr "Рабочий стол:"
+
+msgid ""
+"Overrides the name of the main desktop environment installed on the system. "
+"If a system offers multiple desktop environments $XDG_MENU_PREFIX is typically "
+"set. It is ignored if this field is used. Possible names: gnome, kde, lxde, etc."
+msgstr ""
+"Переписывает имя основной среды рабочего стола. При наличии множественных рабочих сред в системе"
+"устанавливается $XDG_MENU_PREFIX. При употреблении этого поля он игнорируется. Возможные имена:"
+"gnome, kde, lxde, etc."
+
+msgid "Install-Prefix:"
+msgstr "Монтаж Префикс:"
+
+msgid ""
+"Overrides the standard locations for XDG menu definitions. The standard "
+"locations are /etc/xdg/menus and ~/.config/menus if available."
+msgstr ""
+"Переписывает стандартную директорию XDG меню спецификацией. "
+"Стандартными директориями являются: /etc/xdg/menus и ~/.config/menus"
+
+msgid "Menu Type:"
+msgstr "Тип Меню:"
+
+msgid ""
+"Defines which type of menu should be found. Possible name types could "
+"be: applications, settings, preferences, etc. Note if the specified "
+"menu type doesn't exist the generated menu is empty!"
+msgstr ""
+"Определяет тип меню. Возможные имена типов: applications, settings, preferences, etc."
+"При отсутствии определенного типа меню генерированное меню будет пустым!"
+
+########################################################################
+# Menu Options
+########################################################################
+
+msgid " General Options "
+msgstr " Общие Параметры "
+
+msgid "Use Icons"
+msgstr "С иконками"
+
+msgid "Option enables mini-icons in the menu(s)."
+msgstr "Позволить употребление мини-иконок в меню."
+
+msgid "Icon Size:"
+msgstr "Размер иконки:"
+
+msgid ""
+"If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size "
+"is desired change the wanted size in this field."
+msgstr ""
+"При установки 'Использовать Иконки' употребляются мини-иконки с размером 24х24."
+"Для измени размера иконок введите желанный размер в это поля."
+
+msgid "Icon Theme:"
+msgstr "Тема Иконок:"
+
+msgid ""
+"Sets the used icon theme. Default is 'gnome' but all others found in ~/.icons "
+"or /usr/share/icons can used except the hicolor theme because it's the default "
+"fallback theme if no icon is found. Note that the theme name must be written "
+"exactly as the icon directory e.g. /usr/share/icons/Mint-X => 'Mint-X'."
+msgstr ""
+"Устанавливает тему иконок. По умолчанию 'gnome', хотя все другие темы найденные в"
+"~/.icons или /usr/share/icons могут быть установлены кроме темы hicolor. Последняя "
+"является fallback темой по умолчанию. Имя темы должно совпасть с именем директории "
+"один в один. К примеру: /usr/share/icons/Mint-X => 'Mint-X'."
+
+msgid "Change icon theme path."
+msgstr "Изменить темы иконок."
+
+msgid "Directory Icon:"
+msgstr "Иконка директории:"
+
+msgid ""
+"If 'Use Icons' is enabled and for a directory in a menu no icon is found "
+"'gnome-fs-directory' as default icon is used. But if the gnome icon theme "
+"isn't installed no default icon appears. Another icon can defined here. "
+"Only the name of an icon is needed not the path!"
+msgstr ""
+"Если 'Use Icons' установлено и иконки для директории в меню не найдены тогда"
+"'gnome-fs-directory' иконки употреблены по умолчанию. Если тема иконок gnome"
+" не установлена то иконки по умолчанию не появятся. Другие иконки могут быть"
+" настроены тут. Введите только имя иконки исключая путь."
+
+msgid "Change directoy icon path."
+msgstr "Изменить директорию иконок."
+
+msgid "Application Icon:"
+msgstr "Иконка программы:"
+
+msgid ""
+"If 'Use Icons' is enabled and for an application no icon is found 'gnome-applications' "
+"as default icon is used. But if the gnome icon theme isn't installed no default icon "
+"appears. Another icon can defined here. Only the name of an icon is needed not the path!"
+msgstr ""
+"Если 'Use Icons' установлено и иконки для программы не найдены, по умолчанию "
+"употребляются иконки от 'gnome-applications'. Если тема иконок gnome не установлена иконки"
+" по умолчанию не появятся. Другие иконки могут быть"
+" настроены тут. Введите только имя иконки исключая путь."
+
+msgid "Change application icon path."
+msgstr "Изменит путь к программным иконкам."
+
+msgid "Icon Directory:"
+msgstr "Директория Иконк:"
+
+msgid ""
+"If the specified icon isn't that size it is converted if ImageMagick is installed. "
+"Generated icons are saved in $FVWM_USERDIR/icons or the directory specified here. "
+"Otherwise no icon appears in the menu for that entry."
+msgstr ""
+"Если размер выбранной иконки не совпадает с выбранным размером, то размер иконки будет "
+"изменен если ImageMagick установлен в системе. Генерированные иконки сохранены в $FVWM_USERDIR/icons "
+"или же в директории специфицированной тут. Иначе иконка для данной вкладке не появится в меню."
+
+msgid "Change icon directory path."
+msgstr "Изменить путь к директории иконок."
+
+msgid "Use Titles"
+msgstr "С названиями"
+
+msgid "If this option is set menus are generated with titles. Default is no titles."
+msgstr "Если эта опция выбрана, меню появляются с заглавиями. По умолчанию заглавя отсутствуют"
+
+msgid "Menus in Menu:"
+msgstr "Меню в меню:"
+
+msgid "Enable this checkbox to insert generated menu(s) IN a menu."
+msgstr "поставите птичку для внетдения меню в меню."
+
+msgid ""
+"Enter in this field the name of the menu (its top title) where the generated "
+"menu(s) should insert. For more information see the USAGE section in the man "
+"page of fns-menu-desktop."
+msgstr ""
+"Введите в это поле имя меню (его заглавие) где генерированные меню будут введены."
+"Информация об этом отделе предоставлена в секции USAGE в мануале fns-menu-desktop."
+
+
+msgid "Output Path:"
+msgstr "Путь Результатов."
+
+msgid "Enter here the FULL path of the menu to store. Default path is $FVWM_USERDIR/.menu."
+msgstr "Введите полный путь меню для сохранения. Путь по умолчанию: $FVWM_USERDIR/.menu."
+
+msgid "Change output path of the menu file."
+msgstr "Изменить путь результатов меню файла."
+
+########################################################################
+# Button bar
+########################################################################
+
+msgid "Generate"
+msgstr "Генерировать"
+
+msgid "Generate menu(s)."
+msgstr "Генерировать Меню."
+
+msgid "Help"
+msgstr "Помощь"
+
+msgid "Get help."
+msgstr "Получить помощь."
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save settings."
+msgstr "Сохранить Настройки."
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Cancel/Quit Menu Configurator."
+msgstr "Отменит/Выйти из меню Конфигураций."
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr "Присутствуют не сохраненные изменения! продолжить?"
+
+########################################################################
+# Others
+########################################################################
+msgid "Info"
+msgstr "Информация"
+
+msgid "Warning"
+msgstr "Предупреждения"
+
+msgid "Question"
+msgstr "Вопросы"
+
+msgid "Error"
+msgstr "Ошибки"
+
+msgid "Other"
+msgstr "Другое"
+
+msgid "Open File"
+msgstr "Открыть Файл"
+
+msgid "Save File"
+msgstr "Сохранить Файл"
+
+msgid "Select Folder"
+msgstr "Выбрать Файл"
+
+msgid "Create Folder"
+msgstr "Создать Файл"

@@ -1,7 +1,7 @@
-########################################################################
-# File:		decor
-# Version:	0.1.6
-# Licence: 	GPL 2
+#-----------------------------------------------------------------------
+# File:         decor
+# Version:      0.1.1
+# Licence:      GPL 2
 #
 # Description:	decor parts (titlebar, buttons, menus) of Clean theme
 #
@@ -9,8 +9,8 @@
 #			Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:	06/08/2012
-# Changed:	08/01/2013
-########################################################################
+# Changed:      08/15/2014
+#-----------------------------------------------------------------------
 
 Piperead "echo InfoStoreAdd titlebar_height `perl -e 'printf \"%.0f\",1.5*$[infostore.fontsize]'`"
 #=======================================================================
@@ -87,10 +87,11 @@ AddToDecor Default
 # Root menu
 #***********************************************************************
 MenuStyle * fvwm
+MenuStyle * Greyed gray45
 MenuStyle * BorderWidth 1, HilightBack, ActiveFore
 MenuStyle * font "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 MenuStyle * MenuColorset 5, ActiveColorset 6
-MenuStyle * Hilight3DThickness 0, TrianglesSolid, Animation
+MenuStyle * Hilight3DThickness 0, TrianglesSolid, !Animation
 MenuStyle * PopupDelay 300, PopdownImmediately, PopupOffset 0 100
 MenuStyle * ItemFormat "%s%|%5.i%5.5l%5.5r%.5>%|"
 MenuStyle * VerticalItemSpacing 2 3, VerticalTitleSpacing 1 2
@@ -112,7 +113,7 @@ MenuStyle winops VerticalItemSpacing 1 2, VerticalTitleSpacing 1 2
 #
 # +------------+
 # | ||  ||  || |
-# |	       |
+# |            |
 # +------------+
 #   1   2   3
 
@@ -200,19 +201,23 @@ Mouse 0		6		SCM		FuncShowMessage  "Minimize Button Bindings" \
 
 DestroyFunc FuncRemoveAllButtonBindings
 AddToFunc   FuncRemoveAllButtonBindings
-#   Button		Context Modifi 	Function
-+ I Mouse 1 	1      	A		-
-+ I Mouse 2    	1      	A     	-
-+ I Mouse 3    	1 		A		-
-+ I Mouse 0 	2		A		-
-+ I Mouse 1		4		A		-
-+ I Mouse 2		4		A		-
-+ I Mouse 2		4		M		-
-+ I Mouse 3		4		A		-
-+ I Mouse 1		6		A		-
-+ I Mouse 2		6		A		-
-+ I Mouse 3		6		A		-
-+ I Mouse 0		3		SCM		-
-+ I Mouse 0		2		SCM		-
-+ I Mouse 0		4		SCM		-
-+ I Mouse 0		6		SCM		-
+#   Button      Context     Modifi  Function
++ I Mouse 1     1           A       -
++ I Mouse 2     1           A       -
++ I Mouse 3     1           A       -
++ I Mouse 0     2           A       -
++ I Mouse 1     4           A       -
++ I Mouse 2     4           A       -
++ I Mouse 2     4           M       -
++ I Mouse 3     4           A       -
++ I Mouse 1     6           A       -
++ I Mouse 2     6           A       -
++ I Mouse 3     6           A       -
++ I Mouse 1     8           A       -
++ I Mouse 2     8           A       -
++ I Mouse 3     8           A       -
++ I Mouse 0     3           SCM     -
++ I Mouse 0     2           SCM     -
++ I Mouse 0     4           SCM     -
++ I Mouse 0     6           SCM     -
++ I Mouse 0     8           SCM     -

@@ -1,38 +1,33 @@
 #-----------------------------------------------------------------------
-# File:		VerticalPanel
-# Version:	1.0.6
-# Licence: 	GPL 2
+# File:         VerticalPanel
+# Version:      1.1.2
+# Licence:      GPL 2
 #
-# Description:	FvwmButtons panel for vertical layout. Position on the
-#		upper right side
+# Description:  FvwmButtons panel for vertical layout. Position on the
+#               upper right side
 #
-#		+-----------+
-#		|           | clock
-#		+-----------+
-#		|           | CPUmon
-#		+-----------+
-#		|           | stalonetray
-#		|           |
-#		+-----------+
-#		|           | Menü button
-#		+-----------+
-#		|           | Winlist button
-#		+-----------+
+#        +-----------+
+#        |           | clock
+#        +-----------+
+#        |           | CPUmon
+#        +-----------+
+#        |           | stalonetray
+#        |           |
+#        +-----------+
+#        |           | Menü button
+#        +-----------+
+#        |           | Winlist button
+#        +-----------+
 #
-# Author:	Thomas Funk <t.funk@web.de>
-#			Bernhard Popp <kermit.popp@googlemail.com>
+# Author:       Thomas Funk <t.funk@web.de>
+#               Bernhard Popp <kermit.popp@googlemail.com>
 #
-# Created:	08/15/2012
-# Changed:	10/09/2014
+# Created:      08/15/2012
+# Changed:      02/12/2016
 #-----------------------------------------------------------------------
 
-Style VerticalPanel !Title, Sticky, WindowListSkip, StaysOnBottom, HandleWidth 2
+Style VerticalPanel !Title, Sticky, WindowListSkip, Layer 4, HandleWidth 2
 
-
-#-----------------------------------------------------------------------
-# General
-#-----------------------------------------------------------------------
-#PipeRead "echo InfoStoreAdd column_size `perl -e 'printf \"%.0f\",$[infostore.panel_width]/($[infostore.panel_columns]+1)'`"
 
 #-----------------------------------------------------------------------
 # For systray
@@ -42,16 +37,81 @@ PipeRead 'echo InfostoreAdd tray_max_x $(($[infostore.tray_icons]+1))'
 #-----------------------------------------------------------------------
 # For clock applet
 #-----------------------------------------------------------------------
-PipeRead "echo InfoStoreAdd time_fsize `perl -e 'printf \"%.0f\",$[infostore.fontsize]/($[infostore.hratio]/1.1)'`"
-PipeRead "echo InfoStoreAdd time_voffset `perl -e 'printf \"%.0f\",$[infostore.fontsize]-10'`"
+#InfoStoreAdd time_fsize 15
+PipeRead `perl -e 'my $height = $[vp.height]; my $width = $[vp.width]; \
+my $fac = ($height/($[infostore.ratio]*100)*$[infostore.aspect_ratio]); \
+if ($width > 3000 and $height > 2000) { \
+   printf "InfoStoreAdd time_fsize %.0f\\n", \
+   $fac+(6.422E-11*$height**4-6.6E-7*$height**3+2.52832E-3*$height**2-4.2781*$height+2694.288); \
+} elsif ($width > 1920 and $height > 1200) { \
+   printf "InfoStoreAdd time_fsize %.0f\\n", \
+   $fac+(1.28E-10*$height**4-8.2156E-7*$height**3+1.97E-3*$height**2-2.093*$height+829.522); \
+} elsif ($width > 1440 and $height > 960) { \
+   printf "InfoStoreAdd time_fsize %.0f\\n", \
+   $fac+(4.449E-10*$height**3-2.446E-6*$height**2+3.475E-3*$height-1.95); \
+} elsif ($width > 1024 and $height > 768) { \
+   printf "InfoStoreAdd time_fsize %.0f\\n", \
+   $fac+(4.449E-10*$height**3-2.446E-6*$height**2+3.475E-3*$height-1.7); \
+} else { \
+   printf "InfoStoreAdd time_fsize %.0f\\n", \
+   $fac+(4.449E-10*$height**3-2.446E-6*$height**2+3.475E-3*$height-1.3); \
+}'`
+
+#InfoStoreAdd time_voffset 18
+PipeRead `perl -e \
+    'if ($[vp.height] > 1440) { \
+        printf "InfoStoreAdd time_voffset %.0f\\n", \
+        $[vp.height]/10**(-7.972E-10*$[vp.height]**3+5.636E-6*$[vp.height]**2-0.013*$[vp.height]+12.255); \
+    } elsif ($[vp.height] > 768) { \
+        print "InfoStoreAdd time_voffset 3\\n"; \
+    } else { \
+        printf "InfoStoreAdd time_voffset %.0f\\n", \
+        $[vp.height]/10**(-1.26E-6*$[vp.height]**3+2.432E-3*$[vp.height]**2-1.549*$[vp.height]+328.333); \
+    }'`
+
 
 #-----------------------------------------------------------------------
 # For cpu applet
 #-----------------------------------------------------------------------
 InfostoreAdd graph_width $[infostore.panel_width]
-PipeRead 'echo InfostoreAdd graph_height $[infostore.row_height]*0.9'
-PipeRead "echo InfoStoreAdd graph_voffset `perl -e 'printf \"%.0f\",-$[infostore.graph_height]/((($[infostore.fontsize]*2)+6)/(34-($[infostore.fontsize]*2)))'`"
-PipeRead "echo InfoStoreAdd percentage_voffset `perl -e 'printf \"%.0f\",$[infostore.row_height]'`"
+
+#InfostoreAdd graph_height 29
+PipeRead "echo InfostoreAdd graph_height `perl -e 'printf \"%.0f\",($[infostore.row_height]*0.9)'`"
+
+#InfoStoreAdd graph_fsize 10
+PipeRead `perl -e \
+    'if ($[vp.height] == 1050) { \
+        printf "InfoStoreAdd graph_fsize %.0f\\n", (0.003571*$[vp.width]+2); \
+    } elsif ($[vp.height] == 768) { \
+        printf "InfoStoreAdd graph_fsize %.0f\\n", (-5.076E-6*$[vp.width]**2+0.015*$[vp.width]-3.095); \
+    } else { \
+        printf "InfoStoreAdd graph_fsize %.0f\\n", \
+        (10**((-3.259E-14*$[vp.height]**5+1.634E-10*$[vp.height]**4-1.335E-7*$[vp.height]**3-2.987E-4*$[vp.height]**2+1.413*$[vp.height]-217.831)/$[vp.height])); \
+    }'`
+
+#InfoStoreAdd graph_voffset 14
+PipeRead `perl -e \
+    'if ($[vp.height] >= 1800) { \
+        printf "InfoStoreAdd graph_voffset %.0f\\n", \
+        5.508E-9*$[vp.height]**3-3.475E-5*$[vp.height]**2+0.073*$[vp.height]-42.17; \
+    } else { \
+        print "InfoStoreAdd graph_voffset 9\\n"; \
+    }'`
+
+#InfoStoreAdd percentage_voffset 48
+PipeRead `perl -e \
+    'if ($[vp.height] > 1050) { \
+        printf "InfoStoreAdd percentage_voffset %.0f\\n", \
+        (-8.941E-10*$[vp.height]**3+6.293E-6*$[vp.height]**2-0.01*$[vp.height]+45.251); \
+    } elsif ($[vp.height] == 1050) { \
+        printf "InfoStoreAdd percentage_voffset %.0f\\n", (3.571E-3*$[vp.width]+35); \
+    } elsif ($[vp.height] > 768) { \
+        print "InfoStoreAdd percentage_voffset 38\\n"; \
+    } elsif ($[vp.height] == 768) { \
+        printf "InfoStoreAdd percentage_voffset %.0f\\n", (3.241E-5*$[vp.width]**2-0.083*$[vp.width]+91.1); \
+    } else { \
+        print "InfoStoreAdd percentage_voffset 40\\n"; \
+    }'`
 
 
 #=======================================================================
@@ -62,52 +122,97 @@ PipeRead "echo InfoStoreAdd percentage_voffset `perl -e 'printf \"%.0f\",$[infos
 # General
 #***********************************************************************
 DestroyModuleConfig VerticalPanel: *
-*VerticalPanel: Geometry			$[infostore.panel_geometry]
-*VerticalPanel: Colorset			13
-*VerticalPanel: ActiveColorset		13
-*VerticalPanel: PressColorset		13
-*VerticalPanel: Font				"xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
+*VerticalPanel: Geometry            $[infostore.panel_geometry]
+*VerticalPanel: Colorset            13
+*VerticalPanel: ActiveColorset      13
+*VerticalPanel: PressColorset       13
+*VerticalPanel: Font                "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 
-*VerticalPanel: Rows				5
-*VerticalPanel: Columns				1
-*VerticalPanel: Frame				0
+*VerticalPanel: Rows                5
+*VerticalPanel: Columns             1
+*VerticalPanel: Frame               0
 
 #***********************************************************************
 # Buttons
 #***********************************************************************
 
+#-----------------------------------------------------------------------
+# find conky and its version
+#-----------------------------------------------------------------------
+PipeRead "if [ `which conky` ]; then \
+            if [ `conky -v |head -1|cut -d'.' -f2` -ge 10 ]; then \
+                echo InfoStoreAdd conky_version conky1X; \
+            else \
+                echo InfoStoreAdd conky_version conky0X; \
+            fi; \
+          else \
+            echo InfoStoreAdd conky_version conky0X; \
+          fi"
+
+#-----------------------------------------------------------------------
+# find conky config for clock applet
+#-----------------------------------------------------------------------
+PipeRead "if [ `fns-find-file -p $FVWM_USERDIR/layouts -r -s $[infostore.conky_version]rc_cpu` ]; then \
+            echo InfoStoreAdd root_dir $FVWM_USERDIR; \
+          else \
+            echo InfoStoreAdd root_dir $FNS_SYSTEMDIR; \
+          fi"
+
+#-----------------------------------------------------------------------
 # clock
+#-----------------------------------------------------------------------
 *VerticalPanel: (1x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_clock" \
-        `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset $[infostore.time_voffset]}$alignc${time %a %e %b %H:%M}' \
-        -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_clock -p 1`, \
-        Action (mouse 3) `Menu MenuClockOps`,\
-        Action (mouse 0) Nop)
+            `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:bold:size=$[infostore.time_fsize]}${voffset \
+            $[infostore.time_voffset]}$alignc${time %a %e %b %H:%M}' \
+            -c $[infostore.root_dir]/layouts/rc-files/$[infostore.conky_version]rc_clock -p 2`, \
+            Action (mouse 3) `Menu MenuClockOps`,\
+            Action (mouse 0) Nop)
 
+#-----------------------------------------------------------------------
+# find conky config for cpu applet
+#-----------------------------------------------------------------------
+PipeRead "if [ `fns-find-file -p $FVWM_USERDIR/layouts -r -s $[infostore.conky_version]rc_clock` ]; then \
+            echo InfoStoreAdd conky_rc_path $FVWM_USERDIR; \
+          else \
+            echo InfoStoreAdd root_dir $FNS_SYSTEMDIR; \
+          fi"
+
+#-----------------------------------------------------------------------
 # cpu
+#-----------------------------------------------------------------------
 *VerticalPanel: (1x1, Colorset 13, Swallow (Close, Kill, Respawn) "conky_cpu" \
-        `Exec exec conky -t '${color $[fg.cs13]}${font $[infostore.used_font]:size=$[infostore.time_fsize]}${voffset $[infostore.graph_voffset]}${cpugraph $[infostore.graph_height],$[infostore.graph_width] 71fb06 fb0634 -t}\\n${voffset -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
-        -c $[FNS_SYSTEMDIR]/layouts/rc-files/conkyrc_cpu -p 1`, \
-        Action (mouse 3) `Menu MenuCpuOps`,\
-        Action (mouse 0) Nop)
+            `Exec exec conky -t '${color $[fg.cs13]}${voffset -$[infostore.graph_voffset]}${cpugraph \
+            $[infostore.graph_height],$[infostore.graph_width] 71fb06 fb0634 \
+            -t}\\n${font $[infostore.used_font]:size=$[infostore.graph_fsize]}${voffset \
+            -$[infostore.percentage_voffset]}$alignc${cpu cpu0}%' \
+            -c $[infostore.root_dir]/layouts/rc-files/$[infostore.conky_version]rc_cpu -p 1`, \
+            Action (mouse 3) `Menu MenuCpuOps`,\
+            Action (mouse 0) Nop)
 
+#-----------------------------------------------------------------------
 # systray
-*VerticalPanel: (1x1, Right, Colorset 13, Swallow (UseOld, Close, Kill) "stalonetray" \
-		    `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_icons]x1 \
-		    --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
-		    --grow-gravity E --icon-gravity E --kludges force_icons_size -i 24 \
-		    --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
+#-----------------------------------------------------------------------
+*VerticalPanel: (1x1, Left, Colorset 13, Swallow (UseOld, Close, Kill) "stalonetray" \
+            `Exec exec stalonetray --geometry 1x1 --max-geometry $[infostore.tray_icons]x1 \
+            --scrollbars horizontal --scrollbars-highlight $[fg.cs13] \
+            --grow-gravity E --icon-gravity E --kludges force_icons_size -i $[infostore.i_size] \
+            --parent-bg true -d none --log-level info 2> $[FVWM_USERDIR]/.systray.log`)
 
+#-----------------------------------------------------------------------
 # menu button
-*VerticalPanel: (1x1, Colorset 13, Left, Padding 5 0, Title (Side) "Root Menu", ActionOnPress, \
-		Icon icon_fns.svg:24x24, \
-		ActiveIcon icon_fns.svg:24x24, \
-		Action(Mouse 1) `Menu MenuRoot`)
+#-----------------------------------------------------------------------
+*VerticalPanel: (1x1, Colorset 13, Left, Padding 5 0, Title (Side) "$[gt.Menu]", ActionOnPress, \
+        Icon icon_fns.svg:$[infostore.i_size]x$[infostore.i_size], \
+        ActiveIcon icon_fns.svg:$[infostore.i_size]x$[infostore.i_size], \
+        Action(Mouse 1) `Menu MenuRoot`)
 
+#-----------------------------------------------------------------------
 # winlist button
-*VerticalPanel: (1x1, Colorset 13, Left, Padding 5 0, Title (Side) "Window List", ActionOnPress, \
-		Icon windows.svg:24x24, \
-		ActiveIcon windows.svg:24x24, \
-		Action(Mouse 1) `WindowList`)
+#-----------------------------------------------------------------------
+*VerticalPanel: (1x1, Colorset 13, Left, Padding 5 0, Title (Side) "$[gt.Window List]", ActionOnPress, \
+        Icon windows.svg:$[infostore.i_size]x$[infostore.i_size], \
+        ActiveIcon windows.svg:$[infostore.i_size]x$[infostore.i_size], \
+        Action(Mouse 1) `WindowList`)
 
 
 

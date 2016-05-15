@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.7" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
 <title>FvwmSmartMaximize(1)</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -87,9 +87,15 @@ ul, ol, li > p {
 ul > li     { color: #aaa; }
 ul > li > * { color: black; }
 
-pre {
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
   padding: 0;
   margin: 0;
+}
+pre {
+  white-space: pre-wrap;
 }
 
 #author {
@@ -219,7 +225,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; }
+span.image img { border-style: none; vertical-align: text-bottom; }
 a.image:visited { color: white; }
 
 dl {
@@ -415,12 +421,6 @@ div.unbreakable { page-break-inside: avoid; }
  *
  * */
 
-tt {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-}
-
 div.tableblock {
   margin-top: 1.0em;
   margin-bottom: 1.5em;
@@ -453,12 +453,6 @@ div.tableblock > table[frame="vsides"] {
  * html5 specific
  *
  * */
-
-.monospaced {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-}
 
 table.tableblock {
   margin-top: 1.0em;
@@ -539,6 +533,8 @@ body.manpage div.sectionbody {
 @media print {
   body.manpage div#toc { display: none; }
 }
+
+
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
@@ -743,7 +739,7 @@ FvwmSmartMaximize(1) Manual Page
 <h2>NAME</h2>
 <div class="sectionbody">
 <p>FvwmSmartMaximize -
-   The smart maximize module
+   Perl module to smart maximize windows.
 </p>
 </div>
 </div>
@@ -815,12 +811,12 @@ You can copy <strong>FvwmSmartMaximize</strong> in the lib directory of Fvwm. To
 </p>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ echo $FVWM_MODULEDIR</tt></pre>
+<pre><code>$ echo $FVWM_MODULEDIR</code></pre>
 </div></div>
 <div class="paragraph"><p>Or you can implement your own in your .fvwm2rc file with:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>ModulePath $[FVWM_USERDIR]/lib:+</tt></pre>
+<pre><code>ModulePath $[FVWM_USERDIR]/lib:+</code></pre>
 </div></div>
 <div class="paragraph"><p>Now copy <strong>FvwmSmartMaximize</strong> into your own module path.</p></div>
 </li>
@@ -830,9 +826,9 @@ The module initialization in the StartFunction declaration in your .fvwm2rc file
 </p>
 <div class="listingblock">
 <div class="content">
-<pre><tt>DestroyFunc StartFunction
+<pre><code>DestroyFunc StartFunction
 AddToFunc StartFunction
-+ I Module FvwmSmartMaximize</tt></pre>
++ I Module FvwmSmartMaximize</code></pre>
 </div></div>
 </li>
 <li>
@@ -841,20 +837,20 @@ A menu, mouse button, or keystroke binding:
 </p>
 <div class="listingblock">
 <div class="content">
-<pre><tt>Mouse 1 4 M SendToModule FvwmSmartMaximize IgnoreMaxWindows screen</tt></pre>
+<pre><code>Mouse 1 4 M SendToModule FvwmSmartMaximize IgnoreMaxWindows screen</code></pre>
 </div></div>
 <div class="paragraph"><p>This binds the call to mouse button 1 (left button) + Alt-Key and to the window button 4. So if you hold Alt and click on the window button 4 <strong>FvwmSmartMaximize</strong> is smart maximizing the active window to the largest free area on the current screen, ignoring maximized windows.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>Key Super_L WTSF N SendToModule FvwmSmartMaximize All</tt></pre>
+<pre><code>Key Super_L WTSF N SendToModule FvwmSmartMaximize All</code></pre>
 </div></div>
 <div class="paragraph"><p>This binds the call to the left Windows key and smart maximizing the active window to the largest free area on the whole desktop if no maximized window blocks it.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>DestroyMenu MenuWindowMaximize
+<pre><code>DestroyMenu MenuWindowMaximize
 AddToMenu   MenuWindowMaximize
 + "Maximize Window" Title
-+ "%menu/window-maximize.xpm%Maximize &amp;Smart"   SendToModule FvwmSmartMaximize IgnoreMaxWindows screen</tt></pre>
++ "%menu/window-maximize.xpm%Maximize &amp;Smart"   SendToModule FvwmSmartMaximize IgnoreMaxWindows screen</code></pre>
 </div></div>
 <div class="paragraph"><p>This creates a menu <em>Maximize Window</em> with an entry <em>Maximize Smart</em>.</p></div>
 </li>
@@ -879,7 +875,7 @@ possible width/height of a program it is only positioning there without resizing
 <div class="sect1">
 <h2 id="_copyrights">COPYRIGHTS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>This program stands under the GPL V2.</p></div>
+<div class="paragraph"><p>This program stands under the GPL V2. &#169; 2014 - 2016.</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -892,7 +888,8 @@ possible width/height of a program it is only positioning there without resizing
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2013-08-01 15:30:30 CEST
+Last updated
+ 2016-04-28 21:14:03 CEST
 </div>
 </div>
 </body>

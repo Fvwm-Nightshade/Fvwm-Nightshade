@@ -1,0 +1,216 @@
+# LANGUAGE translation for FNS-BaseSetup
+# Copyright (C) 2014 Fvwm-Nightshade team
+# This file is distributed under the same license as the fvwm-nightshade package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: FNS-BaseSetup\n"
+"POT-Creation-Date: 2014-10-10 21:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+########################################################################
+# Titlebar
+########################################################################
+msgid "Fvwm-Nightshade Base Setup"
+msgstr ""
+
+########################################################################
+# Environment
+########################################################################
+
+msgid " Environment "
+msgstr ""
+
+msgid "Splash On"
+msgstr ""
+
+msgid "Run Banner at startup? Default: on"
+msgstr ""
+
+msgid "Path to splash image."
+msgstr ""
+
+msgid "Set path to splash image."
+msgstr ""
+
+msgid "Composite Manager On"
+msgstr ""
+
+msgid "Use composite manager? Default: off."
+msgstr ""
+
+msgid "Configure"
+msgstr ""
+
+msgid "Open composite settings."
+msgstr ""
+
+########################################################################
+# Desktop
+########################################################################
+
+msgid " Desktop "
+msgstr ""
+
+msgid "Wallpaper Dirs:"
+msgstr ""
+
+msgid "Wallpaper directories, separated by ':'."
+msgstr ""
+
+msgid "Icons on Desktop"
+msgstr ""
+
+msgid "Use Icons on desktop? Default: off."
+msgstr ""
+
+msgid "Icon Size:"
+msgstr ""
+
+msgid "Change size of the desktop icons."
+msgstr ""
+
+msgid "Desktop scrolling On"
+msgstr ""
+
+msgid "Activate page scrolling when the cursor hits the edge of a page? Default: on."
+msgstr ""
+
+msgid "Desktops:"
+msgstr ""
+
+msgid "Set horizontal count of desktop pages."
+msgstr ""
+
+msgid "Set vertical count of desktop pages."
+msgstr ""
+
+########################################################################
+# Decorations & Panels
+########################################################################
+
+msgid " Decorations & Panels "
+msgstr ""
+
+msgid "Used Layout:"
+msgstr ""
+
+msgid "The actual FNS layout."
+msgstr ""
+
+msgid "Used Theme:"
+msgstr ""
+
+msgid "The actual FNS decor theme."
+msgstr ""
+
+msgid "Used Font:"
+msgstr ""
+
+msgid "Used default font in FNS."
+msgstr ""
+
+########################################################################
+# Default Applications
+########################################################################
+
+msgid " Default Applications "
+msgstr ""
+
+msgid "Browser:"
+msgstr ""
+
+msgid "Default browser in FNS."
+msgstr ""
+
+msgid "Set path to browser."
+msgstr ""
+
+msgid "Editor:"
+msgstr ""
+
+msgid "Default editor in FNS."
+msgstr ""
+
+msgid "Set path to editor."
+msgstr ""
+
+msgid "Terminal:"
+msgstr ""
+
+msgid "Default terminal in FNS."
+msgstr ""
+
+msgid "Set path to terminal."
+msgstr ""
+
+msgid "Transset:"
+msgstr ""
+
+msgid "Default transset in FNS."
+msgstr ""
+
+msgid "Set path to transset."
+msgstr ""
+
+########################################################################
+# Button Bar
+########################################################################
+
+msgid "Help"
+msgstr ""
+
+msgid "Get help"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Apply and save new settings."
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cancel / Quit Base Setup."
+msgstr ""
+
+msgid "You have unsaved changes! Continue anyway?"
+msgstr ""
+
+########################################################################
+# Others
+########################################################################
+msgid "Info"
+msgstr ""
+
+msgid "Warning"
+msgstr ""
+
+msgid "Question"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Other"
+msgstr ""
+
+msgid "Open File"
+msgstr ""
+
+msgid "Save File"
+msgstr ""
+
+msgid "Select Folder"
+msgstr ""
+
+msgid "Create Folder"
+msgstr ""

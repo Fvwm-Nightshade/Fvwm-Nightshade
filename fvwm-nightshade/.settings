@@ -1,34 +1,34 @@
 #-----------------------------------------------------------------------
-# File:		.settings
-# Version:	1.0.6
-# Licence: 	GPL 2
+# File:         .settings
+# Version:      1.0.17
+# Licence:      GPL 2
 #
-# Description:	base settings for Fvwm-Nighshade
+# Description:  base settings for Fvwm-Nighshade
 #
-# Author:	Thomas Funk <t.funk@web.de>	
-# Created:	08/11/2012
-# Changed:	11/09/2012
+# Author:       Thomas Funk <t.funk@web.de>    
+# Created:      08/11/2012
+# Changed:      04/30/2016
 #-----------------------------------------------------------------------
 
 #***********************************************************************
 # Environment settings
 #***********************************************************************
-# DO NOT EDIT! WILL BE CHANGED BY FVWMFORM-FNS-BASESETUP!
+# DO NOT EDIT! WILL BE CHANGED BY FNS-Form-BaseSetup!
 
 #-----------------------------------------------------------------------
 # The actual theme. Be changed dynamically via FuncChangeDecor
 #-----------------------------------------------------------------------
-InfoStoreAdd used_theme "Tribal"
+InfoStoreAdd used_theme "PitchBlack"
 
 #-----------------------------------------------------------------------
 # Banner image for FvwmBanner
 #-----------------------------------------------------------------------
-InfoStoreAdd used_banner "/usr/local/bin/../share/fvwm-nightshade/artwork/splashs/splash_fns_small.png"
+InfoStoreAdd used_banner "/usr/bin/../share/fvwm-nightshade/artwork/splashs/splash_fns_transparent.png"
 
 #-----------------------------------------------------------------------
 # Run Banner at startup?
 #-----------------------------------------------------------------------
-SetEnv SplashOn "0"
+SetEnv SplashOn "1"
 
 #-----------------------------------------------------------------------
 # default used font for all Fvwm parts
@@ -43,7 +43,62 @@ InfoStoreAdd fontsize "12"
 #-----------------------------------------------------------------------
 # The actual layout
 #-----------------------------------------------------------------------
-InfoStoreAdd used_layout "Horizontal"
+InfoStoreAdd used_layout "Klike"
+
+#-----------------------------------------------------------------------
+# The actual desktop count X
+#-----------------------------------------------------------------------
+InfoStoreAdd x_desks "4"
+
+#-----------------------------------------------------------------------
+# The actual desktop count Y
+#-----------------------------------------------------------------------
+InfoStoreAdd y_desks "1"
+
+#-----------------------------------------------------------------------
+# The actual menu tint level
+#-----------------------------------------------------------------------
+InfoStoreAdd used_menutint "70"
+
+#-----------------------------------------------------------------------
+# use composite manager
+#-----------------------------------------------------------------------
+SetEnv use_composite "0"
+
+#-----------------------------------------------------------------------
+# composite manager command
+#-----------------------------------------------------------------------
+InfoStoreAdd comp_command "xcompmgr -c -C -o 0.8 -r 10 -l -5 -t -5 -f -D 5"
+
+#-----------------------------------------------------------------------
+# The actual (inactive) window transparency level (used by transset)
+#-----------------------------------------------------------------------
+InfoStoreAdd used_windowtransparency "80"
+
+#-----------------------------------------------------------------------
+# The actual (active) window opacity level (used by transset)
+#-----------------------------------------------------------------------
+InfoStoreAdd used_windowopacity "100"
+
+#-----------------------------------------------------------------------
+# Use Icons on desktop
+#-----------------------------------------------------------------------
+SetEnv DesktopIconsOn "0"
+
+#-----------------------------------------------------------------------
+# Activate page scrolling
+#-----------------------------------------------------------------------
+SetEnv DesktopScrollOn "1"
+
+#-----------------------------------------------------------------------
+# State of pcmanfm
+#-----------------------------------------------------------------------
+SetEnv PcmanFmStatus "2"
+
+#-----------------------------------------------------------------------
+# Additional wallpaper directories
+#-----------------------------------------------------------------------
+InfoStoreAdd additional_wp_dirs " "
 
 
 #***********************************************************************
@@ -53,10 +108,20 @@ InfoStoreAdd used_layout "Horizontal"
 #-----------------------------------------------------------------------
 # terminal
 #-----------------------------------------------------------------------
-InfoStoreAdd default_terminal "xterm -fn 10x20"                                                             "
+InfoStoreAdd default_terminal "xterm"
+
+#-----------------------------------------------------------------------
+# editor
+#-----------------------------------------------------------------------
+InfoStoreAdd default_editor "mousepad"
 
 #-----------------------------------------------------------------------
 # browser
 #-----------------------------------------------------------------------
-InfoStoreAdd default_browser "firefox                                                               "
+InfoStoreAdd default_browser "firefox"
+
+#-----------------------------------------------------------------------
+# transset
+#-----------------------------------------------------------------------
+InfoStoreAdd default_transset "transset"
 

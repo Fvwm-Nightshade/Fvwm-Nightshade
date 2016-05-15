@@ -1,0 +1,246 @@
+#!/usr/bin/env bash 
+#-----------------------------------------------------------------------
+# File:         fns-poladd
+version=1.0.1
+# Licence:      GPL 2
+#
+# Description:  Adds or remove programs to/from polkit for gui view
+#
+# Author:       Thomas Funk <t.funk@web.de>    
+# Original:     Bresiyel 28-01-2012
+#
+# Created:      12/18/2014
+# Changed:      01/04/2015
+#-----------------------------------------------------------------------
+
+if [ `id -un` != "root" ];
+then
+    echo "`basename $0` needs root rights. You're not root, sorry. Exiting." >&2
+    exit 1
+fi
+
+VERBOSE=false
+REMOVE=false
+POLICY_FILE="/usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy"
+
+########################################################################
+# functions
+########################################################################
+
+#-----------------------------------------------------------------------
+# print out usage
+#-----------------------------------------------------------------------
+usage()
+{
+    echo 
+    echo "Usage: `basename $0` [Options] <program_name>"
+    echo "Add or remove a program from pkexec policykit. Default file is"
+    echo "/usr/share/polkit-1/actions/org.freedesktop.policykit.pkexec.policy"
+    echo
+    echo "Available options:"
+    echo "       -r | --remove        remove <program_name> from policykit"
+    echo "       -h | --help          short help"
+    echo "       -l | --verbose       verbose output. Default is silent."
+    echo "       -v | --version       version"
+    echo
+    echo "Examples:"
+    echo "`basename $0` cpupower    <= add cpupower to polkit."
+    echo "`basename $0` -r cpupower <= removes cpupower from polkit."
+    echo 
+}
+
+#-----------------------------------------------------------------------
+# verify whether program name, its' location is valid.
+#-----------------------------------------------------------------------
+verify()
+{
+    if [ "$progAdd" == "" ];
+    then
+        usage
+    fi
+    
+    if [ "$progLoc" == "" ];
+    then
+        echo "Did not find $progAdd" >&2
+        exit 1
+    elif [ `echo $progLoc | grep bin` == "" ];
+    then
+        echo "Found location $progLoc, however this may not be valid..." >&2
+        echo "Exiting..." >&2
+        exit 1
+    fi
+    
+    return
+}
+
+#-----------------------------------------------------------------------
+# check if for the program a policy entry already exists.
+#-----------------------------------------------------------------------
+exists()
+{
+    if [ -f $POLICY_FILE ];
+    then
+        alreadyHere=$(cat $POLICY_FILE | grep "$progAdd")
+        
+        if [ "$alreadyHere" != "" ] && [ "$REMOVE" == "false" ];
+        then
+            echo "This program is already configured." >&2
+            exit 1
+        fi
+        if [ "$alreadyHere" == "" ] && [ "$REMOVE" == "true" ];
+        then
+            echo "This program is not configured." >&2
+            exit 1
+        fi
+    fi
+    return
+}
+
+#-----------------------------------------------------------------------
+# create policy file unless it exists
+#-----------------------------------------------------------------------
+createPolicyFile()
+{
+	echo '<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<policyconfig>
+  <vendor>The PolicyKit Project</vendor>
+  <vendor_url>http://hal.freedesktop.org/docs/PolicyKit/</vendor_url>
+</policyconfig>' > $POLICY_FILE
+
+    return
+}
+
+#-----------------------------------------------------------------------
+# add program to the policy
+#-----------------------------------------------------------------------
+addProgram()
+{
+    if [ ! -f $POLICY_FILE ];
+    then
+        createPolicyFile
+    fi
+    
+    sed -i 's_</policyconfig>__' $POLICY_FILE
+    echo "  <action id=\"org.freedesktop.policykit.pkexec."$progAdd"\">
+    <description>Run "$progAdd"</description>
+    <message>Authentication is required to run "$progAdd"</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key=\"org.freedesktop.policykit.exec.path\">"$progLoc"</annotate>
+    <annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>
+  </action>
+</policyconfig>" >> $POLICY_FILE
+
+    return
+}
+
+#-----------------------------------------------------------------------
+# remove program from the policy
+#-----------------------------------------------------------------------
+removeProgram()
+{
+    if [ -f $POLICY_FILE ];
+    then
+        echo "  <action id=\"org.freedesktop.policykit.pkexec."$progAdd"\">
+    <description>Run "$progAdd"</description>
+    <message>Authentication is required to run "$progAdd"</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key=\"org.freedesktop.policykit.exec.path\">"$progLoc"</annotate>
+    <annotate key=\"org.freedesktop.policykit.exec.allow_gui\">true</annotate>
+  </action>" >> /tmp/delete_pol.txt
+        cp -f $POLICY_FILE $POLICY_FILE.bak
+        diff -u $POLICY_FILE.bak \
+                /tmp/delete_pol.txt | sed '/^---/d;/^+++/d;/^@@/d;/^ /d' | sed 's/^-//' \
+                > $POLICY_FILE
+        rm -f $POLICY_FILE.bak
+        rm -f /tmp/delete_pol.txt
+    fi
+    return
+}
+
+########################################################################
+# main
+########################################################################
+
+# translate long options to short
+for arg
+do
+    delim=""
+    case "$arg" in
+       --help) args="${args}-h ";;
+       --verbose) args="${args}-l ";;
+       --version) args="${args}-v ";;
+       --remove) args="${args}-r ";;
+       # pass through anything else
+       *) [[ "${arg:0:1}" == "-" ]] || delim="\""
+           args="${args}${delim}${arg}${delim} ";;
+    esac
+done
+
+# reset the translated args
+eval set -- $args
+
+# now we can process with getopt
+counter=0
+while getopts ":hvlr:" opt;
+do
+    case $opt in
+        h)  usage
+            exit 0
+            ;;
+        v)  echo "`basename $0` version: $version"
+            exit 0
+            ;;
+        l)  VERBOSE=true
+            ;;
+        r)  progAdd=$OPTARG
+            REMOVE=true
+            ((counter+=1))
+            ;;
+        \?) 
+            echo "Unknown argument \"$OPTARG\"" >&2
+            usage >&2
+            exit 2
+           ;;
+        :)
+            echo "Option -$OPTARG requires an argument" >&2
+            usage >&2
+            exit 2
+            ;;
+    esac
+done
+
+if [ $counter -eq 0 ];
+then
+    progAdd=$@
+fi
+
+if [ "$#" == "0" ];
+then
+    echo -e "\nToo few arguments!" >&2
+    usage >&2
+    exit 2
+fi
+
+progLoc=$(echo `whereis "$progAdd" | awk '{print $2}'`)
+
+verify
+
+if [ "$REMOVE" == "true" ];
+then
+    removeProgram
+else
+    addProgram
+fi
+
+exit 0

@@ -1,5 +1,5 @@
 # French translation for Fvwm-Nightshade
-# Copyright (C) 2013 Fvwm-Nightshade team
+# Copyright (C) 2015 Fvwm-Nightshade team
 # This file is distributed under the same license as the fvwm-nightshade package.
 # Maxime Lordier <maxime.lordier@gmail.com>, 2013.
 #
@@ -8,8 +8,8 @@ msgstr ""
 
 "Project-Id-Version: fvwm-nightshade\n"
 "POT-Creation-Date: 2013-07-07 18:40+0200\n"
-"PO-Revision-Date: 2014-02-27 11:40+0100\n"
-"Last-Translator: Dominique Michel <dominique_libre@users.sourceforge.net>\n"
+"PO-Revision-Date: 2016-04-21 22:19+0200\n"
+"Last-Translator: Maxime Lordier <maxime.lordier@gmail.com>\n"
 "Language-Team: French\n"
 "Language: French\n"
 "MIME-Version: 1.0\n"
@@ -143,6 +143,12 @@ msgid "Fvwm-Nightshade Wiki"
 msgstr "Fvwm-Nightshade Wiki"
 
 #-----------------------------------------------------------------------
+# MenuFvwmModules
+#-----------------------------------------------------------------------
+msgid "Fvwm Modules"
+msgstr "Fvwm Modules"
+
+#-----------------------------------------------------------------------
 # MenuStartRegularModules
 #-----------------------------------------------------------------------
 msgid "Start Regular Modules"
@@ -220,11 +226,17 @@ msgstr "Fvwm Form par &défault"
 msgid "Configure &Background"
 msgstr "Configuration &arriére plan"
 
+msgid "&Compositing"
+msgstr "&Composite"
+
 msgid "&Decoration"
 msgstr "&Decoration"
 
-msgid "Fvwm-&Nightshade Setup"
-msgstr "Fvwm-&Nightshade Setup"
+msgid "FNS Base &Setup"
+msgstr "FNS installation de &base"
+
+msgid "FNS &Windows Behaviour"
+msgstr "Comportement des &fenêtres"
 
 #-----------------------------------------------------------------------
 # MenuSystemConfiguration
@@ -240,6 +252,9 @@ msgstr "&Ecran de sauvegarde"
 
 msgid "&CPU Performance"
 msgstr "&Performance du CPU"
+
+msgid "Set &Date/Time"
+msgstr "Régler &date/heure"
 
 #-----------------------------------------------------------------------
 # MenuKeyboard
@@ -305,6 +320,24 @@ msgid "Layouts"
 msgstr "Mise en page"
 
 #-----------------------------------------------------------------------
+# MenuCompositing
+#-----------------------------------------------------------------------
+msgid "Compositing"
+msgstr "Composite"
+
+msgid "FNS CompMgr &Configurator"
+msgstr "FNS CompMgr &Configurateur"
+
+msgid "&Menu Transparency"
+msgstr "Transparence du menu"
+
+msgid "Active Window &Opacity"
+msgstr "Actif &opacité de la fenêtre"
+
+msgid "Inactive Window &Transparency"
+msgstr "&Transparence de la fenêtre inactive"
+
+#-----------------------------------------------------------------------
 # MenuWallpaperConfiguration
 #-----------------------------------------------------------------------
 msgid "Background Configuration"
@@ -323,19 +356,19 @@ msgid "Screen Saver"
 msgstr "Ecran de sauvegarde"
 
 msgid "XscreenSaver &Settings"
-msgstr "&Réglages de XscreenSaver "
+msgstr "&Réglages de XscreenSaver"
 
 msgid "&XscreenSaver (Re)start"
-msgstr "(Re)Démarrarge de &XscreenSaver "
+msgstr "(Re)Démarrarge de &XscreenSaver"
 
 msgid "XscreenSaver &Stop"
-msgstr "&Arrêt de XscreenSaver "
+msgstr "&Arrêt de XscreenSaver"
 
 msgid "XscreenSaver &Lock"
-msgstr "&Verrouiller de XscreenSaver "
+msgstr "&Verrouiller de XscreenSaver"
 
 msgid "XscreenSaver &Activate"
-msgstr "&Activation de XscreenSaver "
+msgstr "&Activation de XscreenSaver"
 
 #-----------------------------------------------------------------------
 # MenuFvwmQuit
@@ -367,6 +400,12 @@ msgstr "&Non, ne pas quitter"
 msgid "Window Operations"
 msgstr "Fenêtre Opération"
 
+msgid "&Move"
+msgstr "&Déplacer"
+
+msgid "&Resize"
+msgstr "Redimens&ionner"
+
 msgid "(De)&Iconify"
 msgstr "(De)M&ininmiser"
 
@@ -374,7 +413,7 @@ msgid "(Un)Ma&ximize"
 msgstr "(Dé)Ma&ximiser"
 
 msgid "(Un)&Shade"
-msgstr "(Dé)&Masquer"
+msgstr "(Dé)Mas&quer"
 
 msgid "(Un)S&tick"
 msgstr "&Coller"
@@ -384,6 +423,12 @@ msgstr "&Augmenter"
 
 msgid "&Lower"
 msgstr "&Diminuer"
+
+msgid "&Delete"
+msgstr "E&ffacer"
+
+msgid "&Close"
+msgstr "&Fermer"
 
 msgid "&Destroy"
 msgstr "D&étruire"
@@ -406,7 +451,7 @@ msgstr "Fenêtre &rafraîchi"
 msgid "R&earrange All"
 msgstr "R&éorganiser tout"
 
-msgid "Window &Utility"
+msgid "Window &Utilitie"
 msgstr "Fenêtre &utilitaires"
 
 msgid "Sw&itch to...(WinList)"
@@ -604,7 +649,7 @@ msgstr "&Iconiser"
 #-----------------------------------------------------------------------
 # MenuWindowUtility
 #-----------------------------------------------------------------------
-msgid "Window Utility"
+msgid "Window Utilities"
 msgstr "Fenêtre utilitaires"
 
 msgid "Create &Screenshot"
@@ -631,6 +676,12 @@ msgstr "Rester sur &l'arrière plan"
 msgid "Desktopmenu"
 msgstr "Menu de bureau"
 
+msgid "Desktop Preferences"
+msgstr "Préférences du bureau"
+
+msgid "Root Menu"
+msgstr "Menu root"
+
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
 #-----------------------------------------------------------------------
@@ -641,17 +692,8 @@ msgstr "&Droite	Page"
 msgid "&Left	Page"
 msgstr "&Gauche	Page"
 
-msgid "&1.	Page"
-msgstr "&1.	Page"
-
-msgid "&2.	Page"
-msgstr "&2.	Page"
-
-msgid "&3.	Page"
-msgstr "&3.	Page"
-
-msgid "&4.	Page"
-msgstr "&4.	Page"
+msgid "Page"
+msgstr "Page"
 
 #-----------------------------------------------------------------------
 # MenuWindowGroupQuickMove
@@ -673,6 +715,15 @@ msgstr "Page	&supérieur"
 msgid "Conky Clock Ops"
 msgstr "Conky Montre Ops"
 
+msgid "Calender"
+msgstr "Calendrier"
+
+msgid "Alarm"
+msgstr "Alarme"
+
+msgid "Set Date/Time"
+msgstr "Régler date/heure"
+
 msgid "Restart Conky Clock"
 msgstr "Redémarrer Conky Montre"
 
@@ -682,112 +733,15 @@ msgstr "Redémarrer Conky Montre"
 msgid "Conky Cpu Ops"
 msgstr "Conky Cpu Ops"
 
+msgid "CPU Performance"
+msgstr "Performance du CPU"
+
 msgid "Restart Conky CPU"
 msgstr "Redémarrer Conky CPU"
 
 ########################################################################
 # FvwmForm
 ########################################################################
-#-----------------------------------------------------------------------
-# FNS-BaseSetup
-#-----------------------------------------------------------------------
-msgid "Fvwm-Nightshade -- Base Setup"
-msgstr "Fvwm-Nightshade -- installation de base"
-
-msgid "Use this setup to configure base settings of Fvwm-Nightshade"
-msgstr "Utilisez l'installation pour configurer les réglages de base de Fvwm-Nightshade "
-
-# msgstr same length as msgid
-msgid "----------------- Environment ------------------"
-msgstr "---------------- Environnement -----------------"
-
-# msgstr same length as msgid
-msgid  "Used Splash: "
-msgstr "Splash util: "
-
-# msgstr same length as msgid
-msgid  "Show on start: "
-msgstr "Au démarrage : "
-
-msgid "Yes"
-msgstr "Oui"
-
-msgid "No"
-msgstr "Non"
-
-# msgstr same length as msgid
-msgid "---------- Decoration (Windows, Menus) ----------"
-msgstr "---------- Decoration (Fenêtre, Menus) ----------"
-
-# msgstr same length as msgid
-msgid  "Used Theme:    "
-msgstr "Thème utilisé: "
-
-# msgstr same length as msgid
-msgid  " (Others: Clean, Air, Ambience, CrystalBalls)"
-msgstr " (Autres: Clean, Air, Ambience, CrystalBalls)"
-
-# msgstr same length as msgid
-msgid  "Used Font:     "
-msgstr "Police utilisé:"
-
-# msgstr same length as msgid
-msgid  " (E.g. Arial, Helvetia, Verdana)"
-msgstr " (E.g. Arial, Helvetia, Verdana)"
-
-# msgstr same length as msgid
-msgid  "Used Font size:"
-msgstr "Taille utilisé:"
-
-# msgstr same length as msgid
-msgid "              (E.g. 10, 11, 13)"
-msgstr "              (E.g. 10, 11, 13)"
-
-# msgstr same length as msgid
-msgid "------- Panels (Iconman, Pager, Systray) -------"
-msgstr "------- Panels (Iconman, Pager, Systray) -------"
-
-# msgstr same length as msgid
-msgid "Used Layout:   "
-msgstr "Mise en page:  "
-
-msgid "Horizontal (Panels on top)"
-msgstr "Horizontale (Panels en haut)"
-
-msgid "Vertical (Panels on right side)"
-msgstr "Vertical (Panels sur le côté droit)"
-
-msgid "G2like (Panels on top and bottom)"
-msgstr "G2like (Panels en haut et en bas)"
-
-# msgstr same length as msgid
-msgid "----------------- Applications -----------------"
-msgstr "----------------- Applications -----------------"
-
-# msgstr same length as msgid
-msgid "Used Terminal: "
-msgstr "Terminal:      "
-
-# msgstr same length as msgid
-msgid " (E.g. konsole, aterm, rxvt)"
-msgstr " (E.g. konsole, aterm, rxvt)"
-
-# msgstr same length as msgid
-msgid "Used Browser:  "
-msgstr "Navigateur:    "
-
-# msgstr same length as msgid
-msgid " (E.g. chromium, seamonkey)"
-msgstr " (E.g. chromium, seamonkey)"
-
-msgid "Apply & Save"
-msgstr "Appliquer"
-
-msgid "Reset"
-msgstr "Reset"
-
-msgid "Cancel"
-msgstr "Annuler"
 
 #-----------------------------------------------------------------------
 # FvwmForm-RunCommand
@@ -823,6 +777,7 @@ msgstr "Fermer"
 # FvwmForm-Messages
 #-----------------------------------------------------------------------
 # FuncShowMessage "Fvwm Version Info"
+
 msgid "Fvwm Version Info"
 msgstr "Fvwm Version Info"
 
@@ -1046,22 +1001,22 @@ msgstr "Touche ALT enfoncé"
 msgid "ALT:"
 msgstr "ALT:"
 
-msgid "F1: Open root menu          F7:  Move window"
+msgid "F1: Open root menu           F7:  Move window"
 msgstr "F1: Ouvrir menu root               F7:  Déplace la fenêtre"
 
-msgid "F2: Launch 'run' dialog box F8:  Resize window"
+msgid "F2: Launch 'run' dialog box  F8:  Resize window"
 msgstr "F2: Boite de dialogue 'commande'   F8:  Redimensionne la fenêtre"
 
-msgid "F3: Show window list        F9:  Minimize window"
+msgid "F3: Show window list         F9:  Minimize window"
 msgstr "F3:Affiche la liste de la fenêtre  F9:  Minimise la fenêtre"
 
-msgid "F4: Close active window     F10: Maximize/restore window"
+msgid "F4: Close active window      F10: Maximize/restore window"
 msgstr "F4: Ferme la fenêtre active        F10: Maximise/restaure la fenêtre"
 
-msgid "F5: Not used                F11: Fullscreen/restore window"
-msgstr "F5: Pas utilisé                    F11: Plein écran/restaure la fenêtre"
+msgid "F5: Show/hide AppletIconMan  F11: Fullscreen/restore window"
+msgstr "F5: Montrer/cacher AppletIconMan   F11: Plein écran/restaure la fenêtre"
 
-msgid "F6: Cycle between same      F12: Identify window"
+msgid "F6: Cycle between same       F12: Identify window"
 msgstr "F6: Cycle between same             F12: Identifier la fenêtre"
 
 msgid "    resource windows"
@@ -1132,7 +1087,7 @@ msgid "Mouse 1:  Delete on click"
 msgstr "Mouse 1:  Effacer au click"
 
 msgid "          Destroy on double click"
-msgstr "		  Détruire avec le double clic"
+msgstr "          Détruire avec le double clic"
 
 msgid "Maximize Button Bindings"
 msgstr "Button maximiser enfoncé"
@@ -1141,7 +1096,7 @@ msgid "Mouse 1:       Maximize fully on click"
 msgstr "Mouse 1:       Maximiser pleinement cliquez sur"
 
 msgid "               Maximize menu on double click"
-msgstr "		       Menu maximiser avec le double clic"
+msgstr "               Menu maximiser avec le double clic"
 
 msgid "Mouse 2:       Maximize vertically"
 msgstr "Mouse 2:       Maximiser verticallement"
@@ -1167,232 +1122,6 @@ msgstr "Mouse 3:  Iconify toggle resource group"
 ########################################################################
 # FvwmScript
 ########################################################################
-#-----------------------------------------------------------------------
-# FvwmScript-PersonalMenu
-#-----------------------------------------------------------------------
-msgid "Menu Folders"
-msgstr "Menu dossiers"
-
-msgid "Menu Entries"
-msgstr "menu entrée"
-
-msgid "Add >"
-msgstr "Ajouter >"
-
-msgid "< Remove"
-msgstr "< Enlever"
-
-msgid "Save"
-msgstr "Sauvegarder"
-
-msgid "Quit"
-msgstr "Quitter"
-
-msgid "!!! Changed menu not saved !!! Next click will quit."
-msgstr "!!! Le menu a changé sans être sauvegarder!!! Prochain clic quittera le menu."
-
-msgid "Personal Entries "
-msgstr "Entrées personnelle"
-
-msgid "Personal Entries"
-msgstr "Entrées personnelle "
-
-msgid "Personal applications*"
-msgstr "Application personnelle*"
-
-msgid "Personal menu saved"
-msgstr "Menu personnel sauvegardé"
-
-msgid "Added '"
-msgstr "Ajouté '"
-
-msgid "' to menu"
-msgstr "' au menu"
-
-msgid "Removed '"
-msgstr "Enlevé  '"
-
-msgid "' from menu"
-msgstr "' du menu"
-
-#-----------------------------------------------------------------------
-# FvwmScript-PersonalMenu
-#-----------------------------------------------------------------------
-msgid "Vendor"
-msgstr "Vendeur"
-
-msgid "CPU Count"
-msgstr "Compteur CPU"
-
-msgid "At the moment the governor 'userspace' is not supported, so you cannot use it!"
-msgstr "Pour l'instant le gouvernement 'userspace'n'est pas supporté, donc vous ne pouvez pas l'utiliser "
-
-msgid "But you get the same result with governor 'powersave' and one of the frequencies"
-msgstr "mais vous obtenez le même résultat avec le gouvernement 'powersave' et un autres de cette fréquence"
-
-msgid "in 'Min Frequency', or governor 'performance' in combination with 'Max Frequency'."
-msgstr "dans 'fréquence min' , ou gouvernement 'perfermonce'  en combinant avec 'fréquence max'."
-
-msgid "Min Frequency"
-msgstr "Fréquence min"
-
-msgid "Max Frequency"
-msgstr "Fréquence max"
-
-msgid "not installed"
-msgstr "pas installé"
-
-msgid "Set"
-msgstr "Set"
-
-msgid " updated and cpufreq set."
-msgstr " mis à jour et cpufreq set."
-
-msgid "New file "
-msgstr "Nouveau fichier "
-
-msgid " written and cpufreq set."
-msgstr " écrit et pufreq set."
-
-#-----------------------------------------------------------------------
-# fvwm-menu-desktop-config.fpl which are in the CVS version of FVWM
-#-----------------------------------------------------------------------
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 51
-msgid "Fvwm Menu Desktop Config"
-msgstr "Configuration de Fvwm Menu Desktop"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 58
-msgid "Multiple Menu"
-msgstr "Menu multiple"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 66
-msgid "Menus in"
-msgstr "Menus dans"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 95
-msgid "No menus found! Check why from within a terminal with"
-msgstr "Pas de menu trouvé ! Depuis un terminal, contrôlez pourquoi avec"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 109
-msgid "Single Menu"
-msgstr "Menu simple"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 114
-msgid ""
-"If you want a single menu only deselect all menus above and fill out the "
-"fields below."
-msgstr ""
-"Si vous voulez un menu unique, désélectionner tous les menus ci-dessus et "
-"remplissez les champs"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 116
-msgid "But remember, if the menu doesn't exist, nothing happens."
-msgstr ""
-"ci-dessous. Mais rappelez-vous, si le menu n'existe pas, rien ne se passe."
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 120
-msgid "Menu Top Title:     "
-msgstr "Titre du menu :     "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 123
-msgid "  "
-msgstr "  "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 124
-msgid "Install-Prefix:     "
-msgstr "Préfixe de menu :   "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 128
-msgid "Desktop:            "
-msgstr "Bureau:             "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 132
-msgid "Menutype:           "
-msgstr "Type de menu:       "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 141
-msgid "General Options"
-msgstr "Options générales"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 146
-msgid "Used Menu Type:     "
-msgstr "Type de menu utilisé: "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 149
-msgid "Multiple "
-msgstr "Multiple "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 150
-msgid "Single"
-msgstr "Simple"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 153
-msgid "Use Icons?          "
-msgstr "Utiliser des icônes?  "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 155
-msgid "Yes      "
-msgstr "Oui      "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 156
-msgid "No   "
-msgstr "Non  "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 159
-msgid "Icon size:          "
-msgstr "Taille d'icône:       "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 161
-msgid " (Default is 24)"
-msgstr " (Par défaut, 24)"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 164
-msgid "Use Titles?         "
-msgstr "Utiliser des titres?  "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 170
-msgid "Used Icon theme:    "
-msgstr "Thème d'icônes:       "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 174
-msgid "Menu(s) in a Menu?  "
-msgstr "Menu(s) dans un menu? "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 180
-msgid "Insert in menu:     "
-msgstr "Insérer dans le menu: "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 184
-msgid "Directory Icon:     "
-msgstr "Annuaire d'icône:     "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 188
-msgid "Application Icon:   "
-msgstr "Icône d'applications: "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 192
-msgid "Icon directory:     "
-msgstr "Dossier des icônes:   "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 194
-msgid " (Directory for converted icons)"
-msgstr " (Répertoire pour les icônes converties)"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 197
-msgid "Output path:        "
-msgstr "Chemin de sortie:     "
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 199
-msgid " (Full path to store output)"
-msgstr " (Chemin complêt du fichier de menu)"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 209
-msgid "Generate Menu(s)"
-msgstr "Générez le menu"
-
-#. ./bin/fvwm-menu-desktop-config.fpl.in: line 235
-msgid "Save Settings"
-msgstr "Sauvez les réglages"
 
 #-----------------------------------------------------------------------
 # fvwm-menu-desktop which are in the CVS version of FVWM
@@ -1405,303 +1134,25 @@ msgstr "Régénérer le(s) menu(s) XDG"
 msgid "Regenerate XDG Menu"
 msgstr "Régénérer le menu XDG"
 
+########################################################################
+# Layouts modules
+########################################################################
 #-----------------------------------------------------------------------
-# FvwmForm-SingleMenuHelp which are in the CVS version of FVWM
+# KlikeBottomBar, VerticalPanel, G2likeTopBar
 #-----------------------------------------------------------------------
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 17
-msgid ""
-"In this section you can define a custom-assembled menu 'foo-bar.menu' placed "
-"on another"
-msgstr ""
-"Dans cette section vous pouvez customiser un menu 'foo-bar.menu' placé dans "
-"un autre"
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 19
-msgid "location as defined in the XDG menu definitions."
-msgstr "emplacement comme defini dans les définitions du menu XDG."
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 24
-msgid "Specifies the menu title of the top menu used by Fvwm's Popup command."
-msgstr ""
-"  Specifiez le titre du menu principal utilisé par la commande de Fvwm."
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 26
-msgid "                    "
-msgstr "                      "
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 27
-msgid "Default is 'FvwmMenu'."
-msgstr "La valeur par défaut est 'FvwmMenu'."
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 32
-msgid "Overrides the standard locations for XDG menu definitions. The standard"
-msgstr ""
-"  Écrase l'emplacement standard pour la definition du menu XDG. Les "
-"emplacements"
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 35
-msgid "locations are /etc/xdg/menus and"
-msgstr "standards sont /etc/xdg/menus et"
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 35
-msgid "if available."
-msgstr "si disponible."
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 40
-msgid "Overrides the name of the main desktop environment installed on the"
-msgstr ""
-"  Écrase le nom de l'environnement principal qui est installé sur le systeme."
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 43
-msgid ""
-"system. If a system offers multiple desktop environments $XDG_MENU_PREFIX"
-msgstr ""
-"Si le systeme offre plusieurs environneents de bureau, $XDG_MENU_PREFIX est"
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 46
-msgid "is typically set. It is ignored if this field is used."
-msgstr ""
-"normalement appliqué. Elle est ignorée si le champ est utilisé. Les noms"
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 49
-msgid "Possible names: gnome, kde, lxde, etc."
-msgstr "possibles sont: gnome, kde, lxde, etc."
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 54
-msgid ""
-"Defines which type of menu should be found. Possible name types could be:"
-msgstr ""
-"  Définit quel type de menu doit être trouvé. Les noms des types possibles"
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 57
-msgid ""
-"applications, settings, preferences, etc. Note if the specified menu type"
-msgstr ""
-"peuvent être : applications, settings, preferences, etc. Attention: si le "
-"type"
-
-#. ./bin/FvwmForm-SingleMenuHelp.in: line 60
-msgid "doesn't exist the generated menu is empty!"
-msgstr "de menu specifié n'existe pas, le menu généré est vide !"
+msgid "Menu"
+msgstr "Menu"
 
 #-----------------------------------------------------------------------
-# FvwmForm-MultiMenuHelp which are in the CVS version of FVWM
+# VerticalPanel
 #-----------------------------------------------------------------------
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 17
-msgid ""
-"In this section all XDG menus found on the system are shown. All selected "
-"menus"
-msgstr ""
-"Dans cette section tous les menus XDG trouvés seront affichés sur le "
-"systeme. Tous les"
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 19
-msgid ""
-"will integrate in one Fvwm menu. If you want to generate a custom-assembled "
-"menu"
-msgstr ""
-"menus selectionnés seront intégrés dans  un menu Fvwm. Si vous voulez générer"
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 21
-msgid "use the 'Single Menu' section."
-msgstr "un menu client, utlisez la section 'Menu simple'."
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 28
-msgid "List menus with checkboxes found in /etc/xdg/menus/"
-msgstr ""
-"La liste des menus avec des cases à cocher se trouve dans /etc/xdg/menus/"
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 36
-msgid "List menus with checkboxes found in $HOME/.config/menus/"
-msgstr ""
-"La liste des menus avec des cases à cocher se trouve dans $HOME/.config/"
-"menus/"
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 42
-msgid ""
-"Note that equal menus found under /etc/xdg/menus AND $HOME/.config/menus/"
-msgstr ""
-"Notez que des menus identiques trouvés dans /etc/xdg/menus et $HOME/.config/"
-"menus/,"
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 44
-msgid ""
-"following the XDG menu specification only shown in $HOME/.config/menus/."
-msgstr ""
-"suivant la spécification de menu XDG ne sont montrés que dans $HOME/.config/"
-"menus/."
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 48
-msgid ""
-"If no menus appear check why from within a terminal with 'fvwm-menu-desktop -"
-"v'."
-msgstr ""
-"Si le menu n'apparaît pas, vérifiez  pourquoi dans un terminal avec 'fvwm-"
-"menu-desktop -v'."
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 50
-msgid ""
-"Also it is a good idea to check .xsession-errors in the user home for errors."
-msgstr ""
-"C'est aussi une bonne idée de chercher les erreurs dans ~/.xsession-errors."
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 54
-msgid "One limitation exists:"
-msgstr "Il existe une limitation :"
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 56
-msgid "If there are too much menus found an error occurs in .xsession-errors:"
-msgstr ""
-"S'il y a trop de menus trouvés, un message d'erreur apparaît dans .xsession-"
-"errors:"
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 62
-msgid ""
-"This happens because PipeRead used for menu generation has a command length"
-msgstr ""
-"Cela se produit quand PipeRead a utilisé pour la generation du menu une "
-"commande"
-
-#. ./bin/FvwmForm-MultiMenuHelp.in: line 64
-msgid "limit of 1000 characters. Sorry for that inconvinience."
-msgstr ""
-"qui dépasse la limite de 1000 caractéres. Désolé pour la gêne occassionnée."
+msgid "Window List"
+msgstr "liste de la fenêtre"
 
 #-----------------------------------------------------------------------
-# FvwmForm-GenOptionHelp which are in the CVS version of FVWM
+# G2likeTopBar
 #-----------------------------------------------------------------------
-#. ./bin/FvwmForm-GenOptionHelp.in: line 18
-msgid "Set which menu generation will be used."
-msgstr "Applique quel type de génération de menu sera utilisé."
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 23
-msgid "Option enables mini-icons in the menu(s)."
-msgstr "Option pour activer les mini icônes dans le/les menu(s)."
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 28
-msgid ""
-"If 'Use Icons' is set, by default 24x24 mini-icons are used. If another size "
-"is"
-msgstr ""
-"Si 'Utiliser des icônes' est choisi, par defaut des mini-icones de 24x24 "
-"seront utilisés."
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 31
-msgid "desired enter the wanted size in this field."
-msgstr ""
-"Si une autre taille est desirée, entrer la taille voulue dans ce champ."
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 36
-msgid ""
-"If the specified icon isn't that size it is converted if ImageMagick is "
-"installed."
-msgstr ""
-"Si l'icône specifiée n'exsite pas à cette taille, elle peut être convertie "
-"si ImageMagick"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 39
-msgid ""
-"Generated icons are saved in $HOME/.fvwm/icons or the directory specified "
-"here."
-msgstr ""
-"est installé. Les icônes générées sont sauvegardées sous $HOME/.fvwm/icons "
-"ou dans le"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 42
-msgid "Otherwise no icon appears in the menu for that entry."
-msgstr ""
-"dossier spécifié ici. Sinon aucune icône apparaît dans le menu pour cette "
-"entrée."
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 47
-msgid "Sets the used icon theme. Default is 'gnome' but all others found in"
-msgstr ""
-"Applique le théme d'icônes utilisé. Par défaut  'gnome', mais toute autre "
-"icône trouvée"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 50
-msgid ""
-"/usr/share/icons can used except the hicolor theme because it's the default"
-msgstr ""
-"dans /usr/share/icons peut être utilisée sauf le théme hicolor car c'est le "
-"théme"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 53
-msgid ""
-"fallback theme if no icon is found. Note that the theme name must be written"
-msgstr ""
-"de secour par défaut, si aucune icône n'est trouvée. Notez que le théme doit "
-"avoir le"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 56
-msgid "exactly as the icon directory e.g."
-msgstr "même nom que le dossier des icônes, par exemple :"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 61
-msgid ""
-"If 'Use Icons' is enabled and for a directory in a menu no icon is found"
-msgstr ""
-"Si 'Utiliser des icônes' est actif et qu'aucune icône n'est trouvée dans un "
-"dossier,"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 64
-msgid "as default icon is used. But if the gnome icon theme isn't"
-msgstr "est utilisé par defaut. Mais si le théme d'icône de gnome n'est pas"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 67
-msgid "installed no default icon appears. Another icon can defined here."
-msgstr ""
-"installé, aucune icône n'apparaîtera. D'autres icônes peuvent être definies "
-"ici."
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 70
-msgid "Only the name of an icon is needed not the path!"
-msgstr "Seul le nom d'une icône est nécessaire, pas le chemin d'accés."
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 75
-msgid "If 'Use Icons' is enabled and for an application no icon is found"
-msgstr ""
-"Si 'Utiliser des icônes' est actif et que pour une application aucune icnone "
-"n'est trouvée,"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 89
-msgid "Enable this checkbox to insert generated menu(s) IN a menu."
-msgstr "Activez cette case à cocher pour insérer le menu généré dans un menu."
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 94
-msgid ""
-"Enter in this field the name of the menu (its top title) where the generated "
-"menu(s)"
-msgstr ""
-"Entrez dans ce chanp le nom du menu (son titre principal) où le menu généré "
-"devra être"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 97
-msgid ""
-"should insert. For more information see the USAGE section in the man page of"
-msgstr ""
-"inséré. Pour plus d'information regardez la section USAGE dans la page man de"
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 105
-msgid ""
-"If this option is set menus are generated with titles. Default is no titles."
-msgstr ""
-"Si cet option est active les menus sont générés avec des titres. Par défaut "
-"sans titre."
-
-#. ./bin/FvwmForm-GenOptionHelp.in: line 110
-msgid ""
-"Enter here the FULL path of the menu to store. Default path is "
-"$FVWM_USERDIR/.menu."
-msgstr ""
-"Entrez ici le chemin complet du menu pour l'enregistrer. Par default "
-"$FVWM_USERDIR/.menu."
-
-
-
-
-
-
-
+msgid "Personal"
+msgstr "Personnel"
 
 

@@ -1,0 +1,81 @@
+A couple of applications have problems with dark themes. Below we're 
+listing some of them with hints and tips to fix this. Hope it helps.
+
+Iceweasel/Firefox
+-----------------
+Often Iceweasel/Firefox using wrong colors for checkboxes, input or text
+entries. To fix this Navigate to ~/.mozilla/firefox/xxxxxxxx.default/chrome,
+rename userContent-example.css to userContent.css and add the following 
+to the bottom of the file:
+
+input {
+    -moz-appearance: none !important;
+    background-color: white;
+    color: black;
+}
+
+textarea {
+    -moz-appearance: none !important;
+    background-color: white;
+    color: black;
+}
+
+select {
+    -moz-appearance: none !important;
+    background-color: white;
+    color: black;
+}
+
+You can set the colors to whatever you like using hex codes.
+
+For further information see also
+http://www-archive.mozilla.org/unix/customizing.html#usercss
+
+
+Geany
+-----
+If you want to invert the colour scheme of geany to display coloured 
+letters on black background, choose Edit=>Preferences=>menu and select 
+"Editor/Display/Invert syntax highlighting colors".
+
+or
+
+- Go to /usr/local/share/geany 
+- Open "filetypes.common" with a text editor (Geany) and goto line 49 
+  --invert_all=0;0;false;false 
+- Change the first "0" to "1" 
+  --invert_all=1;0;false;false 
+- Save and close 
+- Open Geany 
+
+
+Eclipse
+-------
+Mostly Eclipse 4.x looks quiet ugly after using a dark theme. The best 
+way is to install two things:
+1. Eclipse Color Theme plugin (http://eclipsecolorthemes.org/?view=plugin)
+2. Eclipse UI Themes which includes "Juno Dark" 
+   (https://github.com/rogerdudler/eclipse-ui-themes)
+
+If there're still problems like unreadable elements or wrong colors follow
+these instructions:
+https://wiki.archlinux.org/index.php/Eclipse#Eclipse_4.2.0_not_respecting_dark.2Fcustom_gtk_themes_resulting_in_white_background
+
+
+Setting a custom Gtk theme for specific applications
+----------------------------------------------------
+If you just want to change the Gtk theme only for a specific application 
+do this with the following command:
+
+    GTK2_RC_FILES=/path/to/your/theme/gtkrc application-command
+
+
+For more information see also
+http://urukrama.wordpress.com/2008/07/13/setting-a-custom-gtk-theme-for-specific-applications/
+https://wiki.archlinux.org/index.php/GTK+
+http://bbs.archbang.org/viewtopic.php?id=1498
+http://stillstup.blogspot.de/2010/06/make-qt-apps-look-better-in-almost-gtk.html
+
+
+To extend this README send an email to <fvwmnightshade@gmail.com>
+Thanks ^^

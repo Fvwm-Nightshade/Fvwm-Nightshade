@@ -18,106 +18,94 @@
 Welcome to Fvwm-Nightshade! This project aims to be a lightweight but
 feature rich and good looking configuration of Fvwm. It contains many 
 useful things to make work and life easier with a flavour of a modern 
-desktop. But it can be configure by your own. It is good documented and
-shows you what is possible with this powerful window manager.
+desktop. But it can be also configured by your own. It's good documented
+and shows you what is possible with this powerful window manager.
 
 
-Featurelist of Fvwm-Nightshade 0.6.9:
+Featurelist of Fvwm-Nightshade 0.8:
 =====================================
 - Works with FVWM 2.6.5 but with full support of Xdg menus like in 
-  CVS version
+  CVS version of FVWM.
+
 - Own user configuration directory ~/.fvwm-nightshade (can be used 
-  parallel to existing Fvwm configuration)
-- Own entry "Fvwm-Nightshade" in graphical login managers
-- Config tool for base settings (Font, layouts, etc)
-- 4 virtual desktop pages (at the moment)
-- Taskbar to show running apps per page
-- Three different layouts: Horizontal, Vertical and G2like
+  parallel to existing Fvwm configuration).
+- Own entry "Fvwm-Nightshade" in graphical login managers.
+- Own XDG applications menu with it's own directory files.
 
-  - horizontal (top):
-               Top
-    +--------+        +--------+        +--------+
-    |        |        |        |        |        |
-    +--------+        +--------+        +--------+
-    IconManager       Pager             Panel
-  
-  - vertical (top right):
-    
-    +--------+
-    |        | Panel
-    +--------+
-    +--------+
-    |        | Pager
-    +--------+
-    +--------+
-    |        | IconManager
-    +--------+
-  
-    Panel content in both with:
-    - Menu
-    - Systray (stalonetray)
-    - cpu graph (conky)
-    - date and time (conky)
+- Build support for deb, rpm, Gentoo and Arch installation.
+- Support for local installation without root rights.
+- Localization support for German, French, Spanish and Russian.
 
+- Support for shadows and transparency with XcompMgr and Compton.
+- Support for hald, upower and systemd for Suspend and Hibernate.
+- Support for hotplug mounting (i.e. usb).
+- Support for icons on desktop. Also for mounted devices.
+
+- Up to 10 virtual desktop pages (more possible but only keys 0-9 
+  for different key bindings are available).
+- Taskbar to show running apps per page.
+- Lock desk & screen (xscreensaver).
+- Autostart possibility (starting apps while startup).
+
+- Gtk2 Config tools for different settings:
+  - FNS-BaseSetup (layouts, themes, compositing, icons on desktop, etc.).
+  - FNS-WindowsBehaviour (focus policies, placement, etc.).
+  - FNS-CompConfigurator (config tool for xcompmgr or compton).
+  - FNS-MenuConfigurator (exchange original fvwm-menu-config GUI).
+  - FNS-CPU-Performance (governor-tool for cpufreq / cpupower).
+  - FNS-MenuBuilder (configuration tool for personal menu).
+
+- "Run" command depending on installed software (grun, gmrun or FvwmForm).
+- Background configurable with a thumb browser which can scan different
+  wallpaper locations.
+
+- Four different layouts scalable up to 4K:
+  - horizontal (top)
+  - vertical (top right)
   - G2like (top & bottom)
-    Topbar
-    +---+---+---------------------------------+----------+---------+---+
-    |   |   |                                 |          |         |   |
-    +---+---+---------------------------------+----------+---------+---+
-    Menu Personal                             Systray    Date     Logout
-       
+  - Klike (bottom)
 
-    Bottombar
-    +---+----------------------------------------------+---------------+
-    |   |                                              |               |
-    +---+----------------------------------------------+---------------+
-    Desktop                                            Pager
-        IconManager
+- Many eye candy themes/decors (changable on the fly without restart):
+  - Air
+  - Ambience
+  - Clean
+  - CrystalBalls
+  - FlatTab
+  - GrayRevenge
+  - PitchBlack (default)
+  - Redmond 
+  - Rocken
+  - Tribal
 
-- Lock desk & screensaver (xscreensaver)
-- Personal menu via FvwmScript-PersonalMenu
-- Background configurable with thumb browser (imagemagick and feh)
-- Animation control of window moves
-- Simple "Run" command with FvwmForm
-- Some themes/decors (Clean, Ambience, Tribal, CrystalBall, FlatTab and Air). 
-  Can be changed on the fly without restart
-- Autostart possibility (starting apps while startup)
-- A useful set of GUI tools to configure the global system (Gtk+, Qt, 
-  mouse, keyboard, etc)
-- Help messages for mouse and key bindings
-- Dynamic menus
-- Switching focus between windows with Alt / Shift-Alt-Tab
-- Splash screen
-- Print messages for needed apps for full config functionality in 
-  .xsessions-error
-- Governor-tool FvwmScript-CPU-Performance to handle cpufreq settings
-- Create thumbs with mini icon and name for iconified applications 
-  instead of their icon
-- Build support for deb, rpm, Arch, Gentoo and local installation
-- Localization support for German, French and Spanish
+- Own Gtk2 and 3 themes for Air, Tribal, FlatTab and PitchBlack (default).
+- Set of nice icons for menus and internal apps.
+
+- Animation control of window moves (FvwmAnimate).
+- Window focus switching with Alt-Tab / Shift-Alt-Tab.
+- Splash screen based on ImageMagick to support more image formats.
+- Creation of thumbs with mini icon and name for iconified applications 
+  instead of a simple icon.
 - Smart maximize windows - move and resize windows to the largest free 
-  area of a desktop/page
-- Own set of icons for menus and internal apps
-- Own XDG applications menu with it's own directory files
-- New fvwm-menu-desktop GUI with help windows
-- Restart possibility for Conky clock and CPU applet in panel
-- Support for hald, upower and systemd to FuncSuspend/FuncHibernate
+  area of a desktop page.
+
+- Dynamic menus
+- Help messages for mouse bindings in titlebar, window, corners, sides.
+- Help messages for key bindings.
 
 
 Requirements:
 =============
-Required:        Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
-                 xscreensaver, feh, imagemagick, librsvg2, xwd,
-                 stalonetray, cpufrequtils*, gksu
+Required:       Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
+                xscreensaver, feh, imagemagick, librsvg2-bin, xwd,
+                stalonetray, cpufrequtils or cpupower, gksu, pcmanfm,
+                libgtk2-perl, liblocale-gettext-perl, polkit-gnome
 
-Recommended:     gnomes network manager, Volume Icon
+Recommended:    gnome-network-manager, pm-utils, qtconfig for qt4, 
+                lxappearance, gtk2-engines-murrine, gtk2-engines-pixbuf
 
-Useful:          fdpowermon, blueman-applet, pm-utils, LxApearance, 
-                 qtconfig for qt3, qtconfig for qt4, xneurs
-  
-* unfortunatelly not usable in Arch at the moment. They have changed from
-  cpufrequtils to cpupower but it's not supported at the moment 
-  -> see issue #40 in the bugtracker.
+Suggested:      fdpowermon or cbatticon-gtk2 (for pm-utils), blueman, 
+                grun or gmrun, volumeicon-alsa, clipit or parcelite, 
+                xneur, compton or xcompmgr
 
 
 Installation
@@ -129,7 +117,8 @@ Bugs and Feature requests
 =========================
 Fvwm-Nightshade is a young project. Bugs are possible. We try to avoid 
 them but nobody is perfect ... So, if you find one or have ideas, submit
-them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues
+them under https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues or
+send an email to fvwmnightshade@gmail.com.
 
 
 Mailinglist

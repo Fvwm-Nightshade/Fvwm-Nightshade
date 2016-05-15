@@ -1,0 +1,1080 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>FNS-WindowsBehaviour(1)</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="manpage">
+<div id="header">
+<h1>
+FNS-WindowsBehaviour(1) Manual Page
+</h1>
+<h2>NAME</h2>
+<div class="sectionbody">
+<p>FNS-WindowsBehaviour -
+   SimpleGtk2 perl module to configure the windows behaviour in Fvwm-Nightshade.
+</p>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_synopsis">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Module FNS-WindowsBehaviour</p></div>
+<div class="paragraph"><p><strong>FNS-WindowsBehaviour</strong> can only be invoked by fvwm. Command line invocation of the
+<strong>FNS-WindowsBehaviour</strong> will not work.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>FNS-WindowsBehaviour</strong> is used to configure some of the window behaviours in
+Fvwm-Nightshade.</p></div>
+<div class="paragraph"><p>The following option descriptions are copied from Fvwm&#8217;s manpage because there is
+all described as better as we already can.</p></div>
+<div class="paragraph"><p>On the other hand it is easier to find a passage in Fvwm&#8217;s huge manpage while searching.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options">OPTIONS</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_focus_policies">Focus Policies</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Click to Focus</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>ClickToFocus</em></strong> instructs fvwm to give the focus to a window when it is clicked in.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Focus follows Mouse</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>FocusFollowsMouse</em></strong> tells fvwm to give a window the focus as soon as the pointer
+enters the window, and take it away when the pointer leaves the window.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Sloopy Focus</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>SloppyFocus</em></strong> is similar, but doesn&#8217;t give up the focus if the pointer leaves the
+window to pass over the root window or a <strong><em>ClickToFocus</em></strong> window (unless you click
+on it, that is), which makes it possible to move the mouse out of the way without
+losing focus.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_raise_options">Raise Options</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Raise if focused</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Controls if the window is raised when focused (depending on the focus model).</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Stack Transient Parent</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>The <strong><em>StackTransientParent</em></strong> style augments <strong><em>RaiseTransient</em></strong> and <strong><em>LowerTransient</em></strong> styles.
+Raising a window with StackTransientParent style transfers the raise action to the
+main window if the window being raised is a transient and its main window has
+<strong><em>RaiseTransient</em></strong> style; this effect makes raise on a transient act just like raise on
+its main - the whole group is raised. Similar behavior holds for lowering a whole
+group of transients when the main has <strong><em>LowerTransient</em></strong> style. DontStackTransientParent
+turns this behavior off. (Dont)StackTransientParent has no effect if RaiseTransient
+and LowerTransient are not used.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p>A window with the <strong><em>RaiseTransient</em></strong> style that has transient windows raises all its
+transients when it is raised. The DontRaiseTransient style disables this behavior.
+All windows are then treated as if they had no transients.</p></div>
+<div class="paragraph"><p>A window with the <strong><em>LowerTransient</em></strong> style that has transient windows lowers all its
+transients when it is lowered. The DontLowerTransient style disables this behavior.
+All windows are then treated as if they had no transients.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>If <strong><em>StackTransientParent</em></strong> is set the following style combination is used:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Style * RaiseTransient
+Style * LowerTransient
+Style * StackTransientParent</code></pre>
+</div></div>
+<div class="paragraph"><p>If <strong><em>StackTransientParent</em></strong> is disabled this style combination is used:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Style * DontRaiseTransient
+Style * DontLowerTransient
+Style * DontStackTransientParent</code></pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+<strong>No Raise Click on Motion</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>If the <strong><em>FPIgnoreRaiseClickMotion</em></strong> style is used, clicking in a window and then dragging
+the pointer with the button held down does not count as the click to raise the window.
+Instead, the application processes these events normally. This is useful to select text
+in a terminal window with the mouse without raising the window. However, mouse bindings
+on the client window are not guaranteed to work anymore (see Mouse command. Note that
+this style forces that the initial click is passed to the application. The distance that
+the pointer must be moved to trigger this is controlled by the <strong><em>MoveThreshold</em></strong> command.</p></div>
+<div class="paragraph"><p>The <strong><em>MoveThreshold</em></strong> can be set in the <strong>Miscellaneous</strong> section.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_focus_options">Focus Options</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Grab Focus</strong> and <strong>Grab Focus Transient</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>New normal or transient windows with the <strong><em>GrabFocus</em></strong> (FPGrabFocus + FPReleaseFocus) or
+<strong><em>GrabFocusTransient</em></strong> (FPGrabFocusTransient + FPReleaseFocusTransient) style automatically
+receive the focus when they are created. GrabFocus is the default for windows with the
+ClickToFocus style. Note that even if these styles are disabled, the application may take the
+focus itself. Fvwm can not prevent this.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p><strong><em>FPReleaseFocus</em></strong> and <strong><em>FPReleaseFocusTransient</em></strong> controls whether the focus is returned to
+another window when the window is closed. Otherwise no window or the window under the
+pointer receives the focus.</p></div>
+</td>
+</tr></table>
+</div>
+</dd>
+<dt class="hdlist1">
+<strong>No Focus Click on Motion</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>If the <strong><em>FPIgnoreFocusClickMotion</em></strong> style is used, clicking in a window and then dragging the
+pointer with the button held down does not count as the click to focus the window. Instead,
+the application processes these events normally. This is useful to select text in a terminal
+window with the mouse without raising the window. However, mouse bindings on the client window
+are not guaranteed to work anymore (see Mouse command). This style forces the initial click
+to be passed to the application. The distance that the pointer must be moved to trigger this
+is controlled by the <strong><em>MoveThreshold</em></strong> command.</p></div>
+<div class="paragraph"><p>The <strong><em>MoveThreshold</em></strong> can be set in the <strong>Miscellaneous</strong> section.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Focus by Program</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>The <strong><em>FPFocusByProgram</em></strong> style allows windows to take the focus themselves.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_window_placement">Window Placement</h3>
+<div class="paragraph"><p>Applications can place windows at a particular spot on the screen either by window manager
+hints or a geometry specification. When they do neither, then the window manager steps in
+to find a place for the window. Fvwm knows several ways to deal with this situation. The
+default is <strong><em>TileCascadePlacement</em></strong>.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Tile Cascade Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>TileCascadePlacement</em></strong> automatically places new windows in a smart location - a location in
+which they do not overlap any other windows on the screen. If no such position can be found
+<strong><em>CascadePlacement</em></strong> is used as a fall-back method.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Tile Manual Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>This is the same as <strong><em>TileCascadePlacement</em></strong>, but uses <strong><em>ManualPlacement</em></strong> as the fall-back method.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Cascade Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>CascadePlacement</em></strong> automatically place new windows in a cascading fashion.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Manual Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Aka active placement. The user is required to place every new window manually.
+The window only shows as a rubber band until a place is selected manually. The window is placed
+when a mouse button or any key except <em>Escape</em> is pressed. <em>Escape</em> aborts manual placement which
+places the window in the top left corner of the screen. If mouse button 2 is pressed during the
+initial placement of a window (respectively Shift and mouse button 1 in case Mwm emulation has
+been enabled with the Emulate command), the user is asked to resize the window too.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Position Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>When used with <strong>TopLeft</strong> argument, new windows are placed in the top left corner of the display. With
+the argument <strong>Center</strong>, all new window appear at the center of the screen, and with <strong>UnderMouse</strong>, windows
+are centered under the mouse pointer where possible. If the window is unable to fit on the screen
+because the pointer is at the edge of the screen, then the window is forced on-screen using this
+option.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Min Overlap Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>MinOverlapPlacement</em></strong> automatically places new windows in a location in which the overlapping area in
+pixels of other windows is minimized. By default this placement policy tries to avoid overlapping icons
+and windows on higher layers. This can be configured with the <strong><em>Penalties</em></strong> (MinOverlapPlacementPenalties style).</p></div>
+<div class="paragraph"><p><strong><em>MinOverlapPlacementPenalties</em></strong> takes at most 6 positive or null decimal arguments:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>normal ontop icon sticky below strut</code></pre>
+</div></div>
+<div class="paragraph"><p>if trailing arguments are missing the default is used which is:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>1 5 10 1 0.05 50</code></pre>
+</div></div>
+<div class="paragraph"><p>The <strong>normal</strong> factor affects normal windows, the <strong>ontop</strong> factor affects windows with a greater layer than the
+window being placed, the <strong>icon</strong> factor affects icons, the <strong>sticky</strong> factor affects sticky windows, the <strong>below</strong>
+factor affects windows with a smaller layer than the window being placed, the <strong>strut</strong> factor affects the
+complement of the EWMH working area if the window being placed has the <em>EWMHPlacementUseWorkingArea</em> style
+and windows with an EWMH strut hint (i.e., a "please do not cover me" hint) if the window being placed has
+the <em>EWMHPlacementUseDynamicWorkingArea</em> style.</p></div>
+<div class="paragraph"><p>These factors represent the amount of area that these types of windows (or area) are counted as, when a new
+window is placed. For example, by default the area of ontop windows is counted 5 times as much as normal windows.
+So <strong><em>MinOverlapPlacement</em></strong> (and MinOverlapPercentPlacement described below) covers 5 times as much area of another
+window before it will cover an ontop window. To treat ontop windows the same as other windows, set this to 1.
+To really, really avoid putting windows under ontop windows, set this to a high value, say 1000. This style
+affects the window already mapped and not the window which is currently placed.</p></div>
+<div class="paragraph"><p>There is one exception to this rule:
+in the case of the window being placed has the <em>EWMHPlacementUseWorkingArea</em> style the strut factor affects the placed window.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Min Overlap Percent Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>MinOverlapPercentPlacement</em></strong> is similar to <strong><em>MinOverlapPlacement</em></strong> but tries to minimize the overlapped percentages
+of other windows instead of the overlapped area in pixels. This placement policy tries to avoid covering other
+windows completely and tries even harder not to cover small windows. This can be configured with the
+<strong><em>Penalties</em></strong> (MinOverlapPercentPlacementPenalties styles).</p></div>
+<div class="paragraph"><p><strong><em>MinOverlapPercentPlacementPenalties</em></strong> takes at most 4 positive or null integer arguments:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>cover_100 cover_95 cover_85 cover_75</code></pre>
+</div></div>
+<div class="paragraph"><p>if trailing arguments are missing the defaults are used which are:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>12 6 4 1</code></pre>
+</div></div>
+<div class="paragraph"><p>The <strong>cover_xx</strong> factor is used when the window being placed covers at least xx percent of the window. This factor is
+added to the factor determined by the <strong><em>MinOverlapPlacementPenalties</em></strong> style.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_miscellaneous">Miscellaneous</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Hide Geometry Window</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Hides the position or size window that is usually shown when a window is moved or resized interactively.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Resize Opaque</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>ResizeOpaque</em></strong> instructs fvwm to resize the corresponding windows with their contents visible instead of using
+an outline. Since this causes the application to redraw frequently it can be quite slow and make the window
+flicker excessively, depending on the amount of graphics the application redraws. The <strong><em>ResizeOutline</em></strong> style
+(default) negates the <strong><em>ResizeOpaque</em></strong> style. Many applications do not like their windows being resized opaque,
+e.g. XEmacs, Netscape or terminals with a pixmap background. If you do not like the result, do not use the
+ResizeOpaque style for these windows. To exempt certain windows from opaque resizing you could use these lines
+in your configuration file:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Style * ResizeOpaque
+Style rxvt ResizeOutline
+Style emacs ResizeOutline</code></pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+<strong>Move Threshold</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>When the user presses a mouse button upon an object fvwm waits to see if the action is a click or a drag. If
+the mouse moves by more than <em>pixels</em> pixels it is assumed to be a drag.</p></div>
+<div class="paragraph"><p>Previous versions of fvwm hardwired pixels to <strong>3</strong>, which is now the default value. If pixels is <em>negative</em> or
+omitted the default value (which might be increased when 16000x9000 pixel displays become affordable) is restored.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Opaque Move Size</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Tells fvwm the maximum size window with which opaque window movement should be used. The percentage is percent
+of the total screen area (may be <em>greater than</em> <strong>100</strong>). With <strong>0</strong> all windows are moved using the traditional rubber-band
+outline. With <strong>100</strong> all windows are moved as solid windows. The <em>default</em> is <strong>5</strong> which allows small windows to be moved
+in an opaque manner but large windows are moved as rubber-bands.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_files">FILES</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The settings are saved in <code>~/.fvwm-nightshade/.users</code>. In this file the user can put her/his custom changes, too.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_author">AUTHOR</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>&#169; 2015 - 2016 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2016-04-28 20:21:43 CEST
+</div>
+</div>
+</body>
+</html>

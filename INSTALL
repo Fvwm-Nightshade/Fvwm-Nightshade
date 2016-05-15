@@ -1,21 +1,20 @@
 Installing Fvwm-Nightshade
 ==========================
 
-Requirements
-============
-
-Required:       Fvwm >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
+Requirements:
+=============
+Required:       FVWM >= 2.6.5, python-2.7, python-xdg, xterm, conky, 
                 xscreensaver, feh, imagemagick, librsvg2-bin, xwd,
-                stalonetray, cpufrequtils*, gksu/beesu
+                stalonetray, cpufrequtils or cpupower, gksu, pcmanfm,
+                libgtk2-perl, liblocale-gettext-perl, polkit-gnome
 
-Recommended:    gnomes network manager, Volume Icon
+Recommended:    gnome-network-manager, pm-utils, qtconfig for qt4, 
+                lxappearance, gtk2-engines-murrine, gtk2-engines-pixbuf
 
-Useful:         fdpowermon, blueman-applet, pm-utils, LxApearance, 
-                qtconfig for qt3, qtconfig for qt4, xneurs
+Suggested:      fdpowermon or cbatticon-gtk2 (for pm-utils), blueman, 
+                grun or gmrun, volumeicon-alsa, clipit or parcelite, 
+                xneur, compton or xcompmgr
 
-* unfortunatelly not usable in Arch at the moment. They have changed from
-  cpufrequtils to cpupower but it's not supported at the moment 
-  -> see issue #40 in the bugtracker.
 
 Preparation
 ===========
@@ -23,83 +22,20 @@ Preparation
 Fvwm
 ----
 
-1. Get latest Fvwm 
+Get latest FVWM (>= 2.6.5)
     a. from distribution if available
-    b. from Fvwm homepage
-    - open http://www.fvwm.org/download/ and download latest release
-    - unpack it
-    c. from Fvwm CVS:
-    - Open http://www.fvwm.org/documentation/dev_cvs.php
-    - Do the Initial Setup
-    - Checking Out Source Code:
-       $ cvs -d :pserver:anonymous@cvs.fvwm.org:/home/cvs/fvwm co -r branch-2_6 fvwm
+    b. from FVWM homepage
+        - open http://www.fvwm.org/ and download latest release or one
+          from https://github.com/fvwmorg/fvwm/releases
+        - unpack it and follow the instructions in INSTALL and INSTALL.fvwm
 
-    If distribution package is not available (b and c)
-    1. Prepare environment 
-        rpm:
-        - follow instructions under http://www.fvwm.org/documentation/dev_creating_rpms.php
-          "Before you Begin" and install listed packages (don't forget 'rpm-build' ^^).
-        - next step "Where rpms will be created" and create ~/.rpmmacros file with
-          %_topdir /home/<your_user_home>/redhat
-        - read "Creating binary and source rpm packages" but wait ...
-            unfortunatelly rpm-dist doesn't work at the moment. You've to fix the following:
-            - rename bin/fvwm-menu-desktop-config.fpl into bin/fvwm-menu-desktop-config.fpl.in
-            - add in configure.ac after line 1766:
-              bin/fvwm-menu-desktop-config.fpl
-        
-        deb:
-        - it's mostly easier to do "3. Building the Tree" before installing packages because the 
-          absent packages/dev-libs are in braces in the "no" lines at the end of the summary ;)
-        - if X11/Intrinsic.h not found while make you need package libXt-dev, too.
-        
-        Arch:
-        - xsltproc is equivalent to libxslt. librplay not available but normally not needed.
-        - next step: 4. Compile Fvwm
-    
-    2. Building the Tree:
-    - execute in the terminal
-        $ utils/configure_dev.sh
-       
-       Hint:
-       You can ignore "With GNOME libs support in FvwmGtk? no: Can't find working gnome-config" 
-       because Fvwm wants Gtk+ Version 1 which is obsolete since ages and newer distributions 
-       don't has it anymore. 
+NOTE:
+-----
+Since Fvwm has been switched to https://github.com/fvwmorg/fvwm 
+the different build processes (rpm, deb, src) have to be tested again 
+and if remained described in the future below.
 
-    3. Compile Fvwm:
-        deb:
-        - run 
-           $ ./configure --prefix=/usr
-        - after that
-           $ make deb-inplace
-            
-        rpm:
-        - run
-        $ make rpm-dist
-        
-        Arch:
-        - build the package:
-            1. Create directory where you want to build the package and change to
-                $ mkdir -p /home/<your_user_name>/packages/fvwm
-                $ cd /home/<your_user_name>/packages/fvwm
-            2. Copy from arch/PKGBUILD_FVWM into the directory rename it to PKGBUILD and run
-                $ makepkg -s
-            3. enter password 'guest' for CVS login
-
-2. Install Fvwm
-    - To install Fvwm you need root rights!
-    a. from distribution
-        use the package manager
-    b/c. from Fvwm homepage
-        rpm:
-            - The package is located under /home/[your_user_name]/redhat/RPMS/i386/
-            # rpm -ivh /home/<your_user_name>/redhat/RPMS/i386/fvwm-2.6.x-0.<date>.i386.rpm
-        deb:
-            - The package is created one level higher than the fvwm folder
-            # dpkg -i ../<path_to_fvwm>/fvwm-2.6.x-0.<date>.i386.deb
-        Arch:
-            - The package is created in the previous generated directory. Run
-            # pacman -U fvwm-cvs-2.6.6-1-architecture.pkg.tar.xz
-    
+Sorry for this inconvenience.
 
 
 Installation of Fvwm-Nightshade
@@ -111,7 +47,8 @@ Installation of Fvwm-Nightshade
            Use unzip instead.
 3. Switch into the unpacked directory
 4. Now you have different possibilities to install Fvwm-Nightshade.
-    - General
+
+    => General
         Fvwm-Nightshade will be installed to /usr/local by default. So root
         permissions are required. Run
   
@@ -122,51 +59,73 @@ Installation of Fvwm-Nightshade
 
             # make prefix=<other_dir> install
         
-        If you haven't installed a display-manager like GDM you can add the option
-        displaymanager=no to the make call:
+        If you want to install FNS to a directory else then /usr you have to
+        add 
+        
+            PATH="<other_dir>/bin:$PATH"
+        
+        in a file called <No>_common_xsessionrc or so in /etc/X11/Xsession.d/ that
+        Fvwm-Nightshades executables will be found.
+        
+        If you haven't installed a display-manager like GDM, XDM or LightDM you can
+        add the option 'displaymanager=no' to the make call:
 
             # make install displaymanager=no
 
-        If Fvwm is installed in another directory then /usr/share/fvwm you have
+        If FVWM is installed in another directory then /usr/share/fvwm you have
         to told make where because there are some scripts which have to be installed
-        into Fvwm. 
+        into FVWM. 
    
-              # make fvwm_path=<path_to_fvwm> install
+            # make fvwm_path=<path_to_fvwm> install
           
         If you haven't root rights you can install Fvwm-Nightshade locally. All you
-        need is a directory e.g. ~/.local with write permissions. Also an entry in 
-        your PATH variable in your .bashrc, .bash_profile or .profile like
-          
-              PATH=$PATH:$HOME/.local/bin
-          
+        need is a directory e.g. ~/.local with write permissions.
+            
         Now you can install Fvwm-Nightshade with the following make call:
 
-              $ make prefix=~/.local install local=yes
+            $ make prefix=~/.local install local=yes localperldir=~/.perl displaymanager=no
           
         Don't forget to install the required packages from the beginning of this document!
 
-    - deb:
+    => deb:
         Run
+        
             # make deb
+        
         A Debian package is created in the directory above. Install it with the two liner:
+        
             # dpkg -i fvwm-nightshade-<version>.deb
             # apt-get -f install
-    - rpm:
+
+    => rpm:
         Type in the terminal
+        
             # make rpm
+        
         A rpm package is created in /home/<your_user_name>/redhat/RPMS/noarch/. Install it with
+        
             Fedora/Redhat:
+        
             # yum --nogpgcheck localinstall /home/<your_user_name>/redhat/RPMS/noarch/fvwm-nightshade_<version>_noarch.rpm
+        
             SuSE:
+        
             # yast -i /home/<your_user_name>/redhat/RPMS/noarch/fvwm-nightshade_<version>_noarch.rpm
+        
             For others (dependencies must installed before):
+        
             # rpm -ivh /home/<your_user_name>/redhat/RPMS/noarch/fvwm-nightshade_<version>_noarch.rpm
-    - Arch:
+
+    => Arch:
         Type in the terminal
+
             # make arch
+
         The package is created in the directory above. Run as root
+
             # pacman -U fvwm-nightshade-<version>-any.pkg.tar.xz
-    - Gentoo:
+
+    => Gentoo:
         An additional overlay repository for custom ebuilds which are not in the official
         Portage is needed. It will be set over the PORTDIR_OVERLAY variable in 
         /etc/portage/make.conf. The normal personal per-machine overlay is /usr/local/portage.
@@ -174,49 +133,68 @@ Installation of Fvwm-Nightshade
         
         The Fvwm-Nightshade ebuild has to be created from the template in gentoo/.
         Also the dist package for the installation. This can done with one step.
+        
         Type in the terminal:
+        
             $ make gentoo-prepare
+        
         The make rule creates the dist package ../fvwm-nightshade-<version>.tar.gz and adds 
         the current version of the downloaded package to the ebuild name and saves it in 
         the current directory.
         
         A sub directory 'fvwm-nightshade' in the category 'x11-themes' have to be created
         (if you use the overlay /usr/local/portage you need root permissions!):
+
             $|# mkdir -p <overlay_directory>/x11-themes/fvwm-nightshade
         
         Copy the versioned fvwm-nightshade ebuild into your personal overlay repository:
+
             $|# cp fvwm-nightshade-<version>.ebuild <overlay_directory>/x11-themes/fvwm-nightshade/
         
         Copy the dist package as root to /usr/portage/disfiles:
+
             # cp ../fvwm-nightshade-<version>.tar.gz /usr/portage/distfiles/
         
         Create the manifest:
+
             $|# ebuild --force <overlay_directory>/x11-themes/fvwm-nightshade/fvwm-nightshade-<version>.ebuild digest
         
         Unmask the package with your system architecture -> ~x86 or ~amd64 :
+
             # echo x11-themes/fvwm-nightshade ~x86 >> /etc/portage/package.keywords
         
         Install Fvwm-Nightshade with
+
             # emerge x11-themes/fvwm-nightshade
         
         Perhaps you need some additional USEs. Emerge told you which. Echo them into /etc/portage/package.use:
+
             # echo "<USEs>" >> /etc/portage/package.use
         
         Emerge again.
 
-Fvwm-Nightshade is installed. Congratulation!
 
-If you haven't a graphical login manager copy xinitrc template into your home directory 
+Fvwm-Nightshade is now installed. Congratulation! ^^
+
+
+If you haven't a graphical login manager copy xinitrc template into your home directory:
+
     $ cp <system>/share/doc/fvwm-nightshade/xinitrc-example ~/.xinitrc
+
 or add the following line to your .xinitrc:
+
     exec fvwm-nightshade
+
 and start the xserver with
+
     $ startx
 
 Change the base settings and enjoy.
 
+
 If you have a graphical login manager there's now a new entry "Fvwm-Nightshade" in your sessions dialog.
 Login, change the base settings and enjoy.
+
 
 If you have installed Fvwm-Nightshade locally and want to use a display-manager copy (with root rights) 
 fvwm-nightshade.desktop-example from the doc directory to /usr/share/xsessions:
@@ -236,8 +214,8 @@ Deinstallation
 
     That applies for local installation without root rights, too.
     
-    Also, if Fvwm is installed in another directory then /usr/share/fvwm you have
-    to told make where Fvwm is located
+    Also, if FVWM is installed in another directory then /usr/share/fvwm you have
+    to told make where FVWM is located
 
         # make fvwm_path=<path_to_fvwm> uninstall
     
@@ -247,7 +225,7 @@ Deinstallation
         # make uninstall-alternative
     
     It checks the default installation locations and try to uninstall all installed files. Maybe
-    some files won't found. Excuse the inconvenience.
+    some files won't found please excuse the inconvenience.
             
 - For all others use the package management system.
 
@@ -304,7 +282,7 @@ http://www.rpmseek.com/index.html
 Bugs and Wishes
 ===============
 
-If you have problems or suggestions send an email to fvwmnightshade@gmail.com
+If you have problems or suggestions please send an email to fvwmnightshade@gmail.com
 
 
 

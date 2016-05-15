@@ -1,28 +1,694 @@
 History:
 
-10/09/2014 V 0.6.9
-- add fix from bstrik for issue #52 - FvwmIdent ColorSet 21 to the following
-  colorsets: Air, Ambience and Tribal
-- update NEWS and AUTHORS
+05/15/2016
+- fix bug in FNS-MenuBuilder that personal menu tree isn't sorted correctly
+- add fns-menu-desktop asciidoc document, manpage and html page. It exists 
+  as manpage only but needed for new website, too.
+- fix some bugs in all layouts:
+  - in different shell functions change some variables to biunique names
+  - menu entries for pages show page numbers + translation of 'Page' again
+- update version in config to 0.8-beta1
+- merge develop into master for preparing branch to release 0.8 - start beta cycle
+
+05/05/2016
+- update fns-menubuilder.fr.po and add the .mo for (thanks Axel Lagre for helping out :-)
+- add Axel to AUTHORS
+- remove description how to build and install Fvwm from INSTALL because Fvwm has moved 
+  to Github and all have to be tested and verified again.
+
+05/01/2016
+- rename show_banner to fns-show-banner to fullfill FNS naming. In config, too.
+- add fns-show-banner asciidoc document, manpage and html page
+- add FNS-CompConfigurator asciidoc document, manpage and html page
+- add FNS-MenuConfigurator asciidoc document, manpage and html page
+- add fns-poladd asciidoc document, manpage and html page
+
+04/30/2016
+- add new splash tool show_banner based on ImageMagick to get better quality 
+  and more image format support than in FvwmBanner
+- add new transparent splash "splash_fns_transparent.png" to Artwork
+- changes in config depending on new splash tool:
+  - move FvwmBanner styles to one point instead of two
+  - add FvwmBanner to Excludes in FvwmTranset
+  - comment out FvwmBanner line in StartFunctions
+  - remove depreceated entries of show wallpaper in StartFunctions
+  - add new entry based on show_banner to show splash
+- change banner in .settings to new transparent splash
+- update NEWS and README for new splash
+
+04/29/2016
+- add asciidoc document for FNS-CpuPerformance
+- add manpage and html page for FNS-MenuBuilder
+
+04/28/2016
+- add asciidoc document for FNS-MenuBuilder
+- update all asciidoc documents before building new manpages and html pages
+- update all manpages and html pages
+
+04/26/2016
+- fix bugs in FNS-MenuBuilder:
+  - correct check if XDG_DATA_DIRS is empty
+  - in parse_menu():
+    - add forgotten case if empty line in .personal appears while parsing
+    - add case that .personal not exists
+  - use the correct array entries for text in status bar
+  - build correct folder/application entries with/without icons
+- update asciidoc documents:
+  - add PitchBlack theme description in FNS-BaseSetup.txt
+  - update copyright year in fns-built-trayapplist, fns-find-file, fns-find-icon,
+    FNS-WindowsBehaviour, FvwmSmartMaximize and FvwmTransSet
+  - fix typo in fns-start-programs
+  - update fvwm-nightshade asciidoc manpage
+  
+04/22/2016
+- exchange FNS-Script-PersonalMenu with new SimpleGtk2 based application 
+  FNS-MenuBuilder. Fixed issue #61
+- add template fns-menu-builder.pot, po and mo files for German, Spanish,
+  French and Russian language. French po not complete yet
+- remove FNS-Script-PersonalMenu translations in fvwm-nightshade.po/pot files
+- update SimpleGtk2 library to 0.68
+- changes in config:
+  - update version to 0.7.9.20160422 - now alpha cycle is starting :-)
+  - exchange FNS-Script-PersonalMenu with FNS-MenuBuilder
+  - update sed command in FuncMenuFvwmPersonal for correct reading of .personal
+- update NEWS and README
+
+03/11/2016
+- fix bug in FNS-MenuConfigurator that an undefined array prevents creation
+  of menu list if a local menu is available
+- add check to bin/fvwm-nightshade that script .fnssession will be sourced
+  if FNS is installed locally (extend $PATH and PERL5LIB)
+- update Makefile:
+  - fix issue #51 - Installation isn't possible in different locations
+  - adapt build-install-list to create correct install list for local installation
+  - disable register apps at polkit for local installation
+  - add .fnssession for local installation
+- add fnssession.tpl to templates/
+- update NEWS with Re-add support for different install locations
+
+03/05/2016
+- add third party perl libs to SimpleGtk2:
+  - Gtk2-Ex-Simple-List
+  - Gtk2-Ex-Simple-Tree
+- update Makefile:
+  - build-install-list:
+    - fix bug that display manager path is added whether not root
+    - add path building of SimpleGtk2 and the third party libs
+    - fix path order of localization files => first files than folders
+  - dist-install:
+    - add correct installation of SimpleGtk2 if local=yes is set
+    - add possibility that fvwm perllib module for SimpleGtk2 can installed whether not root
+    - fix bug that apps will register to polkit which not installed
+  - uninstall-alternative:
+    - improve remove process that also local installation can be deleted
+    - add deletion of SimpleGtk2 and other used perl files
+- update INSTALL:
+  - exchange 'Fvwm' with 'FVWM' which is the more correct spelling
+  - add additional description for prefix=<other_dir> to be more specific
+  - add description for local Perl directory
+- update README:
+  - add support for local installation without root rights
+- update AUTHORS:
+  - add gtk2-perl team for perl modules Gtk2-Ex-Simple-List and Gtk2-Ex-Simple-Tree
+
+02/14/2016
+- change some widget sizes and positions in FNS-BaseSetup and FNS-MenuConfigurator
+  to fit different language translations
+- fix missing $[gt.] entries to support text translation in G2likeTopBar and VerticalPanel
+- fixes in config:
+  - change sort order of locale paths in LocalePath string
+  - add missing hotkeys to some menu entries
+- add missing msgids to fvwm-nightshade.pot
+- update fvwm-nightshade.pos and their binaries
+- trim long sentences in pos to fit text in FNS GUIs. Also change encoding of some po files to UTF-8
+
+02/11/2016
+- fix some if constructs that no error occur if an icon or file not found
+- update version in config
+
+02/10/2016
+- remove old marple wallpaper
+- add new pitchblack wallpapers (16:9 and 4:3)
+- update version in config
+
+02/05/2016
+- fix missing comment in .settings
+- update README that version works again ^^
+- add 'Support for Russian language' in NEWS
+- update version in config
+
+01/27/2016
+- add forgotten tray_max_x in KlikeBottomBar for systray
+- add last Russian translation file fns-win-behaviour.ru.po from Art and its .mo \0/
+- rename conkyrc_clock to conky0Xrc_clock and conkyrc_cpu to conky0Xrc_cpu. 0X means conky version <= 1.9
+- add conky1Xrc_clock and conky1Xrc_cpu to layouts/rc-files. 1X means conky version >= 1.10. 
+- add conky version check in all modules with conky swallowed in FvwmButtons to fix issue #59
+- update NEWS that FNS now supports conky >= 1.10 (new config format)
+
+01/26/2016
+- update layouts (G2like, Horizontal, Vertical) to new reorganized Iconman modules 
+- subtract one column from IconMan in KlikeBottomBar to prevent overlapping with systray
+- rename IconMan to GlobalIconMan in G2likeBottomBar
+- update G2likeTopBar to new scaling calculations
+- update version in config
+
+01/24/2016
+- update calculations in all layouts and their modules to allow scaling up to 4K
+- update ratio calculations in config to allow scaling up to 4K
+- removing IconMan modules (GlobalIconMan_Bar, GlobalIconMan_ShowHide, GlobalIconMan_TopBottom)
+  for reorganization. Split them into
+  - a general GlobalIconMan
+  - a Bar_GlobalIconMan: swallowed in a bar
+  - a ShowHide_GlobalIconMan: moves down while mouse hovers over it and hide if leaves
+  - a TopBottom_GlobalIconMan: moving from bottom to top layer and after loosing focus back to bottom layer
+- README and NEWS updated
+
+12/26/2015
+- remove prototypes in function definitions in SimpleGtk2.pm (perllib) to 
+  prevent error messages in new Perl versions
+- add new Gtk2 + Gtk3 theme 'PitchBlack'
+- add new FNS theme 'PitchBlack'
+- change in .settings default layout from 'Horizontal' to 'Klike' and default theme from 'GrayRevenge' to 'PitchBlack'
+- update README
+
+10/01/2015
+- continue debianizing:
+  - add #DEBHELPER# in postinst and prerm script
+  - change in control:
+    - Standards-Version to 3.9.6
+    - remove in Build-Depends and Depends '(<< 3)' from python
+    - remove line above Description
+  - add rm lines in override_dh_auto_install to remove license files in GTK themes
+  - change wrong file permission attributes to 644 in Gtk themes
+  - update unreleased entry in changelog
+
+10/01/2015
+- change optional dependencies in PKGBUILD_FNS:
+  - fdpowermon => cbatticon-gtk2
+  - xcompmgr => compton
+- add cbatticon to 
+  - FuncAppCheck in config
+  - suggested requirements in README and INSTALL
+- add cbatticon to optional dependencies in gentoo ebuild
+
+09/22/2015
+- cleanup conky configs (cpu, clock)
+- adapt panel configs that conky configs will be found in FVWM_USERDIR, too.
+- adapt percentage_voffset calculation in G2likeTopBar for a better fit of cpu percentage
+- fix bug in KlikeBottomBar that systray overlaps pager
+- change background color and transparency of FvwmIdent window in GrayRevenge colorsets
+  for better readability
+- update Russian translation file fvwm-nightshade.ru.po and its .mo. Thanks Art ^^
+- fix discrepancies in original text sections in fns-cpu-performance.fr.po,
+  fns-menu-configurator.fr.po, fns-win-behaviour.fr.po and update the .mo files
+- add parameter '--svg' to fns-find-icon that svg can prefer instead of bitmap formats.
+- update documentation of fns-find-icon - asciidoc, manpage and html
+
+09/21/2015
+- update fns-find-file:
+  - fix error if another path is used
+  - add -r | --recursive to search recursively
+- update documentation of fns-find-file - asciidoc, manpage and html
+
+08/15/2015
+- add new icon add_bookmark.svg
+- update po and mo with revised French translations. Thanks to Dominique Michel ^^
+- update Russian translation file fns-menu-configurator.ru.po and its .mo. Thanks to Artashes Mkhitaryan :-)
+
+07/13/2015
+- change download procedure in standard ebuild to git.
+- fix bug in Makefile that perlsitedir could get empty and remove Gentoo-prepare rule
+  because it's never needed anymore.
+- add a develop ebuild + metadata.xml to gentoo/develop folder. Thanks to Dominique Michel for that :-)
+- add Dominique to AUTHORS
+
+03/17/2015
+- add missing translation in fns-cpu-performance.ru.po and update the mo
+
+02/16/2015
+- update text parts in FNS-BaseSetup, FNS-CompConfigurator, FNS-MenuConfigurator
+  and FNS-WindowsBehaviour to the changes in their pot files (missing dots, grammar)
+- add missing text parts in FNS-CpuPerformance to its pot file and update 
+  all po files
+- exchange wrong text part fvwm-menu-desktop with fns-menu-desktop in FNS-MenuConfigurator
+  and update pot and all po files
+- update all mo files
+- exchange GrabFocus and GrabFocusTransient with FPGrabFocus and FPGrabFocusTransient
+  in FNS-WindowsBehaviour because they're not used with e.g. ClickToFocus. Also 
+  they're using FPReleaseFocus/FPReleaseFocusTransient which is not a wanted
+  default behaviour.
+- fix wrong placed semicolon in FNS-CompConfigurator.
+- fix problem in FNS-CpuPerformance that if no cpufreq driver is installed no error dialog occurs
+
+02/15/2015
+- add new rule 'update-mo' to Makefile to update all mo files or with
+  make update-mo po-file=<filename> <= all mo's named <filename>.*.mo
+  make update-mo po-lang=<language> <= all mo's named *.<language.mo
+- correct window title in fns-win-behaviour.es.po mentioned by Jesús J. Guerrero Botella
+- update all mo files
+
+02/14/2015
+- update po templates and fix typos or wrong grammar
+- update po files to fit state of their templates and fix typos
+- add full name of Art to AUTHORS
+
+02/13/2015
+- fix wrong conversion from hex to float in FNS-CompConfigurator. Also
+  rounding errors from float to hex and vice versa.
+- Merge pull request of Russian translation po files from Artashm (thanks Art! ^^)
+- update French translation po files from Maxime (thanks Maxime! ^^)
+- update Spanish translation po files from Ado (thanks Ado! ^^) with the reviewed
+  versions from Jesus (thanks Jesus! ^^)
+- add Artashm to AUTHORS
+
+01/14/2015
+- fix bug in Makefile to identify only one correct Perl lib path
+- add forgotten Version 0.6.9 changes in NEWS
+
+01/13/2015
+- update fns-base-setup.pot because of possibility to configure size of desktops/pages
+- update some po files (Spanish and German)
+- update all mo files
+- remove old documentation for FNS-Form-BaseSetup and fvwm-menu-desktop2
+- add man page for fns-menu-desktop (adapted fvwm-menu-desktop man page)
+- update all documentation files (asciidoc, man and html)
+- add new documentation (asciidoc, man and html) for FNS-BaseSetup and FNS-WindowsBehaviour
+- adapt click event for Help button in FNS-BaseSetup to show the correct help document
+- add missing click event for Help button in FNS-MenuConfigurator to show the fns-menu-desktop help document
+- add missing click event for Help button in FNS-WindowsBehaviour to show the new help document
+
+01/10/2015
+- fix bug which prevents starting FNS-BaseSetup. Add also Tips to the
+  desktop spin buttons.
+- update version to 0.7.8.20150110
+- update README and NEWS
+
+01/09/2015
+- add possibility to configure size of desktops/pages to FNS-BaseSetup
+- merge gtk_configs branch into develop branch
+- update version to 0.7.8.20150109
+- update README and NEWS
+
+01/05/2015
+- exchange dev-qt/qtgui with dev-qt/qtgui:4 in ebuild (thanks to Sebaro).
+  Also remove some einfo lines not needed on package installation
+- add support for more than 4 desktop pages (currently 10 depending on the
+  limits of available key bindings => SHIFT+ALT+0-9 for window move to page
+  and SHIFT+CTRL+0-9 for goto page):
+  - add 2 new infostore variables: x_desks and y_desks in .settings
+  - update all layouts to set the menu entries and key bindings automatically.
+    Also calculating the correct used space and position of the pager
+  - update G2likeBottomBar and KlikeBottomBar to calculate the correct used
+    space and positions of the pager
+- add missing FuncWriteSetEnvToFileAndSet call for use_composite in FNS-CompConfigurator
+  Also update shell call to get compositors paths (supress errors)
+- update NEWS and README
+
+01/04/2015
+- add post and preun scriptlets in ebuild for register and unregister apps
+  in policy file for pkexec
+- remove forgotten line in fns.install arch script
+- changes in config:
+  - FuncAutoStartPrograms starts only on Init now because most programs will
+    survive a restart of FNS
+  - screenshots will be created in $FVWM_USERDIR/screenshots now
+- exchange <allow_active>auth_admin</allow_active> in fns-poladd with
+  <allow_active>auth_admin_keep</allow_active> to set authorization like sudo
+  to a few minutes.
+- fix bug in FNS-CpuPerformance that changes won't set immediately
+- set SetEnv PcmanFmStatus in .settings to '2' to prevent start of pcmanfm GUI
+
+01/03/2015
+- exchange nucleo.svg with cpu.svg because of better icon quality. Also in
+  menus in config
+- change color of bug.svg from black to grey because of better visibility
+- exchange old fns icon with newer and more stylish fns icon
+- add new dependency liblocale-gettext-perl to Required in INSTALL
+- exchange orphaned/deprecated packages in the ebuild with their replacements:
+  - pm-utils => upower-pm-utils
+  - cpufrequtils => cpupower
+
+01/01/2015
+- update Makefile and arch/PKBUILD_FNS to support changes for upcoming 0.8 release.
+  Also fix missing regex for perlsitedir
+- add fns.install with scriptlets to support postinstall and preuninstall in Arch
+- add missing dependency perl-locale-gettext to PKGBUILD_FNS, spec, ebuild and control
+- fix hangup of policy agent while startup in function FuncStartPolkit in config
+
+12/31/2014
+- update config:
+  - reduce search path for polkit agent in FuncCheck4Polkit because in Fedora
+    it is found in /usr/libexec/ and not like in Debian /usr/lib/pol*. Also fix
+    too few backslashes before '&' in FuncStartPolkit
+  - if 'Icons on desktop' is active no wm menus are accessible. In PcmanFm desktop
+    preference dialog an option is available to activate at least the right one.
+    So for that RootMenu is available additionally to Super_L key
+- add new svg icon for PcmanFm desktop preference dialog
+- adaptions in FNS-CpuPerformance:
+  - add missing show_and_run() for error dialog
+  - exchange '&> /dev/null' with '2> /dev/null' to find available scaler
+  - split frequency info text with '\n' and not ' ' to find the correct sentence
+- adaption in FNS-BaseSetup:
+  - add ~/.config/pcmanfm/default/pcmanfm.conf to change show_wm_menu to activate
+    wm menus while 'Icons on desktop' are active.
+
+12/30/2014
+- update spec file:
+  - with post and preun scriptlets for register and unregister apps
+    in policy file for pkexec
+  - add missing dependencies and perlsitedir
+- add perlsitedir support to Makefile for rpm
+- rename too long svg file names to eliminate build errors in 'make rpm'
+- update new file names in gtk.css and gtkrc in the Gtk2+3 themes
+- exchange shell commands in FNS-CpuPerformance to prevent errors while
+  searching for governors
+- add error dialog in FNS-CpuPerformance if no cpufreq driver is active
+- update SimpleGtk2 to 0.64 to support font and color changing for some widgets
+  => needed for error dialog ^^
+- update version in config
+
+12/21/2014
+- add debian/postinst and debian/prerm for register and unregister apps
+  in policy file for pkexec
+- update dist-install, uninstall and build-deb rules in Makefile to support postinst and prerm
+- fix bugs in fns-poladd to return the correct exit codes
+- restructure debian/rules
+- add %post and %preun to rpm spec file for register and unregister apps
+  in policy file for pkexec
+
+12/19/2014
+- add further support for pkexec (policykit):
+  - add register and unregister functions in Makefile for apps in policy for pkexec
+  - add functions for checking and starting polkit in config
+  - exchange gksu with pkexec in FNS-Cpu-Performance
+  - remove gksu and beesu in control files
+  - update dependency polkit-gnome in README and INSTALL
+  - add Bresiyel to AUTHORS
+  - update NEWS
+
+12/18/2014
+- update package build control files for rpm, pkgbuild and ebuild
+- exchange tabs with spaces in fns-start-programs
+- add support for pkexec (policykit):
+  - update all control files
+  - add new shell script fns-poladd to add or remove policies for different
+    programs needed gui autentification. It's based on Bresiyel's script from here:
+    http://pastebin.com/PbGTZ0jc
+
+12/17/2014
+- config:
+  - while initial start:
+    - deactivate FvwmBanner
+    - position FNS-BaseSetup in the center
+  - update internal use of $[use_composite] to disable/enable the respective menus:
+    0 => no composite
+    1 => composite activated but not started
+    2 => composite started
+  - change Read $[FVWM_USERDIR]/.user to Load .user
+- update $[use_composite] in colorsets to disable/enable the respective colorset settings
+- add to depends in debian/control:
+  - libgtk2-perl - needed by SimpleGtk2
+  - cpupower - alternative to cpufrequtils
+  - lxappearance - fix typo (missing p)
+- update dependencies and featurelist in README
+- update NEWS
+- update dependencies in INSTALL
+
+12/14/2014
+- fixes in config:
+  - add TestRc infront of fns-menu-desktop in FuncXdgMenusInRoot to remove double
+    entries in menu
+  - exchange TestRc (!Match) with Test (EnvMatch DesktopScrollOn 0) to make desktop
+    scroll on/off workable
+- exchange .FvwmForm-Desktop-Config with .fns-menu.cfg in fns-init
+- exchange .FvwmForm-Desktop-Config with .fns-menu.cfg
+- fix bugs in FNS-BaseSetup:
+  - in first_start():
+    - .FvwmForm-Desktop-Config was used instead of .fns-menu.cfg
+    - no wallpapers directory was created
+  - desktop scrolling value wasn't insert due to a wrong variable name
+  - in apply_and_save():
+    - no .layout link was created ever
+    - sed error message occured if no pcmanfm config was found
+    - no error message occur if ~/.config/libfm/libfm.conf" not exist
+    - exchange system(ln -s ...) with symlink()
+- fix display bug in FNS-CompConfigurator if no composite manager available
+- fix bugs in FNS-MenuConfigurator:
+  - fvwm-menu-config2 was used instead of fns-menu-config
+  - in create_menu():
+    - command string was built with quotes on the wrong place
+    - wanted menu string was composed wrong
+- add a sleep(1) between reading the config (FVWM) and deleting it in FNS-WindowsBehaviour
+- expand Makefile with:
+  - un/install routines for new tools, perllib and SimpleGtk2
+  - add an error message for installing FNS desktop file if user not root
+- remove old files:
+  - FNS-Form-BaseSetup
+  - FNS-Script-CpuPerformance
+  - FvwmForm-GenOptionHelp2
+  - FvwmForm-MultiMenuHelp2
+  - FvwmForm-SingleMenuHelp2
+  - fvwm-menu-desktop2-config.fpl
+- move new tools from fvwm to fvwm-nightshade/lib:
+  - FNS-BaseSetup
+  - FNS-CompConfigurator
+  - FNS-MenuConfigurator
+  - FNS-WindowsBehaviour
+- add ' ' to InfoStore additional_wp_dirs because it doesn't be empty
+
+12/12/2014
+- rename fvwm-menu-desktop2 to fns-menu-desktop because of the new FNS-MenuConfigurator
+- rename fns-cpu-performance back to FNS-CpuPerformance for consistency
+- add new InfoStoreAdd default_editor and SetEnv DesktopScrollOn to .settings
+- update config:
+  - change all FNS-Form-BaseSetup to FNS-BaseSetup
+  - change all FNS-Script-CompConfigurator to FNS-CompConfigurator
+  - change all FNS-Script-CpuPerformance to FNS-CpuPerformance
+  - change all fvwm-menu-desktop2 to fns-menu-desktop
+  - add new icons for FNS-WindowsBehaviour and FNS-MenuConfigurator
+  - add DesktopScrollOn to support deactivation of page scrolling
+  - remove FuncUpdateBaseSetupFile and its entries because never needed anymore
+
+12/10/2014
+- add new fns configuration tools based on SimpleGtk2 and fvwm-perllib:
+  - FNS-BaseSetup => will replace FNS-Form-BaseSetup
+  - FNS-CompConfigurator => will replace FNS-Script-CompConfigurator
+  - FNS-MenuConfigurator => will replace fvwm-menu-desktop2-config.fpl
+  - FNS-WindowsBehaviour => implements #46
+- add needed perllib module to start those tools as a module
+- add needed RAD library SimpleGtk2 (#47) for Perl-Gtk2 tools
+- add revised fns-cpu-performance based on SimpleGtk2 (issue #40) with
+  support for cpufreq and cpupower => will replace FNS-Script-CpuPerformance
+- adapt fvwm-menu-desktop2 to support FNS-MenuConfigurator
+- add pot templates for all new configuration tools
+- remove old translation parts from fvwm-nightshade.pot and the german translation
+- add complete german translation for new configuration tools
+- add incomplete spanish and french translations for new configuration tools
+
+11/17/2014
+- update Redmond colorset: better contrast in menu. Thanks to Berno Strik
+  for his patch
+
+11/14/2014
+- fix bug #55 that the horizontal panel was too small to accept all the
+  swallowed items (thanks to Berno Strik for his patch).
+- change some colors in Redmond theme:
+  - border color of active window for better contrast
+  - use the same colors for fg and bg in menu title as in inactive menu
+  - set the active mini window in pager a little bit darker
+
+10/16/2014
+- add new theme 'Redmond'. Thanks to Berno Strik for his creation :-)
+- update NEWS, README, AUTHORS and config (version number)
+
+10/02/2014
+- increase menu button in horizontal layout because systray overlaps it.
+- remove xfce4-power-manager because since 1.3, it no longer provides a 
+  tray icon.
+- update NEWS, README, INSTALL, Arch pkgbuild and Debian control
+
+09/02/2014
+- remove change from 08/08/2014 that Suspend and Hibernate don't appear
+  in the Quit menu if xfce4 power manager is installed.
+- remove old introduction comments from the beginning of config
+- exchange not needed tabs with spaces in config
+- change Schedule of EwmhBaseStruts to 2000 ms that pcmanfm gets the
+  complete screen in desktop mode
+- fix bug in wallpaper functions that spaces break the link deletion
+
+08/31/2014
+- remove FNS-Script-AppletConfigurator and FNS-Script-PlaylistCreator
+- remove all icons needed by FNS-Applets
+- update FuncWallpaperBrowser to support more than one wallpaper directories
+  - add FuncCreateWpDirLinks and FuncRemoveWpDirLinks
+  - add a new icon folder-images.svg
+- add systemd support in FuncSuspend and FuncHibernate
+- make transset version configurable
+- update fvwm-nightshade documentation
+
+08/26/2014
+- change all FNS function in config that they start with 'Func'
+- remove FNS-Applets:
+  - remove all FNS-Applets entries and menus because they will move to 
+    an extra package in the future
+  - remove AppletIconMan from ALT-TAB functions
+  - remove FNS-Applet colorsets from decor themes
+  - remove dependencies in ARCH, Debian, RPM and Gentoo build control files
+  - remove helper scripts (coverlovin)
+- simplify Qt config menu
+- add seperators in layout and decor menu to show which parts come from system
+  and user (DONE)
 - fix bug in fns-start-programs that comments (with # infront) creating errors
 - update docs for fns-start-programs
+- update README and INSTALL
+- reduce the amount of wallpapers to shrink the package size. Putting them in an extra package
+
+08/18/2014
+- remove spaces in empty lines in debian/control to prevent parsing error
+  while building deb package with 'make'
+
+08/17/2014
+- add key binding CTRL + Super_L (left win key) to call DesktopMenu while
+  icons on desktop are active. Normally it is on the right mouse key but
+  in this case the pcmanfm menu is there.
+- changes in config:
+  - add missing case in FuncRunPcmanFmWithDesktop
+  - remove test echos in FuncStartMountDaemon, FuncRunPcmanFmWithoutDesktop,
+    FuncSetWallpaper and FuncRunPcmanFmWithDesktop
+  - extend mouse bindings help messages with new possibility to call the 
+    DesktopMenu
+- fix missing cases if layouts will set - only the system wide were used.
+  Now the same named in FVWM_USERDIR/layouts are prefered
+
+08/16/2014
+- reduce schedules in layouts and add a sleep FuncRunPcmanFmWithDesktop
+
+08/15/2014
+- exchange in some files tabs with 4 spaces
+- Implementation of PcmanFm as mount daemon AND desktop manager. So
+  icons on desktop now possible. Also mount icons.
+- fix problem that find-desktop-icon sometimes doesn't find the needed
+  icon. If this happens a fns icon will be taken
+- fix disappear bug of conky_clock and conky_cpu while startup/restart
+- put Klike bar to the same layer as application to remove the clause
+  whether a composite manager is running. Also center the ShowDesktop button
+- disable sub menu animation in all decors due to the annoying flipping 
+  whether the menu hits the right screen edge
+- add two new variable to .settings to manage icons on desktop
+- add pcmanfm as deamon to exclude list of FvwmTransSet
+- add functions to stear pcmanfm - only as mount daemon or with icon on
+  desktop support
+- adapt wallpaper functions to use pcmanfm as wallpaper setter if icons on desktop
+  are active because it's not possible to set the pcmanfm desktop transparent
+- add 'icons on desktop' to FNS-Form-BaseSetup. Also the Klike layout
+- fix some display bugs in Tribal Gtk3 theme
+- update NEWS and README
+
+08/13/2014
+- fix some display bugs in Tribal Gtk3 theme:
+  - commented out gnome-panel.css and gnome-mdi.css in gtk.css
+  - add background: transparent for menus i.e. gedit in menu.css
+- add function RunAppLauncher with some application launchers in config
+  and exchange FvwmForm-RunCommand in MenuRoot and .bindings
+- update depends and optdepends in PKGBUILD_FNS
+- update Suggests in debian/control
+- update ebuild dependencies
+- update README, NEWS and INSTALL
+- update version in config
+
+08/11/2014
+- adapt FlatTab theme for consistent look:
+  Gtk2:
+  - GtkPaned::handle_size to 6
+  Gtk3:
+  - add missing CSS part for resize grip. Also height and width to 16
+  - add background-color to frame
+  - adapt border-radius in tooltip
+- add Gtk2 + 3 theme based on elementary (Gtk2) and Greybird (Gtk3) for Air
+- update README, NEWS and AUTHORS
+
+08/10/2014
+- add themes installation to Makefile.
+- fix broken 'make deb' because of the debianization of FNS
+- fix annoying flip of IconMan
+- fix bug that pcmanfm doesn't start as daemon
+- set terminal hard to xterm for FvwmConsole to prevent a no-start
+- fix bug in FvwmTransSet whether wmClass is empty after closing of an app.
+- update README, NEWS and INSTALL.
+
+08/08/2014
+- add xfce4 power manager as an optional exchange for pm-utils to 
+  FuncAppCheck, FuncStartSystrayApplets, FuncSuspend and FuncHibernate.
+  Also, if xfce4 power manager is installed no Suspend and hibernate 
+  entry in Quit menu is available.
+
+07/30/2014
+- debianize the package correctly. Add changelog (template), copyright, 
+  rules, source/format, watch and update control file.
+- updating dependencies in README, INSTALL, fvwm-nightshade.spec,
+  fvwm-nightshade.ebuild and PKGBUILD_FNS
+- updating FuncAppCheck with new dependencies
+- add FuncStartMountDaemon to start pcmanfm as daemon to support hotplug
+  mounting
+- updating NEWS about hotplug mounting
+- add clipboards (clipit and parcellite) to FuncStartSystrayApplets
+
+05/30/2014
+- fix other too dark insensitive fore color in menus
+- add README.DarkThemes to help fixing ugly application coloring while
+  using dark themes.
+
+05/23/2014
+- fix too dark insensitive fore color in menus
+
+05/22/2014
+- add Gtk2 + 3 theme based on elementary (Gtk2) and Evolve (Gtk3) for FlatTab
+- add theme.index to Tribal theme
+
+05/21/2014
+- adapt Tribal Gtk3 parts to fit appearance of Gtk2 parts and vice versa
+
+05/11/2014
+- add Gtk2 + 3 theme based on MediterraneanNight Series v2.0 by Rafa Cobreros
+  for Tribal
+
+05/10/2014
+- change some colors in CrystalBall because they were too crude
+- fix annoying bug that Iconman in Horizontal and Vertical layout 
+  moving up and down very often after enter it with mouse
+- change slackware package search engine in INSTALL because old link is closed
+
+05/09/2014
+- adapt Colorset 7 in all themes cause current setting won't remove Rockens title color/pixmap settings
+- change wrong border color in the Clean theme
+- add new svg image for title menu
+- darken the module/pager/iconman background svgs because was too crude
+- updating colorsets template
+- update AUTHORS
+
+05/08/2014
+- add new theme 'Rocken' based on Thibaut's theme (thanks for his admition :-) )
+- add to all decors Greyed style and exchange Colorset 7 because needed for removing bg image if
+  Rocken theme was loaded before.
+- update comments in colorsets to be up to date in all of them
+- exchange tabs with spaces in some files (decors, modules, ...)
+- exchange StaysOnBottom with Layer 4 in some modules because with compositing they're to deep
+- updating colorsets template
+
+05/04/2014
+- fix bug in debian/control - not || but |
+- set use_composite = 0 not 1 in .settings because we don't know whether a composite manager is active
+- switch default theme for 0.8 to "GrayRevenge".
+- set version to 0.7.7.<date> because it's start of 0.8 develop branch
+- set in conky configs own_window_type to 'dock' to prevent invisible cpu_conky and date_conky
+- fix bug #48 - FNS manpages don't show in the help menu
+- add issue #49 - a new layout 'Klike' - a KDE like bottom bar
+
+04/29/2014 (starting with 0.8 develop branch)
+- merge feature_nanomoids branch
+- fix bug in FNS-Applet-Plaia to prevent mplayer showing a cover if in audio file exists
 - update fvwm-menu-desktop2 to current fvwm-menu-desktop in FVWM CVS
-- add CTRL + left Windows key anywhere to open Desktop menu
-- Bugfixes in config:
-  - fix bug in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
-    that strings with space get cut
-  - exchange blutooth-applet with bluemon-applet because it doesn't exist in Gnome3
-    anymore
-  - set terminal hard to xterm for FvwmConsole to prevent a no-start
-  - add support for hald, upower and systemd to FuncSuspend/FuncHibernate
-  - fix bug in FuncFvwmManpageMenu that not all Fvwm manpages are shown
-- updated control files to blueman
-- update README, INSTALL and COPYING
-- fix bugs in G2like, Horizontal and Vertikal that:
-  - sometimes icons not shown
-  - cpu and clock applet won't appear in panel
-- bump config, README and NEWS to 0.6.9
-  
+
 03/01/2014
 - update FvwmForm-MultiMenuHelp2 to last upstream changes
   - 2 line fix by Dominique Michel to correspond correctly with fvwm-nightshade.pot
@@ -33,6 +699,66 @@ History:
 02/25/2014
 - update fvwm-menu-desktop2 to last upstream changes:
   - Converting of icons always to png
+
+01/09/2014
+- add FNS-Script-CompConfigurator - Composite configurator script for 
+  xcompmgr or compton
+- add new composite icons
+- add new values in .settings: use_composite, comp_command, used_windowtransparency,
+  used_windowopacity
+- add new module FvwmTransSet to set true transparency to windows if a composite
+  manager is running
+- update config:
+  - assign CompConfigurator icon to FNS-Script-CompConfigurator
+  - add configuration for FvwmTransSet
+  - add composite manager and FvwmTransSet to StartFunction
+  - add ExitFunction to stop composite manager and FvwmTransSet if needed
+  - add some needed composite functions: FuncKillCompmgr, FuncStartFvwmTransSet,
+    FuncStopFvwmTransSet, UpdateWindowOpacity, UpdateWindowTransparency,
+    UpdateMenuTint, 
+  - fix bug in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
+    that strings with space get cut
+  - add new sub menu for compositing in Fvwm-Nightshade configuration menu. Also
+    menus for change transparency in the RootMenu, and windows
+  - add in MenuWindowOpsTrimmed the possibility to change window opacity and
+    transparency if composite manager is running. Also in MenuDesktopOps to
+    change the menu transparency
+  - update overview, copyright and version number
+- add to colorsets use_composite tests to set tint or not
+- add a check in FvwmTransSet that dialogs don't change the last window's opacity
+  because it looks confusing if the parent window gets transparent
+- add support for hald AND upower to FuncSuspend/FuncHibernate
+- add some additional search sites to INSTALL
+- add zypper install command to INSTALL
+- update NEWS, COPYING, README
+- add documentation for FvwmTransSet
+
+11/02/2013
+- add new wallpapers 'wp_fns_blobs' in 4:3, 16:9 and 16:10
+- update config version
+
+11/01/2013
+- add new theme 'GrayRevenge' based on Alessandro Roncone's Gray-Revenge-1-7
+  (http://alecive.deviantart.com/art/Gray-Revenge-1-7-194633730) and update
+  colorsets to handle nanomoids
+- update NEWS and config version
+
+10/26/2013
+- merge changes from develop branch:
+  - add /etc/* to %files in fvwm-nightshade.spec to add fns-applications.menu to rpm
+  - fix bug in layouts that shortcuts are shown with '&' instead of an underline
+  - add new vector icons for menu and modify some
+  - change #!/usr/bin/env python2 to #!/usr/bin/env python2.7 in fns-find-icon
+  - final update of fvwm-nightshade.pot, german, spanish and french po and mo files
+  - update fvwm-nightshade help in asciidoc, man page and html
+  - update fvwm-menu-desktop2, fvwm-menu-desktop2-config.fpl to final version
+  - add fvwm-menu-desktop man page
+  - add help forms for new fvwm-menu-desktop2-config.fpl
+  - add desktop-directories for fns-applications.menu to system/
+  - add fns-applications.menu to system/
+  - change xpm icons to svg icons in menu and update version
+  - add XDG menu parts to install/uninstal and build-list in Makefile
+  - fix bug in Makefile that shell errors occur while creating fns-install-list
 
 10/20/2013
 - update fvwm-nightshade help in asciidoc, man page and html
@@ -109,7 +835,30 @@ History:
 - changes in config:
   - remove partitialmaximize in menu
   - exchange bitmap icon entries with new svg icon entries in menus
-  
+
+10/09/2014 V 0.6.9
+- add fix from bstrik for issue #52 - FvwmIdent ColorSet 21 to the following
+  colorsets: Air, Ambience and Tribal
+- update NEWS and AUTHORS
+- fix bug in fns-start-programs that comments (with # infront) creating errors
+- update docs for fns-start-programs
+- update fvwm-menu-desktop2 to current fvwm-menu-desktop in FVWM CVS
+- add CTRL + left Windows key anywhere to open Desktop menu
+- Bugfixes in config:
+  - fix bug in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet
+    that strings with space get cut
+  - exchange blutooth-applet with bluemon-applet because it doesn't exist in Gnome3
+    anymore
+  - set terminal hard to xterm for FvwmConsole to prevent a no-start
+  - add support for hald, upower and systemd to FuncSuspend/FuncHibernate
+  - fix bug in FuncFvwmManpageMenu that not all Fvwm manpages are shown
+- updated control files to blueman
+- update README, INSTALL and COPYING
+- fix bugs in G2like, Horizontal and Vertikal that:
+  - sometimes icons not shown
+  - cpu and clock applet won't appear in panel
+- bump config, README and NEWS to 0.6.9
+    
 09/22/2013
 - Some Bugfixes in fvwm-menu-desktop2:
   - DecodeEncodeErrors in menu names
@@ -214,9 +963,154 @@ History:
     - change required FVWM version to >= 2.6.5
     - add Xdg menu support
   - update NEWS
-    
+
+08/28/2013
+- add new applet FNS-Applet-DriveInn (a storage drives manager)
+- add new vector icons for FNS-Applet-DriveInn to artwork/scalable
+
+08/26/2013
+- add new environment variable to fvwm-nightshade to have a search variable
+  for sound paths
+- add new function FnsSoundPath in fns-init to have the same possibility
+  like ModulePath or ImagePath to create search paths for sounds
+- add new python script fns-find-file to search in path variables like
+  $PATH or $FNS_SOUNDPATH for files
+- add FnsSoundPath to config and update version
+- add new applet FNS-Aplet-Chrono (alarm clock)
+- add new 32x32 icons for FNS-Aplet-Chrono in artwork/icons
+- add sounds in artworks for own system sounds
+- exchange tabs with spaces in fns-init and fvwm-nightshade
+- add new variable __version__ for version in fns-find-icon
+- adapt variables which use 0/1 to false/true in some FvwmScript scripts
+- fix bug in FNS-Applet-Kalende that in script mode the background is transparent
+- add documentation for fns-find-file (asciidoc, manpage, html)
+- add new feature description of fns-find-file to NEWS
+
+08/22/2013
+- add FNS-Script-Date based on FvwmScript-Date because the original fits
+  not into the FNS GUI design. Also, setting system time/date needs root
+  permission which is not possible with FvwmScript-Date
+- add FNS-Script-Date in some menus
+- add new clock vector icon for FNS-Script-Date
+- exchange tabs with spaces in FNS-Script-FileBrowser and header.tpl
+
+08/21/2013
+- create new icon directory structure in artworks/icon:
+  16x16/, 24x24/, 64x64/ and 80x64/ for bitmap icons
+- delete fns bitmap icons because they never needed - a svg icon exist
+- resize weather icons faenza and google from 40x40 to 24x24
+- update applet icons in config to new icon directory structure
+- adapt in Meteo, Kalende, Plaia and Pagina:
+  - exchange tabs with spaces
+  - rename all window titles to Applet-<name>
+  - make command line parsing more general
+  - exchange svg icons with bitmaps
+- changes in Meteo:
+  - add a bunch of new options
+  - script can now decide which theme should taken - wonderground or system theme icons
+
+08/18/2013
+- changes in config:
+  - launch new develop versioning: <version_number>-<YYYYMMDD>
+  - exchange tabs with spaces
+  - add to 9.3 -> Modules and Applets menu
+  - add icon styles for FNS-Applets and other FNS scripts
+  - add new menus:
+    - MenuFnsApplets - show all new applets
+    - MenuClockOps - popups when right click on date/time with:
+      - calender
+      - alarm clock
+      - set time and date
+      - restart Conky clock
+    - MenuCpuOps - popups when right click on cpu bar with:
+      - Cpu Performance tool
+      - Cpu applet Nucleu
+      - restart Conky cpu bar
+    - exchange some xpm icons with vector icons in MenuAppletOps
+- add own_window_title to conkyrc_clock and conkyrc_cpu to make it possible to kill them with xkill
+- update FNS-Applet-Kalende:
+  - add new option '-s' to start it as a normal Skript with the same decoration as normal FvwmScripts
+  - move Sebaros settings in a if loop
+  - made changes in Command line argument parsing to can handle more than on option without value
+  - integrate other colors for using applet as a script for better look
+  - fix bug that current day number won't show colorized if month or year changed
+  - remove old useless comment lines
+- add mouse action on conky_cpu and conky_clock button - right click to show menu - in
+  G2likeTopBar, HorizontalPanel and VerticalPanel
+- add some new vector icons to artworks/icons/scalable
+- change some vector icons in artworks/icons/scalable
+
+08/17/2013
+- add dependencies for coverlovin in control files for arch, deb and rpm
+- remove wm-icons package from recommended dependencies in /debian/control
+- adapt FNS-Applet-Kalende, FNS-Applet-Pagina and FNS-Applet-Plaia to new structure
+- add new vector icons to artworks/icons/scalable to replace wm-icons package
+- remove Tips entries and mouse actions in AppletIconMan because they're not needed
+- change bitmap icons to vector icons in G2likeTopBar, VerticalPanel and HorizontalPanel
+  to change icon size on the fly
+- add SetMenuIconSize function in fns-init to set Menu icon size dependent of .FvwmForm-Desktop-Config
+  on the fly in menus and Windowlist
+- changes in config:
+  - add loading of AppletIconMan in 7. Modules under 7.8.1
+  - change the order in ImagePath that Fvwm search for images in FVWM_USERDIR first
+  - change most of the xpm files to svg
+  - change static menus to dynamic menus and xpm to vector icons to change icon size on the fly
+  - fix variable problem in FuncWriteInfoStoreToFileAndSet
+  - implement SetMenuIconSize in all menus if needed to update icon size variable to enable
+    changing icon size on the fly
+- change static menus to dynamic menus and xpm to vector icons in all layouts to change icon size on the fly
+- remove wm-icons from recommended dependencies in INSTALL and README
+- exchange tabs with spaces in INSTALL and README
+
 08/12/2013
 - FvwmSmartMaximize: make EwmhBaseStruts determination more perlish
+
+08/03/2013
+- move all FNS-Applets from fvwm-nightshade/applets to fvwm/
+- rename all FvwmScripts to FNS-Script-<Name>
+- rename all FvwmForms to FNS-Form-<Name>
+- rename all FvwmApplets to FNS-Applet-<Name>
+- update all names in config to the new name nomenclature
+- add Pagina menus to config
+- rename FNS-BaseSetup helps to FNS-Form-BaseSetup helps and update it
+- update fvwm-nightshade help with the new names
+- update fvwm-nightshade help with new infostore variables and the new tools
+- adapt Makefile to new name convention
+- add weather icons for FNS-Applet-Meteo
+- set permissions of FNS-Applet-Meteo to 644
+- add quit icon to artwork/icons
+- rename coverlovin.py to coverlovin
+
+08/02/2013
+- Changes in config:
+  - add FuncFvwmAppletLibCheck in config to check whether softlink 
+    FvwmApplet to FvwmScript exist
+  - increase in all functions colorsets greater 30 +1 to get more place
+    in theme colorsets for FvwmApplets
+  - update FuncFvwmNextWindow and FuncFvwmPrevWindow to support AppletIconMan
+  - add general Style for FvwmApplets
+  - add icon style for Kalende, Meteo, Plaia and Pagina
+  - add some Ops menu for FvwmApplets
+  - add update functions for tint and font color
+  - add general binding for Ops menu
+- add key binding to show/hide AppletIconMan in .bindings
+- update translation files for new key binding
+- add AppletIconMan to modules to manage FvwmApplets
+  - add Functions to show/hide AppletIconMan and de-/activate focus on applets
+- add some Nanomoids applets in applets/:
+  - Kalende - a Calendar
+  - Meteo - a Weather forecast applet
+  - Plaia - a Musicplayer based on mplayer
+  - Pagina - a Videoplayer based on mplayer
+  - DriveInn - a storage drives manager
+- add Nanomoids icons in artwork/icons
+- add some tools needed for Nanomoids in fvwm/:
+  - FNS-AppletConfigurator - only a GUI at the moment
+  - FNS-FileBrowser - a file browser based on FvwmScript-FileBrowser
+  - FNS-PlaylistCreator - a simple playlist creator
+- add a modified version of coverlovin in bin/ to handle id3 tags and covers
+- add new colorsets for Nanomoids in themes
+- add 2 new infostore variables for FvwmApplets in .settings
 
 08/01/2013
 - add FvwmSmartMaximize to all themes:
