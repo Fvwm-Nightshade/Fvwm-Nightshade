@@ -7,8 +7,8 @@ History:
 - fix some bugs in all layouts:
   - in different shell functions change some variables to biunique names
   - menu entries for pages show page numbers + translation of 'Page' again
+- merge develop into master to prepare branch for release 0.8 - start beta cycle
 - update version in config to 0.8-beta1
-- merge develop into master for preparing branch to release 0.8 - start beta cycle
 
 05/05/2016
 - update fns-menubuilder.fr.po and add the .mo for (thanks Axel Lagre for helping out :-)
