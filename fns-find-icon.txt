@@ -1,0 +1,120 @@
+DESCRIPTION
+-----------
+*fns-find-icon* is used to find the correct icon path listed in the desktop 
+file of an application in /usr/share/applications/ or the icon path of an 
+application depending on the used theme in fvwm-menu-desktop-config.fpl. 
+Default theme is 'gnome'.
+
+
+OPTIONS
+-------
+These command line options are recognized by *fns-find-icon*:
+
+*-n* 'NAME'::
++
+Find the appropriate icon path of an application listed in its desktop file.
+Or if *--notdesk* is given find the icon in /usr/share/icons/.
++
+Example for .desktop file search:
++
+------
+$ fns-find-icon -n meld
+------
++
+Desktop file of meld:
++
+------
+[Desktop Entry]
+Encoding=UTF-8
+Name=Meld
+GenericName=Diff Viewer
+X-GNOME-FullName=Meld Diff Viewer
+Comment=Compare and merge your files
+Exec=meld
+Terminal=false
+Type=Application
+Icon=meld
+StartupNotify=true
+Categories=GNOME;Application;Development;
+------
++
+First *fns-find-icon* tries to find the full path. If only the name is given
+in the .desktop file it searches for the used theme in $FVWM_USERDIR/.FvwmForm-Desktop-Config. 
+If $FVWM_USERDIR/.FvwmForm-Desktop-Config doesn't exist it uses the default theme 'gnome'. 
+If the icon not found it searches in $FVWM_USERDIR/.menu lastly. 
+If the search was successfully it converts the icon to the needed size 
+(if the icon found in $FVWM_USERDIR/.menu only).
++
+Example for normal icon search:
++
+------
+$ fns-find-icon -n 'system-log-out' -s 24 -c 'actions' --notdesk
+------
++
+Here *fns-find-icon* tries to find the icon "system-log-out" with the 
+size of "24x24" in the category "actions". The *--notdesk* tolds *fns-find-icon* 
+not to search in the desktop files but in /usr/share/icons/. 
++
+First it gets the used theme, then it searches in the category with the 
+stated size. If it find the icon it returns the full path. If not returns 
+nothing.
+
+*-i* 'W_ID'::
++
+It is possible to search for an icon for a specific window with the window id. 
+*fns-find-icon* uses for this the program 'xprop'. It asks 'xprop' over 'WM_CLASS' 
+for the used name and then makes the same steps as in *-n* 'NAME' described.
+
+*-p* 'EXTEND_PATH'::
++
+Sometimes it is needed to told *fns-find-icon* to search in other paths 
+also. The defaults are:
++
+------
+/usr/share/icons/[theme]/[icon-size]/[category]/
+/usr/share/icons/[theme]/[category]/[icon-size]/
+/usr/share/icons/hicolor/[icon-size]/[category]/
+/usr/share/pixmaps/
+------
++
+You can extend the defaults with this option. Different paths are sperated 
+with a ":".
+
+*-s* 'ICON_SIZE'::
++
+The 'ICON_SIZE' defines the the icon size to search for. Default is '48'.
+
+*--svg*::
++
+Prefer svg instead of bitmaps and if found add :<size>x<size> at the 
+end of the path.
+
+*-c* 'CATEGORY'::
++
+The 'CATEGORY' defines the category in the theme to search for an icon. 
+Default is 'apps'.
+
+*-t* 'THEME'::
++
+The 'THEME' defines the theme to search for an icon. 
+Default is the theme used in fvwm-menu-desktop-config.
+
+*--notdesk*::
++
+To search for a specific icon not for an icon from a .desktop file use 
+this option.
+
+*--version*::
++
+Shows program's version number and exit.
+
+*-h | --help*::
++
+Shows short help and exit.
+
+AUTHOR
+------
+
+(C) 2013 - 2016 Thomas Funk <t.funk@web.de>
+
+

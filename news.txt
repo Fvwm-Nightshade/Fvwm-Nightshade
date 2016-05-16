@@ -1,0 +1,377 @@
+NEWS
+----
+
+=== Monday, 16th May 2016
+Hi there!
+
+Finally after two long years I've finished FNS for the upcoming version 0.8.
+
+Today two parts are now available:
+
+- The Beta 1 in https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/master.zip[Master]
+- The new website
+
+Check out whats link:./features.html[NEW]!
+
+Best,
+
+Thomas
+
+_Your Fvwm-Nightshader_
+
+++++
+<br>
+<br>
+++++
+
+=== Thursday, 11th December 2014
+Hi!
+
+Done the first commits for graphical tools for FNS 0.8 in branch gtk_configs \o/ 
+
+It isn't completelly workable but each tool is fully functional. Also as a FVWM module ^^
+
+The next step is to implement them in FNS. Updating the Makefile for proper installation will follow.
+
+It goes forward!!
+
+Best,
+Thomas
+
+_Your Fvwm-Nightshader_
+
+++++
+<br>
+<br>
+++++
+
+=== Thursday, 9th October 2014
+Hi folks,
+
+we've released the definitely last Bugfix Release 0.6.9 of the 0.6 branch. The next milestone will be our 0.8 release with many improvements.
+
+Here are the changes of 0.6.9:
+
+* Update fvwm-menu-desktop2, FvwmForm-MultiMenuHelp2 and their French and Spanish translation to last upstream changes.
+* Fix colorset bug in Air, Ambience and Tribal which ends up in an empty FvwmIdent (thanks for the patches from bstrik :-) ).
+* Fix bug in fns-start-programs that comments (with # infront) creating errors
+* Add CTRL + left Windows key anywhere to open Desktop menu.
+* Fix bugs in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet that strings with space get cut and therefore .settings get corrupted.
+* Exchange blutooth-applet with bluemon-applet because it doesn't exist in Gnome3 anymore.
+* Add support for hald, upower and systemd to FuncSuspend/FuncHibernate
+
+Best,
+
+_Your Fvwm-Nightshade Team_
+
+++++
+<br>
+<br>
+++++
+
+=== Sunday, 17th August 2014
+Hi all!
+
+A short sign of life from us - We're not dead and working hard on 0.8. 
+
+Since March much happened with and within FNS. Have a look on the highlights:
+* 3 Gtk themes added for a more unique look.
+* Support for hotplug mounting (i.e. usb).
+* Support for icons on desktop. Also for mount icons.
+* Support for shadows and transparency.
+* A new layout 'Klike' - a KDE like bottom bar
+* A wonderful new theme 'Rocken' based on Thibaut's theme - thanks for his admition :-)
+* Some optional tools like xfce4-power-manager or application launchers (grun and gmrun) for more flexibility.
+* Many bugfixes i.e. the annoying disapearing of the clock and cpu applets in the panels or the flipping of the global IconManager.
+
+Also SimpleGtk2 - the RAD library for Gtk2 GUI elements - has the most important parts implemented and can be used within a FVWM module.
+
+But the best is, presupposed we finishing FNS 0.8 in the next time, a preview spin in Tanglu, a Debian based distribution will be published!
+
+If you want to look into FNS download the current develop version. It is workable but perhaps with some minor issues from time to time ;-)
+
+Have fun!
+
+_Your Fvwm-Nightshade Team_
+
+++++
+<br>
+<br>
+++++
+
+=== Saturday, 29th March 2014
+
+We're still working on FNS and want to give a short update on what.
+
+FNS 0.8 is now in the queue and the following preparations are ongoing:
+* switching all/most tools from FvwmScript to Gtk2 and Perl. Therefore we're developing a RAD Gtk2 library to reduce the amount of work.
+* finishing the nanomoid applets.
+* create a configuration manager for the most important settings.
+
+These are the main parts. If time others could follow.
+
+**If anybody is interrested in helping you're more than welcome. It is much work and we're only two persons. So, don't be shy and write us on fvwmnightshade@gmail.com**
+
+++++
+<br>
+<br>
+++++
+
+=== Thursday, 31st December 2013
+Hi all FNS users!
+
+Christmas is gone and 2014 is coming soon. Therefore we, the team of 
+Fvwm-Nightshade, want to wish all of you a good and healthy new year! 
+Hope you will stay the next months on our side to see what happens with FNS.
+
+For 2014 we have planned these targets:
+
+* Bugfix release *0.69*
+* New major release *0.8* with
+** Applets and icons on the desktop
+** Compositing (shadows and transparency)
+** New themes and layouts
+** Auto mounting
+** New languages (probably Portuguese, Italian(?), Russian(?))
+** Multi monitor support (not sure)
+* Newly designed website with more and clearly arranged information
+* A News blog to show our work with videos, pictures and code snippets
+* fvwm-pylib (Python library for FVWM)
+
+Much, much work ... but for most points cornerstones are layed.
+
+If anybody has interest to help, all hands are more than welcome!!
+
+So, with these New Year's resolutions we say goodbye for this year and 
+wish all a great year
+
+-----
+˛¸.o•°`~☻~`°•o.˛¸˛.o•°★°•o.˛¸˛.o•°`~☻~`°•o.˛   
+•(¯`•★•´¯)•╔═══╦═══╗╔╗╔═══╗╔╦╦╗•(¯`•★•´¯)•   
+•(¯`•★•´¯)•║╔═╗║╔═╗╠╝║║╔═╗║║║║║•(¯`•★•´¯)•   
+•(¯`•★•´¯)•╚╝╔╝║║║║╠╗║╚╝╔╝║║║║║•(¯`•★•´¯)•   
+•(¯`•★•´¯)•╔═╝╔╣║║║║║║╔╗╚╗║╚╩╩╝•(¯`•★•´¯)•   
+•(¯`•★•´¯)•║║║╚╣╚═╝╠╝╚╣╚═╝║╔╦╦╗•(¯`•★•´¯)•   
+•(¯`•★•´¯)•╚═══╩═══╩══╩═══╝╚╩╩╝•(¯`•★•´¯)•   
+˛¸.o•°`~☻~`°•o.˛¸˛.o•°★°•o.˛¸˛.o•°`~☻~`°•o.˛   
+-----
+
+_Your Fvwm-Nightshade Team_
+
+++++
+<br>
+<br>
+++++
+
+=== Monday, 21st October 2013
+Hi all,
+
+We're proud to announce a new Bugfix and enhancement release of Fvwm-Nightshade!
+
+Changes of 0.6.8:
+
+* Works now with FVWM 2.6.5 without loosing new Xdg menu support from CVS version.
+* Own XDG applications menu with it's own directory files.
+* Revised fvwm-menu-desktop GUI with help windows for each configuration section.
+* Feature 'smart maximize' - moves and resizes a current window to the largest free area of a desktop/page.Thanks to Andreas Hoenen.
+* New set of icons for menus and internal apps to remove wm-icons dependency because this package isn't available in all distributions and of its' unscalability. Also special thanks to Alessandro Roncone who gives us the permission to use his Awoken icons (http://www.deviantart.com/art/AwOken-163570862).
+* Support for Gentoo installation. Thanks to Sebastian Luncan who creates the ebuild.
+* Right click menu for Conky clock and CPU applet in panel to restart them on error.
+
+Enjoy
+
+The Wiki will be updated in the next days.
+[Edit:] Done.
+
+++++
+<br>
+<br>
+++++
+
+=== Monday, 14th October 2013
+Hi all,
+
+the new release is moving closer and closer! The only thing is the translations for German, French and Spanish. Then it's ready :-)
+
+If someone wants to help with French or Spanish translation send us an email to <fvwmnightshade@gmail.com>.
+
+We would be happy about it ^^
+
+For testing use the https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tree/develop[develop branch] here on Github.
+
+++++
+<br>
+<br>
+++++
+
+
+=== Friday, 6th September 2013
+Hi!
+
+A short update ...
+
+In the develop version (master branch) FVWM 2.6.5 is now supported! But with the Xdg menu feature from the CVS version of FVWM ^^
+
+Also a great new feature - smart maximize - with one click on the maximize button the window maximizing to the largest possible area of the page. Big thanks to Andreas Hoenen!
+
+And ... Gentoo build support will be added soon!
+
+We have tested the develop version of Fvwm-Nightshade on the newest Ubuntu, Fedora and Arch distribution without problems. So ... test it :-)
+
+++++
+<br>
+<br>
+++++
+
+
+=== Wednesday, 10th July 2013
+
+A new Bugfix and Enhancement Release 0.6.7 is out!
+
+The new changes are:
+
+* Enhanced uninstall routine for generic installation - an install list will be created, so keeping the sources of the installed version never needed anymore.
+* It is now possible to install Fvwm-Nightshade locally if the user hasn't root rights. Good for testing. ^^
+* Also an installation without the login file can be done if no display-manger is available.
+* We have exchanged Esetroot with feh because of the poor availability of eterm package in different distribution repositories.
+
+One drop of bitterness for Arch user exist:
+
+FvwmScript-CPU-Performance not working because cpufrequtils are exchanged with cpupower and this have to be implemented first. Sorry for that.
+
+The Wiki will be updated in the next days. So stay tuned :-)
+
+++++
+<br>
+<br>
+++++
+
+
+=== Saturday, 15th June 2013
+We have released Version 0.6.6. It's a small bugfix release but with two good improvements: 
+
+1. The Global Iconman is often flipping uncontrolled which was very annoying. Now never. 
+2. At the first menu creation with 'Regenerate XDG menu(s)' it was unclear what options have to set to get correct application menu(s). Now we've set the right initial values.
+
+Hope this helps :-)
+
+++++
+<br>
+<br>
+++++
+
+
+=== Sunday, 9th June 2013
+Version 0.6.5 is out now! It's a minor update with
+* Localization support for German, French and Spanish.
+
+* Some bugfixes
+
+Unfortunately Russian hasn't got it into this release. Perhaps next time. Sorry ...
+
+Hope you like it :-)
+
+Also we have changed our branching system now:
+
+* Main branches are all **release-x.x** where bugfixes will be integrated only.
+* The _stable_ develop branch is **master**. Here new but finished features will be implemented.
+* The _unstable_ develop branch is **develop**. This one _can be_ usable. But for those who want to test new feature should use the **master** branch.
+* Temporary branches for bugfixes or new feature are labeled with "bugfix_[bugtracker-number]" or "feature_[name_of_the_feature]"
+
+++++
+<br>
+<br>
+++++
+
+
+=== Friday, 26th April 2013
+Sorry for that long time of silence but we're still working on Fvwm-Nightshade ^^
+
+Two big projects are in progress at the moment:
+
+* *Localization* - German, Spanish and French are nearly finished now (need only some reviews). Russian will follow in the next weeks (hopefully). Unfortunately Italian must be canceled because we haven't found anyone who can translate it for us. Sorry ...
+
+* *FNS-Nanomoids* - little useful desktop applets based on Sebaros Minimoids. They are smaller than the original and have some new features. 60% are finished: 
+** *Pagina* - a video player
+** *Plaia* - a music player, both based on mplayer
+** *Kalende* - a calender
+** *DriveInn* - a little automounter
+** *Meteo* - a weather applet
+** *Yard* - a quick access to six folders or apps. 
++
+In preparation: 
+
+** *Nucleu* - a cpu economy viewer based on cpufreq
+** *Chrono* - a digital clock with alarm & date. 
+
+But the big part comes now: 
+
+how to configure them (over config files) and how use these FvwmScripts more than once. A nice feature will be that the user can raise all active Nanomoids with a key combination on top, cycle through with Alt-TAB and after interaction lower them back. Nice? We think so ;-)
+
+++++
+<br>
+<br>
+++++
+
+
+=== Friday, 8th March 2013
+We're working on the localization. The following languages will be implemented:
+
+* German
+* Spanish
+* French
+* Russian
+* Italian (unsafe but intended)
+
+On source code side all is finished. Next the translation files follows.
+
+After that we will release it with some bugfixes. d=
+
+Another point is our branching system. We have decided to change it a little bit in the next time:
+
+* Main branches are all *release-x.x* where bugfixes will be integrated only.
+* The _stable_ develop branch is *master*. Here new but finished features will be implemented.
+* The _unstable_ develop branch is *develop*. This one _can be_ usable. But for those who want to test new feature should use the *master* branch.
+* Temporary branches for bugfixes or new feature are labeled with "bugfix_[bugtracker-number]" or "feature_[name_of_the_feature]"
+
+++++
+<br>
+<br>
+++++
+
+
+=== Sunday, 3rd February 2013
+We're proud to announce our first release of Fvwm-Nightshade :-)
+
+Enjoy!
+
+++++
+<br>
+<br>
+++++
+
+
+=== Wednesday, 30th January 2013
+* Our homepage is now available (in english and german): http://fvwm-nightshade.github.com/Fvwm-Nightshade/
+
+* Master is updated to release *0.6*! We are now ready to release ^^.
+
+In the next days we will anounce on different places and hope you enjoy it :-)
+
+++++
+<br>
+<br>
+++++
+
+
+=== Saturday, 5th January 2013
+After adding rpm, deb and arch package support we start with beta testing now. The develop branch is stable enough for use. The master branch is more than out of date so please do not use it anymore (if you have did it ever ;).
+
+Missing parts in the develop branch are:
+
+* Some documentation
+* The layout choice in the configuration menu
+* Some cleanups
+* Some wallpapers
+
+We hope to release Fvwm-Nightshade in the next weeks, so stay tuned...

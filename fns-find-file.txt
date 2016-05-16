@@ -1,0 +1,59 @@
+DESCRIPTION
+-----------
+*fns-find-file* is used to find the correct path of a file depending of 
+the directories specified in a search path. The default search path is 
++$FNS_SOUNDPATH+. But other search paths like +$PATH+ can be used.
+
+
+OPTIONS
+-------
+These command line options are recognized by *fns-find-file*:
+
+*FILENAME*::
++
+Find the appropriate path of a file depending of the directories specified 
+in a search path. The default search path is +$FNS_SOUNDPATH+. But other 
+search paths like +$PATH+ can be used instead with *--path*.
++
+Example for a file search:
++
+------
+$ fns-find-file alarm.wav
+------
+
+*-p | --path* 'OTHER_PATH'::
++
+Sometimes it is useful to told *fns-find-file* to search in another search 
+path:
++
+------
+$ fns-find-file --path $PATH gksu
+------
+
+*-r | --recursive*::
++
+Normally *fns-find-file* searches in the given search path(s). But sometimes 
+it is useful to search recursive:
++
+------
+$ fns-find-file --path $FVWM_USERDIR --recursive 16x16-geany.png
+------
+
+*-s | --silent*::
++
+The 'silent' option is useful if no error output is welcome.
+
+*--version*::
++
+Shows program's version number and exit.
+
+*-h | --help*::
++
+Shows short help and exit.
+
+AUTHOR
+------
+
+(C) 2013 - 2016 Thomas Funk <t.funk@web.de>
+
+

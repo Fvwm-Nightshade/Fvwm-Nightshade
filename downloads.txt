@@ -1,0 +1,32 @@
+DOWNLOADS
+---------
+You can download the source package from our 
+https://github.com/Fvwm-Nightshade[github repository]
+
+There are several versions available:
+
+Release-0.8
+~~~~~~~~~~~
+This is the *official stable branch* where only bug fixing will be done.
+
+image:./images/icons/package.png[]Get it
+
+Master
+~~~~~~
+In this tree the *stable development* system can be found. Here are all 
+new stable features implemented and can be tested without crashes hopefully.
+
+image:./images/icons/package.png[]https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/master.zip[Get it]
+
+Develop
+~~~~~~~
+In this tree the *current developing* is taking place. It could be stable 
+but we recommended the Master branch if new features want to be tested.
+
+image:./images/icons/package.png[]https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/develop.zip[Get it]
+
+Older Releases
+~~~~~~~~~~~~~~
+0.6.9
+
+image:./images/icons/package.png[]https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/release-0.6.zip[Get it]

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="generator" content="AsciiDoc 8.6.9">
+        <meta name="author" content="Fvwm-Nightshade">
+        <meta name="copyright" content="Fvwm-Nightshade">
+
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="content-language" content="en">
+        <meta http-equiv="content-style-type" content="text/css">
+        <meta http-equiv="content-script-type" content="text/javascript">
+
+        <link rel="stylesheet" href="./styles/menu.css" type="text/css"><style type="text/css" media="screen"></style>
+        <link rel="stylesheet" href="./styles/asciidoc.css" type="text/css"><style type="text/css" media="screen"></style>
+        <link rel="stylesheet" href="./styles/sites.css" type="text/css"><style type="text/css" media="screen"></style>
+        <!-- JavaScripts-->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function foo(){
+                // this will get the full URL at the address bar
+                var url = window.location.href;
+
+                // passes on every "a" tag
+                $(".inner a").each(function() {
+                    // checks if its the same on the address bar
+                    if(url == (this.href)) {
+                        $(this).addClass("highlighted");
+                    } else {
+                        $(this).removeClass("highlighted");
+                    }
+                });
+               setTimeout(foo, 1000);
+            })();
+        </script>
+    </head>
+
+    <!-- BEGIN: Sticky Header -->
+    <div id="header_container">
+        <div id="_header">
+            <body class="site" id="news">
+                <div class="menu_templ">
+                    <ul id="css3menu1" class="topmenu">
+                        <li class="topmenu"><a href="./features.html" title="What you get with FNS" id="featuresnav"><img src="./images/menu/features.png" alt="">Features</a></li>
+                        <li class="topmenu"><a href="" title="All news around FNS" id="newsblognav"><span><img src="./images/menu/news.png" alt="">News/Blog</span></a>
+                            <ul>
+                                <li><a href="./news.html" title="Release News" id="newsnav"><img src="./images/menu/news_small.png" alt="">News</a></li>
+                                <li><a href="./blog.html" title="See our work in progress" id="blognav"><img src="./images/menu/blog_small.png" alt="">Blog</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="./screenshots.html" title="" id="screennav"><img src="./images/menu/screen.png" alt="">Screenshots</a></li>
+                        <li class="topmenu"><a href="" title="" id="docunav"><span><img src="./images/menu/documentation.png" alt="">Documentation</span></a>
+                            <ul>
+                                <li><a href="./faq.html" title="Frequently Asked Questions" id="faqnav"><img src="./images/menu/faq_small.png" alt="">FAQ</a></li>
+                                <li><a href="./install.html" title="Install FNS to your system" id="installnav"><span><img src="./images/menu/install_small.png" alt="">Installation/Deinstallation</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./install.html#Dependencies" title="Which packages are needed" id="depsnav"><img src="./images/menu/deps_small.png" alt="">Dependencies</a></li>
+                                        <li><a href="./install.html#InstallFvwm" title="How to install Fvwm" id="instfvwmnav"><img src="./images/menu/install_small.png" alt="">Step 1: Install Fvwm</a></li>
+                                        <li><a href="./install.html#InstallFNS" title="How to install FNS" id="instfnsnav"><img src="./images/menu/install_small.png" alt="">Step 2: Install Fvwm-Nightshade</a></li>
+                                        <li><a href="./install.html#UnInstallFNS" title="How to uninstall FNS" id="uninstfnsnav"><img src="./images/menu/uninstall_small.png" alt="">Uninstall Fvwm-Nightshade</a></li>
+                                        <li><a href="./install.html#Tips" title="How to get required packages" id="tipsnav"><img src="./images/menu/tips_small.png" alt="">Tips</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./usage.html#Usage" title="How to use FNS" id="usenav"><span><img src="./images/menu/usage_small.png" alt="">Usage</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./usage.html#FirstStart" title="" id="1ststartnav"><img src="./images/menu/1st_small.png" alt="">First Start</a></li>
+                                        <li><a href="./fnsbasesetup.html" title="SimpleGtk2 module to configure base settings" id="setupnav"><img src="./images/menu/setup_small.png" alt="">FNS-BaseSetup</a></li>
+                                        <li><a href="./fnswindowsbehaviour.html" title="SimpleGtk2 module to configure the windows behaviour" id="winbehavenav"><img src="./images/menu/winbehaviour.png" alt="">FNS-WindowsBehaviour</a></li>
+                                        <li><a href="./usage.html#DesktopOrganisation" title="Horizontal, Vertical & G2like Layout" id="desknav"><img src="./images/menu/desktop_small.png" alt="">Desktop Organisation</a></li>
+                                        <li><a href="./usage.html#RootMenu" title="Personal Applications, Configuration, Help, WinOops" id="rootnav"><img src="./images/menu/menu_small.png" alt="">Root Menu</a></li>
+                                        <li><a href="./fnsmenuconfigurator.html" title="SimpleGtk2 program to configure the root menu" id="menuconfnav"><img src="./images/menu/menuconfigurator.png" alt="">FNS-MenuConfigurator</a></li>
+                                        <li><a href="./fnspersonalmenu.html" title="SimpleGtk2 program to customize personal application menu" id="menubuildernav"><img src="./images/menu/menubuilder.png" alt="">FNS-MenuBuilder</a></li>
+                                        <li><a href="./usage.html#Bindings" title="Mouse and Keys" id="bindnav"><img src="./images/menu/bindings_small.png" alt="">Bindings</a></li>
+                                        <li><a href="./fnscompconfigurator.html" title="SimpleGtk2 program to configure composition" id="compconfnav"><img src="./images/menu/compconfigurator.png" alt="">FNS-CompConfigurator</a></li>
+                                        <li><a href="./fnscpuperformance.html" title="SimpleGtk2 program to configure cpu governor" id="cpuperfnav"><img src="./images/menu/cpuperf.png" alt="">FNS-CpuPerformance</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./configuration.html#Configuration" title="How FNS works" id="confnav"><span><img src="./images/menu/conf_small.png" alt="">Configuration</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./configuration.html#Structure" title="System and user parts" id="structnav"><img src="./images/menu/deps_small.png" alt="">Structure</a></li>
+                                        <li><a href="./configuration.html#LocationFiles" title="Location of Files and their Function" id="filesnav"><img src="./images/menu/files_small.png" alt="">Location of Files</a></li>
+                                        <li><a href="./configuration.html#Startup" title="Call Sequence while Startup" id="startupnav"><img src="./images/menu/startup_small.png" alt="">Startup</a></li>
+                                        <li><a href="./configuration.html#Autostart" title="Autostart of Applications" id="autonav"><img src="./images/menu/auto_small.png" alt="">Autostart</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./advanced.html#Adv" title="All for customization" id="advnav"><span><img src="./images/menu/adv_small.png" alt="">Advanced</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./advanced.html#EnvSpec" title="Global and FNS related Variables" id="envnav"><img src="./images/menu/deps_small.png" alt="">Environment Specifications</a></li>
+                                        <li><a href="./advanced.html#Debug" title="Possibilities to debug FNS" id="debugnav"><img src="./images/menu/debug_small.png" alt="">Debugging</a></li>
+                                        <li><a href="./tools.html" title="Used Tools in FNS" id="toolsnav"><span><img src="./images/menu/tools_small.png" alt="">Tools</span></a>
+                                            <ul class="inner">
+                                                <li><a href="./tools.html#menudesktop" title="Reads XDG menu files and creates Fvwm menus" id="fnsmenudesktopnav"><img src="./images/menu/tools_small.png" alt="">fns-menu-desktop</a></li>
+                                                <li><a href="./tools.html#findicon" title="Find icons for your panel, button etc." id="fnsfindiconnav"><img src="./images/menu/tools_small.png" alt="">fns-find-icon</a></li>
+                                                <li><a href="./tools.html#findfile" title="Get the path of a file" id="fnsfindfilenav"><img src="./images/menu/tools_small.png" alt="">fns-find-file</a></li>
+                                                <li><a href="./tools.html#startprogs" title="Start apps from a list" id="fnsstartnav"><img src="./images/menu/tools_small.png" alt="">fns-start-programs</a></li>
+                                                <li><a href="./tools.html#builttraylist" title="Create list of running stalonetray apps" id="fnstraynav"><img src="./images/menu/tools_small.png" alt="">fns-built-trayapplist</a></li>
+                                                <li><a href="./tools.html#poladd" title="Add or remove programs to/from polkit for gui view" id="fnspoladdnav"><img src="./images/menu/tools_small.png" alt="">fns-poladd</a></li>
+                                                <li><a href="./tools.html#banner" title="Show a banner while Fvwm-Nightshade's startup" id="fnsbannernav"><img src="./images/menu/tools_small.png" alt="">fns-show-banner</a></li>
+                                                <li><a href="./tools.html#transset" title="Set true transparency to windows if a composite manager is running" id="fnstranssetnav"><img src="./images/menu/tools_small.png" alt="">FvwmTransSet</a></li>
+                                                <li><a href="./tools.html#smartmax" title="Maximize window to the largest free area" id="smartmaxnav"><img src="./images/menu/tools_small.png" alt="">FvwmSmartMaximize</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="./advanced.html#Theme" title="How to create own Themes" id="themenav"><img src="./images/menu/themes_small.png" alt="">Theme Creation</a></li>
+                                        <li><a href="./advanced.html#Layout" title="How to create own Layouts" id="layoutnav"><img src="./images/menu/layout_small.png" alt="">Layout Creation</a></li>
+                                        <li><a href="./advanced.html#Language" title="How to create own Language" id="langnav"><img src="./images/menu/lang_small.png" alt="">Language Creation</a></li>
+                                        <li><a href="./advanced.html#Module" title="How to create own Modules" id="modulesnav"><img src="./images/menu/modules_small.png" alt="">Module Creation</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="http://thomasfunk.github.io/SimpleGtk2" title="RAD library to create Gtk2 apps/modules" id="simplegtk2nav"><img src="./images/menu/gtk2_small.png" alt="">SimpleGtk2</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="" title="" id="involvednav"><span><img src="./images/menu/get-involved.png" alt="">Get Involved</span></a>
+                            <ul>
+                                <li><a href="./development.html" title="Become a part of us" id="devnav"><img src="./images/menu/devel_small.png" alt="">Development</a></li>
+                                <li><a href="./contact.html" title="Get in touch with us" id="mailnav"><img src="./images/menu/mail_small.png" alt="">Contact</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="./about.html" title="What is Fvwm-Nightshade" id="aboutnav"><img src="./images/menu/home.png" alt="">About</a></li>
+                        <li class="topmenu"><a href="./downloads.html" title="Get Fvwm-Nightshade" id="downloadsnav"><img src="./images/menu/downloads.png" alt="">Downloads</a></li>
+                    </ul>
+                </div>
+            </body>
+        </div>
+    </div>
+    <!-- END: Sticky Header -->
+
+    <!-- BEGIN: Page Content -->
+    <div id="container">
+        <div id="_content">
+
+    <body class="manpage">
+        <div class="bg_header">
+            <a href="./index.html" title="Home"><img style="display:block; margin-left:auto; margin-right:auto" src="./images/html_header.png" alt=""></a>
+            <p class="site" align="center">Desktop environment based on Fvwm</p>
+        </div>
+        <div id="header">
+        <div class="sectionbody">
+        </div>
+        </div>
+        <div id="content">
+<div class="sect1">
+<h2 id="_news">NEWS</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_monday_16th_may_2016">Monday, 16th May 2016</h3>
+<div class="paragraph"><p>Hi there!</p></div>
+<div class="paragraph"><p>Finally after two long years I&#8217;ve finished FNS for the upcoming version 0.8.</p></div>
+<div class="paragraph"><p>Today two parts are now available:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The Beta 1 in <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/master.zip">Master</a>
+</p>
+</li>
+<li>
+<p>
+The new website
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Check out whats <a href="./features.html">NEW</a>!</p></div>
+<div class="paragraph"><p>Best,</p></div>
+<div class="paragraph"><p>Thomas</p></div>
+<div class="paragraph"><p><em>Your Fvwm-Nightshader</em></p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_thursday_11th_december_2014">Thursday, 11th December 2014</h3>
+<div class="paragraph"><p>Hi!</p></div>
+<div class="paragraph"><p>Done the first commits for graphical tools for FNS 0.8 in branch gtk_configs \o/</p></div>
+<div class="paragraph"><p>It isn&#8217;t completelly workable but each tool is fully functional. Also as a FVWM module ^^</p></div>
+<div class="paragraph"><p>The next step is to implement them in FNS. Updating the Makefile for proper installation will follow.</p></div>
+<div class="paragraph"><p>It goes forward!!</p></div>
+<div class="paragraph"><p>Best,
+Thomas</p></div>
+<div class="paragraph"><p><em>Your Fvwm-Nightshader</em></p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_thursday_9th_october_2014">Thursday, 9th October 2014</h3>
+<div class="paragraph"><p>Hi folks,</p></div>
+<div class="paragraph"><p>we&#8217;ve released the definitely last Bugfix Release 0.6.9 of the 0.6 branch. The next milestone will be our 0.8 release with many improvements.</p></div>
+<div class="paragraph"><p>Here are the changes of 0.6.9:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Update fvwm-menu-desktop2, FvwmForm-MultiMenuHelp2 and their French and Spanish translation to last upstream changes.
+</p>
+</li>
+<li>
+<p>
+Fix colorset bug in Air, Ambience and Tribal which ends up in an empty FvwmIdent (thanks for the patches from bstrik :-) ).
+</p>
+</li>
+<li>
+<p>
+Fix bug in fns-start-programs that comments (with # infront) creating errors
+</p>
+</li>
+<li>
+<p>
+Add CTRL + left Windows key anywhere to open Desktop menu.
+</p>
+</li>
+<li>
+<p>
+Fix bugs in FuncWriteInfoStoreToFileAndSet and FuncWriteSetEnvToFileAndSet that strings with space get cut and therefore .settings get corrupted.
+</p>
+</li>
+<li>
+<p>
+Exchange blutooth-applet with bluemon-applet because it doesn&#8217;t exist in Gnome3 anymore.
+</p>
+</li>
+<li>
+<p>
+Add support for hald, upower and systemd to FuncSuspend/FuncHibernate
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Best,</p></div>
+<div class="paragraph"><p><em>Your Fvwm-Nightshade Team</em></p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_sunday_17th_august_2014">Sunday, 17th August 2014</h3>
+<div class="paragraph"><p>Hi all!</p></div>
+<div class="paragraph"><p>A short sign of life from us - We&#8217;re not dead and working hard on 0.8.</p></div>
+<div class="paragraph"><p>Since March much happened with and within FNS. Have a look on the highlights:
+* 3 Gtk themes added for a more unique look.
+* Support for hotplug mounting (i.e. usb).
+* Support for icons on desktop. Also for mount icons.
+* Support for shadows and transparency.
+* A new layout <em>Klike</em> - a KDE like bottom bar
+* A wonderful new theme <em>Rocken</em> based on Thibaut&#8217;s theme - thanks for his admition :-)
+* Some optional tools like xfce4-power-manager or application launchers (grun and gmrun) for more flexibility.
+* Many bugfixes i.e. the annoying disapearing of the clock and cpu applets in the panels or the flipping of the global IconManager.</p></div>
+<div class="paragraph"><p>Also SimpleGtk2 - the RAD library for Gtk2 GUI elements - has the most important parts implemented and can be used within a FVWM module.</p></div>
+<div class="paragraph"><p>But the best is, presupposed we finishing FNS 0.8 in the next time, a preview spin in Tanglu, a Debian based distribution will be published!</p></div>
+<div class="paragraph"><p>If you want to look into FNS download the current develop version. It is workable but perhaps with some minor issues from time to time ;-)</p></div>
+<div class="paragraph"><p>Have fun!</p></div>
+<div class="paragraph"><p><em>Your Fvwm-Nightshade Team</em></p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_saturday_29th_march_2014">Saturday, 29th March 2014</h3>
+<div class="paragraph"><p>We&#8217;re still working on FNS and want to give a short update on what.</p></div>
+<div class="paragraph"><p>FNS 0.8 is now in the queue and the following preparations are ongoing:
+* switching all/most tools from FvwmScript to Gtk2 and Perl. Therefore we&#8217;re developing a RAD Gtk2 library to reduce the amount of work.
+* finishing the nanomoid applets.
+* create a configuration manager for the most important settings.</p></div>
+<div class="paragraph"><p>These are the main parts. If time others could follow.</p></div>
+<div class="paragraph"><p><strong>If anybody is interrested in helping you&#8217;re more than welcome. It is much work and we&#8217;re only two persons. So, don&#8217;t be shy and write us on <a href="mailto:fvwmnightshade@gmail">fvwmnightshade@gmail</a>.com</strong></p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_thursday_31st_december_2013">Thursday, 31st December 2013</h3>
+<div class="paragraph"><p>Hi all FNS users!</p></div>
+<div class="paragraph"><p>Christmas is gone and 2014 is coming soon. Therefore we, the team of
+Fvwm-Nightshade, want to wish all of you a good and healthy new year!
+Hope you will stay the next months on our side to see what happens with FNS.</p></div>
+<div class="paragraph"><p>For 2014 we have planned these targets:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Bugfix release <strong>0.69</strong>
+</p>
+</li>
+<li>
+<p>
+New major release <strong>0.8</strong> with
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Applets and icons on the desktop
+</p>
+</li>
+<li>
+<p>
+Compositing (shadows and transparency)
+</p>
+</li>
+<li>
+<p>
+New themes and layouts
+</p>
+</li>
+<li>
+<p>
+Auto mounting
+</p>
+</li>
+<li>
+<p>
+New languages (probably Portuguese, Italian(?), Russian(?))
+</p>
+</li>
+<li>
+<p>
+Multi monitor support (not sure)
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Newly designed website with more and clearly arranged information
+</p>
+</li>
+<li>
+<p>
+A News blog to show our work with videos, pictures and code snippets
+</p>
+</li>
+<li>
+<p>
+fvwm-pylib (Python library for FVWM)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Much, much work &#8230; but for most points cornerstones are layed.</p></div>
+<div class="paragraph"><p>If anybody has interest to help, all hands are more than welcome!!</p></div>
+<div class="paragraph"><p>So, with these New Year&#8217;s resolutions we say goodbye for this year and
+wish all a great year</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>˛¸.o•°`~☻~`°•o.˛¸˛.o•°★°•o.˛¸˛.o•°`~☻~`°•o.˛
+•(¯`•★•´¯)•╔═══╦═══╗╔╗╔═══╗╔╦╦╗•(¯`•★•´¯)•
+•(¯`•★•´¯)•║╔═╗║╔═╗╠╝║║╔═╗║║║║║•(¯`•★•´¯)•
+•(¯`•★•´¯)•╚╝╔╝║║║║╠╗║╚╝╔╝║║║║║•(¯`•★•´¯)•
+•(¯`•★•´¯)•╔═╝╔╣║║║║║║╔╗╚╗║╚╩╩╝•(¯`•★•´¯)•
+•(¯`•★•´¯)•║║║╚╣╚═╝╠╝╚╣╚═╝║╔╦╦╗•(¯`•★•´¯)•
+•(¯`•★•´¯)•╚═══╩═══╩══╩═══╝╚╩╩╝•(¯`•★•´¯)•
+˛¸.o•°`~☻~`°•o.˛¸˛.o•°★°•o.˛¸˛.o•°`~☻~`°•o.˛</pre>
+</div></div>
+<div class="paragraph"><p><em>Your Fvwm-Nightshade Team</em></p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_monday_21st_october_2013">Monday, 21st October 2013</h3>
+<div class="paragraph"><p>Hi all,</p></div>
+<div class="paragraph"><p>We&#8217;re proud to announce a new Bugfix and enhancement release of Fvwm-Nightshade!</p></div>
+<div class="paragraph"><p>Changes of 0.6.8:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Works now with FVWM 2.6.5 without loosing new Xdg menu support from CVS version.
+</p>
+</li>
+<li>
+<p>
+Own XDG applications menu with it&#8217;s own directory files.
+</p>
+</li>
+<li>
+<p>
+Revised fvwm-menu-desktop GUI with help windows for each configuration section.
+</p>
+</li>
+<li>
+<p>
+Feature <em>smart maximize</em> - moves and resizes a current window to the largest free area of a desktop/page.Thanks to Andreas Hoenen.
+</p>
+</li>
+<li>
+<p>
+New set of icons for menus and internal apps to remove wm-icons dependency because this package isn&#8217;t available in all distributions and of its' unscalability. Also special thanks to Alessandro Roncone who gives us the permission to use his Awoken icons (<a href="http://www.deviantart.com/art/AwOken-163570862">http://www.deviantart.com/art/AwOken-163570862</a>).
+</p>
+</li>
+<li>
+<p>
+Support for Gentoo installation. Thanks to Sebastian Luncan who creates the ebuild.
+</p>
+</li>
+<li>
+<p>
+Right click menu for Conky clock and CPU applet in panel to restart them on error.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Enjoy</p></div>
+<div class="paragraph"><p>The Wiki will be updated in the next days.
+[Edit:] Done.</p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_monday_14th_october_2013">Monday, 14th October 2013</h3>
+<div class="paragraph"><p>Hi all,</p></div>
+<div class="paragraph"><p>the new release is moving closer and closer! The only thing is the translations for German, French and Spanish. Then it&#8217;s ready :-)</p></div>
+<div class="paragraph"><p>If someone wants to help with French or Spanish translation send us an email to &lt;<a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a>&gt;.</p></div>
+<div class="paragraph"><p>We would be happy about it ^^</p></div>
+<div class="paragraph"><p>For testing use the <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/tree/develop">develop branch</a> here on Github.</p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_friday_6th_september_2013">Friday, 6th September 2013</h3>
+<div class="paragraph"><p>Hi!</p></div>
+<div class="paragraph"><p>A short update &#8230;</p></div>
+<div class="paragraph"><p>In the develop version (master branch) FVWM 2.6.5 is now supported! But with the Xdg menu feature from the CVS version of FVWM ^^</p></div>
+<div class="paragraph"><p>Also a great new feature - smart maximize - with one click on the maximize button the window maximizing to the largest possible area of the page. Big thanks to Andreas Hoenen!</p></div>
+<div class="paragraph"><p>And &#8230; Gentoo build support will be added soon!</p></div>
+<div class="paragraph"><p>We have tested the develop version of Fvwm-Nightshade on the newest Ubuntu, Fedora and Arch distribution without problems. So &#8230; test it :-)</p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_wednesday_10th_july_2013">Wednesday, 10th July 2013</h3>
+<div class="paragraph"><p>A new Bugfix and Enhancement Release 0.6.7 is out!</p></div>
+<div class="paragraph"><p>The new changes are:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Enhanced uninstall routine for generic installation - an install list will be created, so keeping the sources of the installed version never needed anymore.
+</p>
+</li>
+<li>
+<p>
+It is now possible to install Fvwm-Nightshade locally if the user hasn&#8217;t root rights. Good for testing. ^^
+</p>
+</li>
+<li>
+<p>
+Also an installation without the login file can be done if no display-manger is available.
+</p>
+</li>
+<li>
+<p>
+We have exchanged Esetroot with feh because of the poor availability of eterm package in different distribution repositories.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>One drop of bitterness for Arch user exist:</p></div>
+<div class="paragraph"><p>FvwmScript-CPU-Performance not working because cpufrequtils are exchanged with cpupower and this have to be implemented first. Sorry for that.</p></div>
+<div class="paragraph"><p>The Wiki will be updated in the next days. So stay tuned :-)</p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_saturday_15th_june_2013">Saturday, 15th June 2013</h3>
+<div class="paragraph"><p>We have released Version 0.6.6. It&#8217;s a small bugfix release but with two good improvements:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+The Global Iconman is often flipping uncontrolled which was very annoying. Now never.
+</p>
+</li>
+<li>
+<p>
+At the first menu creation with <em>Regenerate XDG menu(s)</em> it was unclear what options have to set to get correct application menu(s). Now we&#8217;ve set the right initial values.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Hope this helps :-)</p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_sunday_9th_june_2013">Sunday, 9th June 2013</h3>
+<div class="paragraph"><p>Version 0.6.5 is out now! It&#8217;s a minor update with
+* Localization support for German, French and Spanish.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Some bugfixes
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Unfortunately Russian hasn&#8217;t got it into this release. Perhaps next time. Sorry &#8230;</p></div>
+<div class="paragraph"><p>Hope you like it :-)</p></div>
+<div class="paragraph"><p>Also we have changed our branching system now:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Main branches are all <strong>release-x.x</strong> where bugfixes will be integrated only.
+</p>
+</li>
+<li>
+<p>
+The <em>stable</em> develop branch is <strong>master</strong>. Here new but finished features will be implemented.
+</p>
+</li>
+<li>
+<p>
+The <em>unstable</em> develop branch is <strong>develop</strong>. This one <em>can be</em> usable. But for those who want to test new feature should use the <strong>master</strong> branch.
+</p>
+</li>
+<li>
+<p>
+Temporary branches for bugfixes or new feature are labeled with "bugfix_[bugtracker-number]" or "feature_[name_of_the_feature]"
+</p>
+</li>
+</ul></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_friday_26th_april_2013">Friday, 26th April 2013</h3>
+<div class="paragraph"><p>Sorry for that long time of silence but we&#8217;re still working on Fvwm-Nightshade ^^</p></div>
+<div class="paragraph"><p>Two big projects are in progress at the moment:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>Localization</strong> - German, Spanish and French are nearly finished now (need only some reviews). Russian will follow in the next weeks (hopefully). Unfortunately Italian must be canceled because we haven&#8217;t found anyone who can translate it for us. Sorry &#8230;
+</p>
+</li>
+<li>
+<p>
+<strong>FNS-Nanomoids</strong> - little useful desktop applets based on Sebaros Minimoids. They are smaller than the original and have some new features. 60% are finished:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>Pagina</strong> - a video player
+</p>
+</li>
+<li>
+<p>
+<strong>Plaia</strong> - a music player, both based on mplayer
+</p>
+</li>
+<li>
+<p>
+<strong>Kalende</strong> - a calender
+</p>
+</li>
+<li>
+<p>
+<strong>DriveInn</strong> - a little automounter
+</p>
+</li>
+<li>
+<p>
+<strong>Meteo</strong> - a weather applet
+</p>
+</li>
+<li>
+<p>
+<strong>Yard</strong> - a quick access to six folders or apps.
+</p>
+<div class="paragraph"><p>In preparation:</p></div>
+</li>
+<li>
+<p>
+<strong>Nucleu</strong> - a cpu economy viewer based on cpufreq
+</p>
+</li>
+<li>
+<p>
+<strong>Chrono</strong> - a digital clock with alarm &amp; date.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>But the big part comes now:</p></div>
+<div class="paragraph"><p>how to configure them (over config files) and how use these FvwmScripts more than once. A nice feature will be that the user can raise all active Nanomoids with a key combination on top, cycle through with Alt-TAB and after interaction lower them back. Nice? We think so ;-)</p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_friday_8th_march_2013">Friday, 8th March 2013</h3>
+<div class="paragraph"><p>We&#8217;re working on the localization. The following languages will be implemented:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+German
+</p>
+</li>
+<li>
+<p>
+Spanish
+</p>
+</li>
+<li>
+<p>
+French
+</p>
+</li>
+<li>
+<p>
+Russian
+</p>
+</li>
+<li>
+<p>
+Italian (unsafe but intended)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>On source code side all is finished. Next the translation files follows.</p></div>
+<div class="paragraph"><p>After that we will release it with some bugfixes. d=</p></div>
+<div class="paragraph"><p>Another point is our branching system. We have decided to change it a little bit in the next time:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Main branches are all <strong>release-x.x</strong> where bugfixes will be integrated only.
+</p>
+</li>
+<li>
+<p>
+The <em>stable</em> develop branch is <strong>master</strong>. Here new but finished features will be implemented.
+</p>
+</li>
+<li>
+<p>
+The <em>unstable</em> develop branch is <strong>develop</strong>. This one <em>can be</em> usable. But for those who want to test new feature should use the <strong>master</strong> branch.
+</p>
+</li>
+<li>
+<p>
+Temporary branches for bugfixes or new feature are labeled with "bugfix_[bugtracker-number]" or "feature_[name_of_the_feature]"
+</p>
+</li>
+</ul></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_sunday_3rd_february_2013">Sunday, 3rd February 2013</h3>
+<div class="paragraph"><p>We&#8217;re proud to announce our first release of Fvwm-Nightshade :-)</p></div>
+<div class="paragraph"><p>Enjoy!</p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_wednesday_30th_january_2013">Wednesday, 30th January 2013</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Our homepage is now available (in english and german): <a href="http://fvwm-nightshade.github.com/Fvwm-Nightshade/">http://fvwm-nightshade.github.com/Fvwm-Nightshade/</a>
+</p>
+</li>
+<li>
+<p>
+Master is updated to release <strong>0.6</strong>! We are now ready to release ^^.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>In the next days we will anounce on different places and hope you enjoy it :-)</p></div>
+<br>
+<br>
+</div>
+<div class="sect2">
+<h3 id="_saturday_5th_january_2013">Saturday, 5th January 2013</h3>
+<div class="paragraph"><p>After adding rpm, deb and arch package support we start with beta testing now. The develop branch is stable enough for use. The master branch is more than out of date so please do not use it anymore (if you have did it ever ;).</p></div>
+<div class="paragraph"><p>Missing parts in the develop branch are:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Some documentation
+</p>
+</li>
+<li>
+<p>
+The layout choice in the configuration menu
+</p>
+</li>
+<li>
+<p>
+Some cleanups
+</p>
+</li>
+<li>
+<p>
+Some wallpapers
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>We hope to release Fvwm-Nightshade in the next weeks, so stay tuned&#8230;</p></div>
+</div>
+</div>
+</div>
+        </div>
+        <div id="footnotes"></div>
+        <div id="footer">
+            <div id="footer-text">
+                Design by Thomas Funk and built with <a href="http://www.methods.co.nz/asciidoc/index.html">Asciidoc</a><br />
+                Last updated 2016-05-16 17:21:11 CEST
+            </div>
+        </div>
+    </body>
+</html>

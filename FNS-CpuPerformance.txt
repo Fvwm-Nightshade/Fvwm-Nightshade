@@ -1,0 +1,166 @@
+FNS-CpuPerformance(1)
+=====================
+:doctype: manpage
+
+
+== NAME
+
+FNS-CpuPerformance - SimpleGtk2 perl program to configure cpu governor.
+
+== SYNOPSIS
+
+[cols="75%,25%",align="left",frame="none",grid="none",width="95%"]
+|====
+|FNS-CpuPerformance
+>s| image:./images/FNS-CpuPerformance.png["Module FNS-CpuPerformance",width=150, link="./images/FNS-CpuPerformance.png"]|
+|====
+
+== DESCRIPTION
+
+*FNS-CpuPerformance* is used to configure the cpu governor. Two tools 
+are supported: _cpufreq_ and _cpupower_.
+
+== CPU Information
+
+It contains the CPU model, the count and the manufacturer.
+
+== CPU Configuration
+
+Two types of tabs exists - one to configure the cores as a whole and 
+one for each core of the CPU. 
+
+Deeper information about the CPU and its core(s) can be called in each tab, too.
+
+=== Joined
+
+In this tab the governor behaviour of the whole CPU is settable if they're 
+not unlocked.
+
+*Unlock cores*::
++
+Each core can be configured separately to set governor and frequencies 
+if this checkbox is set. 
+
+*Governor*::
++
+In this combobox the available governor can be chosen. For more information 
+about the different governors see _Governors_ chapter below.
+
+*Min Fequency*::
++
+Sets the minimum used frequency from the range of available frequencies.
+
+*Max Fequency*::
++
+Sets the maximum used frequency from the range of available frequencies.
+
+*Information to Cores*::
++
+Show deeper information about the cpu by clicking _More_.
+
+=== Core [n]
+
+Each core has its own tab to set governor and frequencies separately. 
+
+[NOTE]
+===============================
+The options are only active if "Unlock cores" is set.
+===============================
+
+*Governor*::
++
+In this combobox the available governor can be chosen. For more information 
+about the different governors see _Governors_ chapter below.
+
+*Min Fequency*::
++
+Sets the minimum used frequency from the range of available frequencies.
+
+*Max Fequency*::
++
+Sets the maximum used frequency from the range of available frequencies.
+
+*Information to Core n*::
++
+Show deeper information about the core by clicking _More_.
+
+=== Governors
+
+The following governors are available:
+
+*Performance*::
++
+This governor sets the CPU statically to the highest frequency within the 
+borders of Min Frequency and Max Frequency. Consequently, saving power is 
+not the focus of this governor.
+
+*Powersave*::
++
+The CPU frequency is statically set to the lowest possibility. This can have 
+severe impact on the performance, as the system will never rise above this 
+frequency no matter how busy the processors are.
++
+However, using this governor often does not lead to the expected power savings 
+as the highest savings can usually be achieved at idle through entering C-states. 
+Due to running processes at the lowest frequency with the powersave governor, 
+processes will take longer to finish, thus prolonging the time for the system 
+to enter any idle C-states.
+
+*On-demand*::
+The kernel implementation of a dynamic CPU frequency policy: The governor 
+monitors the processor utilization. As soon as it exceeds a certain threshold, 
+the governor will set the frequency to the highest available. If the utilization 
+is less than the threshold, the next lowest frequency is used. If the system 
+continues to be underutilized, the frequency is again reduced until the lowest 
+available frequency is set.
+
+*Conservative*::
++
+Similar to the on-demand implementation, this governor also dynamically adjusts 
+frequencies based on processor utilization, except that it allows for a more 
+gradual increase in power. If processor utilization exceeds a certain threshold, 
+the governor does not immediately switch to the highest available frequency 
+(as the on-demand governor does), but only to next higher frequency available.
+
+*Userspace*::
++
+This governor allows the user, or any userspace program running with UID 'root', 
+to set the CPU to a specific frequency.
++
+[NOTE]
+===============================
+'Userspace' is not supported yet, but to get the same result use governor 
+'powersave' and one of the frequencies in 'Min Frequency', or governor 
+'performance' in combination with 'Max Frequency'.
+===============================
+
+=== Apply
+
+Applies the current settings to the cpufreq system.
+
+[NOTE]
+===============================
+This is only active for the current session. After reboot it falls back 
+to default settings. Therefore the settings are saved in ~/.fvwm-nightshade/.governor 
+for later use or while autostart if set.
+===============================
+
+=== Cancel
+
+Closes *FNS-CpuPerformance* without setting the custom governor configuration.
+
+=== Add to Autostart
+
+To use the changes permanently after each login enable this checkbox.
+
+== FILES
+
+The new settings are saved in +~/.fvwm-nightshade/.governor+ after each 'Apply'.
+
+If Autostart is enabled +.governor+ is added to +~/.fvwm-nightshade/.autostart+.
+
+== AUTHOR
+(C) 2016 Thomas Funk <t.funk@web.de>
+
+
+

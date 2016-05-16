@@ -1,0 +1,15 @@
+FAQ (Frequently asked Questions)
+--------------------------------
+[qanda]
+Does Fvwm-Nightshade overwrite or destroy a current Fvwm configuration?::
+    No. It has it's own directory +~/.fvwm-nightshade+ for user configuration. Also it has it's own login entry in a graphical login manager like GDM or KDM. So you can run Fvwm-Nightshade parallel to Fvwm.
+
+How do I upgrade Fvwm-Nightshade?::
+Unfortunately no update mechanism exists because of the different possibilities an user have. Below the safest way is described:
+
+. Logout and uninstall Fvwm-Nightshade.
+. Rename +\~/.fvwm-nightshade+ to e.g. +~/fvwm-nightshade_last+.
+. Install the new version and login.
+. Copy +.menu+, +.fns-menu.cfg+, +.FvwmTransSet+ if available, +.personal+ and +icon/+ into new +~/.fvwm-nightshade/+.
+. All other files like +.settings+, +config+ or +.bindings+ if available should be checked with a diff tool for differences.
+. After finishing restart Fvwm-Nightshade.

@@ -1,0 +1,40 @@
+DESCRIPTION
+-----------
+*fns-built-trayapplist* creates a file with the current systemtray applications 
+of stalonetray. This is useful if stalonetray must close, e.g. FvwmButtons 
+which swallows stalonetray has to be restarted. After restarting the apps can be 
+started again with *fns-start-programs*
+
+
+PARAMETERS
+----------
+Two command line parameter are mandatory:
+
+*LOGFILE* (1st one)::
++
+Path of the stalonetray logfile. Stalonetray must started with the 
+parameter '--log-level info' to create the appropriated information.
+
+*APPFILE* (2nd one)::
++
+Path of the file to write the list of the current running applications 
+which want to be executed after restart of stalonetray.
+
+
+OPTIONS
+-------
+There exist two options also:
+
+*-h|--help*::
++
+Show a short help and exiting.
+
+*-v|--version*::
++
+Show the version and exiting.
+
+
+AUTHOR
+------
+
+(C) 2012 - 2016 Thomas Funk <t.funk@web.de>

@@ -1,0 +1,31 @@
+DEVELOPMENT
+-----------
+We are a young project, so many parts need a helping hand. Possible tasks are:
+
+Testing / Bug reporting
+~~~~~~~~~~~~~~~~~~~~~~~
+One of the most important parts is to find bugs in functionality or look 
+and feel. To get Fvwm-Nightshade working on different platforms every help 
+is welcome. 
+
+Development
+~~~~~~~~~~~
+Do you like programming with Python, Perl, Bash and don’t balk to learn 
+new things? We need creative and interested people who loves challenges!
+
+Artwork
+~~~~~~~
+If you like to design themes or other eye candies become a part of our team!
+
+Documentation
+~~~~~~~~~~~~~
+By providing useful and up-to-date documentation, you would help us by 
+writing Howtos and other not available documentation. 
+
+Translation
+~~~~~~~~~~~
+At the moment Fvwm-Nightshade supports English, German, French, Spanish 
+and Russian. Other translations (Documentation and po files) are more than 
+welcome ^^
+
+To get in touch with us see our link:./contact.html[Contact] site.

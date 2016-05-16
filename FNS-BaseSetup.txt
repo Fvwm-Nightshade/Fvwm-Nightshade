@@ -1,0 +1,228 @@
+FNS-BaseSetup(1)
+================
+:doctype: manpage
+
+
+== NAME
+
+FNS-BaseSetup - link:http://thomasfunk.github.io/SimpleGtk2[SimpleGtk2] perl module to configure base settings of Fvwm-Nightshade.
+
+
+== SYNOPSIS
+
+[cols="75%,25%",align="left",frame="none",grid="none",width="95%"]
+|====
+|Module FNS-BaseSetup
+.2+>s| image:./images/FNS-BaseSetup.png["Module FNS-BaseSetup",width=150, link="./images/FNS-BaseSetup.png"]
+|*FNS-BaseSetup* can only be invoked by fvwm. Command line invocation 
+of the *FNS-BaseSetup* module will not work.
+|====
+
+== DESCRIPTION
+
+*FNS-BaseSetup* is used to configure the base settings of Fvwm-Nightshade 
+while first startup or if you want to change core parts like font, layout or the
+default terminal, etc.
+
+
+== OPTIONS
+
+=== Environment
+
+*Splash On*::
++
+Fvwm-Nightshade supports startup images (png, xpm or gif) called "splashs"  
+shown with FvwmBanner. You can activate or deactivate the showing of it by 
+seting the checkbox. The path of the image can entered directly or via the
+right button.
+
+
+*Composite Manager On*::
++
+With the checkbox a composite manager for shadows and translucency can be 
+enabled (if installed). Two of them are supported:
++
+XcompMgr::::
++
+It is the standard composition manager for the X Composite 
+extension. It implements shadows, fading, proper translucency, and more.
+
+Compton::::
++
+It is a compositor based on xcompmgr.  In addition to shadows, 
+fading and translucency, it implements window frame opacity control, 
+inactive window transparency, and shadows on argb windows.
+
++
+Configure one by clicking the _Configure_ button to open *FNS Composite 
+Configurator*.
+
+
+=== Desktop
+
+*Wallpaper Dirs*::
++
+Since version 0.8 of Fvwm-Nightshade more than one wallpaper directory in 
+addition to +~/.fvwm-nightshade/wallpapers+ is supported. They can be 
+specified in the text entry separated with a _colon_.
+
+
+*Icons on Desktop*::
++
+With this checkbox icons on desktop can be enabled. This feature is 
+offered by PcmanFm. If activated the root window is under its' control. 
+Therefore the root menu of Fvwm-Nightshade must moved around to the right 
+click desktop menu. Anyway it can be shown already with the Super_L key.
+
+
+*Icon Size*::
++
+Over this combo box the size of the desktop icons can be set. With 
+PcmanFM's Settings => Display => Big Symbols it can be set, too.
+
+
+*Desktop scrolling On*::
++
+Desktop scrolling is set per default but some people don't like those 
+switching to another desktop while scrolling with the mouse to the edges 
+of the current screen. Disable it with this checkbox.
+
+
+*Desktops*::
++
+In earlier versions of Fvwm-Nightshade only 4 desktop pages were possible. 
+Now up to 10 desktop pages can be configured. More are possible but as only 
+numbers from 0-9 are available needed for key bindings to move windows 
+(SHIFT+ALT+0-9) or switch to another desktop (SHIFT+CTRL+0-9) we decided to 
+limit it to 10.
++
+The raster depends on the set layout. Mostly the horizontal amount can be 
+changed. Only the _Vertical_ layout has the possibility to change the 
+vertical amount.
+
+
+=== Decoration & Panels
+
+*Used Layout*::
+Fvwm-Nightshade has 4 different layouts how components like pager, icon 
+manager, panels are positioned:
++
+Horizontal::::
++
+All components are seperated and arranged at the top of the screen.
+
+Vertical::::
++
+The components are arranged on the top right side.
+
+G2like::::
++
+This layout is based on the Gnome 2 layout - a top panel with menu, 
+favorites, systray, cpu bar and clock/date. A bottom panel with a minimize 
+all button, the task bar and a pager.
+
+Klike::::
+The default layout. This one is based on the KDE layout - a bottom panel 
+with menu, task bar, pager, systray, cpu bar and clock/date.
+
+
+*Used Theme*::
++
+In this combobox you can choose which theme/decor shall be used for windows, 
+panels, pager or other Fvwm modules.
++
+Possible Themes are:
++
+Air::::
++
+Kde 4 Oxygen theme held in grey and blue tones.
+
+Ambience::::
++
+Dark Ubuntu 10.04 theme with black gradients for title bar and orange for highlighting.
+
+Clean::::
++
+Simple vector theme with -, +, v and x as buttons. Blue/gray color gradients for title bar 
+and Fvwm modules.
+
+CrystalBalls::::
++
+Milky Mac OSX theme with white, grey and blue tones.
+
+FlatTab::::
++
+Simple flat theme, mostly black and white, based on xeNULL's openbox theme.
+
+GrayRevenge::::
++
+A dark gray and plain theme based on Alessandro Roncone's Gray-Revenge-1-7.
+
+PitchBlack::::
++
+The default theme of Fvwm-Nightshade. A dark violet and plain theme based on 
+GrayRevenge.
+
+Redmond::::
++
+The all known theme - for people who switching the operating system or for 
+nostalgists.
+
+Rocken::::
++
+A great bright and beautiful theme based on Thibaut's theme 'Rocken' from 2010 
+with silver bars and black buttons.
+
+Tribal::::
++
+The theme is held in green/black tones with yellow font collors and tribal 
+signs as buttons.
+
+
+*Used Font*::
++
+Choose here an installed Xft font via the FontSelection button. This font 
+is for menus, modules and other Fvwm components. Also the used font size 
+of the Fvwm components can be chosen here.
+
+
+=== Default Applications
+
+In this section the applications for default actions can be set.
+
+*Browser*::
++
+Default browser for html help pages.
+
+*Editor*::
++
+Default editor for editing Fvwm-Nightshade configuration files.
+
+*Terminal*::
++
+The default favorite terminal.
+
+*Transset*::
++
+Default translucency application. Possible are *transset* or *transset-df*.
+
+
+[NOTE]
+===============================
+Parameters are possible e.g.:
+------
+xterm -fn 10x20
+------
+===============================
+
+== FILES
+
+Standard settings are found in +/usr/share/fvwm-nightshade/.settings+ copied 
+while first startup into +~/.fvwm-nightshade/+ .
+
+
+== AUTHOR
+(C) 2015 - 2016 Thomas Funk <t.funk@web.de>
+
+
+

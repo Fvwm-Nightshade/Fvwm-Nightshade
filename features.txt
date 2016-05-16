@@ -1,0 +1,216 @@
+FEATURES
+--------
+
+[cols="10%,60%,30%",valign="middle", frame="none",grid="none",options="header"]
+|====
+3+|Different layouts for any desktop resolution (up to 4K)
+.4+^.^| image:./images/Desktop.png[]
+|*Horizontal*
+
+Layout with 3 elements at the top of the screen. From left to right:
+
+_Global Iconman_ - a vertical growing window list. It moves down if the mouse hovers over it. 
+
+_Pager_ - a miniature illustration of up to 10 virtual desktop pages (10x1) with mini windows.
+
+_Panel_ - it contains a root menu, systemtray, cpu graph and clock and date applet.
+
+^.^| image:./images/Screen_TF.jpg["Horizontal Layout", width=256, link="./images/Screen_TF.jpg"]
+
+|*Vertical*
+
+Layout with 3 elements on the right side of the screen. It consists from above to below:
+
+_Panel_ - it contains a clock and date applet, cpu graph, systemtray, root and a menu winlist.
+
+_Pager_ - a miniature illustration of up to 10 virtual desktop pages (10x1) with mini windows.
+
+_Global Iconman_ - a vertical growing window list. It moves down if the mouse hovers over it. 
+
+^.^| image:./images/Screen_BP_01.jpg["Vertical Layout", width=256, link="./images/Screen_BP_01.jpg"]
+
+|*G2like*
+
+Layout based on the Gnome 2 layout. It has a top and a bottom panel.
+
+_Top Panel_ - from left to right: a root and personal menu, a systemtray, cpu graph clock and date applet and an Exit menu.
+
+_Bottom Panel_ - from left to right: a "Show desktop" button, a taskbar and Pager with up to 10 virtual desktop pages.
+
+^.^| image:./images/Screen_G2like_TF_Clean.jpg["G2like Layout", width=256, link="./images/Screen_G2like_TF_Clean.jpg"]
+
+|*Klike* (the default)
+
+Layout is based on the KDE layout with one _bottom panel_. From left to right:
+
+A root menu, a "Show desktop" button, a taskbar and Pager with up to 10 virtual desktop pages. 
+Also a systemtray, a cpu graph and a clock and date applet.
+
+^.^| image:./images/Screen_Klike_TF_PitchBlack.png["Klike Layout", width=256, link="./images/Screen_Klike_TF_PitchBlack.png"]
+|====
+
+
+image::./images/bar.png[]
+
+
+[cols="30%,60%,10%",valign="middle", frame="none",grid="none",options="header"]
+|====
+3+|Many eye candy themes/decors changable on the fly without restart.
+^.^| image:./images/Themes.gif["7 Themes/Decors", width=256, link="./images/Themes.gif"]
+| *Air* - Kde 4 Oxygen theme held in grey and blue tones.
+
+*Ambience* - Dark Ubuntu 10.04 theme with black gradients for title bar and orange for highlighting.
+
+*Clean* - Simple vector theme with -, +, v and x as buttons. Blue/gray color gradients for title bar and Fvwm modules.
+
+*CrystalBalls* - Milky Mac OSX theme with white, grey and blue tones.
+
+*FlatTab* - Simple flat theme, mostly black and white, based on xeNULL's openbox theme.
+
+*GrayRevenge* - A dark gray and plain theme based on Alessandro Roncone's Gray-Revenge-1-7.
+
+*PitchBlack* - The default theme of Fvwm-Nightshade. A dark violet and plain theme based on GrayRevenge.
+
+*Redmond* - The all known theme - for people who switching the operating system or for nostalgists.
+
+*Rocken* - A great bright and beautiful theme based on Thibaut's theme Rocken from 2010 with silver bars and black buttons.
+
+*Tribal* - The theme is held in green/black tones with yellow font collors and tribal signs as buttons.
+<.>m| image:./images/Desktop.png[]
+|====
+
+[cols="20%,20%,20%,20%,20%",valign="middle", frame="none",grid="none",options="header"]
+|====
+5+|Own Gtk2 and 3 themes for Air, FlatTab, PitchBlack (default) and Tribal.
+^.^| image:./images/awf-gtk3_Air.png["Gtk3 Theme Air", width=128, link="./images/awf-gtk3_Air.png"]
+^.^| image:./images/awf-gtk2_FlatTab.png["Gtk2 Theme FlatTab", width=128, link="./images/awf-gtk2_FlatTab.png"]
+^.^| image:./images/awf-gtk2_PitchBlack.png["Gtk2 Theme PitchBlack", width=128, link="./images/awf-gtk2_PitchBlack.png"]
+^.^| image:./images/awf-gtk3_Tribal.png["Gtk3 Theme Tribal", width=128, link="./images/awf-gtk3_Tribal.png"]|
+|====
+
+[cols="30%,60%,10%",valign="middle", frame="none",grid="none",options="header"]
+|====
+3+|Support for shadows and transparency.
+^.^| image:./images/transparency_compton.png["Shadows and transparency", width=256, link="./images/transparency_compton.png"]
+|Supported composite managers are: _xcompmgr_ and _compton_.
+
+Can be configured and activated via link:./fnscompconfigurator.html[*FNS-CompConfigurator*] very easily.|
+|====
+
+
+image::./images/bar.png[]
+
+
+[cols="10%,60%,30%",valign="middle", frame="none",grid="none",options="header"]
+|====
+3+|link:http://thomasfunk.github.io/SimpleGtk2[SimpleGtk2] Config tools for different settings:
+.6+^.^| image:./images/Desktop.png[]
+|link:./fnsbasesetup.html[*FNS-BaseSetup*] - it configures the base settings of Fvwm-Nightshade while first startup or if you want to change core parts like font, layout or the default terminal, etc.
+^.^| image:./images/FNS-BaseSetup.png["FNS Base Setup", width=128, link="./images/FNS-BaseSetup.png"]
+|link:./fnswindowsbehaviour.html[*FNS-WindowsBehaviour*] is used to configure some of the window behaviours in Fvwm-Nightshade e.g Focus policies, Raise options or Window placements.
+^.^| image:./images/FNS-WindowsBehaviour.png["FNS Windows Behaviour", width=128, link="./images/FNS-WindowsBehaviour.png"]
+|link:./fnscompconfigurator.html[*FNS-CompConfigurator*] can be used to configure composition like shadows, fading, translucency, and more.
+^.^| image:./images/FNS-CompConfigurator.png["FNS Composite Configurator", width=128, link="./images/FNS-CompConfigurator.png"]
+|link:./fnsmenuconfigurator.html[*FNS-MenuConfigurator*] configures the appearance of the root menu. It is the graphical user interface of link:./tools.html#menudesktop[*fns-menu-desktop*] - a revised version of _fvwm-menu-desktop_ which reads XDG menu files and creates Fvwm menus.
+^.^| image:./images/FNS-MenuConfigurator.png["FNS Menu Configurator", width=128, link="./images/FNS-MenuConfigurator.png"]
+|link:./fnscpuperformance.html[*FNS-CpuPerformance*] can handle the cpu governor installed on the system.
+
+Two governor tools are supported: _cpufreq_ and _cpupower_.
+^.^| image:./images/FNS-CpuPerformance.png["FNS Cpu Performance", width=128, link="./images/FNS-CpuPerformance.png"]
+|link:./fnspersonalmenu.html[*FNS-MenuBuilder*] is used to create and customize the personal application menu from the menus found on the system.
+^.^| image:./images/FNS-MenuBuilder.png["FNS Personal Menu Builder", width=128, link="./images/FNS-MenuBuilder.png"]
+|====
+
+[cols="10%,20%,20%,20%,20%,10%",valign="middle", frame="none",grid="none",options="header"]
+|====
+6+|Localization support for:
+^.^| ^.^| image:./images/germany.png["German", width=128]
+^.^| image:./images/france.png["French", width=96]
+^.^| image:./images/spain.png["Spanish", width=128]
+^.^| image:./images/russia.png["Russian", width=128]|
+^.^| ^.^|German
+^.^|French
+^.^|Spanish
+^.^|Russian|
+|====
+
+
+image::./images/bar.png[]
+
+
+[cols="30%,60%,10%",valign="middle", frame="none",grid="none",options="header"]
+|====
+3+|Wallpaper Thumb Browser.
+^.^| image:./images/wallpaper_dirs.png["Thumb Browser", width=256, link="./images/wallpaper_dirs.png"]
+|Background configurable with a thumb browser which can scan different wallpaper locations.|
+|====
+
+[cols="30%,60%,10%",valign="middle", frame="none",grid="none",options="header"]
+|====
+3+|Icons on desktop.
+^.^| image:./images/icons_desktop.png["Icons on desktop", width=256, link="./images/icons_desktop.png"]
+|Support icons on desktop over PcManFM. Mounted and hotplug devices are possible, too.
+<.>m| image:./images/Desktop.png[]
+|====
+
+[cols="30%,60%,10%",valign="middle", frame="none",grid="none",options="header"]
+|====
+3+|Iconified applications as thumbs.
+^.^| image:./images/iconify_thumbs.png["Icon thumbs", width=256, link="./images/iconify_thumbs.png"]
+|Thumbs with mini icon and name for iconified apps instead of a simple icon.|
+|====
+
+[cols="30%,5%,30%,25%,10%",valign="middle", frame="none",grid="none",options="header"]
+|====
+5+|Smart maximize windows.
+^.^| image:./images/SmartMaximize_before.png["before", width=256, link="./images/SmartMaximize_before.png"]
+^.^|=>
+^.^| image:./images/SmartMaximize_after.png["after", width=256, link="./images/SmartMaximize_after.png"]
+|Moves and resizes windows to the largest free area of a desktop page.|
+|====
+
+
+image::./images/bar.png[]
+
+
+[cols="20%,20%,20%,20%,20%",valign="middle", frame="none",grid="none",options="header"]
+|====
+5+|Different Package build support.
+.3+^.^| image:./images/Desktop.png[]
+^.^| image:./images/deb.png["deb package", width=96]
+^.^| image:./images/rpm.png["rpm package", width=96]
+^.^| image:./images/ebuild.png["gentoo package", width=96]
+^.^| image:./images/arch.png["Arch package", width=96]
+^.^|deb
+^.^|rpm
+^.^|ebuild
+^.^|pkgbuild
+^.^| image:./images/src.png["src package", width=96]
+^.^| image:./images/local.png["local package", width=96]
+2+|Installation from source with _make install_.
+
+Local installation without root rights.
+|====
+
+
+image::./images/bar.png[]
+
+
+[cols="5%,85%,10%",valign="middle", frame="none",grid="none",options="header"]
+|====
+3+|Other useful and nice features:
+| |- Support for hald, upower and systemd for *Suspend* and *Hibernate*.
+.10+^.^| image:./images/Desktop.png[]
+| |- Own XDG applications menu with it's own directory files.
+| |- Own user configuration directory ~/.fvwm-nightshade (can be used parallel to existing Fvwm configuration).
+| |- Own entry "Fvwm-Nightshade" in graphical login managers.
+| |- *Autostart* possibility (starting apps while startup).
+| |- *Run* command depending on installed software (_grun_, _gmrun_ or _FvwmForm_).
+| |- Animation control of window moves (*FvwmAnimate*).
+| |- Window focus switching with *Alt-Tab / Shift-Alt-Tab*.
+| |- *Splash* screen based on ImageMagick to support more image formats.
+| |- *Help* messages for *key bindings*. Also for *mouse bindings* in titlebar, window, corners, sides.
+|====
+
+
+

@@ -1,0 +1,421 @@
+INSTALL / DEINSTALL
+-------------------
+Fvwm-Nightshade is based on Fvwm but for full functionality you have to 
+install more than Fvwm. Below all dependencies are listed.
+
+[[Dependencies]]
+Dependencies
+------------
+
+[[Required]]
+Required - _absolutely needed for proper work_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* *Fvwm >= 2.6.5* (compiled with all features if possible)
+* *python-2.7* (for python scripts)
+* *python-xdg* (for menu creation with fns-menu-desktop)
+* *xterm* (for some functions like displaying man pages, tailing .xsession-errors, …)
+* http://conky.sourceforge.net/[*conky*] (for clock/date, cpu graph)
+* *xscreensaver* (for locking desk, screensaver)
+* *feh* (for displaying wallpapers)
+* *ImageMagick* (needed for thumbnailing, menu icons, …)
+* *librsvg2* (fns-menu-desktop need this library to convert svg icons)
+* http://stalonetray.sourceforge.net/[*stalonetray*] (needed for the Systemtray)
+* *cpufreq/cpufrequtils* or *cpupower* (needed for the governor tool to control cpu states)
+* *polkit-gnome* (for user applications to use root apps with pkexec)
+* *x11-apps* (A collection of common X Window System applications)
+* *gksu* (wrapper around su to let you have a graphic interface)
+* *pcmanfm* (for icons on desktop and device mounting)
+* *libgtk2-perl* (for link:http://thomasfunk.github.io/SimpleGtk2[SimpleGtk2] library. To show FNS GUI tools) 
+* *liblocale-gettext-perl* (for link:http://thomasfunk.github.io/SimpleGtk2[SimpleGtk2] library. To localize FNS GUI tools)
+
+[[Recommended]]
+Recommended - _important but indispensable to life_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* *networkmanager-gnome* (to have a network controlling tool resides in the systray)
+* http://softwarebakery.com/maato/volumeicon.html[*volumeicon*] (volume control in the systray)
+* *pm-utils* (utilities and scripts for power management)
+* *qtconfig for qt4* (Qt 4 configuration tool)
+* *lxappearance* (GTK+ theme switcher)
+* *gtk2-engines-murrine* (for FNS themes)
+* *gtk2-engines-pixbuf* (for FNS themes)
+
+[[Suggested]]
+Suggested - _nice to have_
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+* *fdpowermon* or *cbatticon-gtk2* (important for notebooks - show the battery state)
+* *blueman* (shows the bluetooth state in the systray)
+* *pm-utils* (needed for suspend and hibernate)
+* *grun* or *gmrun* (comfortable replacement for FvwmForm "Run" command)
+* *compton* or *xcompmgr* (composite manager for X11)
+* *transset* or *transset-df* (true transparency for windows in conjunction with composite manager)
+* *clipit* or *parcelite* (clipboard manager for systray)
+* http://en.wikipedia.org/wiki/X_Neural_Switcher[*xneurs*] (tool to change all around keyboard like language, layout, etc)
+
+
+[[InstallFvwm]]
+Step 1: Installing Fvwm
+-----------------------
+First of all you have to install Fvwm.
+
+Get latest Fvwm
+~~~~~~~~~~~~~~~
+. from distribution if available
+. from Fvwm homepage
+* open http://www.fvwm.org/ and download the latest release or one 
+from https://github.com/fvwmorg/fvwm/releases
+* unpack it and follow the instructions in *INSTALL* and *INSTALL.fvwm*
+
+[NOTE]
+===============================
+Since Fvwm has been switched to https://github.com/fvwmorg/fvwm[Github] 
+the different build processes (rpm, deb, src) have to be tested again 
+and if remained described in the future below.
+Sorry for this inconvenience.
+===============================
+
+
+[[InstallFNS]]
+Step 2: Installing Fvwm-Nightshade
+----------------------------------
+1. Download package from http://fvwm-nightshade.github.io/Fvwm-Nightshade.
+2. Unpack it and switch into the expanded directory.
++
+[IMPORTANT]
+===============================
+Don't use file-roller because the tool cannot handle unix rights in zip files. 
+Use *unzip* instead.
+===============================
+
+3. Switch into the unpacked directory.
+4. Now you have different possibilities to install Fvwm-Nightshade:
+
+General
+~~~~~~~
+Fvwm-Nightshade will be installed to +/usr/local/+ by default. So root
+permissions are required. Run
+
+----
+# make install
+----
+
+If you want to install Fvwm-Nightshade to another directory you can 
+change the prefix:
+
+----
+# make prefix=<other_dir> install
+----
+
+If you want to install FNS to a directory else then /usr you have to
+add 
+
+----
+PATH="<other_dir>/bin:$PATH"
+----
+
+in a file called <number>_common_xsessionrc or so in +/etc/X11/Xsession.d/+ that
+Fvwm-Nightshades executables will be found.
+
+If you haven't installed a display-manager like _GDM_, _XDM_ or _LightDM_ you can
+add the option 'displaymanager=no' to the make call:
+
+----
+# make install displaymanager=no
+----
+
+
+If *Fvwm is installed in another directory* then +/usr/share/fvwm+ you have
+to told make where because there are some scripts which have to be installed
+into Fvwm. 
+
+----
+# make fvwm_path=<path_to_fvwm> install
+----
+
+If you haven't root rights you can install Fvwm-Nightshade locally. All you
+need is a directory e.g. +~/.local+ with write permissions.
+
+Now you can install Fvwm-Nightshade with the following make call:
+
+----
+$ make prefix=~/.local install local=yes localperldir=~/.perl displaymanager=no
+----
+
+Don't forget to install the following required packages:
+
+* *python-xdg* (normally installed on most systems. Look for 'pyxdg')
+* *xterm* (normally installed with xserver but some distributions swapped it out in a seperate package)
+* *conky*
+* *xscreensaver*
+* *feh*
+* *ImageMagick*
+* *librsvg2* (fvwm-menu-desktop need this library to convert svg icons)
+* *stalonetray* (not in all distributions available. See xref:Tips[Tips])
+* *cpufreq* (nedded for the Governor tool to control cpu states)
+* *x11-apps* (A collection of common X Window System applications)
+* *gksu/Beesu* (wrapper around su to let you have a graphic interface)
+
+If you want some packages from xref:Recommended[*_recommended_*] and xref:Suggested[*_suggested_*] install them also. 
+If you have problems to get some packages see also xref:Tips[Tips].
+
+
+deb
+~~~
+Run
+
+----
+# make deb
+----
+
+A Debian package is created in the directory above. Install it with the two liner:
+
+----
+# dpkg -i fvwm-nightshade-<version>.deb
+# apt-get -f install
+----
+
+rpm
+~~~
+Type in the terminal
+
+----
+# make rpm
+----
+
+A rpm package is created in +/home/<your_user_name>/redhat/RPMS/noarch/+. Install it with
+
+Fedora/Redhat:
+
+----
+# yum --nogpgcheck localinstall /home/<your_user_name>/redhat/RPMS/noarch/fvwm-nightshade_<version>_noarch.rpm
+----
+
+SuSE:
+
+----
+# yast -i /home/<your_user_name>/redhat/RPMS/noarch/fvwm-nightshade_<version>_noarch.rpm
+----
+
+For others (dependencies must installed before):
+
+----
+# rpm -ivh /home/<your_user_name>/redhat/RPMS/noarch/fvwm-nightshade_<version>_noarch.rpm
+----
+
+Arch
+~~~~
+Type in the terminal
+
+----
+# make arch
+----
+
+The package is created in the directory above. Run as root
+
+----
+# pacman -U fvwm-nightshade-<version>-any.pkg.tar.xz
+----
+
+Gentoo
+~~~~~~
+An additional overlay repository for custom ebuilds which are not in the official
+Portage is needed. It will be set over the +PORTDIR_OVERLAY+ variable in 
++/etc/portage/make.conf+. The normal personal per-machine overlay is +/usr/local/portage+.
+But another could used also.
+
+The Fvwm-Nightshade ebuild has to be created from the template in +gentoo/+.
+Also the dist package for the installation. This can done this with one step.
+
+Type in the terminal:
+
+----
+$ make gentoo-prepare
+----
+
+The make rule creates the dist package ../fvwm-nightshade-<version>.tar.gz and adds 
+the current version of the downloaded package to the ebuild name and saves it in 
+the current directory.
+
+A sub directory 'fvwm-nightshade' in the category 'x11-themes' have to be created
+(if you use the overlay +/usr/local/portage+ you need root permissions!):
+
+----
+$|# mkdir -p <overlay_directory>/x11-themes/fvwm-nightshade
+----
+
+Copy the versioned fvwm-nightshade ebuild into your personal overlay repository:
+
+----
+$|# cp fvwm-nightshade-<version>.ebuild <overlay_directory>/x11-themes/fvwm-nightshade/
+----
+
+Copy the dist package as root to +/usr/portage/distfiles+:
+
+----
+# cp ../fvwm-nightshade-<version>.tar.gz /usr/portage/distfiles/
+----
+
+Create the manifest:
+
+----
+$|# ebuild --force <overlay_directory>/x11-themes/fvwm-nightshade/fvwm-nightshade-<version>.ebuild digest
+----
+
+Unmask the package with your system architecture => \~x86 or ~amd64 :
+
+----
+# echo x11-themes/fvwm-nightshade ~x86 >> /etc/portage/package.keywords
+----
+
+Install Fvwm-Nightshade with
+
+----
+# emerge x11-themes/fvwm-nightshade
+----
+
+Perhaps you need some additional USEs. Emerge told you which. Echo them into +/etc/portage/package.use+:
+
+----
+# echo "<USEs>" >> /etc/portage/package.use
+----
+
+Emerge again.
+
+
+*Fvwm-Nightshade is installed. Congratulation!*
+
+If you haven't a graphical login manager copy xinitrc template into your home directory 
+
+----
+$ cp <system>/share/doc/fvwm-nightshade/xinitrc-example ~/.xinitrc
+----
+
+or add the following line to your +.xinitrc+:
+
+----
+exec fvwm-nightshade
+----
+
+and start the xserver with
+
+----
+$ startx
+----
+
+Change the base settings and enjoy.
+
+If you have a graphical login manager there's now a new entry "Fvwm-Nightshade" in your sessions dialog.
+Login, change the base settings and enjoy.
+
+If you have installed Fvwm-Nightshade locally and want to use a display-manager copy (with root rights) 
++fvwm-nightshade.desktop-example+ from the doc directory to +/usr/share/xsessions+:
+
+----
+# cp <system>/share/doc/fvwm-nightshade/fvwm-nightshade.desktop-example /usr/share/xsessions/fvwm-nightshade.desktop
+----
+
+
+[[UnInstallFNS]]
+Deinstallation
+--------------
+
+General
+~~~~~~~
+To remove Fvwm-Nightshade expect +~/.fvwm-nightshade+ run as root
+
+----
+# make uninstall
+----
+
+If you have installed Fvwm-Nightshade to another directory you have to change the prefix:
+
+----
+# make prefix=<other_dir> uninstall
+----
+
+That applies for local installation without root rights, too.
+
+Also, if Fvwm is installed in another directory then +/usr/share/fvwm+ you have
+to told make where Fvwm is located
+
+----
+# make fvwm_path=<path_to_fvwm> uninstall
+----
+
+Since 0.6.7 'make install' creates an install log. For previous versions which haven't this
+file you must use
+
+----
+# make uninstall-alternative
+----
+
+It checks the default installation locations and try to uninstall all installed files. Maybe
+some files won't found. Excuse the inconvenience.
+    
+*For all others use the package management system.*
+
+
+[[Tips]]
+Tips
+----
+
+How to get the required packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Some distributions haven't all packages in their main repositories. But you can get them
+over some other ways.
+
+*OpenSuse:*::
++
+http://software.opensuse.org/search
++
+To install a downloaded package use yast (as root) to solve package dependencies with
++
+----
+# yast -i <path_to_rpm_package>
+----
++
+or, if you have zypper installed use (as root)
++
+----
+# zypper install <path_to_rpm_package>
+----
+
+*Fedora:*::
++
+https://apps.fedoraproject.org/packages/
++
+http://koji.fedoraproject.org/koji/search
++
+To install a downloaded package use yum (as root) to solve package dependencies with
++
+----
+# yum --nogpgcheck localinstall <path_to_rpm_package>
+----
+
+*Arch:*::
++
+https://www.archlinux.org/packages/
++
+https://aur.archlinux.org/
++
+To install a downloaded package use pacman (as root) to solve package dependencies with
++
+----
+# pacman -U <path_to_arch_package>
+----
+
+*Gentoo:*::
++
+http://en.znurt.org/
+
+*Slackware:*::
++
+http://www.slackabduction.com/sse/index.php
+
+*Some other package search sites:*::
++
+http://pkgs.org
++
+http://rpm.pbone.net/
++
+http://www.rpmseek.com/index.html

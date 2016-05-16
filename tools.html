@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="generator" content="AsciiDoc 8.6.9">
+        <meta name="author" content="Fvwm-Nightshade">
+        <meta name="copyright" content="Fvwm-Nightshade">
+
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="content-language" content="en">
+        <meta http-equiv="content-style-type" content="text/css">
+        <meta http-equiv="content-script-type" content="text/javascript">
+
+        <link rel="stylesheet" href="./styles/menu.css" type="text/css"><style type="text/css" media="screen"></style>
+        <link rel="stylesheet" href="./styles/asciidoc.css" type="text/css"><style type="text/css" media="screen"></style>
+        <link rel="stylesheet" href="./styles/sites.css" type="text/css"><style type="text/css" media="screen"></style>
+        <!-- JavaScripts-->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function foo(){
+                // this will get the full URL at the address bar
+                var url = window.location.href;
+
+                // passes on every "a" tag
+                $(".inner a").each(function() {
+                    // checks if its the same on the address bar
+                    if(url == (this.href)) {
+                        $(this).addClass("highlighted");
+                    } else {
+                        $(this).removeClass("highlighted");
+                    }
+                });
+               setTimeout(foo, 1000);
+            })();
+        </script>
+    </head>
+
+    <!-- BEGIN: Sticky Header -->
+    <div id="header_container">
+        <div id="_header">
+            <body class="site" id="tools">
+                <div class="menu_templ">
+                    <ul id="css3menu1" class="topmenu">
+                        <li class="topmenu"><a href="./features.html" title="What you get with FNS" id="featuresnav"><img src="./images/menu/features.png" alt="">Features</a></li>
+                        <li class="topmenu"><a href="" title="All news around FNS" id="newsblognav"><span><img src="./images/menu/news.png" alt="">News/Blog</span></a>
+                            <ul>
+                                <li><a href="./news.html" title="Release News" id="newsnav"><img src="./images/menu/news_small.png" alt="">News</a></li>
+                                <li><a href="./blog.html" title="See our work in progress" id="blognav"><img src="./images/menu/blog_small.png" alt="">Blog</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="./screenshots.html" title="" id="screennav"><img src="./images/menu/screen.png" alt="">Screenshots</a></li>
+                        <li class="topmenu"><a href="" title="" id="docunav"><span><img src="./images/menu/documentation.png" alt="">Documentation</span></a>
+                            <ul>
+                                <li><a href="./faq.html" title="Frequently Asked Questions" id="faqnav"><img src="./images/menu/faq_small.png" alt="">FAQ</a></li>
+                                <li><a href="./install.html" title="Install FNS to your system" id="installnav"><span><img src="./images/menu/install_small.png" alt="">Installation/Deinstallation</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./install.html#Dependencies" title="Which packages are needed" id="depsnav"><img src="./images/menu/deps_small.png" alt="">Dependencies</a></li>
+                                        <li><a href="./install.html#InstallFvwm" title="How to install Fvwm" id="instfvwmnav"><img src="./images/menu/install_small.png" alt="">Step 1: Install Fvwm</a></li>
+                                        <li><a href="./install.html#InstallFNS" title="How to install FNS" id="instfnsnav"><img src="./images/menu/install_small.png" alt="">Step 2: Install Fvwm-Nightshade</a></li>
+                                        <li><a href="./install.html#UnInstallFNS" title="How to uninstall FNS" id="uninstfnsnav"><img src="./images/menu/uninstall_small.png" alt="">Uninstall Fvwm-Nightshade</a></li>
+                                        <li><a href="./install.html#Tips" title="How to get required packages" id="tipsnav"><img src="./images/menu/tips_small.png" alt="">Tips</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./usage.html#Usage" title="How to use FNS" id="usenav"><span><img src="./images/menu/usage_small.png" alt="">Usage</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./usage.html#FirstStart" title="" id="1ststartnav"><img src="./images/menu/1st_small.png" alt="">First Start</a></li>
+                                        <li><a href="./fnsbasesetup.html" title="SimpleGtk2 module to configure base settings" id="setupnav"><img src="./images/menu/setup_small.png" alt="">FNS-BaseSetup</a></li>
+                                        <li><a href="./fnswindowsbehaviour.html" title="SimpleGtk2 module to configure the windows behaviour" id="winbehavenav"><img src="./images/menu/winbehaviour.png" alt="">FNS-WindowsBehaviour</a></li>
+                                        <li><a href="./usage.html#DesktopOrganisation" title="Horizontal, Vertical & G2like Layout" id="desknav"><img src="./images/menu/desktop_small.png" alt="">Desktop Organisation</a></li>
+                                        <li><a href="./usage.html#RootMenu" title="Personal Applications, Configuration, Help, WinOops" id="rootnav"><img src="./images/menu/menu_small.png" alt="">Root Menu</a></li>
+                                        <li><a href="./fnsmenuconfigurator.html" title="SimpleGtk2 program to configure the root menu" id="menuconfnav"><img src="./images/menu/menuconfigurator.png" alt="">FNS-MenuConfigurator</a></li>
+                                        <li><a href="./fnspersonalmenu.html" title="SimpleGtk2 program to customize personal application menu" id="menubuildernav"><img src="./images/menu/menubuilder.png" alt="">FNS-MenuBuilder</a></li>
+                                        <li><a href="./usage.html#Bindings" title="Mouse and Keys" id="bindnav"><img src="./images/menu/bindings_small.png" alt="">Bindings</a></li>
+                                        <li><a href="./fnscompconfigurator.html" title="SimpleGtk2 program to configure composition" id="compconfnav"><img src="./images/menu/compconfigurator.png" alt="">FNS-CompConfigurator</a></li>
+                                        <li><a href="./fnscpuperformance.html" title="SimpleGtk2 program to configure cpu governor" id="cpuperfnav"><img src="./images/menu/cpuperf.png" alt="">FNS-CpuPerformance</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./configuration.html#Configuration" title="How FNS works" id="confnav"><span><img src="./images/menu/conf_small.png" alt="">Configuration</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./configuration.html#Structure" title="System and user parts" id="structnav"><img src="./images/menu/deps_small.png" alt="">Structure</a></li>
+                                        <li><a href="./configuration.html#LocationFiles" title="Location of Files and their Function" id="filesnav"><img src="./images/menu/files_small.png" alt="">Location of Files</a></li>
+                                        <li><a href="./configuration.html#Startup" title="Call Sequence while Startup" id="startupnav"><img src="./images/menu/startup_small.png" alt="">Startup</a></li>
+                                        <li><a href="./configuration.html#Autostart" title="Autostart of Applications" id="autonav"><img src="./images/menu/auto_small.png" alt="">Autostart</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./advanced.html#Adv" title="All for customization" id="advnav"><span><img src="./images/menu/adv_small.png" alt="">Advanced</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./advanced.html#EnvSpec" title="Global and FNS related Variables" id="envnav"><img src="./images/menu/deps_small.png" alt="">Environment Specifications</a></li>
+                                        <li><a href="./advanced.html#Debug" title="Possibilities to debug FNS" id="debugnav"><img src="./images/menu/debug_small.png" alt="">Debugging</a></li>
+                                        <li><a href="./tools.html" title="Used Tools in FNS" id="toolsnav"><span><img src="./images/menu/tools_small.png" alt="">Tools</span></a>
+                                            <ul class="inner">
+                                                <li><a href="./tools.html#menudesktop" title="Reads XDG menu files and creates Fvwm menus" id="fnsmenudesktopnav"><img src="./images/menu/tools_small.png" alt="">fns-menu-desktop</a></li>
+                                                <li><a href="./tools.html#findicon" title="Find icons for your panel, button etc." id="fnsfindiconnav"><img src="./images/menu/tools_small.png" alt="">fns-find-icon</a></li>
+                                                <li><a href="./tools.html#findfile" title="Get the path of a file" id="fnsfindfilenav"><img src="./images/menu/tools_small.png" alt="">fns-find-file</a></li>
+                                                <li><a href="./tools.html#startprogs" title="Start apps from a list" id="fnsstartnav"><img src="./images/menu/tools_small.png" alt="">fns-start-programs</a></li>
+                                                <li><a href="./tools.html#builttraylist" title="Create list of running stalonetray apps" id="fnstraynav"><img src="./images/menu/tools_small.png" alt="">fns-built-trayapplist</a></li>
+                                                <li><a href="./tools.html#poladd" title="Add or remove programs to/from polkit for gui view" id="fnspoladdnav"><img src="./images/menu/tools_small.png" alt="">fns-poladd</a></li>
+                                                <li><a href="./tools.html#banner" title="Show a banner while Fvwm-Nightshade's startup" id="fnsbannernav"><img src="./images/menu/tools_small.png" alt="">fns-show-banner</a></li>
+                                                <li><a href="./tools.html#transset" title="Set true transparency to windows if a composite manager is running" id="fnstranssetnav"><img src="./images/menu/tools_small.png" alt="">FvwmTransSet</a></li>
+                                                <li><a href="./tools.html#smartmax" title="Maximize window to the largest free area" id="smartmaxnav"><img src="./images/menu/tools_small.png" alt="">FvwmSmartMaximize</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="./advanced.html#Theme" title="How to create own Themes" id="themenav"><img src="./images/menu/themes_small.png" alt="">Theme Creation</a></li>
+                                        <li><a href="./advanced.html#Layout" title="How to create own Layouts" id="layoutnav"><img src="./images/menu/layout_small.png" alt="">Layout Creation</a></li>
+                                        <li><a href="./advanced.html#Language" title="How to create own Language" id="langnav"><img src="./images/menu/lang_small.png" alt="">Language Creation</a></li>
+                                        <li><a href="./advanced.html#Module" title="How to create own Modules" id="modulesnav"><img src="./images/menu/modules_small.png" alt="">Module Creation</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="http://thomasfunk.github.io/SimpleGtk2" title="RAD library to create Gtk2 apps/modules" id="simplegtk2nav"><img src="./images/menu/gtk2_small.png" alt="">SimpleGtk2</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="" title="" id="involvednav"><span><img src="./images/menu/get-involved.png" alt="">Get Involved</span></a>
+                            <ul>
+                                <li><a href="./development.html" title="Become a part of us" id="devnav"><img src="./images/menu/devel_small.png" alt="">Development</a></li>
+                                <li><a href="./contact.html" title="Get in touch with us" id="mailnav"><img src="./images/menu/mail_small.png" alt="">Contact</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="./about.html" title="What is Fvwm-Nightshade" id="aboutnav"><img src="./images/menu/home.png" alt="">About</a></li>
+                        <li class="topmenu"><a href="./downloads.html" title="Get Fvwm-Nightshade" id="downloadsnav"><img src="./images/menu/downloads.png" alt="">Downloads</a></li>
+                    </ul>
+                </div>
+            </body>
+        </div>
+    </div>
+    <!-- END: Sticky Header -->
+
+    <!-- BEGIN: Page Content -->
+    <div id="container">
+        <div id="_content">
+
+    <body class="manpage">
+        <div class="bg_header">
+            <a href="./index.html" title="Home"><img style="display:block; margin-left:auto; margin-right:auto" src="./images/html_header.png" alt=""></a>
+            <p class="site" align="center">Desktop environment based on Fvwm</p>
+        </div>
+        <div id="header">
+        <div class="sectionbody">
+        </div>
+        </div>
+        <div id="content">
+<div class="sect1">
+<h2 id="tools">TOOLS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Below all command line tools are listed used in <strong>Fvwm-Nightshade</strong>.</p></div>
+<br>
+</div>
+</div>
+<div class="sect1">
+<h2 id="menudesktop"><strong>fns-menu-desktop</strong></h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_name">NAME</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-menu-desktop - Reads XDG menu files and creates Fvwm menus</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_synopsis">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-menu-desktop  [ --help|-h ] [ --version|-v ] [ --install-prefix DIR
+] [ --desktop NAME ] [ --menu-type NAME ] [ --theme NAME ] [
+--with-titles|-w ] [ --enable-mini-icons ] [ --size|-s NUM ] [
+--mini-icon-dir|-t DIR ] [ --app-icon NAME ] [ --dir-icon NAME ] [
+--title|-t NAME ] [ --insert-in-menu NAME ] [ --get-menus all|desktop ] [
+--set-menus menu_paths ] [ --verbose ]</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This is a python script which parses XDG  menus  definitions  to  build
+corresponding fvwm menus.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options">OPTIONS</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_main_options">Main Options</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>--help</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Show the help and exit.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--version</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Show the version and exit.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--install-prefix</strong> <em>DIR</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Optional  parameter to override the standard locations for XDG
+menu definitions. The standard locations are /etc/xdg/menus (and
+<span class="monospaced">$HOME/.config/menus</span> if it exists).</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--desktop</strong> <em>NAME</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Optional  parameter to override the NAME of the main desktop
+environment installed on the system. If a system offers multiple
+desktop environments <span class="monospaced">$XDG_MENU_PREFIX</span> is typically set and is
+ignored if <span class="monospaced">--desktop</span> is denoted. Possible names are: gnome, kde,
+xfce, lxde, debian, etc.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--menu-type</strong> <em>NAME</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Defines which type of menus should be found. Possible NAME types
+could be: applications, settings, preferences, etc.</p></div>
+<div class="paragraph"><p>Note that if the specified menu type doesn&#8217;t exist the generated
+menu is empty!</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--theme</strong> <em>NAME</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Defines the used icon theme. Default is gnome but all others
+found in <span class="monospaced">/usr/share/icons</span> could be used except the hicolor theme
+because it&#8217;s the default fallback theme if no icon is found.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--with-titles|-w</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>If  this option is set menus are generated with titles. Default
+is no titles.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--title|-t</strong> <em>NAME</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Option to define the menu title NAME of the top menu used by
+Fvwm&#8217;s Popup command. Default is "FvwmMenu".</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--insert-in-menu</strong> <em>NAME</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Option to insert generated menu(s) IN a menu NAME (its top
+title).</p></div>
+<div class="paragraph"><p>Note that this option does not work correctly with the Regnerate
+Menus menu entry in a normal built menu since items inserted
+into such a menu cannot be removed (currently). If you use this
+option there and want to update your menus, you have to restart
+fvwm. A better way is to use dynamic menus (see the  example in
+the USAGE section).</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--get-menus</strong> <em>all|desktop</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Prints a space separated list of full menu paths. all is all
+menus on the system except empty ones. desktop is desktop
+related menus.  No menu generation is done.</p></div>
+<div class="paragraph"><p>This option is meant for use with the configuration tool.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--set-menus</strong> <em>menu_paths</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Expects a space separated list of full menu paths to generate
+user specified menus</p></div>
+<div class="paragraph"><p>This option is meant for use with the configuration tool.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--verbose</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Enables additional information printouts on STDERR.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_icons_options">Icons Options</h3>
+<div class="paragraph"><p>By default, fns-menu-desktop builds menus without mini-icons. To
+enable mini-icons use:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>--enable-mini-icons</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>This option enables mini-icons in the menus. If set, 24x24 mini-
+icons are used. If the specified icon isn&#8217;t that size it will be
+converted if ImageMagick is installed and saved in
+<span class="monospaced">$HOME/.fvwm/icons</span> or to the directory specified with
+<strong>--mini-icon-dir</strong> option. Otherwise no icon appears in the menu
+for that entry. With most distributions, all the menu entries
+will have mini-icons appropriate to the application.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--size|-s</strong> <em>NUM</em>
+</dt>
+<dd>
+<div class="paragraph"><p>If <strong>--enable-mini-icons</strong> is used the size of the icons can changed
+with this parameter. Default is 24.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--mini-icon-dir</strong> <em>DIR</em>
+</dt>
+<dd>
+<div class="paragraph"><p>When the right size mini-icon isn&#8217;t available, fns-menu-desktop
+creates icons with the right size in <span class="monospaced">$HOME/.fvwm/icons</span>. If you
+don&#8217;t want to use the default directory, $HOME/.fvwm/icons, use
+this option to specify a different folder.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--app-icon</strong> <em>NAME</em>
+</dt>
+<dd>
+<div class="paragraph"><p>If <strong>--enable-mini-icons</strong> is used and for an application no icon is
+found <em>gnome-applications</em> as default icon is used. But if the
+gnome icon theme isn&#8217;t installed no default icon appears. So
+another icon can defined here.</p></div>
+<div class="paragraph"><p>Only the name of an icon is needed not the path!</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--dir-icon</strong> <em>NAME</em>
+</dt>
+<dd>
+<div class="paragraph"><p>If --enable-mini-icons is used and for a directory in a menu no
+icon is found <em>gnome-fs-directory</em> as default icon is used. But
+if the gnome icon theme isn&#8217;t installed no default icon appears.
+So another icon can defined here.</p></div>
+<div class="paragraph"><p>Only the name of an icon is needed not the path!</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usage">USAGE</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Without any parameters fns-menu-desktop creates a menu named "FvwmMenu"
+with sub menus found for the main desktop environment installed on the
+system.</p></div>
+<div class="paragraph"><p>To add the default generated menu to the "Root" menu add the following
+to your fvwm config file <span class="monospaced">~/.fvwm/config</span> (in Fvwm-Nightshade it is
+already implemented). This generates the menu each time you pop it up:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>AddToMenu MenuRoot "XDG Menus" Popup FvwmMenu
+PipeRead 'fns-menu-desktop'</pre>
+</div></div>
+<div class="paragraph"><p>This is likely to be too slow and is not recommended.</p></div>
+<div class="paragraph"><p>Another possibility is to use DynamicPopupAction, the menu will be
+built only if you pop up the menu. The following creates a "KDE  Menus"
+menu which contains all Kde menus found on the system which is built
+only the first time you pop it up:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>AddToMenu MenuRoot "KDE Menus" Popup FvwmKde
+ ...
+
+AddToMenu FvwmKde
++ DynamicPopupAction PipeRead 'fns-menu-desktop --desktop kde \
+                                                  --title FvwmKde \
+                                                  --enable-mini-icons \
+                                                  [other options]'</pre>
+</div></div>
+<div class="paragraph"><p>The example above generates a menu with the Xdg menus as sub menus. If
+the sub menus should appear one level higher do this:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>AddToMenu MenuRoot "Root Menu" Title
++ PipeRead 'fns-menu-desktop --insert-in-menu MenuRoot'</pre>
+</div></div>
+<div class="paragraph"><p>To generate single menus like preferences:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>fns-menu-desktop --desktop kde --menu-type preferences --title FvwmPref \
+                   --enable-mini-icons -size 16 --with-titles</pre>
+</div></div>
+<div class="paragraph"><p>This generates a single KDE Preferences menu with top title "FvwmPref",
+mini icons with a size of 16x16 pixels and titles for each sub menu.
+But only if a menu with the name preferences exists in the users or
+system wide Xdg directories. Else it&#8217;s empty!</p></div>
+<div class="paragraph"><p>To add the generated menu to the "Utilities" menu for example  put  the
+following to your fvwm config file <span class="monospaced">~/.fvwm/config</span>:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>AddToMenu Utilities "Preferences Menu" Popup FvwmPref
+PipeRead 'fns-menu-desktop --desktop kde --menu-type preferences \
+                             --title FvwmPref [other options]'</pre>
+</div></div>
+<div class="paragraph"><p>If you think that fns-menu-desktop slows down your menu startup too
+much do not use PipeRead. Instead run fns-menu-desktop and redirect the
+menu to a file and read that file in your <span class="monospaced">~/.fvwm/config</span> file.</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>AddToMenu MenuRoot "XDG Menus" Popup FvwmMenu
+ ...
+
+AddToMenu FvwmMenu
++ DynamicPopupAction Function FuncRecreateXdgMenus
+ ...
+
+DestroyFunc FuncRecreateXdgMenus
+AddToFunc   FuncRecreateXdgMenus
++ I Test (f  $[FVWM_USERDIR]/.menu) Read $[FVWM_USERDIR]/.menu
++ I TestRC (!Match) PipeRead 'fns-menu-desktop &gt; $[FVWM_USERDIR]/.menu \
+                              &amp;&amp;  echo "Read $[FVWM_USERDIR]/.menu"'</pre>
+</div></div>
+<div class="paragraph"><p>or if you want to show the menus directly in a normal "Root" menu use
+this:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>AddToMenu MenuRoot "Root Menu" Title
++ FuncXdgMenusInRoot
+ ...
+
+DestroyFunc FuncXdgMenusInRoot
+AddToFunc   FuncXdgMenusInRoot
++ I Test (f  $[FVWM_USERDIR]/.menu) Read $[FVWM_USERDIR]/.menu
++ I TestRC (!Match) PipeRead 'fns-menu-desktop --insert-in-menu MenuRoot \
+                              &gt; $[FVWM_USERDIR]/.menu \
+                              &amp;&amp; echo "Read $[FVWM_USERDIR]/.menu"'</pre>
+</div></div>
+<div class="paragraph"><p>The problem here is, that you have to restart fvwm because items
+insserted into such a menu cannot be removed. For that BOTH menus must
+be regenerated:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>AddToMenu MenuRoot DynamicPopupAction FuncMenuRoot
+
+DestroyFunc FuncMenuRoot
+AddToFunc FuncMenuRoot
++ I DestroyMenu MenuRoot
++ I AddToMenu MenuRoot DynamicPopupAction FuncMenuRoot
++ I AddToMenu MenuRoot "Root Menu" Title
++ I Popup XdgMenus
+
+AddToMenu XdgMenus DynamicPopupAction FuncXdgMenusInRoot
+
+DestroyFunc FuncXdgMenusInRoot
+AddToFunc FuncXdgMenusInRoot
++ I AddToMenu XdgMenus DynamicPopupAction FuncXdgMenusInRoot
++ I Test (f  $[FVWM_USERDIR]/.menu) Read $[FVWM_USERDIR]/.menu
++ I TestRC (!Match) PipeRead 'fns-menu-desktop --insert-in-menu MenuRoot \
+                              &gt; $[FVWM_USERDIR]/.menu \
+                              &amp;&amp; echo "Read $[FVWM_USERDIR]/.menu"'</pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gui">GUI</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>There&#8217;s a <a href="http://thomasfunk.github.io/SimpleGtk2">Perl-SimpleGtk2</a> GUI to setup the menu generation manually. It
+is  found  in  the  root  of  the generated menu called "Regenerate XDG
+Menu(s)".</p></div>
+<div class="paragraph"><p>Or it can be started from within FvwmConsole with</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Module FNS-MenuConfigurator</pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bugs">BUGS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The whole process of creating menus from files is slow. Otherwise
+report bugs to the fvwmnightshade-workers mailing list &lt;<a href="mailto:fvwmnightshade-workers@googlegroups.com">fvwmnightshade-workers@googlegroups.com</a>&gt;.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors">AUTHORS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This script is based on fvwm-xdg-menu.py written by Piotr Zielinski
+(<a href="http://www.cl.cam.ac.uk/~pz215/">http://www.cl.cam.ac.uk/~pz215/</a>) who assigned Licence: GPL 2 Date:
+03.12.2005.</p></div>
+<div class="paragraph"><p>The script was reworked to replace the existing fvwm-menu-desktop perl
+script by the fvwm-workers and it was adapted and renamed to work
+within Fvwm-Nightshade.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_copying">COPYING</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The script is distributed by the same terms as Fvwm-Nightshade itself.
+See GNU General Public License for details.</p></div>
+<br>
+<hr>
+<br>
+</div>
+</div>
+<div class="sect1">
+<h2 id="findicon"><strong>FNS-FIND-ICON</strong></h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_name_2">NAME</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-find-icon - command line tool to get the iconpath of an application
+or the icon of an application</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_synopsis_2">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-find-icon [-h|--help] [--version] [-n NAME] [-i W_ID] [-p EXTEND_PATH] [-s ICON_SIZE] [--svg] [-c CATEGORY] [--notdesk]</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description_2">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>fns-find-icon</strong> is used to find the correct icon path listed in the desktop
+file of an application in /usr/share/applications/ or the icon path of an
+application depending on the used theme in fvwm-menu-desktop-config.fpl.
+Default theme is <em>gnome</em>.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options_2">OPTIONS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>These command line options are recognized by <strong>fns-find-icon</strong>:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>-n</strong> <em>NAME</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Find the appropriate icon path of an application listed in its desktop file.
+Or if <strong>--notdesk</strong> is given find the icon in /usr/share/icons/.</p></div>
+<div class="paragraph"><p>Example for .desktop file search:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>$ fns-find-icon -n meld</pre>
+</div></div>
+<div class="paragraph"><p>Desktop file of meld:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>[Desktop Entry]
+Encoding=UTF-8
+Name=Meld
+GenericName=Diff Viewer
+X-GNOME-FullName=Meld Diff Viewer
+Comment=Compare and merge your files
+Exec=meld
+Terminal=false
+Type=Application
+Icon=meld
+StartupNotify=true
+Categories=GNOME;Application;Development;</pre>
+</div></div>
+<div class="paragraph"><p>First <strong>fns-find-icon</strong> tries to find the full path. If only the name is given
+in the .desktop file it searches for the used theme in $FVWM_USERDIR/.FvwmForm-Desktop-Config.
+If $FVWM_USERDIR/.FvwmForm-Desktop-Config doesn&#8217;t exist it uses the default theme <em>gnome</em>.
+If the icon not found it searches in $FVWM_USERDIR/.menu lastly.
+If the search was successfully it converts the icon to the needed size
+(if the icon found in $FVWM_USERDIR/.menu only).</p></div>
+<div class="paragraph"><p>Example for normal icon search:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>$ fns-find-icon -n 'system-log-out' -s 24 -c 'actions' --notdesk</pre>
+</div></div>
+<div class="paragraph"><p>Here <strong>fns-find-icon</strong> tries to find the icon "system-log-out" with the
+size of "24x24" in the category "actions". The <strong>--notdesk</strong> tolds <strong>fns-find-icon</strong>
+not to search in the desktop files but in /usr/share/icons/.</p></div>
+<div class="paragraph"><p>First it gets the used theme, then it searches in the category with the
+stated size. If it find the icon it returns the full path. If not returns
+nothing.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-i</strong> <em>W_ID</em>
+</dt>
+<dd>
+<div class="paragraph"><p>It is possible to search for an icon for a specific window with the window id.
+<strong>fns-find-icon</strong> uses for this the program <em>xprop</em>. It asks <em>xprop</em> over <em>WM_CLASS</em>
+for the used name and then makes the same steps as in <strong>-n</strong> <em>NAME</em> described.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-p</strong> <em>EXTEND_PATH</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Sometimes it is needed to told <strong>fns-find-icon</strong> to search in other paths
+also. The defaults are:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>/usr/share/icons/[theme]/[icon-size]/[category]/
+/usr/share/icons/[theme]/[category]/[icon-size]/
+/usr/share/icons/hicolor/[icon-size]/[category]/
+/usr/share/pixmaps/</pre>
+</div></div>
+<div class="paragraph"><p>You can extend the defaults with this option. Different paths are sperated
+with a ":".</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-s</strong> <em>ICON_SIZE</em>
+</dt>
+<dd>
+<div class="paragraph"><p>The <em>ICON_SIZE</em> defines the the icon size to search for. Default is <em>48</em>.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--svg</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Prefer svg instead of bitmaps and if found add :&lt;size&gt;x&lt;size&gt; at the
+end of the path.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-c</strong> <em>CATEGORY</em>
+</dt>
+<dd>
+<div class="paragraph"><p>The <em>CATEGORY</em> defines the category in the theme to search for an icon.
+Default is <em>apps</em>.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-t</strong> <em>THEME</em>
+</dt>
+<dd>
+<div class="paragraph"><p>The <em>THEME</em> defines the theme to search for an icon.
+Default is the theme used in fvwm-menu-desktop-config.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--notdesk</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>To search for a specific icon not for an icon from a .desktop file use
+this option.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--version</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Shows program&#8217;s version number and exit.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-h | --help</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Shows short help and exit.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_author">AUTHOR</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>&#169; 2013 - 2016 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+<br>
+<hr>
+<br>
+</div>
+</div>
+<div class="sect1">
+<h2 id="findfile"><strong>fns-find-file</strong></h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_name_3">NAME</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-find-file - command line tool to get the path of a file</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_synopsis_3">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-find-file [-h | --help] [--version] [-s | --silent] [-p | --path] [-r | --recursive] [FILENAME]</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description_3">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>fns-find-file</strong> is used to find the correct path of a file depending of
+the directories specified in a search path. The default search path is
+<span class="monospaced">$FNS_SOUNDPATH</span>. But other search paths like <span class="monospaced">$PATH</span> can be used.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options_3">OPTIONS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>These command line options are recognized by <strong>fns-find-file</strong>:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>FILENAME</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Find the appropriate path of a file depending of the directories specified
+in a search path. The default search path is <span class="monospaced">$FNS_SOUNDPATH</span>. But other
+search paths like <span class="monospaced">$PATH</span> can be used instead with <strong>--path</strong>.</p></div>
+<div class="paragraph"><p>Example for a file search:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>$ fns-find-file alarm.wav</pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+<strong>-p | --path</strong> <em>OTHER_PATH</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Sometimes it is useful to told <strong>fns-find-file</strong> to search in another search
+path:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>$ fns-find-file --path $PATH gksu</pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+<strong>-r | --recursive</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Normally <strong>fns-find-file</strong> searches in the given search path(s). But sometimes
+it is useful to search recursive:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>$ fns-find-file --path $FVWM_USERDIR --recursive 16x16-geany.png</pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+<strong>-s | --silent</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>The <em>silent</em> option is useful if no error output is welcome.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>--version</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Shows program&#8217;s version number and exit.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-h | --help</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Shows short help and exit.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_author_2">AUTHOR</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>&#169; 2013 - 2016 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+<br>
+<hr>
+<br>
+</div>
+</div>
+<div class="sect1">
+<h2 id="startprogs"><strong>fns-start-programs</strong></h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_name_4">NAME</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-start-programs - shell script to start applications listed in
+a file</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_synopsis_4">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-start-programs [TYPE] [FILE] [-h|--help] [-v|--version]</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description_4">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>fns-start-programs</strong> is used to start applications listed in a file. It
+executes them line by line. Before starting the script checks if the
+application is already running. If so it prints to stderr</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>[Fvwm-Nightshade][TYPE]: '&lt;app-command&gt;' is already running. Skipping.</pre>
+</div></div>
+<div class="paragraph"><p>else</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>[Fvwm-Nightshade][TYPE]: '&lt;app-command&gt;' not running. Starting now.</pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_parameters">PARAMETERS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Two command line parameter are mandatory:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>TYPE</strong> (1st one)
+</dt>
+<dd>
+<div class="paragraph"><p>Defines the <em>type</em> e.g. "autostart" which will print behind [Fvwm-Nightshade]
+to show for which service it starts an application.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>FILE</strong> (2nd one)
+</dt>
+<dd>
+<div class="paragraph"><p>The path to a file with the list of applications or commands which wants
+to execute. The file structure should looks like</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>skype
+xterm -fn 10x20
+geany ~/Documents/mytext.txt</pre>
+</div></div>
+<div class="paragraph"><p>Lines are commented out with a <em>#</em>.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options_4">OPTIONS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>There exist two options also:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>-h|--help</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Show a short help and exiting.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-v|--version</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Show the version and exiting.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_author_3">AUTHOR</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>&#169; 2012 - 2016 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+<br>
+<hr>
+<br>
+</div>
+</div>
+<div class="sect1">
+<h2 id="builttraylist"><strong>fns-built-trayapplist</strong></h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_name_5">NAME</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-built-trayapplist - shell script to create application/command list
+of stalonetray</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_synopsis_5">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-built-trayapplist [LOGFILE] [APPFILE] [-h|--help] [-v|--version]</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description_5">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>fns-built-trayapplist</strong> creates a file with the current systemtray applications
+of stalonetray. This is useful if stalonetray must close, e.g. FvwmButtons
+which swallows stalonetray has to be restarted. After restarting the apps can be
+started again with <strong>fns-start-programs</strong></p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_parameters_2">PARAMETERS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Two command line parameter are mandatory:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>LOGFILE</strong> (1st one)
+</dt>
+<dd>
+<div class="paragraph"><p>Path of the stalonetray logfile. Stalonetray must started with the
+parameter <em>--log-level info</em> to create the appropriated information.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>APPFILE</strong> (2nd one)
+</dt>
+<dd>
+<div class="paragraph"><p>Path of the file to write the list of the current running applications
+which want to be executed after restart of stalonetray.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options_5">OPTIONS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>There exist two options also:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>-h|--help</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Show a short help and exiting.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-v|--version</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Show the version and exiting.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_author_4">AUTHOR</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>&#169; 2012 - 2016 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+<br>
+<hr>
+<br>
+</div>
+</div>
+<div class="sect1">
+<h2 id="poladd"><strong>fns-poladd</strong></h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_name_6">NAME</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-poladd - shell script to add or remove programs to/from polkit for gui view.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_synopsis_6">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-poladd [-r|--remove] [PROGRAM_NAME] [-l|--verbose] [-h|--help] [-v|--version]</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description_6">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>fns-poladd</strong> is used to add or remove a program to or from polkit for gui view.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note">
+</td>
+<td class="content">This programm needs root rights!</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_parameters_3">PARAMETERS</h2>
+<div class="sectionbody">
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>PROGRAM_NAME</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Add or remove program PROGRAM_NAME to or from policykit.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-r|--remove</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>remove PROGRAM_NAME from policykit.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-l|--verbose</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>verbose output. Default is silent.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-h|--help</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Show a short help and exiting.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-v|--version</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Show the version and exiting.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_author_5">AUTHOR</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>&#169; 2014 - 2016 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+<br>
+<hr>
+<br>
+</div>
+</div>
+<div class="sect1">
+<h2 id="banner"><strong>fns-show-banner</strong></h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_name_7">NAME</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-show-banner - shell script to show a banner while Fvwm-Nightshade&#8217;s startup.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_synopsis_7">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>fns-show-banner [IMAGE] [TIME] [-h|--help] [-v|--version]</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description_7">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>fns-show-banner</strong> is used show a banner while startup of Fvwm-Nightshade.</p></div>
+<div class="paragraph"><p>It is based on ImageMagick to support more image formats than FvwmBanner.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_parameters_4">PARAMETERS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Two command line parameter are mandatory:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>IMAGE</strong> (1st one)
+</dt>
+<dd>
+<div class="paragraph"><p>The path to the splash image.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>TIME</strong> (2nd one)
+</dt>
+<dd>
+<div class="paragraph"><p>The time how long the image should be shown.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options_6">OPTIONS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>There are further options, too:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>-h|--help</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Show a short help and exiting.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>-v|--version</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Show the version and exiting.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_author_6">AUTHOR</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>&#169; 2016 Bernhard Popp &lt;<a href="mailto:kermit.popp@googlemail.com">kermit.popp@googlemail.com</a>&gt;</p></div>
+<br>
+<hr>
+<br>
+</div>
+</div>
+<div class="sect1">
+<h2 id="transset"><strong>FvwmTransSet</strong></h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_name_8">NAME</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>FvwmTransSet - set true transparency to windows if a composite manager is
+running.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_synopsis_8">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>FvwmTransSet</strong> can only be invoked by fvwm. Command line invocation of the
+<strong>FvwmTransSet</strong> module will not work.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description_8">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This module sets the transparency to inactive and opacity to active windows
+with transset or df-transset if a composite manager like xcompmgr, compton
+or Cairo Composite manager is running.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_invocation">INVOCATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>FvwmTransSet</strong> can be invoked by inserting the line "Module FvwmTransSet"
+in the <span class="monospaced">.fvwm2rc</span> file. This should be placed in the StartFunction if
+<strong>FvwmTransSet</strong> is to be spawned during fvwm&#8217;s initialization.</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>DestroyFunc StartFunction
+AddToFunc StartFunction
++ I Module FvwmTransSet</pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuration_options">CONFIGURATION OPTIONS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The following commands are understood by <strong>FvwmTransSet</strong>:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>*FvwmTransSet:</strong> Excludes <em>list of WM_CLASS names</em>
+</dt>
+<dd>
+<div class="paragraph"><p>On this line one or a comma seperated list of applications or modules
+with their <span class="monospaced">WM_CLASS</span> names can specified which shall not get transparent.</p></div>
+<div class="paragraph"><p>Example:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>*FvwmTransSet: Excludes FvwmButtons, FvwmPager, FvwmIconMan</pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+<strong>*FvwmTransSet:</strong> Opacity <em>value</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Sets the opacity value for the active/focused window and if defined
+the excluded applications or modules. Default is <em>1.0</em>.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>*FvwmTransSet:</strong> Transparency  <em>value</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Sets the transparency value for all inactive/unfocused windows.
+Default is <em>0.7</em>.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>*FvwmTransSet:</strong> UsedTransset <em>type</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Sets the used transset type. Default is <em>transset</em>. Not all transset
+versions can used. Only those with the <strong>-i</strong> option. Otherwise <em>transset-df</em>
+(<a href="http://forchheimer.se/transset-df/">http://forchheimer.se/transset-df/</a>) should use instead.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_dynamical_actions">DYNAMICAL ACTIONS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>A running <strong>FvwmTransSet</strong> instance may receive some dynamical actions.
+This is achived using the fvwm command</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>SendToModule FvwmTransSet &lt;action&gt; &lt;params&gt;</pre>
+</div></div>
+<div class="paragraph"><p>Supported actions:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>opac</strong> <em>value</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Change the opacity for the active/focused window and if defined
+the excluded applications or modules.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>trans</strong> <em>value</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Change the transparency for all inactive/unfocused windows.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>exclude</strong> <em>list of WM_CLASS names</em>
+</dt>
+<dd>
+<div class="paragraph"><p>Add one or a comma seperated list of applications or modules to
+the existing exclude list.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>stop</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Set transparency and opacity to 1.0 and terminate <strong>FvwmTransSet</strong>.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>reset</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Resets all <strong>FvwmTransSet</strong> values to the initials loaded at
+startup and update all windows.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>save</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Tells <strong>FvwmTransSet</strong> to save the current configuration in a file named
+".FvwmTransSet" in the users home directory. This same file is read
+automatically by <strong>FvwmTransSet</strong> during startup.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bugs_2">BUGS</h2>
+<div class="sectionbody">
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Bug reports can be sent to fvwmnightshade-workers mailing list at
+</dt>
+<dd>
+<div class="paragraph"><p><a href="https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers">https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers</a></p></div>
+</dd>
+<dt class="hdlist1">
+or submit them under
+</dt>
+<dd>
+<div class="paragraph"><p><a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues">https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues</a>.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_copyrights">COPYRIGHTS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>FvwmTransSet</strong> is based on <strong>FvwmPeteTransFocus</strong> by Peter Blair.</p></div>
+<div class="paragraph"><p>This program stands under the GPL V2. &#169; 2014 - 2016.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors_2">AUTHORS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;.</p></div>
+<br>
+<hr>
+<br>
+</div>
+</div>
+<div class="sect1">
+<h2 id="smartmax"><strong>FvwmSmartMaximize</strong></h2>
+<div class="sectionbody">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_name_9">NAME</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>FvwmSmartMaximize - Perl module to smart maximize windows.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_synopsis_9">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>FvwmSmartMaximize</strong> can only be invoked by fvwm. Command line invocation
+of the <strong>FvwmSmartMaximize</strong> module will not work.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description_9">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This module moves and resizes a current window to the largest free area
+of the desktop/page. If no place found nothing happens.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_invocation_2">INVOCATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>FvwmSmartMaximize</strong> can be invoked by inserting the line <em>Module FvwmSmartMaximize</em>
+in the StartFunction declarations in the .fvwm2rc file.</p></div>
+<div class="paragraph"><p>To call <strong>FvwmSmartMaximize</strong> it has to be bound to a menu, mouse button, or keystroke.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options_7">OPTIONS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Two main options exist needed for calling <strong>FvwmSmartMaximize</strong> from a menu,
+mouse button, or keystroke.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>All</strong> <em>[screen]</em>
+</dt>
+<dd>
+<div class="paragraph"><p>All windows on the current page are included in the calculation of the
+largest free area. If maximized windows are available they will block
+the smart maximization and nothing will happen.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>IgnoreMaxWindows</strong> <em>[screen]</em>
+</dt>
+<dd>
+<div class="paragraph"><p>All windows on the current page except maximized windows are included in
+the calculation of the largest free area. This is the preffered option.</p></div>
+</dd>
+</dl></div>
+<div class="paragraph"><p>For multi display screens there&#8217;s an addition to the main options:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<em>[screen]</em>
+</dt>
+<dd>
+<div class="paragraph"><p>With this addition <strong>FvwmSmartMaximize</strong> will only use the current screen
+for placing. Else the complete display is used.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_examples">EXAMPLES</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To use <strong>FvwmSmartMaximize</strong> three parts have to be implemented:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+You can copy <strong>FvwmSmartMaximize</strong> in the lib directory of Fvwm. To get the path type in a terminal
+</p>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>$ echo $FVWM_MODULEDIR</pre>
+</div></div>
+<div class="paragraph"><p>Or you can implement your own in your .fvwm2rc file with:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>ModulePath $[FVWM_USERDIR]/lib:+</pre>
+</div></div>
+<div class="paragraph"><p>Now copy <strong>FvwmSmartMaximize</strong> into your own module path.</p></div>
+</li>
+<li>
+<p>
+The module initialization in the StartFunction declaration in your .fvwm2rc file:
+</p>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>DestroyFunc StartFunction
+AddToFunc StartFunction
++ I Module FvwmSmartMaximize</pre>
+</div></div>
+</li>
+<li>
+<p>
+A menu, mouse button, or keystroke binding:
+</p>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Mouse 1 4 M SendToModule FvwmSmartMaximize IgnoreMaxWindows screen</pre>
+</div></div>
+<div class="paragraph"><p>This binds the call to mouse button 1 (left button) + Alt-Key and to the window button 4. So if you hold Alt and click on the window button 4 <strong>FvwmSmartMaximize</strong> is smart maximizing the active window to the largest free area on the current screen, ignoring maximized windows.</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Key Super_L WTSF N SendToModule FvwmSmartMaximize All</pre>
+</div></div>
+<div class="paragraph"><p>This binds the call to the left Windows key and smart maximizing the active window to the largest free area on the whole desktop if no maximized window blocks it.</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>DestroyMenu MenuWindowMaximize
+AddToMenu   MenuWindowMaximize
++ "Maximize Window" Title
++ "%menu/window-maximize.xpm%Maximize &amp;Smart"   SendToModule FvwmSmartMaximize IgnoreMaxWindows screen</pre>
+</div></div>
+<div class="paragraph"><p>This creates a menu <em>Maximize Window</em> with an entry <em>Maximize Smart</em>.</p></div>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bugs_3">BUGS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Bug reports can be sent to &lt;<a href="mailto:andreas@hoenen-terstappen.de">andreas@hoenen-terstappen.de</a>&gt; or the
+fvwmnightshade-workers mailing list at <a href="https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers">https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers</a>
+or submit them under <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues">https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues</a>.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_caveats">CAVEATS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If the width/height of the largest free area is smaller than the smallest
+possible width/height of a program it is only positioning there without resizing.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_copyrights_2">COPYRIGHTS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>This program stands under the GPL V2. &#169; 2014 - 2016.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors_3">AUTHORS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Andreas Hoenen &lt;<a href="mailto:andreas@hoenen-terstappen.de">andreas@hoenen-terstappen.de</a>&gt; and Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;.</p></div>
+</div>
+</div>
+        </div>
+        <div id="footnotes"></div>
+        <div id="footer">
+            <div id="footer-text">
+                Design by Thomas Funk and built with <a href="http://www.methods.co.nz/asciidoc/index.html">Asciidoc</a><br />
+                Last updated 2016-05-16 17:21:06 CEST
+            </div>
+        </div>
+    </body>
+</html>

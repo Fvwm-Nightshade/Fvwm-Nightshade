@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fvwm-Nightshade - Desktop environment based on Fvwm: FNS-WindowsBehaviour(1)</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="generator" content="AsciiDoc 8.6.9">
+        <meta name="author" content="Fvwm-Nightshade">
+        <meta name="copyright" content="Fvwm-Nightshade">
+
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="content-language" content="en">
+        <meta http-equiv="content-style-type" content="text/css">
+        <meta http-equiv="content-script-type" content="text/javascript">
+
+        <link rel="stylesheet" href="./styles/menu.css" type="text/css"><style type="text/css" media="screen"></style>
+        <link rel="stylesheet" href="./styles/asciidoc.css" type="text/css"><style type="text/css" media="screen"></style>
+        <link rel="stylesheet" href="./styles/sites.css" type="text/css"><style type="text/css" media="screen"></style>
+        <!-- JavaScripts-->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function foo(){
+                // this will get the full URL at the address bar
+                var url = window.location.href;
+
+                // passes on every "a" tag
+                $(".inner a").each(function() {
+                    // checks if its the same on the address bar
+                    if(url == (this.href)) {
+                        $(this).addClass("highlighted");
+                    } else {
+                        $(this).removeClass("highlighted");
+                    }
+                });
+               setTimeout(foo, 1000);
+            })();
+        </script>
+    </head>
+
+    <!-- BEGIN: Sticky Header -->
+    <div id="header_container">
+        <div id="_header">
+            <body class="site" id="fnswindowsbehaviour">
+                <div class="menu_templ">
+                    <ul id="css3menu1" class="topmenu">
+                        <li class="topmenu"><a href="./features.html" title="What you get with FNS" id="featuresnav"><img src="./images/menu/features.png" alt="">Features</a></li>
+                        <li class="topmenu"><a href="" title="All news around FNS" id="newsblognav"><span><img src="./images/menu/news.png" alt="">News/Blog</span></a>
+                            <ul>
+                                <li><a href="./news.html" title="Release News" id="newsnav"><img src="./images/menu/news_small.png" alt="">News</a></li>
+                                <li><a href="./blog.html" title="See our work in progress" id="blognav"><img src="./images/menu/blog_small.png" alt="">Blog</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="./screenshots.html" title="" id="screennav"><img src="./images/menu/screen.png" alt="">Screenshots</a></li>
+                        <li class="topmenu"><a href="" title="" id="docunav"><span><img src="./images/menu/documentation.png" alt="">Documentation</span></a>
+                            <ul>
+                                <li><a href="./faq.html" title="Frequently Asked Questions" id="faqnav"><img src="./images/menu/faq_small.png" alt="">FAQ</a></li>
+                                <li><a href="./install.html" title="Install FNS to your system" id="installnav"><span><img src="./images/menu/install_small.png" alt="">Installation/Deinstallation</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./install.html#Dependencies" title="Which packages are needed" id="depsnav"><img src="./images/menu/deps_small.png" alt="">Dependencies</a></li>
+                                        <li><a href="./install.html#InstallFvwm" title="How to install Fvwm" id="instfvwmnav"><img src="./images/menu/install_small.png" alt="">Step 1: Install Fvwm</a></li>
+                                        <li><a href="./install.html#InstallFNS" title="How to install FNS" id="instfnsnav"><img src="./images/menu/install_small.png" alt="">Step 2: Install Fvwm-Nightshade</a></li>
+                                        <li><a href="./install.html#UnInstallFNS" title="How to uninstall FNS" id="uninstfnsnav"><img src="./images/menu/uninstall_small.png" alt="">Uninstall Fvwm-Nightshade</a></li>
+                                        <li><a href="./install.html#Tips" title="How to get required packages" id="tipsnav"><img src="./images/menu/tips_small.png" alt="">Tips</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./usage.html#Usage" title="How to use FNS" id="usenav"><span><img src="./images/menu/usage_small.png" alt="">Usage</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./usage.html#FirstStart" title="" id="1ststartnav"><img src="./images/menu/1st_small.png" alt="">First Start</a></li>
+                                        <li><a href="./fnsbasesetup.html" title="SimpleGtk2 module to configure base settings" id="setupnav"><img src="./images/menu/setup_small.png" alt="">FNS-BaseSetup</a></li>
+                                        <li><a href="./fnswindowsbehaviour.html" title="SimpleGtk2 module to configure the windows behaviour" id="winbehavenav"><img src="./images/menu/winbehaviour.png" alt="">FNS-WindowsBehaviour</a></li>
+                                        <li><a href="./usage.html#DesktopOrganisation" title="Horizontal, Vertical & G2like Layout" id="desknav"><img src="./images/menu/desktop_small.png" alt="">Desktop Organisation</a></li>
+                                        <li><a href="./usage.html#RootMenu" title="Personal Applications, Configuration, Help, WinOops" id="rootnav"><img src="./images/menu/menu_small.png" alt="">Root Menu</a></li>
+                                        <li><a href="./fnsmenuconfigurator.html" title="SimpleGtk2 program to configure the root menu" id="menuconfnav"><img src="./images/menu/menuconfigurator.png" alt="">FNS-MenuConfigurator</a></li>
+                                        <li><a href="./fnspersonalmenu.html" title="SimpleGtk2 program to customize personal application menu" id="menubuildernav"><img src="./images/menu/menubuilder.png" alt="">FNS-MenuBuilder</a></li>
+                                        <li><a href="./usage.html#Bindings" title="Mouse and Keys" id="bindnav"><img src="./images/menu/bindings_small.png" alt="">Bindings</a></li>
+                                        <li><a href="./fnscompconfigurator.html" title="SimpleGtk2 program to configure composition" id="compconfnav"><img src="./images/menu/compconfigurator.png" alt="">FNS-CompConfigurator</a></li>
+                                        <li><a href="./fnscpuperformance.html" title="SimpleGtk2 program to configure cpu governor" id="cpuperfnav"><img src="./images/menu/cpuperf.png" alt="">FNS-CpuPerformance</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./configuration.html#Configuration" title="How FNS works" id="confnav"><span><img src="./images/menu/conf_small.png" alt="">Configuration</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./configuration.html#Structure" title="System and user parts" id="structnav"><img src="./images/menu/deps_small.png" alt="">Structure</a></li>
+                                        <li><a href="./configuration.html#LocationFiles" title="Location of Files and their Function" id="filesnav"><img src="./images/menu/files_small.png" alt="">Location of Files</a></li>
+                                        <li><a href="./configuration.html#Startup" title="Call Sequence while Startup" id="startupnav"><img src="./images/menu/startup_small.png" alt="">Startup</a></li>
+                                        <li><a href="./configuration.html#Autostart" title="Autostart of Applications" id="autonav"><img src="./images/menu/auto_small.png" alt="">Autostart</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./advanced.html#Adv" title="All for customization" id="advnav"><span><img src="./images/menu/adv_small.png" alt="">Advanced</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./advanced.html#EnvSpec" title="Global and FNS related Variables" id="envnav"><img src="./images/menu/deps_small.png" alt="">Environment Specifications</a></li>
+                                        <li><a href="./advanced.html#Debug" title="Possibilities to debug FNS" id="debugnav"><img src="./images/menu/debug_small.png" alt="">Debugging</a></li>
+                                        <li><a href="./tools.html" title="Used Tools in FNS" id="toolsnav"><span><img src="./images/menu/tools_small.png" alt="">Tools</span></a>
+                                            <ul class="inner">
+                                                <li><a href="./tools.html#menudesktop" title="Reads XDG menu files and creates Fvwm menus" id="fnsmenudesktopnav"><img src="./images/menu/tools_small.png" alt="">fns-menu-desktop</a></li>
+                                                <li><a href="./tools.html#findicon" title="Find icons for your panel, button etc." id="fnsfindiconnav"><img src="./images/menu/tools_small.png" alt="">fns-find-icon</a></li>
+                                                <li><a href="./tools.html#findfile" title="Get the path of a file" id="fnsfindfilenav"><img src="./images/menu/tools_small.png" alt="">fns-find-file</a></li>
+                                                <li><a href="./tools.html#startprogs" title="Start apps from a list" id="fnsstartnav"><img src="./images/menu/tools_small.png" alt="">fns-start-programs</a></li>
+                                                <li><a href="./tools.html#builttraylist" title="Create list of running stalonetray apps" id="fnstraynav"><img src="./images/menu/tools_small.png" alt="">fns-built-trayapplist</a></li>
+                                                <li><a href="./tools.html#poladd" title="Add or remove programs to/from polkit for gui view" id="fnspoladdnav"><img src="./images/menu/tools_small.png" alt="">fns-poladd</a></li>
+                                                <li><a href="./tools.html#banner" title="Show a banner while Fvwm-Nightshade's startup" id="fnsbannernav"><img src="./images/menu/tools_small.png" alt="">fns-show-banner</a></li>
+                                                <li><a href="./tools.html#transset" title="Set true transparency to windows if a composite manager is running" id="fnstranssetnav"><img src="./images/menu/tools_small.png" alt="">FvwmTransSet</a></li>
+                                                <li><a href="./tools.html#smartmax" title="Maximize window to the largest free area" id="smartmaxnav"><img src="./images/menu/tools_small.png" alt="">FvwmSmartMaximize</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="./advanced.html#Theme" title="How to create own Themes" id="themenav"><img src="./images/menu/themes_small.png" alt="">Theme Creation</a></li>
+                                        <li><a href="./advanced.html#Layout" title="How to create own Layouts" id="layoutnav"><img src="./images/menu/layout_small.png" alt="">Layout Creation</a></li>
+                                        <li><a href="./advanced.html#Language" title="How to create own Language" id="langnav"><img src="./images/menu/lang_small.png" alt="">Language Creation</a></li>
+                                        <li><a href="./advanced.html#Module" title="How to create own Modules" id="modulesnav"><img src="./images/menu/modules_small.png" alt="">Module Creation</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="http://thomasfunk.github.io/SimpleGtk2" title="RAD library to create Gtk2 apps/modules" id="simplegtk2nav"><img src="./images/menu/gtk2_small.png" alt="">SimpleGtk2</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="" title="" id="involvednav"><span><img src="./images/menu/get-involved.png" alt="">Get Involved</span></a>
+                            <ul>
+                                <li><a href="./development.html" title="Become a part of us" id="devnav"><img src="./images/menu/devel_small.png" alt="">Development</a></li>
+                                <li><a href="./contact.html" title="Get in touch with us" id="mailnav"><img src="./images/menu/mail_small.png" alt="">Contact</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="./about.html" title="What is Fvwm-Nightshade" id="aboutnav"><img src="./images/menu/home.png" alt="">About</a></li>
+                        <li class="topmenu"><a href="./downloads.html" title="Get Fvwm-Nightshade" id="downloadsnav"><img src="./images/menu/downloads.png" alt="">Downloads</a></li>
+                    </ul>
+                </div>
+            </body>
+        </div>
+    </div>
+    <!-- END: Sticky Header -->
+
+    <!-- BEGIN: Page Content -->
+    <div id="container">
+        <div id="_content">
+
+    <body class="manpage">
+        <div class="bg_header">
+            <a href="./index.html" title="Home"><img style="display:block; margin-left:auto; margin-right:auto" src="./images/html_header.png" alt=""></a>
+            <p class="site" align="center">Desktop environment based on Fvwm</p>
+        </div>
+        <div id="header">
+        <div class="sectionbody">
+        </div>
+        </div>
+        <div id="content">
+<div class="sect1">
+<h2 id="_synopsis">SYNOPSIS</h2>
+<div class="sectionbody">
+<table class="tableblock frame-none grid-none"
+style="
+margin-left:0; margin-right:auto;
+width:95%;
+">
+<col style="width:75%;">
+<col style="width:25%;">
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Module FNS-WindowsBehaviour</p></td>
+<td class="tableblock halign-right valign-top" rowspan="2" ><p class="tableblock"><strong><span class="image">
+<a class="image" href="./images/FNS-WindowsBehaviour.png">
+<img src="./images/FNS-WindowsBehaviour.png" alt="Module FNS-WindowsBehaviour" width="150">
+</a>
+</span></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock"><strong>FNS-WindowsBehaviour</strong> can only be invoked by fvwm. Command line invocation of the
+<strong>FNS-WindowsBehaviour</strong> will not work.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>FNS-WindowsBehaviour</strong> is used to configure some of the window behaviours in
+Fvwm-Nightshade.</p></div>
+<div class="paragraph"><p>The following option descriptions are copied from Fvwm&#8217;s manpage because there is
+all described as better as we already can.</p></div>
+<div class="paragraph"><p>On the other hand it is easier to find a passage in Fvwm&#8217;s huge manpage while searching.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_options">OPTIONS</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_focus_policies">Focus Policies</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Click to Focus</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>ClickToFocus</em></strong> instructs fvwm to give the focus to a window when it is clicked in.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Focus follows Mouse</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>FocusFollowsMouse</em></strong> tells fvwm to give a window the focus as soon as the pointer
+enters the window, and take it away when the pointer leaves the window.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Sloopy Focus</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>SloppyFocus</em></strong> is similar, but doesn&#8217;t give up the focus if the pointer leaves the
+window to pass over the root window or a <strong><em>ClickToFocus</em></strong> window (unless you click
+on it, that is), which makes it possible to move the mouse out of the way without
+losing focus.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_raise_options">Raise Options</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Raise if focused</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Controls if the window is raised when focused (depending on the focus model).</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Stack Transient Parent</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>The <strong><em>StackTransientParent</em></strong> style augments <strong><em>RaiseTransient</em></strong> and <strong><em>LowerTransient</em></strong> styles.
+Raising a window with StackTransientParent style transfers the raise action to the
+main window if the window being raised is a transient and its main window has
+<strong><em>RaiseTransient</em></strong> style; this effect makes raise on a transient act just like raise on
+its main - the whole group is raised. Similar behavior holds for lowering a whole
+group of transients when the main has <strong><em>LowerTransient</em></strong> style. DontStackTransientParent
+turns this behavior off. (Dont)StackTransientParent has no effect if RaiseTransient
+and LowerTransient are not used.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+<div class="paragraph"><p>A window with the <strong><em>RaiseTransient</em></strong> style that has transient windows raises all its
+transients when it is raised. The DontRaiseTransient style disables this behavior.
+All windows are then treated as if they had no transients.</p></div>
+<div class="paragraph"><p>A window with the <strong><em>LowerTransient</em></strong> style that has transient windows lowers all its
+transients when it is lowered. The DontLowerTransient style disables this behavior.
+All windows are then treated as if they had no transients.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>If <strong><em>StackTransientParent</em></strong> is set the following style combination is used:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Style * RaiseTransient
+Style * LowerTransient
+Style * StackTransientParent</pre>
+</div></div>
+<div class="paragraph"><p>If <strong><em>StackTransientParent</em></strong> is disabled this style combination is used:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Style * DontRaiseTransient
+Style * DontLowerTransient
+Style * DontStackTransientParent</pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+<strong>No Raise Click on Motion</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>If the <strong><em>FPIgnoreRaiseClickMotion</em></strong> style is used, clicking in a window and then dragging
+the pointer with the button held down does not count as the click to raise the window.
+Instead, the application processes these events normally. This is useful to select text
+in a terminal window with the mouse without raising the window. However, mouse bindings
+on the client window are not guaranteed to work anymore (see Mouse command. Note that
+this style forces that the initial click is passed to the application. The distance that
+the pointer must be moved to trigger this is controlled by the <strong><em>MoveThreshold</em></strong> command.</p></div>
+<div class="paragraph"><p>The <strong><em>MoveThreshold</em></strong> can be set in the <strong>Miscellaneous</strong> section.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_focus_options">Focus Options</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Grab Focus</strong> and <strong>Grab Focus Transient</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>New normal or transient windows with the <strong><em>GrabFocus</em></strong> (FPGrabFocus + FPReleaseFocus) or
+<strong><em>GrabFocusTransient</em></strong> (FPGrabFocusTransient + FPReleaseFocusTransient) style automatically
+receive the focus when they are created. GrabFocus is the default for windows with the
+ClickToFocus style. Note that even if these styles are disabled, the application may take the
+focus itself. Fvwm can not prevent this.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+<div class="paragraph"><p><strong><em>FPReleaseFocus</em></strong> and <strong><em>FPReleaseFocusTransient</em></strong> controls whether the focus is returned to
+another window when the window is closed. Otherwise no window or the window under the
+pointer receives the focus.</p></div>
+</td>
+</tr></table>
+</div>
+</dd>
+<dt class="hdlist1">
+<strong>No Focus Click on Motion</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>If the <strong><em>FPIgnoreFocusClickMotion</em></strong> style is used, clicking in a window and then dragging the
+pointer with the button held down does not count as the click to focus the window. Instead,
+the application processes these events normally. This is useful to select text in a terminal
+window with the mouse without raising the window. However, mouse bindings on the client window
+are not guaranteed to work anymore (see Mouse command). This style forces the initial click
+to be passed to the application. The distance that the pointer must be moved to trigger this
+is controlled by the <strong><em>MoveThreshold</em></strong> command.</p></div>
+<div class="paragraph"><p>The <strong><em>MoveThreshold</em></strong> can be set in the <strong>Miscellaneous</strong> section.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Focus by Program</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>The <strong><em>FPFocusByProgram</em></strong> style allows windows to take the focus themselves.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_window_placement">Window Placement</h3>
+<div class="paragraph"><p>Applications can place windows at a particular spot on the screen either by window manager
+hints or a geometry specification. When they do neither, then the window manager steps in
+to find a place for the window. Fvwm knows several ways to deal with this situation. The
+default is <strong><em>TileCascadePlacement</em></strong>.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Tile Cascade Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>TileCascadePlacement</em></strong> automatically places new windows in a smart location - a location in
+which they do not overlap any other windows on the screen. If no such position can be found
+<strong><em>CascadePlacement</em></strong> is used as a fall-back method.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Tile Manual Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>This is the same as <strong><em>TileCascadePlacement</em></strong>, but uses <strong><em>ManualPlacement</em></strong> as the fall-back method.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Cascade Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>CascadePlacement</em></strong> automatically place new windows in a cascading fashion.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Manual Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Aka active placement. The user is required to place every new window manually.
+The window only shows as a rubber band until a place is selected manually. The window is placed
+when a mouse button or any key except <em>Escape</em> is pressed. <em>Escape</em> aborts manual placement which
+places the window in the top left corner of the screen. If mouse button 2 is pressed during the
+initial placement of a window (respectively Shift and mouse button 1 in case Mwm emulation has
+been enabled with the Emulate command), the user is asked to resize the window too.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Position Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>When used with <strong>TopLeft</strong> argument, new windows are placed in the top left corner of the display. With
+the argument <strong>Center</strong>, all new window appear at the center of the screen, and with <strong>UnderMouse</strong>, windows
+are centered under the mouse pointer where possible. If the window is unable to fit on the screen
+because the pointer is at the edge of the screen, then the window is forced on-screen using this
+option.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Min Overlap Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>MinOverlapPlacement</em></strong> automatically places new windows in a location in which the overlapping area in
+pixels of other windows is minimized. By default this placement policy tries to avoid overlapping icons
+and windows on higher layers. This can be configured with the <strong><em>Penalties</em></strong> (MinOverlapPlacementPenalties style).</p></div>
+<div class="paragraph"><p><strong><em>MinOverlapPlacementPenalties</em></strong> takes at most 6 positive or null decimal arguments:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>normal ontop icon sticky below strut</pre>
+</div></div>
+<div class="paragraph"><p>if trailing arguments are missing the default is used which is:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>1 5 10 1 0.05 50</pre>
+</div></div>
+<div class="paragraph"><p>The <strong>normal</strong> factor affects normal windows, the <strong>ontop</strong> factor affects windows with a greater layer than the
+window being placed, the <strong>icon</strong> factor affects icons, the <strong>sticky</strong> factor affects sticky windows, the <strong>below</strong>
+factor affects windows with a smaller layer than the window being placed, the <strong>strut</strong> factor affects the
+complement of the EWMH working area if the window being placed has the <em>EWMHPlacementUseWorkingArea</em> style
+and windows with an EWMH strut hint (i.e., a "please do not cover me" hint) if the window being placed has
+the <em>EWMHPlacementUseDynamicWorkingArea</em> style.</p></div>
+<div class="paragraph"><p>These factors represent the amount of area that these types of windows (or area) are counted as, when a new
+window is placed. For example, by default the area of ontop windows is counted 5 times as much as normal windows.
+So <strong><em>MinOverlapPlacement</em></strong> (and MinOverlapPercentPlacement described below) covers 5 times as much area of another
+window before it will cover an ontop window. To treat ontop windows the same as other windows, set this to 1.
+To really, really avoid putting windows under ontop windows, set this to a high value, say 1000. This style
+affects the window already mapped and not the window which is currently placed.</p></div>
+<div class="paragraph"><p>There is one exception to this rule:
+in the case of the window being placed has the <em>EWMHPlacementUseWorkingArea</em> style the strut factor affects the placed window.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Min Overlap Percent Placement</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>MinOverlapPercentPlacement</em></strong> is similar to <strong><em>MinOverlapPlacement</em></strong> but tries to minimize the overlapped percentages
+of other windows instead of the overlapped area in pixels. This placement policy tries to avoid covering other
+windows completely and tries even harder not to cover small windows. This can be configured with the
+<strong><em>Penalties</em></strong> (MinOverlapPercentPlacementPenalties styles).</p></div>
+<div class="paragraph"><p><strong><em>MinOverlapPercentPlacementPenalties</em></strong> takes at most 4 positive or null integer arguments:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>cover_100 cover_95 cover_85 cover_75</pre>
+</div></div>
+<div class="paragraph"><p>if trailing arguments are missing the defaults are used which are:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>12 6 4 1</pre>
+</div></div>
+<div class="paragraph"><p>The <strong>cover_xx</strong> factor is used when the window being placed covers at least xx percent of the window. This factor is
+added to the factor determined by the <strong><em>MinOverlapPlacementPenalties</em></strong> style.</p></div>
+</dd>
+</dl></div>
+</div>
+<div class="sect2">
+<h3 id="_miscellaneous">Miscellaneous</h3>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<strong>Hide Geometry Window</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Hides the position or size window that is usually shown when a window is moved or resized interactively.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Resize Opaque</strong>
+</dt>
+<dd>
+<div class="paragraph"><p><strong><em>ResizeOpaque</em></strong> instructs fvwm to resize the corresponding windows with their contents visible instead of using
+an outline. Since this causes the application to redraw frequently it can be quite slow and make the window
+flicker excessively, depending on the amount of graphics the application redraws. The <strong><em>ResizeOutline</em></strong> style
+(default) negates the <strong><em>ResizeOpaque</em></strong> style. Many applications do not like their windows being resized opaque,
+e.g. XEmacs, Netscape or terminals with a pixmap background. If you do not like the result, do not use the
+ResizeOpaque style for these windows. To exempt certain windows from opaque resizing you could use these lines
+in your configuration file:</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Style * ResizeOpaque
+Style rxvt ResizeOutline
+Style emacs ResizeOutline</pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+<strong>Move Threshold</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>When the user presses a mouse button upon an object fvwm waits to see if the action is a click or a drag. If
+the mouse moves by more than <em>pixels</em> pixels it is assumed to be a drag.</p></div>
+<div class="paragraph"><p>Previous versions of fvwm hardwired pixels to <strong>3</strong>, which is now the default value. If pixels is <em>negative</em> or
+omitted the default value (which might be increased when 16000x9000 pixel displays become affordable) is restored.</p></div>
+</dd>
+<dt class="hdlist1">
+<strong>Opaque Move Size</strong>
+</dt>
+<dd>
+<div class="paragraph"><p>Tells fvwm the maximum size window with which opaque window movement should be used. The percentage is percent
+of the total screen area (may be <em>greater than</em> <strong>100</strong>). With <strong>0</strong> all windows are moved using the traditional rubber-band
+outline. With <strong>100</strong> all windows are moved as solid windows. The <em>default</em> is <strong>5</strong> which allows small windows to be moved
+in an opaque manner but large windows are moved as rubber-bands.</p></div>
+</dd>
+</dl></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_files">FILES</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The settings are saved in <span class="monospaced">~/.fvwm-nightshade/.users</span>. In this file the user can put her/his custom changes, too.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_author">AUTHOR</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>&#169; 2015 - 2016 Thomas Funk &lt;<a href="mailto:t.funk@web.de">t.funk@web.de</a>&gt;</p></div>
+</div>
+</div>
+        </div>
+        <div id="footnotes"></div>
+        <div id="footer">
+            <div id="footer-text">
+                Design by Thomas Funk and built with <a href="http://www.methods.co.nz/asciidoc/index.html">Asciidoc</a><br />
+                Last updated 2016-05-16 17:21:04 CEST
+            </div>
+        </div>
+    </body>
+</html>

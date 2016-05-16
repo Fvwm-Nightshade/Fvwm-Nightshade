@@ -1,0 +1,86 @@
+@import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
+@import url(http://fonts.googleapis.com/css?family=Exo+2:400,400italic);
+
+body {
+    font-family: 'Exo 2';
+    margin:0; 
+    padding:0;
+}
+
+body.site {
+   max-width: 1024px;
+   margin: 0 auto;
+   background: #909090;
+}
+
+div.menu_templ {
+   width: 100%;
+   max-width: 1024px;
+   background-color: #1a1a1a;
+   margin: auto;
+   display:block;
+   position: fixed;
+}
+
+div.bg_header {
+   width: 100%;
+   max-width: 1024px;
+   height: 220px;
+   background-image: url('../images/bg_header.png');
+   margin: auto;
+}
+
+article.site {
+    font-family: 'Exo 2';
+	font-size: 16px;
+   	font-style: italic;
+}
+
+p.site {
+    display:block;
+   margin-left: auto;
+   margin-right: auto;
+    margin-top:5px;
+   font-family: Architects Daughter;
+   font-size: 24px;
+  font-weight: bold;
+	color:#ffffff;
+	text-decoration:none;
+}
+
+/* Make Header Sticky */
+#header_container { 
+/*    background:#eee; */
+/*    border:1px solid #666; */
+    height:25px; left:0; 
+    position:fixed;
+     width:100%; 
+     top:0; 
+}
+
+#_header {
+    line-height:25px; 
+    margin: auto; 
+/*    width:940px; */
+   width: 100%;
+   max-width: 1024px;
+    text-align:center; 
+}
+
+/* CSS for the content of page. I am giving top and bottom padding of 80px to make sure the header and footer do not overlap the content.*/
+#container { 
+    margin:0 auto; 
+    overflow:auto; 
+    padding:40px 0; 
+/*    width:940px; */
+   width: 100%;
+   max-width: 1024px;
+}
+
+#_content{}
+
+h2[id], h3[id], h4[id], a[name] {
+  padding-top: 50px;
+  margin-top: -20px;
+  display: inline-block; /* required for webkit browsers */
+}

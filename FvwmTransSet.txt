@@ -1,0 +1,110 @@
+DESCRIPTION
+-----------
+This module sets the transparency to inactive and opacity to active windows 
+with transset or df-transset if a composite manager like xcompmgr, compton 
+or Cairo Composite manager is running.
+
+INVOCATION
+----------
+*FvwmTransSet* can be invoked by inserting the line "Module FvwmTransSet" 
+in the +.fvwm2rc+ file. This should be placed in the StartFunction if 
+*FvwmTransSet* is to be spawned during fvwm's initialization.
+
+----
+DestroyFunc StartFunction
+AddToFunc StartFunction
++ I Module FvwmTransSet
+----
+
+CONFIGURATION OPTIONS
+---------------------
+The following commands are understood by *FvwmTransSet*:
+
+**FvwmTransSet:* Excludes 'list of WM_CLASS names'::
++
+On this line one or a comma seperated list of applications or modules 
+with their +WM_CLASS+ names can specified which shall not get transparent.
++    
+Example:
++
+----
+*FvwmTransSet: Excludes FvwmButtons, FvwmPager, FvwmIconMan
+----
+
+**FvwmTransSet:* Opacity 'value'::
++
+Sets the opacity value for the active/focused window and if defined 
+the excluded applications or modules. Default is '1.0'.
+
+**FvwmTransSet:* Transparency  'value'::
++
+Sets the transparency value for all inactive/unfocused windows.
+Default is '0.7'.
+
+**FvwmTransSet:* UsedTransset 'type'::
++
+Sets the used transset type. Default is 'transset'. Not all transset
+versions can used. Only those with the *-i* option. Otherwise 'transset-df'
+(http://forchheimer.se/transset-df/) should use instead.
+
+DYNAMICAL ACTIONS
+-----------------
+A running *FvwmTransSet* instance may receive some dynamical actions. 
+This is achived using the fvwm command
+
+----
+SendToModule FvwmTransSet <action> <params>
+----
+
+Supported actions:
+
+*opac* 'value'::
++
+Change the opacity for the active/focused window and if defined
+the excluded applications or modules.
+
+*trans* 'value'::
++
+Change the transparency for all inactive/unfocused windows.
+
+*exclude* 'list of WM_CLASS names'::
++
+Add one or a comma seperated list of applications or modules to 
+the existing exclude list.
+
+*stop*::
++
+Set transparency and opacity to 1.0 and terminate *FvwmTransSet*.
+
+*reset*::
++
+Resets all *FvwmTransSet* values to the initials loaded at 
+startup and update all windows.
+
+*save*::
++
+Tells *FvwmTransSet* to save the current configuration in a file named 
+".FvwmTransSet" in the users home directory. This same file is read 
+automatically by *FvwmTransSet* during startup. 
+
+BUGS
+----
+Bug reports can be sent to fvwmnightshade-workers mailing list at::
++
+https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers 
+
+or submit them under::
++
+https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues.
+
+COPYRIGHTS
+----------
+*FvwmTransSet* is based on *FvwmPeteTransFocus* by Peter Blair.
+
+This program stands under the GPL V2. (C) 2014 - 2016.
+
+AUTHORS
+-------
+Thomas Funk <t.funk@web.de>.
+
+

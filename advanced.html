@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="generator" content="AsciiDoc 8.6.9">
+        <meta name="author" content="Fvwm-Nightshade">
+        <meta name="copyright" content="Fvwm-Nightshade">
+
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="content-language" content="en">
+        <meta http-equiv="content-style-type" content="text/css">
+        <meta http-equiv="content-script-type" content="text/javascript">
+
+        <link rel="stylesheet" href="./styles/menu.css" type="text/css"><style type="text/css" media="screen"></style>
+        <link rel="stylesheet" href="./styles/asciidoc.css" type="text/css"><style type="text/css" media="screen"></style>
+        <link rel="stylesheet" href="./styles/sites.css" type="text/css"><style type="text/css" media="screen"></style>
+        <!-- JavaScripts-->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function foo(){
+                // this will get the full URL at the address bar
+                var url = window.location.href;
+
+                // passes on every "a" tag
+                $(".inner a").each(function() {
+                    // checks if its the same on the address bar
+                    if(url == (this.href)) {
+                        $(this).addClass("highlighted");
+                    } else {
+                        $(this).removeClass("highlighted");
+                    }
+                });
+               setTimeout(foo, 1000);
+            })();
+        </script>
+    </head>
+
+    <!-- BEGIN: Sticky Header -->
+    <div id="header_container">
+        <div id="_header">
+            <body class="site" id="advanced">
+                <div class="menu_templ">
+                    <ul id="css3menu1" class="topmenu">
+                        <li class="topmenu"><a href="./features.html" title="What you get with FNS" id="featuresnav"><img src="./images/menu/features.png" alt="">Features</a></li>
+                        <li class="topmenu"><a href="" title="All news around FNS" id="newsblognav"><span><img src="./images/menu/news.png" alt="">News/Blog</span></a>
+                            <ul>
+                                <li><a href="./news.html" title="Release News" id="newsnav"><img src="./images/menu/news_small.png" alt="">News</a></li>
+                                <li><a href="./blog.html" title="See our work in progress" id="blognav"><img src="./images/menu/blog_small.png" alt="">Blog</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="./screenshots.html" title="" id="screennav"><img src="./images/menu/screen.png" alt="">Screenshots</a></li>
+                        <li class="topmenu"><a href="" title="" id="docunav"><span><img src="./images/menu/documentation.png" alt="">Documentation</span></a>
+                            <ul>
+                                <li><a href="./faq.html" title="Frequently Asked Questions" id="faqnav"><img src="./images/menu/faq_small.png" alt="">FAQ</a></li>
+                                <li><a href="./install.html" title="Install FNS to your system" id="installnav"><span><img src="./images/menu/install_small.png" alt="">Installation/Deinstallation</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./install.html#Dependencies" title="Which packages are needed" id="depsnav"><img src="./images/menu/deps_small.png" alt="">Dependencies</a></li>
+                                        <li><a href="./install.html#InstallFvwm" title="How to install Fvwm" id="instfvwmnav"><img src="./images/menu/install_small.png" alt="">Step 1: Install Fvwm</a></li>
+                                        <li><a href="./install.html#InstallFNS" title="How to install FNS" id="instfnsnav"><img src="./images/menu/install_small.png" alt="">Step 2: Install Fvwm-Nightshade</a></li>
+                                        <li><a href="./install.html#UnInstallFNS" title="How to uninstall FNS" id="uninstfnsnav"><img src="./images/menu/uninstall_small.png" alt="">Uninstall Fvwm-Nightshade</a></li>
+                                        <li><a href="./install.html#Tips" title="How to get required packages" id="tipsnav"><img src="./images/menu/tips_small.png" alt="">Tips</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./usage.html#Usage" title="How to use FNS" id="usenav"><span><img src="./images/menu/usage_small.png" alt="">Usage</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./usage.html#FirstStart" title="" id="1ststartnav"><img src="./images/menu/1st_small.png" alt="">First Start</a></li>
+                                        <li><a href="./fnsbasesetup.html" title="SimpleGtk2 module to configure base settings" id="setupnav"><img src="./images/menu/setup_small.png" alt="">FNS-BaseSetup</a></li>
+                                        <li><a href="./fnswindowsbehaviour.html" title="SimpleGtk2 module to configure the windows behaviour" id="winbehavenav"><img src="./images/menu/winbehaviour.png" alt="">FNS-WindowsBehaviour</a></li>
+                                        <li><a href="./usage.html#DesktopOrganisation" title="Horizontal, Vertical & G2like Layout" id="desknav"><img src="./images/menu/desktop_small.png" alt="">Desktop Organisation</a></li>
+                                        <li><a href="./usage.html#RootMenu" title="Personal Applications, Configuration, Help, WinOops" id="rootnav"><img src="./images/menu/menu_small.png" alt="">Root Menu</a></li>
+                                        <li><a href="./fnsmenuconfigurator.html" title="SimpleGtk2 program to configure the root menu" id="menuconfnav"><img src="./images/menu/menuconfigurator.png" alt="">FNS-MenuConfigurator</a></li>
+                                        <li><a href="./fnspersonalmenu.html" title="SimpleGtk2 program to customize personal application menu" id="menubuildernav"><img src="./images/menu/menubuilder.png" alt="">FNS-MenuBuilder</a></li>
+                                        <li><a href="./usage.html#Bindings" title="Mouse and Keys" id="bindnav"><img src="./images/menu/bindings_small.png" alt="">Bindings</a></li>
+                                        <li><a href="./fnscompconfigurator.html" title="SimpleGtk2 program to configure composition" id="compconfnav"><img src="./images/menu/compconfigurator.png" alt="">FNS-CompConfigurator</a></li>
+                                        <li><a href="./fnscpuperformance.html" title="SimpleGtk2 program to configure cpu governor" id="cpuperfnav"><img src="./images/menu/cpuperf.png" alt="">FNS-CpuPerformance</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./configuration.html#Configuration" title="How FNS works" id="confnav"><span><img src="./images/menu/conf_small.png" alt="">Configuration</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./configuration.html#Structure" title="System and user parts" id="structnav"><img src="./images/menu/deps_small.png" alt="">Structure</a></li>
+                                        <li><a href="./configuration.html#LocationFiles" title="Location of Files and their Function" id="filesnav"><img src="./images/menu/files_small.png" alt="">Location of Files</a></li>
+                                        <li><a href="./configuration.html#Startup" title="Call Sequence while Startup" id="startupnav"><img src="./images/menu/startup_small.png" alt="">Startup</a></li>
+                                        <li><a href="./configuration.html#Autostart" title="Autostart of Applications" id="autonav"><img src="./images/menu/auto_small.png" alt="">Autostart</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="./advanced.html#Adv" title="All for customization" id="advnav"><span><img src="./images/menu/adv_small.png" alt="">Advanced</span></a>
+                                    <ul class="inner">
+                                        <li><a href="./advanced.html#EnvSpec" title="Global and FNS related Variables" id="envnav"><img src="./images/menu/deps_small.png" alt="">Environment Specifications</a></li>
+                                        <li><a href="./advanced.html#Debug" title="Possibilities to debug FNS" id="debugnav"><img src="./images/menu/debug_small.png" alt="">Debugging</a></li>
+                                        <li><a href="./tools.html" title="Used Tools in FNS" id="toolsnav"><span><img src="./images/menu/tools_small.png" alt="">Tools</span></a>
+                                            <ul class="inner">
+                                                <li><a href="./tools.html#menudesktop" title="Reads XDG menu files and creates Fvwm menus" id="fnsmenudesktopnav"><img src="./images/menu/tools_small.png" alt="">fns-menu-desktop</a></li>
+                                                <li><a href="./tools.html#findicon" title="Find icons for your panel, button etc." id="fnsfindiconnav"><img src="./images/menu/tools_small.png" alt="">fns-find-icon</a></li>
+                                                <li><a href="./tools.html#findfile" title="Get the path of a file" id="fnsfindfilenav"><img src="./images/menu/tools_small.png" alt="">fns-find-file</a></li>
+                                                <li><a href="./tools.html#startprogs" title="Start apps from a list" id="fnsstartnav"><img src="./images/menu/tools_small.png" alt="">fns-start-programs</a></li>
+                                                <li><a href="./tools.html#builttraylist" title="Create list of running stalonetray apps" id="fnstraynav"><img src="./images/menu/tools_small.png" alt="">fns-built-trayapplist</a></li>
+                                                <li><a href="./tools.html#poladd" title="Add or remove programs to/from polkit for gui view" id="fnspoladdnav"><img src="./images/menu/tools_small.png" alt="">fns-poladd</a></li>
+                                                <li><a href="./tools.html#banner" title="Show a banner while Fvwm-Nightshade's startup" id="fnsbannernav"><img src="./images/menu/tools_small.png" alt="">fns-show-banner</a></li>
+                                                <li><a href="./tools.html#transset" title="Set true transparency to windows if a composite manager is running" id="fnstranssetnav"><img src="./images/menu/tools_small.png" alt="">FvwmTransSet</a></li>
+                                                <li><a href="./tools.html#smartmax" title="Maximize window to the largest free area" id="smartmaxnav"><img src="./images/menu/tools_small.png" alt="">FvwmSmartMaximize</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="./advanced.html#Theme" title="How to create own Themes" id="themenav"><img src="./images/menu/themes_small.png" alt="">Theme Creation</a></li>
+                                        <li><a href="./advanced.html#Layout" title="How to create own Layouts" id="layoutnav"><img src="./images/menu/layout_small.png" alt="">Layout Creation</a></li>
+                                        <li><a href="./advanced.html#Language" title="How to create own Language" id="langnav"><img src="./images/menu/lang_small.png" alt="">Language Creation</a></li>
+                                        <li><a href="./advanced.html#Module" title="How to create own Modules" id="modulesnav"><img src="./images/menu/modules_small.png" alt="">Module Creation</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="http://thomasfunk.github.io/SimpleGtk2" title="RAD library to create Gtk2 apps/modules" id="simplegtk2nav"><img src="./images/menu/gtk2_small.png" alt="">SimpleGtk2</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="" title="" id="involvednav"><span><img src="./images/menu/get-involved.png" alt="">Get Involved</span></a>
+                            <ul>
+                                <li><a href="./development.html" title="Become a part of us" id="devnav"><img src="./images/menu/devel_small.png" alt="">Development</a></li>
+                                <li><a href="./contact.html" title="Get in touch with us" id="mailnav"><img src="./images/menu/mail_small.png" alt="">Contact</a></li>
+                            </ul>
+                        </li>
+                        <li class="topmenu"><a href="./about.html" title="What is Fvwm-Nightshade" id="aboutnav"><img src="./images/menu/home.png" alt="">About</a></li>
+                        <li class="topmenu"><a href="./downloads.html" title="Get Fvwm-Nightshade" id="downloadsnav"><img src="./images/menu/downloads.png" alt="">Downloads</a></li>
+                    </ul>
+                </div>
+            </body>
+        </div>
+    </div>
+    <!-- END: Sticky Header -->
+
+    <!-- BEGIN: Page Content -->
+    <div id="container">
+        <div id="_content">
+
+    <body class="manpage">
+        <div class="bg_header">
+            <a href="./index.html" title="Home"><img style="display:block; margin-left:auto; margin-right:auto" src="./images/html_header.png" alt=""></a>
+            <p class="site" align="center">Desktop environment based on Fvwm</p>
+        </div>
+        <div id="header">
+        <div class="sectionbody">
+        </div>
+        </div>
+        <div id="content">
+<div class="sect1">
+<h2 id="EnvSpec">ENVIRONMENT SPECIFICATIONS</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_global_variables">Global Variables</h3>
+<div class="paragraph"><p>There are some <strong>Fvwm-Nightshade</strong> specific variables. Valid in the shell and
+Fvwm namespace:</p></div>
+<table class="tableblock frame-all grid-all"
+style="
+margin-left:auto; margin-right:auto;
+width:80%;
+">
+<col style="width:20%;">
+<col style="width:80%;">
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">FVWM_USERDIR</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">It holds the user directory ~/.fvwm-nightshade.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">FNS_SYSTEMDIR</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">It contains the system path to the shared files of Fvwm-Nightshade - /usr/local/share/fvwm-nightshade or /usr/share/fvwm-nightshade.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">FNS_INITFILE</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">It holds the path to the pre config fns-init.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">FNS_DEBUG</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">If you want to raise the message output of Fvwm-Nightshade into ~/.xsession-errors set it to 1. Default is 0.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[MenuIconSize]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">It holds the used menu icon size set with fvwm-menu-desktop2-config to adapt menu icons on the fly.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_fvwm_related_variables">Fvwm related Variables</h3>
+<div class="paragraph"><p>There are also some variables in the <strong>Fvwm-Nightshade</strong> namespace defined in
+the system config and .settings file.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+config
+</dt>
+<dd>
+</dd>
+</dl></div>
+<table class="tableblock frame-all grid-all"
+style="
+margin-left:auto; margin-right:auto;
+width:80%;
+">
+<col style="width:20%;">
+<col style="width:80%;">
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.wallpaper_dir]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The wallpaper directory located in $[FVWM_USERDIR]/wallpapers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.fvwm_wallpaper]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The current wallpaper located in $[FVWM_USERDIR]/.wallpaper.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.ratio]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The screen ratio used for layout, panel, pager calculations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.hratio]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The height ratio used for layout, panel, pager calculations.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.wratio]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The width ratio used for layout, panel, pager calculations.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+settings
+</dt>
+<dd>
+</dd>
+</dl></div>
+<table class="tableblock frame-all grid-all"
+style="
+margin-left:auto; margin-right:auto;
+width:80%;
+">
+<col style="width:20%;">
+<col style="width:80%;">
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.used_theme]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The actual theme. Changed dynamically via FuncChangeDecor.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[SplashOn]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Run Banner at startup.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.used_banner]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Banner image for FvwmBanner.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.used_font]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Default used font for all Fvwm parts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.fontsize]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Default font size for all Fvwm parts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.used_layout]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The actual layout.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.x_desks]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The actual desktop count X.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.y_desks]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The actual desktop count Y.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.used_menutint]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The actual menu tint level.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[use_composite]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Use composite manager.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.comp_command]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Composite manager command.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.used_windowtransparency]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The actual (inactive) window transparency level (used by transset).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.used_windowopacity]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The actual (active) window opacity level (used by transset).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.DesktopIconsOn]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Use Icons on desktop.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.DesktopScrollOn]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Activate page scrolling.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.PcmanFmStatus]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">State of pcmanfm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.additional_wp_dirs]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Additional wallpaper directories.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.default_terminal]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The default used terminal program.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.default_editor]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The default used editor.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.default_browser]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The default used browser.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">$[infostore.default_transset]</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">The default used transset program.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Debug">DEBUGING</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If you want to debug something there are some functions available you can
+use to get output in <span class="monospaced">~/.xsession-errors</span>:</p></div>
+<table class="tableblock frame-all grid-all"
+style="
+margin-left:auto; margin-right:auto;
+width:80%;
+">
+<col style="width:40%;">
+<col style="width:60%;">
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">FuncPrintDbgMsg &lt;string or value&gt;</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">This prints debug message but only if you have set FNS_DEBUG to 1 in &lt;system&gt;/share/fvwm-nightshade/fns-init.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">FuncPrintMsg &lt;name&gt; &lt;string or value&gt;</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">This function prints normal messages. Yo can use it for normal messages.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Theme">THEME CREATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>A theme consists of the following parts either in <span class="monospaced">&lt;system&gt;/share/fvwm-nightshade/themes/&lt;name&gt;/</span>
+or <span class="monospaced">&lt;user&gt;/themes/&lt;name&gt;/</span>:</p></div>
+<table class="tableblock frame-all grid-all"
+style="
+margin-left:auto; margin-right:auto;
+width:80%;
+">
+<col style="width:10%;">
+<col style="width:90%;">
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">colorsets</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Colorsets of decorations, menus, modules etc.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">decor</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">Styles of titlebar, buttons, menus and theme related mouse bindings.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">images</p></td>
+<td class="tableblock halign-left valign-top" ><p class="tableblock">optional folder for button images (SVG).</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph"><p>If you want to build a new theme create in <span class="monospaced">&lt;user&gt;/themes/</span> a theme directory
+with it’s name and copy the colorset template from <span class="monospaced">&lt;system&gt;/share/docs/fvwm-nightshade/templates</span>
+into the directory.</p></div>
+<div class="paragraph"><p>Two different decors exist - vector based (Clean theme) and image based (Air, Ambiance,
+etc). Copy one of these decor files into your theme directory.</p></div>
+<div class="paragraph"><p>If you want to build an image related theme create also an "images" folder for
+the button images.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/important.png" alt="Important">
+</td>
+<td class="content">
+<div class="paragraph"><p>All image related themes are SVG themes! You can use bitmaps, but than you
+have problems with the button scaling! Also bear in mind If you want to
+send us an image related theme only SVG themes will be accepted.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Now you can adapt the files for your needs. The theme appears automatically
+in the menu</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Configuration -&gt; Fvwm-Nightshade -&gt; Decoration -&gt; Decors</pre>
+</div></div>
+<div class="paragraph"><p>and can be tested by clicking on the name easily.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Layout">LAYOUT CREATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Layouts are a summary of different parts of modules like FvwmPager, FvwmButtons
+or FvwmIconMan and applets from e.g. conky.</p></div>
+<div class="paragraph"><p>The main part is the layout file where the positions, calculations, key
+bindings and module loadings are done. This can be very tricky and the
+only thing we can say is - look into the Horizontal, Vertical or G2like
+layout to get an overview</p></div>
+<div class="paragraph"><p>Generally the structure is as follow:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+You have to thought about the positioning of your elements and their
+dependencies to each other.
+</p>
+</li>
+<li>
+<p>
+You must define your working area (maximized window) and the Iconbox
+for your iconified windows.
+</p>
+</li>
+<li>
+<p>
+Now the "Load" part follows to initialize your modules with the calculated
+positioning values.
+</p>
+</li>
+<li>
+<p>
+The next step is to include your modules in the Start Function that your
+theme will be loaded correctly after a restart.
+</p>
+</li>
+<li>
+<p>
+In the ReloadLayoutParts function you define all your layout needed to
+function properly after calling it from the configuration menu.
+</p>
+</li>
+<li>
+<p>
+Next you have to define your key bindings if any. Mostly needed for the
+pager module or if you have other special things implemented.
+</p>
+</li>
+<li>
+<p>
+Then the menus following. Also needed mostly for the pager.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>You can test it easily by clicking your layout name under</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Configuration -&gt; Fvwm-Nightshade -&gt; Decoration -&gt; Layouts</pre>
+</div></div>
+<div class="paragraph"><p>if it found under <span class="monospaced">&lt;user&gt;/layouts/</span>. It appears automatically.</p></div>
+<div class="paragraph"><p>That’s it. Not much but hopefully enough for playing ;).</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Language">LANGUAGE CREATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>Fvwm-Nightshade</strong> supports a couple of languages - at the moment german,
+russian, spanish, italian and french. If you want to create your own
+translation you can use the "fvwm-nightshade.pot" template located in <span class="monospaced">&lt;system&gt;/templates</span>.</p></div>
+<div class="paragraph"><p>We support <strong>two</strong> locations where your translation can copy to:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+The system wide in <span class="monospaced">/usr/share/locale/</span> or <span class="monospaced">/usr/local/share/locale/</span>
+</p>
+</li>
+<li>
+<p>
+The user wide in <span class="monospaced">~/fvwm-nightshade/locale/</span>
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>The following Howto uses the user wide one.</p></div>
+<div class="sect2">
+<h3 id="_steps_for_your_own_translation">Steps for your own translation</h3>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Create the directory with its' sub directories:
+</p>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>~/.fvwm-nightshade/locale/&lt;your_lang&gt;/LC_MESSAGES</pre>
+</div></div>
+</li>
+<li>
+<p>
+Copy fvwm-nightshade.pot to this directory:
+</p>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>$&gt; cp &lt;system&gt;/templates/fvwm-nightshade.pot ~/.fvwm-nightshade/locale/&lt;your_lang&gt;/LC_MESSAGES/fvwm-nightshade.po</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph"><p>You can look to <span class="monospaced">/usr/share/locale</span> which token is normally used for your language.</p></div>
+</td>
+</tr></table>
+</div>
+</li>
+<li>
+<p>
+Open it with your favorite editor, fill out the header and translate
+the messages into your language.
+</p>
+</li>
+<li>
+<p>
+Create the machine readable code with <strong>msgfmt</strong>
+</p>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>$&gt; msgfmt fvwm-nightshade.po -o fvwm-nightshade.mo</pre>
+</div></div>
+</li>
+<li>
+<p>
+Restart <strong>Fvwm-Nightshade</strong>.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Now all menus, messages and tools should be shown in your language.</p></div>
+<div class="paragraph"><p><strong>Remark:</strong></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Some messages have a fixed size and spaces at the beginning or the end.
+They should used in the translation just as well! For example:
+</p>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>msgid "              (E.g. 10, 11, 13)"
+msgstr "              (z.B. 10, 11, 13)"</pre>
+</div></div>
+</li>
+<li>
+<p>
+Menu entries have <strong>&amp;</strong> for hotkeys. So you should set them that no double
+underlines exist.
+</p>
+</li>
+<li>
+<p>
+Every time you change something in the <strong>po</strong> file a restart of <strong>Fvwm-Nightshade</strong>
+is necessary if it is related to menu entries. All others like in <strong>FvwmScripts</strong>
+or <strong>FvwmForms</strong> are shown after restart of the application.
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph"><p>You can use <strong>poedit</strong> or <strong>KBabel</strong> instead of an editor for translation. It&#8217;s
+a matter of choice ;-) &#8230;</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>If you need more information about the used translation process see
+<a href="http://www.gnu.org/software/gettext/manual/gettext.html">http://www.gnu.org/software/gettext/manual/gettext.html</a></p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Module">MODULE CREATION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If you want to create your own modules based on fvwm-perlib you have three
+possibilities to put them in:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Fvwm its own directory, usually <span class="monospaced">/usr/lib/fvwm/&lt;Fvwm-version/</span>.
+</p>
+</li>
+<li>
+<p>
+Fvwm-Nightshades system directory - <span class="monospaced">&lt;system&gt;/share/fvwm-nightshade/lib/</span>.
+</p>
+</li>
+<li>
+<p>
+The user directory in <span class="monospaced">&lt;user&gt;/lib/</span>
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>The easiest way is the user directory. Create the directory <span class="monospaced">~/.fvwm-nightshade/lib</span>
+and put your module in it. Now you can start it from within <strong>FvwmConsole</strong> with</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>Module &lt;Modulename&gt;</pre>
+</div></div>
+<div class="paragraph"><p>or in the <em>StartFunction</em> with</p></div>
+<div class="listingblock">
+<div class="content monospaced">
+<pre>+ I Module &lt;Modulename&gt;</pre>
+</div></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors">AUTHORS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>&#169; 2013 - 2016 by the Fvwm-Nightshade team &lt;<a href="mailto:fvwmnightshade@gmail.com">fvwmnightshade@gmail.com</a>&gt;.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_copyright">COPYRIGHT</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><strong>Fvwm-Nightshade</strong> and all the scripts and other files coming with
+the distribution are subject to the GNU General Public License (GPL).
+Please refer to the COPYING file that came with <strong>Fvwm-Nightshade</strong> for details.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bugs">BUGS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Bug reports can be sent to the fvwmnightshade-workers mailing list at
+<a href="https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers">https://groups.google.com/forum/?hl=en#!forum/fvwmnightshade-workers</a>
+or submit them under <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues">https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues</a>.</p></div>
+</div>
+</div>
+        </div>
+        <div id="footnotes"></div>
+        <div id="footer">
+            <div id="footer-text">
+                Design by Thomas Funk and built with <a href="http://www.methods.co.nz/asciidoc/index.html">Asciidoc</a><br />
+                Last updated 2016-05-16 17:20:58 CEST
+            </div>
+        </div>
+    </body>
+</html>

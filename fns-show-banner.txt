@@ -1,0 +1,37 @@
+DESCRIPTION
+-----------
+*fns-show-banner* is used show a banner while startup of Fvwm-Nightshade.
+
+It is based on ImageMagick to support more image formats than FvwmBanner.
+
+
+PARAMETERS
+----------
+Two command line parameter are mandatory:
+
+*IMAGE* (1st one)::
++
+The path to the splash image.
+
+*TIME* (2nd one)::
++
+The time how long the image should be shown.
+
+
+OPTIONS
+-------
+There are further options, too:
+
+*-h|--help*::
++
+Show a short help and exiting.
+
+*-v|--version*::
++
+Show the version and exiting.
+
+
+AUTHOR
+------
+
+(C) 2016 Bernhard Popp <kermit.popp@googlemail.com>

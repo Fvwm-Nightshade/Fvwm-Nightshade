@@ -1,0 +1,217 @@
+[[tools]]
+TOOLS
+-----
+Below all command line tools are listed used in *Fvwm-Nightshade*.
+
+++++
+<br>
+++++
+
+[[menudesktop]]
+*fns-menu-desktop*
+------------------
+
+NAME
+----
+
+fns-menu-desktop - Reads XDG menu files and creates Fvwm menus
+
+
+SYNOPSIS
+--------
+
+fns-menu-desktop  [ --help|-h ] [ --version|-v ] [ --install-prefix DIR 
+] [ --desktop NAME ] [ --menu-type NAME ] [ --theme NAME ] [ 
+--with-titles|-w ] [ --enable-mini-icons ] [ --size|-s NUM ] [ 
+--mini-icon-dir|-t DIR ] [ --app-icon NAME ] [ --dir-icon NAME ] [ 
+--title|-t NAME ] [ --insert-in-menu NAME ] [ --get-menus all|desktop ] [ 
+--set-menus menu_paths ] [ --verbose ]
+
+include::fns-menu-desktop.txt[]
+
+++++
+<br>
+<hr>
+<br>
+++++
+
+[[findicon]]
+*FNS-FIND-ICON*
+---------------
+
+NAME
+----
+
+fns-find-icon - command line tool to get the iconpath of an application 
+or the icon of an application
+
+SYNOPSIS
+--------
+
+fns-find-icon [-h|--help] [--version] [-n NAME] [-i W_ID] [-p EXTEND_PATH] [-s ICON_SIZE] [--svg] [-c CATEGORY] [--notdesk]
+
+include::fns-find-icon.txt[]
+
+++++
+<br>
+<hr>
+<br>
+++++
+
+
+[[findfile]]
+*fns-find-file*
+---------------
+
+NAME
+----
+
+fns-find-file - command line tool to get the path of a file
+
+SYNOPSIS
+--------
+
+fns-find-file [-h | --help] [--version] [-s | --silent] [-p | --path] [-r | --recursive] [FILENAME]
+
+include::fns-find-file.txt[]
+
+++++
+<br>
+<hr>
+<br>
+++++
+
+
+[[startprogs]]
+*fns-start-programs*
+--------------------
+
+NAME
+----
+
+fns-start-programs - shell script to start applications listed in 
+a file
+
+SYNOPSIS
+--------
+
+fns-start-programs [TYPE] [FILE] [-h|--help] [-v|--version]
+
+include::fns-start-programs.txt[]
+
+++++
+<br>
+<hr>
+<br>
+++++
+
+
+[[builttraylist]]
+*fns-built-trayapplist*
+-----------------------
+
+NAME
+----
+
+fns-built-trayapplist - shell script to create application/command list 
+of stalonetray
+
+
+SYNOPSIS
+--------
+
+fns-built-trayapplist [LOGFILE] [APPFILE] [-h|--help] [-v|--version]
+
+include::fns-built-trayapplist.txt[]
+
+++++
+<br>
+<hr>
+<br>
+++++
+
+[[poladd]]
+*fns-poladd*
+------------
+
+NAME
+----
+
+fns-poladd - shell script to add or remove programs to/from polkit for gui view.
+
+
+SYNOPSIS
+--------
+
+fns-poladd [-r|--remove] [PROGRAM_NAME] [-l|--verbose] [-h|--help] [-v|--version]
+
+include::fns-poladd.txt[]
+
+++++
+<br>
+<hr>
+<br>
+++++
+
+[[banner]]
+*fns-show-banner*
+-----------------
+
+NAME
+----
+
+fns-show-banner - shell script to show a banner while Fvwm-Nightshade's startup.
+
+
+SYNOPSIS
+--------
+
+fns-show-banner [IMAGE] [TIME] [-h|--help] [-v|--version]
+
+include::fns-show-banner.txt[]
+
+++++
+<br>
+<hr>
+<br>
+++++
+
+[[transset]]
+*FvwmTransSet*
+--------------
+
+NAME
+----
+FvwmTransSet - set true transparency to windows if a composite manager is 
+running.
+
+SYNOPSIS
+--------
+*FvwmTransSet* can only be invoked by fvwm. Command line invocation of the 
+*FvwmTransSet* module will not work.
+
+include::FvwmTransSet.txt[]
+
+++++
+<br>
+<hr>
+<br>
+++++
+
+[[smartmax]]
+*FvwmSmartMaximize*
+-------------------
+
+NAME
+----
+
+FvwmSmartMaximize - Perl module to smart maximize windows.
+
+
+SYNOPSIS
+--------
+
+*FvwmSmartMaximize* can only be invoked by fvwm. Command line invocation 
+of the *FvwmSmartMaximize* module will not work.
+
+include::FvwmSmartMaximize.txt[]

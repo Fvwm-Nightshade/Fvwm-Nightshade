@@ -14,17 +14,8 @@
         <link rel="stylesheet" href="./styles/menu.css" type="text/css"><style type="text/css" media="screen"></style>
         <link rel="stylesheet" href="./styles/asciidoc.css" type="text/css"><style type="text/css" media="screen"></style>
         <link rel="stylesheet" href="./styles/sites.css" type="text/css"><style type="text/css" media="screen"></style>
-        <link rel="stylesheet" href="./styles/s3Slider.css" type="text/css"><style type="text/css" media="screen"></style>
         <!-- JavaScripts-->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script type="text/javascript" src="./javascript/s3Slider.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#slider').s3Slider({
-                    timeOut: 5000
-                });
-            });
-        </script>
         <script type="text/javascript">
             $(function foo(){
                 // this will get the full URL at the address bar
@@ -47,7 +38,7 @@
     <!-- BEGIN: Sticky Header -->
     <div id="header_container">
         <div id="_header">
-            <body class="site" id="index">
+            <body class="site" id="about">
                 <div class="menu_templ">
                     <ul id="css3menu1" class="topmenu">
                         <li class="topmenu"><a href="./features.html" title="What you get with FNS" id="featuresnav"><img src="./images/menu/features.png" alt="">Features</a></li>
@@ -147,81 +138,91 @@
         </div>
         </div>
         <div id="content">
-                <table align="center"; width="1024px"; border="0px">
-                        <tr>
-                                <td width="102px">
-                                </td>
-                                <td width="410px">
-                                <div id="slider">
-                                        <ul id="sliderContent">
-                                                <li class="sliderImage">
-                                                        <a href=""><img src="./images/slider1/1.jpg" alt="1" /></a>
-                                                        <span class="top"><strong>Klike Layout</strong><br />with default theme PitchBlack, a dark violet and plain theme and compositing.</span>
-                                                </li>
-                                                <li class="sliderImage">
-                                                        <a href=""><img src="./images/slider1/2.jpg" alt="2" /></a>
-                                                        <span class="bottom"><strong>Horizontal Layout</strong><br />with Tribal theme, held in green/black tones with yellow font collors and tribal signs as buttons.</span>
-                                                </li>
-                                                <li class="sliderImage">
-                                                        <a href=""><img src="./images/slider1/3.jpg" alt="3" /></a>
-                                                        <span class="left"><strong>Vertical layout</strong><br />with CrystalBall theme, a milky Mac OSX theme with white, grey and blue tones.</span>
-                                                </li>
-                                                <li class="sliderImage">
-                                                        <a href=""><img src="./images/slider1/4.jpg" alt="4" /></a>
-                                                        <span class="right"><strong>G2like layout</strong><br />with Clean, a simple vector theme with blue/gray color gradients for title bar and Fvwm modules.</span>
-                                                </li>
-                                                <div class="clear sliderImage"></div>
-                                        </ul>
-                                </div>
-                                <!-- // slider -->
-                                </td>
-                                <td width="410px">
-                                        <article style="margin-left:20px;"><font color="#303030">Welcome to Fvwm-Nightshade! This project aims to be a lightweight but feature rich and good looking configuration of Fvwm. It contains many useful things to make work and life easier with a flavour of a modern desktop. But it can be configure by your own. It is good documented and shows you what is possible with this powerful window manager.
-                                        </font></article>
-                                </td>
-                                <td width="102px">
-                                </td>
-                        </tr>
-
-                <table align="center"; width="1024px"; border="0px">
-                        <tr>
-                                <td>
-                                        <img src="images/bar.png">
-                                </td>
-                        </tr>
-                </table>
-
-                <table align="center"; width="1024px"; height="20px"; border="0px">
-                        <tr>
-                                <td width="102px"; align="top">
-                                        <img src="images/Desktop.png">
-                                </td>
-                                <td width="820px">
-                                        <p align="left" style="display:block; margin-top:5px"><font size="5" color="#303030"><strong>Latest News</strong></font></p>
-                                        <article>
-                                                After two long years I've finished FNS for the upcoming version 0.8. Now Beta stage is started.<br />
-                                                Many new features have found the way into Fvwm-Nightshade:<br /><br />
-                                                        <li>Different layouts for any desktop resolution (up to 4K)</li>
-                                                        <li>Many eye candy themes/decors changable on the fly without restart.</li>
-                                                        <li>Localization support for German, French, Spanish and Russian.</li>
-                                                        <li>Graphical config tools for different settings.</li>
-                                        <a align="left" style="display:block; margin-left:20px" href="./features.html"><strong>And much more</strong></a><br />
-                                                Also the new website is available with many many new and updated information.<br /><br />
-                                                Currently Fvwm-Nightshade Beta is downloadable over <a href="https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/archive/master.zip"><strong>Master</strong></a> branch. Check it out if you like what you see!<br />
-                                        </article>
-                                </td>
-                                <td width="102px">
-                                </td>
-                        </tr>
-                </table>
-
-                <table align="center"; width="1024px"; border="0px">
-                        <tr>
-                                <td>
-                                        <img src="images/bar.png">
-                                </td>
-                        </tr>
-                </table>
+<div class="sect1">
+<h2 id="_about">ABOUT</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_what_is_fvwm_nightshade">What is Fvwm-Nightshade?</h3>
+<div class="paragraph"><p>First of all what is it not - it is not a new desktop and it is not a
+standalone application. So what is it then? It is a lightweight but
+feature rich and good looking configuration of <a href="http://www.fvwm.org">Fvwm</a>.
+It contains many useful things to make work and life easier with a
+flavor of a modern desktop.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_why_we_developing_fvwm_nightshade">Why we developing Fvwm-Nightshade</h3>
+<div class="paragraph"><p>Fvwm is a fast, stable and highly configurable windowmanager, despite of
+his age it can keep up with younger desktop environments easily.</p></div>
+<div class="paragraph"><p>Unfortunately Fvwm has three problems, beginners become frightened to test it:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Most distributions containing a too old version of Fvwm in their
+repositories (e.g. 2.5.27). Since release 2.6 older versions of Fvwm are
+no longer supported and therefore interested persons have to compile Fvwm
+from source.
+</p>
+</li>
+<li>
+<p>
+If this was successfully done and Fvwm is started, not much will be
+shown. Searching the web for better configurations than the default one
+discovers many results. There are good looking and feature rich
+configurations (e.g. <a href="http://www.fvwmforums.org/phpBB3/viewforum.php?f=39&amp;sid=756bd760e51a044f86fe29e295592d5a">FvwmForum - Screenshot &amp; Configs</a>,
+<a href="http://box-look.org/index.php?xcontentmode=7314&amp;PHPSESSID=42743de7ba1f15717817f5f2b3342296">Box-Look.org - Fvwm Themes</a>)
+but trying them to run ends up mostly in frustration to get them working
+(except <a href="http://fvwm-themes.sourceforge.net/">FVWM Themes</a> and
+<a href="http://home.gna.org/fvwm-crystal/">FVWM-Crystal</a>). People try to test
+some of them with more or less good results but at the end Fvwm is
+removed and replaced with Xfce, Lxde or Openbox because &#8230;
+</p>
+</li>
+<li>
+<p>
+Mostly of the configurations are too complicated/confusable. Or they&#8217;re
+made for one desktop resolution only. Some are too old or made for static
+systems. To adapt them means to become acquainted with Fvwm&#8217;s huge
+documentation, but RTFM isn&#8217;t that what normal users like. They want to
+install a desktop environment and then work with it, not experimenting
+many days to get it work.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>This is why we developing Fvwm-Nightshade. We want to show</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+how easy it is to install
+</p>
+</li>
+<li>
+<p>
+how good and modern looking Fvwm can be
+</p>
+</li>
+<li>
+<p>
+how fine it is for daily work
+</p>
+</li>
+<li>
+<p>
+that it can work out of the box
+</p>
+</li>
+<li>
+<p>
+some specials other desktop haven&#8217;t
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Ok, Fvwm-Nightshade isn&#8217;t complete (which environment is that &#8230;) but
+with the users help it will be in the future. Give it a try and tell us
+your impressions.</p></div>
+<div class="paragraph"><p>Your Fvwm-Nightshade team</p></div>
+</div>
+</div>
+</div>
         </div>
         <div id="footnotes"></div>
         <div id="footer">

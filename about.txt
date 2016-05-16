@@ -1,0 +1,52 @@
+ABOUT
+-----
+
+What is Fvwm-Nightshade?
+~~~~~~~~~~~~~~~~~~~~~~~~
+First of all what is it not - it is not a new desktop and it is not a 
+standalone application. So what is it then? It is a lightweight but 
+feature rich and good looking configuration of http://www.fvwm.org[Fvwm]. 
+It contains many useful things to make work and life easier with a 
+flavor of a modern desktop.
+
+Why we developing Fvwm-Nightshade
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Fvwm is a fast, stable and highly configurable windowmanager, despite of 
+his age it can keep up with younger desktop environments easily.
+
+Unfortunately Fvwm has three problems, beginners become frightened to test it:
+
+1. Most distributions containing a too old version of Fvwm in their 
+repositories (e.g. 2.5.27). Since release 2.6 older versions of Fvwm are 
+no longer supported and therefore interested persons have to compile Fvwm 
+from source.
+2. If this was successfully done and Fvwm is started, not much will be 
+shown. Searching the web for better configurations than the default one 
+discovers many results. There are good looking and feature rich 
+configurations (e.g. http://www.fvwmforums.org/phpBB3/viewforum.php?f=39&sid=756bd760e51a044f86fe29e295592d5a[FvwmForum - Screenshot & Configs], 
+http://box-look.org/index.php?xcontentmode=7314&PHPSESSID=42743de7ba1f15717817f5f2b3342296[Box-Look.org - Fvwm Themes]) 
+but trying them to run ends up mostly in frustration to get them working 
+(except http://fvwm-themes.sourceforge.net/[FVWM Themes] and 
+http://home.gna.org/fvwm-crystal/[FVWM-Crystal]). People try to test 
+some of them with more or less good results but at the end Fvwm is 
+removed and replaced with Xfce, Lxde or Openbox because ...
+3. Mostly of the configurations are too complicated/confusable. Or they're 
+made for one desktop resolution only. Some are too old or made for static 
+systems. To adapt them means to become acquainted with Fvwm's huge 
+documentation, but RTFM isn't that what normal users like. They want to 
+install a desktop environment and then work with it, not experimenting 
+many days to get it work.
+
+This is why we developing Fvwm-Nightshade. We want to show
+
+- how easy it is to install
+- how good and modern looking Fvwm can be
+- how fine it is for daily work
+- that it can work out of the box
+- some specials other desktop haven't
+
+Ok, Fvwm-Nightshade isn't complete (which environment is that ...) but 
+with the users help it will be in the future. Give it a try and tell us 
+your impressions.
+
+Your Fvwm-Nightshade team

@@ -1,0 +1,18 @@
+CONTACT
+-------
+If you have problems or want to contribute in any way three possibilities 
+are available at the moment:
+
+Mailing Lists
+~~~~~~~~~~~~~
+https://groups.google.com/forum/#!forum/fvwmnightshade[fvwm.nightshade] (Discussion and questions list)  
+
+https://groups.google.com/forum/#!forum/fvwmnightshade-workers[fvwm.nightshade.workers] (Beta testers and contributors list)
+
+Bug / Feature Request Tracker
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/issues[Here] you can enter bugs or feature requests if needed.
+
+Or send us an email to <fvwmnightshade@gmail.com>. We would be happy to 
+hear from you!
+

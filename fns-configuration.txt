@@ -1,0 +1,193 @@
+[[Configuration]]
+CONFIGURATION
+-------------
+In the following chapters we describe where you find what, how and which 
+files are loaded, how you can debug problems and how you can customize 
+*Fvwm-Nightshade*.
+
+[[Structure]]
+Structure of Fvwm-Nightshade
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*Fvwm-Nightshade* is splitted in a system and an user part.
+
+The system part is located in +/usr/local+ (default), +/usr+ (distribution 
+related) or if you use the local installation under +<chosen_dir>+. In the 
+following named as <system>.
+
+The user part is located in +~/.fvwm-nightshade+. Following named as <user>.
+
+[[LocationFiles]]
+Location of Files and their Function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++<system>/bin+ => Executables.
+[cols="20%,80%",align="center",width="80%"]
+|====
+|fvwm-nightshade        |start script.
+|fns-built-trayapplist  |Python script for stalonetray to build applet list. Used for restoring applets after restart stalonetray.
+|link:./fnscpuperformance.html[FNS-CpuPerformance]  |link:http://thomasfunk.github.io/SimpleGtk2[Perl-SimpleGtk2] script to set CPU frequency governor.
+|link:./tools.html#findicon[fns-find-icon]          |Python script to find the correct icon for iconified apps or for icons used in layouts.
+|link:./fnspersonalmenu.html[FNS-MenuBuilder]       |link:http://thomasfunk.github.io/SimpleGtk2[Perl-SimpleGtk2] script to build personal menu.
+|link:./tools.html#menudesktop[fns-menu-desktop]    |adapted fvwm-menu-desktop from Fvwm's CVS to create XDG menu(s).
+|link:./tools.html#startprogs[fns-start-programs]   |shell script to start apps from a file list. Used for autostart and starting applets for stalonetray.
+|====
+
+-
+
++<system>/share/fvwm-nightshade/+ => System home of *Fvwm-Nightshade*.
+[cols="10%,90%",align="center",width="80%"]
+|====
+|config             |system wide configuration file.
+|fns-init           |initial config with the base functions.
+|.settings          |template of the base settings. Will be copied into <user> dir.
+|.bindings          |system wide key bindings.
+|====
+
+-
+
++<system>/share/fvwm-nightshade/artwork/+   => *Fvwm-Nightshade* icons, splash and wallpapers.
+
++<system>/share/fvwm-nightshade/layouts/+   => System layout files and conky rc-files.
+
++<system>/share/fvwm-nightshade/lib/+       => Fvwm modules written in Perl or C/C++. Directory is in the ModulePath.
+[cols="20%,80%",align="center",width="80%"]
+|====
+|link:./tools.html#smartmax[FvwmSmartMaximize]          |Perl module to maximize windows in the largest area of the desktop/page.
+|link:./tools.html#transset[FvwmTransSet]               |Perl module to set true transparency to windows if a composite manager is running.
+|link:./fnsbasesetup.html[FNS-BaseSetup]                |link:http://thomasfunk.github.io/SimpleGtk2[Perl-SimpleGtk2] module to configure base settings of Fvwm-Nightshade (layouts, themes, compositing, icons on desktop, etc.).
+|link:./fnswindowsbehaviour.html[FNS-WindowsBehaviour]  |link:http://thomasfunk.github.io/SimpleGtk2[Perl-SimpleGtk2] module to configure window behaviours (focus policies, placement, etc.).
+|link:./fnscompconfigurator.html[FNS-CompConfigurator]  |link:http://thomasfunk.github.io/SimpleGtk2[Perl-SimpleGtk2] module to configure composite manager if installed (shadows, translucency, etc).
+|link:./fnsmenuconfigurator.html[FNS-MenuConfigurator]  |link:http://thomasfunk.github.io/SimpleGtk2[Perl-SimpleGtk2] module to configure the XDG menu creation. It exchange fvwm-menu-desktop2-config.fpl.
+|====
+
+-
+
++<system>/share/fvwm-nightshade/modules/+   => Pager, pannels and Iconman modules.
+
++<system>/share/fvwm-nightshade/themes/+    => Theme files and icons.
+
++<system>/share/doc/fvwm-nightshade/+       => Html pages, templates, readmes.
+
+- 
+
++/usr/share/fvwm/+ => Scripts which must resides in Fvwm's directory or if 
+local installation is chosen in the <user> directories - FvwmScripts in the 
+scripts/ sub directory, all others in the <user> root.
+[cols="20%,80%",align="center",width="80%"]
+|====
+|FNS-Script-FileBrowser         |File browser based on FvwmScript-FileBrowser
+|FNS-Script-Date                |Set time/date based on FvwmScript-Date
+|FNS-Applet-Kalende             |Calendar applet
+|FNS-Applet-Chrono              |Alarm applet
+|====
+
+-
+
++/etc/xdg/menus/+ => XDG applications menu directory. If local installation 
+is chosen it is located in ~/.config/menus/.
+[cols="20%,80%",align="center",width="80%"]
+|====
+|fns-applications.menu          |Fvwm-Nightshade's application menu.
+|====
+
+-
+
++/usr/share/desktop-directories/+ => Directory for XDG directory files. If local 
+installation is chosen it is located in <chosen_dir>/share/desktop-directories/.
+[cols="20%,80%",align="center",width="80%"]
+|====
+|fns-<*>.directory              |Some .directory files for fns-applications.menu.
+|====
+
+-
+
++/usr/share/xsessions/+ => Login manager directory if a display-manager is available.
+[cols="20%,80%",align="center",width="80%"]
+|====
+|fvwm-nightshade.desktop        |login script.
+|====
+
+-
+
++/usr/local/lib/perl-site|Perl5+ => Perl directories for 3rd party libraries
+[cols="20%,80%",frame="none",grid="none"]
+|====
+|link:http://thomasfunk.github.io/SimpleGtk2[SimpleGtk2.pm]        |a wrapper around Perl-Gtk2 to allow RAD.
+|====
+
+-
+
++~/.fvwm-nightshade/+ => the user home directory (<user>)
+[cols="20%,80%",align="center",width="80%"]
+|====
+|.autostart         |optional file with application commands.
+|.fns-menu.cfg      |config file of Regenerate XDG Menus.
+|.FvwmTransSet      |local config file of FvwmTransSet.
+|.layout            |link to current layout file.
+|.menu              |Fvwm menu file.
+|.personal          |Menu file of your personal apps.
+|.settings          |settings like layout, theme, font, splash, etc.
+|.systray.log       |stalonetray log file.
+|.trayapplist       |internal list of current systray apps.
+|.user              |config file for FNS-WindowsBehaviour and custom user settings.
+|.wallpaper         |link to current wallpaper
+|====
+
+-
+
++<user>/wallpapers/+    => default wallpaper directory.
+
++<user>/screenshots/+   => default screenshots directory.
+
++<user>/scripts/+       => Optional user FvwmScripts directory.
+
++<user>/icons/+         => Menu icon directory created by Regenerate XDG Menus.
+
++<user>/layouts/+       => Optional user layout directory.
+
++<user>/lib/+           => Optional user module directory. Is in the ModulPath.
+
++<user>/themes/+        => Optional user themes directory.
+
++<user>/locales/+       => Optional user language directory.
+
+
+[[Startup]]
+Call Sequence while Startup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The first file which is called while startup is +<system>/bin/fvwm-nightshade+. 
+It initialize some environment variables, creates +~/.fvwm-nightshade+ if not 
+available and starts Fvwm. But not with the +<user>/config+ or +<system>/config+. 
+
+First Fvwm starts with a pre config - +<system>/share/fvwm-nightshade/fns-init+. 
+It contains some important functions which allows *Fvwm-Nightshade* to handle 
+another directory than +~/.fvwm+. 
+
+The script calls then the main config via the "Load" function. This function 
+looks first in the <user> dir and then in the <system> dir. It makes it 
+possible to load parts created by the user or the default ones. With that 
+function the user can copy the config or bindings in the <user> dir, alter 
+it and restart *Fvwm-Nightshade* without changing anything in the process.
+
+This works with themes and layouts, too. If you create under +~/.fvwm-nightshade+ 
+the directory structures of themes/layouts as in the +<system>/share/fvwm-nightshade+ 
+you can build themes or layouts by your own (see link:./advanced.html#Theme[THEME] 
+and link:./advanced.html#Layout[LAYOUT CREATION]).
+
+[[Autostart]]
+Autostart of Applications
+~~~~~~~~~~~~~~~~~~~~~~~~~
+*Fvwm-Nightshade* has the possibility to start applications while startup 
+like email daemons or systemtools (e.g. gkrellm). Therefore a file ".autostart" 
+must created in the <user> directory and filled with application commands per 
+line e.g.
+----
+thunderbird
+----
+
+Another possibility is to use the function "FuncStartSystrayApplets" in the 
+config file but then you have to copy the system file 'config' into the <user> 
+directory and add your app like
+-----
++ I Test (x nm-applet) exec exec nm-applet
+-----
+
