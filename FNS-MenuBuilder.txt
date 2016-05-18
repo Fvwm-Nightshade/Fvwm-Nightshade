@@ -29,7 +29,7 @@ entries can be sorted with drag'n'drop.
 === Root Menu
 
 Contains the application menu(s) found on the system and activated in 
-*FNS-MenuConfigurator*. Choose a folder or an application entry which 
+link:./fnsmenuconfigurator.html[*FNS-MenuConfigurator*]. Choose a folder or an application entry which 
 should appear in the personal menu.
 
 [NOTE]
@@ -89,7 +89,7 @@ can be chosen - an application or folder entry.
 *Icon Button*::
 +
 With the Icon button an own icon can be selected. Clicking opens a selection dialog 
-in the icon theme directory set in *FNS Base Setup*. No icon change creates an entry 
+in the icon theme directory set in link:./fnsbasesetup.html[*FNS-BaseSetup*]. No icon change creates an entry 
 without an icon.
 +
 [NOTE]

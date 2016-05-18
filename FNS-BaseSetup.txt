@@ -54,8 +54,7 @@ fading and translucency, it implements window frame opacity control,
 inactive window transparency, and shadows on argb windows.
 
 +
-Configure one by clicking the _Configure_ button to open *FNS Composite 
-Configurator*.
+Configure one by clicking the _Configure_ button to open link:./fnscompconfigurator.html[*FNS-CompConfigurator*].
 
 
 === Desktop

@@ -103,7 +103,7 @@ on the client window are not guaranteed to work anymore (see Mouse command. Note
 this style forces that the initial click is passed to the application. The distance that 
 the pointer must be moved to trigger this is controlled by the *_MoveThreshold_* command.
 +
-The *_MoveThreshold_* can be set in the *Miscellaneous* section.
+The *_MoveThreshold_* can be set in the xref:Misc[*Miscellaneous*] section.
 
 
 === Focus Options
@@ -133,7 +133,7 @@ are not guaranteed to work anymore (see Mouse command). This style forces the in
 to be passed to the application. The distance that the pointer must be moved to trigger this 
 is controlled by the *_MoveThreshold_* command.
 +
-The *_MoveThreshold_* can be set in the *Miscellaneous* section.
+The *_MoveThreshold_* can be set in the xref:Misc[*Miscellaneous*] section.
 
 
 *Focus by Program*::
@@ -236,7 +236,7 @@ if trailing arguments are missing the defaults are used which are:
 The *cover_xx* factor is used when the window being placed covers at least xx percent of the window. This factor is 
 added to the factor determined by the *_MinOverlapPlacementPenalties_* style.
 
-
+[[Misc]]
 === Miscellaneous
 
 *Hide Geometry Window*::

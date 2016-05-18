@@ -22,7 +22,7 @@ of the *FNS-MenuConfigurator* module will not work.
 == DESCRIPTION
 
 *FNS-MenuConfigurator* is used to configure the appearance of the root menu. 
-It is the graphical user interface of *fns-menu-desktop* - a revised version 
+It is the graphical user interface of link:./tools.html#menudesktop[*fns-menu-desktop*] - a revised version 
 of _fvwm-menu-desktop_ which reads XDG menu files and creates Fvwm menus.
 
 == OPTIONS
@@ -133,7 +133,7 @@ Generates the menu(s).
 
 *Help*::
 +
-Opens the manpage of *fns-menu-desktop*.
+Opens the manpage of link:./tools.html#menudesktop[*fns-menu-desktop*].
 
 *Save*::
 +
