@@ -1,6 +1,12 @@
 History:
 
 05/28/2016
+- update refresh.svg
+- add dh-python to Build-Depends in debian/control and update Standards-Version to 3.9.8
+- add lintian-override file because of install location of the perl libraries depending
+  of paths in @INC
+
+05/28/2016
 - changes in config:
   - fix old URL in MenuFvwmWebPages. Remove depreciated fns-wiki menu entry
     and add new menu entry for fns website, too.
