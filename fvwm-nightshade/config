@@ -15,7 +15,7 @@
 #
 #
 # Fvwm Nightshade Configuration
-InfoStoreAdd ns_version 0.8-beta1
+InfoStoreAdd ns_version 0.8-beta2
 # Copyright (C) 2012 - 2016
 #
 # Authors:
@@ -1259,6 +1259,26 @@ AddToFunc   FuncRemoveAllButtons
 + I TitleStyle Height 5
 
 #-----------------------------------------------------------------------
+# Remove all key bindings higher than the current desks/pages.
+# - key 1-x move current window to page n
+# - Go to page n with SHIFT-CTRL + number
+#-----------------------------------------------------------------------
+DestroyFunc FuncUnsetDeskKeyBindings
+AddToFunc   FuncUnsetDeskKeyBindings
++ I PipeRead 'unst=1; \
+              max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
+              while [ $unst -le $max ]; do \
+                  if [ $unst -ne 10 ]; then \
+                      echo "Key $unst A SM -"; \
+                      echo "Key $unst A SC -"; \
+                  else \
+                      echo "Key 0 A SM -"; \
+                      echo "Key 0 A SC -"; \
+                  fi; \
+              unst=$(($unst+1)); \
+              done'
+
+#-----------------------------------------------------------------------
 # Change a decor on the fly
 #-----------------------------------------------------------------------
 DestroyFunc FuncChangeDecor
@@ -1882,6 +1902,27 @@ AddToFunc   FuncMoveWindowToPage
 + I GotoPage $0 $1
 
 #-----------------------------------------------------------------------
+# Move active window to next/previous page with animation
+# but not outside the visible pages ;)
+#-----------------------------------------------------------------------
+DestroyFunc FuncAnimatedMove
+AddToFunc   FuncAnimatedMove
++ I PipeRead   'if [ "$0" != "w" ]; then \
+                    if [ $[page.nx] -eq 0 ] && [ "$0" = "w-100" ]; then \
+                        exit; \
+                    elif [ $[page.nx] -eq $(($[infostore.x_desks]-1)) ] && [ "$0" = "w+100" ]; then \
+                        exit; \
+                    fi; \
+                else \
+                    if [ $[page.ny] -eq 0 ] && [ "$1" = "w-100" ]; then \
+                        exit; \
+                    elif [ $[page.ny] -eq $(($[infostore.y_desks]-1)) ] && [ "$1" = "w+100" ]; then \
+                        exit; \
+                    fi; \
+                fi; \
+                echo AnimatedMove $0 $1'
+
+#-----------------------------------------------------------------------
 # GotoPage and set focus to window which is in the foreground
 #-----------------------------------------------------------------------
 DestroyFunc FuncGotoPage
@@ -1898,15 +1939,6 @@ AddToFunc   FuncStaysOnTopAndBack
 + I TestRc (!Match) Pick (CirculateHit) Layer default
 + I Raise
 
-#-----------------------------------------------------------------------
-# Moves all windows of the same resource to another page
-#-----------------------------------------------------------------------
-# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
-
-#-----------------------------------------------------------------------
-# Move a window to left/right/1-4 page
-#-----------------------------------------------------------------------
-# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
 
 
 #=======================================================================
@@ -2075,7 +2107,7 @@ AddToFunc   FuncMenuFvwmWebPages
 + I AddToMenu MenuFvwmWebPages "$[gt.Wiki]%webpage.svg:$[infostore.MenuIconSize]%"                      FuncOpenURL http://fvwmwiki.xteddy.org/
 + I AddToMenu MenuFvwmWebPages "$[gt.Forum]%webpage.svg:$[infostore.MenuIconSize]%"                     FuncOpenURL http://www.fvwmforums.org/
 + I AddToMenu MenuFvwmWebPages "" Nop
-+ I AddToMenu MenuFvwmWebPages "$[gt.In the beginning was ...]%webpage.svg:$[infostore.MenuIconSize]%"  FuncOpenURL http://edulinux.homeunix.org/fvwm/user_enumerate.html
++ I AddToMenu MenuFvwmWebPages "$[gt.In the beginning was ...]%webpage.svg:$[infostore.MenuIconSize]%"  FuncOpenURL http://www.xteddy.org/fvwm/user_enumerate.html
 + I AddToMenu MenuFvwmWebPages "$[gt.Beginners Guide]%webpage.svg:$[infostore.MenuIconSize]%"           FuncOpenURL http://zensites.net/fvwm/guide/
 + I AddToMenu MenuFvwmWebPages "$[gt.FAQ inofficial]%webpage.svg:$[infostore.MenuIconSize]%"            FuncOpenURL http://edulinux.homeunix.org/fvwm/fvwmchanfaq.html
 + I AddToMenu MenuFvwmWebPages "$[gt.How Styles are Applied]%webpage.svg:$[infostore.MenuIconSize]%"    FuncOpenURL http://linuxgazette.net/127/adam.html
@@ -2097,7 +2129,8 @@ AddToFunc   FuncFNSWebPagesMenu
 + I AddToMenu FNSWebPagesMenu "$[gt.FNS Web Pages]" Title
 + I PipeRead 'for i in `ls -1 $FNS_SYSTEMDIR/../doc/fvwm-nightshade/html/*.html | sed "s#.*/##"`; \
   do echo AddToMenu FNSWebPagesMenu "${i}%webpage.svg:$[infostore.MenuIconSize]%" FuncOpenURL file://$[FNS_SYSTEMDIR]/../doc/fvwm-nightshade/html/$i; done'
-+ I AddToMenu FNSWebPagesMenu "$[gt.Fvwm-Nightshade Wiki]%webpage.svg:$[infostore.MenuIconSize]%" FuncOpenURL https://github.com/Fvwm-Nightshade/Fvwm-Nightshade/wiki
++ I AddToMenu FNSWebPagesMenu "$[gt.Fvwm-Nightshade Website]%webpage.svg:$[infostore.MenuIconSize]%" FuncOpenURL hhttp://fvwm-nightshade.github.io/Fvwm-Nightshade/
++ I AddToMenu FNSWebPagesMenu "$[gt.SimpleGtk2 Website]%webpage.svg:$[infostore.MenuIconSize]%" FuncOpenURL http://thomasfunk.github.io/SimpleGtk2/files/SimpleGtk2-pm.html
 
 
 #=======================================================================
@@ -2475,6 +2508,77 @@ AddToFunc   FuncMenuWindowOpsTrimmed
     AddToMenu MenuWindowOpsTrimmed "$[gt.Inactive Window &Transparency]%tint.svg:$[infostore.MenuIconSize]%"    Popup MenuTransparencyOps
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.&Identify]	Alt+F12%question.svg:$[infostore.MenuIconSize]%"            Module FvwmIdent
 + I AddToMenu MenuWindowOpsTrimmed "$[gt.Mor&e...]	%window.svg:$[infostore.MenuIconSize]%"                     Menu MenuWindowOpsFull This 0 0
+
+#-----------------------------------------------------------------------
+# Menu to move all windows of the same resource to another page
+#-----------------------------------------------------------------------
+AddToMenu MenuWindowGroupQuickMove DynamicPopupAction FuncMenuWindowGroupQuickMove
+
+DestroyFunc FuncMenuWindowGroupQuickMove
+AddToFunc   FuncMenuWindowGroupQuickMove
++ I SetMenuIconSize
++ I DestroyMenu MenuWindowGroupQuickMove
++ I AddToMenu MenuWindowGroupQuickMove DynamicPopupAction FuncMenuWindowGroupQuickMove
++ I PipeRead   'if [ $[infostore.x_desks] -gt 1 ]; then \
+                    echo AddToMenu MenuWindowGroupQuickMove "$[gt.&Right\\	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All \\($[w.resource]\\) MoveToPage +1p +0p; \
+                    echo AddToMenu MenuWindowGroupQuickMove "$[gt.&Left\\	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All \\($[w.resource]\\) MoveToPage -1p +0p; \
+                fi'
++ I PipeRead   'if [ $[infostore.y_desks] -gt 1 ]; then \
+                    echo AddToMenu MenuWindowGroupQuickMove "$[gt.D&own\\	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All \\($[w.resource]\\) MoveToPage +0p +1p; \
+                    echo AddToMenu MenuWindowGroupQuickMove "$[gt.&Up\\	Page]%window-move.svg:$[infostore.MenuIconSize]%"           Pick All \\($[w.resource]\\) MoveToPage +0p -1p; \
+                fi'
++ I AddToMenu MenuWindowGroupQuickMove "" Nop
++ I PipeRead   'fn=0; en=0; mv=1; \
+                max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
+                while [ "$mv" -le "$max" ]; do \
+                    if [ `expr $mv % 2` -eq 0 ]; then \
+                        echo AddToMenu MenuWindowGroupQuickMove "&$mv.\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All \\($[w.resource]\\) FuncMoveWindowToPage $fn $en; \
+                    else \
+                        echo AddToMenu MenuWindowGroupQuickMove "&$mv.\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All \\($[w.resource]\\) FuncMoveWindowToPage $fn $en; \
+                    fi; \
+                    fn=$(($fn+1)); \
+                    if [ "$mv" -eq "$[infostore.x_desks]" ]; then \
+                        en=$(($en+1)); \
+                        fn=0; \
+                    fi; \
+                mv=$(($mv+1)); \
+                done'
+
+#-----------------------------------------------------------------------
+# Menu to move a window to left/right/1-n page
+#-----------------------------------------------------------------------
+AddToMenu MenuWindowMoveTo DynamicPopupAction FuncMenuWindowMoveTo
+
+DestroyFunc FuncMenuWindowMoveTo
+AddToFunc   FuncMenuWindowMoveTo
++ I SetMenuIconSize
++ I DestroyMenu MenuWindowMoveTo
++ I AddToMenu MenuWindowMoveTo DynamicPopupAction FuncMenuWindowMoveTo
++ I AddToMenu MenuWindowMoveTo "$[gt.Move to ...]" Title
++ I PipeRead   'if [ $[infostore.x_desks] -gt 1 ]; then \
+                    echo AddToMenu MenuWindowMoveTo "$[gt.&Right\\	Page]%window-move.svg:$[infostore.MenuIconSize]%"       FuncAnimatedMove w+100 w; \
+                    echo AddToMenu MenuWindowMoveTo "$[gt.&Left\\	Page]%window-move.svg:$[infostore.MenuIconSize]%"       FuncAnimatedMove w-100 w; \
+                fi'
++ I PipeRead   'if [ $[infostore.y_desks] -gt 1 ]; then \
+                    echo AddToMenu MenuWindowMoveTo "$[gt.D&own\\	Page]%window-move.svg:$[infostore.MenuIconSize]%"       FuncAnimatedMove w w+100; \
+                    echo AddToMenu MenuWindowMoveTo "$[gt.&Up\\	Page]%window-move.svg:$[infostore.MenuIconSize]%"           FuncAnimatedMove w w-100; \
+                fi'
++ I AddToMenu MenuWindowMoveTo "" Nop
++ I PipeRead   'fn=0; en=0; mv=1; \
+                max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
+                while [ "$mv" -le "$max" ]; do \
+                    if [ `expr $mv % 2` -eq 0 ]; then \
+                        echo AddToMenu MenuWindowMoveTo "&$mv.\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage $fn $en; \
+                    else \
+                        echo AddToMenu MenuWindowMoveTo "&$mv.\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage $fn $en; \
+                    fi; \
+                    fn=$(($fn+1)); \
+                    if [ "$mv" -eq "$[infostore.x_desks]" ]; then \
+                        en=$(($en+1)); \
+                        fn=0; \
+                    fi; \
+                mv=$(($mv+1)); \
+                done'
 
 #-----------------------------------------------------------------------
 # Sub menu for tint style
