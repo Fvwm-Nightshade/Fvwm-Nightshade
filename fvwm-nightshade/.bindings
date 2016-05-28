@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:		.bindings
-# Version:	1.1.5
+# Version:	1.1.6
 # Licence: 	GPL 2
 #
 # Description:	keyboard bindings
@@ -8,7 +8,7 @@
 # Author:	Thomas Funk <t.funk@web.de>	
 #
 # Created:	10/24/2012
-# Changed:	08/25/2014
+# Changed:	05/28/2016
 #-----------------------------------------------------------------------
 #
 # Overview:
@@ -115,12 +115,37 @@ Key Tab		A		SM		FuncFvwmPrevWindow
 # press SHIFT-ALT arrow anywhere, move active
 # window to next/previous page
 #-----------------------------------------------------------------------
-# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
+PipeRead   'if [ $[infostore.x_desks] -gt 1 ]; then \
+                echo "Key Left        A           SM          Current FuncMoveWindowToPage -1p +0p; \
+                echo "Key Right       A           SM          Current FuncMoveWindowToPage +1p +0p; \
+            fi'
+PipeRead   'if [ $[infostore.y_desks] -gt 1 ]; then \
+                echo "Key Up          A           SM          Current FuncMoveWindowToPage +0p -1p; \
+                echo "Key Down        A           SM          Current FuncMoveWindowToPage +0p +1p; \
+            fi'
 
 #-----------------------------------------------------------------------
-# key 1-4 move current window to page n
+# key 1-(1)0 move current window to page n
 #-----------------------------------------------------------------------
-# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
+PipeRead   'fn=0; en=0; mv=1; \
+            max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
+            while [ "$mv" -le "$max" ]; do \
+                if [ `expr $mv % 2` -eq 0 ]; then \
+                    if [ $mv -ne 10 ]; then \
+                        echo "Key $mv A SM Current FuncMoveWindowToPage $fn $en"; \
+                    else \
+                        echo "Key 0 A SM Current FuncMoveWindowToPage $fn $en"; \
+                    fi; \
+                else \
+                        echo "Key $mv A SM Current FuncMoveWindowToPage $fn $en"; \
+                fi; \
+                fn=$(($fn+1)); \
+                if [ "$mv" -eq "$[infostore.x_desks]" ]; then \
+                    en=$(($en+1)); \
+                    fn=0; \
+                fi; \
+            mv=$(($mv+1)); \
+            done'
 
 
 #***********************************************************************
@@ -204,12 +229,37 @@ Key Down	A		CM		CursorMove +0 +1
 #-----------------------------------------------------------------------
 # Go to page n
 #-----------------------------------------------------------------------
-# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
+PipeRead   'fn=0; en=0; mv=1; \
+            max=10; \
+            while [ "$mv" -le "$max" ]; do \
+                if [ `expr $mv % 2` -eq 0 ]; then \
+                    if [ $mv -ne 10 ]; then \
+                        echo "Key $mv A SC FuncGotoPage $fn $en"; \
+                    else \
+                        echo "Key 0 A SC FuncGotoPage $fn $en"; \
+                    fi; \
+                else \
+                    echo "Key $mv A SC FuncGotoPage $fn $en"; \
+                fi; \
+                fn=$(($fn+1)); \
+                if [ "$mv" -eq "$[infostore.x_desks]" ]; then \
+                    en=$(($en+1)); \
+                    fn=0; \
+                fi; \
+            mv=$(($mv+1)); \
+            done'
 
 #-----------------------------------------------------------------------
 # press SHIFT-CTRL arrow anywhere, and scroll by one page
 #-----------------------------------------------------------------------
-# See in different layout files under $FNS_SYSTEMDIR/layouts or $FVWM_USERDIR/layouts
+PipeRead   'if [ $[infostore.x_desks] -gt 1 ]; then \
+                echo "Key Left        A           SC          FuncGotoPage -1p +0p"; \
+                echo "Key Right       A           SC          FuncGotoPage +1p +0p"; \
+            fi'
+PipeRead   'if [ $[infostore.y_desks] -gt 1 ]; then \
+                echo "Key Up          A           SC          FuncGotoPage +0p -1p"; \
+                echo "Key Down        A           SC          FuncGotoPage +0p +1p"; \
+            fi'
 
 #-----------------------------------------------------------------------
 # open full windows oops menu
