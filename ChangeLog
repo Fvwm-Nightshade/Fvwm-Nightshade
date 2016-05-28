@@ -1,10 +1,12 @@
 History:
 
-05/28/2016
+05/29/2016
 - update refresh.svg
 - add dh-python to Build-Depends in debian/control and update Standards-Version to 3.9.8
 - add lintian-override file because of install location of the perl libraries depending
   of paths in @INC
+- update initial changelog entry in debian/changelog to current status
+- update copyright date in debian/copyright
 
 05/28/2016
 - changes in config:
