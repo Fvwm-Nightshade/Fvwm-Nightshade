@@ -1,0 +1,2 @@
+# The installed perl files are architecture independant but Makefile found path via @INC
+fvwm-nightshade: triplet-dir-and-architecture-mismatch
