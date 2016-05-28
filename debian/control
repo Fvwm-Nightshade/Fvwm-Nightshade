@@ -2,8 +2,8 @@ Source: fvwm-nightshade
 Maintainer: Thomas Funk <t.funk@web.de>
 Section: x11
 Priority: optional
-Standards-Version: 3.9.6
-Build-Depends: debhelper (>= 9), python
+Standards-Version: 3.9.8
+Build-Depends: debhelper (>= 9), python, dh-python
 Homepage: https://github.com/Fvwm-Nightshade
 
 Package: fvwm-nightshade
