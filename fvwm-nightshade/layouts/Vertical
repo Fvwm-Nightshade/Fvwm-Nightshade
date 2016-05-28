@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Vertical
-# Version:      1.2.2
+# Version:      1.2.4
 # Licence:      GPL 2
 #
 # Description:  Layout of object positions on desktop
@@ -9,7 +9,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/16/2012
-# Changed:      05/15/2016
+# Changed:      05/28/2016
 #-----------------------------------------------------------------------
 # Top right
 #
@@ -206,74 +206,12 @@ AddToFunc   ReloadLayoutParts
 + I Wait stalonetray
 + I Exec exec fns-start-programs reload_applets $[FVWM_USERDIR]/.trayapplist
 
-#-----------------------------------------------------------------------
-# Remove all key bindings higher than the current desks/pages.
-# - key 1-x move current window to page n
-# - Go to page n with SHIFT-CTRL + number
-#-----------------------------------------------------------------------
-DestroyFunc FuncUnsetDeskKeyBindings
-AddToFunc   FuncUnsetDeskKeyBindings
-+ I PipeRead 'unst=10; \
-              max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
-              while [ "$unst" -gt "$max" ]; do \
-                echo "Key $unst A SM -"; \
-                echo "Key $unst A SC -"; \
-                unst=$(($unst-1)); \
-              done'
-
 
 #=======================================================================
 # Bindings
 #=======================================================================
 
-#   Keyname     Context     Modifi      Function
-
-#-----------------------------------------------------------------------
-# press SHIFT-ALT arrow anywhere, move active
-# window to next/previous page
-#-----------------------------------------------------------------------
-Key Left        A           SM          FuncMoveWindowToPage -1p +0p
-Key Right       A           SM          FuncMoveWindowToPage +1p +0p
-Key Up          A           SM          FuncMoveWindowToPage +0p -1p
-Key Down        A           SM          FuncMoveWindowToPage +0p +1p
-
-#-----------------------------------------------------------------------
-# key 1-4 move current window to page n
-#-----------------------------------------------------------------------
-PipeRead   'keyn=0; en=0; \
-            max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
-            while [ "$keyn" -lt "$max" ]; do \
-                if [ `expr $keyn % 2` -eq 0 ]; then \
-                    echo "Key $(($keyn+1)) A SM Current FuncMoveWindowToPage 0 $en"; \
-                else \
-                    echo "Key $(($keyn+1)) A SM Current FuncMoveWindowToPage 1 $en"; \
-                    en=$(($en+1)); \
-                fi; \
-                keyn=$(($keyn+1)); \
-            done'
-
-#-----------------------------------------------------------------------
-# Go to page n with SHIFT-CTRL + number
-#-----------------------------------------------------------------------
-PipeRead   'pgn=0; en=0; \
-            max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
-            while [ "$pgn" -lt "$max" ]; do \
-                if [ `expr $pgn % 2` -eq 0 ]; then \
-                    echo "Key $(($pgn+1)) A SC FuncGotoPage 0 $en"; \
-                else \
-                    echo "Key $(($pgn+1)) A SC FuncGotoPage 1 $en"; \
-                    en=$(($en+1)); \
-                fi; \
-                pgn=$(($pgn+1)); \
-            done'
-
-#-----------------------------------------------------------------------
-# press SHIFT-CTRL arrow anywhere, and scroll by one page
-#-----------------------------------------------------------------------
-Key Left        A           SC          FuncGotoPage -1p +0p
-Key Right       A           SC          FuncGotoPage +1p +0p
-Key Up          A           SC          FuncGotoPage +0p -1p
-Key Down        A           SC          FuncGotoPage +0p +1p
+#   Keyname Context Modifi  Function
 
 #-----------------------------------------------------------------------
 # Help info with SHIFT-CTRL-ALT P to show all page related key bindings
@@ -292,63 +230,3 @@ key P           A           SCM         FuncShowMessage  "Page Key Bindings" \
 "SHIFT-ALT-CTRL:" \
 "Cursor right/left/up/down: Scroll right/left/up/down by 10% of a page"
 
-
-
-#=======================================================================
-# Menus
-#=======================================================================
-
-#-----------------------------------------------------------------------
-# Moves all windows of the same resource to another page
-#-----------------------------------------------------------------------
-AddToMenu MenuWindowGroupQuickMove DynamicPopupAction FuncMenuWindowGroupQuickMove
-
-DestroyFunc FuncMenuWindowGroupQuickMove
-AddToFunc   FuncMenuWindowGroupQuickMove
-+ I SetMenuIconSize
-+ I DestroyMenu MenuWindowGroupQuickMove
-+ I AddToMenu MenuWindowGroupQuickMove DynamicPopupAction FuncMenuWindowGroupQuickMove
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage +1p +0p
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage -1p +0p
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.D&own	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage +0p +1p
-+ I AddToMenu MenuWindowGroupQuickMove "$[gt.&Up	Page]%window-move.svg:$[infostore.MenuIconSize]%"       Pick All ($[w.resource]) MoveToPage +0p -1p
-+ I AddToMenu MenuWindowGroupQuickMove "" Nop
-+ I PipeRead   'g=0; en=0; \
-                max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
-                while [ "$g" -lt "$max" ]; do \
-                    if [ `expr $g % 2` -eq 0 ]; then \
-                        echo AddToMenu MenuWindowGroupQuickMove "&$(($g+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All ($[w.resource]) FuncMoveWindowToPage 0 $en; \
-                    else \
-                        echo AddToMenu MenuWindowGroupQuickMove "&$(($g+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" Pick All ($[w.resource]) FuncMoveWindowToPage 1 $en; \
-                        en=$(($en+1)); \
-                    fi; \
-                    g=$(($g+1)); \
-                done'
-
-#-----------------------------------------------------------------------
-# Move a window to left/right/1-4 page
-#-----------------------------------------------------------------------
-AddToMenu MenuWindowMoveTo DynamicPopupAction FuncMenuWindowMoveTo
-
-DestroyFunc FuncMenuWindowMoveTo
-AddToFunc   FuncMenuWindowMoveTo
-+ I SetMenuIconSize
-+ I DestroyMenu MenuWindowMoveTo
-+ I AddToMenu MenuWindowMoveTo DynamicPopupAction FuncMenuWindowMoveTo
-+ I AddToMenu MenuWindowMoveTo "$[gt.Move to ...]" Title
-+ I AddToMenu MenuWindowMoveTo "$[gt.&Right	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w+100 w
-+ I AddToMenu MenuWindowMoveTo "$[gt.&Left	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w-100 w
-+ I AddToMenu MenuWindowMoveTo "$[gt.D&own	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w w+100
-+ I AddToMenu MenuWindowMoveTo "$[gt.&Up	Page]%window-move.svg:$[infostore.MenuIconSize]%"        AnimatedMove w w-100
-+ I AddToMenu MenuWindowMoveTo "" Nop
-+ I PipeRead   'mv=0; en=0; \
-                max=$(($[infostore.x_desks]*$[infostore.y_desks])); \
-                while [ "$mv" -lt "$max" ]; do \
-                    if [ `expr $mv % 2` -eq 0 ]; then \
-                        echo AddToMenu MenuWindowMoveTo "&$(($mv+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage 0 $en; \
-                    else \
-                        echo AddToMenu MenuWindowMoveTo "&$(($mv+1)).\\	$[gt.Page]%window-move.svg:$[infostore.MenuIconSize]%" FuncMoveWindowToPage 1 $en; \
-                        en=$(($en+1)); \
-                    fi; \
-                    mv=$(($mv+1)); \
-                done'
