@@ -1,5 +1,18 @@
 History:
 
+05/28/2016
+- changes in config:
+  - fix old URL in MenuFvwmWebPages. Remove depreciated fns-wiki menu entry
+    and add new menu entry for fns website, too.
+  - add modified FuncUnsetDeskKeyBindings, MenuWindowGroupQuickMove and MenuWindowMoveTo
+    for full page move support for windows.
+  - update FuncAnimatedMove to prevent window move to non existing pages
+  - update version to beta2
+- remove FuncUnsetDeskKeyBindings, MenuWindowGroupQuickMove and MenuWindowMoveTo and 
+  key bindings from layouts
+- add modified key bindings from layouts back to .bindings
+- fix wrong behaviour to set spin buttons in FNS-BaseSetup
+
 05/15/2016
 - fix bug in FNS-MenuBuilder that personal menu tree isn't sorted correctly
 - add fns-menu-desktop asciidoc document, manpage and html page. It exists 
