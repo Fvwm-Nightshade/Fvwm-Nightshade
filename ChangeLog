@@ -7,6 +7,14 @@ History:
   of paths in @INC
 - update initial changelog entry in debian/changelog to current status
 - update copyright date in debian/copyright
+- change architecture in debian/control to 'any' because of architecture dependant install
+  locations of shipped Perl modules
+- remove lintian-overrides because now amd64 and i386 packages will be created depending
+  to 'any' in debian/control
+- update deb rule in Makefile to create architecture dependant packages
+- add rm line in debian/rules to remove LICENSE file in PitchBlack theme
+- change some images from 755 to 644 in gtk-3 theme folders of PitchBlack
+- change some files in fvwm-nightshade/modules/ from 755 to 644
 
 05/28/2016
 - changes in config:
