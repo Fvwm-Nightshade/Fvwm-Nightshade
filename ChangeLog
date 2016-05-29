@@ -15,6 +15,8 @@ History:
 - add rm line in debian/rules to remove LICENSE file in PitchBlack theme
 - change some images from 755 to 644 in gtk-3 theme folders of PitchBlack
 - change some files in fvwm-nightshade/modules/ from 755 to 644
+- fix bug in fns-cpu-performance that it will start whether no governor tool is installed
+- fix crash in FNS-MenuBuilder if an icon path not valid. Also forward messages to STDERR
 
 05/28/2016
 - changes in config:
