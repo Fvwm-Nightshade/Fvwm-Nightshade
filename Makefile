@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.5.0
+# Version:      2.5.1
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      03/10/2016
+# Changed:      05/29/2016
 #-----------------------------------------------------------------------
 
 package 		= fvwm-nightshade
@@ -784,6 +784,7 @@ build-deb:
 deb: build-deb dist-install
 	sed -i "/^Standards\|^Build\|^Package:\|^Depends:\|^$$/d;s/^[ \t]*fvwm/Depends:    fvwm/" $(pkgdir)/DEBIAN/control
 	sed -i "s/Source: fvwm-nightshade/Package: fvwm-nightshade\nVersion: $(version)\nInstalled-Size: `du -s fvwm-nightshade |cut -f1`/" $(pkgdir)/DEBIAN/control
+	sed -i "s/Architecture: any/Architecture: `dpkg --print-architecture`/" $(pkgdir)/DEBIAN/control
 	dpkg -b $(pkgdir) ../$(package)_$(version)-0_`dpkg --print-architecture`.deb
 	rm -rf $(pkgdir)
 	echo "Done."
