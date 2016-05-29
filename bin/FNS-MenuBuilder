@@ -12,7 +12,7 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuBuilder
-my $Version =   '1.0.2';
+my $Version =   '1.0.3';
 # Licence:      GPL 2
 #
 # Description:  Perl script to create/modify personal menu
@@ -20,7 +20,7 @@ my $Version =   '1.0.2';
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      03/27/2016
-# Changed:      05/14/2016
+# Changed:      05/29/2016
 #-----------------------------------------------------------------------
 
 #my $module = new FVWM::Module::SimpleGtk2(
@@ -259,7 +259,14 @@ sub parse_menu(@) {
                     # add it infront of the parts array
                     push(@tmp_array, splice(@parts, -($#parts-1), ($#parts)));
                     @parts = @tmp_array;
-                    push(@pixbuf_obj, Gtk2::Gdk::Pixbuf->new_from_file("$pixbuf_path"));
+                    if (-f "$pixbuf_path") {
+						push(@pixbuf_obj, Gtk2::Gdk::Pixbuf->new_from_file("$pixbuf_path"));
+					} else {
+						print STDERR "[Fvwm-Nightshade][FNS-MenuBuilder]: '". $pixbuf_path . "' not found! Using stock icon 'gtk-missing-image'.\n";
+						my $tmp_image = Gtk2::Image->new_from_stock ('gtk-missing-image', 'menu');
+						my $tmp_pixbuf = $tmp_image->render_icon('gtk-missing-image', 'menu');
+						push(@pixbuf_obj, $tmp_pixbuf->scale_simple($default_icon_size, $default_icon_size, 'bilinear'));
+					}
                     push(@pixbuf_obj, $pixbuf_path);
                 } else {
                     # remove +
@@ -324,7 +331,7 @@ sub parse_menu(@) {
                 &build_tree($tree_ref, $menus, \@pixbuf_obj, $entry);
             }
             else {
-                print "Bad line '". $orig_line . "' in menu! Skipping.\n";
+                print STDERR "[Fvwm-Nightshade][FNS-MenuBuilder]: Bad line '". $orig_line . "' in menu! Skipping.\n";
                 next;
             }
         }
@@ -402,7 +409,7 @@ sub build_tree(@) {
                     }
                     push(@{$tree_array_ref}, $hash_element);
                 } else {
-                    print "count = $count; app_entries not defined!\n"
+                    print STDERR "[Fvwm-Nightshade][FNS-MenuBuilder]: count = $count; app_entries not defined!\n"
                 }
             }
         }
