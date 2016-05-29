@@ -784,7 +784,7 @@ build-deb:
 deb: build-deb dist-install
 	sed -i "/^Standards\|^Build\|^Package:\|^Depends:\|^$$/d;s/^[ \t]*fvwm/Depends:    fvwm/" $(pkgdir)/DEBIAN/control
 	sed -i "s/Source: fvwm-nightshade/Package: fvwm-nightshade\nVersion: $(version)\nInstalled-Size: `du -s fvwm-nightshade |cut -f1`/" $(pkgdir)/DEBIAN/control
-	dpkg -b $(pkgdir) ../$(package)_$(version)_all.deb
+	dpkg -b $(pkgdir) ../$(package)_$(version)-0_`dpkg --print-architecture`.deb
 	rm -rf $(pkgdir)
 	echo "Done."
 
