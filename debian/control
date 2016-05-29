@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 9), python, dh-python
 Homepage: https://github.com/Fvwm-Nightshade
 
 Package: fvwm-nightshade
-Architecture: all
+Architecture: any
 Depends:    ${misc:Depends}, ${perl:Depends}, ${python:Depends},
             fvwm (>> 1:2.6.4) | fvwm (>> 2.6.4),
             conky,
