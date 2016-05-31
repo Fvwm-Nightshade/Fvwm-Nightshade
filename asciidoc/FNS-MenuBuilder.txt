@@ -86,8 +86,7 @@ can be chosen - an application or folder entry.
 *Icon Button*::
 +
 With the Icon button an own icon can be selected. Clicking opens a selection dialog 
-in the icon theme directory set in *FNS Base Setup*. No icon change creates an entry 
-without an icon.
+in the icon theme directory set in *FNS Base Setup*.
 +
 [NOTE]
 ===============================
