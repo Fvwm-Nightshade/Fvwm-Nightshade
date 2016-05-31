@@ -8,7 +8,7 @@ msgstr ""
 
 "Project-Id-Version: FNS-MenuBuilder\n"
 "POT-Creation-Date: 2016-04-20 10:41+0200\n"
-"PO-Revision-Date: 2016-04-21 21:37+0200\n"
+"PO-Revision-Date: 2016-06-01 00:30+0200\n"
 "Last-Translator: Artashes Mkhitaryan <artashm@mytum.de>\n"
 "Language-Team: Russian\n"
 "Language: Russian\n"
@@ -92,8 +92,8 @@ msgstr "У вас ест не сохраненные изменения, про�
 msgid "Create new application or folder entry"
 msgstr "Создать новую запись программы/папки"
 
-msgid "Click to choose an icon. No change creates no icon."
-msgstr "Нажмите для выбора иконки. Отсутствие перемен приведет к отсутствию иконки."
+msgid "Click to choose an icon."
+msgstr "Нажмите для выбора иконки."
 
 msgid "Create a folder entry."
 msgstr "Создать запись папки."
