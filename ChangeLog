@@ -1,5 +1,12 @@
 History:
 
+06/01/2016
+- changes in FNS-MenuBuilder:
+  - remove remove Fvwm module implementation lines not needed anymore
+  - remove $icon_changed variable never needed
+- update pot, po and mo files of FNS-MenuBuilder
+- update documentation of FNS-MenuBuilder
+
 05/29/2016
 - update refresh.svg
 - add dh-python to Build-Depends in debian/control and update Standards-Version to 3.9.8
