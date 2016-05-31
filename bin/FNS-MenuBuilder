@@ -3,8 +3,6 @@
 use strict;
 use warnings;
 use SimpleGtk2;
-#use lib `fvwm-perllib dir`;
-#use FVWM::Module::SimpleGtk2;
 use File::Basename;
 use File::Copy qw(copy);
 use File::Spec;
@@ -12,7 +10,7 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuBuilder
-my $Version =   '1.0.3';
+my $Version =   '1.0.4';
 # Licence:      GPL 2
 #
 # Description:  Perl script to create/modify personal menu
@@ -20,11 +18,9 @@ my $Version =   '1.0.3';
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      03/27/2016
-# Changed:      05/29/2016
+# Changed:      06/01/2016
 #-----------------------------------------------------------------------
 
-#my $module = new FVWM::Module::SimpleGtk2(
-#);
 
 ########################################################################
 # Global values
@@ -114,7 +110,6 @@ sub get_fns_menu_value {
         my $cfg_line = `grep '^$wanted' $menu_cfg`;
         unless ($cfg_line eq '') {
             my @array = split('=', $cfg_line);
-    #        $value = chomp($array[-1]);
             $value = $array[-1];
             # Remove whitespaces at the beginning and the end
             $value = &del_spaces($value);
@@ -823,7 +818,7 @@ sub check_before_quit {
 sub open_entry_dialog {
     my $row_ref = shift;
     my $icon_size = shift;
-    my $icon_changed = 0;
+
     # open creation dialog
     my $dialog = SimpleGtk2->new_window( Name => 'createDialog', 
                             Version => $Version,
@@ -837,18 +832,17 @@ sub open_entry_dialog {
             Pos     => [10, 13], 
             Size    => [48, 48], 
             Sens    => $icons_dest, 
-            Tip     => "Click to choose an icon. No change creates no icon.", 
+            Tip     => "Click to choose an icon.", 
             Stock   => ['gtk-missing-image']);
-    $dialog->add_signal_handler('ChooseIcon', 'button_press_event', sub{&open_icon_dir($dialog, 'ChooseIcon', \$icon_changed)});
+    $dialog->add_signal_handler('ChooseIcon', 'button_press_event', sub{&open_icon_dir($dialog, 'ChooseIcon')});
     
     sub open_icon_dir {
-        my ($self, $name, $icon_changed_ref) = @_;
+        my ($self, $name) = @_;
         # get object
         my $object = $self->get_object($name);
         my $resp = $self->show_filechooser_dialog('open', $default_icon_dir);
         unless ($resp eq '0') {
             $self->set_image($name, Path => $resp);
-            $$icon_changed_ref = 1;
         }
     }
     
@@ -940,17 +934,16 @@ sub open_entry_dialog {
             Size    => [80, 25], 
             Title   => "Create", 
             Tip     => "Create the new entry.");
-    $dialog->add_signal_handler('okButton', 'clicked', \&build_row, [$dialog, $row_ref, $icon_size, \$icon_changed]);
+    $dialog->add_signal_handler('okButton', 'clicked', \&build_row, [$dialog, $row_ref, $icon_size]);
     
     sub build_row {
         my ($widget, $data) = @_;
         my $self = $$data[0];
         my $row_ref = $$data[1];
         my $icon_size = $$data[2];
-        my $icon_changed = $$data[3];
         
         # Icon
-        if ($self->is_sensitive('ChooseIcon') and $icon_changed) {
+        if ($self->is_sensitive('ChooseIcon')) {
             # get icon pixbuf and resize it
             my $pixbuf = $self->get_image('ChooseIcon', 'Pixbuf');
             my $scaled = $pixbuf->scale_simple($icon_size,$icon_size,'bilinear');
@@ -959,7 +952,7 @@ sub open_entry_dialog {
         # Label
         push(@{$row_ref}, $self->get_title('entryLabel'));
         # is application active?
-        if ($self->is_sensitive('radioCreateApp')) {
+        unless ($self->is_sensitive('radioCreateFolder')) {
             my $cmd_string = "Exec exec " . $self->get_title('entryCommandString');
             push(@{$row_ref}, $cmd_string) if $self->is_sensitive('entryCommandString');
         }
@@ -979,6 +972,3 @@ sub open_entry_dialog {
 
 
 $win->show_and_run();
-#$win->show();
-
-#$module->eventLoop;
