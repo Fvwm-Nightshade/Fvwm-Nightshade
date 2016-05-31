@@ -92,7 +92,7 @@ msgstr ""
 msgid "Create new application or folder entry"
 msgstr ""
 
-msgid "Click to choose an icon. No change creates no icon."
+msgid "Click to choose an icon."
 msgstr ""
 
 msgid "Create a folder entry."
