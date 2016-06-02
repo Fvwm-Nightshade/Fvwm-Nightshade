@@ -60,6 +60,9 @@ unless (defined($default_icon_size)) {
     $default_icon_size = '24';
 }
 
+# gtk-missing-image path
+my $no_image_path = `fns-find-icon -n 'gtk-missing-image' -s $default_icon_size -t 'all' -c 'status' --notdesk`;
+
 # tree data array for root menu
 my @src_tree; 
 
@@ -748,7 +751,7 @@ sub build_lines {
         unless (defined($hash_ref->{children})) {return;}
         
         # is entry only an application or a folder?
-        if (scalar @{$hash_ref->{children}} == 0) {
+        if (scalar @{$hash_ref->{children}} == 0 and defined($hash_ref->{value}[3])) {
             # application
             # AddToMenu "MenuFvwmPersonal" "Icedove%/home/tf/.fvwm-nightshade/icons/16x16-icedove.png%" Exec exec  icedove
             # AddToMenu "MenuFvwmPersonal" "Font Manager" Exec exec  font-manager
@@ -818,6 +821,7 @@ sub check_before_quit {
 sub open_entry_dialog {
     my $row_ref = shift;
     my $icon_size = shift;
+    my $image_path = undef;
 
     # open creation dialog
     my $dialog = SimpleGtk2->new_window( Name => 'createDialog', 
@@ -833,16 +837,17 @@ sub open_entry_dialog {
             Size    => [48, 48], 
             Sens    => $icons_dest, 
             Tip     => "Click to choose an icon.", 
-            Stock   => ['gtk-missing-image']);
-    $dialog->add_signal_handler('ChooseIcon', 'button_press_event', sub{&open_icon_dir($dialog, 'ChooseIcon')});
+            Path    => $no_image_path);
+    $dialog->add_signal_handler('ChooseIcon', 'button_press_event', sub{&open_icon_dir($dialog, 'ChooseIcon', $image_path)});
     
     sub open_icon_dir {
-        my ($self, $name) = @_;
+        my ($self, $name, $image_path) = @_;
         # get object
         my $object = $self->get_object($name);
         my $resp = $self->show_filechooser_dialog('open', $default_icon_dir);
         unless ($resp eq '0') {
             $self->set_image($name, Path => $resp);
+            $image_path = $resp;
         }
     }
     
@@ -952,10 +957,18 @@ sub open_entry_dialog {
         # Label
         push(@{$row_ref}, $self->get_title('entryLabel'));
         # is application active?
-        unless ($self->is_sensitive('radioCreateFolder')) {
+        if ($self->is_active('radioCreateApp')) {
             my $cmd_string = "Exec exec " . $self->get_title('entryCommandString');
             push(@{$row_ref}, $cmd_string) if $self->is_sensitive('entryCommandString');
         }
+        # Icon path
+        if ($self->is_sensitive('ChooseIcon')) {
+            # get widget object
+            my $obj = $self->get_object('ChooseIcon');
+            my $img_path = $self->get_image('ChooseIcon', 'Path');
+            push(@{$row_ref}, $img_path);
+        }
+        
         $self->get_widget('createDialog')->destroy();
     }
     
