@@ -1,5 +1,13 @@
 History:
 
+06/02/2016
+- changes in fns-find-icon:
+  - add possibility to scan 'all' themes in /usr/share/icons AND in $HOME/.icons
+  - fix bug in 'prefer svg' that if 'all' themes are scanned not the first png will be returned
+  - remove useless adding of search paths if iconsize is not 48
+  - extend error messages
+- update documentation of fns-find-icon
+
 06/01/2016
 - changes in FNS-MenuBuilder:
   - remove remove Fvwm module implementation lines not needed anymore
