@@ -12,7 +12,8 @@ or the icon of an application
 SYNOPSIS
 --------
 
-fns-find-icon [-h|--help] [--version] [-n NAME] [-i W_ID] [-p EXTEND_PATH] [-s ICON_SIZE] [--svg] [-c CATEGORY] [--notdesk]
+fns-find-icon [-h|--help] [--version] [-n NAME] [-i W_ID] [-p EXTEND_PATH
+] [-s ICON_SIZE] [--svg] [-c CATEGORY] [-t THEME] [--notdesk]
 
 
 
@@ -69,9 +70,9 @@ Example for normal icon search:
 $ fns-find-icon -n 'system-log-out' -s 24 -c 'actions' --notdesk
 ------
 +
-Here *fns-find-icon* tries to find the icon "system-log-out" with the 
-size of "24x24" in the category "actions". The *--notdesk* tolds *fns-find-icon* 
-not to search in the desktop files but in /usr/share/icons/. 
+Here *fns-find-icon* tries to find the icon "system-log-out" with a 
+size of "24x24" in category "actions". The *--notdesk* tolds *fns-find-icon* 
+not to search in desktop files directories but in $HOME/.icons and /usr/share/icons/. 
 +
 First it gets the used theme, then it searches in the category with the 
 stated size. If it find the icon it returns the full path. If not returns 
@@ -79,16 +80,18 @@ nothing.
 
 *-i* 'W_ID'::
 +
-It is possible to search for an icon for a specific window with the window id. 
-*fns-find-icon* uses for this the program 'xprop'. It asks 'xprop' over 'WM_CLASS' 
-for the used name and then makes the same steps as in *-n* 'NAME' described.
+It is possible to search for an icon for a specific window with its window id. 
+*fns-find-icon* uses for this 'xprop'. It asks 'xprop' over 'WM_CLASS' for the 
+used name and then makes the same steps as in *-n* 'NAME' described.
 
 *-p* 'EXTEND_PATH'::
 +
-Sometimes it is needed to told *fns-find-icon* to search in other paths 
-also. The defaults are:
+Sometimes it is needed to told *fns-find-icon* to search in other paths, too. 
+The defaults are:
 +
 ------
+$HOME/.icons/[theme]/[icon-size]/[category]/
+$HOME/.icons/[theme]/[category]/[icon-size]/
 /usr/share/icons/[theme]/[icon-size]/[category]/
 /usr/share/icons/[theme]/[category]/[icon-size]/
 /usr/share/icons/hicolor/[icon-size]/[category]/
@@ -105,22 +108,26 @@ The 'ICON_SIZE' defines the the icon size to search for. Default is '48'.
 *--svg*::
 +
 Prefer svg instead of bitmaps and if found add :<size>x<size> at the 
-end of the path.
+end of the path. Else bitmap path is returned.
 
 *-c* 'CATEGORY'::
 +
-The 'CATEGORY' defines the category in the theme to search for an icon. 
+'CATEGORY' defines the category in the theme to search for an icon. 
 Default is 'apps'.
 
 *-t* 'THEME'::
 +
-The 'THEME' defines the theme to search for an icon. 
-Default is the theme used in fvwm-menu-desktop-config.
+'THEME' defines the icon theme name. Default is the theme used in 
+fvwm-menu-desktop-config/fns-menu-config. To search trough all themes use 'all'.
++
+[NOTE]
+===============================
+'all' returns the first icon ever which matches the made choice!
+===============================
 
 *--notdesk*::
 +
-To search for a specific icon not for an icon from a .desktop file use 
-this option.
+Search not for an icon found in a .desktop file but for a specific one.
 
 *--version*::
 +

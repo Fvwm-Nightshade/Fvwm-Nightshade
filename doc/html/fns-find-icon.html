@@ -747,7 +747,8 @@ fns-find-icon(1) Manual Page
 <div class="sect1">
 <h2 id="_synopsis">SYNOPSIS</h2>
 <div class="sectionbody">
-<div class="paragraph"><p>fns-find-icon [-h|--help] [--version] [-n NAME] [-i W_ID] [-p EXTEND_PATH] [-s ICON_SIZE] [--svg] [-c CATEGORY] [--notdesk]</p></div>
+<div class="paragraph"><p>fns-find-icon [-h|--help] [--version] [-n NAME] [-i W_ID] [-p EXTEND_PATH
+] [-s ICON_SIZE] [--svg] [-c CATEGORY] [-t THEME] [--notdesk]</p></div>
 </div>
 </div>
 <div class="sect1">
@@ -802,9 +803,9 @@ If the search was successfully it converts the icon to the needed size
 <div class="content">
 <pre><code>$ fns-find-icon -n 'system-log-out' -s 24 -c 'actions' --notdesk</code></pre>
 </div></div>
-<div class="paragraph"><p>Here <strong>fns-find-icon</strong> tries to find the icon "system-log-out" with the
-size of "24x24" in the category "actions". The <strong>--notdesk</strong> tolds <strong>fns-find-icon</strong>
-not to search in the desktop files but in /usr/share/icons/.</p></div>
+<div class="paragraph"><p>Here <strong>fns-find-icon</strong> tries to find the icon "system-log-out" with a
+size of "24x24" in category "actions". The <strong>--notdesk</strong> tolds <strong>fns-find-icon</strong>
+not to search in desktop files directories but in $HOME/.icons and /usr/share/icons/.</p></div>
 <div class="paragraph"><p>First it gets the used theme, then it searches in the category with the
 stated size. If it find the icon it returns the full path. If not returns
 nothing.</p></div>
@@ -813,19 +814,21 @@ nothing.</p></div>
 <strong>-i</strong> <em>W_ID</em>
 </dt>
 <dd>
-<div class="paragraph"><p>It is possible to search for an icon for a specific window with the window id.
-<strong>fns-find-icon</strong> uses for this the program <em>xprop</em>. It asks <em>xprop</em> over <em>WM_CLASS</em>
-for the used name and then makes the same steps as in <strong>-n</strong> <em>NAME</em> described.</p></div>
+<div class="paragraph"><p>It is possible to search for an icon for a specific window with its window id.
+<strong>fns-find-icon</strong> uses for this <em>xprop</em>. It asks <em>xprop</em> over <em>WM_CLASS</em> for the
+used name and then makes the same steps as in <strong>-n</strong> <em>NAME</em> described.</p></div>
 </dd>
 <dt class="hdlist1">
 <strong>-p</strong> <em>EXTEND_PATH</em>
 </dt>
 <dd>
-<div class="paragraph"><p>Sometimes it is needed to told <strong>fns-find-icon</strong> to search in other paths
-also. The defaults are:</p></div>
+<div class="paragraph"><p>Sometimes it is needed to told <strong>fns-find-icon</strong> to search in other paths, too.
+The defaults are:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><code>/usr/share/icons/[theme]/[icon-size]/[category]/
+<pre><code>$HOME/.icons/[theme]/[icon-size]/[category]/
+$HOME/.icons/[theme]/[category]/[icon-size]/
+/usr/share/icons/[theme]/[icon-size]/[category]/
 /usr/share/icons/[theme]/[category]/[icon-size]/
 /usr/share/icons/hicolor/[icon-size]/[category]/
 /usr/share/pixmaps/</code></pre>
@@ -844,28 +847,37 @@ with a ":".</p></div>
 </dt>
 <dd>
 <div class="paragraph"><p>Prefer svg instead of bitmaps and if found add :&lt;size&gt;x&lt;size&gt; at the
-end of the path.</p></div>
+end of the path. Else bitmap path is returned.</p></div>
 </dd>
 <dt class="hdlist1">
 <strong>-c</strong> <em>CATEGORY</em>
 </dt>
 <dd>
-<div class="paragraph"><p>The <em>CATEGORY</em> defines the category in the theme to search for an icon.
+<div class="paragraph"><p><em>CATEGORY</em> defines the category in the theme to search for an icon.
 Default is <em>apps</em>.</p></div>
 </dd>
 <dt class="hdlist1">
 <strong>-t</strong> <em>THEME</em>
 </dt>
 <dd>
-<div class="paragraph"><p>The <em>THEME</em> defines the theme to search for an icon.
-Default is the theme used in fvwm-menu-desktop-config.</p></div>
+<div class="paragraph"><p><em>THEME</em> defines the icon theme name. Default is the theme used in
+fvwm-menu-desktop-config/fns-menu-config. To search trough all themes use <em>all</em>.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph"><p><em>all</em> returns the first icon ever which matches the made choice!</p></div>
+</td>
+</tr></table>
+</div>
 </dd>
 <dt class="hdlist1">
 <strong>--notdesk</strong>
 </dt>
 <dd>
-<div class="paragraph"><p>To search for a specific icon not for an icon from a .desktop file use
-this option.</p></div>
+<div class="paragraph"><p>Search not for an icon found in a .desktop file but for a specific one.</p></div>
 </dd>
 <dt class="hdlist1">
 <strong>--version</strong>
@@ -893,7 +905,7 @@ this option.</p></div>
 <div id="footer">
 <div id="footer-text">
 Last updated
- 2016-04-26 22:57:19 CEST
+ 2016-06-02 08:16:21 CEST
 </div>
 </div>
 </body>
