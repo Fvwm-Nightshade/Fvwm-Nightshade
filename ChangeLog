@@ -7,6 +7,8 @@ History:
   - remove useless adding of search paths if iconsize is not 48
   - extend error messages
 - update documentation of fns-find-icon
+- fix bug in FvwmTransSet that a loop will execute whether a variable is undefined
+- fix bug in FNS-MenuBuilder that a forgotten icon breaks .personal
 
 06/01/2016
 - changes in FNS-MenuBuilder:
