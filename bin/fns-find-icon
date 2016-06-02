@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 #-----------------------------------------------------------------------
 # File:        fns-find-icon
-__version__ = '1.3.4'
+__version__ = '1.3.5'
 # Licence:     GPL 2
 #
 # Description: get the iconpath of an application or icon
@@ -10,14 +10,14 @@ __version__ = '1.3.4'
 #              -p <path(s)>     More search path(s). Seperated with ':'
 #              -s <size>        Source icon size. Default is 48
 #              -c <category>    Default is 'apps'
-#              -t <theme>       Other used theme. Default is None
+#              -t <theme>       Other used theme or 'all'. Default is None
 #              --notdesk        Don't search in desktop files. Default is false
 #              --version        Prints version
 #              --svg            Prefer svg and if found add ':<size>x<size>' to the path.
 #
 # Author:      Thomas Funk <t.funk@web.de>
 # Created:     09/22/2012
-# Changed:     07/24/2015
+# Changed:     06/02/2016
 #-----------------------------------------------------------------------
 
 import os, sys, time
@@ -30,6 +30,7 @@ def print_(s):
     
 def search_file(filename, searchpaths, nodesktop=False, svgwanted=False, pathsep=os.pathsep):
     """ Given a search path, find file with requested name """
+    png_remember = ''
     for path in searchpaths.split(pathsep):
         if os.path.exists(path):
             file_list = os.listdir(path)
@@ -46,7 +47,12 @@ def search_file(filename, searchpaths, nodesktop=False, svgwanted=False, pathsep
                     for svg_filename in filenames:
                         if os.path.splitext(svg_filename)[1][1:].strip().lower() == 'svg':
                             return os.path.join(path, svg_filename)
-                return os.path.join(path, filenames[0])
+                    if png_remember == '':
+                        png_remember = os.path.join(path, filenames[0])
+                else:
+                    return os.path.join(path, filenames[0])
+    if not png_remember == '':
+        return png_remember
     return ''
 
 def get_default_theme():
@@ -61,9 +67,9 @@ def get_default_theme():
             cmd = "awk '$1 ~ \"IconTheme\" { gsub(\"[:'\"'\"']\",\"\"); print $3 }' "+desktop_config
             out = os.path.basename(subprocess.check_output([cmd], shell=True, universal_newlines=True).replace('\n', ''))
     if out == '':
-        return 'gnome'
+        return ['gnome']
     else:
-        return out
+        return [out]
 
 def get_menu_icon_path(app_name):
     menu_path = os.path.join(os.environ['FVWM_USERDIR'], '.menu')
@@ -126,34 +132,37 @@ if __name__ == '__main__':
     
     ts = time.time()
 
+    icon_system_dirs = '/usr/share/icons/'
+    icon_local_dirs = os.path.join(os.environ['HOME'], '.icons/')
     if not other_theme == None:
-        theme = other_theme
+        if other_theme == 'all':
+            themes = []
+            for theme_path in [icon_system_dirs, icon_local_dirs]:
+                themes += os.listdir(theme_path)
+        else:
+            themes = [other_theme]
     else:
-        # get the used theme in fvwm-menu-desktop-config
-        theme = get_default_theme()
+        # get the used theme in fvwm-menu-desktop-config / fns-menu-config
+        themes = get_default_theme()
     
-    #print theme
+    #print theme(s)
     i_size = icon_size+'x'+icon_size
-    search_path = '/usr/share/icons/'+theme+'/'+i_size+'/'+category + os.pathsep \
-                + '/usr/share/icons/'+theme+'/'+category+'/'+i_size + os.pathsep \
-                + '/usr/share/icons/'+theme+'/'+category+'/'+icon_size + os.pathsep \
-                + '/usr/share/icons/hicolor/'+i_size+'/'+category + os.pathsep \
-                + '/usr/share/pixmaps'
-    
-    if prefer_svg:
-        search_path = search_path + os.pathsep \
-                      + '/usr/share/icons/'+theme+'/scalable/'+category + os.pathsep \
-                      + '/usr/share/icons/'+theme+'/'+category+'/scalable'+ os.pathsep \
-                      + '/usr/share/icons/hicolor/scalable/'+category
+    search_path = ''
+    for theme_path in [icon_local_dirs, icon_system_dirs]:
+        for theme in themes:
+            if prefer_svg:
+                search_path += theme_path + theme + '/scalable/' + category + os.pathsep \
+                            + theme_path + theme + '/' + category + '/scalable/' + os.pathsep \
+                            + theme_path + theme + '/' + category + '/scalable/' + os.pathsep
+            search_path += theme_path + theme + '/' + i_size + '/' + category + os.pathsep \
+                        + theme_path + theme + '/' + category + '/' + i_size + os.pathsep \
+                        + theme_path + theme + '/' + category + '/' + icon_size + os.pathsep
+    if len(themes) == 1:
+        if prefer_svg:
+            search_path += os.pathsep + '/usr/share/icons/hicolor/scalable/'+category
+        search_path += os.pathsep + '/usr/share/icons/hicolor/'+i_size+'/'+category + os.pathsep
+    search_path += '/usr/share/pixmaps'
 
-    if not i_size == 48:
-        # add default size if no prefered icon size found
-        search_path =  search_path + os.pathsep \
-                    + '/usr/share/icons/'+theme+'/48x48/'+category + os.pathsep \
-                    + '/usr/share/icons/'+theme+'/'+category+'/48x48' + os.pathsep \
-                    + '/usr/share/icons/'+theme+'/'+category+'/48' + os.pathsep \
-                    + '/usr/share/icons/hicolor/48x48/'+category + os.pathsep \
-        
     # extend search path if given
     if extend_path:
         search_path = search_path + os.pathsep + extend_path
@@ -185,7 +194,11 @@ if __name__ == '__main__':
         print_(icon_path)
     else:
         if icon_path == '':
-            sys.stderr.write("No icon found named '"+app_name+"' with size "+i_size+" in category '"+category+"'\n")
+            if len(themes) > 1:
+                err_str = "[Fvwm-Nightshade][fns-find-icon]: No icon found in all themes named '"+app_name+"' with size "+i_size+" in category '"+category+"'\n"
+            else:
+                err_str = "[Fvwm-Nightshade][fns-find-icon]: No icon found in '"+''.join(themes)+"' theme named '"+app_name+"' with size "+i_size+" in category '"+category+"'\n"
+            sys.stderr.write(err_str)
             sys.exit(1)
         else:
             if not not_desktop_file:
@@ -195,7 +208,7 @@ if __name__ == '__main__':
                     # get icon path from .menu
                     icon_path = get_menu_icon_path(app_name)
                     if icon_path == '':
-                        sys.stderr.write("No icon found for app named '"+app_name+"' with size "+i_size+" in category '"+category+"'\n")
+                        sys.stderr.write("[Fvwm-Nightshade][fns-find-icon]: No icon found for app named '"+app_name+"' with size "+i_size+" in category '"+category+"'\n")
                         sys.exit(1)
         print_(icon_path)
     #print "duration: " + str(time.time()-ts)
