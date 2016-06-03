@@ -12,7 +12,7 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuConfigurator
-my $Version =   '2.0.6';
+my $Version =   '2.0.7';
 # Licence:      GPL 2
 #
 # Description:  Perl script to configure fns-menu-desktop to create
@@ -21,7 +21,7 @@ my $Version =   '2.0.6';
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      11/19/2014
-# Changed:      03/10/2016
+# Changed:      06/03/2016
 #-----------------------------------------------------------------------
 
 my $module = new FVWM::Module::SimpleGtk2(
@@ -698,7 +698,7 @@ sub change_path {
         $param_key = $name;
         $param_key =~ s/entry//;
         #create path to the icon
-        my $theme = &get_config_value('IconTheme');
+        my $theme = basename(&get_config_value('IconTheme'));
         my $iconsize = &get_config_value("IconSize");
         my @files;
         if (-d "~/.themes/$theme") {
