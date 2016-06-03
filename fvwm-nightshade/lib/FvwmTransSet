@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #-----------------------------------------------------------------------
 # File:         FvwmTransSet
-# Version:      1.0.3
+# Version:      1.0.4
 # Licence:      GPL 2
 #
 # Description:  Module to set true transparency to windows if a composite
@@ -10,8 +10,8 @@
 #
 # Author:       Thomas Funk <t.funk@web.de>
 #
-# Created:      2013-11-30
-# Changed:      2016-06-02
+# Created:      11/30/2013
+# Changed:      06/03/2016
 #-----------------------------------------------------------------------
 # To get a man page:
 # pod2man --center=" " --section=1 --release="1.0.0" FvwmTransSet > FvwmTransSet.1
@@ -61,7 +61,7 @@ $module->showMessage("starting");
 $module->send("Read $transCfgPath") if -e $transCfgPath;
 # update config hash
 my $configTracker = $module->track("ModuleConfig");
-foreach (keys $configTracker->data) {
+foreach (keys %{$configTracker->data}) {
     $initialConfig{$_} = $configTracker->data->{$_};
 }
 #resetConfig();
@@ -281,12 +281,14 @@ sub setWindowOpaque {
 
 sub getClass {
     my ($win_id) = @_;
+    showDebugMsg("------- getClass -------");
+    showDebugMsg("win_id: $win_id");
     my $result = `xprop -id $win_id | grep ^WM_CLASS | cut -d= -f2`;
+    showDebugMsg("xprop result: $result");
     $result =~ s/\"|\s//g;
     chomp($result);
     my @wmClass = split(/,/,$result);
     my $wmClass = $wmClass[1];
-    showDebugMsg("------- getClass -------");
     showDebugMsg("wmClass: @wmClass");
     unless (defined($wmClass)) {
         $wmClass = $global_wmClass;
