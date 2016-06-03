@@ -1,5 +1,11 @@
 History:
 
+06/03/2016
+- add functionality in FNS-MenuBuilder that bigger icons chosen by create dialog will be
+  converted to the correct size and change the path in .personal
+- fix bug in FNS-MenuConfigurator that not the theme path is chosen while changing folder or
+  application icon
+
 06/02/2016
 - changes in fns-find-icon:
   - add possibility to scan 'all' themes in /usr/share/icons AND in $HOME/.icons
