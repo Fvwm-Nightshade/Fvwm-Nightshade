@@ -10,7 +10,7 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuBuilder
-my $Version =   '1.0.4';
+my $Version =   '1.0.5';
 # Licence:      GPL 2
 #
 # Description:  Perl script to create/modify personal menu
@@ -18,7 +18,7 @@ my $Version =   '1.0.4';
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      03/27/2016
-# Changed:      06/01/2016
+# Changed:      06/03/2016
 #-----------------------------------------------------------------------
 
 
@@ -58,6 +58,17 @@ unless (defined($default_icon_dir)) {
 my $default_icon_size = &get_fns_menu_value('IconSize');
 unless (defined($default_icon_size)) {
     $default_icon_size = '24';
+}
+
+# fns icon dir for converted menu icons
+my $default_icon_save_dir = &get_fns_menu_value('IconDir');
+unless (defined($default_icon_save_dir)) {
+    $default_icon_save_dir = "$FVWM_USERDIR/icons/";
+}
+# check if $FVWM_USERDIR is in string
+if ($default_icon_save_dir =~ /\$FVWM_USERDIR/) {
+    $default_icon_save_dir =~ s/\$FVWM_USERDIR//;
+    $default_icon_save_dir = $FVWM_USERDIR . $default_icon_save_dir;
 }
 
 # gtk-missing-image path
@@ -757,6 +768,12 @@ sub build_lines {
             # AddToMenu "MenuFvwmPersonal" "Font Manager" Exec exec  font-manager
             $menu_string = 'AddToMenu "' . $sub_menu . '" "' . $hash_ref->{value}[$icons_dest];
             if ($icons_dest) {
+                # check if icon is bigger than wanted icon size
+                my $new_icon_path = &check_icon_size($hash_ref->{value}[3]);
+                unless ($new_icon_path eq $hash_ref->{value}[3]) {
+                    # exchange path
+                    $hash_ref->{value}[3] = $new_icon_path;
+                }
                 $menu_string = $menu_string . '%' . $hash_ref->{value}[3] . '%" ';
             } else {
                 $menu_string = $menu_string . '" ';
@@ -769,6 +786,12 @@ sub build_lines {
             # AddToMenu "MenuFvwmPersonal" "Development" Popup "Development"
             $menu_string = 'AddToMenu "' . $sub_menu . '" "' . $hash_ref->{value}[$icons_dest];
             if ($icons_dest) {
+                # check if icon is bigger than wanted icon size
+                my $new_icon_path = &check_icon_size($hash_ref->{value}[2]);
+                unless ($new_icon_path eq $hash_ref->{value}[2]) {
+                    # exchange path
+                    $hash_ref->{value}[2] = $new_icon_path;
+                }
                 $menu_string = $menu_string . '%' . $hash_ref->{value}[2] . '%" ';
             } else {
                 $menu_string = $menu_string . '" ';
@@ -792,6 +815,25 @@ sub build_lines {
         $i++;
     }
     return;
+}
+
+sub check_icon_size {
+    my $icon_path = shift;
+    # check if icon is bigger than wanted icon size
+    my $image = Gtk2::Image->new_from_file($icon_path);
+    my $req = $image->size_request();
+    my $image_size = $req->width();
+    unless ($image_size == $default_icon_size) {
+        my $new_file_path = $default_icon_save_dir . $default_icon_size . 'x' . $default_icon_size . '-' . basename($icon_path);
+        unless (-f $new_file_path) {
+            # convert icon to correct size
+            my $cmd = "convert '" . $icon_path . "' -resize " . $default_icon_size . " '" . $new_file_path . "'";
+            system ($cmd);
+        }
+        # exchange path
+        $icon_path = $new_file_path;
+    }
+    return $icon_path;
 }
 
 # Cancel ---------------------------------------------------------------
