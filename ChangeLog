@@ -5,6 +5,9 @@ History:
   converted to the correct size and change the path in .personal
 - fix bug in FNS-MenuConfigurator that not the theme path is chosen while changing folder or
   application icon
+- changes in FvwmTransSet:
+  - fix warning 'reference is experimental'
+  - add some additional debug messages
 
 06/02/2016
 - changes in fns-find-icon:
