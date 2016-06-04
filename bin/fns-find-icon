@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 #-----------------------------------------------------------------------
 # File:        fns-find-icon
-__version__ = '1.3.5'
+__version__ = '1.3.6'
 # Licence:     GPL 2
 #
 # Description: get the iconpath of an application or icon
@@ -17,7 +17,7 @@ __version__ = '1.3.5'
 #
 # Author:      Thomas Funk <t.funk@web.de>
 # Created:     09/22/2012
-# Changed:     06/02/2016
+# Changed:     06/04/2016
 #-----------------------------------------------------------------------
 
 import os, sys, time
@@ -94,7 +94,12 @@ def check_convert(iconpath, iconsize, svg_prefered):
     if os.path.splitext(iconpath)[1] == '.svg' and not svg_prefered \
     or not os.path.splitext(iconpath)[1] == '.svg' and not iconsize in iconpath:
         basename = os.path.basename(iconpath)
-        new_iconpath = os.path.join(os.environ['FVWM_USERDIR']+'/temp', basename.replace('.svg', '.png'))
+        # check that $FVWM_USERDIR/temp exist
+        fns_temp_dir = os.path.join(os.environ['FVWM_USERDIR'],'temp')
+        if not os.path.exists(fns_temp_dir):
+			os.makedirs(fns_temp_dir)
+        new_iconpath = os.path.join(fns_temp_dir, basename.replace('.svg', '.png'))
+        # convert icon to needed size
         os.system('convert '+iconpath+' -resize '+iconsize+' '+new_iconpath)
         return new_iconpath
     else:
