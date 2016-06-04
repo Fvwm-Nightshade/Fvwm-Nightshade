@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         KlikeBottomBar
-# Version:      1.3.4
+# Version:      1.3.5
 # Licence:      GPL 2
 #
 # Description:  KDE like bottom bar with menu and iconify/deiconify button,
@@ -10,7 +10,7 @@
 # Author:       Thomas Funk <t.funk@web.de>    
 #
 # Created:      04/27/2014
-# Changed:      02/10/2016
+# Changed:      06/04/2016
 #-----------------------------------------------------------------------
 
 # Bottombar
@@ -179,7 +179,7 @@ InfoStoreAdd pager_geometry $[infostore.pager_width]x$[infostore.pager_height]-0
 # GlobalIconMan columns
 #-----------------------------------------------------------------------
 PipeRead 'echo InfostoreAdd iconman_columns \
-    $(($[infostore.columns]-(5+3+$[infostore.pager_columns]+1+$[infostore.tray_columns]+1+5+$[infostore.time_hsize])))'
+    $(($[infostore.columns]-(6+3+$[infostore.pager_columns]+1+$[infostore.tray_columns]+1+5+$[infostore.time_hsize])))'
 
 #-----------------------------------------------------------------------
 # GlobalIconMan manager geometry
@@ -209,6 +209,7 @@ DestroyModuleConfig KlikeBottomBar: *
 *KlikeBottomBar: Colorset           13
 *KlikeBottomBar: ActiveColorset     13
 *KlikeBottomBar: PressColorset      13
+*KlikeBottomBar: Font               "xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 
 *KlikeBottomBar: Rows               1
 *KlikeBottomBar: Columns            $[infostore.columns]
@@ -221,7 +222,7 @@ DestroyModuleConfig KlikeBottomBar: *
 #-----------------------------------------------------------------------
 # menu button
 #-----------------------------------------------------------------------
-*KlikeBottomBar: (5x1, Colorset 13, ActiveColorset 11, \
+*KlikeBottomBar: (6x1, Colorset 13, ActiveColorset 11, \
                   Left, Padding 5 0, Title (Side) "$[gt.Menu]", ActionOnPress, \
                   Icon    icon_fns.svg:$[infostore.i_size]x$[infostore.i_size], \
                   ActiveIcon  icon_fns.svg:$[infostore.i_size]x$[infostore.i_size], \

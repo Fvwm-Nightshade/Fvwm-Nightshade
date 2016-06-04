@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         HorizontalPanel
-# Version:      1.1.1
+# Version:      1.1.2
 # Licence:      GPL 2
 #
 # Description:  FvwmButtons panel for horizontal layout. Position on the
@@ -15,7 +15,7 @@
 #               Bernhard Popp <kermit.popp@googlemail.com>
 #
 # Created:      08/11/2012
-# Changed:      01/27/2016
+# Changed:      06/04/2016
 #-----------------------------------------------------------------------
 
 Style HorizontalPanel !Title, Sticky, NeverFocus, WindowListSkip, HandleWidth 2
@@ -106,6 +106,7 @@ DestroyModuleConfig HorizontalPanel: *
 *HorizontalPanel: Colorset          13
 *HorizontalPanel: ActiveColorset    13
 *HorizontalPanel: PressColorset     13
+*HorizontalPanel: Font          	"xft:$[infostore.used_font]:pixelsize=$[infostore.fontsize]"
 
 *HorizontalPanel: Rows              1
 *HorizontalPanel: Columns           $[infostore.columns]
