@@ -10,7 +10,7 @@ use File::Find;
 
 #-----------------------------------------------------------------------
 # File:         FNS-MenuBuilder
-my $Version =   '1.0.5';
+my $Version =   '1.0.6';
 # Licence:      GPL 2
 #
 # Description:  Perl script to create/modify personal menu
@@ -18,7 +18,7 @@ my $Version =   '1.0.5';
 # Author:       Thomas Funk <t.funk@web.de>
 #
 # Created:      03/27/2016
-# Changed:      06/03/2016
+# Changed:      06/04/2016
 #-----------------------------------------------------------------------
 
 
@@ -72,7 +72,7 @@ if ($default_icon_save_dir =~ /\$FVWM_USERDIR/) {
 }
 
 # gtk-missing-image path
-my $no_image_path = `fns-find-icon -n 'gtk-missing-image' -s $default_icon_size -t 'all' -c 'status' --notdesk`;
+my $no_image_path = `fns-find-icon -n 'gtk-missing-image' -s 48 -t 'all' -c 'status' --notdesk`;
 
 # tree data array for root menu
 my @src_tree; 
@@ -485,7 +485,7 @@ unless (defined($icons_dest)) {$icons_dest = $icons_src;}
 
 my $win = SimpleGtk2->new_window(  Name => 'mainWindow', 
                         Version => $Version,
-                        Size    => [560, 280],
+                        Size    => [537, 280],
                         Statusbar   => 1,
                         Title   => "FNS Personal Menu Builder");
 $win->add_signal_handler('mainWindow', 'delete_event', \&check_before_quit);
@@ -513,7 +513,7 @@ if ($icons_src) {
 $win->add_treeview(Name => 'stree',
         Type    => 'Tree',
         Pos     => [10, 25],
-        Size    => [210, 225],
+        Size    => [200, 225],
         Headers => $headers_src,
         Data    => \@src_tree,
         Sens    => 1);
@@ -560,7 +560,7 @@ $src_treecolumn->set_visible(0);
 
 # Personal Menu --------------------------------------------------------
 $win->add_label( Name => 'labelPersonalMenu', 
-        Pos     => [345, 5], 
+        Pos     => [330, 5], 
         Font => \@label_fontarray,
         Title   => "Personal Menu",
         Tip     => "Sort entries with drag'n drop.");
@@ -572,8 +572,8 @@ if ($icons_dest) {
 
 $win->add_treeview(Name => 'dtree',
         Type    => 'Tree',
-        Pos     => [340, 25],
-        Size    => [210, 225],
+        Pos     => [325, 25],
+        Size    => [200, 225],
         Headers => $headers_dest,
         Data    => \@dest_tree,
         Sens    => 1);
@@ -638,8 +638,8 @@ sub personal_changed {
 
 # Add > ----------------------------------------------------------------
 $win->add_button( Name => 'addButton', 
-        Pos     => [240, 35], 
-        Size    => [80, 25], 
+        Pos     => [220, 35], 
+        Size    => [95, 25], 
         Title   => "Add >", 
         Tip     => "Add the selected menu entry.");
 $win->add_signal_handler('addButton', 'clicked', \&add_menu_entry);
@@ -678,8 +678,8 @@ sub add_dest_entry {
 
 # < Remove -------------------------------------------------------------
 $win->add_button( Name => 'removeButton', 
-        Pos     => [240, 70], 
-        Size    => [80, 25], 
+        Pos     => [220, 70], 
+        Size    => [95, 25], 
         Title   => "< Remove", 
         Tip     => "Remove the selected menu entry.\nAttention:\nRemoving a folder removes all entries below!");
 $win->add_signal_handler('removeButton', 'clicked', \&remove_menu_entry);
@@ -697,8 +697,8 @@ sub remove_menu_entry {
 
 # New directory --------------------------------------------------------
 $win->add_button( Name => 'createDirButton', 
-        Pos     => [240, 105], 
-        Size    => [80, 25], 
+        Pos     => [220, 105], 
+        Size    => [95, 25], 
         Title   => "Create", 
         Tip     => "Create a new folder or application entry below of the selected position.");
 $win->add_signal_handler('createDirButton', 'clicked', \&create_new_entry);
@@ -715,8 +715,8 @@ sub create_new_entry {
 
 # Save -----------------------------------------------------------------
 $win->add_button( Name => 'saveButton', 
-        Pos     => [240, 165], 
-        Size    => [80, 25], 
+        Pos     => [220, 165], 
+        Size    => [95, 25], 
         Title   => "Save", 
         Sens    => $values_changed,
         Tip     => "Save the new personal menu.");
@@ -838,8 +838,8 @@ sub check_icon_size {
 
 # Cancel ---------------------------------------------------------------
 $win->add_button( Name => 'quitButton', 
-        Pos     => [240, 200], 
-        Size    => [80, 25], 
+        Pos     => [220, 200], 
+        Size    => [95, 25], 
         Title   => "Quit", 
         Tip     => "Quit Personal Menu Builder.");
 $win->add_signal_handler('quitButton', 'clicked', \&check_before_quit);
