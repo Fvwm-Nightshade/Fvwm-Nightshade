@@ -1,5 +1,12 @@
 History:
 
+06/04/2016
+- fix bug in fns-find-icon that no icon can convert if ~/.fvwm-nightshade/trmp exist
+- change widget dimensions in FNS-MenuBuilder to fit different translations and reduce
+  window size
+- add font to FvwmButton config in G2likeTopBar, HorizontalPanel and KlikeBottomBar
+  to fix wrong display of Russian characters
+
 06/03/2016
 - add functionality in FNS-MenuBuilder that bigger icons chosen by create dialog will be
   converted to the correct size and change the path in .personal
