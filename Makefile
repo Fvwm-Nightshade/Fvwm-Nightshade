@@ -1,6 +1,6 @@
 #-----------------------------------------------------------------------
 # File:         Makefile
-# Version:      2.5.1
+# Version:      2.5.2
 # Licence:      GPL 2
 # 
 # Description:  Makefile to install, uninstall Fvwm-Nightshade and create
@@ -8,7 +8,7 @@
 # 
 # Author:       Thomas Funk <t.funk@web.de>     
 # Created:      09/08/2012
-# Changed:      05/29/2016
+# Changed:      07/07/2016
 #-----------------------------------------------------------------------
 
 package 		= fvwm-nightshade
@@ -829,7 +829,7 @@ prepare-arch: dist
 	cp arch/fns.install $(pkgdir)/
 	mv $(distdir).tar.gz $(pkgdir)/
 	sed -i "s/pkgver=.*/pkgver=$(version)/" $(pkgdir)/PKGBUILD
-	sed -i "s#source=.*#source=\"$(package)-$(version).tar.gz\"#" $(pkgdir)/PKGBUILD
+	sed -i "s#source=.*#source=('$(package)-$(version).tar.gz')#" $(pkgdir)/PKGBUILD
 	sed -i "s#^  cd \"\$$srcdir/.*#  cd \"\$$srcdir/$(package)-$(version)\"#" $(pkgdir)/PKGBUILD
 
 arch: prepare-arch

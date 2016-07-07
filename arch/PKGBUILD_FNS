@@ -1,14 +1,14 @@
 #-----------------------------------------------------------------------
 # File:         PKGBUILD_FNS
-# Version:      1.2.5
+# Version:      1.2.6
 # Licence:      GPL 2
 #
 # Description:  Pkgbuild script for Fvwm-Nightshade
 #
-# Author:       Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>    
+# Maintainer:	Bernhard Popp, Thomas Funk <fvwmnightshade@gmail.com>    
 #
 # Created:      ???
-# Changed:      10/01/2015
+# Changed:      07/07/2016
 #-----------------------------------------------------------------------
 
 pkgname=fvwm-nightshade
@@ -17,10 +17,10 @@ pkgrel=1
 arch=('any')
 url="https://github.com/Fvwm-Nightshade"
 license=('GPL')
+pkgdesc='A lightweight but feature rich and good looking configuration of Fvwm.'
 source=
 
 package_fvwm-nightshade() {
-    pkgdesc="A lightweight but feature rich and good looking configuration of Fvwm."
     depends=(
         'fvwm>=2.6.5'
         'conky'
@@ -53,7 +53,7 @@ package_fvwm-nightshade() {
         'compton: Composite Window-effects manager for X.org'
     )
     provides=('fvwm-nightshade')
-    install=fns.install
+    install='fns.install'
     
     cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR=${pkgdir} prefix=/usr dist-install
